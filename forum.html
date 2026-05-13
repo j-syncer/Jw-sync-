@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JW Sync — Community</title>
+    <meta name="theme-color" content="#0c0a09">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --bg:      #0c0a09;
+            --bg2:     #18110e;
+            --bg3:     #211610;
+            --border:  #2d1f14;
+            --border2: #3d2a1a;
+            --text:    #e8ddd5;
+            --muted:   #7a6558;
+            --accent:  #f97316;
+            --accent2: #fb923c;
+            --green:   #22c55e;
+            --blue:    #60a5fa;
+            --red:     #f87171;
+            --amber:   #fbbf24;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'IBM Plex Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; line-height:1.6; }
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:transparent; }
+        ::-webkit-scrollbar-thumb { background:var(--border2); border-radius:99px; }
+        .wrap { max-width:860px; margin:0 auto; padding:0 16px; }
+
+        /* Header */
+        header { border-bottom:1px solid var(--border); background:rgba(12,10,9,0.96); backdrop-filter:blur(12px); position:sticky; top:0; z-index:100; }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; padding:13px 0; }
+        .logo-area { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
+        .logo-icon { width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,#f97316,#dc2626); display:flex; align-items:center; justify-content:center; font-size:17px; }
+        .logo-name { font-size:15px; font-weight:700; letter-spacing:-0.3px; }
+        .logo-sub  { font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+        .back-btn { display:flex; align-items:center; gap:5px; color:var(--muted); text-decoration:none; font-size:13px; padding:6px 12px; border:1px solid var(--border); border-radius:6px; transition:all 0.15s; }
+        .back-btn:hover { color:var(--text); border-color:var(--border2); }
+
+        /* Hero */
+        .hero { padding:28px 0 20px; border-bottom:1px solid var(--border); }
+        .hero h1 { font-size:clamp(20px,4vw,30px); font-weight:700; letter-spacing:-0.4px; margin-bottom:5px; }
+        .hero h1 span { color:var(--accent); }
+        .hero p { color:var(--muted); font-size:14px; }
+        .hero-actions { display:flex; gap:9px; margin-top:16px; flex-wrap:wrap; }
+
+        /* Buttons */
+        .btn { display:inline-flex; align-items:center; gap:6px; padding:8px 15px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; border:none; transition:all 0.15s; font-family:'IBM Plex Sans',sans-serif; }
+        .btn-primary { background:var(--accent); color:#fff; }
+        .btn-primary:hover:not(:disabled) { background:var(--accent2); }
+        .btn-primary:disabled { opacity:0.5; cursor:not-allowed; }
+        .btn-ghost { background:transparent; color:var(--muted); border:1px solid var(--border2); }
+        .btn-ghost:hover { color:var(--text); background:var(--bg3); }
+
+        /* Filter */
+        .filter-bar { display:flex; gap:7px; padding:14px 0; border-bottom:1px solid var(--border); overflow-x:auto; scrollbar-width:none; }
+        .filter-bar::-webkit-scrollbar { display:none; }
+        .pill { display:inline-flex; align-items:center; gap:4px; padding:5px 12px; border-radius:99px; font-size:12px; font-weight:500; cursor:pointer; white-space:nowrap; border:1px solid var(--border); background:var(--bg2); color:var(--muted); transition:all 0.15s; }
+        .pill.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+        .pill[data-cat="question"].active { background:rgba(96,165,250,0.15); color:var(--blue); border-color:rgba(96,165,250,0.3); }
+        .pill[data-cat="bug"].active { background:rgba(248,113,113,0.15); color:var(--red); border-color:rgba(248,113,113,0.3); }
+        .pill[data-cat="feature"].active { background:rgba(34,197,94,0.15); color:var(--green); border-color:rgba(34,197,94,0.3); }
+        .pill[data-cat="general"].active { background:rgba(251,191,36,0.15); color:var(--amber); border-color:rgba(251,191,36,0.3); }
+
+        /* Stats */
+        .stats-bar { display:flex; gap:24px; padding:12px 0; border-bottom:1px solid var(--border); }
+        .stat { font-size:12px; color:var(--muted); }
+        .stat strong { color:var(--text); font-size:15px; display:block; font-weight:700; }
+
+        /* Compose */
+        .compose-panel { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; padding:20px; margin:16px 0; display:none; }
+        .compose-panel.open { display:block; animation:slideIn 0.18s ease; }
+        @keyframes slideIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+        .compose-panel h3 { font-size:14px; font-weight:700; margin-bottom:14px; }
+        .form-row { margin-bottom:10px; }
+        .form-label { font-size:11px; color:var(--muted); display:block; margin-bottom:4px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px; }
+        .form-input,.form-select,.form-textarea { width:100%; background:var(--bg); border:1px solid var(--border2); border-radius:7px; padding:9px 12px; color:var(--text); font-family:'IBM Plex Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.15s; }
+        .form-input:focus,.form-select:focus,.form-textarea:focus { border-color:var(--accent); }
+        .form-textarea { resize:vertical; min-height:90px; }
+        option { background:#1a1a1a; }
+        .form-actions { display:flex; gap:8px; justify-content:flex-end; margin-top:14px; }
+        .char-count { font-size:11px; color:var(--muted); text-align:right; margin-top:3px; font-family:'IBM Plex Mono',monospace; }
+
+        /* Post list */
+        .post-list { padding:4px 0; }
+        .post-item { display:flex; gap:12px; padding:16px 0; border-bottom:1px solid var(--border); cursor:pointer; transition:opacity 0.1s; }
+        .post-item:hover .post-title { color:var(--accent2); }
+        .post-item:active { opacity:0.8; }
+        .vote-col { display:flex; flex-direction:column; align-items:center; gap:3px; min-width:32px; padding-top:2px; }
+        .vote-btn { background:none; border:none; cursor:pointer; color:var(--muted); font-size:13px; padding:3px; border-radius:4px; transition:all 0.1s; line-height:1; }
+        .vote-btn:hover { color:var(--accent); }
+        .vote-btn.voted { color:var(--accent); }
+        .vote-count { font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--text); }
+        .vote-count.hi { color:var(--accent); }
+        .post-body { flex:1; min-width:0; }
+        .badges { display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap; }
+        .cat-badge { font-size:10px; font-weight:600; padding:2px 7px; border-radius:99px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.4px; }
+        .cat-question { background:rgba(96,165,250,0.12); color:var(--blue); }
+        .cat-bug      { background:rgba(248,113,113,0.12); color:var(--red); }
+        .cat-feature  { background:rgba(34,197,94,0.12); color:var(--green); }
+        .cat-general  { background:rgba(251,191,36,0.12); color:var(--amber); }
+        .solved-badge { font-size:10px; color:var(--green); font-weight:600; }
+        .post-title { font-size:15px; font-weight:600; color:var(--text); transition:color 0.15s; margin-bottom:4px; line-height:1.35; }
+        .post-excerpt { font-size:13px; color:var(--muted); line-height:1.5; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+        .post-meta { display:flex; align-items:center; gap:10px; margin-top:9px; flex-wrap:wrap; }
+        .meta-chip { display:flex; align-items:center; gap:4px; font-size:12px; color:var(--muted); }
+        .avatar-sm { width:20px; height:20px; border-radius:50%; font-size:10px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff; }
+        .reply-chip { color:var(--blue); }
+        .mono { font-family:'IBM Plex Mono',monospace; font-size:11px; }
+
+        /* States */
+        .state-box { padding:48px 0; text-align:center; color:var(--muted); }
+        .state-box .icon { font-size:32px; margin-bottom:12px; }
+        .state-box h3 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:6px; }
+        .state-box p { font-size:13px; }
+        .spinner { width:28px; height:28px; margin:0 auto 14px; border:2px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite; }
+        @keyframes spin { to{transform:rotate(360deg)} }
+
+        /* Toast */
+        .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--bg2); border:1px solid var(--border2); border-radius:8px; padding:10px 18px; font-size:13px; z-index:9999; box-shadow:0 8px 32px rgba(0,0,0,0.5); display:none; white-space:nowrap; }
+        .toast.show { display:block; animation:toastIn 0.2s ease; }
+        .toast.success { border-color:rgba(34,197,94,0.4); color:var(--green); }
+        .toast.error   { border-color:rgba(248,113,113,0.4); color:var(--red); }
+        @keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(8px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+
+        /* Thread overlay */
+        .overlay { position:fixed; inset:0; background:var(--bg); z-index:200; overflow-y:auto; display:none; }
+        .overlay.open { display:block; animation:fadeIn 0.15s ease; }
+        @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+        .thread-inner { max-width:720px; margin:0 auto; padding:20px 16px 80px; }
+        .thread-back { display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:13px; cursor:pointer; margin-bottom:18px; transition:color 0.15s; background:none; border:none; font-family:inherit; }
+        .thread-back:hover { color:var(--text); }
+        .thread-card { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; padding:20px; margin-bottom:4px; }
+        .thread-card.original { border-color:rgba(249,115,22,0.25); }
+        .thread-title { font-size:19px; font-weight:700; letter-spacing:-0.3px; margin:10px 0 8px; }
+        .thread-content { font-size:14px; line-height:1.75; color:rgba(232,221,213,0.85); white-space:pre-wrap; word-break:break-word; }
+        .thread-footer { display:flex; align-items:center; gap:12px; margin-top:14px; padding-top:12px; border-top:1px solid var(--border); flex-wrap:wrap; }
+        .author-chip { display:flex; align-items:center; gap:7px; font-size:13px; }
+        .avatar-md { width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
+        .react-btn { background:none; border:1px solid var(--border); color:var(--muted); font-size:12px; cursor:pointer; display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:5px; font-family:inherit; transition:all 0.1s; }
+        .react-btn:hover { color:var(--text); border-color:var(--border2); }
+        .react-btn.voted { color:var(--accent); border-color:rgba(249,115,22,0.4); }
+        .replies-section { margin-top:20px; }
+        .replies-header { font-size:12px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; }
+        .reply-item { display:flex; gap:11px; padding:14px 0; border-bottom:1px solid var(--border); }
+        .reply-item:last-child { border-bottom:none; }
+        .reply-body { flex:1; }
+        .reply-author-row { display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap; }
+        .reply-author { font-size:13px; font-weight:600; }
+        .reply-time { font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace; }
+        .reply-text { font-size:14px; color:rgba(232,221,213,0.85); line-height:1.65; white-space:pre-wrap; word-break:break-word; }
+        .solution-badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; color:var(--green); font-weight:600; margin-top:5px; }
+        .reply-compose { background:var(--bg2); border:1px solid var(--border2); border-radius:10px; padding:16px; margin-top:18px; }
+        .reply-compose h4 { font-size:13px; font-weight:600; margin-bottom:10px; }
+
+        /* Footer */
+        footer { border-top:1px solid var(--border); margin-top:36px; padding:20px 0; text-align:center; }
+        footer p { font-size:12px; color:var(--muted); }
+        footer a { color:var(--accent); text-decoration:none; }
+
+        @media(max-width:520px) {
+            .stats-bar { gap:16px; }
+            .vote-col { min-width:26px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="wrap header-inner">
+        <a class="logo-area" href="index.html">
+            <div class="logo-icon">📚</div>
+            <div>
+                <div class="logo-name">JW Sync</div>
+                <div class="logo-sub">Community</div>
+            </div>
+        </a>
+        <a class="back-btn" href="index.html">← Back to app</a>
+    </div>
+</header>
+
+<main class="wrap">
+    <div class="hero">
+        <h1>Ask questions, share <span>tips</span>, report bugs.</h1>
+        <p>A space for JW Sync users — all questions welcome, no matter how simple.</p>
+        <div class="hero-actions">
+            <button class="btn btn-primary" onclick="toggleCompose()">✏️ New Post</button>
+        </div>
+    </div>
+
+    <div class="compose-panel" id="compose-panel">
+        <h3>New Post</h3>
+        <div class="form-row">
+            <label class="form-label">Category</label>
+            <select class="form-select" id="new-cat">
+                <option value="question">❓ Question</option>
+                <option value="bug">🐛 Bug Report</option>
+                <option value="feature">💡 Feature Request</option>
+                <option value="general">💬 General</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label class="form-label">Title <span style="color:var(--red)">*</span></label>
+            <input class="form-input" id="new-title" type="text" maxlength="120" placeholder="What's your question or topic?" oninput="cc('new-title','tc',120)"/>
+            <div class="char-count"><span id="tc">0</span>/120</div>
+        </div>
+        <div class="form-row">
+            <label class="form-label">Details</label>
+            <textarea class="form-textarea" id="new-body" maxlength="2000" placeholder="Describe in more detail (optional)…" oninput="cc('new-body','bc',2000)"></textarea>
+            <div class="char-count"><span id="bc">0</span>/2000</div>
+        </div>
+        <div class="form-row">
+            <label class="form-label">Your name <span style="color:var(--red)">*</span></label>
+            <input class="form-input" id="new-author" type="text" maxlength="40" placeholder="How should we call you?"/>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-ghost" onclick="toggleCompose()">Cancel</button>
+            <button class="btn btn-primary" id="post-btn" onclick="submitPost()">Post →</button>
+        </div>
+    </div>
+
+    <div class="filter-bar">
+        <span class="pill active" data-cat="all"      onclick="setFilter('all')">All posts</span>
+        <span class="pill"        data-cat="question"  onclick="setFilter('question')">❓ Questions</span>
+        <span class="pill"        data-cat="bug"       onclick="setFilter('bug')">🐛 Bugs</span>
+        <span class="pill"        data-cat="feature"   onclick="setFilter('feature')">💡 Features</span>
+        <span class="pill"        data-cat="general"   onclick="setFilter('general')">💬 General</span>
+    </div>
+
+    <div class="stats-bar">
+        <div class="stat"><strong id="s-posts">—</strong>Posts</div>
+        <div class="stat"><strong id="s-replies">—</strong>Replies</div>
+        <div class="stat"><strong id="s-solved">—</strong>Solved</div>
+    </div>
+
+    <div class="post-list" id="post-list">
+        <div class="state-box"><div class="spinner"></div><p>Loading posts…</p></div>
+    </div>
+</main>
+
+<footer>
+    <div class="wrap">
+        <p>JW Sync Community · <a href="index.html">← Back to the app</a></p>
+    </div>
+</footer>
+
+<!-- Thread overlay -->
+<div class="overlay" id="overlay">
+    <div class="thread-inner">
+        <button class="thread-back" onclick="closeThread()">← Back to community</button>
+        <div id="thread-post"></div>
+        <div class="replies-section" id="replies-section" style="display:none">
+            <div class="replies-header" id="replies-hdr"></div>
+            <div id="replies-list"></div>
+        </div>
+        <div class="reply-compose" id="reply-compose" style="display:none">
+            <h4>Write a reply</h4>
+            <div class="form-row" style="margin-bottom:8px">
+                <input class="form-input" id="r-author" type="text" maxlength="40" placeholder="Your name / nickname"/>
+            </div>
+            <div class="form-row" style="margin-bottom:10px">
+                <textarea class="form-textarea" id="r-text" maxlength="2000" style="min-height:80px" placeholder="Write your reply…" oninput="cc('r-text','rc',2000)"></textarea>
+                <div class="char-count"><span id="rc">0</span>/2000</div>
+            </div>
+            <div style="display:flex;justify-content:flex-end">
+                <button class="btn btn-primary" id="reply-btn" onclick="submitReply()">Reply →</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Supabase ──────────────────────────────────────────────────
+const { createClient } = supabase;
+const db = createClient(
+    'https://owwsfbtbjmdskjfkxtjy.supabase.co',
+    'sb_publishable_KJJJAafNJR8o0tcBMYcK6g_M7IqlRsC'
+);
+
+// ── State ─────────────────────────────────────────────────────
+let posts = [], filter = 'all', activePostId = null;
+let votedP = new Set(JSON.parse(localStorage.getItem('vp') || '[]'));
+let votedR = new Set(JSON.parse(localStorage.getItem('vr') || '[]'));
+const saveVotes = () => {
+    localStorage.setItem('vp', JSON.stringify([...votedP]));
+    localStorage.setItem('vr', JSON.stringify([...votedR]));
+};
+
+// ── Utils ─────────────────────────────────────────────────────
+const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const ago = iso => {
+    const m = Math.floor((Date.now() - new Date(iso)) / 60000);
+    if (m < 1) return 'just now';
+    if (m < 60) return m + 'm ago';
+    const h = Math.floor(m/60);
+    if (h < 24) return h + 'h ago';
+    const d = Math.floor(h/24);
+    return d < 7 ? d + 'd ago' : new Date(iso).toLocaleDateString();
+};
+const aColor = n => {
+    const c = ['#f97316','#60a5fa','#22c55e','#a78bfa','#f472b6','#fb923c','#34d399','#38bdf8'];
+    let h = 0; for (const x of String(n||'?')) h = (h*31 + x.charCodeAt(0)) & 0xffffffff;
+    return c[Math.abs(h) % c.length];
+};
+const catLabel = c => ({question:'❓ Question',bug:'🐛 Bug',feature:'💡 Feature',general:'💬 General'}[c]||c);
+const catCls   = c => 'cat-'+(c||'general');
+const cc = (src, dst, max) => { const el = document.getElementById(dst); if(el) el.textContent = document.getElementById(src)?.value?.length||0; };
+
+let toastTimer;
+const toast = (msg, type='success', ms=3000) => {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = 'toast show ' + type;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.className = 'toast', ms);
+};
+
+// ── Load posts ────────────────────────────────────────────────
+async function load() {
+    try {
+        const { data, error } = await db
+            .from('posts')
+            .select('*, replies(count)')
+            .order('created_at', { ascending: false });
+        if (error) throw error;
+        posts = data || [];
+        render(); stats();
+    } catch(e) {
+        document.getElementById('post-list').innerHTML = `
+            <div class="state-box">
+                <div class="icon">⚠️</div>
+                <h3>Couldn't load posts</h3>
+                <p>${esc(e.message)}</p>
+                <button class="btn btn-ghost" style="margin-top:12px" onclick="load()">Try again</button>
+            </div>`;
+    }
+}
+
+function render() {
+    const shown = filter === 'all' ? posts : posts.filter(p => p.category === filter);
+    const list  = document.getElementById('post-list');
+    if (!shown.length) {
+        list.innerHTML = `<div class="state-box"><div class="icon">💬</div><h3>${filter==='all'?'No posts yet':'No posts here'}</h3><p>${filter==='all'?'Be the first to post!':'Try a different filter.'}</p></div>`;
+        return;
+    }
+    list.innerHTML = shown.map(p => {
+        const rc = p.replies?.[0]?.count ?? 0;
+        const col = aColor(p.author);
+        const voted = votedP.has(p.id);
+        return `<div class="post-item" onclick="openThread('${esc(p.id)}')">
+            <div class="vote-col" onclick="event.stopPropagation()">
+                <button class="vote-btn${voted?' voted':''}" onclick="votePost('${esc(p.id)}',this)">▲</button>
+                <span class="vote-count${p.votes>0?' hi':''}" id="pv-${esc(p.id)}">${p.votes}</span>
+            </div>
+            <div class="post-body">
+                <div class="badges">
+                    <span class="cat-badge ${catCls(p.category)}">${catLabel(p.category)}</span>
+                    ${p.solved?'<span class="solved-badge">✓ Solved</span>':''}
+                </div>
+                <div class="post-title">${esc(p.title)}</div>
+                ${p.content?`<div class="post-excerpt">${esc(p.content)}</div>`:''}
+                <div class="post-meta">
+                    <span class="meta-chip"><div class="avatar-sm" style="background:${col}">${esc((p.author[0]||'?').toUpperCase())}</div>${esc(p.author)}</span>
+                    <span class="meta-chip reply-chip">💬 ${rc} ${rc===1?'reply':'replies'}</span>
+                    <span class="meta-chip mono">${ago(p.created_at)}</span>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function stats() {
+    document.getElementById('s-posts').textContent   = posts.length;
+    document.getElementById('s-solved').textContent  = posts.filter(p=>p.solved).length;
+    document.getElementById('s-replies').textContent = posts.reduce((a,p) => a + (p.replies?.[0]?.count??0), 0);
+}
+
+// ── Filter ────────────────────────────────────────────────────
+function setFilter(cat) {
+    filter = cat;
+    document.querySelectorAll('.pill').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+    render();
+}
+
+// ── Compose ───────────────────────────────────────────────────
+function toggleCompose() {
+    const p = document.getElementById('compose-panel');
+    const open = p.classList.toggle('open');
+    if (open) p.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+async function submitPost() {
+    const title  = document.getElementById('new-title').value.trim();
+    const body   = document.getElementById('new-body').value.trim();
+    const author = document.getElementById('new-author').value.trim();
+    const cat    = document.getElementById('new-cat').value;
+    if (!title)  { toast('Please add a title.','error'); return; }
+    if (!author) { toast('Please add your name.','error'); return; }
+    const btn = document.getElementById('post-btn');
+    btn.disabled = true; btn.textContent = 'Posting…';
+    try {
+        const { error } = await db.from('posts').insert({ title, content: body||null, author, category: cat, votes: 0 });
+        if (error) throw error;
+        ['new-title','new-body','new-author'].forEach(id => document.getElementById(id).value='');
+        ['tc','bc'].forEach(id => document.getElementById(id).textContent='0');
+        document.getElementById('compose-panel').classList.remove('open');
+        toast('Posted! ✓');
+        await load();
+    } catch(e) {
+        toast('Error: '+e.message,'error');
+    } finally {
+        btn.disabled = false; btn.textContent = 'Post →';
+    }
+}
+
+// ── Vote post ─────────────────────────────────────────────────
+async function votePost(id, btn) {
+    if (votedP.has(id)) { toast('Already upvoted!','error',1800); return; }
+    const post = posts.find(p=>p.id===id);
+    if (post) post.votes++;
+    const el = document.getElementById('pv-'+id);
+    if (el) { el.textContent = post?.votes??''; el.classList.add('hi'); }
+    btn?.classList.add('voted');
+    votedP.add(id); saveVotes();
+    try {
+        const { error } = await db.from('posts').update({ votes: post?.votes??1 }).eq('id',id);
+        if (error) throw error;
+    } catch(e) {
+        votedP.delete(id); saveVotes();
+        if (post) post.votes--;
+        if (el) el.textContent = post?.votes??'';
+        btn?.classList.remove('voted');
+        toast('Vote failed: '+e.message,'error');
+    }
+}
+
+// ── Thread ────────────────────────────────────────────────────
+async function openThread(id) {
+    activePostId = id;
+    const post = posts.find(p=>p.id===id);
+    if (!post) return;
+    document.getElementById('overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    const col = aColor(post.author);
+    const voted = votedP.has(id);
+    document.getElementById('thread-post').innerHTML = `
+        <div class="thread-card original">
+            <div class="badges">
+                <span class="cat-badge ${catCls(post.category)}">${catLabel(post.category)}</span>
+                ${post.solved?'<span class="solved-badge">✓ Solved</span>':''}
+            </div>
+            <div class="thread-title">${esc(post.title)}</div>
+            ${post.content?`<div class="thread-content">${esc(post.content)}</div>`:''}
+            <div class="thread-footer">
+                <div class="author-chip">
+                    <div class="avatar-md" style="background:${col}">${esc((post.author[0]||'?').toUpperCase())}</div>
+                    <span style="font-size:13px;font-weight:600">${esc(post.author)}</span>
+                    <span class="reply-time">${ago(post.created_at)}</span>
+                </div>
+                <button class="react-btn${voted?' voted':''}" id="tv-btn" onclick="votePostThread('${esc(id)}')">
+                    ▲ <span id="tv-count">${post.votes}</span>
+                </button>
+            </div>
+        </div>`;
+    document.getElementById('replies-section').style.display = 'block';
+    document.getElementById('reply-compose').style.display   = 'block';
+    document.getElementById('replies-list').innerHTML = '<div style="padding:14px 0;color:var(--muted);font-size:13px">Loading replies…</div>';
+    await loadReplies(id);
+}
+
+async function loadReplies(postId) {
+    try {
+        const { data, error } = await db.from('replies').select('*').eq('post_id',postId).order('created_at',{ascending:true});
+        if (error) throw error;
+        const replies = data||[];
+        document.getElementById('replies-hdr').textContent =
+            replies.length===0 ? 'No replies yet — be the first!' : `${replies.length} ${replies.length===1?'reply':'replies'}`;
+        document.getElementById('replies-list').innerHTML = replies.length===0 ? '' : replies.map(r => {
+            const col = aColor(r.author);
+            const voted = votedR.has(r.id);
+            return `<div class="reply-item">
+                <div class="avatar-md" style="background:${col}">${esc((r.author[0]||'?').toUpperCase())}</div>
+                <div class="reply-body">
+                    <div class="reply-author-row">
+                        <span class="reply-author">${esc(r.author)}</span>
+                        <span class="reply-time">${ago(r.created_at)}</span>
+                        <button class="react-btn${voted?' voted':''}" onclick="voteReply('${esc(r.id)}',this)">▲ <span id="rv-${esc(r.id)}">${r.votes}</span></button>
+                    </div>
+                    <div class="reply-text">${esc(r.content)}</div>
+                    ${r.is_solution?'<div class="solution-badge">✓ Marked as solution</div>':''}
+                </div>
+            </div>`;
+        }).join('');
+    } catch(e) {
+        document.getElementById('replies-list').innerHTML = `<p style="color:var(--red);font-size:13px;padding:12px 0">Error: ${esc(e.message)}</p>`;
+    }
+}
+
+async function votePostThread(id) {
+    if (votedP.has(id)) { toast('Already upvoted!','error',1800); return; }
+    const post = posts.find(p=>p.id===id);
+    if (post) post.votes++;
+    const tc = document.getElementById('tv-count');
+    if (tc) tc.textContent = post?.votes??'';
+    document.getElementById('tv-btn')?.classList.add('voted');
+    const lc = document.getElementById('pv-'+id);
+    if (lc) { lc.textContent = post?.votes??''; lc.classList.add('hi'); }
+    votedP.add(id); saveVotes();
+    try {
+        const { error } = await db.from('posts').update({ votes: post?.votes??1 }).eq('id',id);
+        if (error) throw error;
+    } catch(e) {
+        votedP.delete(id); saveVotes();
+        if (post) post.votes--;
+        if (tc) tc.textContent = post?.votes??'';
+        document.getElementById('tv-btn')?.classList.remove('voted');
+        toast('Vote failed: '+e.message,'error');
+    }
+}
+
+async function voteReply(id, btn) {
+    if (votedR.has(id)) { toast('Already upvoted!','error',1800); return; }
+    const el = document.getElementById('rv-'+id);
+    let cur = parseInt(el?.textContent||'0')+1;
+    if (el) el.textContent = cur;
+    btn.classList.add('voted');
+    votedR.add(id); saveVotes();
+    try {
+        const { error } = await db.from('replies').update({ votes: cur }).eq('id',id);
+        if (error) throw error;
+    } catch(e) {
+        votedR.delete(id); saveVotes();
+        if (el) el.textContent = cur-1;
+        btn.classList.remove('voted');
+        toast('Vote failed: '+e.message,'error');
+    }
+}
+
+async function submitReply() {
+    if (!activePostId) return;
+    const author  = document.getElementById('r-author').value.trim();
+    const content = document.getElementById('r-text').value.trim();
+    if (!author)  { toast('Please add your name.','error'); return; }
+    if (!content) { toast('Reply cannot be empty.','error'); return; }
+    const btn = document.getElementById('reply-btn');
+    btn.disabled = true; btn.textContent = 'Posting…';
+    try {
+        const { error } = await db.from('replies').insert({ post_id:activePostId, author, content, votes:0, is_solution:false });
+        if (error) throw error;
+        document.getElementById('r-text').value = '';
+        document.getElementById('rc').textContent = '0';
+        toast('Reply posted! ✓');
+        await loadReplies(activePostId);
+        await load(); // refresh reply counts
+    } catch(e) {
+        toast('Error: '+e.message,'error');
+    } finally {
+        btn.disabled = false; btn.textContent = 'Reply →';
+    }
+}
+
+function closeThread() {
+    document.getElementById('overlay').classList.remove('open');
+    document.body.style.overflow = '';
+    activePostId = null;
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('overlay').classList.contains('open')) closeThread();
+    else if (document.getElementById('compose-panel').classList.contains('open')) toggleCompose();
+});
+
+load();
+</script>
+</body>
+</html>
