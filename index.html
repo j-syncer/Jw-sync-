@@ -1255,10 +1255,24 @@ window.jwsyncForumInit = function () {
       locateFile: function (f) { return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f; }
     });
 
+    /**
+     * Run INSERT and return the new rowid. Separated into two calls because
+     * SQL.js's db.exec() doesn't reliably handle `INSERT...; SELECT
+     * last_insert_rowid()` together when parameters are bound — the bind
+     * step throws "column index out of range" since the SELECT has no
+     * placeholders while INSERT has several. Two calls is the canonical fix.
+     */
+    function insertGetId(db, sql, params) {
+      if (params && params.length) db.run(sql, params); else db.run(sql);
+      var r = db.exec('SELECT last_insert_rowid()');
+      return r[0].values[0][0];
+    }
+
     // Helper to make one synthetic backup
     function makeBackup(label, notes, tagNames, version) {
       var db = new SQL.Database();
-      // Schema modelled on JW Library's userData.db (minimum viable subset)
+      // Schema modelled on JW Library's userData.db (minimum viable subset).
+      // db.run() supports multi-statement SQL when no params are passed.
       db.run(
         'CREATE TABLE Location (LocationId INTEGER PRIMARY KEY AUTOINCREMENT, BookNumber INTEGER, ChapterNumber INTEGER, DocumentId INTEGER, Track INTEGER, IssueTagNumber INTEGER DEFAULT 0, KeySymbol TEXT, MepsLanguage INTEGER DEFAULT 0, Type INTEGER DEFAULT 0, Title TEXT);' +
         'CREATE TABLE Note (NoteId INTEGER PRIMARY KEY AUTOINCREMENT, Guid TEXT NOT NULL, UserMarkId INTEGER, LocationId INTEGER, Title TEXT, Content TEXT, LastModified TEXT, Created TEXT, BlockType INTEGER DEFAULT 0, BlockIdentifier INTEGER);' +
@@ -1271,16 +1285,17 @@ window.jwsyncForumInit = function () {
       );
 
       // Insert sample locations
-      var loc1 = db.exec('INSERT INTO Location (BookNumber, ChapterNumber, KeySymbol, Title, Type) VALUES (43, 3, \'nwt\', \'John chapter 3\', 0); SELECT last_insert_rowid()');
-      var locId1 = loc1[0].values[0][0];
-      var loc2 = db.exec('INSERT INTO Location (BookNumber, ChapterNumber, KeySymbol, Title, Type) VALUES (40, 5, \'nwt\', \'Matthew chapter 5\', 0); SELECT last_insert_rowid()');
-      var locId2 = loc2[0].values[0][0];
+      var locId1 = insertGetId(db,
+        'INSERT INTO Location (BookNumber, ChapterNumber, KeySymbol, Title, Type) VALUES (?, ?, ?, ?, ?)',
+        [43, 3, 'nwt', 'John chapter 3', 0]);
+      var locId2 = insertGetId(db,
+        'INSERT INTO Location (BookNumber, ChapterNumber, KeySymbol, Title, Type) VALUES (?, ?, ?, ?, ?)',
+        [40, 5, 'nwt', 'Matthew chapter 5', 0]);
 
       // Insert tags
       var tagIds = {};
       tagNames.forEach(function (name) {
-        var r = db.exec('INSERT INTO Tag (Name) VALUES (?); SELECT last_insert_rowid()', [name]);
-        tagIds[name] = r[0].values[0][0];
+        tagIds[name] = insertGetId(db, 'INSERT INTO Tag (Name) VALUES (?)', [name]);
       });
 
       // Insert notes + tagmap
@@ -1288,22 +1303,24 @@ window.jwsyncForumInit = function () {
         var lid = i % 2 === 0 ? locId1 : locId2;
         var guid = 'demo-' + label + '-' + i + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
         var iso = new Date(Date.now() - (notes.length - i) * 86400000).toISOString();
-        var noteR = db.exec(
-          'INSERT INTO Note (Guid, LocationId, Title, Content, LastModified, Created) VALUES (?, ?, ?, ?, ?, ?); SELECT last_insert_rowid()',
-          [guid, lid, n.title, n.body, iso, iso]
-        );
-        var nid = noteR[0].values[0][0];
+        var nid = insertGetId(db,
+          'INSERT INTO Note (Guid, LocationId, Title, Content, LastModified, Created) VALUES (?, ?, ?, ?, ?, ?)',
+          [guid, lid, n.title, n.body, iso, iso]);
         if (n.tag && tagIds[n.tag]) {
           db.run('INSERT INTO TagMap (NoteId, TagId, Position) VALUES (?, ?, ?)', [nid, tagIds[n.tag], i]);
         }
       });
 
-      // A couple of highlights
-      var mark1 = db.exec('INSERT INTO UserMark (ColorIndex, LocationId, UserMarkGuid, Version) VALUES (1, ?, ?, 1); SELECT last_insert_rowid()', [locId1, 'demo-mark-1-' + label]);
-      db.run('INSERT INTO BlockRange (BlockType, Identifier, StartToken, EndToken, UserMarkId) VALUES (2, 16, 0, 5, ?)', [mark1[0].values[0][0]]);
+      // A highlight
+      var markId = insertGetId(db,
+        'INSERT INTO UserMark (ColorIndex, LocationId, UserMarkGuid, Version) VALUES (?, ?, ?, ?)',
+        [1, locId1, 'demo-mark-1-' + label, 1]);
+      db.run('INSERT INTO BlockRange (BlockType, Identifier, StartToken, EndToken, UserMarkId) VALUES (?, ?, ?, ?, ?)',
+        [2, 16, 0, 5, markId]);
 
       // A bookmark
-      db.run('INSERT INTO Bookmark (LocationId, PublicationLocationId, Slot, Title, Snippet) VALUES (?, ?, 0, ?, ?)', [locId2, locId2, 'The Sermon on the Mount', 'Blessed are the poor in spirit…']);
+      db.run('INSERT INTO Bookmark (LocationId, PublicationLocationId, Slot, Title, Snippet) VALUES (?, ?, ?, ?, ?)',
+        [locId2, locId2, 0, 'The Sermon on the Mount', 'Blessed are the poor in spirit…']);
 
       var bytes = db.export();
       db.close();
