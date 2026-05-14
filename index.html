@@ -644,6 +644,89 @@ button[class*='bg-stone-'] {
   box-shadow:0 6px 24px rgba(245,158,11,.3) !important;
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   Mobile improvements
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── iOS input zoom fix ────────────────────────────────────────
+   iOS Safari auto-zooms the viewport when a focused input has
+   font-size < 16px. Force 16px floor on all fields so the layout
+   never jumps when the user taps into a text input or dropdown. */
+@media (max-width:768px) {
+  input,select,textarea { font-size:16px !important; }
+}
+
+/* ── Touch targets ─────────────────────────────────────────────
+   Apple HIG minimum is 44×44pt. Buttons below this are
+   frustrating to hit, especially for users with larger thumbs. */
+button,[role="button"],label[for],summary { min-height:44px; }
+input[type="file"]::file-selector-button {
+  min-height:40px;
+  padding:10px 16px;
+  cursor:pointer;
+}
+
+/* ── Remove grey tap flash ─────────────────────────────────────
+   iOS/Android add a semi-transparent grey overlay on tap. We have
+   our own focus/hover styles so this just looks like a glitch. */
+* { -webkit-tap-highlight-color:transparent; }
+
+/* ── Faster taps ───────────────────────────────────────────────
+   Removes the 300ms click delay mobile browsers add for
+   double-tap-to-zoom detection. Makes the whole app feel snappier. */
+button,a,[role="button"],label { touch-action:manipulation; }
+
+/* ── No horizontal overflow ────────────────────────────────────
+   Prevents elements wider than the viewport causing unwanted
+   side-scroll (a common cause of the "not snapped in" feel). */
+html,body { overflow-x:hidden !important; }
+img,svg,video { max-width:100%; }
+
+/* ── iPhone safe-area insets ───────────────────────────────────
+   Keeps nav and merge button from hiding behind the home indicator
+   bar or the Dynamic Island on modern iPhones. */
+@supports (padding:env(safe-area-inset-bottom)) {
+  #mob-bar,footer {
+    padding-bottom:max(0.75rem,env(safe-area-inset-bottom)) !important;
+  }
+  body {
+    padding-left:env(safe-area-inset-left);
+    padding-right:env(safe-area-inset-right);
+  }
+}
+
+/* ── Small-screen layout tweaks ────────────────────────────────
+   Reduce excessive padding, scale down headings that clip, fix
+   any rows that overflow horizontally. */
+@media (max-width:480px) {
+  /* Tighter page padding — the default p-8 is too generous on a
+     375px phone screen */
+  .p-8   { padding:1rem !important; }
+  .px-8  { padding-left:1rem !important; padding-right:1rem !important; }
+  .py-8  { padding-top:1.25rem !important; padding-bottom:1.25rem !important; }
+  .p-6   { padding:0.875rem !important; }
+  .px-6  { padding-left:0.875rem !important; padding-right:0.875rem !important; }
+
+  /* Headings: scale down so they fit without clipping or wrapping badly */
+  .text-4xl { font-size:1.75rem !important; line-height:1.2  !important; }
+  .text-3xl { font-size:1.5rem  !important; line-height:1.25 !important; }
+  .text-2xl { font-size:1.25rem !important; line-height:1.3  !important; }
+
+  /* Tag / chip rows: wrap onto a new line rather than scroll off-screen */
+  .flex-nowrap { flex-wrap:wrap !important; }
+
+  /* Drop zones: taller target area — easier to tap than a thin strip */
+  .simple-drop-zone { padding:28px 14px !important; }
+
+  /* Merge button: thumb-friendly height, slightly smaller text
+     so it doesn't look cramped at full width */
+  .simple-merge-btn {
+    font-size:17px !important;
+    padding:20px 18px !important;
+    min-height:60px !important;
+  }
+}
+
     </style>
     <!-- ── End design theme ────────────────────────────────── -->
 </head>
