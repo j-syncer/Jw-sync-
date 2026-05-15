@@ -789,20 +789,84 @@ img,svg,video { max-width:100%; }
     min-width: 0;
 }
 
-/* ── File attachment box redesign ───────────────────────────
-   Previous attempts at text-overflow:ellipsis all failed because the
-   pa-component h3 is display:flex — a flex container ignores text-overflow.
-   New approach: allow filenames to WRAP (word-break) rather than truncate.
-   On mobile the card grows taller, never wider. No layout bugs possible.
-   ─────────────────────────────────────────────────────────── */
+/* ═══════════════════════════════════════════════════════════
+   SLEEK FILE ATTACHMENT REDESIGN  (all screen widths)
+   Root cause of every prior failure: h3 is display:flex, so
+   word-break / overflow-wrap are silently ignored. Fix: make
+   h3 display:block so text wraps as a normal block element,
+   and render the icon inline within that block.
+   ═══════════════════════════════════════════════════════════ */
 
-/* Truncate elements: at minimum ensure they can shrink in flex/grid */
-[class~="truncate"] {
-    min-width: 0 !important;
-    max-width: 100% !important;
+/* ─ pa card: remove heavy box, use a thin left-accent strip ─ */
+div[class*="bg-stone-800/80"][class*="rounded-xl"] {
+    background: rgba(28,25,23,0.5) !important;
+    border-top:    1px solid rgba(68,64,60,0.3) !important;
+    border-right:  1px solid rgba(68,64,60,0.3) !important;
+    border-bottom: 1px solid rgba(68,64,60,0.3) !important;
+    border-left:   3px solid rgba(249,115,22,0.55) !important;
+    border-radius: 0 6px 6px 0 !important;
+    padding: 0.6rem 0.8rem !important;
+    box-shadow: none !important;
 }
 
-/* Drop zone labels — keep width-constrained */
+/* ─ Header row: allow wrapping so nothing can overflow ─────── */
+div[class*="bg-stone-800/80"] > div[class*="justify-between"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    gap: 5px 8px !important;
+    padding-right: 1.75rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+/* ─ h3: BLOCK (not flex) so word-break actually fires ──────── */
+div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 {
+    display: block !important;
+    flex: 1 1 100px !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    font-size: 0.83rem !important;
+    line-height: 1.45 !important;
+}
+
+/* ─ Icon: inline with the block text ───────────────────────── */
+div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 > svg,
+div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 > i {
+    display: inline !important;
+    vertical-align: middle !important;
+    margin-right: 4px !important;
+}
+
+/* ─ Peek / Stats buttons: always a horizontal row ──────────── */
+div[class*="bg-stone-800/80"] > div[class*="justify-between"] > div[class*="shrink-0"] {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    flex-shrink: 0 !important;
+    align-items: flex-start !important;
+}
+
+div[class*="bg-stone-800/80"] > div[class*="justify-between"] > div[class*="shrink-0"] > button {
+    font-size: 0.7rem !important;
+    padding: 2px 7px !important;
+    white-space: nowrap !important;
+    line-height: 1.5 !important;
+}
+
+/* ─ Stats grid: tighter ─────────────────────────────────────── */
+div[class*="bg-stone-800/80"] > div[class*="grid-cols-2"] {
+    gap: 3px 10px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+/* ─ Drop zone: width-contained, filename wraps ──────────────── */
 label[class*="border-dashed"],
 .simple-drop-zone {
     display: block !important;
@@ -812,19 +876,48 @@ label[class*="border-dashed"],
     overflow: hidden !important;
 }
 
-/* Drop zone filename <p>: let it wrap rather than overflow */
-label[class*="border-dashed"] > p {
+label[class*="border-dashed"] p {
     white-space: normal !important;
     word-break: break-word !important;
-    overflow-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
     max-width: 100% !important;
 }
 
-/* Simple-mode */
+/* ─ Confirmation row: filename wraps ────────────────────────── */
+div[class*="bg-orange-900/20"] {
+    flex-wrap: wrap !important;
+}
+
+div[class*="bg-orange-900/20"] span[class*="truncate"] {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+/* ─ Secondary file list: filename wraps ─────────────────────── */
+div[class*="bg-stone-800"][class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: anywhere !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    min-width: 0 !important;
+}
+
+/* ─ All .truncate: at minimum allow shrinking ───────────────── */
+[class~="truncate"] {
+    min-width: 0 !important;
+}
+
+/* ─ Simple mode ─────────────────────────────────────────────── */
 .simple-drop-zone > div,
 .simple-drop-zone > span {
     word-break: break-word !important;
-    overflow-wrap: break-word !important;
+    overflow-wrap: anywhere !important;
     max-width: 100% !important;
 }
 
@@ -833,57 +926,5 @@ label[class*="border-dashed"] > p {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-}
-
-/* ── Mobile-only redesign (phones < 640 px) ─────────────── */
-@media (max-width: 639px) {
-
-  /* pa card header: stack filename above Peek/Stats buttons */
-  div[class*="bg-stone-800/80"] > div[class*="justify-between"] {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      gap: 0.5rem !important;
-      padding-right: 2rem !important;   /* preserve room for × remove button */
-  }
-
-  /* h3 filename: keep flex for icon+text alignment, allow text to wrap */
-  div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 {
-      display: flex !important;
-      flex-wrap: nowrap !important;
-      align-items: flex-start !important;   /* icon pins top-left as text wraps */
-      white-space: normal !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      word-break: break-word !important;
-      overflow-wrap: break-word !important;
-      min-width: 0 !important;
-      max-width: 100% !important;
-  }
-
-  /* icon: stays pinned to top of the first text line */
-  div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 svg,
-  div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 i {
-      flex-shrink: 0 !important;
-      margin-top: 2px !important;
-  }
-
-  /* Peek / Stats buttons: change from a stacked column to a horizontal row */
-  div[class*="bg-stone-800/80"] > div[class*="justify-between"] > div[class*="shrink-0"] {
-      flex-direction: row !important;
-      flex-wrap: wrap !important;
-      gap: 0.4rem !important;
-  }
-
-  /* Confirmation row below drop zone + secondary file list: allow span to wrap */
-  div[class*="bg-orange-900/20"] span[class*="truncate"],
-  div[class*="bg-stone-800"] span[class*="truncate"] {
-      white-space: normal !important;
-      word-break: break-word !important;
-      overflow-wrap: break-word !important;
-      overflow: visible !important;
-      text-overflow: clip !important;
-      min-width: 0 !important;
-  }
-
 }
 
