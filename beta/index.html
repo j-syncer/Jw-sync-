@@ -302,25 +302,21 @@ ${stripHTML(v.content)||"No content"}
 <!-- Inline style + JS observer guarantee these rules apply  -->
 <!-- even if Tailwind CDN regenerates CSS after page load.   -->
 <style>
-@media (max-width:1023px){
+@media (max-width:639px){
   #root{overflow-x:hidden!important;max-width:100vw!important;width:100%!important}
-  label[class*="border-dashed"],.simple-drop-zone{display:block!important;overflow:hidden!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
-  label[class*="border-dashed"]>p{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;max-width:100%!important;display:block!important}
-  .simple-drop-zone>div,.simple-drop-zone>span{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;max-width:100%!important}
-  .simple-step{overflow:hidden!important;width:100%!important;max-width:100%!important}
-  [class~="truncate"]{min-width:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
-  /* text-overflow only works on BLOCK containers, not flex containers.
-     The pa-component h3 is display:flex — override to block so the long
-     filename is clipped with ellipsis instead of expanding the card. */
-  h3[class*="flex"][class*="truncate"]{display:block!important;min-width:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
-  h3[class*="flex"][class*="truncate"] svg,h3[class*="flex"][class*="truncate"] i{display:inline-block!important;vertical-align:middle!important;margin-right:0.35rem!important}
+  [class~="truncate"]{min-width:0!important;max-width:100%!important}
+  label[class*="border-dashed"],.simple-drop-zone{display:block!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important;overflow:hidden!important}
+  label[class*="border-dashed"]>p{white-space:normal!important;word-break:break-word!important;max-width:100%!important}
+  div[class*="bg-stone-800/80"]>div[class*="justify-between"]{flex-direction:column!important;align-items:flex-start!important;gap:.5rem!important;padding-right:2rem!important}
+  div[class*="bg-stone-800/80"]>div[class*="justify-between"] h3{display:flex!important;align-items:flex-start!important;white-space:normal!important;overflow:visible!important;word-break:break-word!important;min-width:0!important;max-width:100%!important}
+  div[class*="bg-stone-800/80"]>div[class*="justify-between"] h3 svg,div[class*="bg-stone-800/80"]>div[class*="justify-between"] h3 i{flex-shrink:0!important;margin-top:2px!important}
+  div[class*="bg-stone-800/80"]>div[class*="justify-between"]>div[class*="shrink-0"]{flex-direction:row!important;flex-wrap:wrap!important;gap:.4rem!important}
+  div[class*="bg-orange-900/20"] span[class*="truncate"],div[class*="bg-stone-800"] span[class*="truncate"]{white-space:normal!important;word-break:break-word!important;overflow:visible!important;min-width:0!important}
 }
-/* Filename popup (shown on tap of truncated name — all screen sizes) */
 #fn-popup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1c1917;border:1px solid #ea580c;border-radius:12px;padding:16px 20px;max-width:85vw;word-break:break-all;z-index:9999;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.8)}
 </style>
 <script>
 (function(){
-  if(window.innerWidth>=1024)return;
   function sp(el,p,v){el.style.setProperty(p,v,'important');}
 
   function showFnPopup(name){
@@ -340,59 +336,64 @@ ${stripHTML(v.content)||"No content"}
 
   var fixTimer=null;
   function fix(){
+    var mobile=window.innerWidth<640;
     var r=document.getElementById('root');
     if(r){sp(r,'overflow-x','hidden');sp(r,'max-width','100vw');sp(r,'width','100%');}
 
     document.querySelectorAll('label[class*="border-dashed"],.simple-drop-zone').forEach(function(el){
-      sp(el,'display','block');sp(el,'overflow','hidden');
-      sp(el,'width','100%');sp(el,'max-width','100%');sp(el,'box-sizing','border-box');
+      sp(el,'display','block');sp(el,'width','100%');
+      sp(el,'max-width','100%');sp(el,'box-sizing','border-box');sp(el,'overflow','hidden');
       for(var i=0;i<el.children.length;i++){
         var c=el.children[i];
         if(c.tagName!=='INPUT'){
-          sp(c,'overflow','hidden');sp(c,'text-overflow','ellipsis');
-          sp(c,'white-space','nowrap');sp(c,'max-width','100%');sp(c,'display','block');
+          sp(c,'white-space','normal');sp(c,'word-break','break-word');
+          sp(c,'overflow-wrap','break-word');sp(c,'max-width','100%');
         }
       }
     });
 
     document.querySelectorAll('[class*="truncate"]').forEach(function(el){
       sp(el,'min-width','0');sp(el,'max-width','100%');
-      sp(el,'overflow','hidden');sp(el,'text-overflow','ellipsis');
-      sp(el,'white-space','nowrap');
+      if(mobile){
+        sp(el,'white-space','normal');sp(el,'word-break','break-word');
+        sp(el,'overflow','visible');sp(el,'text-overflow','clip');
+      }
     });
 
     document.querySelectorAll('.simple-step').forEach(function(el){
       sp(el,'overflow','hidden');sp(el,'width','100%');sp(el,'max-width','100%');
     });
 
-    /* Apply display:block inline-style to flex+truncate h3 so text-overflow fires.
-       CSS alone can be delayed by Tailwind CDN; inline styles always win. */
-    document.querySelectorAll('h3').forEach(function(h3){
-      var cls=h3.className||'';
-      if(cls.indexOf('flex')===-1||cls.indexOf('truncate')===-1)return;
-      sp(h3,'display','block');
-      sp(h3,'min-width','0');sp(h3,'max-width','100%');
-      sp(h3,'overflow','hidden');sp(h3,'text-overflow','ellipsis');
-      sp(h3,'white-space','nowrap');
-      /* Attach tap-to-expand popup once per element (survives React reconciliation
-         because we check a data attribute that React doesn't manage). */
-      if(!h3.getAttribute('data-popup-ok')){
-        h3.setAttribute('data-popup-ok','1');
-        h3.style.cursor='pointer';
-        h3.addEventListener('click',function(e){
-          /* textContent includes SVG text (empty) + filename; trim removes spaces */
-          var name=(this.textContent||'').replace(/\s+/g,' ').trim();
-          if(name)showFnPopup(name);
-        });
+    if(!mobile)return;
+
+    document.querySelectorAll('div[class*="bg-stone-800/80"][class*="rounded-xl"]').forEach(function(card){
+      var header=card.querySelector('div[class*="justify-between"][class*="items-start"]');
+      if(!header)return;
+      sp(header,'flex-direction','column');
+      sp(header,'align-items','flex-start');
+      sp(header,'gap','8px');
+      sp(header,'padding-right','2rem');
+      var h3=header.querySelector('h3');
+      if(h3){
+        sp(h3,'display','flex');
+        sp(h3,'flex-wrap','nowrap');
+        sp(h3,'align-items','flex-start');
+        sp(h3,'white-space','normal');
+        sp(h3,'overflow','visible');
+        sp(h3,'text-overflow','clip');
+        sp(h3,'word-break','break-word');
+        sp(h3,'overflow-wrap','break-word');
+        sp(h3,'min-width','0');
+        sp(h3,'max-width','100%');
+        var icon=h3.querySelector('svg,i');
+        if(icon){sp(icon,'flex-shrink','0');sp(icon,'margin-top','2px');}
       }
-      /* Also fix icon children: must be inline-block for vertical alignment */
-      Array.prototype.slice.call(h3.children).forEach(function(child){
-        if(child.tagName==='svg'||child.tagName==='SVG'||child.tagName==='I'){
-          sp(child,'display','inline-block');
-          sp(child,'vertical-align','middle');
-          sp(child,'margin-right','0.35rem');
-        }
-      });
+      var btns=header.querySelector('div[class*="shrink-0"]');
+      if(btns){
+        sp(btns,'flex-direction','row');
+        sp(btns,'flex-wrap','wrap');
+        sp(btns,'gap','4px');
+      }
     });
   }
 

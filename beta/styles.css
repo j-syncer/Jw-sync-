@@ -789,44 +789,45 @@ img,svg,video { max-width:100%; }
     min-width: 0;
 }
 
-/* 8. Drop zone labels — full-mode and simple-mode.
-      Full-mode uses <label class="block w-full border-2 border-dashed ...">
-      Simple-mode uses <label class="simple-drop-zone ...">
-      Both need display:block + overflow:hidden so they never expand beyond
-      their parent's width. */
+/* ── File attachment box redesign ───────────────────────────
+   Previous attempts at text-overflow:ellipsis all failed because the
+   pa-component h3 is display:flex — a flex container ignores text-overflow.
+   New approach: allow filenames to WRAP (word-break) rather than truncate.
+   On mobile the card grows taller, never wider. No layout bugs possible.
+   ─────────────────────────────────────────────────────────── */
+
+/* Truncate elements: at minimum ensure they can shrink in flex/grid */
+[class~="truncate"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+
+/* Drop zone labels — keep width-constrained */
 label[class*="border-dashed"],
 .simple-drop-zone {
     display: block !important;
-    overflow: hidden !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-}
-
-/* Full-mode filename: <p class="text-xs text-stone-600 mt-1">{l.name}</p>
-   This has ZERO overflow control in the source. A long unbroken filename
-   expands the label → expands the card → the whole column shifts right.
-   Fix: truncate with ellipsis. */
-label[class*="border-dashed"] > p {
     overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-    max-width: 100% !important;
-    display: block !important;
-    box-sizing: border-box !important;
 }
 
-/* Simple-mode filename divs/spans inside the custom drop zone class */
+/* Drop zone filename <p>: let it wrap rather than overflow */
+label[class*="border-dashed"] > p {
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
+}
+
+/* Simple-mode */
 .simple-drop-zone > div,
 .simple-drop-zone > span {
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
     max-width: 100% !important;
-    box-sizing: border-box !important;
 }
 
-/* Simple-mode step card container */
 .simple-step {
     overflow: hidden !important;
     width: 100% !important;
@@ -834,36 +835,55 @@ label[class*="border-dashed"] > p {
     box-sizing: border-box !important;
 }
 
-/* Tailwind's `truncate` class only works in flex/grid when the child also
-   has min-width:0. The flex default min-width:auto prevents shrinking below
-   content size, so `truncate` has no effect without this override. */
-[class~="truncate"] {
-    min-width: 0 !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-}
+/* ── Mobile-only redesign (phones < 640 px) ─────────────── */
+@media (max-width: 639px) {
 
-/* The file-info card h3 has BOTH `flex items-center` (display:flex) and
-   `truncate`. CSS text-overflow:ellipsis only works on BLOCK containers —
-   not flex containers. Forcing display:block makes text-overflow fire
-   correctly. The icon (svg/i) becomes inline-block so it stays vertically
-   aligned with the text. The h3 is still a flex ITEM of its parent
-   (div.flex.justify-between), so min-width:0 lets the parent shrink it. */
-h3[class*="flex"][class*="truncate"] {
-    display: block !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-}
-h3[class*="flex"][class*="truncate"] svg,
-h3[class*="flex"][class*="truncate"] i {
-    display: inline-block !important;
-    vertical-align: middle !important;
-    margin-right: 0.35rem !important;
-    flex-shrink: 0 !important;
+  /* pa card header: stack filename above Peek/Stats buttons */
+  div[class*="bg-stone-800/80"] > div[class*="justify-between"] {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0.5rem !important;
+      padding-right: 2rem !important;   /* preserve room for × remove button */
+  }
+
+  /* h3 filename: keep flex for icon+text alignment, allow text to wrap */
+  div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      align-items: flex-start !important;   /* icon pins top-left as text wraps */
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+  }
+
+  /* icon: stays pinned to top of the first text line */
+  div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 svg,
+  div[class*="bg-stone-800/80"] > div[class*="justify-between"] h3 i {
+      flex-shrink: 0 !important;
+      margin-top: 2px !important;
+  }
+
+  /* Peek / Stats buttons: change from a stacked column to a horizontal row */
+  div[class*="bg-stone-800/80"] > div[class*="justify-between"] > div[class*="shrink-0"] {
+      flex-direction: row !important;
+      flex-wrap: wrap !important;
+      gap: 0.4rem !important;
+  }
+
+  /* Confirmation row below drop zone + secondary file list: allow span to wrap */
+  div[class*="bg-orange-900/20"] span[class*="truncate"],
+  div[class*="bg-stone-800"] span[class*="truncate"] {
+      white-space: normal !important;
+      word-break: break-word !important;
+      overflow-wrap: break-word !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      min-width: 0 !important;
+  }
+
 }
 
