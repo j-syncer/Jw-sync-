@@ -685,18 +685,18 @@ img,svg,video { max-width:100%; }
     }
 }
 
-/* 3. Navbar button row: swap horizontal scroll for wrapping rows so
-      every feature button is immediately visible without needing to
-      know to swipe the nav. */
+/* 3. Navbar button row: wrap so every feature button is immediately visible
+      without needing to swipe. Keep overflow-x contained (not visible) so
+      buttons never escape the navbar and push the page wider. */
 @media (max-width: 1023px) {
     #jw-navbar [class~="overflow-x-auto"] {
-        overflow-x: visible !important;
+        overflow-x: hidden !important;
         flex-wrap: wrap !important;
         row-gap: 4px !important;
         padding-bottom: 6px !important;
-        /* Prevent the scroll container from eating vertical touch scroll */
         overscroll-behavior-x: contain !important;
     }
+    #jw-navbar [class~="overflow-x-auto"]::-webkit-scrollbar { display: none !important; }
 
     /* Tighten button size so 4-5 fit per row on a 390 px phone */
     .nav-btn {
@@ -763,5 +763,19 @@ img,svg,video { max-width:100%; }
 @media (max-width: 1023px) {
     #mob-bar { bottom: env(safe-area-inset-bottom, 0px); }
     body.mob-bar-on { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* 8. File upload drop zones: prevent long filenames from pushing the card
+      wider than the viewport. The flex child holding the filename has no
+      min-width: 0 in the source, so we must clamp it here. */
+.simple-step { overflow: hidden !important; }
+.simple-drop-zone { overflow: hidden !important; max-width: 100% !important; }
+.simple-drop-zone > * { min-width: 0; max-width: 100%; }
+.simple-step p,
+.simple-step span,
+.simple-step div {
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    max-width: 100% !important;
 }
 
