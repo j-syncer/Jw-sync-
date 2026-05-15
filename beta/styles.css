@@ -845,3 +845,14 @@ label[class*="border-dashed"] > p {
     white-space: nowrap !important;
 }
 
+/* The file-info card (pa component) uses an h3 that is BOTH a flex container
+   (for icon + name alignment) and has `truncate`. CSS text-overflow cannot
+   target anonymous flex items (raw text nodes), so the JS observer wraps them
+   in spans. This rule prevents the h3 from expanding its parent card before
+   the JS runs. */
+h3[class*="flex"][class*="truncate"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
