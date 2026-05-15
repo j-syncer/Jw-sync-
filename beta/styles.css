@@ -789,17 +789,12 @@ img,svg,video { max-width:100%; }
     min-width: 0;
 }
 
-/* 8. File upload drop zones — both simple-mode and full-mode.
-      With #root now clamped, width:100% resolves correctly, but we
-      still force display:block on <label> (inline by default) and
-      apply filename truncation so the card doesn't grow taller than
-      needed to accommodate a broken-word filename. */
-.simple-step {
-    overflow: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-}
+/* 8. Drop zone labels — full-mode and simple-mode.
+      Full-mode uses <label class="block w-full border-2 border-dashed ...">
+      Simple-mode uses <label class="simple-drop-zone ...">
+      Both need display:block + overflow:hidden so they never expand beyond
+      their parent's width. */
+label[class*="border-dashed"],
 .simple-drop-zone {
     display: block !important;
     overflow: hidden !important;
@@ -807,9 +802,21 @@ img,svg,video { max-width:100%; }
     max-width: 100% !important;
     box-sizing: border-box !important;
 }
-/* Direct children of drop zone: truncate filenames with ellipsis.
-   The emoji divs (text-4xl / text-5xl) and sub-labels are short
-   enough that nowrap doesn't cause problems. */
+
+/* Full-mode filename: <p class="text-xs text-stone-600 mt-1">{l.name}</p>
+   This has ZERO overflow control in the source. A long unbroken filename
+   expands the label → expands the card → the whole column shifts right.
+   Fix: truncate with ellipsis. */
+label[class*="border-dashed"] > p {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    max-width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+/* Simple-mode filename divs/spans inside the custom drop zone class */
 .simple-drop-zone > div,
 .simple-drop-zone > span {
     overflow: hidden !important;
@@ -817,5 +824,24 @@ img,svg,video { max-width:100%; }
     white-space: nowrap !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+}
+
+/* Simple-mode step card container */
+.simple-step {
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Tailwind's `truncate` class only works in flex/grid when the child also
+   has min-width:0. The flex default min-width:auto prevents shrinking below
+   content size, so `truncate` has no effect without this override. */
+[class~="truncate"] {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
