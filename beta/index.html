@@ -297,5 +297,50 @@ ${stripHTML(v.content)||"No content"}
 <script src="js/forum.js"></script>
 <script src="js/enhancements.js"></script>
 <!-- ── End enhancement layer ───────────────────────────── -->
+
+<!-- ── Mobile overflow hardfix ─────────────────────────── -->
+<!-- Inline style + JS observer guarantee these rules apply  -->
+<!-- even if Tailwind CDN regenerates CSS after page load.   -->
+<style>
+@media (max-width:1023px){
+  #root{overflow-x:hidden!important;max-width:100vw!important;width:100%!important}
+  .simple-step{overflow:hidden!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+  .simple-drop-zone{display:block!important;overflow:hidden!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+  .simple-drop-zone>div,.simple-drop-zone>span{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;max-width:100%!important}
+}
+</style>
+<script>
+(function(){
+  if(window.innerWidth>=1024)return;
+  function sp(el,p,v){el.style.setProperty(p,v,'important');}
+  function fix(){
+    var r=document.getElementById('root');
+    if(r){sp(r,'overflow-x','hidden');sp(r,'max-width','100vw');sp(r,'width','100%');}
+    document.querySelectorAll('.simple-drop-zone').forEach(function(el){
+      sp(el,'display','block');sp(el,'overflow','hidden');
+      sp(el,'width','100%');sp(el,'max-width','100%');sp(el,'box-sizing','border-box');
+      for(var i=0;i<el.children.length;i++){
+        var c=el.children[i];
+        if(c.tagName!=='INPUT'){
+          sp(c,'overflow','hidden');sp(c,'text-overflow','ellipsis');
+          sp(c,'white-space','nowrap');sp(c,'max-width','100%');
+        }
+      }
+    });
+    document.querySelectorAll('.simple-step').forEach(function(el){
+      sp(el,'overflow','hidden');sp(el,'width','100%');sp(el,'max-width','100%');
+    });
+  }
+  var obs=new MutationObserver(function(muts){
+    for(var i=0;i<muts.length;i++){
+      if(muts[i].addedNodes.length||muts[i].type==='attributes'){fix();break;}
+    }
+  });
+  function start(){obs.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});fix();}
+  if(document.body)start();else document.addEventListener('DOMContentLoaded',start);
+  window.addEventListener('load',fix);
+})();
+</script>
+<!-- ── End mobile overflow hardfix ─────────────────────── -->
 </body>
 </html>
