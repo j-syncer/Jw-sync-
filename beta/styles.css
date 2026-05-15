@@ -1,0 +1,666 @@
+/* =============================================================================
+   JW Sync Beta — styles.css
+   All custom CSS extracted from beta/index.html. Three sections:
+     1. App styles      — scrollbars, animations, navbar, modals, beta banner
+     2. Forum styles    — scoped to #forum-view (Supabase community)
+     3. Design theme    — font stack, mobile responsive, light-mode overrides
+   ============================================================================= */
+
+/* ── Section 1: App styles ───────────────────────────────────────────────── */
+
+        /* ── Scrollbars ── */
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #44403c; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #57534e; }
+
+        /* ── Animations (replaces Tailwind animate-in plugin) ── */
+        @keyframes fadeIn    { from { opacity: 0; }                            to { opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp   { from { opacity: 0; transform: translateY(8px);  } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUpIn { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
+        .anim-fade       { animation: fadeIn    0.2s ease both; }
+        .anim-slide-down { animation: slideDown 0.25s ease both; }
+        .anim-slide-up   { animation: slideUp   0.3s ease both; }
+        .anim-slide-up-in { animation: slideUpIn 0.3s cubic-bezier(0.16,1,0.3,1) both; }
+
+        /* ── Sticky navbar ── */
+        #jw-navbar {
+            position: sticky; top: 0; z-index: 40;
+            background: rgba(12,10,9,0.92);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(68,64,60,0.6);
+            box-shadow: 0 1px 24px rgba(0,0,0,0.4);
+        }
+        .nav-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 12px; font-weight: 700;
+            padding: 7px 13px; border-radius: 20px;
+            border: 1px solid #44403c; background: #1c1917;
+            color: #a8a29e; cursor: pointer; white-space: nowrap;
+            transition: color 0.15s, border-color 0.15s, background 0.15s;
+            text-decoration: none;
+        }
+        .nav-btn:hover { color: #f5f5f4; border-color: #57534e; background: #292524; }
+        .nav-btn.active { color: #fb923c; border-color: rgba(249,115,22,0.4); background: rgba(249,115,22,0.08); }
+        .nav-btn.has-errors { color: #f87171; border-color: rgba(248,113,113,0.4); }
+        .nav-btn-community {
+            font-size: 13px; padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(249,115,22,0.18), rgba(234,88,12,0.12));
+            border-color: rgba(249,115,22,0.45); color: #fb923c;
+            box-shadow: 0 0 12px rgba(249,115,22,0.12);
+        }
+        .nav-btn-community:hover {
+            background: linear-gradient(135deg, rgba(249,115,22,0.28), rgba(234,88,12,0.22));
+            border-color: rgba(249,115,22,0.7); color: #fed7aa;
+            box-shadow: 0 0 18px rgba(249,115,22,0.22);
+        }
+        .nav-select {
+            background: #1c1917; border: 1px solid #44403c; color: #a8a29e;
+            font-size: 13px; font-weight: 600; padding: 7px 10px;
+            border-radius: 20px; outline: none; cursor: pointer;
+            transition: color 0.15s, border-color 0.15s;
+            max-width: 160px;
+        }
+        .nav-select:hover { color: #f5f5f4; border-color: #57534e; }
+
+        /* ── Modal close button ── */
+        .modal-close {
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; border: 1px solid #44403c; background: #1c1917;
+            color: #78716c; transition: all 0.15s; flex-shrink: 0; font-size: 18px; line-height: 1; cursor: pointer;
+        }
+        .modal-close:hover { background: #ef4444; border-color: #ef4444; color: white; }
+
+        /* ── Help / Changelog modal tabs ── */
+        .help-tab {
+            padding: 7px 14px; font-size: 12px; font-weight: 700;
+            border-radius: 8px; transition: all 0.15s; color: #78716c; cursor: pointer;
+        }
+        .help-tab.active { background: #292524; color: #f5f5f4; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+        .help-tab:hover:not(.active) { color: #a8a29e; }
+
+        /* ── Log panel (slide-up from bottom) ── */
+        #log-panel {
+            position: fixed; bottom: 0; left: 0; right: 0; z-index: 35;
+            background: #0c0a09; border-top: 1px solid #292524;
+            box-shadow: 0 -8px 32px rgba(0,0,0,0.6);
+            display: flex; flex-direction: column;
+            max-height: 38vh; min-height: 180px;
+        }
+        #log-panel.anim-slide-up-in { animation: slideUpIn 0.3s cubic-bezier(0.16,1,0.3,1) both; }
+
+        /* ── Privacy badge pill ── */
+        .privacy-pill {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 11px; font-weight: 700; color: #4ade80;
+            background: rgba(74,222,128,0.07); border: 1px solid rgba(74,222,128,0.2);
+            padding: 4px 10px; border-radius: 20px;
+        }
+        .privacy-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* ── Feature card hover ── */
+        .feature-card { transition: border-color 0.2s, box-shadow 0.2s; }
+        .feature-card:hover { box-shadow: 0 0 0 1px rgba(249,115,22,0.12); }
+
+        /* ── Section label ── */
+        .section-label { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #57534e; }
+
+        /* ── Body padding for log panel ── */
+        body { padding-bottom: 0; }
+
+        /* ── Mobile sticky merge/download bar ── */
+        @media (max-width: 1023px) {
+            #mob-bar {
+                position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
+                background: rgba(12,10,9,0.97); border-top: 1px solid #292524;
+                padding: 10px 16px; display: flex; align-items: center; gap: 10px;
+                box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+                transform: translateY(0); transition: transform 0.25s ease;
+            }
+            #mob-bar.mob-hidden { transform: translateY(100%); }
+            .mob-label { flex: 1; min-width: 0; }
+            .mob-label-title { font-size: 13px; font-weight: 700; color: #e7e5e4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .mob-label-sub { font-size: 11px; color: #57534e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .mob-btn { padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
+            .mob-btn-merge { background: #ea580c; color: white; }
+            .mob-btn-merge:hover { background: #fb923c; }
+            .mob-btn-merge:disabled { background: #292524; color: #57534e; cursor: not-allowed; }
+            .mob-btn-download { background: #16a34a; color: white; text-decoration: none; display: inline-flex; align-items: center; }
+            .mob-btn-download:hover { background: #15803d; }
+            body.mob-bar-on { padding-bottom: 68px; }
+        }
+        @media (min-width: 1024px) { #mob-bar { display: none !important; } }
+
+        /* ── Light mode ── */
+        body.light { background: #f5f5f4; color: #1c1917; }
+        body.light #jw-navbar { background: rgba(245,245,244,0.95); border-bottom-color: rgba(214,211,209,0.8); }
+        body.light .nav-btn { background: #fff; border-color: #d6d3d1; color: #57534e; }
+        body.light .nav-btn:hover { background: #f5f5f4; color: #1c1917; border-color: #a8a29e; }
+        body.light .nav-btn.active { background: rgba(249,115,22,0.08); color: #ea580c; border-color: rgba(249,115,22,0.4); }
+        body.light .nav-select { background: #fff; border-color: #d6d3d1; color: #57534e; }
+        body.light .modal-close { background: #f5f5f4; border-color: #d6d3d1; color: #78716c; }
+        body.light .bg-stone-900 { background: #fafaf9 !important; }
+        body.light .bg-stone-800 { background: #f5f5f4 !important; }
+        body.light .bg-stone-800\/80, body.light .bg-stone-800\/50 { background: rgba(245,245,244,0.8) !important; }
+        body.light .bg-stone-950 { background: #e7e5e4 !important; }
+        body.light .text-stone-100 { color: #1c1917 !important; }
+        body.light .text-stone-200 { color: #292524 !important; }
+        body.light .text-stone-300 { color: #44403c !important; }
+        body.light .text-stone-400 { color: #57534e !important; }
+        body.light .text-stone-500 { color: #78716c !important; }
+        body.light .border-stone-700 { border-color: #d6d3d1 !important; }
+        body.light .border-stone-800 { border-color: #e7e5e4 !important; }
+        body.light .text-white { color: #1c1917 !important; }
+        body.light #log-panel { background: #f5f5f4; border-top-color: #d6d3d1; }
+
+        /* ── Drag-drop highlight ── */
+        .drop-active { border-color: #fb923c !important; background: rgba(251,146,60,0.07) !important; box-shadow: 0 0 0 3px rgba(251,146,60,0.15); }
+
+        /* ── Merge preview diff badge ── */
+        .diff-add { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.25); color: #4ade80; padding: 1px 7px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .diff-skip { background: rgba(161,161,170,0.1); border: 1px solid rgba(161,161,170,0.2); color: #71717a; padding: 1px 7px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+
+        /* ── QR code modal ── */
+        #qr-canvas { image-rendering: pixelated; }
+
+        /* ── Undo banner ── */
+        .undo-banner { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 45; background: #292524; border: 1px solid #44403c; border-radius: 24px; padding: 10px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); white-space: nowrap; animation: slideUp 0.3s ease both; }
+
+        /* ── Side-by-side comparison ── */
+        .compare-col { flex: 1; min-width: 0; overflow-y: auto; }
+        .compare-note-match { border-left: 3px solid #4ade80; }
+        .compare-note-diff { border-left: 3px solid #fb923c; }
+        .compare-note-only { border-left: 3px solid #60a5fa; }
+
+        /* ── Stats bars ── */
+        .stat-bar-track { background: #292524; border-radius: 4px; height: 6px; overflow: hidden; }
+        .stat-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s cubic-bezier(0.16,1,0.3,1); }
+
+        /* ── Theme toggle ── */
+        .theme-toggle { width: 38px; height: 22px; border-radius: 11px; background: #44403c; border: 1px solid #57534e; position: relative; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+        .theme-toggle.light-on { background: #f59e0b; border-color: #f59e0b; }
+        .theme-toggle-knob { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #a8a29e; transition: transform 0.2s, background 0.2s; }
+        .theme-toggle.light-on .theme-toggle-knob { transform: translateX(16px); background: #fff; }
+
+        /* ── Simple Mode ── */
+        .simple-step {
+            background: #1c1917; border: 2px solid #44403c; border-radius: 20px;
+            padding: 28px; text-align: center; transition: border-color 0.2s;
+        }
+        .simple-step.active { border-color: #fb923c; background: rgba(251,146,60,0.05); }
+        .simple-step.done { border-color: #4ade80; background: rgba(74,222,128,0.05); }
+        .simple-step-num {
+            width: 52px; height: 52px; border-radius: 50%; font-size: 22px; font-weight: 900;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+            border: 3px solid currentColor;
+        }
+        .simple-drop-zone {
+            border: 3px dashed #44403c; border-radius: 16px; padding: 36px 20px;
+            cursor: pointer; transition: all 0.2s; text-align: center; margin-top: 16px;
+        }
+        .simple-drop-zone:hover, .simple-drop-zone.active { border-color: #fb923c; background: rgba(251,146,60,0.06); }
+        .simple-drop-zone.done { border-color: #4ade80; background: rgba(74,222,128,0.06); border-style: solid; }
+        .simple-merge-btn {
+            width: 100%; padding: 22px; border-radius: 16px; font-size: 22px; font-weight: 900;
+            background: linear-gradient(135deg, #ea580c, #fb923c); color: white;
+            border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 8px 32px rgba(251,146,60,0.3);
+            letter-spacing: 0.01em;
+        }
+        .simple-merge-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(251,146,60,0.45); }
+        .simple-merge-btn:disabled { background: #292524; color: #57534e; transform: none; box-shadow: none; cursor: not-allowed; }
+        .simple-download-btn {
+            width: 100%; padding: 22px; border-radius: 16px; font-size: 22px; font-weight: 900;
+            background: linear-gradient(135deg, #16a34a, #4ade80); color: white;
+            border: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 8px 32px rgba(74,222,128,0.3);
+            text-decoration: none; display: block; text-align: center;
+        }
+        .simple-download-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(74,222,128,0.45); }
+        .simple-arrow { font-size: 40px; text-align: center; color: #44403c; line-height: 1; margin: 8px 0; }
+        .simple-mode-toggle {
+            display: flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            border: none; border-radius: 12px; padding: 12px 20px;
+            color: white; font-size: 15px; font-weight: 800; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(124,58,237,0.4); transition: all 0.2s; width: 100%;
+        }
+        .simple-mode-toggle:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(124,58,237,0.5); }
+        .simple-mode-toggle.exit { background: linear-gradient(135deg, #374151, #6b7280); box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+        .simple-mode-toggle.exit:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.4); }
+
+        /* ── Loading Screen ── */
+        #jws-loading {
+            position: fixed; inset: 0;
+            background: #0c0a09;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+            z-index: 99999;
+            transition: opacity 0.4s ease;
+        }
+        #jws-loading.hide { opacity: 0; pointer-events: none; }
+        #jws-loading .ls-spinner {
+            width: 56px; height: 56px;
+            border: 3px solid rgba(251,191,36,0.15);
+            border-top-color: #fbbf24; border-right-color: #fbbf24;
+            border-radius: 50%;
+            animation: ls-spin 1s linear infinite;
+        }
+        @keyframes ls-spin { to { transform: rotate(360deg); } }
+        #jws-loading h2 { font-size: 20px; font-weight: 700; color: #f5f5f4; margin: 0; }
+        #jws-loading p  { font-size: 14px; color: #78716c; margin: 0; }
+        #jws-loading .ls-dots { display: flex; gap: 6px; }
+        #jws-loading .ls-dots span {
+            width: 8px; height: 8px; border-radius: 50%; background: #fbbf24;
+            animation: ls-bounce 1.2s infinite;
+        }
+        #jws-loading .ls-dots span:nth-child(2) { animation-delay: .2s; }
+        #jws-loading .ls-dots span:nth-child(3) { animation-delay: .4s; }
+        @keyframes ls-bounce {
+            0%,80%,100% { transform: translateY(0); opacity:.5; }
+            40%          { transform: translateY(-10px); opacity:1; }
+        }
+
+        /* ── Beta environment banner ── */
+        #beta-banner {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+            background: linear-gradient(90deg, #7c3aed, #6d28d9);
+            color: #fff; text-align: center;
+            font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+            padding: 5px 16px; display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 2px 12px rgba(109,40,217,0.5);
+        }
+        #beta-banner .beta-pill {
+            background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 20px; padding: 2px 10px; font-size: 11px;
+        }
+        #beta-banner a { color: #ddd6fe; text-decoration: none; font-weight: 600; }
+        #beta-banner a:hover { color: #fff; text-decoration: underline; }
+        body { padding-top: 32px !important; }
+
+/* ── Section 2: Forum styles (scoped to #forum-view) ────────────────────── */
+
+:root {--bg:      #0c0a09;
+            --bg2:     #18110e;
+            --bg3:     #211610;
+            --border:  #2d1f14;
+            --border2: #3d2a1a;
+            --text:    #e8ddd5;
+            --muted:   #7a6558;
+            --accent:  #f97316;
+            --accent2: #fb923c;
+            --green:   #22c55e;
+            --blue:    #60a5fa;
+            --red:     #f87171;
+            --amber:   #fbbf24;}
+#forum-view * {margin:0; padding:0; box-sizing:border-box;}
+body.is-forum {font-family:'IBM Plex Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; line-height:1.6;}
+#forum-view ::-webkit-scrollbar {width:5px;}
+#forum-view ::-webkit-scrollbar-track {background:transparent;}
+#forum-view ::-webkit-scrollbar-thumb {background:var(--border2); border-radius:99px;}
+#forum-view .wrap {max-width:860px; margin:0 auto; padding:0 16px;}
+#forum-view header {border-bottom:1px solid var(--border); background:rgba(12,10,9,0.96); backdrop-filter:blur(12px); position:sticky; top:0; z-index:100;}
+#forum-view .header-inner {display:flex; align-items:center; justify-content:space-between; padding:13px 0;}
+#forum-view .logo-area {display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;}
+#forum-view .logo-icon {width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,#f97316,#dc2626); display:flex; align-items:center; justify-content:center; font-size:17px;}
+#forum-view .logo-name {font-size:15px; font-weight:700; letter-spacing:-0.3px;}
+#forum-view .logo-sub {font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace;}
+#forum-view .back-btn {display:flex; align-items:center; gap:5px; color:var(--muted); text-decoration:none; font-size:13px; padding:6px 12px; border:1px solid var(--border); border-radius:6px; transition:all 0.15s;}
+#forum-view .back-btn:hover {color:var(--text); border-color:var(--border2);}
+#forum-view .hero {padding:28px 0 20px; border-bottom:1px solid var(--border);}
+#forum-view .hero h1 {font-size:clamp(20px,4vw,30px); font-weight:700; letter-spacing:-0.4px; margin-bottom:5px;}
+#forum-view .hero h1 span {color:var(--accent);}
+#forum-view .hero p {color:var(--muted); font-size:14px;}
+#forum-view .hero-actions {display:flex; gap:9px; margin-top:16px; flex-wrap:wrap;}
+#forum-view .btn {display:inline-flex; align-items:center; gap:6px; padding:8px 15px; border-radius:7px; font-size:13px; font-weight:600; cursor:pointer; border:none; transition:all 0.15s; font-family:'IBM Plex Sans',sans-serif;}
+#forum-view .btn-primary {background:var(--accent); color:#fff;}
+#forum-view .btn-primary:hover:not(:disabled) {background:var(--accent2);}
+#forum-view .btn-primary:disabled {opacity:0.5; cursor:not-allowed;}
+#forum-view .btn-ghost {background:transparent; color:var(--muted); border:1px solid var(--border2);}
+#forum-view .btn-ghost:hover {color:var(--text); background:var(--bg3);}
+#forum-view .filter-bar {display:flex; gap:7px; padding:14px 0; border-bottom:1px solid var(--border); overflow-x:auto; scrollbar-width:none;}
+#forum-view .filter-bar::-webkit-scrollbar {display:none;}
+#forum-view .pill {display:inline-flex; align-items:center; gap:4px; padding:5px 12px; border-radius:99px; font-size:12px; font-weight:500; cursor:pointer; white-space:nowrap; border:1px solid var(--border); background:var(--bg2); color:var(--muted); transition:all 0.15s;}
+#forum-view .pill.active {background:var(--accent); color:#fff; border-color:var(--accent);}
+#forum-view .pill[data-cat="question"].active {background:rgba(96,165,250,0.15); color:var(--blue); border-color:rgba(96,165,250,0.3);}
+#forum-view .pill[data-cat="bug"].active {background:rgba(248,113,113,0.15); color:var(--red); border-color:rgba(248,113,113,0.3);}
+#forum-view .pill[data-cat="feature"].active {background:rgba(34,197,94,0.15); color:var(--green); border-color:rgba(34,197,94,0.3);}
+#forum-view .pill[data-cat="general"].active {background:rgba(251,191,36,0.15); color:var(--amber); border-color:rgba(251,191,36,0.3);}
+#forum-view .stats-bar {display:flex; gap:24px; padding:12px 0; border-bottom:1px solid var(--border);}
+#forum-view .stat {font-size:12px; color:var(--muted);}
+#forum-view .stat strong {color:var(--text); font-size:15px; display:block; font-weight:700;}
+#forum-view .compose-panel {background:var(--bg2); border:1px solid var(--border2); border-radius:12px; padding:20px; margin:16px 0; display:none;}
+#forum-view .compose-panel.open {display:block; animation:slideIn 0.18s ease;}
+@keyframes slideIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:none} }
+#forum-view .compose-panel h3 {font-size:14px; font-weight:700; margin-bottom:14px;}
+#forum-view .form-row {margin-bottom:10px;}
+#forum-view .form-label {font-size:11px; color:var(--muted); display:block; margin-bottom:4px; font-weight:600; text-transform:uppercase; letter-spacing:0.4px;}
+#forum-view .form-input, #forum-view .form-select, #forum-view .form-textarea {width:100%; background:var(--bg); border:1px solid var(--border2); border-radius:7px; padding:9px 12px; color:var(--text); font-family:'IBM Plex Sans',sans-serif; font-size:14px; outline:none; transition:border-color 0.15s;}
+#forum-view .form-input:focus, #forum-view .form-select:focus, #forum-view .form-textarea:focus {border-color:var(--accent);}
+#forum-view .form-textarea {resize:vertical; min-height:90px;}
+#forum-view option {background:#1a1a1a;}
+#forum-view .form-actions {display:flex; gap:8px; justify-content:flex-end; margin-top:14px;}
+#forum-view .char-count {font-size:11px; color:var(--muted); text-align:right; margin-top:3px; font-family:'IBM Plex Mono',monospace;}
+#forum-view .post-list {padding:4px 0;}
+#forum-view .post-item {display:flex; gap:12px; padding:16px 0; border-bottom:1px solid var(--border); cursor:pointer; transition:opacity 0.1s;}
+#forum-view .post-item:hover .post-title {color:var(--accent2);}
+#forum-view .post-item:active {opacity:0.8;}
+#forum-view .vote-col {display:flex; flex-direction:column; align-items:center; gap:3px; min-width:32px; padding-top:2px;}
+#forum-view .vote-btn {background:none; border:none; cursor:pointer; color:var(--muted); font-size:13px; padding:3px; border-radius:4px; transition:all 0.1s; line-height:1;}
+#forum-view .vote-btn:hover {color:var(--accent);}
+#forum-view .vote-btn.voted {color:var(--accent);}
+#forum-view .vote-count {font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--text);}
+#forum-view .vote-count.hi {color:var(--accent);}
+#forum-view .post-body {flex:1; min-width:0;}
+#forum-view .badges {display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap;}
+#forum-view .cat-badge {font-size:10px; font-weight:600; padding:2px 7px; border-radius:99px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.4px;}
+#forum-view .cat-question {background:rgba(96,165,250,0.12); color:var(--blue);}
+#forum-view .cat-bug {background:rgba(248,113,113,0.12); color:var(--red);}
+#forum-view .cat-feature {background:rgba(34,197,94,0.12); color:var(--green);}
+#forum-view .cat-general {background:rgba(251,191,36,0.12); color:var(--amber);}
+#forum-view .solved-badge {font-size:10px; color:var(--green); font-weight:600;}
+#forum-view .post-title {font-size:15px; font-weight:600; color:var(--text); transition:color 0.15s; margin-bottom:4px; line-height:1.35;}
+#forum-view .post-excerpt {font-size:13px; color:var(--muted); line-height:1.5; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;}
+#forum-view .post-meta {display:flex; align-items:center; gap:10px; margin-top:9px; flex-wrap:wrap;}
+#forum-view .meta-chip {display:flex; align-items:center; gap:4px; font-size:12px; color:var(--muted);}
+#forum-view .avatar-sm {width:20px; height:20px; border-radius:50%; font-size:10px; font-weight:700; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; color:#fff;}
+#forum-view .reply-chip {color:var(--blue);}
+#forum-view .mono {font-family:'IBM Plex Mono',monospace; font-size:11px;}
+#forum-view .state-box {padding:48px 0; text-align:center; color:var(--muted);}
+#forum-view .state-box .icon {font-size:32px; margin-bottom:12px;}
+#forum-view .state-box h3 {font-size:15px; font-weight:600; color:var(--text); margin-bottom:6px;}
+#forum-view .state-box p {font-size:13px;}
+#forum-view .spinner {width:28px; height:28px; margin:0 auto 14px; border:2px solid var(--border2); border-top-color:var(--accent); border-radius:50%; animation:spin 0.8s linear infinite;}
+@keyframes spin { to{transform:rotate(360deg)} }
+#forum-view .toast {position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--bg2); border:1px solid var(--border2); border-radius:8px; padding:10px 18px; font-size:13px; z-index:9999; box-shadow:0 8px 32px rgba(0,0,0,0.5); display:none; white-space:nowrap;}
+#forum-view .toast.show {display:block; animation:toastIn 0.2s ease;}
+#forum-view .toast.success {border-color:rgba(34,197,94,0.4); color:var(--green);}
+#forum-view .toast.error {border-color:rgba(248,113,113,0.4); color:var(--red);}
+@keyframes toastIn { from{opacity:0;transform:translateX(-50%) translateY(8px)} to{opacity:1;transform:translateX(-50%) translateY(0)} }
+#forum-view .overlay {position:fixed; inset:0; background:var(--bg); z-index:200; overflow-y:auto; display:none;}
+#forum-view .overlay.open {display:block; animation:fadeIn 0.15s ease;}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+#forum-view .thread-inner {max-width:720px; margin:0 auto; padding:20px 16px 80px;}
+#forum-view .thread-back {display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:13px; cursor:pointer; margin-bottom:18px; transition:color 0.15s; background:none; border:none; font-family:inherit;}
+#forum-view .thread-back:hover {color:var(--text);}
+#forum-view .thread-card {background:var(--bg2); border:1px solid var(--border2); border-radius:12px; padding:20px; margin-bottom:4px;}
+#forum-view .thread-card.original {border-color:rgba(249,115,22,0.25);}
+#forum-view .thread-title {font-size:19px; font-weight:700; letter-spacing:-0.3px; margin:10px 0 8px;}
+#forum-view .thread-content {font-size:14px; line-height:1.75; color:rgba(232,221,213,0.85); white-space:pre-wrap; word-break:break-word;}
+#forum-view .thread-footer {display:flex; align-items:center; gap:12px; margin-top:14px; padding-top:12px; border-top:1px solid var(--border); flex-wrap:wrap;}
+#forum-view .author-chip {display:flex; align-items:center; gap:7px; font-size:13px;}
+#forum-view .avatar-md {width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0;}
+#forum-view .react-btn {background:none; border:1px solid var(--border); color:var(--muted); font-size:12px; cursor:pointer; display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:5px; font-family:inherit; transition:all 0.1s;}
+#forum-view .react-btn:hover {color:var(--text); border-color:var(--border2);}
+#forum-view .react-btn.voted {color:var(--accent); border-color:rgba(249,115,22,0.4);}
+#forum-view .replies-section {margin-top:20px;}
+#forum-view .replies-header {font-size:12px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px;}
+#forum-view .reply-item {display:flex; gap:11px; padding:14px 0; border-bottom:1px solid var(--border);}
+#forum-view .reply-item:last-child {border-bottom:none;}
+#forum-view .reply-body {flex:1;}
+#forum-view .reply-author-row {display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap;}
+#forum-view .reply-author {font-size:13px; font-weight:600;}
+#forum-view .reply-time {font-size:11px; color:var(--muted); font-family:'IBM Plex Mono',monospace;}
+#forum-view .reply-text {font-size:14px; color:rgba(232,221,213,0.85); line-height:1.65; white-space:pre-wrap; word-break:break-word;}
+#forum-view .solution-badge {display:inline-flex; align-items:center; gap:4px; font-size:11px; color:var(--green); font-weight:600; margin-top:5px;}
+#forum-view .reply-compose {background:var(--bg2); border:1px solid var(--border2); border-radius:10px; padding:16px; margin-top:18px;}
+#forum-view .reply-compose h4 {font-size:13px; font-weight:600; margin-bottom:10px;}
+#forum-view footer {border-top:1px solid var(--border); margin-top:36px; padding:20px 0; text-align:center;}
+#forum-view footer p {font-size:12px; color:var(--muted);}
+#forum-view footer a {color:var(--accent); text-decoration:none;}
+@media(max-width:520px) { #forum-view .stats-bar {gap:16px;}
+#forum-view .vote-col {min-width:26px;} }
+
+/* ── Section 3: Design theme + mobile responsive ─────────────────────────── */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   JW Sync – Design Refresh  /  do not edit this block manually
+   (generated by consolidate.py)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Typography ──────────────────────────────────────────────── */
+body,button,input,select,textarea,p,span,div,h1,h2,h3,h4,h5,h6,a,label {
+  font-family:'Inter',ui-sans-serif,-apple-system,BlinkMacSystemFont,
+              'Segoe UI',system-ui,sans-serif !important;
+  -webkit-font-smoothing:antialiased !important;
+}
+h1,h2,h3,h4 { letter-spacing:-0.025em !important; }
+
+/* ── Background: warm stone → cool zinc ──────────────────────── */
+body                  { background-color:#09090b !important; }
+.bg-stone-950         { background-color:#09090b !important; }
+.bg-stone-900         { background-color:#111113 !important; }
+.bg-stone-800         { background-color:#1c1c1f !important; }
+.bg-stone-700         { background-color:#27272a !important; }
+.bg-stone-600         { background-color:#3f3f46 !important; }
+.bg-stone-500         { background-color:#52525b !important; }
+
+/* Semi-transparent variants (Tailwind /opacity suffix) */
+.bg-stone-800\/80     { background-color:rgba(28,28,31,.85) !important; }
+.bg-stone-800\/50     { background-color:rgba(28,28,31,.55) !important; }
+.bg-stone-800\/30     { background-color:rgba(28,28,31,.35) !important; }
+.bg-stone-900\/80     { background-color:rgba(17,17,19,.85) !important; }
+.bg-stone-900\/50     { background-color:rgba(17,17,19,.55) !important; }
+.bg-stone-950\/80     { background-color:rgba( 9, 9,11,.85) !important; }
+
+/* Gradient colour-stop tokens */
+.from-stone-950       { --tw-gradient-from:#09090b !important; }
+.from-stone-900       { --tw-gradient-from:#111113 !important; }
+.from-stone-800       { --tw-gradient-from:#1c1c1f !important; }
+.to-stone-950         { --tw-gradient-to  :#09090b !important; }
+.to-stone-900         { --tw-gradient-to  :#111113 !important; }
+.to-stone-800         { --tw-gradient-to  :#1c1c1f !important; }
+.via-stone-900        { --tw-gradient-via :#111113 !important; }
+
+/* ── Text palette ─────────────────────────────────────────────── */
+.text-stone-100       { color:#fafafa  !important; }
+.text-stone-200       { color:#e4e4e7  !important; }
+.text-stone-300       { color:#d4d4d8  !important; }
+.text-stone-400       { color:#a1a1aa  !important; }
+.text-stone-500       { color:#71717a  !important; }
+.text-stone-600       { color:#52525b  !important; }
+.text-stone-700       { color:#3f3f46  !important; }
+
+/* ── Accent: orange → warm amber (refined, not construction-cone) */
+.text-orange-300,.text-amber-300  { color:#fcd34d !important; }
+.text-orange-400,.text-amber-400  { color:#fbbf24 !important; }
+.text-orange-500,.text-amber-500  { color:#f59e0b !important; }
+.text-orange-600,.text-amber-600  { color:#d97706 !important; }
+
+.bg-orange-400,.bg-amber-400      { background-color:#fbbf24 !important; }
+.bg-orange-500,.bg-amber-500      { background-color:#f59e0b !important; }
+.bg-orange-600,.bg-amber-600      { background-color:#d97706 !important; }
+
+.border-orange-400,.border-amber-400 { border-color:rgba(251,191,36,.45) !important; }
+.border-orange-500,.border-amber-500 { border-color:rgba(245,158,11,.45) !important; }
+
+/* SVG icons */
+.stroke-orange-400,.stroke-amber-400 { stroke:#fbbf24 !important; }
+.stroke-orange-500,.stroke-amber-500 { stroke:#f59e0b !important; }
+.fill-orange-400,.fill-amber-400     { fill:#fbbf24  !important; }
+
+/* ── Borders: nearly invisible, very clean ────────────────────── */
+[class*='border-stone-8']  { border-color:rgba(255,255,255,.06) !important; }
+[class*='border-stone-7']  { border-color:rgba(255,255,255,.08) !important; }
+[class*='border-stone-6']  { border-color:rgba(255,255,255,.10) !important; }
+[class*='border-stone-5']  { border-color:rgba(255,255,255,.12) !important; }
+
+/* ── Shape: tighter, more confident radii ────────────────────── */
+.rounded-3xl { border-radius:18px !important; }
+.rounded-2xl { border-radius:14px !important; }
+.rounded-xl  { border-radius:10px !important; }
+.rounded-lg  { border-radius: 8px !important; }
+
+/* ── Depth: softer, more modern shadows ──────────────────────── */
+.shadow-2xl { box-shadow:0 8px 30px rgba(0,0,0,.55) !important; }
+.shadow-xl  { box-shadow:0 4px 20px rgba(0,0,0,.45) !important; }
+.shadow-lg  { box-shadow:0 2px 12px rgba(0,0,0,.35) !important; }
+.shadow-md  { box-shadow:0 1px  8px rgba(0,0,0,.28) !important; }
+.shadow-sm  { box-shadow:0 1px  4px rgba(0,0,0,.22) !important; }
+
+/* ── Buttons: refined amber, not screaming orange ─────────────── */
+button[class*='bg-orange-'],
+button[class*='bg-amber-'] {
+  background:linear-gradient(135deg,#d97706,#f59e0b) !important;
+  box-shadow:0 2px 10px rgba(245,158,11,.18) !important;
+  transition:filter .15s ease,box-shadow .15s ease !important;
+}
+button[class*='bg-orange-']:hover,
+button[class*='bg-amber-']:hover {
+  filter:brightness(1.08) !important;
+  box-shadow:0 4px 16px rgba(245,158,11,.28) !important;
+}
+button[class*='bg-stone-'] {
+  transition:background-color .15s ease !important;
+}
+
+/* ── Loading screen ───────────────────────────────────────────── */
+#jws-loading { background-color:#09090b !important; }
+
+/* ── Nav bar: frosted glass blur ──────────────────────────────── */
+#jw-navbar {
+  background-color:rgba(9,9,11,.82) !important;
+  -webkit-backdrop-filter:saturate(180%) blur(16px) !important;
+  backdrop-filter:saturate(180%) blur(16px) !important;
+  border-bottom-color:rgba(255,255,255,.06) !important;
+}
+/* Mobile sticky bar */
+#mob-bar {
+  background-color:rgba(9,9,11,.88) !important;
+  -webkit-backdrop-filter:blur(14px) !important;
+  backdrop-filter:blur(14px) !important;
+  border-top-color:rgba(255,255,255,.06) !important;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+::-webkit-scrollbar-track { background:#09090b !important; }
+::-webkit-scrollbar-thumb { background:rgba(255,255,255,.10) !important;
+                             border-radius:4px !important; }
+::-webkit-scrollbar-thumb:hover { background:rgba(255,255,255,.18) !important; }
+
+/* ── Simple Mode ─────────────────────────────────────────────── */
+.simple-card {
+  background:rgba(28,28,31,.95) !important;
+  border:1px solid rgba(255,255,255,.07) !important;
+  border-radius:16px !important;
+  box-shadow:0 2px 16px rgba(0,0,0,.35) !important;
+}
+/* Drop zones: solid subtle instead of dashed */
+.simple-drop-zone {
+  border:1.5px solid rgba(255,255,255,.1) !important;
+  border-style:solid !important;
+  border-radius:12px !important;
+  background:rgba(255,255,255,.015) !important;
+  transition:border-color .2s ease,background-color .2s ease !important;
+}
+.simple-drop-zone:hover {
+  border-color:rgba(251,191,36,.35) !important;
+  background:rgba(251,191,36,.03) !important;
+}
+.simple-drop-zone.active {
+  border-color:rgba(251,191,36,.6) !important;
+  background:rgba(245,158,11,.05) !important;
+}
+.simple-drop-zone.done {
+  border-color:rgba(74,222,128,.45) !important;
+  background:rgba(74,222,128,.04) !important;
+}
+/* Merge button: less bulky, still confident */
+.simple-merge-btn {
+  background:linear-gradient(135deg,#d97706,#f59e0b) !important;
+  box-shadow:0 4px 20px rgba(245,158,11,.2) !important;
+  border-radius:12px !important;
+  font-size:18px !important;
+  font-weight:700 !important;
+  padding:18px 22px !important;
+  letter-spacing:-.01em !important;
+  transition:filter .15s ease,box-shadow .15s ease !important;
+}
+.simple-merge-btn:hover {
+  filter:brightness(1.08) !important;
+  box-shadow:0 6px 24px rgba(245,158,11,.3) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Mobile improvements
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── iOS input zoom fix ────────────────────────────────────────
+   iOS Safari auto-zooms the viewport when a focused input has
+   font-size < 16px. Force 16px floor on all fields so the layout
+   never jumps when the user taps into a text input or dropdown. */
+@media (max-width:768px) {
+  input,select,textarea { font-size:16px !important; }
+}
+
+/* ── Touch targets ─────────────────────────────────────────────
+   Apple HIG minimum is 44×44pt. Buttons below this are
+   frustrating to hit, especially for users with larger thumbs. */
+button,[role="button"],label[for],summary { min-height:44px; }
+input[type="file"]::file-selector-button {
+  min-height:40px;
+  padding:10px 16px;
+  cursor:pointer;
+}
+
+/* ── Remove grey tap flash ─────────────────────────────────────
+   iOS/Android add a semi-transparent grey overlay on tap. We have
+   our own focus/hover styles so this just looks like a glitch. */
+* { -webkit-tap-highlight-color:transparent; }
+
+/* ── Faster taps ───────────────────────────────────────────────
+   Removes the 300ms click delay mobile browsers add for
+   double-tap-to-zoom detection. Makes the whole app feel snappier. */
+button,a,[role="button"],label { touch-action:manipulation; }
+
+/* ── No horizontal overflow ────────────────────────────────────
+   Prevents elements wider than the viewport causing unwanted
+   side-scroll (a common cause of the "not snapped in" feel). */
+html,body { overflow-x:hidden !important; }
+img,svg,video { max-width:100%; }
+
+/* ── iPhone safe-area insets ───────────────────────────────────
+   Keeps nav and merge button from hiding behind the home indicator
+   bar or the Dynamic Island on modern iPhones. */
+@supports (padding:env(safe-area-inset-bottom)) {
+  #mob-bar,footer {
+    padding-bottom:max(0.75rem,env(safe-area-inset-bottom)) !important;
+  }
+  body {
+    padding-left:env(safe-area-inset-left);
+    padding-right:env(safe-area-inset-right);
+  }
+}
+
+/* ── Small-screen layout tweaks ────────────────────────────────
+   Reduce excessive padding, scale down headings that clip, fix
+   any rows that overflow horizontally. */
+@media (max-width:480px) {
+  /* Tighter page padding — the default p-8 is too generous on a
+     375px phone screen */
+  .p-8   { padding:1rem !important; }
+  .px-8  { padding-left:1rem !important; padding-right:1rem !important; }
+  .py-8  { padding-top:1.25rem !important; padding-bottom:1.25rem !important; }
+  .p-6   { padding:0.875rem !important; }
+  .px-6  { padding-left:0.875rem !important; padding-right:0.875rem !important; }
+
+  /* Headings: scale down so they fit without clipping or wrapping badly */
+  .text-4xl { font-size:1.75rem !important; line-height:1.2  !important; }
+  .text-3xl { font-size:1.5rem  !important; line-height:1.25 !important; }
+  .text-2xl { font-size:1.25rem !important; line-height:1.3  !important; }
+
+  /* Tag / chip rows: wrap onto a new line rather than scroll off-screen */
+  .flex-nowrap { flex-wrap:wrap !important; }
+
+  /* Drop zones: taller target area — easier to tap than a thin strip */
+  .simple-drop-zone { padding:28px 14px !important; }
+
+  /* Merge button: thumb-friendly height, slightly smaller text
+     so it doesn't look cramped at full width */
+  .simple-merge-btn {
+    font-size:17px !important;
+    padding:20px 18px !important;
+    min-height:60px !important;
+  }
+}
+
