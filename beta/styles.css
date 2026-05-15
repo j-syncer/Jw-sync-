@@ -766,16 +766,27 @@ img,svg,video { max-width:100%; }
 }
 
 /* 8. File upload drop zones: prevent long filenames from pushing the card
-      wider than the viewport. The flex child holding the filename has no
-      min-width: 0 in the source, so we must clamp it here. */
-.simple-step { overflow: hidden !important; }
-.simple-drop-zone { overflow: hidden !important; max-width: 100% !important; }
-.simple-drop-zone > * { min-width: 0; max-width: 100%; }
-.simple-step p,
-.simple-step span,
-.simple-step div {
-    overflow-wrap: break-word !important;
-    word-break: break-word !important;
+      wider than the viewport.
+      Root cause: <label class="simple-drop-zone"> is an inline element by
+      default, so it sizes to its content width rather than filling the parent.
+      A long filename (no spaces) forces it wider than the viewport. */
+.simple-step {
+    overflow: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+.simple-drop-zone {
+    display: block !important;        /* label is inline by default — must be block */
+    overflow: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+/* All descendants: break long unspaced filenames and never exceed parent */
+.simple-drop-zone *,
+.simple-step * {
     max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: break-all !important;  /* break-all handles filenames with no spaces */
+    box-sizing: border-box !important;
 }
 
