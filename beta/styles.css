@@ -664,3 +664,104 @@ img,svg,video { max-width:100%; }
   }
 }
 
+/* ════════════════════════════════════════════════════════════════════
+   ── Beta mobile layout overhaul ──────────────────────────────────
+   Fixes horizontal overflow and hidden features after file attachment.
+   ════════════════════════════════════════════════════════════════════ */
+
+/* 1. Navbar: in the beta environment the fixed banner is 32 px tall.
+      Without this the sticky navbar slides behind the banner on scroll. */
+#jw-navbar { top: 32px; }
+
+/* 2. Main feature grid: Tailwind Play CDN (cdn.tailwindcss.com) can
+      have a timing gap between React rendering lg:grid-cols-3 and the
+      CDN generating the media-query CSS for it. On mobile this means
+      the grid briefly (or permanently) shows 3 columns side-by-side,
+      hiding the 2nd and 3rd cards off-screen to the right.
+      Force single-column below 1024 px as a guaranteed override. */
+@media (max-width: 1023px) {
+    [class~="lg:grid-cols-3"] {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 3. Navbar button row: swap horizontal scroll for wrapping rows so
+      every feature button is immediately visible without needing to
+      know to swipe the nav. */
+@media (max-width: 1023px) {
+    #jw-navbar [class~="overflow-x-auto"] {
+        overflow-x: visible !important;
+        flex-wrap: wrap !important;
+        row-gap: 4px !important;
+        padding-bottom: 6px !important;
+        /* Prevent the scroll container from eating vertical touch scroll */
+        overscroll-behavior-x: contain !important;
+    }
+
+    /* Tighten button size so 4-5 fit per row on a 390 px phone */
+    .nav-btn {
+        font-size: 11px !important;
+        padding: 5px 9px !important;
+        gap: 3px !important;
+    }
+    .nav-btn-community {
+        font-size: 11px !important;
+        padding: 5px 10px !important;
+    }
+    .nav-select {
+        font-size: 12px !important;
+        padding: 5px 8px !important;
+        max-width: 110px !important;
+    }
+    /* Nav buttons don't need 44 px min-height — they're in a row,
+       not isolated tap targets, and the row as a whole is thumb-reachable */
+    .nav-btn, .nav-select { min-height: unset !important; }
+}
+
+/* 4. Ensure Tailwind flex-wrap classes actually wrap — belt-and-suspenders
+      in case CDN hasn't generated the utility by the time React renders */
+@media (max-width: 1023px) {
+    [class~="flex-wrap"] { flex-wrap: wrap !important; }
+    [class~="sm:flex-row"] { flex-direction: column !important; }
+}
+@media (min-width: 640px) {
+    [class~="sm:flex-row"] { flex-direction: row !important; }
+}
+
+/* 5. Below 480 px: collapse always-2-col and always-3-col inner grids
+      (file stats grid, colour picker grid) to single column so they
+      don't produce tiny, illegible side-by-side cells. */
+@media (max-width: 479px) {
+    [class~="grid-cols-2"]:not([class~="sm:grid-cols-2"]):not([class~="lg:grid-cols-2"]),
+    [class~="grid-cols-3"]:not([class~="sm:grid-cols-3"]):not([class~="lg:grid-cols-3"]) {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* 6. Cards and flex containers: guarantee nothing overflows its parent */
+@media (max-width: 1023px) {
+    /* Every rounded card must not push content wider than the screen */
+    [class~="rounded-2xl"],
+    [class~="rounded-xl"],
+    [class~="rounded-lg"] {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* File name / note title text: never force the row wider */
+    [class~="truncate"] { max-width: 100%; }
+
+    /* Buttons grouped in a row inside feature cards should wrap */
+    [class~="flex"][class~="gap-2"][class~="mt-4"],
+    [class~="flex"][class~="flex-wrap"] {
+        flex-wrap: wrap !important;
+    }
+}
+
+/* 7. Bottom mobile bar: raise it so it clears the iOS home indicator
+      and doesn't overlap the last card content */
+@media (max-width: 1023px) {
+    #mob-bar { bottom: env(safe-area-inset-bottom, 0px); }
+    body.mob-bar-on { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+}
+
