@@ -765,28 +765,57 @@ img,svg,video { max-width:100%; }
     body.mob-bar-on { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
 }
 
-/* 8. File upload drop zones: prevent long filenames from pushing the card
-      wider than the viewport.
-      Root cause: <label class="simple-drop-zone"> is an inline element by
-      default, so it sizes to its content width rather than filling the parent.
-      A long filename (no spaces) forces it wider than the viewport. */
+/* ════════════════════════════════════════════════════════════════════
+   ── Mobile overflow root fix ──────────────────────────────────────
+   Root cause: the outermost React div is a flex-direction:column
+   container. Flex items have min-width:auto by default, which means
+   any child wider than the viewport (e.g. the navbar with -mx-4
+   negative margin) forces the ENTIRE flex container wider than 100vw.
+   Every subsequent child (including simple mode cards) then resolves
+   "width:100%" to MORE than the viewport width, so even overflow:hidden
+   on the card clips to a box that's already too wide.
+   Fix: clamp #root and force flex-col children to min-width:0.
+   ════════════════════════════════════════════════════════════════════ */
+#root {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100% !important;
+}
+
+/* All direct children of any flex-column container must be able to
+   shrink; min-width:auto (the flex default) prevents shrinking below
+   content size. */
+[class~="flex"][class~="flex-col"] > * {
+    min-width: 0;
+}
+
+/* 8. File upload drop zones — both simple-mode and full-mode.
+      With #root now clamped, width:100% resolves correctly, but we
+      still force display:block on <label> (inline by default) and
+      apply filename truncation so the card doesn't grow taller than
+      needed to accommodate a broken-word filename. */
 .simple-step {
     overflow: hidden !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
 }
 .simple-drop-zone {
-    display: block !important;        /* label is inline by default — must be block */
+    display: block !important;
     overflow: hidden !important;
     width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
 }
-/* All descendants: break long unspaced filenames and never exceed parent */
-.simple-drop-zone *,
-.simple-step * {
+/* Direct children of drop zone: truncate filenames with ellipsis.
+   The emoji divs (text-4xl / text-5xl) and sub-labels are short
+   enough that nowrap doesn't cause problems. */
+.simple-drop-zone > div,
+.simple-drop-zone > span {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
     max-width: 100% !important;
-    overflow-wrap: break-word !important;
-    word-break: break-all !important;  /* break-all handles filenames with no spaces */
     box-sizing: border-box !important;
 }
 
