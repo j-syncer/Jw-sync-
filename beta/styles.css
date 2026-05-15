@@ -845,14 +845,25 @@ label[class*="border-dashed"] > p {
     white-space: nowrap !important;
 }
 
-/* The file-info card (pa component) uses an h3 that is BOTH a flex container
-   (for icon + name alignment) and has `truncate`. CSS text-overflow cannot
-   target anonymous flex items (raw text nodes), so the JS observer wraps them
-   in spans. This rule prevents the h3 from expanding its parent card before
-   the JS runs. */
+/* The file-info card h3 has BOTH `flex items-center` (display:flex) and
+   `truncate`. CSS text-overflow:ellipsis only works on BLOCK containers —
+   not flex containers. Forcing display:block makes text-overflow fire
+   correctly. The icon (svg/i) becomes inline-block so it stays vertically
+   aligned with the text. The h3 is still a flex ITEM of its parent
+   (div.flex.justify-between), so min-width:0 lets the parent shrink it. */
 h3[class*="flex"][class*="truncate"] {
+    display: block !important;
     min-width: 0 !important;
     max-width: 100% !important;
     overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+h3[class*="flex"][class*="truncate"] svg,
+h3[class*="flex"][class*="truncate"] i {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 0.35rem !important;
+    flex-shrink: 0 !important;
 }
 

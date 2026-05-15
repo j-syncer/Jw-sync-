@@ -309,10 +309,13 @@ ${stripHTML(v.content)||"No content"}
   .simple-drop-zone>div,.simple-drop-zone>span{overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;max-width:100%!important}
   .simple-step{overflow:hidden!important;width:100%!important;max-width:100%!important}
   [class~="truncate"]{min-width:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
-  /* Constrain the flex row holding the file-info h3 so it can't expand the card */
-  h3[class*="flex"][class*="truncate"]{min-width:0!important;max-width:100%!important;overflow:hidden!important}
+  /* text-overflow only works on BLOCK containers, not flex containers.
+     The pa-component h3 is display:flex — override to block so the long
+     filename is clipped with ellipsis instead of expanding the card. */
+  h3[class*="flex"][class*="truncate"]{display:block!important;min-width:0!important;max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+  h3[class*="flex"][class*="truncate"] svg,h3[class*="flex"][class*="truncate"] i{display:inline-block!important;vertical-align:middle!important;margin-right:0.35rem!important}
 }
-/* Filename popup */
+/* Filename popup (shown on tap of truncated name — all screen sizes) */
 #fn-popup{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1c1917;border:1px solid #ea580c;border-radius:12px;padding:16px 20px;max-width:85vw;word-break:break-all;z-index:9999;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.8)}
 </style>
 <script>
@@ -320,7 +323,6 @@ ${stripHTML(v.content)||"No content"}
   if(window.innerWidth>=1024)return;
   function sp(el,p,v){el.style.setProperty(p,v,'important');}
 
-  /* Show a popup with the full filename (tap on truncated name triggers this) */
   function showFnPopup(name){
     var p=document.getElementById('fn-popup');
     if(!p){
@@ -363,33 +365,34 @@ ${stripHTML(v.content)||"No content"}
       sp(el,'overflow','hidden');sp(el,'width','100%');sp(el,'max-width','100%');
     });
 
-    /* h3 elements that are flex containers: text-overflow:ellipsis cannot target
-       anonymous flex items (raw text nodes). Wrap them in a real span so they
-       can shrink and truncate, then let the user tap to see the full name. */
+    /* Apply display:block inline-style to flex+truncate h3 so text-overflow fires.
+       CSS alone can be delayed by Tailwind CDN; inline styles always win. */
     document.querySelectorAll('h3').forEach(function(h3){
       var cls=h3.className||'';
       if(cls.indexOf('flex')===-1||cls.indexOf('truncate')===-1)return;
-      if(h3.getAttribute('data-fn-fixed')==='1')return;
-      var wrapped=false;
-      Array.prototype.slice.call(h3.childNodes).forEach(function(node){
-        if(node.nodeType===3&&node.textContent.trim()){
-          var txt=node.textContent.trim();
-          var s=document.createElement('span');
-          s.textContent=txt;
-          s.setAttribute('data-full-name',txt);
-          s.title=txt;
-          sp(s,'overflow','hidden');sp(s,'text-overflow','ellipsis');
-          sp(s,'white-space','nowrap');sp(s,'min-width','0');
-          sp(s,'flex','1');sp(s,'cursor','pointer');
-          s.addEventListener('click',function(e){
-            e.stopPropagation();
-            showFnPopup(this.getAttribute('data-full-name'));
-          });
-          h3.replaceChild(s,node);
-          wrapped=true;
+      sp(h3,'display','block');
+      sp(h3,'min-width','0');sp(h3,'max-width','100%');
+      sp(h3,'overflow','hidden');sp(h3,'text-overflow','ellipsis');
+      sp(h3,'white-space','nowrap');
+      /* Attach tap-to-expand popup once per element (survives React reconciliation
+         because we check a data attribute that React doesn't manage). */
+      if(!h3.getAttribute('data-popup-ok')){
+        h3.setAttribute('data-popup-ok','1');
+        h3.style.cursor='pointer';
+        h3.addEventListener('click',function(e){
+          /* textContent includes SVG text (empty) + filename; trim removes spaces */
+          var name=(this.textContent||'').replace(/\s+/g,' ').trim();
+          if(name)showFnPopup(name);
+        });
+      }
+      /* Also fix icon children: must be inline-block for vertical alignment */
+      Array.prototype.slice.call(h3.children).forEach(function(child){
+        if(child.tagName==='svg'||child.tagName==='SVG'||child.tagName==='I'){
+          sp(child,'display','inline-block');
+          sp(child,'vertical-align','middle');
+          sp(child,'margin-right','0.35rem');
         }
       });
-      if(wrapped)h3.setAttribute('data-fn-fixed','1');
     });
   }
 
