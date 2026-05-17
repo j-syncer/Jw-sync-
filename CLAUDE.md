@@ -57,13 +57,24 @@
   - State init changed from `useState(!1)` → `useState(()=>{const p=loadPrefs();return p.simpleMode!==void 0?p.simpleMode:!0})`
 - **Segmented pill toggle** in nav bar (replaces old single button):
   - CSS classes: `.mode-seg-ctrl`, `.mode-seg-btn`, `.mode-seg-on`, `.mode-seg-full`
-  - Orange gradient when Simple active, purple when Full active
-- **Animated teaser banner** at top of Simple Mode (replaces old "Switch Back to Full Version" button):
+  - Simple active: flat solid `#ea580c` (orange). Full active: flat solid `#1d4ed8` (blue). No gradients.
+- **Static teaser banner** at top of Simple Mode:
   - CSS classes: `.simple-mode-teaser`, `.simple-mode-teaser-inner`, `.simple-mode-teaser-text`, `.simple-mode-teaser-btn`
-  - Animated border cycles orange→purple via `@keyframes teaserGlow`
-  - Text: *"✨ Unlock **Tag Management**, advanced merging, bulk tools & more"*
-  - CTA button: *"⚡ It's Free — Switch Now"*
+  - Static orange-tinted card (`rgba(234,88,12,.05)` bg, `rgba(234,88,12,.2)` border). No animation.
+  - Text: *"Unlock **Tag Management**, advanced merging, bulk tools & more"*
+  - CTA button: *"Explore Full Mode →"* — flat orange `#ea580c`, no emojis
+  - `.simple-mode-teaser-icon` is `display:none` (emoji icon hidden)
 - All mode changes call `savePrefs({simpleMode: bool})` to persist
+
+### 3. Professional UI Redesign
+**Design principles (approved, apply to all future work):**
+- **Single accent color** — orange (`#ea580c`) is the brand color. Blue (`#1d4ed8`) is used only for the Full Mode toggle indicator. Never introduce a third competing accent.
+- **No animated gradients** — `teaserGlow` and similar cycling animations are removed. Static borders and backgrounds only.
+- **No emojis in functional UI** — no ✨ ⚡ in buttons or banners. Emoji only acceptable in content (e.g. flag icons in language picker).
+- **Flat solid buttons** — use solid `#ea580c` for primary actions, not gradients. Drop-shadows kept minimal (`0 1px 5px` max).
+- **Cool dark backgrounds** — use cool navy/slate (`rgba(4,15,34,.7)`) not warm brown (`#1c1410`). The Tailwind stone palette is already cool navy (`stone-900 = #040f22`).
+- **Quiet utility controls** — the peek button (`.fn-peek-btn`) and similar inline helpers should be muted (`rgba(71,85,105,.35)` slate) so they don't compete with content.
+- **Professional CTA copy** — "Explore Full Mode →" not "⚡ It's Free — Switch Now".
 
 ---
 
