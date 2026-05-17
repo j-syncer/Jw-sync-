@@ -1,27 +1,26 @@
 # JW Sync — Claude Instructions
 
-## Development Workflow
+## ⚠️ Read This First — Default Behaviour
 
-**Default: every change goes to beta only.**
+**Every change goes to `beta/index.html` and is committed + pushed to the `main` git branch.**
+Do this automatically for any request. No need to ask, no feature branches.
 
-| Term | What it means |
-|------|---------------|
-| "update beta" / any normal request | Edit `beta/index.html`, commit, push to the `main` git branch → live at jwsync.org/beta |
-| "push to production" / "go live" / "ship it" | Copy the same changes into `index.html`, commit, push → live at jwsync.org |
+| Trigger | Action |
+|---------|--------|
+| Any normal request | Edit `beta/index.html` → commit → `git push origin main` |
+| "go live" / "push to production" / "ship it" | Copy the same changes into `index.html` → commit → `git push origin main` |
 
-Steps:
-1. **All changes → `beta/index.html` first**, always, unless told otherwise
-2. Commit + push to the `main` git branch → jwsync.org/beta updates immediately
-3. User reviews at jwsync.org/beta
-4. User says **"push to production"** → apply the same changes to `index.html` → commit + push
-5. **Never touch `index.html` unless the user explicitly says "push to production"**
+**Never touch `index.html` unless the user explicitly says "go live" or "push to production".**
 
-The git branch is always `main` — that detail never needs to come up in conversation.
-
-| File | URL | When to edit |
-|------|-----|--------------|
+| File | Live URL | Edit when |
+|------|----------|-----------|
 | `beta/index.html` | jwsync.org/beta | Every change, by default |
-| `index.html` | jwsync.org | Only after "push to production" |
+| `index.html` | jwsync.org | Only on explicit "go live" |
+
+### Git rules
+- Branch is **always `main`** — never create feature branches unless explicitly asked
+- Always `git push origin main` after every commit
+- Never ask the user about branching; it never needs to come up
 
 ---
 
@@ -29,7 +28,7 @@ The git branch is always `main` — that detail never needs to come up in conver
 
 - **Single-file React SPA** — all JS is minified and embedded directly in the HTML files
 - **No build system** — edit the HTML files directly with Python string replacements
-- Files are ~440KB+; use Python `str.replace()` for all edits, not text editor tools
+- Files are ~440KB+; use Python `str.replace()` for all edits, never the Edit tool
 - `styles.css` / `beta/styles.css` exist but the HTML files also have embedded `<style>` blocks
 - `loadPrefs()` / `savePrefs({key:val})` — localStorage persistence via key `jwsync_prefs_v1`
 - Language preference stored separately via key `jwsync_lang`
@@ -48,43 +47,46 @@ The git branch is always `main` — that detail never needs to come up in conver
 
 ---
 
-## What Was Built (this session)
+## Design Principles (always apply)
 
-### 1. Tagalog (Filipino) Language — `tl`
-- Added `tl` translation block (~94 keys) to `TRANSLATIONS` in both HTML files
-- Added `🇵🇭 Filipino` option to the `<select>` language picker in the nav
-- Updated `inLanguage` schema.org array and "9 languages" → "10 languages" everywhere
-- **Critical gotcha:** The `TRANSLATIONS` object ends with `}},stripHTML=` where the first `}` closes the last language object and the second `}` closes `TRANSLATIONS`. When inserting a new language, you must insert BETWEEN those two braces — not before both. Wrong insertion makes the new language nest inside the previous one instead of being a top-level sibling.
-
-  **Correct pattern:**
-  ```python
-  content.replace('}},stripHTML=', '}' + tl_block + '},stripHTML=', 1)
-  # tl_block starts with: ,tl:{...} and ends with }
-  ```
-
-### 2. Simple Mode Redesign
-- **Default:** Simple Mode on first visit; restores saved preference via `loadPrefs().simpleMode`
-  - State init changed from `useState(!1)` → `useState(()=>{const p=loadPrefs();return p.simpleMode!==void 0?p.simpleMode:!0})`
-- **Segmented pill toggle** in nav bar (replaces old single button):
-  - CSS classes: `.mode-seg-ctrl`, `.mode-seg-btn`, `.mode-seg-on`, `.mode-seg-full`
-  - Simple active: flat solid `#ea580c` (orange). Full active: flat solid `#1d4ed8` (blue). No gradients.
-- **Static teaser banner** at top of Simple Mode:
-  - CSS classes: `.simple-mode-teaser`, `.simple-mode-teaser-inner`, `.simple-mode-teaser-text`, `.simple-mode-teaser-btn`
-  - Static orange-tinted card (`rgba(234,88,12,.05)` bg, `rgba(234,88,12,.2)` border). No animation.
-  - Text: *"Unlock **Tag Management**, advanced merging, bulk tools & more"*
-  - CTA button: *"Explore Full Mode →"* — flat orange `#ea580c`, no emojis
-  - `.simple-mode-teaser-icon` is `display:none` (emoji icon hidden)
-- All mode changes call `savePrefs({simpleMode: bool})` to persist
-
-### 3. Professional UI Redesign
-**Design principles (approved, apply to all future work):**
 - **Single accent color** — orange (`#ea580c`) is the brand color. Blue (`#1d4ed8`) is used only for the Full Mode toggle indicator. Never introduce a third competing accent.
-- **No animated gradients** — `teaserGlow` and similar cycling animations are removed. Static borders and backgrounds only.
+- **No animated gradients** — static borders and backgrounds only.
 - **No emojis in functional UI** — no ✨ ⚡ in buttons or banners. Emoji only acceptable in content (e.g. flag icons in language picker).
-- **Flat solid buttons** — use solid `#ea580c` for primary actions, not gradients. Drop-shadows kept minimal (`0 1px 5px` max).
-- **Cool dark backgrounds** — use cool navy/slate (`rgba(4,15,34,.7)`) not warm brown (`#1c1410`). The Tailwind stone palette is already cool navy (`stone-900 = #040f22`).
-- **Quiet utility controls** — the peek button (`.fn-peek-btn`) and similar inline helpers should be muted (`rgba(71,85,105,.35)` slate) so they don't compete with content.
+- **Flat solid buttons** — solid `#ea580c` for primary actions, not gradients. Drop-shadows minimal (`0 1px 5px` max).
+- **Cool dark backgrounds** — cool navy/slate (`rgba(4,15,34,.7)`), not warm brown.
+- **Quiet utility controls** — muted (`rgba(71,85,105,.35)` slate) so they don't compete with content.
 - **Professional CTA copy** — "Explore Full Mode →" not "⚡ It's Free — Switch Now".
+
+---
+
+## Features Built (permanent reference)
+
+### Languages (10 total)
+`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl`
+
+**Adding a language — critical gotcha:** The `TRANSLATIONS` object ends with `}},stripHTML=`. Insert a new language BETWEEN those two closing braces:
+```python
+content.replace('}},stripHTML=', '}' + new_lang_block + '},stripHTML=', 1)
+# new_lang_block starts with ,xx:{...} and ends with }
+```
+
+### Simple Mode
+- Default ON for first-time visitors; restores saved pref via `loadPrefs().simpleMode`
+- State init: `useState(()=>{const p=loadPrefs();return p.simpleMode!==void 0?p.simpleMode:!0})`
+- Segmented pill toggle in nav bar — CSS classes: `.mode-seg-ctrl`, `.mode-seg-btn`, `.mode-seg-on`, `.mode-seg-full`
+- Static teaser banner at top of Simple Mode — CSS classes: `.simple-mode-teaser`, `.simple-mode-teaser-inner`
+- All mode changes call `savePrefs({simpleMode: bool})`
+
+### Merge Pipeline — Web Worker (`beta/js/merge-worker.js`)
+All SQLite query execution, ZIP decompression, and ZIP recompression run in a dedicated Web Worker off the UI thread. The main thread transfers `ArrayBuffer`s to the worker via Transferable Objects (zero-copy) and receives the merged `.jwlibrary` buffer back the same way. The main thread's `vt()` function is now a thin dispatcher; result assembly (Blob URL, IDB save) stays on the main thread.
+- Worker file: `beta/js/merge-worker.js`
+- Cancel: main thread posts `{type:'cancel'}` → worker checks `cancelled` flag every 250 rows
+
+### Tag Suggestion Merge Toggle
+The "Merge →" button in the Suggested Merges panel is a persistent toggle:
+- **Idle:** Orange "Merge →"
+- **Active:** Emerald green "✓ Applied" (bold) — persists until clicked again
+- Clicking again resets action to `"keep"` (toggle off / undo)
 
 ---
 
@@ -92,12 +94,12 @@ The git branch is always `main` — that detail never needs to come up in conver
 
 - **Python replacements only** — files are too large for Edit tool; use `open().read()` → `str.replace()` → `write()`
 - **Always verify anchors first** — check `content.count(anchor) == 1` before replacing
-- **Service worker** caches `index.html` (key: `jwsync-v3`). Comment says bump `CACHE_VERSION` in `service-worker.js` when shipping a new version if users report stale cache
-- **Mobile language picker** — on Android, the `<select>` element renders as a native radio list. That IS the language selector we update, not a separate component
-- **TRANSLATIONS validation** — use Node.js to verify after any language insertion:
+- **Service worker** caches `index.html` (key: `jwsync-v3`). Bump `CACHE_VERSION` in `service-worker.js` if users report stale cache after a production push
+- **Mobile language picker** — on Android, the `<select>` renders as a native radio list. That IS the language selector; no separate component
+- **TRANSLATIONS validation** — verify after any language insertion:
   ```bash
   node -e "
-  const c=require('fs').readFileSync('index.html','utf8');
+  const c=require('fs').readFileSync('beta/index.html','utf8');
   const ts=c.indexOf('TRANSLATIONS=')+13;
   let d=0,e=ts;
   for(let i=ts;i<c.length;i++){if(c[i]==='{')d++;else if(c[i]==='}'){d--;if(d===0){e=i+1;break;}}}
@@ -105,9 +107,3 @@ The git branch is always `main` — that detail never needs to come up in conver
   console.log(Object.keys(r));
   "
   ```
-- **Branch for Tagalog work:** `claude/add-tagalog-language-H3H6D` (merged to main, done)
-
----
-
-## Languages Supported (10 total)
-`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl`
