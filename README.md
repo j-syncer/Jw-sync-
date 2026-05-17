@@ -26,7 +26,7 @@ If you use JW Library on more than one device — a phone, a tablet, a laptop �
 - **Statistics** — see a summary of your merged library
 - **Activity log** — a full record of every merge operation
 - **Simple Mode** — a clean, minimal interface for everyday use
-- **9 languages** — English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean
+- **10 languages** — English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean, Filipino (Tagalog)
 - **Works offline** — installs as a Progressive Web App (PWA)
 - **Opens files from your device** — tap a `.jwlibrary` file and JW Sync opens it directly
 - **Community forum** — ask questions and share feedback without leaving the app
@@ -116,7 +116,7 @@ Contributions are warmly welcome — whether that's a bug report, a translation 
 
 **Want to contribute code?** The enhancement layer (`jwsync-enhancements.js` in the build source) is the cleanest entry point — it's well-structured vanilla JavaScript that handles PWA features, file handling, and UI additions. Start there.
 
-**Translations?** The app already supports 9 languages. If you spot an error in any translation or want to add a new language, open an issue and we can work through it together.
+**Translations?** The app already supports 10 languages. If you spot an error in any translation or want to add a new language, open an issue and we can work through it together.
 
 All contributions, no matter how small, are appreciated.
 
