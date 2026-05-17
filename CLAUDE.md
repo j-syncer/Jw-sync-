@@ -2,16 +2,26 @@
 
 ## Development Workflow
 
-1. **All changes → `beta/index.html` first** (live at jwsync.org/beta)
-2. Commit + push to `main` so beta updates immediately
-3. User reviews at jwsync.org/beta
-4. User says "push to main" → apply same changes to `index.html` → push
-5. **Never touch `index.html` (production) unless user explicitly approves**
+**Default: every change goes to beta only.**
 
-| File | URL |
-|------|-----|
-| `beta/index.html` | jwsync.org/beta — staging |
-| `index.html` | jwsync.org — production |
+| Term | What it means |
+|------|---------------|
+| "update beta" / any normal request | Edit `beta/index.html`, commit, push to the `main` git branch → live at jwsync.org/beta |
+| "push to production" / "go live" / "ship it" | Copy the same changes into `index.html`, commit, push → live at jwsync.org |
+
+Steps:
+1. **All changes → `beta/index.html` first**, always, unless told otherwise
+2. Commit + push to the `main` git branch → jwsync.org/beta updates immediately
+3. User reviews at jwsync.org/beta
+4. User says **"push to production"** → apply the same changes to `index.html` → commit + push
+5. **Never touch `index.html` unless the user explicitly says "push to production"**
+
+The git branch is always `main` — that detail never needs to come up in conversation.
+
+| File | URL | When to edit |
+|------|-----|--------------|
+| `beta/index.html` | jwsync.org/beta | Every change, by default |
+| `index.html` | jwsync.org | Only after "push to production" |
 
 ---
 
