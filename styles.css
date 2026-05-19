@@ -492,3 +492,10 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .feat-new-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ea580c;animation:pulse 2s infinite;margin-left:6px;vertical-align:middle;flex-shrink:0}
 .discover-stats{font-size:12px;font-weight:700;color:#4ade80;text-align:center;margin-bottom:8px;padding:6px 10px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:6px}
 .nav-unread-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ea580c;border-radius:50%;animation:pulse 2s infinite;pointer-events:none}
+
+/* Feature section tip boxes */
+.feat-tip{background:rgba(7,26,56,.5);border-left:3px solid rgba(234,88,12,.35);border-radius:0 6px 6px 0;padding:8px 12px;margin-top:10px}
+.feat-tip-label{font-size:10px;font-weight:700;color:rgba(234,88,12,.65);text-transform:uppercase;letter-spacing:.07em;margin-bottom:5px}
+.feat-tip-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
+.feat-tip-list li{font-size:11px;color:rgba(208,232,248,.5);padding-left:12px;position:relative;line-height:1.45}
+.feat-tip-list li::before{content:"–";position:absolute;left:0;color:rgba(234,88,12,.45)}
