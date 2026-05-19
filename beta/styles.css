@@ -496,3 +496,9 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 
 /* Changelog unread dot */
 .nav-unread-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ea580c;border-radius:50%;animation:pulse 2s infinite;pointer-events:none}
+
+/* Feature discovery dots on section headings */
+.feat-new-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ea580c;animation:pulse 2s infinite;margin-left:6px;vertical-align:middle;flex-shrink:0}
+
+/* Merge stats in post-merge discover panel */
+.discover-stats{font-size:12px;font-weight:700;color:#4ade80;text-align:center;margin-bottom:8px;padding:6px 10px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:6px}
