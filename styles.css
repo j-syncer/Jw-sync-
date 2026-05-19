@@ -471,3 +471,24 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
     background: linear-gradient(135deg, #f06292, #e040fb);
     box-shadow: 0 0 10px rgba(240,98,146,0.5);
 }
+
+/* === User Engagement Improvements === */
+.smt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+@media(max-width:600px){.smt-grid{grid-template-columns:1fr}}
+.smt-feat{background:rgba(4,15,34,.5);border:1px solid rgba(234,88,12,.2);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.smt-feat-name{font-size:13px;font-weight:700;color:#fb923c}
+.smt-feat-desc{font-size:11px;color:rgba(208,232,248,.6);line-height:1.4}
+.discover-panel{margin-top:20px;padding:16px;background:rgba(4,15,34,.5);border:1px solid rgba(71,85,105,.3);border-radius:10px}
+.discover-title{font-size:11px;font-weight:700;color:rgba(208,232,248,.45);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.discover-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+@media(max-width:480px){.discover-grid{grid-template-columns:1fr}}
+.discover-card{background:rgba(7,26,56,.6);border:1px solid rgba(71,85,105,.3);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:3px;transition:border-color .15s}
+.discover-card:hover{border-color:rgba(234,88,12,.35)}
+.discover-card-name{font-size:12px;font-weight:700;color:#d0e8f8}
+.discover-card-desc{font-size:11px;color:rgba(208,232,248,.5);line-height:1.4}
+.discover-community{font-size:12px;color:rgba(208,232,248,.4);text-align:center;margin-top:4px}
+.discover-community-link{color:#fb923c;text-decoration:none;transition:color .15s}
+.discover-community-link:hover{color:#ea580c;text-decoration:underline}
+.feat-new-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ea580c;animation:pulse 2s infinite;margin-left:6px;vertical-align:middle;flex-shrink:0}
+.discover-stats{font-size:12px;font-weight:700;color:#4ade80;text-align:center;margin-bottom:8px;padding:6px 10px;background:rgba(74,222,128,.06);border:1px solid rgba(74,222,128,.15);border-radius:6px}
+.nav-unread-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ea580c;border-radius:50%;animation:pulse 2s infinite;pointer-events:none}
