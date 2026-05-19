@@ -682,3 +682,6 @@ body.light .mode-seg-ctrl { background:rgba(11,46,88,.08)!important; border-colo
 body.light .mode-seg-btn { color:#64748b!important; }
 body.light .mode-seg-on { background:var(--color-orange)!important; color:#fff!important; }
 body.light #jws-loading { background:#f4f8ff; }
+
+/* CLS fix: pre-size root so footer starts near final position */
+#root { min-height: calc(100svh - 180px); }

@@ -194,8 +194,8 @@
       if (timelineEl && document.body.contains(timelineEl)) return timelineEl;
       timelineEl = document.createElement('div');
       timelineEl.id = 'jw-backup-timeline';
-      timelineEl.style.cssText = 'margin:14px 0 18px;padding:14px 16px;background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(124,58,237,0.06));border:1px solid rgba(96,165,250,0.18);border-radius:14px;animation:jwsync-fadeIn 0.3s ease';
-      anchorEl.parentNode.insertBefore(timelineEl, anchorEl);
+      timelineEl.style.cssText = 'margin:0 0 16px;padding:14px 16px;background:linear-gradient(135deg,rgba(59,130,246,0.06),rgba(124,58,237,0.06));border:1px solid rgba(96,165,250,0.18);border-radius:14px;animation:jwsync-fadeIn 0.3s ease';
+      anchorEl.after(timelineEl);
       return timelineEl;
     }
 
