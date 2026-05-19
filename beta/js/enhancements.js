@@ -504,7 +504,7 @@
   function showToast(msg, isError) {
     var t = document.createElement('div');
     t.textContent = msg;
-    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9999;background:' + (isError ? '#7f1d1d' : '#1c1917') + ';color:#fff;border:1px solid ' + (isError ? '#ef4444' : '#44403c') + ';border-radius:10px;padding:12px 20px;font-size:13px;font-family:system-ui,sans-serif;box-shadow:0 8px 32px rgba(0,0,0,0.5);animation:jwsync-slideUp 0.3s ease';
+    t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:9999;background:' + (isError ? 'rgba(127,29,29,.95)' : '#132240') + ';color:#e8f0ff;border:1px solid ' + (isError ? 'rgba(239,68,68,.4)' : 'rgba(255,255,255,.13)') + ';border-radius:10px;padding:10px 20px;font-size:12px;font-family:system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:jwsync-slideUp .3s ease';
     document.body.appendChild(t);
     setTimeout(function () { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; }, 4000);
     setTimeout(function () { t.remove(); }, 4400);
