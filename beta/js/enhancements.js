@@ -337,12 +337,27 @@
       }
     };
 
+    // Full Mode = the "Full" segment button carries the active class
+    function isFullMode() {
+      return !!document.querySelector('.mode-seg-full.mode-seg-on');
+    }
+    function syncBtnVisibility() {
+      if (btn.parentNode) btn.style.display = isFullMode() ? '' : 'none';
+    }
+
     // Wait for app to be ready before showing button
     var attempts = 0;
     function tryAdd() {
       // Show only when JSZip + SQL.js are available
       if (typeof JSZip !== 'undefined' && typeof initSqlJs !== 'undefined' && document.querySelector('input[type="file"][accept=".jwlibrary"]')) {
         document.body.appendChild(btn);
+        syncBtnVisibility();
+        // Re-check visibility whenever the mode toggle is clicked
+        document.addEventListener('click', function (e) {
+          if (e.target && e.target.closest && e.target.closest('.mode-seg-btn')) {
+            setTimeout(syncBtnVisibility, 50);
+          }
+        });
         return;
       }
       if (++attempts < 50) setTimeout(tryAdd, 300);
@@ -516,7 +531,8 @@
     '@keyframes jwsync-slideUp { from { opacity: 0; transform: translateX(-50%) translateY(20px) } to { opacity: 1; transform: translateX(-50%) translateY(0) } }\n' +
     '@keyframes jwsync-slideDown { from { opacity: 0; transform: translateX(-50%) translateY(-20px) } to { opacity: 1; transform: translateX(-50%) translateY(0) } }\n' +
     'body.is-forum #mob-bar, body.is-forum #log-panel, body.is-forum footer { display: none !important }\n' +
-    'body.is-forum #jw-sample-btn { display: none !important }';
+    'body.is-forum #jw-sample-btn { display: none !important }\n' +
+    'body.is-landing #jw-sample-btn { display: none !important }';
   document.head.appendChild(style);
 
   // ── Landing page routing ───────────────────────────────────────────────
@@ -547,11 +563,19 @@
       if (navForum) navForum.classList.toggle('active', isForum);
     }
 
-    // Only mark landing as seen when the user deliberately clicks the CTA
+    // Only mark landing as seen when the user deliberately clicks the CTA.
+    // Also ensure Simple Mode is active for first-timers arriving via the CTA.
     var ctaBtn = document.getElementById('landing-launch-btn');
     if (ctaBtn) {
       ctaBtn.addEventListener('click', function () {
         try { localStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
+        try {
+          var prefs = JSON.parse(localStorage.getItem('jwsync_prefs_v1') || '{}');
+          if (prefs.simpleMode === undefined) {
+            prefs.simpleMode = true;
+            localStorage.setItem('jwsync_prefs_v1', JSON.stringify(prefs));
+          }
+        } catch (e) {}
       });
     }
 
