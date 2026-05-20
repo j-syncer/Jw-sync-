@@ -549,6 +549,7 @@
     var SEEN_KEY = 'jwsync_lp_seen';
 
     function update() {
+      document.documentElement.removeAttribute('data-view');
       var hash = location.hash;
       var hasSeenLanding = !!localStorage.getItem(SEEN_KEY);
       var isLanding = hash === '#home' || (hash === '' && !hasSeenLanding);

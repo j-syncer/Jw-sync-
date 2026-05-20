@@ -684,7 +684,8 @@ body.light .mode-seg-on { background:var(--color-orange)!important; color:#fff!i
 body.light #jws-loading { background:#f4f8ff; }
 
 /* CLS fix: pre-size root so footer starts near final position */
-#root { min-height: calc(100svh - 180px); }
+#root { min-height: calc(100svh - 228px); } /* 228 = 48px site-nav + 180px footer */
+#landing-view { min-height: calc(100svh - 228px); }
 
 /* ── Site navigation (persistent across all views) ── */
 #site-nav {
@@ -951,3 +952,8 @@ body.is-forum { background: var(--bg) !important; }
 #forum-view .react-btn { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; border-radius:6px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; font-size:13px; transition:all .15s; font-family:'IBM Plex Sans',sans-serif; }
 #forum-view .react-btn:hover { border-color:var(--accent); color:var(--accent); }
 #forum-view .react-btn.voted { background:rgba(50,130,188,.1); border-color:var(--accent); color:var(--accent); }
+
+/* CLS fix: suppress root/loading before JS runs for first-time visitors */
+html[data-view="landing"] #root,
+html[data-view="landing"] #jws-loading { display: none !important; }
+html[data-view="landing"] #landing-view { display: flex !important; }
