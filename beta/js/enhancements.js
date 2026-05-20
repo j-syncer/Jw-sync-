@@ -530,7 +530,7 @@
     '@keyframes jwsync-fadeIn { from { opacity: 0 } to { opacity: 1 } }\n' +
     '@keyframes jwsync-slideUp { from { opacity: 0; transform: translateX(-50%) translateY(20px) } to { opacity: 1; transform: translateX(-50%) translateY(0) } }\n' +
     '@keyframes jwsync-slideDown { from { opacity: 0; transform: translateX(-50%) translateY(-20px) } to { opacity: 1; transform: translateX(-50%) translateY(0) } }\n' +
-    'body.is-forum #mob-bar, body.is-forum #log-panel, body.is-forum footer { display: none !important }\n' +
+    'body.is-forum #mob-bar, body.is-forum #log-panel, body.is-forum > footer { display: none !important }\n' +
     'body.is-forum #jw-sample-btn { display: none !important }\n' +
     'body.is-landing #jw-sample-btn { display: none !important }';
   document.head.appendChild(style);
