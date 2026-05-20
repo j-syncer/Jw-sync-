@@ -1,15 +1,15 @@
 /* === JW Sync Design Tokens v2 === */
 :root {
-  --color-bg:               #060d19;
-  --color-surface:          #0b1628;
-  --color-surface-hover:    #0f1e37;
-  --color-surface-elevated: #132240;
-  --color-border:           rgba(255,255,255,.07);
-  --color-border-strong:    rgba(255,255,255,.13);
-  --color-border-orange:    rgba(234,88,12,.25);
-  --color-text-primary:     #e8f0ff;
-  --color-text-secondary:   rgba(232,240,255,.55);
-  --color-text-muted:       rgba(232,240,255,.30);
+  --color-bg:               #080f1e;
+  --color-surface:          #0f1d32;
+  --color-surface-hover:    #142540;
+  --color-surface-elevated: #192e50;
+  --color-border:           rgba(255,255,255,.10);
+  --color-border-strong:    rgba(255,255,255,.20);
+  --color-border-orange:    rgba(234,88,12,.30);
+  --color-text-primary:     #f0f6ff;
+  --color-text-secondary:   rgba(232,240,255,.78);
+  --color-text-muted:       rgba(232,240,255,.52);
   --color-orange:           #ea580c;
   --color-orange-light:     #fb923c;
   --color-green:            #22c55e;
@@ -40,8 +40,8 @@ html, body {
         /* ── Scrollbars ── */
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #0d2550; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #163870; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1d3d70; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #2a538f; }
 
         /* ── Animations ── */
         @keyframes fadeIn    { from { opacity: 0; }                            to { opacity: 1; } }
@@ -56,7 +56,7 @@ html, body {
         /* ── Sticky navbar ── */
         #jw-navbar {
             position: sticky; top: 0; z-index: 40;
-            background: rgba(6,13,25,.97);
+            background: rgba(8,15,30,.97);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--color-border-strong);
             box-shadow: 0 1px 0 var(--color-border);
@@ -101,15 +101,15 @@ html, body {
         /* ── Help / Changelog modal tabs ── */
         .help-tab {
             padding: 7px 14px; font-size: 12px; font-weight: 700;
-            border-radius: 8px; transition: all 0.15s; color: #3282bc; cursor: pointer;
+            border-radius: 8px; transition: all 0.15s; color: #5ba8d4; cursor: pointer;
         }
-        .help-tab.active { background: #0d2548; color: #d0e8f8; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
-        .help-tab:hover:not(.active) { color: #62a6d8; }
+        .help-tab.active { background: #132240; color: #e8f4ff; box-shadow: 0 1px 3px rgba(0,0,0,0.4); }
+        .help-tab:hover:not(.active) { color: #8acbe8; }
 
         /* ── Log panel ── */
         #log-panel {
             position: fixed; bottom: 0; left: 0; right: 0; z-index: 35;
-            background: #020a16; border-top: 1px solid #0b2e58;
+            background: #050c1a; border-top: 1px solid #1a3d70;
             box-shadow: 0 -8px 32px rgba(0,0,0,0.6);
             display: flex; flex-direction: column;
             max-height: 38vh; min-height: 180px;
@@ -131,7 +131,7 @@ html, body {
         .feature-card:hover { box-shadow: 0 0 0 1px rgba(50,130,188,0.2); }
 
         /* ── Section label ── */
-        .section-label { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #1d619a; }
+        .section-label { font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #5ba8d4; }
 
         /* ── Body padding for log panel ── */
         body { padding-bottom: 0; }
@@ -140,7 +140,7 @@ html, body {
         @media (max-width: 1023px) {
             #mob-bar {
                 position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
-                background: rgba(2,8,20,0.98); border-top: 1px solid #0b2e58;
+                background: rgba(5,12,26,0.98); border-top: 1px solid #1a3d70;
                 padding: 10px 16px; display: flex; align-items: center; gap: 10px;
                 box-shadow: 0 -4px 20px rgba(0,0,0,0.7);
                 transform: translateY(0); transition: transform 0.25s ease;
@@ -148,11 +148,11 @@ html, body {
             #mob-bar.mob-hidden { transform: translateY(100%); }
             .mob-label { flex: 1; min-width: 0; }
             .mob-label-title { font-size: 13px; font-weight: 700; color: #d0e8f8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-            .mob-label-sub { font-size: 11px; color: #1d619a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .mob-label-sub { font-size: 11px; color: #5ba8d4; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
             .mob-btn { padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 800; border: none; cursor: pointer; white-space: nowrap; transition: background 0.15s; }
             .mob-btn-merge { background: #ea580c; color: white; }
             .mob-btn-merge:hover { background: #fb923c; }
-            .mob-btn-merge:disabled { background: #0b2e58; color: #1d619a; cursor: not-allowed; }
+            .mob-btn-merge:disabled { background: #1a3d70; color: #5ba8d4; cursor: not-allowed; }
             .mob-btn-download { background: #16a34a; color: white; text-decoration: none; display: inline-flex; align-items: center; }
             .mob-btn-download:hover { background: #15803d; }
             body.mob-bar-on { padding-bottom: 68px; }
