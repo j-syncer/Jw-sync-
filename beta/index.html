@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>JW Sync — Merge JW Library Backups Privately in Your Browser</title>
+    <title>JW Sync BETA — Test Environment</title>
     <meta name="description" content="Free privacy-first tool to merge JW Library backups from multiple devices. Combine notes, highlights, bookmarks and tags directly in your browser — your files never leave your device.">
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
@@ -23,7 +23,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="JW Sync">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="../favicon.ico">
     <style>html,body{overflow-x:hidden!important;max-width:100vw!important}*{box-sizing:border-box}</style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -44,9 +44,10 @@ tailwind.config={theme:{extend:{colors:{stone:{50:'#eef6ff',100:'#d0e8f8',200:'#
     <!-- ── End font ───────────────────────────────────────────── -->
 
     <!-- ── SEO: canonical, structured data, social cards ─────── -->
-    <link rel="canonical" href="https://jwsync.org/">
+    <link rel="canonical" href="https://jwsync.org/beta/">
     <meta name="keywords" content="JW Sync, JW Library backup, merge JW Library, jwlibrary merger, JW Library notes, JW Library highlights, JW Library tags, JW Library sync, JW backup merge tool">
     <meta name="author" content="JW Sync">
+    <meta name="robots" content="noindex, nofollow">
     <meta name="application-name" content="JW Sync">
 
     <meta property="og:site_name" content="JW Sync">
@@ -100,6 +101,19 @@ tailwind.config={theme:{extend:{colors:{stone:{50:'#eef6ff',100:'#d0e8f8',200:'#
     <!-- ── End design theme ────────────────────────────────── -->
 </head>
 <body class="min-h-screen flex flex-col font-sans">
+<div id="beta-banner">
+    <span class="beta-pill">BETA</span>
+    <span>This is the test environment — bugs expected. &nbsp;<a href="/">← Go to production site</a></span>
+    <span class="beta-pill">BETA</span>
+</div>
+
+<nav id="site-nav">
+  <a href="#home" id="site-nav-home" class="site-nav-logo">JW Sync</a>
+  <div class="site-nav-links">
+    <a href="#app" id="site-nav-app" class="site-nav-link">App</a>
+    <a href="#forum" id="site-nav-forum" class="site-nav-link">Community</a>
+  </div>
+</nav>
 
     <!-- Loading screen: hidden by JS once React mounts -->
     <div id="jws-loading">
@@ -108,13 +122,43 @@ tailwind.config={theme:{extend:{colors:{stone:{50:'#eef6ff',100:'#d0e8f8',200:'#
         <p>Preparing your workspace…</p>
         <div class="ls-dots"><span></span><span></span><span></span></div>
     </div>
+    <section id="landing-view" hidden>
+      <div class="landing-hero">
+        <h1>Merge JW Library backups privately in your browser</h1>
+        <p>Combine notes, highlights, bookmarks and tags from multiple devices. Every merge runs entirely in your browser — your files never leave your device.</p>
+        <a href="#app" class="cta-btn" id="landing-launch-btn">Launch App &#8594;</a>
+      </div>
+      <div class="landing-features">
+        <div class="landing-feat">
+          <div class="landing-feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Local-only processing</h3>
+          <p>All merging happens in your browser via WebAssembly. No server. No uploads. Complete privacy.</p>
+        </div>
+        <div class="landing-feat">
+          <div class="landing-feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
+          <h3>Tags &amp; highlights merged</h3>
+          <p>Intelligently combine tags, highlights, bookmarks and margin notes across all your backups.</p>
+        </div>
+        <div class="landing-feat">
+          <div class="landing-feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <h3>Date-specific extraction</h3>
+          <p>Extract content from a specific backup date to restore exactly what you had at any point in time.</p>
+        </div>
+      </div>
+    </section>
     <div id="root" class="flex-grow max-w-5xl mx-auto w-full p-4 md:p-8"></div>
 
     <footer class="bg-stone-950 border-t border-stone-800 text-stone-500 text-[10px] md:text-xs p-6 mt-8">
-        <div class="max-w-5xl mx-auto space-y-4 text-justify">
-            <p><strong>LEGAL DISCLAIMER & TERMS OF USE:</strong> This web application ("Tool") is provided on an "as-is" and "as-available" basis without warranties of any kind. By utilizing this Tool, you expressly agree that your use is at your sole risk.</p>
-            <p><strong>DATA PRIVACY & LOCAL PROCESSING:</strong> All data processing occurs entirely and exclusively within the local environment of the user's web browser ("Client-Side"). No user data is transmitted to or stored on any external server.</p>
-            <p><strong>INTELLECTUAL PROPERTY ACKNOWLEDGEMENT:</strong> "JW Library" and associated rights are the exclusive property of the Watch Tower Bible and Tract Society of Pennsylvania. This Tool is an independent utility and is not affiliated with or endorsed by the Watch Tower Bible and Tract Society of Pennsylvania.</p>
+        <div class="max-w-5xl mx-auto">
+            <p class="footer-tagline">JW Sync processes all data locally — your files never leave your device.</p>
+            <details class="legal-details">
+                <summary>Legal, Privacy &amp; IP Notices</summary>
+                <div class="legal-body">
+                    <p><strong>LEGAL DISCLAIMER &amp; TERMS OF USE:</strong> This web application (“Tool”) is provided on an “as-is” and “as-available” basis without warranties of any kind. By utilizing this Tool, you expressly agree that your use is at your sole risk.</p>
+                    <p><strong>DATA PRIVACY &amp; LOCAL PROCESSING:</strong> All data processing occurs entirely and exclusively within the local environment of the user’s web browser (“Client-Side”). No user data is transmitted to or stored on any external server.</p>
+                    <p><strong>INTELLECTUAL PROPERTY ACKNOWLEDGEMENT:</strong> “JW Library” and associated rights are the exclusive property of the Watch Tower Bible and Tract Society of Pennsylvania. This Tool is an independent utility and is not affiliated with or endorsed by the Watch Tower Bible and Tract Society of Pennsylvania.</p>
+                </div>
+            </details>
         </div>
     </footer>
 
@@ -333,6 +377,15 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
 .mode-seg-btn{padding:5px 13px;border-radius:20px;border:none;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;background:transparent;color:#64748b}
 .mode-seg-on{background:#ea580c;color:#fff;box-shadow:0 1px 5px rgba(234,88,12,.3)}
 .mode-seg-full{background:rgba(232,240,255,.12)!important;color:#e8f0ff!important;box-shadow:none!important}
+/* ── Full Mode teaser card ──────────────── */
+.full-mode-teaser{border:1px solid rgba(234,88,12,.2);border-radius:14px;padding:18px;background:rgba(234,88,12,.05);margin-top:20px;margin-bottom:12px}
+.full-mode-teaser-hdr{font-size:15px;font-weight:700;color:#fed7aa;margin-bottom:5px}
+.full-mode-teaser-sub{font-size:12px;color:#9ca3af;margin-bottom:12px;margin-top:0}
+.full-mode-teaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px}
+.full-mode-teaser-feat{display:flex;align-items:center;gap:6px;font-size:12px;color:#d1d5db;background:rgba(255,255,255,.04);border-radius:8px;padding:6px 10px}
+.full-mode-teaser-btn{width:100%;padding:10px;background:#ea580c;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s}
+.full-mode-teaser-btn:hover{opacity:.85}
+
 /* ── Simple Mode teaser banner ─────────── */
 .simple-mode-teaser{border-radius:12px;border:1px solid rgba(234,88,12,.2);background:rgba(234,88,12,.05);margin-bottom:4px}
 .simple-mode-teaser-inner{padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
