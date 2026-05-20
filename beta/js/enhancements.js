@@ -520,20 +520,22 @@
   document.head.appendChild(style);
 
   // ── Landing page routing ───────────────────────────────────────────────
-  // Shows the landing section for first-time visitors (no jwsync_visited flag)
-  // or when hash is #home. Returning visitors and #app hash go straight to the
-  // React workspace. Forum routing (#forum) is handled by setupForumRouting().
+  // Shows the landing section for first-time visitors (no jwsync_lp_seen flag)
+  // or when hash is #home. The flag is only set when the user explicitly clicks
+  // the CTA — not on every app view — so direct #app links don't skip the landing
+  // for first-time visitors. Forum routing (#forum) is handled by setupForumRouting().
   function setupLandingRouting() {
     var landingEl = document.getElementById('landing-view');
     var rootEl = document.getElementById('root');
     var navHome = document.getElementById('site-nav-home');
     var navApp = document.getElementById('site-nav-app');
     var navForum = document.getElementById('site-nav-forum');
+    var SEEN_KEY = 'jwsync_lp_seen';
 
     function update() {
       var hash = location.hash;
-      var isFirstVisit = !localStorage.getItem('jwsync_visited');
-      var isLanding = hash === '#home' || (hash === '' && isFirstVisit);
+      var hasSeenLanding = !!localStorage.getItem(SEEN_KEY);
+      var isLanding = hash === '#home' || (hash === '' && !hasSeenLanding);
       var isForum = hash === '#forum';
 
       if (landingEl) landingEl.style.display = isLanding ? '' : 'none';
@@ -543,11 +545,14 @@
       if (navHome) navHome.classList.toggle('active', isLanding);
       if (navApp) navApp.classList.toggle('active', !isLanding && !isForum);
       if (navForum) navForum.classList.toggle('active', isForum);
+    }
 
-      // Mark as visited once the app view is shown
-      if (!isLanding && !isForum) {
-        try { localStorage.setItem('jwsync_visited', '1'); } catch (e) {}
-      }
+    // Only mark landing as seen when the user deliberately clicks the CTA
+    var ctaBtn = document.getElementById('landing-launch-btn');
+    if (ctaBtn) {
+      ctaBtn.addEventListener('click', function () {
+        try { localStorage.setItem(SEEN_KEY, '1'); } catch (e) {}
+      });
     }
 
     window.addEventListener('hashchange', update);
