@@ -135,12 +135,11 @@
   function setupForumRouting() {
     function update() {
       var isForum = location.hash === '#forum';
-      var root = document.getElementById('root');
       var forum = document.getElementById('forum-view');
       var navbar = document.getElementById('jw-navbar');
       if (!forum) return;
       forum.hidden = !isForum;
-      if (root) root.hidden = isForum;
+      // #jw-navbar (React in-app nav) hides on forum; site-nav stays visible
       if (navbar) navbar.style.display = isForum ? 'none' : '';
       document.body.classList.toggle('is-forum', isForum);
       if (isForum && typeof window.jwsyncForumInit === 'function') {
@@ -520,6 +519,42 @@
     'body.is-forum #jw-sample-btn { display: none !important }';
   document.head.appendChild(style);
 
+  // ── Landing page routing ───────────────────────────────────────────────
+  // Shows the landing section for first-time visitors (no jwsync_visited flag)
+  // or when hash is #home. Returning visitors and #app hash go straight to the
+  // React workspace. Forum routing (#forum) is handled by setupForumRouting().
+  function setupLandingRouting() {
+    var landingEl = document.getElementById('landing-view');
+    var rootEl = document.getElementById('root');
+    var navHome = document.getElementById('site-nav-home');
+    var navApp = document.getElementById('site-nav-app');
+    var navForum = document.getElementById('site-nav-forum');
+
+    function update() {
+      var hash = location.hash;
+      var isFirstVisit = !localStorage.getItem('jwsync_visited');
+      var isLanding = hash === '#home' || (hash === '' && isFirstVisit);
+      var isForum = hash === '#forum';
+
+      if (landingEl) landingEl.hidden = !isLanding;
+      if (rootEl) rootEl.hidden = isLanding || isForum;
+      document.body.classList.toggle('is-landing', isLanding);
+
+      if (navHome) navHome.classList.toggle('active', isLanding);
+      if (navApp) navApp.classList.toggle('active', !isLanding && !isForum);
+      if (navForum) navForum.classList.toggle('active', isForum);
+
+      // Mark as visited once the app view is shown
+      if (!isLanding && !isForum) {
+        try { localStorage.setItem('jwsync_visited', '1'); } catch (e) {}
+      }
+    }
+
+    window.addEventListener('hashchange', update);
+    document.addEventListener('DOMContentLoaded', update);
+    update();
+  }
+
   // ── Initialise on load ─────────────────────────────────────────────────
   /**
    * Entry point — called on DOMContentLoaded (or immediately if already loaded).
@@ -528,6 +563,7 @@
   function init() {
     registerServiceWorker();
     setupFileHandler();
+    setupLandingRouting();
     setupForumRouting();
     setupBackupTimeline();
     setupSampleDataButton();
