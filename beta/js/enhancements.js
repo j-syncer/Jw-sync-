@@ -536,7 +536,7 @@
       var isLanding = hash === '#home' || (hash === '' && isFirstVisit);
       var isForum = hash === '#forum';
 
-      if (landingEl) landingEl.hidden = !isLanding;
+      if (landingEl) landingEl.style.display = isLanding ? '' : 'none';
       if (rootEl) rootEl.hidden = isLanding || isForum;
       document.body.classList.toggle('is-landing', isLanding);
 
