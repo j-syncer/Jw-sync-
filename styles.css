@@ -160,13 +160,38 @@ html, body {
         @media (min-width: 1024px) { #mob-bar { display: none !important; } }
 
         /* ── Light mode ── */
-        body.light { background: #f0f7ff; color: #071a38; }
-        body.light #jw-navbar { background: rgba(240,247,255,0.96); border-bottom-color: rgba(157,200,238,0.8); }
-        body.light .nav-btn { background: #fff; border-color: #9ec8ee; color: #134678; }
-        body.light .nav-btn:hover { background: #f0f7ff; color: #071a38; border-color: #62a6d8; }
-        body.light .nav-btn.active { background: rgba(50,130,188,0.08); color: #134678; border-color: rgba(50,130,188,0.4); }
-        body.light .nav-select { background: #fff; border-color: #9ec8ee; color: #134678; }
-        body.light .modal-close { background: #f0f7ff; border-color: #9ec8ee; color: #3282bc; }
+        body.light {
+          --color-bg:               #f0f4f8;
+          --color-surface:          #ffffff;
+          --color-surface-hover:    #f1f5f9;
+          --color-surface-elevated: #ffffff;
+          --color-border:           rgba(0,0,0,.08);
+          --color-border-strong:    rgba(0,0,0,.13);
+          --color-border-orange:    rgba(234,88,12,.3);
+          --color-text-primary:     #1e293b;
+          --color-text-secondary:   rgba(15,23,42,.65);
+          --color-text-muted:       rgba(15,23,42,.40);
+          background: #f0f4f8;
+          color: #1e293b;
+        }
+        body.light #jw-navbar { background: rgba(240,244,248,0.96); border-bottom-color: rgba(0,0,0,.1); }
+        body.light .nav-btn { background: #fff; border-color: #cbd5e1; color: #1e293b; }
+        body.light .nav-btn:hover { background: #f1f5f9; color: #0f172a; border-color: #94a3b8; }
+        body.light .nav-btn.active { background: rgba(50,130,188,0.1); color: #134678; border-color: rgba(50,130,188,0.4); }
+        body.light .nav-select { background: #fff; border-color: #cbd5e1; color: #1e293b; }
+        body.light .modal-close { background: #f1f5f9; border-color: #cbd5e1; color: #475569; }
+        body.light #site-nav { background: rgba(240,244,248,.96); border-bottom-color: rgba(0,0,0,.09); }
+        body.light .site-nav-logo { color: #ea580c; }
+        body.light .site-nav-link { color: #475569; }
+        body.light .site-nav-link:hover { color: #1e293b; }
+        body.light .site-nav-link.active { color: #1e293b; background: rgba(0,0,0,.06); }
+        body.light #log-panel { background: #f8fafc; border-top-color: #e2e8f0; box-shadow: 0 -4px 16px rgba(0,0,0,.08); }
+        body.light #mob-bar { background: rgba(240,244,248,.97); border-top-color: rgba(0,0,0,.09); }
+        body.light .mob-btn-merge:disabled { background: #e2e8f0; color: #94a3b8; }
+        body.light .stat-bar-track { background: #e2e8f0; }
+        body.light .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; }
+        body.light .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        body.light .help-tab:hover:not(.active) { color: #1d4ed8; }
 
         /* ── Drag-drop highlight ── */
         .drop-active { border-color: #fb923c !important; background: rgba(251,146,60,0.07) !important; box-shadow: 0 0 0 3px rgba(251,146,60,0.15); }
@@ -287,19 +312,20 @@ html, body {
 
         /* ── Beta environment banner ── */
         #beta-banner {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
-            background: linear-gradient(90deg, #7c3aed, #6d28d9);
-            color: #fff; text-align: center;
-            font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
-            padding: 5px 16px; display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 2px 12px rgba(109,40,217,0.5);
-        }
-        #beta-banner .beta-pill {
-            background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.35);
-            border-radius: 20px; padding: 2px 10px; font-size: 11px;
-        }
-        #beta-banner a { color: #ddd6fe; text-decoration: none; font-weight: 600; }
-        #beta-banner a:hover { color: #fff; text-decoration: underline; }
+  position:fixed; top:0; left:0; right:0; z-index:9999;
+  background:#0a1626; border-bottom:1px solid var(--color-border-orange);
+  color:var(--color-text-secondary); text-align:center;
+  font-size:var(--text-xs); font-weight:600; letter-spacing:.06em;
+  padding:5px 16px; display:flex; align-items:center;
+  justify-content:center; gap:var(--sp-2); box-shadow:none;
+}
+#beta-banner .beta-pill {
+  background:rgba(234,88,12,.12); border:1px solid var(--color-border-orange);
+  border-radius:var(--radius-pill); padding:2px 10px;
+  font-size:var(--text-xs); color:var(--color-orange-light);
+}
+#beta-banner a { color:var(--color-orange-light); text-decoration:none; font-weight:600; }
+#beta-banner a:hover { color:#fff; text-decoration:underline; }
         body { padding-top: 32px !important; }
 
 /* ── Section 2: Forum styles ─────────────────────────────────────────────── */
@@ -504,12 +530,16 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .fn-peek-btn:hover { background: rgba(255,255,255,.1); color: var(--color-text-primary); }
 
 /* === User Engagement Improvements === */
-.smt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2);margin-bottom:var(--sp-3)}
+
+/* Revamped Simple Mode teaser: feature mini-cards */
+.smt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-2);margin-bottom:var(--sp-3)}
 @media(max-width:600px){.smt-grid{grid-template-columns:1fr}}
 .smt-feat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
 .smt-feat:hover{border-color:var(--color-border-strong)}
 .smt-feat-name{font-size:var(--text-sm);font-weight:700;color:var(--color-orange-light)}
-.smt-feat-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}
+.smt-feat-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
+
+/* Post-merge discover panel */
 .discover-panel{margin-top:var(--sp-5);padding:var(--sp-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-md)}
 .discover-title{font-size:11px;font-weight:700;color:rgba(208,232,248,.45);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
 .discover-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
@@ -521,9 +551,15 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .discover-community{font-size:12px;color:rgba(208,232,248,.4);text-align:center;margin-top:4px}
 .discover-community-link{color:#fb923c;text-decoration:none;transition:color .15s}
 .discover-community-link:hover{color:#ea580c;text-decoration:underline}
-.feat-new-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ea580c;animation:pulse 2s infinite;margin-left:6px;vertical-align:middle;flex-shrink:0}
+
+/* Changelog unread dot */
+.nav-unread-dot{position:absolute;top:4px;right:4px;width:6px;height:6px;background:var(--color-orange);border-radius:50%;border:1.5px solid var(--color-bg);animation:pulse 2s infinite;pointer-events:none}
+
+/* Feature discovery dots on section headings */
+.feat-new-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--color-orange);animation:pulse 2s infinite;margin-left:var(--sp-1);vertical-align:middle;flex-shrink:0}
+
+/* Merge stats in post-merge discover panel */
 .discover-stats{font-size:var(--text-sm);font-weight:700;color:var(--color-green);text-align:center;margin-bottom:var(--sp-2);padding:var(--sp-1) var(--sp-3);background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:var(--radius-sm)}
-.nav-unread-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:#ea580c;border-radius:50%;animation:pulse 2s infinite;pointer-events:none}
 
 /* Feature section tip boxes */
 .feat-tip{background:var(--color-surface-hover);border-left:2px solid rgba(234,88,12,.4);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:var(--sp-2) var(--sp-3);margin-top:var(--sp-2)}
