@@ -532,12 +532,12 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 /* === User Engagement Improvements === */
 
 /* Revamped Simple Mode teaser: feature mini-cards */
-.smt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2);margin-bottom:var(--sp-3)}
+.smt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-2);margin-bottom:var(--sp-3)}
 @media(max-width:600px){.smt-grid{grid-template-columns:1fr}}
 .smt-feat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
 .smt-feat:hover{border-color:var(--color-border-strong)}
 .smt-feat-name{font-size:var(--text-sm);font-weight:700;color:var(--color-orange-light)}
-.smt-feat-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}
+.smt-feat-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
 
 /* Post-merge discover panel */
 .discover-panel{margin-top:var(--sp-5);padding:var(--sp-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-md)}
