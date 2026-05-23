@@ -183,6 +183,20 @@ html, body {
         body.light #site-nav { background: rgba(240,244,248,.96); border-bottom-color: rgba(0,0,0,.09); }
         body.light .site-nav-logo { color: #ea580c; }
         body.light .site-nav-link { color: #475569; }
+.nav-lang-select {
+  background: rgba(71,85,105,.25);
+  border: 1px solid rgba(255,255,255,.1);
+  color: #94a3b8;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  margin-left: 4px;
+}
+.nav-lang-select:hover { background: rgba(71,85,105,.4); }
+.nav-lang-select option { background: #0c1322; color: #e7eaf3; }
+body.light .nav-lang-select { background: rgba(11,46,88,.08); border-color: rgba(11,46,88,.15); color: #475569; }
         body.light .site-nav-link:hover { color: #1e293b; }
         body.light .site-nav-link.active { color: #1e293b; background: rgba(0,0,0,.06); }
         body.light #log-panel { background: #f8fafc; border-top-color: #e2e8f0; box-shadow: 0 -4px 16px rgba(0,0,0,.08); }

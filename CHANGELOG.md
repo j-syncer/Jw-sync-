@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.5.0] — 2026-05-23
+
+### Added
+- **Full language coverage** — every visible string throughout the site now changes when you switch language (10 languages: EN, ES, PT, FR, DE, IT, RU, JA, KO, TL)
+- **Language picker on the landing page** — a language selector is now present in the top nav, so first-time visitors can choose their language before entering the app
+- Landing page hero subtitle, nav links ("App", "Community"), feature card names and descriptions all now respond to language selection
+- Simple Mode teaser cards (Note Explorer, Study Insights, Tag Management, Extract & Share, Compare & Review), the "Explore Full Mode" button, and the "Browse Your Notes" CTA card all translate correctly
+- App main heading ("Merge Your JW Library Backups"), subtitle, discover cards ("What else can JW Sync do?" section), and download title all translate
+- Two-way sync: changing language in the app updates the landing page; changing it on the landing page updates the React app when you enter it
+
+---
+
 ## [2.4.2] — 2026-05-23
 
 ### Changed
