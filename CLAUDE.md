@@ -24,6 +24,29 @@ Do this automatically for any request. No need to ask, no feature branches.
 
 ---
 
+## ⚠️ Tests — when the user says "run tests" / "run the tests"
+
+The test suite lives in `tests/`. **Always run it as a single command** (no need to ask which suite):
+
+```bash
+cd tests && npm install --silent 2>/dev/null; npm test
+```
+
+- `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
+- `npm test` chains all three suites (`01_static.js && 02_runtime.js && 03_regression.js`) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`.
+
+**Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
+
+Suite coverage (~80 assertions):
+- **01_static.js** — both index.html files parse, TRANSLATIONS object is well-formed across all 10 languages, Browse i18n covers every required key, every CSS class referenced is defined, all hook/marker strings present.
+- **02_runtime.js** — synthesises a `.jwlibrary` in-memory (zipped SQLite with the JW Library schema), boots the Browse module in JSDOM, drives every UI affordance (tab switching, color/tag/publication filters, search, sort, detail panes for notes/highlights/bookmarks, copy-to-clipboard, clear-all, close).
+- **03_regression.js** — merge worker still parses, every critical merge anchor is intact, HTML structure clean (one structural `</body>`/`</html>` outside scripts), cache version is set.
+
+If you add a new user-facing feature, extend the relevant suite to cover it.
+
+---
+
 ## Codebase Overview
 
 - **Single-file React SPA** — all JS is minified and embedded directly in the HTML files
@@ -88,13 +111,26 @@ The "Merge →" button in the Suggested Merges panel is a persistent toggle:
 - **Active:** Emerald green "✓ Applied" (bold) — persists until clicked again
 - Clicking again resets action to `"keep"` (toggle off / undo)
 
+### Note Explorer (Browse)
+In-browser searchable library browser for any `.jwlibrary` file — three tabs (Notes / Highlights / Bookmarks) with search, color filter, tag filter, publication filter, and a detail pane.
+
+- **Self-contained `<script>` + `<style>` block** injected just before `</body>` (markers: `<!-- ── Note Explorer (Browse) ──...`). Does NOT touch React state — all CSS classes are `.jb-*` to avoid collisions.
+- **Entry points:**
+  - Standalone CTA card on the Simple Mode landing (`.jb-cta-card`, "Browse Your Notes")
+  - Orange button in the Insights modal header (`.jb-browse-open-btn`, label key `brw_open`)
+  - Public function: `window.__openJwBrowse(file)` — pass a `File`/`Blob`/`ArrayBuffer` or `undefined` (will prompt for one)
+- **File hand-off:** the main app's `ja()` function (the file loader that powers Insights) sets `window.__jwLastFile = e` so Browse can reuse the same upload.
+- **i18n:** Browse has its **own** `I18N` object inside the module (~34 keys × 10 languages). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React).
+- **Data:** Reads `Note`, `UserMark`, `Bookmark`, `Tag`, `TagMap`, `Location` on the main thread via sql.js — do NOT extend `merge-worker.js` (it's write-optimised).
+- Capped at 2000 displayed rows with a "narrow your search" hint.
+
 ---
 
 ## Gotchas & Tips
 
 - **Python replacements only** — files are too large for Edit tool; use `open().read()` → `str.replace()` → `write()`
 - **Always verify anchors first** — check `content.count(anchor) == 1` before replacing
-- **Service worker** caches `index.html` (key: `jwsync-v3`). Bump `CACHE_VERSION` in `service-worker.js` if users report stale cache after a production push
+- **Service worker** caches `index.html`. Bump `CACHE_VERSION` in `service-worker.js` (currently `jwsync-vN` — check the file) any time you ship a meaningful change to either index.html so PWA users pick it up
 - **Mobile language picker** — on Android, the `<select>` renders as a native radio list. That IS the language selector; no separate component
 - **TRANSLATIONS validation** — verify after any language insertion:
   ```bash

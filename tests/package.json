@@ -1,0 +1,17 @@
+{
+  "name": "jwsync-tests",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static + JSDOM runtime + regression tests for jwsync.org. Run `npm install` once, then `npm test`.",
+  "scripts": {
+    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js",
+    "test:static": "node 01_static.js",
+    "test:runtime": "node 02_runtime.js",
+    "test:regression": "node 03_regression.js"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.3",
+    "jszip": "3.10",
+    "sql.js": "1.10"
+  }
+}
