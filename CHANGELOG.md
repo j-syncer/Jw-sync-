@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.4.2] — 2026-05-23
+
+### Changed
+- **Dark mode design refinement**: resolved "box-in-a-box" visual layering across all full-mode cards — hard `border border-stone-700` outlines removed from main cards, replaced with subtle `shadow-lg` elevation
+- Removed rainbow top-border accents (pink, amber, blue, emerald strips) from utility section cards; all cards now share a consistent borderless elevated style
+- Card section headers no longer use a separate high-contrast background; they now use a minimal separator line (`border-white/7`) to divide from body
+- Inner drop-zone bordered boxes removed — content area is now visually flat inside the card
+- "Ideas" tip boxes redesigned from opaque background boxes into quiet inline text lists with a barely-visible top separator
+- Navigation utility buttons (Activity Log, Changelog, How to Use, Share, Community) visually demoted to 11 px muted ghost buttons, leaving the Simple/Full mode toggle as the clear primary control
+- A subtle divider line now separates the mode toggle pill from the secondary nav buttons, reinforcing the hierarchy
+- FAQ / How-to-Use modal tip cards toned down from stone-bordered boxes to lightly tinted panels; purple accent replaced with neutral stone
+
+---
+
 ## [2.4.1] — 2026-05-23
 
 ### Fixed
