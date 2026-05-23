@@ -17,11 +17,11 @@ If you use JW Library on more than one device — a phone, a tablet, a laptop �
 ## Features
 
 - **Merge** notes, highlights, bookmarks, and tags from multiple `.jwlibrary` backups
+- **Browse & edit notes** — open any backup to search, edit titles and content, manage tags, change highlight colours, then download the updated `.jwlibrary` file
 - **Pre-merge preview** — see exactly what will change before committing
 - **Duplicate finder** — detect and resolve conflicting or identical notes
 - **Tag manager** — search, rename, and organise tags across merged files
 - **Bulk colour changer** — update highlight colours across your whole library
-- **Side-by-side comparison** — compare two backup files before merging
 - **Note export** — save notes as TXT, CSV, HTML, or PDF
 - **Statistics** — see a summary of your merged library
 - **Activity log** — a full record of every merge operation
@@ -126,7 +126,7 @@ All contributions, no matter how small, are appreciated.
 
 - [ ] Modular rebuild — separate JS/CSS source files with esbuild pipeline
 - [ ] JSDoc documentation on all functions
-- [ ] Web Worker for SQL.js (move heavy database work off the main thread)
+- [x] Web Worker for SQL.js (move heavy database work off the main thread)
 - [ ] More export formats
 
 ---

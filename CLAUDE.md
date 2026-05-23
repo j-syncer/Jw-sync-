@@ -22,6 +22,12 @@ Do this automatically for any request. No need to ask, no feature branches.
 - Always `git push origin main` after every commit
 - Never ask the user about branching; it never needs to come up
 
+### Changelog rule
+**Every time a user-facing feature is added or changed, update `CHANGELOG.md`** with:
+- A new `## [x.y.z] — YYYY-MM-DD` section at the top (bump the minor version for new features, patch for fixes)
+- Bullet points describing what changed from the user's perspective
+- Also update: `softwareVersion` in the Schema.org JSON-LD block in both `beta/index.html` and `index.html`, and the feature cards / hero copy on the landing page if the feature warrants it.
+
 ---
 
 ## ⚠️ Tests — when the user says "run tests" / "run the tests"
@@ -111,8 +117,8 @@ The "Merge →" button in the Suggested Merges panel is a persistent toggle:
 - **Active:** Emerald green "✓ Applied" (bold) — persists until clicked again
 - Clicking again resets action to `"keep"` (toggle off / undo)
 
-### Note Explorer (Browse)
-In-browser searchable library browser for any `.jwlibrary` file — three tabs (Notes / Highlights / Bookmarks) with search, color filter, tag filter, publication filter, and a detail pane.
+### Note Explorer (Browse) — v2.4.0 full edit mode
+In-browser library manager for any `.jwlibrary` file — three tabs (Notes / Highlights / Bookmarks) with search, color filter, tag filter, publication filter, detail pane, **and full editing**.
 
 - **Self-contained `<script>` + `<style>` block** injected just before `</body>` (markers: `<!-- ── Note Explorer (Browse) ──...`). Does NOT touch React state — all CSS classes are `.jb-*` to avoid collisions.
 - **Entry points:**
@@ -120,9 +126,19 @@ In-browser searchable library browser for any `.jwlibrary` file — three tabs (
   - Orange button in the Insights modal header (`.jb-browse-open-btn`, label key `brw_open`)
   - Public function: `window.__openJwBrowse(file)` — pass a `File`/`Blob`/`ArrayBuffer` or `undefined` (will prompt for one)
 - **File hand-off:** the main app's `ja()` function (the file loader that powers Insights) sets `window.__jwLastFile = e` so Browse can reuse the same upload.
-- **i18n:** Browse has its **own** `I18N` object inside the module (~34 keys × 10 languages). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React).
-- **Data:** Reads `Note`, `UserMark`, `Bookmark`, `Tag`, `TagMap`, `Location` on the main thread via sql.js — do NOT extend `merge-worker.js` (it's write-optimised).
+- **i18n:** Browse has its **own** `I18N` object inside the module (~55 keys × 10 languages). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React).
+- **Data:** Reads AND WRITES `Note`, `UserMark`, `Bookmark`, `Tag`, `TagMap`, `Location` on the main thread via sql.js — do NOT extend `merge-worker.js` (it's write-optimised).
 - Capped at 2000 displayed rows with a "narrow your search" hint.
+- **DB stays open** after load (`state.db`); `state.dirty` tracks change count; `state.editingId` tracks which item is in edit mode.
+- **Edit mode** (all three tabs): click Edit in the detail pane → in-place form; Save writes SQL UPDATE; Cancel restores read view.
+  - Notes: edit title + content (textarea, plain text → `plainTextToNoteHtml()` on save), add/remove tags, change highlight colour (if note has a UserMarkId)
+  - Highlights: change colour, edit linked note title + content
+  - Bookmarks: edit title
+- **Delete**: inline confirm box (no `window.confirm`) → cascade-deletes TagMap rows for notes
+- **Export**: `state.db.export()` → JSZip → download `edited_<filename>.jwlibrary`
+- **Unsaved guard**: `closeOverlay()` calls `window.confirm()` if `state.dirty > 0`
+- **New CSS classes** (all `.jb-*`): `.jb-edit-panel`, `.jb-edit-field`, `.jb-edit-label`, `.jb-edit-input`, `.jb-edit-textarea`, `.jb-tag-editor`, `.jb-tag-rm`, `.jb-tag-rm-x`, `.jb-tag-add-row`, `.jb-tag-add-input`, `.jb-tag-add-btn`, `.jb-color-picker-row`, `.jb-cp-dot`, `.jb-btn-danger`, `.jb-btn-danger-solid`, `.jb-delete-confirm`, `.jb-export-btn`, `.jb-dirty-badge`, `.jb-format-note`
+- **Key helper functions**: `plainTextToNoteHtml(text)`, `saveNote()`, `deleteNote()`, `addTagToNote()`, `removeTagFromNote()`, `changeNoteColor()`, `changeHighlightColor()`, `deleteHighlight()`, `saveHighlightNote()`, `deleteBookmark()`, `saveBookmark()`, `exportDb()`, `markDirty()`, `updateDirtyBadge()`, `buildEditNote()`, `buildEditHighlight()`, `buildEditBookmark()`, `buildColorPicker()`, `buildTagEditor()`, `buildInlineDeleteConfirm()`
 
 ---
 
