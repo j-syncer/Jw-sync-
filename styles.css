@@ -73,23 +73,6 @@ html, body {
         .nav-btn:hover { color: var(--color-text-secondary); border-color: rgba(255,255,255,.13); background: rgba(255,255,255,.04); }
         .nav-btn.active { color: var(--color-orange-light); border-color: var(--color-border-orange); background: rgba(234,88,12,.08); }
         .nav-btn.has-errors { color: #f87171; border-color: rgba(248,113,113,.35); }
-        .nav-btn-browse {
-            color: #fff !important;
-            background: rgba(234,88,12,.18) !important;
-            border-color: rgba(234,88,12,.7) !important;
-            box-shadow: 0 0 7px rgba(234,88,12,.45), inset 0 0 6px rgba(234,88,12,.08);
-            animation: browse-pulse 2.4s ease-in-out infinite;
-        }
-        .nav-btn-browse:hover {
-            background: rgba(234,88,12,.32) !important;
-            border-color: #ea580c !important;
-            box-shadow: 0 0 14px rgba(234,88,12,.7), inset 0 0 8px rgba(234,88,12,.15);
-            animation: none;
-        }
-        @keyframes browse-pulse {
-            0%,100% { box-shadow: 0 0 5px rgba(234,88,12,.35), inset 0 0 5px rgba(234,88,12,.06); border-color: rgba(234,88,12,.55) !important; }
-            50%      { box-shadow: 0 0 12px rgba(234,88,12,.7), inset 0 0 8px rgba(234,88,12,.12); border-color: rgba(234,88,12,.9) !important; }
-        }
         .nav-btn-community {
             border-color: var(--color-border-strong);
             color: var(--color-text-secondary); background: transparent; box-shadow: none;
