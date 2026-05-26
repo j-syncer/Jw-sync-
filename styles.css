@@ -551,7 +551,7 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .smt-feat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
 .smt-feat:hover{border-color:var(--color-border-strong)}
 .smt-feat-name{font-size:var(--text-sm);font-weight:700;color:var(--color-orange-light)}
-.smt-feat-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
+.smt-feat-desc{font-size:15px;color:#cbd5e1;line-height:1.6}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
 
 /* Post-merge discover panel */
 .discover-panel{margin-top:var(--sp-5);padding:var(--sp-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-md)}
@@ -561,7 +561,7 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .discover-card{background:var(--color-surface-hover);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
 .discover-card:hover{border-color:var(--color-border-orange)}
 .discover-card-name{font-size:var(--text-sm);font-weight:700;color:var(--color-text-primary)}
-.discover-card-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}
+.discover-card-desc{font-size:var(--text-xs);color:#cbd5e1;line-height:1.6}
 .discover-community{font-size:12px;color:rgba(208,232,248,.4);text-align:center;margin-top:4px}
 .discover-community-link{color:#fb923c;text-decoration:none;transition:color .15s}
 .discover-community-link:hover{color:#ea580c;text-decoration:underline}
@@ -575,12 +575,12 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 /* Merge stats in post-merge discover panel */
 .discover-stats{font-size:var(--text-sm);font-weight:700;color:var(--color-green);text-align:center;margin-bottom:var(--sp-2);padding:var(--sp-1) var(--sp-3);background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:var(--radius-sm)}
 
-/* Feature section tip boxes */
-.feat-tip{background:var(--color-surface-hover);border-left:2px solid rgba(234,88,12,.4);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:var(--sp-2) var(--sp-3);margin-top:var(--sp-2)}
-.feat-tip-label{font-size:var(--text-xs);font-weight:700;color:rgba(234,88,12,.7);text-transform:uppercase;letter-spacing:.07em;margin-bottom:var(--sp-1)}
+/* Feature section tip boxes — quiet inline text, no box */
+.feat-tip{padding:var(--sp-1) 0;margin-top:var(--sp-3);border-top:1px solid rgba(255,255,255,.06);min-width:0;overflow-wrap:break-word}
+.feat-tip-label{font-size:10px;font-weight:700;color:rgba(232,240,255,.55);text-transform:uppercase;letter-spacing:.09em;margin-bottom:var(--sp-1)}
 .feat-tip-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
-.feat-tip-list li{font-size:var(--text-xs);color:var(--color-text-muted);padding-left:12px;position:relative;line-height:1.45}
-.feat-tip-list li::before{content:"–";position:absolute;left:0;color:rgba(234,88,12,.4)}
+.feat-tip-list li{font-size:var(--text-xs);color:#cbd5e1;padding-left:10px;position:relative;line-height:1.6;overflow-wrap:break-word;word-break:break-word}
+.feat-tip-list li::before{content:"–";position:absolute;left:0;color:rgba(232,240,255,.45)}
 
 
 /* === JW Sync Redesign v2 — Appended rules === */
@@ -710,6 +710,8 @@ body.light .simple-drop-zone { border-color:rgba(11,46,88,.2)!important; }
 body.light .simple-drop-zone:hover { background:rgba(234,88,12,.03)!important; border-color:var(--color-orange)!important; }
 body.light .simple-mode-teaser { background:#fff!important; border-color:rgba(11,46,88,.12)!important; }
 body.light .smt-feat { background:#f8fbff!important; border-color:rgba(11,46,88,.1)!important; }
+body.light .smt-feat-desc { color:#475569!important; }
+body.light .discover-card-desc { color:#475569!important; }
 body.light .privacy-pill { color:#16a34a!important; background:rgba(22,163,74,.06)!important; border-color:rgba(22,163,74,.2)!important; }
 body.light .privacy-dot { background:#16a34a!important; }
 body.light .undo-banner { background:#fff!important; border-color:rgba(11,46,88,.2)!important; color:#071a38!important; }
