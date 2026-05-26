@@ -551,7 +551,7 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .smt-feat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
 .smt-feat:hover{border-color:var(--color-border-strong)}
 .smt-feat-name{font-size:var(--text-sm);font-weight:700;color:var(--color-orange-light)}
-.smt-feat-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
+.smt-feat-desc{font-size:var(--text-xs);color:#cbd5e1;line-height:1.6}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
 
 /* Post-merge discover panel */
 .discover-panel{margin-top:var(--sp-5);padding:var(--sp-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-md)}
@@ -561,7 +561,7 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .discover-card{background:var(--color-surface-hover);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
 .discover-card:hover{border-color:var(--color-border-orange)}
 .discover-card-name{font-size:var(--text-sm);font-weight:700;color:var(--color-text-primary)}
-.discover-card-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.4}
+.discover-card-desc{font-size:var(--text-xs);color:#cbd5e1;line-height:1.6}
 .discover-community{font-size:12px;color:rgba(208,232,248,.4);text-align:center;margin-top:4px}
 .discover-community-link{color:#fb923c;text-decoration:none;transition:color .15s}
 .discover-community-link:hover{color:#ea580c;text-decoration:underline}
@@ -710,6 +710,8 @@ body.light .simple-drop-zone { border-color:rgba(11,46,88,.2)!important; }
 body.light .simple-drop-zone:hover { background:rgba(234,88,12,.03)!important; border-color:var(--color-orange)!important; }
 body.light .simple-mode-teaser { background:#fff!important; border-color:rgba(11,46,88,.12)!important; }
 body.light .smt-feat { background:#f8fbff!important; border-color:rgba(11,46,88,.1)!important; }
+body.light .smt-feat-desc { color:#475569!important; }
+body.light .discover-card-desc { color:#475569!important; }
 body.light .privacy-pill { color:#16a34a!important; background:rgba(22,163,74,.06)!important; border-color:rgba(22,163,74,.2)!important; }
 body.light .privacy-dot { background:#16a34a!important; }
 body.light .undo-banner { background:#fff!important; border-color:rgba(11,46,88,.2)!important; color:#071a38!important; }
