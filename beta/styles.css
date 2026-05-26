@@ -576,11 +576,11 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .discover-stats{font-size:var(--text-sm);font-weight:700;color:var(--color-green);text-align:center;margin-bottom:var(--sp-2);padding:var(--sp-1) var(--sp-3);background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.15);border-radius:var(--radius-sm)}
 
 /* Feature section tip boxes — quiet inline text, no box */
-.feat-tip{padding:var(--sp-1) 0;margin-top:var(--sp-3);border-top:1px solid rgba(255,255,255,.06)}
-.feat-tip-label{font-size:10px;font-weight:700;color:rgba(232,240,255,.25);text-transform:uppercase;letter-spacing:.09em;margin-bottom:var(--sp-1)}
+.feat-tip{padding:var(--sp-1) 0;margin-top:var(--sp-3);border-top:1px solid rgba(255,255,255,.06);min-width:0;overflow-wrap:break-word}
+.feat-tip-label{font-size:10px;font-weight:700;color:rgba(232,240,255,.55);text-transform:uppercase;letter-spacing:.09em;margin-bottom:var(--sp-1)}
 .feat-tip-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
-.feat-tip-list li{font-size:var(--text-xs);color:rgba(232,240,255,.38);padding-left:10px;position:relative;line-height:1.45}
-.feat-tip-list li::before{content:"–";position:absolute;left:0;color:rgba(232,240,255,.18)}
+.feat-tip-list li{font-size:var(--text-xs);color:#cbd5e1;padding-left:10px;position:relative;line-height:1.6;overflow-wrap:break-word;word-break:break-word}
+.feat-tip-list li::before{content:"–";position:absolute;left:0;color:rgba(232,240,255,.45)}
 
 
 /* === JW Sync Redesign v2 — Appended rules === */
