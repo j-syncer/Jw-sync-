@@ -63,14 +63,14 @@ html, body {
         }
         .nav-btn {
             display: inline-flex; align-items: center; gap: var(--sp-1);
-            font-size: var(--text-sm); font-weight: 600; height: 32px;
-            padding: 6px 12px; border-radius: var(--radius-sm);
-            border: 1px solid var(--color-border-strong);
-            background: transparent; color: var(--color-text-secondary);
+            font-size: 11px; font-weight: 600; height: 28px;
+            padding: 4px 10px; border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,255,255,.07);
+            background: transparent; color: var(--color-text-muted);
             cursor: pointer; white-space: nowrap; text-decoration: none;
             transition: color var(--t-fast), border-color var(--t-fast), background var(--t-fast);
         }
-        .nav-btn:hover { color: var(--color-text-primary); border-color: rgba(255,255,255,.2); background: var(--color-surface-hover); }
+        .nav-btn:hover { color: var(--color-text-secondary); border-color: rgba(255,255,255,.13); background: rgba(255,255,255,.04); }
         .nav-btn.active { color: var(--color-orange-light); border-color: var(--color-border-orange); background: rgba(234,88,12,.08); }
         .nav-btn.has-errors { color: #f87171; border-color: rgba(248,113,113,.35); }
         .nav-btn-community {
