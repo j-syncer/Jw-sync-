@@ -4,6 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.6.1] — 2026-05-27
+
+### Added
+- **"Try Demo" button on every screen.** The sample-notes demo previously only appeared on the landing page (which shows once per visitor). It now also lives in the persistent top nav and in the React-rendered app nav alongside the existing "Browse notes" button, plus a secondary "Try with sample notes" button next to "Explore Full Mode →" inside the Simple Mode teaser. Returning visitors can always reach the demo.
+- New `cta_try_demo_nav` i18n key (short label for nav buttons) translated to all 10 languages.
+
+### Changed
+- Demo handler upgraded: exposes `window.__jwOpenDemo()` and binds any element carrying `data-demo-trigger` (including dynamically-mounted React buttons, via MutationObserver). The decoded `.jwlibrary` buffer is cached after first click and cloned per call so the consumer can transfer it freely.
+- `softwareVersion` bumped to `2.6.1`.
+- Service worker cache bumped to `jwsync-v19`.
+
+---
+
 ## [2.6.0] — 2026-05-27
 
 ### Added

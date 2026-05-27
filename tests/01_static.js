@@ -16,7 +16,7 @@ function section(name) { console.log('\n== ' + name + ' =='); }
 const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl'];
 const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
-const BETA_ONLY_KEYS = ['cta_try_demo'];
+const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav'];
 
 const BROWSE_REQUIRED_KEYS = [
   'title','search','no_results','loading','close','no_file','pick_file',
@@ -141,6 +141,23 @@ for (const path of FILES) {
     if (!demoMatch) fail('DEMO_B64 payload missing');
     else if (demoMatch[1].length < 1000) fail('DEMO_B64 payload looks truncated (' + demoMatch[1].length + ' chars)');
     else ok('DEMO_B64 payload present (' + demoMatch[1].length + ' base64 chars)');
+
+    // 9a) Demo trigger surfaces in every place we expect:
+    //   - static #site-nav (always-visible)
+    //   - React internal nav (next to "Browse notes")
+    //   - Simple Mode teaser (next to "Explore Full Mode →")
+    if (!c.includes('class="site-nav-link site-nav-demo"')) fail('static nav demo button missing');
+    else ok('static #site-nav demo button present');
+    if (!c.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
+    else ok('React internal nav demo button present');
+    if (!c.includes('simple-mode-teaser-btn-demo')) fail('Simple Mode teaser demo button missing');
+    else ok('Simple Mode teaser demo button present');
+    if (!c.includes('window.__jwOpenDemo')) fail('window.__jwOpenDemo not exposed');
+    else ok('window.__jwOpenDemo exposed for React buttons');
+    if (!c.includes('data-demo-trigger')) fail('data-demo-trigger attribute missing');
+    else ok('data-demo-trigger attribute present');
+    if (!c.includes('MutationObserver')) fail('MutationObserver not wired in demo handler');
+    else ok('MutationObserver present (catches React-rendered demo buttons)');
   }
 }
 
