@@ -189,11 +189,19 @@ function assertContains(text, needle, label) {
   // Polyfill localStorage already exists in jsdom; set default language
   win.localStorage.setItem('jwsync_lang', 'en');
 
-  if (typeof win.__openJwBrowse !== 'function') {
-    fail('window.__openJwBrowse not exposed after script load');
+  // v2.7.0: the Browse module is wrapped in window.__bootBrowse() and no
+  // longer auto-runs on script load. The boot loader calls it on demand;
+  // for tests, we call it ourselves.
+  if (typeof win.__bootBrowse !== 'function') {
+    fail('window.__bootBrowse not exposed after script load');
     process.exit(1);
   }
-  ok('Browse module booted; __openJwBrowse exposed');
+  win.__bootBrowse();
+  if (typeof win.__openJwBrowse !== 'function') {
+    fail('window.__openJwBrowse not exposed after __bootBrowse() call');
+    process.exit(1);
+  }
+  ok('Browse module booted via __bootBrowse(); __openJwBrowse exposed');
 
   // Build a File-like for the module
   const fileLike = {

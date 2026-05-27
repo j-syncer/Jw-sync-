@@ -920,6 +920,25 @@ body.light #jws-loading { background:#f4f8ff; }
   background: rgba(234,88,12,.07);
   opacity: 1;
 }
+/* Loading state when a demo button has triggered lazy-load. */
+.jw-demo-loading {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}
+.jw-demo-loading::after {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-left: 8px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  vertical-align: -1px;
+  animation: jw-demo-spin .6s linear infinite;
+}
+@keyframes jw-demo-spin { to { transform: rotate(360deg); } }
 .landing-features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1097,3 +1116,7 @@ body.is-forum { background: var(--bg) !important; }
 html[data-view="landing"] #root,
 html[data-view="landing"] #jws-loading { display: none !important; }
 html[data-view="landing"] #landing-view { display: flex !important; }
+/* Once the initial data-view is stripped by enhancements.js, the
+   landing class on <body> keeps the workspace splash hidden until the
+   user actually requests the app (lazy-load, v2.7.0). */
+body.is-landing #jws-loading { display: none !important; }

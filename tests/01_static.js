@@ -158,6 +158,42 @@ for (const path of FILES) {
     else ok('data-demo-trigger attribute present');
     if (!c.includes('MutationObserver')) fail('MutationObserver not wired in demo handler');
     else ok('MutationObserver present (catches React-rendered demo buttons)');
+
+    // 10) Lazy-load infrastructure (v2.7.0)
+    //   - CDN script tags must NOT be in <head> (eager loading would defeat the point)
+    //   - The main app and Browse module must be wrapped in __bootApp / __bootBrowse
+    //   - The boot loader must expose __jwBootApp / __jwBootBrowse
+    const CDN_SCRIPTS_IN_HEAD = [
+      'cdnjs.cloudflare.com/ajax/libs/react/18.2.0',
+      'cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0',
+      'cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1',
+      'cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0',
+      'cdnjs.cloudflare.com/ajax/libs/lucide',
+    ];
+    const headEnd = c.indexOf('</head>');
+    const headSection = c.slice(0, headEnd);
+    let eagerCdn = CDN_SCRIPTS_IN_HEAD.filter(u => headSection.includes('<script') && headSection.includes(u) && /<script[^>]*src="[^"]*cdnjs/.test(headSection));
+    // Stronger check: look for any <script src="cdnjs..."> in head
+    if (/<script[^>]*src="https:\/\/cdnjs\.cloudflare\.com/.test(headSection)) {
+      fail('CDN <script src> still present in <head> — lazy-load broken');
+    } else {
+      ok('no eager CDN <script> tags in <head>');
+    }
+
+    if (!c.includes('window.__bootApp')) fail('main app not wrapped in window.__bootApp');
+    else ok('main app wrapped in window.__bootApp');
+    if (!c.includes('window.__bootBrowse')) fail('Browse module not wrapped in window.__bootBrowse');
+    else ok('Browse module wrapped in window.__bootBrowse');
+    if (!c.includes('window.__jwBootApp')) fail('window.__jwBootApp not exposed (boot loader missing)');
+    else ok('window.__jwBootApp exposed by boot loader');
+    if (!c.includes('window.__jwBootBrowse')) fail('window.__jwBootBrowse not exposed (boot loader missing)');
+    else ok('window.__jwBootBrowse exposed by boot loader');
+    if (!c.includes('Lazy boot loader')) fail('lazy boot loader marker comment missing');
+    else ok('lazy boot loader script block present');
+    if (!c.includes("rel = 'prefetch'") && !c.includes('rel=\'prefetch\'')) fail('prefetch link logic missing');
+    else ok('prefetch logic present (hover / idle)');
+    if (!c.includes('jw-demo-loading')) fail('demo loading state CSS class missing');
+    else ok('jw-demo-loading state class referenced');
   }
 }
 

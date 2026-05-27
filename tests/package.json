@@ -4,10 +4,11 @@
   "private": true,
   "description": "Static + JSDOM runtime + regression tests for jwsync.org. Run `npm install` once, then `npm test`.",
   "scripts": {
-    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js",
+    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js && node 04_lazy_load.js",
     "test:static": "node 01_static.js",
     "test:runtime": "node 02_runtime.js",
-    "test:regression": "node 03_regression.js"
+    "test:regression": "node 03_regression.js",
+    "test:lazy": "node 04_lazy_load.js"
   },
   "dependencies": {
     "jsdom": "^24.1.3",

@@ -4,6 +4,24 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.7.0] — 2026-05-27
+
+### Changed
+- **Lazy-loaded heavy bundles for faster first paint.** The landing page no longer downloads React, ReactDOM, JSZip, sql.js, or Lucide upfront — those CDN scripts (~400 KB transferred) are now fetched only when the user navigates to the app, clicks "Try Demo", or hovers a CTA button. Returning visitors who go straight to the app still see the same "Preparing your workspace…" splash; the perceived difference is on landing, where the page becomes interactive almost immediately.
+- The inline main React app is now wrapped in `window.__bootApp()` and only executes when needed; the Browse module is wrapped in `window.__bootBrowse()` and runs the first time the demo CTA or the in-app Browse button is used.
+- A small inline boot loader (~3 KB) orchestrates lazy loading: it decides whether to boot the app based on URL hash + first-visit flag, listens on `hashchange`, prefetches CDN scripts on hover/focus of "Launch App" / "Try Demo" / site-nav "App", and queues an idle prefetch ~2.5 s after a landing visit so the first click stays snappy.
+- The "Try Demo" buttons now show a `jw-demo-loading` spinner state while the Browse module + storage CDNs download on the first click.
+- Connection-aware: skips prefetch entirely if `navigator.connection.saveData` is set.
+
+### Added
+- New `tests/04_lazy_load.js` JSDOM integration suite (6 scenarios) verifies that landing visits do NOT trigger CDN loads, demo clicks only load Browse + storage (not React), and `#app` navigation triggers the full bundle.
+
+### Bumped
+- `softwareVersion` 2.6.1 → 2.7.0.
+- Service worker cache `jwsync-v19` → `jwsync-v20`.
+
+---
+
 ## [2.6.1] — 2026-05-27
 
 ### Added
