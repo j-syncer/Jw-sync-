@@ -14,7 +14,9 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
 const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl'];
-const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object
+const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
+// Keys that must exist on the beta build (new features land in beta first).
+const BETA_ONLY_KEYS = ['cta_try_demo'];
 
 const BROWSE_REQUIRED_KEYS = [
   'title','search','no_results','loading','close','no_file','pick_file',
@@ -62,13 +64,20 @@ for (const path of FILES) {
     ok('TRANSLATIONS parses');
   } catch (e) { fail('TRANSLATIONS parse failed: ' + e.message); continue; }
 
+  const isBeta = path.endsWith('beta/index.html') || path.endsWith('beta\\index.html');
   for (const lang of EXPECTED_LANGS) {
     if (!trans[lang]) { fail('missing language: ' + lang); continue; }
     for (const key of REQUIRED_I18N_KEYS) {
       if (!trans[lang][key]) fail(`${lang}.${key} missing`);
     }
+    if (isBeta) {
+      for (const key of BETA_ONLY_KEYS) {
+        if (!trans[lang][key]) fail(`${lang}.${key} missing (beta)`);
+      }
+    }
   }
   if (Object.keys(trans).length === EXPECTED_LANGS.length) ok('TRANSLATIONS has exactly 10 languages');
+  if (isBeta) ok(`Beta: all ${BETA_ONLY_KEYS.length} beta-only key(s) present across ${EXPECTED_LANGS.length} languages`);
 
   // 4) Browse I18N object parses + every lang has every required key
   const i18nMatch = browseSrc.match(/var I18N = (\{[\s\S]*?\});\s*function curLang/);
@@ -118,6 +127,21 @@ for (const path of FILES) {
   // 8) Insights modal has the trigger button
   if (!c.includes('jb-browse-open-btn')) fail('Insights trigger button missing');
   else ok('Insights "Browse notes" button present');
+
+  // 9) Beta-only: "Try with sample notes" hero CTA + handler
+  if (isBeta) {
+    if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');
+    else ok('landing-demo-btn present');
+    if (!c.includes('class="cta-row"')) fail('.cta-row wrapper missing');
+    else ok('.cta-row wrapper present');
+    if (!c.includes('Demo handler')) fail('Demo handler script block missing');
+    else ok('Demo handler script block present');
+    // base64 demo payload is bulky but present
+    const demoMatch = c.match(/DEMO_B64\s*=\s*"([A-Za-z0-9+/=]+)"/);
+    if (!demoMatch) fail('DEMO_B64 payload missing');
+    else if (demoMatch[1].length < 1000) fail('DEMO_B64 payload looks truncated (' + demoMatch[1].length + ' chars)');
+    else ok('DEMO_B64 payload present (' + demoMatch[1].length + ' base64 chars)');
+  }
 }
 
 section('SUMMARY');

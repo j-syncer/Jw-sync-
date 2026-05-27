@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.6.0] — 2026-05-27
+
+### Added
+- **"Try with sample notes" CTA** on the landing page hero — a secondary button alongside "Launch App →" that opens Note Explorer pre-loaded with a small demo library. Visitors can search, filter, tag, recolour, and even export the demo data without uploading a personal `.jwlibrary` file. The demo contains 10 notes, 7 highlights, 3 bookmarks, and 4 tags across 8 publications (Bible references, Watchtower, Awake!, and a study brochure).
+- New `cta_try_demo` i18n key with translations for all 10 supported languages (EN, ES, PT, FR, DE, IT, RU, JA, KO, TL).
+
+### Changed
+- `softwareVersion` bumped to `2.6.0` (Schema.org JSON-LD in `beta/index.html`).
+- Service worker cache bumped to `jwsync-v18`.
+
+---
+
 ## [2.5.0] — 2026-05-23
 
 ### Added
