@@ -4,6 +4,27 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.8.0] — 2026-05-28
+
+### Changed
+- **"Try Demo" now actually demonstrates the merge.** Previously the demo opened Note Explorer with a single sample library — useful, but it showed the secondary feature, not the headline value prop. Clicking any "Try Demo" button (landing hero, top nav, React-rendered nav, Simple-Mode teaser) now boots the app, generates two synthetic `.jwlibrary` backups end-to-end via sql.js + JSZip, injects them into the React file pickers (main + secondary), shows a guidance banner explaining the next step, and pulses the **Preview Merge** button so the user can see the entire merge → preview → confirm → download arc without uploading anything.
+- The legacy floating purple "Try with sample data" button (Full-Mode only, first-time-visitor only) is deprecated; its `buildDemoBackups` + `injectFilesIntoMainInput` helpers now power the unified merge demo, so there's a single discoverable path instead of two competing ones.
+- Demo banner is i18n-aware — translated into all 10 supported languages. Localised toast on failure too.
+- If the user already has real files staged, the demo asks for confirmation before overwriting them (no silent data loss).
+
+### Added
+- New CSS: `#jw-demo-banner` guidance overlay, `.jw-demo-toast` success/error notification, `.jw-demo-pulse` highlight animation that briefly draws attention to the "Preview Merge" button after the demo loads.
+- `enhancements.js` now exposes `window.__jwBuildDemoBackups()` and `window.__jwInjectMergeDemo(file1, file2)` so the inline demo handler can drive a real merge without duplicating the builder code.
+
+### Removed
+- The inline base64 demo payload (`DEMO_B64`, ~3.5 KB) is gone — the merge demo generates its backups at runtime via sql.js + JSZip, which were already needed for the merge UI itself.
+
+### Bumped
+- `softwareVersion` 2.7.0 → 2.8.0.
+- Service worker cache `jwsync-v20` → `jwsync-v21`.
+
+---
+
 ## [2.7.0] — 2026-05-27
 
 ### Changed

@@ -136,11 +136,17 @@ for (const path of FILES) {
     else ok('.cta-row wrapper present');
     if (!c.includes('Demo handler')) fail('Demo handler script block missing');
     else ok('Demo handler script block present');
-    // base64 demo payload is bulky but present
-    const demoMatch = c.match(/DEMO_B64\s*=\s*"([A-Za-z0-9+/=]+)"/);
-    if (!demoMatch) fail('DEMO_B64 payload missing');
-    else if (demoMatch[1].length < 1000) fail('DEMO_B64 payload looks truncated (' + demoMatch[1].length + ' chars)');
-    else ok('DEMO_B64 payload present (' + demoMatch[1].length + ' base64 chars)');
+    // v2.8.0: the demo no longer carries an inline DEMO_B64 — it generates two
+    // synthetic backups at click time via enhancements.js's buildDemoBackups,
+    // then injects them into the React file pickers for a real merge demo.
+    if (!c.includes('__jwInjectMergeDemo')) fail('merge-demo injector helper not referenced');
+    else ok('merge-demo injector helper referenced (__jwInjectMergeDemo)');
+    if (!c.includes('__jwBuildDemoBackups')) fail('demo builder helper not referenced');
+    else ok('demo builder helper referenced (__jwBuildDemoBackups)');
+    if (!c.includes('jw-demo-banner')) fail('demo guidance banner id missing');
+    else ok('demo guidance banner referenced (#jw-demo-banner)');
+    if (!c.includes('Try Demo') || !c.includes('merge flow')) fail('merge-flow marker comment missing');
+    else ok('merge-flow Demo handler marker present');
 
     // 9a) Demo trigger surfaces in every place we expect:
     //   - static #site-nav (always-visible)
@@ -194,6 +200,29 @@ for (const path of FILES) {
     else ok('prefetch logic present (hover / idle)');
     if (!c.includes('jw-demo-loading')) fail('demo loading state CSS class missing');
     else ok('jw-demo-loading state class referenced');
+
+    // 11) v2.8.0 enhancements.js must expose builder + injector for the merge demo
+    const enhPath = REPO + '/beta/js/enhancements.js';
+    const enh = require('fs').readFileSync(enhPath, 'utf8');
+    if (!enh.includes('window.__jwBuildDemoBackups = buildDemoBackups')) fail('enhancements.js does not expose __jwBuildDemoBackups');
+    else ok('enhancements.js exposes __jwBuildDemoBackups');
+    if (!enh.includes('window.__jwInjectMergeDemo')) fail('enhancements.js does not expose __jwInjectMergeDemo');
+    else ok('enhancements.js exposes __jwInjectMergeDemo');
+    // The duplicate floating sample-data button must be deprecated (no DOM injection)
+    if (/btn\.style\.cssText\s*=\s*['"]position:fixed/.test(enh) && enh.includes('Try with sample data')) {
+      fail('the old floating "Try with sample data" button is still active in enhancements.js');
+    } else {
+      ok('legacy floating sample-data button is deprecated');
+    }
+    // 12) Banner CSS lives in beta/styles.css
+    const cssPath = REPO + '/beta/styles.css';
+    const css = require('fs').readFileSync(cssPath, 'utf8');
+    if (!css.includes('#jw-demo-banner')) fail('beta/styles.css missing #jw-demo-banner rule');
+    else ok('beta/styles.css defines #jw-demo-banner');
+    if (!css.includes('.jw-demo-toast')) fail('beta/styles.css missing .jw-demo-toast rule');
+    else ok('beta/styles.css defines .jw-demo-toast');
+    if (!css.includes('.jw-demo-pulse')) fail('beta/styles.css missing .jw-demo-pulse rule');
+    else ok('beta/styles.css defines .jw-demo-pulse');
   }
 }
 

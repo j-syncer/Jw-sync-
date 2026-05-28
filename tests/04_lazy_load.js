@@ -136,14 +136,14 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     dom.window.close();
   }
 
-  section('Demo click on landing → Browse + storage only (no React)');
+  section('Demo click on landing → boots full app for merge demo (v2.8.0)');
   {
     const { dom, requested } = makeDom({ seeded: {} });
     const spy = { bootApp: 0, bootBrowse: 0 };
     dom.window.__bootApp = function() { spy.bootApp++; };
     dom.window.__bootBrowse = function() { spy.bootBrowse++; };
     await wait(50);
-    requested.length = 0;  // drop any startup requests (there shouldn't be any)
+    requested.length = 0;
 
     const btn = dom.window.document.getElementById('landing-demo-btn');
     if (!btn) { fail('landing-demo-btn not in DOM'); dom.window.close(); }
@@ -154,20 +154,19 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
       if (btn.classList.contains('jw-demo-loading')) ok('demo button enters jw-demo-loading state');
       else fail('demo button missing jw-demo-loading after click');
 
-      await wait(80);
+      await wait(120);
 
-      const storage = requested.filter(u => /jszip|sql\.js/.test(u));
-      if (storage.length >= 2) ok('demo click loads storage CDN: JSZip + sql.js');
-      else fail('demo click missing storage scripts (got: ' + JSON.stringify(requested) + ')');
+      // v2.8.0: demo runs a real merge, so the full app boots (not just Browse).
+      const cdn = requested.filter(u => u.includes('cdnjs.cloudflare.com'));
+      if (cdn.length >= 4) ok('demo click triggers full app load (' + cdn.length + ' CDN scripts)');
+      else fail('demo click did not load full app (got: ' + JSON.stringify(requested) + ')');
 
       const react = requested.filter(u => /react/.test(u));
-      if (react.length === 0) ok('demo click does NOT load React (correctly scoped to Browse)');
-      else fail('demo click leaked React loads: ' + react.length);
+      if (react.length >= 2) ok('demo click loads React + ReactDOM (required for merge UI)');
+      else fail('demo click missing React (got ' + react.length + ' react scripts)');
 
-      if (spy.bootBrowse >= 1) ok('__bootBrowse invoked after storage scripts loaded');
-      else fail('__bootBrowse not invoked');
-      if (spy.bootApp === 0) ok('__bootApp NOT invoked by demo click');
-      else fail('__bootApp invoked by demo click');
+      if (spy.bootApp >= 1) ok('__bootApp invoked by demo click (drives the merge UI)');
+      else fail('__bootApp NOT invoked by demo click');
 
       dom.window.close();
     }
