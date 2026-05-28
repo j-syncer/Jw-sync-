@@ -478,7 +478,7 @@
       document.documentElement.removeAttribute('data-view');
       var hash = location.hash;
       var hasSeenLanding = !!localStorage.getItem(SEEN_KEY);
-      var isLanding = hash === '#home' || (hash === '' && !hasSeenLanding);
+      var isLanding = hash === '#home' || hash === '';
       var isForum = hash === '#forum';
 
       if (landingEl) landingEl.style.display = isLanding ? '' : 'none';

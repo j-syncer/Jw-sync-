@@ -2,7 +2,7 @@
 //
 // Loads beta/index.html in JSDOM (CDN <script> injections intercepted) and
 // asserts the orchestration is correct:
-//   1. Returning visitor on empty hash → bootApp runs immediately
+//   1. Returning visitor on empty hash → shows landing (no app boot) — same as first-time
 //   2. First-time visitor on empty hash → bootApp does NOT run; CDN untouched
 //   3. Clicking "Try Demo" while on landing → only Browse + storage scripts load
 //   4. Navigating to #app on landing → full app boot (React + ReactDOM + storage)
@@ -70,13 +70,9 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 (async () => {
 
-  section('Returning visitor on empty hash → bootApp immediately');
+  section('Returning visitor on empty hash → landing shown (no app boot)');
   {
     const { dom, requested } = makeDom({ seeded: { jwsync_lp_seen: '1' } });
-    // Override __bootApp / __bootBrowse with spies BEFORE the boot loader gets a
-    // chance to call them. The boot loader's microtask-chain calls __bootApp
-    // inside Promise.all().then(), which is queued but not yet run — we can
-    // still replace the function reference before then.
     const spy = { bootApp: 0, bootBrowse: 0 };
     const realBootApp = dom.window.__bootApp;
     const realBootBrowse = dom.window.__bootBrowse;
@@ -84,10 +80,7 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     dom.window.__bootBrowse = function() { spy.bootBrowse++; };
 
     // v2.10.0: __bootApp is now defined by the EXTERNAL js/app.js, so it is
-    // NOT present at HTML-parse time. (That's the win — landing visitors
-    // don't download the bundle.) The boot loader will set it later when
-    // js/app.js arrives. Browse module is still inline, so __bootBrowse IS
-    // present at parse time.
+    // NOT present at HTML-parse time. Browse module is still inline.
     if (typeof realBootApp === 'undefined') ok('main app extracted: __bootApp NOT inline (v2.10.0)');
     else fail('__bootApp was inline at parse time — extraction did not happen');
     if (typeof realBootBrowse === 'function') ok('Browse module wrapped inline: __bootBrowse defined');
@@ -97,17 +90,17 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     if (typeof dom.window.__jwBootBrowse === 'function') ok('boot loader exposed __jwBootBrowse');
     else fail('__jwBootBrowse not exposed');
 
-    await wait(50);  // let bootApp's promise chain resolve
+    await wait(50);
 
+    // Empty hash always shows landing now — even for returning visitors
     const cdn = requested.filter(u => u.includes('cdnjs.cloudflare.com'));
-    if (cdn.length >= 4) ok('returning-visitor empty-hash: boot loader triggered ' + cdn.length + ' CDN script loads');
-    else fail('returning-visitor empty-hash: only ' + cdn.length + ' CDN scripts (expected ≥4)');
-    // v2.10.0: js/app.js is now a same-origin lazy dependency
+    if (cdn.length === 0) ok('returning-visitor empty-hash: NO CDN scripts (landing shown, not app)');
+    else fail('returning-visitor empty-hash: ' + cdn.length + ' CDN scripts loaded unexpectedly');
     const appBundle = requested.filter(u => /js\/app\.js$/.test(u));
-    if (appBundle.length >= 1) ok('returning-visitor: js/app.js fetched lazily (' + appBundle.length + 'x)');
-    else fail('returning-visitor: js/app.js NOT fetched (' + JSON.stringify(requested) + ')');
-    if (spy.bootApp >= 1) ok('__bootApp invoked after CDN scripts loaded');
-    else fail('__bootApp not invoked');
+    if (appBundle.length === 0) ok('returning-visitor empty-hash: js/app.js NOT fetched (home-first)');
+    else fail('returning-visitor empty-hash: js/app.js fetched unexpectedly');
+    if (spy.bootApp === 0) ok('__bootApp NOT invoked on empty hash (landing shown)');
+    else fail('__bootApp invoked ' + spy.bootApp + ' times — should not boot on empty hash');
 
     dom.window.close();
   }
