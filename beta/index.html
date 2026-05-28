@@ -215,7 +215,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.8.0",
+      "softwareVersion": "2.9.0",
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
     }
     </script>
@@ -2031,6 +2031,346 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End Demo handler ─────────────────────────────────── -->
+<!-- ── Post-merge celebration + Restore Guide (v2.9.0) ───── -->
+<script>
+(function () {
+  'use strict';
+
+  // Localised UI strings. Long restore-guide step text stays in English for
+  // now (translation effort is bigger than the dialogue itself).
+  var I18N = {
+    en: { close: 'Close', cele_title: 'Merge complete', cele_subtitle: 'You combined your backups into a single unified file.', stat_notes: 'notes', stat_highlights: 'highlights', stat_bookmarks: 'bookmarks', stat_tags: 'tags', cele_browse: 'Browse the merged result', cele_restore: 'Restore to JW Library', cele_demo_title: 'That was a demo with sample data', cele_demo_body: 'Ready to try with your own JW Library backups?', cele_demo_cta: 'Use my real files', guide_title: 'How to restore to JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Other / Desktop', guide_warning: 'Restoring replaces the notes currently in JW Library. Keep this merged backup as your master copy.', guide_done: 'Got it' },
+    es: { close: 'Cerrar', cele_title: '¡Fusión completa!', cele_subtitle: 'Combinaste tus copias en un solo archivo unificado.', stat_notes: 'notas', stat_highlights: 'resaltados', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_browse: 'Explorar el resultado', cele_restore: 'Restaurar en JW Library', cele_demo_title: 'Eso fue una demo con datos de muestra', cele_demo_body: '¿Listo para probar con tus propias copias de JW Library?', cele_demo_cta: 'Usar mis archivos reales', guide_title: 'Cómo restaurar en JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Otro / Escritorio', guide_warning: 'Al restaurar se reemplazan las notas actuales en JW Library. Guarda esta copia como tu archivo maestro.', guide_done: 'Entendido' },
+    pt: { close: 'Fechar', cele_title: 'Mesclagem concluída!', cele_subtitle: 'Você combinou seus backups em um único arquivo unificado.', stat_notes: 'notas', stat_highlights: 'destaques', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_browse: 'Explorar o resultado', cele_restore: 'Restaurar no JW Library', cele_demo_title: 'Isso foi uma demo com dados de exemplo', cele_demo_body: 'Pronto para experimentar com seus próprios backups do JW Library?', cele_demo_cta: 'Usar meus arquivos reais', guide_title: 'Como restaurar no JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Outro / Desktop', guide_warning: 'A restauração substitui as notas atuais no JW Library. Guarde esse backup mesclado como sua cópia mestre.', guide_done: 'Entendi' },
+    fr: { close: 'Fermer', cele_title: 'Fusion terminée !', cele_subtitle: 'Vous avez combiné vos sauvegardes en un seul fichier unifié.', stat_notes: 'notes', stat_highlights: 'surlignages', stat_bookmarks: 'signets', stat_tags: 'étiquettes', cele_browse: 'Explorer le résultat', cele_restore: 'Restaurer dans JW Library', cele_demo_title: 'C’était une démo avec des données d’exemple', cele_demo_body: 'Prêt à essayer avec vos propres sauvegardes JW Library ?', cele_demo_cta: 'Utiliser mes vrais fichiers', guide_title: 'Comment restaurer dans JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Autre / Bureau', guide_warning: 'La restauration remplace les notes actuelles dans JW Library. Gardez cette sauvegarde fusionnée comme copie maîtresse.', guide_done: 'Compris' },
+    de: { close: 'Schließen', cele_title: 'Zusammenführung abgeschlossen!', cele_subtitle: 'Du hast deine Backups in einer einzigen Datei vereint.', stat_notes: 'Notizen', stat_highlights: 'Hervorhebungen', stat_bookmarks: 'Lesezeichen', stat_tags: 'Etiketten', cele_browse: 'Ergebnis durchsuchen', cele_restore: 'In JW Library wiederherstellen', cele_demo_title: 'Das war eine Demo mit Beispieldaten', cele_demo_body: 'Bereit, es mit deinen eigenen JW Library-Backups zu versuchen?', cele_demo_cta: 'Meine echten Dateien verwenden', guide_title: 'So stellst du in JW Library wieder her', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Andere / Desktop', guide_warning: 'Eine Wiederherstellung ersetzt die aktuellen Notizen in JW Library. Bewahre dieses zusammengeführte Backup als Master-Kopie auf.', guide_done: 'Verstanden' },
+    it: { close: 'Chiudi', cele_title: 'Fusione completata!', cele_subtitle: 'Hai combinato i tuoi backup in un singolo file unificato.', stat_notes: 'note', stat_highlights: 'evidenziazioni', stat_bookmarks: 'segnalibri', stat_tags: 'etichette', cele_browse: 'Esplora il risultato', cele_restore: 'Ripristina in JW Library', cele_demo_title: 'Era una demo con dati di esempio', cele_demo_body: 'Pronto a provarla con i tuoi backup di JW Library?', cele_demo_cta: 'Usa i miei file reali', guide_title: 'Come ripristinare in JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Altro / Desktop', guide_warning: 'Il ripristino sostituisce le note correnti in JW Library. Conserva questo backup unificato come copia principale.', guide_done: 'Ho capito' },
+    ru: { close: 'Закрыть', cele_title: 'Объединение завершено!', cele_subtitle: 'Вы объединили резервные копии в один файл.', stat_notes: 'заметок', stat_highlights: 'выделений', stat_bookmarks: 'закладок', stat_tags: 'тегов', cele_browse: 'Просмотреть результат', cele_restore: 'Восстановить в JW Library', cele_demo_title: 'Это была демо с примерами', cele_demo_body: 'Готовы попробовать со своими резервными копиями JW Library?', cele_demo_cta: 'Использовать свои файлы', guide_title: 'Как восстановить в JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Другое / Десктоп', guide_warning: 'Восстановление заменит текущие заметки в JW Library. Сохраните этот объединённый файл как мастер-копию.', guide_done: 'Понятно' },
+    ja: { close: '閉じる', cele_title: 'マージが完了しました', cele_subtitle: '複数のバックアップを1つの統合ファイルにまとめました。', stat_notes: 'ノート', stat_highlights: 'ハイライト', stat_bookmarks: 'ブックマーク', stat_tags: 'タグ', cele_browse: 'マージ結果を閲覧', cele_restore: 'JW Library に復元', cele_demo_title: 'これはサンプルデータを使ったデモでした', cele_demo_body: '実際の JW Library バックアップで試してみますか？', cele_demo_cta: '自分のファイルを使う', guide_title: 'JW Library への復元方法', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'その他 / デスクトップ', guide_warning: '復元すると JW Library の現在のノートが置き換わります。このマージ済みバックアップをマスターコピーとして保管してください。', guide_done: 'わかった' },
+    ko: { close: '닫기', cele_title: '병합 완료!', cele_subtitle: '백업을 하나의 통합 파일로 합쳤습니다.', stat_notes: '노트', stat_highlights: '하이라이트', stat_bookmarks: '북마크', stat_tags: '태그', cele_browse: '병합된 결과 탐색', cele_restore: 'JW Library에 복원', cele_demo_title: '샘플 데이터로 진행한 데모였습니다', cele_demo_body: '실제 JW Library 백업으로 시도할 준비가 되셨나요?', cele_demo_cta: '내 실제 파일 사용', guide_title: 'JW Library에 복원하는 방법', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: '기타 / 데스크톱', guide_warning: '복원하면 JW Library의 현재 노트가 대체됩니다. 이 병합된 백업을 마스터 사본으로 보관하세요.', guide_done: '확인' },
+    tl: { close: 'Isara', cele_title: 'Tapos ang merge!', cele_subtitle: 'Pinagsama mo ang iyong mga backup sa isang pinag-isang file.', stat_notes: 'mga tala', stat_highlights: 'mga highlight', stat_bookmarks: 'mga bookmark', stat_tags: 'mga tag', cele_browse: 'Tingnan ang merged na resulta', cele_restore: 'I-restore sa JW Library', cele_demo_title: 'Iyon ay isang demo gamit ang sample data', cele_demo_body: 'Handa nang subukan gamit ang sarili mong JW Library backup?', cele_demo_cta: 'Gamitin ang aking mga file', guide_title: 'Paano i-restore sa JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Iba / Desktop', guide_warning: 'Papalitan ng restore ang kasalukuyang mga tala sa JW Library. Panatilihin ang merged backup na ito bilang master copy.', guide_done: 'Sige' }
+  };
+  function lang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
+  function t(k) { var l = lang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  // Platform-specific restore steps. English copy is the source of truth; if a
+  // localised version exists in I18N[lang].guide_steps_<platform> use it.
+  var GUIDE = {
+    ios: [
+      'Your merged backup file is downloaded — usually to your Downloads folder or wherever your browser saves files.',
+      'If you’re on a desktop, transfer the file to your iPhone or iPad (AirDrop, iCloud Drive, email, or any cloud service works).',
+      'On your iPhone or iPad, open the Files app and locate the .jwlibrary file.',
+      'Tap the file. iOS may ask which app to open it with — choose <strong>JW Library</strong>.',
+      'JW Library will prompt you to confirm restoring the backup. Confirm.',
+      'Done — your merged notes are now in JW Library.'
+    ],
+    android: [
+      'Your merged backup file is downloaded — usually to your Downloads folder.',
+      'If you’re on a desktop, transfer the .jwlibrary file to your Android device (Google Drive, email, USB, or any cloud service).',
+      'On your Android device, open your file manager and find the file.',
+      'Tap the file. Android may ask which app should open it — choose <strong>JW Library</strong>.',
+      'JW Library will ask to confirm the restore. Confirm.',
+      'Done — your merged notes are now in JW Library.'
+    ],
+    other: [
+      'Your merged backup file is on your computer.',
+      'To use it, transfer it to a device running JW Library — an iPhone, iPad, or Android phone/tablet.',
+      'Use cloud storage (iCloud, Google Drive, Dropbox), AirDrop, or USB to move the file across.',
+      'On your phone or tablet, tap the file and choose <strong>JW Library</strong> to open it.',
+      'Confirm the restore in JW Library.',
+      'Done — your merged notes are now in JW Library.'
+    ]
+  };
+
+  // ── State ──────────────────────────────────────────────────────────
+  var lastSeenBlob = '';
+  var cached = null; // { stats, buffer, demoMode, name }
+
+  // ── Helpers ────────────────────────────────────────────────────────
+  function detectPlatform() {
+    var ua = (navigator.userAgent || '');
+    if (/iPad|iPhone|iPod/i.test(ua)) return 'ios';
+    if (/Android/i.test(ua)) return 'android';
+    return 'other';
+  }
+  function isDemoMerge() {
+    var inputs = document.querySelectorAll('input[type="file"][accept=".jwlibrary"]');
+    for (var i = 0; i < inputs.length; i++) {
+      var fl = inputs[i].files;
+      if (fl && fl.length) {
+        for (var j = 0; j < fl.length; j++) {
+          if (fl[j].name.indexOf('JWSync_Demo_') === 0) return true;
+        }
+      }
+    }
+    return false;
+  }
+  function fireAnalytics(ev) {
+    try { if (typeof gtag === 'function') gtag('event', ev, { event_category: 'engagement' }); } catch (_) {}
+  }
+  function readDownloadName() {
+    var a = document.querySelector('a#download-btn[download]');
+    return (a && a.getAttribute('download')) || 'merged.jwlibrary';
+  }
+
+  // ── Query merged db for stats (runs entirely in-browser) ──────────
+  function fetchStats(blobUrl) {
+    if (typeof window.JSZip !== 'function' || typeof window.initSqlJs !== 'function') {
+      return Promise.resolve(null);
+    }
+    return fetch(blobUrl)
+      .then(function (r) { return r.arrayBuffer(); })
+      .then(function (buf) {
+        cached = cached || {};
+        cached.buffer = buf;
+        return window.JSZip.loadAsync(buf);
+      })
+      .then(function (zip) {
+        var name = Object.keys(zip.files).find(function (f) { return /userdata\.db$/i.test(f); });
+        if (!name) throw new Error('userData.db not in zip');
+        return zip.file(name).async('uint8array');
+      })
+      .then(function (dbBytes) {
+        return window.initSqlJs({
+          locateFile: function (f) { return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f; }
+        }).then(function (SQL) {
+          var db = new SQL.Database(dbBytes);
+          function count(sql) {
+            try {
+              var r = db.exec(sql);
+              return (r[0] && r[0].values && r[0].values[0]) ? r[0].values[0][0] : 0;
+            } catch (_) { return 0; }
+          }
+          var s = {
+            notes: count('SELECT COUNT(*) FROM Note'),
+            highlights: count('SELECT COUNT(*) FROM UserMark'),
+            bookmarks: count('SELECT COUNT(*) FROM Bookmark'),
+            tags: count('SELECT COUNT(*) FROM Tag')
+          };
+          db.close();
+          return s;
+        });
+      })
+      .catch(function (e) { console.warn('[jwsync] stats query failed:', e); return null; });
+  }
+
+  // ── Render the celebration overlay ─────────────────────────────────
+  function renderCelebration(opts) {
+    closeCelebration(true); // silent cleanup
+    var stats = opts.stats || { notes: '–', highlights: '–', bookmarks: '–', tags: '–' };
+    var demo = !!opts.demoMode;
+    var html =
+      '<div class="jwc-backdrop" data-jwc-close></div>' +
+      '<div class="jwc-card" role="dialog" aria-modal="true" aria-labelledby="jwc-title">' +
+        '<button class="jwc-close" type="button" data-jwc-close aria-label="' + esc(t('close')) + '">×</button>' +
+        '<div class="jwc-icon" aria-hidden="true">' +
+          '<svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>' +
+        '</div>' +
+        '<h2 id="jwc-title" class="jwc-title">' + esc(t('cele_title')) + '</h2>' +
+        '<p class="jwc-subtitle">' + esc(t('cele_subtitle')) + '</p>' +
+        '<div class="jwc-stats">' +
+          '<div class="jwc-stat"><strong>' + stats.notes + '</strong><span>' + esc(t('stat_notes')) + '</span></div>' +
+          '<div class="jwc-stat"><strong>' + stats.highlights + '</strong><span>' + esc(t('stat_highlights')) + '</span></div>' +
+          '<div class="jwc-stat"><strong>' + stats.bookmarks + '</strong><span>' + esc(t('stat_bookmarks')) + '</span></div>' +
+          '<div class="jwc-stat"><strong>' + stats.tags + '</strong><span>' + esc(t('stat_tags')) + '</span></div>' +
+        '</div>' +
+        '<div class="jwc-actions">' +
+          '<button class="jwc-btn jwc-btn-primary" type="button" data-jwc-restore>' + esc(t('cele_restore')) + ' →</button>' +
+          '<button class="jwc-btn jwc-btn-secondary" type="button" data-jwc-browse>' + esc(t('cele_browse')) + '</button>' +
+        '</div>' +
+        (demo ?
+          '<div class="jwc-demo-cta">' +
+            '<strong>' + esc(t('cele_demo_title')) + '</strong>' +
+            '<span>' + esc(t('cele_demo_body')) + '</span>' +
+            '<button class="jwc-demo-btn" type="button" data-jwc-real>' + esc(t('cele_demo_cta')) + ' →</button>' +
+          '</div>' : '') +
+      '</div>';
+
+    var ov = document.createElement('div');
+    ov.id = 'jw-celebrate-overlay';
+    ov.innerHTML = html;
+    document.body.appendChild(ov);
+    document.body.classList.add('jw-modal-open');
+
+    // Wire interactions
+    ov.querySelectorAll('[data-jwc-close]').forEach(function (el) {
+      el.addEventListener('click', function () { closeCelebration(); });
+    });
+    var rBtn = ov.querySelector('[data-jwc-restore]');
+    if (rBtn) rBtn.addEventListener('click', function () { fireAnalytics('post_merge_restore'); openRestoreGuide(); });
+    var bBtn = ov.querySelector('[data-jwc-browse]');
+    if (bBtn) bBtn.addEventListener('click', function () { fireAnalytics('post_merge_browse'); browseMerged(); });
+    var realBtn = ov.querySelector('[data-jwc-real]');
+    if (realBtn) realBtn.addEventListener('click', function () { fireAnalytics('post_merge_use_real'); resetForRealFiles(); });
+
+    // Focus the primary button
+    if (rBtn) setTimeout(function () { try { rBtn.focus(); } catch (_) {} }, 50);
+    document.addEventListener('keydown', escListener);
+  }
+  function escListener(e) {
+    if (e.key === 'Escape') closeCelebration();
+  }
+  function closeCelebration(silent) {
+    var ov = document.getElementById('jw-celebrate-overlay');
+    if (ov) ov.remove();
+    var rg = document.getElementById('jw-restore-overlay');
+    if (rg) rg.remove();
+    document.body.classList.remove('jw-modal-open');
+    document.removeEventListener('keydown', escListener);
+    if (!silent) fireAnalytics('post_merge_close');
+  }
+
+  // ── Browse the merged result via the existing Note Explorer ────────
+  function browseMerged() {
+    var buf = cached && cached.buffer;
+    if (!buf) return;
+    var bootP = (typeof window.__jwBootBrowse === 'function') ? window.__jwBootBrowse() : Promise.resolve();
+    bootP.then(function () {
+      if (typeof window.__openJwBrowse === 'function') {
+        window.__openJwBrowse(buf.slice(0));
+      }
+    });
+  }
+
+  // ── Restore guide overlay ──────────────────────────────────────────
+  function openRestoreGuide() {
+    var current = detectPlatform();
+    var html =
+      '<div class="jwrg-backdrop" data-jwrg-close></div>' +
+      '<div class="jwrg-card" role="dialog" aria-modal="true" aria-labelledby="jwrg-title">' +
+        '<button class="jwrg-close" type="button" data-jwrg-close aria-label="' + esc(t('close')) + '">×</button>' +
+        '<h2 id="jwrg-title" class="jwrg-title">' + esc(t('guide_title')) + '</h2>' +
+        '<div class="jwrg-tabs" role="tablist">' +
+          '<button data-platform="ios" class="jwrg-tab' + (current === 'ios' ? ' active' : '') + '" role="tab">' + esc(t('guide_tab_ios')) + '</button>' +
+          '<button data-platform="android" class="jwrg-tab' + (current === 'android' ? ' active' : '') + '" role="tab">' + esc(t('guide_tab_android')) + '</button>' +
+          '<button data-platform="other" class="jwrg-tab' + (current === 'other' ? ' active' : '') + '" role="tab">' + esc(t('guide_tab_other')) + '</button>' +
+        '</div>' +
+        '<ol class="jwrg-steps" id="jwrg-steps"></ol>' +
+        '<div class="jwrg-warning"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>' + esc(t('guide_warning')) + '</span></div>' +
+        '<div class="jwrg-actions">' +
+          '<button class="jwrg-done" type="button" data-jwrg-close>' + esc(t('guide_done')) + '</button>' +
+        '</div>' +
+      '</div>';
+
+    var ov = document.createElement('div');
+    ov.id = 'jw-restore-overlay';
+    ov.innerHTML = html;
+    document.body.appendChild(ov);
+
+    function renderSteps(platform) {
+      var ol = ov.querySelector('#jwrg-steps');
+      var steps = GUIDE[platform] || GUIDE.other;
+      ol.innerHTML = steps.map(function (s) { return '<li>' + s + '</li>'; }).join('');
+    }
+    renderSteps(current);
+
+    ov.querySelectorAll('.jwrg-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        ov.querySelectorAll('.jwrg-tab').forEach(function (t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+        renderSteps(tab.getAttribute('data-platform'));
+      });
+    });
+    ov.querySelectorAll('[data-jwrg-close]').forEach(function (el) {
+      el.addEventListener('click', function () { ov.remove(); });
+    });
+  }
+
+  // ── Demo CTA: reset the app for real files ────────────────────────
+  function resetForRealFiles() {
+    // Clear file pickers (React will re-render with empty state).
+    var inputs = document.querySelectorAll('input[type="file"][accept=".jwlibrary"]');
+    for (var i = 0; i < inputs.length; i++) {
+      try {
+        inputs[i].value = '';
+        inputs[i].dispatchEvent(new Event('change', { bubbles: true }));
+      } catch (_) {}
+    }
+    closeCelebration(true);
+    // Scroll the main file picker into view so the next step is obvious.
+    setTimeout(function () {
+      var main = document.querySelector('input[type="file"][accept=".jwlibrary"]:not([multiple])');
+      // The visible label is usually a sibling; scroll the input's nearest "step" container.
+      var node = main && (main.closest('[class*="step"]') || main.parentElement);
+      if (node && node.scrollIntoView) {
+        try { node.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
+      }
+    }, 120);
+  }
+
+  // ── MutationObserver: detect when merge completes ─────────────────
+  function checkAnchor(node) {
+    if (!node || node.tagName !== 'A') return;
+    if (node.getAttribute && node.getAttribute('download') === null) return;
+    var href = node.getAttribute && node.getAttribute('href') || '';
+    if (href.indexOf('blob:') !== 0) return;
+    if (href === lastSeenBlob) return;
+    lastSeenBlob = href;
+    handleMergeComplete(href);
+  }
+  function handleMergeComplete(blobUrl) {
+    var demoMode = isDemoMerge();
+    fireAnalytics(demoMode ? 'merge_complete_demo' : 'merge_complete_real');
+    cached = { stats: null, buffer: null, demoMode: demoMode, name: readDownloadName(), blobUrl: blobUrl };
+
+    // Show the overlay immediately (with placeholder stats), then query the
+    // merged db in the background and refresh stats when ready.
+    renderCelebration({ stats: null, demoMode: demoMode });
+    fetchStats(blobUrl).then(function (stats) {
+      if (!stats) return;
+      cached.stats = stats;
+      // Update stats in place if the overlay is still open.
+      var ov = document.getElementById('jw-celebrate-overlay');
+      if (!ov) return;
+      var statsEls = ov.querySelectorAll('.jwc-stat strong');
+      if (statsEls.length >= 4) {
+        statsEls[0].textContent = String(stats.notes);
+        statsEls[1].textContent = String(stats.highlights);
+        statsEls[2].textContent = String(stats.bookmarks);
+        statsEls[3].textContent = String(stats.tags);
+      }
+    });
+  }
+
+  function init() {
+    // Scan once for any download anchor already present (returning visitor on a
+    // page that already has a merge result, e.g. via #app).
+    var existing = document.querySelectorAll('a#download-btn[download]');
+    for (var i = 0; i < existing.length; i++) {
+      var href = existing[i].getAttribute('href') || '';
+      if (href.indexOf('blob:') === 0) { checkAnchor(existing[i]); break; }
+    }
+    var obs = new MutationObserver(function (muts) {
+      for (var i = 0; i < muts.length; i++) {
+        var m = muts[i];
+        if (m.type === 'attributes' && m.target) checkAnchor(m.target);
+        // Newly added nodes (in case React mounts download anchors on render)
+        for (var j = 0; j < (m.addedNodes ? m.addedNodes.length : 0); j++) {
+          var n = m.addedNodes[j];
+          if (n.nodeType !== 1) continue;
+          if (n.tagName === 'A') checkAnchor(n);
+          else if (n.querySelectorAll) {
+            n.querySelectorAll('a[download]').forEach(checkAnchor);
+          }
+        }
+      }
+    });
+    obs.observe(document.body, {
+      attributes: true,
+      attributeFilter: ['href'],
+      subtree: true,
+      childList: true
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+<!-- ── End post-merge celebration ───────────────────────── -->
 
 </body>
 </html>

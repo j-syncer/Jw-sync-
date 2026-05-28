@@ -223,6 +223,33 @@ for (const path of FILES) {
     else ok('beta/styles.css defines .jw-demo-toast');
     if (!css.includes('.jw-demo-pulse')) fail('beta/styles.css missing .jw-demo-pulse rule');
     else ok('beta/styles.css defines .jw-demo-pulse');
+
+    // 13) v2.9.0 post-merge celebration + Restore Guide
+    if (!c.includes('Post-merge celebration')) fail('post-merge celebration script block missing');
+    else ok('post-merge celebration script block present');
+    if (!c.includes('jw-celebrate-overlay')) fail('celebration overlay id missing');
+    else ok('celebration overlay referenced (#jw-celebrate-overlay)');
+    if (!c.includes('jw-restore-overlay')) fail('restore guide overlay id missing');
+    else ok('restore guide overlay referenced (#jw-restore-overlay)');
+    // Stats query path uses sql.js for the merged db
+    if (!c.includes('SELECT COUNT(*) FROM Note')) fail('celebration not querying merged db');
+    else ok('celebration queries merged db via sql.js');
+    // Translations: all 10 langs must have the celebration keys
+    for (const lang of EXPECTED_LANGS) {
+      const re = new RegExp(`${lang}:\\s*\\{[^}]*cele_title:`);
+      if (!re.test(c)) fail(`celebration i18n missing for ${lang}`);
+    }
+    ok('celebration i18n present for all 10 languages');
+    // Restore guide steps for each platform
+    for (const platform of ['ios', 'android', 'other']) {
+      const re = new RegExp(`${platform}:\\s*\\[`);
+      if (!re.test(c)) fail(`restore guide steps missing for platform: ${platform}`);
+    }
+    ok('restore guide steps defined for ios / android / other');
+    if (!css.includes('#jw-celebrate-overlay')) fail('beta/styles.css missing #jw-celebrate-overlay rule');
+    else ok('beta/styles.css defines #jw-celebrate-overlay');
+    if (!css.includes('#jw-restore-overlay')) fail('beta/styles.css missing #jw-restore-overlay rule');
+    else ok('beta/styles.css defines #jw-restore-overlay');
   }
 }
 

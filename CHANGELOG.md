@@ -4,6 +4,23 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.9.0] — 2026-05-28
+
+### Added
+- **Post-merge celebration overlay.** When the merge worker finishes and the download anchor's `href` becomes a `blob:` URL, JW Sync now opens a polished full-screen dialog announcing the result. The overlay reads the merged `.jwlibrary` back via sql.js + JSZip (entirely client-side, no server) and shows live counts of notes, highlights, bookmarks, and tags in the merged file — so the user can see at a glance what they just gained.
+- **"Restore to JW Library" guide.** Primary CTA on the celebration opens a second dialog with platform-aware step-by-step instructions (iPhone / iPad, Android, Other / Desktop tabs — pre-selected based on `userAgent`) for actually getting the merged file back into JW Library on a real device. Includes a safety warning that restoring replaces the current library.
+- **"Browse the merged result" CTA** pipes the merged buffer into the existing Note Explorer so users can immediately verify the merge worked without re-uploading.
+- **Demo conversion ramp.** When the user just ran the v2.8.0 sample merge demo, the celebration surfaces an additional "That was a demo · Use my real files →" CTA that clears the file pickers and scrolls back to the upload area — turning the demo into a direct path to first real use.
+- Escape key dismisses the overlay; same-blob-URL deduplication prevents duplicate dialogs; new-merge triggers a fresh dialog.
+- All overlay short strings (titles, buttons, stat labels, warnings) translated into all 10 supported languages. Long platform-specific step text stays in English for now.
+- New `tests/05_post_merge.js` JSDOM suite (18 scenarios) covers overlay rendering, demo CTA gating, restore guide tab switching, Escape/close interactions, and the idempotency guard.
+
+### Bumped
+- `softwareVersion` 2.8.0 → 2.9.0.
+- Service worker cache `jwsync-v21` → `jwsync-v22`.
+
+---
+
 ## [2.8.0] — 2026-05-28
 
 ### Changed
