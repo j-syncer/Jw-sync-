@@ -215,7 +215,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.9.0",
+      "softwareVersion": "2.9.1",
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
     }
     </script>
@@ -2031,31 +2031,31 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End Demo handler ─────────────────────────────────── -->
-<!-- ── Post-merge celebration + Restore Guide (v2.9.0) ───── -->
+<!-- ── Post-merge celebration + Restore Guide (v2.9.1) ───── -->
 <script>
 (function () {
   'use strict';
 
+  var DONATE_URL = 'https://www.paypal.com/paypalme/jwsync';
+
   // Localised UI strings. Long restore-guide step text stays in English for
   // now (translation effort is bigger than the dialogue itself).
   var I18N = {
-    en: { close: 'Close', cele_title: 'Merge complete', cele_subtitle: 'You combined your backups into a single unified file.', stat_notes: 'notes', stat_highlights: 'highlights', stat_bookmarks: 'bookmarks', stat_tags: 'tags', cele_browse: 'Browse the merged result', cele_restore: 'Restore to JW Library', cele_demo_title: 'That was a demo with sample data', cele_demo_body: 'Ready to try with your own JW Library backups?', cele_demo_cta: 'Use my real files', guide_title: 'How to restore to JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Other / Desktop', guide_warning: 'Restoring replaces the notes currently in JW Library. Keep this merged backup as your master copy.', guide_done: 'Got it' },
-    es: { close: 'Cerrar', cele_title: '¡Fusión completa!', cele_subtitle: 'Combinaste tus copias en un solo archivo unificado.', stat_notes: 'notas', stat_highlights: 'resaltados', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_browse: 'Explorar el resultado', cele_restore: 'Restaurar en JW Library', cele_demo_title: 'Eso fue una demo con datos de muestra', cele_demo_body: '¿Listo para probar con tus propias copias de JW Library?', cele_demo_cta: 'Usar mis archivos reales', guide_title: 'Cómo restaurar en JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Otro / Escritorio', guide_warning: 'Al restaurar se reemplazan las notas actuales en JW Library. Guarda esta copia como tu archivo maestro.', guide_done: 'Entendido' },
-    pt: { close: 'Fechar', cele_title: 'Mesclagem concluída!', cele_subtitle: 'Você combinou seus backups em um único arquivo unificado.', stat_notes: 'notas', stat_highlights: 'destaques', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_browse: 'Explorar o resultado', cele_restore: 'Restaurar no JW Library', cele_demo_title: 'Isso foi uma demo com dados de exemplo', cele_demo_body: 'Pronto para experimentar com seus próprios backups do JW Library?', cele_demo_cta: 'Usar meus arquivos reais', guide_title: 'Como restaurar no JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Outro / Desktop', guide_warning: 'A restauração substitui as notas atuais no JW Library. Guarde esse backup mesclado como sua cópia mestre.', guide_done: 'Entendi' },
-    fr: { close: 'Fermer', cele_title: 'Fusion terminée !', cele_subtitle: 'Vous avez combiné vos sauvegardes en un seul fichier unifié.', stat_notes: 'notes', stat_highlights: 'surlignages', stat_bookmarks: 'signets', stat_tags: 'étiquettes', cele_browse: 'Explorer le résultat', cele_restore: 'Restaurer dans JW Library', cele_demo_title: 'C’était une démo avec des données d’exemple', cele_demo_body: 'Prêt à essayer avec vos propres sauvegardes JW Library ?', cele_demo_cta: 'Utiliser mes vrais fichiers', guide_title: 'Comment restaurer dans JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Autre / Bureau', guide_warning: 'La restauration remplace les notes actuelles dans JW Library. Gardez cette sauvegarde fusionnée comme copie maîtresse.', guide_done: 'Compris' },
-    de: { close: 'Schließen', cele_title: 'Zusammenführung abgeschlossen!', cele_subtitle: 'Du hast deine Backups in einer einzigen Datei vereint.', stat_notes: 'Notizen', stat_highlights: 'Hervorhebungen', stat_bookmarks: 'Lesezeichen', stat_tags: 'Etiketten', cele_browse: 'Ergebnis durchsuchen', cele_restore: 'In JW Library wiederherstellen', cele_demo_title: 'Das war eine Demo mit Beispieldaten', cele_demo_body: 'Bereit, es mit deinen eigenen JW Library-Backups zu versuchen?', cele_demo_cta: 'Meine echten Dateien verwenden', guide_title: 'So stellst du in JW Library wieder her', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Andere / Desktop', guide_warning: 'Eine Wiederherstellung ersetzt die aktuellen Notizen in JW Library. Bewahre dieses zusammengeführte Backup als Master-Kopie auf.', guide_done: 'Verstanden' },
-    it: { close: 'Chiudi', cele_title: 'Fusione completata!', cele_subtitle: 'Hai combinato i tuoi backup in un singolo file unificato.', stat_notes: 'note', stat_highlights: 'evidenziazioni', stat_bookmarks: 'segnalibri', stat_tags: 'etichette', cele_browse: 'Esplora il risultato', cele_restore: 'Ripristina in JW Library', cele_demo_title: 'Era una demo con dati di esempio', cele_demo_body: 'Pronto a provarla con i tuoi backup di JW Library?', cele_demo_cta: 'Usa i miei file reali', guide_title: 'Come ripristinare in JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Altro / Desktop', guide_warning: 'Il ripristino sostituisce le note correnti in JW Library. Conserva questo backup unificato come copia principale.', guide_done: 'Ho capito' },
-    ru: { close: 'Закрыть', cele_title: 'Объединение завершено!', cele_subtitle: 'Вы объединили резервные копии в один файл.', stat_notes: 'заметок', stat_highlights: 'выделений', stat_bookmarks: 'закладок', stat_tags: 'тегов', cele_browse: 'Просмотреть результат', cele_restore: 'Восстановить в JW Library', cele_demo_title: 'Это была демо с примерами', cele_demo_body: 'Готовы попробовать со своими резервными копиями JW Library?', cele_demo_cta: 'Использовать свои файлы', guide_title: 'Как восстановить в JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Другое / Десктоп', guide_warning: 'Восстановление заменит текущие заметки в JW Library. Сохраните этот объединённый файл как мастер-копию.', guide_done: 'Понятно' },
-    ja: { close: '閉じる', cele_title: 'マージが完了しました', cele_subtitle: '複数のバックアップを1つの統合ファイルにまとめました。', stat_notes: 'ノート', stat_highlights: 'ハイライト', stat_bookmarks: 'ブックマーク', stat_tags: 'タグ', cele_browse: 'マージ結果を閲覧', cele_restore: 'JW Library に復元', cele_demo_title: 'これはサンプルデータを使ったデモでした', cele_demo_body: '実際の JW Library バックアップで試してみますか？', cele_demo_cta: '自分のファイルを使う', guide_title: 'JW Library への復元方法', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'その他 / デスクトップ', guide_warning: '復元すると JW Library の現在のノートが置き換わります。このマージ済みバックアップをマスターコピーとして保管してください。', guide_done: 'わかった' },
-    ko: { close: '닫기', cele_title: '병합 완료!', cele_subtitle: '백업을 하나의 통합 파일로 합쳤습니다.', stat_notes: '노트', stat_highlights: '하이라이트', stat_bookmarks: '북마크', stat_tags: '태그', cele_browse: '병합된 결과 탐색', cele_restore: 'JW Library에 복원', cele_demo_title: '샘플 데이터로 진행한 데모였습니다', cele_demo_body: '실제 JW Library 백업으로 시도할 준비가 되셨나요?', cele_demo_cta: '내 실제 파일 사용', guide_title: 'JW Library에 복원하는 방법', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: '기타 / 데스크톱', guide_warning: '복원하면 JW Library의 현재 노트가 대체됩니다. 이 병합된 백업을 마스터 사본으로 보관하세요.', guide_done: '확인' },
-    tl: { close: 'Isara', cele_title: 'Tapos ang merge!', cele_subtitle: 'Pinagsama mo ang iyong mga backup sa isang pinag-isang file.', stat_notes: 'mga tala', stat_highlights: 'mga highlight', stat_bookmarks: 'mga bookmark', stat_tags: 'mga tag', cele_browse: 'Tingnan ang merged na resulta', cele_restore: 'I-restore sa JW Library', cele_demo_title: 'Iyon ay isang demo gamit ang sample data', cele_demo_body: 'Handa nang subukan gamit ang sarili mong JW Library backup?', cele_demo_cta: 'Gamitin ang aking mga file', guide_title: 'Paano i-restore sa JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Iba / Desktop', guide_warning: 'Papalitan ng restore ang kasalukuyang mga tala sa JW Library. Panatilihin ang merged backup na ito bilang master copy.', guide_done: 'Sige' }
+    en: { close: 'Close', cele_title: 'Merge complete', cele_subtitle: 'You combined your backups into a single unified file.', stat_notes: 'notes', stat_highlights: 'highlights', stat_bookmarks: 'bookmarks', stat_tags: 'tags', cele_download: 'Download merged backup', cele_redownload: 'Download again', cele_downloading: 'Your file is downloading…', cele_browse: 'Browse the merged result', cele_restore: 'Restore to JW Library', cele_demo_title: 'That was a demo with sample data', cele_demo_body: 'Ready to try with your own JW Library backups?', cele_demo_cta: 'Use my real files', donate_prompt: 'Found JW Sync useful?', donate_cta: 'Support development', guide_title: 'How to restore to JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Other / Desktop', guide_warning: 'Restoring replaces the notes currently in JW Library. Keep this merged backup as your master copy.', guide_done: 'Got it' },
+    es: { close: 'Cerrar', cele_title: '¡Fusión completa!', cele_subtitle: 'Combinaste tus copias en un solo archivo unificado.', stat_notes: 'notas', stat_highlights: 'resaltados', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_download: 'Descargar copia fusionada', cele_redownload: 'Descargar de nuevo', cele_downloading: 'Tu archivo se está descargando…', cele_browse: 'Explorar el resultado', cele_restore: 'Restaurar en JW Library', cele_demo_title: 'Eso fue una demo con datos de muestra', cele_demo_body: '¿Listo para probar con tus propias copias de JW Library?', cele_demo_cta: 'Usar mis archivos reales', donate_prompt: '¿Te resulta útil JW Sync?', donate_cta: 'Apoyar el desarrollo', guide_title: 'Cómo restaurar en JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Otro / Escritorio', guide_warning: 'Al restaurar se reemplazan las notas actuales en JW Library. Guarda esta copia como tu archivo maestro.', guide_done: 'Entendido' },
+    pt: { close: 'Fechar', cele_title: 'Mesclagem concluída!', cele_subtitle: 'Você combinou seus backups em um único arquivo unificado.', stat_notes: 'notas', stat_highlights: 'destaques', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_download: 'Baixar backup mesclado', cele_redownload: 'Baixar novamente', cele_downloading: 'Seu arquivo está sendo baixado…', cele_browse: 'Explorar o resultado', cele_restore: 'Restaurar no JW Library', cele_demo_title: 'Isso foi uma demo com dados de exemplo', cele_demo_body: 'Pronto para experimentar com seus próprios backups do JW Library?', cele_demo_cta: 'Usar meus arquivos reais', donate_prompt: 'JW Sync foi útil pra você?', donate_cta: 'Apoiar o desenvolvimento', guide_title: 'Como restaurar no JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Outro / Desktop', guide_warning: 'A restauração substitui as notas atuais no JW Library. Guarde esse backup mesclado como sua cópia mestre.', guide_done: 'Entendi' },
+    fr: { close: 'Fermer', cele_title: 'Fusion terminée !', cele_subtitle: 'Vous avez combiné vos sauvegardes en un seul fichier unifié.', stat_notes: 'notes', stat_highlights: 'surlignages', stat_bookmarks: 'signets', stat_tags: 'étiquettes', cele_download: 'Télécharger la sauvegarde fusionnée', cele_redownload: 'Télécharger à nouveau', cele_downloading: 'Votre fichier est en cours de téléchargement…', cele_browse: 'Explorer le résultat', cele_restore: 'Restaurer dans JW Library', cele_demo_title: 'C’était une démo avec des données d’exemple', cele_demo_body: 'Prêt à essayer avec vos propres sauvegardes JW Library ?', cele_demo_cta: 'Utiliser mes vrais fichiers', donate_prompt: 'JW Sync vous est utile ?', donate_cta: 'Soutenir le développement', guide_title: 'Comment restaurer dans JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Autre / Bureau', guide_warning: 'La restauration remplace les notes actuelles dans JW Library. Gardez cette sauvegarde fusionnée comme copie maîtresse.', guide_done: 'Compris' },
+    de: { close: 'Schließen', cele_title: 'Zusammenführung abgeschlossen!', cele_subtitle: 'Du hast deine Backups in einer einzigen Datei vereint.', stat_notes: 'Notizen', stat_highlights: 'Hervorhebungen', stat_bookmarks: 'Lesezeichen', stat_tags: 'Etiketten', cele_download: 'Zusammengeführtes Backup herunterladen', cele_redownload: 'Erneut herunterladen', cele_downloading: 'Deine Datei wird heruntergeladen…', cele_browse: 'Ergebnis durchsuchen', cele_restore: 'In JW Library wiederherstellen', cele_demo_title: 'Das war eine Demo mit Beispieldaten', cele_demo_body: 'Bereit, es mit deinen eigenen JW Library-Backups zu versuchen?', cele_demo_cta: 'Meine echten Dateien verwenden', donate_prompt: 'Findest du JW Sync nützlich?', donate_cta: 'Entwicklung unterstützen', guide_title: 'So stellst du in JW Library wieder her', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Andere / Desktop', guide_warning: 'Eine Wiederherstellung ersetzt die aktuellen Notizen in JW Library. Bewahre dieses zusammengeführte Backup als Master-Kopie auf.', guide_done: 'Verstanden' },
+    it: { close: 'Chiudi', cele_title: 'Fusione completata!', cele_subtitle: 'Hai combinato i tuoi backup in un singolo file unificato.', stat_notes: 'note', stat_highlights: 'evidenziazioni', stat_bookmarks: 'segnalibri', stat_tags: 'etichette', cele_download: 'Scarica backup unificato', cele_redownload: 'Scarica di nuovo', cele_downloading: 'Il tuo file si sta scaricando…', cele_browse: 'Esplora il risultato', cele_restore: 'Ripristina in JW Library', cele_demo_title: 'Era una demo con dati di esempio', cele_demo_body: 'Pronto a provarla con i tuoi backup di JW Library?', cele_demo_cta: 'Usa i miei file reali', donate_prompt: 'Trovi utile JW Sync?', donate_cta: 'Sostieni lo sviluppo', guide_title: 'Come ripristinare in JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Altro / Desktop', guide_warning: 'Il ripristino sostituisce le note correnti in JW Library. Conserva questo backup unificato come copia principale.', guide_done: 'Ho capito' },
+    ru: { close: 'Закрыть', cele_title: 'Объединение завершено!', cele_subtitle: 'Вы объединили резервные копии в один файл.', stat_notes: 'заметок', stat_highlights: 'выделений', stat_bookmarks: 'закладок', stat_tags: 'тегов', cele_download: 'Скачать объединённую копию', cele_redownload: 'Скачать ещё раз', cele_downloading: 'Ваш файл загружается…', cele_browse: 'Просмотреть результат', cele_restore: 'Восстановить в JW Library', cele_demo_title: 'Это была демо с примерами', cele_demo_body: 'Готовы попробовать со своими резервными копиями JW Library?', cele_demo_cta: 'Использовать свои файлы', donate_prompt: 'JW Sync оказался полезен?', donate_cta: 'Поддержать разработку', guide_title: 'Как восстановить в JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Другое / Десктоп', guide_warning: 'Восстановление заменит текущие заметки в JW Library. Сохраните этот объединённый файл как мастер-копию.', guide_done: 'Понятно' },
+    ja: { close: '閉じる', cele_title: 'マージが完了しました', cele_subtitle: '複数のバックアップを1つの統合ファイルにまとめました。', stat_notes: 'ノート', stat_highlights: 'ハイライト', stat_bookmarks: 'ブックマーク', stat_tags: 'タグ', cele_download: '統合バックアップをダウンロード', cele_redownload: 'もう一度ダウンロード', cele_downloading: 'ファイルをダウンロードしています…', cele_browse: 'マージ結果を閲覧', cele_restore: 'JW Library に復元', cele_demo_title: 'これはサンプルデータを使ったデモでした', cele_demo_body: '実際の JW Library バックアップで試してみますか？', cele_demo_cta: '自分のファイルを使う', donate_prompt: 'JW Sync は役に立ちましたか？', donate_cta: '開発を応援する', guide_title: 'JW Library への復元方法', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'その他 / デスクトップ', guide_warning: '復元すると JW Library の現在のノートが置き換わります。このマージ済みバックアップをマスターコピーとして保管してください。', guide_done: 'わかった' },
+    ko: { close: '닫기', cele_title: '병합 완료!', cele_subtitle: '백업을 하나의 통합 파일로 합쳤습니다.', stat_notes: '노트', stat_highlights: '하이라이트', stat_bookmarks: '북마크', stat_tags: '태그', cele_download: '병합 백업 다운로드', cele_redownload: '다시 다운로드', cele_downloading: '파일을 다운로드하는 중입니다…', cele_browse: '병합된 결과 탐색', cele_restore: 'JW Library에 복원', cele_demo_title: '샘플 데이터로 진행한 데모였습니다', cele_demo_body: '실제 JW Library 백업으로 시도할 준비가 되셨나요?', cele_demo_cta: '내 실제 파일 사용', donate_prompt: 'JW Sync가 유용했나요?', donate_cta: '개발 지원하기', guide_title: 'JW Library에 복원하는 방법', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: '기타 / 데스크톱', guide_warning: '복원하면 JW Library의 현재 노트가 대체됩니다. 이 병합된 백업을 마스터 사본으로 보관하세요.', guide_done: '확인' },
+    tl: { close: 'Isara', cele_title: 'Tapos ang merge!', cele_subtitle: 'Pinagsama mo ang iyong mga backup sa isang pinag-isang file.', stat_notes: 'mga tala', stat_highlights: 'mga highlight', stat_bookmarks: 'mga bookmark', stat_tags: 'mga tag', cele_download: 'I-download ang merged backup', cele_redownload: 'I-download muli', cele_downloading: 'Dina-download na ang iyong file…', cele_browse: 'Tingnan ang merged na resulta', cele_restore: 'I-restore sa JW Library', cele_demo_title: 'Iyon ay isang demo gamit ang sample data', cele_demo_body: 'Handa nang subukan gamit ang sarili mong JW Library backup?', cele_demo_cta: 'Gamitin ang aking mga file', donate_prompt: 'Nakatulong sa iyo ang JW Sync?', donate_cta: 'Suportahan ang pag-develop', guide_title: 'Paano i-restore sa JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Iba / Desktop', guide_warning: 'Papalitan ng restore ang kasalukuyang mga tala sa JW Library. Panatilihin ang merged backup na ito bilang master copy.', guide_done: 'Sige' }
   };
   function lang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
   function t(k) { var l = lang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
-  // Platform-specific restore steps. English copy is the source of truth; if a
-  // localised version exists in I18N[lang].guide_steps_<platform> use it.
   var GUIDE = {
     ios: [
       'Your merged backup file is downloaded — usually to your Downloads folder or wherever your browser saves files.',
@@ -2085,9 +2085,9 @@ window.__bootBrowse = function() {
 
   // ── State ──────────────────────────────────────────────────────────
   var lastSeenBlob = '';
-  var cached = null; // { stats, buffer, demoMode, name }
+  var autoDownloadedFor = null;
+  var cached = null;
 
-  // ── Helpers ────────────────────────────────────────────────────────
   function detectPlatform() {
     var ua = (navigator.userAgent || '');
     if (/iPad|iPhone|iPod/i.test(ua)) return 'ios';
@@ -2114,7 +2114,22 @@ window.__bootBrowse = function() {
     return (a && a.getAttribute('download')) || 'merged.jwlibrary';
   }
 
-  // ── Query merged db for stats (runs entirely in-browser) ──────────
+  // ── Trigger the download (click the existing React-rendered anchor) ──
+  function triggerDownload(opts) {
+    var dl = document.getElementById('download-btn');
+    if (!dl) return false;
+    var href = dl.getAttribute('href') || '';
+    if (href.indexOf('blob:') !== 0) return false;
+    try {
+      dl.click();
+      fireAnalytics(opts && opts.auto ? 'merge_auto_download' : 'merge_manual_download');
+      return true;
+    } catch (e) {
+      console.warn('[jwsync] download click blocked:', e);
+      return false;
+    }
+  }
+
   function fetchStats(blobUrl) {
     if (typeof window.JSZip !== 'function' || typeof window.initSqlJs !== 'function') {
       return Promise.resolve(null);
@@ -2157,9 +2172,16 @@ window.__bootBrowse = function() {
 
   // ── Render the celebration overlay ─────────────────────────────────
   function renderCelebration(opts) {
-    closeCelebration(true); // silent cleanup
+    closeCelebration(true);
     var stats = opts.stats || { notes: '–', highlights: '–', bookmarks: '–', tags: '–' };
     var demo = !!opts.demoMode;
+    var didAutoDl = !!opts.autoDownloaded;
+
+    var downloadIcon =
+      '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' +
+      '</svg>';
+
     var html =
       '<div class="jwc-backdrop" data-jwc-close></div>' +
       '<div class="jwc-card" role="dialog" aria-modal="true" aria-labelledby="jwc-title">' +
@@ -2175,8 +2197,16 @@ window.__bootBrowse = function() {
           '<div class="jwc-stat"><strong>' + stats.bookmarks + '</strong><span>' + esc(t('stat_bookmarks')) + '</span></div>' +
           '<div class="jwc-stat"><strong>' + stats.tags + '</strong><span>' + esc(t('stat_tags')) + '</span></div>' +
         '</div>' +
+        // Download status banner — informs the user the download started
+        '<div class="jwc-download-status" data-jwc-dl-status hidden>' +
+          '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +
+          '<span>' + esc(t('cele_downloading')) + '</span>' +
+        '</div>' +
         '<div class="jwc-actions">' +
-          '<button class="jwc-btn jwc-btn-primary" type="button" data-jwc-restore>' + esc(t('cele_restore')) + ' →</button>' +
+          '<button class="jwc-btn jwc-btn-primary" type="button" data-jwc-download>' +
+            downloadIcon + '<span data-jwc-dl-label>' + esc(t('cele_download')) + '</span>' +
+          '</button>' +
+          '<button class="jwc-btn jwc-btn-outline" type="button" data-jwc-restore>' + esc(t('cele_restore')) + ' →</button>' +
           '<button class="jwc-btn jwc-btn-secondary" type="button" data-jwc-browse>' + esc(t('cele_browse')) + '</button>' +
         '</div>' +
         (demo ?
@@ -2185,6 +2215,14 @@ window.__bootBrowse = function() {
             '<span>' + esc(t('cele_demo_body')) + '</span>' +
             '<button class="jwc-demo-btn" type="button" data-jwc-real>' + esc(t('cele_demo_cta')) + ' →</button>' +
           '</div>' : '') +
+        '<div class="jwc-donate">' +
+          '<a href="' + DONATE_URL + '" target="_blank" rel="noopener noreferrer" data-jwc-donate>' +
+            '<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true">' +
+              '<path d="M12 21s-7-4.35-7-10.5a4.5 4.5 0 0 1 7-3.72A4.5 4.5 0 0 1 19 10.5C19 16.65 12 21 12 21z"/>' +
+            '</svg>' +
+            '<span><strong>' + esc(t('donate_prompt')) + '</strong> ' + esc(t('donate_cta')) + ' →</span>' +
+          '</a>' +
+        '</div>' +
       '</div>';
 
     var ov = document.createElement('div');
@@ -2193,9 +2231,25 @@ window.__bootBrowse = function() {
     document.body.appendChild(ov);
     document.body.classList.add('jw-modal-open');
 
+    // Reflect auto-download status if it succeeded
+    if (didAutoDl) {
+      var status = ov.querySelector('[data-jwc-dl-status]');
+      if (status) status.hidden = false;
+      var label = ov.querySelector('[data-jwc-dl-label]');
+      if (label) label.textContent = t('cele_redownload');
+    }
+
     // Wire interactions
     ov.querySelectorAll('[data-jwc-close]').forEach(function (el) {
       el.addEventListener('click', function () { closeCelebration(); });
+    });
+    var dlBtn = ov.querySelector('[data-jwc-download]');
+    if (dlBtn) dlBtn.addEventListener('click', function () {
+      triggerDownload({ auto: false });
+      var status = ov.querySelector('[data-jwc-dl-status]');
+      if (status) status.hidden = false;
+      var label = ov.querySelector('[data-jwc-dl-label]');
+      if (label) label.textContent = t('cele_redownload');
     });
     var rBtn = ov.querySelector('[data-jwc-restore]');
     if (rBtn) rBtn.addEventListener('click', function () { fireAnalytics('post_merge_restore'); openRestoreGuide(); });
@@ -2203,9 +2257,11 @@ window.__bootBrowse = function() {
     if (bBtn) bBtn.addEventListener('click', function () { fireAnalytics('post_merge_browse'); browseMerged(); });
     var realBtn = ov.querySelector('[data-jwc-real]');
     if (realBtn) realBtn.addEventListener('click', function () { fireAnalytics('post_merge_use_real'); resetForRealFiles(); });
+    var donateLink = ov.querySelector('[data-jwc-donate]');
+    if (donateLink) donateLink.addEventListener('click', function () { fireAnalytics('post_merge_donate_click'); });
 
-    // Focus the primary button
-    if (rBtn) setTimeout(function () { try { rBtn.focus(); } catch (_) {} }, 50);
+    // Focus the primary (download) button
+    if (dlBtn) setTimeout(function () { try { dlBtn.focus(); } catch (_) {} }, 50);
     document.addEventListener('keydown', escListener);
   }
   function escListener(e) {
@@ -2221,7 +2277,6 @@ window.__bootBrowse = function() {
     if (!silent) fireAnalytics('post_merge_close');
   }
 
-  // ── Browse the merged result via the existing Note Explorer ────────
   function browseMerged() {
     var buf = cached && cached.buffer;
     if (!buf) return;
@@ -2233,7 +2288,6 @@ window.__bootBrowse = function() {
     });
   }
 
-  // ── Restore guide overlay ──────────────────────────────────────────
   function openRestoreGuide() {
     var current = detectPlatform();
     var html =
@@ -2277,9 +2331,7 @@ window.__bootBrowse = function() {
     });
   }
 
-  // ── Demo CTA: reset the app for real files ────────────────────────
   function resetForRealFiles() {
-    // Clear file pickers (React will re-render with empty state).
     var inputs = document.querySelectorAll('input[type="file"][accept=".jwlibrary"]');
     for (var i = 0; i < inputs.length; i++) {
       try {
@@ -2288,10 +2340,8 @@ window.__bootBrowse = function() {
       } catch (_) {}
     }
     closeCelebration(true);
-    // Scroll the main file picker into view so the next step is obvious.
     setTimeout(function () {
       var main = document.querySelector('input[type="file"][accept=".jwlibrary"]:not([multiple])');
-      // The visible label is usually a sibling; scroll the input's nearest "step" container.
       var node = main && (main.closest('[class*="step"]') || main.parentElement);
       if (node && node.scrollIntoView) {
         try { node.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (_) {}
@@ -2299,7 +2349,6 @@ window.__bootBrowse = function() {
     }, 120);
   }
 
-  // ── MutationObserver: detect when merge completes ─────────────────
   function checkAnchor(node) {
     if (!node || node.tagName !== 'A') return;
     if (node.getAttribute && node.getAttribute('download') === null) return;
@@ -2314,13 +2363,22 @@ window.__bootBrowse = function() {
     fireAnalytics(demoMode ? 'merge_complete_demo' : 'merge_complete_real');
     cached = { stats: null, buffer: null, demoMode: demoMode, name: readDownloadName(), blobUrl: blobUrl };
 
-    // Show the overlay immediately (with placeholder stats), then query the
-    // merged db in the background and refresh stats when ready.
-    renderCelebration({ stats: null, demoMode: demoMode });
+    // Try to auto-trigger the file download once per merge. Some browsers
+    // block programmatic downloads not initiated by a user gesture; the
+    // overlay always renders a manual Download button as the primary CTA
+    // so the user can complete the download with one click if the auto
+    // attempt was blocked.
+    var didAutoDl = false;
+    if (autoDownloadedFor !== blobUrl) {
+      autoDownloadedFor = blobUrl;
+      // Small delay so the overlay is in the DOM before download dialog
+      didAutoDl = triggerDownload({ auto: true });
+    }
+
+    renderCelebration({ stats: null, demoMode: demoMode, autoDownloaded: didAutoDl });
     fetchStats(blobUrl).then(function (stats) {
       if (!stats) return;
       cached.stats = stats;
-      // Update stats in place if the overlay is still open.
       var ov = document.getElementById('jw-celebrate-overlay');
       if (!ov) return;
       var statsEls = ov.querySelectorAll('.jwc-stat strong');
@@ -2334,8 +2392,6 @@ window.__bootBrowse = function() {
   }
 
   function init() {
-    // Scan once for any download anchor already present (returning visitor on a
-    // page that already has a merge result, e.g. via #app).
     var existing = document.querySelectorAll('a#download-btn[download]');
     for (var i = 0; i < existing.length; i++) {
       var href = existing[i].getAttribute('href') || '';
@@ -2345,7 +2401,6 @@ window.__bootBrowse = function() {
       for (var i = 0; i < muts.length; i++) {
         var m = muts[i];
         if (m.type === 'attributes' && m.target) checkAnchor(m.target);
-        // Newly added nodes (in case React mounts download anchors on render)
         for (var j = 0; j < (m.addedNodes ? m.addedNodes.length : 0); j++) {
           var n = m.addedNodes[j];
           if (n.nodeType !== 1) continue;

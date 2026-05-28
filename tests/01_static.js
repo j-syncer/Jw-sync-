@@ -250,6 +250,30 @@ for (const path of FILES) {
     else ok('beta/styles.css defines #jw-celebrate-overlay');
     if (!css.includes('#jw-restore-overlay')) fail('beta/styles.css missing #jw-restore-overlay rule');
     else ok('beta/styles.css defines #jw-restore-overlay');
+
+    // 14) v2.9.1: auto-download + manual download button + donate link
+    if (!c.includes('data-jwc-download')) fail('celebration missing Download button (data-jwc-download)');
+    else ok('celebration has Download button');
+    if (!c.includes('triggerDownload')) fail('celebration missing triggerDownload function (auto-download path)');
+    else ok('celebration auto-download path (triggerDownload) present');
+    if (!c.includes('autoDownloadedFor')) fail('celebration missing auto-download dedup guard');
+    else ok('celebration auto-download one-shot guard present');
+    if (!c.includes('paypal.com/paypalme/jwsync')) fail('donate link URL missing');
+    else ok('donate link URL present (PayPal)');
+    if (!c.includes('data-jwc-donate')) fail('donate link hook missing');
+    else ok('donate link has data-jwc-donate hook');
+    // Donate prompt/cta strings translated for all 10 langs
+    for (const lang of EXPECTED_LANGS) {
+      const re = new RegExp(`${lang}:\\s*\\{[^}]*donate_prompt:`);
+      if (!re.test(c)) fail(`donate i18n missing for ${lang}`);
+    }
+    ok('donate i18n present for all 10 languages');
+    if (!css.includes('.jwc-donate')) fail('beta/styles.css missing .jwc-donate rule');
+    else ok('beta/styles.css defines .jwc-donate');
+    if (!css.includes('.jwc-btn-outline')) fail('beta/styles.css missing .jwc-btn-outline (Restore button) rule');
+    else ok('beta/styles.css defines .jwc-btn-outline');
+    if (!css.includes('.jwc-download-status')) fail('beta/styles.css missing .jwc-download-status banner rule');
+    else ok('beta/styles.css defines .jwc-download-status banner');
   }
 }
 

@@ -4,6 +4,23 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.9.1] — 2026-05-28
+
+### Added
+- **Auto-download on merge complete.** When the celebration dialog opens, the merged `.jwlibrary` file now downloads automatically (one-shot per merge, deduped by blob URL). If the browser blocks the programmatic click (some popup-blocker setups do), the new **Download merged backup** button right at the top of the dialog completes the download with one tap.
+- **Re-download button** as the primary CTA — the user no longer has to scroll past the celebration to find the original React download link. A green "Your file is downloading…" confirmation banner appears once auto-download succeeds, and the button label switches to "Download again" so it's clear what a second click does.
+- **Donate link** in the celebration footer ("Found JW Sync useful? Support development →") pointing to `paypal.me/jwsync`. Subtle, opt-in, opens in a new tab. Translated in all 10 languages.
+
+### Changed
+- Button hierarchy in the celebration: **Download** (primary, filled orange) → **Restore to JW Library** (outline, also brand-coloured) → **Browse the merged result** (secondary, neutral outline). The previous layout buried the download.
+- `tests/05_post_merge.js`: 2 new scenarios verify the auto-download programmatically clicks `#download-btn` on merge complete + that it's correctly one-shot per merge.
+
+### Bumped
+- `softwareVersion` 2.9.0 → 2.9.1.
+- Service worker cache `jwsync-v22` → `jwsync-v23`.
+
+---
+
 ## [2.9.0] — 2026-05-28
 
 ### Added

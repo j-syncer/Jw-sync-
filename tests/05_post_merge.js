@@ -134,12 +134,27 @@ async function waitForOverlay(doc, id, timeoutMs) {
       if (stats.length === 4) ok('overlay shows 4 stat cells (notes / highlights / bookmarks / tags)');
       else fail('overlay has ' + stats.length + ' stat cells (expected 4)');
 
-      const primary = overlay.querySelector('.jwc-btn-primary');
-      const secondary = overlay.querySelector('.jwc-btn-secondary');
-      if (primary) ok('primary CTA "Restore to JW Library" present');
-      else fail('primary CTA missing');
-      if (secondary) ok('secondary CTA "Browse the merged result" present');
-      else fail('secondary CTA missing');
+      // v2.9.1 button hierarchy: Download (primary) > Restore (outline) > Browse (secondary)
+      const downloadBtn = overlay.querySelector('[data-jwc-download]');
+      const restoreBtn = overlay.querySelector('[data-jwc-restore]');
+      const browseBtn = overlay.querySelector('[data-jwc-browse]');
+      if (downloadBtn && downloadBtn.classList.contains('jwc-btn-primary')) ok('Download is the primary CTA');
+      else fail('Download primary CTA missing/wrong class');
+      if (restoreBtn && restoreBtn.classList.contains('jwc-btn-outline')) ok('Restore CTA present (outline)');
+      else fail('Restore outline CTA missing');
+      if (browseBtn && browseBtn.classList.contains('jwc-btn-secondary')) ok('Browse CTA present (secondary)');
+      else fail('Browse secondary CTA missing');
+
+      // v2.9.1 donate link
+      const donateLink = overlay.querySelector('[data-jwc-donate]');
+      if (donateLink && /paypal\.com\/paypalme\/jwsync/.test(donateLink.getAttribute('href') || '')) {
+        ok('donate link present pointing to PayPal');
+      } else { fail('donate link missing or wrong href'); }
+      if (donateLink && donateLink.getAttribute('rel') === 'noopener noreferrer') {
+        ok('donate link has rel="noopener noreferrer"');
+      } else { fail('donate link missing rel="noopener noreferrer"'); }
+      if (donateLink && donateLink.getAttribute('target') === '_blank') ok('donate link opens in new tab');
+      else fail('donate link missing target="_blank"');
 
       const demoCta = overlay.querySelector('.jwc-demo-cta');
       if (!demoCta) ok('real-file merge: no demo CTA shown (correct)');
@@ -182,7 +197,8 @@ async function waitForOverlay(doc, id, timeoutMs) {
     const cele = await waitForOverlay(doc, 'jw-celebrate-overlay');
     if (!cele) { fail('celebration overlay did not appear'); dom.window.close(); }
     else {
-      const restoreBtn = cele.querySelector('.jwc-btn-primary');
+      // Restore button is the outline-style CTA in v2.9.1 (Download is primary)
+      const restoreBtn = cele.querySelector('[data-jwc-restore]');
       restoreBtn.click();
       const guide = await waitForOverlay(doc, 'jw-restore-overlay');
       if (!guide) { fail('restore guide did not open'); dom.window.close(); }
@@ -274,6 +290,80 @@ async function waitForOverlay(doc, id, timeoutMs) {
 
       dom.window.close();
     }
+  }
+
+  section('Auto-download fires when merge completes (v2.9.1)');
+  {
+    const dom = makeDom();
+    const doc = dom.window.document;
+    await wait(80);
+    setupFakeFileInput(doc, 'MyRealBackup.jwlibrary');
+
+    // Pre-create the download anchor with a click spy
+    const a = doc.createElement('a');
+    a.id = 'download-btn';
+    a.setAttribute('download', 'merged.jwlibrary');
+    a.setAttribute('href', '');
+    a.textContent = 'Download';
+    let clickCount = 0;
+    a.addEventListener('click', function (e) { clickCount++; e.preventDefault(); });
+    doc.body.appendChild(a);
+
+    // Update href to a blob: URL — should trigger handleMergeComplete →
+    // which calls triggerDownload → which clicks the anchor.
+    await new Promise(r => setTimeout(() => { a.setAttribute('href', 'blob:https://jwsync.org/auto-download-test'); r(); }, 30));
+    await waitForOverlay(doc, 'jw-celebrate-overlay');
+    await wait(80);
+
+    if (clickCount >= 1) ok('auto-download programmatically clicked #download-btn (' + clickCount + 'x)');
+    else fail('auto-download did NOT click #download-btn');
+
+    // Download status banner should be visible
+    const overlay = doc.getElementById('jw-celebrate-overlay');
+    const status = overlay && overlay.querySelector('[data-jwc-dl-status]');
+    if (status && !status.hidden) ok('download-status banner shown after successful auto-download');
+    else fail('download-status banner not shown');
+
+    // Manual re-download via the button increments the click count
+    const dlBtn = overlay.querySelector('[data-jwc-download]');
+    const before = clickCount;
+    dlBtn.click();
+    await wait(40);
+    if (clickCount > before) ok('manual click on Download button fires anchor click again (' + (clickCount - before) + 'x)');
+    else fail('manual Download click did not re-trigger anchor');
+
+    dom.window.close();
+  }
+
+  section('Auto-download is one-shot per merge (no duplicate fires)');
+  {
+    const dom = makeDom();
+    const doc = dom.window.document;
+    await wait(80);
+    setupFakeFileInput(doc, 'MyRealBackup.jwlibrary');
+
+    const a = doc.createElement('a');
+    a.id = 'download-btn';
+    a.setAttribute('download', 'merged.jwlibrary');
+    a.setAttribute('href', '');
+    let autoClicks = 0;
+    a.addEventListener('click', function (e) { autoClicks++; e.preventDefault(); });
+    doc.body.appendChild(a);
+
+    await new Promise(r => setTimeout(() => { a.setAttribute('href', 'blob:https://jwsync.org/oneshot-test'); r(); }, 30));
+    await waitForOverlay(doc, 'jw-celebrate-overlay');
+    await wait(80);
+    const firstRunClicks = autoClicks;
+
+    // Close and re-trigger the SAME blob URL — should NOT fire auto-download again
+    doc.getElementById('jw-celebrate-overlay').querySelector('.jwc-close').click();
+    await wait(40);
+    a.setAttribute('href', 'blob:https://jwsync.org/oneshot-test');
+    await wait(120);
+    if (autoClicks === firstRunClicks) ok('same blob URL: auto-download did NOT re-fire (one-shot guard works)');
+    else fail('same blob URL: auto-download fired ' + (autoClicks - firstRunClicks) + 'x more (expected 0)');
+
+    dom.window.close();
   }
 
   section('SUMMARY');
