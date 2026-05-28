@@ -284,86 +284,12 @@
     schedule();
   }
 
-  // ── Sample data button ────────────────────────────────────────────────
-  // First-time visitors can click this to load two synthetic demo backups
-  // so they see the merge flow without uploading their own data.
-  /**
-   * Injects a fixed "Try with sample data" button for first-time visitors.
-   * Generates two synthetic .jwlibrary demo backups via buildDemoBackups()
-   * and injects them into the React file input. Hides itself after use.
-   */
-  function setupSampleDataButton() {
-    // Don't show if user has used the app already
-    try {
-      if (localStorage.getItem('jwsync_used_real_files') === '1') return;
-    } catch (e) {}
-
-    // Mark "used real files" the moment the user picks a real file
-    function markUsed() {
-      try { localStorage.setItem('jwsync_used_real_files', '1'); } catch (e) {}
-      if (btn && btn.parentNode) btn.remove();
-    }
-    document.addEventListener('change', function (e) {
-      if (e.target && e.target.matches && e.target.matches('input[type="file"][accept=".jwlibrary"]')) {
-        if (e.target.files && e.target.files.length && !e.target.files[0].name.startsWith('JWSync_Demo_')) {
-          markUsed();
-        }
-      }
-    }, true);
-
-    var btn = document.createElement('button');
-    btn.id = 'jw-sample-btn';
-    btn.type = 'button';
-    btn.style.cssText = 'position:fixed;bottom:18px;right:18px;z-index:30;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;border:none;border-radius:999px;padding:11px 18px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(124,58,237,0.4);display:inline-flex;align-items:center;gap:8px;font-family:system-ui,sans-serif;transition:transform 0.15s ease,box-shadow 0.15s ease';
-    btn.innerHTML = '✨ Try with sample data';
-    btn.onmouseenter = function () { btn.style.transform = 'translateY(-2px)'; btn.style.boxShadow = '0 10px 28px rgba(124,58,237,0.55)'; };
-    btn.onmouseleave = function () { btn.style.transform = ''; btn.style.boxShadow = '0 8px 24px rgba(124,58,237,0.4)'; };
-
-    btn.onclick = async function () {
-      btn.disabled = true;
-      btn.style.opacity = '0.6';
-      btn.innerHTML = '⏳ Generating demo data…';
-      try {
-        var files = await buildDemoBackups();
-        injectFilesIntoMainInput(files);
-        btn.remove();
-        showToast('Loaded two sample backups. Scroll down and tap Merge!');
-      } catch (err) {
-        console.error('Demo generation failed', err);
-        btn.disabled = false;
-        btn.style.opacity = '';
-        btn.innerHTML = '✨ Try with sample data';
-        showToast('Could not generate demo data: ' + err.message, true);
-      }
-    };
-
-    // Full Mode = the "Full" segment button carries the active class
-    function isFullMode() {
-      return !!document.querySelector('.mode-seg-full.mode-seg-on');
-    }
-    function syncBtnVisibility() {
-      if (btn.parentNode) btn.style.display = isFullMode() ? '' : 'none';
-    }
-
-    // Wait for app to be ready before showing button
-    var attempts = 0;
-    function tryAdd() {
-      // Show only when JSZip + SQL.js are available
-      if (typeof JSZip !== 'undefined' && typeof initSqlJs !== 'undefined' && document.querySelector('input[type="file"][accept=".jwlibrary"]')) {
-        document.body.appendChild(btn);
-        syncBtnVisibility();
-        // Re-check visibility whenever the mode toggle is clicked
-        document.addEventListener('click', function (e) {
-          if (e.target && e.target.closest && e.target.closest('.mode-seg-btn')) {
-            setTimeout(syncBtnVisibility, 50);
-          }
-        });
-        return;
-      }
-      if (++attempts < 50) setTimeout(tryAdd, 300);
-    }
-    setTimeout(tryAdd, 1500);
-  }
+  // ── Sample data button — superseded by the inline "Try Demo" merge flow ──
+  // The merge demo now lives in index.html as part of the persistent
+  // "Try Demo" buttons (data-demo-trigger). The helpers below are exposed
+  // as window.__jwBuildDemoBackups + window.__jwInjectFiles so the inline
+  // handler can drive a real two-file merge.
+  function setupSampleDataButton() { /* deprecated; kept as no-op for safety */ }
 
   /**
    * Build two synthetic .jwlibrary backup files in-memory using the same
@@ -598,6 +524,64 @@
     setupBackupTimeline();
     setupSampleDataButton();
   }
+
+  // ── Public API for the inline merge-demo handler ─────────────────────
+  // The inline "Try Demo" handler in index.html needs to (1) build two
+  // synthetic .jwlibrary backups and (2) inject them into the React file
+  // pickers separately (main + secondary). Expose helpers here.
+  window.__jwBuildDemoBackups = buildDemoBackups;
+  window.__jwInjectFiles = injectFilesIntoMainInput; // legacy single-input helper
+
+  /**
+   * Inject two synthetic backups into the React file pickers:
+   * file1 → main file input, then wait for the secondary picker to become
+   * enabled, then file2 → secondary file input.
+   *
+   * Resolves to true on success, false if the inputs never appear/enable
+   * within the timeout. Works in both Simple Mode and Full Mode because the
+   * selectors target whichever pickers are currently active (non-disabled).
+   */
+  window.__jwInjectMergeDemo = function (file1, file2) {
+    return new Promise(function (resolve) {
+      function pollFor(selector, cb, timeoutMs) {
+        var start = Date.now();
+        (function loop() {
+          var el = document.querySelector(selector);
+          if (el) return cb(el);
+          if (Date.now() - start > timeoutMs) return cb(null);
+          setTimeout(loop, 80);
+        })();
+      }
+      function injectInto(input, file) {
+        try {
+          var dt = new DataTransfer();
+          dt.items.add(file);
+          input.files = dt.files;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+          return true;
+        } catch (e) { console.error('[jwsync] demo inject failed', e); return false; }
+      }
+
+      pollFor(
+        'input[type="file"][accept=".jwlibrary"]:not([multiple]):not([disabled])',
+        function (mainInput) {
+          if (!mainInput) return resolve(false);
+          if (!injectInto(mainInput, file1)) return resolve(false);
+
+          pollFor(
+            'input[type="file"][accept=".jwlibrary"][multiple]:not([disabled])',
+            function (secondaryInput) {
+              if (!secondaryInput) return resolve(false);
+              injectInto(secondaryInput, file2);
+              resolve(true);
+            },
+            8000
+          );
+        },
+        8000
+      );
+    });
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
