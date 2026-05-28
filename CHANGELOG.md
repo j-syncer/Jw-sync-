@@ -4,6 +4,25 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.10.0] — 2026-05-28
+
+### Changed
+- **Main React app bundle extracted to `beta/js/app.js`** (code splitting). Previously, the entire ~241 KB minified app was inlined inside `beta/index.html` and downloaded by every visitor — including bouncers who never clicked anything past the hero. v2.10.0 moves the bundle to its own file and treats it as one more lazy dependency the boot loader fetches alongside React + sql.js + JSZip. **`beta/index.html` shrinks from 397 KB to 158 KB** (a 60% drop).
+- The boot loader's `bootApp()` now does `Promise.all([loadReact(), loadStorage(), loadAppBundle()])`. `loadAppBundle()` injects `<script src="js/app.js">` on demand and resolves on `onload`.
+- Hover/idle prefetch (`prefetchAll`) adds a `<link rel="prefetch" as="script" href="js/app.js">` hint alongside the CDN scripts, so a visitor hovering "Launch App" pre-warms the app bundle.
+- **First-time landing visitors do NOT download `js/app.js`** — the win this commit is named after. Verified by a new `04_lazy_load.js` scenario.
+
+### Bumped
+- `softwareVersion` 2.9.1 → 2.10.0.
+- Service worker cache `jwsync-v23` → `jwsync-v24`. (Same-origin scripts go through `staleWhileRevalidate`, so `js/app.js` gets its own cache entry separate from `index.html`. HTML copy tweaks no longer invalidate the JS bundle, and JS updates no longer re-download the HTML.)
+
+### Tests
+- `01_static.js` — new `bundleSrc` resolution: read TRANSLATIONS + parse the main bundle from `beta/js/app.js` when it exists, fall back to the inline `<script>` block otherwise (so production, which hasn't been mirrored yet, still passes). Added 7 new assertions for the extraction (bundle not inline in HTML, `js/app.js` exists with `__bootApp` wrapper, boot loader has `loadAppBundle`, `js/app.js` in prefetch list and NOT in `<head>`, `Promise.all` chain awaits it).
+- `03_regression.js` — merge anchors (`ja=async e=>`, `className:"modal-close"`, `Preview Merge`, etc.) now searched across both `beta/index.html` and `beta/js/app.js`.
+- `04_lazy_load.js` — 4 new assertions covering the lazy-load chain for `js/app.js`: fetched on returning-visitor boot, NOT fetched on first-time landing, fetched on demo click, fetched on `#app` hashchange, and prefetched on hover.
+
+---
+
 ## [2.9.1] — 2026-05-28
 
 ### Added

@@ -31,17 +31,31 @@ for (const path of FILES) {
   section(path);
   const c = fs.readFileSync(path, 'utf8');
 
-  // 1) Main React script parses
-  const ti = c.indexOf('TRANSLATIONS=');
-  const ss = c.lastIndexOf('<script', ti);
-  const so = c.indexOf('>', ss) + 1;
-  const se = c.indexOf('</script>', so);
+  // v2.10.0: main app bundle may be extracted to js/app.js (beta) or still
+  // inline (production until go-live). Resolve the source either way.
+  const isBeta = path.endsWith('beta/index.html') || path.endsWith('beta\\index.html');
+  const appJsPath = path.replace(/index\.html$/, 'js/app.js');
+  let bundleSrc, bundleSource;
+  if (fs.existsSync(appJsPath) && fs.readFileSync(appJsPath, 'utf8').includes('TRANSLATIONS=')) {
+    bundleSrc = fs.readFileSync(appJsPath, 'utf8');
+    bundleSource = 'external: ' + appJsPath;
+  } else {
+    const ti0 = c.indexOf('TRANSLATIONS=');
+    if (ti0 < 0) { fail('TRANSLATIONS not in HTML nor in ' + appJsPath); continue; }
+    const ss = c.lastIndexOf('<script', ti0);
+    const so = c.indexOf('>', ss) + 1;
+    const se = c.indexOf('</script>', so);
+    bundleSrc = c.slice(so, se);
+    bundleSource = 'inline <script> in ' + path;
+  }
+
+  // 1) Main React bundle parses
   try {
-    new Function(c.slice(so, se));
-    ok('main app <script> parses');
+    new Function(bundleSrc);
+    ok('main app bundle parses (' + bundleSrc.length + ' bytes, ' + bundleSource + ')');
   } catch (e) { fail('main app parse failed: ' + e.message); }
 
-  // 2) Browse module parses
+  // 2) Browse module parses (still inline in both files)
   const m = c.match(/<!-- ── Note Explorer \(Browse\) ─[\s\S]*?<\/script>\s*<!-- ── End Note Explorer/);
   if (!m) { fail('Browse block missing'); continue; }
   const sm = m[0].match(/<script>([\s\S]*?)<\/script>/);
@@ -53,18 +67,18 @@ for (const path of FILES) {
   } catch (e) { fail('Browse parse failed: ' + e.message); continue; }
 
   // 3) TRANSLATIONS object parses and has all langs + required keys
+  const ti = bundleSrc.indexOf('TRANSLATIONS=');
   let d = 0, e2 = ti + 13;
-  for (let i = ti + 13; i < c.length; i++) {
-    if (c[i] === '{') d++;
-    else if (c[i] === '}') { d--; if (d === 0) { e2 = i + 1; break; } }
+  for (let i = ti + 13; i < bundleSrc.length; i++) {
+    if (bundleSrc[i] === '{') d++;
+    else if (bundleSrc[i] === '}') { d--; if (d === 0) { e2 = i + 1; break; } }
   }
   let trans;
   try {
-    trans = eval('(' + c.slice(ti + 13, e2) + ')');
+    trans = eval('(' + bundleSrc.slice(ti + 13, e2) + ')');
     ok('TRANSLATIONS parses');
   } catch (e) { fail('TRANSLATIONS parse failed: ' + e.message); continue; }
 
-  const isBeta = path.endsWith('beta/index.html') || path.endsWith('beta\\index.html');
   for (const lang of EXPECTED_LANGS) {
     if (!trans[lang]) { fail('missing language: ' + lang); continue; }
     for (const key of REQUIRED_I18N_KEYS) {
@@ -112,20 +126,22 @@ for (const path of FILES) {
   if (missingCss.length) fail('CSS classes missing: ' + missingCss.join(','));
   else ok('All ' + CRITICAL_CLASSES.length + ' critical CSS classes are defined');
 
-  // 6) Browse entry hook exposed
-  if (!c.includes('window.__openJwBrowse')) fail('window.__openJwBrowse not exposed');
+  // 6) Browse entry hook exposed (these live in the Browse module inline
+  // and in the main app bundle — search both)
+  const allSrc = c + '\n' + bundleSrc;
+  if (!allSrc.includes('window.__openJwBrowse')) fail('window.__openJwBrowse not exposed');
   else ok('window.__openJwBrowse exposed');
-  if (!c.includes('window.__jwLastFile=e')) fail('window.__jwLastFile not set in ja()');
+  if (!allSrc.includes('window.__jwLastFile=e')) fail('window.__jwLastFile not set in ja()');
   else ok('window.__jwLastFile assignment present in ja()');
 
   // 7) Upsell + CTA in markup
-  if (!c.includes('Note Explorer ✨')) fail('upsell item missing');
+  if (!allSrc.includes('Note Explorer ✨')) fail('upsell item missing');
   else ok('Upsell "Note Explorer ✨" present');
-  if (!c.includes('jb-cta-card') || !c.includes('jb-cta-btn')) fail('CTA card markup missing');
+  if (!allSrc.includes('jb-cta-card') || !allSrc.includes('jb-cta-btn')) fail('CTA card markup missing');
   else ok('CTA card markup present');
 
   // 8) Insights modal has the trigger button
-  if (!c.includes('jb-browse-open-btn')) fail('Insights trigger button missing');
+  if (!allSrc.includes('jb-browse-open-btn')) fail('Insights trigger button missing');
   else ok('Insights "Browse notes" button present');
 
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
@@ -154,9 +170,10 @@ for (const path of FILES) {
     //   - Simple Mode teaser (next to "Explore Full Mode →")
     if (!c.includes('class="site-nav-link site-nav-demo"')) fail('static nav demo button missing');
     else ok('static #site-nav demo button present');
-    if (!c.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
+    // These render inside the React bundle (now external for beta)
+    if (!allSrc.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
     else ok('React internal nav demo button present');
-    if (!c.includes('simple-mode-teaser-btn-demo')) fail('Simple Mode teaser demo button missing');
+    if (!allSrc.includes('simple-mode-teaser-btn-demo')) fail('Simple Mode teaser demo button missing');
     else ok('Simple Mode teaser demo button present');
     if (!c.includes('window.__jwOpenDemo')) fail('window.__jwOpenDemo not exposed');
     else ok('window.__jwOpenDemo exposed for React buttons');
@@ -200,6 +217,41 @@ for (const path of FILES) {
     else ok('prefetch logic present (hover / idle)');
     if (!c.includes('jw-demo-loading')) fail('demo loading state CSS class missing');
     else ok('jw-demo-loading state class referenced');
+
+    // v2.10.0: main app bundle is now external (beta only). Verify:
+    //   - the inline <script> body that used to hold the bundle is gone
+    //   - js/app.js exists and contains the bundle opener + boot wrapper
+    //   - the boot loader has loadAppBundle()
+    //   - js/app.js is in the prefetch list
+    //   - js/app.js is NOT eagerly loaded via <script src> in <head>
+    if (c.includes('var Ka=Object.defineProperty')) {
+      fail('main app bundle still inline in HTML (extraction did not happen)');
+    } else {
+      ok('main app bundle NOT inline in beta/index.html (extracted)');
+    }
+    if (!fs.existsSync(appJsPath)) fail('beta/js/app.js does not exist');
+    else {
+      const app = fs.readFileSync(appJsPath, 'utf8');
+      if (app.includes('window.__bootApp = function()') && app.includes('var Ka=Object.defineProperty')) {
+        ok('beta/js/app.js exists, contains the bundle and __bootApp wrapper');
+      } else {
+        fail('beta/js/app.js missing __bootApp wrapper or bundle opener');
+      }
+    }
+    if (!c.includes('function loadAppBundle()')) fail('boot loader missing loadAppBundle()');
+    else ok('boot loader has loadAppBundle()');
+    if (!c.includes("'js/app.js'") && !c.includes('"js/app.js"')) fail('boot loader does not reference js/app.js');
+    else ok('boot loader references js/app.js');
+    if (!c.includes("appLink.href = 'js/app.js'") && !c.includes('appLink.href = "js/app.js"')) {
+      fail('js/app.js not in the hover/idle prefetch list');
+    } else { ok('js/app.js is in the prefetch list'); }
+    if (/<script[^>]*src=["']js\/app\.js["']/.test(c.slice(0, c.indexOf('</head>')))) {
+      fail('js/app.js eagerly loaded via <script src> in <head>');
+    } else { ok('js/app.js NOT eagerly loaded in <head>'); }
+    // The Promise.all chain must include loadAppBundle so the boot waits for it
+    if (!/Promise\.all\(\[loadReact\(\), loadStorage\(\), loadAppBundle\(\)\]\)/.test(c)) {
+      fail('bootApp Promise.all does not include loadAppBundle()');
+    } else { ok('bootApp awaits loadAppBundle alongside React + storage'); }
 
     // 11) v2.8.0 enhancements.js must expose builder + injector for the merge demo
     const enhPath = REPO + '/beta/js/enhancements.js';

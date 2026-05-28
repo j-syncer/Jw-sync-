@@ -83,9 +83,14 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     dom.window.__bootApp = function() { spy.bootApp++; };
     dom.window.__bootBrowse = function() { spy.bootBrowse++; };
 
-    if (typeof realBootApp === 'function') ok('main app wrapped: __bootApp defined');
-    else fail('__bootApp not defined after script parse');
-    if (typeof realBootBrowse === 'function') ok('Browse module wrapped: __bootBrowse defined');
+    // v2.10.0: __bootApp is now defined by the EXTERNAL js/app.js, so it is
+    // NOT present at HTML-parse time. (That's the win — landing visitors
+    // don't download the bundle.) The boot loader will set it later when
+    // js/app.js arrives. Browse module is still inline, so __bootBrowse IS
+    // present at parse time.
+    if (typeof realBootApp === 'undefined') ok('main app extracted: __bootApp NOT inline (v2.10.0)');
+    else fail('__bootApp was inline at parse time — extraction did not happen');
+    if (typeof realBootBrowse === 'function') ok('Browse module wrapped inline: __bootBrowse defined');
     else fail('__bootBrowse not defined after script parse');
     if (typeof dom.window.__jwBootApp === 'function') ok('boot loader exposed __jwBootApp');
     else fail('__jwBootApp not exposed');
@@ -97,13 +102,17 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     const cdn = requested.filter(u => u.includes('cdnjs.cloudflare.com'));
     if (cdn.length >= 4) ok('returning-visitor empty-hash: boot loader triggered ' + cdn.length + ' CDN script loads');
     else fail('returning-visitor empty-hash: only ' + cdn.length + ' CDN scripts (expected ≥4)');
+    // v2.10.0: js/app.js is now a same-origin lazy dependency
+    const appBundle = requested.filter(u => /js\/app\.js$/.test(u));
+    if (appBundle.length >= 1) ok('returning-visitor: js/app.js fetched lazily (' + appBundle.length + 'x)');
+    else fail('returning-visitor: js/app.js NOT fetched (' + JSON.stringify(requested) + ')');
     if (spy.bootApp >= 1) ok('__bootApp invoked after CDN scripts loaded');
     else fail('__bootApp not invoked');
 
     dom.window.close();
   }
 
-  section('First-time visitor on empty hash → no app boot, no CDN');
+  section('First-time visitor on empty hash → no app boot, no CDN, no js/app.js (v2.10.0)');
   {
     const { dom, requested } = makeDom({ seeded: {} });
     const spy = { bootApp: 0 };
@@ -113,6 +122,10 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     const cdn = requested.filter(u => u.includes('cdnjs.cloudflare.com'));
     if (cdn.length === 0) ok('first-time landing: NO CDN scripts requested');
     else fail('first-time landing: ' + cdn.length + ' CDN scripts requested unexpectedly');
+    // v2.10.0 keystone assertion: bouncer must NOT pay for the app bundle
+    const appBundle = requested.filter(u => /js\/app\.js$/.test(u));
+    if (appBundle.length === 0) ok('first-time landing: NO js/app.js requested (code-split win)');
+    else fail('first-time landing leaked js/app.js: ' + appBundle.length + 'x');
     if (spy.bootApp === 0) ok('__bootApp NOT invoked on landing');
     else fail('__bootApp invoked ' + spy.bootApp + ' times on landing');
 
@@ -165,6 +178,11 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
       if (react.length >= 2) ok('demo click loads React + ReactDOM (required for merge UI)');
       else fail('demo click missing React (got ' + react.length + ' react scripts)');
 
+      // v2.10.0: demo click also pulls the extracted app bundle
+      const appBundle = requested.filter(u => /js\/app\.js$/.test(u));
+      if (appBundle.length >= 1) ok('demo click also loads js/app.js (' + appBundle.length + 'x)');
+      else fail('demo click missing js/app.js');
+
       if (spy.bootApp >= 1) ok('__bootApp invoked by demo click (drives the merge UI)');
       else fail('__bootApp NOT invoked by demo click');
 
@@ -187,6 +205,10 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     const cdn = requested.filter(u => u.includes('cdnjs.cloudflare.com'));
     if (cdn.length >= 4) ok('hashchange #app: full CDN bundle loaded (' + cdn.length + ' scripts)');
     else fail('hashchange #app: only ' + cdn.length + ' CDN scripts (expected ≥4)');
+    // v2.10.0: js/app.js is part of the boot
+    const appBundle = requested.filter(u => /js\/app\.js$/.test(u));
+    if (appBundle.length >= 1) ok('hashchange #app: js/app.js fetched lazily');
+    else fail('hashchange #app: js/app.js NOT fetched');
     if (spy.bootApp >= 1) ok('__bootApp invoked after hashchange #app');
     else fail('__bootApp not invoked on #app');
 
@@ -206,6 +228,10 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
       const cdn = prefetched.filter(u => u.includes('cdnjs.cloudflare.com'));
       if (cdn.length >= 4) ok('hover prefetch: ' + cdn.length + ' CDN scripts hinted');
       else fail('hover prefetch only emitted ' + cdn.length + ' hints (expected ≥4)');
+      // v2.10.0: js/app.js prefetch hint
+      const appPrefetch = prefetched.filter(u => /js\/app\.js$/.test(u));
+      if (appPrefetch.length >= 1) ok('hover prefetch: js/app.js also hinted');
+      else fail('hover prefetch missing js/app.js');
     }
     dom.window.close();
   }

@@ -24,7 +24,12 @@ if (fs.existsSync(rootWorkerPath)) {
 }
 
 section('Critical merge anchors still present in beta');
+// v2.10.0: the main app bundle is now extracted to beta/js/app.js. The merge
+// anchors moved with it. Search both the HTML and the app bundle.
 const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+const betaAppPath = REPO + '/beta/js/app.js';
+const betaApp = fs.existsSync(betaAppPath) ? fs.readFileSync(betaAppPath, 'utf8') : '';
+const betaAll = beta + '\n' + betaApp;
 const MERGE_ANCHORS = [
   // The async file loader and Insights state setter
   'ja=async e=>{if(!M||!e)return;',
@@ -40,7 +45,7 @@ const MERGE_ANCHORS = [
   'merge-worker.js',
 ];
 for (const a of MERGE_ANCHORS) {
-  const n = beta.split(a).length - 1;
+  const n = betaAll.split(a).length - 1;
   if (n >= 1) ok(`anchor present: "${a.slice(0,40)}" (${n}x)`);
   else fail(`anchor missing: "${a.slice(0,40)}"`);
 }
