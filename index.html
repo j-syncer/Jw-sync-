@@ -29,7 +29,7 @@
     window.shortFn=function(n){return n&&n.length>10?"\u2026"+n.slice(-10):n||"";};
     </script>
                         <link rel="stylesheet" href="styles.css">
-    <script>(function(){var h=location.hash,s=!!localStorage.getItem('jwsync_lp_seen');if(h==='#home'||(h===''&&!s))document.documentElement.setAttribute('data-view','landing');}());</script>
+    <script>(function(){var h=location.hash;if(h==='#home'||h==='')document.documentElement.setAttribute('data-view','landing');}());</script>
 <!-- ── Lazy boot loader (v2.7.0) ───────────────────────── -->
 <script>
 (function() {
@@ -144,10 +144,7 @@
   }
   function shouldBootAppNow() {
     var h = location.hash;
-    var seen = false;
-    try { seen = !!localStorage.getItem('jwsync_lp_seen'); } catch(_) {}
-    if (h === '#home') return false;
-    if (h === '' && !seen) return false;
+    if (h === '#home' || h === '') return false;
     return true;
   }
   function onHash() { if (shouldBootAppNow()) bootApp(); }
