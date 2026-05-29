@@ -67,6 +67,8 @@
     .jww-sy-tab{flex-shrink:0;padding:6px 14px;border-radius:999px;border:1px solid rgba(71,85,105,.4);background:rgba(11,20,36,.6);color:#94a3b8;font-size:13px;font-weight:500;cursor:pointer;transition:color .15s,border-color .15s,background .15s;white-space:nowrap;font-family:inherit}
     .jww-sy-tab:hover{color:#f1f5f9;border-color:rgba(255,255,255,.15)}
     .jww-sy-tab.jww-sy-active{color:#fb923c;border-color:rgba(234,88,12,.5);background:rgba(234,88,12,.1)}
+    .jww-sy-tabs-inline{display:flex;gap:5px;flex-wrap:wrap;padding:0 0 14px;margin-top:2px}
+    .jww-sy-tabs-inline .jww-sy-tab{font-size:12px;padding:4px 10px}
 
     /* ── delta badges ── */
     .jww-delta-up{font-size:11px;font-weight:700;color:#4ade80;margin-left:7px;letter-spacing:-.2px}
@@ -433,10 +435,10 @@
     }
 
     // ── service year tab bar ──
-    function tabBarHtml(meta) {
+    function tabBarHtml(meta, extraClass) {
       var syList = (meta && meta.syList) || [];
       if (!syList.length) return '';
-      var html = '<div class="jww-sy-tabs">';
+      var html = '<div class="jww-sy-tabs' + (extraClass ? ' ' + extraClass : '') + '">';
       html += '<button class="jww-sy-tab' + (meta.activeSY === null ? ' jww-sy-active' : '') + '" data-sy="all">' + esc(t('all_time')) + '</button>';
       syList.forEach(function (yr) {
         html += '<button class="jww-sy-tab' + (meta.activeSY === yr ? ' jww-sy-active' : '') + '" data-sy="' + yr + '">' + esc(syLabel(yr) + ' ' + t('service_yr')) + '</button>';
@@ -522,6 +524,9 @@
       // activity by year
       if (s.years.length) {
         html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.chart + esc(t('timeline')) + '</h3>';
+        if (tabsMeta.syList && tabsMeta.syList.length) {
+          html += tabBarHtml(tabsMeta, 'jww-sy-tabs-inline');
+        }
         var ys = s.years.slice(-10);
         html += '<div class="jww-vbars">';
         ys.forEach(function (y, i) {
