@@ -231,7 +231,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.10.0",
+      "softwareVersion": "2.11.0",
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
     }
     </script>
@@ -303,6 +303,11 @@
           <div class="landing-feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M12 10h4"/><path d="M12 14h4"/><path d="M9 10h.01"/><path d="M9 14h.01"/></svg></div>
           <h3 data-i18n="feat_browse_title">Browse &amp; edit notes</h3>
           <p data-i18n="feat_browse_desc">Search your entire library, edit notes, manage tags, change highlight colours, then download the updated backup.</p>
+        </div>
+        <div class="landing-feat">
+          <div class="landing-feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3 data-i18n="feat_review_title">Review before you download</h3>
+          <p data-i18n="feat_review_desc">See exactly which notes were edited on more than one device and choose which version wins — full transparency, no black box.</p>
         </div>
       </div>
     </section>
@@ -1973,6 +1978,422 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End Demo handler ─────────────────────────────────── -->
+<!-- ── Merge Conflict Reviewer (v2.11.0) ──────────────────── -->
+<style>
+#jw-conflict-overlay{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:16px;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.jcr-backdrop{position:absolute;inset:0;background:rgba(4,15,34,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.jcr-card{position:relative;width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;background:#0b1424;border:1px solid rgba(71,85,105,.45);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.55);color:#e2e8f0;overflow:hidden}
+.jcr-close{position:absolute;top:12px;right:14px;width:32px;height:32px;border:none;border-radius:9px;background:rgba(71,85,105,.35);color:#cbd5e1;font-size:20px;line-height:1;cursor:pointer;transition:background .15s}
+.jcr-close:hover{background:rgba(71,85,105,.6)}
+.jcr-head{display:flex;gap:14px;align-items:flex-start;padding:22px 24px 16px;border-bottom:1px solid rgba(71,85,105,.3)}
+.jcr-icon{flex:none;width:42px;height:42px;border-radius:11px;background:rgba(234,88,12,.14);border:1px solid rgba(234,88,12,.4);color:#fb923c;display:flex;align-items:center;justify-content:center}
+.jcr-title{margin:0;font-size:19px;font-weight:800;color:#f8fafc;letter-spacing:-.01em}
+.jcr-subtitle{margin:5px 0 0;font-size:13.5px;line-height:1.5;color:#94a3b8;max-width:60ch}
+.jcr-body{padding:8px 24px 4px;overflow-y:auto;flex:1 1 auto}
+.jcr-conflict{padding:18px 0;border-bottom:1px solid rgba(71,85,105,.22)}
+.jcr-conflict:last-child{border-bottom:none}
+.jcr-conflict-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.jcr-conflict-n{flex:none;width:22px;height:22px;border-radius:6px;background:rgba(71,85,105,.4);color:#cbd5e1;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.jcr-conflict-title{font-size:14.5px;font-weight:700;color:#f1f5f9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jcr-versions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.jcr-ver{display:flex;flex-direction:column;border:1.5px solid rgba(71,85,105,.4);border-radius:13px;background:rgba(15,23,42,.5);overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.jcr-ver.sel{border-color:#ea580c;box-shadow:0 0 0 3px rgba(234,88,12,.16)}
+.jcr-ver-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 8px}
+.jcr-ver-from{font-size:11.5px;font-weight:700;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.jcr-ver-from:before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#64748b}
+.jcr-ver-current{flex:none;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#7dd3fc;background:rgba(29,78,216,.22);border:1px solid rgba(56,189,248,.4);border-radius:5px;padding:2px 6px}
+.jcr-ver-date{padding:0 12px 6px;font-size:11px;color:#64748b}
+.jcr-ver-body{padding:0 12px 12px;font-size:12.5px;line-height:1.55;color:#cbd5e1;white-space:pre-wrap;word-break:break-word;max-height:200px;overflow-y:auto;flex:1 1 auto}
+.jcr-ver-body .jcr-ins{background:rgba(5,150,105,.28);color:#6ee7b7;border-radius:3px;padding:0 1px;text-decoration:none}
+.jcr-ver-body .jcr-del{background:rgba(190,18,60,.22);color:#fda4af;border-radius:3px;padding:0 1px;text-decoration:line-through}
+.jcr-empty{color:#475569;font-style:italic}
+.jcr-ver-pick{margin:auto 10px 10px;padding:7px 10px;border:1px solid rgba(71,85,105,.5);border-radius:8px;background:rgba(71,85,105,.22);color:#e2e8f0;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .15s,border-color .15s}
+.jcr-ver-pick:hover{background:rgba(71,85,105,.4)}
+.jcr-ver.sel .jcr-ver-pick{background:#059669;border-color:#059669;color:#fff}
+.jcr-both-row{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.jcr-both-btn{padding:6px 12px;border:1px dashed rgba(148,163,184,.5);border-radius:8px;background:transparent;color:#cbd5e1;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s}
+.jcr-both-btn:hover{border-color:#94a3b8;color:#f1f5f9}
+.jcr-both-btn.on{background:rgba(5,150,105,.18);border-style:solid;border-color:#059669;color:#6ee7b7}
+.jcr-both-hint{font-size:11.5px;color:#64748b}
+.jcr-more{padding:10px 24px;font-size:12px;color:#94a3b8;background:rgba(15,23,42,.4)}
+.jcr-foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid rgba(71,85,105,.3);background:rgba(11,20,36,.85)}
+.jcr-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid transparent;transition:background .15s,opacity .15s}
+.jcr-btn-ghost{background:transparent;border-color:rgba(71,85,105,.5);color:#cbd5e1}
+.jcr-btn-ghost:hover{background:rgba(71,85,105,.25)}
+.jcr-btn-primary{background:#ea580c;color:#fff;box-shadow:0 1px 5px rgba(234,88,12,.35)}
+.jcr-btn-primary:hover{background:#c2410c}
+.jcr-btn-primary:disabled{opacity:.6;cursor:default}
+@media (max-width:560px){.jcr-head{padding:18px 18px 14px}.jcr-body{padding:6px 16px}.jcr-foot{padding:14px 16px}.jcr-versions{grid-template-columns:1fr}}
+</style>
+<script>
+(function () {
+  'use strict';
+
+  var SQLJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
+
+  var I18N = {
+    en: { title:"Review your merge", subtitle:"{n} notes were edited differently across your backups. Choose which version to keep — or keep both.", current:"In your merge", keep_this:"Keep this", kept:"✓ Kept", keep_both:"Keep both", keep_both_on:"✓ Keeping both", keep_both_hint:"Adds the other version as a separate note", modified:"Edited", apply:"Apply & download", applying:"Applying…", skip:"Keep merge as-is", close:"Close", untitled:"(untitled note)", empty:"(empty)", more:"+{n} more conflicts will keep the merge's automatic choice.", merged_label:"Merged result" },
+    es: { title:"Revisa tu fusión", subtitle:"{n} notas se editaron de forma diferente en tus copias. Elige qué versión conservar — o conserva ambas.", current:"En tu fusión", keep_this:"Conservar esta", kept:"✓ Conservada", keep_both:"Conservar ambas", keep_both_on:"✓ Conservando ambas", keep_both_hint:"Añade la otra versión como una nota aparte", modified:"Editada", apply:"Aplicar y descargar", applying:"Aplicando…", skip:"Dejar la fusión como está", close:"Cerrar", untitled:"(nota sin título)", empty:"(vacío)", more:"+{n} conflictos más mantendrán la elección automática de la fusión.", merged_label:"Resultado de la fusión" },
+    pt: { title:"Revise sua mesclagem", subtitle:"{n} notas foram editadas de forma diferente nos seus backups. Escolha qual versão manter — ou mantenha ambas.", current:"Na sua mesclagem", keep_this:"Manter esta", kept:"✓ Mantida", keep_both:"Manter ambas", keep_both_on:"✓ Mantendo ambas", keep_both_hint:"Adiciona a outra versão como uma nota separada", modified:"Editada", apply:"Aplicar e baixar", applying:"Aplicando…", skip:"Manter a mesclagem como está", close:"Fechar", untitled:"(nota sem título)", empty:"(vazio)", more:"+{n} conflitos manterão a escolha automática da mesclagem.", merged_label:"Resultado da mesclagem" },
+    fr: { title:"Vérifiez votre fusion", subtitle:"{n} notes ont été modifiées différemment dans vos sauvegardes. Choisissez la version à conserver — ou gardez les deux.", current:"Dans votre fusion", keep_this:"Garder celle-ci", kept:"✓ Conservée", keep_both:"Garder les deux", keep_both_on:"✓ Les deux conservées", keep_both_hint:"Ajoute l'autre version comme note distincte", modified:"Modifiée", apply:"Appliquer et télécharger", applying:"Application…", skip:"Laisser la fusion telle quelle", close:"Fermer", untitled:"(note sans titre)", empty:"(vide)", more:"+{n} autres conflits conserveront le choix automatique de la fusion.", merged_label:"Résultat de la fusion" },
+    de: { title:"Prüfe deine Zusammenführung", subtitle:"{n} Notizen wurden in deinen Backups unterschiedlich bearbeitet. Wähle, welche Version bleibt — oder behalte beide.", current:"In deiner Zusammenführung", keep_this:"Diese behalten", kept:"✓ Behalten", keep_both:"Beide behalten", keep_both_on:"✓ Beide behalten", keep_both_hint:"Fügt die andere Version als separate Notiz hinzu", modified:"Bearbeitet", apply:"Anwenden & herunterladen", applying:"Wird angewendet…", skip:"Zusammenführung unverändert lassen", close:"Schließen", untitled:"(Notiz ohne Titel)", empty:"(leer)", more:"+{n} weitere Konflikte behalten die automatische Auswahl der Zusammenführung.", merged_label:"Ergebnis der Zusammenführung" },
+    it: { title:"Controlla la tua unione", subtitle:"{n} note sono state modificate in modo diverso nei tuoi backup. Scegli quale versione mantenere — o tienile entrambe.", current:"Nella tua unione", keep_this:"Tieni questa", kept:"✓ Mantenuta", keep_both:"Tieni entrambe", keep_both_on:"✓ Entrambe mantenute", keep_both_hint:"Aggiunge l'altra versione come nota separata", modified:"Modificata", apply:"Applica e scarica", applying:"Applicazione…", skip:"Lascia l'unione com'è", close:"Chiudi", untitled:"(nota senza titolo)", empty:"(vuoto)", more:"+{n} altri conflitti manterranno la scelta automatica dell'unione.", merged_label:"Risultato dell'unione" },
+    ru: { title:"Проверьте объединение", subtitle:"{n} заметок были изменены по-разному в ваших копиях. Выберите, какую версию оставить — или оставьте обе.", current:"В объединении", keep_this:"Оставить эту", kept:"✓ Оставлено", keep_both:"Оставить обе", keep_both_on:"✓ Обе оставлены", keep_both_hint:"Добавит другую версию как отдельную заметку", modified:"Изменено", apply:"Применить и скачать", applying:"Применение…", skip:"Оставить как есть", close:"Закрыть", untitled:"(заметка без названия)", empty:"(пусто)", more:"+{n} других конфликтов сохранят автоматический выбор объединения.", merged_label:"Результат объединения" },
+    ja: { title:"マージを確認", subtitle:"{n} 件のメモがバックアップ間で異なる形で編集されています。残すバージョンを選ぶか、両方を残せます。", current:"マージ結果", keep_this:"これを残す", kept:"✓ 残しました", keep_both:"両方残す", keep_both_on:"✓ 両方を残す", keep_both_hint:"もう一方を別のメモとして追加します", modified:"編集", apply:"適用してダウンロード", applying:"適用中…", skip:"マージのままにする", close:"閉じる", untitled:"(無題のメモ)", empty:"(空)", more:"他 +{n} 件の競合はマージの自動選択を維持します。", merged_label:"マージ結果" },
+    ko: { title:"병합 검토", subtitle:"{n}개의 메모가 백업마다 다르게 편집되었습니다. 어떤 버전을 남길지 선택하거나 둘 다 보관하세요.", current:"병합 결과", keep_this:"이것 남기기", kept:"✓ 남김", keep_both:"둘 다 남기기", keep_both_on:"✓ 둘 다 보관", keep_both_hint:"다른 버전을 별도의 메모로 추가합니다", modified:"편집됨", apply:"적용 후 다운로드", applying:"적용 중…", skip:"병합 그대로 두기", close:"닫기", untitled:"(제목 없는 메모)", empty:"(비어 있음)", more:"+{n}개의 추가 충돌은 병합의 자동 선택을 유지합니다.", merged_label:"병합 결과" },
+    tl: { title:"Suriin ang merge", subtitle:"{n} na tala ang iba't iba ang pagkaka-edit sa iyong mga backup. Piliin kung aling bersyon ang itatago — o itago ang pareho.", current:"Sa iyong merge", keep_this:"Itago ito", kept:"✓ Itinago", keep_both:"Itago pareho", keep_both_on:"✓ Itinatago pareho", keep_both_hint:"Idaragdag ang isa pang bersyon bilang hiwalay na tala", modified:"In-edit", apply:"Ilapat at i-download", applying:"Inilalapat…", skip:"Iwan ang merge", close:"Isara", untitled:"(talang walang pamagat)", empty:"(walang laman)", more:"+{n} pang conflicts ang magpapanatili ng awtomatikong pili ng merge.", merged_label:"Resulta ng merge" }
+  };
+  function curLang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
+  function t(k) { var l = curLang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function stripHtml(s) { return String(s || '').replace(/<[^>]*>?/gm, ' ').replace(/\s+/g, ' ').trim(); }
+  function clip(s) { s = String(s || ''); return s.length > 1400 ? s.slice(0, 1400) + '…' : s; }
+  function fmtDate(s) {
+    if (!s) return '';
+    var d = new Date(s);
+    if (isNaN(d.getTime())) return String(s);
+    try { return d.toLocaleString(undefined, { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); }
+    catch (_) { return d.toISOString().slice(0, 16).replace('T', ' '); }
+  }
+
+  // ── Lightweight word-level diff (LCS) ──────────────────────────────
+  function lcsDiff(o, n) {
+    var m = o.length, k = n.length;
+    var dp = []; for (var i = 0; i <= m; i++) dp.push(new Array(k + 1).fill(0));
+    for (var a = m - 1; a >= 0; a--) for (var b = k - 1; b >= 0; b--)
+      dp[a][b] = (o[a] === n[b]) ? dp[a + 1][b + 1] + 1 : Math.max(dp[a + 1][b], dp[a][b + 1]);
+    var out = [], x = 0, y = 0;
+    while (x < m && y < k) {
+      if (o[x] === n[y]) { out.push({ t: 'eq', s: n[y] }); x++; y++; }
+      else if (dp[x + 1][y] >= dp[x][y + 1]) { out.push({ t: 'del', s: o[x] }); x++; }
+      else { out.push({ t: 'add', s: n[y] }); y++; }
+    }
+    while (x < m) out.push({ t: 'del', s: o[x++] });
+    while (y < k) out.push({ t: 'add', s: n[y++] });
+    return out;
+  }
+  function diffHtml(curPlain, altPlain) {
+    var a = clip(curPlain).split(/(\s+)/), b = clip(altPlain).split(/(\s+)/);
+    if (a.length > 600) a = a.slice(0, 600);
+    if (b.length > 600) b = b.slice(0, 600);
+    return lcsDiff(a, b).map(function (p) {
+      if (p.t === 'eq') return esc(p.s);
+      if (p.t === 'add') return '<span class="jcr-ins">' + esc(p.s) + '</span>';
+      return '<span class="jcr-del">' + esc(p.s) + '</span>';
+    }).join('');
+  }
+
+  // ── Source-file + DB helpers (all main-thread sql.js) ──────────────
+  function readFileBuf(file) {
+    if (!file) return Promise.reject(new Error('no file'));
+    if (typeof file.arrayBuffer === 'function') return file.arrayBuffer();
+    return new Promise(function (res, rej) {
+      var r = new FileReader();
+      r.onload = function () { res(r.result); };
+      r.onerror = function () { rej(new Error('read failed')); };
+      r.readAsArrayBuffer(file);
+    });
+  }
+  function collectSourceFiles() {
+    var out = [], seen = {};
+    var inputs = document.querySelectorAll('input[type="file"][accept=".jwlibrary"]');
+    for (var i = 0; i < inputs.length; i++) {
+      var fl = inputs[i].files; if (!fl) continue;
+      for (var j = 0; j < fl.length; j++) {
+        var f = fl[j]; if (!f) continue;
+        var key = (f.name || '') + '::' + (f.size || 0);
+        if (seen[key]) continue; seen[key] = 1; out.push(f);
+      }
+    }
+    try {
+      if (window.__jwLastFile) {
+        var lf = window.__jwLastFile, k = (lf.name || '') + '::' + (lf.size || 0);
+        if (!seen[k]) { seen[k] = 1; out.push(lf); }
+      }
+    } catch (_) {}
+    return out;
+  }
+  function openDbFromBuffer(SQL, buf) {
+    return window.JSZip.loadAsync(buf).then(function (zip) {
+      var key = Object.keys(zip.files).find(function (f) { return /userdata\.db$/i.test(f); });
+      if (!key) return null;
+      return zip.file(key).async('uint8array').then(function (bytes) { return new SQL.Database(bytes); });
+    });
+  }
+  function queryNotes(db) {
+    var map = {};
+    try {
+      var r = db.exec('SELECT Guid,Title,Content,LastModified FROM Note');
+      if (r.length && r[0].values) r[0].values.forEach(function (v) {
+        if (v[0] == null) return;
+        map[v[0]] = { title: v[1] || '', content: v[2] || '', lastMod: v[3] || '' };
+      });
+    } catch (_) {}
+    return map;
+  }
+
+  // ── Detection: which notes were edited differently across backups ──
+  function detect(opts) {
+    if (typeof window.JSZip !== 'function' || typeof window.initSqlJs !== 'function') return Promise.resolve(null);
+    var sources = collectSourceFiles();
+    if (sources.length < 2) return Promise.resolve(null);
+    var SQL;
+    return window.initSqlJs({ locateFile: function (f) { return SQLJS_URL + f; } })
+      .then(function (s) {
+        SQL = s;
+        return sources.reduce(function (chain, file, idx) {
+          return chain.then(function (acc) {
+            return readFileBuf(file)
+              .then(function (buf) { return openDbFromBuffer(SQL, buf); })
+              .then(function (db) {
+                if (db) { acc.push({ name: file.name || ('Backup ' + (idx + 1)), notes: queryNotes(db) }); db.close(); }
+                return acc;
+              })
+              .catch(function () { return acc; });
+          });
+        }, Promise.resolve([]));
+      })
+      .then(function (perFile) {
+        if (perFile.length < 2) return null;
+        return fetch(opts.blobUrl).then(function (r) { return r.arrayBuffer(); }).then(function (mergedBuf) {
+          return openDbFromBuffer(SQL, mergedBuf).then(function (mdb) {
+            if (!mdb) return null;
+            var mergedNotes = queryNotes(mdb); mdb.close();
+
+            var byGuid = {};
+            perFile.forEach(function (pf) {
+              Object.keys(pf.notes).forEach(function (guid) {
+                var note = pf.notes[guid];
+                (byGuid[guid] = byGuid[guid] || []).push({
+                  file: pf.name, title: note.title, content: note.content,
+                  key: stripHtml(note.content).toLowerCase(), lastMod: note.lastMod
+                });
+              });
+            });
+
+            var conflicts = [];
+            Object.keys(byGuid).forEach(function (guid) {
+              var list = byGuid[guid];
+              if (list.length < 2) return;
+              var variants = {};
+              list.forEach(function (it) {
+                if (!variants[it.key]) variants[it.key] = { key: it.key, content: it.content, title: it.title, plain: stripHtml(it.content), lastMod: it.lastMod, files: [it.file] };
+                else { variants[it.key].files.push(it.file); if (String(it.lastMod) > String(variants[it.key].lastMod)) variants[it.key].lastMod = it.lastMod; }
+              });
+              var keys = Object.keys(variants);
+              if (keys.length < 2) return; // identical everywhere → no conflict
+              var varr = keys.map(function (k) { return variants[k]; });
+              var mn = mergedNotes[guid];
+              var curKey = mn ? stripHtml(mn.content).toLowerCase() : null;
+              var curIdx = -1;
+              for (var x = 0; x < varr.length; x++) { if (curKey != null && varr[x].key === curKey) { curIdx = x; break; } }
+              if (curIdx === -1 && mn) {
+                varr.unshift({ key: curKey, content: mn.content, title: mn.title, plain: stripHtml(mn.content), lastMod: mn.lastMod, files: [t('merged_label')], synthetic: true });
+                curIdx = 0;
+              }
+              if (curIdx === -1) curIdx = 0;
+              conflicts.push({ guid: guid, title: (mn && mn.title) || varr[curIdx].title || '', variants: varr, current: curIdx });
+            });
+
+            if (!conflicts.length) return null;
+            // Stable order: most-recently-edited conflicts first
+            conflicts.sort(function (p, q) {
+              var pm = p.variants.reduce(function (a, v) { return String(v.lastMod) > a ? String(v.lastMod) : a; }, '');
+              var qm = q.variants.reduce(function (a, v) { return String(v.lastMod) > a ? String(v.lastMod) : a; }, '');
+              return qm < pm ? -1 : (qm > pm ? 1 : 0);
+            });
+            return { conflicts: conflicts, mergedBuf: mergedBuf, SQL: SQL };
+          });
+        });
+      })
+      .catch(function () { return null; });
+  }
+
+  // ── Apply overrides to the merged DB on the main thread ────────────
+  function insertDup(db, cols, vals, variant) {
+    var ic = [], iv = [];
+    var ng = (window.crypto && crypto.randomUUID) ? crypto.randomUUID().toUpperCase() : ('JWSYNC-' + Date.now() + '-' + Math.random().toString(16).slice(2));
+    for (var i = 0; i < cols.length; i++) {
+      var c = cols[i]; if (c === 'NoteId') continue;
+      var v = vals[i];
+      if (c === 'Guid') v = ng;
+      else if (c === 'Title') v = variant.title;
+      else if (c === 'Content') v = variant.content;
+      else if (c === 'LastModified') v = variant.lastMod || new Date().toISOString();
+      ic.push('"' + c + '"'); iv.push(v);
+    }
+    db.run('INSERT INTO Note (' + ic.join(',') + ') VALUES (' + ic.map(function () { return '?'; }).join(',') + ')', iv);
+  }
+  function applyResolutions(ctx, resolutions) {
+    var changed = false;
+    return openDbFromBuffer(ctx.SQL, ctx.mergedBuf.slice(0)).then(function (db) {
+      if (!db) return null;
+      ctx.conflicts.forEach(function (cf, i) {
+        var res = resolutions[i]; if (!res) return;
+        if (res.choice === 'both') {
+          var others = cf.variants.filter(function (_, idx) { return idx !== cf.current; });
+          if (!others.length) return;
+          try {
+            var st = db.prepare('SELECT * FROM Note WHERE Guid = :g');
+            st.bind({ ':g': cf.guid });
+            var cols = null, vals = null;
+            if (st.step()) { cols = st.getColumnNames(); vals = st.get(); }
+            st.free();
+            if (cols && vals) others.forEach(function (v) { try { insertDup(db, cols, vals, v); changed = true; } catch (_) {} });
+          } catch (_) {}
+        } else if (typeof res.choice === 'number' && res.choice !== cf.current) {
+          var v = cf.variants[res.choice]; if (!v) return;
+          try { db.run('UPDATE Note SET Title = ?, Content = ?, LastModified = ? WHERE Guid = ?', [v.title, v.content, v.lastMod || new Date().toISOString(), cf.guid]); changed = true; } catch (_) {}
+        }
+      });
+      if (!changed) { try { db.close(); } catch (_) {} return null; }
+      var out = db.export();
+      try { db.close(); } catch (_) {}
+      return window.JSZip.loadAsync(ctx.mergedBuf.slice(0)).then(function (zip) {
+        var key = Object.keys(zip.files).find(function (f) { return /userdata\.db$/i.test(f); });
+        zip.file(key, out);
+        return zip.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' });
+      }).then(function (arr) {
+        var url = URL.createObjectURL(new Blob([arr], { type: 'application/octet-stream' }));
+        return { blobUrl: url, buffer: arr };
+      });
+    }).catch(function () { return null; });
+  }
+
+  // ── Public entry: called by the celebration before it shows ────────
+  window.__jwConflictReview = function (opts) {
+    opts = opts || {};
+    return new Promise(function (resolve) {
+      var settled = false, overlay = null;
+      function done(v) { if (settled) return; settled = true; cleanup(); resolve(v); }
+      function cleanup() {
+        if (overlay) { overlay.remove(); overlay = null; }
+        document.body.classList.remove('jw-modal-open');
+        document.removeEventListener('keydown', onKey);
+      }
+      function onKey(e) { if (e.key === 'Escape') done(null); }
+
+      detect(opts).then(function (ctx) {
+        if (!ctx) { done(null); return; }
+        render(ctx);
+      }).catch(function () { done(null); });
+
+      function render(ctx) {
+        var MAX = 100;
+        var resolutions = ctx.conflicts.map(function (cf) { return { choice: cf.current }; });
+        var shown = ctx.conflicts.slice(0, MAX);
+
+        var warnIcon = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 19a1 1 0 0 0 .87 1.5h18.26A1 1 0 0 0 22 19L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+        var dlIcon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+
+        var html =
+          '<div class="jcr-backdrop" data-jcr-skip></div>' +
+          '<div class="jcr-card" role="dialog" aria-modal="true" aria-labelledby="jcr-title">' +
+            '<button class="jcr-close" type="button" data-jcr-skip aria-label="' + esc(t('close')) + '">×</button>' +
+            '<div class="jcr-head">' +
+              '<div class="jcr-icon">' + warnIcon + '</div>' +
+              '<div><h2 id="jcr-title" class="jcr-title">' + esc(t('title')) + '</h2>' +
+              '<p class="jcr-subtitle">' + esc(t('subtitle').replace('{n}', ctx.conflicts.length)) + '</p></div>' +
+            '</div>' +
+            '<div class="jcr-body" id="jcr-body"></div>' +
+            (ctx.conflicts.length > MAX ? '<div class="jcr-more">' + esc(t('more').replace('{n}', ctx.conflicts.length - MAX)) + '</div>' : '') +
+            '<div class="jcr-foot">' +
+              '<button class="jcr-btn jcr-btn-ghost" type="button" data-jcr-skip>' + esc(t('skip')) + '</button>' +
+              '<button class="jcr-btn jcr-btn-primary" type="button" data-jcr-apply>' + dlIcon + '<span>' + esc(t('apply')) + '</span></button>' +
+            '</div>' +
+          '</div>';
+
+        overlay = document.createElement('div');
+        overlay.id = 'jw-conflict-overlay';
+        overlay.innerHTML = html;
+        document.body.appendChild(overlay);
+        document.body.classList.add('jw-modal-open');
+
+        var body = overlay.querySelector('#jcr-body');
+        shown.forEach(function (cf, ci) { body.appendChild(buildConflict(cf, ci, resolutions)); });
+
+        overlay.querySelectorAll('[data-jcr-skip]').forEach(function (el) {
+          el.addEventListener('click', function () { done(null); });
+        });
+        var applyBtn = overlay.querySelector('[data-jcr-apply]');
+        applyBtn.addEventListener('click', function () {
+          applyBtn.disabled = true;
+          var span = applyBtn.querySelector('span'); if (span) span.textContent = t('applying');
+          applyResolutions(ctx, resolutions).then(function (r) { done(r); }).catch(function () { done(null); });
+        });
+        document.addEventListener('keydown', onKey);
+      }
+
+      function buildConflict(cf, ci, resolutions) {
+        var wrap = document.createElement('div');
+        wrap.className = 'jcr-conflict';
+        var title = cf.title ? stripHtml(cf.title) : t('untitled');
+
+        var head = document.createElement('div');
+        head.className = 'jcr-conflict-head';
+        head.innerHTML = '<span class="jcr-conflict-n">' + (ci + 1) + '</span><span class="jcr-conflict-title">' + esc(title) + '</span>';
+        wrap.appendChild(head);
+
+        var vers = document.createElement('div');
+        vers.className = 'jcr-versions';
+        var current = cf.variants[cf.current];
+        cf.variants.forEach(function (v, vi) {
+          var isCur = vi === cf.current;
+          var card = document.createElement('div');
+          card.className = 'jcr-ver' + (resolutions[ci].choice === vi ? ' sel' : '');
+          card.setAttribute('data-vi', vi);
+          var contentHtml = isCur ? esc(clip(v.plain)) : diffHtml(current.plain, v.plain);
+          if (!contentHtml) contentHtml = '<span class="jcr-empty">' + esc(t('empty')) + '</span>';
+          card.innerHTML =
+            '<div class="jcr-ver-head">' +
+              '<span class="jcr-ver-from">' + esc(v.files.join(', ')) + '</span>' +
+              (isCur ? '<span class="jcr-ver-current">' + esc(t('current')) + '</span>' : '') +
+            '</div>' +
+            (v.lastMod ? '<div class="jcr-ver-date">' + esc(t('modified')) + ' ' + esc(fmtDate(v.lastMod)) + '</div>' : '') +
+            '<div class="jcr-ver-body">' + contentHtml + '</div>' +
+            '<button class="jcr-ver-pick" type="button">' + esc(resolutions[ci].choice === vi ? t('kept') : t('keep_this')) + '</button>';
+          card.querySelector('.jcr-ver-pick').addEventListener('click', function () { resolutions[ci] = { choice: vi }; refresh(); });
+          vers.appendChild(card);
+        });
+        wrap.appendChild(vers);
+
+        var bothRow = document.createElement('div');
+        bothRow.className = 'jcr-both-row';
+        var bothBtn = document.createElement('button');
+        bothBtn.type = 'button';
+        bothBtn.className = 'jcr-both-btn' + (resolutions[ci].choice === 'both' ? ' on' : '');
+        bothBtn.textContent = resolutions[ci].choice === 'both' ? t('keep_both_on') : t('keep_both');
+        bothBtn.addEventListener('click', function () {
+          resolutions[ci] = (resolutions[ci].choice === 'both') ? { choice: cf.current } : { choice: 'both' };
+          refresh();
+        });
+        bothRow.appendChild(bothBtn);
+        var hint = document.createElement('span');
+        hint.className = 'jcr-both-hint';
+        hint.textContent = t('keep_both_hint');
+        bothRow.appendChild(hint);
+        wrap.appendChild(bothRow);
+
+        function refresh() {
+          vers.querySelectorAll('.jcr-ver').forEach(function (card) {
+            var vi = parseInt(card.getAttribute('data-vi'), 10);
+            var sel = resolutions[ci].choice === vi;
+            card.classList.toggle('sel', sel);
+            card.querySelector('.jcr-ver-pick').textContent = sel ? t('kept') : t('keep_this');
+          });
+          var isBoth = resolutions[ci].choice === 'both';
+          bothBtn.classList.toggle('on', isBoth);
+          bothBtn.textContent = isBoth ? t('keep_both_on') : t('keep_both');
+        }
+
+        return wrap;
+      }
+    });
+  };
+})();
+</script>
+<!-- ── End Merge Conflict Reviewer ─────────────────────────── -->
+
 <!-- ── Post-merge celebration + Restore Guide (v2.9.1) ───── -->
 <script>
 (function () {
@@ -2305,6 +2726,29 @@ window.__bootBrowse = function() {
     fireAnalytics(demoMode ? 'merge_complete_demo' : 'merge_complete_real');
     cached = { stats: null, buffer: null, demoMode: demoMode, name: readDownloadName(), blobUrl: blobUrl };
 
+    // v2.11.0 — Conflict Reviewer: if any notes were edited differently
+    // across the source backups, let the user review/override which version
+    // wins BEFORE the file downloads. Resolves instantly (to null) when the
+    // reviewer is absent, deps are missing, or there are no conflicts.
+    var reviewP = (typeof window.__jwConflictReview === 'function')
+      ? window.__jwConflictReview({ blobUrl: blobUrl, downloadName: cached.name }).catch(function () { return null; })
+      : Promise.resolve(null);
+
+    reviewP.then(function (res) {
+      var finalUrl = (res && res.blobUrl) ? res.blobUrl : blobUrl;
+      if (res && res.blobUrl && res.blobUrl !== blobUrl) {
+        // User overrode one or more conflicts → swap the corrected file in.
+        var dl = document.getElementById('download-btn');
+        if (dl) dl.setAttribute('href', finalUrl);
+        lastSeenBlob = finalUrl;      // stop the observer re-firing on our own swap
+        cached.blobUrl = finalUrl;
+        fireAnalytics('merge_conflicts_resolved');
+      }
+      proceedToCelebration(finalUrl, demoMode);
+    });
+  }
+
+  function proceedToCelebration(blobUrl, demoMode) {
     // Try to auto-trigger the file download once per merge. Some browsers
     // block programmatic downloads not initiated by a user gesture; the
     // overlay always renders a manual Download button as the primary CTA
@@ -2313,7 +2757,6 @@ window.__bootBrowse = function() {
     var didAutoDl = false;
     if (autoDownloadedFor !== blobUrl) {
       autoDownloadedFor = blobUrl;
-      // Small delay so the overlay is in the DOM before download dialog
       didAutoDl = triggerDownload({ auto: true });
     }
 
