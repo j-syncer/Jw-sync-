@@ -231,7 +231,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.11.0",
+      "softwareVersion": "2.12.0",
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
     }
     </script>
@@ -617,6 +617,545 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
   });
 })();
 </script>
+<!-- ── Library Wrapped stats viewer (v2.12.0) ───────────── -->
+<style>
+.jww-backdrop{position:fixed;inset:0;z-index:10070;display:flex;align-items:center;justify-content:center;
+  background:rgba(4,15,34,0.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;padding:18px;box-sizing:border-box;
+  animation:jww-fade .22s ease both;}
+@keyframes jww-fade{from{opacity:0}to{opacity:1}}
+.jww-card{position:relative;width:100%;max-width:720px;max-height:92vh;overflow-y:auto;overflow-x:hidden;
+  background:#070e1c;border:1px solid rgba(71,85,105,.35);border-radius:20px;
+  box-shadow:0 24px 70px rgba(0,0,0,.55);color:#e2e8f0;-webkit-overflow-scrolling:touch;
+  animation:jww-rise .28s cubic-bezier(.16,1,.3,1) both;}
+@keyframes jww-rise{from{opacity:0;transform:translateY(20px) scale(.985)}to{opacity:1;transform:none}}
+.jww-card::-webkit-scrollbar{width:9px}
+.jww-card::-webkit-scrollbar-thumb{background:rgba(71,85,105,.5);border-radius:9px}
+.jww-x{position:absolute;top:14px;right:14px;z-index:3;width:34px;height:34px;border:none;cursor:pointer;
+  border-radius:9px;background:rgba(71,85,105,.35);color:#cbd5e1;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;}
+.jww-x:hover{background:rgba(71,85,105,.55);color:#fff}
+.jww-pad{padding:34px 30px 26px}
+
+/* ── states ── */
+.jww-state{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  padding:60px 30px;text-align:center}
+.jww-spin{width:40px;height:40px;border-radius:50%;border:3px solid rgba(234,88,12,.18);border-top-color:#ea580c;
+  animation:jww-spin .8s linear infinite}
+@keyframes jww-spin{to{transform:rotate(360deg)}}
+.jww-state-msg{color:#94a3b8;font-size:15px;line-height:1.5;max-width:340px}
+.jww-state .jww-btn{margin-top:6px}
+
+/* ── hero ── */
+.jww-hero{text-align:center;padding-bottom:8px}
+.jww-filebadge{display:inline-flex;align-items:center;gap:7px;max-width:90%;
+  background:rgba(11,20,36,.9);border:1px solid rgba(71,85,105,.35);border-radius:999px;
+  padding:6px 14px;font-size:12.5px;color:#94a3b8;margin-bottom:22px;}
+.jww-filebadge svg{flex:0 0 auto;color:#64748b}
+.jww-filebadge span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jww-eyebrow{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#ea580c;margin:0 0 14px}
+.jww-bignum{font-size:80px;line-height:1;font-weight:800;color:#fff;letter-spacing:-.03em;margin:0;
+  font-variant-numeric:tabular-nums}
+.jww-bignum-label{font-size:15px;color:#94a3b8;margin:10px 0 0;font-weight:500}
+
+/* ── 4-stat grid ── */
+.jww-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:30px 0 8px}
+.jww-cell{background:rgba(11,20,36,.9);border:1px solid rgba(71,85,105,.3);border-radius:14px;
+  padding:16px 10px;text-align:center}
+.jww-cell svg{color:#ea580c;margin-bottom:8px}
+.jww-cell-num{font-size:26px;font-weight:800;color:#fff;line-height:1;font-variant-numeric:tabular-nums}
+.jww-cell-lbl{font-size:11.5px;color:#94a3b8;margin-top:6px;font-weight:500}
+
+/* ── section ── */
+.jww-section{margin-top:30px}
+.jww-sec-title{font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#cbd5e1;
+  margin:0 0 16px;display:flex;align-items:center;gap:8px}
+.jww-sec-title svg{color:#ea580c}
+
+/* ── horizontal bars (books) ── */
+.jww-hbar{margin-bottom:11px}
+.jww-hbar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;font-size:13.5px}
+.jww-hbar-name{color:#e2e8f0;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jww-hbar-val{color:#94a3b8;font-variant-numeric:tabular-nums;flex:0 0 auto;margin-left:10px}
+.jww-hbar-track{height:9px;border-radius:99px;background:rgba(71,85,105,.22);overflow:hidden}
+.jww-hbar-fill{height:100%;border-radius:99px;background:#ea580c;width:0;transition:width .9s cubic-bezier(.16,1,.3,1)}
+
+/* ── vertical bars (years) ── */
+.jww-vbars{display:flex;align-items:flex-end;justify-content:space-around;gap:8px;height:160px;
+  padding:0 4px;border-bottom:1px solid rgba(71,85,105,.3)}
+.jww-vcol{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.jww-vbar-val{font-size:12px;color:#94a3b8;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.jww-vbar{width:100%;max-width:42px;border-radius:7px 7px 0 0;background:#ea580c;height:0;
+  transition:height .9s cubic-bezier(.16,1,.3,1)}
+.jww-vlabels{display:flex;justify-content:space-around;gap:8px;padding:9px 4px 0}
+.jww-vlabel{flex:1 1 0;text-align:center;font-size:11.5px;color:#94a3b8;min-width:0}
+
+/* ── tags ── */
+.jww-tags{display:flex;flex-wrap:wrap;gap:9px}
+.jww-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(11,20,36,.9);
+  border:1px solid rgba(71,85,105,.35);border-radius:999px;padding:7px 8px 7px 14px;font-size:13.5px;color:#e2e8f0}
+.jww-tag-badge{background:rgba(234,88,12,.16);color:#fb923c;border-radius:999px;font-size:12px;font-weight:700;
+  padding:2px 9px;font-variant-numeric:tabular-nums}
+
+/* ── highlight colors ── */
+.jww-colorbar{display:flex;height:16px;border-radius:99px;overflow:hidden;margin-bottom:18px;
+  background:rgba(71,85,105,.22)}
+.jww-colorbar-seg{height:100%;transition:flex-grow .8s cubic-bezier(.16,1,.3,1)}
+.jww-colorlist{display:flex;flex-direction:column;gap:10px}
+.jww-colorrow{display:flex;align-items:center;gap:11px;font-size:13.5px}
+.jww-swatch{width:15px;height:15px;border-radius:5px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset}
+.jww-color-name{color:#e2e8f0;flex:1}
+.jww-color-count{color:#94a3b8;font-variant-numeric:tabular-nums}
+.jww-color-pct{color:#64748b;font-variant-numeric:tabular-nums;width:46px;text-align:right}
+
+/* ── fun facts ── */
+.jww-facts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.jww-fact{background:rgba(11,20,36,.9);border:1px solid rgba(71,85,105,.3);border-radius:14px;padding:15px 16px}
+.jww-fact-lbl{font-size:11.5px;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;font-weight:600;margin-bottom:6px}
+.jww-fact-val{font-size:18px;font-weight:700;color:#fff;line-height:1.2}
+
+/* ── footer ── */
+.jww-footer{display:flex;gap:11px;justify-content:flex-end;margin-top:32px;
+  padding-top:20px;border-top:1px solid rgba(71,85,105,.25)}
+.jww-btn{border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;
+  padding:11px 20px;border-radius:11px;transition:background .15s,opacity .15s}
+.jww-btn-primary{background:#ea580c;color:#fff;box-shadow:0 1px 5px rgba(234,88,12,.4)}
+.jww-btn-primary:hover{background:#c2410c}
+.jww-btn-ghost{background:rgba(71,85,105,.35);color:#cbd5e1}
+.jww-btn-ghost:hover{background:rgba(71,85,105,.55);color:#fff}
+.jww-empty{color:#94a3b8;font-size:11px;padding:14px;text-align:center}
+
+@media (max-width:560px){
+  .jww-pad{padding:30px 18px 22px}
+  .jww-bignum{font-size:62px}
+  .jww-grid{grid-template-columns:repeat(2,1fr)}
+  .jww-facts{grid-template-columns:1fr}
+  .jww-footer{flex-direction:column-reverse}
+  .jww-footer .jww-btn{width:100%}
+}
+</style>
+<script>
+(function () {
+  'use strict';
+  if (window.__openJwWrapped) return;
+
+  var SQLJS_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
+
+  var BOOKS = ['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
+
+  var JWC = {1:{h:'#fbbf24',n:'Yellow'},2:{h:'#4ade80',n:'Green'},3:{h:'#60a5fa',n:'Blue'},4:{h:'#f472b6',n:'Pink'},5:{h:'#fb923c',n:'Orange'},6:{h:'#c084fc',n:'Purple'}};
+
+  var I18N = {
+    en:{title:'Your Library in Numbers',close:'Close',share:'Copy stats',copied:'Copied!',loading:'Analyzing your library…',error:'Could not read this file.',highlights:'Highlights',bookmarks:'Bookmarks',tags_label:'Tags',notes_label:'Notes',top_books:'Most Studied Books',timeline:'Activity by Year',your_tags:'Your Tags',hl_colors:'Highlight Colors',first_note:'First note',latest_note:'Latest note',study_span:'Study span',most_active:'Most active',pick_file:'Choose a .jwlibrary file',open_file:'Open File',no_notes:'No notes found in this file.',loading_tools:'Loading tools, please wait a moment…',years_unit:'years',year_unit:'year'},
+    es:{title:'Tu biblioteca en números',close:'Cerrar',share:'Copiar estadísticas',copied:'¡Copiado!',loading:'Analizando tu biblioteca…',error:'No se pudo leer este archivo.',highlights:'Subrayados',bookmarks:'Marcadores',tags_label:'Etiquetas',notes_label:'Notas',top_books:'Libros más estudiados',timeline:'Actividad por año',your_tags:'Tus etiquetas',hl_colors:'Colores de subrayado',first_note:'Primera nota',latest_note:'Última nota',study_span:'Período de estudio',most_active:'Más activo',pick_file:'Elige un archivo .jwlibrary',open_file:'Abrir archivo',no_notes:'No se encontraron notas en este archivo.',loading_tools:'Cargando herramientas, espera un momento…',years_unit:'años',year_unit:'año'},
+    pt:{title:'Sua biblioteca em números',close:'Fechar',share:'Copiar estatísticas',copied:'Copiado!',loading:'Analisando sua biblioteca…',error:'Não foi possível ler este arquivo.',highlights:'Destaques',bookmarks:'Marcadores',tags_label:'Marcadores de texto',notes_label:'Notas',top_books:'Livros mais estudados',timeline:'Atividade por ano',your_tags:'Suas etiquetas',hl_colors:'Cores de destaque',first_note:'Primeira nota',latest_note:'Última nota',study_span:'Período de estudo',most_active:'Mais ativo',pick_file:'Escolha um arquivo .jwlibrary',open_file:'Abrir arquivo',no_notes:'Nenhuma nota encontrada neste arquivo.',loading_tools:'Carregando ferramentas, aguarde um momento…',years_unit:'anos',year_unit:'ano'},
+    fr:{title:'Votre bibliothèque en chiffres',close:'Fermer',share:'Copier les stats',copied:'Copié !',loading:'Analyse de votre bibliothèque…',error:'Impossible de lire ce fichier.',highlights:'Surlignages',bookmarks:'Signets',tags_label:'Étiquettes',notes_label:'Notes',top_books:'Livres les plus étudiés',timeline:'Activité par année',your_tags:'Vos étiquettes',hl_colors:'Couleurs de surlignage',first_note:'Première note',latest_note:'Dernière note',study_span:'Période d’étude',most_active:'Plus actif',pick_file:'Choisir un fichier .jwlibrary',open_file:'Ouvrir le fichier',no_notes:'Aucune note trouvée dans ce fichier.',loading_tools:'Chargement des outils, un instant…',years_unit:'ans',year_unit:'an'},
+    de:{title:'Deine Bibliothek in Zahlen',close:'Schließen',share:'Statistik kopieren',copied:'Kopiert!',loading:'Deine Bibliothek wird analysiert…',error:'Diese Datei konnte nicht gelesen werden.',highlights:'Markierungen',bookmarks:'Lesezeichen',tags_label:'Kategorien',notes_label:'Notizen',top_books:'Meiststudierte Bücher',timeline:'Aktivität nach Jahr',your_tags:'Deine Kategorien',hl_colors:'Markierungsfarben',first_note:'Erste Notiz',latest_note:'Letzte Notiz',study_span:'Studienzeitraum',most_active:'Aktivste Zeit',pick_file:'.jwlibrary-Datei auswählen',open_file:'Datei öffnen',no_notes:'In dieser Datei wurden keine Notizen gefunden.',loading_tools:'Werkzeuge werden geladen, einen Moment…',years_unit:'Jahre',year_unit:'Jahr'},
+    it:{title:'La tua biblioteca in numeri',close:'Chiudi',share:'Copia statistiche',copied:'Copiato!',loading:'Analisi della tua biblioteca…',error:'Impossibile leggere questo file.',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags_label:'Etichette',notes_label:'Note',top_books:'Libri più studiati',timeline:'Attività per anno',your_tags:'Le tue etichette',hl_colors:'Colori evidenziazione',first_note:'Prima nota',latest_note:'Ultima nota',study_span:'Periodo di studio',most_active:'Più attivo',pick_file:'Scegli un file .jwlibrary',open_file:'Apri file',no_notes:'Nessuna nota trovata in questo file.',loading_tools:'Caricamento strumenti, un momento…',years_unit:'anni',year_unit:'anno'},
+    ru:{title:'Ваша библиотека в цифрах',close:'Закрыть',share:'Копировать статистику',copied:'Скопировано!',loading:'Анализируем вашу библиотеку…',error:'Не удалось прочитать этот файл.',highlights:'Выделения',bookmarks:'Закладки',tags_label:'Метки',notes_label:'Заметки',top_books:'Самые изучаемые книги',timeline:'Активность по годам',your_tags:'Ваши метки',hl_colors:'Цвета выделений',first_note:'Первая заметка',latest_note:'Последняя заметка',study_span:'Период изучения',most_active:'Самый активный',pick_file:'Выберите файл .jwlibrary',open_file:'Открыть файл',no_notes:'В этом файле не найдено заметок.',loading_tools:'Загрузка инструментов, подождите…',years_unit:'лет',year_unit:'год'},
+    ja:{title:'数字で見るあなたのライブラリー',close:'閉じる',share:'統計をコピー',copied:'コピーしました',loading:'ライブラリーを分析しています…',error:'このファイルを読み込めませんでした。',highlights:'ハイライト',bookmarks:'しおり',tags_label:'タグ',notes_label:'ノート',top_books:'よく研究した書',timeline:'年ごとの活動',your_tags:'あなたのタグ',hl_colors:'ハイライトの色',first_note:'最初のノート',latest_note:'最新のノート',study_span:'研究期間',most_active:'最も活発な時期',pick_file:'.jwlibrary ファイルを選択',open_file:'ファイルを開く',no_notes:'このファイルにノートが見つかりませんでした。',loading_tools:'ツールを読み込んでいます。少々お待ちください…',years_unit:'年',year_unit:'年'},
+    ko:{title:'숫자로 보는 내 라이브러리',close:'닫기',share:'통계 복사',copied:'복사됨!',loading:'라이브러리를 분석하는 중…',error:'이 파일을 읽을 수 없습니다.',highlights:'강조 표시',bookmarks:'책갈피',tags_label:'태그',notes_label:'노트',top_books:'가장 많이 연구한 책',timeline:'연도별 활동',your_tags:'내 태그',hl_colors:'강조 표시 색상',first_note:'첫 노트',latest_note:'최근 노트',study_span:'연구 기간',most_active:'가장 활발한 시기',pick_file:'.jwlibrary 파일 선택',open_file:'파일 열기',no_notes:'이 파일에서 노트를 찾을 수 없습니다.',loading_tools:'도구를 불러오는 중입니다. 잠시만 기다려 주세요…',years_unit:'년',year_unit:'년'},
+    tl:{title:'Ang Iyong Aklatan sa Bilang',close:'Isara',share:'Kopyahin ang stats',copied:'Nakopya na!',loading:'Sinusuri ang iyong aklatan…',error:'Hindi mabasa ang file na ito.',highlights:'Mga Highlight',bookmarks:'Mga Bookmark',tags_label:'Mga Tag',notes_label:'Mga Tala',top_books:'Pinakapinag-aralang Aklat',timeline:'Aktibidad kada Taon',your_tags:'Iyong mga Tag',hl_colors:'Mga Kulay ng Highlight',first_note:'Unang tala',latest_note:'Pinakahuling tala',study_span:'Saklaw ng pag-aaral',most_active:'Pinakaaktibo',pick_file:'Pumili ng .jwlibrary file',open_file:'Buksan ang File',no_notes:'Walang natagpuang tala sa file na ito.',loading_tools:'Naglo-load ang mga tool, sandali lang…',years_unit:'taon',year_unit:'taon'}
+  };
+
+  function getLang() {
+    var l;
+    try { l = localStorage.getItem('jwsync_lang'); } catch (_) {}
+    if (l && I18N[l]) return l;
+    var nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
+    return I18N[nav] ? nav : 'en';
+  }
+  function t(k) { var L = I18N[getLang()] || I18N.en; return (L[k] != null ? L[k] : (I18N.en[k] != null ? I18N.en[k] : k)); }
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function el(html) { var d = document.createElement('div'); d.innerHTML = html; return d.firstElementChild; }
+
+  function fmtDate(s) {
+    if (!s) return '—';
+    var m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!m) return String(s).slice(0, 10) || '—';
+    try {
+      var dt = new Date(+m[1], +m[2] - 1, +m[3]);
+      return dt.toLocaleDateString(getLang(), { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (_) { return m[1] + '-' + m[2] + '-' + m[3]; }
+  }
+  function fmtMonth(s) {
+    if (!s) return '—';
+    var m = String(s).match(/^(\d{4})-(\d{2})/);
+    if (!m) return String(s);
+    try {
+      var dt = new Date(+m[1], +m[2] - 1, 1);
+      return dt.toLocaleDateString(getLang(), { year: 'numeric', month: 'long' });
+    } catch (_) { return m[1] + '-' + m[2]; }
+  }
+
+  // ── icons ──
+  var IC = {
+    file: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+    x: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    highlight: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>',
+    bookmark: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>',
+    tag: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1.5" fill="currentColor"/></svg>',
+    note: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>',
+    book: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    chart: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+    tags: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H2v7l6.29 6.29c.94.94 2.48.94 3.42 0l3.58-3.58c.94-.94.94-2.48 0-3.42L9 5Z"/><path d="M6 9.01V9"/><path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19"/></svg>',
+    palette: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.5 6.012 17.5 2 12 2z"/></svg>',
+    facts: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>'
+  };
+
+  // ── file reading ──
+  function readBuf(file) {
+    if (!file) return Promise.reject(new Error('no file'));
+    if (file instanceof ArrayBuffer) return Promise.resolve(file);
+    if (typeof file.arrayBuffer === 'function') return file.arrayBuffer();
+    return new Promise(function (res, rej) {
+      var r = new FileReader();
+      r.onload = function () { res(r.result); };
+      r.onerror = function () { rej(new Error('read failed')); };
+      r.readAsArrayBuffer(file);
+    });
+  }
+
+  function depsReady() { return typeof window.JSZip === 'function' && typeof window.initSqlJs === 'function'; }
+
+  function waitForDeps(ms) {
+    return new Promise(function (resolve) {
+      if (depsReady()) { resolve(true); return; }
+      var start = Date.now();
+      var iv = setInterval(function () {
+        if (depsReady()) { clearInterval(iv); resolve(true); }
+        else if (Date.now() - start > ms) { clearInterval(iv); resolve(false); }
+      }, 200);
+    });
+  }
+
+  function num(db, sql) {
+    try { var r = db.exec(sql); if (r.length && r[0].values && r[0].values.length) return +r[0].values[0][0] || 0; } catch (_) {}
+    return 0;
+  }
+  function rows(db, sql) {
+    try { var r = db.exec(sql); if (r.length && r[0].values) return r[0].values; } catch (_) {}
+    return [];
+  }
+
+  function analyze(db) {
+    var s = {};
+    s.notes = num(db, 'SELECT COUNT(*) FROM Note');
+    s.highlights = num(db, 'SELECT COUNT(*) FROM UserMark');
+    s.bookmarks = num(db, 'SELECT COUNT(*) FROM Bookmark');
+    s.tags = num(db, 'SELECT COUNT(*) FROM Tag');
+
+    s.years = rows(db, "SELECT strftime('%Y', LastModified) yr, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL GROUP BY yr ORDER BY yr").map(function (v) { return { year: String(v[0]), n: +v[1] || 0 }; }).filter(function (y) { return /^\d{4}$/.test(y.year); });
+
+    s.books = rows(db, 'SELECT l.BookNumber, COUNT(*) n FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 1 AND 66 GROUP BY l.BookNumber ORDER BY n DESC LIMIT 8').map(function (v) { return { num: +v[0], name: BOOKS[(+v[0]) - 1] || ('Book ' + v[0]), n: +v[1] || 0 }; });
+
+    s.tagList = rows(db, 'SELECT t.Name, COUNT(*) n FROM TagMap tm JOIN Tag t ON tm.TagId=t.TagId WHERE tm.NoteId IS NOT NULL GROUP BY t.Name ORDER BY n DESC LIMIT 12').map(function (v) { return { name: String(v[0] || ''), n: +v[1] || 0 }; });
+
+    s.colors = rows(db, 'SELECT ColorIndex, COUNT(*) n FROM UserMark GROUP BY ColorIndex ORDER BY n DESC').map(function (v) { return { idx: +v[0], n: +v[1] || 0 }; }).filter(function (c) { return JWC[c.idx]; });
+
+    var span = rows(db, 'SELECT MIN(LastModified), MAX(LastModified) FROM Note WHERE LastModified IS NOT NULL');
+    if (span.length && span[0]) { s.first = span[0][0] || null; s.last = span[0][1] || null; }
+
+    var active = rows(db, "SELECT strftime('%Y-%m', LastModified) mo, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL GROUP BY mo ORDER BY n DESC LIMIT 1");
+    if (active.length && active[0]) { s.activeMonth = active[0][0] || null; s.activeMonthN = +active[0][1] || 0; }
+
+    return s;
+  }
+
+  function spanYears(first, last) {
+    if (!first || !last) return 0;
+    var a = new Date(String(first).slice(0, 10)), b = new Date(String(last).slice(0, 10));
+    if (isNaN(a) || isNaN(b)) return 0;
+    return Math.max(0, Math.round(((b - a) / (1000 * 60 * 60 * 24 * 365.25)) * 10) / 10);
+  }
+
+  // ── counter animation ──
+  function animateCount(node, target, dur) {
+    target = +target || 0; dur = dur || 1100;
+    if (target === 0) { node.textContent = '0'; return; }
+    var start = null;
+    function step(ts) {
+      if (start == null) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      node.textContent = Math.round(target * e).toLocaleString(getLang());
+      if (p < 1) requestAnimationFrame(step);
+      else node.textContent = target.toLocaleString(getLang());
+    }
+    requestAnimationFrame(step);
+  }
+
+  // ── copy text ──
+  function buildShareText(s, filename) {
+    var lines = [];
+    lines.push('My JW Library — ' + (filename || 'backup'));
+    lines.push('');
+    lines.push(s.notes.toLocaleString('en') + ' notes · ' + s.highlights.toLocaleString('en') + ' highlights · ' + s.bookmarks.toLocaleString('en') + ' bookmarks · ' + s.tags.toLocaleString('en') + ' tags');
+    lines.push('');
+    if (s.books.length) {
+      var top = s.books.slice(0, 3).map(function (b) { return b.name + ' (' + b.n + ')'; }).join(' · ');
+      lines.push('Most studied: ' + top);
+    }
+    if (s.first && s.last) {
+      var yrs = spanYears(s.first, s.last);
+      lines.push('Active: ' + fmtDate(s.first) + ' → ' + fmtDate(s.last) + '  (' + yrs + ' ' + (yrs === 1 ? t('year_unit') : t('years_unit')) + ')');
+    }
+    lines.push('');
+    lines.push('Analyzed at jwsync.org');
+    return lines.join('\n');
+  }
+
+  // ── overlay lifecycle ──
+  var overlay = null, onKey = null;
+  function close() {
+    if (overlay) { overlay.remove(); overlay = null; }
+    document.body.classList.remove('jw-modal-open');
+    if (onKey) { document.removeEventListener('keydown', onKey); onKey = null; }
+  }
+  function buildOverlay() {
+    close();
+    overlay = el('<div class="jww-backdrop"><div class="jww-card"><button class="jww-x" aria-label="' + esc(t('close')) + '">' + IC.x + '</button><div class="jww-body"></div></div></div>');
+    overlay.addEventListener('mousedown', function (e) { if (e.target === overlay) close(); });
+    overlay.querySelector('.jww-x').addEventListener('click', close);
+    onKey = function (e) { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(overlay);
+    document.body.classList.add('jw-modal-open');
+    return overlay.querySelector('.jww-body');
+  }
+  function setBody(html) { var b = overlay && overlay.querySelector('.jww-body'); if (b) b.innerHTML = html; return b; }
+
+  function showSpinner(msg) {
+    setBody('<div class="jww-state"><div class="jww-spin"></div><div class="jww-state-msg">' + esc(msg) + '</div></div>');
+  }
+  function showError(msg) {
+    var b = setBody('<div class="jww-state"><div class="jww-state-msg">' + esc(msg) + '</div><button class="jww-btn jww-btn-primary jww-err-close">' + esc(t('close')) + '</button></div>');
+    if (b) { var btn = b.querySelector('.jww-err-close'); if (btn) btn.addEventListener('click', close); }
+  }
+
+  // ── render the stats view ──
+  function render(s, filename) {
+    var maxBook = s.books.reduce(function (a, b) { return Math.max(a, b.n); }, 0) || 1;
+    var maxYear = s.years.reduce(function (a, y) { return Math.max(a, y.n); }, 0) || 1;
+    var totalHl = s.colors.reduce(function (a, c) { return a + c.n; }, 0) || 0;
+    var yrs = spanYears(s.first, s.last);
+
+    var html = '<div class="jww-pad">';
+
+    // hero
+    html += '<div class="jww-hero">';
+    html += '<div class="jww-filebadge">' + IC.file + '<span>' + esc(filename || 'backup.jwlibrary') + '</span></div>';
+    html += '<p class="jww-eyebrow">' + esc(t('title')) + '</p>';
+    html += '<p class="jww-bignum" data-count="' + s.notes + '">0</p>';
+    html += '<p class="jww-bignum-label">' + esc(t('notes_label').toLowerCase()) + '</p>';
+    html += '</div>';
+
+    // 4-stat grid
+    html += '<div class="jww-grid">';
+    html += '<div class="jww-cell">' + IC.highlight + '<div class="jww-cell-num" data-count="' + s.highlights + '">0</div><div class="jww-cell-lbl">' + esc(t('highlights')) + '</div></div>';
+    html += '<div class="jww-cell">' + IC.bookmark + '<div class="jww-cell-num" data-count="' + s.bookmarks + '">0</div><div class="jww-cell-lbl">' + esc(t('bookmarks')) + '</div></div>';
+    html += '<div class="jww-cell">' + IC.tag + '<div class="jww-cell-num" data-count="' + s.tags + '">0</div><div class="jww-cell-lbl">' + esc(t('tags_label')) + '</div></div>';
+    html += '<div class="jww-cell">' + IC.note + '<div class="jww-cell-num" data-count="' + yrs + '" data-decimal="1">0</div><div class="jww-cell-lbl">' + esc(t('study_span')) + '</div></div>';
+    html += '</div>';
+
+    // top books
+    if (s.books.length) {
+      html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.book + esc(t('top_books')) + '</h3>';
+      s.books.forEach(function (b, i) {
+        var pct = Math.max(4, Math.round((b.n / maxBook) * 100));
+        html += '<div class="jww-hbar"><div class="jww-hbar-top"><span class="jww-hbar-name">' + esc(b.name) + '</span><span class="jww-hbar-val">' + b.n + '</span></div>'
+          + '<div class="jww-hbar-track"><div class="jww-hbar-fill" data-w="' + pct + '" data-i="' + i + '"></div></div></div>';
+      });
+      html += '</div>';
+    }
+
+    // activity by year
+    if (s.years.length) {
+      html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.chart + esc(t('timeline')) + '</h3>';
+      var ys = s.years.slice(-10);
+      html += '<div class="jww-vbars">';
+      ys.forEach(function (y, i) {
+        var pct = Math.max(3, Math.round((y.n / maxYear) * 100));
+        html += '<div class="jww-vcol"><div class="jww-vbar-val">' + y.n + '</div><div class="jww-vbar" data-h="' + pct + '" data-i="' + i + '"></div></div>';
+      });
+      html += '</div><div class="jww-vlabels">';
+      ys.forEach(function (y) { html += '<div class="jww-vlabel">' + esc(y.year) + '</div>'; });
+      html += '</div></div>';
+    }
+
+    // tags
+    if (s.tagList.length) {
+      html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.tags + esc(t('your_tags')) + '</h3><div class="jww-tags">';
+      s.tagList.forEach(function (tg) {
+        html += '<span class="jww-tag">' + esc(tg.name) + '<span class="jww-tag-badge">' + tg.n + '</span></span>';
+      });
+      html += '</div></div>';
+    }
+
+    // highlight colors
+    if (s.colors.length && totalHl) {
+      html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.palette + esc(t('hl_colors')) + '</h3>';
+      html += '<div class="jww-colorbar">';
+      s.colors.forEach(function (c) {
+        html += '<div class="jww-colorbar-seg" style="flex-grow:0;background:' + JWC[c.idx].h + '" data-grow="' + c.n + '"></div>';
+      });
+      html += '</div><div class="jww-colorlist">';
+      s.colors.forEach(function (c) {
+        var pct = Math.round((c.n / totalHl) * 100);
+        html += '<div class="jww-colorrow"><span class="jww-swatch" style="background:' + JWC[c.idx].h + '"></span>'
+          + '<span class="jww-color-name">' + esc(JWC[c.idx].n) + '</span>'
+          + '<span class="jww-color-count">' + c.n + '</span>'
+          + '<span class="jww-color-pct">' + pct + '%</span></div>';
+      });
+      html += '</div></div>';
+    }
+
+    // fun facts
+    html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.facts + esc(t('most_active')) + '</h3><div class="jww-facts">';
+    html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('first_note')) + '</div><div class="jww-fact-val">' + esc(fmtDate(s.first)) + '</div></div>';
+    html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('latest_note')) + '</div><div class="jww-fact-val">' + esc(fmtDate(s.last)) + '</div></div>';
+    html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('most_active')) + '</div><div class="jww-fact-val">' + (s.activeMonth ? esc(fmtMonth(s.activeMonth)) + ' (' + s.activeMonthN + ')' : '—') + '</div></div>';
+    html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('study_span')) + '</div><div class="jww-fact-val">' + yrs + ' ' + esc(yrs === 1 ? t('year_unit') : t('years_unit')) + '</div></div>';
+    html += '</div></div>';
+
+    // footer
+    html += '<div class="jww-footer">'
+      + '<button class="jww-btn jww-btn-ghost jww-copy">' + esc(t('share')) + '</button>'
+      + '<button class="jww-btn jww-btn-primary jww-close">' + esc(t('close')) + '</button>'
+      + '</div>';
+
+    html += '</div>';
+
+    var body = setBody(html);
+    if (!body) return;
+
+    // wire footer
+    var closeBtn = body.querySelector('.jww-close');
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    var copyBtn = body.querySelector('.jww-copy');
+    if (copyBtn) copyBtn.addEventListener('click', function () {
+      var txt = buildShareText(s, filename);
+      var orig = t('share');
+      function feedback() { copyBtn.textContent = t('copied'); setTimeout(function () { copyBtn.textContent = orig; }, 1600); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(feedback, function () { fallbackCopy(txt); feedback(); });
+      } else { fallbackCopy(txt); feedback(); }
+    });
+
+    // animate counters
+    setTimeout(function () {
+      body.querySelectorAll('[data-count]').forEach(function (n) {
+        var target = +n.getAttribute('data-count');
+        if (n.getAttribute('data-decimal') === '1') animateDecimal(n, target, 1100);
+        else animateCount(n, target, 1100);
+      });
+    }, 50);
+
+    // animate bars (staggered)
+    setTimeout(function () {
+      body.querySelectorAll('.jww-hbar-fill').forEach(function (f) {
+        var i = +f.getAttribute('data-i') || 0;
+        setTimeout(function () { f.style.width = f.getAttribute('data-w') + '%'; }, i * 30);
+      });
+      body.querySelectorAll('.jww-vbar').forEach(function (f) {
+        var i = +f.getAttribute('data-i') || 0;
+        setTimeout(function () { f.style.height = f.getAttribute('data-h') + '%'; }, i * 30);
+      });
+      body.querySelectorAll('.jww-colorbar-seg').forEach(function (f, i) {
+        setTimeout(function () { f.style.flexGrow = f.getAttribute('data-grow'); }, i * 30);
+      });
+    }, 100);
+  }
+
+  function animateDecimal(node, target, dur) {
+    target = +target || 0;
+    if (target === 0) { node.textContent = '0'; return; }
+    var start = null;
+    function step(ts) {
+      if (start == null) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      node.textContent = (Math.round(target * e * 10) / 10).toLocaleString(getLang());
+      if (p < 1) requestAnimationFrame(step);
+      else node.textContent = target.toLocaleString(getLang());
+    }
+    requestAnimationFrame(step);
+  }
+
+  function fallbackCopy(txt) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    } catch (_) {}
+  }
+
+  // ── load + run ──
+  function loadFromFile(file) {
+    var filename = (file && file.name) || 'backup.jwlibrary';
+    showSpinner(t('loading'));
+    var SQL;
+    window.initSqlJs({ locateFile: function (f) { return SQLJS_CDN + f; } })
+      .then(function (sql) { SQL = sql; return readBuf(file); })
+      .then(function (buf) { return window.JSZip.loadAsync(buf); })
+      .then(function (zip) {
+        var key = Object.keys(zip.files).find(function (f) { return /userdata\.db$/i.test(f); });
+        if (!key) throw new Error('no db');
+        return zip.file(key).async('uint8array');
+      })
+      .then(function (bytes) {
+        var db = new SQL.Database(bytes);
+        var s = analyze(db);
+        try { db.close(); } catch (_) {}
+        if (!s.notes && !s.highlights && !s.bookmarks && !s.tags) { setBody('<div class="jww-state"><div class="jww-state-msg">' + esc(t('no_notes')) + '</div><button class="jww-btn jww-btn-primary jww-err-close">' + esc(t('close')) + '</button></div>'); var eb = overlay.querySelector('.jww-err-close'); if (eb) eb.addEventListener('click', close); return; }
+        render(s, filename);
+      })
+      .catch(function () { showError(t('error')); });
+  }
+
+  function promptForFile() {
+    var b = setBody('<div class="jww-state"><div class="jww-state-msg">' + esc(t('pick_file')) + '</div><button class="jww-btn jww-btn-primary jww-pickbtn">' + esc(t('open_file')) + '</button></div>');
+    if (!b) return;
+    var input = document.createElement('input');
+    input.type = 'file'; input.accept = '.jwlibrary'; input.style.display = 'none';
+    b.appendChild(input);
+    input.addEventListener('change', function () {
+      if (input.files && input.files[0]) {
+        try { window.__jwLastFile = input.files[0]; } catch (_) {}
+        loadFromFile(input.files[0]);
+      }
+    });
+    var pb = b.querySelector('.jww-pickbtn');
+    if (pb) pb.addEventListener('click', function () { input.click(); });
+  }
+
+  // ── public API ──
+  window.__openJwWrapped = function (file) {
+    buildOverlay();
+    showSpinner(t('loading'));
+
+    function proceed() {
+      if (file) { loadFromFile(file); return; }
+      var last = null;
+      try { last = window.__jwLastFile || null; } catch (_) {}
+      if (last) { loadFromFile(last); return; }
+      promptForFile();
+    }
+
+    if (depsReady()) { proceed(); return; }
+    showSpinner(t('loading_tools'));
+    waitForDeps(10000).then(function (ok) {
+      if (!ok) { showError(t('error')); return; }
+      proceed();
+    });
+  };
+})();
+</script>
+<!-- ── End Library Wrapped ──────────────────────────────── -->
+
 <!-- ── Note Explorer (Browse) ────────────────────────────── -->
 <style>
 .jb-overlay{position:fixed;inset:0;z-index:9999;background:rgba(2,6,17,.78);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;animation:jbFade .18s ease-out}

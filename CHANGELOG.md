@@ -4,6 +4,37 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.12.0] — 2026-05-29
+
+### Added
+- **Library Wrapped** — a Spotify-Wrapped-style stats card for your JW Library backup. Open it via the new "📊 Library Stats" button in the nav bar or the "Your Stats" button in the Simple Mode teaser. It reads your `.jwlibrary` file locally (nothing leaves your device) and shows:
+  - **4 headline numbers** — total notes, highlights, bookmarks, and tags, each counting up in an animated easeOut reveal.
+  - **Most Studied Books** — a horizontal bar chart of up to 8 Bible books ranked by note count, with full book names.
+  - **Activity by Year** — a vertical bar chart showing how many notes you wrote each year, so you can see your study history at a glance.
+  - **Your Tags** — all your custom tags with their note counts as badges.
+  - **Highlight Colors** — a segmented color bar showing the breakdown of your 6 highlight colors.
+  - **Study span facts** — first note date, latest note date, total years of study, and your single most-active month.
+  - **Copy stats** button — copies a clean plain-text summary to the clipboard for sharing.
+- New "📊" nav button ("Library Stats") and "Your Stats" Simple Mode teaser button — both wired to `window.__openJwWrapped(window.__jwLastFile)`. Translated into all 10 languages.
+
+### Why
+- The merge and browse features answer *what* is in your library. Wrapped answers *how much* — a rewarding, visual snapshot of years of personal Bible study in one beautiful card.
+
+### Notes
+- Fully internationalised (19 keys × 10 languages, self-contained `I18N` object inside the module).
+- Self-contained `<style>` + `<script>` IIFE block; all CSS prefixed `.jww-*` to avoid collisions. Z-index 10070 (above Browse at 10050, above Conflict Reviewer at 10060).
+- Loads sql.js and JSZip on demand from CDN; gracefully falls back to a file-picker prompt if `window.__jwLastFile` is not set.
+- No CDN scripts fetched until the user opens Wrapped.
+
+### Bumped
+- `softwareVersion` 2.11.0 → 2.12.0 (both beta and production).
+- Service worker cache `jwsync-v25` → `jwsync-v26`.
+
+### Tests
+- New suite `07_library_wrapped.js` (28 assertions): boots the module in JSDOM with real JSZip + sql.js, fabricates a `.jwlibrary` with notes/highlights/bookmarks/tags across multiple Bible books and years, and verifies overlay rendering, all 4 headline stat cells, top-books bar chart, year timeline, tags section, color bar, facts section, copy button, close button, Escape key, empty-library "no notes" message, graceful no-crash when deps are absent, I18N coverage (19 keys × 10 langs), and nav/teaser button wiring in `app.js`. Wired into `npm test`.
+
+---
+
 ## [2.11.0] — 2026-05-29
 
 ### Added
