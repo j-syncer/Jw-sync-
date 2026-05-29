@@ -143,6 +143,16 @@
     .jww-fact{background:rgba(11,20,36,.9);border:1px solid rgba(71,85,105,.3);border-radius:14px;padding:15px 16px}
     .jww-fact-lbl{font-size:11.5px;color:#94a3b8;text-transform:uppercase;letter-spacing:.04em;font-weight:600;margin-bottom:6px}
     .jww-fact-val{font-size:18px;font-weight:700;color:#fff;line-height:1.2}
+    .jww-fact-expandable{cursor:pointer;-webkit-user-select:none;user-select:none;transition:background .15s;border-radius:8px;padding:8px 10px;margin:-8px -10px 0}
+    .jww-fact-expandable:hover{background:rgba(255,255,255,.05)}
+    .jww-fact-toggle{display:flex;align-items:center;gap:6px}
+    .jww-expand-arr{font-size:10px;opacity:.5;transition:transform .2s;line-height:1;flex-shrink:0}
+    .jww-fact-expandable.jww-open .jww-expand-arr{transform:rotate(90deg);opacity:.85}
+    .jww-fact-note-panel{display:none;margin-top:8px;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)}
+    .jww-fact-note-panel.jww-open{display:block}
+    .jww-fn-title{font-size:13px;font-weight:600;color:#f1f5f9;margin-bottom:6px;white-space:pre-wrap;word-break:break-word}
+    .jww-fn-body{font-size:13px;color:#94a3b8;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+    .jww-fn-untitled{font-style:italic;color:#475569}
 
     /* ── footer ── */
     .jww-footer{display:flex;gap:11px;justify-content:flex-end;margin-top:32px;
@@ -311,6 +321,13 @@
       return [];
     }
 
+    function stripNoteHtml(h) {
+      return String(h || '')
+        .replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>/gi, '\n').replace(/<[^>]+>/g, '')
+        .replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&')
+        .replace(/&quot;/g,'"').replace(/&#39;/g,"'")
+        .replace(/\n{3,}/g,'\n\n').trim();
+    }
     function analyze(db, opts) {
       opts = opts || {};
       var dw = ''; // extra WHERE clause for joined Note (alias nt) date filtering
@@ -338,6 +355,14 @@
 
       var span = rows(db, 'SELECT MIN(LastModified), MAX(LastModified) FROM Note WHERE LastModified IS NOT NULL' + ndw);
       if (span.length && span[0]) { s.first = span[0][0] || null; s.last = span[0][1] || null; }
+      if (s.first) {
+        var fn = rows(db, "SELECT Title, Content FROM Note WHERE LastModified='" + s.first + "' LIMIT 1");
+        if (fn.length && fn[0]) s.firstNote = { title: fn[0][0] || '', content: fn[0][1] || '' };
+      }
+      if (s.last) {
+        var ln = rows(db, "SELECT Title, Content FROM Note WHERE LastModified='" + s.last + "' LIMIT 1");
+        if (ln.length && ln[0]) s.lastNote = { title: ln[0][0] || '', content: ln[0][1] || '' };
+      }
 
       var active = rows(db, "SELECT strftime('%Y-%m', LastModified) mo, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY mo ORDER BY n DESC LIMIT 1");
       if (active.length && active[0]) { s.activeMonth = active[0][0] || null; s.activeMonthN = +active[0][1] || 0; }
@@ -567,8 +592,27 @@
 
       // fun facts
       html += '<div class="jww-section"><h3 class="jww-sec-title">' + IC.facts + esc(t('most_active')) + '</h3><div class="jww-facts">';
-      html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('first_note')) + '</div><div class="jww-fact-val">' + esc(fmtDate(s.first)) + '</div></div>';
-      html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('latest_note')) + '</div><div class="jww-fact-val">' + esc(fmtDate(s.last)) + '</div></div>';
+      function noteFactHtml(labelKey, date, noteData, uid) {
+        var id = 'jww-fn-' + uid;
+        var hasNote = noteData && (noteData.title || noteData.content);
+        if (!hasNote) {
+          return '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t(labelKey)) + '</div>'
+            + '<div class="jww-fact-val">' + esc(fmtDate(date)) + '</div></div>';
+        }
+        var snippet = noteData.content ? stripNoteHtml(noteData.content) : '';
+        if (snippet.length > 160) snippet = snippet.slice(0, 157).trim() + '\u2026';
+        var titleHtml = noteData.title ? '<div class="jww-fn-title">' + esc(noteData.title) + '</div>' : '';
+        var bodyHtml = snippet
+          ? '<div class="jww-fn-body">' + esc(snippet) + '</div>'
+          : '<div class="jww-fn-body jww-fn-untitled">—</div>';
+        return '<div class="jww-fact jww-fact-expandable" data-panel="' + id + '">'
+          + '<div class="jww-fact-lbl">' + esc(t(labelKey)) + '</div>'
+          + '<div class="jww-fact-val jww-fact-toggle">' + esc(fmtDate(date))
+          + ' <span class="jww-expand-arr">▶</span></div></div>'
+          + '<div class="jww-fact-note-panel" id="' + id + '">' + titleHtml + bodyHtml + '</div>';
+      }
+      html += noteFactHtml('first_note', s.first, s.firstNote, 'first');
+      html += noteFactHtml('latest_note', s.last, s.lastNote, 'last');
       html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('most_active')) + '</div><div class="jww-fact-val">' + (s.activeMonth ? esc(fmtMonth(s.activeMonth)) + ' (' + s.activeMonthN + ')' : '—') + '</div></div>';
       html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('study_span')) + '</div><div class="jww-fact-val">' + yrs + ' ' + esc(yrs === 1 ? t('year_unit') : t('years_unit')) + '</div></div>';
       html += '</div></div>';
@@ -585,6 +629,18 @@
 
       // wire tabs
       wireTabs(body);
+
+      // wire expand-note click handlers
+      Array.prototype.forEach.call(body.querySelectorAll('.jww-fact-expandable'), function (fact) {
+        fact.addEventListener('click', function () {
+          var panelId = fact.getAttribute('data-panel');
+          var panel = document.getElementById(panelId);
+          if (!panel) return;
+          var open = panel.classList.contains('jww-open');
+          panel.classList.toggle('jww-open', !open);
+          fact.classList.toggle('jww-open', !open);
+        });
+      });
 
       // wire footer
       var copyBtn = body.querySelector('.jww-copy');
