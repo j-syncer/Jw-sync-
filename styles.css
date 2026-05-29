@@ -881,16 +881,62 @@ body.light #jws-loading { background:#f4f8ff; }
   outline: 2px solid #ea580c;
   outline-offset: 2px;
 }
-.site-nav-demo {
-  background: transparent;
+.site-nav-wrapped {
+  background: rgba(234,88,12,.1);
+  color: #fb923c;
+  border-color: rgba(234,88,12,.3);
   cursor: pointer;
   font-family: inherit;
   letter-spacing: .1px;
+  position: relative;
+  overflow: hidden;
 }
-.site-nav-demo:hover {
-  color: #ea580c;
-  border-color: rgba(234,88,12,.4);
-  background: rgba(234,88,12,.08);
+.site-nav-wrapped::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 55%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  animation: snav-shimmer 2.8s ease-in-out infinite 1.5s;
+  pointer-events: none;
+}
+@keyframes snav-shimmer {
+  0%   { left: -80%; opacity: 0; }
+  8%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { left: 185%; opacity: 0; }
+}
+.site-nav-wrapped:hover {
+  color: #fb923c;
+  border-color: rgba(234,88,12,.55);
+  background: rgba(234,88,12,.16);
+}
+.nav-btn-wrapped {
+  color: #fb923c;
+  border-color: rgba(234,88,12,.32);
+  background: rgba(234,88,12,.09);
+  position: relative;
+  overflow: hidden;
+}
+.nav-btn-wrapped::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -80%;
+  width: 55%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  animation: nbtn-shimmer 2.8s ease-in-out infinite 2s;
+  pointer-events: none;
+}
+@keyframes nbtn-shimmer {
+  0%   { left: -80%; opacity: 0; }
+  8%   { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { left: 185%; opacity: 0; }
+}
+.nav-btn-wrapped:hover {
+  color: #fb923c;
+  border-color: rgba(234,88,12,.55);
+  background: rgba(234,88,12,.14);
 }
 .nav-btn-demo {
   color: rgba(203,213,225,.85);

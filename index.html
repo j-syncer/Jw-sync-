@@ -254,7 +254,7 @@
   <div class="site-nav-links">
     <a href="#app" id="site-nav-app" class="site-nav-link" data-i18n="nav_app">App</a>
     <a href="#forum" id="site-nav-forum" class="site-nav-link" data-i18n="nav_community">Community</a>
-    <button type="button" class="site-nav-link site-nav-demo" data-demo-trigger data-i18n="cta_try_demo_nav" title="Try with sample notes">Try Demo</button>
+    <button type="button" class="site-nav-link site-nav-wrapped" id="site-nav-wrapped-btn" onclick="try{if(window.__openJwWrapped)window.__openJwWrapped(window.__jwLastFile||void 0)}catch(_){}">Service Year</button>
     <select id="landing-lang-select" class="nav-lang-select" aria-label="Language">
       <option value="en">🇬🇧 English</option>
       <option value="es">🇪🇸 Español</option>
@@ -646,6 +646,19 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
 .jww-state-msg{color:#94a3b8;font-size:15px;line-height:1.5;max-width:340px}
 .jww-state .jww-btn{margin-top:6px}
 
+/* ── service year tabs ── */
+.jww-sy-tabs{display:flex;gap:6px;overflow-x:auto;padding:0 0 18px;scrollbar-width:none;flex-shrink:0}
+.jww-sy-tabs::-webkit-scrollbar{display:none}
+.jww-sy-tab{flex-shrink:0;padding:6px 14px;border-radius:999px;border:1px solid rgba(71,85,105,.4);background:rgba(11,20,36,.6);color:#94a3b8;font-size:13px;font-weight:500;cursor:pointer;transition:color .15s,border-color .15s,background .15s;white-space:nowrap;font-family:inherit}
+.jww-sy-tab:hover{color:#f1f5f9;border-color:rgba(255,255,255,.15)}
+.jww-sy-tab.jww-sy-active{color:#fb923c;border-color:rgba(234,88,12,.5);background:rgba(234,88,12,.1)}
+
+/* ── delta badges ── */
+.jww-delta-up{font-size:11px;font-weight:700;color:#4ade80;margin-left:7px;letter-spacing:-.2px}
+.jww-delta-dn{font-size:11px;font-weight:700;color:#f87171;margin-left:7px;letter-spacing:-.2px}
+.jww-delta-eq{font-size:11px;color:#64748b;margin-left:7px}
+.jww-cell-sub{display:block;font-size:10px;color:#475569;margin-top:2px;letter-spacing:.3px;text-transform:uppercase}
+
 /* ── hero ── */
 .jww-hero{text-align:center;padding-bottom:8px}
 .jww-filebadge{display:inline-flex;align-items:center;gap:7px;max-width:90%;
@@ -746,16 +759,16 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
   var JWC = {1:{h:'#fbbf24',n:'Yellow'},2:{h:'#4ade80',n:'Green'},3:{h:'#60a5fa',n:'Blue'},4:{h:'#f472b6',n:'Pink'},5:{h:'#fb923c',n:'Orange'},6:{h:'#c084fc',n:'Purple'}};
 
   var I18N = {
-    en:{title:'Your Library in Numbers',close:'Close',share:'Copy stats',copied:'Copied!',loading:'Analyzing your library…',error:'Could not read this file.',highlights:'Highlights',bookmarks:'Bookmarks',tags_label:'Tags',notes_label:'Notes',top_books:'Most Studied Books',timeline:'Activity by Year',your_tags:'Your Tags',hl_colors:'Highlight Colors',first_note:'First note',latest_note:'Latest note',study_span:'Study span',most_active:'Most active',pick_file:'Choose a .jwlibrary file',open_file:'Open File',no_notes:'No notes found in this file.',loading_tools:'Loading tools, please wait a moment…',years_unit:'years',year_unit:'year'},
-    es:{title:'Tu biblioteca en números',close:'Cerrar',share:'Copiar estadísticas',copied:'¡Copiado!',loading:'Analizando tu biblioteca…',error:'No se pudo leer este archivo.',highlights:'Subrayados',bookmarks:'Marcadores',tags_label:'Etiquetas',notes_label:'Notas',top_books:'Libros más estudiados',timeline:'Actividad por año',your_tags:'Tus etiquetas',hl_colors:'Colores de subrayado',first_note:'Primera nota',latest_note:'Última nota',study_span:'Período de estudio',most_active:'Más activo',pick_file:'Elige un archivo .jwlibrary',open_file:'Abrir archivo',no_notes:'No se encontraron notas en este archivo.',loading_tools:'Cargando herramientas, espera un momento…',years_unit:'años',year_unit:'año'},
-    pt:{title:'Sua biblioteca em números',close:'Fechar',share:'Copiar estatísticas',copied:'Copiado!',loading:'Analisando sua biblioteca…',error:'Não foi possível ler este arquivo.',highlights:'Destaques',bookmarks:'Marcadores',tags_label:'Marcadores de texto',notes_label:'Notas',top_books:'Livros mais estudados',timeline:'Atividade por ano',your_tags:'Suas etiquetas',hl_colors:'Cores de destaque',first_note:'Primeira nota',latest_note:'Última nota',study_span:'Período de estudo',most_active:'Mais ativo',pick_file:'Escolha um arquivo .jwlibrary',open_file:'Abrir arquivo',no_notes:'Nenhuma nota encontrada neste arquivo.',loading_tools:'Carregando ferramentas, aguarde um momento…',years_unit:'anos',year_unit:'ano'},
-    fr:{title:'Votre bibliothèque en chiffres',close:'Fermer',share:'Copier les stats',copied:'Copié !',loading:'Analyse de votre bibliothèque…',error:'Impossible de lire ce fichier.',highlights:'Surlignages',bookmarks:'Signets',tags_label:'Étiquettes',notes_label:'Notes',top_books:'Livres les plus étudiés',timeline:'Activité par année',your_tags:'Vos étiquettes',hl_colors:'Couleurs de surlignage',first_note:'Première note',latest_note:'Dernière note',study_span:'Période d’étude',most_active:'Plus actif',pick_file:'Choisir un fichier .jwlibrary',open_file:'Ouvrir le fichier',no_notes:'Aucune note trouvée dans ce fichier.',loading_tools:'Chargement des outils, un instant…',years_unit:'ans',year_unit:'an'},
-    de:{title:'Deine Bibliothek in Zahlen',close:'Schließen',share:'Statistik kopieren',copied:'Kopiert!',loading:'Deine Bibliothek wird analysiert…',error:'Diese Datei konnte nicht gelesen werden.',highlights:'Markierungen',bookmarks:'Lesezeichen',tags_label:'Kategorien',notes_label:'Notizen',top_books:'Meiststudierte Bücher',timeline:'Aktivität nach Jahr',your_tags:'Deine Kategorien',hl_colors:'Markierungsfarben',first_note:'Erste Notiz',latest_note:'Letzte Notiz',study_span:'Studienzeitraum',most_active:'Aktivste Zeit',pick_file:'.jwlibrary-Datei auswählen',open_file:'Datei öffnen',no_notes:'In dieser Datei wurden keine Notizen gefunden.',loading_tools:'Werkzeuge werden geladen, einen Moment…',years_unit:'Jahre',year_unit:'Jahr'},
-    it:{title:'La tua biblioteca in numeri',close:'Chiudi',share:'Copia statistiche',copied:'Copiato!',loading:'Analisi della tua biblioteca…',error:'Impossibile leggere questo file.',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags_label:'Etichette',notes_label:'Note',top_books:'Libri più studiati',timeline:'Attività per anno',your_tags:'Le tue etichette',hl_colors:'Colori evidenziazione',first_note:'Prima nota',latest_note:'Ultima nota',study_span:'Periodo di studio',most_active:'Più attivo',pick_file:'Scegli un file .jwlibrary',open_file:'Apri file',no_notes:'Nessuna nota trovata in questo file.',loading_tools:'Caricamento strumenti, un momento…',years_unit:'anni',year_unit:'anno'},
-    ru:{title:'Ваша библиотека в цифрах',close:'Закрыть',share:'Копировать статистику',copied:'Скопировано!',loading:'Анализируем вашу библиотеку…',error:'Не удалось прочитать этот файл.',highlights:'Выделения',bookmarks:'Закладки',tags_label:'Метки',notes_label:'Заметки',top_books:'Самые изучаемые книги',timeline:'Активность по годам',your_tags:'Ваши метки',hl_colors:'Цвета выделений',first_note:'Первая заметка',latest_note:'Последняя заметка',study_span:'Период изучения',most_active:'Самый активный',pick_file:'Выберите файл .jwlibrary',open_file:'Открыть файл',no_notes:'В этом файле не найдено заметок.',loading_tools:'Загрузка инструментов, подождите…',years_unit:'лет',year_unit:'год'},
-    ja:{title:'数字で見るあなたのライブラリー',close:'閉じる',share:'統計をコピー',copied:'コピーしました',loading:'ライブラリーを分析しています…',error:'このファイルを読み込めませんでした。',highlights:'ハイライト',bookmarks:'しおり',tags_label:'タグ',notes_label:'ノート',top_books:'よく研究した書',timeline:'年ごとの活動',your_tags:'あなたのタグ',hl_colors:'ハイライトの色',first_note:'最初のノート',latest_note:'最新のノート',study_span:'研究期間',most_active:'最も活発な時期',pick_file:'.jwlibrary ファイルを選択',open_file:'ファイルを開く',no_notes:'このファイルにノートが見つかりませんでした。',loading_tools:'ツールを読み込んでいます。少々お待ちください…',years_unit:'年',year_unit:'年'},
-    ko:{title:'숫자로 보는 내 라이브러리',close:'닫기',share:'통계 복사',copied:'복사됨!',loading:'라이브러리를 분석하는 중…',error:'이 파일을 읽을 수 없습니다.',highlights:'강조 표시',bookmarks:'책갈피',tags_label:'태그',notes_label:'노트',top_books:'가장 많이 연구한 책',timeline:'연도별 활동',your_tags:'내 태그',hl_colors:'강조 표시 색상',first_note:'첫 노트',latest_note:'최근 노트',study_span:'연구 기간',most_active:'가장 활발한 시기',pick_file:'.jwlibrary 파일 선택',open_file:'파일 열기',no_notes:'이 파일에서 노트를 찾을 수 없습니다.',loading_tools:'도구를 불러오는 중입니다. 잠시만 기다려 주세요…',years_unit:'년',year_unit:'년'},
-    tl:{title:'Ang Iyong Aklatan sa Bilang',close:'Isara',share:'Kopyahin ang stats',copied:'Nakopya na!',loading:'Sinusuri ang iyong aklatan…',error:'Hindi mabasa ang file na ito.',highlights:'Mga Highlight',bookmarks:'Mga Bookmark',tags_label:'Mga Tag',notes_label:'Mga Tala',top_books:'Pinakapinag-aralang Aklat',timeline:'Aktibidad kada Taon',your_tags:'Iyong mga Tag',hl_colors:'Mga Kulay ng Highlight',first_note:'Unang tala',latest_note:'Pinakahuling tala',study_span:'Saklaw ng pag-aaral',most_active:'Pinakaaktibo',pick_file:'Pumili ng .jwlibrary file',open_file:'Buksan ang File',no_notes:'Walang natagpuang tala sa file na ito.',loading_tools:'Naglo-load ang mga tool, sandali lang…',years_unit:'taon',year_unit:'taon'}
+    en:{title:'Your Service Year Highlights',close:'Close',share:'Copy stats',copied:'Copied!',loading:'Analyzing your library…',error:'Could not read this file.',highlights:'Highlights',bookmarks:'Bookmarks',tags_label:'Tags',notes_label:'Notes',top_books:'Most Studied Books',timeline:'Activity by Year',your_tags:'Your Tags',hl_colors:'Highlight Colors',first_note:'First note',latest_note:'Latest note',study_span:'Study span',most_active:'Most active',pick_file:'Choose a .jwlibrary file',open_file:'Open File',no_notes:'No notes found in this file.',loading_tools:'Loading tools, please wait a moment…',years_unit:'years',year_unit:'year',all_time:'All Time',service_yr:'Service Year',vs_prev:'vs prev. year',no_data_sy:'No notes recorded for this service year.'},
+    es:{title:'Momentos de tu año de servicio',close:'Cerrar',share:'Copiar estadísticas',copied:'¡Copiado!',loading:'Analizando tu biblioteca…',error:'No se pudo leer este archivo.',highlights:'Subrayados',bookmarks:'Marcadores',tags_label:'Etiquetas',notes_label:'Notas',top_books:'Libros más estudiados',timeline:'Actividad por año',your_tags:'Tus etiquetas',hl_colors:'Colores de subrayado',first_note:'Primera nota',latest_note:'Última nota',study_span:'Período de estudio',most_active:'Más activo',pick_file:'Elige un archivo .jwlibrary',open_file:'Abrir archivo',no_notes:'No se encontraron notas en este archivo.',loading_tools:'Cargando herramientas, espera un momento…',years_unit:'años',year_unit:'año',all_time:'Todo el tiempo',service_yr:'Año de servicio',vs_prev:'vs año anterior',no_data_sy:'No hay notas registradas para este año de servicio.'},
+    pt:{title:'Destaques do seu ano de serviço',close:'Fechar',share:'Copiar estatísticas',copied:'Copiado!',loading:'Analisando sua biblioteca…',error:'Não foi possível ler este arquivo.',highlights:'Destaques',bookmarks:'Marcadores',tags_label:'Marcadores de texto',notes_label:'Notas',top_books:'Livros mais estudados',timeline:'Atividade por ano',your_tags:'Suas etiquetas',hl_colors:'Cores de destaque',first_note:'Primeira nota',latest_note:'Última nota',study_span:'Período de estudo',most_active:'Mais ativo',pick_file:'Escolha um arquivo .jwlibrary',open_file:'Abrir arquivo',no_notes:'Nenhuma nota encontrada neste arquivo.',loading_tools:'Carregando ferramentas, aguarde um momento…',years_unit:'anos',year_unit:'ano',all_time:'Todo o tempo',service_yr:'Ano de serviço',vs_prev:'vs ano anterior',no_data_sy:'Nenhuma nota registrada para este ano de serviço.'},
+    fr:{title:'Temps forts de votre année de service',close:'Fermer',share:'Copier les stats',copied:'Copié !',loading:'Analyse de votre bibliothèque…',error:'Impossible de lire ce fichier.',highlights:'Surlignages',bookmarks:'Signets',tags_label:'Étiquettes',notes_label:'Notes',top_books:'Livres les plus étudiés',timeline:'Activité par année',your_tags:'Vos étiquettes',hl_colors:'Couleurs de surlignage',first_note:'Première note',latest_note:'Dernière note',study_span:'Période d’étude',most_active:'Plus actif',pick_file:'Choisir un fichier .jwlibrary',open_file:'Ouvrir le fichier',no_notes:'Aucune note trouvée dans ce fichier.',loading_tools:'Chargement des outils, un instant…',years_unit:'ans',year_unit:'an',all_time:'Tout le temps',service_yr:'Année de service',vs_prev:'vs année préc.',no_data_sy:'Aucune note enregistrée pour cette année de service.'},
+    de:{title:'Highlights deines Dienstjahres',close:'Schließen',share:'Statistik kopieren',copied:'Kopiert!',loading:'Deine Bibliothek wird analysiert…',error:'Diese Datei konnte nicht gelesen werden.',highlights:'Markierungen',bookmarks:'Lesezeichen',tags_label:'Kategorien',notes_label:'Notizen',top_books:'Meiststudierte Bücher',timeline:'Aktivität nach Jahr',your_tags:'Deine Kategorien',hl_colors:'Markierungsfarben',first_note:'Erste Notiz',latest_note:'Letzte Notiz',study_span:'Studienzeitraum',most_active:'Aktivste Zeit',pick_file:'.jwlibrary-Datei auswählen',open_file:'Datei öffnen',no_notes:'In dieser Datei wurden keine Notizen gefunden.',loading_tools:'Werkzeuge werden geladen, einen Moment…',years_unit:'Jahre',year_unit:'Jahr',all_time:'Gesamtzeit',service_yr:'Dienstjahr',vs_prev:'vs Vorjahr',no_data_sy:'Für dieses Dienstjahr wurden keine Notizen erfasst.'},
+    it:{title:'Punti salienti del tuo anno di servizio',close:'Chiudi',share:'Copia statistiche',copied:'Copiato!',loading:'Analisi della tua biblioteca…',error:'Impossibile leggere questo file.',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags_label:'Etichette',notes_label:'Note',top_books:'Libri più studiati',timeline:'Attività per anno',your_tags:'Le tue etichette',hl_colors:'Colori evidenziazione',first_note:'Prima nota',latest_note:'Ultima nota',study_span:'Periodo di studio',most_active:'Più attivo',pick_file:'Scegli un file .jwlibrary',open_file:'Apri file',no_notes:'Nessuna nota trovata in questo file.',loading_tools:'Caricamento strumenti, un momento…',years_unit:'anni',year_unit:'anno',all_time:'Tutto il tempo',service_yr:'Anno di servizio',vs_prev:'vs anno prec.',no_data_sy:'Nessuna nota registrata per questo anno di servizio.'},
+    ru:{title:'Итоги вашего года служения',close:'Закрыть',share:'Копировать статистику',copied:'Скопировано!',loading:'Анализируем вашу библиотеку…',error:'Не удалось прочитать этот файл.',highlights:'Выделения',bookmarks:'Закладки',tags_label:'Метки',notes_label:'Заметки',top_books:'Самые изучаемые книги',timeline:'Активность по годам',your_tags:'Ваши метки',hl_colors:'Цвета выделений',first_note:'Первая заметка',latest_note:'Последняя заметка',study_span:'Период изучения',most_active:'Самый активный',pick_file:'Выберите файл .jwlibrary',open_file:'Открыть файл',no_notes:'В этом файле не найдено заметок.',loading_tools:'Загрузка инструментов, подождите…',years_unit:'лет',year_unit:'год',all_time:'За всё время',service_yr:'Год служения',vs_prev:'vs пред. год',no_data_sy:'Для этого года служения заметок не найдено.'},
+    ja:{title:'奉仕年度のハイライト',close:'閉じる',share:'統計をコピー',copied:'コピーしました',loading:'ライブラリーを分析しています…',error:'このファイルを読み込めませんでした。',highlights:'ハイライト',bookmarks:'しおり',tags_label:'タグ',notes_label:'ノート',top_books:'よく研究した書',timeline:'年ごとの活動',your_tags:'あなたのタグ',hl_colors:'ハイライトの色',first_note:'最初のノート',latest_note:'最新のノート',study_span:'研究期間',most_active:'最も活発な時期',pick_file:'.jwlibrary ファイルを選択',open_file:'ファイルを開く',no_notes:'このファイルにノートが見つかりませんでした。',loading_tools:'ツールを読み込んでいます。少々お待ちください…',years_unit:'年',year_unit:'年',all_time:'通算',service_yr:'奉仕年度',vs_prev:'前年比',no_data_sy:'この奉仕年度に記録されたノートはありません。'},
+    ko:{title:'봉사년도 하이라이트',close:'닫기',share:'통계 복사',copied:'복사됨!',loading:'라이브러리를 분석하는 중…',error:'이 파일을 읽을 수 없습니다.',highlights:'강조 표시',bookmarks:'책갈피',tags_label:'태그',notes_label:'노트',top_books:'가장 많이 연구한 책',timeline:'연도별 활동',your_tags:'내 태그',hl_colors:'강조 표시 색상',first_note:'첫 노트',latest_note:'최근 노트',study_span:'연구 기간',most_active:'가장 활발한 시기',pick_file:'.jwlibrary 파일 선택',open_file:'파일 열기',no_notes:'이 파일에서 노트를 찾을 수 없습니다.',loading_tools:'도구를 불러오는 중입니다. 잠시만 기다려 주세요…',years_unit:'년',year_unit:'년',all_time:'전체 기간',service_yr:'봉사년도',vs_prev:'전년 대비',no_data_sy:'이 봉사년도에 기록된 노트가 없습니다.'},
+    tl:{title:'Mga Highlight ng Taon ng Serbisyo',close:'Isara',share:'Kopyahin ang stats',copied:'Nakopya na!',loading:'Sinusuri ang iyong aklatan…',error:'Hindi mabasa ang file na ito.',highlights:'Mga Highlight',bookmarks:'Mga Bookmark',tags_label:'Mga Tag',notes_label:'Mga Tala',top_books:'Pinakapinag-aralang Aklat',timeline:'Aktibidad kada Taon',your_tags:'Iyong mga Tag',hl_colors:'Mga Kulay ng Highlight',first_note:'Unang tala',latest_note:'Pinakahuling tala',study_span:'Saklaw ng pag-aaral',most_active:'Pinakaaktibo',pick_file:'Pumili ng .jwlibrary file',open_file:'Buksan ang File',no_notes:'Walang natagpuang tala sa file na ito.',loading_tools:'Naglo-load ang mga tool, sandali lang…',years_unit:'taon',year_unit:'taon',all_time:'Lahat ng Panahon',service_yr:'Taon ng Serbisyo',vs_prev:'kumpara sa nakaraang taon',no_data_sy:'Walang naitalang tala para sa taong ng serbisyong ito.'}
   };
 
   function getLang() {
@@ -788,6 +801,34 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
       var dt = new Date(+m[1], +m[2] - 1, 1);
       return dt.toLocaleDateString(getLang(), { year: 'numeric', month: 'long' });
     } catch (_) { return m[1] + '-' + m[2]; }
+  }
+
+  // ── service year utilities ──
+  function currentSY() {
+    var now = new Date();
+    var y = now.getFullYear();
+    var mo = now.getMonth() + 1; // 1-12
+    return (mo >= 9) ? y + 1 : y;
+  }
+  function syStart(yr) { return (yr - 1) + '-09-01 00:00:00'; }
+  function syEnd(yr) { return yr + '-08-31 23:59:59'; }
+  function syLabel(yr) {
+    var endTwo = String(yr).slice(-2);
+    return (yr - 1) + '–' + endTwo;
+  }
+  function getAllSYs(db) {
+    var seen = {};
+    var out = [];
+    var r = rows(db, "SELECT DISTINCT strftime('%Y',LastModified), CAST(strftime('%m',LastModified) AS INTEGER) FROM Note WHERE LastModified IS NOT NULL");
+    r.forEach(function (v) {
+      var y = parseInt(v[0], 10);
+      var mo = parseInt(v[1], 10);
+      if (!y || !mo) return;
+      var sy = (mo >= 9) ? y + 1 : y;
+      if (!seen[sy]) { seen[sy] = 1; out.push(sy); }
+    });
+    out.sort(function (a, b) { return b - a; });
+    return out;
   }
 
   // ── icons ──
@@ -840,25 +881,35 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     return [];
   }
 
-  function analyze(db) {
+  function analyze(db, opts) {
+    opts = opts || {};
+    var dw = ''; // extra WHERE clause for joined Note (alias nt) date filtering
+    if (opts.start && opts.end) {
+      dw = " AND nt.LastModified >= '" + opts.start + "' AND nt.LastModified <= '" + opts.end + "'";
+    }
+    var ndw = ''; // same but for direct Note queries (no alias)
+    if (opts.start && opts.end) {
+      ndw = " AND LastModified >= '" + opts.start + "' AND LastModified <= '" + opts.end + "'";
+    }
+
     var s = {};
-    s.notes = num(db, 'SELECT COUNT(*) FROM Note');
+    s.notes = num(db, 'SELECT COUNT(*) FROM Note WHERE 1=1' + ndw);
     s.highlights = num(db, 'SELECT COUNT(*) FROM UserMark');
     s.bookmarks = num(db, 'SELECT COUNT(*) FROM Bookmark');
     s.tags = num(db, 'SELECT COUNT(*) FROM Tag');
 
-    s.years = rows(db, "SELECT strftime('%Y', LastModified) yr, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL GROUP BY yr ORDER BY yr").map(function (v) { return { year: String(v[0]), n: +v[1] || 0 }; }).filter(function (y) { return /^\d{4}$/.test(y.year); });
+    s.years = rows(db, "SELECT strftime('%Y', LastModified) yr, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY yr ORDER BY yr").map(function (v) { return { year: String(v[0]), n: +v[1] || 0 }; }).filter(function (y) { return /^\d{4}$/.test(y.year); });
 
-    s.books = rows(db, 'SELECT l.BookNumber, COUNT(*) n FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 1 AND 66 GROUP BY l.BookNumber ORDER BY n DESC LIMIT 8').map(function (v) { return { num: +v[0], name: BOOKS[(+v[0]) - 1] || ('Book ' + v[0]), n: +v[1] || 0 }; });
+    s.books = rows(db, 'SELECT l.BookNumber, COUNT(*) n FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 1 AND 66' + dw + ' GROUP BY l.BookNumber ORDER BY n DESC LIMIT 8').map(function (v) { return { num: +v[0], name: BOOKS[(+v[0]) - 1] || ('Book ' + v[0]), n: +v[1] || 0 }; });
 
     s.tagList = rows(db, 'SELECT t.Name, COUNT(*) n FROM TagMap tm JOIN Tag t ON tm.TagId=t.TagId WHERE tm.NoteId IS NOT NULL GROUP BY t.Name ORDER BY n DESC LIMIT 12').map(function (v) { return { name: String(v[0] || ''), n: +v[1] || 0 }; });
 
     s.colors = rows(db, 'SELECT ColorIndex, COUNT(*) n FROM UserMark GROUP BY ColorIndex ORDER BY n DESC').map(function (v) { return { idx: +v[0], n: +v[1] || 0 }; }).filter(function (c) { return JWC[c.idx]; });
 
-    var span = rows(db, 'SELECT MIN(LastModified), MAX(LastModified) FROM Note WHERE LastModified IS NOT NULL');
+    var span = rows(db, 'SELECT MIN(LastModified), MAX(LastModified) FROM Note WHERE LastModified IS NOT NULL' + ndw);
     if (span.length && span[0]) { s.first = span[0][0] || null; s.last = span[0][1] || null; }
 
-    var active = rows(db, "SELECT strftime('%Y-%m', LastModified) mo, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL GROUP BY mo ORDER BY n DESC LIMIT 1");
+    var active = rows(db, "SELECT strftime('%Y-%m', LastModified) mo, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY mo ORDER BY n DESC LIMIT 1");
     if (active.length && active[0]) { s.activeMonth = active[0][0] || null; s.activeMonthN = +active[0][1] || 0; }
 
     return s;
@@ -887,6 +938,21 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     requestAnimationFrame(step);
   }
 
+  function animateDecimal(node, target, dur) {
+    target = +target || 0;
+    if (target === 0) { node.textContent = '0'; return; }
+    var start = null;
+    function step(ts) {
+      if (start == null) start = ts;
+      var p = Math.min(1, (ts - start) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      node.textContent = (Math.round(target * e * 10) / 10).toLocaleString(getLang());
+      if (p < 1) requestAnimationFrame(step);
+      else node.textContent = target.toLocaleString(getLang());
+    }
+    requestAnimationFrame(step);
+  }
+
   // ── copy text ──
   function buildShareText(s, filename) {
     var lines = [];
@@ -907,12 +973,32 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     return lines.join('\n');
   }
 
+  function fallbackCopy(txt) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+    } catch (_) {}
+  }
+
+  // ── module-level loaded DB state ──
+  var loadedDb = null;
+  var loadedFilename = '';
+  var loadedSYs = [];
+  var activeSY = null;
+
   // ── overlay lifecycle ──
   var overlay = null, onKey = null;
   function close() {
     if (overlay) { overlay.remove(); overlay = null; }
     document.body.classList.remove('jw-modal-open');
     if (onKey) { document.removeEventListener('keydown', onKey); onKey = null; }
+    try { if (loadedDb) loadedDb.close(); } catch (_) {}
+    loadedDb = null;
+    loadedFilename = '';
+    loadedSYs = [];
+    activeSY = null;
   }
   function buildOverlay() {
     close();
@@ -935,14 +1021,55 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     if (b) { var btn = b.querySelector('.jww-err-close'); if (btn) btn.addEventListener('click', close); }
   }
 
+  // ── service year tab bar ──
+  function tabBarHtml(meta) {
+    var syList = (meta && meta.syList) || [];
+    if (!syList.length) return '';
+    var html = '<div class="jww-sy-tabs">';
+    html += '<button class="jww-sy-tab' + (meta.activeSY === null ? ' jww-sy-active' : '') + '" data-sy="all">' + esc(t('all_time')) + '</button>';
+    syList.forEach(function (yr) {
+      html += '<button class="jww-sy-tab' + (meta.activeSY === yr ? ' jww-sy-active' : '') + '" data-sy="' + yr + '">' + esc(syLabel(yr) + ' ' + t('service_yr')) + '</button>';
+    });
+    html += '</div>';
+    return html;
+  }
+  function wireTabs(body) {
+    if (!body) return;
+    var tabs = body.querySelectorAll('.jww-sy-tab');
+    Array.prototype.forEach.call(tabs, function (btn) {
+      btn.addEventListener('click', function () {
+        var sy = btn.getAttribute('data-sy');
+        activeSY = (sy === 'all') ? null : +sy;
+        renderFull();
+      });
+    });
+  }
+
   // ── render the stats view ──
-  function render(s, filename) {
+  function render(s, filename, meta) {
+    meta = meta || {};
+    var tabsMeta = { activeSY: (meta.activeSY != null ? meta.activeSY : null), syList: meta.syList || [] };
+    var prevS = meta.prevS || null;
+
+    // no-data-for-SY state (keep tab bar visible)
+    if (tabsMeta.activeSY !== null && !s.notes && !s.highlights && !s.bookmarks) {
+      var ndHtml = '<div class="jww-pad">' + tabBarHtml(tabsMeta) +
+        '<div class="jww-state"><div class="jww-state-msg">' + esc(t('no_data_sy')) + '</div></div></div>';
+      var ndBody = setBody(ndHtml);
+      wireTabs(ndBody);
+      return;
+    }
+
     var maxBook = s.books.reduce(function (a, b) { return Math.max(a, b.n); }, 0) || 1;
     var maxYear = s.years.reduce(function (a, y) { return Math.max(a, y.n); }, 0) || 1;
     var totalHl = s.colors.reduce(function (a, c) { return a + c.n; }, 0) || 0;
     var yrs = spanYears(s.first, s.last);
+    var inSY = (tabsMeta.activeSY !== null);
 
     var html = '<div class="jww-pad">';
+
+    // service year tab bar
+    html += tabBarHtml(tabsMeta);
 
     // hero
     html += '<div class="jww-hero">';
@@ -952,12 +1079,22 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     html += '<p class="jww-bignum-label">' + esc(t('notes_label').toLowerCase()) + '</p>';
     html += '</div>';
 
-    // 4-stat grid
+    // notes delta badge markup
+    var notesDelta = '';
+    if (inSY && prevS) {
+      var d = s.notes - prevS.notes;
+      if (d > 0) notesDelta = '<span class="jww-delta-up">↑ +' + d + '</span>';
+      else if (d < 0) notesDelta = '<span class="jww-delta-dn">↓ ' + d + '</span>';
+      else notesDelta = '<span class="jww-delta-eq">→ same</span>';
+    }
+    var allTimeSub = inSY ? '<span class="jww-cell-sub">' + esc(t('all_time')) + '</span>' : '';
+
+    // 4-stat grid: notes / highlights / bookmarks / tags
     html += '<div class="jww-grid">';
-    html += '<div class="jww-cell">' + IC.highlight + '<div class="jww-cell-num" data-count="' + s.highlights + '">0</div><div class="jww-cell-lbl">' + esc(t('highlights')) + '</div></div>';
-    html += '<div class="jww-cell">' + IC.bookmark + '<div class="jww-cell-num" data-count="' + s.bookmarks + '">0</div><div class="jww-cell-lbl">' + esc(t('bookmarks')) + '</div></div>';
-    html += '<div class="jww-cell">' + IC.tag + '<div class="jww-cell-num" data-count="' + s.tags + '">0</div><div class="jww-cell-lbl">' + esc(t('tags_label')) + '</div></div>';
-    html += '<div class="jww-cell">' + IC.note + '<div class="jww-cell-num" data-count="' + yrs + '" data-decimal="1">0</div><div class="jww-cell-lbl">' + esc(t('study_span')) + '</div></div>';
+    html += '<div class="jww-cell">' + IC.note + '<div class="jww-cell-num" data-count="' + s.notes + '">0</div><div class="jww-cell-lbl">' + esc(t('notes_label')) + notesDelta + '</div></div>';
+    html += '<div class="jww-cell">' + IC.highlight + '<div class="jww-cell-num" data-count="' + s.highlights + '">0</div><div class="jww-cell-lbl">' + esc(t('highlights')) + allTimeSub + '</div></div>';
+    html += '<div class="jww-cell">' + IC.bookmark + '<div class="jww-cell-num" data-count="' + s.bookmarks + '">0</div><div class="jww-cell-lbl">' + esc(t('bookmarks')) + allTimeSub + '</div></div>';
+    html += '<div class="jww-cell">' + IC.tag + '<div class="jww-cell-num" data-count="' + s.tags + '">0</div><div class="jww-cell-lbl">' + esc(t('tags_label')) + allTimeSub + '</div></div>';
     html += '</div>';
 
     // top books
@@ -1031,6 +1168,9 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     var body = setBody(html);
     if (!body) return;
 
+    // wire tabs
+    wireTabs(body);
+
     // wire footer
     var closeBtn = body.querySelector('.jww-close');
     if (closeBtn) closeBtn.addEventListener('click', close);
@@ -1069,28 +1209,22 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     }, 100);
   }
 
-  function animateDecimal(node, target, dur) {
-    target = +target || 0;
-    if (target === 0) { node.textContent = '0'; return; }
-    var start = null;
-    function step(ts) {
-      if (start == null) start = ts;
-      var p = Math.min(1, (ts - start) / dur);
-      var e = 1 - Math.pow(1 - p, 3);
-      node.textContent = (Math.round(target * e * 10) / 10).toLocaleString(getLang());
-      if (p < 1) requestAnimationFrame(step);
-      else node.textContent = target.toLocaleString(getLang());
-    }
-    requestAnimationFrame(step);
-  }
+  // ── render against the loaded DB for the active service year ──
+  function renderFull() {
+    if (!loadedDb) return;
+    var opts = (activeSY !== null) ? { start: syStart(activeSY), end: syEnd(activeSY) } : {};
+    var s = analyze(loadedDb, opts);
 
-  function fallbackCopy(txt) {
-    try {
-      var ta = document.createElement('textarea');
-      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      document.execCommand('copy'); document.body.removeChild(ta);
-    } catch (_) {}
+    var prevS = null;
+    if (activeSY !== null) {
+      var idx = loadedSYs.indexOf(activeSY);
+      if (idx !== -1 && idx + 1 < loadedSYs.length) {
+        var prevYr = loadedSYs[idx + 1];
+        prevS = analyze(loadedDb, { start: syStart(prevYr), end: syEnd(prevYr) });
+      }
+    }
+
+    render(s, loadedFilename, { activeSY: activeSY, syList: loadedSYs, prevS: prevS });
   }
 
   // ── load + run ──
@@ -1107,11 +1241,22 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
         return zip.file(key).async('uint8array');
       })
       .then(function (bytes) {
+        try { if (loadedDb) loadedDb.close(); } catch (_) {}
+        loadedDb = null;
         var db = new SQL.Database(bytes);
-        var s = analyze(db);
-        try { db.close(); } catch (_) {}
-        if (!s.notes && !s.highlights && !s.bookmarks && !s.tags) { setBody('<div class="jww-state"><div class="jww-state-msg">' + esc(t('no_notes')) + '</div><button class="jww-btn jww-btn-primary jww-err-close">' + esc(t('close')) + '</button></div>'); var eb = overlay.querySelector('.jww-err-close'); if (eb) eb.addEventListener('click', close); return; }
-        render(s, filename);
+        // probe overall presence with an all-time analyze
+        var probe = analyze(db, {});
+        if (!probe.notes && !probe.highlights && !probe.bookmarks && !probe.tags) {
+          try { db.close(); } catch (_) {}
+          setBody('<div class="jww-state"><div class="jww-state-msg">' + esc(t('no_notes')) + '</div><button class="jww-btn jww-btn-primary jww-err-close">' + esc(t('close')) + '</button></div>');
+          var eb = overlay && overlay.querySelector('.jww-err-close'); if (eb) eb.addEventListener('click', close);
+          return;
+        }
+        loadedDb = db;
+        loadedFilename = filename;
+        loadedSYs = getAllSYs(db);
+        activeSY = loadedSYs[0] || null;
+        renderFull();
       })
       .catch(function () { showError(t('error')); });
   }
@@ -1134,6 +1279,8 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
 
   // ── public API ──
   window.__openJwWrapped = function (file) {
+    try { if (loadedDb) loadedDb.close(); } catch (_) {}
+    loadedDb = null;
     buildOverlay();
     showSpinner(t('loading'));
 
@@ -2320,7 +2467,7 @@ window.__bootBrowse = function() {
 
   // ── DOM helpers ───────────────────────────────────────────────────
   function demoTriggers() {
-    return document.querySelectorAll('[data-demo-trigger], #landing-demo-btn, .nav-btn-demo, .site-nav-demo, .simple-mode-teaser-btn-demo');
+    return document.querySelectorAll('[data-demo-trigger], #landing-demo-btn, .nav-btn-demo, .simple-mode-teaser-btn-demo');
   }
   function setBusy(busy) {
     var nodes = demoTriggers();

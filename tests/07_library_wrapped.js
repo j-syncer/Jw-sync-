@@ -1,23 +1,31 @@
 // Integration test for the v2.12.0 Library Wrapped stats viewer.
 //
 // The module is a self-contained IIFE in beta/index.html exposing
-// window.__openJwWrapped(file). It reads a .jwlibrary file, queries its
-// SQLite DB for 10 different stat groups (note/highlight/bookmark/tag
-// counts, year timeline, top books, tags, highlight colours, study span,
-// most-active month), and renders a Spotify-Wrapped-style stats card.
+// window.__openJwWrapped(file). Reads a .jwlibrary, queries SQLite for
+// stats, and renders a "Your Service Year Highlights" card with:
+//   - Service year tabs (September–August ranges)
+//   - Year-over-year delta badges on the notes headline cell
+//   - All Time tab for aggregate stats
 //
-// This suite boots just that module in JSDOM with real JSZip + sql.js,
-// fabricates a .jwlibrary with known data, and asserts:
-//   1. window.__openJwWrapped is exposed after the module boots
-//   2. Passing a file opens the overlay and renders the stats card
-//   3. All 4 headline stat sections render (notes / highlights / bookmarks / tags)
-//   4. Top-books section renders when data is present
-//   5. Year-timeline section renders when data is present
-//   6. Tags section renders when tags are present
-//   7. Highlight-colors section renders when highlights are present
-//   8. Study-span facts section renders when date data is present
-//   9. Empty library (zero notes) shows the "no_notes" message
-//  10. Close button removes the overlay
+// Assertions:
+//   1.  window.__openJwWrapped exposed
+//   2.  Overlay renders on file open
+//   3.  Service year tab bar renders
+//   4.  Current service year is auto-selected
+//   5.  All 4 headline stat cells render
+//   6.  Top-books section renders
+//   7.  Year-timeline section renders
+//   8.  Tags section renders
+//   9.  Highlight-colors section renders
+//  10.  Facts section renders
+//  11.  Copy button renders
+//  12.  "All Time" tab switches to unfiltered view
+//  13.  Empty library shows no_data_sy state (not crash)
+//  14.  Close button removes overlay
+//  15.  Escape key removes overlay
+//  16.  No deps → graceful loading state
+//  17.  I18N: all 10 langs × required keys
+//  18.  Nav button + teaser button wiring in app.js
 //  11. Escape key removes the overlay
 //  12. Missing deps (no JSZip) shows an error state rather than crashing
 const path = require('path');
@@ -237,6 +245,66 @@ async function waitFor(doc, sel, timeoutMs) {
   }
 
   // ────────────────────────────────────────────────────────────────
+  section('Service year tabs render + current SY auto-selected');
+  {
+    const dom = makeWrappedDom();
+    const win = dom.window, doc = win.document;
+
+    const fileLike = { name: 'my_library.jwlibrary', arrayBuffer: async () => libraryBuf.slice(0) };
+    win.__openJwWrapped(fileLike);
+
+    const pad = await waitForStats(doc, 10000);
+    if (!pad) { fail('.jww-pad never appeared'); dom.window.close(); }
+    else {
+      const tabBar = doc.querySelector('.jww-sy-tabs');
+      if (tabBar) ok('service year tab bar (.jww-sy-tabs) rendered');
+      else fail('service year tab bar not rendered');
+
+      if (tabBar) {
+        const tabs = tabBar.querySelectorAll('.jww-sy-tab');
+        if (tabs.length >= 2) ok('at least 2 tabs rendered (All Time + ≥1 service year): ' + tabs.length);
+        else fail('expected ≥2 tabs, got ' + tabs.length);
+
+        const activeTab = tabBar.querySelector('.jww-sy-active');
+        if (activeTab) ok('one tab is auto-selected (.jww-sy-active): "' + activeTab.textContent.trim() + '"');
+        else fail('no tab is marked active');
+
+        // Active tab should NOT be "All Time" by default (most recent SY is selected)
+        const allTimeTab = Array.from(tabs).find(t => t.getAttribute('data-sy') === 'all');
+        if (allTimeTab && !allTimeTab.classList.contains('jww-sy-active')) ok('All Time tab is NOT the default selection');
+        else if (!allTimeTab) fail('All Time tab not found');
+      }
+      dom.window.close();
+    }
+  }
+
+  // ────────────────────────────────────────────────────────────────
+  section('All Time tab switches view');
+  {
+    const dom = makeWrappedDom();
+    const win = dom.window, doc = win.document;
+
+    const fileLike = { name: 'my_library.jwlibrary', arrayBuffer: async () => libraryBuf.slice(0) };
+    win.__openJwWrapped(fileLike);
+
+    await waitForStats(doc, 10000);
+    const allTimeTab = await waitFor(doc, '.jww-sy-tab[data-sy="all"]', 5000);
+    if (!allTimeTab) { fail('All Time tab not found'); dom.window.close(); }
+    else {
+      allTimeTab.click();
+      await wait(500); // allow re-render (re-render replaces DOM, so re-query)
+      const allTimeTabAfter = doc.querySelector('.jww-sy-tab[data-sy="all"]');
+      if (allTimeTabAfter && allTimeTabAfter.classList.contains('jww-sy-active')) ok('clicking All Time tab activates it');
+      else fail('All Time tab did not become active after click');
+      // Stats card should still be visible (no crash)
+      const pad = doc.querySelector('.jww-pad');
+      if (pad) ok('stats card still renders after switching to All Time');
+      else fail('stats card disappeared after tab switch');
+      dom.window.close();
+    }
+  }
+
+  // ────────────────────────────────────────────────────────────────
   section('Stats card content — 4 headline numbers + sections');
   {
     const dom = makeWrappedDom();
@@ -408,7 +476,8 @@ async function waitFor(doc, sel, timeoutMs) {
     else {
       const REQUIRED_KEYS = ['title','close','share','loading','error','highlights','bookmarks',
         'tags_label','notes_label','top_books','timeline','your_tags','hl_colors',
-        'first_note','latest_note','study_span','no_notes','loading_tools','years_unit'];
+        'first_note','latest_note','study_span','no_notes','loading_tools','years_unit',
+        'all_time','service_yr','no_data_sy'];
       const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl'];
 
       // Rudimentary check: each lang code followed by '{' and each key must appear in the block.

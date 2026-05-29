@@ -165,11 +165,11 @@ for (const path of FILES) {
     else ok('merge-flow Demo handler marker present');
 
     // 9a) Demo trigger surfaces in every place we expect:
-    //   - static #site-nav (always-visible)
     //   - React internal nav (next to "Browse notes")
     //   - Simple Mode teaser (next to "Explore Full Mode →")
-    if (!c.includes('class="site-nav-link site-nav-demo"')) fail('static nav demo button missing');
-    else ok('static #site-nav demo button present');
+    //   - static nav now has the Service Year button instead of Try Demo
+    if (!c.includes('class="site-nav-link site-nav-wrapped"')) fail('static nav Service Year button missing');
+    else ok('static #site-nav Service Year button present');
     // These render inside the React bundle (now external for beta)
     if (!allSrc.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
     else ok('React internal nav demo button present');

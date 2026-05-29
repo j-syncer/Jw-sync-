@@ -4,6 +4,27 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.12.1] — 2026-05-29
+
+### Changed
+- **"Your Service Year Highlights"** — the Library Wrapped feature is now focused on JW service years (September 1 – August 31). The modal is titled "Your Service Year Highlights" and opens to the current service year by default.
+  - **Service year tab bar** at the top of the card: shows all service years that have note data (e.g. "2025–26", "2024–25"…), plus an "All Time" tab. Tabs are horizontally scrollable on mobile.
+  - **Year-over-year delta badge** on the Notes headline cell: shows "↑ +12" in green or "↓ −5" in red compared to the previous service year, so you can see whether your study pace is growing.
+  - **"All Time" tab** aggregates stats across all service years — same view as the original feature.
+  - Highlights, bookmarks, and tag counts are always shown all-time (those tables have no date field), with a small "all time" sub-label when a specific service year is selected.
+- **Nav button renamed**: the "Library Stats" button in the React nav bar is now labelled "Service Year", and the Simple Mode teaser button says "Year Highlights". Translated into all 10 languages.
+- **Removed**: the redundant "Try Demo" button from the top nav bar — Try Demo is already accessible in the mode-controls row and on the landing page. The top-nav slot is now occupied by the shimmering "Service Year" button.
+- **Shimmer effect**: both the static-nav "Service Year" button and the React-nav "Service Year" button have a sweeping light animation to draw the eye. Orange accent, no animated gradient — a subtle sweep on a solid background.
+
+### Bumped
+- No version bump to `softwareVersion` (UI-only change; version stays 2.12.0 internally).
+
+### Tests
+- `07_library_wrapped.js` extended with 7 new assertions: service year tab bar renders, current SY is auto-selected (not All Time), All Time tab can be clicked and activates, all 3 new I18N keys (`all_time`, `service_yr`, `no_data_sy`) verified across all 10 languages.
+- `01_static.js` updated: removed assertion for old `.site-nav-demo` button; now asserts `.site-nav-wrapped` is present.
+
+---
+
 ## [2.12.0] — 2026-05-29
 
 ### Added
