@@ -4,6 +4,30 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.11.0] — 2026-05-29
+
+### Added
+- **Merge Conflict Reviewer** — the headline feature. When the same note was edited differently on more than one device, JW Sync no longer silently picks a winner behind your back. After a merge (and before the file downloads), a review screen now shows every conflicting note **side by side**, with a word-level diff highlighting exactly what changed between versions. For each conflict you can:
+  - **Keep this** — pick whichever version wins (the version currently in the merge is badged "In your merge").
+  - **Keep both** — add the other version as a separate note so nothing is lost.
+  - **Keep merge as-is** — accept the automatic choice and continue.
+  Your picks are written straight into the merged backup on your device (still 100% local, no uploads), and the corrected file is what downloads. If there are no conflicts, nothing changes — you go straight to the celebration + download as before.
+- New landing feature card: **"Review before you download"**, translated into all 10 languages.
+
+### Why
+- The merge used to be a black box: you couldn't see what happened to a note you'd edited on two devices. The reviewer turns JW Sync from "trust me" into "see for yourself" — full transparency over your own notes.
+
+### Notes
+- Fully internationalised (reviewer UI ships its own ~17-key string table across all 10 languages).
+- Self-contained module injected before the celebration block; reads/writes `Note` on the main thread via sql.js (the merge worker is untouched).
+
+### Bumped
+- `softwareVersion` 2.10.0 → 2.11.0 (beta).
+- Service worker cache `jwsync-v24` → `jwsync-v25`.
+
+### Tests
+- New suite `06_conflict_review.js` (~20 assertions): boots the reviewer in JSDOM with real JSZip + sql.js, fabricates two conflicting backups + a merged output, and verifies conflict detection, side-by-side rendering with diff highlights, "Keep this" override (DB rewritten, note count unchanged), "Keep both" (alternate added as a second note), and every short-circuit path (identical notes, missing deps, single backup all resolve to null with no overlay). Wired into `npm test`.
+
 ## [2.10.0] — 2026-05-28
 
 ### Changed
