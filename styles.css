@@ -882,21 +882,30 @@ body.light #jws-loading { background:#f4f8ff; }
   outline-offset: 2px;
 }
 .site-nav-wrapped {
-  background: rgba(234,88,12,.1);
+  background: rgba(234,88,12,.13);
   color: #fb923c;
-  border-color: rgba(234,88,12,.3);
+  border-color: rgba(234,88,12,.4);
   cursor: pointer;
   font-family: inherit;
-  letter-spacing: .1px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  padding: 7px 14px;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 .site-nav-wrapped::after {
   content: '';
   position: absolute;
   top: 0; left: -80%;
   width: 55%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(234,88,12,.25) 30%,
+    rgba(251,191,36,.35) 50%,
+    rgba(234,88,12,.25) 70%,
+    transparent 100%);
   animation: snav-shimmer 2.8s ease-in-out infinite 1.5s;
   pointer-events: none;
 }
@@ -907,14 +916,14 @@ body.light #jws-loading { background:#f4f8ff; }
   100% { left: 185%; opacity: 0; }
 }
 .site-nav-wrapped:hover {
-  color: #fb923c;
-  border-color: rgba(234,88,12,.55);
-  background: rgba(234,88,12,.16);
+  color: #fdba74;
+  border-color: rgba(234,88,12,.6);
+  background: rgba(234,88,12,.2);
 }
 .nav-btn-wrapped {
   color: #fb923c;
-  border-color: rgba(234,88,12,.32);
-  background: rgba(234,88,12,.09);
+  border-color: rgba(234,88,12,.38);
+  background: rgba(234,88,12,.11);
   position: relative;
   overflow: hidden;
 }
@@ -923,7 +932,12 @@ body.light #jws-loading { background:#f4f8ff; }
   position: absolute;
   top: 0; left: -80%;
   width: 55%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(234,88,12,.28) 30%,
+    rgba(251,191,36,.38) 50%,
+    rgba(234,88,12,.28) 70%,
+    transparent 100%);
   animation: nbtn-shimmer 2.8s ease-in-out infinite 2s;
   pointer-events: none;
 }
@@ -934,9 +948,9 @@ body.light #jws-loading { background:#f4f8ff; }
   100% { left: 185%; opacity: 0; }
 }
 .nav-btn-wrapped:hover {
-  color: #fb923c;
-  border-color: rgba(234,88,12,.55);
-  background: rgba(234,88,12,.14);
+  color: #fdba74;
+  border-color: rgba(234,88,12,.58);
+  background: rgba(234,88,12,.17);
 }
 .nav-btn-demo {
   color: rgba(203,213,225,.85);

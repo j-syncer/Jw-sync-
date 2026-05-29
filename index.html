@@ -254,7 +254,7 @@
   <div class="site-nav-links">
     <a href="#app" id="site-nav-app" class="site-nav-link" data-i18n="nav_app">App</a>
     <a href="#forum" id="site-nav-forum" class="site-nav-link" data-i18n="nav_community">Community</a>
-    <button type="button" class="site-nav-link site-nav-wrapped" id="site-nav-wrapped-btn" onclick="try{if(window.__openJwWrapped)window.__openJwWrapped(window.__jwLastFile||void 0)}catch(_){}">Service Year</button>
+    <button type="button" class="site-nav-link site-nav-wrapped" id="site-nav-wrapped-btn" onclick="try{if(window.__openJwWrapped)window.__openJwWrapped(window.__jwLastFile||void 0)}catch(_){}">Your Service Year Highlights</button>
     <select id="landing-lang-select" class="nav-lang-select" aria-label="Language">
       <option value="en">🇬🇧 English</option>
       <option value="es">🇪🇸 Español</option>
@@ -1231,6 +1231,14 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
   function loadFromFile(file) {
     var filename = (file && file.name) || 'backup.jwlibrary';
     showSpinner(t('loading'));
+    if (!depsReady()) {
+      showSpinner(t('loading_tools'));
+      waitForDeps(10000).then(function (ready) {
+        if (!ready) { showError(t('error')); return; }
+        loadFromFile(file);
+      });
+      return;
+    }
     var SQL;
     window.initSqlJs({ locateFile: function (f) { return SQLJS_CDN + f; } })
       .then(function (sql) { SQL = sql; return readBuf(file); })
@@ -1282,22 +1290,21 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
     try { if (loadedDb) loadedDb.close(); } catch (_) {}
     loadedDb = null;
     buildOverlay();
-    showSpinner(t('loading'));
 
-    function proceed() {
-      if (file) { loadFromFile(file); return; }
-      var last = null;
-      try { last = window.__jwLastFile || null; } catch (_) {}
-      if (last) { loadFromFile(last); return; }
+    // Determine what file to use (caller > __jwLastFile > none)
+    var targetFile = file || null;
+    try { if (!targetFile) targetFile = window.__jwLastFile || null; } catch (_) {}
+
+    if (!targetFile) {
+      // No file available — show the picker straight away.
+      // Deps (sql.js / JSZip) are only needed once the user actually picks
+      // a file; loadFromFile() handles waiting for them at that point.
       promptForFile();
+      return;
     }
 
-    if (depsReady()) { proceed(); return; }
-    showSpinner(t('loading_tools'));
-    waitForDeps(10000).then(function (ok) {
-      if (!ok) { showError(t('error')); return; }
-      proceed();
-    });
+    // We have a file — loadFromFile will wait for deps if needed.
+    loadFromFile(targetFile);
   };
 })();
 </script>

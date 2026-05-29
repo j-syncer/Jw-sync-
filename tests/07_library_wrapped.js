@@ -305,7 +305,33 @@ async function waitFor(doc, sel, timeoutMs) {
   }
 
   // ────────────────────────────────────────────────────────────────
-  section('Stats card content — 4 headline numbers + sections');
+  section('No file available → file picker shown immediately (homepage bug fix)');
+  {
+    const dom = makeWrappedDom();
+    const win = dom.window, doc = win.document;
+
+    // Explicitly unset __jwLastFile so we simulate a fresh homepage visit
+    win.__jwLastFile = undefined;
+
+    // Call with no argument (same as the static nav button does)
+    win.__openJwWrapped(undefined);
+    await wait(200);
+
+    // Should immediately show the file picker state, NOT a loading/error state
+    const overlay = doc.querySelector('.jww-backdrop');
+    if (!overlay) { fail('overlay did not appear'); dom.window.close(); }
+    else {
+      ok('overlay appears immediately (no deps-wait before picker)');
+      const spinner = doc.querySelector('.jww-spin');
+      if (!spinner) ok('no spinner shown when prompting for a file (picker shown directly)');
+      else fail('spinner shown instead of file picker — deps-wait bug still present');
+      const pickBtn = doc.querySelector('.jww-pickbtn, .jww-btn');
+      if (pickBtn) ok('file picker button rendered: "' + pickBtn.textContent.trim() + '"');
+      else fail('no file picker button rendered');
+    }
+    dom.window.close();
+  }
+
   {
     const dom = makeWrappedDom();
     const win = dom.window, doc = win.document;
@@ -507,8 +533,8 @@ async function waitFor(doc, sel, timeoutMs) {
     else fail('simple-mode-teaser-btn-wrapped class missing');
     if (appJs.includes('__openJwWrapped')) ok('__openJwWrapped called from nav and teaser buttons');
     else fail('__openJwWrapped not referenced in app.js');
-    if (appJs.match(/wrp_open:"[^"]+"/)) ok('wrp_open translation key present in all languages');
-    else fail('wrp_open key missing from app.js TRANSLATIONS');
+    if (appJs.includes('wrp_open:"Your Service Year Highlights"')) ok('wrp_open en translation = "Your Service Year Highlights"');
+    else fail('wrp_open en value not updated to full label');
     if (appJs.match(/wrp_stats:"[^"]+"/)) ok('wrp_stats translation key present in all languages');
     else fail('wrp_stats key missing from app.js TRANSLATIONS');
     // Count occurrences to make sure all 10 langs got the keys
