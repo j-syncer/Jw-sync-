@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.13.0] — 2026-05-29
+
+### Added
+- **`highlights.html` standalone page** — "Your Service Year Highlights" is now a dedicated page (`jwsync.org/beta/highlights.html` and `jwsync.org/highlights.html`) rather than an overlay. Clicking the button from the homepage or inside the app navigates there directly.
+  - **← JW Sync back button** in the page header returns the user to the app.
+  - **"New file" button** in the header lets the user swap to a different `.jwlibrary` file without leaving the page.
+  - **Eager CDN loading**: JSZip and sql.js load immediately when the page is visited — no 10-second wait or "loading" failures.
+  - **File passing via IndexedDB**: when the user already has a file loaded in the main app, it is written to IDB (`jwsync_hl_v1 / pending / next`) before navigation so the highlights page auto-analyzes it on arrival. If no file is available, the page shows a file picker immediately.
+- **Celebration screen "View Highlights" button** — after a successful merge and download, the celebration overlay now includes a "View Highlights →" button. Clicking it passes the merged `.jwlibrary` buffer to IDB and navigates to `highlights.html` so the user can see their service year stats for the freshly-merged file.
+- **`cele_highlights` i18n key** added to all 10 languages in the celebration module (e.g. `en`: "View Highlights →").
+
+### Changed
+- **Inline Library Wrapped overlay removed** from `beta/index.html` and `index.html`. All stats functionality lives in `highlights.html` now.
+- **Nav buttons updated**: the "Your Service Year Highlights" button in the React nav bar and the Simple Mode teaser now navigate to `highlights.html` (via `__jwGoHighlights()` which handles IDB hand-off) instead of opening an overlay.
+- **Static nav button onclick** updated to call `__jwGoHighlights()`.
+- **Service worker** bumped to `jwsync-v27`; `highlights.html` added to the precache SHELL so it works offline.
+
+### Tests
+- `07_library_wrapped.js` fully rewritten for the standalone-page architecture: extracts the inline script from `highlights.html`, boots it in JSDOM with pre-injected deps, and verifies rendering, service year tabs, All Time switching, empty-library state, file picker, I18N (all 10 langs × 22 keys), nav button wiring, and celebration `cele_highlights` i18n.
+
+---
+
 ## [2.12.1] — 2026-05-29
 
 ### Changed

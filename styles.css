@@ -1279,6 +1279,16 @@ body.jw-modal-open { overflow: hidden; }
   animation: jwc-fade-in .25s ease-out;
 }
 .jwc-download-status[hidden] { display: none; }
+.jwc-btn-highlights {
+  background: rgba(234,88,12,.12);
+  color: #fb923c;
+  border: 1px solid rgba(234,88,12,.35);
+}
+.jwc-btn-highlights:hover {
+  background: rgba(234,88,12,.2);
+  border-color: rgba(234,88,12,.6);
+  color: #fdba74;
+}
 .jwc-donate {
   margin-top: 20px;
   padding-top: 16px;
