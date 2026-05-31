@@ -333,6 +333,37 @@ function assertContains(text, needle, label) {
   // Copy button exists
   if (doc.querySelector('.jb-detail-actions .jb-btn')) ok('Copy button rendered');
   else fail('Copy button missing');
+  // v2.17.0: formatted note content rendered (not flattened to text)
+  const detailHtml = doc.querySelector('.jb-detail-content').innerHTML;
+  if (/<(strong|b)>/i.test(detailHtml)) ok('Note detail renders bold formatting (not plain text)');
+  else fail('Note detail lost formatting: ' + detailHtml);
+
+  section('Rich-text edit mode (Notes)');
+  {
+    // Find + click the Edit button in the detail actions
+    const editBtn = Array.from(doc.querySelectorAll('.jb-detail-actions .jb-btn'))
+      .find(b => /edit/i.test(b.textContent));
+    if (!editBtn) fail('Edit button not found in note detail');
+    else {
+      editBtn.click();
+      await waitFor(() => doc.querySelector('.jb-edit-rte'), 'rich-text editor to render');
+      const rte = doc.querySelector('.jb-edit-rte');
+      if (rte) ok('rich-text editor (.jb-edit-rte) rendered');
+      else fail('.jb-edit-rte not rendered');
+      if (rte && rte.getAttribute('contenteditable') === 'true') ok('editor is contentEditable');
+      else fail('editor not contentEditable');
+      if (rte && /<(strong|b)>/i.test(rte.innerHTML)) ok('editor preserves <strong>/<b> from the note');
+      else fail('editor flattened formatting: ' + (rte && rte.innerHTML));
+      const tools = doc.querySelectorAll('.jb-rte-toolbar .jb-rte-btn');
+      if (tools.length === 4) ok('toolbar has 4 buttons (B/I/U/bullets)');
+      else fail('toolbar buttons: ' + tools.length);
+      // Cancel back out so later sections see read view
+      const cancelBtn = Array.from(doc.querySelectorAll('.jb-detail-actions .jb-btn'))
+        .find(b => /cancel/i.test(b.textContent));
+      if (cancelBtn) cancelBtn.click();
+      await waitFor(() => doc.querySelector('.jb-detail-content'), 'return to read view');
+    }
+  }
 
   section('Switch to Highlights tab');
   hlTab.click();

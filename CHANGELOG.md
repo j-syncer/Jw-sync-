@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.17.0] — 2026-05-31
+
+### Added
+- **Rich-text note editing in the Note Explorer** — editing a note no longer flattens it to plain text. A lightweight built-in editor lets you apply **bold, italic, underline, and bullet lists**, and your note's existing formatting is now preserved when you open it, edit it, and save it. Formatted notes also display with their formatting in the detail pane (and in the linked note shown for a highlight).
+
+### Changed
+- Note content is sanitized to JW Library's safe HTML subset on save, so edits round-trip cleanly back into the app.
+
+---
+
 ## [2.16.0] — 2026-05-31
 
 ### Added

@@ -29,7 +29,8 @@ const BROWSE_REQUIRED_KEYS = [
 ];
 // Browse keys that land on the beta build first (new features ship to beta).
 const BROWSE_BETA_ONLY_KEYS = [
-  'pg_prev','pg_next','pg_status','err_corrupt','err_no_db','err_not_sqlite'
+  'pg_prev','pg_next','pg_status','err_corrupt','err_no_db','err_not_sqlite',
+  'rte_bold','rte_italic','rte_underline','rte_bullets','rich_text_note'
 ];
 
 for (const path of FILES) {
@@ -209,6 +210,14 @@ for (const path of FILES) {
     else ok('pre-merge impact preview (__jwImpactPreview) present');
     if (!c.includes('jip-card')) fail('impact preview markup/CSS missing (.jip-card)');
     else ok('impact preview modal (.jip-card) present');
+
+    // Rich-text note editing (v2.17.0)
+    if (!c.includes('sanitizeNoteHtml')) fail('sanitizeNoteHtml allow-list sanitizer missing');
+    else ok('sanitizeNoteHtml sanitizer present');
+    if (!c.includes('buildRteEditor')) fail('buildRteEditor (WYSIWYG) missing');
+    else ok('rich-text editor (buildRteEditor) present');
+    if (!c.includes('jb-edit-rte')) fail('rich-text editor markup/CSS missing (.jb-edit-rte)');
+    else ok('rich-text editor (.jb-edit-rte) present');
     if (!c.includes('MutationObserver')) fail('MutationObserver not wired in demo handler');
     else ok('MutationObserver present (catches React-rendered demo buttons)');
 
