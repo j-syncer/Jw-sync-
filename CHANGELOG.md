@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.19.2] — 2026-05-31
+
+### Fixed
+- **Language picker now stays visible on mobile.** On the first-time landing page, the nav language selector could be pushed off the right edge (and clipped) on narrow screens — especially in longer-worded languages. The picker is now pinned and the other nav links give way instead.
+
+---
+
 ## [2.19.1] — 2026-05-31
 
 ### Fixed
