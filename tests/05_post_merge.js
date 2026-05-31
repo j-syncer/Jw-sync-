@@ -255,6 +255,36 @@ async function waitForOverlay(doc, id, timeoutMs) {
     }
   }
 
+  section('Landing "How it works" button opens the export guide (cross-module)');
+  {
+    // Regression: the button binding lives in the Demo-handler module while
+    // openRestoreGuide lives in the celebration module — the wiring must go
+    // through the global window.__jwOpenGuide, defined in the right scope.
+    const dom = makeDom();
+    const doc = dom.window.document;
+    await wait(120);
+    if (typeof dom.window.__jwOpenGuide !== 'function') fail('window.__jwOpenGuide not exposed globally');
+    else ok('window.__jwOpenGuide exposed globally');
+    const howBtn = doc.getElementById('landing-howto-btn');
+    if (!howBtn) { fail('landing-howto-btn not present'); dom.window.close(); }
+    else {
+      ok('landing-howto-btn present');
+      howBtn.click();
+      const guide = await waitForOverlay(doc, 'jw-restore-overlay');
+      if (!guide) { fail('How it works button did not open the guide overlay'); dom.window.close(); }
+      else {
+        ok('How it works button opens the guide overlay');
+        const em = guide.querySelector('.jwrg-mode[data-mode="export"]');
+        if (em && em.classList.contains('active')) ok('guide opens in export mode');
+        else fail('guide did not open in export mode');
+        const steps = guide.querySelectorAll('#jwrg-steps li');
+        if (steps.length >= 4) ok('export steps rendered (' + steps.length + ')');
+        else fail('export steps missing: ' + steps.length);
+        dom.window.close();
+      }
+    }
+  }
+
   section('Close button + Escape both dismiss the celebration');
   {
     const dom = makeDom();

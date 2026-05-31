@@ -239,7 +239,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.17.0",
+      "softwareVersion": "2.17.1",
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
     }
     </script>
@@ -2043,7 +2043,6 @@ window.__bootBrowse = function() {
             function () { setBusy(false); demoStarting = false; });
   }
   window.__jwOpenDemo = openDemo;
-  window.__jwOpenGuide = function (mode) { openRestoreGuide(mode === 'restore' ? 'restore' : 'export'); };
 
   // ── Bind to all demo-trigger elements (now + future React renders) ─
   function bindAll(root) {
@@ -2062,7 +2061,7 @@ window.__bootBrowse = function() {
         he.__howtoBound = true;
         he.addEventListener('click', function (ev) {
           if (ev && ev.preventDefault) ev.preventDefault();
-          openRestoreGuide('export');
+          if (window.__jwOpenGuide) window.__jwOpenGuide('export');
         });
       }
     }
@@ -2976,6 +2975,8 @@ window.__bootBrowse = function() {
       el.addEventListener('click', function () { ov.remove(); });
     });
   }
+
+  window.__jwOpenGuide = function (mode) { openRestoreGuide(mode === 'restore' ? 'restore' : 'export'); };
 
   function resetForRealFiles() {
     var inputs = document.querySelectorAll('input[type="file"][accept=".jwlibrary"]');

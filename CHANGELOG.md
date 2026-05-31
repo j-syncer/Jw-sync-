@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.17.1] — 2026-05-31
+
+### Fixed
+- **"First time? How it works" button now opens the guide.** The landing button was wired to a function in a different script scope, so clicking it did nothing. It now correctly opens the export walkthrough.
+
+---
+
 ## [2.17.0] — 2026-05-31
 
 ### Added
