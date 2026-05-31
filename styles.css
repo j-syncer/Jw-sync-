@@ -1781,3 +1781,16 @@ html[data-view="landing"] #landing-view { display: flex !important; }
    landing class on <body> keeps the workspace splash hidden until the
    user actually requests the app (lazy-load, v2.7.0). */
 body.is-landing #jws-loading { display: none !important; }
+
+/* ── Mobile landing nav: keep the language picker fully visible ──
+   The nav <select> is the last item; on narrow screens it was pushed
+   off the right edge and clipped by overflow-x:hidden. Pin it and let
+   the text links give way (truncate / hide). */
+@media (max-width: 600px) {
+  #site-nav { gap: 8px; }
+  .site-nav-logo { flex-shrink: 0; }
+  .site-nav-links { flex: 1 1 auto; min-width: 0; gap: 6px; justify-content: flex-end; }
+  .site-nav-link { flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #site-nav-wrapped-btn { display: none; }
+  .nav-lang-select { flex-shrink: 0; }
+}
