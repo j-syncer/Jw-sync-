@@ -156,6 +156,23 @@ for (const path of FILES) {
   if (!allSrc.includes('window.__jwLastFile=e')) fail('window.__jwLastFile not set in ja()');
   else ok('window.__jwLastFile assignment present in ja()');
 
+  // Landing language picker must work before the (lazy) app bundle loads:
+  // a compact landing i18n set is exposed as a window.TRANSLATIONS fallback.
+  if (isBeta) {
+    if (!c.includes('window.__JW_LANDING_I18N'))
+      fail('landing i18n fallback missing — language switch no-ops on cold landing');
+    else ok('landing i18n fallback (window.__JW_LANDING_I18N) present');
+    // It must cover all 10 languages with the hero key.
+    const lm = c.match(/window\.__JW_LANDING_I18N\s*=\s*(\{[\s\S]*?\});/);
+    if (lm) {
+      try {
+        const li = JSON.parse(lm[1]);
+        const ok10 = EXPECTED_LANGS.every(l => li[l] && li[l].hero_title);
+        if (ok10) ok('landing i18n covers all 10 languages'); else fail('landing i18n missing a language/hero_title');
+      } catch (e) { fail('landing i18n JSON invalid: ' + e.message); }
+    } else fail('landing i18n object not parseable');
+  }
+
   // 7) Upsell + CTA in markup
   if (!allSrc.includes('Note Explorer ✨')) fail('upsell item missing');
   else ok('Upsell "Note Explorer ✨" present');

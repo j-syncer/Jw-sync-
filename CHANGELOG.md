@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.19.3] — 2026-05-31
+
+### Fixed
+- **Changing the language now updates the home page immediately.** On the first-time landing page (before the main app loads), switching the language picker did nothing because the translations weren't available yet. The landing page now carries its own compact translation set, so the hero, buttons, feature cards, and nav switch language instantly.
+
+---
+
 ## [2.19.2] — 2026-05-31
 
 ### Fixed
