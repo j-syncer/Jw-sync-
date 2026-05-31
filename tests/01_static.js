@@ -16,7 +16,8 @@ function section(name) { console.log('\n== ' + name + ' =='); }
 const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl'];
 const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
-const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav'];
+const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',
+  'err_corrupt', 'err_no_db', 'err_not_sqlite', 'err_oversize', 'warn_oversize'];
 
 const BROWSE_REQUIRED_KEYS = [
   'title','search','no_results','loading','close','no_file','pick_file',
@@ -25,6 +26,10 @@ const BROWSE_REQUIRED_KEYS = [
   'sort_oldest','sort_pub','modified','no_content','too_many',
   'tab_notes','tab_highlights','tab_bookmarks','hl_label','hl_no_text',
   'hl_with_note','bm_label','bm_slot','linked_note'
+];
+// Browse keys that land on the beta build first (new features ship to beta).
+const BROWSE_BETA_ONLY_KEYS = [
+  'pg_prev','pg_next','pg_status','err_corrupt','err_no_db','err_not_sqlite'
 ];
 
 for (const path of FILES) {
@@ -102,12 +107,13 @@ for (const path of FILES) {
     ok('Browse I18N parses');
   } catch (e) { fail('Browse I18N parse failed: ' + e.message); continue; }
 
+  const browseKeys = isBeta ? BROWSE_REQUIRED_KEYS.concat(BROWSE_BETA_ONLY_KEYS) : BROWSE_REQUIRED_KEYS;
   for (const lang of EXPECTED_LANGS) {
     if (!browseI18n[lang]) { fail('Browse I18N missing ' + lang); continue; }
-    let missing = BROWSE_REQUIRED_KEYS.filter(k => !browseI18n[lang][k]);
+    let missing = browseKeys.filter(k => !browseI18n[lang][k]);
     if (missing.length) fail(`${lang} missing keys: ${missing.join(',')}`);
   }
-  ok('Browse I18N: 10 langs each cover ' + BROWSE_REQUIRED_KEYS.length + ' keys');
+  ok('Browse I18N: 10 langs each cover ' + browseKeys.length + ' keys');
 
   // 5) Critical CSS classes referenced in module code exist in <style>
   const styleMatch = m[0].match(/<style>([\s\S]*?)<\/style>/);
@@ -191,6 +197,12 @@ for (const path of FILES) {
     else ok('data-howto-trigger attribute present');
     if (!c.includes('jwrg-mode')) fail('jwrg-mode IN/OUT toggle markup missing');
     else ok('guide IN/OUT mode toggle (.jwrg-mode) present');
+
+    // Robust error handling + Browse pagination (v2.15.0)
+    if (!c.includes('jb-pager')) fail('Browse pager markup/CSS missing (.jb-pager)');
+    else ok('Browse pagination (.jb-pager) present');
+    if (!c.includes('PAGE_SIZE')) fail('Browse PAGE_SIZE constant missing');
+    else ok('Browse PAGE_SIZE windowing present');
     if (!c.includes('MutationObserver')) fail('MutationObserver not wired in demo handler');
     else ok('MutationObserver present (catches React-rendered demo buttons)');
 

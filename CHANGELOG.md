@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.15.0] — 2026-05-31
+
+### Added
+- **Friendly, specific file errors** — instead of a raw "Error processing file" message, JW Sync now explains exactly what went wrong when a backup can't be read, in all 10 languages:
+  - the file isn't a readable `.jwlibrary` (corrupted or wrong type),
+  - it's missing its notes database (`userData.db`) — with a prompt to re-export from JW Library,
+  - the database couldn't be opened (damaged file).
+  - These apply both to the merge pipeline and the Note Explorer (Browse) loader.
+- **Large-file heads-up** — merging very large backups now shows a non-blocking notice that it may take longer.
+
+### Changed
+- **Note Explorer no longer caps at 2,000 rows** — large libraries are now fully browsable with simple **pagination** (200 per page, Prev / Next), so no notes are hidden behind a "narrow your search" message.
+
+---
+
 ## [2.14.0] — 2026-05-31
 
 ### Added

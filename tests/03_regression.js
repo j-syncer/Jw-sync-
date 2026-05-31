@@ -16,6 +16,12 @@ try {
   ok('merge-worker.js parses (' + workerSrc.length + ' bytes)');
 } catch (e) { fail('merge-worker.js parse failed: ' + e.message); }
 
+// v2.15.0 — typed/friendly error classification
+if (workerSrc.includes('taggedError') && workerSrc.includes('classifyError')) ok('worker has taggedError + classifyError helpers');
+else fail('worker error-classification helpers missing');
+if (workerSrc.includes("'no_db'") && workerSrc.includes("'corrupt'") && workerSrc.includes("'not_sqlite'")) ok('worker emits typed error codes (no_db/corrupt/not_sqlite)');
+else fail('worker typed error codes missing');
+
 const rootWorkerPath = REPO + '/js/merge-worker.js';
 if (fs.existsSync(rootWorkerPath)) {
   const rootWorker = fs.readFileSync(rootWorkerPath, 'utf8');
