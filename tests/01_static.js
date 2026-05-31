@@ -116,6 +116,21 @@ for (const path of FILES) {
   }
   ok('Browse I18N: 10 langs each cover ' + browseKeys.length + ' keys');
 
+  // 4b) All JSON-LD structured-data blocks parse; SEO schema present (beta)
+  const ldBlocks = [...c.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  let ldOk = true;
+  for (const blk of ldBlocks) {
+    try { JSON.parse(blk[1]); } catch (e) { fail('JSON-LD block invalid: ' + e.message); ldOk = false; }
+  }
+  if (ldOk) ok(`all ${ldBlocks.length} JSON-LD block(s) parse`);
+  const ldTypes = ldBlocks.map(b => { try { return JSON.parse(b[1])['@type']; } catch { return null; } });
+  if (isBeta) {
+    if (ldTypes.includes('FAQPage')) ok('FAQPage structured data present'); else fail('FAQPage JSON-LD missing');
+    if (ldTypes.includes('HowTo')) ok('HowTo structured data present'); else fail('HowTo JSON-LD missing');
+    if (c.includes('class="landing-faq"')) ok('visible FAQ section present'); else fail('visible FAQ section missing');
+    if (c.includes('class="landing-howto"')) ok('visible How-to section present'); else fail('visible How-to section missing');
+  }
+
   // 5) Critical CSS classes referenced in module code exist in <style>
   const styleMatch = m[0].match(/<style>([\s\S]*?)<\/style>/);
   if (!styleMatch) { fail('Browse <style> block missing'); continue; }

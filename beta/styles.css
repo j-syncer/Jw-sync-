@@ -1557,6 +1557,76 @@ body.jw-modal-open { overflow: hidden; }
 .landing-feat h3 { font-size: 14px; font-weight: 700; color: #f1f5f9; margin: 0 0 8px; }
 .landing-feat p { font-size: 13px; color: rgba(148,163,184,.8); line-height: 1.6; margin: 0; }
 
+/* ── SEO content: section heading, How-to steps, FAQ (on-brand, flat) ── */
+.landing-section-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #f1f5f9;
+  text-align: center;
+  letter-spacing: -.01em;
+  margin: 56px 0 24px;
+}
+.landing-howto, .landing-faq {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.landing-steps {
+  list-style: none;
+  counter-reset: jws-step;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.landing-steps li {
+  counter-increment: jws-step;
+  position: relative;
+  padding: 16px 18px 16px 56px;
+  background: rgba(4,15,34,.55);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  font-size: 14px;
+  color: rgba(203,213,225,.92);
+  line-height: 1.6;
+}
+.landing-steps li::before {
+  content: counter(jws-step);
+  position: absolute;
+  left: 16px;
+  top: 14px;
+  width: 26px;
+  height: 26px;
+  background: #ea580c;
+  color: #fff;
+  border-radius: 7px;
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.landing-steps li strong { color: #fff; }
+.landing-faq-item {
+  background: rgba(4,15,34,.55);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+}
+.landing-faq-item h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 8px;
+}
+.landing-faq-item p {
+  font-size: 13.5px;
+  color: rgba(148,163,184,.85);
+  line-height: 1.65;
+  margin: 0;
+}
+
 /* ── Legal footer ── */
 .footer-tagline { font-size: 12px; color: rgba(148,163,184,.65); margin: 0 0 10px; }
 .legal-details { font-size: 10px; }

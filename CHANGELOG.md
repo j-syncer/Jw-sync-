@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.18.0] — 2026-05-31
+
+### Added
+- **Homepage FAQ and "How to merge" sections** — clear, on-brand answers (privacy, multi-device merging, .jwlibrary basics, iPhone/Android support) and a 5-step how-to, giving real content for both visitors and search engines.
+- **Richer search results** — added `FAQPage` and `HowTo` structured data (plus image/screenshot/author on the app schema) so Google can show rich results.
+- **Language URLs** — visiting `?lang=es` (any of the 10 languages) now loads the site in that language, with a self-referencing canonical.
+
+### Changed
+- Tightened the meta description and fixed the heading hierarchy for cleaner on-page SEO.
+
+---
+
 ## [2.17.2] — 2026-05-31
 
 ### Changed
