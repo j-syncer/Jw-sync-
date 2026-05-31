@@ -11,7 +11,7 @@
  * Old caches are cleaned up on activate.
  */
 
-const CACHE_VERSION = 'jwsync-v27';
+const CACHE_VERSION = 'jwsync-v28';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const RUNTIME_CACHE = CACHE_VERSION + '-runtime';
 

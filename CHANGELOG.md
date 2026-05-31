@@ -4,6 +4,17 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.14.0] — 2026-05-31
+
+### Added
+- **Guided "How it works" walkthrough** — a new platform-aware (iPhone/iPad, Android, Desktop) step-by-step guide that covers the whole round trip:
+  - **Export from JW Library** (new): how to create a `.jwlibrary` backup on each device and gather every device's file in one place, ready to merge.
+  - **Restore the merged file**: the existing restore guide is now part of the same modal, with an IN/OUT toggle to switch direction.
+  - **"First time? How it works"** button on the landing page hero opens the guide straight to the export steps — so newcomers immediately learn where to get their backup files.
+  - Reachable after a merge from the celebration overlay's existing **Restore** button, and programmatically via `window.__jwOpenGuide('export' | 'restore')`.
+
+---
+
 ## [2.13.0] — 2026-05-29
 
 ### Added

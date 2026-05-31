@@ -179,6 +179,18 @@ for (const path of FILES) {
     else ok('window.__jwOpenDemo exposed for React buttons');
     if (!c.includes('data-demo-trigger')) fail('data-demo-trigger attribute missing');
     else ok('data-demo-trigger attribute present');
+
+    // Guided in/out flow (v2.14.0)
+    if (!c.includes('EXPORT_GUIDE')) fail('EXPORT_GUIDE object missing (export walkthrough)');
+    else ok('EXPORT_GUIDE export-steps object present');
+    if (!c.includes('window.__jwOpenGuide')) fail('window.__jwOpenGuide not exposed');
+    else ok('window.__jwOpenGuide exposed');
+    if (!c.includes('id="landing-howto-btn"')) fail('landing-howto-btn missing');
+    else ok('landing "How it works" button present');
+    if (!c.includes('data-howto-trigger')) fail('data-howto-trigger attribute missing');
+    else ok('data-howto-trigger attribute present');
+    if (!c.includes('jwrg-mode')) fail('jwrg-mode IN/OUT toggle markup missing');
+    else ok('guide IN/OUT mode toggle (.jwrg-mode) present');
     if (!c.includes('MutationObserver')) fail('MutationObserver not wired in demo handler');
     else ok('MutationObserver present (catches React-rendered demo buttons)');
 

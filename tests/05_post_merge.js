@@ -227,6 +227,29 @@ async function waitForOverlay(doc, id, timeoutMs) {
         if (warning && warning.textContent.length > 20) ok('restore guide shows warning text');
         else fail('restore guide warning missing');
 
+        // IN/OUT mode toggle (v2.14.0 guided in/out flow)
+        const modeBtns = guide.querySelectorAll('.jwrg-mode');
+        if (modeBtns.length === 2) ok('guide has IN/OUT mode toggle (2 buttons)');
+        else fail('guide mode toggle has ' + modeBtns.length + ' buttons (expected 2)');
+
+        const exportModeBtn = guide.querySelector('.jwrg-mode[data-mode="export"]');
+        const titleBefore = guide.querySelector('#jwrg-title').textContent;
+        exportModeBtn.click();
+        if (exportModeBtn.classList.contains('active')) ok('export mode activates on click');
+        else fail('export mode did not activate');
+
+        const exportSteps = guide.querySelectorAll('#jwrg-steps li');
+        if (exportSteps.length >= 4) ok('export mode renders export steps (' + exportSteps.length + ')');
+        else fail('export mode steps: only ' + exportSteps.length);
+
+        const warnAfter = guide.querySelector('#jwrg-warning');
+        if (warnAfter && warnAfter.style.display === 'none') ok('restore warning hidden in export mode');
+        else fail('restore warning should be hidden in export mode');
+
+        const titleAfter = guide.querySelector('#jwrg-title').textContent;
+        if (titleAfter && titleAfter !== titleBefore) ok('guide title changes between modes');
+        else fail('guide title did not change between modes');
+
         dom.window.close();
       }
     }
