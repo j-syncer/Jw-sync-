@@ -117,7 +117,7 @@ for (const path of FILES) {
   ok('Browse I18N: 10 langs each cover ' + browseKeys.length + ' keys');
 
   // 4b) All JSON-LD structured-data blocks parse; SEO schema present (beta)
-  const ldBlocks = [...c.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  const ldBlocks = [...c.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
   let ldOk = true;
   for (const blk of ldBlocks) {
     try { JSON.parse(blk[1]); } catch (e) { fail('JSON-LD block invalid: ' + e.message); ldOk = false; }

@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.19.0] — 2026-05-31
+
+### Added
+- **Localized FAQ and How-to** — the homepage FAQ and "How to merge" sections (and their FAQPage/HowTo structured data) are now translated into all 10 languages. Visiting `?lang=es`, `?lang=ja`, etc. — or switching language — shows the content, and the rich-result schema, in that language.
+
+---
+
 ## [2.18.0] — 2026-05-31
 
 ### Added
