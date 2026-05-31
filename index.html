@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>JW Sync — Merge JW Library Backups Privately in Your Browser</title>
-    <meta name="description" content="Free privacy-first tool to merge JW Library backups from multiple devices. Combine notes, highlights, bookmarks and tags directly in your browser — your files never leave your device.">
+    <meta name="description" content="Free, private tool to merge JW Library backups from all your devices — combine notes, highlights, bookmarks and tags in your browser. Files never uploaded.">
     
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://api.qrserver.com">
@@ -29,6 +29,7 @@
     window.shortFn=function(n){return n&&n.length>10?"\u2026"+n.slice(-10):n||"";};
     </script>
                         <link rel="stylesheet" href="styles.css">
+    <script>(function(){try{var V=['en','es','pt','fr','de','it','ru','ja','ko','tl'],p=new URLSearchParams(location.search).get('lang');if(p&&V.indexOf(p)>=0){localStorage.setItem('jwsync_lang',p);var u=location.origin+location.pathname+'?lang='+p,can=document.querySelector('link[rel="canonical"]'),og=document.querySelector('meta[property="og:url"]');if(can)can.href=u;if(og)og.setAttribute('content',u);}}catch(e){}}());</script>
     <script>(function(){var h=location.hash;if(h==='#home'||h==='')document.documentElement.setAttribute('data-view','landing');}());</script>
 <!-- ── Lazy boot loader (v2.7.0) ───────────────────────── -->
 <script>
@@ -189,6 +190,17 @@
 
     <!-- ── SEO: canonical, structured data, social cards ─────── -->
     <link rel="canonical" href="https://jwsync.org/">
+    <link rel="alternate" hreflang="x-default" href="https://jwsync.org/">
+    <link rel="alternate" hreflang="en" href="https://jwsync.org/?lang=en">
+    <link rel="alternate" hreflang="es" href="https://jwsync.org/?lang=es">
+    <link rel="alternate" hreflang="pt" href="https://jwsync.org/?lang=pt">
+    <link rel="alternate" hreflang="fr" href="https://jwsync.org/?lang=fr">
+    <link rel="alternate" hreflang="de" href="https://jwsync.org/?lang=de">
+    <link rel="alternate" hreflang="it" href="https://jwsync.org/?lang=it">
+    <link rel="alternate" hreflang="ru" href="https://jwsync.org/?lang=ru">
+    <link rel="alternate" hreflang="ja" href="https://jwsync.org/?lang=ja">
+    <link rel="alternate" hreflang="ko" href="https://jwsync.org/?lang=ko">
+    <link rel="alternate" hreflang="tl" href="https://jwsync.org/?lang=tl">
     <meta name="keywords" content="JW Sync, JW Library backup, merge JW Library, jwlibrary merger, JW Library notes, JW Library highlights, JW Library tags, JW Library sync, JW backup merge tool">
     <meta name="author" content="JW Sync">
     <meta name="robots" content="index, follow">
@@ -231,8 +243,119 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.17.2",
+      "softwareVersion": "2.18.0",
+      "image": "https://jwsync.org/og-image.png",
+      "screenshot": "https://jwsync.org/og-image.png",
+      "downloadUrl": "https://jwsync.org/",
+      "author": {
+        "@type": "Organization",
+        "name": "JW Sync",
+        "url": "https://jwsync.org/"
+      },
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Do my files get uploaded anywhere?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. JW Sync runs entirely in your web browser. Your .jwlibrary backup files are never uploaded to any server — every step of the merge happens on your own device, so your notes stay private."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I merge JW Library backups from two phones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Export a backup from JW Library on each device, then open JW Sync, add the first backup as your main file and the others as additional files, and merge. Download the combined .jwlibrary file and restore it in JW Library."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a .jwlibrary file?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A .jwlibrary file is the backup that the JW Library app creates. It contains your notes, highlights, bookmarks and tags. JW Sync reads these files and combines them into one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does JW Sync work on iPhone and Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. JW Sync works in any modern browser on iPhone, iPad, Android and desktop. You can also install it as an app and use it offline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will merging overwrite my notes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. JW Sync combines your backups, and when the same note was edited on two devices it shows you both versions so you can choose which one to keep before you download."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is JW Sync free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. JW Sync is completely free and works without an account or sign-up."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to merge your JW Library backups",
+      "description": "Combine JW Library backups from multiple devices into one .jwlibrary file, privately in your browser.",
+      "totalTime": "PT5M",
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "JW Sync"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Export a backup",
+          "text": "Create a backup in JW Library on each device (menu → Settings → Backup & Restore → Create Backup)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Add your main backup",
+          "text": "Open JW Sync and add the backup from your primary device as the first file."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Add your other backups",
+          "text": "Add the .jwlibrary files from your other devices as additional files."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Review the merge",
+          "text": "Check the impact summary and choose which version wins for any conflicting notes."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Download and restore",
+          "text": "Download the merged .jwlibrary file and restore it in JW Library on your devices."
+        }
+      ]
     }
     </script>
     <!-- ── End SEO block ─────────────────────────────────────── -->
@@ -308,6 +431,7 @@ function __jwGoHighlights(){
         <p data-i18n="hero_desc">Merge, browse, and edit your JW Library notes, highlights, and bookmarks — entirely in your browser. Your files never leave your device.</p>
         <div class="cta-row"><a href="#app" class="cta-btn" id="landing-launch-btn" data-i18n="cta_launch">Launch App &#8594;</a><button type="button" class="cta-btn-secondary" id="landing-demo-btn" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button><button type="button" class="cta-btn-ghost" id="landing-howto-btn" data-howto-trigger data-i18n="cta_howto">First time? How it works</button></div>
       </div>
+      <h2 class="landing-section-title">Everything you need to merge and manage your JW Library notes</h2>
       <div class="landing-features">
         <div class="landing-feat">
           <div class="landing-feat-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
@@ -335,6 +459,43 @@ function __jwGoHighlights(){
           <p data-i18n="feat_review_desc">See exactly which notes were edited on more than one device and choose which version wins — full transparency, no black box.</p>
         </div>
       </div>
+      <section class="landing-howto" aria-labelledby="howto-h">
+        <h2 id="howto-h" class="landing-section-title">How to merge your JW Library backups</h2>
+        <ol class="landing-steps">
+          <li><strong>Export a backup.</strong> Create a backup in JW Library on each device (menu → Settings → Backup &amp; Restore → Create Backup).</li>
+          <li><strong>Add your main backup.</strong> Open JW Sync and add the backup from your primary device as the first file.</li>
+          <li><strong>Add your other backups.</strong> Add the .jwlibrary files from your other devices as additional files.</li>
+          <li><strong>Review the merge.</strong> Check the impact summary and choose which version wins for any conflicting notes.</li>
+          <li><strong>Download and restore.</strong> Download the merged .jwlibrary file and restore it in JW Library on your devices.</li>
+        </ol>
+      </section>
+      <section class="landing-faq" aria-labelledby="faq-h">
+        <h2 id="faq-h" class="landing-section-title">Frequently asked questions</h2>
+        <div class="landing-faq-item">
+          <h3>Do my files get uploaded anywhere?</h3>
+          <p>No. JW Sync runs entirely in your web browser. Your .jwlibrary backup files are never uploaded to any server — every step of the merge happens on your own device, so your notes stay private.</p>
+        </div>
+        <div class="landing-faq-item">
+          <h3>How do I merge JW Library backups from two phones?</h3>
+          <p>Export a backup from JW Library on each device, then open JW Sync, add the first backup as your main file and the others as additional files, and merge. Download the combined .jwlibrary file and restore it in JW Library.</p>
+        </div>
+        <div class="landing-faq-item">
+          <h3>What is a .jwlibrary file?</h3>
+          <p>A .jwlibrary file is the backup that the JW Library app creates. It contains your notes, highlights, bookmarks and tags. JW Sync reads these files and combines them into one.</p>
+        </div>
+        <div class="landing-faq-item">
+          <h3>Does JW Sync work on iPhone and Android?</h3>
+          <p>Yes. JW Sync works in any modern browser on iPhone, iPad, Android and desktop. You can also install it as an app and use it offline.</p>
+        </div>
+        <div class="landing-faq-item">
+          <h3>Will merging overwrite my notes?</h3>
+          <p>No. JW Sync combines your backups, and when the same note was edited on two devices it shows you both versions so you can choose which one to keep before you download.</p>
+        </div>
+        <div class="landing-faq-item">
+          <h3>Is JW Sync free?</h3>
+          <p>Yes. JW Sync is completely free and works without an account or sign-up.</p>
+        </div>
+      </section>
     </section>
     <div id="root" class="flex-grow max-w-5xl mx-auto w-full p-4 md:p-8"></div>
 
