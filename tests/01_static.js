@@ -166,6 +166,12 @@ for (const path of FILES) {
   if (!allSrc.includes('jb-browse-open-btn')) fail('Insights trigger button missing');
   else ok('Insights "Browse notes" button present');
 
+  // Browse open buttons must boot the (lazy) Browse module before opening —
+  // otherwise a cold click leaves window.__openJwBrowse undefined and no-ops.
+  if (bundleSrc.includes('__openJwBrowse') && !bundleSrc.includes('__jwBootBrowse'))
+    fail('Browse buttons call __openJwBrowse without booting Browse first (cold click no-ops)');
+  else ok('Browse buttons boot Browse before opening');
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');

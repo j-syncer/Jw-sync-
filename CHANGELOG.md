@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.19.1] — 2026-05-31
+
+### Fixed
+- **"Browse notes" button now works from a cold start.** The button opened the Note Explorer only if the (lazy-loaded) Browse module had already been booted by another action; clicking it from Simple or Full mode without that did nothing. It now boots the Browse module on demand before opening.
+
+---
+
 ## [2.19.0] — 2026-05-31
 
 ### Added
