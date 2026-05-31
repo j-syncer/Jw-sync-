@@ -203,6 +203,12 @@ for (const path of FILES) {
     else ok('Browse pagination (.jb-pager) present');
     if (!c.includes('PAGE_SIZE')) fail('Browse PAGE_SIZE constant missing');
     else ok('Browse PAGE_SIZE windowing present');
+
+    // Pre-merge impact preview (v2.16.0)
+    if (!c.includes('window.__jwImpactPreview')) fail('window.__jwImpactPreview module missing');
+    else ok('pre-merge impact preview (__jwImpactPreview) present');
+    if (!c.includes('jip-card')) fail('impact preview markup/CSS missing (.jip-card)');
+    else ok('impact preview modal (.jip-card) present');
     if (!c.includes('MutationObserver')) fail('MutationObserver not wired in demo handler');
     else ok('MutationObserver present (catches React-rendered demo buttons)');
 

@@ -23,6 +23,7 @@ importScripts(
 );
 
 let cancelled = false;
+let confirmResolver = null;
 
 const stripHTML = d => String(d || '').replace(/<[^>]*>?/gm, '').trim().toLowerCase();
 const safeText  = d => String(d || '').replace(/<[^>]*>?/gm, '').trim();
@@ -64,11 +65,16 @@ function classifyError(e) {
 }
 
 self.onmessage = async ({ data }) => {
-  if (data.type === 'cancel') { cancelled = true; return; }
+  if (data.type === 'cancel') { cancelled = true; if (confirmResolver) { confirmResolver(false); confirmResolver = null; } return; }
+  if (data.type === 'confirmMerge') { if (confirmResolver) { confirmResolver(true); confirmResolver = null; } return; }
   if (data.type !== 'merge') return;
   cancelled = false;
   try {
     const result = await runMerge(data);
+    if (result.cancelled) {
+      self.postMessage({ type: 'cancelled' });
+      return;
+    }
     self.postMessage(
       { type: 'done', zipBuffer: result.zipBuffer, stats: result.stats, previewNotes: result.previewNotes },
       [result.zipBuffer]
@@ -513,6 +519,20 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   if (check.length > 0 && check[0].values[0][0] !== 'ok')
     throw new Error('Safety check failed. Database is corrupt.');
   a.run('VACUUM;');
+
+  // ── Pre-merge impact preview gate ──────────────────────────────────────
+  if (p.previewConfirm) {
+    self.postMessage({ type: 'impact', counts: {
+      Note: f.Note, UserMark: f.UserMark, Bookmark: f.Bookmark, Tag: f.Tag,
+      Updated: f.Updated, Deduplicated: f.Deduplicated
+    } });
+    const proceed = await new Promise(res => { confirmResolver = res; });
+    if (!proceed) {
+      try { a.close(); } catch {}
+      a = null;
+      return { cancelled: true };
+    }
+  }
 
   // ── Step 6: Package output ZIP ─────────────────────────────────────────
   log('Step 6: Packaging final download...');

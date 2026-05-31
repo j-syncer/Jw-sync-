@@ -239,7 +239,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.15.0",
+      "softwareVersion": "2.16.0",
       "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl"]
     }
     </script>
@@ -2465,6 +2465,86 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End Merge Conflict Reviewer ─────────────────────────── -->
+
+<!-- ── Pre-merge Impact Preview (v2.16.0) ───────────────── -->
+<style>
+#jw-impact-overlay{position:fixed;inset:0;z-index:10060;display:flex;align-items:center;justify-content:center;padding:20px}
+.jip-backdrop{position:absolute;inset:0;background:rgba(2,6,18,.74);backdrop-filter:blur(3px)}
+.jip-card{position:relative;width:100%;max-width:430px;background:rgba(4,15,34,.97);border:1px solid #1f2a3d;border-radius:16px;padding:26px 24px 20px;box-shadow:0 12px 40px rgba(0,0,0,.5);color:#e2e8f0;font-family:inherit}
+.jip-title{margin:0 0 4px;font-size:19px;font-weight:700;color:#fff}
+.jip-sub{margin:0 0 18px;font-size:13px;color:#8aa0bd;line-height:1.5}
+.jip-grid{display:grid;gap:8px;margin:0 0 20px}
+.jip-row{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(255,255,255,.03);border:1px solid #1f2a3d;border-radius:9px}
+.jip-row.jip-added{background:rgba(234,88,12,.07);border-color:rgba(234,88,12,.22)}
+.jip-label{font-size:13.5px;color:#cbd5e1}
+.jip-num{font-size:16px;font-weight:700;color:#fff;font-variant-numeric:tabular-nums}
+.jip-row.jip-added .jip-num{color:#fdba74}
+.jip-actions{display:flex;gap:10px;justify-content:flex-end}
+.jip-btn{font-family:inherit;font-size:14px;font-weight:600;padding:11px 20px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+.jip-btn-cancel{background:transparent;color:#cbd5e1;border-color:rgba(148,163,184,.3)}
+.jip-btn-cancel:hover{border-color:rgba(148,163,184,.55);color:#fff}
+.jip-btn-go{background:#ea580c;color:#fff;border:0;box-shadow:0 1px 5px rgba(234,88,12,.35)}
+.jip-btn-go:hover{background:#f2670f}
+</style>
+<script>
+(function () {
+  'use strict';
+  if (window.__jwImpactPreview) return;
+  var I18N = {
+    en:{title:'Ready to merge',sub:'Here’s what this merge will change. Review the numbers, then download your merged backup.',added:'Will be added',notes:'Notes',highlights:'Highlights',bookmarks:'Bookmarks',tags:'Tags',updated:'Notes updated (newer version wins)',deduped:'Duplicates skipped',confirm:'Merge & Download',cancel:'Cancel'},
+    es:{title:'Listo para combinar',sub:'Esto es lo que cambiará esta combinación. Revisa los números y descarga tu copia combinada.',added:'Se añadirá',notes:'Notas',highlights:'Destacados',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas actualizadas (gana la más reciente)',deduped:'Duplicados omitidos',confirm:'Combinar y descargar',cancel:'Cancelar'},
+    pt:{title:'Pronto para combinar',sub:'Veja o que esta combinação vai alterar. Revise os números e baixe seu backup combinado.',added:'Será adicionado',notes:'Notas',highlights:'Destaques',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas atualizadas (vence a mais recente)',deduped:'Duplicatas ignoradas',confirm:'Combinar e baixar',cancel:'Cancelar'},
+    fr:{title:'Prêt à fusionner',sub:'Voici ce que cette fusion va modifier. Vérifiez les chiffres, puis téléchargez votre sauvegarde fusionnée.',added:'Sera ajouté',notes:'Notes',highlights:'Surlignages',bookmarks:'Signets',tags:'Étiquettes',updated:'Notes mises à jour (la plus récente l’emporte)',deduped:'Doublons ignorés',confirm:'Fusionner et télécharger',cancel:'Annuler'},
+    de:{title:'Bereit zum Zusammenführen',sub:'Das wird beim Zusammenführen geändert. Prüfe die Zahlen und lade dann deine Sicherung herunter.',added:'Wird hinzugefügt',notes:'Notizen',highlights:'Markierungen',bookmarks:'Lesezeichen',tags:'Tags',updated:'Aktualisierte Notizen (neuere gewinnt)',deduped:'Duplikate übersprungen',confirm:'Zusammenführen & herunterladen',cancel:'Abbrechen'},
+    it:{title:'Pronto per l’unione',sub:'Ecco cosa cambierà questa unione. Controlla i numeri, poi scarica il backup unito.',added:'Verrà aggiunto',notes:'Note',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags:'Tag',updated:'Note aggiornate (vince la più recente)',deduped:'Duplicati saltati',confirm:'Unisci e scarica',cancel:'Annulla'},
+    ru:{title:'Готово к объединению',sub:'Вот что изменит это объединение. Проверьте числа и скачайте объединённую копию.',added:'Будет добавлено',notes:'Заметки',highlights:'Выделения',bookmarks:'Закладки',tags:'Метки',updated:'Обновлённые заметки (побеждает новейшая)',deduped:'Дубликаты пропущены',confirm:'Объединить и скачать',cancel:'Отмена'},
+    ja:{title:'結合の準備ができました',sub:'この結合で変わる内容です。数値を確認してから、結合したバックアップをダウンロードしてください。',added:'追加されます',notes:'ノート',highlights:'ハイライト',bookmarks:'しおり',tags:'タグ',updated:'更新されたノート（新しい方を採用）',deduped:'重複をスキップ',confirm:'結合してダウンロード',cancel:'キャンセル'},
+    ko:{title:'병합 준비 완료',sub:'이 병합으로 변경될 내용입니다. 숫자를 확인한 뒤 병합된 백업을 다운로드하세요.',added:'추가됨',notes:'노트',highlights:'하이라이트',bookmarks:'북마크',tags:'태그',updated:'업데이트된 노트(최신 버전 우선)',deduped:'중복 건너뜀',confirm:'병합 및 다운로드',cancel:'취소'},
+    tl:{title:'Handa nang i-merge',sub:'Ito ang babaguhin ng merge na ito. Suriin ang mga numero, pagkatapos i-download ang iyong pinagsamang backup.',added:'Idaragdag',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update na nota (nananalo ang mas bago)',deduped:'Nilaktawang duplikado',confirm:'I-merge at i-download',cancel:'Kanselahin'}
+  };
+  function curLang(){ try{return localStorage.getItem('jwsync_lang')||'en';}catch(_){return 'en';} }
+  function t(k){ var l=curLang(); return (I18N[l]&&I18N[l][k])||I18N.en[k]||k; }
+  function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  window.__jwImpactPreview = function (counts) {
+    counts = counts || {};
+    return new Promise(function (resolve) {
+      var settled = false, overlay = null;
+      function done(v){ if(settled) return; settled = true; if(overlay){overlay.remove();} document.removeEventListener('keydown', onKey); resolve(v); }
+      function onKey(e){ if(e.key==='Escape') done(false); }
+      function row(label, n, added){
+        return '<div class="jip-row'+(added?' jip-added':'')+'"><span class="jip-label">'+esc(label)+'</span><span class="jip-num">'+(added?'+':'')+(n||0)+'</span></div>';
+      }
+      var html =
+        '<div class="jip-backdrop" data-jip-cancel></div>'+
+        '<div class="jip-card" role="dialog" aria-modal="true" aria-labelledby="jip-title">'+
+          '<h2 id="jip-title" class="jip-title">'+esc(t('title'))+'</h2>'+
+          '<p class="jip-sub">'+esc(t('sub'))+'</p>'+
+          '<div class="jip-grid">'+
+            row(t('notes'), counts.Note, true)+
+            row(t('highlights'), counts.UserMark, true)+
+            row(t('bookmarks'), counts.Bookmark, true)+
+            row(t('tags'), counts.Tag, true)+
+            row(t('updated'), counts.Updated, false)+
+            row(t('deduped'), counts.Deduplicated, false)+
+          '</div>'+
+          '<div class="jip-actions">'+
+            '<button type="button" class="jip-btn jip-btn-cancel" data-jip-cancel>'+esc(t('cancel'))+'</button>'+
+            '<button type="button" class="jip-btn jip-btn-go" data-jip-go>'+esc(t('confirm'))+'</button>'+
+          '</div>'+
+        '</div>';
+      overlay = document.createElement('div');
+      overlay.id = 'jw-impact-overlay';
+      overlay.innerHTML = html;
+      document.body.appendChild(overlay);
+      overlay.querySelectorAll('[data-jip-cancel]').forEach(function(el){ el.addEventListener('click', function(){ done(false); }); });
+      overlay.querySelector('[data-jip-go]').addEventListener('click', function(){ done(true); });
+      document.addEventListener('keydown', onKey);
+    });
+  };
+})();
+</script>
+<!-- ── End Pre-merge Impact Preview ────────────────────── -->
 
 <!-- ── Post-merge celebration + Restore Guide (v2.9.1) ───── -->
 <script>

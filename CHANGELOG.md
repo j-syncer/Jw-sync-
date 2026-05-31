@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.16.0] — 2026-05-31
+
+### Added
+- **Pre-merge impact preview** — before your merged backup is packaged and downloaded, JW Sync now shows a clear summary of exactly what the merge will do: how many **notes, highlights, bookmarks, and tags** will be added, how many notes will be **updated** (newer version wins), and how many **duplicates** were skipped. Confirm with **Merge & Download**, or **Cancel** to back out — nothing is downloaded until you approve. Available in all 10 languages.
+
+---
+
 ## [2.15.0] — 2026-05-31
 
 ### Added
