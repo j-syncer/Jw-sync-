@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.17.2] — 2026-05-31
+
+### Changed
+- **"First time? How it works" button now shimmers** with a subtle animated sheen and orange glow so new visitors notice it. Respects `prefers-reduced-motion`.
+
+---
+
 ## [2.17.1] — 2026-05-31
 
 ### Fixed
