@@ -23,6 +23,7 @@ importScripts(
 );
 
 let cancelled = false;
+let confirmResolver = null;
 
 const stripHTML = d => String(d || '').replace(/<[^>]*>?/gm, '').trim().toLowerCase();
 const safeText  = d => String(d || '').replace(/<[^>]*>?/gm, '').trim();
@@ -49,18 +50,37 @@ function mapTagName(name, tagManager) {
   return (t.action === 'rename' && t.customName.trim()) || name;
 }
 
+function taggedError(code, message) {
+  const err = new Error(message);
+  err.code = code;
+  return err;
+}
+
+function classifyError(e) {
+  const m = ((e && e.message) || '').toLowerCase();
+  if (m.includes('memory') || m.includes('allocation') || e instanceof RangeError) return 'oversize';
+  if (m.includes('zip') || m.includes('end of central') || m.includes('corrupt')) return 'corrupt';
+  if (m.includes('sqlite') || m.includes('database') || m.includes('file is not a database')) return 'not_sqlite';
+  return '';
+}
+
 self.onmessage = async ({ data }) => {
-  if (data.type === 'cancel') { cancelled = true; return; }
+  if (data.type === 'cancel') { cancelled = true; if (confirmResolver) { confirmResolver(false); confirmResolver = null; } return; }
+  if (data.type === 'confirmMerge') { if (confirmResolver) { confirmResolver(true); confirmResolver = null; } return; }
   if (data.type !== 'merge') return;
   cancelled = false;
   try {
     const result = await runMerge(data);
+    if (result.cancelled) {
+      self.postMessage({ type: 'cancelled' });
+      return;
+    }
     self.postMessage(
       { type: 'done', zipBuffer: result.zipBuffer, stats: result.stats, previewNotes: result.previewNotes },
       [result.zipBuffer]
     );
   } catch (e) {
-    self.postMessage({ type: 'error', message: e.message });
+    self.postMessage({ type: 'error', code: e.code || classifyError(e), message: e.message });
   }
 };
 
@@ -78,7 +98,9 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   log('Step 1: Unzipping main backup...');
   await A();
 
-  const o = await new JSZip().loadAsync(mainBuffer);
+  let o;
+  try { o = await new JSZip().loadAsync(mainBuffer); }
+  catch (e) { throw taggedError('corrupt', "This file isn't a readable .jwlibrary backup."); }
   const manifestFile = o.file('manifest.json');
   if (manifestFile) {
     try {
@@ -90,13 +112,16 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   }
 
   const dbKey  = Object.keys(o.files).find(k => /userdata\.db$/i.test(k));
+  if (!dbKey) throw taggedError('no_db', 'This .jwlibrary backup is missing its notes database (userData.db).');
   const dbBytes = await o.files[dbKey].async('uint8array');
 
   // ── Step 2: Open base database ──────────────────────────────────────────
   log('Step 2: Preparing database framework...');
   await A();
 
-  let a = new SQL.Database(dbBytes);
+  let a;
+  try { a = new SQL.Database(dbBytes); }
+  catch (e) { throw taggedError('not_sqlite', "The backup's database couldn't be opened."); }
   a.run('PRAGMA foreign_keys = OFF;');
 
   const f = { Note: 0, UserMark: 0, Bookmark: 0, Tag: 0, Deduplicated: 0,
@@ -494,6 +519,20 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   if (check.length > 0 && check[0].values[0][0] !== 'ok')
     throw new Error('Safety check failed. Database is corrupt.');
   a.run('VACUUM;');
+
+  // ── Pre-merge impact preview gate ──────────────────────────────────────
+  if (p.previewConfirm) {
+    self.postMessage({ type: 'impact', counts: {
+      Note: f.Note, UserMark: f.UserMark, Bookmark: f.Bookmark, Tag: f.Tag,
+      Updated: f.Updated, Deduplicated: f.Deduplicated
+    } });
+    const proceed = await new Promise(res => { confirmResolver = res; });
+    if (!proceed) {
+      try { a.close(); } catch {}
+      a = null;
+      return { cancelled: true };
+    }
+  }
 
   // ── Step 6: Package output ZIP ─────────────────────────────────────────
   log('Step 6: Packaging final download...');
