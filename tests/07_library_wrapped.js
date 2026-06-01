@@ -293,6 +293,26 @@ async function waitForStats(doc, timeoutMs) {
         const shareBtn = doc.querySelector('.jww-copy');
         if (shareBtn) ok('copy/share button (.jww-copy) rendered');
         else fail('copy/share button not rendered');
+
+        // ── v2.25 deep analytics sections ──
+        if (doc.querySelector('.jww-mini')) ok('mini stats (words/engagement) rendered');
+        else fail('mini stats section missing');
+        if (doc.querySelector('.jww-heat .jww-heat-cell')) ok('activity heatmap rendered');
+        else fail('activity heatmap missing');
+        if (doc.querySelector('.jww-streak-num')) ok('streaks section rendered');
+        else fail('streaks section missing');
+        if (doc.querySelector('.jww-dow-bar')) ok('day-of-week rhythm rendered');
+        else fail('day-of-week section missing');
+        if (doc.querySelector('.jww-growth-line')) ok('cumulative growth chart rendered');
+        else fail('growth chart missing');
+        const bcells = doc.querySelectorAll('.jww-bible-grid .jww-bcell');
+        if (bcells.length === 66) ok('Bible coverage grid rendered (66 cells)');
+        else fail('Bible grid expected 66 cells, got ' + bcells.length);
+        if (doc.querySelector('.jww-otnt-bar')) ok('OT/NT split bar rendered');
+        else fail('OT/NT split missing');
+        const pubsTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /publication|publicac|publica|publik|публикац|出版物|출판물|pubblicazioni/i.test(el.textContent));
+        if (pubsTitle) ok('top publications section rendered');
+        else fail('publications section missing');
       }
     }
     dom.window.close();

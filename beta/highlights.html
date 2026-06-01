@@ -172,6 +172,47 @@
       .jww-footer{flex-direction:column-reverse}
       .jww-footer .jww-btn{width:100%}
     }
+    /* ── v2.25 deep analytics ── */
+    .jww-mini-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+    .jww-mini{background:rgba(255,255,255,.03);border:1px solid #1f2a3d;border-radius:14px;padding:16px 14px;text-align:center}
+    .jww-mini-num{font-size:26px;font-weight:800;color:#fb923c;font-variant-numeric:tabular-nums;line-height:1}
+    .jww-mini-lbl{font-size:12.5px;color:#e2e8f0;font-weight:600;margin-top:6px}
+    .jww-mini-sub{font-size:11px;color:#64748b;margin-top:2px}
+    .jww-heat-wrap{overflow-x:auto;padding-bottom:6px}
+    .jww-heat{display:flex;gap:3px;min-width:max-content}
+    .jww-heat-week{display:flex;flex-direction:column;gap:3px}
+    .jww-heat-cell{width:13px;height:13px;border-radius:3px;background:rgba(148,163,184,.10);animation:jwwHeatIn .45s ease both}
+    .jww-h1{background:rgba(234,88,12,.30)}.jww-h2{background:rgba(234,88,12,.50)}.jww-h3{background:rgba(234,88,12,.72)}.jww-h4{background:#ea580c}
+    @keyframes jwwHeatIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+    .jww-streak-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .jww-streak{background:linear-gradient(135deg,rgba(234,88,12,.12),rgba(234,88,12,.03));border:1px solid rgba(234,88,12,.28);border-radius:14px;padding:18px;text-align:center}
+    .jww-streak-num{font-size:34px;font-weight:800;color:#fb923c;line-height:1;font-variant-numeric:tabular-nums}
+    .jww-streak-lbl{font-size:12px;color:#94a3b8;margin-top:6px}
+    .jww-dow{display:flex;align-items:flex-end;justify-content:space-around;gap:8px;height:140px;padding-top:10px}
+    .jww-dow-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+    .jww-dow-val{font-size:11px;color:#94a3b8;font-variant-numeric:tabular-nums}
+    .jww-dow-bar{width:70%;max-width:34px;height:0;background:linear-gradient(180deg,#fb923c,#ea580c);border-radius:6px 6px 0 0;transition:height .7s cubic-bezier(.2,.8,.2,1)}
+    .jww-dow-lbl{font-size:11px;color:#64748b}
+    .jww-growth{width:100%;height:90px;display:block;margin-top:6px}
+    .jww-growth-line{stroke-dasharray:1200;stroke-dashoffset:1200;animation:jwwDraw 1.4s ease forwards}
+    .jww-growth-area{opacity:0;animation:jwwFade .9s ease .55s forwards}
+    @keyframes jwwDraw{to{stroke-dashoffset:0}}
+    @keyframes jwwFade{to{opacity:1}}
+    .jww-growth-labels{display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-top:4px}
+    .jww-growth-labels span:nth-child(2){color:#fb923c;font-weight:700}
+    .jww-bible-top{text-align:center;margin:4px 0 14px}
+    .jww-bible-big{font-size:40px;font-weight:800;color:#fb923c;line-height:1;font-variant-numeric:tabular-nums}
+    .jww-bible-sub{font-size:12.5px;color:#94a3b8;margin-top:2px}
+    .jww-bible-grid{display:grid;grid-template-columns:repeat(22,1fr);gap:3px;margin-bottom:14px}
+    .jww-bcell{aspect-ratio:1;border-radius:2px;background:rgba(148,163,184,.10)}
+    .jww-ot.jww-b2{background:rgba(96,165,250,.45)}.jww-ot.jww-b3{background:rgba(96,165,250,.7)}.jww-ot.jww-b4{background:#60a5fa}
+    .jww-nt.jww-b2{background:rgba(251,146,60,.45)}.jww-nt.jww-b3{background:rgba(251,146,60,.72)}.jww-nt.jww-b4{background:#fb923c}
+    .jww-otnt-bar{display:flex;height:10px;border-radius:6px;overflow:hidden;background:rgba(148,163,184,.12)}
+    .jww-otnt-ot{background:#60a5fa}.jww-otnt-nt{background:#fb923c}
+    .jww-otnt-legend{display:flex;justify-content:space-between;font-size:11.5px;color:#94a3b8;margin-top:7px}
+    .jww-otnt-legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+    .jww-dot-ot{background:#60a5fa}.jww-dot-nt{background:#fb923c}
+    @media (max-width:520px){.jww-mini-row{grid-template-columns:1fr}.jww-bible-grid{grid-template-columns:repeat(11,1fr)}}
   </style>
 </head>
 <body>
@@ -227,16 +268,16 @@
     var JWC = {1:{h:'#fbbf24',n:'Yellow'},2:{h:'#4ade80',n:'Green'},3:{h:'#60a5fa',n:'Blue'},4:{h:'#f472b6',n:'Pink'},5:{h:'#fb923c',n:'Orange'},6:{h:'#c084fc',n:'Purple'}};
 
     var I18N = {
-      en:{title:'Your Service Year Highlights',close:'Close',share:'Copy stats',copied:'Copied!',loading:'Analyzing your library…',error:'Could not read this file.',highlights:'Highlights',bookmarks:'Bookmarks',tags_label:'Tags',notes_label:'Notes',top_books:'Most Studied Books',timeline:'Activity by Year',your_tags:'Your Tags',hl_colors:'Highlight Colors',first_note:'First note',latest_note:'Latest note',study_span:'Study span',most_active:'Most active',pick_file:'Choose a .jwlibrary file',open_file:'Open File',no_notes:'No notes found in this file.',loading_tools:'Loading tools, please wait a moment…',years_unit:'years',year_unit:'year',all_time:'All Time',service_yr:'Service Year',vs_prev:'vs prev. year',no_data_sy:'No notes recorded for this service year.'},
-      es:{title:'Momentos de tu año de servicio',close:'Cerrar',share:'Copiar estadísticas',copied:'¡Copiado!',loading:'Analizando tu biblioteca…',error:'No se pudo leer este archivo.',highlights:'Subrayados',bookmarks:'Marcadores',tags_label:'Etiquetas',notes_label:'Notas',top_books:'Libros más estudiados',timeline:'Actividad por año',your_tags:'Tus etiquetas',hl_colors:'Colores de subrayado',first_note:'Primera nota',latest_note:'Última nota',study_span:'Período de estudio',most_active:'Más activo',pick_file:'Elige un archivo .jwlibrary',open_file:'Abrir archivo',no_notes:'No se encontraron notas en este archivo.',loading_tools:'Cargando herramientas, espera un momento…',years_unit:'años',year_unit:'año',all_time:'Todo el tiempo',service_yr:'Año de servicio',vs_prev:'vs año anterior',no_data_sy:'No hay notas registradas para este año de servicio.'},
-      pt:{title:'Destaques do seu ano de serviço',close:'Fechar',share:'Copiar estatísticas',copied:'Copiado!',loading:'Analisando sua biblioteca…',error:'Não foi possível ler este arquivo.',highlights:'Destaques',bookmarks:'Marcadores',tags_label:'Marcadores de texto',notes_label:'Notas',top_books:'Livros mais estudados',timeline:'Atividade por ano',your_tags:'Suas etiquetas',hl_colors:'Cores de destaque',first_note:'Primeira nota',latest_note:'Última nota',study_span:'Período de estudo',most_active:'Mais ativo',pick_file:'Escolha um arquivo .jwlibrary',open_file:'Abrir arquivo',no_notes:'Nenhuma nota encontrada neste arquivo.',loading_tools:'Carregando ferramentas, aguarde um momento…',years_unit:'anos',year_unit:'ano',all_time:'Todo o tempo',service_yr:'Ano de serviço',vs_prev:'vs ano anterior',no_data_sy:'Nenhuma nota registrada para este ano de serviço.'},
-      fr:{title:'Temps forts de votre année de service',close:'Fermer',share:'Copier les stats',copied:'Copié !',loading:'Analyse de votre bibliothèque…',error:'Impossible de lire ce fichier.',highlights:'Surlignages',bookmarks:'Signets',tags_label:'Étiquettes',notes_label:'Notes',top_books:'Livres les plus étudiés',timeline:'Activité par année',your_tags:'Vos étiquettes',hl_colors:'Couleurs de surlignage',first_note:'Première note',latest_note:'Dernière note',study_span:'Période d’étude',most_active:'Plus actif',pick_file:'Choisir un fichier .jwlibrary',open_file:'Ouvrir le fichier',no_notes:'Aucune note trouvée dans ce fichier.',loading_tools:'Chargement des outils, un instant…',years_unit:'ans',year_unit:'an',all_time:'Tout le temps',service_yr:'Année de service',vs_prev:'vs année préc.',no_data_sy:'Aucune note enregistrée pour cette année de service.'},
-      de:{title:'Highlights deines Dienstjahres',close:'Schließen',share:'Statistik kopieren',copied:'Kopiert!',loading:'Deine Bibliothek wird analysiert…',error:'Diese Datei konnte nicht gelesen werden.',highlights:'Markierungen',bookmarks:'Lesezeichen',tags_label:'Kategorien',notes_label:'Notizen',top_books:'Meiststudierte Bücher',timeline:'Aktivität nach Jahr',your_tags:'Deine Kategorien',hl_colors:'Markierungsfarben',first_note:'Erste Notiz',latest_note:'Letzte Notiz',study_span:'Studienzeitraum',most_active:'Aktivste Zeit',pick_file:'.jwlibrary-Datei auswählen',open_file:'Datei öffnen',no_notes:'In dieser Datei wurden keine Notizen gefunden.',loading_tools:'Werkzeuge werden geladen, einen Moment…',years_unit:'Jahre',year_unit:'Jahr',all_time:'Gesamtzeit',service_yr:'Dienstjahr',vs_prev:'vs Vorjahr',no_data_sy:'Für dieses Dienstjahr wurden keine Notizen erfasst.'},
-      it:{title:'Punti salienti del tuo anno di servizio',close:'Chiudi',share:'Copia statistiche',copied:'Copiato!',loading:'Analisi della tua biblioteca…',error:'Impossibile leggere questo file.',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags_label:'Etichette',notes_label:'Note',top_books:'Libri più studiati',timeline:'Attività per anno',your_tags:'Le tue etichette',hl_colors:'Colori evidenziazione',first_note:'Prima nota',latest_note:'Ultima nota',study_span:'Periodo di studio',most_active:'Più attivo',pick_file:'Scegli un file .jwlibrary',open_file:'Apri file',no_notes:'Nessuna nota trovata in questo file.',loading_tools:'Caricamento strumenti, un momento…',years_unit:'anni',year_unit:'anno',all_time:'Tutto il tempo',service_yr:'Anno di servizio',vs_prev:'vs anno prec.',no_data_sy:'Nessuna nota registrata per questo anno di servizio.'},
-      ru:{title:'Итоги вашего года служения',close:'Закрыть',share:'Копировать статистику',copied:'Скопировано!',loading:'Анализируем вашу библиотеку…',error:'Не удалось прочитать этот файл.',highlights:'Выделения',bookmarks:'Закладки',tags_label:'Метки',notes_label:'Заметки',top_books:'Самые изучаемые книги',timeline:'Активность по годам',your_tags:'Ваши метки',hl_colors:'Цвета выделений',first_note:'Первая заметка',latest_note:'Последняя заметка',study_span:'Период изучения',most_active:'Самый активный',pick_file:'Выберите файл .jwlibrary',open_file:'Открыть файл',no_notes:'В этом файле не найдено заметок.',loading_tools:'Загрузка инструментов, подождите…',years_unit:'лет',year_unit:'год',all_time:'За всё время',service_yr:'Год служения',vs_prev:'vs пред. год',no_data_sy:'Для этого года служения заметок не найдено.'},
-      ja:{title:'奉仕年度のハイライト',close:'閉じる',share:'統計をコピー',copied:'コピーしました',loading:'ライブラリーを分析しています…',error:'このファイルを読み込めませんでした。',highlights:'ハイライト',bookmarks:'しおり',tags_label:'タグ',notes_label:'ノート',top_books:'よく研究した書',timeline:'年ごとの活動',your_tags:'あなたのタグ',hl_colors:'ハイライトの色',first_note:'最初のノート',latest_note:'最新のノート',study_span:'研究期間',most_active:'最も活発な時期',pick_file:'.jwlibrary ファイルを選択',open_file:'ファイルを開く',no_notes:'このファイルにノートが見つかりませんでした。',loading_tools:'ツールを読み込んでいます。少々お待ちください…',years_unit:'年',year_unit:'年',all_time:'通算',service_yr:'奉仕年度',vs_prev:'前年比',no_data_sy:'この奉仕年度に記録されたノートはありません。'},
-      ko:{title:'봉사년도 하이라이트',close:'닫기',share:'통계 복사',copied:'복사됨!',loading:'라이브러리를 분석하는 중…',error:'이 파일을 읽을 수 없습니다.',highlights:'강조 표시',bookmarks:'책갈피',tags_label:'태그',notes_label:'노트',top_books:'가장 많이 연구한 책',timeline:'연도별 활동',your_tags:'내 태그',hl_colors:'강조 표시 색상',first_note:'첫 노트',latest_note:'최근 노트',study_span:'연구 기간',most_active:'가장 활발한 시기',pick_file:'.jwlibrary 파일 선택',open_file:'파일 열기',no_notes:'이 파일에서 노트를 찾을 수 없습니다.',loading_tools:'도구를 불러오는 중입니다. 잠시만 기다려 주세요…',years_unit:'년',year_unit:'년',all_time:'전체 기간',service_yr:'봉사년도',vs_prev:'전년 대비',no_data_sy:'이 봉사년도에 기록된 노트가 없습니다.'},
-      tl:{title:'Mga Highlight ng Taon ng Serbisyo',close:'Isara',share:'Kopyahin ang stats',copied:'Nakopya na!',loading:'Sinusuri ang iyong aklatan…',error:'Hindi mabasa ang file na ito.',highlights:'Mga Highlight',bookmarks:'Mga Bookmark',tags_label:'Mga Tag',notes_label:'Mga Tala',top_books:'Pinakapinag-aralang Aklat',timeline:'Aktibidad kada Taon',your_tags:'Iyong mga Tag',hl_colors:'Mga Kulay ng Highlight',first_note:'Unang tala',latest_note:'Pinakahuling tala',study_span:'Saklaw ng pag-aaral',most_active:'Pinakaaktibo',pick_file:'Pumili ng .jwlibrary file',open_file:'Buksan ang File',no_notes:'Walang natagpuang tala sa file na ito.',loading_tools:'Naglo-load ang mga tool, sandali lang…',years_unit:'taon',year_unit:'taon',all_time:'Lahat ng Panahon',service_yr:'Taon ng Serbisyo',vs_prev:'kumpara sa nakaraang taon',no_data_sy:'Walang naitalang tala para sa taong ng serbisyong ito.'}
+      en:{title:'Your Service Year Highlights',close:'Close',share:'Copy stats',copied:'Copied!',loading:'Analyzing your library…',error:'Could not read this file.',highlights:'Highlights',bookmarks:'Bookmarks',tags_label:'Tags',notes_label:'Notes',top_books:'Most Studied Books',timeline:'Activity by Year',your_tags:'Your Tags',hl_colors:'Highlight Colors',first_note:'First note',latest_note:'Latest note',study_span:'Study span',most_active:'Most active',pick_file:'Choose a .jwlibrary file',open_file:'Open File',no_notes:'No notes found in this file.',loading_tools:'Loading tools, please wait a moment…',years_unit:'years',year_unit:'year',all_time:'All Time',service_yr:'Service Year',vs_prev:'vs prev. year',no_data_sy:'No notes recorded for this service year.',heatmap:'Activity Heatmap',rhythm:'Study Rhythm',growth:'Growth Over Time',streaks:'Streaks',longest_streak:'Longest',current_streak:'Most recent',day_unit_s:'days',bible_cov:'Bible Coverage',books_touched:'of 66 books',ot_label:'Hebrew Scriptures',nt_label:'Greek Scriptures',top_pubs:'Top Publications',words_written:'Words Written',words_sub:'across your notes',longest_note:'Longest note',depth_title:'Highlights with Notes',depth_sub:'carry a written note'},
+      es:{title:'Momentos de tu año de servicio',close:'Cerrar',share:'Copiar estadísticas',copied:'¡Copiado!',loading:'Analizando tu biblioteca…',error:'No se pudo leer este archivo.',highlights:'Subrayados',bookmarks:'Marcadores',tags_label:'Etiquetas',notes_label:'Notas',top_books:'Libros más estudiados',timeline:'Actividad por año',your_tags:'Tus etiquetas',hl_colors:'Colores de subrayado',first_note:'Primera nota',latest_note:'Última nota',study_span:'Período de estudio',most_active:'Más activo',pick_file:'Elige un archivo .jwlibrary',open_file:'Abrir archivo',no_notes:'No se encontraron notas en este archivo.',loading_tools:'Cargando herramientas, espera un momento…',years_unit:'años',year_unit:'año',all_time:'Todo el tiempo',service_yr:'Año de servicio',vs_prev:'vs año anterior',no_data_sy:'No hay notas registradas para este año de servicio.',heatmap:'Mapa de actividad',rhythm:'Ritmo de estudio',growth:'Crecimiento en el tiempo',streaks:'Rachas',longest_streak:'Más larga',current_streak:'Más reciente',day_unit_s:'días',bible_cov:'Cobertura de la Biblia',books_touched:'de 66 libros',ot_label:'Escrituras Hebreas',nt_label:'Escrituras Griegas',top_pubs:'Publicaciones principales',words_written:'Palabras escritas',words_sub:'en tus notas',longest_note:'Nota más larga',depth_title:'Subrayados con nota',depth_sub:'tienen una nota escrita'},
+      pt:{title:'Destaques do seu ano de serviço',close:'Fechar',share:'Copiar estatísticas',copied:'Copiado!',loading:'Analisando sua biblioteca…',error:'Não foi possível ler este arquivo.',highlights:'Destaques',bookmarks:'Marcadores',tags_label:'Marcadores de texto',notes_label:'Notas',top_books:'Livros mais estudados',timeline:'Atividade por ano',your_tags:'Suas etiquetas',hl_colors:'Cores de destaque',first_note:'Primeira nota',latest_note:'Última nota',study_span:'Período de estudo',most_active:'Mais ativo',pick_file:'Escolha um arquivo .jwlibrary',open_file:'Abrir arquivo',no_notes:'Nenhuma nota encontrada neste arquivo.',loading_tools:'Carregando ferramentas, aguarde um momento…',years_unit:'anos',year_unit:'ano',all_time:'Todo o tempo',service_yr:'Ano de serviço',vs_prev:'vs ano anterior',no_data_sy:'Nenhuma nota registrada para este ano de serviço.',heatmap:'Mapa de atividade',rhythm:'Ritmo de estudo',growth:'Crescimento ao longo do tempo',streaks:'Sequências',longest_streak:'Mais longa',current_streak:'Mais recente',day_unit_s:'dias',bible_cov:'Cobertura da Bíblia',books_touched:'de 66 livros',ot_label:'Escrituras Hebraicas',nt_label:'Escrituras Gregas',top_pubs:'Principais publicações',words_written:'Palavras escritas',words_sub:'nas suas notas',longest_note:'Nota mais longa',depth_title:'Destaques com nota',depth_sub:'têm uma nota escrita'},
+      fr:{title:'Temps forts de votre année de service',close:'Fermer',share:'Copier les stats',copied:'Copié !',loading:'Analyse de votre bibliothèque…',error:'Impossible de lire ce fichier.',highlights:'Surlignages',bookmarks:'Signets',tags_label:'Étiquettes',notes_label:'Notes',top_books:'Livres les plus étudiés',timeline:'Activité par année',your_tags:'Vos étiquettes',hl_colors:'Couleurs de surlignage',first_note:'Première note',latest_note:'Dernière note',study_span:'Période d’étude',most_active:'Plus actif',pick_file:'Choisir un fichier .jwlibrary',open_file:'Ouvrir le fichier',no_notes:'Aucune note trouvée dans ce fichier.',loading_tools:'Chargement des outils, un instant…',years_unit:'ans',year_unit:'an',all_time:'Tout le temps',service_yr:'Année de service',vs_prev:'vs année préc.',no_data_sy:'Aucune note enregistrée pour cette année de service.',heatmap:'Carte d\u2019activité',rhythm:'Rythme d\u2019étude',growth:'Évolution dans le temps',streaks:'Séries',longest_streak:'La plus longue',current_streak:'La plus récente',day_unit_s:'jours',bible_cov:'Couverture de la Bible',books_touched:'sur 66 livres',ot_label:'Écritures hébraïques',nt_label:'Écritures grecques',top_pubs:'Principales publications',words_written:'Mots écrits',words_sub:'dans vos notes',longest_note:'Note la plus longue',depth_title:'Surlignages avec note',depth_sub:'ont une note écrite'},
+      de:{title:'Highlights deines Dienstjahres',close:'Schließen',share:'Statistik kopieren',copied:'Kopiert!',loading:'Deine Bibliothek wird analysiert…',error:'Diese Datei konnte nicht gelesen werden.',highlights:'Markierungen',bookmarks:'Lesezeichen',tags_label:'Kategorien',notes_label:'Notizen',top_books:'Meiststudierte Bücher',timeline:'Aktivität nach Jahr',your_tags:'Deine Kategorien',hl_colors:'Markierungsfarben',first_note:'Erste Notiz',latest_note:'Letzte Notiz',study_span:'Studienzeitraum',most_active:'Aktivste Zeit',pick_file:'.jwlibrary-Datei auswählen',open_file:'Datei öffnen',no_notes:'In dieser Datei wurden keine Notizen gefunden.',loading_tools:'Werkzeuge werden geladen, einen Moment…',years_unit:'Jahre',year_unit:'Jahr',all_time:'Gesamtzeit',service_yr:'Dienstjahr',vs_prev:'vs Vorjahr',no_data_sy:'Für dieses Dienstjahr wurden keine Notizen erfasst.',heatmap:'Aktivitäts-Heatmap',rhythm:'Studienrhythmus',growth:'Wachstum über die Zeit',streaks:'Serien',longest_streak:'Längste',current_streak:'Neueste',day_unit_s:'Tage',bible_cov:'Bibelabdeckung',books_touched:'von 66 Büchern',ot_label:'Hebräische Schriften',nt_label:'Griechische Schriften',top_pubs:'Top-Veröffentlichungen',words_written:'Geschriebene Wörter',words_sub:'in deinen Notizen',longest_note:'Längste Notiz',depth_title:'Markierungen mit Notiz',depth_sub:'haben eine Notiz'},
+      it:{title:'Punti salienti del tuo anno di servizio',close:'Chiudi',share:'Copia statistiche',copied:'Copiato!',loading:'Analisi della tua biblioteca…',error:'Impossibile leggere questo file.',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags_label:'Etichette',notes_label:'Note',top_books:'Libri più studiati',timeline:'Attività per anno',your_tags:'Le tue etichette',hl_colors:'Colori evidenziazione',first_note:'Prima nota',latest_note:'Ultima nota',study_span:'Periodo di studio',most_active:'Più attivo',pick_file:'Scegli un file .jwlibrary',open_file:'Apri file',no_notes:'Nessuna nota trovata in questo file.',loading_tools:'Caricamento strumenti, un momento…',years_unit:'anni',year_unit:'anno',all_time:'Tutto il tempo',service_yr:'Anno di servizio',vs_prev:'vs anno prec.',no_data_sy:'Nessuna nota registrata per questo anno di servizio.',heatmap:'Mappa attività',rhythm:'Ritmo di studio',growth:'Crescita nel tempo',streaks:'Serie',longest_streak:'Più lunga',current_streak:'Più recente',day_unit_s:'giorni',bible_cov:'Copertura della Bibbia',books_touched:'su 66 libri',ot_label:'Scritture Ebraiche',nt_label:'Scritture Greche',top_pubs:'Pubblicazioni principali',words_written:'Parole scritte',words_sub:'nelle tue note',longest_note:'Nota più lunga',depth_title:'Evidenziazioni con nota',depth_sub:'hanno una nota'},
+      ru:{title:'Итоги вашего года служения',close:'Закрыть',share:'Копировать статистику',copied:'Скопировано!',loading:'Анализируем вашу библиотеку…',error:'Не удалось прочитать этот файл.',highlights:'Выделения',bookmarks:'Закладки',tags_label:'Метки',notes_label:'Заметки',top_books:'Самые изучаемые книги',timeline:'Активность по годам',your_tags:'Ваши метки',hl_colors:'Цвета выделений',first_note:'Первая заметка',latest_note:'Последняя заметка',study_span:'Период изучения',most_active:'Самый активный',pick_file:'Выберите файл .jwlibrary',open_file:'Открыть файл',no_notes:'В этом файле не найдено заметок.',loading_tools:'Загрузка инструментов, подождите…',years_unit:'лет',year_unit:'год',all_time:'За всё время',service_yr:'Год служения',vs_prev:'vs пред. год',no_data_sy:'Для этого года служения заметок не найдено.',heatmap:'Карта активности',rhythm:'Ритм изучения',growth:'Рост со временем',streaks:'Серии',longest_streak:'Самая длинная',current_streak:'Последняя',day_unit_s:'дн.',bible_cov:'Охват Библии',books_touched:'из 66 книг',ot_label:'Еврейские Писания',nt_label:'Греческие Писания',top_pubs:'Топ публикаций',words_written:'Написано слов',words_sub:'в ваших заметках',longest_note:'Самая длинная заметка',depth_title:'Пометки с заметкой',depth_sub:'содержат заметку'},
+      ja:{title:'奉仕年度のハイライト',close:'閉じる',share:'統計をコピー',copied:'コピーしました',loading:'ライブラリーを分析しています…',error:'このファイルを読み込めませんでした。',highlights:'ハイライト',bookmarks:'しおり',tags_label:'タグ',notes_label:'ノート',top_books:'よく研究した書',timeline:'年ごとの活動',your_tags:'あなたのタグ',hl_colors:'ハイライトの色',first_note:'最初のノート',latest_note:'最新のノート',study_span:'研究期間',most_active:'最も活発な時期',pick_file:'.jwlibrary ファイルを選択',open_file:'ファイルを開く',no_notes:'このファイルにノートが見つかりませんでした。',loading_tools:'ツールを読み込んでいます。少々お待ちください…',years_unit:'年',year_unit:'年',all_time:'通算',service_yr:'奉仕年度',vs_prev:'前年比',no_data_sy:'この奉仕年度に記録されたノートはありません。',heatmap:'活動ヒートマップ',rhythm:'学習リズム',growth:'時間ごとの成長',streaks:'連続記録',longest_streak:'最長',current_streak:'最近',day_unit_s:'日',bible_cov:'聖書のカバー範囲',books_touched:'/ 66 書',ot_label:'ヘブライ語聖書',nt_label:'ギリシャ語聖書',top_pubs:'主な出版物',words_written:'書いた語数',words_sub:'ノート全体',longest_note:'最長のノート',depth_title:'ノート付きハイライト',depth_sub:'にノートがあります'},
+      ko:{title:'봉사년도 하이라이트',close:'닫기',share:'통계 복사',copied:'복사됨!',loading:'라이브러리를 분석하는 중…',error:'이 파일을 읽을 수 없습니다.',highlights:'강조 표시',bookmarks:'책갈피',tags_label:'태그',notes_label:'노트',top_books:'가장 많이 연구한 책',timeline:'연도별 활동',your_tags:'내 태그',hl_colors:'강조 표시 색상',first_note:'첫 노트',latest_note:'최근 노트',study_span:'연구 기간',most_active:'가장 활발한 시기',pick_file:'.jwlibrary 파일 선택',open_file:'파일 열기',no_notes:'이 파일에서 노트를 찾을 수 없습니다.',loading_tools:'도구를 불러오는 중입니다. 잠시만 기다려 주세요…',years_unit:'년',year_unit:'년',all_time:'전체 기간',service_yr:'봉사년도',vs_prev:'전년 대비',no_data_sy:'이 봉사년도에 기록된 노트가 없습니다.',heatmap:'활동 히트맵',rhythm:'학습 리듬',growth:'시간에 따른 성장',streaks:'연속 기록',longest_streak:'최장',current_streak:'최근',day_unit_s:'일',bible_cov:'성경 커버리지',books_touched:'/ 66권',ot_label:'히브리어 성경',nt_label:'그리스어 성경',top_pubs:'주요 출판물',words_written:'작성한 단어',words_sub:'노트 전체',longest_note:'가장 긴 노트',depth_title:'노트가 있는 하이라이트',depth_sub:'에 노트가 있습니다'},
+      tl:{title:'Mga Highlight ng Taon ng Serbisyo',close:'Isara',share:'Kopyahin ang stats',copied:'Nakopya na!',loading:'Sinusuri ang iyong aklatan…',error:'Hindi mabasa ang file na ito.',highlights:'Mga Highlight',bookmarks:'Mga Bookmark',tags_label:'Mga Tag',notes_label:'Mga Tala',top_books:'Pinakapinag-aralang Aklat',timeline:'Aktibidad kada Taon',your_tags:'Iyong mga Tag',hl_colors:'Mga Kulay ng Highlight',first_note:'Unang tala',latest_note:'Pinakahuling tala',study_span:'Saklaw ng pag-aaral',most_active:'Pinakaaktibo',pick_file:'Pumili ng .jwlibrary file',open_file:'Buksan ang File',no_notes:'Walang natagpuang tala sa file na ito.',loading_tools:'Naglo-load ang mga tool, sandali lang…',years_unit:'taon',year_unit:'taon',all_time:'Lahat ng Panahon',service_yr:'Taon ng Serbisyo',vs_prev:'kumpara sa nakaraang taon',no_data_sy:'Walang naitalang tala para sa taong ng serbisyong ito.',heatmap:'Heatmap ng Aktibidad',rhythm:'Ritmo ng Pag-aaral',growth:'Paglago sa Paglipas ng Panahon',streaks:'Mga Streak',longest_streak:'Pinakamahaba',current_streak:'Pinakabago',day_unit_s:'araw',bible_cov:'Saklaw ng Bibliya',books_touched:'sa 66 aklat',ot_label:'Hebreong Kasulatan',nt_label:'Griegong Kasulatan',top_pubs:'Nangungunang Publikasyon',words_written:'Mga Salitang Naisulat',words_sub:'sa iyong mga tala',longest_note:'Pinakamahabang tala',depth_title:'Mga Highlight na may Tala',depth_sub:'ay may nakasulat na tala'}
     };
 
     function getLang() {
@@ -299,6 +340,11 @@
 
     // ── icons ──
     var IC = {
+      calendar: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+      flame: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3 4 4 4 8a4 4 0 0 1-8 0c0-1 .5-2 1-3 .5 2 3 2 3 0 0-2-1-3 0-5z"/></svg>',
+      clock: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>',
+      trend: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>',
+      layers: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
       file: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
       x: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
       highlight: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11-6 6v3h9l3-3"/><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"/></svg>',
@@ -366,6 +412,30 @@
 
       var active = rows(db, "SELECT strftime('%Y-%m', LastModified) mo, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY mo ORDER BY n DESC LIMIT 1");
       if (active.length && active[0]) { s.activeMonth = active[0][0] || null; s.activeMonthN = +active[0][1] || 0; }
+
+      // ── v2.25 deep analytics ──
+      s.daily = rows(db, "SELECT strftime('%Y-%m-%d', LastModified) d, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY d ORDER BY d")
+        .map(function (v) { return { d: String(v[0]), n: +v[1] || 0 }; })
+        .filter(function (x) { return /^\d{4}-\d{2}-\d{2}$/.test(x.d); });
+      s.dow = [0, 0, 0, 0, 0, 0, 0];
+      rows(db, "SELECT strftime('%w', LastModified) w, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY w")
+        .forEach(function (v) { var w = +v[0]; if (w >= 0 && w <= 6) s.dow[w] = +v[1] || 0; });
+      s.months = rows(db, "SELECT strftime('%Y-%m', LastModified) mo, COUNT(*) n FROM Note WHERE LastModified IS NOT NULL" + ndw + " GROUP BY mo ORDER BY mo")
+        .map(function (v) { return { mo: String(v[0]), n: +v[1] || 0 }; })
+        .filter(function (x) { return /^\d{4}-\d{2}$/.test(x.mo); });
+      s.bibleBooks = num(db, 'SELECT COUNT(DISTINCT l.BookNumber) FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 1 AND 66' + dw);
+      s.ot = num(db, 'SELECT COUNT(*) FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 1 AND 39' + dw);
+      s.nt = num(db, 'SELECT COUNT(*) FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 40 AND 66' + dw);
+      s.bookHits = {};
+      rows(db, 'SELECT l.BookNumber, COUNT(*) n FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.BookNumber BETWEEN 1 AND 66' + dw + ' GROUP BY l.BookNumber')
+        .forEach(function (v) { s.bookHits[+v[0]] = +v[1] || 0; });
+      s.pubs = rows(db, "SELECT l.KeySymbol, COUNT(*) n FROM Note nt JOIN Location l ON nt.LocationId=l.LocationId WHERE l.KeySymbol IS NOT NULL AND l.KeySymbol<>''" + dw + " GROUP BY l.KeySymbol ORDER BY n DESC LIMIT 8")
+        .map(function (v) { return { sym: String(v[0] || ''), n: +v[1] || 0 }; });
+      var contents = rows(db, 'SELECT Content FROM Note WHERE Content IS NOT NULL' + ndw);
+      var totalWords = 0, longest = 0;
+      contents.forEach(function (r) { var txt = stripNoteHtml(r[0]); var w = txt ? txt.split(/\s+/).filter(Boolean).length : 0; totalWords += w; if (w > longest) longest = w; });
+      s.words = totalWords; s.longestNote = longest;
+      s.hlWithNote = num(db, 'SELECT COUNT(*) FROM UserMark u WHERE EXISTS(SELECT 1 FROM Note n WHERE n.UserMarkId=u.UserMarkId)');
 
       return s;
     }
@@ -483,6 +553,114 @@
       });
     }
 
+    var PUBNAMES = { nwt:'New World Translation', nwtsty:'Study Bible', Rbi8:'Reference Bible', w:'The Watchtower', wp:'Watchtower (Public)', g:'Awake!', bt:'Bible Teach', bhs:'Enjoy Life Forever', lff:'Love People', lfb:'Become Friends', rr:'Pure Worship', jy:'Jesus—The Way', it:'Insight', od:'Organized', lvs:"Jehovah's Love", cl:'Draw Close', sjj:'Sing Out Joyfully', jwb:'JW Broadcasting', mwb:'Meeting Workbook', km:'Ministry', yb:'Yearbook', es:'Examining the Scriptures' };
+
+    function computeStreaks(daily) {
+      if (!daily || !daily.length) return { longest: 0, current: 0 };
+      var set = {}; daily.forEach(function (x) { set[x.d] = 1; });
+      var sorted = Object.keys(set).sort();
+      function shift(dstr, n) { var dt = new Date(dstr + 'T00:00:00Z'); dt.setUTCDate(dt.getUTCDate() + n); return dt.toISOString().slice(0, 10); }
+      var longest = 1, run = 1;
+      for (var i = 1; i < sorted.length; i++) {
+        if (shift(sorted[i - 1], 1) === sorted[i]) { run++; if (run > longest) longest = run; }
+        else { run = 1; }
+      }
+      var cur = 0, cursor = sorted[sorted.length - 1];
+      while (set[cursor]) { cur++; cursor = shift(cursor, -1); }
+      return { longest: longest, current: cur };
+    }
+
+    function wordsHtml(s) {
+      var parts = '';
+      if (s.words) parts += '<div class="jww-mini"><div class="jww-mini-num" data-count="' + s.words + '">0</div><div class="jww-mini-lbl">' + esc(t('words_written')) + '</div><div class="jww-mini-sub">' + esc(t('words_sub')) + '</div></div>';
+      if (s.longestNote) parts += '<div class="jww-mini"><div class="jww-mini-num" data-count="' + s.longestNote + '">0</div><div class="jww-mini-lbl">' + esc(t('longest_note')) + '</div><div class="jww-mini-sub">' + esc(t('words_sub')) + '</div></div>';
+      if (s.highlights) { var pct = Math.round((s.hlWithNote || 0) / s.highlights * 100); parts += '<div class="jww-mini"><div class="jww-mini-num">' + pct + '%</div><div class="jww-mini-lbl">' + esc(t('depth_title')) + '</div><div class="jww-mini-sub">' + esc(t('depth_sub')) + '</div></div>'; }
+      if (!parts) return '';
+      return '<div class="jww-section"><div class="jww-mini-row">' + parts + '</div></div>';
+    }
+
+    function heatmapHtml(s) {
+      if (!s.daily || !s.daily.length) return '';
+      var map = {}, maxN = 0;
+      s.daily.forEach(function (x) { map[x.d] = x.n; if (x.n > maxN) maxN = x.n; });
+      var end = new Date(s.daily[s.daily.length - 1].d + 'T00:00:00Z');
+      var weeks = 26;
+      var start = new Date(end); start.setUTCDate(start.getUTCDate() - (weeks * 7 - 1)); start.setUTCDate(start.getUTCDate() - start.getUTCDay());
+      function lvl(n) { if (!n) return 0; if (maxN <= 1) return 4; var q = n / maxN; return q > 0.75 ? 4 : q > 0.5 ? 3 : q > 0.25 ? 2 : 1; }
+      var html = '<div class="jww-heat">', cursor = new Date(start), idx = 0;
+      while (cursor <= end) {
+        html += '<div class="jww-heat-week">';
+        for (var d = 0; d < 7; d++) {
+          var ds = cursor.toISOString().slice(0, 10), n = map[ds] || 0;
+          html += '<span class="jww-heat-cell jww-h' + lvl(n) + '" style="animation-delay:' + (idx * 4) + 'ms" title="' + ds + ': ' + n + '"></span>';
+          cursor.setUTCDate(cursor.getUTCDate() + 1); idx++;
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+      return '<div class="jww-section"><h3 class="jww-sec-title">' + IC.calendar + esc(t('heatmap')) + '</h3><div class="jww-heat-wrap">' + html + '</div></div>';
+    }
+
+    function streakHtml(st) {
+      if (!st || (!st.longest && !st.current)) return '';
+      return '<div class="jww-section"><h3 class="jww-sec-title">' + IC.flame + esc(t('streaks')) + '</h3><div class="jww-streak-row">'
+        + '<div class="jww-streak"><div class="jww-streak-num" data-count="' + st.longest + '">0</div><div class="jww-streak-lbl">' + esc(t('longest_streak')) + ' · ' + esc(t('day_unit_s')) + '</div></div>'
+        + '<div class="jww-streak"><div class="jww-streak-num" data-count="' + st.current + '">0</div><div class="jww-streak-lbl">' + esc(t('current_streak')) + ' · ' + esc(t('day_unit_s')) + '</div></div>'
+        + '</div></div>';
+    }
+
+    function dowHtml(s) {
+      if (!s.dow) return '';
+      var max = Math.max.apply(null, s.dow) || 1; if (!max) return '';
+      var labels = []; for (var i = 0; i < 7; i++) labels.push(new Date(Date.UTC(2024, 0, 7 + i)).toLocaleDateString(getLang(), { weekday: 'short' }));
+      var html = '<div class="jww-section"><h3 class="jww-sec-title">' + IC.clock + esc(t('rhythm')) + '</h3><div class="jww-dow">';
+      s.dow.forEach(function (n, i) { var pct = Math.max(3, Math.round(n / max * 100)); html += '<div class="jww-dow-col"><div class="jww-dow-val">' + n + '</div><div class="jww-dow-bar" data-h="' + pct + '" data-i="' + i + '"></div><div class="jww-dow-lbl">' + esc(labels[i]) + '</div></div>'; });
+      return html + '</div></div>';
+    }
+
+    function growthHtml(s) {
+      if (!s.months || s.months.length < 2) return '';
+      var cum = 0, pts = s.months.map(function (m) { cum += m.n; return { mo: m.mo, c: cum }; });
+      var maxC = cum || 1, W = 300, H = 90, n = pts.length;
+      var coords = pts.map(function (p, i) { var x = (n === 1 ? 0 : (i / (n - 1)) * W); var y = H - (p.c / maxC) * H; return [x, y]; });
+      var line = coords.map(function (cc, i) { return (i ? 'L' : 'M') + cc[0].toFixed(1) + ' ' + cc[1].toFixed(1); }).join(' ');
+      var area = line + ' L' + W + ' ' + H + ' L0 ' + H + ' Z';
+      return '<div class="jww-section"><h3 class="jww-sec-title">' + IC.trend + esc(t('growth')) + '</h3>'
+        + '<svg class="jww-growth" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none"><defs><linearGradient id="jwgrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ea580c" stop-opacity="0.5"/><stop offset="1" stop-color="#ea580c" stop-opacity="0"/></linearGradient></defs>'
+        + '<path class="jww-growth-area" d="' + area + '" fill="url(#jwgrad)"/><path class="jww-growth-line" d="' + line + '" fill="none" stroke="#fb923c" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>'
+        + '<div class="jww-growth-labels"><span>' + esc(fmtMonth(pts[0].mo)) + '</span><span>' + cum.toLocaleString(getLang()) + '</span><span>' + esc(fmtMonth(pts[pts.length - 1].mo)) + '</span></div></div>';
+    }
+
+    function bibleHtml(s) {
+      if (!s.bibleBooks) return '';
+      var totalBible = (s.ot || 0) + (s.nt || 0) || 1;
+      var otPct = Math.round((s.ot || 0) / totalBible * 100), ntPct = 100 - otPct;
+      var maxHit = 0, k; for (k in s.bookHits) if (s.bookHits[k] > maxHit) maxHit = s.bookHits[k];
+      var grid = '<div class="jww-bible-grid">';
+      for (var b = 1; b <= 66; b++) {
+        var hn = s.bookHits[b] || 0, lv = !hn ? 0 : (maxHit <= 1 ? 4 : (hn / maxHit > 0.66 ? 4 : (hn / maxHit > 0.33 ? 3 : 2)));
+        grid += '<span class="jww-bcell jww-b' + lv + ' jww-' + (b <= 39 ? 'ot' : 'nt') + '" title="' + esc(BOOKS[b - 1]) + ': ' + hn + '"></span>';
+      }
+      grid += '</div>';
+      return '<div class="jww-section"><h3 class="jww-sec-title">' + IC.book + esc(t('bible_cov')) + '</h3>'
+        + '<div class="jww-bible-top"><div class="jww-bible-big" data-count="' + s.bibleBooks + '">0</div><div class="jww-bible-sub">' + esc(t('books_touched')) + '</div></div>'
+        + grid
+        + '<div class="jww-otnt"><div class="jww-otnt-bar"><span class="jww-otnt-ot" style="width:' + otPct + '%"></span><span class="jww-otnt-nt" style="width:' + ntPct + '%"></span></div>'
+        + '<div class="jww-otnt-legend"><span><i class="jww-dot-ot"></i>' + esc(t('ot_label')) + ' ' + (s.ot || 0) + '</span><span>' + (s.nt || 0) + ' ' + esc(t('nt_label')) + '<i class="jww-dot-nt" style="margin-left:5px;margin-right:0"></i></span></div></div></div>';
+    }
+
+    function pubsHtml(s) {
+      if (!s.pubs || !s.pubs.length) return '';
+      var max = s.pubs.reduce(function (a, p) { return Math.max(a, p.n); }, 0) || 1;
+      var html = '<div class="jww-section"><h3 class="jww-sec-title">' + IC.layers + esc(t('top_pubs')) + '</h3>';
+      s.pubs.forEach(function (p, i) {
+        var nm = PUBNAMES[p.sym] || PUBNAMES[p.sym.toLowerCase()] || p.sym.toUpperCase();
+        var pct = Math.max(4, Math.round(p.n / max * 100));
+        html += '<div class="jww-hbar"><div class="jww-hbar-top"><span class="jww-hbar-name">' + esc(nm) + '</span><span class="jww-hbar-val">' + p.n + '</span></div><div class="jww-hbar-track"><div class="jww-hbar-fill" data-w="' + pct + '" data-i="' + i + '"></div></div></div>';
+      });
+      return html + '</div>';
+    }
+
     // ── render the stats view ──
     function render(s, filename, meta) {
       meta = meta || {};
@@ -534,6 +712,13 @@
       html += '<div class="jww-cell">' + IC.bookmark + '<div class="jww-cell-num" data-count="' + s.bookmarks + '">0</div><div class="jww-cell-lbl">' + esc(t('bookmarks')) + allTimeSub + '</div></div>';
       html += '<div class="jww-cell">' + IC.tag + '<div class="jww-cell-num" data-count="' + s.tags + '">0</div><div class="jww-cell-lbl">' + esc(t('tags_label')) + allTimeSub + '</div></div>';
       html += '</div>';
+
+      // ── deep analytics (v2.25): showcase charts ──
+      html += wordsHtml(s);
+      html += heatmapHtml(s);
+      html += streakHtml(computeStreaks(s.daily));
+      html += dowHtml(s);
+      html += growthHtml(s);
 
       // top books
       if (s.books.length) {
@@ -617,6 +802,10 @@
       html += '<div class="jww-fact"><div class="jww-fact-lbl">' + esc(t('study_span')) + '</div><div class="jww-fact-val">' + yrs + ' ' + esc(yrs === 1 ? t('year_unit') : t('years_unit')) + '</div></div>';
       html += '</div></div>';
 
+      // ── deep analytics (v2.25): coverage ──
+      html += bibleHtml(s);
+      html += pubsHtml(s);
+
       // footer
       html += '<div class="jww-footer">'
         + '<button class="jww-btn jww-btn-ghost jww-copy">' + esc(t('share')) + '</button>'
@@ -669,6 +858,10 @@
           setTimeout(function () { f.style.width = f.getAttribute('data-w') + '%'; }, i * 30);
         });
         body.querySelectorAll('.jww-vbar').forEach(function (f) {
+          var i = +f.getAttribute('data-i') || 0;
+          setTimeout(function () { f.style.height = f.getAttribute('data-h') + '%'; }, i * 30);
+        });
+        body.querySelectorAll('.jww-dow-bar').forEach(function (f) {
           var i = +f.getAttribute('data-i') || 0;
           setTimeout(function () { f.style.height = f.getAttribute('data-h') + '%'; }, i * 30);
         });

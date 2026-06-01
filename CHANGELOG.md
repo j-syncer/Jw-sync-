@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.25.0] — 2026-06-01
+
+### Added
+- **A whole analytics dashboard in "Your Service Year Highlights."** The Wrapped page now goes deep on your study habits — all computed privately in your browser:
+  - **Activity heatmap** — a GitHub-style calendar of your note-taking over the last six months.
+  - **Streaks** — your longest and most-recent runs of consecutive days with a note.
+  - **Study rhythm** — which days of the week you study most.
+  - **Growth over time** — an animated chart of your notes accumulating month by month.
+  - **Bible coverage** — how many of the 66 books you've annotated, a book-by-book grid, and your Hebrew-vs-Greek-Scriptures split.
+  - **Top publications** — your most-annotated publications beyond the Bible.
+  - **Words written**, your **longest note**, and what share of your **highlights carry a written note**.
+- All new sections are animated, responsive, and fully localized in all 10 languages.
+
+---
+
 ## [2.24.0] — 2026-06-01
 
 ### Added
