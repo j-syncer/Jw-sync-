@@ -215,6 +215,14 @@ for (const path of FILES) {
     else ok('Conflict suggestion badge/highlight styles present');
   }
 
+  // 8e) Markdown sharing & export (v2.23.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('function noteToMarkdown') || !c.includes('function exportMarkdown')) fail('Markdown export helpers missing');
+    else ok('Markdown export helpers present');
+    if (!c.includes('jb-md-btn')) fail('Markdown export button missing');
+    else ok('Markdown export button present');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');

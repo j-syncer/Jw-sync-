@@ -396,6 +396,42 @@ function assertContains(text, needle, label) {
   if (/<(strong|b)>/i.test(detailHtml)) ok('Note detail renders bold formatting (not plain text)');
   else fail('Note detail lost formatting: ' + detailHtml);
 
+  section('Markdown sharing & export (v2.23.0)');
+  // Detail pane should now offer a "Copy as Markdown" action alongside Copy.
+  const actionBtns = Array.from(doc.querySelectorAll('.jb-detail-actions .jb-btn'));
+  if (actionBtns.length >= 2) ok('Copy + Copy-as-Markdown actions rendered');
+  else fail('expected >=2 detail action buttons, got ' + actionBtns.length);
+  // Header Export-Markdown button
+  const mdExportBtn = doc.querySelector('.jb-md-btn');
+  if (mdExportBtn) ok('"Export Markdown" header button present');
+  else fail('Export Markdown button missing');
+  if (mdExportBtn) {
+    let mdBlob = null;
+    const origCOU = win.URL.createObjectURL;
+    win.URL.createObjectURL = (b) => { mdBlob = b; return 'blob:md'; };
+    win.URL.revokeObjectURL = () => {};
+    mdExportBtn.click();
+    await waitFor(() => mdBlob !== null, 'markdown zip to generate');
+    win.URL.createObjectURL = origCOU;
+    if (mdBlob) {
+      ok('Markdown export produced a .zip blob');
+      const zip = await JSZip.loadAsync(Buffer.from(await mdBlob.arrayBuffer()));
+      const mdFiles = Object.keys(zip.files).filter(n => /\.md$/.test(n));
+      assertEq(mdFiles.length, 5, 'one .md per note (5 total)');
+      // The "Awake note" has <strong>bold</strong> → expect **bold** in its markdown
+      let foundBold = false, foundFrontmatter = false;
+      for (const fn of mdFiles) {
+        const txt = await zip.files[fn].async('string');
+        if (txt.includes('**bold**')) foundBold = true;
+        if (/^---[\s\S]*title:/.test(txt)) foundFrontmatter = true;
+      }
+      if (foundBold) ok('HTML <strong> converted to Markdown **bold**');
+      else fail('bold not converted to Markdown');
+      if (foundFrontmatter) ok('Markdown files include YAML frontmatter');
+      else fail('no frontmatter in Markdown output');
+    }
+  }
+
   section('Rich-text edit mode (Notes)');
   {
     // Find + click the Edit button in the detail actions

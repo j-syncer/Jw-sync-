@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.23.0] — 2026-06-01
+
+### Added
+- **Share & export notes as Markdown.** In the Note Explorer:
+  - Each note's detail pane now has a **"Copy as Markdown"** button — paste a clean, formatted version straight into Obsidian, Notion, Apple Notes, or any Markdown editor (bold, italics and lists preserved).
+  - A new **"Export Markdown"** button downloads the notes you're currently viewing as a `.zip` of individual `.md` files, each with YAML frontmatter (title, date, tags, publication). Combine with the date filter or a tag filter to export, say, just one tag's notes as a study guide.
+
+---
+
 ## [2.22.0] — 2026-06-01
 
 ### Added
