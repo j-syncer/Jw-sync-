@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.20.0] — 2026-06-01
+
+### Added
+- **Saved Devices & Auto-Sync.** Save each device's `.jwlibrary` backup once, then re-merge them all with a single click — no more re-uploading the same files every time you sync. A new **Sync** button (bottom-right) opens a panel where you can:
+  - Add a backup from each device and keep them in one place
+  - Choose which device is the "main" base for the merge
+  - Merge every saved device instantly and download the unified file
+  - Set a gentle **weekly or monthly reminder** to re-sync, with a quiet prompt when it's time
+- **Everything stays private.** Saved backups live only in your browser (IndexedDB) and are never uploaded.
+
+---
+
 ## [2.19.3] — 2026-05-31
 
 ### Fixed

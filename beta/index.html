@@ -240,7 +240,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.19.3",
+      "softwareVersion": "2.20.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -3278,6 +3278,278 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End post-merge celebration ───────────────────────── -->
+<!-- ── Saved Devices & Auto-Sync (Sync Hub, v2.20.0) ───── -->
+<style>
+.jsh-fab{position:fixed;right:18px;bottom:18px;z-index:9000;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border:1px solid rgba(71,85,105,.45);border-radius:999px;cursor:pointer;
+  background:rgba(4,15,34,.92);color:#cbd5e1;font:600 13px/1 Inter,system-ui,sans-serif;
+  box-shadow:0 1px 5px rgba(0,0,0,.35);transition:border-color .15s,color .15s}
+.jsh-fab:hover{border-color:#ea580c;color:#fff}
+.jsh-fab svg{width:16px;height:16px;flex:0 0 auto}
+.jsh-overlay{position:fixed;inset:0;z-index:10070;display:flex;align-items:center;justify-content:center;
+  padding:18px;background:rgba(2,6,17,.78);backdrop-filter:blur(6px)}
+.jsh-panel{width:100%;max-width:540px;max-height:88vh;overflow:auto;background:#071a38;
+  border:1px solid rgba(71,85,105,.5);border-radius:16px;padding:22px 22px 18px;
+  box-shadow:0 12px 48px rgba(0,0,0,.5);color:#e2e8f0;font:400 14px/1.5 Inter,system-ui,sans-serif}
+.jsh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.jsh-title{font:700 18px/1.25 Inter,sans-serif;color:#fff;margin:0}
+.jsh-x{background:none;border:none;color:#94a3b8;font-size:22px;line-height:1;cursor:pointer;padding:2px 6px}
+.jsh-x:hover{color:#fff}
+.jsh-intro{color:#94a3b8;font-size:13px;margin:0 0 14px}
+.jsh-priv{color:#64748b;font-size:11.5px;margin:10px 0 16px;display:flex;gap:6px;align-items:flex-start}
+.jsh-list{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
+.jsh-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(71,85,105,.35);
+  border-radius:10px;background:rgba(4,15,34,.5)}
+.jsh-row.is-main{border-color:rgba(234,88,12,.55)}
+.jsh-row-name{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;color:#f1f5f9}
+.jsh-row-meta{font-size:11px;color:#64748b;margin-top:2px}
+.jsh-badge{font:700 10px/1 Inter,sans-serif;color:#fff;background:#ea580c;border-radius:5px;padding:3px 6px;letter-spacing:.3px}
+.jsh-setmain{background:none;border:1px solid rgba(71,85,105,.45);color:#94a3b8;border-radius:6px;
+  font-size:11px;padding:4px 8px;cursor:pointer}
+.jsh-setmain:hover{border-color:#ea580c;color:#fff}
+.jsh-rm{background:none;border:none;color:#64748b;cursor:pointer;font-size:16px;padding:2px 6px}
+.jsh-rm:hover{color:#f87171}
+.jsh-empty{color:#64748b;font-size:13px;text-align:center;padding:14px 0;border:1px dashed rgba(71,85,105,.4);
+  border-radius:10px;margin-bottom:12px}
+.jsh-add{display:inline-flex;align-items:center;gap:7px;background:rgba(71,85,105,.25);
+  border:1px solid rgba(71,85,105,.45);color:#cbd5e1;border-radius:9px;padding:9px 14px;
+  font:600 13px/1 Inter,sans-serif;cursor:pointer;width:100%;justify-content:center;margin-bottom:14px}
+.jsh-add:hover{border-color:#ea580c;color:#fff}
+.jsh-merge{display:block;width:100%;background:#ea580c;border:none;color:#fff;border-radius:10px;
+  padding:13px 16px;font:700 15px/1 Inter,sans-serif;cursor:pointer;box-shadow:0 1px 5px rgba(234,88,12,.4)}
+.jsh-merge:hover{background:#c2410c}
+.jsh-merge:disabled{background:rgba(71,85,105,.4);color:#94a3b8;cursor:not-allowed;box-shadow:none}
+.jsh-status{font-size:12.5px;color:#94a3b8;text-align:center;min-height:18px;margin:10px 0 0}
+.jsh-status.ok{color:#34d399}
+.jsh-status.err{color:#f87171}
+.jsh-divider{border:none;border-top:1px solid rgba(71,85,105,.3);margin:16px 0}
+.jsh-field{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.jsh-field label{font-size:13px;color:#cbd5e1;font-weight:600}
+.jsh-select{background:rgba(4,15,34,.7);border:1px solid rgba(71,85,105,.45);color:#e2e8f0;
+  border-radius:8px;padding:7px 10px;font:600 13px Inter,sans-serif;cursor:pointer}
+.jsh-clear{background:none;border:none;color:#64748b;font-size:12px;cursor:pointer;text-decoration:underline}
+.jsh-clear:hover{color:#f87171}
+.jsh-reminder{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9001;
+  display:flex;align-items:center;gap:12px;max-width:92vw;padding:11px 14px;border-radius:12px;
+  background:rgba(7,26,56,.97);border:1px solid rgba(234,88,12,.5);box-shadow:0 6px 24px rgba(0,0,0,.4);
+  color:#e2e8f0;font:500 13px/1.35 Inter,sans-serif}
+.jsh-reminder-cta{background:#ea580c;border:none;color:#fff;border-radius:8px;padding:7px 12px;
+  font:700 12px Inter,sans-serif;cursor:pointer;white-space:nowrap}
+.jsh-reminder-x{background:none;border:none;color:#94a3b8;font-size:18px;cursor:pointer;padding:0 4px}
+.jsh-reminder-x:hover{color:#fff}
+@media (max-width:600px){.jsh-fab span{display:none}.jsh-fab{padding:11px}}
+</style>
+<script>
+(function(){
+  "use strict";
+  if (window.__jwOpenSyncHub) return;
+
+  /* ── i18n (10 languages; AI-assisted non-English strings — review welcome) ── */
+  var I18N = {
+    en:{title:"Saved Devices & Auto-Sync",intro:"Save each device's backup here once. Then re-merge everything with one click — no re-uploading.",priv:"Your files stay in this browser only (IndexedDB). Nothing is ever uploaded.",add:"Add a device backup",empty:"No saved devices yet. Add your first backup above.",main:"Main",setmain:"Set as main",remove:"Remove",saved:"Saved",mergenow:"Merge saved devices now",merging:"Merging…",done:"Merged! Your file is downloading.",needtwo:"Add at least two device backups to merge.",reminder:"Remind me to sync",off:"Off",weekly:"Weekly",monthly:"Monthly",clear:"Clear all saved devices",clearconfirm:"Remove all saved devices? This can't be undone.",banner:"It's been a while since your last sync. Merge your saved devices?",bannercta:"Open Sync",dismiss:"Dismiss",close:"Close",fab:"Sync",error:"Something went wrong during the merge. Please try again."},
+    es:{title:"Dispositivos guardados y sincronización",intro:"Guarda aquí la copia de cada dispositivo una vez. Luego combina todo con un clic, sin volver a subir nada.",priv:"Tus archivos quedan solo en este navegador (IndexedDB). Nunca se suben.",add:"Añadir copia de un dispositivo",empty:"Aún no hay dispositivos guardados. Añade tu primera copia arriba.",main:"Principal",setmain:"Marcar como principal",remove:"Quitar",saved:"Guardado",mergenow:"Combinar dispositivos ahora",merging:"Combinando…",done:"¡Combinado! Tu archivo se está descargando.",needtwo:"Añade al menos dos copias para combinar.",reminder:"Recordarme sincronizar",off:"Nunca",weekly:"Semanal",monthly:"Mensual",clear:"Borrar todos los dispositivos",clearconfirm:"¿Borrar todos los dispositivos guardados? No se puede deshacer.",banner:"Hace tiempo de tu última sincronización. ¿Combinar tus dispositivos?",bannercta:"Abrir",dismiss:"Descartar",close:"Cerrar",fab:"Sincronizar",error:"Algo salió mal durante la combinación. Inténtalo de nuevo."},
+    pt:{title:"Dispositivos salvos e sincronização",intro:"Salve aqui a cópia de cada dispositivo uma vez. Depois combine tudo com um clique, sem reenviar nada.",priv:"Seus arquivos ficam só neste navegador (IndexedDB). Nada é enviado.",add:"Adicionar cópia de um dispositivo",empty:"Nenhum dispositivo salvo ainda. Adicione sua primeira cópia acima.",main:"Principal",setmain:"Definir como principal",remove:"Remover",saved:"Salvo",mergenow:"Combinar dispositivos agora",merging:"Combinando…",done:"Combinado! Seu arquivo está sendo baixado.",needtwo:"Adicione pelo menos duas cópias para combinar.",reminder:"Lembrar de sincronizar",off:"Nunca",weekly:"Semanal",monthly:"Mensal",clear:"Apagar todos os dispositivos",clearconfirm:"Remover todos os dispositivos salvos? Isso não pode ser desfeito.",banner:"Faz tempo desde sua última sincronização. Combinar seus dispositivos?",bannercta:"Abrir",dismiss:"Dispensar",close:"Fechar",fab:"Sincronizar",error:"Algo deu errado durante a combinação. Tente novamente."},
+    fr:{title:"Appareils enregistrés et synchro",intro:"Enregistrez ici la sauvegarde de chaque appareil une fois. Fusionnez ensuite tout d'un clic, sans rien re-téléverser.",priv:"Vos fichiers restent uniquement dans ce navigateur (IndexedDB). Rien n'est envoyé.",add:"Ajouter la sauvegarde d'un appareil",empty:"Aucun appareil enregistré. Ajoutez votre première sauvegarde ci-dessus.",main:"Principal",setmain:"Définir comme principal",remove:"Retirer",saved:"Enregistré",mergenow:"Fusionner les appareils",merging:"Fusion…",done:"Fusionné ! Votre fichier se télécharge.",needtwo:"Ajoutez au moins deux sauvegardes à fusionner.",reminder:"Me rappeler de synchroniser",off:"Jamais",weekly:"Hebdomadaire",monthly:"Mensuel",clear:"Effacer tous les appareils",clearconfirm:"Supprimer tous les appareils enregistrés ? Irréversible.",banner:"Cela fait un moment depuis votre dernière synchro. Fusionner vos appareils ?",bannercta:"Ouvrir",dismiss:"Ignorer",close:"Fermer",fab:"Synchro",error:"Une erreur est survenue pendant la fusion. Réessayez."},
+    de:{title:"Gespeicherte Geräte & Auto-Sync",intro:"Sichere die Datei jedes Geräts einmal hier. Führe dann alles mit einem Klick zusammen — ohne erneutes Hochladen.",priv:"Deine Dateien bleiben nur in diesem Browser (IndexedDB). Nichts wird hochgeladen.",add:"Geräte-Backup hinzufügen",empty:"Noch keine gespeicherten Geräte. Füge oben dein erstes Backup hinzu.",main:"Haupt",setmain:"Als Haupt festlegen",remove:"Entfernen",saved:"Gespeichert",mergenow:"Geräte jetzt zusammenführen",merging:"Zusammenführen…",done:"Zusammengeführt! Deine Datei wird geladen.",needtwo:"Füge mindestens zwei Backups zum Zusammenführen hinzu.",reminder:"An Sync erinnern",off:"Nie",weekly:"Wöchentlich",monthly:"Monatlich",clear:"Alle Geräte löschen",clearconfirm:"Alle gespeicherten Geräte entfernen? Das kann nicht rückgängig gemacht werden.",banner:"Deine letzte Synchronisierung ist eine Weile her. Geräte zusammenführen?",bannercta:"Öffnen",dismiss:"Verwerfen",close:"Schließen",fab:"Sync",error:"Beim Zusammenführen ist etwas schiefgelaufen. Bitte erneut versuchen."},
+    it:{title:"Dispositivi salvati e sincronizzazione",intro:"Salva qui il backup di ogni dispositivo una volta. Poi unisci tutto con un clic, senza ricaricare nulla.",priv:"I tuoi file restano solo in questo browser (IndexedDB). Niente viene caricato.",add:"Aggiungi backup di un dispositivo",empty:"Nessun dispositivo salvato. Aggiungi il primo backup sopra.",main:"Principale",setmain:"Imposta come principale",remove:"Rimuovi",saved:"Salvato",mergenow:"Unisci i dispositivi ora",merging:"Unione…",done:"Unito! Il file si sta scaricando.",needtwo:"Aggiungi almeno due backup da unire.",reminder:"Ricordami di sincronizzare",off:"Mai",weekly:"Settimanale",monthly:"Mensile",clear:"Cancella tutti i dispositivi",clearconfirm:"Rimuovere tutti i dispositivi salvati? Non si può annullare.",banner:"È passato un po' dall'ultima sincronizzazione. Unire i dispositivi?",bannercta:"Apri",dismiss:"Ignora",close:"Chiudi",fab:"Sincronizza",error:"Qualcosa è andato storto durante l'unione. Riprova."},
+    ru:{title:"Сохранённые устройства и автосинхронизация",intro:"Сохраните копию каждого устройства один раз. Затем объединяйте всё одним щелчком — без повторной загрузки.",priv:"Ваши файлы остаются только в этом браузере (IndexedDB). Ничего не загружается на сервер.",add:"Добавить копию устройства",empty:"Пока нет сохранённых устройств. Добавьте первую копию выше.",main:"Основное",setmain:"Сделать основным",remove:"Удалить",saved:"Сохранено",mergenow:"Объединить устройства сейчас",merging:"Объединение…",done:"Объединено! Ваш файл загружается.",needtwo:"Добавьте хотя бы две копии для объединения.",reminder:"Напоминать о синхронизации",off:"Никогда",weekly:"Еженедельно",monthly:"Ежемесячно",clear:"Удалить все устройства",clearconfirm:"Удалить все сохранённые устройства? Это нельзя отменить.",banner:"Давно не было синхронизации. Объединить ваши устройства?",bannercta:"Открыть",dismiss:"Закрыть",close:"Закрыть",fab:"Синхр.",error:"Во время объединения произошла ошибка. Попробуйте ещё раз."},
+    ja:{title:"保存済みデバイスと自動同期",intro:"各デバイスのバックアップを一度ここに保存。あとはワンクリックで再マージ — 再アップロード不要です。",priv:"ファイルはこのブラウザ内（IndexedDB）だけに保存され、アップロードされません。",add:"デバイスのバックアップを追加",empty:"保存済みのデバイスはまだありません。上から最初のバックアップを追加してください。",main:"メイン",setmain:"メインに設定",remove:"削除",saved:"保存日",mergenow:"保存済みデバイスをマージ",merging:"マージ中…",done:"マージ完了！ファイルをダウンロード中です。",needtwo:"マージするには2つ以上のバックアップを追加してください。",reminder:"同期のリマインド",off:"オフ",weekly:"毎週",monthly:"毎月",clear:"保存済みデバイスをすべて削除",clearconfirm:"保存済みデバイスをすべて削除しますか？元に戻せません。",banner:"前回の同期からしばらく経ちました。デバイスをマージしますか？",bannercta:"開く",dismiss:"閉じる",close:"閉じる",fab:"同期",error:"マージ中に問題が発生しました。もう一度お試しください。"},
+    ko:{title:"저장된 기기 및 자동 동기화",intro:"각 기기의 백업을 한 번만 저장하세요. 그러면 다시 업로드 없이 한 번의 클릭으로 병합할 수 있습니다.",priv:"파일은 이 브라우저(IndexedDB)에만 저장되며 업로드되지 않습니다.",add:"기기 백업 추가",empty:"저장된 기기가 없습니다. 위에서 첫 백업을 추가하세요.",main:"메인",setmain:"메인으로 설정",remove:"제거",saved:"저장됨",mergenow:"저장된 기기 지금 병합",merging:"병합 중…",done:"병합 완료! 파일을 다운로드하는 중입니다.",needtwo:"병합하려면 백업을 두 개 이상 추가하세요.",reminder:"동기화 알림",off:"끄기",weekly:"매주",monthly:"매월",clear:"저장된 기기 모두 지우기",clearconfirm:"저장된 기기를 모두 제거하시겠습니까? 되돌릴 수 없습니다.",banner:"마지막 동기화 이후 시간이 지났습니다. 기기를 병합할까요?",bannercta:"열기",dismiss:"닫기",close:"닫기",fab:"동기화",error:"병합 중 문제가 발생했습니다. 다시 시도하세요."},
+    tl:{title:"Naka-save na Device at Auto-Sync",intro:"I-save dito ang backup ng bawat device nang isang beses. Pagkatapos ay pagsamahin ang lahat sa isang click — walang muling pag-upload.",priv:"Nananatili ang iyong mga file sa browser na ito lang (IndexedDB). Walang ina-upload kahit kailan.",add:"Magdagdag ng backup ng device",empty:"Wala pang naka-save na device. Idagdag ang unang backup sa itaas.",main:"Pangunahin",setmain:"Itakda bilang pangunahin",remove:"Alisin",saved:"Na-save",mergenow:"Pagsamahin ang mga device ngayon",merging:"Pinagsasama…",done:"Pinagsama na! Dina-download na ang iyong file.",needtwo:"Magdagdag ng hindi bababa sa dalawang backup para pagsamahin.",reminder:"Ipaalala ang pag-sync",off:"Huwag",weekly:"Lingguhan",monthly:"Buwanan",clear:"Burahin lahat ng device",clearconfirm:"Alisin ang lahat ng naka-save na device? Hindi na maibabalik.",banner:"Matagal na mula sa huli mong pag-sync. Pagsamahin ang iyong mga device?",bannercta:"Buksan",dismiss:"I-dismiss",close:"Isara",fab:"Sync",error:"May naganap na problema habang nagsasama. Pakisubukang muli."}
+  };
+  function lang(){ try{ var l=localStorage.getItem('jwsync_lang'); return (l&&I18N[l])?l:'en'; }catch(_){ return 'en'; } }
+  function t(k){ var L=I18N[lang()]||I18N.en; return L[k]!=null?L[k]:(I18N.en[k]!=null?I18N.en[k]:k); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  /* ── Persistent prefs (cadence + last sync) ── */
+  var PK='jwsync_synchub';
+  function prefs(){ try{ var d=localStorage.getItem(PK); return d?JSON.parse(d):{cadence:'off',lastSync:0,mainId:null}; }catch(_){ return {cadence:'off',lastSync:0,mainId:null}; } }
+  function savePrefs(p){ try{ localStorage.setItem(PK, JSON.stringify(p)); }catch(_){} }
+
+  /* ── IndexedDB store for device backups (own DB; no clash with app's jwsync_db) ── */
+  var DB='jwsync_synchub_db', STORE='devices';
+  function open(){ return new Promise(function(res,rej){ try{ var r=indexedDB.open(DB,1);
+    r.onupgradeneeded=function(){ var db=r.result; if(!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE,{keyPath:'id'}); };
+    r.onsuccess=function(){ res(r.result); }; r.onerror=function(){ rej(r.error); }; }catch(e){ rej(e); } }); }
+  function putDevice(d){ return open().then(function(db){ return new Promise(function(res,rej){ var tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).put(d); tx.oncomplete=function(){ db.close(); res(true); }; tx.onerror=function(){ db.close(); rej(tx.error); }; }); }); }
+  function getDevices(){ return open().then(function(db){ return new Promise(function(res){ var g=db.transaction(STORE,'readonly').objectStore(STORE).getAll(); g.onsuccess=function(){ db.close(); res((g.result||[]).sort(function(a,b){return (a.savedAt||0)-(b.savedAt||0);})); }; g.onerror=function(){ db.close(); res([]); }; }); }).catch(function(){ return []; }); }
+  function delDevice(id){ return open().then(function(db){ return new Promise(function(res){ var tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).delete(id); tx.oncomplete=function(){ db.close(); res(true); }; tx.onerror=function(){ db.close(); res(false); }; }); }).catch(function(){ return false; }); }
+  function clearDevices(){ return open().then(function(db){ return new Promise(function(res){ var tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).clear(); tx.oncomplete=function(){ db.close(); res(true); }; tx.onerror=function(){ db.close(); res(false); }; }); }).catch(function(){ return false; }); }
+
+  function fmtDate(ts){ try{ return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }catch(_){ return ''; } }
+
+  var overlay=null, busy=false;
+
+  function close(){ if(overlay){ overlay.remove(); overlay=null; } document.removeEventListener('keydown',onKey); }
+  function onKey(e){ if(e.key==='Escape'&&!busy) close(); }
+
+  function pickMain(devices){
+    var p=prefs();
+    if(p.mainId && devices.some(function(d){return d.id===p.mainId;})) return p.mainId;
+    return devices.length?devices[0].id:null;
+  }
+
+  function setStatus(msg,cls){ if(!overlay) return; var s=overlay.querySelector('.jsh-status'); if(s){ s.textContent=msg||''; s.className='jsh-status'+(cls?' '+cls:''); } }
+
+  function doMerge(devices){
+    if(busy) return;
+    if(devices.length<2){ setStatus(t('needtwo'),'err'); return; }
+    var mainId=pickMain(devices);
+    var main=devices.filter(function(d){return d.id===mainId;})[0];
+    var secs=devices.filter(function(d){return d.id!==mainId;}).map(function(d){return {buffer:d.buffer.slice(0),name:d.name};});
+    busy=true;
+    var mergeBtn=overlay&&overlay.querySelector('.jsh-merge'); if(mergeBtn) mergeBtn.disabled=true;
+    setStatus(t('merging'),'');
+    var w;
+    try{ w=new Worker('./js/merge-worker.js'); }catch(e){ busy=false; setStatus(t('error'),'err'); if(mergeBtn) mergeBtn.disabled=false; return; }
+    w.onmessage=function(ev){
+      var d=ev.data||{};
+      if(d.type==='done'){
+        try{
+          var blob=new Blob([d.zipBuffer],{type:'application/octet-stream'});
+          var url=URL.createObjectURL(blob);
+          var a=document.createElement('a');
+          var base=(main&&main.name?main.name.replace(/\.jwlibrary$/i,''):'backup');
+          a.href=url; a.download='merged_'+base+'.jwlibrary';
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); },4000);
+          var p=prefs(); p.lastSync=Date.now(); savePrefs(p);
+          setStatus(t('done'),'ok');
+          dismissReminder();
+        }catch(e){ setStatus(t('error'),'err'); }
+        busy=false; if(mergeBtn) mergeBtn.disabled=false; w.terminate();
+      } else if(d.type==='error'){
+        setStatus(d.message||t('error'),'err'); busy=false; if(mergeBtn) mergeBtn.disabled=false; w.terminate();
+      } else if(d.type==='impact'){
+        /* auto-confirm: this path is an explicit one-click merge */
+        w.postMessage({type:'confirmMerge'});
+      } else if(d.type==='progress' && d.payload && d.payload.label){
+        setStatus(d.payload.label,'');
+      }
+    };
+    w.onerror=function(){ setStatus(t('error'),'err'); busy=false; if(mergeBtn) mergeBtn.disabled=false; try{w.terminate();}catch(_){} };
+    var opts={mergeNotes:true,mergeHighlights:true,mergeBookmarks:true,mergeTags:true,smartDedupe:true,
+      conflictStrategy:'newest',previewConfirm:false,syncByDate:false,filterDate:'',deepClean:false};
+    w.postMessage({type:'merge',mainBuffer:main.buffer.slice(0),mainName:main.name,secondaryFiles:secs,opts:opts,tagManager:{},colorRules:[]});
+  }
+
+  function render(devices){
+    var p=prefs(), mainId=pickMain(devices);
+    var rows=devices.map(function(d){
+      var isMain=d.id===mainId;
+      return '<li class="jsh-row'+(isMain?' is-main':'')+'" data-id="'+esc(d.id)+'">'+
+        '<div class="jsh-row-name">'+esc(d.name)+
+          '<div class="jsh-row-meta">'+esc(t('saved'))+' '+esc(fmtDate(d.savedAt))+'</div></div>'+
+        (isMain?'<span class="jsh-badge">'+esc(t('main'))+'</span>'
+               :'<button class="jsh-setmain" data-setmain="'+esc(d.id)+'">'+esc(t('setmain'))+'</button>')+
+        '<button class="jsh-rm" data-rm="'+esc(d.id)+'" title="'+esc(t('remove'))+'">&times;</button>'+
+      '</li>';
+    }).join('');
+    var listHtml = devices.length
+      ? '<ul class="jsh-list">'+rows+'</ul>'
+      : '<div class="jsh-empty">'+esc(t('empty'))+'</div>';
+    var cad=p.cadence||'off';
+    return ''+
+      '<div class="jsh-panel" role="dialog" aria-modal="true" aria-label="'+esc(t('title'))+'">'+
+        '<div class="jsh-head"><h2 class="jsh-title">'+esc(t('title'))+'</h2>'+
+          '<button class="jsh-x" data-close title="'+esc(t('close'))+'">&times;</button></div>'+
+        '<p class="jsh-intro">'+esc(t('intro'))+'</p>'+
+        listHtml+
+        '<button class="jsh-add" data-add type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>'+esc(t('add'))+'</button>'+
+        '<button class="jsh-merge" data-merge type="button"'+(devices.length<2?' disabled':'')+'>'+esc(t('mergenow'))+'</button>'+
+        '<p class="jsh-status"></p>'+
+        '<p class="jsh-priv"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 auto;margin-top:1px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'+esc(t('priv'))+'</p>'+
+        '<hr class="jsh-divider">'+
+        '<div class="jsh-field"><label>'+esc(t('reminder'))+'</label>'+
+          '<select class="jsh-select" data-cadence>'+
+            '<option value="off"'+(cad==='off'?' selected':'')+'>'+esc(t('off'))+'</option>'+
+            '<option value="weekly"'+(cad==='weekly'?' selected':'')+'>'+esc(t('weekly'))+'</option>'+
+            '<option value="monthly"'+(cad==='monthly'?' selected':'')+'>'+esc(t('monthly'))+'</option>'+
+          '</select></div>'+
+        (devices.length?'<button class="jsh-clear" data-clear type="button">'+esc(t('clear'))+'</button>':'')+
+      '</div>';
+  }
+
+  function refresh(){
+    return getDevices().then(function(devices){
+      if(!overlay) return;
+      overlay.innerHTML=render(devices);
+      wire(devices);
+    });
+  }
+
+  function wire(devices){
+    var panel=overlay.querySelector('.jsh-panel');
+    overlay.querySelector('[data-close]').addEventListener('click',function(){ if(!busy) close(); });
+    overlay.addEventListener('mousedown',function(e){ if(e.target===overlay&&!busy) close(); });
+    var addBtn=overlay.querySelector('[data-add]');
+    if(addBtn) addBtn.addEventListener('click',function(){
+      var fi=document.createElement('input'); fi.type='file'; fi.accept='.jwlibrary,application/octet-stream';
+      fi.onchange=function(){ var f=fi.files&&fi.files[0]; if(!f) return;
+        f.arrayBuffer().then(function(buf){
+          return putDevice({id:'dev_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),name:f.name,buffer:buf,savedAt:Date.now()});
+        }).then(refresh).catch(function(){ setStatus(t('error'),'err'); });
+      };
+      fi.click();
+    });
+    var mergeBtn=overlay.querySelector('[data-merge]');
+    if(mergeBtn) mergeBtn.addEventListener('click',function(){ doMerge(devices); });
+    Array.prototype.forEach.call(overlay.querySelectorAll('[data-setmain]'),function(b){
+      b.addEventListener('click',function(){ var p=prefs(); p.mainId=b.getAttribute('data-setmain'); savePrefs(p); refresh(); });
+    });
+    Array.prototype.forEach.call(overlay.querySelectorAll('[data-rm]'),function(b){
+      b.addEventListener('click',function(){ delDevice(b.getAttribute('data-rm')).then(refresh); });
+    });
+    var cadSel=overlay.querySelector('[data-cadence]');
+    if(cadSel) cadSel.addEventListener('change',function(){ var p=prefs(); p.cadence=cadSel.value; savePrefs(p); });
+    var clr=overlay.querySelector('[data-clear]');
+    if(clr) clr.addEventListener('click',function(){ if(window.confirm(t('clearconfirm'))){ clearDevices().then(function(){ var p=prefs(); p.mainId=null; savePrefs(p); refresh(); }); } });
+  }
+
+  function openHub(){
+    if(overlay) return;
+    overlay=document.createElement('div'); overlay.className='jsh-overlay'; overlay.id='jw-synchub-overlay';
+    document.body.appendChild(overlay);
+    document.addEventListener('keydown',onKey);
+    refresh();
+  }
+  window.__jwOpenSyncHub=openHub;
+
+  /* ── Floating launcher ── */
+  function addFab(){
+    if(document.getElementById('jw-synchub-fab')) return;
+    var b=document.createElement('button'); b.id='jw-synchub-fab'; b.className='jsh-fab'; b.type='button';
+    b.setAttribute('aria-label',t('title'));
+    b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span>'+esc(t('fab'))+'</span>';
+    b.addEventListener('click',openHub);
+    document.body.appendChild(b);
+  }
+
+  /* ── Sync reminder banner ── */
+  function dismissReminder(){ var r=document.getElementById('jw-synchub-reminder'); if(r) r.remove(); }
+  function maybeReminder(){
+    var p=prefs(); if(!p.cadence||p.cadence==='off') return;
+    var span=p.cadence==='weekly'?7*864e5:30*864e5;
+    if(!p.lastSync||Date.now()-p.lastSync<span) return;
+    getDevices().then(function(devices){
+      if(devices.length<2||document.getElementById('jw-synchub-reminder')) return;
+      var r=document.createElement('div'); r.id='jw-synchub-reminder'; r.className='jsh-reminder';
+      r.innerHTML='<span>'+esc(t('banner'))+'</span>'+
+        '<button class="jsh-reminder-cta" type="button" data-open>'+esc(t('bannercta'))+'</button>'+
+        '<button class="jsh-reminder-x" type="button" data-x aria-label="'+esc(t('dismiss'))+'">&times;</button>';
+      document.body.appendChild(r);
+      r.querySelector('[data-open]').addEventListener('click',function(){ dismissReminder(); openHub(); });
+      r.querySelector('[data-x]').addEventListener('click',dismissReminder);
+    });
+  }
+
+  function init(){ addFab(); setTimeout(maybeReminder,1500); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+<!-- ── End Saved Devices & Auto-Sync ────────────────────── -->
+
 
 </body>
 </html>

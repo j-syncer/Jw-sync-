@@ -4,7 +4,7 @@
   "private": true,
   "description": "Static + JSDOM runtime + regression tests for jwsync.org. Run `npm install` once, then `npm test`.",
   "scripts": {
-    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js && node 04_lazy_load.js && node 05_post_merge.js && node 06_conflict_review.js && node 07_library_wrapped.js && node 08_pre_merge_preview.js",
+    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js && node 04_lazy_load.js && node 05_post_merge.js && node 06_conflict_review.js && node 07_library_wrapped.js && node 08_pre_merge_preview.js && node 09_scheduled_sync.js",
     "test:static": "node 01_static.js",
     "test:runtime": "node 02_runtime.js",
     "test:regression": "node 03_regression.js",
@@ -12,7 +12,8 @@
     "test:post-merge": "node 05_post_merge.js",
     "test:conflict": "node 06_conflict_review.js",
     "test:wrapped": "node 07_library_wrapped.js",
-    "test:preview": "node 08_pre_merge_preview.js"
+    "test:preview": "node 08_pre_merge_preview.js",
+    "test:sync": "node 09_scheduled_sync.js"
   },
   "dependencies": {
     "jsdom": "^24.1.3",

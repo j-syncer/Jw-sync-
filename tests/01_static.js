@@ -189,6 +189,16 @@ for (const path of FILES) {
     fail('Browse buttons call __openJwBrowse without booting Browse first (cold click no-ops)');
   else ok('Browse buttons boot Browse before opening');
 
+  // 8b) Beta-only: Saved Devices & Auto-Sync (Sync Hub, v2.20.0)
+  if (isBeta) {
+    if (!c.includes('window.__jwOpenSyncHub')) fail('Sync Hub (window.__jwOpenSyncHub) missing');
+    else ok('Sync Hub module present');
+    if (!c.includes('jsh-fab') || !c.includes('jsh-merge')) fail('Sync Hub markup/CSS missing');
+    else ok('Sync Hub launcher + merge controls present');
+    if (!c.includes("new Worker('./js/merge-worker.js')")) fail('Sync Hub does not drive merge-worker.js');
+    else ok('Sync Hub drives merge-worker.js directly');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');
