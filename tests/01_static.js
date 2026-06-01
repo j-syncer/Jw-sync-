@@ -223,6 +223,14 @@ for (const path of FILES) {
     else ok('Markdown export button present');
   }
 
+  // 8f) Mobile UX polish (v2.24.0, beta-only): offline banner, haptics, swipe
+  if (isBeta) {
+    if (!c.includes('jw-offline-banner') || !c.includes('window.__jwHaptic')) fail('Offline banner / haptic helper missing');
+    else ok('Offline banner + haptic helper present');
+    if (!c.includes('function switchTo') || !c.includes('switchByOffset') || !c.includes('touchstart')) fail('Browse swipe-to-switch missing');
+    else ok('Browse swipe-to-switch tabs present');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');

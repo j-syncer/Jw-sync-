@@ -240,7 +240,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.23.0",
+      "softwareVersion": "2.24.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -2064,7 +2064,7 @@ window.__bootBrowse = function() {
     exportBtn.className='jb-export-btn';
     exportBtn.disabled=true;
     exportBtn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'+htmlEscape(t('export_db'));
-    exportBtn.onclick=exportDb;
+    exportBtn.onclick=function(){ if(window.__jwHaptic) window.__jwHaptic(20); exportDb(); };
     head.appendChild(exportBtn);
     var mdBtn=document.createElement('button'); mdBtn.className='jb-md-btn'; mdBtn.type='button';
     mdBtn.title=t('md_hint');
@@ -2076,17 +2076,24 @@ window.__bootBrowse = function() {
     modal.appendChild(head);
 
     // Tabs
+    var TAB_ORDER=['notes','highlights','bookmarks'];
+    function switchTo(type){
+      if(!type || state.activeType===type) return;
+      state.activeType=type; state.selected=null; state.editingId=null;
+      if(state.overlay){ Array.prototype.forEach.call(state.overlay.querySelectorAll('.jb-tab'),function(tb){ tb.classList.toggle('active', tb.dataset.type===type); }); }
+      applyFilter(); renderBody();
+      if(window.__jwHaptic) window.__jwHaptic(15);
+    }
+    function switchByOffset(delta){
+      var idx=TAB_ORDER.indexOf(state.activeType); if(idx<0) return;
+      var next=idx+delta; if(next<0||next>=TAB_ORDER.length) return;
+      switchTo(TAB_ORDER[next]);
+    }
     var tabs=document.createElement('div'); tabs.className='jb-tabs';
     [['notes',t('tab_notes')],['highlights',t('tab_highlights')],['bookmarks',t('tab_bookmarks')]].forEach(function(pair){
       var b=document.createElement('button'); b.className='jb-tab'+(pair[0]===state.activeType?' active':''); b.dataset.type=pair[0];
       b.innerHTML='<span>'+htmlEscape(pair[1])+'</span><span class="jb-tab-count">0</span>';
-      b.onclick=function(){
-        if(state.activeType===pair[0]) return;
-        state.activeType=pair[0]; state.selected=null; state.editingId=null;
-        Array.prototype.forEach.call(tabs.querySelectorAll('.jb-tab'),function(t){ t.classList.remove('active'); });
-        b.classList.add('active');
-        applyFilter(); renderBody();
-      };
+      b.onclick=function(){ switchTo(pair[0]); };
       tabs.appendChild(b);
     });
     modal.appendChild(tabs);
@@ -2131,6 +2138,15 @@ window.__bootBrowse = function() {
     modal.appendChild(toolbar);
 
     var body=document.createElement('div'); body.className='jb-body'; modal.appendChild(body);
+    // Touch: horizontal swipe switches tabs (Notes ↔ Highlights ↔ Bookmarks)
+    var _tsx=0, _tsy=0, _tsActive=false;
+    body.addEventListener('touchstart',function(e){ if(e.touches&&e.touches.length===1){ _tsx=e.touches[0].clientX; _tsy=e.touches[0].clientY; _tsActive=true; } },{passive:true});
+    body.addEventListener('touchend',function(e){
+      if(!_tsActive) return; _tsActive=false;
+      var tch=e.changedTouches&&e.changedTouches[0]; if(!tch) return;
+      var dx=tch.clientX-_tsx, dy=tch.clientY-_tsy;
+      if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.6){ switchByOffset(dx<0?1:-1); }
+    },{passive:true});
     return o;
   }
 
@@ -3564,6 +3580,7 @@ window.__bootBrowse = function() {
     var main=devices.filter(function(d){return d.id===mainId;})[0];
     var secs=devices.filter(function(d){return d.id!==mainId;}).map(function(d){return {buffer:d.buffer.slice(0),name:d.name};});
     busy=true;
+    if(window.__jwHaptic) window.__jwHaptic(20);
     var mergeBtn=overlay&&overlay.querySelector('.jsh-merge'); if(mergeBtn) mergeBtn.disabled=true;
     setStatus(t('merging'),'');
     var w;
@@ -3715,6 +3732,61 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End Saved Devices & Auto-Sync ────────────────────── -->
+<!-- ── Offline indicator + haptics (v2.24.0) ───────────── -->
+<style>
+.jw-offline-banner{position:fixed;left:0;right:0;top:0;z-index:9002;transform:translateY(-100%);
+  transition:transform .25s ease;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:8px 14px;background:rgba(15,23,42,.97);border-bottom:1px solid rgba(71,85,105,.5);
+  color:#cbd5e1;font:600 12.5px/1.35 Inter,system-ui,sans-serif;text-align:center}
+.jw-offline-banner.show{transform:translateY(0)}
+.jw-offline-banner svg{width:15px;height:15px;flex:0 0 auto;color:#94a3b8}
+@media (max-width:600px){.jw-offline-banner{font-size:12px;padding:7px 12px}}
+</style>
+<script>
+(function(){
+  "use strict";
+  /* Global haptic helper — short vibration on key actions where supported. */
+  if(!window.__jwHaptic){
+    window.__jwHaptic=function(ms){ try{ if(typeof navigator!=='undefined'&&navigator.vibrate) navigator.vibrate(ms||15); }catch(_){ } };
+  }
+  if(window.__jwOfflineBannerReady) return;
+  window.__jwOfflineBannerReady=true;
+
+  var I18N={
+    en:"You're offline — merging still works and your notes stay on this device.",
+    es:"Estás sin conexión — la combinación sigue funcionando y tus notas permanecen en este dispositivo.",
+    pt:"Você está offline — a combinação continua funcionando e suas notas ficam neste dispositivo.",
+    fr:"Vous êtes hors ligne — la fusion fonctionne toujours et vos notes restent sur cet appareil.",
+    de:"Du bist offline — das Zusammenführen funktioniert weiterhin und deine Notizen bleiben auf diesem Gerät.",
+    it:"Sei offline — l'unione funziona ancora e le tue note restano su questo dispositivo.",
+    ru:"Вы офлайн — объединение по-прежнему работает, а заметки остаются на этом устройстве.",
+    ja:"オフラインです — マージは引き続き使え、ノートはこの端末に保存されます。",
+    ko:"오프라인 상태입니다 — 병합은 계속 작동하고 노트는 이 기기에 남아 있습니다.",
+    tl:"Offline ka — gumagana pa rin ang pagsasama at nananatili sa device na ito ang iyong mga tala."
+  };
+  function msg(){ var l; try{ l=localStorage.getItem('jwsync_lang'); }catch(_){ } return (l&&I18N[l])?I18N[l]:I18N.en; }
+
+  var bar=null;
+  function ensureBar(){
+    if(bar) return bar;
+    bar=document.createElement('div'); bar.className='jw-offline-banner'; bar.id='jw-offline-banner'; bar.setAttribute('role','status');
+    bar.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l22 22"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><span class="jw-offline-msg"></span>';
+    document.body.appendChild(bar);
+    return bar;
+  }
+  function update(){
+    var off = (typeof navigator!=='undefined') && navigator.onLine===false;
+    if(off){ var b=ensureBar(); b.querySelector('.jw-offline-msg').textContent=msg(); requestAnimationFrame(function(){ b.classList.add('show'); }); }
+    else if(bar){ bar.classList.remove('show'); }
+  }
+  window.addEventListener('online',update);
+  window.addEventListener('offline',update);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',update);
+  else update();
+})();
+</script>
+<!-- ── End Offline indicator + haptics ─────────────────── -->
+
 
 
 </body>

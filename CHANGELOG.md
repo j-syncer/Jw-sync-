@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.24.0] — 2026-06-01
+
+### Added
+- **Mobile polish.**
+  - **Offline indicator** — a quiet banner now appears when you lose connection, reassuring you that merging still works and your notes stay on your device. It disappears automatically when you're back online.
+  - **Swipe between tabs** in the Note Explorer — swipe left/right to move between Notes, Highlights, and Bookmarks on touch devices.
+  - **Haptic feedback** — a subtle vibration on key actions (merging, exporting, switching tabs) on supported devices.
+
+---
+
 ## [2.23.0] — 2026-06-01
 
 ### Added
