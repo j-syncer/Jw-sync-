@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.22.0] — 2026-06-01
+
+### Added
+- **Smart suggestions in the Merge Conflict Reviewer.** When notes were edited differently on more than one device, a new **"Suggest best"** button now recommends a version for every conflict at once — highlighting it in green with a short reason ("Most recent edit", "Most detailed", or "Has content"). You can accept the suggestions as-is (just click Download) or override any of them. No more reading every conflict from scratch.
+
+---
+
 ## [2.21.0] — 2026-06-01
 
 ### Added

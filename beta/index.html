@@ -240,7 +240,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.21.0",
+      "softwareVersion": "2.22.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -2365,6 +2365,9 @@ window.__bootBrowse = function() {
 .jcr-versions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .jcr-ver{display:flex;flex-direction:column;border:1.5px solid rgba(71,85,105,.4);border-radius:13px;background:rgba(15,23,42,.5);overflow:hidden;transition:border-color .15s,box-shadow .15s}
 .jcr-ver.sel{border-color:#ea580c;box-shadow:0 0 0 3px rgba(234,88,12,.16)}
+.jcr-ver.jcr-suggested{border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.16)}
+.jcr-suggestion-badge{flex:none;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:#6ee7b7;background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.45);border-radius:5px;padding:2px 6px;margin-left:6px;white-space:nowrap}
+.jcr-btn-suggest{margin-right:auto}
 .jcr-ver-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 8px}
 .jcr-ver-from{font-size:11.5px;font-weight:700;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:6px}
 .jcr-ver-from:before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#64748b}
@@ -2399,16 +2402,16 @@ window.__bootBrowse = function() {
   var SQLJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
 
   var I18N = {
-    en: { title:"Review your merge", subtitle:"{n} notes were edited differently across your backups. Choose which version to keep — or keep both.", current:"In your merge", keep_this:"Keep this", kept:"✓ Kept", keep_both:"Keep both", keep_both_on:"✓ Keeping both", keep_both_hint:"Adds the other version as a separate note", modified:"Edited", apply:"Apply & download", applying:"Applying…", skip:"Keep merge as-is", close:"Close", untitled:"(untitled note)", empty:"(empty)", more:"+{n} more conflicts will keep the merge's automatic choice.", merged_label:"Merged result" },
-    es: { title:"Revisa tu fusión", subtitle:"{n} notas se editaron de forma diferente en tus copias. Elige qué versión conservar — o conserva ambas.", current:"En tu fusión", keep_this:"Conservar esta", kept:"✓ Conservada", keep_both:"Conservar ambas", keep_both_on:"✓ Conservando ambas", keep_both_hint:"Añade la otra versión como una nota aparte", modified:"Editada", apply:"Aplicar y descargar", applying:"Aplicando…", skip:"Dejar la fusión como está", close:"Cerrar", untitled:"(nota sin título)", empty:"(vacío)", more:"+{n} conflictos más mantendrán la elección automática de la fusión.", merged_label:"Resultado de la fusión" },
-    pt: { title:"Revise sua mesclagem", subtitle:"{n} notas foram editadas de forma diferente nos seus backups. Escolha qual versão manter — ou mantenha ambas.", current:"Na sua mesclagem", keep_this:"Manter esta", kept:"✓ Mantida", keep_both:"Manter ambas", keep_both_on:"✓ Mantendo ambas", keep_both_hint:"Adiciona a outra versão como uma nota separada", modified:"Editada", apply:"Aplicar e baixar", applying:"Aplicando…", skip:"Manter a mesclagem como está", close:"Fechar", untitled:"(nota sem título)", empty:"(vazio)", more:"+{n} conflitos manterão a escolha automática da mesclagem.", merged_label:"Resultado da mesclagem" },
-    fr: { title:"Vérifiez votre fusion", subtitle:"{n} notes ont été modifiées différemment dans vos sauvegardes. Choisissez la version à conserver — ou gardez les deux.", current:"Dans votre fusion", keep_this:"Garder celle-ci", kept:"✓ Conservée", keep_both:"Garder les deux", keep_both_on:"✓ Les deux conservées", keep_both_hint:"Ajoute l'autre version comme note distincte", modified:"Modifiée", apply:"Appliquer et télécharger", applying:"Application…", skip:"Laisser la fusion telle quelle", close:"Fermer", untitled:"(note sans titre)", empty:"(vide)", more:"+{n} autres conflits conserveront le choix automatique de la fusion.", merged_label:"Résultat de la fusion" },
-    de: { title:"Prüfe deine Zusammenführung", subtitle:"{n} Notizen wurden in deinen Backups unterschiedlich bearbeitet. Wähle, welche Version bleibt — oder behalte beide.", current:"In deiner Zusammenführung", keep_this:"Diese behalten", kept:"✓ Behalten", keep_both:"Beide behalten", keep_both_on:"✓ Beide behalten", keep_both_hint:"Fügt die andere Version als separate Notiz hinzu", modified:"Bearbeitet", apply:"Anwenden & herunterladen", applying:"Wird angewendet…", skip:"Zusammenführung unverändert lassen", close:"Schließen", untitled:"(Notiz ohne Titel)", empty:"(leer)", more:"+{n} weitere Konflikte behalten die automatische Auswahl der Zusammenführung.", merged_label:"Ergebnis der Zusammenführung" },
-    it: { title:"Controlla la tua unione", subtitle:"{n} note sono state modificate in modo diverso nei tuoi backup. Scegli quale versione mantenere — o tienile entrambe.", current:"Nella tua unione", keep_this:"Tieni questa", kept:"✓ Mantenuta", keep_both:"Tieni entrambe", keep_both_on:"✓ Entrambe mantenute", keep_both_hint:"Aggiunge l'altra versione come nota separata", modified:"Modificata", apply:"Applica e scarica", applying:"Applicazione…", skip:"Lascia l'unione com'è", close:"Chiudi", untitled:"(nota senza titolo)", empty:"(vuoto)", more:"+{n} altri conflitti manterranno la scelta automatica dell'unione.", merged_label:"Risultato dell'unione" },
-    ru: { title:"Проверьте объединение", subtitle:"{n} заметок были изменены по-разному в ваших копиях. Выберите, какую версию оставить — или оставьте обе.", current:"В объединении", keep_this:"Оставить эту", kept:"✓ Оставлено", keep_both:"Оставить обе", keep_both_on:"✓ Обе оставлены", keep_both_hint:"Добавит другую версию как отдельную заметку", modified:"Изменено", apply:"Применить и скачать", applying:"Применение…", skip:"Оставить как есть", close:"Закрыть", untitled:"(заметка без названия)", empty:"(пусто)", more:"+{n} других конфликтов сохранят автоматический выбор объединения.", merged_label:"Результат объединения" },
-    ja: { title:"マージを確認", subtitle:"{n} 件のメモがバックアップ間で異なる形で編集されています。残すバージョンを選ぶか、両方を残せます。", current:"マージ結果", keep_this:"これを残す", kept:"✓ 残しました", keep_both:"両方残す", keep_both_on:"✓ 両方を残す", keep_both_hint:"もう一方を別のメモとして追加します", modified:"編集", apply:"適用してダウンロード", applying:"適用中…", skip:"マージのままにする", close:"閉じる", untitled:"(無題のメモ)", empty:"(空)", more:"他 +{n} 件の競合はマージの自動選択を維持します。", merged_label:"マージ結果" },
-    ko: { title:"병합 검토", subtitle:"{n}개의 메모가 백업마다 다르게 편집되었습니다. 어떤 버전을 남길지 선택하거나 둘 다 보관하세요.", current:"병합 결과", keep_this:"이것 남기기", kept:"✓ 남김", keep_both:"둘 다 남기기", keep_both_on:"✓ 둘 다 보관", keep_both_hint:"다른 버전을 별도의 메모로 추가합니다", modified:"편집됨", apply:"적용 후 다운로드", applying:"적용 중…", skip:"병합 그대로 두기", close:"닫기", untitled:"(제목 없는 메모)", empty:"(비어 있음)", more:"+{n}개의 추가 충돌은 병합의 자동 선택을 유지합니다.", merged_label:"병합 결과" },
-    tl: { title:"Suriin ang merge", subtitle:"{n} na tala ang iba't iba ang pagkaka-edit sa iyong mga backup. Piliin kung aling bersyon ang itatago — o itago ang pareho.", current:"Sa iyong merge", keep_this:"Itago ito", kept:"✓ Itinago", keep_both:"Itago pareho", keep_both_on:"✓ Itinatago pareho", keep_both_hint:"Idaragdag ang isa pang bersyon bilang hiwalay na tala", modified:"In-edit", apply:"Ilapat at i-download", applying:"Inilalapat…", skip:"Iwan ang merge", close:"Isara", untitled:"(talang walang pamagat)", empty:"(walang laman)", more:"+{n} pang conflicts ang magpapanatili ng awtomatikong pili ng merge.", merged_label:"Resulta ng merge" }
+    en: { title:"Review your merge", subtitle:"{n} notes were edited differently across your backups. Choose which version to keep — or keep both.", current:"In your merge", keep_this:"Keep this", kept:"✓ Kept", keep_both:"Keep both", keep_both_on:"✓ Keeping both", keep_both_hint:"Adds the other version as a separate note", modified:"Edited", apply:"Apply & download", applying:"Applying…", skip:"Keep merge as-is", close:"Close", untitled:"(untitled note)", empty:"(empty)", more:"+{n} more conflicts will keep the merge's automatic choice.", merged_label:"Merged result" , suggest:"Suggest best",suggested:"Suggested",sg_content:"Has content",sg_newer:"Most recent edit",sg_longer:"Most detailed" },
+    es: { title:"Revisa tu fusión", subtitle:"{n} notas se editaron de forma diferente en tus copias. Elige qué versión conservar — o conserva ambas.", current:"En tu fusión", keep_this:"Conservar esta", kept:"✓ Conservada", keep_both:"Conservar ambas", keep_both_on:"✓ Conservando ambas", keep_both_hint:"Añade la otra versión como una nota aparte", modified:"Editada", apply:"Aplicar y descargar", applying:"Aplicando…", skip:"Dejar la fusión como está", close:"Cerrar", untitled:"(nota sin título)", empty:"(vacío)", more:"+{n} conflictos más mantendrán la elección automática de la fusión.", merged_label:"Resultado de la fusión" , suggest:"Sugerir la mejor",suggested:"Sugerida",sg_content:"Tiene contenido",sg_newer:"Edición más reciente",sg_longer:"Más detallada" },
+    pt: { title:"Revise sua mesclagem", subtitle:"{n} notas foram editadas de forma diferente nos seus backups. Escolha qual versão manter — ou mantenha ambas.", current:"Na sua mesclagem", keep_this:"Manter esta", kept:"✓ Mantida", keep_both:"Manter ambas", keep_both_on:"✓ Mantendo ambas", keep_both_hint:"Adiciona a outra versão como uma nota separada", modified:"Editada", apply:"Aplicar e baixar", applying:"Aplicando…", skip:"Manter a mesclagem como está", close:"Fechar", untitled:"(nota sem título)", empty:"(vazio)", more:"+{n} conflitos manterão a escolha automática da mesclagem.", merged_label:"Resultado da mesclagem" , suggest:"Sugerir a melhor",suggested:"Sugerida",sg_content:"Tem conteúdo",sg_newer:"Edição mais recente",sg_longer:"Mais detalhada" },
+    fr: { title:"Vérifiez votre fusion", subtitle:"{n} notes ont été modifiées différemment dans vos sauvegardes. Choisissez la version à conserver — ou gardez les deux.", current:"Dans votre fusion", keep_this:"Garder celle-ci", kept:"✓ Conservée", keep_both:"Garder les deux", keep_both_on:"✓ Les deux conservées", keep_both_hint:"Ajoute l'autre version comme note distincte", modified:"Modifiée", apply:"Appliquer et télécharger", applying:"Application…", skip:"Laisser la fusion telle quelle", close:"Fermer", untitled:"(note sans titre)", empty:"(vide)", more:"+{n} autres conflits conserveront le choix automatique de la fusion.", merged_label:"Résultat de la fusion" , suggest:"Suggérer la meilleure",suggested:"Suggérée",sg_content:"Contient du texte",sg_newer:"Édition la plus récente",sg_longer:"La plus détaillée" },
+    de: { title:"Prüfe deine Zusammenführung", subtitle:"{n} Notizen wurden in deinen Backups unterschiedlich bearbeitet. Wähle, welche Version bleibt — oder behalte beide.", current:"In deiner Zusammenführung", keep_this:"Diese behalten", kept:"✓ Behalten", keep_both:"Beide behalten", keep_both_on:"✓ Beide behalten", keep_both_hint:"Fügt die andere Version als separate Notiz hinzu", modified:"Bearbeitet", apply:"Anwenden & herunterladen", applying:"Wird angewendet…", skip:"Zusammenführung unverändert lassen", close:"Schließen", untitled:"(Notiz ohne Titel)", empty:"(leer)", more:"+{n} weitere Konflikte behalten die automatische Auswahl der Zusammenführung.", merged_label:"Ergebnis der Zusammenführung" , suggest:"Beste vorschlagen",suggested:"Vorschlag",sg_content:"Hat Inhalt",sg_newer:"Neueste Änderung",sg_longer:"Am ausführlichsten" },
+    it: { title:"Controlla la tua unione", subtitle:"{n} note sono state modificate in modo diverso nei tuoi backup. Scegli quale versione mantenere — o tienile entrambe.", current:"Nella tua unione", keep_this:"Tieni questa", kept:"✓ Mantenuta", keep_both:"Tieni entrambe", keep_both_on:"✓ Entrambe mantenute", keep_both_hint:"Aggiunge l'altra versione come nota separata", modified:"Modificata", apply:"Applica e scarica", applying:"Applicazione…", skip:"Lascia l'unione com'è", close:"Chiudi", untitled:"(nota senza titolo)", empty:"(vuoto)", more:"+{n} altri conflitti manterranno la scelta automatica dell'unione.", merged_label:"Risultato dell'unione" , suggest:"Suggerisci la migliore",suggested:"Suggerita",sg_content:"Ha contenuto",sg_newer:"Modifica più recente",sg_longer:"Più dettagliata" },
+    ru: { title:"Проверьте объединение", subtitle:"{n} заметок были изменены по-разному в ваших копиях. Выберите, какую версию оставить — или оставьте обе.", current:"В объединении", keep_this:"Оставить эту", kept:"✓ Оставлено", keep_both:"Оставить обе", keep_both_on:"✓ Обе оставлены", keep_both_hint:"Добавит другую версию как отдельную заметку", modified:"Изменено", apply:"Применить и скачать", applying:"Применение…", skip:"Оставить как есть", close:"Закрыть", untitled:"(заметка без названия)", empty:"(пусто)", more:"+{n} других конфликтов сохранят автоматический выбор объединения.", merged_label:"Результат объединения" , suggest:"Предложить лучшее",suggested:"Рекомендуется",sg_content:"Есть содержимое",sg_newer:"Последнее изменение",sg_longer:"Наиболее подробная" },
+    ja: { title:"マージを確認", subtitle:"{n} 件のメモがバックアップ間で異なる形で編集されています。残すバージョンを選ぶか、両方を残せます。", current:"マージ結果", keep_this:"これを残す", kept:"✓ 残しました", keep_both:"両方残す", keep_both_on:"✓ 両方を残す", keep_both_hint:"もう一方を別のメモとして追加します", modified:"編集", apply:"適用してダウンロード", applying:"適用中…", skip:"マージのままにする", close:"閉じる", untitled:"(無題のメモ)", empty:"(空)", more:"他 +{n} 件の競合はマージの自動選択を維持します。", merged_label:"マージ結果" , suggest:"おすすめを提案",suggested:"おすすめ",sg_content:"内容あり",sg_newer:"最新の編集",sg_longer:"最も詳しい" },
+    ko: { title:"병합 검토", subtitle:"{n}개의 메모가 백업마다 다르게 편집되었습니다. 어떤 버전을 남길지 선택하거나 둘 다 보관하세요.", current:"병합 결과", keep_this:"이것 남기기", kept:"✓ 남김", keep_both:"둘 다 남기기", keep_both_on:"✓ 둘 다 보관", keep_both_hint:"다른 버전을 별도의 메모로 추가합니다", modified:"편집됨", apply:"적용 후 다운로드", applying:"적용 중…", skip:"병합 그대로 두기", close:"닫기", untitled:"(제목 없는 메모)", empty:"(비어 있음)", more:"+{n}개의 추가 충돌은 병합의 자동 선택을 유지합니다.", merged_label:"병합 결과" , suggest:"최적 추천",suggested:"추천",sg_content:"내용 있음",sg_newer:"가장 최근 편집",sg_longer:"가장 상세함" },
+    tl: { title:"Suriin ang merge", subtitle:"{n} na tala ang iba't iba ang pagkaka-edit sa iyong mga backup. Piliin kung aling bersyon ang itatago — o itago ang pareho.", current:"Sa iyong merge", keep_this:"Itago ito", kept:"✓ Itinago", keep_both:"Itago pareho", keep_both_on:"✓ Itinatago pareho", keep_both_hint:"Idaragdag ang isa pang bersyon bilang hiwalay na tala", modified:"In-edit", apply:"Ilapat at i-download", applying:"Inilalapat…", skip:"Iwan ang merge", close:"Isara", untitled:"(talang walang pamagat)", empty:"(walang laman)", more:"+{n} pang conflicts ang magpapanatili ng awtomatikong pili ng merge.", merged_label:"Resulta ng merge" , suggest:"Imungkahi ang pinakamahusay",suggested:"Iminumungkahi",sg_content:"May nilalaman",sg_newer:"Pinakabagong edit",sg_longer:"Pinakadetalyado" }
   };
   function curLang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
   function t(k) { var l = curLang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
@@ -2632,6 +2635,7 @@ window.__bootBrowse = function() {
     opts = opts || {};
     return new Promise(function (resolve) {
       var settled = false, overlay = null;
+      var refreshers = [], suggestions = {};
       function done(v) { if (settled) return; settled = true; cleanup(); resolve(v); }
       function cleanup() {
         if (overlay) { overlay.remove(); overlay = null; }
@@ -2649,6 +2653,7 @@ window.__bootBrowse = function() {
         var MAX = 100;
         var resolutions = ctx.conflicts.map(function (cf) { return { choice: cf.current }; });
         var shown = ctx.conflicts.slice(0, MAX);
+        refreshers.length = 0; suggestions = {};
 
         var warnIcon = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 19a1 1 0 0 0 .87 1.5h18.26A1 1 0 0 0 22 19L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
         var dlIcon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -2665,6 +2670,7 @@ window.__bootBrowse = function() {
             '<div class="jcr-body" id="jcr-body"></div>' +
             (ctx.conflicts.length > MAX ? '<div class="jcr-more">' + esc(t('more').replace('{n}', ctx.conflicts.length - MAX)) + '</div>' : '') +
             '<div class="jcr-foot">' +
+              '<button class="jcr-btn jcr-btn-ghost jcr-btn-suggest" type="button" data-jcr-suggest>' + esc(t('suggest')) + '</button>' +
               '<button class="jcr-btn jcr-btn-ghost" type="button" data-jcr-skip>' + esc(t('skip')) + '</button>' +
               '<button class="jcr-btn jcr-btn-primary" type="button" data-jcr-apply>' + dlIcon + '<span>' + esc(t('apply')) + '</span></button>' +
             '</div>' +
@@ -2688,7 +2694,27 @@ window.__bootBrowse = function() {
           var span = applyBtn.querySelector('span'); if (span) span.textContent = t('applying');
           applyResolutions(ctx, resolutions).then(function (r) { done(r); }).catch(function () { done(null); });
         });
+        var suggestBtn = overlay.querySelector('[data-jcr-suggest]');
+        if (suggestBtn) suggestBtn.addEventListener('click', function () {
+          shown.forEach(function (cf, ci) { var s = suggestFor(cf); suggestions[ci] = s; if (s.reason) resolutions[ci] = { choice: s.vi }; });
+          refreshers.forEach(function (fn) { fn(); });
+        });
         document.addEventListener('keydown', onKey);
+      }
+
+      function suggestFor(cf) {
+        var vs = cf.variants, nonEmpty = [];
+        vs.forEach(function (v, i) { if (v.plain && v.plain.trim().length > 0) nonEmpty.push(i); });
+        if (nonEmpty.length === 0) return { vi: cf.current, reason: null };
+        if (nonEmpty.length === 1) return { vi: nonEmpty[0], reason: 'sg_content' };
+        var withDate = nonEmpty.filter(function (i) { return vs[i].lastMod; });
+        if (withDate.length === nonEmpty.length) {
+          var sorted = withDate.slice().sort(function (a2, b2) { return new Date(vs[b2].lastMod) - new Date(vs[a2].lastMod); });
+          if (new Date(vs[sorted[0]].lastMod).getTime() !== new Date(vs[sorted[1]].lastMod).getTime())
+            return { vi: sorted[0], reason: 'sg_newer' };
+        }
+        var longest = nonEmpty.slice().sort(function (a2, b2) { return vs[b2].plain.length - vs[a2].plain.length; })[0];
+        return { vi: longest, reason: 'sg_longer' };
       }
 
       function buildConflict(cf, ci, resolutions) {
@@ -2742,16 +2768,25 @@ window.__bootBrowse = function() {
         wrap.appendChild(bothRow);
 
         function refresh() {
+          var sg = suggestions[ci];
           vers.querySelectorAll('.jcr-ver').forEach(function (card) {
             var vi = parseInt(card.getAttribute('data-vi'), 10);
             var sel = resolutions[ci].choice === vi;
             card.classList.toggle('sel', sel);
+            var isSug = !!(sg && sg.reason && sg.vi === vi);
+            card.classList.toggle('jcr-suggested', isSug);
+            var badge = card.querySelector('.jcr-suggestion-badge');
+            if (isSug) {
+              if (!badge) { badge = document.createElement('span'); badge.className = 'jcr-suggestion-badge'; card.querySelector('.jcr-ver-head').appendChild(badge); }
+              badge.textContent = t('suggested') + ' \u00b7 ' + t(sg.reason);
+            } else if (badge) { badge.remove(); }
             card.querySelector('.jcr-ver-pick').textContent = sel ? t('kept') : t('keep_this');
           });
           var isBoth = resolutions[ci].choice === 'both';
           bothBtn.classList.toggle('on', isBoth);
           bothBtn.textContent = isBoth ? t('keep_both_on') : t('keep_both');
         }
+        refreshers.push(refresh);
 
         return wrap;
       }

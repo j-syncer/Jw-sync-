@@ -153,8 +153,9 @@ async function waitForOverlay(doc, timeoutMs) {
       const picks = overlay.querySelectorAll('.jcr-ver-pick');
       if (picks.length === 2) ok('each version has a "Keep this" control');
       else fail('expected 2 pick buttons, got ' + picks.length);
-      // dismiss (skip) → resolves null
-      overlay.querySelector('.jcr-btn-ghost').click();
+      // dismiss (skip) → resolves null  (target the explicit skip control —
+      // the foot also holds a "Suggest best" ghost button as of v2.22)
+      overlay.querySelector('[data-jcr-skip].jcr-btn').click();
       const res = await reviewP;
       if (res === null) ok('"Keep merge as-is" resolves null (no rewrite)');
       else fail('skip should resolve null, got ' + JSON.stringify(res));
@@ -191,6 +192,42 @@ async function waitForOverlay(doc, timeoutMs) {
         if (total === 3) ok('note count unchanged (override, not duplicate): ' + total);
         else fail('expected 3 notes after override, got ' + total);
       } else { fail('Apply did not return a corrected buffer: ' + JSON.stringify(res)); }
+      dom.window.close();
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  section('Smart suggestion (v2.22.0) → recommends a version + badge');
+  {
+    const dom = makeReviewerDom({ deps: true });
+    const win = dom.window, doc = win.document;
+    win.fetch = () => Promise.resolve({ arrayBuffer: async () => mergedBuf.slice(0) });
+    attachInputs(win, [{ name: 'phone.jwlibrary', buffer: phoneBuf }, { name: 'tablet.jwlibrary', buffer: tabletBuf }]);
+
+    const reviewP = win.__jwConflictReview({ blobUrl: 'blob:merged' });
+    const overlay = await waitForOverlay(doc);
+    if (!overlay) { fail('overlay did not appear'); dom.window.close(); }
+    else {
+      const suggestBtn = overlay.querySelector('[data-jcr-suggest]');
+      if (suggestBtn) ok('"Suggest best" button present');
+      else fail('Suggest button missing');
+      // Before: no suggestion styling
+      if (!overlay.querySelector('.jcr-suggested')) ok('no suggestion highlighted before click');
+      else fail('suggestion shown before clicking Suggest');
+      suggestBtn.click();
+      // After: exactly one card per conflict is highlighted + badged
+      const suggested = overlay.querySelectorAll('.jcr-suggested');
+      if (suggested.length >= 1) ok('a version is highlighted as suggested after click');
+      else fail('no suggested version after clicking Suggest');
+      const badge = overlay.querySelector('.jcr-suggestion-badge');
+      if (badge && badge.textContent.trim().length > 0) ok('suggestion badge with reason rendered: "' + badge.textContent + '"');
+      else fail('no suggestion badge rendered');
+      // The suggested card should also be the selected one
+      if (overlay.querySelector('.jcr-suggested.sel')) ok('suggested version is auto-selected');
+      else fail('suggested version was not selected');
+      // Cancel out
+      overlay.querySelector('[data-jcr-skip].jcr-btn').click();
+      await reviewP;
       dom.window.close();
     }
   }

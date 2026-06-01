@@ -207,6 +207,14 @@ for (const path of FILES) {
     else ok('extractByDate() present');
   }
 
+  // 8d) Smart Conflict Suggestions (v2.22.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('data-jcr-suggest') || !c.includes('function suggestFor')) fail('Conflict suggestion engine missing');
+    else ok('Conflict "Suggest best" engine present');
+    if (!c.includes('jcr-suggestion-badge') || !c.includes('jcr-suggested')) fail('Conflict suggestion styles missing');
+    else ok('Conflict suggestion badge/highlight styles present');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');
