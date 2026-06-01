@@ -88,6 +88,9 @@
   var appPromise = null;
   function bootApp() {
     if (appPromise) return appPromise;
+    // The 'Preparing your workspace…' splash (#jws-loading) is already
+    // visible by default; CSS hides it on the landing route via body.is-landing.
+    // The main app itself removes the splash once React mounts.
     appPromise = Promise.all([loadReact(), loadStorage(), loadAppBundle()]).then(function() {
       if (typeof window.__bootApp === 'function') window.__bootApp();
       loadLucide();
@@ -243,7 +246,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.19.3",
+      "softwareVersion": "2.24.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -370,7 +373,6 @@
     <!-- ── End design theme ────────────────────────────────── -->
 </head>
 <body class="min-h-screen flex flex-col font-sans">
-
 
 <nav id="site-nav">
   <a href="#home" id="site-nav-home" class="site-nav-logo">JW Sync</a>
@@ -859,6 +861,12 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jb-search input::placeholder{color:#5a6883}
 .jb-select{background:#0a1224;border:1px solid #2a3548;border-radius:10px;padding:8px 10px;color:#cbd5e1;font-size:13px;min-width:140px;max-width:200px;outline:none;cursor:pointer}
 .jb-clear{background:transparent;border:1px solid #2a3548;color:#94a3b8;padding:7px 12px;border-radius:8px;font-size:12px;cursor:pointer}
+.jb-date-wrap{display:flex;align-items:center;gap:6px}
+.jb-filter-date{background:#0a1224;border:1px solid #2a3548;border-radius:8px;padding:6px 8px;color:#cbd5e1;font-size:12px;outline:none;color-scheme:dark;cursor:pointer}
+.jb-date-dash{color:#5a6883;font-size:13px}
+.jb-extract-btn{background:transparent;border:1px solid #ea580c;color:#fb923c;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+.jb-extract-btn:hover:not(:disabled){background:rgba(234,88,12,.12)}
+.jb-extract-btn:disabled{border-color:#2a3548;color:#5a6883;cursor:not-allowed}
 .jb-clear:hover{background:rgba(71,85,105,.25);color:#e7eaf3}
 .jb-colors{display:flex;gap:6px;align-items:center}
 .jb-color-dot{width:22px;height:22px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:transform .12s,border-color .12s}
@@ -952,6 +960,9 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jb-btn-danger-solid{background:#dc2626;border:0;color:#fff;padding:7px 14px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer}
 .jb-btn-danger-solid:hover{background:#ef4444}
 .jb-export-btn{background:rgba(234,88,12,0.18);border:1px solid rgba(234,88,12,0.45);color:#fb923c;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:background .12s,opacity .12s;white-space:nowrap}
+.jb-md-btn{background:transparent;border:1px solid #2a3548;color:#cbd5e1;padding:6px 12px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.jb-md-btn:hover:not(:disabled){border-color:#475569;color:#fff}
+.jb-md-btn:disabled{opacity:.5;cursor:not-allowed}
 .jb-export-btn:hover:not(:disabled){background:rgba(234,88,12,0.3)}
 .jb-export-btn:disabled{opacity:.35;cursor:not-allowed}
 .jb-dirty-badge{background:rgba(234,88,12,0.22);color:#fdba74;font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px;margin-left:4px;display:none}
@@ -981,16 +992,16 @@ window.__bootBrowse = function() {
 
   // ---------- i18n ----------
   var I18N = {
-    en:{title:"Note Explorer",search:"Search...",no_results:"Nothing matches your filters.",loading:"Loading library...",close:"Close",no_file:"Open a backup file first — pick one to browse.",pick_file:"Choose .jwlibrary file",count_one:"{n} item",count_many:"{n} items",color_all:"All colors",no_title:"Untitled",copy:"Copy",copied:"Copied",clear:"Clear",error:"Could not load:",pub_all:"All publications",tag_all:"All tags",back:"← Back",detail_empty:"Select an item from the list.",sort_newest:"Newest first",sort_oldest:"Oldest first",sort_pub:"By publication",modified:"Modified",no_content:"(No content)",too_many:"Showing first {n} of {total} — narrow the search.",pg_prev:"Prev",pg_next:"Next",pg_status:"Page {page} of {pages} · {total} results",err_corrupt:"This file isn't a readable .jwlibrary backup — it may be corrupted or the wrong type of file.",err_no_db:"This backup is missing its notes database (userData.db). Re-export it from JW Library.",err_not_sqlite:"The backup's database couldn't be opened — the file may be damaged.",tab_notes:"Notes",tab_highlights:"Highlights",tab_bookmarks:"Bookmarks",hl_label:"Highlight",hl_no_text:"Highlighted passage (text lives in the publication, not the backup).",hl_with_note:"With note",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Linked note:",edit:"Edit",save:"Save",cancel:"Cancel",delete_item:"Delete",export_db:"Export .jwlibrary",n_edits:"{n} edit",n_edits_many:"{n} edits",add_tag:"+ Add tag",new_tag_ph:"Tag name...",delete_note_confirm:"Delete this note? This cannot be undone.",delete_hl_confirm:"Delete this highlight? This cannot be undone.",delete_bm_confirm:"Delete this bookmark? This cannot be undone.",yes_delete:"Yes, delete",change_color:"Color",unsaved_exit:"You have {n} unsaved edit(s). Close without exporting?",title_label:"Title",content_label:"Content",tags_label:"Tags",hl_color_label:"Highlight color",bm_title_label:"Bookmark title",plain_text_note:"Formatting simplified to plain text on save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Underline",rte_bullets:"Bullet list",rich_text_note:"Edit with bold, italics and lists — formatting is kept"},
-    es:{title:"Explorador de Notas",search:"Buscar...",no_results:"Nada coincide con tus filtros.",loading:"Cargando biblioteca...",close:"Cerrar",no_file:"Abre primero un archivo de respaldo.",pick_file:"Elegir archivo .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementos",color_all:"Todos los colores",no_title:"Sin título",copy:"Copiar",copied:"Copiado",clear:"Limpiar",error:"No se pudo cargar:",pub_all:"Todas las publicaciones",tag_all:"Todas las etiquetas",back:"← Volver",detail_empty:"Selecciona un elemento de la lista.",sort_newest:"Más recientes primero",sort_oldest:"Más antiguas primero",sort_pub:"Por publicación",modified:"Modificado",no_content:"(Sin contenido)",too_many:"Mostrando los primeros {n} de {total} — refina la búsqueda.",pg_prev:"Anterior",pg_next:"Siguiente",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este archivo no es una copia .jwlibrary legible: puede estar dañado o ser de tipo incorrecto.",err_no_db:"A esta copia le falta su base de datos de notas (userData.db). Vuelve a exportarla desde JW Library.",err_not_sqlite:"No se pudo abrir la base de datos de la copia: el archivo puede estar dañado.",tab_notes:"Notas",tab_highlights:"Resaltados",tab_bookmarks:"Marcadores",hl_label:"Resaltado",hl_no_text:"Pasaje resaltado (el texto está en la publicación, no en el respaldo).",hl_with_note:"Con nota",bm_label:"Marcador",bm_slot:"Posición {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Guardar",cancel:"Cancelar",delete_item:"Eliminar",export_db:"Exportar .jwlibrary",n_edits:"{n} edición",n_edits_many:"{n} ediciones",add_tag:"+ Agregar etiqueta",new_tag_ph:"Nombre de etiqueta...",delete_note_confirm:"¿Eliminar esta nota? Esta acción no se puede deshacer.",delete_hl_confirm:"¿Eliminar este resaltado? Esta acción no se puede deshacer.",delete_bm_confirm:"¿Eliminar este marcador? Esta acción no se puede deshacer.",yes_delete:"Sí, eliminar",change_color:"Color",unsaved_exit:"Tienes {n} edición(es) sin exportar. ¿Cerrar sin exportar?",title_label:"Título",content_label:"Contenido",tags_label:"Etiquetas",hl_color_label:"Color del resaltado",bm_title_label:"Título del marcador",plain_text_note:"El formato se simplifica a texto plano al guardar",rte_bold:"Negrita",rte_italic:"Cursiva",rte_underline:"Subrayado",rte_bullets:"Lista con viñetas",rich_text_note:"Edita con negrita, cursiva y listas — el formato se conserva"},
-    pt:{title:"Explorador de Notas",search:"Pesquisar...",no_results:"Nada corresponde aos filtros.",loading:"Carregando biblioteca...",close:"Fechar",no_file:"Abra primeiro um arquivo de backup.",pick_file:"Escolher arquivo .jwlibrary",count_one:"{n} item",count_many:"{n} itens",color_all:"Todas as cores",no_title:"Sem título",copy:"Copiar",copied:"Copiado",clear:"Limpar",error:"Não foi possível carregar:",pub_all:"Todas as publicações",tag_all:"Todas as etiquetas",back:"← Voltar",detail_empty:"Selecione um item da lista.",sort_newest:"Mais recentes primeiro",sort_oldest:"Mais antigos primeiro",sort_pub:"Por publicação",modified:"Modificado",no_content:"(Sem conteúdo)",too_many:"Exibindo os primeiros {n} de {total} — refine a busca.",pg_prev:"Anterior",pg_next:"Próxima",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este arquivo não é um backup .jwlibrary legível — pode estar corrompido ou ser do tipo errado.",err_no_db:"Falta o banco de dados de notas (userData.db) neste backup. Exporte-o novamente no JW Library.",err_not_sqlite:"Não foi possível abrir o banco de dados do backup — o arquivo pode estar danificado.",tab_notes:"Notas",tab_highlights:"Marcações",tab_bookmarks:"Favoritos",hl_label:"Marcação",hl_no_text:"Trecho marcado (o texto está na publicação, não no backup).",hl_with_note:"Com nota",bm_label:"Favorito",bm_slot:"Posição {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Salvar",cancel:"Cancelar",delete_item:"Excluir",export_db:"Exportar .jwlibrary",n_edits:"{n} edição",n_edits_many:"{n} edições",add_tag:"+ Adicionar etiqueta",new_tag_ph:"Nome da etiqueta...",delete_note_confirm:"Excluir esta nota? Esta ação não pode ser desfeita.",delete_hl_confirm:"Excluir esta marcação? Esta ação não pode ser desfeita.",delete_bm_confirm:"Excluir este favorito? Esta ação não pode ser desfeita.",yes_delete:"Sim, excluir",change_color:"Cor",unsaved_exit:"Você tem {n} edição(ões) sem exportar. Fechar sem exportar?",title_label:"Título",content_label:"Conteúdo",tags_label:"Etiquetas",hl_color_label:"Cor da marcação",bm_title_label:"Título do favorito",plain_text_note:"Formatação simplificada para texto simples ao salvar",rte_bold:"Negrito",rte_italic:"Itálico",rte_underline:"Sublinhado",rte_bullets:"Lista com marcadores",rich_text_note:"Edite com negrito, itálico e listas — a formatação é mantida"},
-    fr:{title:"Explorateur de Notes",search:"Rechercher...",no_results:"Aucun résultat ne correspond.",loading:"Chargement de la bibliothèque...",close:"Fermer",no_file:"Ouvrez d'abord un fichier de sauvegarde.",pick_file:"Choisir un fichier .jwlibrary",count_one:"{n} élément",count_many:"{n} éléments",color_all:"Toutes les couleurs",no_title:"Sans titre",copy:"Copier",copied:"Copié",clear:"Effacer",error:"Impossible de charger :",pub_all:"Toutes les publications",tag_all:"Toutes les étiquettes",back:"← Retour",detail_empty:"Sélectionnez un élément dans la liste.",sort_newest:"Plus récents d'abord",sort_oldest:"Plus anciens d'abord",sort_pub:"Par publication",modified:"Modifié",no_content:"(Pas de contenu)",too_many:"Affichage des {n} premiers sur {total} — affinez la recherche.",pg_prev:"Préc.",pg_next:"Suiv.",pg_status:"Page {page} sur {pages} · {total} résultats",err_corrupt:"Ce fichier n'est pas une sauvegarde .jwlibrary lisible — il est peut-être corrompu ou d'un mauvais type.",err_no_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db). Réexportez-la depuis JW Library.",err_not_sqlite:"Impossible d'ouvrir la base de données de la sauvegarde — le fichier est peut-être endommagé.",tab_notes:"Notes",tab_highlights:"Surlignages",tab_bookmarks:"Signets",hl_label:"Surlignage",hl_no_text:"Passage surligné (le texte se trouve dans la publication, pas dans la sauvegarde).",hl_with_note:"Avec note",bm_label:"Signet",bm_slot:"Position {n}",linked_note:"Note liée :",edit:"Modifier",save:"Enregistrer",cancel:"Annuler",delete_item:"Supprimer",export_db:"Exporter .jwlibrary",n_edits:"{n} modification",n_edits_many:"{n} modifications",add_tag:"+ Ajouter étiquette",new_tag_ph:"Nom de l'étiquette...",delete_note_confirm:"Supprimer cette note ? Cette action est irréversible.",delete_hl_confirm:"Supprimer ce surlignage ? Cette action est irréversible.",delete_bm_confirm:"Supprimer ce signet ? Cette action est irréversible.",yes_delete:"Oui, supprimer",change_color:"Couleur",unsaved_exit:"Vous avez {n} modification(s) non exportée(s). Fermer sans exporter ?",title_label:"Titre",content_label:"Contenu",tags_label:"Étiquettes",hl_color_label:"Couleur du surlignage",bm_title_label:"Titre du signet",plain_text_note:"La mise en forme est simplifiée en texte brut lors de l'enregistrement",rte_bold:"Gras",rte_italic:"Italique",rte_underline:"Souligné",rte_bullets:"Liste à puces",rich_text_note:"Modifiez avec gras, italique et listes — la mise en forme est conservée"},
-    de:{title:"Notiz-Explorer",search:"Suchen...",no_results:"Keine Treffer für die Filter.",loading:"Bibliothek wird geladen...",close:"Schließen",no_file:"Öffnen Sie zuerst eine Sicherungsdatei.",pick_file:".jwlibrary-Datei wählen",count_one:"{n} Eintrag",count_many:"{n} Einträge",color_all:"Alle Farben",no_title:"Ohne Titel",copy:"Kopieren",copied:"Kopiert",clear:"Zurücksetzen",error:"Konnte nicht geladen werden:",pub_all:"Alle Veröffentlichungen",tag_all:"Alle Stichwörter",back:"← Zurück",detail_empty:"Wählen Sie einen Eintrag aus der Liste.",sort_newest:"Neueste zuerst",sort_oldest:"Älteste zuerst",sort_pub:"Nach Veröffentlichung",modified:"Geändert",no_content:"(Kein Inhalt)",too_many:"Erste {n} von {total} angezeigt — Suche einschränken.",pg_prev:"Zurück",pg_next:"Weiter",pg_status:"Seite {page} von {pages} · {total} Ergebnisse",err_corrupt:"Diese Datei ist keine lesbare .jwlibrary-Sicherung — sie ist evtl. beschädigt oder vom falschen Typ.",err_no_db:"Dieser Sicherung fehlt ihre Notizdatenbank (userData.db). Exportiere sie erneut aus JW Library.",err_not_sqlite:"Die Datenbank der Sicherung konnte nicht geöffnet werden — die Datei ist evtl. beschädigt.",tab_notes:"Notizen",tab_highlights:"Markierungen",tab_bookmarks:"Lesezeichen",hl_label:"Markierung",hl_no_text:"Markierte Passage (Text liegt in der Veröffentlichung, nicht im Backup).",hl_with_note:"Mit Notiz",bm_label:"Lesezeichen",bm_slot:"Slot {n}",linked_note:"Verknüpfte Notiz:",edit:"Bearbeiten",save:"Speichern",cancel:"Abbrechen",delete_item:"Löschen",export_db:".jwlibrary exportieren",n_edits:"{n} Änderung",n_edits_many:"{n} Änderungen",add_tag:"+ Stichwort hinzufügen",new_tag_ph:"Stichwortname...",delete_note_confirm:"Diese Notiz löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_hl_confirm:"Diese Markierung löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_bm_confirm:"Dieses Lesezeichen löschen? Diese Aktion kann nicht rückgängig gemacht werden.",yes_delete:"Ja, löschen",change_color:"Farbe",unsaved_exit:"Sie haben {n} nicht exportierte Änderung(en). Ohne Export schließen?",title_label:"Titel",content_label:"Inhalt",tags_label:"Stichwörter",hl_color_label:"Markierungsfarbe",bm_title_label:"Lesezeichentitel",plain_text_note:"Formatierung wird beim Speichern auf Nur-Text vereinfacht",rte_bold:"Fett",rte_italic:"Kursiv",rte_underline:"Unterstrichen",rte_bullets:"Aufzählung",rich_text_note:"Mit Fett, Kursiv und Listen bearbeiten — Formatierung bleibt erhalten"},
-    it:{title:"Esplora Note",search:"Cerca...",no_results:"Nessun risultato per i filtri.",loading:"Caricamento biblioteca...",close:"Chiudi",no_file:"Apri prima un file di backup.",pick_file:"Scegli file .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementi",color_all:"Tutti i colori",no_title:"Senza titolo",copy:"Copia",copied:"Copiato",clear:"Cancella",error:"Impossibile caricare:",pub_all:"Tutte le pubblicazioni",tag_all:"Tutte le etichette",back:"← Indietro",detail_empty:"Seleziona un elemento dall'elenco.",sort_newest:"Più recenti prima",sort_oldest:"Più vecchi prima",sort_pub:"Per pubblicazione",modified:"Modificato",no_content:"(Nessun contenuto)",too_many:"Mostrati i primi {n} di {total} — restringi la ricerca.",pg_prev:"Prec.",pg_next:"Succ.",pg_status:"Pagina {page} di {pages} · {total} risultati",err_corrupt:"Questo file non è un backup .jwlibrary leggibile — potrebbe essere danneggiato o di tipo errato.",err_no_db:"A questo backup manca il database delle note (userData.db). Riesportalo da JW Library.",err_not_sqlite:"Non è stato possibile aprire il database del backup — il file potrebbe essere danneggiato.",tab_notes:"Note",tab_highlights:"Evidenziazioni",tab_bookmarks:"Segnalibri",hl_label:"Evidenziazione",hl_no_text:"Brano evidenziato (il testo è nella pubblicazione, non nel backup).",hl_with_note:"Con nota",bm_label:"Segnalibro",bm_slot:"Posizione {n}",linked_note:"Nota collegata:",edit:"Modifica",save:"Salva",cancel:"Annulla",delete_item:"Elimina",export_db:"Esporta .jwlibrary",n_edits:"{n} modifica",n_edits_many:"{n} modifiche",add_tag:"+ Aggiungi etichetta",new_tag_ph:"Nome etichetta...",delete_note_confirm:"Eliminare questa nota? Questa azione non può essere annullata.",delete_hl_confirm:"Eliminare questa evidenziazione? Questa azione non può essere annullata.",delete_bm_confirm:"Eliminare questo segnalibro? Questa azione non può essere annullata.",yes_delete:"Sì, elimina",change_color:"Colore",unsaved_exit:"Hai {n} modifica/modifiche non esportata/e. Chiudere senza esportare?",title_label:"Titolo",content_label:"Contenuto",tags_label:"Etichette",hl_color_label:"Colore evidenziazione",bm_title_label:"Titolo segnalibro",plain_text_note:"La formattazione verrà semplificata a testo normale al salvataggio",rte_bold:"Grassetto",rte_italic:"Corsivo",rte_underline:"Sottolineato",rte_bullets:"Elenco puntato",rich_text_note:"Modifica con grassetto, corsivo ed elenchi — la formattazione è mantenuta"},
-    ru:{title:"Просмотр заметок",search:"Поиск...",no_results:"Ничего не найдено.",loading:"Загрузка библиотеки...",close:"Закрыть",no_file:"Сначала откройте файл резервной копии.",pick_file:"Выбрать .jwlibrary файл",count_one:"{n} элемент",count_many:"{n} элементов",color_all:"Все цвета",no_title:"Без названия",copy:"Копировать",copied:"Скопировано",clear:"Очистить",error:"Не удалось загрузить:",pub_all:"Все публикации",tag_all:"Все теги",back:"← Назад",detail_empty:"Выберите элемент из списка.",sort_newest:"Сначала новые",sort_oldest:"Сначала старые",sort_pub:"По публикации",modified:"Изменено",no_content:"(Нет содержимого)",too_many:"Показаны первые {n} из {total} — уточните поиск.",pg_prev:"Назад",pg_next:"Вперёд",pg_status:"Страница {page} из {pages} · {total} результатов",err_corrupt:"Этот файл не является читаемой копией .jwlibrary — возможно, он повреждён или это другой тип файла.",err_no_db:"В этой копии нет базы данных заметок (userData.db). Экспортируйте её заново из JW Library.",err_not_sqlite:"Не удалось открыть базу данных копии — файл может быть повреждён.",tab_notes:"Заметки",tab_highlights:"Пометки",tab_bookmarks:"Закладки",hl_label:"Пометка",hl_no_text:"Выделенный отрывок (текст находится в публикации, а не в копии).",hl_with_note:"С заметкой",bm_label:"Закладка",bm_slot:"Слот {n}",linked_note:"Связанная заметка:",edit:"Изменить",save:"Сохранить",cancel:"Отмена",delete_item:"Удалить",export_db:"Экспорт .jwlibrary",n_edits:"{n} изм.",n_edits_many:"{n} изм.",add_tag:"+ Добавить тег",new_tag_ph:"Название тега...",delete_note_confirm:"Удалить эту заметку? Это действие нельзя отменить.",delete_hl_confirm:"Удалить эту пометку? Это действие нельзя отменить.",delete_bm_confirm:"Удалить эту закладку? Это действие нельзя отменить.",yes_delete:"Да, удалить",change_color:"Цвет",unsaved_exit:"У вас {n} неэкспортированное(ых) изменение(й). Закрыть без экспорта?",title_label:"Название",content_label:"Содержание",tags_label:"Теги",hl_color_label:"Цвет пометки",bm_title_label:"Название закладки",plain_text_note:"Форматирование упрощается до простого текста при сохранении",rte_bold:"Жирный",rte_italic:"Курсив",rte_underline:"Подчёркнутый",rte_bullets:"Маркированный список",rich_text_note:"Редактируйте с жирным, курсивом и списками — форматирование сохраняется"},
-    ja:{title:"ノート閲覧",search:"検索...",no_results:"フィルターに一致する項目はありません。",loading:"ライブラリを読み込み中...",close:"閉じる",no_file:"先にバックアップファイルを開いてください。",pick_file:".jwlibrary ファイルを選択",count_one:"{n} 件",count_many:"{n} 件",color_all:"すべての色",no_title:"タイトルなし",copy:"コピー",copied:"コピーしました",clear:"クリア",error:"読み込めませんでした:",pub_all:"すべての出版物",tag_all:"すべてのタグ",back:"← 戻る",detail_empty:"リストから項目を選択してください。",sort_newest:"新しい順",sort_oldest:"古い順",sort_pub:"出版物別",modified:"更新日",no_content:"(内容なし)",too_many:"{total} 件中 {n} 件を表示 — 検索を絞ってください。",pg_prev:"前へ",pg_next:"次へ",pg_status:"{pages} ページ中 {page} ページ · {total} 件",err_corrupt:"このファイルは読み取り可能な .jwlibrary バックアップではありません。破損しているか種類が違う可能性があります。",err_no_db:"このバックアップにはノートのデータベース（userData.db）がありません。JW Library から再書き出ししてください。",err_not_sqlite:"バックアップのデータベースを開けませんでした。ファイルが破損している可能性があります。",tab_notes:"ノート",tab_highlights:"ハイライト",tab_bookmarks:"しおり",hl_label:"ハイライト",hl_no_text:"ハイライトした箇所(テキストは出版物にあり、バックアップには含まれません)。",hl_with_note:"ノート付き",bm_label:"しおり",bm_slot:"スロット {n}",linked_note:"関連ノート:",edit:"編集",save:"保存",cancel:"キャンセル",delete_item:"削除",export_db:".jwlibrary を書き出し",n_edits:"{n}件の編集",n_edits_many:"{n}件の編集",add_tag:"+ タグを追加",new_tag_ph:"タグ名...",delete_note_confirm:"このノートを削除しますか？この操作は取り消せません。",delete_hl_confirm:"このハイライトを削除しますか？この操作は取り消せません。",delete_bm_confirm:"このしおりを削除しますか？この操作は取り消せません。",yes_delete:"はい、削除",change_color:"色",unsaved_exit:"{n}件の未エクスポートの編集があります。エクスポートせずに閉じますか？",title_label:"タイトル",content_label:"内容",tags_label:"タグ",hl_color_label:"ハイライトの色",bm_title_label:"しおりのタイトル",plain_text_note:"保存時にプレーンテキストに変換されます",rte_bold:"太字",rte_italic:"斜体",rte_underline:"下線",rte_bullets:"箇条書き",rich_text_note:"太字・斜体・リストで編集できます。書式は保持されます"},
-    ko:{title:"노트 탐색기",search:"검색...",no_results:"필터와 일치하는 항목이 없습니다.",loading:"라이브러리 로드 중...",close:"닫기",no_file:"먼저 백업 파일을 여세요.",pick_file:".jwlibrary 파일 선택",count_one:"{n}개",count_many:"{n}개",color_all:"모든 색상",no_title:"제목 없음",copy:"복사",copied:"복사됨",clear:"초기화",error:"불러올 수 없습니다:",pub_all:"모든 출판물",tag_all:"모든 태그",back:"← 뒤로",detail_empty:"목록에서 항목을 선택하세요.",sort_newest:"최신순",sort_oldest:"오래된순",sort_pub:"출판물순",modified:"수정됨",no_content:"(내용 없음)",too_many:"전체 {total}개 중 처음 {n}개 표시 — 검색을 좁히세요.",pg_prev:"이전",pg_next:"다음",pg_status:"{pages}페이지 중 {page}페이지 · {total}개",err_corrupt:"이 파일은 읽을 수 있는 .jwlibrary 백업이 아닙니다. 손상되었거나 잘못된 형식일 수 있습니다.",err_no_db:"이 백업에는 노트 데이터베이스(userData.db)가 없습니다. JW Library에서 다시 내보내세요.",err_not_sqlite:"백업의 데이터베이스를 열 수 없습니다. 파일이 손상되었을 수 있습니다.",tab_notes:"노트",tab_highlights:"하이라이트",tab_bookmarks:"북마크",hl_label:"하이라이트",hl_no_text:"하이라이트된 구절 (텍스트는 출판물에 있고 백업에는 포함되지 않음).",hl_with_note:"노트 포함",bm_label:"북마크",bm_slot:"슬롯 {n}",linked_note:"연결된 노트:",edit:"편집",save:"저장",cancel:"취소",delete_item:"삭제",export_db:".jwlibrary 내보내기",n_edits:"{n}개 편집",n_edits_many:"{n}개 편집",add_tag:"+ 태그 추가",new_tag_ph:"태그 이름...",delete_note_confirm:"이 노트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_hl_confirm:"이 하이라이트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_bm_confirm:"이 북마크를 삭제할까요? 이 작업은 취소할 수 없습니다.",yes_delete:"예, 삭제",change_color:"색상",unsaved_exit:"{n}개의 내보내지 않은 편집이 있습니다. 내보내지 않고 닫을까요?",title_label:"제목",content_label:"내용",tags_label:"태그",hl_color_label:"하이라이트 색상",bm_title_label:"북마크 제목",plain_text_note:"저장 시 서식이 일반 텍스트로 변환됩니다",rte_bold:"굵게",rte_italic:"기울임",rte_underline:"밑줄",rte_bullets:"글머리 기호 목록",rich_text_note:"굵게, 기울임, 목록으로 편집 — 서식이 유지됩니다"},
-    tl:{title:"Tagasiyasat ng Tala",search:"Maghanap...",no_results:"Walang tumugma sa mga filter.",loading:"Naglo-load ng aklatan...",close:"Isara",no_file:"Magbukas muna ng backup file.",pick_file:"Pumili ng .jwlibrary file",count_one:"{n} item",count_many:"{n} item",color_all:"Lahat ng kulay",no_title:"Walang pamagat",copy:"Kopyahin",copied:"Nakopya",clear:"Burahin",error:"Hindi ma-load:",pub_all:"Lahat ng publikasyon",tag_all:"Lahat ng tag",back:"← Bumalik",detail_empty:"Pumili ng item mula sa listahan.",sort_newest:"Pinakabago muna",sort_oldest:"Pinakaluma muna",sort_pub:"Ayon sa publikasyon",modified:"Binago",no_content:"(Walang nilalaman)",too_many:"Ipinapakita ang unang {n} sa {total} — paliitin ang paghahanap.",pg_prev:"Nakaraan",pg_next:"Susunod",pg_status:"Pahina {page} ng {pages} · {total} resulta",err_corrupt:"Ang file na ito ay hindi nababasang .jwlibrary backup — maaaring sira o maling uri.",err_no_db:"Walang database ng mga nota (userData.db) ang backup na ito. I-export muli mula sa JW Library.",err_not_sqlite:"Hindi mabuksan ang database ng backup — maaaring sira ang file.",tab_notes:"Mga Tala",tab_highlights:"Mga Highlight",tab_bookmarks:"Mga Bookmark",hl_label:"Highlight",hl_no_text:"Naka-highlight na talata (ang teksto ay nasa publikasyon, hindi sa backup).",hl_with_note:"May tala",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Naka-link na tala:",edit:"I-edit",save:"I-save",cancel:"Kanselahin",delete_item:"Burahin",export_db:"I-export ang .jwlibrary",n_edits:"{n} pagbabago",n_edits_many:"{n} pagbabago",add_tag:"+ Magdagdag ng tag",new_tag_ph:"Pangalan ng tag...",delete_note_confirm:"Burahin ang talang ito? Hindi ito maaaring bawiin.",delete_hl_confirm:"Burahin ang highlight na ito? Hindi ito maaaring bawiin.",delete_bm_confirm:"Burahin ang bookmark na ito? Hindi ito maaaring bawiin.",yes_delete:"Oo, burahin",change_color:"Kulay",unsaved_exit:"Mayroon kang {n} hindi pa na-export na pagbabago. Isara nang hindi nagexport?",title_label:"Pamagat",content_label:"Nilalaman",tags_label:"Mga tag",hl_color_label:"Kulay ng highlight",bm_title_label:"Pamagat ng bookmark",plain_text_note:"Ang format ay magiging plain text kapag nai-save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Salungguhit",rte_bullets:"Bulleted na listahan",rich_text_note:"I-edit nang may bold, italic at listahan — pinapanatili ang format"}
+    en:{title:"Note Explorer",search:"Search...",no_results:"Nothing matches your filters.",loading:"Loading library...",close:"Close",no_file:"Open a backup file first — pick one to browse.",pick_file:"Choose .jwlibrary file",count_one:"{n} item",count_many:"{n} items",color_all:"All colors",no_title:"Untitled",copy:"Copy",copied:"Copied",clear:"Clear",error:"Could not load:",pub_all:"All publications",tag_all:"All tags",back:"← Back",detail_empty:"Select an item from the list.",sort_newest:"Newest first",sort_oldest:"Oldest first",sort_pub:"By publication",modified:"Modified",no_content:"(No content)",too_many:"Showing first {n} of {total} — narrow the search.",pg_prev:"Prev",pg_next:"Next",pg_status:"Page {page} of {pages} · {total} results",err_corrupt:"This file isn't a readable .jwlibrary backup — it may be corrupted or the wrong type of file.",err_no_db:"This backup is missing its notes database (userData.db). Re-export it from JW Library.",err_not_sqlite:"The backup's database couldn't be opened — the file may be damaged.",tab_notes:"Notes",tab_highlights:"Highlights",tab_bookmarks:"Bookmarks",hl_label:"Highlight",hl_no_text:"Highlighted passage (text lives in the publication, not the backup).",hl_with_note:"With note",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Linked note:",edit:"Edit",save:"Save",cancel:"Cancel",delete_item:"Delete",export_db:"Export .jwlibrary",n_edits:"{n} edit",n_edits_many:"{n} edits",add_tag:"+ Add tag",new_tag_ph:"Tag name...",delete_note_confirm:"Delete this note? This cannot be undone.",delete_hl_confirm:"Delete this highlight? This cannot be undone.",delete_bm_confirm:"Delete this bookmark? This cannot be undone.",yes_delete:"Yes, delete",change_color:"Color",unsaved_exit:"You have {n} unsaved edit(s). Close without exporting?",title_label:"Title",content_label:"Content",tags_label:"Tags",hl_color_label:"Highlight color",bm_title_label:"Bookmark title",plain_text_note:"Formatting simplified to plain text on save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Underline",rte_bullets:"Bullet list",rich_text_note:"Edit with bold, italics and lists — formatting is kept",date_from:"From",date_to:"To",date_range:"Filter by date",extract_range:"Extract date range",extract_none:"No notes fall in this date range.",extract_hint:"Save a new .jwlibrary with only the notes in this date range.",copy_md:"Copy as Markdown",export_md:"Export Markdown",md_hint:"Download the notes shown as Markdown files (.zip)"},
+    es:{title:"Explorador de Notas",search:"Buscar...",no_results:"Nada coincide con tus filtros.",loading:"Cargando biblioteca...",close:"Cerrar",no_file:"Abre primero un archivo de respaldo.",pick_file:"Elegir archivo .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementos",color_all:"Todos los colores",no_title:"Sin título",copy:"Copiar",copied:"Copiado",clear:"Limpiar",error:"No se pudo cargar:",pub_all:"Todas las publicaciones",tag_all:"Todas las etiquetas",back:"← Volver",detail_empty:"Selecciona un elemento de la lista.",sort_newest:"Más recientes primero",sort_oldest:"Más antiguas primero",sort_pub:"Por publicación",modified:"Modificado",no_content:"(Sin contenido)",too_many:"Mostrando los primeros {n} de {total} — refina la búsqueda.",pg_prev:"Anterior",pg_next:"Siguiente",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este archivo no es una copia .jwlibrary legible: puede estar dañado o ser de tipo incorrecto.",err_no_db:"A esta copia le falta su base de datos de notas (userData.db). Vuelve a exportarla desde JW Library.",err_not_sqlite:"No se pudo abrir la base de datos de la copia: el archivo puede estar dañado.",tab_notes:"Notas",tab_highlights:"Resaltados",tab_bookmarks:"Marcadores",hl_label:"Resaltado",hl_no_text:"Pasaje resaltado (el texto está en la publicación, no en el respaldo).",hl_with_note:"Con nota",bm_label:"Marcador",bm_slot:"Posición {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Guardar",cancel:"Cancelar",delete_item:"Eliminar",export_db:"Exportar .jwlibrary",n_edits:"{n} edición",n_edits_many:"{n} ediciones",add_tag:"+ Agregar etiqueta",new_tag_ph:"Nombre de etiqueta...",delete_note_confirm:"¿Eliminar esta nota? Esta acción no se puede deshacer.",delete_hl_confirm:"¿Eliminar este resaltado? Esta acción no se puede deshacer.",delete_bm_confirm:"¿Eliminar este marcador? Esta acción no se puede deshacer.",yes_delete:"Sí, eliminar",change_color:"Color",unsaved_exit:"Tienes {n} edición(es) sin exportar. ¿Cerrar sin exportar?",title_label:"Título",content_label:"Contenido",tags_label:"Etiquetas",hl_color_label:"Color del resaltado",bm_title_label:"Título del marcador",plain_text_note:"El formato se simplifica a texto plano al guardar",rte_bold:"Negrita",rte_italic:"Cursiva",rte_underline:"Subrayado",rte_bullets:"Lista con viñetas",rich_text_note:"Edita con negrita, cursiva y listas — el formato se conserva",date_from:"Desde",date_to:"Hasta",date_range:"Filtrar por fecha",extract_range:"Extraer rango de fechas",extract_none:"Ninguna nota está en este rango de fechas.",extract_hint:"Guarda un nuevo .jwlibrary solo con las notas de este rango de fechas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Descarga las notas mostradas como archivos Markdown (.zip)"},
+    pt:{title:"Explorador de Notas",search:"Pesquisar...",no_results:"Nada corresponde aos filtros.",loading:"Carregando biblioteca...",close:"Fechar",no_file:"Abra primeiro um arquivo de backup.",pick_file:"Escolher arquivo .jwlibrary",count_one:"{n} item",count_many:"{n} itens",color_all:"Todas as cores",no_title:"Sem título",copy:"Copiar",copied:"Copiado",clear:"Limpar",error:"Não foi possível carregar:",pub_all:"Todas as publicações",tag_all:"Todas as etiquetas",back:"← Voltar",detail_empty:"Selecione um item da lista.",sort_newest:"Mais recentes primeiro",sort_oldest:"Mais antigos primeiro",sort_pub:"Por publicação",modified:"Modificado",no_content:"(Sem conteúdo)",too_many:"Exibindo os primeiros {n} de {total} — refine a busca.",pg_prev:"Anterior",pg_next:"Próxima",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este arquivo não é um backup .jwlibrary legível — pode estar corrompido ou ser do tipo errado.",err_no_db:"Falta o banco de dados de notas (userData.db) neste backup. Exporte-o novamente no JW Library.",err_not_sqlite:"Não foi possível abrir o banco de dados do backup — o arquivo pode estar danificado.",tab_notes:"Notas",tab_highlights:"Marcações",tab_bookmarks:"Favoritos",hl_label:"Marcação",hl_no_text:"Trecho marcado (o texto está na publicação, não no backup).",hl_with_note:"Com nota",bm_label:"Favorito",bm_slot:"Posição {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Salvar",cancel:"Cancelar",delete_item:"Excluir",export_db:"Exportar .jwlibrary",n_edits:"{n} edição",n_edits_many:"{n} edições",add_tag:"+ Adicionar etiqueta",new_tag_ph:"Nome da etiqueta...",delete_note_confirm:"Excluir esta nota? Esta ação não pode ser desfeita.",delete_hl_confirm:"Excluir esta marcação? Esta ação não pode ser desfeita.",delete_bm_confirm:"Excluir este favorito? Esta ação não pode ser desfeita.",yes_delete:"Sim, excluir",change_color:"Cor",unsaved_exit:"Você tem {n} edição(ões) sem exportar. Fechar sem exportar?",title_label:"Título",content_label:"Conteúdo",tags_label:"Etiquetas",hl_color_label:"Cor da marcação",bm_title_label:"Título do favorito",plain_text_note:"Formatação simplificada para texto simples ao salvar",rte_bold:"Negrito",rte_italic:"Itálico",rte_underline:"Sublinhado",rte_bullets:"Lista com marcadores",rich_text_note:"Edite com negrito, itálico e listas — a formatação é mantida",date_from:"De",date_to:"Até",date_range:"Filtrar por data",extract_range:"Extrair intervalo de datas",extract_none:"Nenhuma nota está neste intervalo de datas.",extract_hint:"Salve um novo .jwlibrary apenas com as notas deste intervalo de datas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Baixe as notas exibidas como arquivos Markdown (.zip)"},
+    fr:{title:"Explorateur de Notes",search:"Rechercher...",no_results:"Aucun résultat ne correspond.",loading:"Chargement de la bibliothèque...",close:"Fermer",no_file:"Ouvrez d'abord un fichier de sauvegarde.",pick_file:"Choisir un fichier .jwlibrary",count_one:"{n} élément",count_many:"{n} éléments",color_all:"Toutes les couleurs",no_title:"Sans titre",copy:"Copier",copied:"Copié",clear:"Effacer",error:"Impossible de charger :",pub_all:"Toutes les publications",tag_all:"Toutes les étiquettes",back:"← Retour",detail_empty:"Sélectionnez un élément dans la liste.",sort_newest:"Plus récents d'abord",sort_oldest:"Plus anciens d'abord",sort_pub:"Par publication",modified:"Modifié",no_content:"(Pas de contenu)",too_many:"Affichage des {n} premiers sur {total} — affinez la recherche.",pg_prev:"Préc.",pg_next:"Suiv.",pg_status:"Page {page} sur {pages} · {total} résultats",err_corrupt:"Ce fichier n'est pas une sauvegarde .jwlibrary lisible — il est peut-être corrompu ou d'un mauvais type.",err_no_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db). Réexportez-la depuis JW Library.",err_not_sqlite:"Impossible d'ouvrir la base de données de la sauvegarde — le fichier est peut-être endommagé.",tab_notes:"Notes",tab_highlights:"Surlignages",tab_bookmarks:"Signets",hl_label:"Surlignage",hl_no_text:"Passage surligné (le texte se trouve dans la publication, pas dans la sauvegarde).",hl_with_note:"Avec note",bm_label:"Signet",bm_slot:"Position {n}",linked_note:"Note liée :",edit:"Modifier",save:"Enregistrer",cancel:"Annuler",delete_item:"Supprimer",export_db:"Exporter .jwlibrary",n_edits:"{n} modification",n_edits_many:"{n} modifications",add_tag:"+ Ajouter étiquette",new_tag_ph:"Nom de l'étiquette...",delete_note_confirm:"Supprimer cette note ? Cette action est irréversible.",delete_hl_confirm:"Supprimer ce surlignage ? Cette action est irréversible.",delete_bm_confirm:"Supprimer ce signet ? Cette action est irréversible.",yes_delete:"Oui, supprimer",change_color:"Couleur",unsaved_exit:"Vous avez {n} modification(s) non exportée(s). Fermer sans exporter ?",title_label:"Titre",content_label:"Contenu",tags_label:"Étiquettes",hl_color_label:"Couleur du surlignage",bm_title_label:"Titre du signet",plain_text_note:"La mise en forme est simplifiée en texte brut lors de l'enregistrement",rte_bold:"Gras",rte_italic:"Italique",rte_underline:"Souligné",rte_bullets:"Liste à puces",rich_text_note:"Modifiez avec gras, italique et listes — la mise en forme est conservée",date_from:"Du",date_to:"Au",date_range:"Filtrer par date",extract_range:"Extraire la plage de dates",extract_none:"Aucune note dans cette plage de dates.",extract_hint:"Enregistrez un nouveau .jwlibrary avec seulement les notes de cette plage de dates.",copy_md:"Copier en Markdown",export_md:"Exporter Markdown",md_hint:"Téléchargez les notes affichées en fichiers Markdown (.zip)"},
+    de:{title:"Notiz-Explorer",search:"Suchen...",no_results:"Keine Treffer für die Filter.",loading:"Bibliothek wird geladen...",close:"Schließen",no_file:"Öffnen Sie zuerst eine Sicherungsdatei.",pick_file:".jwlibrary-Datei wählen",count_one:"{n} Eintrag",count_many:"{n} Einträge",color_all:"Alle Farben",no_title:"Ohne Titel",copy:"Kopieren",copied:"Kopiert",clear:"Zurücksetzen",error:"Konnte nicht geladen werden:",pub_all:"Alle Veröffentlichungen",tag_all:"Alle Stichwörter",back:"← Zurück",detail_empty:"Wählen Sie einen Eintrag aus der Liste.",sort_newest:"Neueste zuerst",sort_oldest:"Älteste zuerst",sort_pub:"Nach Veröffentlichung",modified:"Geändert",no_content:"(Kein Inhalt)",too_many:"Erste {n} von {total} angezeigt — Suche einschränken.",pg_prev:"Zurück",pg_next:"Weiter",pg_status:"Seite {page} von {pages} · {total} Ergebnisse",err_corrupt:"Diese Datei ist keine lesbare .jwlibrary-Sicherung — sie ist evtl. beschädigt oder vom falschen Typ.",err_no_db:"Dieser Sicherung fehlt ihre Notizdatenbank (userData.db). Exportiere sie erneut aus JW Library.",err_not_sqlite:"Die Datenbank der Sicherung konnte nicht geöffnet werden — die Datei ist evtl. beschädigt.",tab_notes:"Notizen",tab_highlights:"Markierungen",tab_bookmarks:"Lesezeichen",hl_label:"Markierung",hl_no_text:"Markierte Passage (Text liegt in der Veröffentlichung, nicht im Backup).",hl_with_note:"Mit Notiz",bm_label:"Lesezeichen",bm_slot:"Slot {n}",linked_note:"Verknüpfte Notiz:",edit:"Bearbeiten",save:"Speichern",cancel:"Abbrechen",delete_item:"Löschen",export_db:".jwlibrary exportieren",n_edits:"{n} Änderung",n_edits_many:"{n} Änderungen",add_tag:"+ Stichwort hinzufügen",new_tag_ph:"Stichwortname...",delete_note_confirm:"Diese Notiz löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_hl_confirm:"Diese Markierung löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_bm_confirm:"Dieses Lesezeichen löschen? Diese Aktion kann nicht rückgängig gemacht werden.",yes_delete:"Ja, löschen",change_color:"Farbe",unsaved_exit:"Sie haben {n} nicht exportierte Änderung(en). Ohne Export schließen?",title_label:"Titel",content_label:"Inhalt",tags_label:"Stichwörter",hl_color_label:"Markierungsfarbe",bm_title_label:"Lesezeichentitel",plain_text_note:"Formatierung wird beim Speichern auf Nur-Text vereinfacht",rte_bold:"Fett",rte_italic:"Kursiv",rte_underline:"Unterstrichen",rte_bullets:"Aufzählung",rich_text_note:"Mit Fett, Kursiv und Listen bearbeiten — Formatierung bleibt erhalten",date_from:"Von",date_to:"Bis",date_range:"Nach Datum filtern",extract_range:"Datumsbereich extrahieren",extract_none:"Keine Notizen in diesem Datumsbereich.",extract_hint:"Ein neues .jwlibrary nur mit den Notizen dieses Datumsbereichs speichern.",copy_md:"Als Markdown kopieren",export_md:"Markdown exportieren",md_hint:"Die angezeigten Notizen als Markdown-Dateien herunterladen (.zip)"},
+    it:{title:"Esplora Note",search:"Cerca...",no_results:"Nessun risultato per i filtri.",loading:"Caricamento biblioteca...",close:"Chiudi",no_file:"Apri prima un file di backup.",pick_file:"Scegli file .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementi",color_all:"Tutti i colori",no_title:"Senza titolo",copy:"Copia",copied:"Copiato",clear:"Cancella",error:"Impossibile caricare:",pub_all:"Tutte le pubblicazioni",tag_all:"Tutte le etichette",back:"← Indietro",detail_empty:"Seleziona un elemento dall'elenco.",sort_newest:"Più recenti prima",sort_oldest:"Più vecchi prima",sort_pub:"Per pubblicazione",modified:"Modificato",no_content:"(Nessun contenuto)",too_many:"Mostrati i primi {n} di {total} — restringi la ricerca.",pg_prev:"Prec.",pg_next:"Succ.",pg_status:"Pagina {page} di {pages} · {total} risultati",err_corrupt:"Questo file non è un backup .jwlibrary leggibile — potrebbe essere danneggiato o di tipo errato.",err_no_db:"A questo backup manca il database delle note (userData.db). Riesportalo da JW Library.",err_not_sqlite:"Non è stato possibile aprire il database del backup — il file potrebbe essere danneggiato.",tab_notes:"Note",tab_highlights:"Evidenziazioni",tab_bookmarks:"Segnalibri",hl_label:"Evidenziazione",hl_no_text:"Brano evidenziato (il testo è nella pubblicazione, non nel backup).",hl_with_note:"Con nota",bm_label:"Segnalibro",bm_slot:"Posizione {n}",linked_note:"Nota collegata:",edit:"Modifica",save:"Salva",cancel:"Annulla",delete_item:"Elimina",export_db:"Esporta .jwlibrary",n_edits:"{n} modifica",n_edits_many:"{n} modifiche",add_tag:"+ Aggiungi etichetta",new_tag_ph:"Nome etichetta...",delete_note_confirm:"Eliminare questa nota? Questa azione non può essere annullata.",delete_hl_confirm:"Eliminare questa evidenziazione? Questa azione non può essere annullata.",delete_bm_confirm:"Eliminare questo segnalibro? Questa azione non può essere annullata.",yes_delete:"Sì, elimina",change_color:"Colore",unsaved_exit:"Hai {n} modifica/modifiche non esportata/e. Chiudere senza esportare?",title_label:"Titolo",content_label:"Contenuto",tags_label:"Etichette",hl_color_label:"Colore evidenziazione",bm_title_label:"Titolo segnalibro",plain_text_note:"La formattazione verrà semplificata a testo normale al salvataggio",rte_bold:"Grassetto",rte_italic:"Corsivo",rte_underline:"Sottolineato",rte_bullets:"Elenco puntato",rich_text_note:"Modifica con grassetto, corsivo ed elenchi — la formattazione è mantenuta",date_from:"Dal",date_to:"Al",date_range:"Filtra per data",extract_range:"Estrai intervallo di date",extract_none:"Nessuna nota in questo intervallo di date.",extract_hint:"Salva un nuovo .jwlibrary solo con le note di questo intervallo di date.",copy_md:"Copia come Markdown",export_md:"Esporta Markdown",md_hint:"Scarica le note mostrate come file Markdown (.zip)"},
+    ru:{title:"Просмотр заметок",search:"Поиск...",no_results:"Ничего не найдено.",loading:"Загрузка библиотеки...",close:"Закрыть",no_file:"Сначала откройте файл резервной копии.",pick_file:"Выбрать .jwlibrary файл",count_one:"{n} элемент",count_many:"{n} элементов",color_all:"Все цвета",no_title:"Без названия",copy:"Копировать",copied:"Скопировано",clear:"Очистить",error:"Не удалось загрузить:",pub_all:"Все публикации",tag_all:"Все теги",back:"← Назад",detail_empty:"Выберите элемент из списка.",sort_newest:"Сначала новые",sort_oldest:"Сначала старые",sort_pub:"По публикации",modified:"Изменено",no_content:"(Нет содержимого)",too_many:"Показаны первые {n} из {total} — уточните поиск.",pg_prev:"Назад",pg_next:"Вперёд",pg_status:"Страница {page} из {pages} · {total} результатов",err_corrupt:"Этот файл не является читаемой копией .jwlibrary — возможно, он повреждён или это другой тип файла.",err_no_db:"В этой копии нет базы данных заметок (userData.db). Экспортируйте её заново из JW Library.",err_not_sqlite:"Не удалось открыть базу данных копии — файл может быть повреждён.",tab_notes:"Заметки",tab_highlights:"Пометки",tab_bookmarks:"Закладки",hl_label:"Пометка",hl_no_text:"Выделенный отрывок (текст находится в публикации, а не в копии).",hl_with_note:"С заметкой",bm_label:"Закладка",bm_slot:"Слот {n}",linked_note:"Связанная заметка:",edit:"Изменить",save:"Сохранить",cancel:"Отмена",delete_item:"Удалить",export_db:"Экспорт .jwlibrary",n_edits:"{n} изм.",n_edits_many:"{n} изм.",add_tag:"+ Добавить тег",new_tag_ph:"Название тега...",delete_note_confirm:"Удалить эту заметку? Это действие нельзя отменить.",delete_hl_confirm:"Удалить эту пометку? Это действие нельзя отменить.",delete_bm_confirm:"Удалить эту закладку? Это действие нельзя отменить.",yes_delete:"Да, удалить",change_color:"Цвет",unsaved_exit:"У вас {n} неэкспортированное(ых) изменение(й). Закрыть без экспорта?",title_label:"Название",content_label:"Содержание",tags_label:"Теги",hl_color_label:"Цвет пометки",bm_title_label:"Название закладки",plain_text_note:"Форматирование упрощается до простого текста при сохранении",rte_bold:"Жирный",rte_italic:"Курсив",rte_underline:"Подчёркнутый",rte_bullets:"Маркированный список",rich_text_note:"Редактируйте с жирным, курсивом и списками — форматирование сохраняется",date_from:"С",date_to:"По",date_range:"Фильтр по дате",extract_range:"Извлечь диапазон дат",extract_none:"Нет заметок в этом диапазоне дат.",extract_hint:"Сохранить новый .jwlibrary только с заметками этого диапазона дат.",copy_md:"Копировать как Markdown",export_md:"Экспорт Markdown",md_hint:"Скачать показанные заметки как файлы Markdown (.zip)"},
+    ja:{title:"ノート閲覧",search:"検索...",no_results:"フィルターに一致する項目はありません。",loading:"ライブラリを読み込み中...",close:"閉じる",no_file:"先にバックアップファイルを開いてください。",pick_file:".jwlibrary ファイルを選択",count_one:"{n} 件",count_many:"{n} 件",color_all:"すべての色",no_title:"タイトルなし",copy:"コピー",copied:"コピーしました",clear:"クリア",error:"読み込めませんでした:",pub_all:"すべての出版物",tag_all:"すべてのタグ",back:"← 戻る",detail_empty:"リストから項目を選択してください。",sort_newest:"新しい順",sort_oldest:"古い順",sort_pub:"出版物別",modified:"更新日",no_content:"(内容なし)",too_many:"{total} 件中 {n} 件を表示 — 検索を絞ってください。",pg_prev:"前へ",pg_next:"次へ",pg_status:"{pages} ページ中 {page} ページ · {total} 件",err_corrupt:"このファイルは読み取り可能な .jwlibrary バックアップではありません。破損しているか種類が違う可能性があります。",err_no_db:"このバックアップにはノートのデータベース（userData.db）がありません。JW Library から再書き出ししてください。",err_not_sqlite:"バックアップのデータベースを開けませんでした。ファイルが破損している可能性があります。",tab_notes:"ノート",tab_highlights:"ハイライト",tab_bookmarks:"しおり",hl_label:"ハイライト",hl_no_text:"ハイライトした箇所(テキストは出版物にあり、バックアップには含まれません)。",hl_with_note:"ノート付き",bm_label:"しおり",bm_slot:"スロット {n}",linked_note:"関連ノート:",edit:"編集",save:"保存",cancel:"キャンセル",delete_item:"削除",export_db:".jwlibrary を書き出し",n_edits:"{n}件の編集",n_edits_many:"{n}件の編集",add_tag:"+ タグを追加",new_tag_ph:"タグ名...",delete_note_confirm:"このノートを削除しますか？この操作は取り消せません。",delete_hl_confirm:"このハイライトを削除しますか？この操作は取り消せません。",delete_bm_confirm:"このしおりを削除しますか？この操作は取り消せません。",yes_delete:"はい、削除",change_color:"色",unsaved_exit:"{n}件の未エクスポートの編集があります。エクスポートせずに閉じますか？",title_label:"タイトル",content_label:"内容",tags_label:"タグ",hl_color_label:"ハイライトの色",bm_title_label:"しおりのタイトル",plain_text_note:"保存時にプレーンテキストに変換されます",rte_bold:"太字",rte_italic:"斜体",rte_underline:"下線",rte_bullets:"箇条書き",rich_text_note:"太字・斜体・リストで編集できます。書式は保持されます",date_from:"開始",date_to:"終了",date_range:"日付で絞り込み",extract_range:"日付範囲を抽出",extract_none:"この日付範囲にノートはありません。",extract_hint:"この日付範囲のノートだけを含む新しい .jwlibrary を保存します。",copy_md:"Markdown としてコピー",export_md:"Markdown を書き出し",md_hint:"表示中のノートを Markdown ファイル（.zip）としてダウンロード"},
+    ko:{title:"노트 탐색기",search:"검색...",no_results:"필터와 일치하는 항목이 없습니다.",loading:"라이브러리 로드 중...",close:"닫기",no_file:"먼저 백업 파일을 여세요.",pick_file:".jwlibrary 파일 선택",count_one:"{n}개",count_many:"{n}개",color_all:"모든 색상",no_title:"제목 없음",copy:"복사",copied:"복사됨",clear:"초기화",error:"불러올 수 없습니다:",pub_all:"모든 출판물",tag_all:"모든 태그",back:"← 뒤로",detail_empty:"목록에서 항목을 선택하세요.",sort_newest:"최신순",sort_oldest:"오래된순",sort_pub:"출판물순",modified:"수정됨",no_content:"(내용 없음)",too_many:"전체 {total}개 중 처음 {n}개 표시 — 검색을 좁히세요.",pg_prev:"이전",pg_next:"다음",pg_status:"{pages}페이지 중 {page}페이지 · {total}개",err_corrupt:"이 파일은 읽을 수 있는 .jwlibrary 백업이 아닙니다. 손상되었거나 잘못된 형식일 수 있습니다.",err_no_db:"이 백업에는 노트 데이터베이스(userData.db)가 없습니다. JW Library에서 다시 내보내세요.",err_not_sqlite:"백업의 데이터베이스를 열 수 없습니다. 파일이 손상되었을 수 있습니다.",tab_notes:"노트",tab_highlights:"하이라이트",tab_bookmarks:"북마크",hl_label:"하이라이트",hl_no_text:"하이라이트된 구절 (텍스트는 출판물에 있고 백업에는 포함되지 않음).",hl_with_note:"노트 포함",bm_label:"북마크",bm_slot:"슬롯 {n}",linked_note:"연결된 노트:",edit:"편집",save:"저장",cancel:"취소",delete_item:"삭제",export_db:".jwlibrary 내보내기",n_edits:"{n}개 편집",n_edits_many:"{n}개 편집",add_tag:"+ 태그 추가",new_tag_ph:"태그 이름...",delete_note_confirm:"이 노트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_hl_confirm:"이 하이라이트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_bm_confirm:"이 북마크를 삭제할까요? 이 작업은 취소할 수 없습니다.",yes_delete:"예, 삭제",change_color:"색상",unsaved_exit:"{n}개의 내보내지 않은 편집이 있습니다. 내보내지 않고 닫을까요?",title_label:"제목",content_label:"내용",tags_label:"태그",hl_color_label:"하이라이트 색상",bm_title_label:"북마크 제목",plain_text_note:"저장 시 서식이 일반 텍스트로 변환됩니다",rte_bold:"굵게",rte_italic:"기울임",rte_underline:"밑줄",rte_bullets:"글머리 기호 목록",rich_text_note:"굵게, 기울임, 목록으로 편집 — 서식이 유지됩니다",date_from:"시작",date_to:"종료",date_range:"날짜로 필터",extract_range:"날짜 범위 추출",extract_none:"이 날짜 범위에 노트가 없습니다.",extract_hint:"이 날짜 범위의 노트만 포함된 새 .jwlibrary를 저장합니다.",copy_md:"Markdown으로 복사",export_md:"Markdown 내보내기",md_hint:"표시된 노트를 Markdown 파일(.zip)로 다운로드"},
+    tl:{title:"Tagasiyasat ng Tala",search:"Maghanap...",no_results:"Walang tumugma sa mga filter.",loading:"Naglo-load ng aklatan...",close:"Isara",no_file:"Magbukas muna ng backup file.",pick_file:"Pumili ng .jwlibrary file",count_one:"{n} item",count_many:"{n} item",color_all:"Lahat ng kulay",no_title:"Walang pamagat",copy:"Kopyahin",copied:"Nakopya",clear:"Burahin",error:"Hindi ma-load:",pub_all:"Lahat ng publikasyon",tag_all:"Lahat ng tag",back:"← Bumalik",detail_empty:"Pumili ng item mula sa listahan.",sort_newest:"Pinakabago muna",sort_oldest:"Pinakaluma muna",sort_pub:"Ayon sa publikasyon",modified:"Binago",no_content:"(Walang nilalaman)",too_many:"Ipinapakita ang unang {n} sa {total} — paliitin ang paghahanap.",pg_prev:"Nakaraan",pg_next:"Susunod",pg_status:"Pahina {page} ng {pages} · {total} resulta",err_corrupt:"Ang file na ito ay hindi nababasang .jwlibrary backup — maaaring sira o maling uri.",err_no_db:"Walang database ng mga nota (userData.db) ang backup na ito. I-export muli mula sa JW Library.",err_not_sqlite:"Hindi mabuksan ang database ng backup — maaaring sira ang file.",tab_notes:"Mga Tala",tab_highlights:"Mga Highlight",tab_bookmarks:"Mga Bookmark",hl_label:"Highlight",hl_no_text:"Naka-highlight na talata (ang teksto ay nasa publikasyon, hindi sa backup).",hl_with_note:"May tala",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Naka-link na tala:",edit:"I-edit",save:"I-save",cancel:"Kanselahin",delete_item:"Burahin",export_db:"I-export ang .jwlibrary",n_edits:"{n} pagbabago",n_edits_many:"{n} pagbabago",add_tag:"+ Magdagdag ng tag",new_tag_ph:"Pangalan ng tag...",delete_note_confirm:"Burahin ang talang ito? Hindi ito maaaring bawiin.",delete_hl_confirm:"Burahin ang highlight na ito? Hindi ito maaaring bawiin.",delete_bm_confirm:"Burahin ang bookmark na ito? Hindi ito maaaring bawiin.",yes_delete:"Oo, burahin",change_color:"Kulay",unsaved_exit:"Mayroon kang {n} hindi pa na-export na pagbabago. Isara nang hindi nagexport?",title_label:"Pamagat",content_label:"Nilalaman",tags_label:"Mga tag",hl_color_label:"Kulay ng highlight",bm_title_label:"Pamagat ng bookmark",plain_text_note:"Ang format ay magiging plain text kapag nai-save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Salungguhit",rte_bullets:"Bulleted na listahan",rich_text_note:"I-edit nang may bold, italic at listahan — pinapanatili ang format",date_from:"Mula",date_to:"Hanggang",date_range:"I-filter ayon sa petsa",extract_range:"I-extract ang saklaw ng petsa",extract_none:"Walang talang nasa saklaw ng petsang ito.",extract_hint:"Mag-save ng bagong .jwlibrary na may mga tala lang sa saklaw ng petsang ito.",copy_md:"Kopyahin bilang Markdown",export_md:"I-export ang Markdown",md_hint:"I-download ang mga ipinapakitang tala bilang Markdown files (.zip)"}
   };
   function curLang(){ try{return localStorage.getItem('jwsync_lang')||'en';}catch(_){return 'en';} }
   function t(k, vars){
@@ -1123,7 +1134,7 @@ window.__bootBrowse = function() {
     tagsByNote: {}, tagsByHighlight: {}, tagsByLocation: {},
     allTags: [], allPublications: [],
     filtered: [], selected: null, page: 0,
-    search: '', color: '', tagId: '', pubId: '', sort: 'newest',
+    search: '', color: '', tagId: '', pubId: '', dateFrom: '', dateTo: '', sort: 'newest',
     overlay: null,
     db: null, fileName: '', dirty: 0, editingId: null
   };
@@ -1340,6 +1351,102 @@ window.__bootBrowse = function() {
       console.error('[jb] export failed',e);
       if(exportBtn){ exportBtn.disabled=(state.dirty===0); exportBtn.textContent=t('export_db'); }
     }
+  }
+
+  function extractByDate(){
+    if(!state.db||!window.JSZip||!window.initSqlJs) return;
+    var df=state.dateFrom, dt=state.dateTo;
+    if(!df&&!dt) return;
+    // NoteIds whose LastModified date falls OUTSIDE the [df, dt] window.
+    var drop=state.allNotes.filter(function(n){
+      var lm=(n.LastModified||'').slice(0,10);
+      if(!lm) return true;
+      if(df&&lm<df) return true;
+      if(dt&&lm>dt) return true;
+      return false;
+    }).map(function(n){ return n.NoteId; });
+    var keep=state.allNotes.length-drop.length;
+    if(keep<=0){ window.alert(t('extract_none')); return; }
+    window.initSqlJs({locateFile:function(f){return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f;}}).then(function(SQL){
+      var clone=new SQL.Database(state.db.export());
+      try{
+        clone.run('PRAGMA foreign_keys = OFF;');
+        clone.run('BEGIN TRANSACTION;');
+        for(var i=0;i<drop.length;i+=400){
+          var batch=drop.slice(i,i+400);
+          var ph=batch.map(function(){return '?';}).join(',');
+          clone.run('DELETE FROM TagMap WHERE NoteId IN ('+ph+')', batch);
+          clone.run('DELETE FROM Note WHERE NoteId IN ('+ph+')', batch);
+        }
+        clone.run('COMMIT;');
+      }catch(e){ try{ clone.run('ROLLBACK;'); }catch(_){} console.error('[jb] extract',e); try{ clone.close(); }catch(__){} return; }
+      var bytes=clone.export();
+      try{ clone.close(); }catch(_){}
+      var zip=new JSZip(); zip.file('userData.db', bytes);
+      zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){
+        var url=URL.createObjectURL(blob);
+        var base=(state.fileName?state.fileName.replace(/\.jwlibrary$/i,''):'backup');
+        var a=document.createElement('a'); a.href=url; a.download='extracted_'+base+'.jwlibrary';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(function(){ URL.revokeObjectURL(url); },2000);
+      }).catch(function(err){ console.error('[jb] extract export',err); });
+    }).catch(function(err){ console.error('[jb] extract sql',err); });
+  }
+
+  function htmlToMarkdown(html){
+    if(!html) return '';
+    var div=document.createElement('div'); div.innerHTML=sanitizeNoteHtml(html)||'';
+    function walk(node){
+      var out='';
+      for(var i=0;i<node.childNodes.length;i++){
+        var ch=node.childNodes[i];
+        if(ch.nodeType===3){ out+=ch.nodeValue; }
+        else if(ch.nodeType===1){
+          var tag=ch.tagName.toLowerCase(), inner=walk(ch);
+          if(tag==='strong'||tag==='b') out+='**'+inner+'**';
+          else if(tag==='em'||tag==='i') out+='*'+inner+'*';
+          else if(tag==='br') out+='\n';
+          else if(tag==='li') out+='- '+inner+'\n';
+          else if(tag==='ul'||tag==='ol') out+=inner+'\n';
+          else if(tag==='p') out+=inner+'\n\n';
+          else out+=inner;
+        }
+      }
+      return out;
+    }
+    return walk(div).replace(/\n{3,}/g,'\n\n').trim();
+  }
+  function noteToMarkdown(n){
+    var title=(n.Title&&n.Title.trim())||t('no_title');
+    var tags=(state.tagsByNote[n.NoteId]||[]).map(function(tg){ return tg.name; });
+    var fm='---\ntitle: '+title.replace(/\n/g,' ')+'\n';
+    if(n.LastModified) fm+='date: '+String(n.LastModified).slice(0,10)+'\n';
+    if(tags.length) fm+='tags: ['+tags.join(', ')+']\n';
+    var pub=pubLabel(n); if(pub) fm+='publication: '+pub.replace(/\n/g,' ')+'\n';
+    fm+='---\n\n';
+    return fm+'# '+title+'\n\n'+htmlToMarkdown(n.Content||'')+'\n';
+  }
+  function exportMarkdown(){
+    if(!window.JSZip) return;
+    var notes=(state.activeType==='notes')?state.filtered:state.allNotes;
+    if(!notes||!notes.length) return;
+    var zip=new JSZip(), used={};
+    notes.forEach(function(n,i){
+      var title=(n.Title&&n.Title.trim())||t('no_title');
+      var slug=title.replace(/[^a-z0-9\- ]/gi,'').trim().replace(/\s+/g,'-').slice(0,50)||'note';
+      var fname=(i+1)+'-'+slug; while(used[fname.toLowerCase()]){ fname=fname+'_'; } used[fname.toLowerCase()]=1;
+      zip.file(fname+'.md', noteToMarkdown(n));
+    });
+    var mdBtn=state.overlay&&state.overlay.querySelector('.jb-md-btn');
+    if(mdBtn) mdBtn.disabled=true;
+    zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){
+      var url=URL.createObjectURL(blob);
+      var base=(state.fileName?state.fileName.replace(/\.jwlibrary$/i,''):'notes');
+      var a=document.createElement('a'); a.href=url; a.download=base+'_markdown.zip';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); },2000);
+      if(mdBtn) mdBtn.disabled=false;
+    }).catch(function(err){ console.error('[jb] md export',err); if(mdBtn) mdBtn.disabled=false; });
   }
 
   // ---------- edit UI helpers ----------
@@ -1655,9 +1762,11 @@ window.__bootBrowse = function() {
   function applyFilter(){
     var q=state.search.trim().toLowerCase();
     var c=state.color, tagId=state.tagId, pubId=state.pubId;
+    var df=state.dateFrom, dt=state.dateTo;
     var src=activeSource();
     var rows=src.filter(function(r){
       if(c!==''&&state.activeType!=='bookmarks'){ if(String(r.ColorIndex||0)!==c) return false; }
+      if((df||dt)&&state.activeType!=='bookmarks'){ var lm=(r.LastModified||'').slice(0,10); if(!lm) return false; if(df&&lm<df) return false; if(dt&&lm>dt) return false; }
       if(pubId!==''&&String(r.LocationId||'')!==pubId) return false;
       if(tagId!==''){
         var ts=[];
@@ -1818,6 +1927,14 @@ window.__bootBrowse = function() {
       catch(_){ var ta=document.createElement('textarea'); ta.value=copyText; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(_){} document.body.removeChild(ta); copyBtn.textContent=t('copied'); setTimeout(function(){ copyBtn.textContent=t('copy'); },1500); }
     };
     acts.appendChild(copyBtn);
+    var copyMdBtn=document.createElement('button'); copyMdBtn.className='jb-btn jb-btn-ghost'; copyMdBtn.textContent=t('copy_md');
+    var mdText=noteToMarkdown(n);
+    copyMdBtn.onclick=function(){
+      function flash(){ copyMdBtn.textContent=t('copied'); setTimeout(function(){ copyMdBtn.textContent=t('copy_md'); },1500); }
+      try{ navigator.clipboard.writeText(mdText).then(flash); }
+      catch(_){ var ta=document.createElement('textarea'); ta.value=mdText; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(__){} document.body.removeChild(ta); flash(); }
+    };
+    acts.appendChild(copyMdBtn);
     if(state.db){
       var editBtn=document.createElement('button'); editBtn.className='jb-btn jb-btn-ghost'; editBtn.textContent=t('edit');
       editBtn.onclick=function(){ state.editingId=n.NoteId; refreshDetail(); };
@@ -1948,24 +2065,36 @@ window.__bootBrowse = function() {
     exportBtn.className='jb-export-btn';
     exportBtn.disabled=true;
     exportBtn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'+htmlEscape(t('export_db'));
-    exportBtn.onclick=exportDb;
+    exportBtn.onclick=function(){ if(window.__jwHaptic) window.__jwHaptic(20); exportDb(); };
     head.appendChild(exportBtn);
+    var mdBtn=document.createElement('button'); mdBtn.className='jb-md-btn'; mdBtn.type='button';
+    mdBtn.title=t('md_hint');
+    mdBtn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>'+htmlEscape(t('export_md'));
+    mdBtn.onclick=exportMarkdown;
+    head.appendChild(mdBtn);
     var closeBtn=document.createElement('button'); closeBtn.className='jb-head-close'; closeBtn.textContent=t('close'); closeBtn.onclick=closeOverlay;
     head.appendChild(closeBtn);
     modal.appendChild(head);
 
     // Tabs
+    var TAB_ORDER=['notes','highlights','bookmarks'];
+    function switchTo(type){
+      if(!type || state.activeType===type) return;
+      state.activeType=type; state.selected=null; state.editingId=null;
+      if(state.overlay){ Array.prototype.forEach.call(state.overlay.querySelectorAll('.jb-tab'),function(tb){ tb.classList.toggle('active', tb.dataset.type===type); }); }
+      applyFilter(); renderBody();
+      if(window.__jwHaptic) window.__jwHaptic(15);
+    }
+    function switchByOffset(delta){
+      var idx=TAB_ORDER.indexOf(state.activeType); if(idx<0) return;
+      var next=idx+delta; if(next<0||next>=TAB_ORDER.length) return;
+      switchTo(TAB_ORDER[next]);
+    }
     var tabs=document.createElement('div'); tabs.className='jb-tabs';
     [['notes',t('tab_notes')],['highlights',t('tab_highlights')],['bookmarks',t('tab_bookmarks')]].forEach(function(pair){
       var b=document.createElement('button'); b.className='jb-tab'+(pair[0]===state.activeType?' active':''); b.dataset.type=pair[0];
       b.innerHTML='<span>'+htmlEscape(pair[1])+'</span><span class="jb-tab-count">0</span>';
-      b.onclick=function(){
-        if(state.activeType===pair[0]) return;
-        state.activeType=pair[0]; state.selected=null; state.editingId=null;
-        Array.prototype.forEach.call(tabs.querySelectorAll('.jb-tab'),function(t){ t.classList.remove('active'); });
-        b.classList.add('active');
-        applyFilter(); renderBody();
-      };
+      b.onclick=function(){ switchTo(pair[0]); };
       tabs.appendChild(b);
     });
     modal.appendChild(tabs);
@@ -1980,6 +2109,17 @@ window.__bootBrowse = function() {
     search.appendChild(inp); toolbar.appendChild(search);
     var tagSel=document.createElement('select'); tagSel.className='jb-select jb-filter-tag'; tagSel.onchange=function(){ state.tagId=tagSel.value; applyFilter(); renderBody(); }; toolbar.appendChild(tagSel);
     var pubSel=document.createElement('select'); pubSel.className='jb-select jb-filter-pub'; pubSel.onchange=function(){ state.pubId=pubSel.value; applyFilter(); renderBody(); }; toolbar.appendChild(pubSel);
+    var dWrap=document.createElement('div'); dWrap.className='jb-date-wrap'; dWrap.title=t('date_range');
+    var dFrom=document.createElement('input'); dFrom.type='date'; dFrom.className='jb-filter-date'; dFrom.setAttribute('aria-label',t('date_from'));
+    var dTo=document.createElement('input'); dTo.type='date'; dTo.className='jb-filter-date'; dTo.setAttribute('aria-label',t('date_to'));
+    dFrom.onchange=function(){ state.dateFrom=dFrom.value; state.page=0; applyFilter(); renderBody(); updateExtractBtn(); };
+    dTo.onchange=function(){ state.dateTo=dTo.value; state.page=0; applyFilter(); renderBody(); updateExtractBtn(); };
+    var dDash=document.createElement('span'); dDash.className='jb-date-dash'; dDash.textContent='\u2013';
+    dWrap.appendChild(dFrom); dWrap.appendChild(dDash); dWrap.appendChild(dTo); toolbar.appendChild(dWrap);
+    var extractBtn=document.createElement('button'); extractBtn.type='button'; extractBtn.className='jb-extract-btn'; extractBtn.textContent=t('extract_range'); extractBtn.title=t('extract_hint'); extractBtn.disabled=true;
+    extractBtn.onclick=function(){ extractByDate(); };
+    function updateExtractBtn(){ extractBtn.disabled=!(state.dateFrom||state.dateTo)||!state.db; }
+    toolbar.appendChild(extractBtn);
     var colors=document.createElement('div'); colors.className='jb-colors';
     var allDot=document.createElement('button'); allDot.className='jb-color-dot active'; allDot.style.background='transparent'; allDot.style.border='2px dashed #5a6883'; allDot.title=t('color_all'); allDot.onclick=function(){ setColor('',allDot); }; colors.appendChild(allDot);
     [1,2,3,4,5,6].forEach(function(ci){ var b=document.createElement('button'); b.className='jb-color-dot'; b.style.background=COLORS[ci]; b.title='Color '+ci; b.onclick=function(){ setColor(String(ci),b); }; colors.appendChild(b); });
@@ -1990,8 +2130,8 @@ window.__bootBrowse = function() {
     sort.onchange=function(){ state.sort=sort.value; applyFilter(); renderBody(); }; toolbar.appendChild(sort);
     var clearBtn=document.createElement('button'); clearBtn.className='jb-clear'; clearBtn.textContent=t('clear');
     clearBtn.onclick=function(){
-      state.search=''; state.color=''; state.sort='newest'; state.tagId=''; state.pubId='';
-      inp.value=''; sort.value='newest'; tagSel.value=''; pubSel.value='';
+      state.search=''; state.color=''; state.sort='newest'; state.tagId=''; state.pubId=''; state.dateFrom=''; state.dateTo='';
+      inp.value=''; sort.value='newest'; tagSel.value=''; pubSel.value=''; dFrom.value=''; dTo.value=''; updateExtractBtn();
       Array.prototype.forEach.call(colors.children,function(c){ c.classList.remove('active'); }); colors.children[0].classList.add('active');
       applyFilter(); renderBody();
     };
@@ -1999,6 +2139,15 @@ window.__bootBrowse = function() {
     modal.appendChild(toolbar);
 
     var body=document.createElement('div'); body.className='jb-body'; modal.appendChild(body);
+    // Touch: horizontal swipe switches tabs (Notes ↔ Highlights ↔ Bookmarks)
+    var _tsx=0, _tsy=0, _tsActive=false;
+    body.addEventListener('touchstart',function(e){ if(e.touches&&e.touches.length===1){ _tsx=e.touches[0].clientX; _tsy=e.touches[0].clientY; _tsActive=true; } },{passive:true});
+    body.addEventListener('touchend',function(e){
+      if(!_tsActive) return; _tsActive=false;
+      var tch=e.changedTouches&&e.changedTouches[0]; if(!tch) return;
+      var dx=tch.clientX-_tsx, dy=tch.clientY-_tsy;
+      if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.6){ switchByOffset(dx<0?1:-1); }
+    },{passive:true});
     return o;
   }
 
@@ -2014,7 +2163,7 @@ window.__bootBrowse = function() {
     state.tagsByNote={}; state.tagsByLocation={}; state.tagsByHighlight={};
     state.allTags=[]; state.allPublications=[];
     state.filtered=[]; state.selected=null; state.editingId=null;
-    state.search=''; state.color=''; state.tagId=''; state.pubId='';
+    state.search=''; state.color=''; state.tagId=''; state.pubId=''; state.dateFrom=''; state.dateTo='';
     state.activeType='notes'; state.dirty=0; state.fileName='';
     document.removeEventListener('keydown',escHandler);
   }
@@ -2305,6 +2454,9 @@ window.__bootBrowse = function() {
 .jcr-versions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
 .jcr-ver{display:flex;flex-direction:column;border:1.5px solid rgba(71,85,105,.4);border-radius:13px;background:rgba(15,23,42,.5);overflow:hidden;transition:border-color .15s,box-shadow .15s}
 .jcr-ver.sel{border-color:#ea580c;box-shadow:0 0 0 3px rgba(234,88,12,.16)}
+.jcr-ver.jcr-suggested{border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.16)}
+.jcr-suggestion-badge{flex:none;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:#6ee7b7;background:rgba(16,185,129,.18);border:1px solid rgba(16,185,129,.45);border-radius:5px;padding:2px 6px;margin-left:6px;white-space:nowrap}
+.jcr-btn-suggest{margin-right:auto}
 .jcr-ver-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px 8px}
 .jcr-ver-from{font-size:11.5px;font-weight:700;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:flex;align-items:center;gap:6px}
 .jcr-ver-from:before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#64748b}
@@ -2339,16 +2491,16 @@ window.__bootBrowse = function() {
   var SQLJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
 
   var I18N = {
-    en: { title:"Review your merge", subtitle:"{n} notes were edited differently across your backups. Choose which version to keep — or keep both.", current:"In your merge", keep_this:"Keep this", kept:"✓ Kept", keep_both:"Keep both", keep_both_on:"✓ Keeping both", keep_both_hint:"Adds the other version as a separate note", modified:"Edited", apply:"Apply & download", applying:"Applying…", skip:"Keep merge as-is", close:"Close", untitled:"(untitled note)", empty:"(empty)", more:"+{n} more conflicts will keep the merge's automatic choice.", merged_label:"Merged result" },
-    es: { title:"Revisa tu fusión", subtitle:"{n} notas se editaron de forma diferente en tus copias. Elige qué versión conservar — o conserva ambas.", current:"En tu fusión", keep_this:"Conservar esta", kept:"✓ Conservada", keep_both:"Conservar ambas", keep_both_on:"✓ Conservando ambas", keep_both_hint:"Añade la otra versión como una nota aparte", modified:"Editada", apply:"Aplicar y descargar", applying:"Aplicando…", skip:"Dejar la fusión como está", close:"Cerrar", untitled:"(nota sin título)", empty:"(vacío)", more:"+{n} conflictos más mantendrán la elección automática de la fusión.", merged_label:"Resultado de la fusión" },
-    pt: { title:"Revise sua mesclagem", subtitle:"{n} notas foram editadas de forma diferente nos seus backups. Escolha qual versão manter — ou mantenha ambas.", current:"Na sua mesclagem", keep_this:"Manter esta", kept:"✓ Mantida", keep_both:"Manter ambas", keep_both_on:"✓ Mantendo ambas", keep_both_hint:"Adiciona a outra versão como uma nota separada", modified:"Editada", apply:"Aplicar e baixar", applying:"Aplicando…", skip:"Manter a mesclagem como está", close:"Fechar", untitled:"(nota sem título)", empty:"(vazio)", more:"+{n} conflitos manterão a escolha automática da mesclagem.", merged_label:"Resultado da mesclagem" },
-    fr: { title:"Vérifiez votre fusion", subtitle:"{n} notes ont été modifiées différemment dans vos sauvegardes. Choisissez la version à conserver — ou gardez les deux.", current:"Dans votre fusion", keep_this:"Garder celle-ci", kept:"✓ Conservée", keep_both:"Garder les deux", keep_both_on:"✓ Les deux conservées", keep_both_hint:"Ajoute l'autre version comme note distincte", modified:"Modifiée", apply:"Appliquer et télécharger", applying:"Application…", skip:"Laisser la fusion telle quelle", close:"Fermer", untitled:"(note sans titre)", empty:"(vide)", more:"+{n} autres conflits conserveront le choix automatique de la fusion.", merged_label:"Résultat de la fusion" },
-    de: { title:"Prüfe deine Zusammenführung", subtitle:"{n} Notizen wurden in deinen Backups unterschiedlich bearbeitet. Wähle, welche Version bleibt — oder behalte beide.", current:"In deiner Zusammenführung", keep_this:"Diese behalten", kept:"✓ Behalten", keep_both:"Beide behalten", keep_both_on:"✓ Beide behalten", keep_both_hint:"Fügt die andere Version als separate Notiz hinzu", modified:"Bearbeitet", apply:"Anwenden & herunterladen", applying:"Wird angewendet…", skip:"Zusammenführung unverändert lassen", close:"Schließen", untitled:"(Notiz ohne Titel)", empty:"(leer)", more:"+{n} weitere Konflikte behalten die automatische Auswahl der Zusammenführung.", merged_label:"Ergebnis der Zusammenführung" },
-    it: { title:"Controlla la tua unione", subtitle:"{n} note sono state modificate in modo diverso nei tuoi backup. Scegli quale versione mantenere — o tienile entrambe.", current:"Nella tua unione", keep_this:"Tieni questa", kept:"✓ Mantenuta", keep_both:"Tieni entrambe", keep_both_on:"✓ Entrambe mantenute", keep_both_hint:"Aggiunge l'altra versione come nota separata", modified:"Modificata", apply:"Applica e scarica", applying:"Applicazione…", skip:"Lascia l'unione com'è", close:"Chiudi", untitled:"(nota senza titolo)", empty:"(vuoto)", more:"+{n} altri conflitti manterranno la scelta automatica dell'unione.", merged_label:"Risultato dell'unione" },
-    ru: { title:"Проверьте объединение", subtitle:"{n} заметок были изменены по-разному в ваших копиях. Выберите, какую версию оставить — или оставьте обе.", current:"В объединении", keep_this:"Оставить эту", kept:"✓ Оставлено", keep_both:"Оставить обе", keep_both_on:"✓ Обе оставлены", keep_both_hint:"Добавит другую версию как отдельную заметку", modified:"Изменено", apply:"Применить и скачать", applying:"Применение…", skip:"Оставить как есть", close:"Закрыть", untitled:"(заметка без названия)", empty:"(пусто)", more:"+{n} других конфликтов сохранят автоматический выбор объединения.", merged_label:"Результат объединения" },
-    ja: { title:"マージを確認", subtitle:"{n} 件のメモがバックアップ間で異なる形で編集されています。残すバージョンを選ぶか、両方を残せます。", current:"マージ結果", keep_this:"これを残す", kept:"✓ 残しました", keep_both:"両方残す", keep_both_on:"✓ 両方を残す", keep_both_hint:"もう一方を別のメモとして追加します", modified:"編集", apply:"適用してダウンロード", applying:"適用中…", skip:"マージのままにする", close:"閉じる", untitled:"(無題のメモ)", empty:"(空)", more:"他 +{n} 件の競合はマージの自動選択を維持します。", merged_label:"マージ結果" },
-    ko: { title:"병합 검토", subtitle:"{n}개의 메모가 백업마다 다르게 편집되었습니다. 어떤 버전을 남길지 선택하거나 둘 다 보관하세요.", current:"병합 결과", keep_this:"이것 남기기", kept:"✓ 남김", keep_both:"둘 다 남기기", keep_both_on:"✓ 둘 다 보관", keep_both_hint:"다른 버전을 별도의 메모로 추가합니다", modified:"편집됨", apply:"적용 후 다운로드", applying:"적용 중…", skip:"병합 그대로 두기", close:"닫기", untitled:"(제목 없는 메모)", empty:"(비어 있음)", more:"+{n}개의 추가 충돌은 병합의 자동 선택을 유지합니다.", merged_label:"병합 결과" },
-    tl: { title:"Suriin ang merge", subtitle:"{n} na tala ang iba't iba ang pagkaka-edit sa iyong mga backup. Piliin kung aling bersyon ang itatago — o itago ang pareho.", current:"Sa iyong merge", keep_this:"Itago ito", kept:"✓ Itinago", keep_both:"Itago pareho", keep_both_on:"✓ Itinatago pareho", keep_both_hint:"Idaragdag ang isa pang bersyon bilang hiwalay na tala", modified:"In-edit", apply:"Ilapat at i-download", applying:"Inilalapat…", skip:"Iwan ang merge", close:"Isara", untitled:"(talang walang pamagat)", empty:"(walang laman)", more:"+{n} pang conflicts ang magpapanatili ng awtomatikong pili ng merge.", merged_label:"Resulta ng merge" }
+    en: { title:"Review your merge", subtitle:"{n} notes were edited differently across your backups. Choose which version to keep — or keep both.", current:"In your merge", keep_this:"Keep this", kept:"✓ Kept", keep_both:"Keep both", keep_both_on:"✓ Keeping both", keep_both_hint:"Adds the other version as a separate note", modified:"Edited", apply:"Apply & download", applying:"Applying…", skip:"Keep merge as-is", close:"Close", untitled:"(untitled note)", empty:"(empty)", more:"+{n} more conflicts will keep the merge's automatic choice.", merged_label:"Merged result" , suggest:"Suggest best",suggested:"Suggested",sg_content:"Has content",sg_newer:"Most recent edit",sg_longer:"Most detailed" },
+    es: { title:"Revisa tu fusión", subtitle:"{n} notas se editaron de forma diferente en tus copias. Elige qué versión conservar — o conserva ambas.", current:"En tu fusión", keep_this:"Conservar esta", kept:"✓ Conservada", keep_both:"Conservar ambas", keep_both_on:"✓ Conservando ambas", keep_both_hint:"Añade la otra versión como una nota aparte", modified:"Editada", apply:"Aplicar y descargar", applying:"Aplicando…", skip:"Dejar la fusión como está", close:"Cerrar", untitled:"(nota sin título)", empty:"(vacío)", more:"+{n} conflictos más mantendrán la elección automática de la fusión.", merged_label:"Resultado de la fusión" , suggest:"Sugerir la mejor",suggested:"Sugerida",sg_content:"Tiene contenido",sg_newer:"Edición más reciente",sg_longer:"Más detallada" },
+    pt: { title:"Revise sua mesclagem", subtitle:"{n} notas foram editadas de forma diferente nos seus backups. Escolha qual versão manter — ou mantenha ambas.", current:"Na sua mesclagem", keep_this:"Manter esta", kept:"✓ Mantida", keep_both:"Manter ambas", keep_both_on:"✓ Mantendo ambas", keep_both_hint:"Adiciona a outra versão como uma nota separada", modified:"Editada", apply:"Aplicar e baixar", applying:"Aplicando…", skip:"Manter a mesclagem como está", close:"Fechar", untitled:"(nota sem título)", empty:"(vazio)", more:"+{n} conflitos manterão a escolha automática da mesclagem.", merged_label:"Resultado da mesclagem" , suggest:"Sugerir a melhor",suggested:"Sugerida",sg_content:"Tem conteúdo",sg_newer:"Edição mais recente",sg_longer:"Mais detalhada" },
+    fr: { title:"Vérifiez votre fusion", subtitle:"{n} notes ont été modifiées différemment dans vos sauvegardes. Choisissez la version à conserver — ou gardez les deux.", current:"Dans votre fusion", keep_this:"Garder celle-ci", kept:"✓ Conservée", keep_both:"Garder les deux", keep_both_on:"✓ Les deux conservées", keep_both_hint:"Ajoute l'autre version comme note distincte", modified:"Modifiée", apply:"Appliquer et télécharger", applying:"Application…", skip:"Laisser la fusion telle quelle", close:"Fermer", untitled:"(note sans titre)", empty:"(vide)", more:"+{n} autres conflits conserveront le choix automatique de la fusion.", merged_label:"Résultat de la fusion" , suggest:"Suggérer la meilleure",suggested:"Suggérée",sg_content:"Contient du texte",sg_newer:"Édition la plus récente",sg_longer:"La plus détaillée" },
+    de: { title:"Prüfe deine Zusammenführung", subtitle:"{n} Notizen wurden in deinen Backups unterschiedlich bearbeitet. Wähle, welche Version bleibt — oder behalte beide.", current:"In deiner Zusammenführung", keep_this:"Diese behalten", kept:"✓ Behalten", keep_both:"Beide behalten", keep_both_on:"✓ Beide behalten", keep_both_hint:"Fügt die andere Version als separate Notiz hinzu", modified:"Bearbeitet", apply:"Anwenden & herunterladen", applying:"Wird angewendet…", skip:"Zusammenführung unverändert lassen", close:"Schließen", untitled:"(Notiz ohne Titel)", empty:"(leer)", more:"+{n} weitere Konflikte behalten die automatische Auswahl der Zusammenführung.", merged_label:"Ergebnis der Zusammenführung" , suggest:"Beste vorschlagen",suggested:"Vorschlag",sg_content:"Hat Inhalt",sg_newer:"Neueste Änderung",sg_longer:"Am ausführlichsten" },
+    it: { title:"Controlla la tua unione", subtitle:"{n} note sono state modificate in modo diverso nei tuoi backup. Scegli quale versione mantenere — o tienile entrambe.", current:"Nella tua unione", keep_this:"Tieni questa", kept:"✓ Mantenuta", keep_both:"Tieni entrambe", keep_both_on:"✓ Entrambe mantenute", keep_both_hint:"Aggiunge l'altra versione come nota separata", modified:"Modificata", apply:"Applica e scarica", applying:"Applicazione…", skip:"Lascia l'unione com'è", close:"Chiudi", untitled:"(nota senza titolo)", empty:"(vuoto)", more:"+{n} altri conflitti manterranno la scelta automatica dell'unione.", merged_label:"Risultato dell'unione" , suggest:"Suggerisci la migliore",suggested:"Suggerita",sg_content:"Ha contenuto",sg_newer:"Modifica più recente",sg_longer:"Più dettagliata" },
+    ru: { title:"Проверьте объединение", subtitle:"{n} заметок были изменены по-разному в ваших копиях. Выберите, какую версию оставить — или оставьте обе.", current:"В объединении", keep_this:"Оставить эту", kept:"✓ Оставлено", keep_both:"Оставить обе", keep_both_on:"✓ Обе оставлены", keep_both_hint:"Добавит другую версию как отдельную заметку", modified:"Изменено", apply:"Применить и скачать", applying:"Применение…", skip:"Оставить как есть", close:"Закрыть", untitled:"(заметка без названия)", empty:"(пусто)", more:"+{n} других конфликтов сохранят автоматический выбор объединения.", merged_label:"Результат объединения" , suggest:"Предложить лучшее",suggested:"Рекомендуется",sg_content:"Есть содержимое",sg_newer:"Последнее изменение",sg_longer:"Наиболее подробная" },
+    ja: { title:"マージを確認", subtitle:"{n} 件のメモがバックアップ間で異なる形で編集されています。残すバージョンを選ぶか、両方を残せます。", current:"マージ結果", keep_this:"これを残す", kept:"✓ 残しました", keep_both:"両方残す", keep_both_on:"✓ 両方を残す", keep_both_hint:"もう一方を別のメモとして追加します", modified:"編集", apply:"適用してダウンロード", applying:"適用中…", skip:"マージのままにする", close:"閉じる", untitled:"(無題のメモ)", empty:"(空)", more:"他 +{n} 件の競合はマージの自動選択を維持します。", merged_label:"マージ結果" , suggest:"おすすめを提案",suggested:"おすすめ",sg_content:"内容あり",sg_newer:"最新の編集",sg_longer:"最も詳しい" },
+    ko: { title:"병합 검토", subtitle:"{n}개의 메모가 백업마다 다르게 편집되었습니다. 어떤 버전을 남길지 선택하거나 둘 다 보관하세요.", current:"병합 결과", keep_this:"이것 남기기", kept:"✓ 남김", keep_both:"둘 다 남기기", keep_both_on:"✓ 둘 다 보관", keep_both_hint:"다른 버전을 별도의 메모로 추가합니다", modified:"편집됨", apply:"적용 후 다운로드", applying:"적용 중…", skip:"병합 그대로 두기", close:"닫기", untitled:"(제목 없는 메모)", empty:"(비어 있음)", more:"+{n}개의 추가 충돌은 병합의 자동 선택을 유지합니다.", merged_label:"병합 결과" , suggest:"최적 추천",suggested:"추천",sg_content:"내용 있음",sg_newer:"가장 최근 편집",sg_longer:"가장 상세함" },
+    tl: { title:"Suriin ang merge", subtitle:"{n} na tala ang iba't iba ang pagkaka-edit sa iyong mga backup. Piliin kung aling bersyon ang itatago — o itago ang pareho.", current:"Sa iyong merge", keep_this:"Itago ito", kept:"✓ Itinago", keep_both:"Itago pareho", keep_both_on:"✓ Itinatago pareho", keep_both_hint:"Idaragdag ang isa pang bersyon bilang hiwalay na tala", modified:"In-edit", apply:"Ilapat at i-download", applying:"Inilalapat…", skip:"Iwan ang merge", close:"Isara", untitled:"(talang walang pamagat)", empty:"(walang laman)", more:"+{n} pang conflicts ang magpapanatili ng awtomatikong pili ng merge.", merged_label:"Resulta ng merge" , suggest:"Imungkahi ang pinakamahusay",suggested:"Iminumungkahi",sg_content:"May nilalaman",sg_newer:"Pinakabagong edit",sg_longer:"Pinakadetalyado" }
   };
   function curLang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
   function t(k) { var l = curLang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
@@ -2572,6 +2724,7 @@ window.__bootBrowse = function() {
     opts = opts || {};
     return new Promise(function (resolve) {
       var settled = false, overlay = null;
+      var refreshers = [], suggestions = {};
       function done(v) { if (settled) return; settled = true; cleanup(); resolve(v); }
       function cleanup() {
         if (overlay) { overlay.remove(); overlay = null; }
@@ -2589,6 +2742,7 @@ window.__bootBrowse = function() {
         var MAX = 100;
         var resolutions = ctx.conflicts.map(function (cf) { return { choice: cf.current }; });
         var shown = ctx.conflicts.slice(0, MAX);
+        refreshers.length = 0; suggestions = {};
 
         var warnIcon = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 19a1 1 0 0 0 .87 1.5h18.26A1 1 0 0 0 22 19L12 2z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
         var dlIcon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -2605,6 +2759,7 @@ window.__bootBrowse = function() {
             '<div class="jcr-body" id="jcr-body"></div>' +
             (ctx.conflicts.length > MAX ? '<div class="jcr-more">' + esc(t('more').replace('{n}', ctx.conflicts.length - MAX)) + '</div>' : '') +
             '<div class="jcr-foot">' +
+              '<button class="jcr-btn jcr-btn-ghost jcr-btn-suggest" type="button" data-jcr-suggest>' + esc(t('suggest')) + '</button>' +
               '<button class="jcr-btn jcr-btn-ghost" type="button" data-jcr-skip>' + esc(t('skip')) + '</button>' +
               '<button class="jcr-btn jcr-btn-primary" type="button" data-jcr-apply>' + dlIcon + '<span>' + esc(t('apply')) + '</span></button>' +
             '</div>' +
@@ -2628,7 +2783,27 @@ window.__bootBrowse = function() {
           var span = applyBtn.querySelector('span'); if (span) span.textContent = t('applying');
           applyResolutions(ctx, resolutions).then(function (r) { done(r); }).catch(function () { done(null); });
         });
+        var suggestBtn = overlay.querySelector('[data-jcr-suggest]');
+        if (suggestBtn) suggestBtn.addEventListener('click', function () {
+          shown.forEach(function (cf, ci) { var s = suggestFor(cf); suggestions[ci] = s; if (s.reason) resolutions[ci] = { choice: s.vi }; });
+          refreshers.forEach(function (fn) { fn(); });
+        });
         document.addEventListener('keydown', onKey);
+      }
+
+      function suggestFor(cf) {
+        var vs = cf.variants, nonEmpty = [];
+        vs.forEach(function (v, i) { if (v.plain && v.plain.trim().length > 0) nonEmpty.push(i); });
+        if (nonEmpty.length === 0) return { vi: cf.current, reason: null };
+        if (nonEmpty.length === 1) return { vi: nonEmpty[0], reason: 'sg_content' };
+        var withDate = nonEmpty.filter(function (i) { return vs[i].lastMod; });
+        if (withDate.length === nonEmpty.length) {
+          var sorted = withDate.slice().sort(function (a2, b2) { return new Date(vs[b2].lastMod) - new Date(vs[a2].lastMod); });
+          if (new Date(vs[sorted[0]].lastMod).getTime() !== new Date(vs[sorted[1]].lastMod).getTime())
+            return { vi: sorted[0], reason: 'sg_newer' };
+        }
+        var longest = nonEmpty.slice().sort(function (a2, b2) { return vs[b2].plain.length - vs[a2].plain.length; })[0];
+        return { vi: longest, reason: 'sg_longer' };
       }
 
       function buildConflict(cf, ci, resolutions) {
@@ -2682,16 +2857,25 @@ window.__bootBrowse = function() {
         wrap.appendChild(bothRow);
 
         function refresh() {
+          var sg = suggestions[ci];
           vers.querySelectorAll('.jcr-ver').forEach(function (card) {
             var vi = parseInt(card.getAttribute('data-vi'), 10);
             var sel = resolutions[ci].choice === vi;
             card.classList.toggle('sel', sel);
+            var isSug = !!(sg && sg.reason && sg.vi === vi);
+            card.classList.toggle('jcr-suggested', isSug);
+            var badge = card.querySelector('.jcr-suggestion-badge');
+            if (isSug) {
+              if (!badge) { badge = document.createElement('span'); badge.className = 'jcr-suggestion-badge'; card.querySelector('.jcr-ver-head').appendChild(badge); }
+              badge.textContent = t('suggested') + ' \u00b7 ' + t(sg.reason);
+            } else if (badge) { badge.remove(); }
             card.querySelector('.jcr-ver-pick').textContent = sel ? t('kept') : t('keep_this');
           });
           var isBoth = resolutions[ci].choice === 'both';
           bothBtn.classList.toggle('on', isBoth);
           bothBtn.textContent = isBoth ? t('keep_both_on') : t('keep_both');
         }
+        refreshers.push(refresh);
 
         return wrap;
       }
@@ -3277,6 +3461,334 @@ window.__bootBrowse = function() {
 })();
 </script>
 <!-- ── End post-merge celebration ───────────────────────── -->
+<!-- ── Saved Devices & Auto-Sync (Sync Hub, v2.20.0) ───── -->
+<style>
+.jsh-fab{position:fixed;right:18px;bottom:18px;z-index:9000;display:flex;align-items:center;gap:8px;
+  padding:10px 14px;border:1px solid rgba(71,85,105,.45);border-radius:999px;cursor:pointer;
+  background:rgba(4,15,34,.92);color:#cbd5e1;font:600 13px/1 Inter,system-ui,sans-serif;
+  box-shadow:0 1px 5px rgba(0,0,0,.35);transition:border-color .15s,color .15s}
+.jsh-fab:hover{border-color:#ea580c;color:#fff}
+.jsh-fab svg{width:16px;height:16px;flex:0 0 auto}
+.jsh-overlay{position:fixed;inset:0;z-index:10070;display:flex;align-items:center;justify-content:center;
+  padding:18px;background:rgba(2,6,17,.78);backdrop-filter:blur(6px)}
+.jsh-panel{width:100%;max-width:540px;max-height:88vh;overflow:auto;background:#071a38;
+  border:1px solid rgba(71,85,105,.5);border-radius:16px;padding:22px 22px 18px;
+  box-shadow:0 12px 48px rgba(0,0,0,.5);color:#e2e8f0;font:400 14px/1.5 Inter,system-ui,sans-serif}
+.jsh-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:6px}
+.jsh-title{font:700 18px/1.25 Inter,sans-serif;color:#fff;margin:0}
+.jsh-x{background:none;border:none;color:#94a3b8;font-size:22px;line-height:1;cursor:pointer;padding:2px 6px}
+.jsh-x:hover{color:#fff}
+.jsh-intro{color:#94a3b8;font-size:13px;margin:0 0 14px}
+.jsh-priv{color:#64748b;font-size:11.5px;margin:10px 0 16px;display:flex;gap:6px;align-items:flex-start}
+.jsh-list{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
+.jsh-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(71,85,105,.35);
+  border-radius:10px;background:rgba(4,15,34,.5)}
+.jsh-row.is-main{border-color:rgba(234,88,12,.55)}
+.jsh-row-name{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;color:#f1f5f9}
+.jsh-row-meta{font-size:11px;color:#64748b;margin-top:2px}
+.jsh-badge{font:700 10px/1 Inter,sans-serif;color:#fff;background:#ea580c;border-radius:5px;padding:3px 6px;letter-spacing:.3px}
+.jsh-setmain{background:none;border:1px solid rgba(71,85,105,.45);color:#94a3b8;border-radius:6px;
+  font-size:11px;padding:4px 8px;cursor:pointer}
+.jsh-setmain:hover{border-color:#ea580c;color:#fff}
+.jsh-rm{background:none;border:none;color:#64748b;cursor:pointer;font-size:16px;padding:2px 6px}
+.jsh-rm:hover{color:#f87171}
+.jsh-empty{color:#64748b;font-size:13px;text-align:center;padding:14px 0;border:1px dashed rgba(71,85,105,.4);
+  border-radius:10px;margin-bottom:12px}
+.jsh-add{display:inline-flex;align-items:center;gap:7px;background:rgba(71,85,105,.25);
+  border:1px solid rgba(71,85,105,.45);color:#cbd5e1;border-radius:9px;padding:9px 14px;
+  font:600 13px/1 Inter,sans-serif;cursor:pointer;width:100%;justify-content:center;margin-bottom:14px}
+.jsh-add:hover{border-color:#ea580c;color:#fff}
+.jsh-merge{display:block;width:100%;background:#ea580c;border:none;color:#fff;border-radius:10px;
+  padding:13px 16px;font:700 15px/1 Inter,sans-serif;cursor:pointer;box-shadow:0 1px 5px rgba(234,88,12,.4)}
+.jsh-merge:hover{background:#c2410c}
+.jsh-merge:disabled{background:rgba(71,85,105,.4);color:#94a3b8;cursor:not-allowed;box-shadow:none}
+.jsh-status{font-size:12.5px;color:#94a3b8;text-align:center;min-height:18px;margin:10px 0 0}
+.jsh-status.ok{color:#34d399}
+.jsh-status.err{color:#f87171}
+.jsh-divider{border:none;border-top:1px solid rgba(71,85,105,.3);margin:16px 0}
+.jsh-field{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.jsh-field label{font-size:13px;color:#cbd5e1;font-weight:600}
+.jsh-select{background:rgba(4,15,34,.7);border:1px solid rgba(71,85,105,.45);color:#e2e8f0;
+  border-radius:8px;padding:7px 10px;font:600 13px Inter,sans-serif;cursor:pointer}
+.jsh-clear{background:none;border:none;color:#64748b;font-size:12px;cursor:pointer;text-decoration:underline}
+.jsh-clear:hover{color:#f87171}
+.jsh-reminder{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:9001;
+  display:flex;align-items:center;gap:12px;max-width:92vw;padding:11px 14px;border-radius:12px;
+  background:rgba(7,26,56,.97);border:1px solid rgba(234,88,12,.5);box-shadow:0 6px 24px rgba(0,0,0,.4);
+  color:#e2e8f0;font:500 13px/1.35 Inter,sans-serif}
+.jsh-reminder-cta{background:#ea580c;border:none;color:#fff;border-radius:8px;padding:7px 12px;
+  font:700 12px Inter,sans-serif;cursor:pointer;white-space:nowrap}
+.jsh-reminder-x{background:none;border:none;color:#94a3b8;font-size:18px;cursor:pointer;padding:0 4px}
+.jsh-reminder-x:hover{color:#fff}
+@media (max-width:600px){.jsh-fab span{display:none}.jsh-fab{padding:11px}}
+</style>
+<script>
+(function(){
+  "use strict";
+  if (window.__jwOpenSyncHub) return;
+
+  /* ── i18n (10 languages; AI-assisted non-English strings — review welcome) ── */
+  var I18N = {
+    en:{title:"Saved Devices & Auto-Sync",intro:"Save each device's backup here once. Then re-merge everything with one click — no re-uploading.",priv:"Your files stay in this browser only (IndexedDB). Nothing is ever uploaded.",add:"Add a device backup",empty:"No saved devices yet. Add your first backup above.",main:"Main",setmain:"Set as main",remove:"Remove",saved:"Saved",mergenow:"Merge saved devices now",merging:"Merging…",done:"Merged! Your file is downloading.",needtwo:"Add at least two device backups to merge.",reminder:"Remind me to sync",off:"Off",weekly:"Weekly",monthly:"Monthly",clear:"Clear all saved devices",clearconfirm:"Remove all saved devices? This can't be undone.",banner:"It's been a while since your last sync. Merge your saved devices?",bannercta:"Open Sync",dismiss:"Dismiss",close:"Close",fab:"Sync",error:"Something went wrong during the merge. Please try again."},
+    es:{title:"Dispositivos guardados y sincronización",intro:"Guarda aquí la copia de cada dispositivo una vez. Luego combina todo con un clic, sin volver a subir nada.",priv:"Tus archivos quedan solo en este navegador (IndexedDB). Nunca se suben.",add:"Añadir copia de un dispositivo",empty:"Aún no hay dispositivos guardados. Añade tu primera copia arriba.",main:"Principal",setmain:"Marcar como principal",remove:"Quitar",saved:"Guardado",mergenow:"Combinar dispositivos ahora",merging:"Combinando…",done:"¡Combinado! Tu archivo se está descargando.",needtwo:"Añade al menos dos copias para combinar.",reminder:"Recordarme sincronizar",off:"Nunca",weekly:"Semanal",monthly:"Mensual",clear:"Borrar todos los dispositivos",clearconfirm:"¿Borrar todos los dispositivos guardados? No se puede deshacer.",banner:"Hace tiempo de tu última sincronización. ¿Combinar tus dispositivos?",bannercta:"Abrir",dismiss:"Descartar",close:"Cerrar",fab:"Sincronizar",error:"Algo salió mal durante la combinación. Inténtalo de nuevo."},
+    pt:{title:"Dispositivos salvos e sincronização",intro:"Salve aqui a cópia de cada dispositivo uma vez. Depois combine tudo com um clique, sem reenviar nada.",priv:"Seus arquivos ficam só neste navegador (IndexedDB). Nada é enviado.",add:"Adicionar cópia de um dispositivo",empty:"Nenhum dispositivo salvo ainda. Adicione sua primeira cópia acima.",main:"Principal",setmain:"Definir como principal",remove:"Remover",saved:"Salvo",mergenow:"Combinar dispositivos agora",merging:"Combinando…",done:"Combinado! Seu arquivo está sendo baixado.",needtwo:"Adicione pelo menos duas cópias para combinar.",reminder:"Lembrar de sincronizar",off:"Nunca",weekly:"Semanal",monthly:"Mensal",clear:"Apagar todos os dispositivos",clearconfirm:"Remover todos os dispositivos salvos? Isso não pode ser desfeito.",banner:"Faz tempo desde sua última sincronização. Combinar seus dispositivos?",bannercta:"Abrir",dismiss:"Dispensar",close:"Fechar",fab:"Sincronizar",error:"Algo deu errado durante a combinação. Tente novamente."},
+    fr:{title:"Appareils enregistrés et synchro",intro:"Enregistrez ici la sauvegarde de chaque appareil une fois. Fusionnez ensuite tout d'un clic, sans rien re-téléverser.",priv:"Vos fichiers restent uniquement dans ce navigateur (IndexedDB). Rien n'est envoyé.",add:"Ajouter la sauvegarde d'un appareil",empty:"Aucun appareil enregistré. Ajoutez votre première sauvegarde ci-dessus.",main:"Principal",setmain:"Définir comme principal",remove:"Retirer",saved:"Enregistré",mergenow:"Fusionner les appareils",merging:"Fusion…",done:"Fusionné ! Votre fichier se télécharge.",needtwo:"Ajoutez au moins deux sauvegardes à fusionner.",reminder:"Me rappeler de synchroniser",off:"Jamais",weekly:"Hebdomadaire",monthly:"Mensuel",clear:"Effacer tous les appareils",clearconfirm:"Supprimer tous les appareils enregistrés ? Irréversible.",banner:"Cela fait un moment depuis votre dernière synchro. Fusionner vos appareils ?",bannercta:"Ouvrir",dismiss:"Ignorer",close:"Fermer",fab:"Synchro",error:"Une erreur est survenue pendant la fusion. Réessayez."},
+    de:{title:"Gespeicherte Geräte & Auto-Sync",intro:"Sichere die Datei jedes Geräts einmal hier. Führe dann alles mit einem Klick zusammen — ohne erneutes Hochladen.",priv:"Deine Dateien bleiben nur in diesem Browser (IndexedDB). Nichts wird hochgeladen.",add:"Geräte-Backup hinzufügen",empty:"Noch keine gespeicherten Geräte. Füge oben dein erstes Backup hinzu.",main:"Haupt",setmain:"Als Haupt festlegen",remove:"Entfernen",saved:"Gespeichert",mergenow:"Geräte jetzt zusammenführen",merging:"Zusammenführen…",done:"Zusammengeführt! Deine Datei wird geladen.",needtwo:"Füge mindestens zwei Backups zum Zusammenführen hinzu.",reminder:"An Sync erinnern",off:"Nie",weekly:"Wöchentlich",monthly:"Monatlich",clear:"Alle Geräte löschen",clearconfirm:"Alle gespeicherten Geräte entfernen? Das kann nicht rückgängig gemacht werden.",banner:"Deine letzte Synchronisierung ist eine Weile her. Geräte zusammenführen?",bannercta:"Öffnen",dismiss:"Verwerfen",close:"Schließen",fab:"Sync",error:"Beim Zusammenführen ist etwas schiefgelaufen. Bitte erneut versuchen."},
+    it:{title:"Dispositivi salvati e sincronizzazione",intro:"Salva qui il backup di ogni dispositivo una volta. Poi unisci tutto con un clic, senza ricaricare nulla.",priv:"I tuoi file restano solo in questo browser (IndexedDB). Niente viene caricato.",add:"Aggiungi backup di un dispositivo",empty:"Nessun dispositivo salvato. Aggiungi il primo backup sopra.",main:"Principale",setmain:"Imposta come principale",remove:"Rimuovi",saved:"Salvato",mergenow:"Unisci i dispositivi ora",merging:"Unione…",done:"Unito! Il file si sta scaricando.",needtwo:"Aggiungi almeno due backup da unire.",reminder:"Ricordami di sincronizzare",off:"Mai",weekly:"Settimanale",monthly:"Mensile",clear:"Cancella tutti i dispositivi",clearconfirm:"Rimuovere tutti i dispositivi salvati? Non si può annullare.",banner:"È passato un po' dall'ultima sincronizzazione. Unire i dispositivi?",bannercta:"Apri",dismiss:"Ignora",close:"Chiudi",fab:"Sincronizza",error:"Qualcosa è andato storto durante l'unione. Riprova."},
+    ru:{title:"Сохранённые устройства и автосинхронизация",intro:"Сохраните копию каждого устройства один раз. Затем объединяйте всё одним щелчком — без повторной загрузки.",priv:"Ваши файлы остаются только в этом браузере (IndexedDB). Ничего не загружается на сервер.",add:"Добавить копию устройства",empty:"Пока нет сохранённых устройств. Добавьте первую копию выше.",main:"Основное",setmain:"Сделать основным",remove:"Удалить",saved:"Сохранено",mergenow:"Объединить устройства сейчас",merging:"Объединение…",done:"Объединено! Ваш файл загружается.",needtwo:"Добавьте хотя бы две копии для объединения.",reminder:"Напоминать о синхронизации",off:"Никогда",weekly:"Еженедельно",monthly:"Ежемесячно",clear:"Удалить все устройства",clearconfirm:"Удалить все сохранённые устройства? Это нельзя отменить.",banner:"Давно не было синхронизации. Объединить ваши устройства?",bannercta:"Открыть",dismiss:"Закрыть",close:"Закрыть",fab:"Синхр.",error:"Во время объединения произошла ошибка. Попробуйте ещё раз."},
+    ja:{title:"保存済みデバイスと自動同期",intro:"各デバイスのバックアップを一度ここに保存。あとはワンクリックで再マージ — 再アップロード不要です。",priv:"ファイルはこのブラウザ内（IndexedDB）だけに保存され、アップロードされません。",add:"デバイスのバックアップを追加",empty:"保存済みのデバイスはまだありません。上から最初のバックアップを追加してください。",main:"メイン",setmain:"メインに設定",remove:"削除",saved:"保存日",mergenow:"保存済みデバイスをマージ",merging:"マージ中…",done:"マージ完了！ファイルをダウンロード中です。",needtwo:"マージするには2つ以上のバックアップを追加してください。",reminder:"同期のリマインド",off:"オフ",weekly:"毎週",monthly:"毎月",clear:"保存済みデバイスをすべて削除",clearconfirm:"保存済みデバイスをすべて削除しますか？元に戻せません。",banner:"前回の同期からしばらく経ちました。デバイスをマージしますか？",bannercta:"開く",dismiss:"閉じる",close:"閉じる",fab:"同期",error:"マージ中に問題が発生しました。もう一度お試しください。"},
+    ko:{title:"저장된 기기 및 자동 동기화",intro:"각 기기의 백업을 한 번만 저장하세요. 그러면 다시 업로드 없이 한 번의 클릭으로 병합할 수 있습니다.",priv:"파일은 이 브라우저(IndexedDB)에만 저장되며 업로드되지 않습니다.",add:"기기 백업 추가",empty:"저장된 기기가 없습니다. 위에서 첫 백업을 추가하세요.",main:"메인",setmain:"메인으로 설정",remove:"제거",saved:"저장됨",mergenow:"저장된 기기 지금 병합",merging:"병합 중…",done:"병합 완료! 파일을 다운로드하는 중입니다.",needtwo:"병합하려면 백업을 두 개 이상 추가하세요.",reminder:"동기화 알림",off:"끄기",weekly:"매주",monthly:"매월",clear:"저장된 기기 모두 지우기",clearconfirm:"저장된 기기를 모두 제거하시겠습니까? 되돌릴 수 없습니다.",banner:"마지막 동기화 이후 시간이 지났습니다. 기기를 병합할까요?",bannercta:"열기",dismiss:"닫기",close:"닫기",fab:"동기화",error:"병합 중 문제가 발생했습니다. 다시 시도하세요."},
+    tl:{title:"Naka-save na Device at Auto-Sync",intro:"I-save dito ang backup ng bawat device nang isang beses. Pagkatapos ay pagsamahin ang lahat sa isang click — walang muling pag-upload.",priv:"Nananatili ang iyong mga file sa browser na ito lang (IndexedDB). Walang ina-upload kahit kailan.",add:"Magdagdag ng backup ng device",empty:"Wala pang naka-save na device. Idagdag ang unang backup sa itaas.",main:"Pangunahin",setmain:"Itakda bilang pangunahin",remove:"Alisin",saved:"Na-save",mergenow:"Pagsamahin ang mga device ngayon",merging:"Pinagsasama…",done:"Pinagsama na! Dina-download na ang iyong file.",needtwo:"Magdagdag ng hindi bababa sa dalawang backup para pagsamahin.",reminder:"Ipaalala ang pag-sync",off:"Huwag",weekly:"Lingguhan",monthly:"Buwanan",clear:"Burahin lahat ng device",clearconfirm:"Alisin ang lahat ng naka-save na device? Hindi na maibabalik.",banner:"Matagal na mula sa huli mong pag-sync. Pagsamahin ang iyong mga device?",bannercta:"Buksan",dismiss:"I-dismiss",close:"Isara",fab:"Sync",error:"May naganap na problema habang nagsasama. Pakisubukang muli."}
+  };
+  function lang(){ try{ var l=localStorage.getItem('jwsync_lang'); return (l&&I18N[l])?l:'en'; }catch(_){ return 'en'; } }
+  function t(k){ var L=I18N[lang()]||I18N.en; return L[k]!=null?L[k]:(I18N.en[k]!=null?I18N.en[k]:k); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+  /* ── Persistent prefs (cadence + last sync) ── */
+  var PK='jwsync_synchub';
+  function prefs(){ try{ var d=localStorage.getItem(PK); return d?JSON.parse(d):{cadence:'off',lastSync:0,mainId:null}; }catch(_){ return {cadence:'off',lastSync:0,mainId:null}; } }
+  function savePrefs(p){ try{ localStorage.setItem(PK, JSON.stringify(p)); }catch(_){} }
+
+  /* ── IndexedDB store for device backups (own DB; no clash with app's jwsync_db) ── */
+  var DB='jwsync_synchub_db', STORE='devices';
+  function open(){ return new Promise(function(res,rej){ try{ var r=indexedDB.open(DB,1);
+    r.onupgradeneeded=function(){ var db=r.result; if(!db.objectStoreNames.contains(STORE)) db.createObjectStore(STORE,{keyPath:'id'}); };
+    r.onsuccess=function(){ res(r.result); }; r.onerror=function(){ rej(r.error); }; }catch(e){ rej(e); } }); }
+  function putDevice(d){ return open().then(function(db){ return new Promise(function(res,rej){ var tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).put(d); tx.oncomplete=function(){ db.close(); res(true); }; tx.onerror=function(){ db.close(); rej(tx.error); }; }); }); }
+  function getDevices(){ return open().then(function(db){ return new Promise(function(res){ var g=db.transaction(STORE,'readonly').objectStore(STORE).getAll(); g.onsuccess=function(){ db.close(); res((g.result||[]).sort(function(a,b){return (a.savedAt||0)-(b.savedAt||0);})); }; g.onerror=function(){ db.close(); res([]); }; }); }).catch(function(){ return []; }); }
+  function delDevice(id){ return open().then(function(db){ return new Promise(function(res){ var tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).delete(id); tx.oncomplete=function(){ db.close(); res(true); }; tx.onerror=function(){ db.close(); res(false); }; }); }).catch(function(){ return false; }); }
+  function clearDevices(){ return open().then(function(db){ return new Promise(function(res){ var tx=db.transaction(STORE,'readwrite'); tx.objectStore(STORE).clear(); tx.oncomplete=function(){ db.close(); res(true); }; tx.onerror=function(){ db.close(); res(false); }; }); }).catch(function(){ return false; }); }
+
+  function fmtDate(ts){ try{ return new Date(ts).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); }catch(_){ return ''; } }
+
+  var overlay=null, busy=false;
+
+  function close(){ if(overlay){ overlay.remove(); overlay=null; } document.removeEventListener('keydown',onKey); }
+  function onKey(e){ if(e.key==='Escape'&&!busy) close(); }
+
+  function pickMain(devices){
+    var p=prefs();
+    if(p.mainId && devices.some(function(d){return d.id===p.mainId;})) return p.mainId;
+    return devices.length?devices[0].id:null;
+  }
+
+  function setStatus(msg,cls){ if(!overlay) return; var s=overlay.querySelector('.jsh-status'); if(s){ s.textContent=msg||''; s.className='jsh-status'+(cls?' '+cls:''); } }
+
+  function doMerge(devices){
+    if(busy) return;
+    if(devices.length<2){ setStatus(t('needtwo'),'err'); return; }
+    var mainId=pickMain(devices);
+    var main=devices.filter(function(d){return d.id===mainId;})[0];
+    var secs=devices.filter(function(d){return d.id!==mainId;}).map(function(d){return {buffer:d.buffer.slice(0),name:d.name};});
+    busy=true;
+    if(window.__jwHaptic) window.__jwHaptic(20);
+    var mergeBtn=overlay&&overlay.querySelector('.jsh-merge'); if(mergeBtn) mergeBtn.disabled=true;
+    setStatus(t('merging'),'');
+    var w;
+    try{ w=new Worker('./js/merge-worker.js'); }catch(e){ busy=false; setStatus(t('error'),'err'); if(mergeBtn) mergeBtn.disabled=false; return; }
+    w.onmessage=function(ev){
+      var d=ev.data||{};
+      if(d.type==='done'){
+        try{
+          var blob=new Blob([d.zipBuffer],{type:'application/octet-stream'});
+          var url=URL.createObjectURL(blob);
+          var a=document.createElement('a');
+          var base=(main&&main.name?main.name.replace(/\.jwlibrary$/i,''):'backup');
+          a.href=url; a.download='merged_'+base+'.jwlibrary';
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function(){ URL.revokeObjectURL(url); },4000);
+          var p=prefs(); p.lastSync=Date.now(); savePrefs(p);
+          setStatus(t('done'),'ok');
+          dismissReminder();
+        }catch(e){ setStatus(t('error'),'err'); }
+        busy=false; if(mergeBtn) mergeBtn.disabled=false; w.terminate();
+      } else if(d.type==='error'){
+        setStatus(d.message||t('error'),'err'); busy=false; if(mergeBtn) mergeBtn.disabled=false; w.terminate();
+      } else if(d.type==='impact'){
+        /* auto-confirm: this path is an explicit one-click merge */
+        w.postMessage({type:'confirmMerge'});
+      } else if(d.type==='progress' && d.payload && d.payload.label){
+        setStatus(d.payload.label,'');
+      }
+    };
+    w.onerror=function(){ setStatus(t('error'),'err'); busy=false; if(mergeBtn) mergeBtn.disabled=false; try{w.terminate();}catch(_){} };
+    var opts={mergeNotes:true,mergeHighlights:true,mergeBookmarks:true,mergeTags:true,smartDedupe:true,
+      conflictStrategy:'newest',previewConfirm:false,syncByDate:false,filterDate:'',deepClean:false};
+    w.postMessage({type:'merge',mainBuffer:main.buffer.slice(0),mainName:main.name,secondaryFiles:secs,opts:opts,tagManager:{},colorRules:[]});
+  }
+
+  function render(devices){
+    var p=prefs(), mainId=pickMain(devices);
+    var rows=devices.map(function(d){
+      var isMain=d.id===mainId;
+      return '<li class="jsh-row'+(isMain?' is-main':'')+'" data-id="'+esc(d.id)+'">'+
+        '<div class="jsh-row-name">'+esc(d.name)+
+          '<div class="jsh-row-meta">'+esc(t('saved'))+' '+esc(fmtDate(d.savedAt))+'</div></div>'+
+        (isMain?'<span class="jsh-badge">'+esc(t('main'))+'</span>'
+               :'<button class="jsh-setmain" data-setmain="'+esc(d.id)+'">'+esc(t('setmain'))+'</button>')+
+        '<button class="jsh-rm" data-rm="'+esc(d.id)+'" title="'+esc(t('remove'))+'">&times;</button>'+
+      '</li>';
+    }).join('');
+    var listHtml = devices.length
+      ? '<ul class="jsh-list">'+rows+'</ul>'
+      : '<div class="jsh-empty">'+esc(t('empty'))+'</div>';
+    var cad=p.cadence||'off';
+    return ''+
+      '<div class="jsh-panel" role="dialog" aria-modal="true" aria-label="'+esc(t('title'))+'">'+
+        '<div class="jsh-head"><h2 class="jsh-title">'+esc(t('title'))+'</h2>'+
+          '<button class="jsh-x" data-close title="'+esc(t('close'))+'">&times;</button></div>'+
+        '<p class="jsh-intro">'+esc(t('intro'))+'</p>'+
+        listHtml+
+        '<button class="jsh-add" data-add type="button"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>'+esc(t('add'))+'</button>'+
+        '<button class="jsh-merge" data-merge type="button"'+(devices.length<2?' disabled':'')+'>'+esc(t('mergenow'))+'</button>'+
+        '<p class="jsh-status"></p>'+
+        '<p class="jsh-priv"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="flex:0 0 auto;margin-top:1px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'+esc(t('priv'))+'</p>'+
+        '<hr class="jsh-divider">'+
+        '<div class="jsh-field"><label>'+esc(t('reminder'))+'</label>'+
+          '<select class="jsh-select" data-cadence>'+
+            '<option value="off"'+(cad==='off'?' selected':'')+'>'+esc(t('off'))+'</option>'+
+            '<option value="weekly"'+(cad==='weekly'?' selected':'')+'>'+esc(t('weekly'))+'</option>'+
+            '<option value="monthly"'+(cad==='monthly'?' selected':'')+'>'+esc(t('monthly'))+'</option>'+
+          '</select></div>'+
+        (devices.length?'<button class="jsh-clear" data-clear type="button">'+esc(t('clear'))+'</button>':'')+
+      '</div>';
+  }
+
+  function refresh(){
+    return getDevices().then(function(devices){
+      if(!overlay) return;
+      overlay.innerHTML=render(devices);
+      wire(devices);
+    });
+  }
+
+  function wire(devices){
+    var panel=overlay.querySelector('.jsh-panel');
+    overlay.querySelector('[data-close]').addEventListener('click',function(){ if(!busy) close(); });
+    overlay.addEventListener('mousedown',function(e){ if(e.target===overlay&&!busy) close(); });
+    var addBtn=overlay.querySelector('[data-add]');
+    if(addBtn) addBtn.addEventListener('click',function(){
+      var fi=document.createElement('input'); fi.type='file'; fi.accept='.jwlibrary,application/octet-stream';
+      fi.onchange=function(){ var f=fi.files&&fi.files[0]; if(!f) return;
+        f.arrayBuffer().then(function(buf){
+          return putDevice({id:'dev_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),name:f.name,buffer:buf,savedAt:Date.now()});
+        }).then(refresh).catch(function(){ setStatus(t('error'),'err'); });
+      };
+      fi.click();
+    });
+    var mergeBtn=overlay.querySelector('[data-merge]');
+    if(mergeBtn) mergeBtn.addEventListener('click',function(){ doMerge(devices); });
+    Array.prototype.forEach.call(overlay.querySelectorAll('[data-setmain]'),function(b){
+      b.addEventListener('click',function(){ var p=prefs(); p.mainId=b.getAttribute('data-setmain'); savePrefs(p); refresh(); });
+    });
+    Array.prototype.forEach.call(overlay.querySelectorAll('[data-rm]'),function(b){
+      b.addEventListener('click',function(){ delDevice(b.getAttribute('data-rm')).then(refresh); });
+    });
+    var cadSel=overlay.querySelector('[data-cadence]');
+    if(cadSel) cadSel.addEventListener('change',function(){ var p=prefs(); p.cadence=cadSel.value; savePrefs(p); });
+    var clr=overlay.querySelector('[data-clear]');
+    if(clr) clr.addEventListener('click',function(){ if(window.confirm(t('clearconfirm'))){ clearDevices().then(function(){ var p=prefs(); p.mainId=null; savePrefs(p); refresh(); }); } });
+  }
+
+  function openHub(){
+    if(overlay) return;
+    overlay=document.createElement('div'); overlay.className='jsh-overlay'; overlay.id='jw-synchub-overlay';
+    document.body.appendChild(overlay);
+    document.addEventListener('keydown',onKey);
+    refresh();
+  }
+  window.__jwOpenSyncHub=openHub;
+
+  /* ── Floating launcher ── */
+  function addFab(){
+    if(document.getElementById('jw-synchub-fab')) return;
+    var b=document.createElement('button'); b.id='jw-synchub-fab'; b.className='jsh-fab'; b.type='button';
+    b.setAttribute('aria-label',t('title'));
+    b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span>'+esc(t('fab'))+'</span>';
+    b.addEventListener('click',openHub);
+    document.body.appendChild(b);
+  }
+
+  /* ── Sync reminder banner ── */
+  function dismissReminder(){ var r=document.getElementById('jw-synchub-reminder'); if(r) r.remove(); }
+  function maybeReminder(){
+    var p=prefs(); if(!p.cadence||p.cadence==='off') return;
+    var span=p.cadence==='weekly'?7*864e5:30*864e5;
+    if(!p.lastSync||Date.now()-p.lastSync<span) return;
+    getDevices().then(function(devices){
+      if(devices.length<2||document.getElementById('jw-synchub-reminder')) return;
+      var r=document.createElement('div'); r.id='jw-synchub-reminder'; r.className='jsh-reminder';
+      r.innerHTML='<span>'+esc(t('banner'))+'</span>'+
+        '<button class="jsh-reminder-cta" type="button" data-open>'+esc(t('bannercta'))+'</button>'+
+        '<button class="jsh-reminder-x" type="button" data-x aria-label="'+esc(t('dismiss'))+'">&times;</button>';
+      document.body.appendChild(r);
+      r.querySelector('[data-open]').addEventListener('click',function(){ dismissReminder(); openHub(); });
+      r.querySelector('[data-x]').addEventListener('click',dismissReminder);
+    });
+  }
+
+  function init(){ addFab(); setTimeout(maybeReminder,1500); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+<!-- ── End Saved Devices & Auto-Sync ────────────────────── -->
+<!-- ── Offline indicator + haptics (v2.24.0) ───────────── -->
+<style>
+.jw-offline-banner{position:fixed;left:0;right:0;top:0;z-index:9002;transform:translateY(-100%);
+  transition:transform .25s ease;display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:8px 14px;background:rgba(15,23,42,.97);border-bottom:1px solid rgba(71,85,105,.5);
+  color:#cbd5e1;font:600 12.5px/1.35 Inter,system-ui,sans-serif;text-align:center}
+.jw-offline-banner.show{transform:translateY(0)}
+.jw-offline-banner svg{width:15px;height:15px;flex:0 0 auto;color:#94a3b8}
+@media (max-width:600px){.jw-offline-banner{font-size:12px;padding:7px 12px}}
+</style>
+<script>
+(function(){
+  "use strict";
+  /* Global haptic helper — short vibration on key actions where supported. */
+  if(!window.__jwHaptic){
+    window.__jwHaptic=function(ms){ try{ if(typeof navigator!=='undefined'&&navigator.vibrate) navigator.vibrate(ms||15); }catch(_){ } };
+  }
+  if(window.__jwOfflineBannerReady) return;
+  window.__jwOfflineBannerReady=true;
+
+  var I18N={
+    en:"You're offline — merging still works and your notes stay on this device.",
+    es:"Estás sin conexión — la combinación sigue funcionando y tus notas permanecen en este dispositivo.",
+    pt:"Você está offline — a combinação continua funcionando e suas notas ficam neste dispositivo.",
+    fr:"Vous êtes hors ligne — la fusion fonctionne toujours et vos notes restent sur cet appareil.",
+    de:"Du bist offline — das Zusammenführen funktioniert weiterhin und deine Notizen bleiben auf diesem Gerät.",
+    it:"Sei offline — l'unione funziona ancora e le tue note restano su questo dispositivo.",
+    ru:"Вы офлайн — объединение по-прежнему работает, а заметки остаются на этом устройстве.",
+    ja:"オフラインです — マージは引き続き使え、ノートはこの端末に保存されます。",
+    ko:"오프라인 상태입니다 — 병합은 계속 작동하고 노트는 이 기기에 남아 있습니다.",
+    tl:"Offline ka — gumagana pa rin ang pagsasama at nananatili sa device na ito ang iyong mga tala."
+  };
+  function msg(){ var l; try{ l=localStorage.getItem('jwsync_lang'); }catch(_){ } return (l&&I18N[l])?I18N[l]:I18N.en; }
+
+  var bar=null;
+  function ensureBar(){
+    if(bar) return bar;
+    bar=document.createElement('div'); bar.className='jw-offline-banner'; bar.id='jw-offline-banner'; bar.setAttribute('role','status');
+    bar.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l22 22"/><path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/><path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/><path d="M10.71 5.05A16 16 0 0 1 22.58 9"/><path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg><span class="jw-offline-msg"></span>';
+    document.body.appendChild(bar);
+    return bar;
+  }
+  function update(){
+    var off = (typeof navigator!=='undefined') && navigator.onLine===false;
+    if(off){ var b=ensureBar(); b.querySelector('.jw-offline-msg').textContent=msg(); requestAnimationFrame(function(){ b.classList.add('show'); }); }
+    else if(bar){ bar.classList.remove('show'); }
+  }
+  window.addEventListener('online',update);
+  window.addEventListener('offline',update);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',update);
+  else update();
+})();
+</script>
+<!-- ── End Offline indicator + haptics ─────────────────── -->
+
+
 
 </body>
 </html>
