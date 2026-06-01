@@ -320,6 +320,64 @@ function assertContains(text, needle, label) {
   searchInp.dispatchEvent(new win.Event('input'));
   await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 5, 'search clear');
 
+  section('Date-range filter (v2.21.0)');
+  // Notes span 2024-01-15 .. 2024-05-01. Two date inputs live in the toolbar.
+  const dateInputs = doc.querySelectorAll('.jb-filter-date');
+  assertEq(dateInputs.length, 2, 'two date inputs in toolbar');
+  const [dFrom, dTo] = dateInputs;
+  dFrom.value = '2024-03-01';
+  dFrom.dispatchEvent(new win.Event('change'));
+  dTo.value = '2024-04-30';
+  dTo.dispatchEvent(new win.Event('change'));
+  await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 2, 'date range 03-01..04-30');
+  assertEq(doc.querySelectorAll('.jb-list .jb-note').length, 2, 'date range shows 2 notes (Mar+Apr)');
+  const extractBtn = doc.querySelector('.jb-extract-btn');
+  if (extractBtn && !extractBtn.disabled) ok('extract button enabled when a date is set');
+  else fail('extract button should be enabled with a date set');
+
+  // Lower-bound only
+  dTo.value = '';
+  dTo.dispatchEvent(new win.Event('change'));
+  dFrom.value = '2024-05-01';
+  dFrom.dispatchEvent(new win.Event('change'));
+  await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 1, 'from 2024-05-01');
+  assertEq(doc.querySelectorAll('.jb-list .jb-note').length, 1, 'from 2024-05-01 shows 1 note (May)');
+
+  section('Date extract → pruned .jwlibrary');
+  // Extract Jan+Feb (2 notes) into a new backup; capture the generated Blob.
+  dFrom.value = '2024-01-01';
+  dFrom.dispatchEvent(new win.Event('change'));
+  dTo.value = '2024-02-28';
+  dTo.dispatchEvent(new win.Event('change'));
+  await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 2, 'date range Jan+Feb');
+  let capturedBlob = null;
+  const origCOU = win.URL.createObjectURL;
+  win.URL.createObjectURL = (b) => { capturedBlob = b; return 'blob:capture'; };
+  win.URL.revokeObjectURL = () => {};
+  doc.querySelector('.jb-extract-btn').click();
+  await waitFor(() => capturedBlob !== null, 'extract to produce a blob');
+  win.URL.createObjectURL = origCOU;
+  if (capturedBlob) {
+    ok('extract produced a .jwlibrary blob');
+    const buf = Buffer.from(await capturedBlob.arrayBuffer());
+    const ezip = await JSZip.loadAsync(buf);
+    const ekey = Object.keys(ezip.files).find(n => /userdata\.db$/i.test(n));
+    const ebytes = await ezip.files[ekey].async('uint8array');
+    const SQLx = await initSqlJs({ locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) });
+    const edb = new SQLx.Database(ebytes);
+    const res = edb.exec('SELECT COUNT(*) FROM Note');
+    const cnt = res[0].values[0][0];
+    assertEq(cnt, 2, 'extracted backup contains only the 2 in-range notes');
+    edb.close();
+  }
+
+  // Reset date filter so later sections see all 5 notes again.
+  dFrom.value = '';
+  dFrom.dispatchEvent(new win.Event('change'));
+  dTo.value = '';
+  dTo.dispatchEvent(new win.Event('change'));
+  await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 5, 'date filter cleared');
+
   section('Detail pane (Notes)');
   // Click the first note
   doc.querySelectorAll('.jb-list .jb-note')[0].click();

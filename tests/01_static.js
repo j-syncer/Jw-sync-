@@ -199,6 +199,14 @@ for (const path of FILES) {
     else ok('Sync Hub drives merge-worker.js directly');
   }
 
+  // 8c) Date-Range Extraction in Browse (v2.21.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('jb-filter-date') || !c.includes('jb-extract-btn')) fail('Browse date-range controls missing');
+    else ok('Browse date-range filter + extract controls present');
+    if (!c.includes('function extractByDate')) fail('extractByDate() missing');
+    else ok('extractByDate() present');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');

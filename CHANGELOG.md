@@ -4,6 +4,14 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.21.0] — 2026-06-01
+
+### Added
+- **Date-range extraction in the Note Explorer.** The Browse tool now has **From / To date filters** so you can narrow your notes and highlights to any time window — e.g. "everything up to my baptism" or "just this year's notes."
+- **One-click "Extract date range".** With a date set, download a brand-new `.jwlibrary` containing **only the notes in that window** — the in-browser way to pull out content from a point in time, exactly as promised on the home page. Your working library is never altered; the extract is a fresh copy.
+
+---
+
 ## [2.20.0] — 2026-06-01
 
 ### Added
