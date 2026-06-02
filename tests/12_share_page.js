@@ -1,0 +1,165 @@
+// Integration test for the v2.30.0 standalone Share page (beta/share.html).
+//
+// The page is a self-contained standalone tool (like highlights.html) with two
+// flows: SEND (open a backup → tick notes → create a .jwshare.json) and RECEIVE
+// (paste/choose a shared file → preview → adopt into one of your backups). It
+// boots in JSDOM with JSZip + sql.js wired onto window, and exposes test hooks
+// __shLoadBackup / __shRenderReceive / __shAdopt.
+//
+// Asserts:
+//   1. Home renders the two mode cards
+//   2. SEND: a loaded backup lists notes; select-all + create builds a valid
+//      jwsync envelope containing the notes
+//   3. RECEIVE: pasting an envelope previews the notes read-only
+//   4. ADOPT: adopting into a backup produces an updated .jwlibrary with the
+//      shared notes added (tagged) — verified by re-opening the exported DB
+const path = require('path');
+const fs = require('fs');
+const { JSDOM } = require('jsdom');
+const JSZip = require('jszip');
+const initSqlJs = require('sql.js');
+
+const REPO = path.join(__dirname, '..');
+const SHARE_PATH = REPO + '/beta/share.html';
+const SQL_OPTS = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) };
+
+let failures = 0;
+function ok(m) { console.log('  ✓', m); }
+function fail(m) { console.log('  ✗', m); failures++; }
+function section(n) { console.log('\n== ' + n + ' =='); }
+function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function buildBackup(SQL, notes) {
+  const db = new SQL.Database();
+  db.run(`CREATE TABLE Note (NoteId INTEGER PRIMARY KEY, Guid TEXT, UserMarkId INTEGER, LocationId INTEGER, Title TEXT, Content TEXT, LastModified TEXT, Created TEXT, BlockType INTEGER DEFAULT 1, BlockIdentifier INTEGER DEFAULT 0);
+    CREATE TABLE UserMark (UserMarkId INTEGER PRIMARY KEY, ColorIndex INTEGER, LocationId INTEGER, StyleIndex INTEGER, UserMarkGuid TEXT, Version INTEGER);
+    CREATE TABLE Location (LocationId INTEGER PRIMARY KEY, BookNumber INTEGER, ChapterNumber INTEGER, KeySymbol TEXT, Title TEXT);
+    CREATE TABLE Tag (TagId INTEGER PRIMARY KEY, Type INTEGER, Name TEXT);
+    CREATE TABLE TagMap (TagMapId INTEGER PRIMARY KEY, NoteId INTEGER, LocationId INTEGER, TagId INTEGER, Position INTEGER);`);
+  db.run(`INSERT INTO Location (LocationId, KeySymbol, Title) VALUES (1,'nwt','Genesis'),(2,'w23','Watchtower')`);
+  (notes || []).forEach(n => db.run('INSERT INTO Note (NoteId,Guid,Title,Content,LastModified,LocationId) VALUES (?,?,?,?,?,?)',
+    [n.id, 'g' + n.id, n.title, n.content, n.date || '2024-01-01 00:00:00', n.loc || 1]));
+  const bytes = db.export(); db.close();
+  const zip = new JSZip(); zip.file('userData.db', bytes); zip.file('manifest.json', JSON.stringify({ version: 1, name: 'Test' }));
+  return zip.generateAsync({ type: 'nodebuffer' });
+}
+
+function bootShare() {
+  const html = fs.readFileSync(SHARE_PATH, 'utf8');
+  const m = html.match(/<script>\s*\(function\s*\(\)[\s\S]*?<\/script>/);
+  if (!m) { fail('share.html inline script not found'); process.exit(1); }
+  const page = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>
+<header id="sh-header"><button id="sh-back" class="sh-back">← JW Sync</button><span id="sh-htitle" class="sh-htitle">Share Notes</span><button id="sh-new" class="sh-new" style="display:none">Start over</button></header>
+<main id="sh-main"></main>${m[0]}</body></html>`;
+  const dom = new JSDOM(page, { url: 'https://jwsync.org/beta/', runScripts: 'dangerously', pretendToBeVisual: true });
+  const win = dom.window;
+  win.localStorage.setItem('jwsync_lang', 'en');
+  win.JSZip = JSZip;
+  win.initSqlJs = () => initSqlJs(SQL_OPTS);
+  if (!win.URL.createObjectURL) win.URL.createObjectURL = () => 'blob:mock';
+  win.indexedDB = { open: function () { const req = {}; setTimeout(() => { if (req.onerror) req.onerror({ target: req }); }, 0); return req; } };
+  return dom;
+}
+
+(async function run() {
+  const SQL = await initSqlJs(SQL_OPTS);
+
+  section('Home — two mode cards');
+  {
+    const dom = bootShare(); const doc = dom.window.document;
+    await wait(60);
+    if (doc.getElementById('sh-go-send') && doc.getElementById('sh-go-recv')) ok('Send + Receive cards render');
+    else fail('mode cards missing');
+    dom.window.close();
+  }
+
+  section('Send — pick a backup, select notes, create file');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    const buf = await buildBackup(SQL, [
+      { id: 1, title: 'Faith', content: 'Hope and trust' },
+      { id: 2, title: 'Love', content: 'Patience and kindness' },
+      { id: 3, title: 'Peace', content: 'Calm in the storm' },
+    ]);
+    win.__shLoadBackup({ name: 'test.jwlibrary', arrayBuffer: async () => buf });
+    async function until(p, l, ms = 8000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    if (await until(() => doc.querySelectorAll('.sh-list .sh-item').length === 3, 'note list'))
+      ok('backup loaded — 3 notes listed for selection');
+    doc.getElementById('sh-all').click();
+    await until(() => /3/.test(doc.getElementById('sh-count').textContent), 'all selected');
+    ok('select-all ticks every note');
+    const createBtn = doc.getElementById('sh-create');
+    if (createBtn && !createBtn.disabled) ok('Create file enabled with a selection'); else fail('create button disabled');
+    createBtn.click();
+    await until(() => doc.getElementById('sh-json'), 'share result');
+    const env = JSON.parse(doc.getElementById('sh-json').value);
+    if (env.app === 'jwsync' && env.notes.length === 3) ok('valid envelope built with 3 notes');
+    else fail('envelope wrong: ' + JSON.stringify(env).slice(0, 80));
+    if (env.notes.some(n => n.title === 'Faith' && /Hope/.test(n.content))) ok('note content carried into envelope');
+    else fail('note content missing from envelope');
+    dom.window.close();
+  }
+
+  section('Receive — preview shared notes');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    win.__shRenderReceive();
+    await wait(40);
+    const envelope = JSON.stringify({ v: 1, app: 'jwsync', kind: 'notes', notes: [
+      { title: 'Shared one', content: 'first shared note', tags: ['Study'] },
+      { title: 'Shared two', content: 'second shared note', tags: [] },
+    ] });
+    doc.getElementById('sh-paste').value = envelope;
+    doc.getElementById('sh-prev').click();
+    async function until(p, l, ms = 4000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.querySelectorAll('#sh-prevout .sh-item').length === 2, 'preview list');
+    ok('shared notes preview (2 items, read-only)');
+    if (doc.getElementById('sh-addto')) ok('"Add to my backup" action offered');
+    else fail('add-to-backup action missing');
+    dom.window.close();
+  }
+
+  section('Adopt — shared notes added into a backup');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    win.__shRenderReceive(); await wait(20);
+    const backupBuf = await buildBackup(SQL, [{ id: 1, title: 'Existing', content: 'already here' }]);
+    const fileLike = { name: 'mybackup.jwlibrary', arrayBuffer: async () => backupBuf };
+    const sharedNotes = [
+      { title: 'Gift', content: 'a shared note', tags: ['FromFriend'] },
+      { title: 'Grace', content: 'another shared note', tags: [] },
+    ];
+    // capture the generated updated-backup blob
+    let blob = null;
+    win.URL.createObjectURL = (b) => { blob = b; return 'blob:upd'; };
+    win.URL.revokeObjectURL = () => {};
+    win.__shAdopt(fileLike, sharedNotes);
+    async function until(p, l, ms = 9000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.querySelector('.sh-ok'), 'adopt done screen');
+    if (/2/.test(doc.querySelector('.sh-ok').textContent)) ok('adopt confirms 2 notes added');
+    else fail('adopt count wrong: ' + doc.querySelector('.sh-ok').textContent);
+    const dlu = doc.getElementById('sh-dlu');
+    if (dlu) { dlu.click(); await until(() => blob !== null, 'updated backup blob'); }
+    else fail('download button missing');
+    if (blob) {
+      const zip = await JSZip.loadAsync(Buffer.from(await blob.arrayBuffer()));
+      const key = Object.keys(zip.files).find(n => /userdata\.db$/i.test(n));
+      const edb = new SQL.Database(await zip.files[key].async('uint8array'));
+      const cnt = edb.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
+      if (cnt === 3) ok('updated backup has original + 2 adopted notes (1→3)');
+      else fail('expected 3 notes in updated backup, got ' + cnt);
+      const tagged = edb.exec("SELECT COUNT(*) FROM Tag WHERE Name='Shared'")[0].values[0][0];
+      if (tagged >= 1) ok('adopted notes tagged "Shared"');
+      else fail('"Shared" tag not created');
+      edb.close();
+    }
+    dom.window.close();
+  }
+
+  console.log('\n== SUMMARY ==');
+  if (failures) { console.log('\nFAIL: ' + failures + ' check(s) failed.'); process.exit(1); }
+  console.log('\nAll Share-page checks passed.');
+})().catch(e => { console.error('TEST CRASH:', e); process.exit(2); });

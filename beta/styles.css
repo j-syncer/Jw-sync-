@@ -1791,6 +1791,6 @@ body.is-landing #jws-loading { display: none !important; }
   .site-nav-logo { flex-shrink: 0; }
   .site-nav-links { flex: 1 1 auto; min-width: 0; gap: 6px; justify-content: flex-end; }
   .site-nav-link { flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #site-nav-wrapped-btn { display: none; }
+  #site-nav-wrapped-btn, #site-nav-share-btn { display: none; }
   .nav-lang-select { flex-shrink: 0; }
 }

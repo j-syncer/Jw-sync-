@@ -4,6 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.30.0] — 2026-06-02
+
+### Added
+- **Share Notes now has its own dedicated page** (like Your Service Year Highlights), reachable from a prominent **Share notes** button on the home page and a **Share Notes** link in the top nav. It walks you through everything step by step:
+  - **Send:** open one of your backups, **tick the notes you want** to share (with search and select-all), then create a small file to send — by email, chat, or AirDrop. Clear instructions explain exactly what to do.
+  - **Receive:** paste shared text or open the file someone sent, **preview the notes**, then add them into one of your backups and download the updated copy to restore in JW Library.
+- Everything stays on your device — nothing is uploaded.
+
+### Fixed
+- **The Note Explorer tab strip no longer cuts off on phones.** With the new Study Answers tab, the tabs now scroll sideways (and shrink on small screens) so every tab is reachable in portrait — no need to rotate to landscape.
+
+---
+
 ## [2.29.0] — 2026-06-02
 
 ### Added

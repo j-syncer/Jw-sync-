@@ -254,14 +254,23 @@ for (const path of FILES) {
     else ok('Study Answers tab wired');
   }
 
-  // 8i) Note sharing / adopt (v2.28.0, beta-only)
+  // 8i) Note sharing (v2.28.0 in-Browse quick share + v2.30.0 dedicated page)
   if (isBeta) {
-    if (!c.includes('function openShareExport') || !c.includes('function openShareImport') || !c.includes('function adoptNotes') || !c.includes('function buildShareEnvelope'))
-      fail('Note-sharing functions missing');
-    else ok('Note-sharing functions present');
-    if (!c.includes('jbs-overlay') || !c.includes("t('share_action')") || !c.includes("t('receive_action')"))
-      fail('Note-sharing UI wiring missing');
-    else ok('Note-sharing UI (share/receive) wired');
+    if (!c.includes('function openShareExport') || !c.includes('function buildShareEnvelope'))
+      fail('Quick-share functions missing');
+    else ok('Quick-share functions present');
+    if (!c.includes('function __jwGoShare') || !c.includes("href='share.html'"))
+      fail('Dedicated Share page handoff missing');
+    else ok('Dedicated Share page handoff present');
+    if (!c.includes('id="site-nav-share-btn"') || !c.includes('id="landing-share-btn"'))
+      fail('Share entry-point buttons missing');
+    else ok('Share nav + landing buttons present');
+  }
+
+  // 8j2) Browse tab strip scrolls on overflow (mobile) — v2.30.0
+  if (isBeta) {
+    if (!/\.jb-tabs\{[^}]*overflow-x:auto/.test(c)) fail('Browse tab strip is not horizontally scrollable (mobile cut-off)');
+    else ok('Browse tab strip scrolls horizontally (no cut-off)');
   }
 
   // 8j) Merge performance dashboard (v2.29.0, beta-only)

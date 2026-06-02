@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Share Notes — JW Sync</title>
+  <style>
+    body{background:#060d1a;color:#e2e8f0;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif}
+    *{box-sizing:border-box}
+    #sh-header{position:fixed;top:0;left:0;right:0;height:52px;z-index:100;display:flex;align-items:center;padding:0 16px;gap:12px;
+      background:rgba(8,15,30,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.07)}
+    .sh-back{text-decoration:none;color:rgba(203,213,225,.7);font-size:14px;flex-shrink:0;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
+    .sh-back:hover{color:#f1f5f9}
+    .sh-htitle{color:#fb923c;font-weight:600;font-size:15px;flex-grow:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .sh-new{background:transparent;border:none;color:rgba(203,213,225,.7);font-size:14px;flex-shrink:0;cursor:pointer;font-family:inherit;padding:0}
+    .sh-new:hover{color:#f1f5f9}
+    #sh-main{max-width:720px;margin:0 auto;padding:72px 16px 48px;min-height:100vh}
+    .sh-hero{text-align:center;margin:6px 0 26px}
+    .sh-eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#fb923c;font-weight:700;margin:0 0 6px}
+    .sh-h1{font-size:26px;font-weight:800;color:#fff;margin:0 0 8px;line-height:1.2}
+    .sh-lead{font-size:14.5px;color:#94a3b8;margin:0 auto;max-width:46ch;line-height:1.55}
+    .sh-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+    @media(max-width:560px){.sh-cards{grid-template-columns:1fr}}
+    .sh-card{text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(71,85,105,.4);border-radius:16px;padding:20px;cursor:pointer;transition:border-color .15s,transform .15s;color:inherit}
+    .sh-card:hover{border-color:#ea580c;transform:translateY(-2px)}
+    .sh-card-ic{width:42px;height:42px;border-radius:12px;background:rgba(234,88,12,.14);border:1px solid rgba(234,88,12,.4);color:#fb923c;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+    .sh-card h3{margin:0 0 6px;font-size:17px;color:#f8fafc;font-weight:700}
+    .sh-card p{margin:0;font-size:13px;color:#94a3b8;line-height:1.5}
+    .sh-steps{display:flex;flex-direction:column;gap:10px;margin:14px 0 18px}
+    .sh-step{display:flex;gap:12px;align-items:flex-start}
+    .sh-step-n{flex:none;width:24px;height:24px;border-radius:50%;background:rgba(234,88,12,.16);border:1px solid rgba(234,88,12,.45);color:#fb923c;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center}
+    .sh-step-t{font-size:13.5px;color:#cbd5e1;line-height:1.5;padding-top:2px}
+    .sh-panel{background:rgba(255,255,255,.02);border:1px solid rgba(71,85,105,.35);border-radius:14px;padding:18px}
+    .sh-section-title{font-size:15px;font-weight:800;color:#f1f5f9;margin:0 0 4px}
+    .sh-section-help{font-size:13px;color:#94a3b8;margin:0 0 14px;line-height:1.5}
+    .sh-btn{font-family:inherit;font-size:14px;font-weight:700;padding:12px 18px;border-radius:10px;cursor:pointer;border:1px solid transparent;background:#ea580c;color:#fff;display:inline-flex;align-items:center;gap:8px}
+    .sh-btn:hover{background:#c2410c}
+    .sh-btn:disabled{background:rgba(71,85,105,.4);color:#94a3b8;cursor:not-allowed}
+    .sh-btn-ghost{background:transparent;border-color:rgba(148,163,184,.35);color:#cbd5e1}
+    .sh-btn-ghost:hover{background:rgba(148,163,184,.12);border-color:rgba(148,163,184,.6)}
+    .sh-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+    .sh-search{flex:1;min-width:160px;display:flex;align-items:center;gap:8px;background:#0a1224;border:1px solid #2a3548;border-radius:10px;padding:9px 12px}
+    .sh-search input{flex:1;background:transparent;border:0;outline:0;color:#e7eaf3;font-size:14px}
+    .sh-mini{background:transparent;border:1px solid #2a3548;color:#94a3b8;padding:7px 11px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit}
+    .sh-mini:hover{border-color:#475569;color:#fff}
+    .sh-list{max-height:46vh;overflow-y:auto;border:1px solid rgba(71,85,105,.3);border-radius:12px}
+    .sh-item{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid rgba(71,85,105,.22);cursor:pointer}
+    .sh-item:last-child{border-bottom:none}
+    .sh-item:hover{background:rgba(255,255,255,.02)}
+    .sh-item.sel{background:rgba(234,88,12,.08)}
+    .sh-check{flex:none;width:19px;height:19px;border:2px solid #475569;border-radius:5px;margin-top:1px;position:relative}
+    .sh-item.sel .sh-check{background:#ea580c;border-color:#ea580c}
+    .sh-item.sel .sh-check::after{content:"";position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+    .sh-item-body{min-width:0}
+    .sh-item-title{font-weight:700;color:#f1f5f9;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .sh-item-ex{color:#94a3b8;font-size:12.5px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .sh-item-meta{color:#64748b;font-size:11px;margin-top:3px}
+    .sh-footer{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+    .sh-count{font-size:13px;color:#fb923c;font-weight:700}
+    .sh-text{width:100%;min-height:130px;background:#0a1224;border:1px solid #2a3548;border-radius:10px;padding:11px;color:#cbd5e1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;resize:vertical;outline:none}
+    .sh-text.drop{border-color:#ea580c;background:rgba(234,88,12,.06)}
+    .sh-note{font-size:12px;color:#64748b;margin-top:10px;display:flex;gap:7px;align-items:flex-start;line-height:1.5}
+    .sh-ok{color:#34d399;font-weight:700;font-size:15px;margin:0 0 6px}
+    .sh-err{color:#fca5a5;font-size:13px;margin-top:10px}
+    .sh-state{min-height:240px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center}
+    .sh-spin{width:34px;height:34px;border:3px solid rgba(234,88,12,.25);border-top-color:#ea580c;border-radius:50%;animation:shspin 1s linear infinite}
+    @keyframes shspin{to{transform:rotate(360deg)}}
+    .sh-filebadge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(71,85,105,.4);border-radius:999px;padding:5px 12px;font-size:12px;color:#cbd5e1;margin-bottom:14px}
+  </style>
+</head>
+<body>
+  <header id="sh-header">
+    <button type="button" class="sh-back" id="sh-back">← JW Sync</button>
+    <span class="sh-htitle" id="sh-htitle">Share Notes</span>
+    <button type="button" class="sh-new" id="sh-new" style="display:none">Start over</button>
+  </header>
+  <main id="sh-main"></main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <script>
+  (function(){
+    'use strict';
+    var SQLJS_CDN='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
+    var IDB_NAME='jwsync_share_v1', IDB_STORE='pending', IDB_KEY='next';
+
+    var I18N={
+      en:{title:'Share Notes',lead:'Send some of your notes to another person — or add notes someone sent you. Everything happens on your device; nothing is uploaded.',
+        send_t:'Send notes',send_d:'Pick notes from your backup and make a small file to send to someone.',
+        recv_t:'Receive notes',recv_d:'Got a shared file? Preview the notes and add them to your own backup.',
+        back:'← JW Sync',start_over:'Start over',
+        send_how:'How sending works',send_s1:'Open one of your JW Library backups (a .jwlibrary file).',send_s2:'Tick the notes you want to share.',send_s3:'Create the file and send it however you like — email, chat, AirDrop. The other person opens JW Sync → Share → Receive.',
+        choose_backup:'Open my backup',pick_help:'Choose a .jwlibrary backup to pick notes from. It never leaves your device.',
+        sel_title:'Select the notes to share',sel_help:'Tap a note to tick it. Only the notes you tick are included.',
+        search_ph:'Search notes…',sel_all:'Select all',sel_none:'Clear',sel_count:'{n} selected',
+        create_file:'Create share file',no_sel:'Tick at least one note first.',no_notes:'No notes found in this backup.',
+        made_t:'Your share file is ready',made_h:'Send this to the other person. They open JW Sync → Share → Receive, then choose this file.',
+        download:'Download file',copy:'Copy text',copied:'Copied!',
+        recv_how:'How receiving works',recv_s1:'Paste the shared text, or choose the .jwshare.json file you were sent.',recv_s2:'Preview the notes to make sure they look right.',recv_s3:'Add them into one of your own backups, then restore that backup to JW Library.',
+        paste_ph:'Paste shared notes here, or drop a .jwshare.json file…',choose_file:'Choose file',preview:'Preview',
+        invalid:'That doesn’t look like a valid shared-notes file.',
+        prev_t:'Shared notes (preview)',prev_h:'These are read-only. To keep them, add them to one of your backups below.',
+        add_to:'Add to my backup',add_h:'Choose the .jwlibrary backup you want these notes added to. You’ll get an updated copy to download.',
+        adopt_done:'Added {n} notes to your backup',adopt_done_h:'Download the updated backup, then restore it in JW Library to see the notes.',download_updated:'Download updated backup',
+        loading:'Reading your backup…',building:'Building file…',error:'Could not read that file.',
+        shared_tag:'Shared',no_title:'Untitled',privacy:'Private: this file is made on your device and only contains the notes you chose. Share it only with people you trust.'},
+      es:{title:'Compartir notas',lead:'Envía algunas de tus notas a otra persona, o agrega notas que alguien te envió. Todo ocurre en tu dispositivo; nada se sube.',
+        send_t:'Enviar notas',send_d:'Elige notas de tu copia y crea un archivo pequeño para enviar a alguien.',
+        recv_t:'Recibir notas',recv_d:'¿Tienes un archivo compartido? Previsualiza las notas y agrégalas a tu copia.',
+        back:'← JW Sync',start_over:'Empezar de nuevo',
+        send_how:'Cómo funciona el envío',send_s1:'Abre una de tus copias de JW Library (un archivo .jwlibrary).',send_s2:'Marca las notas que quieres compartir.',send_s3:'Crea el archivo y envíalo como prefieras: correo, chat, AirDrop. La otra persona abre JW Sync → Compartir → Recibir.',
+        choose_backup:'Abrir mi copia',pick_help:'Elige una copia .jwlibrary para seleccionar notas. Nunca sale de tu dispositivo.',
+        sel_title:'Selecciona las notas a compartir',sel_help:'Toca una nota para marcarla. Solo se incluyen las que marques.',
+        search_ph:'Buscar notas…',sel_all:'Seleccionar todo',sel_none:'Limpiar',sel_count:'{n} seleccionadas',
+        create_file:'Crear archivo',no_sel:'Marca al menos una nota.',no_notes:'No se encontraron notas en esta copia.',
+        made_t:'Tu archivo está listo',made_h:'Envíalo a la otra persona. Abre JW Sync → Compartir → Recibir y elige este archivo.',
+        download:'Descargar archivo',copy:'Copiar texto',copied:'¡Copiado!',
+        recv_how:'Cómo funciona recibir',recv_s1:'Pega el texto compartido o elige el archivo .jwshare.json que te enviaron.',recv_s2:'Previsualiza las notas para confirmar.',recv_s3:'Agrégalas a una de tus copias y luego restaura esa copia en JW Library.',
+        paste_ph:'Pega aquí las notas compartidas o suelta un archivo .jwshare.json…',choose_file:'Elegir archivo',preview:'Previsualizar',
+        invalid:'Esto no parece un archivo de notas compartidas válido.',
+        prev_t:'Notas compartidas (vista previa)',prev_h:'Son de solo lectura. Para conservarlas, agrégalas a una copia abajo.',
+        add_to:'Agregar a mi copia',add_h:'Elige la copia .jwlibrary donde quieres agregar estas notas. Obtendrás una copia actualizada para descargar.',
+        adopt_done:'Se agregaron {n} notas a tu copia',adopt_done_h:'Descarga la copia actualizada y restáurala en JW Library para ver las notas.',download_updated:'Descargar copia actualizada',
+        loading:'Leyendo tu copia…',building:'Creando archivo…',error:'No se pudo leer ese archivo.',
+        shared_tag:'Compartido',no_title:'Sin título',privacy:'Privado: este archivo se crea en tu dispositivo y solo contiene las notas que elegiste. Compártelo solo con personas de confianza.'},
+      pt:{title:'Compartilhar notas',lead:'Envie algumas notas para outra pessoa, ou adicione notas que alguém te enviou. Tudo acontece no seu dispositivo; nada é enviado.',
+        send_t:'Enviar notas',send_d:'Escolha notas do seu backup e crie um arquivo pequeno para enviar.',
+        recv_t:'Receber notas',recv_d:'Recebeu um arquivo? Veja as notas e adicione-as ao seu backup.',
+        back:'← JW Sync',start_over:'Recomeçar',
+        send_how:'Como enviar',send_s1:'Abra um dos seus backups do JW Library (arquivo .jwlibrary).',send_s2:'Marque as notas que quer compartilhar.',send_s3:'Crie o arquivo e envie como preferir — e-mail, chat, AirDrop. A outra pessoa abre JW Sync → Compartilhar → Receber.',
+        choose_backup:'Abrir meu backup',pick_help:'Escolha um backup .jwlibrary para selecionar notas. Ele nunca sai do seu dispositivo.',
+        sel_title:'Selecione as notas para compartilhar',sel_help:'Toque numa nota para marcá-la. Só as marcadas são incluídas.',
+        search_ph:'Buscar notas…',sel_all:'Selecionar tudo',sel_none:'Limpar',sel_count:'{n} selecionadas',
+        create_file:'Criar arquivo',no_sel:'Marque pelo menos uma nota.',no_notes:'Nenhuma nota encontrada neste backup.',
+        made_t:'Seu arquivo está pronto',made_h:'Envie para a outra pessoa. Ela abre JW Sync → Compartilhar → Receber e escolhe este arquivo.',
+        download:'Baixar arquivo',copy:'Copiar texto',copied:'Copiado!',
+        recv_how:'Como receber',recv_s1:'Cole o texto compartilhado ou escolha o arquivo .jwshare.json.',recv_s2:'Veja as notas para conferir.',recv_s3:'Adicione-as a um backup e depois restaure esse backup no JW Library.',
+        paste_ph:'Cole as notas compartilhadas aqui ou solte um arquivo .jwshare.json…',choose_file:'Escolher arquivo',preview:'Pré-visualizar',
+        invalid:'Isto não parece um arquivo de notas compartilhadas válido.',
+        prev_t:'Notas compartilhadas (prévia)',prev_h:'São somente leitura. Para guardá-las, adicione a um backup abaixo.',
+        add_to:'Adicionar ao meu backup',add_h:'Escolha o backup .jwlibrary onde adicionar estas notas. Você receberá uma cópia atualizada.',
+        adopt_done:'{n} notas adicionadas ao seu backup',adopt_done_h:'Baixe o backup atualizado e restaure-o no JW Library para ver as notas.',download_updated:'Baixar backup atualizado',
+        loading:'Lendo seu backup…',building:'Criando arquivo…',error:'Não foi possível ler esse arquivo.',
+        shared_tag:'Compartilhado',no_title:'Sem título',privacy:'Privado: este arquivo é criado no seu dispositivo e só contém as notas que você escolheu. Compartilhe só com pessoas de confiança.'},
+      fr:{title:'Partager des notes',lead:'Envoyez certaines de vos notes à quelqu’un, ou ajoutez des notes qu’on vous a envoyées. Tout se passe sur votre appareil ; rien n’est envoyé.',
+        send_t:'Envoyer des notes',send_d:'Choisissez des notes de votre sauvegarde et créez un petit fichier à envoyer.',
+        recv_t:'Recevoir des notes',recv_d:'Un fichier partagé ? Affichez les notes et ajoutez-les à votre sauvegarde.',
+        back:'← JW Sync',start_over:'Recommencer',
+        send_how:'Comment envoyer',send_s1:'Ouvrez une de vos sauvegardes JW Library (fichier .jwlibrary).',send_s2:'Cochez les notes à partager.',send_s3:'Créez le fichier et envoyez-le comme vous voulez — e-mail, chat, AirDrop. L’autre personne ouvre JW Sync → Partager → Recevoir.',
+        choose_backup:'Ouvrir ma sauvegarde',pick_help:'Choisissez une sauvegarde .jwlibrary pour sélectionner des notes. Elle ne quitte jamais votre appareil.',
+        sel_title:'Sélectionnez les notes à partager',sel_help:'Touchez une note pour la cocher. Seules les notes cochées sont incluses.',
+        search_ph:'Rechercher des notes…',sel_all:'Tout sélectionner',sel_none:'Effacer',sel_count:'{n} sélectionnées',
+        create_file:'Créer le fichier',no_sel:'Cochez au moins une note.',no_notes:'Aucune note dans cette sauvegarde.',
+        made_t:'Votre fichier est prêt',made_h:'Envoyez-le à l’autre personne. Elle ouvre JW Sync → Partager → Recevoir et choisit ce fichier.',
+        download:'Télécharger',copy:'Copier le texte',copied:'Copié !',
+        recv_how:'Comment recevoir',recv_s1:'Collez le texte partagé ou choisissez le fichier .jwshare.json reçu.',recv_s2:'Affichez les notes pour vérifier.',recv_s3:'Ajoutez-les à une sauvegarde, puis restaurez-la dans JW Library.',
+        paste_ph:'Collez les notes partagées ici ou déposez un fichier .jwshare.json…',choose_file:'Choisir un fichier',preview:'Aperçu',
+        invalid:'Cela ne ressemble pas à un fichier de notes partagées valide.',
+        prev_t:'Notes partagées (aperçu)',prev_h:'En lecture seule. Pour les garder, ajoutez-les à une sauvegarde ci-dessous.',
+        add_to:'Ajouter à ma sauvegarde',add_h:'Choisissez la sauvegarde .jwlibrary à laquelle ajouter ces notes. Vous obtiendrez une copie mise à jour.',
+        adopt_done:'{n} notes ajoutées à votre sauvegarde',adopt_done_h:'Téléchargez la sauvegarde mise à jour, puis restaurez-la dans JW Library.',download_updated:'Télécharger la sauvegarde',
+        loading:'Lecture de votre sauvegarde…',building:'Création du fichier…',error:'Impossible de lire ce fichier.',
+        shared_tag:'Partagé',no_title:'Sans titre',privacy:'Privé : ce fichier est créé sur votre appareil et ne contient que les notes choisies. Ne le partagez qu’avec des personnes de confiance.'},
+      de:{title:'Notizen teilen',lead:'Sende einige deiner Notizen an jemanden – oder füge Notizen hinzu, die dir jemand geschickt hat. Alles passiert auf deinem Gerät; nichts wird hochgeladen.',
+        send_t:'Notizen senden',send_d:'Wähle Notizen aus deinem Backup und erstelle eine kleine Datei zum Versenden.',
+        recv_t:'Notizen empfangen',recv_d:'Eine geteilte Datei? Sieh dir die Notizen an und füge sie deinem Backup hinzu.',
+        back:'← JW Sync',start_over:'Neu starten',
+        send_how:'So funktioniert das Senden',send_s1:'Öffne eines deiner JW-Library-Backups (.jwlibrary-Datei).',send_s2:'Hake die Notizen an, die du teilen möchtest.',send_s3:'Erstelle die Datei und sende sie beliebig — E-Mail, Chat, AirDrop. Die andere Person öffnet JW Sync → Teilen → Empfangen.',
+        choose_backup:'Mein Backup öffnen',pick_help:'Wähle ein .jwlibrary-Backup, um Notizen auszuwählen. Es verlässt nie dein Gerät.',
+        sel_title:'Wähle die Notizen zum Teilen',sel_help:'Tippe eine Notiz an, um sie anzuhaken. Nur angehakte Notizen werden aufgenommen.',
+        search_ph:'Notizen suchen…',sel_all:'Alle auswählen',sel_none:'Leeren',sel_count:'{n} ausgewählt',
+        create_file:'Datei erstellen',no_sel:'Hake mindestens eine Notiz an.',no_notes:'Keine Notizen in diesem Backup.',
+        made_t:'Deine Datei ist fertig',made_h:'Sende sie an die andere Person. Sie öffnet JW Sync → Teilen → Empfangen und wählt diese Datei.',
+        download:'Datei herunterladen',copy:'Text kopieren',copied:'Kopiert!',
+        recv_how:'So funktioniert das Empfangen',recv_s1:'Füge den geteilten Text ein oder wähle die erhaltene .jwshare.json-Datei.',recv_s2:'Sieh dir die Notizen zur Kontrolle an.',recv_s3:'Füge sie einem Backup hinzu und stelle dieses dann in JW Library wieder her.',
+        paste_ph:'Geteilte Notizen hier einfügen oder .jwshare.json-Datei ablegen…',choose_file:'Datei wählen',preview:'Vorschau',
+        invalid:'Das sieht nicht nach einer gültigen Datei mit geteilten Notizen aus.',
+        prev_t:'Geteilte Notizen (Vorschau)',prev_h:'Nur lesbar. Zum Behalten unten einem Backup hinzufügen.',
+        add_to:'Zu meinem Backup hinzufügen',add_h:'Wähle das .jwlibrary-Backup, dem diese Notizen hinzugefügt werden sollen. Du erhältst eine aktualisierte Kopie.',
+        adopt_done:'{n} Notizen zu deinem Backup hinzugefügt',adopt_done_h:'Lade das aktualisierte Backup herunter und stelle es in JW Library wieder her.',download_updated:'Aktualisiertes Backup laden',
+        loading:'Backup wird gelesen…',building:'Datei wird erstellt…',error:'Diese Datei konnte nicht gelesen werden.',
+        shared_tag:'Geteilt',no_title:'Ohne Titel',privacy:'Privat: Diese Datei entsteht auf deinem Gerät und enthält nur die gewählten Notizen. Teile sie nur mit vertrauenswürdigen Personen.'},
+      it:{title:'Condividi note',lead:'Invia alcune note a un’altra persona, o aggiungi note che qualcuno ti ha inviato. Tutto avviene sul tuo dispositivo; niente viene caricato.',
+        send_t:'Invia note',send_d:'Scegli note dal tuo backup e crea un piccolo file da inviare.',
+        recv_t:'Ricevi note',recv_d:'Hai un file condiviso? Vedi le note e aggiungile al tuo backup.',
+        back:'← JW Sync',start_over:'Ricomincia',
+        send_how:'Come inviare',send_s1:'Apri uno dei tuoi backup JW Library (file .jwlibrary).',send_s2:'Seleziona le note da condividere.',send_s3:'Crea il file e invialo come preferisci — email, chat, AirDrop. L’altra persona apre JW Sync → Condividi → Ricevi.',
+        choose_backup:'Apri il mio backup',pick_help:'Scegli un backup .jwlibrary per selezionare le note. Non lascia mai il tuo dispositivo.',
+        sel_title:'Seleziona le note da condividere',sel_help:'Tocca una nota per selezionarla. Vengono incluse solo quelle selezionate.',
+        search_ph:'Cerca note…',sel_all:'Seleziona tutto',sel_none:'Pulisci',sel_count:'{n} selezionate',
+        create_file:'Crea file',no_sel:'Seleziona almeno una nota.',no_notes:'Nessuna nota in questo backup.',
+        made_t:'Il tuo file è pronto',made_h:'Invialo all’altra persona. Apre JW Sync → Condividi → Ricevi e sceglie questo file.',
+        download:'Scarica file',copy:'Copia testo',copied:'Copiato!',
+        recv_how:'Come ricevere',recv_s1:'Incolla il testo condiviso o scegli il file .jwshare.json ricevuto.',recv_s2:'Vedi le note per controllare.',recv_s3:'Aggiungile a un backup, poi ripristina quel backup in JW Library.',
+        paste_ph:'Incolla qui le note condivise o trascina un file .jwshare.json…',choose_file:'Scegli file',preview:'Anteprima',
+        invalid:'Questo non sembra un file di note condivise valido.',
+        prev_t:'Note condivise (anteprima)',prev_h:'Sono in sola lettura. Per tenerle, aggiungile a un backup qui sotto.',
+        add_to:'Aggiungi al mio backup',add_h:'Scegli il backup .jwlibrary a cui aggiungere queste note. Otterrai una copia aggiornata.',
+        adopt_done:'{n} note aggiunte al tuo backup',adopt_done_h:'Scarica il backup aggiornato e ripristinalo in JW Library per vedere le note.',download_updated:'Scarica backup aggiornato',
+        loading:'Lettura del backup…',building:'Creazione file…',error:'Impossibile leggere quel file.',
+        shared_tag:'Condiviso',no_title:'Senza titolo',privacy:'Privato: questo file è creato sul tuo dispositivo e contiene solo le note scelte. Condividilo solo con persone fidate.'},
+      ru:{title:'Поделиться заметками',lead:'Отправьте часть своих заметок другому человеку или добавьте заметки, которые прислали вам. Всё происходит на вашем устройстве; ничего не загружается.',
+        send_t:'Отправить заметки',send_d:'Выберите заметки из копии и создайте небольшой файл для отправки.',
+        recv_t:'Получить заметки',recv_d:'Получили файл? Просмотрите заметки и добавьте их в свою копию.',
+        back:'← JW Sync',start_over:'Начать заново',
+        send_how:'Как отправить',send_s1:'Откройте одну из своих копий JW Library (файл .jwlibrary).',send_s2:'Отметьте заметки, которыми хотите поделиться.',send_s3:'Создайте файл и отправьте любым способом — почта, чат, AirDrop. Другой человек открывает JW Sync → Поделиться → Получить.',
+        choose_backup:'Открыть мою копию',pick_help:'Выберите копию .jwlibrary, чтобы отметить заметки. Она не покидает устройство.',
+        sel_title:'Выберите заметки для отправки',sel_help:'Коснитесь заметки, чтобы отметить. Включаются только отмеченные.',
+        search_ph:'Поиск заметок…',sel_all:'Выбрать все',sel_none:'Очистить',sel_count:'Выбрано: {n}',
+        create_file:'Создать файл',no_sel:'Отметьте хотя бы одну заметку.',no_notes:'В этой копии нет заметок.',
+        made_t:'Ваш файл готов',made_h:'Отправьте его другому человеку. Он открывает JW Sync → Поделиться → Получить и выбирает этот файл.',
+        download:'Скачать файл',copy:'Копировать текст',copied:'Скопировано!',
+        recv_how:'Как получить',recv_s1:'Вставьте присланный текст или выберите файл .jwshare.json.',recv_s2:'Просмотрите заметки для проверки.',recv_s3:'Добавьте их в копию, затем восстановите её в JW Library.',
+        paste_ph:'Вставьте сюда заметки или перетащите файл .jwshare.json…',choose_file:'Выбрать файл',preview:'Предпросмотр',
+        invalid:'Это не похоже на корректный файл общих заметок.',
+        prev_t:'Общие заметки (просмотр)',prev_h:'Только для чтения. Чтобы сохранить, добавьте их в копию ниже.',
+        add_to:'Добавить в мою копию',add_h:'Выберите копию .jwlibrary, куда добавить заметки. Вы получите обновлённую копию.',
+        adopt_done:'Добавлено заметок: {n}',adopt_done_h:'Скачайте обновлённую копию и восстановите её в JW Library, чтобы увидеть заметки.',download_updated:'Скачать обновлённую копию',
+        loading:'Чтение копии…',building:'Создание файла…',error:'Не удалось прочитать этот файл.',
+        shared_tag:'Общие',no_title:'Без названия',privacy:'Конфиденциально: файл создаётся на вашем устройстве и содержит только выбранные заметки. Делитесь только с теми, кому доверяете.'},
+      ja:{title:'ノートを共有',lead:'自分のノートを誰かに送ったり、送られたノートを追加したりできます。すべて端末内で行われ、アップロードはされません。',
+        send_t:'ノートを送る',send_d:'バックアップからノートを選び、送る用の小さなファイルを作ります。',
+        recv_t:'ノートを受け取る',recv_d:'共有ファイルがありますか？ノートを確認して自分のバックアップに追加します。',
+        back:'← JW Sync',start_over:'やり直す',
+        send_how:'送り方',send_s1:'JW Library のバックアップ（.jwlibrary ファイル）を開きます。',send_s2:'共有したいノートにチェックを入れます。',send_s3:'ファイルを作り、メール・チャット・AirDrop など好きな方法で送ります。相手は JW Sync → 共有 → 受け取る を開きます。',
+        choose_backup:'バックアップを開く',pick_help:'ノートを選ぶ .jwlibrary バックアップを選択。端末から出ません。',
+        sel_title:'共有するノートを選択',sel_help:'ノートをタップしてチェック。チェックしたものだけが含まれます。',
+        search_ph:'ノートを検索…',sel_all:'すべて選択',sel_none:'クリア',sel_count:'{n} 件選択',
+        create_file:'共有ファイルを作成',no_sel:'少なくとも1件チェックしてください。',no_notes:'このバックアップにノートがありません。',
+        made_t:'共有ファイルができました',made_h:'相手に送ってください。相手は JW Sync → 共有 → 受け取る を開き、このファイルを選びます。',
+        download:'ファイルをダウンロード',copy:'テキストをコピー',copied:'コピーしました',
+        recv_how:'受け取り方',recv_s1:'共有テキストを貼り付けるか、受け取った .jwshare.json ファイルを選びます。',recv_s2:'ノートを確認します。',recv_s3:'自分のバックアップに追加し、それを JW Library に復元します。',
+        paste_ph:'共有ノートを貼り付け、または .jwshare.json ファイルをドロップ…',choose_file:'ファイルを選択',preview:'プレビュー',
+        invalid:'有効な共有ノートファイルではないようです。',
+        prev_t:'共有ノート（プレビュー）',prev_h:'読み取り専用です。保存するには下でバックアップに追加してください。',
+        add_to:'自分のバックアップに追加',add_h:'これらのノートを追加する .jwlibrary バックアップを選択。更新版をダウンロードできます。',
+        adopt_done:'{n} 件のノートを追加しました',adopt_done_h:'更新したバックアップをダウンロードし、JW Library に復元するとノートが表示されます。',download_updated:'更新したバックアップをダウンロード',
+        loading:'バックアップを読み込み中…',building:'ファイルを作成中…',error:'そのファイルを読み込めませんでした。',
+        shared_tag:'共有',no_title:'無題',privacy:'プライベート：このファイルは端末内で作られ、選んだノートだけを含みます。信頼できる人とだけ共有してください。'},
+      ko:{title:'노트 공유',lead:'내 노트 일부를 다른 사람에게 보내거나, 받은 노트를 추가하세요. 모든 작업은 기기에서 이뤄지며 업로드되지 않습니다.',
+        send_t:'노트 보내기',send_d:'백업에서 노트를 골라 보낼 작은 파일을 만듭니다.',
+        recv_t:'노트 받기',recv_d:'공유 파일이 있나요? 노트를 미리 보고 내 백업에 추가하세요.',
+        back:'← JW Sync',start_over:'다시 시작',
+        send_how:'보내는 방법',send_s1:'JW Library 백업(.jwlibrary 파일)을 엽니다.',send_s2:'공유할 노트를 체크합니다.',send_s3:'파일을 만들어 이메일·채팅·AirDrop 등으로 보냅니다. 상대는 JW Sync → 공유 → 받기 를 엽니다.',
+        choose_backup:'내 백업 열기',pick_help:'노트를 고를 .jwlibrary 백업을 선택하세요. 기기를 벗어나지 않습니다.',
+        sel_title:'공유할 노트 선택',sel_help:'노트를 탭하여 체크하세요. 체크한 노트만 포함됩니다.',
+        search_ph:'노트 검색…',sel_all:'전체 선택',sel_none:'지우기',sel_count:'{n}개 선택',
+        create_file:'공유 파일 만들기',no_sel:'노트를 하나 이상 체크하세요.',no_notes:'이 백업에 노트가 없습니다.',
+        made_t:'공유 파일이 준비됐습니다',made_h:'상대에게 보내세요. 상대는 JW Sync → 공유 → 받기 를 열고 이 파일을 선택합니다.',
+        download:'파일 다운로드',copy:'텍스트 복사',copied:'복사됨!',
+        recv_how:'받는 방법',recv_s1:'공유된 텍스트를 붙여넣거나 받은 .jwshare.json 파일을 선택하세요.',recv_s2:'노트를 미리 확인하세요.',recv_s3:'내 백업에 추가한 뒤 그 백업을 JW Library에 복원하세요.',
+        paste_ph:'공유된 노트를 붙여넣거나 .jwshare.json 파일을 놓으세요…',choose_file:'파일 선택',preview:'미리보기',
+        invalid:'유효한 공유 노트 파일이 아닌 것 같습니다.',
+        prev_t:'공유된 노트(미리보기)',prev_h:'읽기 전용입니다. 보관하려면 아래에서 백업에 추가하세요.',
+        add_to:'내 백업에 추가',add_h:'이 노트를 추가할 .jwlibrary 백업을 선택하세요. 업데이트된 사본을 받게 됩니다.',
+        adopt_done:'{n}개 노트를 백업에 추가했습니다',adopt_done_h:'업데이트된 백업을 다운로드하고 JW Library에 복원하면 노트가 보입니다.',download_updated:'업데이트된 백업 다운로드',
+        loading:'백업을 읽는 중…',building:'파일을 만드는 중…',error:'그 파일을 읽을 수 없습니다.',
+        shared_tag:'공유됨',no_title:'제목 없음',privacy:'비공개: 이 파일은 기기에서 만들어지며 선택한 노트만 포함합니다. 신뢰하는 사람과만 공유하세요.'},
+      tl:{title:'Ibahagi ang mga Tala',lead:'Magpadala ng ilang tala sa ibang tao, o magdagdag ng mga talang ipinadala sa iyo. Lahat ay nangyayari sa device mo; walang ina-upload.',
+        send_t:'Magpadala ng tala',send_d:'Pumili ng mga tala mula sa backup mo at gumawa ng maliit na file na ipapadala.',
+        recv_t:'Tumanggap ng tala',recv_d:'May ibinahaging file? Tingnan ang mga tala at idagdag sa backup mo.',
+        back:'← JW Sync',start_over:'Magsimula muli',
+        send_how:'Paano magpadala',send_s1:'Buksan ang isa sa mga JW Library backup mo (.jwlibrary file).',send_s2:'I-tsek ang mga talang gusto mong ibahagi.',send_s3:'Gawin ang file at ipadala — email, chat, AirDrop. Bubuksan ng kabila ang JW Sync → Ibahagi → Tumanggap.',
+        choose_backup:'Buksan ang backup ko',pick_help:'Pumili ng .jwlibrary backup para mamili ng tala. Hindi ito lalabas ng device mo.',
+        sel_title:'Piliin ang mga talang ibabahagi',sel_help:'I-tap ang tala para i-tsek. Ang naka-tsek lang ang isasama.',
+        search_ph:'Maghanap ng tala…',sel_all:'Piliin lahat',sel_none:'I-clear',sel_count:'{n} napili',
+        create_file:'Gumawa ng file',no_sel:'Mag-tsek ng kahit isang tala.',no_notes:'Walang talang nakita sa backup na ito.',
+        made_t:'Handa na ang file mo',made_h:'Ipadala ito sa kabila. Bubuksan nila ang JW Sync → Ibahagi → Tumanggap at pipiliin ang file na ito.',
+        download:'I-download ang file',copy:'Kopyahin ang teksto',copied:'Nakopya!',
+        recv_how:'Paano tumanggap',recv_s1:'I-paste ang ibinahaging teksto o pumili ng .jwshare.json file.',recv_s2:'Tingnan ang mga tala para masiguro.',recv_s3:'Idagdag ang mga ito sa backup, tapos i-restore ang backup na iyon sa JW Library.',
+        paste_ph:'I-paste ang ibinahaging tala dito o mag-drop ng .jwshare.json file…',choose_file:'Pumili ng file',preview:'Preview',
+        invalid:'Mukhang hindi ito wastong file ng ibinahaging tala.',
+        prev_t:'Ibinahaging tala (preview)',prev_h:'Read-only ito. Para itago, idagdag sa backup sa ibaba.',
+        add_to:'Idagdag sa backup ko',add_h:'Piliin ang .jwlibrary backup na pagdadagdagan ng mga talang ito. Makakakuha ka ng updated na kopya.',
+        adopt_done:'Naidagdag ang {n} tala sa backup mo',adopt_done_h:'I-download ang updated na backup, tapos i-restore sa JW Library para makita ang mga tala.',download_updated:'I-download ang updated backup',
+        loading:'Binabasa ang backup mo…',building:'Ginagawa ang file…',error:'Hindi mabasa ang file na iyon.',
+        shared_tag:'Ibinahagi',no_title:'Walang pamagat',privacy:'Pribado: ang file na ito ay ginawa sa device mo at naglalaman lang ng mga talang pinili mo. Ibahagi lang sa mga pinagkakatiwalaan.'}
+    };
+    function getLang(){ try{ var l=localStorage.getItem('jwsync_lang'); if(l&&I18N[l]) return l; }catch(_){ } var n=(navigator.language||'en').slice(0,2); return I18N[n]?n:'en'; }
+    function t(k,vars){ var L=I18N[getLang()]||I18N.en; var s=(L[k]!=null?L[k]:(I18N.en[k]!=null?I18N.en[k]:k)); if(vars) for(var v in vars) s=s.replace('{'+v+'}', vars[v]); return s; }
+    function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+    function stripHtml(h){ return String(h||'').replace(/<br\s*\/?>/gi,' ').replace(/<\/p>/gi,' ').replace(/<[^>]+>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim(); }
+    function sanitizeNoteHtml(html){ var d=document.createElement('div'); d.innerHTML=String(html||''); var allow={P:1,BR:1,B:1,STRONG:1,I:1,EM:1,U:1,UL:1,OL:1,LI:1}; (function walk(node){ var ch=Array.prototype.slice.call(node.childNodes); ch.forEach(function(n){ if(n.nodeType===1){ if(!allow[n.tagName]){ while(n.firstChild) node.insertBefore(n.firstChild,n); node.removeChild(n); } else { while(n.attributes&&n.attributes.length) n.removeAttribute(n.attributes[0].name); walk(n); } } else if(n.nodeType!==3){ node.removeChild(n); } }); })(d); return d.innerHTML; }
+    function uuid(){ return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g,function(ch){var r=Math.random()*16|0,v=ch==='x'?r:(r&0x3|0x8);return v.toString(16);}); }
+    var BOOKS=['Genesis','Exodus','Leviticus','Numbers','Deuteronomy','Joshua','Judges','Ruth','1 Samuel','2 Samuel','1 Kings','2 Kings','1 Chronicles','2 Chronicles','Ezra','Nehemiah','Esther','Job','Psalms','Proverbs','Ecclesiastes','Song of Solomon','Isaiah','Jeremiah','Lamentations','Ezekiel','Daniel','Hosea','Joel','Amos','Obadiah','Jonah','Micah','Nahum','Habakkuk','Zephaniah','Haggai','Zechariah','Malachi','Matthew','Mark','Luke','John','Acts','Romans','1 Corinthians','2 Corinthians','Galatians','Ephesians','Philippians','Colossians','1 Thessalonians','2 Thessalonians','1 Timothy','2 Timothy','Titus','Philemon','Hebrews','James','1 Peter','2 Peter','1 John','2 John','3 John','Jude','Revelation'];
+    function pubLabel(r){ if(r.BookNumber&&r.BookNumber>=1&&r.BookNumber<=66){ return BOOKS[r.BookNumber-1]+(r.ChapterNumber?' '+r.ChapterNumber:''); } return r.LocTitle||r.KeySymbol||''; }
+
+    var main=document.getElementById('sh-main');
+    function setMain(html){ main.innerHTML=html; }
+    function showNew(on){ var n=document.getElementById('sh-new'); if(n) n.style.display=on?'':'none'; }
+
+    var rows=function(db,sql){ try{ var r=db.exec(sql); if(r.length&&r[0].values){ var cols=r[0].columns; return r[0].values.map(function(v){ var o={}; cols.forEach(function(c,i){o[c]=v[i];}); return o; }); } }catch(_){ } return []; };
+
+    /* ───── home / mode chooser ───── */
+    function renderHome(){
+      showNew(false);
+      document.getElementById('sh-htitle').textContent=t('title');
+      var ic1='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+      var ic2='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
+      setMain(
+        '<div class="sh-hero"><p class="sh-eyebrow">JW Sync</p><h1 class="sh-h1">'+esc(t('title'))+'</h1><p class="sh-lead">'+esc(t('lead'))+'</p></div>'+
+        '<div class="sh-cards">'+
+          '<button class="sh-card" id="sh-go-send"><div class="sh-card-ic">'+ic1+'</div><h3>'+esc(t('send_t'))+'</h3><p>'+esc(t('send_d'))+'</p></button>'+
+          '<button class="sh-card" id="sh-go-recv"><div class="sh-card-ic">'+ic2+'</div><h3>'+esc(t('recv_t'))+'</h3><p>'+esc(t('recv_d'))+'</p></button>'+
+        '</div>'
+      );
+      document.getElementById('sh-go-send').onclick=renderSendIntro;
+      document.getElementById('sh-go-recv').onclick=renderReceive;
+    }
+    function stepsHtml(titleKey,keys){ var h='<h2 class="sh-section-title">'+esc(t(titleKey))+'</h2><div class="sh-steps">'; keys.forEach(function(k,i){ h+='<div class="sh-step"><span class="sh-step-n">'+(i+1)+'</span><span class="sh-step-t">'+esc(t(k))+'</span></div>'; }); return h+'</div>'; }
+
+    /* ───── SEND ───── */
+    function renderSendIntro(prefill){
+      showNew(true);
+      setMain('<div class="sh-panel">'+stepsHtml('send_how',['send_s1','send_s2','send_s3'])+
+        '<p class="sh-section-help">'+esc(t('pick_help'))+'</p>'+
+        '<button class="sh-btn" id="sh-open-backup">'+esc(t('choose_backup'))+'</button></div>');
+      document.getElementById('sh-open-backup').onclick=function(){ pickFile('.jwlibrary',function(f){ loadBackup(f); }); };
+      if(prefill) loadBackup(prefill);
+    }
+    var sendState={ notes:[], sel:{}, fileName:'' };
+    function loadBackup(file){
+      setMain('<div class="sh-state"><div class="sh-spin"></div><div>'+esc(t('loading'))+'</div></div>');
+      var SQL;
+      initSqlJs({locateFile:function(f){return SQLJS_CDN+f;}})
+        .then(function(s){ SQL=s; return (file instanceof ArrayBuffer)?file:(file.arrayBuffer?file.arrayBuffer():new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=rej;r.readAsArrayBuffer(file);})); })
+        .then(function(buf){ return JSZip.loadAsync(buf); })
+        .then(function(zip){ var k=Object.keys(zip.files).find(function(n){return /userdata\.db$/i.test(n);}); if(!k) throw new Error('no db'); return zip.file(k).async('uint8array'); })
+        .then(function(bytes){
+          var db=new SQL.Database(bytes);
+          var ns=rows(db,"SELECT n.NoteId, n.Title, n.Content, n.LastModified, u.ColorIndex, l.Title AS LocTitle, l.BookNumber, l.ChapterNumber, l.KeySymbol FROM Note n LEFT JOIN UserMark u ON n.UserMarkId=u.UserMarkId LEFT JOIN Location l ON n.LocationId=l.LocationId ORDER BY n.LastModified DESC");
+          var tagMap={};
+          rows(db,"SELECT tm.NoteId, tg.Name FROM TagMap tm JOIN Tag tg ON tm.TagId=tg.TagId WHERE tm.NoteId IS NOT NULL").forEach(function(r){ (tagMap[r.NoteId]=tagMap[r.NoteId]||[]).push(r.Name); });
+          ns.forEach(function(n){ n._tags=tagMap[n.NoteId]||[]; });
+          db.close();
+          sendState={ notes:ns, sel:{}, fileName:(file&&file.name)||'backup.jwlibrary' };
+          renderSelect('');
+        })
+        .catch(function(e){ console.error(e); setMain('<div class="sh-state"><div class="sh-err">'+esc(t('error'))+'</div><button class="sh-btn sh-btn-ghost" id="sh-retry">'+esc(t('choose_backup'))+'</button></div>'); var rb=document.getElementById('sh-retry'); if(rb) rb.onclick=function(){ renderSendIntro(); }; });
+    }
+    function renderSelect(q){
+      var ns=sendState.notes;
+      if(!ns.length){ setMain('<div class="sh-state"><div>'+esc(t('no_notes'))+'</div></div>'); return; }
+      var ql=(q||'').toLowerCase();
+      var shown=ns.filter(function(n){ if(!ql) return true; return ((n.Title||'')+' '+stripHtml(n.Content||'')+' '+pubLabel(n)).toLowerCase().indexOf(ql)>=0; });
+      var selCount=Object.keys(sendState.sel).filter(function(k){return sendState.sel[k];}).length;
+      var list='';
+      shown.slice(0,1000).forEach(function(n){
+        var on=!!sendState.sel[n.NoteId];
+        list+='<div class="sh-item'+(on?' sel':'')+'" data-id="'+n.NoteId+'"><span class="sh-check"></span>'+
+          '<div class="sh-item-body"><div class="sh-item-title">'+esc((n.Title&&n.Title.trim())||t('no_title'))+'</div>'+
+          '<div class="sh-item-ex">'+esc(stripHtml(n.Content||'')||'—')+'</div>'+
+          '<div class="sh-item-meta">'+esc(pubLabel(n))+'</div></div></div>';
+      });
+      setMain('<div class="sh-filebadge">📄 '+esc(sendState.fileName)+'</div>'+
+        '<h2 class="sh-section-title">'+esc(t('sel_title'))+'</h2><p class="sh-section-help">'+esc(t('sel_help'))+'</p>'+
+        '<div class="sh-toolbar"><label class="sh-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7d8aa8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="sh-q" type="search" placeholder="'+esc(t('search_ph'))+'" value="'+esc(q||'')+'"></label>'+
+          '<button class="sh-mini" id="sh-all">'+esc(t('sel_all'))+'</button><button class="sh-mini" id="sh-none">'+esc(t('sel_none'))+'</button></div>'+
+        '<div class="sh-list" id="sh-list">'+list+'</div>'+
+        '<div class="sh-footer"><span class="sh-count" id="sh-count">'+esc(t('sel_count',{n:selCount}))+'</span><button class="sh-btn" id="sh-create"'+(selCount?'':' disabled')+'>'+esc(t('create_file'))+'</button></div>'+
+        '<p class="sh-note">🔒 '+esc(t('privacy'))+'</p>');
+      var qEl=document.getElementById('sh-q'); var deb;
+      qEl.oninput=function(){ clearTimeout(deb); deb=setTimeout(function(){ renderSelect(qEl.value); var nq=document.getElementById('sh-q'); if(nq){ nq.focus(); nq.selectionStart=nq.value.length; } },200); };
+      function refreshCount(){ var c=Object.keys(sendState.sel).filter(function(k){return sendState.sel[k];}).length; document.getElementById('sh-count').textContent=t('sel_count',{n:c}); document.getElementById('sh-create').disabled=!c; }
+      Array.prototype.forEach.call(document.querySelectorAll('#sh-list .sh-item'),function(it){
+        it.onclick=function(){ var id=it.getAttribute('data-id'); sendState.sel[id]=!sendState.sel[id]; it.classList.toggle('sel',sendState.sel[id]); refreshCount(); };
+      });
+      document.getElementById('sh-all').onclick=function(){ shown.forEach(function(n){ sendState.sel[n.NoteId]=true; }); renderSelect(q); };
+      document.getElementById('sh-none').onclick=function(){ sendState.sel={}; renderSelect(q); };
+      document.getElementById('sh-create').onclick=function(){
+        var chosen=sendState.notes.filter(function(n){ return sendState.sel[n.NoteId]; });
+        if(!chosen.length){ return; }
+        var env={ v:1, app:'jwsync', kind:'notes', exported:new Date().toISOString(), notes:chosen.map(function(n){ return { title:n.Title||'', content:n.Content||'', color:n.ColorIndex||0, tags:n._tags||[], pub:pubLabel(n), lastMod:n.LastModified||'' }; }) };
+        renderShareResult(JSON.stringify(env,null,2), env.notes.length);
+      };
+    }
+    function renderShareResult(json,count){
+      setMain('<div class="sh-panel"><p class="sh-ok">✓ '+esc(t('made_t'))+'</p><p class="sh-section-help">'+esc(t('made_h'))+'</p>'+
+        '<textarea class="sh-text" readonly id="sh-json"></textarea>'+
+        '<div class="sh-footer"><button class="sh-btn" id="sh-dl">'+esc(t('download'))+'</button><button class="sh-btn sh-btn-ghost" id="sh-cp">'+esc(t('copy'))+'</button></div></div>');
+      document.getElementById('sh-json').value=json;
+      document.getElementById('sh-dl').onclick=function(){ var blob=new Blob([json],{type:'application/json'}); var url=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=url; a.download='shared_notes.jwshare.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},2000); };
+      document.getElementById('sh-cp').onclick=function(){ var b=document.getElementById('sh-cp'); function done(){ b.textContent=t('copied'); setTimeout(function(){b.textContent=t('copy');},1500); } try{ navigator.clipboard.writeText(json).then(done,function(){ var ta=document.getElementById('sh-json'); ta.select(); try{document.execCommand('copy');}catch(_){} done(); }); }catch(_){ var ta=document.getElementById('sh-json'); ta.select(); try{document.execCommand('copy');}catch(__){} done(); } };
+    }
+
+    /* ───── RECEIVE ───── */
+    var recvEnv=null;
+    function renderReceive(){
+      showNew(true);
+      setMain('<div class="sh-panel">'+stepsHtml('recv_how',['recv_s1','recv_s2','recv_s3'])+
+        '<textarea class="sh-text" id="sh-paste" placeholder="'+esc(t('paste_ph'))+'"></textarea>'+
+        '<div class="sh-footer"><button class="sh-btn sh-btn-ghost" id="sh-choose">'+esc(t('choose_file'))+'</button><button class="sh-btn" id="sh-prev">'+esc(t('preview'))+'</button></div>'+
+        '<div id="sh-prevout"></div></div>');
+      var ta=document.getElementById('sh-paste');
+      ta.addEventListener('dragover',function(e){ e.preventDefault(); ta.classList.add('drop'); });
+      ta.addEventListener('dragleave',function(){ ta.classList.remove('drop'); });
+      ta.addEventListener('drop',function(e){ e.preventDefault(); ta.classList.remove('drop'); var f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]; if(f){ var r=new FileReader(); r.onload=function(){ ta.value=String(r.result||''); doPreview(); }; r.readAsText(f); } });
+      document.getElementById('sh-choose').onclick=function(){ pickFile('.json,.jwshare,application/json',function(f){ var r=new FileReader(); r.onload=function(){ ta.value=String(r.result||''); doPreview(); }; r.readAsText(f); }); };
+      document.getElementById('sh-prev').onclick=doPreview;
+      function doPreview(){
+        var out=document.getElementById('sh-prevout'); out.innerHTML='';
+        var env=null; try{ env=JSON.parse(document.getElementById('sh-paste').value); }catch(_){ }
+        if(!env||env.app!=='jwsync'||!Array.isArray(env.notes)){ out.innerHTML='<div class="sh-err">'+esc(t('invalid'))+'</div>'; return; }
+        recvEnv=env;
+        var list='';
+        env.notes.slice(0,200).forEach(function(nd){ list+='<div class="sh-item"><div class="sh-item-body"><div class="sh-item-title">'+esc((nd.title&&String(nd.title).trim())||t('no_title'))+'</div><div class="sh-item-ex">'+esc(stripHtml(String(nd.content||'')))+'</div></div></div>'; });
+        out.innerHTML='<h2 class="sh-section-title" style="margin-top:20px">'+esc(t('prev_t'))+' · '+esc(t('sel_count',{n:env.notes.length}))+'</h2>'+
+          '<p class="sh-section-help">'+esc(t('prev_h'))+'</p><div class="sh-list">'+list+'</div>'+
+          '<p class="sh-section-help" style="margin-top:16px">'+esc(t('add_h'))+'</p>'+
+          '<button class="sh-btn" id="sh-addto">'+esc(t('add_to'))+'</button>';
+        document.getElementById('sh-addto').onclick=function(){ pickFile('.jwlibrary',function(f){ adoptIntoBackup(f, env.notes); }); };
+      }
+    }
+    function adoptIntoBackup(file, notes){
+      setMain('<div class="sh-state"><div class="sh-spin"></div><div>'+esc(t('building'))+'</div></div>');
+      var SQL;
+      initSqlJs({locateFile:function(f){return SQLJS_CDN+f;}})
+        .then(function(s){ SQL=s; return (file.arrayBuffer?file.arrayBuffer():new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=rej;r.readAsArrayBuffer(file);})); })
+        .then(function(buf){ return JSZip.loadAsync(buf).then(function(zip){ return { zip:zip }; }); })
+        .then(function(ctx){ var zip=ctx.zip; var k=Object.keys(zip.files).find(function(n){return /userdata\.db$/i.test(n);}); if(!k) throw new Error('no db'); return zip.file(k).async('uint8array').then(function(bytes){ return { zip:zip, dbKey:k, db:new SQL.Database(bytes) }; }); })
+        .then(function(ctx){
+          var db=ctx.db; var now=new Date().toISOString().replace('T',' ').slice(0,19); var added=0;
+          function tagId(name){ var s=String(name).replace(/'/g,"''"); var r=rows(db,"SELECT TagId FROM Tag WHERE Name='"+s+"' COLLATE NOCASE"); if(r.length) return r[0].TagId; db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]); return rows(db,'SELECT last_insert_rowid() AS id')[0].id; }
+          var shareName=t('shared_tag');
+          try{ db.run('PRAGMA foreign_keys=OFF;'); }catch(_){ }
+          notes.forEach(function(nd){ try{
+            var title=(typeof nd.title==='string')?nd.title:''; var content=sanitizeNoteHtml((typeof nd.content==='string')?nd.content:'');
+            db.run('INSERT INTO Note (Guid, Title, Content, LastModified, Created, BlockType, BlockIdentifier) VALUES (?,?,?,?,?,0,0)',[uuid(),title,content,now,now]);
+            var noteId=rows(db,'SELECT last_insert_rowid() AS id')[0].id;
+            var names=[shareName].concat(Array.isArray(nd.tags)?nd.tags:[]); var seen={};
+            names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()]) return; seen[tn.toLowerCase()]=1; db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,0)',[tagId(tn),noteId]); });
+            added++;
+          }catch(e){ console.error('adopt',e); } });
+          var bytes=db.export(); db.close();
+          ctx.zip.file(ctx.dbKey, bytes);
+          return ctx.zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){ return { blob:blob, added:added, name:(file.name||'backup.jwlibrary') }; });
+        })
+        .then(function(res){
+          var base=(res.name||'backup').replace(/\.jwlibrary$/i,'');
+          setMain('<div class="sh-panel"><p class="sh-ok">✓ '+esc(t('adopt_done',{n:res.added}))+'</p><p class="sh-section-help">'+esc(t('adopt_done_h'))+'</p><button class="sh-btn" id="sh-dlu">'+esc(t('download_updated'))+'</button></div>');
+          document.getElementById('sh-dlu').onclick=function(){ var url=URL.createObjectURL(res.blob); var a=document.createElement('a'); a.href=url; a.download='updated_'+base+'.jwlibrary'; document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},3000); };
+        })
+        .catch(function(e){ console.error(e); setMain('<div class="sh-state"><div class="sh-err">'+esc(t('error'))+'</div><button class="sh-btn sh-btn-ghost" id="sh-rb">'+esc(t('back'))+'</button></div>'); var rb=document.getElementById('sh-rb'); if(rb) rb.onclick=renderReceive; });
+    }
+
+    /* ───── helpers ───── */
+    function pickFile(accept,cb){ var fi=document.createElement('input'); fi.type='file'; fi.accept=accept; fi.style.display='none'; document.body.appendChild(fi); fi.onchange=function(){ var f=fi.files&&fi.files[0]; document.body.removeChild(fi); if(f) cb(f); }; fi.click(); }
+    function readPending(){ return new Promise(function(resolve){ try{ var req=indexedDB.open(IDB_NAME,1); req.onupgradeneeded=function(e){ e.target.result.createObjectStore(IDB_STORE); }; req.onsuccess=function(e){ var db=e.target.result; var tx=db.transaction(IDB_STORE,'readwrite'); var g=tx.objectStore(IDB_STORE).get(IDB_KEY); g.onsuccess=function(){ var v=g.result; tx.objectStore(IDB_STORE).delete(IDB_KEY); db.close(); resolve(v||null); }; g.onerror=function(){ db.close(); resolve(null); }; }; req.onerror=function(){ resolve(null); }; }catch(_){ resolve(null); } }); }
+
+    document.getElementById('sh-back').onclick=function(){ window.location.href='./'; };
+    document.getElementById('sh-new').onclick=renderHome;
+
+    document.title=t('title')+' — JW Sync';
+    document.getElementById('sh-htitle').textContent=t('title');
+    document.getElementById('sh-back').textContent=t('back');
+    document.getElementById('sh-new').textContent=t('start_over');
+
+    document.addEventListener('DOMContentLoaded',function(){});
+    readPending().then(function(p){ if(p&&p.buffer){ renderSendIntro(p.buffer); } else { renderHome(); } }).catch(renderHome);
+
+    // test hooks
+    window.__shRenderHome=renderHome;
+    window.__shLoadBackup=loadBackup;
+    window.__shRenderReceive=renderReceive;
+    window.__shAdopt=adoptIntoBackup;
+  })();
+  </script>
+</body>
+</html>
