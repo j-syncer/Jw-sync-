@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.29.0] — 2026-06-02
+
+### Added
+- **Merge performance breakdown.** The completion screen now includes a collapsible **Merge performance** panel showing total time and how long each stage took (prepare / merge / package) as a quick coloured bar. For very large libraries it adds a tip on how to merge faster (combine fewer files at once or use date-range extraction). Purely informational — it doesn't change how merges work.
+
+---
+
 ## [2.28.0] — 2026-06-02
 
 ### Added

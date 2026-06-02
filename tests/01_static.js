@@ -264,6 +264,13 @@ for (const path of FILES) {
     else ok('Note-sharing UI (share/receive) wired');
   }
 
+  // 8j) Merge performance dashboard (v2.29.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('function buildPerfHtml') || !c.includes('jwc-perf') || !c.includes('__jwLastMergeTimings'))
+      fail('Merge performance section missing');
+    else ok('Merge performance section present');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');

@@ -164,6 +164,49 @@ async function waitForOverlay(doc, id, timeoutMs) {
     }
   }
 
+  section('Merge performance dashboard (v2.29.0)');
+  {
+    // The worker reports stage timings on the 'done' message; app.js stashes
+    // them on window.__jwLastMergeTimings; the celebration reads them.
+    const fs = require('fs');
+    const wsrc = fs.readFileSync(require('path').join(__dirname, '..', 'beta/js/merge-worker.js'), 'utf8');
+    if (wsrc.includes('timings.total') && wsrc.includes('performance.now') && wsrc.includes('timings: result.timings'))
+      ok('worker instruments + returns stage timings');
+    else fail('worker timing instrumentation missing');
+
+    const dom = makeDom();
+    const win = dom.window, doc = win.document;
+    await wait(80);
+    win.__jwLastMergeTimings = { prepare: 120, merge: 640, package: 240, total: 1000, rows: 1500 };
+    setupFakeFileInput(doc, 'Perf_Test.jwlibrary');
+    await simulateMergeComplete(doc);
+    const overlay = await waitForOverlay(doc, 'jw-celebrate-overlay');
+    if (!overlay) { fail('overlay did not appear'); dom.window.close(); }
+    else {
+      const perf = overlay.querySelector('.jwc-perf');
+      if (perf) ok('performance section rendered when timings present');
+      else fail('performance section missing');
+      if (perf && /1(\.0)?s/.test(perf.textContent)) ok('total merge time shown (1s)');
+      else fail('total time not shown: ' + (perf && perf.textContent));
+      const segs = perf ? perf.querySelectorAll('div[style*="display:flex"] span') : [];
+      if (segs.length >= 1) ok('stage duration bar rendered (' + segs.length + ' segments)');
+      else fail('stage bar segments missing');
+      dom.window.close();
+    }
+
+    // And NO performance section when timings are absent.
+    const dom2 = makeDom();
+    const win2 = dom2.window, doc2 = win2.document;
+    await wait(80);
+    try { delete win2.__jwLastMergeTimings; } catch (_) {}
+    setupFakeFileInput(doc2, 'NoPerf.jwlibrary');
+    await simulateMergeComplete(doc2);
+    const ov2 = await waitForOverlay(doc2, 'jw-celebrate-overlay');
+    if (ov2 && !ov2.querySelector('.jwc-perf')) ok('no performance section without timings');
+    else fail('performance section should be absent without timings');
+    dom2.window.close();
+  }
+
   section('Demo merge → "Use my real files" CTA appears');
   {
     const dom = makeDom();
