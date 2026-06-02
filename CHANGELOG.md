@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.32.0] — 2026-06-02
+
+### Fixed
+- **The top navigation no longer scrunches up on phones.** Previously "App", "Community", and "Tools" were squeezed together and truncated (e.g. "A…", "Com…") with the language picker crowding them. The nav now uses a tidy **two-level layout on small screens** — the logo and language picker share the top line, and **App · Community · ✦ Tools** get their own full-width row with complete, readable labels and the Tools launcher clearly set apart.
+
+---
+
 ## [2.31.0] — 2026-06-02
 
 ### Changed

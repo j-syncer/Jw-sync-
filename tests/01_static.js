@@ -276,6 +276,14 @@ for (const path of FILES) {
     else ok('App top-bar Tools button present');
   }
 
+  // 8l) Two-level mobile nav (v2.32.0): language picker sits beside the logo,
+  //     not inside .site-nav-links (so App/Community/Tools get a full row).
+  if (isBeta) {
+    if (!/<\/div>\s*<select id="landing-lang-select"/.test(c))
+      fail('Language picker not moved out of .site-nav-links (two-level nav)');
+    else ok('Two-level nav: language picker is a direct #site-nav child');
+  }
+
   // 8j2) Browse tab strip scrolls on overflow (mobile) — v2.30.0
   if (isBeta) {
     if (!/\.jb-tabs\{[^}]*overflow-x:auto/.test(c)) fail('Browse tab strip is not horizontally scrollable (mobile cut-off)');
