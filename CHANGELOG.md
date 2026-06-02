@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.31.0] — 2026-06-02
+
+### Changed
+- **The extra services now feel like extra services.** Browse, Service Year Highlights, and Share Notes used to sit in the nav next to ordinary links. They're now gathered under one distinct, accented **Tools** button (in both the app top bar and the home-page nav) that opens a tidy menu — each service with its own icon and a one-line description. It reads as a little suite of bonus tools, clearly set apart from the everyday controls, and (unlike before) the launcher stays visible on phones.
+
+---
+
 ## [2.30.0] — 2026-06-02
 
 ### Added

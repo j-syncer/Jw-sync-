@@ -73,7 +73,34 @@ html, body {
         .nav-btn:hover { color: var(--color-text-secondary); border-color: rgba(255,255,255,.13); background: rgba(255,255,255,.04); }
         .nav-btn.active { color: var(--color-orange-light); border-color: var(--color-border-orange); background: rgba(234,88,12,.08); }
         .nav-btn.has-errors { color: #f87171; border-color: rgba(248,113,113,.35); }
-        .nav-btn-browse {
+        
+/* ── Tools / Extra Services launcher (v2.31.0) — set apart from mundane nav ── */
+.nav-btn-tools, .site-nav-tools {
+  color: #fdba74 !important;
+  border: 1px solid rgba(234,88,12,.45) !important;
+  background: linear-gradient(135deg, rgba(234,88,12,.20), rgba(234,88,12,.06)) !important;
+  font-weight: 700;
+  display: inline-flex; align-items: center; gap: 5px;
+  box-shadow: 0 1px 6px rgba(234,88,12,.18);
+}
+.nav-btn-tools:hover, .site-nav-tools:hover {
+  color: #fff !important;
+  border-color: rgba(234,88,12,.75) !important;
+  background: linear-gradient(135deg, rgba(234,88,12,.32), rgba(234,88,12,.12)) !important;
+  box-shadow: 0 2px 12px rgba(234,88,12,.30);
+}
+.site-nav-tools { margin-left: 8px; position: relative; }
+.site-nav-tools::before {
+  content: ''; position: absolute; left: -8px; top: 6px; bottom: 6px; width: 1px;
+  background: rgba(148,163,184,.22);
+}
+.site-nav-tools-ic, .nav-btn-tools-ic { color: #fb923c; }
+.site-nav-tools-caret { font-size: 10px; opacity: .8; }
+@media (max-width: 600px) {
+  /* one compact, ALWAYS-visible launcher on mobile (unlike the old hidden buttons) */
+  #site-nav-tools { display: inline-flex !important; padding: 6px 10px; }
+}
+.nav-btn-browse {
             color: #fff !important;
             background: rgba(234,88,12,.18) !important;
             border-color: rgba(234,88,12,.7) !important;

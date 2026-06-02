@@ -451,20 +451,21 @@ async function waitForStats(doc, timeoutMs) {
   }
 
   // ──────────────────────────────────────────────────────────────────
-  section('Nav + teaser buttons in app.js call __jwGoHighlights');
+  section('Highlights reachable via Tools menu + celebration (v2.31.0)');
   {
     const appJs = fs.readFileSync(REPO + '/beta/js/app.js', 'utf8');
-    if (appJs.includes('nav-btn-wrapped')) ok('nav Wrapped button class present in beta/js/app.js');
-    else fail('nav-btn-wrapped class missing from beta/js/app.js');
-    if (appJs.includes('simple-mode-teaser-btn-wrapped')) ok('Simple Mode teaser Wrapped button class present');
-    else fail('simple-mode-teaser-btn-wrapped class missing');
-    if (appJs.includes('__jwGoHighlights')) ok('__jwGoHighlights called from nav and teaser buttons');
-    else fail('__jwGoHighlights not referenced in app.js');
-    // wrp_open + wrp_stats keys should still exist (used for button labels)
-    if (appJs.includes('wrp_open:')) ok('wrp_open translation key present');
-    else fail('wrp_open translation key missing from app.js');
+    const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+    // The app top bar now opens the consolidated Tools menu instead of a
+    // standalone Wrapped nav button.
+    if (appJs.includes('nav-btn-tools') && appJs.includes('__jwOpenToolsMenu'))
+      ok('app top-bar Tools button opens the service menu');
+    else fail('app Tools button / __jwOpenToolsMenu missing from app.js');
+    // The Tools menu (in index.html) routes to Highlights via __jwGoHighlights.
+    if (html.includes('__jwGoHighlights')) ok('Tools menu routes to __jwGoHighlights');
+    else fail('__jwGoHighlights not referenced for the Tools menu');
+    // wrp_open key still present (the Tools button label fallback / app strings)
     const openCount = (appJs.match(/wrp_open:/g) || []).length;
-    if (openCount === 10) ok('wrp_open added to all 10 languages');
+    if (openCount === 10) ok('wrp_open present in all 10 app languages');
     else fail('wrp_open count: expected 10, got ' + openCount);
   }
 

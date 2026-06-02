@@ -262,9 +262,18 @@ for (const path of FILES) {
     if (!c.includes('function __jwGoShare') || !c.includes("href='share.html'"))
       fail('Dedicated Share page handoff missing');
     else ok('Dedicated Share page handoff present');
-    if (!c.includes('id="site-nav-share-btn"') || !c.includes('id="landing-share-btn"'))
-      fail('Share entry-point buttons missing');
-    else ok('Share nav + landing buttons present');
+    if (!c.includes('id="landing-share-btn"'))
+      fail('Landing Share CTA button missing');
+    else ok('Landing Share CTA button present');
+  }
+
+  // 8k) Tools / Extra Services launcher (v2.31.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('window.__jwOpenToolsMenu') || !c.includes('id="site-nav-tools"'))
+      fail('Tools service menu / launcher missing');
+    else ok('Tools service menu + launcher present');
+    if (!allSrc.includes('nav-btn-tools')) fail('App top-bar Tools button missing (should replace Browse+Highlights)');
+    else ok('App top-bar Tools button present');
   }
 
   // 8j2) Browse tab strip scrolls on overflow (mobile) — v2.30.0
@@ -301,11 +310,11 @@ for (const path of FILES) {
     else ok('merge-flow Demo handler marker present');
 
     // 9a) Demo trigger surfaces in every place we expect:
-    //   - React internal nav (next to "Browse notes")
+    //   - React internal nav (next to the Tools launcher)
     //   - Simple Mode teaser (next to "Explore Full Mode →")
-    //   - static nav now has the Service Year button instead of Try Demo
-    if (!c.includes('class="site-nav-link site-nav-wrapped"')) fail('static nav Service Year button missing');
-    else ok('static #site-nav Service Year button present');
+    //   - static nav now has the Tools launcher (Browse/Highlights/Share)
+    if (!c.includes('class="site-nav-link site-nav-tools"')) fail('static nav Tools launcher missing');
+    else ok('static #site-nav Tools launcher present');
     // These render inside the React bundle (now external for beta)
     if (!allSrc.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
     else ok('React internal nav demo button present');
