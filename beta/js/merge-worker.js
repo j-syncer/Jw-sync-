@@ -524,7 +524,7 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   if (p.previewConfirm) {
     self.postMessage({ type: 'impact', counts: {
       Note: f.Note, UserMark: f.UserMark, Bookmark: f.Bookmark, Tag: f.Tag,
-      Updated: f.Updated, Deduplicated: f.Deduplicated
+      Updated: f.Updated, Deduplicated: f.Deduplicated, InputField: f.InputFields || 0
     } });
     const proceed = await new Promise(res => { confirmResolver = res; });
     if (!proceed) {

@@ -79,6 +79,38 @@ async function waitForOverlay(doc, id, ms = 2000) {
     }
   }
 
+  section('Input Fields row appears when present (v2.27.0)');
+  {
+    const dom = makeDom();
+    const win = dom.window, doc = win.document;
+    const p = win.__jwImpactPreview(Object.assign({}, counts, { InputField: 9 }));
+    const overlay = await waitForOverlay(doc, 'jw-impact-overlay');
+    if (!overlay) { fail('overlay did not render'); dom.window.close(); }
+    else {
+      const rows = overlay.querySelectorAll('.jip-row');
+      if (rows.length === 7) ok('7 stat rows rendered with Input Fields');
+      else fail('expected 7 rows with InputField, got ' + rows.length);
+      if (overlay.textContent.includes('+9')) ok('study answers count (+9) shown');
+      else fail('study answers count not shown');
+      overlay.querySelector('[data-jip-go]').click();
+      await p;
+      dom.window.close();
+    }
+  }
+  // And NO extra row when InputField is absent/zero.
+  {
+    const dom = makeDom();
+    const win = dom.window, doc = win.document;
+    const p = win.__jwImpactPreview(counts);
+    const overlay = await waitForOverlay(doc, 'jw-impact-overlay');
+    const rows = overlay.querySelectorAll('.jip-row');
+    if (rows.length === 6) ok('no Input Fields row when count absent (6 rows)');
+    else fail('expected 6 rows without InputField, got ' + rows.length);
+    overlay.querySelector('.jip-btn-cancel').click();
+    await p;
+    dom.window.close();
+  }
+
   section('Cancel resolves false');
   {
     const dom = makeDom();

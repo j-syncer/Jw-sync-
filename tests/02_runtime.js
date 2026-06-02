@@ -96,7 +96,18 @@ function assertContains(text, needle, label) {
       EndToken INTEGER,
       UserMarkId INTEGER
     );
+    CREATE TABLE InputField (
+      LocationId INTEGER,
+      TextTag TEXT,
+      Value TEXT,
+      PRIMARY KEY (LocationId, TextTag)
+    );
   `);
+  // Seed study answers (Input Fields)
+  db.run(`INSERT INTO InputField (LocationId, TextTag, Value) VALUES
+    (1, 'q1', 'My answer about creation'),
+    (1, 'q2', 'A second study answer'),
+    (2, 'q1', 'Reflection on light')`);
 
   // Seed locations
   db.run(`INSERT INTO Location (LocationId, BookNumber, ChapterNumber, KeySymbol, Title) VALUES
@@ -240,15 +251,19 @@ function assertContains(text, needle, label) {
   let noteRows = doc.querySelectorAll('.jb-list .jb-note');
   assertEq(noteRows.length, 5, 'Notes row count');
 
-  // Tab counts
+  // Tab counts (4 tabs as of v2.27; the Study Answers tab is hidden when empty)
   const tabs = doc.querySelectorAll('.jb-tab');
-  assertEq(tabs.length, 3, 'Tab count');
+  assertEq(tabs.length, 4, 'Tab count');
   const notesTab = doc.querySelector('.jb-tab[data-type="notes"]');
   const hlTab = doc.querySelector('.jb-tab[data-type="highlights"]');
   const bmTab = doc.querySelector('.jb-tab[data-type="bookmarks"]');
+  const ifTab = doc.querySelector('.jb-tab[data-type="inputfields"]');
   assertEq(notesTab.querySelector('.jb-tab-count').textContent, '5', 'Notes tab count');
   assertEq(hlTab.querySelector('.jb-tab-count').textContent, '5', 'Highlights tab count');
   assertEq(bmTab.querySelector('.jb-tab-count').textContent, '3', 'Bookmarks tab count');
+  if (ifTab && ifTab.style.display !== 'none') ok('Study Answers tab visible (has InputField rows)');
+  else fail('Study Answers tab should be visible with InputField rows');
+  assertEq(ifTab.querySelector('.jb-tab-count').textContent, '3', 'Study Answers tab count');
 
   // Default sort: newest first → first row should be the most recent (Awake note, 2024-05-01)
   const firstNoteTitle = noteRows[0].querySelector('.jb-note-title span:last-child').textContent;
@@ -604,6 +619,37 @@ function assertContains(text, needle, label) {
     bmWithSnippet.click();
     await waitFor(() => doc.querySelector('.jb-detail-content'), 'bookmark detail');
     assertContains(doc.querySelector('.jb-detail-content').textContent, 'In the beginning', 'Bookmark detail content');
+  }
+
+  section('Study Answers tab — edit + delete + undo (v2.27.0)');
+  {
+    const wait = (ms) => new Promise(r => setTimeout(r, ms));
+    doc.querySelector('.jb-tab[data-type="inputfields"]').click();
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 3, 'study answers render');
+    ok('Study Answers tab lists 3 answers');
+    // Open the first answer and edit its value
+    doc.querySelectorAll('.jb-list .jb-note')[0].click();
+    await waitFor(() => doc.querySelector('.jb-detail-content'), 'answer detail');
+    Array.from(doc.querySelectorAll('.jb-detail-actions .jb-btn')).find(b => /edit/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelector('.jb-edit-textarea'), 'answer edit textarea');
+    doc.querySelector('.jb-edit-textarea').value = 'EDITED ANSWER';
+    Array.from(doc.querySelectorAll('.jb-detail-actions .jb-btn')).find(b => /save/i.test(b.textContent)).click();
+    await waitFor(() => /EDITED ANSWER/.test(doc.querySelector('.jb-detail-content').textContent), 'edit persisted in view');
+    ok('study answer edit saved (shown in detail)');
+    // Delete an answer → 2 remain; Undo → back to 3
+    Array.from(doc.querySelectorAll('.jb-detail-actions button')).find(b => /delete/i.test(b.textContent) && !/confirm/i.test(b.className)).click();
+    await waitFor(() => doc.querySelector('.jb-delete-confirm') || /\?/.test(doc.querySelector('.jb-detail-actions').textContent), 'delete confirm');
+    Array.from(doc.querySelectorAll('.jb-detail-actions button')).find(b => /yes|sí|sim|oui|ja/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 2, 'answer deleted (3→2)');
+    ok('study answer deleted');
+    doc.querySelector('.jb-undo').click();
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 3, 'undo restored answer');
+    ok('Undo restored the deleted answer');
+    // Undo back to pristine + return to bookmarks tab for the remaining sections
+    let g = 0;
+    while (!doc.querySelector('.jb-undo').disabled && g++ < 40) { doc.querySelector('.jb-undo').click(); await wait(20); }
+    doc.querySelector('.jb-tab[data-type="bookmarks"]').click();
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 3, 'back to bookmarks');
   }
 
   section('Clear-all');

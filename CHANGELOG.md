@@ -4,6 +4,14 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.27.0] — 2026-06-02
+
+### Added
+- **Study Answers are no longer invisible.** JW Library's fill-in study answers (Input Fields) have always been carried through a merge, but you could never see them. The Note Explorer now has a **Study Answers** tab (shown only when your backup contains them) where you can search, **edit**, and **delete** your answers — each change covered by the same Undo/Redo safety net.
+- **Pre-merge preview now counts study answers**, so you can see how many will be added before you commit a merge.
+
+---
+
 ## [2.26.0] — 2026-06-02
 
 ### Added

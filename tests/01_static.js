@@ -244,6 +244,16 @@ for (const path of FILES) {
     else ok('Bulk-manager UI (select/batch/checkbox/undo) present');
   }
 
+  // 8h) Study Questions / Input Fields (v2.27.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('function buildInputFieldRow') || !c.includes('function saveInputField') || !c.includes('function deleteInputField'))
+      fail('Input Field (Study Answers) functions missing');
+    else ok('Input Field (Study Answers) functions present');
+    if (!c.includes("['inputfields',t('tab_inputfields')]") || !c.includes('state.allInputFields'))
+      fail('Study Answers tab wiring missing');
+    else ok('Study Answers tab wired');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');
