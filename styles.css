@@ -73,7 +73,33 @@ html, body {
         .nav-btn:hover { color: var(--color-text-secondary); border-color: rgba(255,255,255,.13); background: rgba(255,255,255,.04); }
         .nav-btn.active { color: var(--color-orange-light); border-color: var(--color-border-orange); background: rgba(234,88,12,.08); }
         .nav-btn.has-errors { color: #f87171; border-color: rgba(248,113,113,.35); }
-        .nav-btn-browse {
+        /* ── Tools / Extra Services launcher (v2.31.0) — set apart from mundane nav ── */
+.nav-btn-tools, .site-nav-tools {
+  color: #fdba74 !important;
+  border: 1px solid rgba(234,88,12,.45) !important;
+  background: linear-gradient(135deg, rgba(234,88,12,.20), rgba(234,88,12,.06)) !important;
+  font-weight: 700;
+  display: inline-flex; align-items: center; gap: 5px;
+  box-shadow: 0 1px 6px rgba(234,88,12,.18);
+}
+.nav-btn-tools:hover, .site-nav-tools:hover {
+  color: #fff !important;
+  border-color: rgba(234,88,12,.75) !important;
+  background: linear-gradient(135deg, rgba(234,88,12,.32), rgba(234,88,12,.12)) !important;
+  box-shadow: 0 2px 12px rgba(234,88,12,.30);
+}
+.site-nav-tools { margin-left: 8px; position: relative; }
+.site-nav-tools::before {
+  content: ''; position: absolute; left: -8px; top: 6px; bottom: 6px; width: 1px;
+  background: rgba(148,163,184,.22);
+}
+.site-nav-tools-ic, .nav-btn-tools-ic { color: #fb923c; }
+.site-nav-tools-caret { font-size: 10px; opacity: .8; }
+@media (max-width: 600px) {
+  /* one compact, ALWAYS-visible launcher on mobile (unlike the old hidden buttons) */
+  #site-nav-tools { display: inline-flex !important; padding: 6px 10px; }
+}
+.nav-btn-browse {
             color: #fff !important;
             background: rgba(234,88,12,.18) !important;
             border-color: rgba(234,88,12,.7) !important;
@@ -201,6 +227,7 @@ html, body {
         body.light .site-nav-logo { color: #ea580c; }
         body.light .site-nav-link { color: #475569; }
 .nav-lang-select {
+  margin-left: 12px;
   background: rgba(71,85,105,.25);
   border: 1px solid rgba(255,255,255,.1);
   color: #94a3b8;
@@ -780,7 +807,7 @@ body.light #jws-loading { background:#f4f8ff; }
   letter-spacing: -.3px;
 }
 .site-nav-logo:hover { color: #ea580c; }
-.site-nav-links { display: flex; align-items: center; gap: 4px; }
+.site-nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
 .site-nav-link {
   font-size: 13px;
   font-weight: 500;
@@ -1787,10 +1814,12 @@ body.is-landing #jws-loading { display: none !important; }
    off the right edge and clipped by overflow-x:hidden. Pin it and let
    the text links give way (truncate / hide). */
 @media (max-width: 600px) {
-  #site-nav { gap: 8px; }
-  .site-nav-logo { flex-shrink: 0; }
-  .site-nav-links { flex: 1 1 auto; min-width: 0; gap: 6px; justify-content: flex-end; }
-  .site-nav-link { flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  #site-nav-wrapped-btn, #site-nav-share-btn { display: none; }
-  .nav-lang-select { flex-shrink: 0; }
-}
+  /* Two-level nav: row 1 = logo + language; row 2 = App / Community / Tools */
+  #site-nav { flex-wrap: wrap; height: auto; min-height: 48px; padding: 7px 16px; row-gap: 8px; column-gap: 8px; justify-content: flex-start; }
+  .site-nav-logo { order: 1; flex: 0 0 auto; }
+  .nav-lang-select { order: 2; margin-left: auto; flex: 0 0 auto; }
+  .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; justify-content: space-between; }
+  .site-nav-link { flex: 0 1 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 12px; }
+  .site-nav-tools { margin-left: 0; }
+  .site-nav-tools::before { display: none; }
+  #site-nav-tools { display: inline-flex !important; }
