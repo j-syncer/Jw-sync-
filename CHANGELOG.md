@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.26.0] — 2026-06-02
+
+### Added
+- **Bulk editing in the Note Explorer.** Tap **Select** to enter selection mode, tick multiple notes, highlights, or bookmarks, then act on them all at once:
+  - **Set a highlight color**, **add a tag**, or **delete** the whole selection in one step.
+  - **Select all** / **none** for the current filtered view.
+- **Undo / Redo.** Every edit — single or bulk — can now be reversed with the **Undo** and **Redo** buttons (or Ctrl/⌘-Z and ⇧-Z) before you export. Made a mistake retagging or deleted the wrong notes? Step right back. Nothing is final until you download the file.
+
+---
+
 ## [2.25.0] — 2026-06-01
 
 ### Added

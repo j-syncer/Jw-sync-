@@ -459,6 +459,102 @@ function assertContains(text, needle, label) {
     }
   }
 
+  section('Bulk select + batch actions + Undo/Redo (v2.26.0)');
+  {
+    const wait = (ms) => new Promise(r => setTimeout(r, ms));
+    // Helper: click Export, capture the generated .jwlibrary blob, open its DB.
+    async function exportAndRead() {
+      let blob = null;
+      const origCOU = win.URL.createObjectURL;
+      win.URL.createObjectURL = (b) => { blob = b; return 'blob:exp'; };
+      win.URL.revokeObjectURL = () => {};
+      doc.querySelector('.jb-export-btn').click();
+      await waitFor(() => blob !== null, 'export blob');
+      win.URL.createObjectURL = origCOU;
+      const zip = await JSZip.loadAsync(Buffer.from(await blob.arrayBuffer()));
+      const key = Object.keys(zip.files).find(n => /userdata\.db$/i.test(n));
+      const bytes = await zip.files[key].async('uint8array');
+      const SQLx = await initSqlJs({ locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) });
+      return new SQLx.Database(bytes);
+    }
+    // Observe the tag filter dropdown (repopulated after every edit/undo).
+    const tagInFilter = () => /BulkTag/.test(doc.querySelector('.jb-filter-tag').textContent);
+
+    // Enter select mode
+    const selToggle = doc.querySelector('.jb-select-toggle');
+    if (selToggle) ok('Select toggle present in toolbar'); else fail('Select toggle missing');
+    selToggle.click();
+    await waitFor(() => doc.querySelector('.jb-note.jb-selectable'), 'rows become selectable');
+    // Select the first two note rows
+    const rows = doc.querySelectorAll('.jb-list .jb-note.jb-selectable');
+    rows[0].click(); rows[1].click();
+    await waitFor(() => doc.querySelectorAll('.jb-check.jb-check-on').length === 2, 'two rows checked');
+    ok('two notes selected (checkboxes on)');
+    const bar = doc.querySelector('.jb-batch-bar');
+    if (bar && bar.style.display !== 'none') ok('batch bar visible with selection');
+    else fail('batch bar not visible');
+
+    // Batch add tag "BulkTag" — verify via the tag filter (no export needed)
+    Array.from(bar.querySelectorAll('.jb-batch-btn')).find(b => /tag/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelector('.jb-batch-input'), 'tag input appears');
+    const tagInput = doc.querySelector('.jb-batch-input');
+    tagInput.value = 'BulkTag';
+    Array.from(doc.querySelectorAll('.jb-batch-bar .jb-batch-btn')).find(b => /add|agregar|adicionar|ajouter/i.test(b.textContent)).click();
+    await waitFor(() => tagInFilter(), 'BulkTag appears after batch add');
+    ok('batch tag applied (appears in tag filter)');
+
+    // Undo → tag gone (export disabled at baseline, so verify via filter)
+    doc.querySelector('.jb-undo').click();
+    await waitFor(() => !tagInFilter(), 'BulkTag gone after Undo');
+    ok('Undo removed the batch tag');
+
+    // Redo → tag back
+    doc.querySelector('.jb-redo').click();
+    await waitFor(() => tagInFilter(), 'BulkTag back after Redo');
+    ok('Redo re-applied the batch tag');
+
+    // Batch delete the two selected notes, then Undo to restore (dirty>0 → export works)
+    const before = await exportAndRead();
+    const noteCountBefore = before.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
+    before.close();
+    // Re-enter selection (delete clears it); select the same two rows
+    const rows2 = doc.querySelectorAll('.jb-list .jb-note.jb-selectable');
+    rows2[0].click(); rows2[1].click();
+    await waitFor(() => doc.querySelectorAll('.jb-check.jb-check-on').length === 2, 're-select two');
+    Array.from(doc.querySelectorAll('.jb-batch-bar .jb-batch-btn')).find(b => /delete|eliminar|excluir|supprimer|löschen/i.test(b.textContent)).click();
+    await waitFor(() => /\?|undo/i.test(doc.querySelector('.jb-batch-bar').textContent), 'delete confirm shows');
+    Array.from(doc.querySelectorAll('.jb-batch-bar .jb-batch-btn')).find(b => /yes|sí|sim|oui|ja|delete/i.test(b.textContent)).click();
+    await wait(80);
+    let db = await exportAndRead();
+    const noteCountAfter = db.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
+    db.close();
+    if (noteCountAfter === noteCountBefore - 2) ok('batch delete removed 2 notes (' + noteCountBefore + '→' + noteCountAfter + ')');
+    else fail('batch delete expected ' + (noteCountBefore - 2) + ', got ' + noteCountAfter);
+    doc.querySelector('.jb-undo').click();
+    await wait(80);
+    db = await exportAndRead();
+    const restored = db.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
+    db.close();
+    assertEq(restored, noteCountBefore, 'Undo restored the deleted notes');
+
+    // Exit select mode for subsequent sections
+    doc.querySelector('.jb-select-toggle').click();
+    await wait(40);
+    if (!doc.querySelector('.jb-note.jb-selectable')) ok('exited select mode');
+    else fail('still in select mode');
+
+    // Undo back to the pristine loaded state so later sections (and the close
+    // test, which prompts on unsaved edits) see the original library again.
+    let guard = 0;
+    while (!doc.querySelector('.jb-undo').disabled && guard++ < 40) {
+      doc.querySelector('.jb-undo').click();
+      await wait(20);
+    }
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 5, 'restored to 5 original notes');
+    if (doc.querySelector('.jb-export-btn').disabled) ok('clean baseline restored (export disabled)');
+    else fail('expected clean baseline after undo-all');
+  }
+
   section('Switch to Highlights tab');
   hlTab.click();
   await waitFor(() => {

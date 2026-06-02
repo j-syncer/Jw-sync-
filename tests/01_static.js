@@ -231,6 +231,19 @@ for (const path of FILES) {
     else ok('Browse swipe-to-switch tabs present');
   }
 
+  // 8g) Bulk manager + Undo/Redo (v2.26.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('function snapshot') || !c.includes('function doUndo') || !c.includes('function doRedo') || !c.includes('function hydrateFromDb'))
+      fail('Undo/redo infrastructure missing');
+    else ok('Undo/redo infrastructure present');
+    if (!c.includes('function batchDelete') || !c.includes('function batchAddTag') || !c.includes('function batchSetColor'))
+      fail('Batch operations missing');
+    else ok('Batch operations present');
+    if (!c.includes('jb-select-toggle') || !c.includes('jb-batch-bar') || !c.includes('jb-check') || !c.includes('jb-undo'))
+      fail('Bulk-manager UI classes missing');
+    else ok('Bulk-manager UI (select/batch/checkbox/undo) present');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');
