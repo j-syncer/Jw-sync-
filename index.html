@@ -246,7 +246,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.25.0",
+      "softwareVersion": "2.30.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -380,6 +380,7 @@
     <a href="#app" id="site-nav-app" class="site-nav-link" data-i18n="nav_app">App</a>
     <a href="#forum" id="site-nav-forum" class="site-nav-link" data-i18n="nav_community">Community</a>
     <button type="button" class="site-nav-link site-nav-wrapped" id="site-nav-wrapped-btn" onclick="__jwGoHighlights()">Your Service Year Highlights</button>
+    <button type="button" class="site-nav-link site-nav-wrapped" id="site-nav-share-btn" onclick="__jwGoShare()" data-i18n="nav_share">Share Notes</button>
     <select id="landing-lang-select" class="nav-lang-select" aria-label="Language">
       <option value="en">🇬🇧 English</option>
       <option value="es">🇪🇸 Español</option>
@@ -418,6 +419,19 @@ function __jwGoHighlights(){
     req.onerror=function(){window.location.href=href;};
   }).catch(function(){window.location.href=href;});
 }
+function __jwGoShare(){
+  var file=null;
+  try{file=window.__jwLastFile||null;}catch(_){}
+  var href='share.html';
+  if(!file){window.location.href=href;return;}
+  var getbuf=(file instanceof ArrayBuffer)?Promise.resolve(file):(typeof file.arrayBuffer==='function'?file.arrayBuffer():new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=rej;r.readAsArrayBuffer(file);}));
+  getbuf.then(function(buf){
+    var req=indexedDB.open('jwsync_share_v1',1);
+    req.onupgradeneeded=function(e){e.target.result.createObjectStore('pending');};
+    req.onsuccess=function(e){var db=e.target.result;var tx=db.transaction('pending','readwrite');tx.objectStore('pending').put({name:(file&&file.name)||'backup.jwlibrary',buffer:buf},'next');tx.oncomplete=function(){db.close();window.location.href=href;};tx.onerror=function(){db.close();window.location.href=href;};};
+    req.onerror=function(){window.location.href=href;};
+  }).catch(function(){window.location.href=href;});
+}
 </script>
 
     <!-- Loading screen: hidden by JS once React mounts -->
@@ -431,7 +445,7 @@ function __jwGoHighlights(){
       <div class="landing-hero">
         <h1 data-i18n="hero_title">Merge JW Library backups privately in your browser</h1>
         <p data-i18n="hero_desc">Merge, browse, and edit your JW Library notes, highlights, and bookmarks — entirely in your browser. Your files never leave your device.</p>
-        <div class="cta-row"><a href="#app" class="cta-btn" id="landing-launch-btn" data-i18n="cta_launch">Launch App &#8594;</a><button type="button" class="cta-btn-secondary" id="landing-demo-btn" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button><button type="button" class="cta-btn-ghost" id="landing-howto-btn" data-howto-trigger data-i18n="cta_howto">First time? How it works</button></div>
+        <div class="cta-row"><a href="#app" class="cta-btn" id="landing-launch-btn" data-i18n="cta_launch">Launch App &#8594;</a><button type="button" class="cta-btn-secondary" id="landing-demo-btn" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button><button type="button" class="cta-btn-ghost" id="landing-howto-btn" data-howto-trigger data-i18n="cta_howto">First time? How it works</button><button type="button" class="cta-btn-share" id="landing-share-btn" onclick="__jwGoShare()" data-i18n="cta_share">Share notes</button></div>
       </div>
       <h2 class="landing-section-title">Everything you need to merge and manage your JW Library notes</h2>
       <div class="landing-features">
@@ -799,7 +813,7 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"]{o
 
 <script>
 /* Compact landing-only i18n so the language picker works before the app bundle loads (first-time landing). The full bundle supersedes this. */
-window.__JW_LANDING_I18N = {"en": {"hero_title": "Merge JW Library backups privately in your browser", "hero_desc": "Merge, browse, and edit your JW Library notes, highlights, and bookmarks — entirely in your browser. Your files never leave your device.", "cta_launch": "Launch App →", "cta_try_demo": "Try with sample notes", "cta_howto": "First time? How it works", "feat_local_title": "Local-only processing", "feat_local_desc": "All merging happens in your browser via WebAssembly. No server. No uploads. Complete privacy.", "feat_tags_title": "Tags & highlights merged", "feat_tags_desc": "Intelligently combine tags, highlights, bookmarks and margin notes across all your backups.", "feat_date_title": "Date-specific extraction", "feat_date_desc": "Extract content from a specific backup date to restore exactly what you had at any point in time.", "feat_browse_title": "Browse & edit notes", "feat_browse_desc": "Search your entire library, edit notes, manage tags, change highlight colours, then download the updated backup.", "feat_review_title": "Review before you download", "feat_review_desc": "See exactly which notes were edited on more than one device and choose which version wins — no black box.", "footer_tagline": "JW Sync processes all data locally — your files never leave your device.", "nav_app": "App", "nav_community": "Community"}, "es": {"hero_title": "Combina copias de seguridad de JW Library de forma privada en tu navegador", "hero_desc": "Fusiona, explora y edita tus notas, resaltados y marcadores de JW Library — completamente en tu navegador. Tus archivos nunca salen de tu dispositivo.", "cta_launch": "Abrir la app →", "cta_try_demo": "Probar con notas de muestra", "cta_howto": "¿Primera vez? Cómo funciona", "feat_local_title": "Procesamiento solo local", "feat_local_desc": "Toda la combinación ocurre en tu navegador mediante WebAssembly. Sin servidor. Sin cargas. Privacidad total.", "feat_tags_title": "Etiquetas y subrayados combinados", "feat_tags_desc": "Combina de forma inteligente etiquetas, subrayados, marcadores y notas al margen de todas tus copias de seguridad.", "feat_date_title": "Extracción por fecha", "feat_date_desc": "Extrae contenido de una fecha de copia de seguridad específica para restaurar exactamente lo que tenías en cualquier momento.", "feat_browse_title": "Explorar y editar notas", "feat_browse_desc": "Busca en toda tu biblioteca, edita notas, gestiona etiquetas, cambia colores de subrayado y descarga la copia actualizada.", "feat_review_title": "Revisa antes de descargar", "feat_review_desc": "Comprueba qué notas se editaron en más de un dispositivo y elige qué versión conservar — sin cajas negras.", "footer_tagline": "JW Sync procesa todos los datos localmente — tus archivos nunca salen de tu dispositivo.", "nav_app": "App", "nav_community": "Comunidad"}, "pt": {"hero_title": "Combine cópias de segurança do JW Library de forma privada no seu navegador", "hero_desc": "Mescle, navegue e edite suas notas, marcações e marcadores da JW Library — totalmente no seu navegador. Seus arquivos nunca saem do seu dispositivo.", "cta_launch": "Abrir o app →", "cta_try_demo": "Experimentar com notas de exemplo", "cta_howto": "Primeira vez? Como funciona", "feat_local_title": "Processamento apenas local", "feat_local_desc": "Toda combinação acontece no seu navegador via WebAssembly. Sem servidor. Sem uploads. Privacidade total.", "feat_tags_title": "Tags e destaques combinados", "feat_tags_desc": "Combine de forma inteligente tags, destaques, marcadores e notas marginais de todos os seus backups.", "feat_date_title": "Extração por data", "feat_date_desc": "Extraia conteúdo de uma data de backup específica para restaurar exatamente o que você tinha em qualquer momento.", "feat_browse_title": "Navegar e editar notas", "feat_browse_desc": "Pesquise em toda a sua biblioteca, edite notas, gerencie tags, altere cores de destaque e baixe o backup atualizado.", "feat_review_title": "Revise antes de baixar", "feat_review_desc": "Veja quais notas foram editadas em mais de um dispositivo e escolha qual versão manter — sem caixa-preta.", "footer_tagline": "JW Sync processa todos os dados localmente — seus arquivos nunca saem do seu dispositivo.", "nav_app": "App", "nav_community": "Comunidade"}, "fr": {"hero_title": "Fusionnez vos sauvegardes JW Library en toute confidentialité dans votre navigateur", "hero_desc": "Fusionnez, parcourez et modifiez vos notes, surlignages et signets JW Library — entièrement dans votre navigateur. Vos fichiers ne quittent jamais votre appareil.", "cta_launch": "Lancer l'app →", "cta_try_demo": "Essayer avec des notes d'exemple", "cta_howto": "Première fois ? Comment ça marche", "feat_local_title": "Traitement local uniquement", "feat_local_desc": "Toute fusion s'effectue dans votre navigateur via WebAssembly. Pas de serveur. Pas de téléchargement. Confidentialité totale.", "feat_tags_title": "Étiquettes et surlignages fusionnés", "feat_tags_desc": "Combinez intelligemment les étiquettes, surlignages, signets et notes de marge de toutes vos sauvegardes.", "feat_date_title": "Extraction par date", "feat_date_desc": "Extrayez le contenu d'une date de sauvegarde spécifique pour restaurer exactement ce que vous aviez à tout moment.", "feat_browse_title": "Parcourir et modifier les notes", "feat_browse_desc": "Recherchez dans toute votre bibliothèque, modifiez des notes, gérez les étiquettes, changez les couleurs de surlignage et téléchargez la sauvegarde mise à jour.", "feat_review_title": "Vérifiez avant de télécharger", "feat_review_desc": "Voyez quelles notes ont été modifiées sur plusieurs appareils et choisissez la version à conserver — aucune boîte noire.", "footer_tagline": "JW Sync traite toutes les données localement — vos fichiers ne quittent jamais votre appareil.", "nav_app": "App", "nav_community": "Communauté"}, "de": {"hero_title": "JW-Library-Backups privat im Browser zusammenführen", "hero_desc": "Führe deine JW-Library-Notizen, Hervorhebungen und Lesezeichen zusammen, durchsuche und bearbeite sie — alles in deinem Browser. Deine Dateien verlassen nie dein Gerät.", "cta_launch": "App starten →", "cta_try_demo": "Mit Beispielnotizen testen", "cta_howto": "Zum ersten Mal? So funktioniert es", "feat_local_title": "Nur lokale Verarbeitung", "feat_local_desc": "Die gesamte Zusammenführung erfolgt im Browser über WebAssembly. Kein Server. Keine Uploads. Vollständige Privatsphäre.", "feat_tags_title": "Tags und Hervorhebungen zusammengeführt", "feat_tags_desc": "Kombiniert intelligent Tags, Hervorhebungen, Lesezeichen und Randnotizen aus all Ihren Backups.", "feat_date_title": "Datumsbasierte Extraktion", "feat_date_desc": "Extrahieren Sie Inhalte aus einem bestimmten Backup-Datum, um genau das wiederherzustellen, was Sie zu jedem Zeitpunkt hatten.", "feat_browse_title": "Notizen durchsuchen und bearbeiten", "feat_browse_desc": "Durchsuchen Sie Ihre gesamte Bibliothek, bearbeiten Sie Notizen, verwalten Sie Tags, ändern Sie Hervorhebungsfarben und laden Sie das aktualisierte Backup herunter.", "feat_review_title": "Prüfen vor dem Download", "feat_review_desc": "Sieh genau, welche Notizen auf mehreren Geräten bearbeitet wurden, und wähle, welche Version bleibt — keine Blackbox.", "footer_tagline": "JW Sync verarbeitet alle Daten lokal — Ihre Dateien verlassen nie Ihr Gerät.", "nav_app": "App", "nav_community": "Community"}, "it": {"hero_title": "Unisci i backup di JW Library in modo privato nel tuo browser", "hero_desc": "Unisci, sfoglia e modifica le tue note, evidenziazioni e segnalibri di JW Library — interamente nel tuo browser. I tuoi file non lasciano mai il tuo dispositivo.", "cta_launch": "Apri l'app →", "cta_try_demo": "Prova con note di esempio", "cta_howto": "Prima volta? Come funziona", "feat_local_title": "Elaborazione solo locale", "feat_local_desc": "Tutta l'unione avviene nel tuo browser tramite WebAssembly. Nessun server. Nessun caricamento. Privacy completa.", "feat_tags_title": "Tag ed evidenziazioni unite", "feat_tags_desc": "Combina in modo intelligente tag, evidenziazioni, segnalibri e note a margine di tutti i tuoi backup.", "feat_date_title": "Estrazione per data", "feat_date_desc": "Estrai contenuti da una data di backup specifica per ripristinare esattamente ciò che avevi in qualsiasi momento.", "feat_browse_title": "Sfoglia e modifica le note", "feat_browse_desc": "Cerca nell'intera biblioteca, modifica note, gestisci tag, cambia colori di evidenziazione e scarica il backup aggiornato.", "feat_review_title": "Controlla prima di scaricare", "feat_review_desc": "Scopri quali note sono state modificate su più dispositivi e scegli quale versione tenere — nessuna scatola nera.", "footer_tagline": "JW Sync elabora tutti i dati localmente — i tuoi file non lasciano mai il tuo dispositivo.", "nav_app": "App", "nav_community": "Comunità"}, "ru": {"hero_title": "Объединяйте резервные копии JW Library конфиденциально в браузере", "hero_desc": "Объединяйте, просматривайте и редактируйте свои заметки, выделения и закладки JW Library — полностью в браузере. Ваши файлы никогда не покидают устройство.", "cta_launch": "Открыть приложение →", "cta_try_demo": "Попробовать с примерами", "cta_howto": "Впервые? Как это работает", "feat_local_title": "Только локальная обработка", "feat_local_desc": "Всё объединение происходит в браузере через WebAssembly. Нет сервера. Нет загрузок. Полная конфиденциальность.", "feat_tags_title": "Теги и выделения объединены", "feat_tags_desc": "Интеллектуально объединяет теги, выделения, закладки и заметки на полях из всех резервных копий.", "feat_date_title": "Извлечение по дате", "feat_date_desc": "Извлекайте содержимое из определённой даты резервной копии для точного восстановления данных на любой момент.", "feat_browse_title": "Просмотр и редактирование заметок", "feat_browse_desc": "Ищите по всей библиотеке, редактируйте заметки, управляйте тегами, меняйте цвета выделений и скачайте обновлённую копию.", "feat_review_title": "Проверьте перед загрузкой", "feat_review_desc": "Узнайте, какие заметки были изменены на нескольких устройствах, и выберите, какую версию оставить — без чёрного ящика.", "footer_tagline": "JW Sync обрабатывает все данные локально — ваши файлы никогда не покидают устройство.", "nav_app": "Приложение", "nav_community": "Сообщество"}, "ja": {"hero_title": "JWライブラリーのバックアップをブラウザで非公開に統合", "hero_desc": "JWライブラリーのメモ、ハイライト、ブックマークを、ブラウザ上で統合・閲覧・編集できます。ファイルはデバイスから外に出ません。", "cta_launch": "アプリを開く →", "cta_try_demo": "サンプルノートで試す", "cta_howto": "初めての方へ：使い方", "feat_local_title": "ローカル処理のみ", "feat_local_desc": "すべての統合はWebAssemblyでブラウザ内で行われます。サーバーなし。アップロードなし。完全なプライバシー。", "feat_tags_title": "タグとハイライトを統合", "feat_tags_desc": "すべてのバックアップからタグ、ハイライト、ブックマーク、欄外メモをインテリジェントに統合します。", "feat_date_title": "日付指定による抽出", "feat_date_desc": "特定のバックアップ日のコンテンツを抽出して、任意の時点のデータを正確に復元できます。", "feat_browse_title": "メモの閲覧と編集", "feat_browse_desc": "ライブラリ全体を検索し、メモを編集し、タグを管理し、ハイライトの色を変更して更新されたバックアップをダウンロードできます。", "feat_review_title": "ダウンロード前に確認", "feat_review_desc": "複数の端末で編集されたメモを正確に確認し、残すバージョンを選べます。ブラックボックスはありません。", "footer_tagline": "JW Syncはすべてのデータをローカルで処理します — ファイルはデバイスから外に出ません。", "nav_app": "アプリ", "nav_community": "コミュニティ"}, "ko": {"hero_title": "JW 라이브러리 백업을 브라우저에서 비공개로 병합", "hero_desc": "JW 라이브러리 노트, 하이라이트, 북마크를 브라우저 안에서 병합, 탐색, 편집하세요. 파일은 기기를 벗어나지 않습니다.", "cta_launch": "앱 열기 →", "cta_try_demo": "샘플 노트로 시도", "cta_howto": "처음이신가요? 사용 방법", "feat_local_title": "로컬 전용 처리", "feat_local_desc": "모든 병합은 WebAssembly를 통해 브라우저에서 이루어집니다. 서버 없음. 업로드 없음. 완벽한 개인 정보 보호.", "feat_tags_title": "태그와 하이라이트 병합", "feat_tags_desc": "모든 백업에서 태그, 하이라이트, 북마크, 여백 메모를 지능적으로 결합합니다.", "feat_date_title": "날짜별 추출", "feat_date_desc": "특정 백업 날짜의 콘텐츠를 추출하여 원하는 시점의 데이터를 정확하게 복원하세요.", "feat_browse_title": "메모 탐색 및 편집", "feat_browse_desc": "전체 라이브러리를 검색하고 메모를 편집하고 태그를 관리하고 하이라이트 색상을 변경한 후 업데이트된 백업을 다운로드하세요.", "feat_review_title": "다운로드 전에 검토", "feat_review_desc": "여러 기기에서 편집된 메모를 정확히 확인하고 어떤 버전을 남길지 선택하세요 — 블랙박스 없음.", "footer_tagline": "JW Sync는 모든 데이터를 로컬에서 처리합니다 — 파일은 기기를 벗어나지 않습니다.", "nav_app": "앱", "nav_community": "커뮤니티"}, "tl": {"hero_title": "Pagsamahin ang mga backup ng JW Library nang pribado sa iyong browser", "hero_desc": "Pagsamahin, i-browse, at i-edit ang iyong mga tala, highlight, at bookmark ng JW Library — nang buo sa iyong browser. Ang iyong mga file ay hindi kailanman lalabas ng iyong device.", "cta_launch": "Buksan ang App →", "cta_try_demo": "Subukan ang halimbawang mga nota", "cta_howto": "Bago lang? Paano ito gumagana", "feat_local_title": "Lokal na pagpoproseso lamang", "feat_local_desc": "Lahat ng pagsasama ay nangyayari sa iyong browser sa pamamagitan ng WebAssembly. Walang server. Walang mga upload. Kumpletong privacy.", "feat_tags_title": "Mga tag at highlight na pinagsama", "feat_tags_desc": "Matalinong pinagsasama ang mga tag, highlight, bookmark, at margin note mula sa lahat ng iyong mga backup.", "feat_date_title": "Pagkuha ayon sa petsa", "feat_date_desc": "Kunin ang nilalaman mula sa isang tiyak na petsa ng backup upang maibalik nang eksakto ang mayroon ka sa anumang oras.", "feat_browse_title": "I-browse at i-edit ang mga tala", "feat_browse_desc": "Hanapin sa iyong buong library, i-edit ang mga tala, pamahalaan ang mga tag, baguhin ang mga kulay ng highlight, at i-download ang na-update na backup.", "feat_review_title": "Suriin bago i-download", "feat_review_desc": "Tingnan kung aling mga tala ang in-edit sa higit sa isang device at piliin kung aling bersyon ang itatago — walang black box.", "footer_tagline": "Pinoproseso ng JW Sync ang lahat ng data nang lokal — ang iyong mga file ay hindi kailanman lalabas ng iyong device.", "nav_app": "App", "nav_community": "Komunidad"}};
+window.__JW_LANDING_I18N = {"en": {"hero_title": "Merge JW Library backups privately in your browser", "hero_desc": "Merge, browse, and edit your JW Library notes, highlights, and bookmarks — entirely in your browser. Your files never leave your device.", "cta_launch": "Launch App →", "cta_try_demo": "Try with sample notes", "cta_howto": "First time? How it works", "feat_local_title": "Local-only processing", "feat_local_desc": "All merging happens in your browser via WebAssembly. No server. No uploads. Complete privacy.", "feat_tags_title": "Tags & highlights merged", "feat_tags_desc": "Intelligently combine tags, highlights, bookmarks and margin notes across all your backups.", "feat_date_title": "Date-specific extraction", "feat_date_desc": "Extract content from a specific backup date to restore exactly what you had at any point in time.", "feat_browse_title": "Browse & edit notes", "feat_browse_desc": "Search your entire library, edit notes, manage tags, change highlight colours, then download the updated backup.", "feat_review_title": "Review before you download", "feat_review_desc": "See exactly which notes were edited on more than one device and choose which version wins — no black box.", "footer_tagline": "JW Sync processes all data locally — your files never leave your device.", "nav_app": "App", "nav_community": "Community", "nav_share": "Share Notes", "cta_share": "Share notes"}, "es": {"hero_title": "Combina copias de seguridad de JW Library de forma privada en tu navegador", "hero_desc": "Fusiona, explora y edita tus notas, resaltados y marcadores de JW Library — completamente en tu navegador. Tus archivos nunca salen de tu dispositivo.", "cta_launch": "Abrir la app →", "cta_try_demo": "Probar con notas de muestra", "cta_howto": "¿Primera vez? Cómo funciona", "feat_local_title": "Procesamiento solo local", "feat_local_desc": "Toda la combinación ocurre en tu navegador mediante WebAssembly. Sin servidor. Sin cargas. Privacidad total.", "feat_tags_title": "Etiquetas y subrayados combinados", "feat_tags_desc": "Combina de forma inteligente etiquetas, subrayados, marcadores y notas al margen de todas tus copias de seguridad.", "feat_date_title": "Extracción por fecha", "feat_date_desc": "Extrae contenido de una fecha de copia de seguridad específica para restaurar exactamente lo que tenías en cualquier momento.", "feat_browse_title": "Explorar y editar notas", "feat_browse_desc": "Busca en toda tu biblioteca, edita notas, gestiona etiquetas, cambia colores de subrayado y descarga la copia actualizada.", "feat_review_title": "Revisa antes de descargar", "feat_review_desc": "Comprueba qué notas se editaron en más de un dispositivo y elige qué versión conservar — sin cajas negras.", "footer_tagline": "JW Sync procesa todos los datos localmente — tus archivos nunca salen de tu dispositivo.", "nav_app": "App", "nav_community": "Comunidad", "nav_share": "Compartir notas", "cta_share": "Compartir notas"}, "pt": {"hero_title": "Combine cópias de segurança do JW Library de forma privada no seu navegador", "hero_desc": "Mescle, navegue e edite suas notas, marcações e marcadores da JW Library — totalmente no seu navegador. Seus arquivos nunca saem do seu dispositivo.", "cta_launch": "Abrir o app →", "cta_try_demo": "Experimentar com notas de exemplo", "cta_howto": "Primeira vez? Como funciona", "feat_local_title": "Processamento apenas local", "feat_local_desc": "Toda combinação acontece no seu navegador via WebAssembly. Sem servidor. Sem uploads. Privacidade total.", "feat_tags_title": "Tags e destaques combinados", "feat_tags_desc": "Combine de forma inteligente tags, destaques, marcadores e notas marginais de todos os seus backups.", "feat_date_title": "Extração por data", "feat_date_desc": "Extraia conteúdo de uma data de backup específica para restaurar exatamente o que você tinha em qualquer momento.", "feat_browse_title": "Navegar e editar notas", "feat_browse_desc": "Pesquise em toda a sua biblioteca, edite notas, gerencie tags, altere cores de destaque e baixe o backup atualizado.", "feat_review_title": "Revise antes de baixar", "feat_review_desc": "Veja quais notas foram editadas em mais de um dispositivo e escolha qual versão manter — sem caixa-preta.", "footer_tagline": "JW Sync processa todos os dados localmente — seus arquivos nunca saem do seu dispositivo.", "nav_app": "App", "nav_community": "Comunidade", "nav_share": "Compartilhar notas", "cta_share": "Compartilhar notas"}, "fr": {"hero_title": "Fusionnez vos sauvegardes JW Library en toute confidentialité dans votre navigateur", "hero_desc": "Fusionnez, parcourez et modifiez vos notes, surlignages et signets JW Library — entièrement dans votre navigateur. Vos fichiers ne quittent jamais votre appareil.", "cta_launch": "Lancer l'app →", "cta_try_demo": "Essayer avec des notes d'exemple", "cta_howto": "Première fois ? Comment ça marche", "feat_local_title": "Traitement local uniquement", "feat_local_desc": "Toute fusion s'effectue dans votre navigateur via WebAssembly. Pas de serveur. Pas de téléchargement. Confidentialité totale.", "feat_tags_title": "Étiquettes et surlignages fusionnés", "feat_tags_desc": "Combinez intelligemment les étiquettes, surlignages, signets et notes de marge de toutes vos sauvegardes.", "feat_date_title": "Extraction par date", "feat_date_desc": "Extrayez le contenu d'une date de sauvegarde spécifique pour restaurer exactement ce que vous aviez à tout moment.", "feat_browse_title": "Parcourir et modifier les notes", "feat_browse_desc": "Recherchez dans toute votre bibliothèque, modifiez des notes, gérez les étiquettes, changez les couleurs de surlignage et téléchargez la sauvegarde mise à jour.", "feat_review_title": "Vérifiez avant de télécharger", "feat_review_desc": "Voyez quelles notes ont été modifiées sur plusieurs appareils et choisissez la version à conserver — aucune boîte noire.", "footer_tagline": "JW Sync traite toutes les données localement — vos fichiers ne quittent jamais votre appareil.", "nav_app": "App", "nav_community": "Communauté", "nav_share": "Partager des notes", "cta_share": "Partager des notes"}, "de": {"hero_title": "JW-Library-Backups privat im Browser zusammenführen", "hero_desc": "Führe deine JW-Library-Notizen, Hervorhebungen und Lesezeichen zusammen, durchsuche und bearbeite sie — alles in deinem Browser. Deine Dateien verlassen nie dein Gerät.", "cta_launch": "App starten →", "cta_try_demo": "Mit Beispielnotizen testen", "cta_howto": "Zum ersten Mal? So funktioniert es", "feat_local_title": "Nur lokale Verarbeitung", "feat_local_desc": "Die gesamte Zusammenführung erfolgt im Browser über WebAssembly. Kein Server. Keine Uploads. Vollständige Privatsphäre.", "feat_tags_title": "Tags und Hervorhebungen zusammengeführt", "feat_tags_desc": "Kombiniert intelligent Tags, Hervorhebungen, Lesezeichen und Randnotizen aus all Ihren Backups.", "feat_date_title": "Datumsbasierte Extraktion", "feat_date_desc": "Extrahieren Sie Inhalte aus einem bestimmten Backup-Datum, um genau das wiederherzustellen, was Sie zu jedem Zeitpunkt hatten.", "feat_browse_title": "Notizen durchsuchen und bearbeiten", "feat_browse_desc": "Durchsuchen Sie Ihre gesamte Bibliothek, bearbeiten Sie Notizen, verwalten Sie Tags, ändern Sie Hervorhebungsfarben und laden Sie das aktualisierte Backup herunter.", "feat_review_title": "Prüfen vor dem Download", "feat_review_desc": "Sieh genau, welche Notizen auf mehreren Geräten bearbeitet wurden, und wähle, welche Version bleibt — keine Blackbox.", "footer_tagline": "JW Sync verarbeitet alle Daten lokal — Ihre Dateien verlassen nie Ihr Gerät.", "nav_app": "App", "nav_community": "Community", "nav_share": "Notizen teilen", "cta_share": "Notizen teilen"}, "it": {"hero_title": "Unisci i backup di JW Library in modo privato nel tuo browser", "hero_desc": "Unisci, sfoglia e modifica le tue note, evidenziazioni e segnalibri di JW Library — interamente nel tuo browser. I tuoi file non lasciano mai il tuo dispositivo.", "cta_launch": "Apri l'app →", "cta_try_demo": "Prova con note di esempio", "cta_howto": "Prima volta? Come funziona", "feat_local_title": "Elaborazione solo locale", "feat_local_desc": "Tutta l'unione avviene nel tuo browser tramite WebAssembly. Nessun server. Nessun caricamento. Privacy completa.", "feat_tags_title": "Tag ed evidenziazioni unite", "feat_tags_desc": "Combina in modo intelligente tag, evidenziazioni, segnalibri e note a margine di tutti i tuoi backup.", "feat_date_title": "Estrazione per data", "feat_date_desc": "Estrai contenuti da una data di backup specifica per ripristinare esattamente ciò che avevi in qualsiasi momento.", "feat_browse_title": "Sfoglia e modifica le note", "feat_browse_desc": "Cerca nell'intera biblioteca, modifica note, gestisci tag, cambia colori di evidenziazione e scarica il backup aggiornato.", "feat_review_title": "Controlla prima di scaricare", "feat_review_desc": "Scopri quali note sono state modificate su più dispositivi e scegli quale versione tenere — nessuna scatola nera.", "footer_tagline": "JW Sync elabora tutti i dati localmente — i tuoi file non lasciano mai il tuo dispositivo.", "nav_app": "App", "nav_community": "Comunità", "nav_share": "Condividi note", "cta_share": "Condividi note"}, "ru": {"hero_title": "Объединяйте резервные копии JW Library конфиденциально в браузере", "hero_desc": "Объединяйте, просматривайте и редактируйте свои заметки, выделения и закладки JW Library — полностью в браузере. Ваши файлы никогда не покидают устройство.", "cta_launch": "Открыть приложение →", "cta_try_demo": "Попробовать с примерами", "cta_howto": "Впервые? Как это работает", "feat_local_title": "Только локальная обработка", "feat_local_desc": "Всё объединение происходит в браузере через WebAssembly. Нет сервера. Нет загрузок. Полная конфиденциальность.", "feat_tags_title": "Теги и выделения объединены", "feat_tags_desc": "Интеллектуально объединяет теги, выделения, закладки и заметки на полях из всех резервных копий.", "feat_date_title": "Извлечение по дате", "feat_date_desc": "Извлекайте содержимое из определённой даты резервной копии для точного восстановления данных на любой момент.", "feat_browse_title": "Просмотр и редактирование заметок", "feat_browse_desc": "Ищите по всей библиотеке, редактируйте заметки, управляйте тегами, меняйте цвета выделений и скачайте обновлённую копию.", "feat_review_title": "Проверьте перед загрузкой", "feat_review_desc": "Узнайте, какие заметки были изменены на нескольких устройствах, и выберите, какую версию оставить — без чёрного ящика.", "footer_tagline": "JW Sync обрабатывает все данные локально — ваши файлы никогда не покидают устройство.", "nav_app": "Приложение", "nav_community": "Сообщество", "nav_share": "Поделиться", "cta_share": "Поделиться заметками"}, "ja": {"hero_title": "JWライブラリーのバックアップをブラウザで非公開に統合", "hero_desc": "JWライブラリーのメモ、ハイライト、ブックマークを、ブラウザ上で統合・閲覧・編集できます。ファイルはデバイスから外に出ません。", "cta_launch": "アプリを開く →", "cta_try_demo": "サンプルノートで試す", "cta_howto": "初めての方へ：使い方", "feat_local_title": "ローカル処理のみ", "feat_local_desc": "すべての統合はWebAssemblyでブラウザ内で行われます。サーバーなし。アップロードなし。完全なプライバシー。", "feat_tags_title": "タグとハイライトを統合", "feat_tags_desc": "すべてのバックアップからタグ、ハイライト、ブックマーク、欄外メモをインテリジェントに統合します。", "feat_date_title": "日付指定による抽出", "feat_date_desc": "特定のバックアップ日のコンテンツを抽出して、任意の時点のデータを正確に復元できます。", "feat_browse_title": "メモの閲覧と編集", "feat_browse_desc": "ライブラリ全体を検索し、メモを編集し、タグを管理し、ハイライトの色を変更して更新されたバックアップをダウンロードできます。", "feat_review_title": "ダウンロード前に確認", "feat_review_desc": "複数の端末で編集されたメモを正確に確認し、残すバージョンを選べます。ブラックボックスはありません。", "footer_tagline": "JW Syncはすべてのデータをローカルで処理します — ファイルはデバイスから外に出ません。", "nav_app": "アプリ", "nav_community": "コミュニティ", "nav_share": "ノートを共有", "cta_share": "ノートを共有"}, "ko": {"hero_title": "JW 라이브러리 백업을 브라우저에서 비공개로 병합", "hero_desc": "JW 라이브러리 노트, 하이라이트, 북마크를 브라우저 안에서 병합, 탐색, 편집하세요. 파일은 기기를 벗어나지 않습니다.", "cta_launch": "앱 열기 →", "cta_try_demo": "샘플 노트로 시도", "cta_howto": "처음이신가요? 사용 방법", "feat_local_title": "로컬 전용 처리", "feat_local_desc": "모든 병합은 WebAssembly를 통해 브라우저에서 이루어집니다. 서버 없음. 업로드 없음. 완벽한 개인 정보 보호.", "feat_tags_title": "태그와 하이라이트 병합", "feat_tags_desc": "모든 백업에서 태그, 하이라이트, 북마크, 여백 메모를 지능적으로 결합합니다.", "feat_date_title": "날짜별 추출", "feat_date_desc": "특정 백업 날짜의 콘텐츠를 추출하여 원하는 시점의 데이터를 정확하게 복원하세요.", "feat_browse_title": "메모 탐색 및 편집", "feat_browse_desc": "전체 라이브러리를 검색하고 메모를 편집하고 태그를 관리하고 하이라이트 색상을 변경한 후 업데이트된 백업을 다운로드하세요.", "feat_review_title": "다운로드 전에 검토", "feat_review_desc": "여러 기기에서 편집된 메모를 정확히 확인하고 어떤 버전을 남길지 선택하세요 — 블랙박스 없음.", "footer_tagline": "JW Sync는 모든 데이터를 로컬에서 처리합니다 — 파일은 기기를 벗어나지 않습니다.", "nav_app": "앱", "nav_community": "커뮤니티", "nav_share": "노트 공유", "cta_share": "노트 공유"}, "tl": {"hero_title": "Pagsamahin ang mga backup ng JW Library nang pribado sa iyong browser", "hero_desc": "Pagsamahin, i-browse, at i-edit ang iyong mga tala, highlight, at bookmark ng JW Library — nang buo sa iyong browser. Ang iyong mga file ay hindi kailanman lalabas ng iyong device.", "cta_launch": "Buksan ang App →", "cta_try_demo": "Subukan ang halimbawang mga nota", "cta_howto": "Bago lang? Paano ito gumagana", "feat_local_title": "Lokal na pagpoproseso lamang", "feat_local_desc": "Lahat ng pagsasama ay nangyayari sa iyong browser sa pamamagitan ng WebAssembly. Walang server. Walang mga upload. Kumpletong privacy.", "feat_tags_title": "Mga tag at highlight na pinagsama", "feat_tags_desc": "Matalinong pinagsasama ang mga tag, highlight, bookmark, at margin note mula sa lahat ng iyong mga backup.", "feat_date_title": "Pagkuha ayon sa petsa", "feat_date_desc": "Kunin ang nilalaman mula sa isang tiyak na petsa ng backup upang maibalik nang eksakto ang mayroon ka sa anumang oras.", "feat_browse_title": "I-browse at i-edit ang mga tala", "feat_browse_desc": "Hanapin sa iyong buong library, i-edit ang mga tala, pamahalaan ang mga tag, baguhin ang mga kulay ng highlight, at i-download ang na-update na backup.", "feat_review_title": "Suriin bago i-download", "feat_review_desc": "Tingnan kung aling mga tala ang in-edit sa higit sa isang device at piliin kung aling bersyon ang itatago — walang black box.", "footer_tagline": "Pinoproseso ng JW Sync ang lahat ng data nang lokal — ang iyong mga file ay hindi kailanman lalabas ng iyong device.", "nav_app": "App", "nav_community": "Komunidad", "nav_share": "Ibahagi ang tala", "cta_share": "Ibahagi ang mga tala"}};
 if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 </script>
 <script>
@@ -849,8 +863,10 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jb-head-count{font-size:12px;color:#7d8aa8;margin-left:8px}
 .jb-head-close{margin-left:auto;background:rgba(71,85,105,.35);border:1px solid #2f3a52;color:#cbd5e1;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:14px}
 .jb-head-close:hover{background:rgba(71,85,105,.55)}
-.jb-tabs{display:flex;gap:4px;padding:10px 18px 0 18px;background:rgba(4,15,34,.4);border-bottom:0;flex-shrink:0;align-items:center}
-.jb-tab{background:transparent;border:1px solid transparent;color:#94a3b8;font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px 8px 0 0;cursor:pointer;border-bottom:0;transition:color .12s,background .12s;display:flex;align-items:center;gap:6px}
+.jb-tabs{display:flex;gap:4px;padding:10px 18px 0 18px;background:rgba(4,15,34,.4);border-bottom:0;flex-shrink:0;align-items:center;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.jb-tabs::-webkit-scrollbar{display:none}
+.jb-tab{background:transparent;border:1px solid transparent;color:#94a3b8;font-size:13px;font-weight:600;padding:7px 14px;border-radius:8px 8px 0 0;cursor:pointer;border-bottom:0;transition:color .12s,background .12s;display:flex;align-items:center;gap:6px;flex:none;white-space:nowrap}
+@media(max-width:600px){.jb-tabs{padding-left:12px;padding-right:12px;gap:2px}.jb-tab{padding:7px 11px;font-size:12px}}
 .jb-tab:hover{color:#e7eaf3;background:rgba(71,85,105,.15)}
 .jb-tab.active{color:#fb923c;background:rgba(234,88,12,0.08);border-color:rgba(234,88,12,0.35);border-bottom-color:transparent;position:relative;z-index:1}
 .jb-tab-count{background:rgba(71,85,105,.45);color:#cbd5e1;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:5px}
@@ -865,6 +881,46 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jb-filter-date{background:#0a1224;border:1px solid #2a3548;border-radius:8px;padding:6px 8px;color:#cbd5e1;font-size:12px;outline:none;color-scheme:dark;cursor:pointer}
 .jb-date-dash{color:#5a6883;font-size:13px}
 .jb-extract-btn{background:transparent;border:1px solid #ea580c;color:#fb923c;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+.cta-btn-share{display:inline-flex;align-items:center;gap:6px;background:rgba(234,88,12,.14);border:1px solid rgba(234,88,12,.5);color:#fdba74;padding:11px 18px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none}
+.cta-btn-share:hover{background:rgba(234,88,12,.22);border-color:#ea580c;color:#fff}
+.jb-if-tag{background:rgba(96,165,250,.18);color:#93c5fd;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px}
+.jbs-overlay{position:fixed;inset:0;z-index:10080;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(2,6,17,.78);backdrop-filter:blur(6px)}
+.jbs-card{width:100%;max-width:540px;max-height:88vh;overflow:auto;background:#0b1424;border:1px solid rgba(71,85,105,.5);border-radius:16px;padding:20px;color:#e2e8f0;font-family:inherit}
+.jbs-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.jbs-head h3{margin:0;font-size:17px;color:#fff;font-weight:800}
+.jbs-x{background:none;border:none;color:#94a3b8;font-size:22px;line-height:1;cursor:pointer;padding:2px 6px}
+.jbs-x:hover{color:#fff}
+.jbs-intro{color:#94a3b8;font-size:13px;margin:0 0 12px;line-height:1.5}
+.jbs-count{font-size:12px;color:#fb923c;font-weight:700;margin-bottom:8px}
+.jbs-text{width:100%;min-height:150px;background:#0a1224;border:1px solid #2a3548;border-radius:10px;padding:10px;color:#cbd5e1;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;resize:vertical;box-sizing:border-box;outline:none}
+.jbs-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.jbs-result{margin-top:14px}
+.jbs-err{color:#fca5a5;font-size:13px}
+.jbs-ok{color:#34d399;font-size:14px;font-weight:600}
+.jbs-list-hdr{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.jbs-item{border:1px solid rgba(71,85,105,.3);border-radius:9px;padding:10px 12px;margin-bottom:8px}
+.jbs-item-title{font-weight:700;color:#f1f5f9;font-size:13.5px}
+.jbs-item-body{color:#94a3b8;font-size:12.5px;margin-top:3px;max-height:60px;overflow:hidden}
+.jb-select-toggle{background:transparent;border:1px solid #2a3548;color:#94a3b8;padding:7px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer}
+.jb-select-toggle.jb-on{background:rgba(234,88,12,.18);border-color:rgba(234,88,12,.5);color:#fb923c}
+.jb-undo,.jb-redo{background:transparent;border:1px solid #2a3548;color:#cbd5e1;width:30px;height:30px;border-radius:7px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.jb-undo:hover:not(:disabled),.jb-redo:hover:not(:disabled){border-color:#475569;color:#fff}
+.jb-undo:disabled,.jb-redo:disabled{opacity:.35;cursor:not-allowed}
+.jb-note.jb-selectable{position:relative;padding-left:42px;cursor:pointer}
+.jb-note.jb-selected{background:rgba(234,88,12,.10);border-color:rgba(234,88,12,.4)}
+.jb-check{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;border:2px solid #475569;border-radius:5px;background:transparent;box-sizing:border-box}
+.jb-check.jb-check-on{background:#ea580c;border-color:#ea580c}
+.jb-check.jb-check-on::after{content:'';position:absolute;left:4px;top:0;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.jb-batch-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 16px;background:rgba(234,88,12,.08);border-bottom:1px solid rgba(234,88,12,.25);flex:none}
+.jb-batch-count{font-size:12.5px;font-weight:700;color:#fb923c}
+.jb-batch-btn{background:rgba(71,85,105,.25);border:1px solid #2a3548;color:#cbd5e1;padding:5px 10px;border-radius:7px;font-size:12px;cursor:pointer}
+.jb-batch-btn:hover{border-color:#475569;color:#fff}
+.jb-batch-btn.jb-batch-danger{border-color:rgba(248,113,113,.5);color:#fca5a5}
+.jb-batch-btn.jb-batch-danger:hover{background:rgba(248,113,113,.15)}
+.jb-batch-color{display:inline-flex;gap:6px;align-items:center}
+.jb-batch-dot{width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid rgba(255,255,255,.25)}
+.jb-batch-dot:hover{border-color:#fff;transform:scale(1.12)}
+.jb-batch-input{background:#0a1224;border:1px solid #2a3548;border-radius:7px;padding:5px 8px;color:#e7eaf3;font-size:12px;outline:none;min-width:120px}
 .jb-extract-btn:hover:not(:disabled){background:rgba(234,88,12,.12)}
 .jb-extract-btn:disabled{border-color:#2a3548;color:#5a6883;cursor:not-allowed}
 .jb-clear:hover{background:rgba(71,85,105,.25);color:#e7eaf3}
@@ -992,16 +1048,16 @@ window.__bootBrowse = function() {
 
   // ---------- i18n ----------
   var I18N = {
-    en:{title:"Note Explorer",search:"Search...",no_results:"Nothing matches your filters.",loading:"Loading library...",close:"Close",no_file:"Open a backup file first — pick one to browse.",pick_file:"Choose .jwlibrary file",count_one:"{n} item",count_many:"{n} items",color_all:"All colors",no_title:"Untitled",copy:"Copy",copied:"Copied",clear:"Clear",error:"Could not load:",pub_all:"All publications",tag_all:"All tags",back:"← Back",detail_empty:"Select an item from the list.",sort_newest:"Newest first",sort_oldest:"Oldest first",sort_pub:"By publication",modified:"Modified",no_content:"(No content)",too_many:"Showing first {n} of {total} — narrow the search.",pg_prev:"Prev",pg_next:"Next",pg_status:"Page {page} of {pages} · {total} results",err_corrupt:"This file isn't a readable .jwlibrary backup — it may be corrupted or the wrong type of file.",err_no_db:"This backup is missing its notes database (userData.db). Re-export it from JW Library.",err_not_sqlite:"The backup's database couldn't be opened — the file may be damaged.",tab_notes:"Notes",tab_highlights:"Highlights",tab_bookmarks:"Bookmarks",hl_label:"Highlight",hl_no_text:"Highlighted passage (text lives in the publication, not the backup).",hl_with_note:"With note",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Linked note:",edit:"Edit",save:"Save",cancel:"Cancel",delete_item:"Delete",export_db:"Export .jwlibrary",n_edits:"{n} edit",n_edits_many:"{n} edits",add_tag:"+ Add tag",new_tag_ph:"Tag name...",delete_note_confirm:"Delete this note? This cannot be undone.",delete_hl_confirm:"Delete this highlight? This cannot be undone.",delete_bm_confirm:"Delete this bookmark? This cannot be undone.",yes_delete:"Yes, delete",change_color:"Color",unsaved_exit:"You have {n} unsaved edit(s). Close without exporting?",title_label:"Title",content_label:"Content",tags_label:"Tags",hl_color_label:"Highlight color",bm_title_label:"Bookmark title",plain_text_note:"Formatting simplified to plain text on save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Underline",rte_bullets:"Bullet list",rich_text_note:"Edit with bold, italics and lists — formatting is kept",date_from:"From",date_to:"To",date_range:"Filter by date",extract_range:"Extract date range",extract_none:"No notes fall in this date range.",extract_hint:"Save a new .jwlibrary with only the notes in this date range.",copy_md:"Copy as Markdown",export_md:"Export Markdown",md_hint:"Download the notes shown as Markdown files (.zip)"},
-    es:{title:"Explorador de Notas",search:"Buscar...",no_results:"Nada coincide con tus filtros.",loading:"Cargando biblioteca...",close:"Cerrar",no_file:"Abre primero un archivo de respaldo.",pick_file:"Elegir archivo .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementos",color_all:"Todos los colores",no_title:"Sin título",copy:"Copiar",copied:"Copiado",clear:"Limpiar",error:"No se pudo cargar:",pub_all:"Todas las publicaciones",tag_all:"Todas las etiquetas",back:"← Volver",detail_empty:"Selecciona un elemento de la lista.",sort_newest:"Más recientes primero",sort_oldest:"Más antiguas primero",sort_pub:"Por publicación",modified:"Modificado",no_content:"(Sin contenido)",too_many:"Mostrando los primeros {n} de {total} — refina la búsqueda.",pg_prev:"Anterior",pg_next:"Siguiente",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este archivo no es una copia .jwlibrary legible: puede estar dañado o ser de tipo incorrecto.",err_no_db:"A esta copia le falta su base de datos de notas (userData.db). Vuelve a exportarla desde JW Library.",err_not_sqlite:"No se pudo abrir la base de datos de la copia: el archivo puede estar dañado.",tab_notes:"Notas",tab_highlights:"Resaltados",tab_bookmarks:"Marcadores",hl_label:"Resaltado",hl_no_text:"Pasaje resaltado (el texto está en la publicación, no en el respaldo).",hl_with_note:"Con nota",bm_label:"Marcador",bm_slot:"Posición {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Guardar",cancel:"Cancelar",delete_item:"Eliminar",export_db:"Exportar .jwlibrary",n_edits:"{n} edición",n_edits_many:"{n} ediciones",add_tag:"+ Agregar etiqueta",new_tag_ph:"Nombre de etiqueta...",delete_note_confirm:"¿Eliminar esta nota? Esta acción no se puede deshacer.",delete_hl_confirm:"¿Eliminar este resaltado? Esta acción no se puede deshacer.",delete_bm_confirm:"¿Eliminar este marcador? Esta acción no se puede deshacer.",yes_delete:"Sí, eliminar",change_color:"Color",unsaved_exit:"Tienes {n} edición(es) sin exportar. ¿Cerrar sin exportar?",title_label:"Título",content_label:"Contenido",tags_label:"Etiquetas",hl_color_label:"Color del resaltado",bm_title_label:"Título del marcador",plain_text_note:"El formato se simplifica a texto plano al guardar",rte_bold:"Negrita",rte_italic:"Cursiva",rte_underline:"Subrayado",rte_bullets:"Lista con viñetas",rich_text_note:"Edita con negrita, cursiva y listas — el formato se conserva",date_from:"Desde",date_to:"Hasta",date_range:"Filtrar por fecha",extract_range:"Extraer rango de fechas",extract_none:"Ninguna nota está en este rango de fechas.",extract_hint:"Guarda un nuevo .jwlibrary solo con las notas de este rango de fechas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Descarga las notas mostradas como archivos Markdown (.zip)"},
-    pt:{title:"Explorador de Notas",search:"Pesquisar...",no_results:"Nada corresponde aos filtros.",loading:"Carregando biblioteca...",close:"Fechar",no_file:"Abra primeiro um arquivo de backup.",pick_file:"Escolher arquivo .jwlibrary",count_one:"{n} item",count_many:"{n} itens",color_all:"Todas as cores",no_title:"Sem título",copy:"Copiar",copied:"Copiado",clear:"Limpar",error:"Não foi possível carregar:",pub_all:"Todas as publicações",tag_all:"Todas as etiquetas",back:"← Voltar",detail_empty:"Selecione um item da lista.",sort_newest:"Mais recentes primeiro",sort_oldest:"Mais antigos primeiro",sort_pub:"Por publicação",modified:"Modificado",no_content:"(Sem conteúdo)",too_many:"Exibindo os primeiros {n} de {total} — refine a busca.",pg_prev:"Anterior",pg_next:"Próxima",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este arquivo não é um backup .jwlibrary legível — pode estar corrompido ou ser do tipo errado.",err_no_db:"Falta o banco de dados de notas (userData.db) neste backup. Exporte-o novamente no JW Library.",err_not_sqlite:"Não foi possível abrir o banco de dados do backup — o arquivo pode estar danificado.",tab_notes:"Notas",tab_highlights:"Marcações",tab_bookmarks:"Favoritos",hl_label:"Marcação",hl_no_text:"Trecho marcado (o texto está na publicação, não no backup).",hl_with_note:"Com nota",bm_label:"Favorito",bm_slot:"Posição {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Salvar",cancel:"Cancelar",delete_item:"Excluir",export_db:"Exportar .jwlibrary",n_edits:"{n} edição",n_edits_many:"{n} edições",add_tag:"+ Adicionar etiqueta",new_tag_ph:"Nome da etiqueta...",delete_note_confirm:"Excluir esta nota? Esta ação não pode ser desfeita.",delete_hl_confirm:"Excluir esta marcação? Esta ação não pode ser desfeita.",delete_bm_confirm:"Excluir este favorito? Esta ação não pode ser desfeita.",yes_delete:"Sim, excluir",change_color:"Cor",unsaved_exit:"Você tem {n} edição(ões) sem exportar. Fechar sem exportar?",title_label:"Título",content_label:"Conteúdo",tags_label:"Etiquetas",hl_color_label:"Cor da marcação",bm_title_label:"Título do favorito",plain_text_note:"Formatação simplificada para texto simples ao salvar",rte_bold:"Negrito",rte_italic:"Itálico",rte_underline:"Sublinhado",rte_bullets:"Lista com marcadores",rich_text_note:"Edite com negrito, itálico e listas — a formatação é mantida",date_from:"De",date_to:"Até",date_range:"Filtrar por data",extract_range:"Extrair intervalo de datas",extract_none:"Nenhuma nota está neste intervalo de datas.",extract_hint:"Salve um novo .jwlibrary apenas com as notas deste intervalo de datas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Baixe as notas exibidas como arquivos Markdown (.zip)"},
-    fr:{title:"Explorateur de Notes",search:"Rechercher...",no_results:"Aucun résultat ne correspond.",loading:"Chargement de la bibliothèque...",close:"Fermer",no_file:"Ouvrez d'abord un fichier de sauvegarde.",pick_file:"Choisir un fichier .jwlibrary",count_one:"{n} élément",count_many:"{n} éléments",color_all:"Toutes les couleurs",no_title:"Sans titre",copy:"Copier",copied:"Copié",clear:"Effacer",error:"Impossible de charger :",pub_all:"Toutes les publications",tag_all:"Toutes les étiquettes",back:"← Retour",detail_empty:"Sélectionnez un élément dans la liste.",sort_newest:"Plus récents d'abord",sort_oldest:"Plus anciens d'abord",sort_pub:"Par publication",modified:"Modifié",no_content:"(Pas de contenu)",too_many:"Affichage des {n} premiers sur {total} — affinez la recherche.",pg_prev:"Préc.",pg_next:"Suiv.",pg_status:"Page {page} sur {pages} · {total} résultats",err_corrupt:"Ce fichier n'est pas une sauvegarde .jwlibrary lisible — il est peut-être corrompu ou d'un mauvais type.",err_no_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db). Réexportez-la depuis JW Library.",err_not_sqlite:"Impossible d'ouvrir la base de données de la sauvegarde — le fichier est peut-être endommagé.",tab_notes:"Notes",tab_highlights:"Surlignages",tab_bookmarks:"Signets",hl_label:"Surlignage",hl_no_text:"Passage surligné (le texte se trouve dans la publication, pas dans la sauvegarde).",hl_with_note:"Avec note",bm_label:"Signet",bm_slot:"Position {n}",linked_note:"Note liée :",edit:"Modifier",save:"Enregistrer",cancel:"Annuler",delete_item:"Supprimer",export_db:"Exporter .jwlibrary",n_edits:"{n} modification",n_edits_many:"{n} modifications",add_tag:"+ Ajouter étiquette",new_tag_ph:"Nom de l'étiquette...",delete_note_confirm:"Supprimer cette note ? Cette action est irréversible.",delete_hl_confirm:"Supprimer ce surlignage ? Cette action est irréversible.",delete_bm_confirm:"Supprimer ce signet ? Cette action est irréversible.",yes_delete:"Oui, supprimer",change_color:"Couleur",unsaved_exit:"Vous avez {n} modification(s) non exportée(s). Fermer sans exporter ?",title_label:"Titre",content_label:"Contenu",tags_label:"Étiquettes",hl_color_label:"Couleur du surlignage",bm_title_label:"Titre du signet",plain_text_note:"La mise en forme est simplifiée en texte brut lors de l'enregistrement",rte_bold:"Gras",rte_italic:"Italique",rte_underline:"Souligné",rte_bullets:"Liste à puces",rich_text_note:"Modifiez avec gras, italique et listes — la mise en forme est conservée",date_from:"Du",date_to:"Au",date_range:"Filtrer par date",extract_range:"Extraire la plage de dates",extract_none:"Aucune note dans cette plage de dates.",extract_hint:"Enregistrez un nouveau .jwlibrary avec seulement les notes de cette plage de dates.",copy_md:"Copier en Markdown",export_md:"Exporter Markdown",md_hint:"Téléchargez les notes affichées en fichiers Markdown (.zip)"},
-    de:{title:"Notiz-Explorer",search:"Suchen...",no_results:"Keine Treffer für die Filter.",loading:"Bibliothek wird geladen...",close:"Schließen",no_file:"Öffnen Sie zuerst eine Sicherungsdatei.",pick_file:".jwlibrary-Datei wählen",count_one:"{n} Eintrag",count_many:"{n} Einträge",color_all:"Alle Farben",no_title:"Ohne Titel",copy:"Kopieren",copied:"Kopiert",clear:"Zurücksetzen",error:"Konnte nicht geladen werden:",pub_all:"Alle Veröffentlichungen",tag_all:"Alle Stichwörter",back:"← Zurück",detail_empty:"Wählen Sie einen Eintrag aus der Liste.",sort_newest:"Neueste zuerst",sort_oldest:"Älteste zuerst",sort_pub:"Nach Veröffentlichung",modified:"Geändert",no_content:"(Kein Inhalt)",too_many:"Erste {n} von {total} angezeigt — Suche einschränken.",pg_prev:"Zurück",pg_next:"Weiter",pg_status:"Seite {page} von {pages} · {total} Ergebnisse",err_corrupt:"Diese Datei ist keine lesbare .jwlibrary-Sicherung — sie ist evtl. beschädigt oder vom falschen Typ.",err_no_db:"Dieser Sicherung fehlt ihre Notizdatenbank (userData.db). Exportiere sie erneut aus JW Library.",err_not_sqlite:"Die Datenbank der Sicherung konnte nicht geöffnet werden — die Datei ist evtl. beschädigt.",tab_notes:"Notizen",tab_highlights:"Markierungen",tab_bookmarks:"Lesezeichen",hl_label:"Markierung",hl_no_text:"Markierte Passage (Text liegt in der Veröffentlichung, nicht im Backup).",hl_with_note:"Mit Notiz",bm_label:"Lesezeichen",bm_slot:"Slot {n}",linked_note:"Verknüpfte Notiz:",edit:"Bearbeiten",save:"Speichern",cancel:"Abbrechen",delete_item:"Löschen",export_db:".jwlibrary exportieren",n_edits:"{n} Änderung",n_edits_many:"{n} Änderungen",add_tag:"+ Stichwort hinzufügen",new_tag_ph:"Stichwortname...",delete_note_confirm:"Diese Notiz löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_hl_confirm:"Diese Markierung löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_bm_confirm:"Dieses Lesezeichen löschen? Diese Aktion kann nicht rückgängig gemacht werden.",yes_delete:"Ja, löschen",change_color:"Farbe",unsaved_exit:"Sie haben {n} nicht exportierte Änderung(en). Ohne Export schließen?",title_label:"Titel",content_label:"Inhalt",tags_label:"Stichwörter",hl_color_label:"Markierungsfarbe",bm_title_label:"Lesezeichentitel",plain_text_note:"Formatierung wird beim Speichern auf Nur-Text vereinfacht",rte_bold:"Fett",rte_italic:"Kursiv",rte_underline:"Unterstrichen",rte_bullets:"Aufzählung",rich_text_note:"Mit Fett, Kursiv und Listen bearbeiten — Formatierung bleibt erhalten",date_from:"Von",date_to:"Bis",date_range:"Nach Datum filtern",extract_range:"Datumsbereich extrahieren",extract_none:"Keine Notizen in diesem Datumsbereich.",extract_hint:"Ein neues .jwlibrary nur mit den Notizen dieses Datumsbereichs speichern.",copy_md:"Als Markdown kopieren",export_md:"Markdown exportieren",md_hint:"Die angezeigten Notizen als Markdown-Dateien herunterladen (.zip)"},
-    it:{title:"Esplora Note",search:"Cerca...",no_results:"Nessun risultato per i filtri.",loading:"Caricamento biblioteca...",close:"Chiudi",no_file:"Apri prima un file di backup.",pick_file:"Scegli file .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementi",color_all:"Tutti i colori",no_title:"Senza titolo",copy:"Copia",copied:"Copiato",clear:"Cancella",error:"Impossibile caricare:",pub_all:"Tutte le pubblicazioni",tag_all:"Tutte le etichette",back:"← Indietro",detail_empty:"Seleziona un elemento dall'elenco.",sort_newest:"Più recenti prima",sort_oldest:"Più vecchi prima",sort_pub:"Per pubblicazione",modified:"Modificato",no_content:"(Nessun contenuto)",too_many:"Mostrati i primi {n} di {total} — restringi la ricerca.",pg_prev:"Prec.",pg_next:"Succ.",pg_status:"Pagina {page} di {pages} · {total} risultati",err_corrupt:"Questo file non è un backup .jwlibrary leggibile — potrebbe essere danneggiato o di tipo errato.",err_no_db:"A questo backup manca il database delle note (userData.db). Riesportalo da JW Library.",err_not_sqlite:"Non è stato possibile aprire il database del backup — il file potrebbe essere danneggiato.",tab_notes:"Note",tab_highlights:"Evidenziazioni",tab_bookmarks:"Segnalibri",hl_label:"Evidenziazione",hl_no_text:"Brano evidenziato (il testo è nella pubblicazione, non nel backup).",hl_with_note:"Con nota",bm_label:"Segnalibro",bm_slot:"Posizione {n}",linked_note:"Nota collegata:",edit:"Modifica",save:"Salva",cancel:"Annulla",delete_item:"Elimina",export_db:"Esporta .jwlibrary",n_edits:"{n} modifica",n_edits_many:"{n} modifiche",add_tag:"+ Aggiungi etichetta",new_tag_ph:"Nome etichetta...",delete_note_confirm:"Eliminare questa nota? Questa azione non può essere annullata.",delete_hl_confirm:"Eliminare questa evidenziazione? Questa azione non può essere annullata.",delete_bm_confirm:"Eliminare questo segnalibro? Questa azione non può essere annullata.",yes_delete:"Sì, elimina",change_color:"Colore",unsaved_exit:"Hai {n} modifica/modifiche non esportata/e. Chiudere senza esportare?",title_label:"Titolo",content_label:"Contenuto",tags_label:"Etichette",hl_color_label:"Colore evidenziazione",bm_title_label:"Titolo segnalibro",plain_text_note:"La formattazione verrà semplificata a testo normale al salvataggio",rte_bold:"Grassetto",rte_italic:"Corsivo",rte_underline:"Sottolineato",rte_bullets:"Elenco puntato",rich_text_note:"Modifica con grassetto, corsivo ed elenchi — la formattazione è mantenuta",date_from:"Dal",date_to:"Al",date_range:"Filtra per data",extract_range:"Estrai intervallo di date",extract_none:"Nessuna nota in questo intervallo di date.",extract_hint:"Salva un nuovo .jwlibrary solo con le note di questo intervallo di date.",copy_md:"Copia come Markdown",export_md:"Esporta Markdown",md_hint:"Scarica le note mostrate come file Markdown (.zip)"},
-    ru:{title:"Просмотр заметок",search:"Поиск...",no_results:"Ничего не найдено.",loading:"Загрузка библиотеки...",close:"Закрыть",no_file:"Сначала откройте файл резервной копии.",pick_file:"Выбрать .jwlibrary файл",count_one:"{n} элемент",count_many:"{n} элементов",color_all:"Все цвета",no_title:"Без названия",copy:"Копировать",copied:"Скопировано",clear:"Очистить",error:"Не удалось загрузить:",pub_all:"Все публикации",tag_all:"Все теги",back:"← Назад",detail_empty:"Выберите элемент из списка.",sort_newest:"Сначала новые",sort_oldest:"Сначала старые",sort_pub:"По публикации",modified:"Изменено",no_content:"(Нет содержимого)",too_many:"Показаны первые {n} из {total} — уточните поиск.",pg_prev:"Назад",pg_next:"Вперёд",pg_status:"Страница {page} из {pages} · {total} результатов",err_corrupt:"Этот файл не является читаемой копией .jwlibrary — возможно, он повреждён или это другой тип файла.",err_no_db:"В этой копии нет базы данных заметок (userData.db). Экспортируйте её заново из JW Library.",err_not_sqlite:"Не удалось открыть базу данных копии — файл может быть повреждён.",tab_notes:"Заметки",tab_highlights:"Пометки",tab_bookmarks:"Закладки",hl_label:"Пометка",hl_no_text:"Выделенный отрывок (текст находится в публикации, а не в копии).",hl_with_note:"С заметкой",bm_label:"Закладка",bm_slot:"Слот {n}",linked_note:"Связанная заметка:",edit:"Изменить",save:"Сохранить",cancel:"Отмена",delete_item:"Удалить",export_db:"Экспорт .jwlibrary",n_edits:"{n} изм.",n_edits_many:"{n} изм.",add_tag:"+ Добавить тег",new_tag_ph:"Название тега...",delete_note_confirm:"Удалить эту заметку? Это действие нельзя отменить.",delete_hl_confirm:"Удалить эту пометку? Это действие нельзя отменить.",delete_bm_confirm:"Удалить эту закладку? Это действие нельзя отменить.",yes_delete:"Да, удалить",change_color:"Цвет",unsaved_exit:"У вас {n} неэкспортированное(ых) изменение(й). Закрыть без экспорта?",title_label:"Название",content_label:"Содержание",tags_label:"Теги",hl_color_label:"Цвет пометки",bm_title_label:"Название закладки",plain_text_note:"Форматирование упрощается до простого текста при сохранении",rte_bold:"Жирный",rte_italic:"Курсив",rte_underline:"Подчёркнутый",rte_bullets:"Маркированный список",rich_text_note:"Редактируйте с жирным, курсивом и списками — форматирование сохраняется",date_from:"С",date_to:"По",date_range:"Фильтр по дате",extract_range:"Извлечь диапазон дат",extract_none:"Нет заметок в этом диапазоне дат.",extract_hint:"Сохранить новый .jwlibrary только с заметками этого диапазона дат.",copy_md:"Копировать как Markdown",export_md:"Экспорт Markdown",md_hint:"Скачать показанные заметки как файлы Markdown (.zip)"},
-    ja:{title:"ノート閲覧",search:"検索...",no_results:"フィルターに一致する項目はありません。",loading:"ライブラリを読み込み中...",close:"閉じる",no_file:"先にバックアップファイルを開いてください。",pick_file:".jwlibrary ファイルを選択",count_one:"{n} 件",count_many:"{n} 件",color_all:"すべての色",no_title:"タイトルなし",copy:"コピー",copied:"コピーしました",clear:"クリア",error:"読み込めませんでした:",pub_all:"すべての出版物",tag_all:"すべてのタグ",back:"← 戻る",detail_empty:"リストから項目を選択してください。",sort_newest:"新しい順",sort_oldest:"古い順",sort_pub:"出版物別",modified:"更新日",no_content:"(内容なし)",too_many:"{total} 件中 {n} 件を表示 — 検索を絞ってください。",pg_prev:"前へ",pg_next:"次へ",pg_status:"{pages} ページ中 {page} ページ · {total} 件",err_corrupt:"このファイルは読み取り可能な .jwlibrary バックアップではありません。破損しているか種類が違う可能性があります。",err_no_db:"このバックアップにはノートのデータベース（userData.db）がありません。JW Library から再書き出ししてください。",err_not_sqlite:"バックアップのデータベースを開けませんでした。ファイルが破損している可能性があります。",tab_notes:"ノート",tab_highlights:"ハイライト",tab_bookmarks:"しおり",hl_label:"ハイライト",hl_no_text:"ハイライトした箇所(テキストは出版物にあり、バックアップには含まれません)。",hl_with_note:"ノート付き",bm_label:"しおり",bm_slot:"スロット {n}",linked_note:"関連ノート:",edit:"編集",save:"保存",cancel:"キャンセル",delete_item:"削除",export_db:".jwlibrary を書き出し",n_edits:"{n}件の編集",n_edits_many:"{n}件の編集",add_tag:"+ タグを追加",new_tag_ph:"タグ名...",delete_note_confirm:"このノートを削除しますか？この操作は取り消せません。",delete_hl_confirm:"このハイライトを削除しますか？この操作は取り消せません。",delete_bm_confirm:"このしおりを削除しますか？この操作は取り消せません。",yes_delete:"はい、削除",change_color:"色",unsaved_exit:"{n}件の未エクスポートの編集があります。エクスポートせずに閉じますか？",title_label:"タイトル",content_label:"内容",tags_label:"タグ",hl_color_label:"ハイライトの色",bm_title_label:"しおりのタイトル",plain_text_note:"保存時にプレーンテキストに変換されます",rte_bold:"太字",rte_italic:"斜体",rte_underline:"下線",rte_bullets:"箇条書き",rich_text_note:"太字・斜体・リストで編集できます。書式は保持されます",date_from:"開始",date_to:"終了",date_range:"日付で絞り込み",extract_range:"日付範囲を抽出",extract_none:"この日付範囲にノートはありません。",extract_hint:"この日付範囲のノートだけを含む新しい .jwlibrary を保存します。",copy_md:"Markdown としてコピー",export_md:"Markdown を書き出し",md_hint:"表示中のノートを Markdown ファイル（.zip）としてダウンロード"},
-    ko:{title:"노트 탐색기",search:"검색...",no_results:"필터와 일치하는 항목이 없습니다.",loading:"라이브러리 로드 중...",close:"닫기",no_file:"먼저 백업 파일을 여세요.",pick_file:".jwlibrary 파일 선택",count_one:"{n}개",count_many:"{n}개",color_all:"모든 색상",no_title:"제목 없음",copy:"복사",copied:"복사됨",clear:"초기화",error:"불러올 수 없습니다:",pub_all:"모든 출판물",tag_all:"모든 태그",back:"← 뒤로",detail_empty:"목록에서 항목을 선택하세요.",sort_newest:"최신순",sort_oldest:"오래된순",sort_pub:"출판물순",modified:"수정됨",no_content:"(내용 없음)",too_many:"전체 {total}개 중 처음 {n}개 표시 — 검색을 좁히세요.",pg_prev:"이전",pg_next:"다음",pg_status:"{pages}페이지 중 {page}페이지 · {total}개",err_corrupt:"이 파일은 읽을 수 있는 .jwlibrary 백업이 아닙니다. 손상되었거나 잘못된 형식일 수 있습니다.",err_no_db:"이 백업에는 노트 데이터베이스(userData.db)가 없습니다. JW Library에서 다시 내보내세요.",err_not_sqlite:"백업의 데이터베이스를 열 수 없습니다. 파일이 손상되었을 수 있습니다.",tab_notes:"노트",tab_highlights:"하이라이트",tab_bookmarks:"북마크",hl_label:"하이라이트",hl_no_text:"하이라이트된 구절 (텍스트는 출판물에 있고 백업에는 포함되지 않음).",hl_with_note:"노트 포함",bm_label:"북마크",bm_slot:"슬롯 {n}",linked_note:"연결된 노트:",edit:"편집",save:"저장",cancel:"취소",delete_item:"삭제",export_db:".jwlibrary 내보내기",n_edits:"{n}개 편집",n_edits_many:"{n}개 편집",add_tag:"+ 태그 추가",new_tag_ph:"태그 이름...",delete_note_confirm:"이 노트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_hl_confirm:"이 하이라이트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_bm_confirm:"이 북마크를 삭제할까요? 이 작업은 취소할 수 없습니다.",yes_delete:"예, 삭제",change_color:"색상",unsaved_exit:"{n}개의 내보내지 않은 편집이 있습니다. 내보내지 않고 닫을까요?",title_label:"제목",content_label:"내용",tags_label:"태그",hl_color_label:"하이라이트 색상",bm_title_label:"북마크 제목",plain_text_note:"저장 시 서식이 일반 텍스트로 변환됩니다",rte_bold:"굵게",rte_italic:"기울임",rte_underline:"밑줄",rte_bullets:"글머리 기호 목록",rich_text_note:"굵게, 기울임, 목록으로 편집 — 서식이 유지됩니다",date_from:"시작",date_to:"종료",date_range:"날짜로 필터",extract_range:"날짜 범위 추출",extract_none:"이 날짜 범위에 노트가 없습니다.",extract_hint:"이 날짜 범위의 노트만 포함된 새 .jwlibrary를 저장합니다.",copy_md:"Markdown으로 복사",export_md:"Markdown 내보내기",md_hint:"표시된 노트를 Markdown 파일(.zip)로 다운로드"},
-    tl:{title:"Tagasiyasat ng Tala",search:"Maghanap...",no_results:"Walang tumugma sa mga filter.",loading:"Naglo-load ng aklatan...",close:"Isara",no_file:"Magbukas muna ng backup file.",pick_file:"Pumili ng .jwlibrary file",count_one:"{n} item",count_many:"{n} item",color_all:"Lahat ng kulay",no_title:"Walang pamagat",copy:"Kopyahin",copied:"Nakopya",clear:"Burahin",error:"Hindi ma-load:",pub_all:"Lahat ng publikasyon",tag_all:"Lahat ng tag",back:"← Bumalik",detail_empty:"Pumili ng item mula sa listahan.",sort_newest:"Pinakabago muna",sort_oldest:"Pinakaluma muna",sort_pub:"Ayon sa publikasyon",modified:"Binago",no_content:"(Walang nilalaman)",too_many:"Ipinapakita ang unang {n} sa {total} — paliitin ang paghahanap.",pg_prev:"Nakaraan",pg_next:"Susunod",pg_status:"Pahina {page} ng {pages} · {total} resulta",err_corrupt:"Ang file na ito ay hindi nababasang .jwlibrary backup — maaaring sira o maling uri.",err_no_db:"Walang database ng mga nota (userData.db) ang backup na ito. I-export muli mula sa JW Library.",err_not_sqlite:"Hindi mabuksan ang database ng backup — maaaring sira ang file.",tab_notes:"Mga Tala",tab_highlights:"Mga Highlight",tab_bookmarks:"Mga Bookmark",hl_label:"Highlight",hl_no_text:"Naka-highlight na talata (ang teksto ay nasa publikasyon, hindi sa backup).",hl_with_note:"May tala",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Naka-link na tala:",edit:"I-edit",save:"I-save",cancel:"Kanselahin",delete_item:"Burahin",export_db:"I-export ang .jwlibrary",n_edits:"{n} pagbabago",n_edits_many:"{n} pagbabago",add_tag:"+ Magdagdag ng tag",new_tag_ph:"Pangalan ng tag...",delete_note_confirm:"Burahin ang talang ito? Hindi ito maaaring bawiin.",delete_hl_confirm:"Burahin ang highlight na ito? Hindi ito maaaring bawiin.",delete_bm_confirm:"Burahin ang bookmark na ito? Hindi ito maaaring bawiin.",yes_delete:"Oo, burahin",change_color:"Kulay",unsaved_exit:"Mayroon kang {n} hindi pa na-export na pagbabago. Isara nang hindi nagexport?",title_label:"Pamagat",content_label:"Nilalaman",tags_label:"Mga tag",hl_color_label:"Kulay ng highlight",bm_title_label:"Pamagat ng bookmark",plain_text_note:"Ang format ay magiging plain text kapag nai-save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Salungguhit",rte_bullets:"Bulleted na listahan",rich_text_note:"I-edit nang may bold, italic at listahan — pinapanatili ang format",date_from:"Mula",date_to:"Hanggang",date_range:"I-filter ayon sa petsa",extract_range:"I-extract ang saklaw ng petsa",extract_none:"Walang talang nasa saklaw ng petsang ito.",extract_hint:"Mag-save ng bagong .jwlibrary na may mga tala lang sa saklaw ng petsang ito.",copy_md:"Kopyahin bilang Markdown",export_md:"I-export ang Markdown",md_hint:"I-download ang mga ipinapakitang tala bilang Markdown files (.zip)"}
+    en:{title:"Note Explorer",search:"Search...",no_results:"Nothing matches your filters.",loading:"Loading library...",close:"Close",no_file:"Open a backup file first — pick one to browse.",pick_file:"Choose .jwlibrary file",count_one:"{n} item",count_many:"{n} items",color_all:"All colors",no_title:"Untitled",copy:"Copy",copied:"Copied",clear:"Clear",error:"Could not load:",pub_all:"All publications",tag_all:"All tags",back:"← Back",detail_empty:"Select an item from the list.",sort_newest:"Newest first",sort_oldest:"Oldest first",sort_pub:"By publication",modified:"Modified",no_content:"(No content)",too_many:"Showing first {n} of {total} — narrow the search.",pg_prev:"Prev",pg_next:"Next",pg_status:"Page {page} of {pages} · {total} results",err_corrupt:"This file isn't a readable .jwlibrary backup — it may be corrupted or the wrong type of file.",err_no_db:"This backup is missing its notes database (userData.db). Re-export it from JW Library.",err_not_sqlite:"The backup's database couldn't be opened — the file may be damaged.",tab_notes:"Notes",tab_highlights:"Highlights",tab_bookmarks:"Bookmarks",hl_label:"Highlight",hl_no_text:"Highlighted passage (text lives in the publication, not the backup).",hl_with_note:"With note",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Linked note:",edit:"Edit",save:"Save",cancel:"Cancel",delete_item:"Delete",export_db:"Export .jwlibrary",n_edits:"{n} edit",n_edits_many:"{n} edits",add_tag:"+ Add tag",new_tag_ph:"Tag name...",delete_note_confirm:"Delete this note? This cannot be undone.",delete_hl_confirm:"Delete this highlight? This cannot be undone.",delete_bm_confirm:"Delete this bookmark? This cannot be undone.",yes_delete:"Yes, delete",change_color:"Color",unsaved_exit:"You have {n} unsaved edit(s). Close without exporting?",title_label:"Title",content_label:"Content",tags_label:"Tags",hl_color_label:"Highlight color",bm_title_label:"Bookmark title",plain_text_note:"Formatting simplified to plain text on save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Underline",rte_bullets:"Bullet list",rich_text_note:"Edit with bold, italics and lists — formatting is kept",date_from:"From",date_to:"To",date_range:"Filter by date",extract_range:"Extract date range",extract_none:"No notes fall in this date range.",extract_hint:"Save a new .jwlibrary with only the notes in this date range.",copy_md:"Copy as Markdown",export_md:"Export Markdown",md_hint:"Download the notes shown as Markdown files (.zip)",sel_mode:"Select",sel_done:"Done",sel_all:"All",sel_none:"None",sel_count:"{n} selected",batch_tag:"Tag",batch_color:"Color",batch_delete:"Delete",batch_delete_confirm:"Delete {n}? You can Undo before exporting.",batch_tag_ph:"Tag name…",batch_add:"Add",undo:"Undo",redo:"Redo",tab_inputfields:"Study Answers",if_label:"Study answer",if_question:"Question",if_answer:"Your answer",if_empty:"(No answer yet)",delete_if_confirm:"Delete this study answer? You can Undo before exporting.",share_action:"Share",share_title:"Share notes",share_intro:"This makes a file you hand over yourself — nothing is uploaded. It contains the note text, so share only with people you trust.",share_count:"{n} notes",share_download:"Download file",share_copy:"Copy",share_tag:"Shared",receive_action:"Receive",receive_title:"Receive shared notes",receive_intro:"Paste shared text, or choose a .jwshare.json file someone sent you.",receive_paste_ph:"Paste shared notes here…",receive_choose:"Choose file",receive_preview:"Preview",receive_invalid:"That doesn't look like valid shared-notes data.",preview_readonly:"Preview",adopt:"Adopt {n} into my library",adopt_need_lib:"Open a backup first",adopted:"Adopted {n} notes (tagged \"Shared\").",open_share:"Share Notes →"},
+    es:{title:"Explorador de Notas",search:"Buscar...",no_results:"Nada coincide con tus filtros.",loading:"Cargando biblioteca...",close:"Cerrar",no_file:"Abre primero un archivo de respaldo.",pick_file:"Elegir archivo .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementos",color_all:"Todos los colores",no_title:"Sin título",copy:"Copiar",copied:"Copiado",clear:"Limpiar",error:"No se pudo cargar:",pub_all:"Todas las publicaciones",tag_all:"Todas las etiquetas",back:"← Volver",detail_empty:"Selecciona un elemento de la lista.",sort_newest:"Más recientes primero",sort_oldest:"Más antiguas primero",sort_pub:"Por publicación",modified:"Modificado",no_content:"(Sin contenido)",too_many:"Mostrando los primeros {n} de {total} — refina la búsqueda.",pg_prev:"Anterior",pg_next:"Siguiente",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este archivo no es una copia .jwlibrary legible: puede estar dañado o ser de tipo incorrecto.",err_no_db:"A esta copia le falta su base de datos de notas (userData.db). Vuelve a exportarla desde JW Library.",err_not_sqlite:"No se pudo abrir la base de datos de la copia: el archivo puede estar dañado.",tab_notes:"Notas",tab_highlights:"Resaltados",tab_bookmarks:"Marcadores",hl_label:"Resaltado",hl_no_text:"Pasaje resaltado (el texto está en la publicación, no en el respaldo).",hl_with_note:"Con nota",bm_label:"Marcador",bm_slot:"Posición {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Guardar",cancel:"Cancelar",delete_item:"Eliminar",export_db:"Exportar .jwlibrary",n_edits:"{n} edición",n_edits_many:"{n} ediciones",add_tag:"+ Agregar etiqueta",new_tag_ph:"Nombre de etiqueta...",delete_note_confirm:"¿Eliminar esta nota? Esta acción no se puede deshacer.",delete_hl_confirm:"¿Eliminar este resaltado? Esta acción no se puede deshacer.",delete_bm_confirm:"¿Eliminar este marcador? Esta acción no se puede deshacer.",yes_delete:"Sí, eliminar",change_color:"Color",unsaved_exit:"Tienes {n} edición(es) sin exportar. ¿Cerrar sin exportar?",title_label:"Título",content_label:"Contenido",tags_label:"Etiquetas",hl_color_label:"Color del resaltado",bm_title_label:"Título del marcador",plain_text_note:"El formato se simplifica a texto plano al guardar",rte_bold:"Negrita",rte_italic:"Cursiva",rte_underline:"Subrayado",rte_bullets:"Lista con viñetas",rich_text_note:"Edita con negrita, cursiva y listas — el formato se conserva",date_from:"Desde",date_to:"Hasta",date_range:"Filtrar por fecha",extract_range:"Extraer rango de fechas",extract_none:"Ninguna nota está en este rango de fechas.",extract_hint:"Guarda un nuevo .jwlibrary solo con las notas de este rango de fechas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Descarga las notas mostradas como archivos Markdown (.zip)",sel_mode:"Seleccionar",sel_done:"Listo",sel_all:"Todo",sel_none:"Ninguno",sel_count:"{n} seleccionados",batch_tag:"Etiqueta",batch_color:"Color",batch_delete:"Eliminar",batch_delete_confirm:"¿Eliminar {n}? Puedes deshacer antes de exportar.",batch_tag_ph:"Nombre de etiqueta…",batch_add:"Agregar",undo:"Deshacer",redo:"Rehacer",tab_inputfields:"Respuestas",if_label:"Respuesta de estudio",if_question:"Pregunta",if_answer:"Tu respuesta",if_empty:"(Sin respuesta aún)",delete_if_confirm:"¿Eliminar esta respuesta de estudio? Puedes deshacer antes de exportar.",share_action:"Compartir",share_title:"Compartir notas",share_intro:"Esto crea un archivo que tú mismo entregas — no se sube nada. Contiene el texto de las notas, así que compártelo solo con personas de confianza.",share_count:"{n} notas",share_download:"Descargar archivo",share_copy:"Copiar",share_tag:"Compartido",receive_action:"Recibir",receive_title:"Recibir notas compartidas",receive_intro:"Pega el texto compartido o elige un archivo .jwshare.json que te enviaron.",receive_paste_ph:"Pega aquí las notas compartidas…",receive_choose:"Elegir archivo",receive_preview:"Vista previa",receive_invalid:"Esto no parece datos de notas compartidas válidos.",preview_readonly:"Vista previa",adopt:"Adoptar {n} en mi biblioteca",adopt_need_lib:"Abre primero un respaldo",adopted:"Se adoptaron {n} notas (con la etiqueta \"Compartido\").",open_share:"Compartir notas →"},
+    pt:{title:"Explorador de Notas",search:"Pesquisar...",no_results:"Nada corresponde aos filtros.",loading:"Carregando biblioteca...",close:"Fechar",no_file:"Abra primeiro um arquivo de backup.",pick_file:"Escolher arquivo .jwlibrary",count_one:"{n} item",count_many:"{n} itens",color_all:"Todas as cores",no_title:"Sem título",copy:"Copiar",copied:"Copiado",clear:"Limpar",error:"Não foi possível carregar:",pub_all:"Todas as publicações",tag_all:"Todas as etiquetas",back:"← Voltar",detail_empty:"Selecione um item da lista.",sort_newest:"Mais recentes primeiro",sort_oldest:"Mais antigos primeiro",sort_pub:"Por publicação",modified:"Modificado",no_content:"(Sem conteúdo)",too_many:"Exibindo os primeiros {n} de {total} — refine a busca.",pg_prev:"Anterior",pg_next:"Próxima",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este arquivo não é um backup .jwlibrary legível — pode estar corrompido ou ser do tipo errado.",err_no_db:"Falta o banco de dados de notas (userData.db) neste backup. Exporte-o novamente no JW Library.",err_not_sqlite:"Não foi possível abrir o banco de dados do backup — o arquivo pode estar danificado.",tab_notes:"Notas",tab_highlights:"Marcações",tab_bookmarks:"Favoritos",hl_label:"Marcação",hl_no_text:"Trecho marcado (o texto está na publicação, não no backup).",hl_with_note:"Com nota",bm_label:"Favorito",bm_slot:"Posição {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Salvar",cancel:"Cancelar",delete_item:"Excluir",export_db:"Exportar .jwlibrary",n_edits:"{n} edição",n_edits_many:"{n} edições",add_tag:"+ Adicionar etiqueta",new_tag_ph:"Nome da etiqueta...",delete_note_confirm:"Excluir esta nota? Esta ação não pode ser desfeita.",delete_hl_confirm:"Excluir esta marcação? Esta ação não pode ser desfeita.",delete_bm_confirm:"Excluir este favorito? Esta ação não pode ser desfeita.",yes_delete:"Sim, excluir",change_color:"Cor",unsaved_exit:"Você tem {n} edição(ões) sem exportar. Fechar sem exportar?",title_label:"Título",content_label:"Conteúdo",tags_label:"Etiquetas",hl_color_label:"Cor da marcação",bm_title_label:"Título do favorito",plain_text_note:"Formatação simplificada para texto simples ao salvar",rte_bold:"Negrito",rte_italic:"Itálico",rte_underline:"Sublinhado",rte_bullets:"Lista com marcadores",rich_text_note:"Edite com negrito, itálico e listas — a formatação é mantida",date_from:"De",date_to:"Até",date_range:"Filtrar por data",extract_range:"Extrair intervalo de datas",extract_none:"Nenhuma nota está neste intervalo de datas.",extract_hint:"Salve um novo .jwlibrary apenas com as notas deste intervalo de datas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Baixe as notas exibidas como arquivos Markdown (.zip)",sel_mode:"Selecionar",sel_done:"Concluir",sel_all:"Tudo",sel_none:"Nenhum",sel_count:"{n} selecionados",batch_tag:"Etiqueta",batch_color:"Cor",batch_delete:"Excluir",batch_delete_confirm:"Excluir {n}? Você pode desfazer antes de exportar.",batch_tag_ph:"Nome da etiqueta…",batch_add:"Adicionar",undo:"Desfazer",redo:"Refazer",tab_inputfields:"Respostas",if_label:"Resposta de estudo",if_question:"Pergunta",if_answer:"Sua resposta",if_empty:"(Sem resposta ainda)",delete_if_confirm:"Excluir esta resposta de estudo? Você pode desfazer antes de exportar.",share_action:"Compartilhar",share_title:"Compartilhar notas",share_intro:"Isto cria um arquivo que você mesmo entrega — nada é enviado. Ele contém o texto das notas, então compartilhe só com pessoas de confiança.",share_count:"{n} notas",share_download:"Baixar arquivo",share_copy:"Copiar",share_tag:"Compartilhado",receive_action:"Receber",receive_title:"Receber notas compartilhadas",receive_intro:"Cole o texto compartilhado ou escolha um arquivo .jwshare.json que enviaram a você.",receive_paste_ph:"Cole as notas compartilhadas aqui…",receive_choose:"Escolher arquivo",receive_preview:"Pré-visualizar",receive_invalid:"Isto não parece dados válidos de notas compartilhadas.",preview_readonly:"Pré-visualização",adopt:"Adotar {n} na minha biblioteca",adopt_need_lib:"Abra um backup primeiro",adopted:"{n} notas adotadas (com a etiqueta \"Compartilhado\").",open_share:"Compartilhar notas →"},
+    fr:{title:"Explorateur de Notes",search:"Rechercher...",no_results:"Aucun résultat ne correspond.",loading:"Chargement de la bibliothèque...",close:"Fermer",no_file:"Ouvrez d'abord un fichier de sauvegarde.",pick_file:"Choisir un fichier .jwlibrary",count_one:"{n} élément",count_many:"{n} éléments",color_all:"Toutes les couleurs",no_title:"Sans titre",copy:"Copier",copied:"Copié",clear:"Effacer",error:"Impossible de charger :",pub_all:"Toutes les publications",tag_all:"Toutes les étiquettes",back:"← Retour",detail_empty:"Sélectionnez un élément dans la liste.",sort_newest:"Plus récents d'abord",sort_oldest:"Plus anciens d'abord",sort_pub:"Par publication",modified:"Modifié",no_content:"(Pas de contenu)",too_many:"Affichage des {n} premiers sur {total} — affinez la recherche.",pg_prev:"Préc.",pg_next:"Suiv.",pg_status:"Page {page} sur {pages} · {total} résultats",err_corrupt:"Ce fichier n'est pas une sauvegarde .jwlibrary lisible — il est peut-être corrompu ou d'un mauvais type.",err_no_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db). Réexportez-la depuis JW Library.",err_not_sqlite:"Impossible d'ouvrir la base de données de la sauvegarde — le fichier est peut-être endommagé.",tab_notes:"Notes",tab_highlights:"Surlignages",tab_bookmarks:"Signets",hl_label:"Surlignage",hl_no_text:"Passage surligné (le texte se trouve dans la publication, pas dans la sauvegarde).",hl_with_note:"Avec note",bm_label:"Signet",bm_slot:"Position {n}",linked_note:"Note liée :",edit:"Modifier",save:"Enregistrer",cancel:"Annuler",delete_item:"Supprimer",export_db:"Exporter .jwlibrary",n_edits:"{n} modification",n_edits_many:"{n} modifications",add_tag:"+ Ajouter étiquette",new_tag_ph:"Nom de l'étiquette...",delete_note_confirm:"Supprimer cette note ? Cette action est irréversible.",delete_hl_confirm:"Supprimer ce surlignage ? Cette action est irréversible.",delete_bm_confirm:"Supprimer ce signet ? Cette action est irréversible.",yes_delete:"Oui, supprimer",change_color:"Couleur",unsaved_exit:"Vous avez {n} modification(s) non exportée(s). Fermer sans exporter ?",title_label:"Titre",content_label:"Contenu",tags_label:"Étiquettes",hl_color_label:"Couleur du surlignage",bm_title_label:"Titre du signet",plain_text_note:"La mise en forme est simplifiée en texte brut lors de l'enregistrement",rte_bold:"Gras",rte_italic:"Italique",rte_underline:"Souligné",rte_bullets:"Liste à puces",rich_text_note:"Modifiez avec gras, italique et listes — la mise en forme est conservée",date_from:"Du",date_to:"Au",date_range:"Filtrer par date",extract_range:"Extraire la plage de dates",extract_none:"Aucune note dans cette plage de dates.",extract_hint:"Enregistrez un nouveau .jwlibrary avec seulement les notes de cette plage de dates.",copy_md:"Copier en Markdown",export_md:"Exporter Markdown",md_hint:"Téléchargez les notes affichées en fichiers Markdown (.zip)",sel_mode:"Sélectionner",sel_done:"Terminé",sel_all:"Tout",sel_none:"Aucun",sel_count:"{n} sélectionnés",batch_tag:"Étiquette",batch_color:"Couleur",batch_delete:"Supprimer",batch_delete_confirm:"Supprimer {n} ? Vous pouvez annuler avant l'export.",batch_tag_ph:"Nom de l'étiquette…",batch_add:"Ajouter",undo:"Annuler",redo:"Rétablir",tab_inputfields:"Réponses",if_label:"Réponse d'étude",if_question:"Question",if_answer:"Votre réponse",if_empty:"(Pas encore de réponse)",delete_if_confirm:"Supprimer cette réponse d'étude ? Vous pouvez annuler avant l'export.",share_action:"Partager",share_title:"Partager des notes",share_intro:"Cela crée un fichier que vous transmettez vous-même — rien n'est envoyé. Il contient le texte des notes, ne le partagez qu'avec des personnes de confiance.",share_count:"{n} notes",share_download:"Télécharger le fichier",share_copy:"Copier",share_tag:"Partagé",receive_action:"Recevoir",receive_title:"Recevoir des notes partagées",receive_intro:"Collez le texte partagé ou choisissez un fichier .jwshare.json qu'on vous a envoyé.",receive_paste_ph:"Collez les notes partagées ici…",receive_choose:"Choisir un fichier",receive_preview:"Aperçu",receive_invalid:"Cela ne ressemble pas à des données de notes partagées valides.",preview_readonly:"Aperçu",adopt:"Adopter {n} dans ma bibliothèque",adopt_need_lib:"Ouvrez d'abord une sauvegarde",adopted:"{n} notes adoptées (étiquetées \"Partagé\").",open_share:"Partager des notes →"},
+    de:{title:"Notiz-Explorer",search:"Suchen...",no_results:"Keine Treffer für die Filter.",loading:"Bibliothek wird geladen...",close:"Schließen",no_file:"Öffnen Sie zuerst eine Sicherungsdatei.",pick_file:".jwlibrary-Datei wählen",count_one:"{n} Eintrag",count_many:"{n} Einträge",color_all:"Alle Farben",no_title:"Ohne Titel",copy:"Kopieren",copied:"Kopiert",clear:"Zurücksetzen",error:"Konnte nicht geladen werden:",pub_all:"Alle Veröffentlichungen",tag_all:"Alle Stichwörter",back:"← Zurück",detail_empty:"Wählen Sie einen Eintrag aus der Liste.",sort_newest:"Neueste zuerst",sort_oldest:"Älteste zuerst",sort_pub:"Nach Veröffentlichung",modified:"Geändert",no_content:"(Kein Inhalt)",too_many:"Erste {n} von {total} angezeigt — Suche einschränken.",pg_prev:"Zurück",pg_next:"Weiter",pg_status:"Seite {page} von {pages} · {total} Ergebnisse",err_corrupt:"Diese Datei ist keine lesbare .jwlibrary-Sicherung — sie ist evtl. beschädigt oder vom falschen Typ.",err_no_db:"Dieser Sicherung fehlt ihre Notizdatenbank (userData.db). Exportiere sie erneut aus JW Library.",err_not_sqlite:"Die Datenbank der Sicherung konnte nicht geöffnet werden — die Datei ist evtl. beschädigt.",tab_notes:"Notizen",tab_highlights:"Markierungen",tab_bookmarks:"Lesezeichen",hl_label:"Markierung",hl_no_text:"Markierte Passage (Text liegt in der Veröffentlichung, nicht im Backup).",hl_with_note:"Mit Notiz",bm_label:"Lesezeichen",bm_slot:"Slot {n}",linked_note:"Verknüpfte Notiz:",edit:"Bearbeiten",save:"Speichern",cancel:"Abbrechen",delete_item:"Löschen",export_db:".jwlibrary exportieren",n_edits:"{n} Änderung",n_edits_many:"{n} Änderungen",add_tag:"+ Stichwort hinzufügen",new_tag_ph:"Stichwortname...",delete_note_confirm:"Diese Notiz löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_hl_confirm:"Diese Markierung löschen? Diese Aktion kann nicht rückgängig gemacht werden.",delete_bm_confirm:"Dieses Lesezeichen löschen? Diese Aktion kann nicht rückgängig gemacht werden.",yes_delete:"Ja, löschen",change_color:"Farbe",unsaved_exit:"Sie haben {n} nicht exportierte Änderung(en). Ohne Export schließen?",title_label:"Titel",content_label:"Inhalt",tags_label:"Stichwörter",hl_color_label:"Markierungsfarbe",bm_title_label:"Lesezeichentitel",plain_text_note:"Formatierung wird beim Speichern auf Nur-Text vereinfacht",rte_bold:"Fett",rte_italic:"Kursiv",rte_underline:"Unterstrichen",rte_bullets:"Aufzählung",rich_text_note:"Mit Fett, Kursiv und Listen bearbeiten — Formatierung bleibt erhalten",date_from:"Von",date_to:"Bis",date_range:"Nach Datum filtern",extract_range:"Datumsbereich extrahieren",extract_none:"Keine Notizen in diesem Datumsbereich.",extract_hint:"Ein neues .jwlibrary nur mit den Notizen dieses Datumsbereichs speichern.",copy_md:"Als Markdown kopieren",export_md:"Markdown exportieren",md_hint:"Die angezeigten Notizen als Markdown-Dateien herunterladen (.zip)",sel_mode:"Auswählen",sel_done:"Fertig",sel_all:"Alle",sel_none:"Keine",sel_count:"{n} ausgewählt",batch_tag:"Stichwort",batch_color:"Farbe",batch_delete:"Löschen",batch_delete_confirm:"{n} löschen? Du kannst vor dem Export rückgängig machen.",batch_tag_ph:"Stichwortname…",batch_add:"Hinzufügen",undo:"Rückgängig",redo:"Wiederholen",tab_inputfields:"Antworten",if_label:"Studienantwort",if_question:"Frage",if_answer:"Deine Antwort",if_empty:"(Noch keine Antwort)",delete_if_confirm:"Diese Studienantwort löschen? Du kannst vor dem Export rückgängig machen.",share_action:"Teilen",share_title:"Notizen teilen",share_intro:"Das erstellt eine Datei, die du selbst weitergibst — nichts wird hochgeladen. Sie enthält den Notiztext, teile sie also nur mit vertrauenswürdigen Personen.",share_count:"{n} Notizen",share_download:"Datei herunterladen",share_copy:"Kopieren",share_tag:"Geteilt",receive_action:"Empfangen",receive_title:"Geteilte Notizen empfangen",receive_intro:"Füge geteilten Text ein oder wähle eine .jwshare.json-Datei, die dir jemand geschickt hat.",receive_paste_ph:"Geteilte Notizen hier einfügen…",receive_choose:"Datei wählen",receive_preview:"Vorschau",receive_invalid:"Das sehen nicht nach gültigen geteilten Notizdaten aus.",preview_readonly:"Vorschau",adopt:"{n} in meine Bibliothek übernehmen",adopt_need_lib:"Öffne zuerst ein Backup",adopted:"{n} Notizen übernommen (mit Stichwort \"Geteilt\").",open_share:"Notizen teilen →"},
+    it:{title:"Esplora Note",search:"Cerca...",no_results:"Nessun risultato per i filtri.",loading:"Caricamento biblioteca...",close:"Chiudi",no_file:"Apri prima un file di backup.",pick_file:"Scegli file .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementi",color_all:"Tutti i colori",no_title:"Senza titolo",copy:"Copia",copied:"Copiato",clear:"Cancella",error:"Impossibile caricare:",pub_all:"Tutte le pubblicazioni",tag_all:"Tutte le etichette",back:"← Indietro",detail_empty:"Seleziona un elemento dall'elenco.",sort_newest:"Più recenti prima",sort_oldest:"Più vecchi prima",sort_pub:"Per pubblicazione",modified:"Modificato",no_content:"(Nessun contenuto)",too_many:"Mostrati i primi {n} di {total} — restringi la ricerca.",pg_prev:"Prec.",pg_next:"Succ.",pg_status:"Pagina {page} di {pages} · {total} risultati",err_corrupt:"Questo file non è un backup .jwlibrary leggibile — potrebbe essere danneggiato o di tipo errato.",err_no_db:"A questo backup manca il database delle note (userData.db). Riesportalo da JW Library.",err_not_sqlite:"Non è stato possibile aprire il database del backup — il file potrebbe essere danneggiato.",tab_notes:"Note",tab_highlights:"Evidenziazioni",tab_bookmarks:"Segnalibri",hl_label:"Evidenziazione",hl_no_text:"Brano evidenziato (il testo è nella pubblicazione, non nel backup).",hl_with_note:"Con nota",bm_label:"Segnalibro",bm_slot:"Posizione {n}",linked_note:"Nota collegata:",edit:"Modifica",save:"Salva",cancel:"Annulla",delete_item:"Elimina",export_db:"Esporta .jwlibrary",n_edits:"{n} modifica",n_edits_many:"{n} modifiche",add_tag:"+ Aggiungi etichetta",new_tag_ph:"Nome etichetta...",delete_note_confirm:"Eliminare questa nota? Questa azione non può essere annullata.",delete_hl_confirm:"Eliminare questa evidenziazione? Questa azione non può essere annullata.",delete_bm_confirm:"Eliminare questo segnalibro? Questa azione non può essere annullata.",yes_delete:"Sì, elimina",change_color:"Colore",unsaved_exit:"Hai {n} modifica/modifiche non esportata/e. Chiudere senza esportare?",title_label:"Titolo",content_label:"Contenuto",tags_label:"Etichette",hl_color_label:"Colore evidenziazione",bm_title_label:"Titolo segnalibro",plain_text_note:"La formattazione verrà semplificata a testo normale al salvataggio",rte_bold:"Grassetto",rte_italic:"Corsivo",rte_underline:"Sottolineato",rte_bullets:"Elenco puntato",rich_text_note:"Modifica con grassetto, corsivo ed elenchi — la formattazione è mantenuta",date_from:"Dal",date_to:"Al",date_range:"Filtra per data",extract_range:"Estrai intervallo di date",extract_none:"Nessuna nota in questo intervallo di date.",extract_hint:"Salva un nuovo .jwlibrary solo con le note di questo intervallo di date.",copy_md:"Copia come Markdown",export_md:"Esporta Markdown",md_hint:"Scarica le note mostrate come file Markdown (.zip)",sel_mode:"Seleziona",sel_done:"Fatto",sel_all:"Tutto",sel_none:"Nessuno",sel_count:"{n} selezionati",batch_tag:"Etichetta",batch_color:"Colore",batch_delete:"Elimina",batch_delete_confirm:"Eliminare {n}? Puoi annullare prima di esportare.",batch_tag_ph:"Nome etichetta…",batch_add:"Aggiungi",undo:"Annulla",redo:"Ripeti",tab_inputfields:"Risposte",if_label:"Risposta di studio",if_question:"Domanda",if_answer:"La tua risposta",if_empty:"(Ancora nessuna risposta)",delete_if_confirm:"Eliminare questa risposta di studio? Puoi annullare prima di esportare.",share_action:"Condividi",share_title:"Condividi note",share_intro:"Questo crea un file che consegni tu stesso — niente viene caricato. Contiene il testo delle note, quindi condividilo solo con persone fidate.",share_count:"{n} note",share_download:"Scarica file",share_copy:"Copia",share_tag:"Condiviso",receive_action:"Ricevi",receive_title:"Ricevi note condivise",receive_intro:"Incolla il testo condiviso o scegli un file .jwshare.json che ti hanno inviato.",receive_paste_ph:"Incolla qui le note condivise…",receive_choose:"Scegli file",receive_preview:"Anteprima",receive_invalid:"Questi non sembrano dati di note condivise validi.",preview_readonly:"Anteprima",adopt:"Adotta {n} nella mia biblioteca",adopt_need_lib:"Apri prima un backup",adopted:"Adottate {n} note (con etichetta \"Condiviso\").",open_share:"Condividi note →"},
+    ru:{title:"Просмотр заметок",search:"Поиск...",no_results:"Ничего не найдено.",loading:"Загрузка библиотеки...",close:"Закрыть",no_file:"Сначала откройте файл резервной копии.",pick_file:"Выбрать .jwlibrary файл",count_one:"{n} элемент",count_many:"{n} элементов",color_all:"Все цвета",no_title:"Без названия",copy:"Копировать",copied:"Скопировано",clear:"Очистить",error:"Не удалось загрузить:",pub_all:"Все публикации",tag_all:"Все теги",back:"← Назад",detail_empty:"Выберите элемент из списка.",sort_newest:"Сначала новые",sort_oldest:"Сначала старые",sort_pub:"По публикации",modified:"Изменено",no_content:"(Нет содержимого)",too_many:"Показаны первые {n} из {total} — уточните поиск.",pg_prev:"Назад",pg_next:"Вперёд",pg_status:"Страница {page} из {pages} · {total} результатов",err_corrupt:"Этот файл не является читаемой копией .jwlibrary — возможно, он повреждён или это другой тип файла.",err_no_db:"В этой копии нет базы данных заметок (userData.db). Экспортируйте её заново из JW Library.",err_not_sqlite:"Не удалось открыть базу данных копии — файл может быть повреждён.",tab_notes:"Заметки",tab_highlights:"Пометки",tab_bookmarks:"Закладки",hl_label:"Пометка",hl_no_text:"Выделенный отрывок (текст находится в публикации, а не в копии).",hl_with_note:"С заметкой",bm_label:"Закладка",bm_slot:"Слот {n}",linked_note:"Связанная заметка:",edit:"Изменить",save:"Сохранить",cancel:"Отмена",delete_item:"Удалить",export_db:"Экспорт .jwlibrary",n_edits:"{n} изм.",n_edits_many:"{n} изм.",add_tag:"+ Добавить тег",new_tag_ph:"Название тега...",delete_note_confirm:"Удалить эту заметку? Это действие нельзя отменить.",delete_hl_confirm:"Удалить эту пометку? Это действие нельзя отменить.",delete_bm_confirm:"Удалить эту закладку? Это действие нельзя отменить.",yes_delete:"Да, удалить",change_color:"Цвет",unsaved_exit:"У вас {n} неэкспортированное(ых) изменение(й). Закрыть без экспорта?",title_label:"Название",content_label:"Содержание",tags_label:"Теги",hl_color_label:"Цвет пометки",bm_title_label:"Название закладки",plain_text_note:"Форматирование упрощается до простого текста при сохранении",rte_bold:"Жирный",rte_italic:"Курсив",rte_underline:"Подчёркнутый",rte_bullets:"Маркированный список",rich_text_note:"Редактируйте с жирным, курсивом и списками — форматирование сохраняется",date_from:"С",date_to:"По",date_range:"Фильтр по дате",extract_range:"Извлечь диапазон дат",extract_none:"Нет заметок в этом диапазоне дат.",extract_hint:"Сохранить новый .jwlibrary только с заметками этого диапазона дат.",copy_md:"Копировать как Markdown",export_md:"Экспорт Markdown",md_hint:"Скачать показанные заметки как файлы Markdown (.zip)",sel_mode:"Выбрать",sel_done:"Готово",sel_all:"Все",sel_none:"Ничего",sel_count:"Выбрано: {n}",batch_tag:"Тег",batch_color:"Цвет",batch_delete:"Удалить",batch_delete_confirm:"Удалить {n}? Можно отменить до экспорта.",batch_tag_ph:"Название тега…",batch_add:"Добавить",undo:"Отменить",redo:"Повторить",tab_inputfields:"Ответы",if_label:"Ответ для изучения",if_question:"Вопрос",if_answer:"Ваш ответ",if_empty:"(Пока нет ответа)",delete_if_confirm:"Удалить этот ответ? Можно отменить до экспорта.",share_action:"Поделиться",share_title:"Поделиться заметками",share_intro:"Это создаёт файл, который вы передаёте сами — ничего не загружается. Он содержит текст заметок, поэтому делитесь только с теми, кому доверяете.",share_count:"{n} заметок",share_download:"Скачать файл",share_copy:"Копировать",share_tag:"Общие",receive_action:"Получить",receive_title:"Получить общие заметки",receive_intro:"Вставьте присланный текст или выберите файл .jwshare.json.",receive_paste_ph:"Вставьте сюда общие заметки…",receive_choose:"Выбрать файл",receive_preview:"Предпросмотр",receive_invalid:"Это не похоже на корректные данные общих заметок.",preview_readonly:"Предпросмотр",adopt:"Добавить {n} в мою библиотеку",adopt_need_lib:"Сначала откройте копию",adopted:"Добавлено заметок: {n} (с меткой \"Общие\").",open_share:"Поделиться →"},
+    ja:{title:"ノート閲覧",search:"検索...",no_results:"フィルターに一致する項目はありません。",loading:"ライブラリを読み込み中...",close:"閉じる",no_file:"先にバックアップファイルを開いてください。",pick_file:".jwlibrary ファイルを選択",count_one:"{n} 件",count_many:"{n} 件",color_all:"すべての色",no_title:"タイトルなし",copy:"コピー",copied:"コピーしました",clear:"クリア",error:"読み込めませんでした:",pub_all:"すべての出版物",tag_all:"すべてのタグ",back:"← 戻る",detail_empty:"リストから項目を選択してください。",sort_newest:"新しい順",sort_oldest:"古い順",sort_pub:"出版物別",modified:"更新日",no_content:"(内容なし)",too_many:"{total} 件中 {n} 件を表示 — 検索を絞ってください。",pg_prev:"前へ",pg_next:"次へ",pg_status:"{pages} ページ中 {page} ページ · {total} 件",err_corrupt:"このファイルは読み取り可能な .jwlibrary バックアップではありません。破損しているか種類が違う可能性があります。",err_no_db:"このバックアップにはノートのデータベース（userData.db）がありません。JW Library から再書き出ししてください。",err_not_sqlite:"バックアップのデータベースを開けませんでした。ファイルが破損している可能性があります。",tab_notes:"ノート",tab_highlights:"ハイライト",tab_bookmarks:"しおり",hl_label:"ハイライト",hl_no_text:"ハイライトした箇所(テキストは出版物にあり、バックアップには含まれません)。",hl_with_note:"ノート付き",bm_label:"しおり",bm_slot:"スロット {n}",linked_note:"関連ノート:",edit:"編集",save:"保存",cancel:"キャンセル",delete_item:"削除",export_db:".jwlibrary を書き出し",n_edits:"{n}件の編集",n_edits_many:"{n}件の編集",add_tag:"+ タグを追加",new_tag_ph:"タグ名...",delete_note_confirm:"このノートを削除しますか？この操作は取り消せません。",delete_hl_confirm:"このハイライトを削除しますか？この操作は取り消せません。",delete_bm_confirm:"このしおりを削除しますか？この操作は取り消せません。",yes_delete:"はい、削除",change_color:"色",unsaved_exit:"{n}件の未エクスポートの編集があります。エクスポートせずに閉じますか？",title_label:"タイトル",content_label:"内容",tags_label:"タグ",hl_color_label:"ハイライトの色",bm_title_label:"しおりのタイトル",plain_text_note:"保存時にプレーンテキストに変換されます",rte_bold:"太字",rte_italic:"斜体",rte_underline:"下線",rte_bullets:"箇条書き",rich_text_note:"太字・斜体・リストで編集できます。書式は保持されます",date_from:"開始",date_to:"終了",date_range:"日付で絞り込み",extract_range:"日付範囲を抽出",extract_none:"この日付範囲にノートはありません。",extract_hint:"この日付範囲のノートだけを含む新しい .jwlibrary を保存します。",copy_md:"Markdown としてコピー",export_md:"Markdown を書き出し",md_hint:"表示中のノートを Markdown ファイル（.zip）としてダウンロード",sel_mode:"選択",sel_done:"完了",sel_all:"すべて",sel_none:"解除",sel_count:"{n} 件選択",batch_tag:"タグ",batch_color:"色",batch_delete:"削除",batch_delete_confirm:"{n} 件を削除？書き出し前に元に戻せます。",batch_tag_ph:"タグ名…",batch_add:"追加",undo:"元に戻す",redo:"やり直し",tab_inputfields:"回答",if_label:"学習の回答",if_question:"質問",if_answer:"あなたの回答",if_empty:"(まだ回答がありません)",delete_if_confirm:"この学習の回答を削除？書き出し前に元に戻せます。",share_action:"共有",share_title:"ノートを共有",share_intro:"これは自分で渡すファイルを作るだけです。アップロードはされません。ノートの本文が含まれるので、信頼できる人とだけ共有してください。",share_count:"{n} 件のノート",share_download:"ファイルをダウンロード",share_copy:"コピー",share_tag:"共有",receive_action:"受け取る",receive_title:"共有されたノートを受け取る",receive_intro:"共有テキストを貼り付けるか、送られた .jwshare.json ファイルを選択してください。",receive_paste_ph:"共有されたノートをここに貼り付け…",receive_choose:"ファイルを選択",receive_preview:"プレビュー",receive_invalid:"有効な共有ノートのデータではないようです。",preview_readonly:"プレビュー",adopt:"{n} 件を自分のライブラリに取り込む",adopt_need_lib:"先にバックアップを開いてください",adopted:"{n} 件のノートを取り込みました（「共有」タグ付き）。",open_share:"ノートを共有 →"},
+    ko:{title:"노트 탐색기",search:"검색...",no_results:"필터와 일치하는 항목이 없습니다.",loading:"라이브러리 로드 중...",close:"닫기",no_file:"먼저 백업 파일을 여세요.",pick_file:".jwlibrary 파일 선택",count_one:"{n}개",count_many:"{n}개",color_all:"모든 색상",no_title:"제목 없음",copy:"복사",copied:"복사됨",clear:"초기화",error:"불러올 수 없습니다:",pub_all:"모든 출판물",tag_all:"모든 태그",back:"← 뒤로",detail_empty:"목록에서 항목을 선택하세요.",sort_newest:"최신순",sort_oldest:"오래된순",sort_pub:"출판물순",modified:"수정됨",no_content:"(내용 없음)",too_many:"전체 {total}개 중 처음 {n}개 표시 — 검색을 좁히세요.",pg_prev:"이전",pg_next:"다음",pg_status:"{pages}페이지 중 {page}페이지 · {total}개",err_corrupt:"이 파일은 읽을 수 있는 .jwlibrary 백업이 아닙니다. 손상되었거나 잘못된 형식일 수 있습니다.",err_no_db:"이 백업에는 노트 데이터베이스(userData.db)가 없습니다. JW Library에서 다시 내보내세요.",err_not_sqlite:"백업의 데이터베이스를 열 수 없습니다. 파일이 손상되었을 수 있습니다.",tab_notes:"노트",tab_highlights:"하이라이트",tab_bookmarks:"북마크",hl_label:"하이라이트",hl_no_text:"하이라이트된 구절 (텍스트는 출판물에 있고 백업에는 포함되지 않음).",hl_with_note:"노트 포함",bm_label:"북마크",bm_slot:"슬롯 {n}",linked_note:"연결된 노트:",edit:"편집",save:"저장",cancel:"취소",delete_item:"삭제",export_db:".jwlibrary 내보내기",n_edits:"{n}개 편집",n_edits_many:"{n}개 편집",add_tag:"+ 태그 추가",new_tag_ph:"태그 이름...",delete_note_confirm:"이 노트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_hl_confirm:"이 하이라이트를 삭제할까요? 이 작업은 취소할 수 없습니다.",delete_bm_confirm:"이 북마크를 삭제할까요? 이 작업은 취소할 수 없습니다.",yes_delete:"예, 삭제",change_color:"색상",unsaved_exit:"{n}개의 내보내지 않은 편집이 있습니다. 내보내지 않고 닫을까요?",title_label:"제목",content_label:"내용",tags_label:"태그",hl_color_label:"하이라이트 색상",bm_title_label:"북마크 제목",plain_text_note:"저장 시 서식이 일반 텍스트로 변환됩니다",rte_bold:"굵게",rte_italic:"기울임",rte_underline:"밑줄",rte_bullets:"글머리 기호 목록",rich_text_note:"굵게, 기울임, 목록으로 편집 — 서식이 유지됩니다",date_from:"시작",date_to:"종료",date_range:"날짜로 필터",extract_range:"날짜 범위 추출",extract_none:"이 날짜 범위에 노트가 없습니다.",extract_hint:"이 날짜 범위의 노트만 포함된 새 .jwlibrary를 저장합니다.",copy_md:"Markdown으로 복사",export_md:"Markdown 내보내기",md_hint:"표시된 노트를 Markdown 파일(.zip)로 다운로드",sel_mode:"선택",sel_done:"완료",sel_all:"전체",sel_none:"해제",sel_count:"{n}개 선택",batch_tag:"태그",batch_color:"색상",batch_delete:"삭제",batch_delete_confirm:"{n}개 삭제? 내보내기 전에 실행 취소할 수 있습니다.",batch_tag_ph:"태그 이름…",batch_add:"추가",undo:"실행 취소",redo:"다시 실행",tab_inputfields:"답변",if_label:"학습 답변",if_question:"질문",if_answer:"내 답변",if_empty:"(아직 답변 없음)",delete_if_confirm:"이 학습 답변을 삭제할까요? 내보내기 전에 실행 취소할 수 있습니다.",share_action:"공유",share_title:"노트 공유",share_intro:"직접 전달하는 파일을 만듭니다 — 아무것도 업로드되지 않습니다. 노트 내용이 들어 있으니 신뢰하는 사람과만 공유하세요.",share_count:"{n}개 노트",share_download:"파일 다운로드",share_copy:"복사",share_tag:"공유됨",receive_action:"받기",receive_title:"공유된 노트 받기",receive_intro:"공유된 텍스트를 붙여넣거나 받은 .jwshare.json 파일을 선택하세요.",receive_paste_ph:"공유된 노트를 여기에 붙여넣기…",receive_choose:"파일 선택",receive_preview:"미리보기",receive_invalid:"올바른 공유 노트 데이터가 아닌 것 같습니다.",preview_readonly:"미리보기",adopt:"{n}개를 내 라이브러리에 추가",adopt_need_lib:"먼저 백업을 여세요",adopted:"{n}개 노트를 추가했습니다(\"공유됨\" 태그).",open_share:"노트 공유 →"},
+    tl:{title:"Tagasiyasat ng Tala",search:"Maghanap...",no_results:"Walang tumugma sa mga filter.",loading:"Naglo-load ng aklatan...",close:"Isara",no_file:"Magbukas muna ng backup file.",pick_file:"Pumili ng .jwlibrary file",count_one:"{n} item",count_many:"{n} item",color_all:"Lahat ng kulay",no_title:"Walang pamagat",copy:"Kopyahin",copied:"Nakopya",clear:"Burahin",error:"Hindi ma-load:",pub_all:"Lahat ng publikasyon",tag_all:"Lahat ng tag",back:"← Bumalik",detail_empty:"Pumili ng item mula sa listahan.",sort_newest:"Pinakabago muna",sort_oldest:"Pinakaluma muna",sort_pub:"Ayon sa publikasyon",modified:"Binago",no_content:"(Walang nilalaman)",too_many:"Ipinapakita ang unang {n} sa {total} — paliitin ang paghahanap.",pg_prev:"Nakaraan",pg_next:"Susunod",pg_status:"Pahina {page} ng {pages} · {total} resulta",err_corrupt:"Ang file na ito ay hindi nababasang .jwlibrary backup — maaaring sira o maling uri.",err_no_db:"Walang database ng mga nota (userData.db) ang backup na ito. I-export muli mula sa JW Library.",err_not_sqlite:"Hindi mabuksan ang database ng backup — maaaring sira ang file.",tab_notes:"Mga Tala",tab_highlights:"Mga Highlight",tab_bookmarks:"Mga Bookmark",hl_label:"Highlight",hl_no_text:"Naka-highlight na talata (ang teksto ay nasa publikasyon, hindi sa backup).",hl_with_note:"May tala",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Naka-link na tala:",edit:"I-edit",save:"I-save",cancel:"Kanselahin",delete_item:"Burahin",export_db:"I-export ang .jwlibrary",n_edits:"{n} pagbabago",n_edits_many:"{n} pagbabago",add_tag:"+ Magdagdag ng tag",new_tag_ph:"Pangalan ng tag...",delete_note_confirm:"Burahin ang talang ito? Hindi ito maaaring bawiin.",delete_hl_confirm:"Burahin ang highlight na ito? Hindi ito maaaring bawiin.",delete_bm_confirm:"Burahin ang bookmark na ito? Hindi ito maaaring bawiin.",yes_delete:"Oo, burahin",change_color:"Kulay",unsaved_exit:"Mayroon kang {n} hindi pa na-export na pagbabago. Isara nang hindi nagexport?",title_label:"Pamagat",content_label:"Nilalaman",tags_label:"Mga tag",hl_color_label:"Kulay ng highlight",bm_title_label:"Pamagat ng bookmark",plain_text_note:"Ang format ay magiging plain text kapag nai-save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Salungguhit",rte_bullets:"Bulleted na listahan",rich_text_note:"I-edit nang may bold, italic at listahan — pinapanatili ang format",date_from:"Mula",date_to:"Hanggang",date_range:"I-filter ayon sa petsa",extract_range:"I-extract ang saklaw ng petsa",extract_none:"Walang talang nasa saklaw ng petsang ito.",extract_hint:"Mag-save ng bagong .jwlibrary na may mga tala lang sa saklaw ng petsang ito.",copy_md:"Kopyahin bilang Markdown",export_md:"I-export ang Markdown",md_hint:"I-download ang mga ipinapakitang tala bilang Markdown files (.zip)",sel_mode:"Pumili",sel_done:"Tapos",sel_all:"Lahat",sel_none:"Wala",sel_count:"{n} napili",batch_tag:"Tag",batch_color:"Kulay",batch_delete:"Burahin",batch_delete_confirm:"Burahin ang {n}? Maaari mong i-undo bago mag-export.",batch_tag_ph:"Pangalan ng tag…",batch_add:"Idagdag",undo:"I-undo",redo:"I-redo",tab_inputfields:"Mga Sagot",if_label:"Sagot sa pag-aaral",if_question:"Tanong",if_answer:"Ang iyong sagot",if_empty:"(Wala pang sagot)",delete_if_confirm:"Burahin ang sagot na ito sa pag-aaral? Maaari mong i-undo bago mag-export.",share_action:"Ibahagi",share_title:"Ibahagi ang mga tala",share_intro:"Gumagawa ito ng file na ikaw mismo ang nagbibigay — walang ina-upload. Naglalaman ito ng teksto ng tala, kaya ibahagi lang sa mga taong pinagkakatiwalaan.",share_count:"{n} tala",share_download:"I-download ang file",share_copy:"Kopyahin",share_tag:"Ibinahagi",receive_action:"Tumanggap",receive_title:"Tumanggap ng ibinahaging tala",receive_intro:"I-paste ang ibinahaging teksto o pumili ng .jwshare.json file na ipinadala sa iyo.",receive_paste_ph:"I-paste ang ibinahaging tala dito…",receive_choose:"Pumili ng file",receive_preview:"Preview",receive_invalid:"Mukhang hindi ito wastong data ng ibinahaging tala.",preview_readonly:"Preview",adopt:"Idagdag ang {n} sa aking library",adopt_need_lib:"Magbukas muna ng backup",adopted:"Naidagdag ang {n} tala (may tag na \"Ibinahagi\").",open_share:"Ibahagi ang tala →"}
   };
   function curLang(){ try{return localStorage.getItem('jwsync_lang')||'en';}catch(_){return 'en';} }
   function t(k, vars){
@@ -1136,7 +1192,9 @@ window.__bootBrowse = function() {
     filtered: [], selected: null, page: 0,
     search: '', color: '', tagId: '', pubId: '', dateFrom: '', dateTo: '', sort: 'newest',
     overlay: null,
-    db: null, fileName: '', dirty: 0, editingId: null
+    db: null, fileName: '', dirty: 0, editingId: null,
+    SQL: null, undo: [], redo: [], selection: new Set(), selectMode: false, _inBatch: false, _batchUI: 'idle',
+    allInputFields: []
   };
 
   // ---------- DB mutations ----------
@@ -1157,6 +1215,7 @@ window.__bootBrowse = function() {
 
   function saveNote(noteId, title, content, isHtml){
     if(!state.db) return false;
+    snapshot();
     var now = nowTimestamp();
     var html = isHtml ? sanitizeNoteHtml(content) : plainTextToNoteHtml(content);
     try{
@@ -1176,6 +1235,7 @@ window.__bootBrowse = function() {
 
   function deleteNote(noteId){
     if(!state.db) return;
+    snapshot();
     try{
       state.db.run('DELETE FROM TagMap WHERE NoteId=?',[noteId]);
       state.db.run('DELETE FROM Note WHERE NoteId=?',[noteId]);
@@ -1193,6 +1253,7 @@ window.__bootBrowse = function() {
     for(var i=0;i<existing.length;i++){
       if(existing[i].name.toLowerCase()===tagName.toLowerCase()) return false;
     }
+    snapshot();
     try{
       var safe = tagName.replace(/'/g,"''");
       var tagRows = rowsFromExec(state.db,"SELECT TagId FROM Tag WHERE Name='"+safe+"' COLLATE NOCASE");
@@ -1222,6 +1283,7 @@ window.__bootBrowse = function() {
 
   function removeTagFromNote(noteId, tagMapId){
     if(!state.db) return;
+    snapshot();
     try{ state.db.run('DELETE FROM TagMap WHERE TagMapId=?',[tagMapId]); }
     catch(e){ console.error('[jb] removeTagFromNote',e); return; }
     if(state.tagsByNote[noteId]){
@@ -1232,6 +1294,7 @@ window.__bootBrowse = function() {
 
   function changeNoteColor(noteId, userMarkId, colorIndex){
     if(!state.db||!userMarkId) return;
+    snapshot();
     try{ state.db.run('UPDATE UserMark SET ColorIndex=?, Version=Version+1 WHERE UserMarkId=?',[colorIndex,userMarkId]); }
     catch(e){ console.error('[jb] changeNoteColor',e); return; }
     for(var i=0;i<state.allNotes.length;i++){
@@ -1246,6 +1309,7 @@ window.__bootBrowse = function() {
 
   function deleteHighlight(userMarkId, linkedNoteId){
     if(!state.db) return;
+    snapshot();
     try{
       state.db.run('DELETE FROM BlockRange WHERE UserMarkId=?',[userMarkId]);
       if(linkedNoteId) state.db.run('UPDATE Note SET UserMarkId=NULL WHERE NoteId=?',[linkedNoteId]);
@@ -1265,6 +1329,7 @@ window.__bootBrowse = function() {
 
   function changeHighlightColor(userMarkId, colorIndex){
     if(!state.db) return;
+    snapshot();
     try{ state.db.run('UPDATE UserMark SET ColorIndex=?, Version=Version+1 WHERE UserMarkId=?',[colorIndex,userMarkId]); }
     catch(e){ console.error('[jb] changeHighlightColor',e); return; }
     for(var i=0;i<state.allHighlights.length;i++){
@@ -1279,6 +1344,7 @@ window.__bootBrowse = function() {
 
   function saveHighlightNote(userMarkId, noteId, title, content){
     if(!state.db||!noteId) return false;
+    snapshot();
     var now=nowTimestamp();
     var html=plainTextToNoteHtml(content);
     try{ state.db.run('UPDATE Note SET Title=?, Content=?, LastModified=? WHERE NoteId=?',[title||'',html,now,noteId]); }
@@ -1306,6 +1372,7 @@ window.__bootBrowse = function() {
 
   function deleteBookmark(bookmarkId){
     if(!state.db) return;
+    snapshot();
     try{ state.db.run('DELETE FROM Bookmark WHERE BookmarkId=?',[bookmarkId]); }
     catch(e){ console.error('[jb] deleteBookmark',e); return; }
     state.allBookmarks=state.allBookmarks.filter(function(b){ return b.BookmarkId!==bookmarkId; });
@@ -1315,6 +1382,7 @@ window.__bootBrowse = function() {
 
   function saveBookmark(bookmarkId, title){
     if(!state.db) return false;
+    snapshot();
     try{ state.db.run('UPDATE Bookmark SET Title=? WHERE BookmarkId=?',[title||'',bookmarkId]); }
     catch(e){ console.error('[jb] saveBookmark',e); return false; }
     for(var i=0;i<state.allBookmarks.length;i++){
@@ -1650,30 +1718,7 @@ window.__bootBrowse = function() {
   }
 
   // ---------- query ----------
-  function loadFromFile(file){
-    var loadingEl = state.overlay.querySelector('.jb-body');
-    loadingEl.innerHTML = '<div class="jb-loading"><div class="jb-spinner"></div><div>' + htmlEscape(t('loading')) + '</div></div>';
-    function fail(msg){
-      loadingEl.innerHTML = '<div class="jb-empty">' + htmlEscape(t('error')) + ' ' + htmlEscape(msg) + '</div>';
-    }
-    if(!window.JSZip || !window.initSqlJs){ fail('Required libraries are not loaded yet.'); return; }
-    // Close any existing DB
-    if(state.db){ try{ state.db.close(); }catch(_){} state.db=null; }
-
-    new JSZip().loadAsync(file).then(function(zip){
-      var dbName = Object.keys(zip.files).find(function(n){ return /userdata\.db$/i.test(n); });
-      if(!dbName) throw new Error('userData.db not found in backup.');
-      return zip.files[dbName].async('uint8array');
-    }).then(function(bytes){
-      return window.initSqlJs({locateFile:function(f){return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f;}})
-        .then(function(SQL){ return new SQL.Database(bytes); });
-    }).then(function(db){
-      state.db = db;
-      state.fileName = (file && file.name) ? file.name : '';
-      state.dirty = 0;
-      state.editingId = null;
-      updateDirtyBadge();
-
+  function hydrateFromDb(db){
       // Notes — also fetch n.UserMarkId for color editing
       state.allNotes = rowsFromExec(db,
         "SELECT n.NoteId, n.LocationId, n.UserMarkId, n.Title, n.Content, n.LastModified, n.Guid, " +
@@ -1736,8 +1781,316 @@ window.__bootBrowse = function() {
       state.allNotes.forEach(function(n){ add(n, n.LocationId); });
       state.allHighlights.forEach(function(h){ add(h, h.LocationId); });
       state.allBookmarks.forEach(function(b){ add(b, b.LocationId); });
+      try{
+        state.allInputFields = rowsFromExec(db, "SELECT i.LocationId, i.TextTag, i.Value, l.Title AS LocTitle, l.BookNumber, l.ChapterNumber, l.KeySymbol FROM InputField i LEFT JOIN Location l ON i.LocationId=l.LocationId ORDER BY i.LocationId").map(function(f){ f.IfKey=String(f.LocationId)+'::'+String(f.TextTag); return f; });
+      }catch(_){ state.allInputFields=[]; }
+      state.allInputFields.forEach(function(f){ add(f, f.LocationId); });
       state.allPublications = Object.keys(pubMap).map(function(k){return pubMap[k];})
         .sort(function(a,b){ if(a.bn!==b.bn) return a.bn-b.bn; return a.label.localeCompare(b.label); });
+  }
+
+  // ---------- undo/redo + bulk selection (v2.26) ----------
+  var UNDO_MAX = 20;
+  function snapshot(){
+    if(state._inBatch || !state.db) return;
+    try{ state.undo.push(state.db.export()); }catch(_){ return; }
+    if(state.undo.length>UNDO_MAX) state.undo.shift();
+    state.redo.length=0;
+    updateUndoButtons();
+  }
+  function restoreSnapshot(bytes){
+    if(!state.SQL) return;
+    try{ if(state.db) state.db.close(); }catch(_){}
+    try{ state.db=new state.SQL.Database(bytes); }catch(e){ console.error('[jb] restore',e); return; }
+    hydrateFromDb(state.db);
+    populateFilters();
+    state.selected=null; state.editingId=null;
+    if(state.selection) state.selection.clear();
+    state.dirty=state.undo.length;
+    applyFilter(); renderBody(); updateTabCounts(); updateDirtyBadge(); updateUndoButtons(); updateBatchBar();
+  }
+  function doUndo(){
+    if(!state.undo.length || !state.db) return;
+    try{ state.redo.push(state.db.export()); }catch(_){}
+    restoreSnapshot(state.undo.pop());
+    if(window.__jwHaptic) window.__jwHaptic(12);
+  }
+  function doRedo(){
+    if(!state.redo.length || !state.db) return;
+    try{ state.undo.push(state.db.export()); }catch(_){}
+    restoreSnapshot(state.redo.pop());
+    if(window.__jwHaptic) window.__jwHaptic(12);
+  }
+  function updateUndoButtons(){
+    if(!state.overlay) return;
+    var u=state.overlay.querySelector('.jb-undo'), r=state.overlay.querySelector('.jb-redo');
+    if(u) u.disabled=!state.undo.length;
+    if(r) r.disabled=!state.redo.length;
+  }
+  if(!window.__jbUndoKeys){
+    window.__jbUndoKeys=true;
+    document.addEventListener('keydown',function(e){
+      if(!state.overlay) return;
+      var tg=e.target, tag=(tg&&tg.tagName||'').toLowerCase();
+      if(tag==='input'||tag==='textarea'||(tg&&tg.isContentEditable)) return;
+      if((e.ctrlKey||e.metaKey)&&(e.key==='z'||e.key==='Z')){ e.preventDefault(); if(e.shiftKey) doRedo(); else doUndo(); }
+      else if((e.ctrlKey||e.metaKey)&&(e.key==='y'||e.key==='Y')){ e.preventDefault(); doRedo(); }
+    });
+  }
+
+  function rowId(r){ return r.NoteId||r.UserMarkId||r.BookmarkId||r.IfKey; }
+  function selectedRows(){
+    var src=activeSource(), ids=state.selection, out=[];
+    src.forEach(function(r){ if(ids.has(rowId(r))) out.push(r); });
+    return out;
+  }
+  function toggleSelect(id){
+    if(state.selection.has(id)) state.selection.delete(id); else state.selection.add(id);
+    renderBody();
+  }
+  function selectAllFiltered(){ state.filtered.forEach(function(r){ state.selection.add(rowId(r)); }); renderBody(); }
+  function clearSelection(){ state.selection.clear(); renderBody(); }
+  function updateSelectBtn(){
+    if(!state.overlay) return;
+    var b=state.overlay.querySelector('.jb-select-toggle');
+    if(b){ b.classList.toggle('jb-on', state.selectMode); b.textContent=state.selectMode?t('sel_done'):t('sel_mode'); }
+  }
+  function enterSelectMode(){
+    state.selectMode=true; state.selected=null; state.editingId=null; state._batchUI='idle';
+    if(state.overlay){ state.overlay.classList.remove('jb-mobile-detail'); state.overlay.classList.add('jb-mobile-list'); }
+    renderBody(); updateSelectBtn();
+  }
+  function exitSelectMode(){
+    state.selectMode=false; state.selection.clear(); state._batchUI='idle';
+    renderBody(); updateSelectBtn();
+  }
+
+  function afterBatch(clearSel){
+    hydrateFromDb(state.db); populateFilters();
+    if(clearSel) state.selection.clear();
+    state.dirty=state.undo.length;
+    state.selected=null; state.editingId=null;
+    applyFilter(); renderBody(); updateTabCounts(); updateDirtyBadge(); updateUndoButtons();
+    if(window.__jwHaptic) window.__jwHaptic(18);
+  }
+  function batchSetColor(ci){
+    var rows=selectedRows(); if(!rows.length) return;
+    snapshot(); state._inBatch=true;
+    try{ rows.forEach(function(r){ if(r.UserMarkId) state.db.run('UPDATE UserMark SET ColorIndex=?, Version=Version+1 WHERE UserMarkId=?',[ci,r.UserMarkId]); }); }
+    finally{ state._inBatch=false; }
+    afterBatch(false);
+  }
+  function batchAddTag(name){
+    name=(name||'').trim(); if(!name){ updateBatchBar(); return; }
+    var rows=selectedRows(); if(!rows.length){ updateBatchBar(); return; }
+    snapshot(); state._inBatch=true;
+    try{
+      var safe=name.replace(/'/g,"''");
+      var tr=rowsFromExec(state.db,"SELECT TagId FROM Tag WHERE Name='"+safe+"' COLLATE NOCASE");
+      var tagId = tr.length>0 ? tr[0].TagId : (state.db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]), rowsFromExec(state.db,'SELECT last_insert_rowid() AS id')[0].id);
+      rows.forEach(function(r){
+        if(!r.NoteId) return;
+        var ex=rowsFromExec(state.db,'SELECT 1 FROM TagMap WHERE NoteId='+(+r.NoteId)+' AND TagId='+(+tagId)+' LIMIT 1');
+        if(ex.length) return;
+        var mp=rowsFromExec(state.db,'SELECT COALESCE(MAX(Position),0)+1 AS p FROM TagMap WHERE NoteId='+(+r.NoteId))[0].p;
+        state.db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tagId,r.NoteId,mp]);
+      });
+    }finally{ state._inBatch=false; }
+    afterBatch(false);
+  }
+  function batchDelete(){
+    var rows=selectedRows(); if(!rows.length) return;
+    snapshot(); state._inBatch=true;
+    try{
+      rows.forEach(function(r){
+        if(state.activeType==='notes'){
+          state.db.run('DELETE FROM TagMap WHERE NoteId=?',[r.NoteId]);
+          state.db.run('DELETE FROM Note WHERE NoteId=?',[r.NoteId]);
+        } else if(state.activeType==='highlights'){
+          state.db.run('DELETE FROM BlockRange WHERE UserMarkId=?',[r.UserMarkId]);
+          if(r.NoteId) state.db.run('UPDATE Note SET UserMarkId=NULL WHERE NoteId=?',[r.NoteId]);
+          state.db.run('DELETE FROM UserMark WHERE UserMarkId=?',[r.UserMarkId]);
+        } else if(state.activeType==='bookmarks'){
+          state.db.run('DELETE FROM Bookmark WHERE BookmarkId=?',[r.BookmarkId]);
+        } else {
+          state.db.run('DELETE FROM InputField WHERE LocationId=? AND TextTag=?',[r.LocationId,r.TextTag]);
+        }
+      });
+    }finally{ state._inBatch=false; }
+    afterBatch(true);
+  }
+  function jbBatchBtn(bar,label,fn,danger){
+    var b=document.createElement('button'); b.type='button'; b.className='jb-batch-btn'+(danger?' jb-batch-danger':''); b.textContent=label; b.onclick=fn; bar.appendChild(b); return b;
+  }
+  function updateBatchBar(){
+    var bar=state.overlay&&state.overlay.querySelector('.jb-batch-bar');
+    if(!bar) return;
+    if(!state.selectMode){ bar.style.display='none'; bar.innerHTML=''; state._batchUI='idle'; return; }
+    bar.style.display='flex'; bar.innerHTML='';
+    var cnt=document.createElement('span'); cnt.className='jb-batch-count'; cnt.textContent=t('sel_count',{n:state.selection.size}); bar.appendChild(cnt);
+    jbBatchBtn(bar,t('sel_all'),selectAllFiltered);
+    jbBatchBtn(bar,t('sel_none'),clearSelection);
+    var sp=document.createElement('span'); sp.style.flex='1'; sp.style.minWidth='4px'; bar.appendChild(sp);
+    if(state.selection.size===0){ state._batchUI='idle'; return; }
+    if(state._batchUI==='tag'){
+      var inp=document.createElement('input'); inp.className='jb-batch-input'; inp.placeholder=t('batch_tag_ph'); bar.appendChild(inp);
+      jbBatchBtn(bar,t('batch_add'),function(){ var v=inp.value; state._batchUI='idle'; batchAddTag(v); });
+      jbBatchBtn(bar,t('cancel'),function(){ state._batchUI='idle'; updateBatchBar(); });
+      inp.onkeydown=function(e){ if(e.key==='Enter'){ var v=inp.value; state._batchUI='idle'; batchAddTag(v); } else if(e.key==='Escape'){ state._batchUI='idle'; updateBatchBar(); } };
+      setTimeout(function(){ try{ inp.focus(); }catch(_){} },30);
+      return;
+    }
+    if(state._batchUI==='del'){
+      var dc=document.createElement('span'); dc.className='jb-batch-count'; dc.style.color='#fca5a5'; dc.textContent=t('batch_delete_confirm',{n:state.selection.size}); bar.appendChild(dc);
+      jbBatchBtn(bar,t('yes_delete'),function(){ state._batchUI='idle'; batchDelete(); },true);
+      jbBatchBtn(bar,t('cancel'),function(){ state._batchUI='idle'; updateBatchBar(); });
+      return;
+    }
+    if(state.activeType==='notes'||state.activeType==='highlights'){
+      var cw=document.createElement('span'); cw.className='jb-batch-color';
+      [1,2,3,4,5,6].forEach(function(ci){ var d=document.createElement('span'); d.className='jb-batch-dot'; d.style.background=COLORS[ci]; d.title=t('batch_color'); d.onclick=function(){ batchSetColor(ci); }; cw.appendChild(d); });
+      bar.appendChild(cw);
+    }
+    if(state.activeType==='notes') jbBatchBtn(bar,t('batch_tag'),function(){ state._batchUI='tag'; updateBatchBar(); });
+    if(state.activeType==='notes') jbBatchBtn(bar,t('share_action'),function(){ openShareExport(selectedRows()); });
+    jbBatchBtn(bar,t('batch_delete'),function(){ state._batchUI='del'; updateBatchBar(); },true);
+  }
+
+  // ---------- note sharing / adopt (v2.28) ----------
+  function jbUuid(){ return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g,function(ch){ var r=Math.random()*16|0, v=ch==='x'?r:(r&0x3|0x8); return v.toString(16); }); }
+  function buildShareEnvelope(rows){
+    var notes=(rows||[]).filter(function(r){ return r.NoteId; }).map(function(n){
+      var tags=(state.tagsByNote[n.NoteId]||[]).map(function(tg){ return tg.name; });
+      return { title:n.Title||'', content:n.Content||'', color:n.ColorIndex||0, tags:tags, pub:pubLabel(n)||'', lastMod:n.LastModified||'' };
+    });
+    return { v:1, app:'jwsync', kind:'notes', exported:new Date().toISOString(), notes:notes };
+  }
+  function jbsClose(ov){ if(ov&&ov.parentNode) ov.parentNode.removeChild(ov); }
+  function openShareExport(rows){
+    var notes=(rows||[]).filter(function(r){ return r.NoteId; });
+    if(!notes.length) return;
+    var env=buildShareEnvelope(notes);
+    var json=JSON.stringify(env,null,2);
+    var ov=document.createElement('div'); ov.className='jbs-overlay';
+    ov.innerHTML='<div class="jbs-card"><div class="jbs-head"><h3>'+htmlEscape(t('share_title'))+'</h3><button class="jbs-x" type="button" aria-label="'+htmlEscape(t('close'))+'">&times;</button></div>'+
+      '<p class="jbs-intro">'+htmlEscape(t('share_intro'))+'</p>'+
+      '<div class="jbs-count">'+htmlEscape(t('share_count',{n:env.notes.length}))+'</div>'+
+      '<textarea class="jbs-text" readonly></textarea>'+
+      '<div class="jbs-actions"><button type="button" class="jb-btn jbs-dl">'+htmlEscape(t('share_download'))+'</button>'+
+      '<button type="button" class="jb-btn jb-btn-ghost jbs-copy">'+htmlEscape(t('share_copy'))+'</button></div></div>';
+    document.body.appendChild(ov);
+    var ta=ov.querySelector('.jbs-text'); ta.value=json;
+    ov.querySelector('.jbs-x').onclick=function(){ jbsClose(ov); };
+    ov.addEventListener('mousedown',function(e){ if(e.target===ov) jbsClose(ov); });
+    ov.querySelector('.jbs-dl').onclick=function(){
+      var blob=new Blob([json],{type:'application/json'}); var url=URL.createObjectURL(blob);
+      var a=document.createElement('a'); a.href=url; a.download='shared_notes.jwshare.json'; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function(){ URL.revokeObjectURL(url); },2000);
+      if(window.__jwHaptic) window.__jwHaptic(15);
+    };
+    ov.querySelector('.jbs-copy').onclick=function(){
+      var b=ov.querySelector('.jbs-copy');
+      function done(){ b.textContent=t('copied'); setTimeout(function(){ b.textContent=t('share_copy'); },1500); }
+      try{ navigator.clipboard.writeText(json).then(done,function(){ ta.select(); try{document.execCommand('copy');}catch(_){} done(); }); }
+      catch(_){ ta.select(); try{document.execCommand('copy');}catch(__){} done(); }
+    };
+  }
+  function adoptNotes(notes){
+    if(!state.db||!Array.isArray(notes)||!notes.length) return 0;
+    snapshot(); state._inBatch=true; var added=0;
+    try{
+      var now=nowTimestamp();
+      function tagId(name){
+        var s=String(name).replace(/'/g,"''");
+        var r=rowsFromExec(state.db,"SELECT TagId FROM Tag WHERE Name='"+s+"' COLLATE NOCASE");
+        if(r.length) return r[0].TagId;
+        state.db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]);
+        return rowsFromExec(state.db,'SELECT last_insert_rowid() AS id')[0].id;
+      }
+      var shareName=t('share_tag');
+      notes.forEach(function(nd){
+        try{
+          var title=(typeof nd.title==='string')?nd.title:'';
+          var content=sanitizeNoteHtml((typeof nd.content==='string')?nd.content:'');
+          state.db.run('INSERT INTO Note (Guid, Title, Content, LastModified, Created, BlockType, BlockIdentifier) VALUES (?,?,?,?,?,0,0)',[jbUuid(),title,content,now,now]);
+          var noteId=rowsFromExec(state.db,'SELECT last_insert_rowid() AS id')[0].id;
+          var names=[shareName].concat(Array.isArray(nd.tags)?nd.tags:[]); var seen={};
+          names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()]) return; seen[tn.toLowerCase()]=1;
+            var tid=tagId(tn); state.db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,0)',[tid,noteId]); });
+          added++;
+        }catch(e){ console.error('[jb] adopt note',e); }
+      });
+    }catch(e){ console.error('[jb] adopt',e); }
+    finally{ state._inBatch=false; }
+    afterBatch(false);
+    return added;
+  }
+  function openShareImport(){
+    var ov=document.createElement('div'); ov.className='jbs-overlay';
+    ov.innerHTML='<div class="jbs-card"><div class="jbs-head"><h3>'+htmlEscape(t('receive_title'))+'</h3><button class="jbs-x" type="button" aria-label="'+htmlEscape(t('close'))+'">&times;</button></div>'+
+      '<p class="jbs-intro">'+htmlEscape(t('receive_intro'))+'</p>'+
+      '<textarea class="jbs-text" placeholder="'+htmlEscape(t('receive_paste_ph'))+'"></textarea>'+
+      '<div class="jbs-actions"><button type="button" class="jb-btn jb-btn-ghost jbs-choose">'+htmlEscape(t('receive_choose'))+'</button>'+
+      '<button type="button" class="jb-btn jbs-preview">'+htmlEscape(t('receive_preview'))+'</button></div>'+
+      '<div class="jbs-result"></div></div>';
+    document.body.appendChild(ov);
+    var ta=ov.querySelector('.jbs-text'), result=ov.querySelector('.jbs-result');
+    ov.querySelector('.jbs-x').onclick=function(){ jbsClose(ov); };
+    ov.addEventListener('mousedown',function(e){ if(e.target===ov) jbsClose(ov); });
+    ov.querySelector('.jbs-choose').onclick=function(){
+      var fi=document.createElement('input'); fi.type='file'; fi.accept='.json,.jwshare,application/json';
+      fi.onchange=function(){ var f=fi.files&&fi.files[0]; if(!f) return; var rd=new FileReader(); rd.onload=function(){ ta.value=String(rd.result||''); doPreview(); }; rd.readAsText(f); };
+      fi.click();
+    };
+    ov.querySelector('.jbs-preview').onclick=doPreview;
+    function doPreview(){
+      result.innerHTML='';
+      var env=null; try{ env=JSON.parse(ta.value); }catch(_){ }
+      if(!env||env.app!=='jwsync'||!Array.isArray(env.notes)){ result.innerHTML='<div class="jbs-err">'+htmlEscape(t('receive_invalid'))+'</div>'; return; }
+      var notes=env.notes;
+      var list=document.createElement('div'); list.className='jbs-list';
+      var hdr=document.createElement('div'); hdr.className='jbs-list-hdr'; hdr.textContent=t('preview_readonly')+' · '+t('share_count',{n:notes.length}); list.appendChild(hdr);
+      notes.slice(0,50).forEach(function(nd){
+        var it=document.createElement('div'); it.className='jbs-item';
+        var ti=document.createElement('div'); ti.className='jbs-item-title'; ti.textContent=(nd.title&&String(nd.title).trim())||t('no_title'); it.appendChild(ti);
+        var bd=document.createElement('div'); bd.className='jbs-item-body'; bd.textContent=stripHtml(String(nd.content||'')); it.appendChild(bd);
+        list.appendChild(it);
+      });
+      result.appendChild(list);
+      var row=document.createElement('div'); row.className='jbs-actions';
+      var adoptBtn=document.createElement('button'); adoptBtn.type='button'; adoptBtn.className='jb-btn';
+      if(!state.db){ adoptBtn.disabled=true; adoptBtn.textContent=t('adopt_need_lib'); }
+      else adoptBtn.textContent=t('adopt',{n:notes.length});
+      adoptBtn.onclick=function(){ if(!state.db) return; var n=adoptNotes(notes); result.innerHTML='<div class="jbs-ok">'+htmlEscape(t('adopted',{n:n}))+'</div>'; };
+      row.appendChild(adoptBtn); result.appendChild(row);
+    }
+  }
+
+  function loadFromFile(file){
+    var loadingEl = state.overlay.querySelector('.jb-body');
+    loadingEl.innerHTML = '<div class="jb-loading"><div class="jb-spinner"></div><div>' + htmlEscape(t('loading')) + '</div></div>';
+    function fail(msg){
+      loadingEl.innerHTML = '<div class="jb-empty">' + htmlEscape(t('error')) + ' ' + htmlEscape(msg) + '</div>';
+    }
+    if(!window.JSZip || !window.initSqlJs){ fail('Required libraries are not loaded yet.'); return; }
+    // Close any existing DB
+    if(state.db){ try{ state.db.close(); }catch(_){} state.db=null; }
+
+    new JSZip().loadAsync(file).then(function(zip){
+      var dbName = Object.keys(zip.files).find(function(n){ return /userdata\.db$/i.test(n); });
+      if(!dbName) throw new Error('userData.db not found in backup.');
+      return zip.files[dbName].async('uint8array');
+    }).then(function(bytes){
+      return window.initSqlJs({locateFile:function(f){return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f;}})
+        .then(function(SQL){ state.SQL=SQL; return new SQL.Database(bytes); });
+    }).then(function(db){
+      state.db = db;
+      state.fileName = (file && file.name) ? file.name : '';
+      state.dirty = 0;
+      state.editingId = null;
+      updateDirtyBadge();
+
+      hydrateFromDb(db);
 
       state.selected = null;
       state.activeType = 'notes';
@@ -1757,6 +2110,7 @@ window.__bootBrowse = function() {
   function activeSource(){
     if(state.activeType==='highlights') return state.allHighlights;
     if(state.activeType==='bookmarks') return state.allBookmarks;
+    if(state.activeType==='inputfields') return state.allInputFields;
     return state.allNotes;
   }
   function applyFilter(){
@@ -1765,8 +2119,8 @@ window.__bootBrowse = function() {
     var df=state.dateFrom, dt=state.dateTo;
     var src=activeSource();
     var rows=src.filter(function(r){
-      if(c!==''&&state.activeType!=='bookmarks'){ if(String(r.ColorIndex||0)!==c) return false; }
-      if((df||dt)&&state.activeType!=='bookmarks'){ var lm=(r.LastModified||'').slice(0,10); if(!lm) return false; if(df&&lm<df) return false; if(dt&&lm>dt) return false; }
+      if(c!==''&&state.activeType!=='bookmarks'&&state.activeType!=='inputfields'){ if(String(r.ColorIndex||0)!==c) return false; }
+      if((df||dt)&&(state.activeType==='notes'||state.activeType==='highlights')){ var lm=(r.LastModified||'').slice(0,10); if(!lm) return false; if(df&&lm<df) return false; if(dt&&lm>dt) return false; }
       if(pubId!==''&&String(r.LocationId||'')!==pubId) return false;
       if(tagId!==''){
         var ts=[];
@@ -1779,12 +2133,13 @@ window.__bootBrowse = function() {
         var hay;
         if(state.activeType==='notes') hay=((r.Title||'')+' '+stripHtml(r.Content||'')+' '+pubLabel(r)).toLowerCase();
         else if(state.activeType==='highlights') hay=((r.NoteTitle||'')+' '+stripHtml(r.NoteContent||'')+' '+pubLabel(r)).toLowerCase();
+        else if(state.activeType==='inputfields') hay=((r.Value||'')+' '+pubLabel(r)).toLowerCase();
         else hay=((r.Title||'')+' '+(r.Snippet||'')+' '+pubLabel(r)).toLowerCase();
         if(hay.indexOf(q)===-1) return false;
       }
       return true;
     });
-    if(state.activeType!=='bookmarks'){
+    if(state.activeType==='notes'||state.activeType==='highlights'){
       if(state.sort==='oldest') rows.sort(function(a,b){ return (a.LastModified||'').localeCompare(b.LastModified||''); });
       else if(state.sort==='pub') rows.sort(function(a,b){ return pubLabel(a).localeCompare(pubLabel(b)); });
       else rows.sort(function(a,b){ return (b.LastModified||'').localeCompare(a.LastModified||''); });
@@ -1834,22 +2189,32 @@ window.__bootBrowse = function() {
     var n=state.filtered.length;
     cnt.textContent=(n===1?t('count_one',{n:n}):t('count_many',{n:n}));
     updateMobileView();
+    updateBatchBar(); updateUndoButtons();
   }
 
   function buildRow(r){
     var row=document.createElement('div');
-    var rowKey=state.activeType+':'+(r.NoteId||r.UserMarkId||r.BookmarkId);
+    var id=r.NoteId||r.UserMarkId||r.BookmarkId||r.IfKey;
+    var rowKey=state.activeType+':'+id;
     var selKey=state.selected?(state.activeType+':'+(state.selected.NoteId||state.selected.UserMarkId||state.selected.BookmarkId)):'';
-    row.className='jb-note'+(rowKey===selKey?' active':'');
-    row.onclick=function(){
-      state.selected=r; state.editingId=null;
-      state.overlay.classList.remove('jb-mobile-list');
-      state.overlay.classList.add('jb-mobile-detail');
-      renderBody();
-    };
-    if(state.activeType==='notes') return buildNoteRow(r,row);
-    if(state.activeType==='highlights') return buildHighlightRow(r,row);
-    return buildBookmarkRow(r,row);
+    if(state.selectMode){
+      row.className='jb-note jb-selectable'+(state.selection.has(id)?' jb-selected':'');
+      row.onclick=function(){ toggleSelect(id); };
+    } else {
+      row.className='jb-note'+(rowKey===selKey?' active':'');
+      row.onclick=function(){
+        state.selected=r; state.editingId=null;
+        state.overlay.classList.remove('jb-mobile-list');
+        state.overlay.classList.add('jb-mobile-detail');
+        renderBody();
+      };
+    }
+    var built = state.activeType==='notes'?buildNoteRow(r,row):(state.activeType==='highlights'?buildHighlightRow(r,row):(state.activeType==='bookmarks'?buildBookmarkRow(r,row):buildInputFieldRow(r,row)));
+    if(state.selectMode){
+      var cb=document.createElement('span'); cb.className='jb-check'+(state.selection.has(id)?' jb-check-on':'');
+      built.insertBefore(cb, built.firstChild);
+    }
+    return built;
   }
 
   function buildNoteRow(n,row){
@@ -1898,15 +2263,85 @@ window.__bootBrowse = function() {
     var back=document.createElement('button'); back.className='jb-back'; back.textContent=t('back');
     back.onclick=function(){ state.overlay.classList.remove('jb-mobile-detail'); state.overlay.classList.add('jb-mobile-list'); };
     wrap.appendChild(back);
-    var itemId=(r.NoteId||r.UserMarkId||r.BookmarkId);
+    var itemId=(r.NoteId||r.UserMarkId||r.BookmarkId||r.IfKey);
     if(state.editingId===itemId){
       if(state.activeType==='notes') return buildEditNote(r,wrap);
       if(state.activeType==='highlights') return buildEditHighlight(r,wrap);
+      if(state.activeType==='inputfields') return buildEditInputField(r,wrap);
       return buildEditBookmark(r,wrap);
     }
     if(state.activeType==='notes') return buildDetailNote(r,wrap);
     if(state.activeType==='highlights') return buildDetailHighlight(r,wrap);
+    if(state.activeType==='inputfields') return buildDetailInputField(r,wrap);
     return buildDetailBookmark(r,wrap);
+  }
+
+  function buildInputFieldRow(f,row){
+    var title=document.createElement('div'); title.className='jb-note-title';
+    var ts=document.createElement('span'); ts.textContent=pubLabel(f)||t('if_label'); title.appendChild(ts); row.appendChild(title);
+    var val=(f.Value||'').trim();
+    var ex=document.createElement('div'); ex.className='jb-note-excerpt';
+    if(val){ ex.textContent=val; } else { ex.style.fontStyle='italic'; ex.textContent=t('if_empty'); }
+    row.appendChild(ex);
+    var meta=buildMeta(f,null,'inputfield');
+    if(f.TextTag){ var tg=document.createElement('span'); tg.className='jb-if-tag'; tg.textContent=f.TextTag; meta.appendChild(tg); }
+    row.appendChild(meta);
+    return row;
+  }
+  function buildDetailInputField(f,wrap){
+    var title=document.createElement('div'); title.className='jb-detail-title';
+    var ts=document.createElement('span'); ts.textContent=pubLabel(f)||t('if_label'); title.appendChild(ts); wrap.appendChild(title);
+    var meta=document.createElement('div'); meta.className='jb-detail-meta'; meta.textContent=t('if_question')+': '+(f.TextTag||'—'); wrap.appendChild(meta);
+    var content=document.createElement('div'); content.className='jb-detail-content';
+    var val=(f.Value||'').trim();
+    if(val){ content.textContent=val; } else { content.textContent=t('if_empty'); content.style.color='#5a6883'; content.style.fontStyle='italic'; }
+    wrap.appendChild(content);
+    var acts=document.createElement('div'); acts.className='jb-detail-actions';
+    var copyBtn=document.createElement('button'); copyBtn.className='jb-btn jb-btn-ghost'; copyBtn.textContent=t('copy');
+    copyBtn.onclick=function(){ try{ navigator.clipboard.writeText(val).then(function(){ copyBtn.textContent=t('copied'); setTimeout(function(){ copyBtn.textContent=t('copy'); },1500); }); }catch(_){ } };
+    acts.appendChild(copyBtn);
+    if(state.db){
+      var editBtn=document.createElement('button'); editBtn.className='jb-btn jb-btn-ghost'; editBtn.textContent=t('edit');
+      editBtn.onclick=function(){ state.editingId=f.IfKey; refreshDetail(); };
+      acts.appendChild(editBtn);
+      var delBtn=document.createElement('button'); delBtn.type='button'; delBtn.className='jb-btn-danger'; delBtn.textContent=t('delete_item');
+      var shown=false;
+      delBtn.onclick=function(){ if(shown) return; shown=true; acts.appendChild(buildInlineDeleteConfirm(t('delete_if_confirm'), function(){ deleteInputField(f.LocationId,f.TextTag); }, function(){ shown=false; acts.removeChild(acts.lastChild); })); };
+      acts.appendChild(delBtn);
+    }
+    wrap.appendChild(acts);
+    return wrap;
+  }
+  function buildEditInputField(f,wrap){
+    wrap.className=(wrap.className||'')+' jb-edit-panel';
+    var fld=document.createElement('div'); fld.className='jb-edit-field';
+    var lbl=document.createElement('label'); lbl.className='jb-edit-label'; lbl.textContent=t('if_answer'); fld.appendChild(lbl);
+    var ta=document.createElement('textarea'); ta.className='jb-edit-textarea'; ta.value=f.Value||''; fld.appendChild(ta); wrap.appendChild(fld);
+    var acts=document.createElement('div'); acts.className='jb-detail-actions';
+    var saveBtn=document.createElement('button'); saveBtn.type='button'; saveBtn.className='jb-btn'; saveBtn.textContent=t('save');
+    saveBtn.onclick=function(){ if(saveInputField(f.LocationId,f.TextTag,ta.value)){ state.editingId=null; applyFilter(); renderBody(); } };
+    var cancelBtn=document.createElement('button'); cancelBtn.type='button'; cancelBtn.className='jb-btn jb-btn-ghost'; cancelBtn.textContent=t('cancel');
+    cancelBtn.onclick=function(){ state.editingId=null; refreshDetail(); };
+    acts.appendChild(saveBtn); acts.appendChild(cancelBtn); wrap.appendChild(acts);
+    setTimeout(function(){ try{ ta.focus(); }catch(_){} },50);
+    return wrap;
+  }
+  function saveInputField(locId, textTag, value){
+    if(!state.db) return false;
+    snapshot();
+    try{ state.db.run('UPDATE InputField SET Value=? WHERE LocationId=? AND TextTag=?',[value||'',locId,textTag]); }
+    catch(e){ console.error('[jb] saveInputField',e); return false; }
+    for(var i=0;i<state.allInputFields.length;i++){ var f=state.allInputFields[i]; if(f.LocationId===locId&&f.TextTag===textTag){ f.Value=value||''; break; } }
+    markDirty(); return true;
+  }
+  function deleteInputField(locId, textTag){
+    if(!state.db) return;
+    snapshot();
+    try{ state.db.run('DELETE FROM InputField WHERE LocationId=? AND TextTag=?',[locId,textTag]); }
+    catch(e){ console.error('[jb] deleteInputField',e); return; }
+    state.allInputFields=state.allInputFields.filter(function(f){ return !(f.LocationId===locId&&f.TextTag===textTag); });
+    state.selected=null; state.editingId=null;
+    markDirty(); applyFilter(); renderBody(); updateTabCounts();
   }
 
   function buildDetailNote(n,wrap){
@@ -2017,9 +2452,10 @@ window.__bootBrowse = function() {
     var tabs=state.overlay.querySelectorAll('.jb-tab');
     tabs.forEach(function(tab){
       var type=tab.dataset.type;
-      var c=(type==='notes'?state.allNotes:(type==='highlights'?state.allHighlights:state.allBookmarks)).length;
+      var c=(type==='notes'?state.allNotes:(type==='highlights'?state.allHighlights:(type==='bookmarks'?state.allBookmarks:state.allInputFields))).length;
       var cnt=tab.querySelector('.jb-tab-count');
       if(cnt) cnt.textContent=c;
+      if(type==='inputfields') tab.style.display=c>0?'':'none';
     });
   }
 
@@ -2066,21 +2502,31 @@ window.__bootBrowse = function() {
     exportBtn.disabled=true;
     exportBtn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'+htmlEscape(t('export_db'));
     exportBtn.onclick=function(){ if(window.__jwHaptic) window.__jwHaptic(20); exportDb(); };
+    var undoBtn=document.createElement('button'); undoBtn.type='button'; undoBtn.className='jb-undo'; undoBtn.disabled=true; undoBtn.title=t('undo');
+    undoBtn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-1"/></svg>';
+    undoBtn.onclick=doUndo;
+    var redoBtn=document.createElement('button'); redoBtn.type='button'; redoBtn.className='jb-redo'; redoBtn.disabled=true; redoBtn.title=t('redo');
+    redoBtn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 14 5-5-5-5"/><path d="M20 9H9a5 5 0 0 0 0 10h1"/></svg>';
+    redoBtn.onclick=doRedo;
+    head.appendChild(undoBtn); head.appendChild(redoBtn);
     head.appendChild(exportBtn);
     var mdBtn=document.createElement('button'); mdBtn.className='jb-md-btn'; mdBtn.type='button';
     mdBtn.title=t('md_hint');
     mdBtn.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>'+htmlEscape(t('export_md'));
     mdBtn.onclick=exportMarkdown;
     head.appendChild(mdBtn);
+    var recvBtn=document.createElement('button'); recvBtn.type='button'; recvBtn.className='jb-md-btn'; recvBtn.textContent=t('open_share'); recvBtn.title=t('open_share'); recvBtn.onclick=function(){ if(window.__jwGoShare) window.__jwGoShare(); };
+    head.appendChild(recvBtn);
     var closeBtn=document.createElement('button'); closeBtn.className='jb-head-close'; closeBtn.textContent=t('close'); closeBtn.onclick=closeOverlay;
     head.appendChild(closeBtn);
     modal.appendChild(head);
 
     // Tabs
-    var TAB_ORDER=['notes','highlights','bookmarks'];
+    var TAB_ORDER=['notes','highlights','bookmarks','inputfields'];
     function switchTo(type){
       if(!type || state.activeType===type) return;
       state.activeType=type; state.selected=null; state.editingId=null;
+      if(state.selection) state.selection.clear(); state._batchUI='idle';
       if(state.overlay){ Array.prototype.forEach.call(state.overlay.querySelectorAll('.jb-tab'),function(tb){ tb.classList.toggle('active', tb.dataset.type===type); }); }
       applyFilter(); renderBody();
       if(window.__jwHaptic) window.__jwHaptic(15);
@@ -2088,10 +2534,11 @@ window.__bootBrowse = function() {
     function switchByOffset(delta){
       var idx=TAB_ORDER.indexOf(state.activeType); if(idx<0) return;
       var next=idx+delta; if(next<0||next>=TAB_ORDER.length) return;
+      if(TAB_ORDER[next]==='inputfields'&&!state.allInputFields.length){ next+=delta; if(next<0||next>=TAB_ORDER.length) return; }
       switchTo(TAB_ORDER[next]);
     }
     var tabs=document.createElement('div'); tabs.className='jb-tabs';
-    [['notes',t('tab_notes')],['highlights',t('tab_highlights')],['bookmarks',t('tab_bookmarks')]].forEach(function(pair){
+    [['notes',t('tab_notes')],['highlights',t('tab_highlights')],['bookmarks',t('tab_bookmarks')],['inputfields',t('tab_inputfields')]].forEach(function(pair){
       var b=document.createElement('button'); b.className='jb-tab'+(pair[0]===state.activeType?' active':''); b.dataset.type=pair[0];
       b.innerHTML='<span>'+htmlEscape(pair[1])+'</span><span class="jb-tab-count">0</span>';
       b.onclick=function(){ switchTo(pair[0]); };
@@ -2136,7 +2583,11 @@ window.__bootBrowse = function() {
       applyFilter(); renderBody();
     };
     toolbar.appendChild(clearBtn);
+    var selectBtn=document.createElement('button'); selectBtn.type='button'; selectBtn.className='jb-select-toggle'; selectBtn.textContent=t('sel_mode');
+    selectBtn.onclick=function(){ if(state.selectMode) exitSelectMode(); else enterSelectMode(); };
+    toolbar.appendChild(selectBtn);
     modal.appendChild(toolbar);
+    var batchBar=document.createElement('div'); batchBar.className='jb-batch-bar'; batchBar.style.display='none'; modal.appendChild(batchBar);
 
     var body=document.createElement('div'); body.className='jb-body'; modal.appendChild(body);
     // Touch: horizontal swipe switches tabs (Notes ↔ Highlights ↔ Bookmarks)
@@ -2159,12 +2610,13 @@ window.__bootBrowse = function() {
     state.overlay=null;
     if(state.db){ try{ state.db.close(); }catch(_){} state.db=null; }
     var dl=document.getElementById('jb-tag-dl'); if(dl&&dl.parentNode) dl.parentNode.removeChild(dl);
-    state.allNotes=[]; state.allHighlights=[]; state.allBookmarks=[];
+    state.allNotes=[]; state.allHighlights=[]; state.allBookmarks=[]; state.allInputFields=[];
     state.tagsByNote={}; state.tagsByLocation={}; state.tagsByHighlight={};
     state.allTags=[]; state.allPublications=[];
     state.filtered=[]; state.selected=null; state.editingId=null;
     state.search=''; state.color=''; state.tagId=''; state.pubId=''; state.dateFrom=''; state.dateTo='';
     state.activeType='notes'; state.dirty=0; state.fileName='';
+    state.selectMode=false; if(state.selection) state.selection.clear(); state.undo=[]; state.redo=[]; state._batchUI='idle';
     document.removeEventListener('keydown',escHandler);
   }
   function escHandler(e){ if(e.key==='Escape') closeOverlay(); }
@@ -2910,16 +3362,16 @@ window.__bootBrowse = function() {
   'use strict';
   if (window.__jwImpactPreview) return;
   var I18N = {
-    en:{title:'Ready to merge',sub:'Here’s what this merge will change. Review the numbers, then download your merged backup.',added:'Will be added',notes:'Notes',highlights:'Highlights',bookmarks:'Bookmarks',tags:'Tags',updated:'Notes updated (newer version wins)',deduped:'Duplicates skipped',confirm:'Merge & Download',cancel:'Cancel'},
-    es:{title:'Listo para combinar',sub:'Esto es lo que cambiará esta combinación. Revisa los números y descarga tu copia combinada.',added:'Se añadirá',notes:'Notas',highlights:'Destacados',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas actualizadas (gana la más reciente)',deduped:'Duplicados omitidos',confirm:'Combinar y descargar',cancel:'Cancelar'},
-    pt:{title:'Pronto para combinar',sub:'Veja o que esta combinação vai alterar. Revise os números e baixe seu backup combinado.',added:'Será adicionado',notes:'Notas',highlights:'Destaques',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas atualizadas (vence a mais recente)',deduped:'Duplicatas ignoradas',confirm:'Combinar e baixar',cancel:'Cancelar'},
-    fr:{title:'Prêt à fusionner',sub:'Voici ce que cette fusion va modifier. Vérifiez les chiffres, puis téléchargez votre sauvegarde fusionnée.',added:'Sera ajouté',notes:'Notes',highlights:'Surlignages',bookmarks:'Signets',tags:'Étiquettes',updated:'Notes mises à jour (la plus récente l’emporte)',deduped:'Doublons ignorés',confirm:'Fusionner et télécharger',cancel:'Annuler'},
-    de:{title:'Bereit zum Zusammenführen',sub:'Das wird beim Zusammenführen geändert. Prüfe die Zahlen und lade dann deine Sicherung herunter.',added:'Wird hinzugefügt',notes:'Notizen',highlights:'Markierungen',bookmarks:'Lesezeichen',tags:'Tags',updated:'Aktualisierte Notizen (neuere gewinnt)',deduped:'Duplikate übersprungen',confirm:'Zusammenführen & herunterladen',cancel:'Abbrechen'},
-    it:{title:'Pronto per l’unione',sub:'Ecco cosa cambierà questa unione. Controlla i numeri, poi scarica il backup unito.',added:'Verrà aggiunto',notes:'Note',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags:'Tag',updated:'Note aggiornate (vince la più recente)',deduped:'Duplicati saltati',confirm:'Unisci e scarica',cancel:'Annulla'},
-    ru:{title:'Готово к объединению',sub:'Вот что изменит это объединение. Проверьте числа и скачайте объединённую копию.',added:'Будет добавлено',notes:'Заметки',highlights:'Выделения',bookmarks:'Закладки',tags:'Метки',updated:'Обновлённые заметки (побеждает новейшая)',deduped:'Дубликаты пропущены',confirm:'Объединить и скачать',cancel:'Отмена'},
-    ja:{title:'結合の準備ができました',sub:'この結合で変わる内容です。数値を確認してから、結合したバックアップをダウンロードしてください。',added:'追加されます',notes:'ノート',highlights:'ハイライト',bookmarks:'しおり',tags:'タグ',updated:'更新されたノート（新しい方を採用）',deduped:'重複をスキップ',confirm:'結合してダウンロード',cancel:'キャンセル'},
-    ko:{title:'병합 준비 완료',sub:'이 병합으로 변경될 내용입니다. 숫자를 확인한 뒤 병합된 백업을 다운로드하세요.',added:'추가됨',notes:'노트',highlights:'하이라이트',bookmarks:'북마크',tags:'태그',updated:'업데이트된 노트(최신 버전 우선)',deduped:'중복 건너뜀',confirm:'병합 및 다운로드',cancel:'취소'},
-    tl:{title:'Handa nang i-merge',sub:'Ito ang babaguhin ng merge na ito. Suriin ang mga numero, pagkatapos i-download ang iyong pinagsamang backup.',added:'Idaragdag',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update na nota (nananalo ang mas bago)',deduped:'Nilaktawang duplikado',confirm:'I-merge at i-download',cancel:'Kanselahin'}
+    en:{title:'Ready to merge',sub:'Here’s what this merge will change. Review the numbers, then download your merged backup.',added:'Will be added',notes:'Notes',highlights:'Highlights',bookmarks:'Bookmarks',tags:'Tags',updated:'Notes updated (newer version wins)',deduped:'Duplicates skipped',confirm:'Merge & Download',cancel:'Cancel',study_answers:'Study answers'},
+    es:{title:'Listo para combinar',sub:'Esto es lo que cambiará esta combinación. Revisa los números y descarga tu copia combinada.',added:'Se añadirá',notes:'Notas',highlights:'Destacados',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas actualizadas (gana la más reciente)',deduped:'Duplicados omitidos',confirm:'Combinar y descargar',cancel:'Cancelar',study_answers:'Respuestas de estudio'},
+    pt:{title:'Pronto para combinar',sub:'Veja o que esta combinação vai alterar. Revise os números e baixe seu backup combinado.',added:'Será adicionado',notes:'Notas',highlights:'Destaques',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas atualizadas (vence a mais recente)',deduped:'Duplicatas ignoradas',confirm:'Combinar e baixar',cancel:'Cancelar',study_answers:'Respostas de estudo'},
+    fr:{title:'Prêt à fusionner',sub:'Voici ce que cette fusion va modifier. Vérifiez les chiffres, puis téléchargez votre sauvegarde fusionnée.',added:'Sera ajouté',notes:'Notes',highlights:'Surlignages',bookmarks:'Signets',tags:'Étiquettes',updated:'Notes mises à jour (la plus récente l’emporte)',deduped:'Doublons ignorés',confirm:'Fusionner et télécharger',cancel:'Annuler',study_answers:'Réponses d’étude'},
+    de:{title:'Bereit zum Zusammenführen',sub:'Das wird beim Zusammenführen geändert. Prüfe die Zahlen und lade dann deine Sicherung herunter.',added:'Wird hinzugefügt',notes:'Notizen',highlights:'Markierungen',bookmarks:'Lesezeichen',tags:'Tags',updated:'Aktualisierte Notizen (neuere gewinnt)',deduped:'Duplikate übersprungen',confirm:'Zusammenführen & herunterladen',cancel:'Abbrechen',study_answers:'Studienantworten'},
+    it:{title:'Pronto per l’unione',sub:'Ecco cosa cambierà questa unione. Controlla i numeri, poi scarica il backup unito.',added:'Verrà aggiunto',notes:'Note',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags:'Tag',updated:'Note aggiornate (vince la più recente)',deduped:'Duplicati saltati',confirm:'Unisci e scarica',cancel:'Annulla',study_answers:'Risposte di studio'},
+    ru:{title:'Готово к объединению',sub:'Вот что изменит это объединение. Проверьте числа и скачайте объединённую копию.',added:'Будет добавлено',notes:'Заметки',highlights:'Выделения',bookmarks:'Закладки',tags:'Метки',updated:'Обновлённые заметки (побеждает новейшая)',deduped:'Дубликаты пропущены',confirm:'Объединить и скачать',cancel:'Отмена',study_answers:'Ответы для изучения'},
+    ja:{title:'結合の準備ができました',sub:'この結合で変わる内容です。数値を確認してから、結合したバックアップをダウンロードしてください。',added:'追加されます',notes:'ノート',highlights:'ハイライト',bookmarks:'しおり',tags:'タグ',updated:'更新されたノート（新しい方を採用）',deduped:'重複をスキップ',confirm:'結合してダウンロード',cancel:'キャンセル',study_answers:'学習の回答'},
+    ko:{title:'병합 준비 완료',sub:'이 병합으로 변경될 내용입니다. 숫자를 확인한 뒤 병합된 백업을 다운로드하세요.',added:'추가됨',notes:'노트',highlights:'하이라이트',bookmarks:'북마크',tags:'태그',updated:'업데이트된 노트(최신 버전 우선)',deduped:'중복 건너뜀',confirm:'병합 및 다운로드',cancel:'취소',study_answers:'학습 답변'},
+    tl:{title:'Handa nang i-merge',sub:'Ito ang babaguhin ng merge na ito. Suriin ang mga numero, pagkatapos i-download ang iyong pinagsamang backup.',added:'Idaragdag',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update na nota (nananalo ang mas bago)',deduped:'Nilaktawang duplikado',confirm:'I-merge at i-download',cancel:'Kanselahin',study_answers:'Mga sagot sa pag-aaral'}
   };
   function curLang(){ try{return localStorage.getItem('jwsync_lang')||'en';}catch(_){return 'en';} }
   function t(k){ var l=curLang(); return (I18N[l]&&I18N[l][k])||I18N.en[k]||k; }
@@ -2944,6 +3396,7 @@ window.__bootBrowse = function() {
             row(t('highlights'), counts.UserMark, true)+
             row(t('bookmarks'), counts.Bookmark, true)+
             row(t('tags'), counts.Tag, true)+
+            (counts.InputField?row(t('study_answers'), counts.InputField, true):'')+
             row(t('updated'), counts.Updated, false)+
             row(t('deduped'), counts.Deduplicated, false)+
           '</div>'+
@@ -2975,16 +3428,16 @@ window.__bootBrowse = function() {
   // Localised UI strings. Long restore-guide step text stays in English for
   // now (translation effort is bigger than the dialogue itself).
   var I18N = {
-    en: { close: 'Close', cele_title: 'Merge complete', cele_subtitle: 'You combined your backups into a single unified file.', stat_notes: 'notes', stat_highlights: 'highlights', stat_bookmarks: 'bookmarks', stat_tags: 'tags', cele_download: 'Download merged backup', cele_redownload: 'Download again', cele_downloading: 'Your file is downloading…', cele_browse: 'Browse the merged result', cele_restore: 'Restore to JW Library', cele_demo_title: 'That was a demo with sample data', cele_demo_body: 'Ready to try with your own JW Library backups?', cele_demo_cta: 'Use my real files', donate_prompt: 'Found JW Sync useful?', donate_cta: 'Support development', guide_title: 'How to restore to JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Other / Desktop', guide_warning: 'Restoring replaces the notes currently in JW Library. Keep this merged backup as your master copy.', guide_done: 'Got it', guide_export_title: 'How to export from JW Library', guide_mode_export: 'Export backups', guide_mode_restore: 'Restore merged file', cele_highlights: 'View Your Highlights' },
-    es: { close: 'Cerrar', cele_title: '¡Fusión completa!', cele_subtitle: 'Combinaste tus copias en un solo archivo unificado.', stat_notes: 'notas', stat_highlights: 'resaltados', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_download: 'Descargar copia fusionada', cele_redownload: 'Descargar de nuevo', cele_downloading: 'Tu archivo se está descargando…', cele_browse: 'Explorar el resultado', cele_restore: 'Restaurar en JW Library', cele_demo_title: 'Eso fue una demo con datos de muestra', cele_demo_body: '¿Listo para probar con tus propias copias de JW Library?', cele_demo_cta: 'Usar mis archivos reales', donate_prompt: '¿Te resulta útil JW Sync?', donate_cta: 'Apoyar el desarrollo', guide_title: 'Cómo restaurar en JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Otro / Escritorio', guide_warning: 'Al restaurar se reemplazan las notas actuales en JW Library. Guarda esta copia como tu archivo maestro.', guide_done: 'Entendido', guide_export_title: 'Cómo exportar desde JW Library', guide_mode_export: 'Exportar copias', guide_mode_restore: 'Restaurar archivo', cele_highlights: 'Ver tus momentos' },
-    pt: { close: 'Fechar', cele_title: 'Mesclagem concluída!', cele_subtitle: 'Você combinou seus backups em um único arquivo unificado.', stat_notes: 'notas', stat_highlights: 'destaques', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_download: 'Baixar backup mesclado', cele_redownload: 'Baixar novamente', cele_downloading: 'Seu arquivo está sendo baixado…', cele_browse: 'Explorar o resultado', cele_restore: 'Restaurar no JW Library', cele_demo_title: 'Isso foi uma demo com dados de exemplo', cele_demo_body: 'Pronto para experimentar com seus próprios backups do JW Library?', cele_demo_cta: 'Usar meus arquivos reais', donate_prompt: 'JW Sync foi útil pra você?', donate_cta: 'Apoiar o desenvolvimento', guide_title: 'Como restaurar no JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Outro / Desktop', guide_warning: 'A restauração substitui as notas atuais no JW Library. Guarde esse backup mesclado como sua cópia mestre.', guide_done: 'Entendi', guide_export_title: 'Como exportar do JW Library', guide_mode_export: 'Exportar backups', guide_mode_restore: 'Restaurar arquivo', cele_highlights: 'Ver destaques' },
-    fr: { close: 'Fermer', cele_title: 'Fusion terminée !', cele_subtitle: 'Vous avez combiné vos sauvegardes en un seul fichier unifié.', stat_notes: 'notes', stat_highlights: 'surlignages', stat_bookmarks: 'signets', stat_tags: 'étiquettes', cele_download: 'Télécharger la sauvegarde fusionnée', cele_redownload: 'Télécharger à nouveau', cele_downloading: 'Votre fichier est en cours de téléchargement…', cele_browse: 'Explorer le résultat', cele_restore: 'Restaurer dans JW Library', cele_demo_title: 'C’était une démo avec des données d’exemple', cele_demo_body: 'Prêt à essayer avec vos propres sauvegardes JW Library ?', cele_demo_cta: 'Utiliser mes vrais fichiers', donate_prompt: 'JW Sync vous est utile ?', donate_cta: 'Soutenir le développement', guide_title: 'Comment restaurer dans JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Autre / Bureau', guide_warning: 'La restauration remplace les notes actuelles dans JW Library. Gardez cette sauvegarde fusionnée comme copie maîtresse.', guide_done: 'Compris', guide_export_title: 'Comment exporter depuis JW Library', guide_mode_export: 'Exporter les sauvegardes', guide_mode_restore: 'Restaurer le fichier', cele_highlights: 'Voir les temps forts' },
-    de: { close: 'Schließen', cele_title: 'Zusammenführung abgeschlossen!', cele_subtitle: 'Du hast deine Backups in einer einzigen Datei vereint.', stat_notes: 'Notizen', stat_highlights: 'Hervorhebungen', stat_bookmarks: 'Lesezeichen', stat_tags: 'Etiketten', cele_download: 'Zusammengeführtes Backup herunterladen', cele_redownload: 'Erneut herunterladen', cele_downloading: 'Deine Datei wird heruntergeladen…', cele_browse: 'Ergebnis durchsuchen', cele_restore: 'In JW Library wiederherstellen', cele_demo_title: 'Das war eine Demo mit Beispieldaten', cele_demo_body: 'Bereit, es mit deinen eigenen JW Library-Backups zu versuchen?', cele_demo_cta: 'Meine echten Dateien verwenden', donate_prompt: 'Findest du JW Sync nützlich?', donate_cta: 'Entwicklung unterstützen', guide_title: 'So stellst du in JW Library wieder her', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Andere / Desktop', guide_warning: 'Eine Wiederherstellung ersetzt die aktuellen Notizen in JW Library. Bewahre dieses zusammengeführte Backup als Master-Kopie auf.', guide_done: 'Verstanden', guide_export_title: 'So exportierst du aus JW Library', guide_mode_export: 'Backups exportieren', guide_mode_restore: 'Datei wiederherstellen', cele_highlights: 'Highlights ansehen' },
-    it: { close: 'Chiudi', cele_title: 'Fusione completata!', cele_subtitle: 'Hai combinato i tuoi backup in un singolo file unificato.', stat_notes: 'note', stat_highlights: 'evidenziazioni', stat_bookmarks: 'segnalibri', stat_tags: 'etichette', cele_download: 'Scarica backup unificato', cele_redownload: 'Scarica di nuovo', cele_downloading: 'Il tuo file si sta scaricando…', cele_browse: 'Esplora il risultato', cele_restore: 'Ripristina in JW Library', cele_demo_title: 'Era una demo con dati di esempio', cele_demo_body: 'Pronto a provarla con i tuoi backup di JW Library?', cele_demo_cta: 'Usa i miei file reali', donate_prompt: 'Trovi utile JW Sync?', donate_cta: 'Sostieni lo sviluppo', guide_title: 'Come ripristinare in JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Altro / Desktop', guide_warning: 'Il ripristino sostituisce le note correnti in JW Library. Conserva questo backup unificato come copia principale.', guide_done: 'Ho capito', guide_export_title: 'Come esportare da JW Library', guide_mode_export: 'Esporta backup', guide_mode_restore: 'Ripristina file', cele_highlights: 'Vedi i punti salienti' },
-    ru: { close: 'Закрыть', cele_title: 'Объединение завершено!', cele_subtitle: 'Вы объединили резервные копии в один файл.', stat_notes: 'заметок', stat_highlights: 'выделений', stat_bookmarks: 'закладок', stat_tags: 'тегов', cele_download: 'Скачать объединённую копию', cele_redownload: 'Скачать ещё раз', cele_downloading: 'Ваш файл загружается…', cele_browse: 'Просмотреть результат', cele_restore: 'Восстановить в JW Library', cele_demo_title: 'Это была демо с примерами', cele_demo_body: 'Готовы попробовать со своими резервными копиями JW Library?', cele_demo_cta: 'Использовать свои файлы', donate_prompt: 'JW Sync оказался полезен?', donate_cta: 'Поддержать разработку', guide_title: 'Как восстановить в JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Другое / Десктоп', guide_warning: 'Восстановление заменит текущие заметки в JW Library. Сохраните этот объединённый файл как мастер-копию.', guide_done: 'Понятно', guide_export_title: 'Как экспортировать из JW Library', guide_mode_export: 'Экспорт копий', guide_mode_restore: 'Восстановить файл', cele_highlights: 'Посмотреть итоги' },
-    ja: { close: '閉じる', cele_title: 'マージが完了しました', cele_subtitle: '複数のバックアップを1つの統合ファイルにまとめました。', stat_notes: 'ノート', stat_highlights: 'ハイライト', stat_bookmarks: 'ブックマーク', stat_tags: 'タグ', cele_download: '統合バックアップをダウンロード', cele_redownload: 'もう一度ダウンロード', cele_downloading: 'ファイルをダウンロードしています…', cele_browse: 'マージ結果を閲覧', cele_restore: 'JW Library に復元', cele_demo_title: 'これはサンプルデータを使ったデモでした', cele_demo_body: '実際の JW Library バックアップで試してみますか？', cele_demo_cta: '自分のファイルを使う', donate_prompt: 'JW Sync は役に立ちましたか？', donate_cta: '開発を応援する', guide_title: 'JW Library への復元方法', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'その他 / デスクトップ', guide_warning: '復元すると JW Library の現在のノートが置き換わります。このマージ済みバックアップをマスターコピーとして保管してください。', guide_done: 'わかった', guide_export_title: 'JW Library からの書き出し方法', guide_mode_export: 'バックアップを書き出す', guide_mode_restore: '統合ファイルを復元', cele_highlights: 'ハイライトを見る' },
-    ko: { close: '닫기', cele_title: '병합 완료!', cele_subtitle: '백업을 하나의 통합 파일로 합쳤습니다.', stat_notes: '노트', stat_highlights: '하이라이트', stat_bookmarks: '북마크', stat_tags: '태그', cele_download: '병합 백업 다운로드', cele_redownload: '다시 다운로드', cele_downloading: '파일을 다운로드하는 중입니다…', cele_browse: '병합된 결과 탐색', cele_restore: 'JW Library에 복원', cele_demo_title: '샘플 데이터로 진행한 데모였습니다', cele_demo_body: '실제 JW Library 백업으로 시도할 준비가 되셨나요?', cele_demo_cta: '내 실제 파일 사용', donate_prompt: 'JW Sync가 유용했나요?', donate_cta: '개발 지원하기', guide_title: 'JW Library에 복원하는 방법', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: '기타 / 데스크톱', guide_warning: '복원하면 JW Library의 현재 노트가 대체됩니다. 이 병합된 백업을 마스터 사본으로 보관하세요.', guide_done: '확인', guide_export_title: 'JW Library에서 내보내는 방법', guide_mode_export: '백업 내보내기', guide_mode_restore: '병합 파일 복원', cele_highlights: '하이라이트 보기' },
-    tl: { close: 'Isara', cele_title: 'Tapos ang merge!', cele_subtitle: 'Pinagsama mo ang iyong mga backup sa isang pinag-isang file.', stat_notes: 'mga tala', stat_highlights: 'mga highlight', stat_bookmarks: 'mga bookmark', stat_tags: 'mga tag', cele_download: 'I-download ang merged backup', cele_redownload: 'I-download muli', cele_downloading: 'Dina-download na ang iyong file…', cele_browse: 'Tingnan ang merged na resulta', cele_restore: 'I-restore sa JW Library', cele_demo_title: 'Iyon ay isang demo gamit ang sample data', cele_demo_body: 'Handa nang subukan gamit ang sarili mong JW Library backup?', cele_demo_cta: 'Gamitin ang aking mga file', donate_prompt: 'Nakatulong sa iyo ang JW Sync?', donate_cta: 'Suportahan ang pag-develop', guide_title: 'Paano i-restore sa JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Iba / Desktop', guide_warning: 'Papalitan ng restore ang kasalukuyang mga tala sa JW Library. Panatilihin ang merged backup na ito bilang master copy.', guide_done: 'Sige', guide_export_title: 'Paano mag-export mula sa JW Library', guide_mode_export: 'Mag-export ng backup', guide_mode_restore: 'I-restore ang file', cele_highlights: 'Tingnan ang highlights' }
+    en: { close: 'Close', cele_title: 'Merge complete', cele_subtitle: 'You combined your backups into a single unified file.', stat_notes: 'notes', stat_highlights: 'highlights', stat_bookmarks: 'bookmarks', stat_tags: 'tags', cele_download: 'Download merged backup', cele_redownload: 'Download again', cele_downloading: 'Your file is downloading…', cele_browse: 'Browse the merged result', cele_restore: 'Restore to JW Library', cele_demo_title: 'That was a demo with sample data', cele_demo_body: 'Ready to try with your own JW Library backups?', cele_demo_cta: 'Use my real files', donate_prompt: 'Found JW Sync useful?', donate_cta: 'Support development', guide_title: 'How to restore to JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Other / Desktop', guide_warning: 'Restoring replaces the notes currently in JW Library. Keep this merged backup as your master copy.', guide_done: 'Got it', guide_export_title: 'How to export from JW Library', guide_mode_export: 'Export backups', guide_mode_restore: 'Restore merged file', cele_highlights: 'View Your Highlights' , perf_title: 'Merge performance', perf_prepare: 'Prepare', perf_merge: 'Merge', perf_package: 'Package', perf_tip_large: 'Large library — for faster merges, combine fewer files at once or use date-range extraction.' },
+    es: { close: 'Cerrar', cele_title: '¡Fusión completa!', cele_subtitle: 'Combinaste tus copias en un solo archivo unificado.', stat_notes: 'notas', stat_highlights: 'resaltados', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_download: 'Descargar copia fusionada', cele_redownload: 'Descargar de nuevo', cele_downloading: 'Tu archivo se está descargando…', cele_browse: 'Explorar el resultado', cele_restore: 'Restaurar en JW Library', cele_demo_title: 'Eso fue una demo con datos de muestra', cele_demo_body: '¿Listo para probar con tus propias copias de JW Library?', cele_demo_cta: 'Usar mis archivos reales', donate_prompt: '¿Te resulta útil JW Sync?', donate_cta: 'Apoyar el desarrollo', guide_title: 'Cómo restaurar en JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Otro / Escritorio', guide_warning: 'Al restaurar se reemplazan las notas actuales en JW Library. Guarda esta copia como tu archivo maestro.', guide_done: 'Entendido', guide_export_title: 'Cómo exportar desde JW Library', guide_mode_export: 'Exportar copias', guide_mode_restore: 'Restaurar archivo', cele_highlights: 'Ver tus momentos' , perf_title: 'Rendimiento de la fusión', perf_prepare: 'Preparar', perf_merge: 'Fusionar', perf_package: 'Empaquetar', perf_tip_large: 'Biblioteca grande: para fusiones más rápidas, combina menos archivos a la vez o usa la extracción por fecha.' },
+    pt: { close: 'Fechar', cele_title: 'Mesclagem concluída!', cele_subtitle: 'Você combinou seus backups em um único arquivo unificado.', stat_notes: 'notas', stat_highlights: 'destaques', stat_bookmarks: 'marcadores', stat_tags: 'etiquetas', cele_download: 'Baixar backup mesclado', cele_redownload: 'Baixar novamente', cele_downloading: 'Seu arquivo está sendo baixado…', cele_browse: 'Explorar o resultado', cele_restore: 'Restaurar no JW Library', cele_demo_title: 'Isso foi uma demo com dados de exemplo', cele_demo_body: 'Pronto para experimentar com seus próprios backups do JW Library?', cele_demo_cta: 'Usar meus arquivos reais', donate_prompt: 'JW Sync foi útil pra você?', donate_cta: 'Apoiar o desenvolvimento', guide_title: 'Como restaurar no JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Outro / Desktop', guide_warning: 'A restauração substitui as notas atuais no JW Library. Guarde esse backup mesclado como sua cópia mestre.', guide_done: 'Entendi', guide_export_title: 'Como exportar do JW Library', guide_mode_export: 'Exportar backups', guide_mode_restore: 'Restaurar arquivo', cele_highlights: 'Ver destaques' , perf_title: 'Desempenho da mesclagem', perf_prepare: 'Preparar', perf_merge: 'Mesclar', perf_package: 'Empacotar', perf_tip_large: 'Biblioteca grande: para mesclagens mais rápidas, combine menos arquivos por vez ou use a extração por data.' },
+    fr: { close: 'Fermer', cele_title: 'Fusion terminée !', cele_subtitle: 'Vous avez combiné vos sauvegardes en un seul fichier unifié.', stat_notes: 'notes', stat_highlights: 'surlignages', stat_bookmarks: 'signets', stat_tags: 'étiquettes', cele_download: 'Télécharger la sauvegarde fusionnée', cele_redownload: 'Télécharger à nouveau', cele_downloading: 'Votre fichier est en cours de téléchargement…', cele_browse: 'Explorer le résultat', cele_restore: 'Restaurer dans JW Library', cele_demo_title: 'C’était une démo avec des données d’exemple', cele_demo_body: 'Prêt à essayer avec vos propres sauvegardes JW Library ?', cele_demo_cta: 'Utiliser mes vrais fichiers', donate_prompt: 'JW Sync vous est utile ?', donate_cta: 'Soutenir le développement', guide_title: 'Comment restaurer dans JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Autre / Bureau', guide_warning: 'La restauration remplace les notes actuelles dans JW Library. Gardez cette sauvegarde fusionnée comme copie maîtresse.', guide_done: 'Compris', guide_export_title: 'Comment exporter depuis JW Library', guide_mode_export: 'Exporter les sauvegardes', guide_mode_restore: 'Restaurer le fichier', cele_highlights: 'Voir les temps forts' , perf_title: 'Performance de la fusion', perf_prepare: 'Préparer', perf_merge: 'Fusionner', perf_package: 'Empaqueter', perf_tip_large: 'Grande bibliothèque : pour des fusions plus rapides, combinez moins de fichiers à la fois ou utilisez l’extraction par date.' },
+    de: { close: 'Schließen', cele_title: 'Zusammenführung abgeschlossen!', cele_subtitle: 'Du hast deine Backups in einer einzigen Datei vereint.', stat_notes: 'Notizen', stat_highlights: 'Hervorhebungen', stat_bookmarks: 'Lesezeichen', stat_tags: 'Etiketten', cele_download: 'Zusammengeführtes Backup herunterladen', cele_redownload: 'Erneut herunterladen', cele_downloading: 'Deine Datei wird heruntergeladen…', cele_browse: 'Ergebnis durchsuchen', cele_restore: 'In JW Library wiederherstellen', cele_demo_title: 'Das war eine Demo mit Beispieldaten', cele_demo_body: 'Bereit, es mit deinen eigenen JW Library-Backups zu versuchen?', cele_demo_cta: 'Meine echten Dateien verwenden', donate_prompt: 'Findest du JW Sync nützlich?', donate_cta: 'Entwicklung unterstützen', guide_title: 'So stellst du in JW Library wieder her', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Andere / Desktop', guide_warning: 'Eine Wiederherstellung ersetzt die aktuellen Notizen in JW Library. Bewahre dieses zusammengeführte Backup als Master-Kopie auf.', guide_done: 'Verstanden', guide_export_title: 'So exportierst du aus JW Library', guide_mode_export: 'Backups exportieren', guide_mode_restore: 'Datei wiederherstellen', cele_highlights: 'Highlights ansehen' , perf_title: 'Zusammenführungs-Leistung', perf_prepare: 'Vorbereiten', perf_merge: 'Zusammenführen', perf_package: 'Verpacken', perf_tip_large: 'Große Bibliothek — für schnellere Zusammenführungen weniger Dateien auf einmal kombinieren oder die Datumsbereich-Extraktion nutzen.' },
+    it: { close: 'Chiudi', cele_title: 'Fusione completata!', cele_subtitle: 'Hai combinato i tuoi backup in un singolo file unificato.', stat_notes: 'note', stat_highlights: 'evidenziazioni', stat_bookmarks: 'segnalibri', stat_tags: 'etichette', cele_download: 'Scarica backup unificato', cele_redownload: 'Scarica di nuovo', cele_downloading: 'Il tuo file si sta scaricando…', cele_browse: 'Esplora il risultato', cele_restore: 'Ripristina in JW Library', cele_demo_title: 'Era una demo con dati di esempio', cele_demo_body: 'Pronto a provarla con i tuoi backup di JW Library?', cele_demo_cta: 'Usa i miei file reali', donate_prompt: 'Trovi utile JW Sync?', donate_cta: 'Sostieni lo sviluppo', guide_title: 'Come ripristinare in JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Altro / Desktop', guide_warning: 'Il ripristino sostituisce le note correnti in JW Library. Conserva questo backup unificato come copia principale.', guide_done: 'Ho capito', guide_export_title: 'Come esportare da JW Library', guide_mode_export: 'Esporta backup', guide_mode_restore: 'Ripristina file', cele_highlights: 'Vedi i punti salienti' , perf_title: 'Prestazioni dell’unione', perf_prepare: 'Preparare', perf_merge: 'Unire', perf_package: 'Pacchettizzare', perf_tip_large: 'Biblioteca grande: per unioni più veloci, combina meno file alla volta o usa l’estrazione per data.' },
+    ru: { close: 'Закрыть', cele_title: 'Объединение завершено!', cele_subtitle: 'Вы объединили резервные копии в один файл.', stat_notes: 'заметок', stat_highlights: 'выделений', stat_bookmarks: 'закладок', stat_tags: 'тегов', cele_download: 'Скачать объединённую копию', cele_redownload: 'Скачать ещё раз', cele_downloading: 'Ваш файл загружается…', cele_browse: 'Просмотреть результат', cele_restore: 'Восстановить в JW Library', cele_demo_title: 'Это была демо с примерами', cele_demo_body: 'Готовы попробовать со своими резервными копиями JW Library?', cele_demo_cta: 'Использовать свои файлы', donate_prompt: 'JW Sync оказался полезен?', donate_cta: 'Поддержать разработку', guide_title: 'Как восстановить в JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Другое / Десктоп', guide_warning: 'Восстановление заменит текущие заметки в JW Library. Сохраните этот объединённый файл как мастер-копию.', guide_done: 'Понятно', guide_export_title: 'Как экспортировать из JW Library', guide_mode_export: 'Экспорт копий', guide_mode_restore: 'Восстановить файл', cele_highlights: 'Посмотреть итоги' , perf_title: 'Производительность объединения', perf_prepare: 'Подготовка', perf_merge: 'Объединение', perf_package: 'Упаковка', perf_tip_large: 'Большая библиотека — для ускорения объединяйте меньше файлов за раз или используйте извлечение по дате.' },
+    ja: { close: '閉じる', cele_title: 'マージが完了しました', cele_subtitle: '複数のバックアップを1つの統合ファイルにまとめました。', stat_notes: 'ノート', stat_highlights: 'ハイライト', stat_bookmarks: 'ブックマーク', stat_tags: 'タグ', cele_download: '統合バックアップをダウンロード', cele_redownload: 'もう一度ダウンロード', cele_downloading: 'ファイルをダウンロードしています…', cele_browse: 'マージ結果を閲覧', cele_restore: 'JW Library に復元', cele_demo_title: 'これはサンプルデータを使ったデモでした', cele_demo_body: '実際の JW Library バックアップで試してみますか？', cele_demo_cta: '自分のファイルを使う', donate_prompt: 'JW Sync は役に立ちましたか？', donate_cta: '開発を応援する', guide_title: 'JW Library への復元方法', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'その他 / デスクトップ', guide_warning: '復元すると JW Library の現在のノートが置き換わります。このマージ済みバックアップをマスターコピーとして保管してください。', guide_done: 'わかった', guide_export_title: 'JW Library からの書き出し方法', guide_mode_export: 'バックアップを書き出す', guide_mode_restore: '統合ファイルを復元', cele_highlights: 'ハイライトを見る' , perf_title: 'マージのパフォーマンス', perf_prepare: '準備', perf_merge: 'マージ', perf_package: 'パッケージ', perf_tip_large: '大きなライブラリです。より速くマージするには、一度に結合するファイルを減らすか、日付範囲の抽出を使ってください。' },
+    ko: { close: '닫기', cele_title: '병합 완료!', cele_subtitle: '백업을 하나의 통합 파일로 합쳤습니다.', stat_notes: '노트', stat_highlights: '하이라이트', stat_bookmarks: '북마크', stat_tags: '태그', cele_download: '병합 백업 다운로드', cele_redownload: '다시 다운로드', cele_downloading: '파일을 다운로드하는 중입니다…', cele_browse: '병합된 결과 탐색', cele_restore: 'JW Library에 복원', cele_demo_title: '샘플 데이터로 진행한 데모였습니다', cele_demo_body: '실제 JW Library 백업으로 시도할 준비가 되셨나요?', cele_demo_cta: '내 실제 파일 사용', donate_prompt: 'JW Sync가 유용했나요?', donate_cta: '개발 지원하기', guide_title: 'JW Library에 복원하는 방법', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: '기타 / 데스크톱', guide_warning: '복원하면 JW Library의 현재 노트가 대체됩니다. 이 병합된 백업을 마스터 사본으로 보관하세요.', guide_done: '확인', guide_export_title: 'JW Library에서 내보내는 방법', guide_mode_export: '백업 내보내기', guide_mode_restore: '병합 파일 복원', cele_highlights: '하이라이트 보기' , perf_title: '병합 성능', perf_prepare: '준비', perf_merge: '병합', perf_package: '패키지', perf_tip_large: '큰 라이브러리입니다. 더 빠른 병합을 위해 한 번에 더 적은 파일을 결합하거나 날짜 범위 추출을 사용하세요.' },
+    tl: { close: 'Isara', cele_title: 'Tapos ang merge!', cele_subtitle: 'Pinagsama mo ang iyong mga backup sa isang pinag-isang file.', stat_notes: 'mga tala', stat_highlights: 'mga highlight', stat_bookmarks: 'mga bookmark', stat_tags: 'mga tag', cele_download: 'I-download ang merged backup', cele_redownload: 'I-download muli', cele_downloading: 'Dina-download na ang iyong file…', cele_browse: 'Tingnan ang merged na resulta', cele_restore: 'I-restore sa JW Library', cele_demo_title: 'Iyon ay isang demo gamit ang sample data', cele_demo_body: 'Handa nang subukan gamit ang sarili mong JW Library backup?', cele_demo_cta: 'Gamitin ang aking mga file', donate_prompt: 'Nakatulong sa iyo ang JW Sync?', donate_cta: 'Suportahan ang pag-develop', guide_title: 'Paano i-restore sa JW Library', guide_tab_ios: 'iPhone / iPad', guide_tab_android: 'Android', guide_tab_other: 'Iba / Desktop', guide_warning: 'Papalitan ng restore ang kasalukuyang mga tala sa JW Library. Panatilihin ang merged backup na ito bilang master copy.', guide_done: 'Sige', guide_export_title: 'Paano mag-export mula sa JW Library', guide_mode_export: 'Mag-export ng backup', guide_mode_restore: 'I-restore ang file', cele_highlights: 'Tingnan ang highlights' , perf_title: 'Performance ng merge', perf_prepare: 'Ihanda', perf_merge: 'Pagsamahin', perf_package: 'I-package', perf_tip_large: 'Malaking library — para sa mas mabilis na merge, magsama ng mas kaunting file o gamitin ang date-range extraction.' }
   };
   function lang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
   function t(k) { var l = lang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
@@ -3131,6 +3584,25 @@ window.__bootBrowse = function() {
   }
 
   // ── Render the celebration overlay ─────────────────────────────────
+  function buildPerfHtml() {
+    var T = null; try { T = window.__jwLastMergeTimings; } catch (_) {}
+    if (!T || !T.total) return '';
+    function ms(v) { v = Math.max(0, +v || 0); return v >= 1000 ? (Math.round(v / 100) / 10) + 's' : Math.round(v) + 'ms'; }
+    var total = T.total || 1;
+    var segs = [['prepare', t('perf_prepare'), '#60a5fa'], ['merge', t('perf_merge'), '#ea580c'], ['package', t('perf_package'), '#34d399']];
+    var bar = '', legend = '';
+    segs.forEach(function (s) {
+      var v = +T[s[0]] || 0, pct = Math.max(0, Math.min(100, v / total * 100));
+      if (pct > 0.4) bar += '<span style="width:' + pct.toFixed(1) + '%;background:' + s[2] + '"></span>';
+      legend += '<span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px;font-size:11.5px;color:#94a3b8"><i style="width:9px;height:9px;border-radius:2px;background:' + s[2] + ';display:inline-block"></i>' + esc(s[1]) + ' ' + ms(v) + '</span>';
+    });
+    var tip = ((T.rows || 0) > 10000 || total > 60000) ? '<div style="margin-top:8px;font-size:12px;color:#fbbf24">' + esc(t('perf_tip_large')) + '</div>' : '';
+    return '<details class="jwc-perf" style="margin:4px 0 10px;text-align:left;border:1px solid rgba(71,85,105,.3);border-radius:10px;padding:10px 12px;background:rgba(255,255,255,.02)">' +
+      '<summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:#cbd5e1">' + esc(t('perf_title')) + ' · ' + ms(total) + '</summary>' +
+      '<div style="display:flex;height:10px;border-radius:6px;overflow:hidden;background:rgba(148,163,184,.12);margin:10px 0 8px">' + bar + '</div>' +
+      '<div>' + legend + '</div>' + tip + '</details>';
+  }
+
   function renderCelebration(opts) {
     closeCelebration(true);
     var stats = opts.stats || { notes: '–', highlights: '–', bookmarks: '–', tags: '–' };
@@ -3157,6 +3629,7 @@ window.__bootBrowse = function() {
           '<div class="jwc-stat"><strong>' + stats.bookmarks + '</strong><span>' + esc(t('stat_bookmarks')) + '</span></div>' +
           '<div class="jwc-stat"><strong>' + stats.tags + '</strong><span>' + esc(t('stat_tags')) + '</span></div>' +
         '</div>' +
+        buildPerfHtml() +
         // Download status banner — informs the user the download started
         '<div class="jwc-download-status" data-jwc-dl-status hidden>' +
           '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>' +

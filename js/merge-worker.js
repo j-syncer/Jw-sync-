@@ -76,7 +76,7 @@ self.onmessage = async ({ data }) => {
       return;
     }
     self.postMessage(
-      { type: 'done', zipBuffer: result.zipBuffer, stats: result.stats, previewNotes: result.previewNotes },
+      { type: 'done', zipBuffer: result.zipBuffer, stats: result.stats, previewNotes: result.previewNotes, timings: result.timings },
       [result.zipBuffer]
     );
   } catch (e) {
@@ -90,6 +90,8 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   });
 
   const p   = opts;
+  const _now = () => (self.performance && performance.now) ? performance.now() : Date.now();
+  const _t0 = _now(); let _tm = _t0; const timings = {};
   const ne  = tagManager;
   const Le  = colorRules || [];
   const ma  = name => mapTagName(name, ne);
@@ -123,6 +125,7 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   try { a = new SQL.Database(dbBytes); }
   catch (e) { throw taggedError('not_sqlite', "The backup's database couldn't be opened."); }
   a.run('PRAGMA foreign_keys = OFF;');
+  timings.prepare = _now() - _tm; _tm = _now();
 
   const f = { Note: 0, UserMark: 0, Bookmark: 0, Tag: 0, Deduplicated: 0,
               Updated: 0, Errors: 0, Cleaned: 0, ColorsMapped: 0, InputFields: 0 };
@@ -524,7 +527,7 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   if (p.previewConfirm) {
     self.postMessage({ type: 'impact', counts: {
       Note: f.Note, UserMark: f.UserMark, Bookmark: f.Bookmark, Tag: f.Tag,
-      Updated: f.Updated, Deduplicated: f.Deduplicated
+      Updated: f.Updated, Deduplicated: f.Deduplicated, InputField: f.InputFields || 0
     } });
     const proceed = await new Promise(res => { confirmResolver = res; });
     if (!proceed) {
@@ -537,12 +540,15 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   // ── Step 6: Package output ZIP ─────────────────────────────────────────
   log('Step 6: Packaging final download...');
   await A();
+  timings.merge = _now() - _tm; _tm = _now();
   const exportedDb = a.export();
   a.close();
   a = null;
 
   o.file(Object.keys(o.files).find(k => /userdata\.db$/i.test(k)), exportedDb);
   const zipBuf = await o.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' });
+  timings.package = _now() - _tm; timings.total = _now() - _t0;
+  timings.rows = (f.Note + f.UserMark + f.Bookmark + f.Tag + (f.InputFields || 0) + f.Updated + f.Deduplicated) || 0;
 
-  return { zipBuffer: zipBuf, stats: f, previewNotes };
+  return { zipBuffer: zipBuf, stats: f, previewNotes, timings };
 }
