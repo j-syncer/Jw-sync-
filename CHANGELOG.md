@@ -4,6 +4,14 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.28.0] — 2026-06-02
+
+### Added
+- **Share notes with others — no server, no account.** In the Note Explorer, select notes and tap **Share** to produce a small file (or copyable text) you hand over yourself. Nothing is uploaded.
+- **Receive & adopt shared notes.** A new **Receive** button lets you paste shared text or open a `.jwshare.json` file someone sent, **preview the notes read-only**, and **adopt them into your library** — added as new notes tagged "Shared" and covered by Undo. Perfect for households and study groups.
+
+---
+
 ## [2.27.0] — 2026-06-02
 
 ### Added

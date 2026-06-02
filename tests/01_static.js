@@ -254,6 +254,16 @@ for (const path of FILES) {
     else ok('Study Answers tab wired');
   }
 
+  // 8i) Note sharing / adopt (v2.28.0, beta-only)
+  if (isBeta) {
+    if (!c.includes('function openShareExport') || !c.includes('function openShareImport') || !c.includes('function adoptNotes') || !c.includes('function buildShareEnvelope'))
+      fail('Note-sharing functions missing');
+    else ok('Note-sharing functions present');
+    if (!c.includes('jbs-overlay') || !c.includes("t('share_action')") || !c.includes("t('receive_action')"))
+      fail('Note-sharing UI wiring missing');
+    else ok('Note-sharing UI (share/receive) wired');
+  }
+
   // 9) Beta-only: "Try with sample notes" hero CTA + handler
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');

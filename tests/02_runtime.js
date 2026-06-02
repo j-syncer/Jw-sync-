@@ -570,6 +570,48 @@ function assertContains(text, needle, label) {
     else fail('expected clean baseline after undo-all');
   }
 
+  section('Note sharing — export envelope + adopt (v2.28.0)');
+  {
+    const wait = (ms) => new Promise(r => setTimeout(r, ms));
+    // On the notes tab, clean state. Select 2 notes and Share them.
+    doc.querySelector('.jb-select-toggle').click();
+    await waitFor(() => doc.querySelector('.jb-note.jb-selectable'), 'selectable rows');
+    const rs = doc.querySelectorAll('.jb-list .jb-note.jb-selectable');
+    rs[0].click(); rs[1].click();
+    await waitFor(() => doc.querySelectorAll('.jb-check.jb-check-on').length === 2, '2 selected');
+    Array.from(doc.querySelectorAll('.jb-batch-bar .jb-batch-btn')).find(b => /share/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelector('.jbs-overlay .jbs-text'), 'share overlay');
+    const json = doc.querySelector('.jbs-overlay .jbs-text').value;
+    const env = JSON.parse(json);
+    if (env.app === 'jwsync' && Array.isArray(env.notes) && env.notes.length === 2) ok('share envelope built (2 notes, jwsync v' + env.v + ')');
+    else fail('share envelope malformed: ' + json.slice(0, 80));
+    doc.querySelector('.jbs-overlay .jbs-x').click();
+    doc.querySelector('.jb-select-toggle').click();
+    await wait(30);
+
+    const beforeCount = doc.querySelectorAll('.jb-list .jb-note').length; // 5
+    // Receive → paste the envelope → Preview → Adopt
+    Array.from(doc.querySelectorAll('.jb-md-btn')).find(b => /receive/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelector('.jbs-overlay .jbs-text'), 'import overlay');
+    doc.querySelector('.jbs-overlay .jbs-text').value = json;
+    Array.from(doc.querySelectorAll('.jbs-overlay .jb-btn')).find(b => /preview/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelector('.jbs-item'), 'preview list');
+    if (doc.querySelectorAll('.jbs-item').length === 2) ok('import preview lists 2 shared notes (read-only)');
+    else fail('preview count wrong: ' + doc.querySelectorAll('.jbs-item').length);
+    Array.from(doc.querySelectorAll('.jbs-overlay .jb-btn')).find(b => /adopt/i.test(b.textContent)).click();
+    await waitFor(() => doc.querySelector('.jbs-ok'), 'adopted confirmation');
+    ok('adopt confirmed');
+    doc.querySelector('.jbs-overlay .jbs-x').click();
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === beforeCount + 2, 'two notes adopted');
+    ok('2 notes adopted into the library (' + beforeCount + '→' + (beforeCount + 2) + ')');
+    if (/Shared/.test(doc.querySelector('.jb-filter-tag').textContent)) ok('adopted notes carry the "Shared" tag');
+    else fail('"Shared" tag missing after adopt');
+    // Clean back to pristine for the remaining sections
+    let g = 0;
+    while (!doc.querySelector('.jb-undo').disabled && g++ < 40) { doc.querySelector('.jb-undo').click(); await wait(20); }
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length === 5, 'restored to 5 notes');
+  }
+
   section('Switch to Highlights tab');
   hlTab.click();
   await waitFor(() => {
