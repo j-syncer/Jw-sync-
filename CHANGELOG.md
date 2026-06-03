@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.36.0] — 2026-06-03
+
+### Added
+- **You're now in control when you receive someone's notes.** When you add a friend's `.jwshare.json`, you can set your own **tag for the imported notes** (defaults to "Shared") so every received note is easy to find later. A clear reminder shows that imported notes are **added as new notes — your own notes are never replaced.**
+- **Shared highlights now travel with their notes.** When you send notes, any highlight on them (its colour and exact verse span) is included in the share file. When the other person receives them, the highlight is recreated **on the right passage in your friend's colour.**
+- **Nothing of yours is ever overwritten.** If a friend's highlight lands on a verse you've **already highlighted** (even with your own note), JW Sync asks how you'd like to add it:
+  - **Add as a separate layer** — the friend's highlight is added in its own colour alongside yours, and a second note is created. Your highlight and note stay exactly as they were.
+  - **Import note only** — just the friend's note is added (linked to your existing highlight), with no competing colour.
+- Highlights on **new** passages are added automatically without asking.
+
+---
+
 ## [2.35.0] — 2026-06-03
 
 ### Changed

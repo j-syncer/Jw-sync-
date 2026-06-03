@@ -33,7 +33,7 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
 
   section('Load the Receive module in JSDOM');
   const html = fs.readFileSync(path.join(__dirname, '../beta/index.html'), 'utf8');
-  const m = html.match(/<!-- ── Receive shared notes in merge \(v2\.34\.0\)[\s\S]*?<!-- ── End Receive shared notes in merge ─[─]*\s*-->/);
+  const m = html.match(/<!-- ── Receive shared notes in merge \(v[\d.]+\)[\s\S]*?<!-- ── End Receive shared notes in merge ─[─]*\s*-->/);
   if (!m) { fail('Receive module block not found'); console.log('\nFAIL'); process.exit(1); }
   const dom = new JSDOM(`<!DOCTYPE html><html><body>${m[0]}</body></html>`, { url: 'https://jwsync.org/beta/', runScripts: 'dangerously', pretendToBeVisual: true });
   const win = dom.window;
@@ -91,6 +91,98 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
   else fail('auto-adopt hook missing');
   if (html.includes("id=\"jwr-panel\"") || html.includes('jwr-panel')) ok('pre-merge attach panel present');
   else fail('pre-merge panel missing');
+
+  section('Phase 2 — non-destructive highlight import (overlapping verse)');
+  // Build a .jwlibrary that already has a highlight + note on Genesis 1, tokens 0-4
+  async function buildLibWithHighlight() {
+    const sql = await initSqlJs(locate);
+    const d = new sql.Database();
+    d.run(`
+      CREATE TABLE Location (LocationId INTEGER PRIMARY KEY, BookNumber INT, ChapterNumber INT, DocumentId INT, Track INT, IssueTagNumber INT DEFAULT 0, KeySymbol TEXT, MepsLanguage INT DEFAULT 0, Type INT DEFAULT 0, Title TEXT);
+      CREATE TABLE UserMark (UserMarkId INTEGER PRIMARY KEY, ColorIndex INT, LocationId INT, StyleIndex INT DEFAULT 0, UserMarkGuid TEXT, Version INT DEFAULT 1);
+      CREATE TABLE BlockRange (BlockRangeId INTEGER PRIMARY KEY, BlockType INT, Identifier INT, StartToken INT, EndToken INT, UserMarkId INT);
+      CREATE TABLE Note (NoteId INTEGER PRIMARY KEY, Guid TEXT, UserMarkId INT, LocationId INT, Title TEXT, Content TEXT, LastModified TEXT, Created TEXT, BlockType INT, BlockIdentifier INT);
+      CREATE TABLE Tag (TagId INTEGER PRIMARY KEY, Type INT, Name TEXT);
+      CREATE TABLE TagMap (TagMapId INTEGER PRIMARY KEY, NoteId INT, LocationId INT, TagId INT, Position INT);
+      INSERT INTO Location (LocationId,BookNumber,ChapterNumber,DocumentId,Track,IssueTagNumber,KeySymbol,MepsLanguage,Type,Title) VALUES (1,1,1,0,0,0,'nwt',0,0,'Genesis');
+      INSERT INTO UserMark (UserMarkId,ColorIndex,LocationId,StyleIndex,UserMarkGuid,Version) VALUES (1,1,1,0,'mine-mark',1);
+      INSERT INTO BlockRange (BlockType,Identifier,StartToken,EndToken,UserMarkId) VALUES (2,5,0,4,1);
+      INSERT INTO Note (Guid,UserMarkId,LocationId,Title,Content,LastModified,Created,BlockType,BlockIdentifier) VALUES ('mine-note',1,1,'My note','<p>mine</p>','2024-01-01 00:00:00','2024-01-01 00:00:00',2,5);
+    `);
+    const bytes = d.export(); d.close();
+    const z = new JSZip(); z.file('userData.db', Buffer.from(bytes));
+    return z.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' });
+  }
+  // An incoming friend's highlight+note on the SAME verse span, different colour (3)
+  const friendLoc = { BookNumber: 1, ChapterNumber: 1, DocumentId: 0, Track: 0, IssueTagNumber: 0, KeySymbol: 'nwt', MepsLanguage: 0, Type: 0, Title: 'Genesis' };
+  const friendNote = () => ([{ title: 'Friend note', content: '<p>from a friend</p>', tags: ['Study'],
+    loc: friendLoc, color: 3, style: 0, ranges: [{ blockType: 2, identifier: 5, startToken: 0, endToken: 4 }] }]);
+
+  async function openDb(buf) {
+    const z = await JSZip.loadAsync(buf);
+    const k = Object.keys(z.files).find(x => /userdata\.db$/i.test(x));
+    const SQLx = await initSqlJs(locate);
+    return new SQLx.Database(await z.file(k).async('uint8array'));
+  }
+
+  // overlap detected → user chooses "Add as a separate layer"
+  {
+    const lib = await buildLibWithHighlight();
+    let asked = 0;
+    const res = await win.__jwAdoptSharedIntoBuffer(lib, friendNote(), { tagLabel: 'FromAnn', onOverlap: (n) => { asked = n; return 'layer'; } });
+    if (asked === 1) ok('overlap detected and the user was asked (1 overlapping highlight)');
+    else fail('overlap prompt not triggered: ' + asked);
+    const db3 = await openDb(res.buffer);
+    const c = (s) => { const r = db3.exec(s); return (r[0] && r[0].values[0]) ? r[0].values[0][0] : 0; };
+    if (c('SELECT COUNT(*) FROM UserMark') === 2) ok('a second UserMark layer was added (1→2)');
+    else fail('UserMark count after layer add: ' + c('SELECT COUNT(*) FROM UserMark'));
+    if (c('SELECT ColorIndex FROM UserMark WHERE UserMarkGuid=\'mine-mark\'') === 1) ok("user's original highlight colour untouched (still 1)");
+    else fail('original highlight colour changed');
+    if (c('SELECT COUNT(*) FROM UserMark WHERE ColorIndex=3') === 1) ok("friend's highlight added in its own colour (3)");
+    else fail('friend highlight colour missing');
+    if (c('SELECT COUNT(*) FROM BlockRange') === 2) ok('a second BlockRange added for the new layer');
+    else fail('BlockRange count wrong: ' + c('SELECT COUNT(*) FROM BlockRange'));
+    if (c("SELECT Content FROM Note WHERE Guid='mine-note'") === '<p>mine</p>') ok("user's original note left intact");
+    else fail('original note altered');
+    if (c('SELECT COUNT(*) FROM Note') === 2) ok('friend note added alongside (1→2)');
+    else fail('Note count wrong: ' + c('SELECT COUNT(*) FROM Note'));
+    if (c("SELECT COUNT(*) FROM Tag WHERE Name='FromAnn'") === 1) ok('imported note carries the custom import tag');
+    else fail('custom tag missing');
+    db3.close();
+  }
+
+  // overlap detected → user chooses "Import note only"
+  {
+    const lib = await buildLibWithHighlight();
+    const res = await win.__jwAdoptSharedIntoBuffer(lib, friendNote(), { tagLabel: 'FromAnn', onOverlap: () => 'note' });
+    const db3 = await openDb(res.buffer);
+    const c = (s) => { const r = db3.exec(s); return (r[0] && r[0].values[0]) ? r[0].values[0][0] : 0; };
+    if (c('SELECT COUNT(*) FROM UserMark') === 1) ok('note-only: no competing highlight created (stays 1)');
+    else fail('note-only added a UserMark: ' + c('SELECT COUNT(*) FROM UserMark'));
+    if (c('SELECT COUNT(*) FROM Note') === 2) ok('note-only: friend note still added');
+    else fail('note-only Note count wrong: ' + c('SELECT COUNT(*) FROM Note'));
+    if (c("SELECT UserMarkId FROM Note WHERE Title='Friend note'") === 1) ok("note-only: friend note linked to user's existing highlight");
+    else fail('note-only link wrong: ' + c("SELECT UserMarkId FROM Note WHERE Title='Friend note'"));
+    db3.close();
+  }
+
+  // no overlap → highlight added without prompting
+  {
+    const lib = await buildLibWithHighlight();
+    const farNote = [{ title: 'Far note', content: '<p>elsewhere</p>', tags: [],
+      loc: { BookNumber: 1, ChapterNumber: 1, DocumentId: 0, Track: 0, IssueTagNumber: 0, KeySymbol: 'nwt', MepsLanguage: 0, Type: 0 },
+      color: 4, style: 0, ranges: [{ blockType: 2, identifier: 9, startToken: 0, endToken: 3 }] }];
+    let asked = 0;
+    const res = await win.__jwAdoptSharedIntoBuffer(lib, farNote, { tagLabel: 'FromAnn', onOverlap: () => { asked = 1; return 'note'; } });
+    if (asked === 0) ok('non-overlapping highlight added without asking');
+    else fail('unexpected overlap prompt for non-overlapping verse');
+    const db3 = await openDb(res.buffer);
+    const c = (s) => { const r = db3.exec(s); return (r[0] && r[0].values[0]) ? r[0].values[0][0] : 0; };
+    if (c('SELECT COUNT(*) FROM UserMark') === 2 && c('SELECT COUNT(*) FROM UserMark WHERE ColorIndex=4') === 1)
+      ok('new highlight layer added on the new passage');
+    else fail('non-overlap highlight not added correctly');
+    db3.close();
+  }
 
   console.log('\n== SUMMARY ==');
   if (failures) { console.log('\nFAIL: ' + failures + ' check(s) failed.'); process.exit(1); }

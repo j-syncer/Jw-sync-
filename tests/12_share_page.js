@@ -32,13 +32,24 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 async function buildBackup(SQL, notes) {
   const db = new SQL.Database();
   db.run(`CREATE TABLE Note (NoteId INTEGER PRIMARY KEY, Guid TEXT, UserMarkId INTEGER, LocationId INTEGER, Title TEXT, Content TEXT, LastModified TEXT, Created TEXT, BlockType INTEGER DEFAULT 1, BlockIdentifier INTEGER DEFAULT 0);
-    CREATE TABLE UserMark (UserMarkId INTEGER PRIMARY KEY, ColorIndex INTEGER, LocationId INTEGER, StyleIndex INTEGER, UserMarkGuid TEXT, Version INTEGER);
-    CREATE TABLE Location (LocationId INTEGER PRIMARY KEY, BookNumber INTEGER, ChapterNumber INTEGER, KeySymbol TEXT, Title TEXT);
+    CREATE TABLE UserMark (UserMarkId INTEGER PRIMARY KEY, ColorIndex INTEGER, LocationId INTEGER, StyleIndex INTEGER DEFAULT 0, UserMarkGuid TEXT, Version INTEGER DEFAULT 1);
+    CREATE TABLE BlockRange (BlockRangeId INTEGER PRIMARY KEY, BlockType INTEGER, Identifier INTEGER, StartToken INTEGER, EndToken INTEGER, UserMarkId INTEGER);
+    CREATE TABLE Location (LocationId INTEGER PRIMARY KEY, BookNumber INTEGER, ChapterNumber INTEGER, DocumentId INTEGER, Track INTEGER, IssueTagNumber INTEGER DEFAULT 0, KeySymbol TEXT, MepsLanguage INTEGER DEFAULT 0, Type INTEGER DEFAULT 0, Title TEXT);
     CREATE TABLE Tag (TagId INTEGER PRIMARY KEY, Type INTEGER, Name TEXT);
     CREATE TABLE TagMap (TagMapId INTEGER PRIMARY KEY, NoteId INTEGER, LocationId INTEGER, TagId INTEGER, Position INTEGER);`);
-  db.run(`INSERT INTO Location (LocationId, KeySymbol, Title) VALUES (1,'nwt','Genesis'),(2,'w23','Watchtower')`);
-  (notes || []).forEach(n => db.run('INSERT INTO Note (NoteId,Guid,Title,Content,LastModified,LocationId) VALUES (?,?,?,?,?,?)',
-    [n.id, 'g' + n.id, n.title, n.content, n.date || '2024-01-01 00:00:00', n.loc || 1]));
+  db.run(`INSERT INTO Location (LocationId, BookNumber, ChapterNumber, KeySymbol, Title) VALUES (1,1,1,'nwt','Genesis'),(2,null,null,'w23','Watchtower')`);
+  (notes || []).forEach(n => {
+    let umId = null;
+    if (n.hl) {
+      db.run('INSERT INTO UserMark (ColorIndex, LocationId, StyleIndex, UserMarkGuid, Version) VALUES (?,?,?,?,1)',
+        [n.hl.color || 1, n.loc || 1, 0, 'um' + n.id]);
+      umId = db.exec('SELECT last_insert_rowid()')[0].values[0][0];
+      db.run('INSERT INTO BlockRange (BlockType, Identifier, StartToken, EndToken, UserMarkId) VALUES (?,?,?,?,?)',
+        [n.hl.blockType || 2, n.hl.identifier || 1, n.hl.start || 0, n.hl.end || 5, umId]);
+    }
+    db.run('INSERT INTO Note (NoteId,Guid,UserMarkId,Title,Content,LastModified,LocationId) VALUES (?,?,?,?,?,?,?)',
+      [n.id, 'g' + n.id, umId, n.title, n.content, n.date || '2024-01-01 00:00:00', n.loc || 1]);
+  });
   const bytes = db.export(); db.close();
   const zip = new JSZip(); zip.file('userData.db', bytes); zip.file('manifest.json', JSON.stringify({ version: 1, name: 'Test' }));
   return zip.generateAsync({ type: 'nodebuffer' });
@@ -78,7 +89,7 @@ function bootShare() {
     const dom = bootShare(); const win = dom.window, doc = win.document;
     await wait(40);
     const buf = await buildBackup(SQL, [
-      { id: 1, title: 'Faith', content: 'Hope and trust' },
+      { id: 1, title: 'Faith', content: 'Hope and trust', hl: { color: 2, blockType: 2, identifier: 5, start: 0, end: 4 } },
       { id: 2, title: 'Love', content: 'Patience and kindness' },
       { id: 3, title: 'Peace', content: 'Calm in the storm' },
     ]);
@@ -98,6 +109,18 @@ function bootShare() {
     else fail('envelope wrong: ' + JSON.stringify(env).slice(0, 80));
     if (env.notes.some(n => n.title === 'Faith' && /Hope/.test(n.content))) ok('note content carried into envelope');
     else fail('note content missing from envelope');
+    if (env.v === 2) ok('envelope bumped to v2');
+    else fail('envelope version not 2: ' + env.v);
+    const faith = env.notes.find(n => n.title === 'Faith');
+    if (faith && faith.loc && Array.isArray(faith.ranges) && faith.ranges.length === 1 && faith.color === 2)
+      ok('highlighted note carries loc + ranges + color in envelope');
+    else fail('highlight payload missing from envelope: ' + JSON.stringify(faith && { loc: faith.loc, ranges: faith.ranges, color: faith.color }));
+    if (faith && faith.ranges[0].startToken === 0 && faith.ranges[0].endToken === 4 && faith.ranges[0].identifier === 5)
+      ok('BlockRange span carried (tokens 0-4, identifier 5)');
+    else fail('BlockRange span wrong: ' + JSON.stringify(faith && faith.ranges[0]));
+    const plain = env.notes.find(n => n.title === 'Love');
+    if (plain && !plain.loc && !plain.ranges) ok('non-highlighted note has no highlight payload');
+    else fail('plain note unexpectedly carries highlight payload');
     dom.window.close();
   }
 
@@ -136,7 +159,7 @@ function bootShare() {
     let blob = null;
     win.URL.createObjectURL = (b) => { blob = b; return 'blob:upd'; };
     win.URL.revokeObjectURL = () => {};
-    win.__shAdopt(fileLike, sharedNotes);
+    win.__shAdopt(fileLike, sharedNotes, 'Gift2026');
     async function until(p, l, ms = 9000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
     await until(() => doc.querySelector('.sh-ok'), 'adopt done screen');
     if (/2/.test(doc.querySelector('.sh-ok').textContent)) ok('adopt confirms 2 notes added');
@@ -151,9 +174,12 @@ function bootShare() {
       const cnt = edb.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
       if (cnt === 3) ok('updated backup has original + 2 adopted notes (1→3)');
       else fail('expected 3 notes in updated backup, got ' + cnt);
-      const tagged = edb.exec("SELECT COUNT(*) FROM Tag WHERE Name='Shared'")[0].values[0][0];
-      if (tagged >= 1) ok('adopted notes tagged "Shared"');
-      else fail('"Shared" tag not created');
+      const tagged = edb.exec("SELECT COUNT(*) FROM Tag WHERE Name='Gift2026'")[0].values[0][0];
+      if (tagged === 1) ok('adopted notes tagged with the custom import tag');
+      else fail('custom import tag not created: ' + tagged);
+      const orig = edb.exec("SELECT Content FROM Note WHERE Title='Existing'");
+      if (orig[0] && orig[0].values[0][0] === 'already here') ok('original note left untouched (non-destructive)');
+      else fail('original note was altered');
       edb.close();
     }
     dom.window.close();
