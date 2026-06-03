@@ -278,8 +278,16 @@ for (const path of FILES) {
     const cards = (c.match(/class="svc-card[ "]/g) || []).length;
     if (cards === 4) ok('Four distinct service cards present');
     else fail('Expected 4 .svc-card, got ' + cards);
-    for (const k of ['svc_merge_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t', 'svc_open'])
+    for (const k of ['svc_merge_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t'])
       if (!c.includes('data-i18n="' + k + '"')) fail('Service card i18n key missing: ' + k);
+    // v2.34.1: whole cards are clickable tiles (no inner buttons / no &#8594; gibberish)
+    if (!c.includes('svc-card-btn')) ok('cards are clickable tiles (no inner Open buttons)');
+    else fail('svc-card-btn buttons should be gone (clickable tiles)');
+    // v2.34.1: landing i18n falls back to __JW_LANDING_I18N so cards translate on
+    // language change even after app.js overwrites window.TRANSLATIONS
+    if (c.includes('var L=window.__JW_LANDING_I18N'))
+      ok('applyLandingI18n falls back to __JW_LANDING_I18N (cards translate on lang change)');
+    else fail('applyLandingI18n missing __JW_LANDING_I18N fallback');
     // in-app nav restored the individual Study Explorer + Study Stats buttons
     if (allSrc.includes('nav-btn-browse') && allSrc.includes('nav-btn-wrapped'))
       ok('App top-bar individual Study Explorer + Study Stats buttons restored');
@@ -324,7 +332,7 @@ for (const path of FILES) {
   if (isBeta) {
     if (!c.includes('id="landing-demo-btn"')) fail('landing-demo-btn missing');
     else ok('landing-demo-btn present');
-    if (!c.includes('class="cta-row"')) fail('.cta-row wrapper missing');
+    if (!c.includes('class="cta-row')) fail('.cta-row wrapper missing');
     else ok('.cta-row wrapper present');
     if (!c.includes('Demo handler')) fail('Demo handler script block missing');
     else ok('Demo handler script block present');

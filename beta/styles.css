@@ -1802,7 +1802,8 @@ body.is-landing #jws-loading { display: none !important; }
 .svc-section { max-width: 1000px; margin: 26px auto 6px; padding: 0 20px; }
 .svc-section-title { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fb923c; text-align: center; margin: 0 0 18px; }
 .svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.svc-card { display: flex; flex-direction: column; gap: 9px; background: rgba(4,15,34,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px 18px; transition: border-color .14s ease, transform .14s ease, box-shadow .14s ease; }
+.svc-card { display: flex; flex-direction: column; gap: 9px; background: rgba(4,15,34,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px 18px; transition: border-color .14s ease, transform .14s ease, box-shadow .14s ease; text-align: left; width: 100%; font-family: inherit; color: inherit; cursor: pointer; text-decoration: none; -webkit-appearance: none; appearance: none; }
+.svc-secondary { justify-content: center; margin-top: 20px; }
 .svc-card:hover { border-color: rgba(234,88,12,.55); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.28); }
 .svc-card-merge { border-color: rgba(234,88,12,.4); background: rgba(234,88,12,.06); }
 .svc-card-ic { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: rgba(234,88,12,.12); border: 1px solid rgba(234,88,12,.3); color: #fb923c; }

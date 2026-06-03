@@ -240,7 +240,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.34.0",
+      "softwareVersion": "2.34.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -442,35 +442,34 @@ function __jwGoShare(){
       <div class="landing-hero">
         <h1 data-i18n="hero_title">Merge JW Library backups privately in your browser</h1>
         <p data-i18n="hero_desc">Merge, browse, and edit your JW Library notes, highlights, and bookmarks — entirely in your browser. Your files never leave your device.</p>
-        <div class="cta-row"><a href="#app" class="cta-btn" id="landing-launch-btn" data-i18n="cta_launch">Launch App &#8594;</a><button type="button" class="cta-btn-secondary" id="landing-demo-btn" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button><button type="button" class="cta-btn-ghost" id="landing-howto-btn" data-howto-trigger data-i18n="cta_howto">First time? How it works</button></div>
       </div>
       <div class="svc-section">
         <h2 class="svc-section-title" data-i18n="svc_heading">Choose a tool</h2>
         <div class="svc-grid">
-          <div class="svc-card svc-card-merge">
-            <div class="svc-card-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></div>
+          <a href="#app" class="svc-card svc-card-merge" id="landing-launch-btn">
+            <div class="svc-card-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M6 21V9a9 9 0 0 0 9 9"/></svg></div>
             <h3 class="svc-card-title" data-i18n="svc_merge_t">Merge Tool</h3>
             <p class="svc-card-desc" data-i18n="svc_merge_d">Combine JW Library backups from all your devices into one.</p>
-            <a href="#app" class="svc-card-btn" data-i18n="svc_open">Open &#8594;</a>
-          </div>
-          <div class="svc-card">
-            <div class="svc-card-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+          </a>
+          <button type="button" class="svc-card" onclick="(window.__jwBootBrowse?window.__jwBootBrowse():Promise.resolve()).then(function(){window.__openJwBrowse&amp;&amp;window.__openJwBrowse(window.__jwLastFile||undefined)}).catch(function(){})">
+            <div class="svc-card-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
             <h3 class="svc-card-title" data-i18n="svc_explorer_t">Study Explorer</h3>
             <p class="svc-card-desc" data-i18n="svc_explorer_d">Search, edit, tag and organise every note in a backup.</p>
-            <button type="button" class="svc-card-btn" data-i18n="svc_open" onclick="(window.__jwBootBrowse?window.__jwBootBrowse():Promise.resolve()).then(function(){window.__openJwBrowse&amp;&amp;window.__openJwBrowse(window.__jwLastFile||undefined)}).catch(function(){})">Open &#8594;</button>
-          </div>
-          <div class="svc-card">
-            <div class="svc-card-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+          </button>
+          <button type="button" class="svc-card" onclick="__jwGoHighlights()">
+            <div class="svc-card-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
             <h3 class="svc-card-title" data-i18n="svc_stats_t">Study Stats</h3>
             <p class="svc-card-desc" data-i18n="svc_stats_d">See your study streaks, totals and trends over time.</p>
-            <button type="button" class="svc-card-btn" data-i18n="svc_open" onclick="__jwGoHighlights()">Open &#8594;</button>
-          </div>
-          <div class="svc-card">
-            <div class="svc-card-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></div>
+          </button>
+          <button type="button" class="svc-card" onclick="__jwGoShare()">
+            <div class="svc-card-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg></div>
             <h3 class="svc-card-title" data-i18n="svc_share_t">Note Share &amp; Receive</h3>
             <p class="svc-card-desc" data-i18n="svc_share_d">Send notes to a friend, or add notes they sent you.</p>
-            <button type="button" class="svc-card-btn" data-i18n="svc_open" onclick="__jwGoShare()">Open &#8594;</button>
-          </div>
+          </button>
+        </div>
+        <div class="cta-row svc-secondary">
+          <button type="button" class="cta-btn-secondary" id="landing-demo-btn" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button>
+          <button type="button" class="cta-btn-ghost" id="landing-howto-btn" data-howto-trigger data-i18n="cta_howto">First time? How it works</button>
         </div>
       </div>
       <h2 class="landing-section-title">Everything you need to merge and manage your JW Library notes</h2>
@@ -849,11 +848,13 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
     if(translations)cachedT=translations;
     var src=cachedT||window.TRANSLATIONS;
     if(!src||!lang)return;
-    var T=src[lang]||src['en'];
-    if(!T)return;
+    var T=src[lang]||src['en']||{};
+    var L=window.__JW_LANDING_I18N||{};
+    var TL=L[lang]||L['en']||{};
     document.querySelectorAll('[data-i18n]').forEach(function(el){
       var k=el.getAttribute('data-i18n');
-      if(T[k])el.textContent=T[k];
+      var v=T[k]; if(v==null||v==='')v=TL[k];
+      if(v!=null)el.textContent=v;
     });
     var sel=document.getElementById('landing-lang-select');
     if(sel&&sel.value!==lang)sel.value=lang;

@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.34.1] — 2026-06-03
+
+### Fixed
+- **Home service cards now translate when you change the language.** They were stuck in English because the cards' text wasn't being looked up correctly after the app loaded — fixed so all four cards follow the selected language in all 10 languages.
+- **Removed the odd "Open &#8594;" text** on the cards. Each card is now a single tidy clickable tile showing the **tool's name** (Merge Tool, Study Explorer, Study Stats, Note Share & Receive) — no stray symbols.
+- **Tidier, unified layout.** The four tools now sit together in one clean sequence right under the heading (the separate "Launch App" button is folded into the Merge Tool tile), with "Try with sample notes" and "First time? How it works" as compact secondary actions beneath.
+
+---
+
 ## [2.34.0] — 2026-06-03
 
 ### Added
