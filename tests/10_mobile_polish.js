@@ -155,54 +155,8 @@ function extractOffline() {
     dom.window.close();
   }
 
-  section('Tools / Extra Services menu (v2.31.0)');
-  {
-    const html = fs.readFileSync(HTML_PATH, 'utf8');
-    const m = html.match(/<!-- ── Tools \/ Extra Services menu \(v2\.31\.0\)[\s\S]*?<!-- ── End Tools \/ Extra Services menu ─[─]*\s*-->/);
-    if (!m) { fail('Tools menu module block not found'); }
-    else {
-      const page = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body><button id="anchor">Tools</button>${m[0]}</body></html>`;
-      const dom = new JSDOM(page, { url: 'https://jwsync.org/beta/', runScripts: 'dangerously', pretendToBeVisual: true });
-      const win = dom.window, doc = win.document;
-      win.localStorage.setItem('jwsync_lang', 'en');
-      // stub the three service globals
-      let called = {};
-      win.__jwBootBrowse = () => Promise.resolve();
-      win.__openJwBrowse = () => { called.browse = true; };
-      win.__jwGoHighlights = () => { called.hl = true; };
-      win.__jwGoShare = () => { called.share = true; };
-      await wait(20);
-      if (typeof win.__jwOpenToolsMenu === 'function') ok('window.__jwOpenToolsMenu exposed');
-      else fail('Tools menu API missing');
-      if (typeof win.__jwToolsLabel === 'function' && win.__jwToolsLabel().length) ok('localized Tools label available');
-      else fail('Tools label fn missing');
-      win.__jwOpenToolsMenu(doc.getElementById('anchor'));
-      await wait(30);
-      const menu = doc.querySelector('.jwt-menu');
-      if (menu) ok('menu opens on trigger'); else fail('menu did not open');
-      const items = doc.querySelectorAll('.jwt-item');
-      if (items.length === 3) ok('menu lists 3 services (Browse / Highlights / Share)');
-      else fail('expected 3 service items, got ' + items.length);
-      // each item shows a label + description
-      if (menu && menu.querySelector('.jwt-desc') && menu.querySelector('.jwt-ic svg')) ok('items have icon + description (service feel)');
-      else fail('item icon/description missing');
-      // clicking Highlights routes to __jwGoHighlights and closes
-      Array.from(items).find(b => b.getAttribute('data-act') === 'hl').click();
-      await wait(20);
-      if (called.hl) ok('clicking Highlights routes to __jwGoHighlights');
-      else fail('Highlights action did not fire');
-      if (!doc.querySelector('.jwt-menu')) ok('menu closes after a selection');
-      else fail('menu stayed open after click');
-      // Browse routes through boot-then-open
-      win.__jwOpenToolsMenu(doc.getElementById('anchor'));
-      await wait(20);
-      Array.from(doc.querySelectorAll('.jwt-item')).find(b => b.getAttribute('data-act') === 'browse').click();
-      await wait(30);
-      if (called.browse) ok('clicking Browse boots + opens the Note Explorer');
-      else fail('Browse action did not fire');
-      dom.window.close();
-    }
-  }
+  // (v2.33.0) The Tools ▾ menu was removed in favour of distinct home-page
+  // service cards; its dedicated test was retired with it.
 
   console.log('\n== SUMMARY ==');
   if (failures) { console.log('\nFAIL: ' + failures + ' check(s) failed.'); process.exit(1); }

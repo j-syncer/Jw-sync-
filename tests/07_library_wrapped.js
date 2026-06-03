@@ -451,22 +451,26 @@ async function waitForStats(doc, timeoutMs) {
   }
 
   // ──────────────────────────────────────────────────────────────────
-  section('Highlights reachable via Tools menu + celebration (v2.31.0)');
+  section('Study Stats reachable via app nav + home card + celebration (v2.33.0)');
   {
     const appJs = fs.readFileSync(REPO + '/beta/js/app.js', 'utf8');
     const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
-    // The app top bar now opens the consolidated Tools menu instead of a
-    // standalone Wrapped nav button.
-    if (appJs.includes('nav-btn-tools') && appJs.includes('__jwOpenToolsMenu'))
-      ok('app top-bar Tools button opens the service menu');
-    else fail('app Tools button / __jwOpenToolsMenu missing from app.js');
-    // The Tools menu (in index.html) routes to Highlights via __jwGoHighlights.
-    if (html.includes('__jwGoHighlights')) ok('Tools menu routes to __jwGoHighlights');
-    else fail('__jwGoHighlights not referenced for the Tools menu');
-    // wrp_open key still present (the Tools button label fallback / app strings)
+    // v2.33.0: Tools menu removed; the app top bar has the individual
+    // Study Stats button again, and the home page has a Study Stats card.
+    if (!appJs.includes('nav-btn-tools') && !appJs.includes('__jwOpenToolsMenu'))
+      ok('Tools menu removed from app.js');
+    else fail('Tools menu remnants still in app.js');
+    if (appJs.includes('nav-btn-wrapped')) ok('app top-bar Study Stats button restored');
+    else fail('nav-btn-wrapped (Study Stats) missing from app.js');
+    if (html.includes('__jwGoHighlights') && html.includes('data-i18n="svc_stats_t"'))
+      ok('home Study Stats card routes to __jwGoHighlights');
+    else fail('Study Stats home card / __jwGoHighlights missing');
+    // wrp_open relabelled to "Study Stats" across all 10 app languages
     const openCount = (appJs.match(/wrp_open:/g) || []).length;
     if (openCount === 10) ok('wrp_open present in all 10 app languages');
     else fail('wrp_open count: expected 10, got ' + openCount);
+    if (appJs.includes('wrp_open:"Study Stats"')) ok('wrp_open relabelled to "Study Stats" (en)');
+    else fail('wrp_open not relabelled to Study Stats');
   }
 
   // ──────────────────────────────────────────────────────────────────

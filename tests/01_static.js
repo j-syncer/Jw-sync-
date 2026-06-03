@@ -262,18 +262,28 @@ for (const path of FILES) {
     if (!c.includes('function __jwGoShare') || !c.includes("href='share.html'"))
       fail('Dedicated Share page handoff missing');
     else ok('Dedicated Share page handoff present');
-    if (!c.includes('id="landing-share-btn"'))
-      fail('Landing Share CTA button missing');
-    else ok('Landing Share CTA button present');
+    if (!c.includes('data-i18n="svc_share_t"'))
+      fail('Share service card missing from home page');
+    else ok('Share service card present');
   }
 
-  // 8k) Tools / Extra Services launcher (v2.31.0, beta-only)
+  // 8k) Home-page service cards + Tools menu removed (v2.33.0, beta-only)
   if (isBeta) {
-    if (!c.includes('window.__jwOpenToolsMenu') || !c.includes('id="site-nav-tools"'))
-      fail('Tools service menu / launcher missing');
-    else ok('Tools service menu + launcher present');
-    if (!allSrc.includes('nav-btn-tools')) fail('App top-bar Tools button missing (should replace Browse+Highlights)');
-    else ok('App top-bar Tools button present');
+    if (c.includes('__jwOpenToolsMenu') || c.includes('site-nav-tools') || allSrc.includes('nav-btn-tools'))
+      fail('Tools ▾ menu should be fully removed in v2.33.0');
+    else ok('Tools ▾ menu fully removed');
+    if (!c.includes('class="svc-grid"') || !c.includes('data-i18n="svc_heading"'))
+      fail('Home service section (.svc-grid) missing');
+    else ok('Home service section (.svc-grid) present');
+    const cards = (c.match(/class="svc-card[ "]/g) || []).length;
+    if (cards === 4) ok('Four distinct service cards present');
+    else fail('Expected 4 .svc-card, got ' + cards);
+    for (const k of ['svc_merge_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t', 'svc_open'])
+      if (!c.includes('data-i18n="' + k + '"')) fail('Service card i18n key missing: ' + k);
+    // in-app nav restored the individual Study Explorer + Study Stats buttons
+    if (allSrc.includes('nav-btn-browse') && allSrc.includes('nav-btn-wrapped'))
+      ok('App top-bar individual Study Explorer + Study Stats buttons restored');
+    else fail('App top-bar nav-btn-browse/nav-btn-wrapped not restored');
   }
 
   // 8l) Two-level mobile nav (v2.32.0): language picker sits beside the logo,
@@ -318,11 +328,11 @@ for (const path of FILES) {
     else ok('merge-flow Demo handler marker present');
 
     // 9a) Demo trigger surfaces in every place we expect:
-    //   - React internal nav (next to the Tools launcher)
+    //   - React internal nav (next to the individual service buttons)
     //   - Simple Mode teaser (next to "Explore Full Mode →")
-    //   - static nav now has the Tools launcher (Browse/Highlights/Share)
-    if (!c.includes('class="site-nav-link site-nav-tools"')) fail('static nav Tools launcher missing');
-    else ok('static #site-nav Tools launcher present');
+    //   - static nav is lean (services live as home-page cards now)
+    if (c.includes('site-nav-tools')) fail('static nav Tools launcher should be removed (v2.33.0)');
+    else ok('static #site-nav is lean (no Tools launcher)');
     // These render inside the React bundle (now external for beta)
     if (!allSrc.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
     else ok('React internal nav demo button present');

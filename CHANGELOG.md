@@ -4,6 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.33.0] — 2026-06-03
+
+### Changed
+- **The home page now presents JW Sync's tools as four distinct services**, each in its own clean card with an icon, a one-line description, and an Open button:
+  - **Merge Tool** — combine JW Library backups from all your devices.
+  - **Study Explorer** — *(renamed from "Note Explorer")* search, edit, tag and organise every note in a backup.
+  - **Study Stats** — *(renamed from "Your Service Year Highlights")* your study streaks, totals and trends.
+  - **Note Share & Receive** — send notes to a friend, or add notes they sent you (its own page).
+- **Retired the "Tools ▾" menu.** The services are now front-and-centre on the home page instead of tucked inside a dropdown. Inside the app, the Study Explorer and Study Stats buttons return to the top bar as individual buttons.
+- These are label/placement changes — the underlying tools (and the service-year date logic behind Study Stats) work exactly as before.
+
+---
+
 ## [2.32.0] — 2026-06-02
 
 ### Fixed

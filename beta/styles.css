@@ -74,32 +74,6 @@ html, body {
         .nav-btn.active { color: var(--color-orange-light); border-color: var(--color-border-orange); background: rgba(234,88,12,.08); }
         .nav-btn.has-errors { color: #f87171; border-color: rgba(248,113,113,.35); }
         
-/* ── Tools / Extra Services launcher (v2.31.0) — set apart from mundane nav ── */
-.nav-btn-tools, .site-nav-tools {
-  color: #fdba74 !important;
-  border: 1px solid rgba(234,88,12,.45) !important;
-  background: linear-gradient(135deg, rgba(234,88,12,.20), rgba(234,88,12,.06)) !important;
-  font-weight: 700;
-  display: inline-flex; align-items: center; gap: 5px;
-  box-shadow: 0 1px 6px rgba(234,88,12,.18);
-}
-.nav-btn-tools:hover, .site-nav-tools:hover {
-  color: #fff !important;
-  border-color: rgba(234,88,12,.75) !important;
-  background: linear-gradient(135deg, rgba(234,88,12,.32), rgba(234,88,12,.12)) !important;
-  box-shadow: 0 2px 12px rgba(234,88,12,.30);
-}
-.site-nav-tools { margin-left: 8px; position: relative; }
-.site-nav-tools::before {
-  content: ''; position: absolute; left: -8px; top: 6px; bottom: 6px; width: 1px;
-  background: rgba(148,163,184,.22);
-}
-.site-nav-tools-ic, .nav-btn-tools-ic { color: #fb923c; }
-.site-nav-tools-caret { font-size: 10px; opacity: .8; }
-@media (max-width: 600px) {
-  /* one compact, ALWAYS-visible launcher on mobile (unlike the old hidden buttons) */
-  #site-nav-tools { display: inline-flex !important; padding: 6px 10px; }
-}
 .nav-btn-browse {
             color: #fff !important;
             background: rgba(234,88,12,.18) !important;
@@ -1821,7 +1795,24 @@ body.is-landing #jws-loading { display: none !important; }
   .nav-lang-select { order: 2; margin-left: auto; flex: 0 0 auto; }
   .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; justify-content: space-between; }
   .site-nav-link { flex: 0 1 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 12px; }
-  .site-nav-tools { margin-left: 0; }
-  .site-nav-tools::before { display: none; }
-  #site-nav-tools { display: inline-flex !important; }
 }
+
+
+/* ── Home service cards (v2.33.0) — four distinct, equal tools ── */
+.svc-section { max-width: 1000px; margin: 26px auto 6px; padding: 0 20px; }
+.svc-section-title { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fb923c; text-align: center; margin: 0 0 18px; }
+.svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.svc-card { display: flex; flex-direction: column; gap: 9px; background: rgba(4,15,34,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px 18px; transition: border-color .14s ease, transform .14s ease, box-shadow .14s ease; }
+.svc-card:hover { border-color: rgba(234,88,12,.55); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.28); }
+.svc-card-merge { border-color: rgba(234,88,12,.4); background: rgba(234,88,12,.06); }
+.svc-card-ic { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; background: rgba(234,88,12,.12); border: 1px solid rgba(234,88,12,.3); color: #fb923c; }
+.svc-card-title { font-size: 16px; font-weight: 800; color: #f1f5f9; margin: 2px 0 0; }
+.svc-card-desc { font-size: 13.5px; line-height: 1.5; color: #94a3b8; margin: 0; flex: 1; }
+.svc-card-btn { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; margin-top: 6px; background: #ea580c; color: #fff; font-size: 14px; font-weight: 700; padding: 9px 16px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 1px 5px rgba(234,88,12,.35); transition: background .15s, box-shadow .15s; }
+.svc-card-btn:hover { background: #c2410c; box-shadow: 0 2px 10px rgba(234,88,12,.5); }
+body.light .svc-card { background: #fff; border-color: rgba(11,46,88,.12); }
+body.light .svc-card-merge { background: rgba(234,88,12,.05); border-color: rgba(234,88,12,.3); }
+body.light .svc-card-title { color: #0b2e58; }
+body.light .svc-card-desc { color: #475569; }
+@media (max-width: 900px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; gap: 12px; } .svc-section { margin-top: 18px; } }
