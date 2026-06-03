@@ -819,7 +819,7 @@ body.light #jws-loading { background:#f4f8ff; }
 .landing-hero {
   text-align: center;
   max-width: 640px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 .landing-hero h1 {
   font-size: clamp(26px, 4vw, 42px);
@@ -833,7 +833,7 @@ body.light #jws-loading { background:#f4f8ff; }
   font-size: 16px;
   color: rgba(148,163,184,.85);
   line-height: 1.65;
-  margin: 0 0 32px;
+  margin: 0;
 }
 .cta-btn {
   display: inline-block;
