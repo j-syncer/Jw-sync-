@@ -246,7 +246,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.37.0",
+      "softwareVersion": "2.38.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -4303,7 +4303,7 @@ window.__bootBrowse = function() {
 
 
 
-<!-- ── Receive shared notes in merge (v2.35.0) ─────────── -->
+<!-- ── Receive shared notes in merge (v2.37.0) ─────────── -->
 <style>
 .jwr-panel{margin:14px 0;padding:14px 16px;border:1px dashed rgba(234,88,12,.45);border-radius:12px;background:rgba(234,88,12,.05);font-family:Inter,system-ui,sans-serif}
 .jwr-panel-h{display:flex;align-items:center;gap:8px;font-weight:700;color:#fb923c;font-size:14px;margin-bottom:4px}
@@ -4335,6 +4335,31 @@ body.light .jwr-modal-q{color:#334155}
 .jwr-mb-primary{background:#ea580c;border-color:#ea580c;color:#fff}
 .jwr-mb-primary:hover{background:#c2410c}
 body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
+.jwr-modal-card{position:relative}
+.jwr-modal-lg{max-width:640px}
+.jwr-x{position:absolute;top:10px;right:13px;background:none;border:none;color:#94a3b8;font-size:22px;line-height:1;cursor:pointer}
+.jwr-chips{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 12px}
+.jwr-chip{font-size:12px;font-weight:700;color:#cbd5e1;background:rgba(2,6,20,.4);border:1px solid rgba(71,85,105,.45);border-radius:999px;padding:5px 11px;cursor:pointer;white-space:nowrap}
+.jwr-chip:hover{border-color:rgba(234,88,12,.6)}
+.jwr-chip-on{background:#ea580c;border-color:#ea580c;color:#fff}
+body.light .jwr-chip{color:#334155;background:#eef2f7}
+.jwr-list{max-height:50vh;overflow-y:auto;border:1px solid rgba(71,85,105,.3);border-radius:12px;background:rgba(2,6,20,.25)}
+body.light .jwr-list{background:#fff}
+.jwr-nrow{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-bottom:1px solid rgba(71,85,105,.2)}
+.jwr-nrow:last-child{border-bottom:none}
+.jwr-dot{flex:none;width:12px;height:12px;border-radius:50%;margin-top:3px;border:1px solid rgba(255,255,255,.3)}
+.jwr-dot-none{background:transparent!important;border-style:dashed;border-color:#475569}
+.jwr-nbody{min-width:0;flex:1}
+.jwr-ntitle{font-weight:700;color:#f1f5f9;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body.light .jwr-ntitle{color:#0b2e58}
+.jwr-nex{color:#94a3b8;font-size:11.5px;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.jwr-nmeta{margin-top:4px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.jwr-pill{font-size:10px;font-weight:700;color:#fb923c;background:rgba(234,88,12,.12);border:1px solid rgba(234,88,12,.35);border-radius:999px;padding:1px 7px}
+.jwr-pill-pub{color:#94a3b8;background:rgba(71,85,105,.2);border-color:rgba(71,85,105,.4)}
+.jwr-more{padding:9px 12px;color:#64748b;font-size:11.5px;text-align:center}
+.jwr-modal-foot{display:flex;gap:9px;margin-top:14px}
+.jwr-modal-foot .jwr-mb{flex:1;text-align:center}
+.jwr-prev-link{background:none;border:none;color:#fb923c;cursor:pointer;text-decoration:underline;font-size:12px;padding:0;font-weight:600}
 </style>
 <script>
 (function(){
@@ -4343,16 +4368,16 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
   var SQLCDN='https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
   var ZIPCDN='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
   var I18N={
-    en:{pm_title:'Got notes from a friend?',pm_hint:'Add a .jwshare.json someone sent you — its notes will be added to this merge.',pm_choose:'Choose shared file',pm_loaded:'{n} shared note(s) will be added to this merge.',pm_remove:'Remove',tag_label:'Tag for imported notes',pm_safe:'Added as new notes — your own notes are never replaced.',ov_q:'{n} highlight(s) land on verses you already highlighted. How should we add them?',ov_layer:'Add as a separate layer',ov_note:'Import note only',adding:'Adding shared notes…',added:'{n} note(s) added from a friend — tap Download for the updated file.',invalid:"That file isn't a JW Sync share file.",shared_tag:'Shared'},
-    es:{pm_title:'¿Notas de un amigo?',pm_hint:'Agrega un .jwshare.json que te enviaron — sus notas se añadirán a esta fusión.',pm_choose:'Elegir archivo compartido',pm_loaded:'Se añadirán {n} nota(s) compartida(s) a esta fusión.',pm_remove:'Quitar',tag_label:'Etiqueta para las notas importadas',pm_safe:'Se agregan como notas nuevas — tus notas nunca se reemplazan.',ov_q:'{n} resaltado(s) caen en versículos que ya resaltaste. ¿Cómo los agregamos?',ov_layer:'Agregar como capa aparte',ov_note:'Importar solo la nota',adding:'Agregando notas compartidas…',added:'{n} nota(s) añadida(s) de un amigo — toca Descargar para el archivo actualizado.',invalid:'Ese archivo no es un archivo de JW Sync.',shared_tag:'Compartido'},
-    pt:{pm_title:'Notas de um amigo?',pm_hint:'Adicione um .jwshare.json que enviaram — as notas serão incluídas nesta mesclagem.',pm_choose:'Escolher arquivo',pm_loaded:'{n} nota(s) compartilhada(s) serão adicionadas a esta mesclagem.',pm_remove:'Remover',tag_label:'Etiqueta para as notas importadas',pm_safe:'Adicionadas como notas novas — suas notas nunca são substituídas.',ov_q:'{n} marcação(ões) caem em versículos que você já marcou. Como adicioná-las?',ov_layer:'Adicionar como camada separada',ov_note:'Importar só a nota',adding:'Adicionando notas compartilhadas…',added:'{n} nota(s) adicionada(s) de um amigo — toque em Baixar para o arquivo atualizado.',invalid:'Esse arquivo não é um arquivo do JW Sync.',shared_tag:'Compartilhado'},
-    fr:{pm_title:"Des notes d'un ami ?",pm_hint:'Ajoutez un .jwshare.json reçu — ses notes seront ajoutées à cette fusion.',pm_choose:'Choisir le fichier',pm_loaded:'{n} note(s) partagée(s) seront ajoutées à cette fusion.',pm_remove:'Retirer',tag_label:'Étiquette pour les notes importées',pm_safe:'Ajoutées comme nouvelles notes — vos notes ne sont jamais remplacées.',ov_q:'{n} surlignage(s) tombent sur des versets déjà surlignés. Comment les ajouter ?',ov_layer:'Ajouter comme calque séparé',ov_note:'Importer la note seule',adding:'Ajout des notes partagées…',added:"{n} note(s) ajoutée(s) d'un ami — appuyez sur Télécharger pour le fichier mis à jour.",invalid:"Ce fichier n'est pas un fichier JW Sync.",shared_tag:'Partagé'},
-    de:{pm_title:'Notizen von einem Freund?',pm_hint:'Füge eine erhaltene .jwshare.json hinzu — ihre Notizen kommen in diese Zusammenführung.',pm_choose:'Datei wählen',pm_loaded:'{n} geteilte Notiz(en) werden hinzugefügt.',pm_remove:'Entfernen',tag_label:'Tag für importierte Notizen',pm_safe:'Werden als neue Notizen hinzugefügt — deine Notizen werden nie ersetzt.',ov_q:'{n} Markierung(en) liegen auf bereits markierten Versen. Wie hinzufügen?',ov_layer:'Als separate Ebene hinzufügen',ov_note:'Nur Notiz importieren',adding:'Geteilte Notizen werden hinzugefügt…',added:'{n} Notiz(en) von einem Freund hinzugefügt — tippe auf Herunterladen für die aktualisierte Datei.',invalid:'Das ist keine JW-Sync-Datei.',shared_tag:'Geteilt'},
-    it:{pm_title:'Note da un amico?',pm_hint:'Aggiungi un .jwshare.json ricevuto — le note saranno incluse in questa unione.',pm_choose:'Scegli file',pm_loaded:'{n} nota/e condivisa/e saranno aggiunte a questa unione.',pm_remove:'Rimuovi',tag_label:'Etichetta per le note importate',pm_safe:'Aggiunte come note nuove — le tue note non vengono mai sostituite.',ov_q:'{n} evidenziazione/i su versetti già evidenziati. Come aggiungerle?',ov_layer:'Aggiungi come livello separato',ov_note:'Importa solo la nota',adding:'Aggiunta note condivise…',added:'{n} nota/e aggiunta/e da un amico — tocca Scarica per il file aggiornato.',invalid:'Questo non è un file JW Sync.',shared_tag:'Condiviso'},
-    ru:{pm_title:'Заметки от друга?',pm_hint:'Добавьте присланный .jwshare.json — его заметки войдут в это объединение.',pm_choose:'Выбрать файл',pm_loaded:'{n} заметок будет добавлено в это объединение.',pm_remove:'Убрать',tag_label:'Метка для импортированных заметок',pm_safe:'Добавляются как новые заметки — ваши заметки никогда не заменяются.',ov_q:'{n} выделени(й) на уже выделенных стихах. Как их добавить?',ov_layer:'Добавить отдельным слоем',ov_note:'Только заметку',adding:'Добавление заметок…',added:'Добавлено {n} заметок от друга — нажмите «Скачать» для обновлённого файла.',invalid:'Это не файл JW Sync.',shared_tag:'Общие'},
-    ja:{pm_title:'友達からのノート？',pm_hint:'受け取った .jwshare.json を追加すると、そのノートがこの結合に加わります。',pm_choose:'共有ファイルを選ぶ',pm_loaded:'{n} 件の共有ノートがこの結合に追加されます。',pm_remove:'削除',tag_label:'取り込むノートのタグ',pm_safe:'新しいノートとして追加されます — あなたのノートは置き換えられません。',ov_q:'{n} 件のハイライトは既にハイライト済みの節にあります。どう追加しますか？',ov_layer:'別レイヤーとして追加',ov_note:'ノートだけ取り込む',adding:'共有ノートを追加中…',added:'友達から {n} 件のノートを追加しました — ダウンロードで更新ファイルを取得。',invalid:'これは JW Sync の共有ファイルではありません。',shared_tag:'共有'},
-    ko:{pm_title:'친구가 보낸 노트?',pm_hint:'받은 .jwshare.json을 추가하면 그 노트가 이 병합에 포함됩니다.',pm_choose:'공유 파일 선택',pm_loaded:'{n}개의 공유 노트가 이 병합에 추가됩니다.',pm_remove:'제거',tag_label:'가져온 노트의 태그',pm_safe:'새 노트로 추가됩니다 — 기존 노트는 절대 교체되지 않습니다.',ov_q:'{n}개의 강조 표시가 이미 강조한 구절에 있습니다. 어떻게 추가할까요?',ov_layer:'별도 레이어로 추가',ov_note:'노트만 가져오기',adding:'공유 노트 추가 중…',added:'친구로부터 {n}개 노트 추가됨 — 다운로드를 눌러 업데이트된 파일을 받으세요.',invalid:'JW Sync 공유 파일이 아닙니다.',shared_tag:'공유됨'},
-    tl:{pm_title:'May tala mula sa kaibigan?',pm_hint:'Magdagdag ng .jwshare.json na ipinadala sa iyo — isasama ang mga tala nito sa merge.',pm_choose:'Pumili ng file',pm_loaded:'{n} ibinahaging tala ang idaragdag sa merge na ito.',pm_remove:'Alisin',tag_label:'Tag para sa mga na-import na tala',pm_safe:'Idinaragdag bilang bagong tala — hindi kailanman papalitan ang iyong mga tala.',ov_q:'{n} highlight ang nasa mga tekstong na-highlight mo na. Paano idaragdag?',ov_layer:'Idagdag bilang hiwalay na layer',ov_note:'Tala lang ang i-import',adding:'Idinaragdag ang mga ibinahaging tala…',added:'{n} tala mula sa kaibigan ang naidagdag — i-tap ang Download para sa updated na file.',invalid:'Hindi ito JW Sync share file.',shared_tag:'Shared'}
+    en:{pm_title:'Got notes from a friend?',pm_hint:'Add a .jwshare.json someone sent you — its notes will be added to this merge.',pm_choose:'Choose shared file',pm_loaded:'{n} shared note(s) will be added to this merge.',pm_remove:'Remove',tag_label:'Tag for imported notes',pm_safe:'Added as new notes — your own notes are never replaced.',ov_q:'{n} highlight(s) land on verses you already highlighted. How should we add them?',ov_layer:'Add as a separate layer',ov_note:'Import note only',cat_all:'All',cat_hl:'Highlights',cat_note:'Notes',conf_intro:'These notes are on verses you already highlighted:',imp_title:'Added to your merge',more_hint:'+{n} more — use the filters above to narrow',preview:'Preview',prev_title:'Shared notes',close:'Close',dl:'Download',adding:'Adding shared notes…',added:'{n} note(s) added from a friend — tap Download for the updated file.',invalid:"That file isn't a JW Sync share file.",shared_tag:'Shared'},
+    es:{pm_title:'¿Notas de un amigo?',pm_hint:'Agrega un .jwshare.json que te enviaron — sus notas se añadirán a esta fusión.',pm_choose:'Elegir archivo compartido',pm_loaded:'Se añadirán {n} nota(s) compartida(s) a esta fusión.',pm_remove:'Quitar',tag_label:'Etiqueta para las notas importadas',pm_safe:'Se agregan como notas nuevas — tus notas nunca se reemplazan.',ov_q:'{n} resaltado(s) caen en versículos que ya resaltaste. ¿Cómo los agregamos?',ov_layer:'Agregar como capa aparte',ov_note:'Importar solo la nota',cat_all:'Todas',cat_hl:'Resaltados',cat_note:'Notas',conf_intro:'Estas notas están en versículos que ya resaltaste:',imp_title:'Agregadas a tu fusión',more_hint:'+{n} más — usa los filtros para acotar',preview:'Vista previa',prev_title:'Notas compartidas',close:'Cerrar',dl:'Descargar',adding:'Agregando notas compartidas…',added:'{n} nota(s) añadida(s) de un amigo — toca Descargar para el archivo actualizado.',invalid:'Ese archivo no es un archivo de JW Sync.',shared_tag:'Compartido'},
+    pt:{pm_title:'Notas de um amigo?',pm_hint:'Adicione um .jwshare.json que enviaram — as notas serão incluídas nesta mesclagem.',pm_choose:'Escolher arquivo',pm_loaded:'{n} nota(s) compartilhada(s) serão adicionadas a esta mesclagem.',pm_remove:'Remover',tag_label:'Etiqueta para as notas importadas',pm_safe:'Adicionadas como notas novas — suas notas nunca são substituídas.',ov_q:'{n} marcação(ões) caem em versículos que você já marcou. Como adicioná-las?',ov_layer:'Adicionar como camada separada',ov_note:'Importar só a nota',cat_all:'Todas',cat_hl:'Marcações',cat_note:'Notas',conf_intro:'Estas notas estão em versículos que você já marcou:',imp_title:'Adicionadas à sua mesclagem',more_hint:'+{n} mais — use os filtros para refinar',preview:'Pré-visualizar',prev_title:'Notas compartilhadas',close:'Fechar',dl:'Baixar',adding:'Adicionando notas compartilhadas…',added:'{n} nota(s) adicionada(s) de um amigo — toque em Baixar para o arquivo atualizado.',invalid:'Esse arquivo não é um arquivo do JW Sync.',shared_tag:'Compartilhado'},
+    fr:{pm_title:"Des notes d'un ami ?",pm_hint:'Ajoutez un .jwshare.json reçu — ses notes seront ajoutées à cette fusion.',pm_choose:'Choisir le fichier',pm_loaded:'{n} note(s) partagée(s) seront ajoutées à cette fusion.',pm_remove:'Retirer',tag_label:'Étiquette pour les notes importées',pm_safe:'Ajoutées comme nouvelles notes — vos notes ne sont jamais remplacées.',ov_q:'{n} surlignage(s) tombent sur des versets déjà surlignés. Comment les ajouter ?',ov_layer:'Ajouter comme calque séparé',ov_note:'Importer la note seule',cat_all:'Toutes',cat_hl:'Surlignages',cat_note:'Notes',conf_intro:'Ces notes sont sur des versets déjà surlignés :',imp_title:'Ajoutées à votre fusion',more_hint:'+{n} de plus — utilisez les filtres pour affiner',preview:'Aperçu',prev_title:'Notes partagées',close:'Fermer',dl:'Télécharger',adding:'Ajout des notes partagées…',added:"{n} note(s) ajoutée(s) d'un ami — appuyez sur Télécharger pour le fichier mis à jour.",invalid:"Ce fichier n'est pas un fichier JW Sync.",shared_tag:'Partagé'},
+    de:{pm_title:'Notizen von einem Freund?',pm_hint:'Füge eine erhaltene .jwshare.json hinzu — ihre Notizen kommen in diese Zusammenführung.',pm_choose:'Datei wählen',pm_loaded:'{n} geteilte Notiz(en) werden hinzugefügt.',pm_remove:'Entfernen',tag_label:'Tag für importierte Notizen',pm_safe:'Werden als neue Notizen hinzugefügt — deine Notizen werden nie ersetzt.',ov_q:'{n} Markierung(en) liegen auf bereits markierten Versen. Wie hinzufügen?',ov_layer:'Als separate Ebene hinzufügen',ov_note:'Nur Notiz importieren',cat_all:'Alle',cat_hl:'Markierungen',cat_note:'Notizen',conf_intro:'Diese Notizen liegen auf bereits markierten Versen:',imp_title:'Zu deiner Zusammenführung hinzugefügt',more_hint:'+{n} weitere — nutze die Filter zum Eingrenzen',preview:'Vorschau',prev_title:'Geteilte Notizen',close:'Schließen',dl:'Herunterladen',adding:'Geteilte Notizen werden hinzugefügt…',added:'{n} Notiz(en) von einem Freund hinzugefügt — tippe auf Herunterladen für die aktualisierte Datei.',invalid:'Das ist keine JW-Sync-Datei.',shared_tag:'Geteilt'},
+    it:{pm_title:'Note da un amico?',pm_hint:'Aggiungi un .jwshare.json ricevuto — le note saranno incluse in questa unione.',pm_choose:'Scegli file',pm_loaded:'{n} nota/e condivisa/e saranno aggiunte a questa unione.',pm_remove:'Rimuovi',tag_label:'Etichetta per le note importate',pm_safe:'Aggiunte come note nuove — le tue note non vengono mai sostituite.',ov_q:'{n} evidenziazione/i su versetti già evidenziati. Come aggiungerle?',ov_layer:'Aggiungi come livello separato',ov_note:'Importa solo la nota',cat_all:'Tutte',cat_hl:'Evidenziazioni',cat_note:'Note',conf_intro:'Queste note sono su versetti già evidenziati:',imp_title:'Aggiunte alla tua unione',more_hint:'+{n} altre — usa i filtri per restringere',preview:'Anteprima',prev_title:'Note condivise',close:'Chiudi',dl:'Scarica',adding:'Aggiunta note condivise…',added:'{n} nota/e aggiunta/e da un amico — tocca Scarica per il file aggiornato.',invalid:'Questo non è un file JW Sync.',shared_tag:'Condiviso'},
+    ru:{pm_title:'Заметки от друга?',pm_hint:'Добавьте присланный .jwshare.json — его заметки войдут в это объединение.',pm_choose:'Выбрать файл',pm_loaded:'{n} заметок будет добавлено в это объединение.',pm_remove:'Убрать',tag_label:'Метка для импортированных заметок',pm_safe:'Добавляются как новые заметки — ваши заметки никогда не заменяются.',ov_q:'{n} выделени(й) на уже выделенных стихах. Как их добавить?',ov_layer:'Добавить отдельным слоем',ov_note:'Только заметку',cat_all:'Все',cat_hl:'Выделения',cat_note:'Заметки',conf_intro:'Эти заметки на уже выделенных стихах:',imp_title:'Добавлено в ваше объединение',more_hint:'+{n} ещё — используйте фильтры',preview:'Предпросмотр',prev_title:'Общие заметки',close:'Закрыть',dl:'Скачать',adding:'Добавление заметок…',added:'Добавлено {n} заметок от друга — нажмите «Скачать» для обновлённого файла.',invalid:'Это не файл JW Sync.',shared_tag:'Общие'},
+    ja:{pm_title:'友達からのノート？',pm_hint:'受け取った .jwshare.json を追加すると、そのノートがこの結合に加わります。',pm_choose:'共有ファイルを選ぶ',pm_loaded:'{n} 件の共有ノートがこの結合に追加されます。',pm_remove:'削除',tag_label:'取り込むノートのタグ',pm_safe:'新しいノートとして追加されます — あなたのノートは置き換えられません。',ov_q:'{n} 件のハイライトは既にハイライト済みの節にあります。どう追加しますか？',ov_layer:'別レイヤーとして追加',ov_note:'ノートだけ取り込む',cat_all:'すべて',cat_hl:'ハイライト',cat_note:'ノート',conf_intro:'これらは既にハイライト済みの節にあります：',imp_title:'結合に追加されました',more_hint:'他 {n} 件 — フィルターで絞り込み',preview:'プレビュー',prev_title:'共有ノート',close:'閉じる',dl:'ダウンロード',adding:'共有ノートを追加中…',added:'友達から {n} 件のノートを追加しました — ダウンロードで更新ファイルを取得。',invalid:'これは JW Sync の共有ファイルではありません。',shared_tag:'共有'},
+    ko:{pm_title:'친구가 보낸 노트?',pm_hint:'받은 .jwshare.json을 추가하면 그 노트가 이 병합에 포함됩니다.',pm_choose:'공유 파일 선택',pm_loaded:'{n}개의 공유 노트가 이 병합에 추가됩니다.',pm_remove:'제거',tag_label:'가져온 노트의 태그',pm_safe:'새 노트로 추가됩니다 — 기존 노트는 절대 교체되지 않습니다.',ov_q:'{n}개의 강조 표시가 이미 강조한 구절에 있습니다. 어떻게 추가할까요?',ov_layer:'별도 레이어로 추가',ov_note:'노트만 가져오기',cat_all:'전체',cat_hl:'강조',cat_note:'노트',conf_intro:'다음은 이미 강조한 구절에 있습니다:',imp_title:'병합에 추가됨',more_hint:'+{n}개 더 — 필터로 좁히기',preview:'미리보기',prev_title:'공유 노트',close:'닫기',dl:'다운로드',adding:'공유 노트 추가 중…',added:'친구로부터 {n}개 노트 추가됨 — 다운로드를 눌러 업데이트된 파일을 받으세요.',invalid:'JW Sync 공유 파일이 아닙니다.',shared_tag:'공유됨'},
+    tl:{pm_title:'May tala mula sa kaibigan?',pm_hint:'Magdagdag ng .jwshare.json na ipinadala sa iyo — isasama ang mga tala nito sa merge.',pm_choose:'Pumili ng file',pm_loaded:'{n} ibinahaging tala ang idaragdag sa merge na ito.',pm_remove:'Alisin',tag_label:'Tag para sa mga na-import na tala',pm_safe:'Idinaragdag bilang bagong tala — hindi kailanman papalitan ang iyong mga tala.',ov_q:'{n} highlight ang nasa mga tekstong na-highlight mo na. Paano idaragdag?',ov_layer:'Idagdag bilang hiwalay na layer',ov_note:'Tala lang ang i-import',cat_all:'Lahat',cat_hl:'Mga highlight',cat_note:'Mga tala',conf_intro:'Ang mga talang ito ay nasa tekstong na-highlight mo na:',imp_title:'Naidagdag sa iyong merge',more_hint:'+{n} pa — gamitin ang mga filter',preview:'I-preview',prev_title:'Mga ibinahaging tala',close:'Isara',dl:'I-download',adding:'Idinaragdag ang mga ibinahaging tala…',added:'{n} tala mula sa kaibigan ang naidagdag — i-tap ang Download para sa updated na file.',invalid:'Hindi ito JW Sync share file.',shared_tag:'Shared'}
   };
   function lang(){ try{ var l=localStorage.getItem('jwsync_lang'); return (l&&I18N[l])?l:'en'; }catch(_){ return 'en'; } }
   function T(){ return I18N[lang()]||I18N.en; }
@@ -4371,7 +4396,7 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
     var env=null; try{ env=JSON.parse(text); }catch(_){ return null; }
     if(!env||env.app!=='jwsync'||!Array.isArray(env.notes)) return null;
     return env.notes.map(function(n){
-      var note={ title:(typeof n.title==='string')?n.title:'', content:sanitize((typeof n.content==='string')?n.content:''), tags:Array.isArray(n.tags)?n.tags:[] };
+      var note={ title:(typeof n.title==='string')?n.title:'', content:sanitize((typeof n.content==='string')?n.content:''), tags:Array.isArray(n.tags)?n.tags:[], pub:(typeof n.pub==='string')?n.pub:'' };
       if(n && n.loc && typeof n.loc==='object' && Array.isArray(n.ranges) && n.ranges.length){
         note.loc=n.loc; note.color=intval(n.color); note.style=intval(n.style);
         note.ranges=n.ranges.map(function(r){ return { blockType:intval(r&&r.blockType), identifier:intval(r&&r.identifier), startToken:intval(r&&r.startToken), endToken:intval(r&&r.endToken) }; });
@@ -4415,6 +4440,40 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
     return nd.ranges.some(function(r){ return ex.some(function(e){ return rangesOverlap(r,e); }); });
   }
 
+  // ── preview / summary UI helpers ──
+  var JWL_COLORS={1:'#fde047',2:'#86efac',3:'#7dd3fc',4:'#f9a8d4',5:'#fdba74',6:'#c4b5fd'};
+  function stripText(html){ var d=document.createElement('div'); d.innerHTML=String(html||''); return (d.textContent||d.innerText||'').replace(/\s+/g,' ').trim(); }
+  function noteHasHl(nd){ return !!(nd && nd.loc && nd.ranges && nd.ranges.length); }
+  function notePub(nd){ return (nd&&nd.pub)?String(nd.pub):''; }
+  function noteRow(nd){
+    var hl=noteHasHl(nd), col=hl?(JWL_COLORS[intval(nd.color)]||'#94a3b8'):null;
+    var dot=col?('<span class="jwr-dot" style="background:'+col+'"></span>'):'<span class="jwr-dot jwr-dot-none"></span>';
+    var title=esc((nd.title&&String(nd.title).trim())||'—'), ex=esc(stripText(nd.content)), pub=notePub(nd), meta='';
+    if(pub) meta+='<span class="jwr-pill jwr-pill-pub">'+esc(pub)+'</span>';
+    (Array.isArray(nd.tags)?nd.tags:[]).slice(0,8).forEach(function(tg){ tg=String(tg||'').trim(); if(tg) meta+='<span class="jwr-pill">'+esc(tg)+'</span>'; });
+    return '<div class="jwr-nrow">'+dot+'<div class="jwr-nbody"><div class="jwr-ntitle">'+title+'</div>'+(ex?'<div class="jwr-nex">'+ex+'</div>':'')+(meta?'<div class="jwr-nmeta">'+meta+'</div>':'')+'</div></div>';
+  }
+  function notesStats(notes){ var nHl=0,nPlain=0,tagCounts={}; notes.forEach(function(nd){ if(noteHasHl(nd)) nHl++; else nPlain++; (Array.isArray(nd.tags)?nd.tags:[]).forEach(function(tg){ tg=String(tg||'').trim(); if(tg) tagCounts[tg]=(tagCounts[tg]||0)+1; }); }); return {nHl:nHl,nPlain:nPlain,tagCounts:tagCounts}; }
+  function chipsHtml(notes,st){ var L=T(); var h='<button class="jwr-chip" data-f="all">'+esc(L.cat_all)+' ('+notes.length+')</button>'; if(st.nHl) h+='<button class="jwr-chip" data-f="hl">'+esc(L.cat_hl)+' ('+st.nHl+')</button>'; if(st.nPlain) h+='<button class="jwr-chip" data-f="plain">'+esc(L.cat_note)+' ('+st.nPlain+')</button>'; Object.keys(st.tagCounts).sort(function(a,b){return st.tagCounts[b]-st.tagCounts[a];}).slice(0,24).forEach(function(tg){ h+='<button class="jwr-chip" data-f="tag:'+esc(tg)+'">'+esc(tg)+' ('+st.tagCounts[tg]+')</button>'; }); return h; }
+  function matchesFilter(nd,f){ if(f.type==='all') return true; if(f.type==='hl') return noteHasHl(nd); if(f.type==='plain') return !noteHasHl(nd); if(f.type==='tag') return (Array.isArray(nd.tags)?nd.tags:[]).some(function(tg){ return String(tg)===f.tag; }); return true; }
+  function listHtml(notes,f){ var CAP=300,html='',shown=notes.filter(function(nd){return matchesFilter(nd,f);}); for(var i=0;i<shown.length&&i<CAP;i++) html+=noteRow(shown[i]); if(shown.length>CAP) html+='<div class="jwr-more">'+esc(fmt(T().more_hint,shown.length-CAP))+'</div>'; if(!shown.length) html+='<div class="jwr-more">—</div>'; return html; }
+  function openNotesModal(title, notes, buttons){
+    var st=notesStats(notes), f={type:'all'};
+    var foot=(buttons||[]).map(function(b,i){ return '<button class="jwr-mb'+(b.primary?' jwr-mb-primary':'')+'" data-i="'+i+'">'+esc(b.label)+'</button>'; }).join('');
+    var ov=document.createElement('div'); ov.className='jwr-modal';
+    ov.innerHTML='<div class="jwr-modal-card jwr-modal-lg"><button class="jwr-x" aria-label="close">×</button><div class="jwr-modal-h">'+esc(title)+'</div><div class="jwr-chips">'+chipsHtml(notes,st)+'</div><div class="jwr-list">'+listHtml(notes,f)+'</div><div class="jwr-modal-foot">'+foot+'</div></div>';
+    var listEl=ov.querySelector('.jwr-list');
+    function setActive(){ Array.prototype.forEach.call(ov.querySelectorAll('.jwr-chip'),function(ch){ var key=f.type==='tag'?('tag:'+f.tag):f.type; ch.classList.toggle('jwr-chip-on', ch.getAttribute('data-f')===key); }); }
+    setActive();
+    Array.prototype.forEach.call(ov.querySelectorAll('.jwr-chip'),function(ch){ ch.onclick=function(){ var d=ch.getAttribute('data-f'); if(d.indexOf('tag:')===0) f={type:'tag',tag:d.slice(4)}; else f={type:d}; listEl.innerHTML=listHtml(notes,f); setActive(); }; });
+    function close(){ try{ov.remove();}catch(_){ } }
+    ov.querySelector('.jwr-x').onclick=close;
+    ov.addEventListener('click',function(e){ if(e.target===ov){ close(); return; } var b=e.target.closest&&e.target.closest('[data-i]'); if(b){ var spec=(buttons||[])[+b.getAttribute('data-i')]; close(); if(spec&&spec.onClick) spec.onClick(); } });
+    document.body.appendChild(ov); return {ov:ov, close:close};
+  }
+  function openPreview(notes){ if(!notes||!notes.length) return; openNotesModal(T().prev_title, notes, [{label:T().close}]); }
+  function openSummary(imported){ if(!imported||!imported.length) return; openNotesModal(T().imp_title, imported, [{label:T().dl, primary:true, onClick:function(){ var dl=document.getElementById('download-btn'); if(dl){ try{ dl.click(); }catch(_){ } } }}, {label:T().close}]); }
+
   // ── core adoption: writes only INSERTs, never UPDATE/DELETE on the user's rows ──
   function adoptIntoDb(db, notes, opts){
     var label=(opts&&opts.tagLabel)||'Shared';
@@ -4425,16 +4484,16 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
     var hasUserMark=tableCols(db,'UserMark').length>0;
     var umCols=hasUserMark?tableCols(db,'UserMark'):[];
     var hasBlockRange=tableCols(db,'BlockRange').length>0;
-    var added=0, highlights=0;
+    var added=0, highlights=0, imported=[];
     try{ db.run('PRAGMA foreign_keys=OFF;'); }catch(_){ }
     notes.forEach(function(nd){ try{
       var title=nd.title||'', content=nd.content||'';
       var hasHl = !!(nd.loc && nd.ranges && nd.ranges.length && hasUserMark && hasBlockRange && locPresent.length);
-      var locId=null, userMarkId=null;
+      var locId=null, userMarkId=null, mode='plain';
       if(hasHl){
         locId=resolveLocationId(db, nd.loc, locPresent, true);
         var overlaps = locId!==null && existingRanges(db, locId).some(function(e){ return nd.ranges.some(function(r){ return rangesOverlap(r,e); }); });
-        var makeLayer = (!overlaps) || (overlapMode==='layer');
+        var makeLayer = (!overlaps) || (overlapMode==='layer'); mode=makeLayer?'layer':'note';
         if(makeLayer && locId!==null){
           var c=['ColorIndex','LocationId','UserMarkGuid','Version'], v=[nd.color||0, locId, uuid(), 1];
           if(umCols.indexOf('StyleIndex')>=0){ c.push('StyleIndex'); v.push(nd.style||0); }
@@ -4455,11 +4514,12 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
       if(locId!==null && noteCols.indexOf('LocationId')>=0){ nc.push('LocationId'); nv.push(locId); }
       db.run('INSERT INTO Note ('+nc.join(',')+') VALUES ('+nc.map(function(){return '?';}).join(',')+')', nv);
       var noteId=lastId(db);
-      var names=[label].concat(Array.isArray(nd.tags)?nd.tags:[]), seen={};
-      names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()])return; seen[tn.toLowerCase()]=1; var tid=getTagId(db,tn); try{ db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tid,noteId,nextTagPos(db,tid)]); }catch(_){ } });
+      var names=[label].concat(Array.isArray(nd.tags)?nd.tags:[]), seen={}, applied=[];
+      names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()])return; seen[tn.toLowerCase()]=1; var tid=getTagId(db,tn); try{ db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tid,noteId,nextTagPos(db,tid)]); applied.push(tn); }catch(_){ } });
+      imported.push({ title:nd.title, content:nd.content, pub:notePub(nd), color:nd.color, loc:nd.loc, ranges:nd.ranges, tags:applied, mode:mode });
       added++;
     }catch(e){ console.error('[jwr] adopt',e); } });
-    return { added:added, highlights:highlights };
+    return { added:added, highlights:highlights, imported:imported };
   }
 
   // adopt notes into a .jwlibrary ArrayBuffer → {buffer, added, highlights, overlaps}
@@ -4475,14 +4535,14 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
           return window.initSqlJs({locateFile:function(f){return SQLCDN+f;}}).then(function(SQL){
             var db=new SQL.Database(bytes);
             var present=tableCols(db,'Location');
-            var overlapCount=0;
-            notes.forEach(function(nd){ if(noteOverlaps(db, nd, present)) overlapCount++; });
-            var decide = (overlapCount>0 && typeof opts.onOverlap==='function') ? Promise.resolve(opts.onOverlap(overlapCount)) : Promise.resolve('layer');
+            var conflicts=[];
+            notes.forEach(function(nd){ if(noteOverlaps(db, nd, present)) conflicts.push(nd); });
+            var decide = (conflicts.length>0 && typeof opts.onOverlap==='function') ? Promise.resolve(opts.onOverlap(conflicts.length, conflicts)) : Promise.resolve('layer');
             return decide.then(function(mode){
-              if(mode==='cancel'){ db.close(); return {buffer:buffer, added:0, highlights:0, overlaps:overlapCount, cancelled:true}; }
+              if(mode==='cancel'){ db.close(); return {buffer:buffer, added:0, highlights:0, overlaps:conflicts.length, imported:[], cancelled:true}; }
               var res=adoptIntoDb(db, notes, {tagLabel:opts.tagLabel, overlapMode:(mode==='note'?'note':'layer')});
               var out=db.export(); db.close(); zip.file(key, out);
-              return zip.generateAsync({type:'arraybuffer',compression:'DEFLATE'}).then(function(buf){ return {buffer:buf, added:res.added, highlights:res.highlights, overlaps:overlapCount}; });
+              return zip.generateAsync({type:'arraybuffer',compression:'DEFLATE'}).then(function(buf){ return {buffer:buf, added:res.added, highlights:res.highlights, overlaps:conflicts.length, imported:res.imported}; });
             });
           });
         });
@@ -4497,12 +4557,13 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
   var toastEl=null, toastT=null;
   function toast(msg, isErr){ if(toastEl){ try{toastEl.remove();}catch(_){ } } toastEl=document.createElement('div'); toastEl.className='jwr-toast'; toastEl.style.borderColor=isErr?'rgba(248,113,113,.6)':'rgba(234,88,12,.5)'; toastEl.textContent=msg; document.body.appendChild(toastEl); if(toastT) clearTimeout(toastT); toastT=setTimeout(function(){ if(toastEl){try{toastEl.remove();}catch(_){ }} toastEl=null; }, 4200); }
 
-  // overlap chooser → resolves 'layer' | 'note' | 'cancel'
-  function promptOverlap(n){
+  // overlap chooser → resolves 'layer' | 'note' | 'cancel'; lists the clashing notes
+  function promptOverlap(n, conflicts){
     return new Promise(function(resolve){
-      var L=T();
+      var L=T(); conflicts=conflicts||[];
+      var listHTML=''; for(var i=0;i<conflicts.length&&i<200;i++) listHTML+=noteRow(conflicts[i]); if(conflicts.length>200) listHTML+='<div class="jwr-more">'+esc(fmt(L.more_hint,conflicts.length-200))+'</div>';
       var ov=document.createElement('div'); ov.className='jwr-modal';
-      ov.innerHTML='<div class="jwr-modal-card"><div class="jwr-modal-h">'+esc(L.pm_title)+'</div><p class="jwr-modal-q">'+esc(fmt(L.ov_q,n))+'</p><div class="jwr-modal-btns"><button class="jwr-mb jwr-mb-primary" data-m="layer">'+esc(L.ov_layer)+'</button><button class="jwr-mb" data-m="note">'+esc(L.ov_note)+'</button></div></div>';
+      ov.innerHTML='<div class="jwr-modal-card jwr-modal-lg"><div class="jwr-modal-h">'+esc(L.pm_title)+'</div><p class="jwr-modal-q">'+esc(fmt(L.ov_q,n))+'</p><p class="jwr-modal-q" style="margin-bottom:8px">'+esc(L.conf_intro)+'</p><div class="jwr-list">'+listHTML+'</div><div class="jwr-modal-foot"><button class="jwr-mb jwr-mb-primary" data-m="layer">'+esc(L.ov_layer)+'</button><button class="jwr-mb" data-m="note">'+esc(L.ov_note)+'</button></div></div>';
       function done(m){ try{ov.remove();}catch(_){ } resolve(m); }
       ov.addEventListener('click',function(e){ var b=e.target.closest&&e.target.closest('[data-m]'); if(b){ done(b.getAttribute('data-m')); return; } if(e.target===ov) done('cancel'); });
       document.body.appendChild(ov);
@@ -4513,16 +4574,17 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
   function pickFile(cb){ var inp=document.createElement('input'); inp.type='file'; inp.accept='.json,.jwshare.json,application/json'; inp.style.display='none'; document.body.appendChild(inp); inp.addEventListener('change',function(){ if(inp.files&&inp.files[0]) cb(inp.files[0]); try{inp.remove();}catch(_){ } }); inp.click(); }
 
   // end-of-merge: pick a share file and adopt into the merged result
-  window.__jwReceivePickAndAdopt=function(){ pickFile(function(file){ readShareFile(file).then(function(notes){ if(!notes||!notes.length){ toast(T().invalid, true); return; } getMergedBuffer().then(function(buf){ if(!buf){ toast(T().invalid, true); return; } toast(T().adding); adoptIntoBuffer(buf, notes, {tagLabel:importTag(), onOverlap:promptOverlap}).then(function(res){ if(res.cancelled) return; applyMerged(res.buffer, true); toast(fmt(T().added, res.added)); }).catch(function(){ toast(T().invalid, true); }); }); }); }); };
+  window.__jwReceivePickAndAdopt=function(){ pickFile(function(file){ readShareFile(file).then(function(notes){ if(!notes||!notes.length){ toast(T().invalid, true); return; } getMergedBuffer().then(function(buf){ if(!buf){ toast(T().invalid, true); return; } toast(T().adding); adoptIntoBuffer(buf, notes, {tagLabel:importTag(), onOverlap:promptOverlap}).then(function(res){ if(res.cancelled) return; applyMerged(res.buffer, false); toast(fmt(T().added, res.added)); openSummary(res.imported); }).catch(function(){ toast(T().invalid, true); }); }); }); }); };
 
   // pre-merge: auto-adopt any attached shared notes when the celebration shows
-  window.__jwReceiveOnCelebration=function(ov){ var pending=window.__jwSharedNotes; window.__jwSharedNotes=null; if(!pending||!pending.length) return; getMergedBuffer().then(function(buf){ if(!buf) return; toast(T().adding); adoptIntoBuffer(buf, pending, {tagLabel:(window.__jwImportTag||T().shared_tag), onOverlap:promptOverlap}).then(function(res){ if(res.cancelled) return; applyMerged(res.buffer, false); toast(fmt(T().added, res.added)); }).catch(function(){ }); }); };
+  window.__jwReceiveOnCelebration=function(ov){ var pending=window.__jwSharedNotes; window.__jwSharedNotes=null; if(!pending||!pending.length) return; getMergedBuffer().then(function(buf){ if(!buf) return; toast(T().adding); adoptIntoBuffer(buf, pending, {tagLabel:(window.__jwImportTag||T().shared_tag), onOverlap:promptOverlap}).then(function(res){ if(res.cancelled) return; applyMerged(res.buffer, false); toast(fmt(T().added, res.added)); openSummary(res.imported); }).catch(function(){ }); }); };
 
   // pre-merge attach UI on the merge screen
-  function setPanelStatus(panel,msg,isErr){ if(!panel) return; var s=panel.querySelector('.jwr-status'); if(!s) return; s.style.display='flex'; s.style.color=isErr?'#f87171':'#4ade80'; s.innerHTML=(isErr?'':'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>')+'<span>'+esc(msg)+'</span>'; if(!isErr){ var rm=document.createElement('button'); rm.className='jwr-rm'; rm.textContent=T().pm_remove; rm.onclick=function(){ window.__jwSharedNotes=null; s.style.display='none'; var inp=panel.querySelector('input[type=file]'); if(inp) inp.value=''; }; s.appendChild(rm); } }
+  function setPanelStatus(panel,msg,isErr){ if(!panel) return; var s=panel.querySelector('.jwr-status'); if(!s) return; s.style.display='flex'; s.style.color=isErr?'#f87171':'#4ade80'; s.innerHTML=(isErr?'':'<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>')+'<span>'+esc(msg)+'</span>'; if(!isErr){ var pv=document.createElement('button'); pv.className='jwr-prev-link'; pv.textContent=T().preview; pv.onclick=function(){ if(window.__jwSharedNotes&&window.__jwSharedNotes.length) openPreview(window.__jwSharedNotes); }; s.appendChild(pv); var rm=document.createElement('button'); rm.className='jwr-rm'; rm.textContent=T().pm_remove; rm.onclick=function(){ window.__jwSharedNotes=null; s.style.display='none'; var inp=panel.querySelector('input[type=file]'); if(inp) inp.value=''; }; s.appendChild(rm); } }
   window.__jwLoadSharedFile=function(file, panel){ readShareFile(file).then(function(notes){ if(!notes){ setPanelStatus(panel, T().invalid, true); return; } window.__jwSharedNotes=notes; setPanelStatus(panel, fmt(T().pm_loaded, notes.length), false); }); };
   function injectPanel(){ var btn=document.getElementById('start-merge-btn'); if(!btn||document.getElementById('jwr-panel')) return; var panel=document.createElement('div'); panel.id='jwr-panel'; panel.className='jwr-panel'; var L=T(); panel.innerHTML='<div class="jwr-panel-h"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg><span>'+esc(L.pm_title)+'</span></div><div class="jwr-panel-hint">'+esc(L.pm_hint)+'</div><label class="jwr-choose">'+esc(L.pm_choose)+'<input type="file" accept=".json,.jwshare.json,application/json" style="display:none"></label><div class="jwr-tag-row"><label class="jwr-tag-label" for="jwr-tag">'+esc(L.tag_label)+'</label><input id="jwr-tag" class="jwr-tag-input" type="text" value="'+esc(L.shared_tag)+'" maxlength="60"></div><div class="jwr-safe"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>'+esc(L.pm_safe)+'</span></div><div class="jwr-status" style="display:none"></div>'; var inp=panel.querySelector('input[type=file]'); inp.addEventListener('change',function(){ if(inp.files&&inp.files[0]) window.__jwLoadSharedFile(inp.files[0], panel); }); var tagInp=panel.querySelector('#jwr-tag'); window.__jwImportTag=tagInp.value; tagInp.addEventListener('input',function(){ window.__jwImportTag=String(tagInp.value||'').trim()||T().shared_tag; }); btn.parentNode.insertBefore(panel, btn); if(window.__jwSharedNotes&&window.__jwSharedNotes.length) setPanelStatus(panel, fmt(L.pm_loaded, window.__jwSharedNotes.length), false); }
   try{ var mo=new MutationObserver(function(){ injectPanel(); }); mo.observe(document.documentElement,{childList:true,subtree:true}); }catch(_){ }
+  window.__jwPromptOverlap=promptOverlap; window.__jwOpenPreview=openPreview; window.__jwOpenSummary=openSummary; // for tests
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',injectPanel); else injectPanel();
 })();
 </script>

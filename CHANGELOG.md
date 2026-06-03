@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.38.0] — 2026-06-03
+
+### Added
+- **The Merge tool's "receive notes" step now has the same rich experience as the Share page.** When you attach a friend's share file before merging, a **Preview** link lets you open a full, categorized view of the notes.
+- **Categorized preview in the Merge tool.** The preview opens in a roomy window with filter chips — **All**, **Highlights**, **Notes**, and one per **tag** (each with a count) — and a scrollable list showing each note's publication, a colour dot for highlights, and its tags.
+- **The conflict prompt now shows which notes clash.** When some incoming highlights land on verses you've already highlighted, the choice dialog lists those specific notes before you pick "Add as a separate layer" or "Import note only".
+- **An import summary after merging.** Once shared notes are added, a summary lists every note that was added, with a Download button for the updated file.
+
+---
+
 ## [2.37.0] — 2026-06-03
 
 ### Added

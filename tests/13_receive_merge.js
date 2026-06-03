@@ -204,6 +204,60 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
     db3.close();
   }
 
+  section('Merge module — categorized preview, conflict list, import summary (UI)');
+  {
+    const previewNotes = [
+      { title: 'HL one', content: '<p>a</p>', tags: ['Study'], pub: 'Genesis 1', color: 3, loc: { BookNumber: 1, ChapterNumber: 1 }, ranges: [{ blockType: 2, identifier: 5, startToken: 0, endToken: 4 }] },
+      { title: 'HL two', content: '<p>b</p>', tags: ['Faith'], pub: 'Matthew 5', color: 4, loc: { BookNumber: 40, ChapterNumber: 5 }, ranges: [{ blockType: 2, identifier: 9, startToken: 0, endToken: 3 }] },
+      { title: 'Plain note', content: '<p>c</p>', tags: [], pub: 'Watchtower' },
+    ];
+    // Preview modal
+    win.__jwOpenPreview(previewNotes);
+    let modal = win.document.querySelector('.jwr-modal');
+    if (modal && modal.querySelectorAll('.jwr-nrow').length === 3) ok('preview modal lists all notes');
+    else fail('preview modal note count wrong: ' + (modal && modal.querySelectorAll('.jwr-nrow').length));
+    const chips = modal ? [...modal.querySelectorAll('.jwr-chip')].map(c => c.textContent) : [];
+    if (chips.some(c => /All \(3\)/.test(c)) && chips.some(c => /Highlights \(2\)/.test(c)) && chips.some(c => /Notes \(1\)/.test(c)) && chips.some(c => /Study \(1\)/.test(c)))
+      ok('preview chips show categories + tags with counts');
+    else fail('preview chips wrong: ' + chips.join(' | '));
+    if (modal.querySelectorAll('.jwr-dot:not(.jwr-dot-none)').length === 2) ok('preview shows colour dots for highlights');
+    else fail('preview colour dots wrong');
+    [...modal.querySelectorAll('.jwr-chip')].find(c => /Highlights/.test(c.textContent)).click();
+    await wait(10);
+    if (modal.querySelectorAll('.jwr-nrow').length === 2) ok('preview Highlights filter narrows the list');
+    else fail('preview filter did not narrow: ' + modal.querySelectorAll('.jwr-nrow').length);
+    modal.querySelector('.jwr-x').click();
+    if (!win.document.querySelector('.jwr-modal')) ok('preview modal closes');
+    else fail('preview modal did not close');
+
+    // Conflict modal lists the clashing notes and resolves the choice
+    const conflicts = [previewNotes[0]];
+    const p = win.__jwPromptOverlap(1, conflicts);
+    modal = win.document.querySelector('.jwr-modal');
+    if (modal && modal.querySelectorAll('.jwr-list .jwr-nrow').length === 1 && /HL one/.test(modal.textContent))
+      ok('conflict modal lists the clashing note');
+    else fail('conflict modal list wrong');
+    if (modal.querySelector('[data-m="layer"]') && modal.querySelector('[data-m="note"]')) ok('conflict modal offers both choices');
+    else fail('conflict choices missing');
+    modal.querySelector('[data-m="note"]').click();
+    const chosen = await p;
+    if (chosen === 'note') ok('conflict modal resolves the chosen option');
+    else fail('conflict choice resolved wrong: ' + chosen);
+
+    // Import summary modal
+    win.__jwOpenSummary([
+      { title: 'Added A', content: '<p>x</p>', tags: ['Shared'], pub: 'Genesis 1', color: 3, loc: { BookNumber: 1 }, ranges: [{ blockType: 2, identifier: 5, startToken: 0, endToken: 4 }], mode: 'layer' },
+      { title: 'Added B', content: '<p>y</p>', tags: ['Shared'], pub: 'Watchtower', mode: 'plain' },
+    ]);
+    modal = win.document.querySelector('.jwr-modal');
+    if (modal && modal.querySelectorAll('.jwr-nrow').length === 2 && /Added A/.test(modal.textContent) && /Added B/.test(modal.textContent))
+      ok('import summary lists the added notes');
+    else fail('import summary list wrong');
+    if (modal.querySelector('.jwr-modal-foot .jwr-mb-primary')) ok('import summary offers a Download action');
+    else fail('import summary download button missing');
+    modal.querySelector('.jwr-x').click();
+  }
+
   console.log('\n== SUMMARY ==');
   if (failures) { console.log('\nFAIL: ' + failures + ' check(s) failed.'); process.exit(1); }
   console.log('\nAll receive-merge checks passed.');
