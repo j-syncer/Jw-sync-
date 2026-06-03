@@ -4,6 +4,22 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.39.0] — 2026-06-03
+
+### Added — Study Stats (beta)
+Eight new colorful visualizations on the Study Stats page:
+- **Study Gauges** — radial arc gauges for Consistency (active weeks), Depth (notes on highlights), Pace (notes per study day), and Weekend share.
+- **Study Clock** — a 24-hour radial chart showing what time of day you study, with your busiest hour called out.
+- **Seasonality radar** — a 12-month polar chart of which months you study most.
+- **Highlight Color Wheel** — your highlight colors as a donut with your signature color in the center.
+- **Bible Progress ring** — a circular gauge of how many of the 66 books you've touched, with Hebrew/Greek-Scripture arcs.
+- **Note Depth histogram** — the spread of your note lengths from one-liners to essays, with your average words per note.
+- **Achievements** — unlockable milestone badges (100 / 1,000 notes, Four Gospels, whole Bible, all colors, 30-day streak, 500 highlights, 10k words).
+
+All localized across 10 languages.
+
+---
+
 ## [2.38.0] — 2026-06-03
 
 ### Added

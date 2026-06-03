@@ -313,6 +313,30 @@ async function waitForStats(doc, timeoutMs) {
         const pubsTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /publication|publicac|publica|publik|публикац|出版物|출판물|pubblicazioni/i.test(el.textContent));
         if (pubsTitle) ok('top publications section rendered');
         else fail('publications section missing');
+
+        // ── v2.39 new visualizations ──
+        const gauges = doc.querySelectorAll('.jww-gauge-arc');
+        if (gauges.length >= 3) ok('radial gauges rendered (' + gauges.length + ' arcs)');
+        else fail('gauges missing: ' + gauges.length);
+        if (doc.querySelectorAll('.jww-clock-spoke').length === 24) ok('study clock rendered (24 hour spokes)');
+        else fail('study clock spokes wrong: ' + doc.querySelectorAll('.jww-clock-spoke').length);
+        if (doc.querySelector('.jww-radar-area')) ok('seasonality radar rendered');
+        else fail('seasonality radar missing');
+        const donut = doc.querySelectorAll('.jww-donut-seg');
+        if (donut.length >= 2) ok('color donut rendered (' + donut.length + ' segments)');
+        else fail('color donut missing: ' + donut.length);
+        if (doc.querySelector('.jww-ring-arc') && /%/.test((doc.querySelector('.jww-ring-pct') || {}).textContent || ''))
+          ok('Bible coverage ring rendered with %');
+        else fail('coverage ring missing');
+        const depBars = doc.querySelectorAll('.jww-dep-bar');
+        if (depBars.length === 5) ok('note-depth histogram rendered (5 buckets)');
+        else fail('depth histogram buckets wrong: ' + depBars.length);
+        const badges = doc.querySelectorAll('.jww-badge');
+        if (badges.length === 8) ok('achievement badges rendered (8)');
+        else fail('badges count wrong: ' + badges.length);
+        const achTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /achiev|logro|conquist|réalis|erfolg|obiett|достиж|実績|업적|tagumpay/i.test(el.textContent));
+        if (achTitle) ok('achievements section titled correctly');
+        else fail('achievements title missing');
       }
     }
     dom.window.close();
