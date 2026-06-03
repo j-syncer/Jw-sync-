@@ -288,6 +288,18 @@ for (const path of FILES) {
     if (c.includes('var L=window.__JW_LANDING_I18N'))
       ok('applyLandingI18n falls back to __JW_LANDING_I18N (cards translate on lang change)');
     else fail('applyLandingI18n missing __JW_LANDING_I18N fallback');
+    // v2.35.0: per-card colored shimmer + distinct accent classes
+    const cssPath = path.replace(/index\.html$/, 'styles.css');
+    const cssSrc = fs.existsSync(cssPath) ? fs.readFileSync(cssPath, 'utf8') : '';
+    if (['svc-explorer', 'svc-stats', 'svc-share'].every(k => c.includes('class="svc-card ' + k + '"')))
+      ok('Distinct accent classes on the three service tiles');
+    else fail('Service tile accent classes missing in HTML');
+    if (/@keyframes svcShimmer/.test(cssSrc) && /\.svc-card::after/.test(cssSrc))
+      ok('Per-card colored shimmer defined in CSS');
+    else fail('svcShimmer / .svc-card::after missing from styles.css');
+    if (cssSrc.includes('prefers-reduced-motion: reduce) { .svc-card::after'))
+      ok('Shimmer respects prefers-reduced-motion');
+    else fail('Shimmer missing reduced-motion guard');
     // in-app nav restored the individual Study Explorer + Study Stats buttons
     if (allSrc.includes('nav-btn-browse') && allSrc.includes('nav-btn-wrapped'))
       ok('App top-bar individual Study Explorer + Study Stats buttons restored');

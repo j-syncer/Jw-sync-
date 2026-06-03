@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.35.0] — 2026-06-03
+
+### Changed
+- **The home tool tiles now have a gentle, colored shimmer** — each with its own accent (Merge Tool orange, Study Explorer blue, Study Stats green, Note Share & Receive violet) and matching icon and hover glow. The shimmers are staggered so they sweep one after another, and they automatically turn off if you have "reduce motion" enabled.
+
+---
+
 ## [2.34.1] — 2026-06-03
 
 ### Fixed
