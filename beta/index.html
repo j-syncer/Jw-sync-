@@ -240,7 +240,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.36.0",
+      "softwareVersion": "2.36.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -4387,6 +4387,7 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
   function tableCols(db,table){ try{ var r=db.exec('PRAGMA table_info("'+table+'")'); return (r.length?r[0].values.map(function(x){return x[1];}):[]); }catch(_){ return []; } }
   function lastId(db){ return db.exec('SELECT last_insert_rowid() AS id')[0].values[0][0]; }
   function getTagId(db,name){ var s=String(name).replace(/'/g,"''"); var r=db.exec("SELECT TagId FROM Tag WHERE Name='"+s+"' COLLATE NOCASE"); if(r.length&&r[0].values.length) return r[0].values[0][0]; db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]); return lastId(db); }
+  function nextTagPos(db,tid){ try{ var r=db.exec('SELECT COALESCE(MAX(Position),-1)+1 AS p FROM TagMap WHERE TagId='+(tid|0)); return (r.length&&r[0].values.length)?r[0].values[0][0]:0; }catch(_){ return 0; } }
   function rangesOverlap(a,b){ return a.blockType===b.blockType && a.identifier===b.identifier && a.startToken<=b.endToken && b.startToken<=a.endToken; }
   function resolveLocationId(db, loc, present, create){
     var idCols=LOC_ID_COLS.filter(function(c){ return present.indexOf(c)>=0; });
@@ -4455,7 +4456,7 @@ body.light .jwr-mb{background:#eef2f7;color:#0b2e58}
       db.run('INSERT INTO Note ('+nc.join(',')+') VALUES ('+nc.map(function(){return '?';}).join(',')+')', nv);
       var noteId=lastId(db);
       var names=[label].concat(Array.isArray(nd.tags)?nd.tags:[]), seen={};
-      names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()])return; seen[tn.toLowerCase()]=1; db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,0)',[getTagId(db,tn),noteId]); });
+      names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()])return; seen[tn.toLowerCase()]=1; var tid=getTagId(db,tn); try{ db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tid,noteId,nextTagPos(db,tid)]); }catch(_){ } });
       added++;
     }catch(e){ console.error('[jwr] adopt',e); } });
     return { added:added, highlights:highlights };

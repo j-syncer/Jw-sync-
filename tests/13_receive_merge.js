@@ -104,6 +104,7 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
       CREATE TABLE Note (NoteId INTEGER PRIMARY KEY, Guid TEXT, UserMarkId INT, LocationId INT, Title TEXT, Content TEXT, LastModified TEXT, Created TEXT, BlockType INT, BlockIdentifier INT);
       CREATE TABLE Tag (TagId INTEGER PRIMARY KEY, Type INT, Name TEXT);
       CREATE TABLE TagMap (TagMapId INTEGER PRIMARY KEY, NoteId INT, LocationId INT, TagId INT, Position INT);
+      CREATE UNIQUE INDEX IX_TagMap_TagId_Position ON TagMap (TagId, Position);
       INSERT INTO Location (LocationId,BookNumber,ChapterNumber,DocumentId,Track,IssueTagNumber,KeySymbol,MepsLanguage,Type,Title) VALUES (1,1,1,0,0,0,'nwt',0,0,'Genesis');
       INSERT INTO UserMark (UserMarkId,ColorIndex,LocationId,StyleIndex,UserMarkGuid,Version) VALUES (1,1,1,0,'mine-mark',1);
       INSERT INTO BlockRange (BlockType,Identifier,StartToken,EndToken,UserMarkId) VALUES (2,5,0,4,1);
@@ -181,6 +182,25 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
     if (c('SELECT COUNT(*) FROM UserMark') === 2 && c('SELECT COUNT(*) FROM UserMark WHERE ColorIndex=4') === 1)
       ok('new highlight layer added on the new passage');
     else fail('non-overlap highlight not added correctly');
+    db3.close();
+  }
+
+  // multiple notes sharing the import tag must all be added (regression: TagMap UNIQUE(TagId,Position))
+  {
+    const lib = await buildLibWithHighlight();
+    const many = [
+      { title: 'A', content: '<p>a</p>', tags: ['Study'] },
+      { title: 'B', content: '<p>b</p>', tags: ['Study'] },
+      { title: 'C', content: '<p>c</p>', tags: [] },
+    ];
+    const res = await win.__jwAdoptSharedIntoBuffer(lib, many, 'Shared');
+    if (res.added === 3) ok('all 3 notes sharing the import tag were added (no Position collision)');
+    else fail('expected 3 added, got ' + res.added + ' (TagMap Position collision?)');
+    const db3 = await openDb(res.buffer);
+    const c = (s) => { const r = db3.exec(s); return (r[0] && r[0].values[0]) ? r[0].values[0][0] : 0; };
+    if (c("SELECT COUNT(*) FROM TagMap tm JOIN Tag t ON tm.TagId=t.TagId WHERE t.Name='Shared'") === 3)
+      ok('import tag linked to all 3 notes at distinct Positions');
+    else fail('import-tag links wrong: ' + c("SELECT COUNT(*) FROM TagMap tm JOIN Tag t ON tm.TagId=t.TagId WHERE t.Name='Shared'"));
     db3.close();
   }
 

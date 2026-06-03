@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.36.1] — 2026-06-03
+
+### Fixed
+- **"0 notes added to your backup" when receiving a friend's notes.** Imported notes were actually being written, but a tagging clash (every note's tag was filed in the same slot) made the import silently fail its count — and could drop the tags. Imported notes are now filed correctly, so all of them are added and tagged, and the count is accurate. Affected the Share page and the Merge tool's receive step.
+
+---
+
 ## [2.36.0] — 2026-06-03
 
 ### Added

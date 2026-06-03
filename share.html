@@ -469,6 +469,7 @@
       var hasBlockRange=tableCols(db,'BlockRange').length>0;
       var added=0, highlights=0;
       function tagId(name){ var s=String(name).replace(/'/g,"''"); var r=rows(db,"SELECT TagId FROM Tag WHERE Name='"+s+"' COLLATE NOCASE"); if(r.length) return r[0].TagId; db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]); return rows(db,'SELECT last_insert_rowid() AS id')[0].id; }
+      function nextTagPos(tid){ var r=rows(db,'SELECT COALESCE(MAX(Position),-1)+1 AS p FROM TagMap WHERE TagId='+(tid|0)); return r.length?r[0].p:0; }
       try{ db.run('PRAGMA foreign_keys=OFF;'); }catch(_){ }
       notes.forEach(function(nd){ try{
         var title=(typeof nd.title==='string')?nd.title:''; var content=sanitizeNoteHtml((typeof nd.content==='string')?nd.content:'');
@@ -498,7 +499,7 @@
         db.run('INSERT INTO Note ('+nc.join(',')+') VALUES ('+nc.map(function(){return '?';}).join(',')+')', nv);
         var noteId=lastId(db);
         var names=[label].concat(Array.isArray(nd.tags)?nd.tags:[]); var seen={};
-        names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()]) return; seen[tn.toLowerCase()]=1; db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,0)',[tagId(tn),noteId]); });
+        names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()]) return; seen[tn.toLowerCase()]=1; var tid=tagId(tn); try{ db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tid,noteId,nextTagPos(tid)]); }catch(_){ } });
         added++;
       }catch(e){ console.error('adopt',e); } });
       return { added:added, highlights:highlights };

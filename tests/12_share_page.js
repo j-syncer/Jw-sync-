@@ -36,7 +36,8 @@ async function buildBackup(SQL, notes) {
     CREATE TABLE BlockRange (BlockRangeId INTEGER PRIMARY KEY, BlockType INTEGER, Identifier INTEGER, StartToken INTEGER, EndToken INTEGER, UserMarkId INTEGER);
     CREATE TABLE Location (LocationId INTEGER PRIMARY KEY, BookNumber INTEGER, ChapterNumber INTEGER, DocumentId INTEGER, Track INTEGER, IssueTagNumber INTEGER DEFAULT 0, KeySymbol TEXT, MepsLanguage INTEGER DEFAULT 0, Type INTEGER DEFAULT 0, Title TEXT);
     CREATE TABLE Tag (TagId INTEGER PRIMARY KEY, Type INTEGER, Name TEXT);
-    CREATE TABLE TagMap (TagMapId INTEGER PRIMARY KEY, NoteId INTEGER, LocationId INTEGER, TagId INTEGER, Position INTEGER);`);
+    CREATE TABLE TagMap (TagMapId INTEGER PRIMARY KEY, NoteId INTEGER, LocationId INTEGER, TagId INTEGER, Position INTEGER);
+    CREATE UNIQUE INDEX IX_TagMap_TagId_Position ON TagMap (TagId, Position);`);
   db.run(`INSERT INTO Location (LocationId, BookNumber, ChapterNumber, KeySymbol, Title) VALUES (1,1,1,'nwt','Genesis'),(2,null,null,'w23','Watchtower')`);
   (notes || []).forEach(n => {
     let umId = null;
@@ -177,6 +178,10 @@ function bootShare() {
       const tagged = edb.exec("SELECT COUNT(*) FROM Tag WHERE Name='Gift2026'")[0].values[0][0];
       if (tagged === 1) ok('adopted notes tagged with the custom import tag');
       else fail('custom import tag not created: ' + tagged);
+      // both notes must be linked to the import tag — distinct Positions (no UNIQUE(TagId,Position) collision)
+      const links = edb.exec("SELECT COUNT(*) FROM TagMap tm JOIN Tag t ON tm.TagId=t.TagId WHERE t.Name='Gift2026'")[0].values[0][0];
+      if (links === 2) ok('both adopted notes linked to the import tag (Position collision avoided)');
+      else fail('expected 2 import-tag links, got ' + links);
       const orig = edb.exec("SELECT Content FROM Note WHERE Title='Existing'");
       if (orig[0] && orig[0].values[0][0] === 'already here') ok('original note left untouched (non-destructive)');
       else fail('original note was altered');
