@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.37.0] — 2026-06-03
+
+### Added
+- **A much richer preview when you receive shared notes.** After you load a share file and tap Preview, the page now scrolls straight to the notes and opens up wider to fit them. The notes are shown in a clean, scrollable list with their publication, a colour dot for highlights, and their tags.
+- **Browse hundreds of notes by category.** Filter chips at the top let you jump between **All**, **Highlights**, and **Notes**, plus a chip for each **tag** — each showing how many there are — so a big share file is easy to skim before importing.
+- **See exactly what clashes.** When some incoming highlights land on verses you've already highlighted, the choice screen now **lists those specific notes** so you can see what's affected before you pick "Add as a separate layer" or "Import note only".
+- **See exactly what was added.** After importing, the confirmation screen now **lists every note that was added to your backup**, with the same colour dots and tags.
+
+---
+
 ## [2.36.1] — 2026-06-03
 
 ### Fixed

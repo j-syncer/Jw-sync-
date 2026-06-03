@@ -76,6 +76,28 @@
   .sh-safe{display:flex;align-items:flex-start;gap:7px;font-size:12.5px;line-height:1.45;color:#86efac;margin:0 0 14px}
   body.light .sh-safe{color:#15803d}
   .sh-choice{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  body.sh-wide #sh-main{max-width:960px}
+  .sh-prev-stats{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0}
+  .sh-chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 10px}
+  .sh-chip{font-size:12px;font-weight:700;color:#cbd5e1;background:rgba(2,6,20,.4);border:1px solid rgba(71,85,105,.45);border-radius:999px;padding:5px 12px;cursor:pointer;white-space:nowrap}
+  .sh-chip:hover{border-color:rgba(234,88,12,.6)}
+  .sh-chip-on{background:#ea580c;border-color:#ea580c;color:#fff}
+  body.light .sh-chip{color:#334155;background:#eef2f7}
+  .sh-prevlist{max-height:56vh;overflow-y:auto;border:1px solid rgba(71,85,105,.3);border-radius:12px;background:rgba(2,6,20,.25)}
+  body.light .sh-prevlist{background:#fff}
+  .sh-nrow{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border-bottom:1px solid rgba(71,85,105,.2)}
+  .sh-nrow:last-child{border-bottom:none}
+  .sh-dot{flex:none;width:13px;height:13px;border-radius:50%;margin-top:3px;border:1px solid rgba(255,255,255,.3);box-shadow:0 0 0 1px rgba(0,0,0,.15) inset}
+  .sh-dot-none{background:transparent!important;border-style:dashed;border-color:#475569}
+  .sh-nbody{min-width:0;flex:1}
+  .sh-ntitle{font-weight:700;color:#f1f5f9;font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  body.light .sh-ntitle{color:#0b2e58}
+  .sh-nex{color:#94a3b8;font-size:12px;margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .sh-nmeta{margin-top:5px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .sh-pill{font-size:10.5px;font-weight:700;color:#fb923c;background:rgba(234,88,12,.12);border:1px solid rgba(234,88,12,.35);border-radius:999px;padding:1px 7px}
+  .sh-pill-pub{color:#94a3b8;background:rgba(71,85,105,.2);border-color:rgba(71,85,105,.4)}
+  .sh-more{padding:10px 13px;color:#64748b;font-size:12px;text-align:center}
+  .sh-conflict{border:1px solid rgba(234,88,12,.4);border-radius:12px;background:rgba(234,88,12,.05);max-height:34vh;overflow-y:auto;margin:8px 0 14px}
   </style>
 </head>
 <body>
@@ -113,7 +135,7 @@
         add_to:'Add to my backup',add_h:'Choose the .jwlibrary backup you want these notes added to. You’ll get an updated copy to download.',
         adopt_done:'Added {n} notes to your backup',adopt_done_h:'Download the updated backup, then restore it in JW Library to see the notes.',download_updated:'Download updated backup',
         loading:'Reading your backup…',building:'Building file…',error:'Could not read that file.',
-        shared_tag:'Shared',tag_label:'Tag for imported notes',pm_safe:'Added as new notes — your own notes are never replaced.',ov_title:'Some verses are already highlighted',ov_q:'{n} highlight(s) land on verses you already highlighted. How should we add them?',ov_layer:'Add as a separate layer',ov_note:'Import note only',no_title:'Untitled',privacy:'Private: this file is made on your device and only contains the notes you chose. Share it only with people you trust.'},
+        shared_tag:'Shared',tag_label:'Tag for imported notes',pm_safe:'Added as new notes — your own notes are never replaced.',ov_title:'Some verses are already highlighted',ov_q:'{n} highlight(s) land on verses you already highlighted. How should we add them?',ov_layer:'Add as a separate layer',ov_note:'Import note only',cat_all:'All',cat_hl:'Highlights',cat_note:'Notes',conf_intro:'These notes are on verses you already highlighted:',imp_title:'Added to your backup',more_hint:'+{n} more — use the filters above to narrow',no_title:'Untitled',privacy:'Private: this file is made on your device and only contains the notes you chose. Share it only with people you trust.'},
       es:{title:'Compartir notas',lead:'Envía algunas de tus notas a otra persona, o agrega notas que alguien te envió. Todo ocurre en tu dispositivo; nada se sube.',
         send_t:'Enviar notas',send_d:'Elige notas de tu copia y crea un archivo pequeño para enviar a alguien.',
         recv_t:'Recibir notas',recv_d:'¿Tienes un archivo compartido? Previsualiza las notas y agrégalas a tu copia.',
@@ -132,7 +154,7 @@
         add_to:'Agregar a mi copia',add_h:'Elige la copia .jwlibrary donde quieres agregar estas notas. Obtendrás una copia actualizada para descargar.',
         adopt_done:'Se agregaron {n} notas a tu copia',adopt_done_h:'Descarga la copia actualizada y restáurala en JW Library para ver las notas.',download_updated:'Descargar copia actualizada',
         loading:'Leyendo tu copia…',building:'Creando archivo…',error:'No se pudo leer ese archivo.',
-        shared_tag:'Compartido',tag_label:'Etiqueta para las notas importadas',pm_safe:'Se agregan como notas nuevas — tus notas nunca se reemplazan.',ov_title:'Algunos versículos ya están resaltados',ov_q:'{n} resaltado(s) caen en versículos que ya resaltaste. ¿Cómo los agregamos?',ov_layer:'Agregar como capa aparte',ov_note:'Importar solo la nota',no_title:'Sin título',privacy:'Privado: este archivo se crea en tu dispositivo y solo contiene las notas que elegiste. Compártelo solo con personas de confianza.'},
+        shared_tag:'Compartido',tag_label:'Etiqueta para las notas importadas',pm_safe:'Se agregan como notas nuevas — tus notas nunca se reemplazan.',ov_title:'Algunos versículos ya están resaltados',ov_q:'{n} resaltado(s) caen en versículos que ya resaltaste. ¿Cómo los agregamos?',ov_layer:'Agregar como capa aparte',ov_note:'Importar solo la nota',cat_all:'Todas',cat_hl:'Resaltados',cat_note:'Notas',conf_intro:'Estas notas están en versículos que ya resaltaste:',imp_title:'Agregadas a tu copia',more_hint:'+{n} más — usa los filtros para acotar',no_title:'Sin título',privacy:'Privado: este archivo se crea en tu dispositivo y solo contiene las notas que elegiste. Compártelo solo con personas de confianza.'},
       pt:{title:'Compartilhar notas',lead:'Envie algumas notas para outra pessoa, ou adicione notas que alguém te enviou. Tudo acontece no seu dispositivo; nada é enviado.',
         send_t:'Enviar notas',send_d:'Escolha notas do seu backup e crie um arquivo pequeno para enviar.',
         recv_t:'Receber notas',recv_d:'Recebeu um arquivo? Veja as notas e adicione-as ao seu backup.',
@@ -151,7 +173,7 @@
         add_to:'Adicionar ao meu backup',add_h:'Escolha o backup .jwlibrary onde adicionar estas notas. Você receberá uma cópia atualizada.',
         adopt_done:'{n} notas adicionadas ao seu backup',adopt_done_h:'Baixe o backup atualizado e restaure-o no JW Library para ver as notas.',download_updated:'Baixar backup atualizado',
         loading:'Lendo seu backup…',building:'Criando arquivo…',error:'Não foi possível ler esse arquivo.',
-        shared_tag:'Compartilhado',tag_label:'Etiqueta para as notas importadas',pm_safe:'Adicionadas como notas novas — suas notas nunca são substituídas.',ov_title:'Alguns versículos já estão marcados',ov_q:'{n} marcação(ões) caem em versículos que você já marcou. Como adicioná-las?',ov_layer:'Adicionar como camada separada',ov_note:'Importar só a nota',no_title:'Sem título',privacy:'Privado: este arquivo é criado no seu dispositivo e só contém as notas que você escolheu. Compartilhe só com pessoas de confiança.'},
+        shared_tag:'Compartilhado',tag_label:'Etiqueta para as notas importadas',pm_safe:'Adicionadas como notas novas — suas notas nunca são substituídas.',ov_title:'Alguns versículos já estão marcados',ov_q:'{n} marcação(ões) caem em versículos que você já marcou. Como adicioná-las?',ov_layer:'Adicionar como camada separada',ov_note:'Importar só a nota',cat_all:'Todas',cat_hl:'Marcações',cat_note:'Notas',conf_intro:'Estas notas estão em versículos que você já marcou:',imp_title:'Adicionadas ao seu backup',more_hint:'+{n} mais — use os filtros para refinar',no_title:'Sem título',privacy:'Privado: este arquivo é criado no seu dispositivo e só contém as notas que você escolheu. Compartilhe só com pessoas de confiança.'},
       fr:{title:'Partager des notes',lead:'Envoyez certaines de vos notes à quelqu’un, ou ajoutez des notes qu’on vous a envoyées. Tout se passe sur votre appareil ; rien n’est envoyé.',
         send_t:'Envoyer des notes',send_d:'Choisissez des notes de votre sauvegarde et créez un petit fichier à envoyer.',
         recv_t:'Recevoir des notes',recv_d:'Un fichier partagé ? Affichez les notes et ajoutez-les à votre sauvegarde.',
@@ -170,7 +192,7 @@
         add_to:'Ajouter à ma sauvegarde',add_h:'Choisissez la sauvegarde .jwlibrary à laquelle ajouter ces notes. Vous obtiendrez une copie mise à jour.',
         adopt_done:'{n} notes ajoutées à votre sauvegarde',adopt_done_h:'Téléchargez la sauvegarde mise à jour, puis restaurez-la dans JW Library.',download_updated:'Télécharger la sauvegarde',
         loading:'Lecture de votre sauvegarde…',building:'Création du fichier…',error:'Impossible de lire ce fichier.',
-        shared_tag:'Partagé',tag_label:'Étiquette pour les notes importées',pm_safe:'Ajoutées comme nouvelles notes — vos notes ne sont jamais remplacées.',ov_title:'Certains versets sont déjà surlignés',ov_q:'{n} surlignage(s) tombent sur des versets déjà surlignés. Comment les ajouter ?',ov_layer:'Ajouter comme calque séparé',ov_note:'Importer la note seule',no_title:'Sans titre',privacy:'Privé : ce fichier est créé sur votre appareil et ne contient que les notes choisies. Ne le partagez qu’avec des personnes de confiance.'},
+        shared_tag:'Partagé',tag_label:'Étiquette pour les notes importées',pm_safe:'Ajoutées comme nouvelles notes — vos notes ne sont jamais remplacées.',ov_title:'Certains versets sont déjà surlignés',ov_q:'{n} surlignage(s) tombent sur des versets déjà surlignés. Comment les ajouter ?',ov_layer:'Ajouter comme calque séparé',ov_note:'Importer la note seule',cat_all:'Toutes',cat_hl:'Surlignages',cat_note:'Notes',conf_intro:'Ces notes sont sur des versets déjà surlignés :',imp_title:'Ajoutées à votre sauvegarde',more_hint:'+{n} de plus — utilisez les filtres pour affiner',no_title:'Sans titre',privacy:'Privé : ce fichier est créé sur votre appareil et ne contient que les notes choisies. Ne le partagez qu’avec des personnes de confiance.'},
       de:{title:'Notizen teilen',lead:'Sende einige deiner Notizen an jemanden – oder füge Notizen hinzu, die dir jemand geschickt hat. Alles passiert auf deinem Gerät; nichts wird hochgeladen.',
         send_t:'Notizen senden',send_d:'Wähle Notizen aus deinem Backup und erstelle eine kleine Datei zum Versenden.',
         recv_t:'Notizen empfangen',recv_d:'Eine geteilte Datei? Sieh dir die Notizen an und füge sie deinem Backup hinzu.',
@@ -189,7 +211,7 @@
         add_to:'Zu meinem Backup hinzufügen',add_h:'Wähle das .jwlibrary-Backup, dem diese Notizen hinzugefügt werden sollen. Du erhältst eine aktualisierte Kopie.',
         adopt_done:'{n} Notizen zu deinem Backup hinzugefügt',adopt_done_h:'Lade das aktualisierte Backup herunter und stelle es in JW Library wieder her.',download_updated:'Aktualisiertes Backup laden',
         loading:'Backup wird gelesen…',building:'Datei wird erstellt…',error:'Diese Datei konnte nicht gelesen werden.',
-        shared_tag:'Geteilt',tag_label:'Tag für importierte Notizen',pm_safe:'Werden als neue Notizen hinzugefügt — deine Notizen werden nie ersetzt.',ov_title:'Einige Verse sind bereits markiert',ov_q:'{n} Markierung(en) liegen auf bereits markierten Versen. Wie hinzufügen?',ov_layer:'Als separate Ebene hinzufügen',ov_note:'Nur Notiz importieren',no_title:'Ohne Titel',privacy:'Privat: Diese Datei entsteht auf deinem Gerät und enthält nur die gewählten Notizen. Teile sie nur mit vertrauenswürdigen Personen.'},
+        shared_tag:'Geteilt',tag_label:'Tag für importierte Notizen',pm_safe:'Werden als neue Notizen hinzugefügt — deine Notizen werden nie ersetzt.',ov_title:'Einige Verse sind bereits markiert',ov_q:'{n} Markierung(en) liegen auf bereits markierten Versen. Wie hinzufügen?',ov_layer:'Als separate Ebene hinzufügen',ov_note:'Nur Notiz importieren',cat_all:'Alle',cat_hl:'Markierungen',cat_note:'Notizen',conf_intro:'Diese Notizen liegen auf bereits markierten Versen:',imp_title:'Zu deinem Backup hinzugefügt',more_hint:'+{n} weitere — nutze die Filter zum Eingrenzen',no_title:'Ohne Titel',privacy:'Privat: Diese Datei entsteht auf deinem Gerät und enthält nur die gewählten Notizen. Teile sie nur mit vertrauenswürdigen Personen.'},
       it:{title:'Condividi note',lead:'Invia alcune note a un’altra persona, o aggiungi note che qualcuno ti ha inviato. Tutto avviene sul tuo dispositivo; niente viene caricato.',
         send_t:'Invia note',send_d:'Scegli note dal tuo backup e crea un piccolo file da inviare.',
         recv_t:'Ricevi note',recv_d:'Hai un file condiviso? Vedi le note e aggiungile al tuo backup.',
@@ -208,7 +230,7 @@
         add_to:'Aggiungi al mio backup',add_h:'Scegli il backup .jwlibrary a cui aggiungere queste note. Otterrai una copia aggiornata.',
         adopt_done:'{n} note aggiunte al tuo backup',adopt_done_h:'Scarica il backup aggiornato e ripristinalo in JW Library per vedere le note.',download_updated:'Scarica backup aggiornato',
         loading:'Lettura del backup…',building:'Creazione file…',error:'Impossibile leggere quel file.',
-        shared_tag:'Condiviso',tag_label:'Etichetta per le note importate',pm_safe:'Aggiunte come note nuove — le tue note non vengono mai sostituite.',ov_title:'Alcuni versetti sono già evidenziati',ov_q:'{n} evidenziazione/i su versetti già evidenziati. Come aggiungerle?',ov_layer:'Aggiungi come livello separato',ov_note:'Importa solo la nota',no_title:'Senza titolo',privacy:'Privato: questo file è creato sul tuo dispositivo e contiene solo le note scelte. Condividilo solo con persone fidate.'},
+        shared_tag:'Condiviso',tag_label:'Etichetta per le note importate',pm_safe:'Aggiunte come note nuove — le tue note non vengono mai sostituite.',ov_title:'Alcuni versetti sono già evidenziati',ov_q:'{n} evidenziazione/i su versetti già evidenziati. Come aggiungerle?',ov_layer:'Aggiungi come livello separato',ov_note:'Importa solo la nota',cat_all:'Tutte',cat_hl:'Evidenziazioni',cat_note:'Note',conf_intro:'Queste note sono su versetti già evidenziati:',imp_title:'Aggiunte al tuo backup',more_hint:'+{n} altre — usa i filtri per restringere',no_title:'Senza titolo',privacy:'Privato: questo file è creato sul tuo dispositivo e contiene solo le note scelte. Condividilo solo con persone fidate.'},
       ru:{title:'Поделиться заметками',lead:'Отправьте часть своих заметок другому человеку или добавьте заметки, которые прислали вам. Всё происходит на вашем устройстве; ничего не загружается.',
         send_t:'Отправить заметки',send_d:'Выберите заметки из копии и создайте небольшой файл для отправки.',
         recv_t:'Получить заметки',recv_d:'Получили файл? Просмотрите заметки и добавьте их в свою копию.',
@@ -227,7 +249,7 @@
         add_to:'Добавить в мою копию',add_h:'Выберите копию .jwlibrary, куда добавить заметки. Вы получите обновлённую копию.',
         adopt_done:'Добавлено заметок: {n}',adopt_done_h:'Скачайте обновлённую копию и восстановите её в JW Library, чтобы увидеть заметки.',download_updated:'Скачать обновлённую копию',
         loading:'Чтение копии…',building:'Создание файла…',error:'Не удалось прочитать этот файл.',
-        shared_tag:'Общие',tag_label:'Метка для импортированных заметок',pm_safe:'Добавляются как новые заметки — ваши заметки никогда не заменяются.',ov_title:'Некоторые стихи уже выделены',ov_q:'{n} выделени(й) на уже выделенных стихах. Как их добавить?',ov_layer:'Добавить отдельным слоем',ov_note:'Только заметку',no_title:'Без названия',privacy:'Конфиденциально: файл создаётся на вашем устройстве и содержит только выбранные заметки. Делитесь только с теми, кому доверяете.'},
+        shared_tag:'Общие',tag_label:'Метка для импортированных заметок',pm_safe:'Добавляются как новые заметки — ваши заметки никогда не заменяются.',ov_title:'Некоторые стихи уже выделены',ov_q:'{n} выделени(й) на уже выделенных стихах. Как их добавить?',ov_layer:'Добавить отдельным слоем',ov_note:'Только заметку',cat_all:'Все',cat_hl:'Выделения',cat_note:'Заметки',conf_intro:'Эти заметки на уже выделенных стихах:',imp_title:'Добавлено в вашу копию',more_hint:'+{n} ещё — используйте фильтры',no_title:'Без названия',privacy:'Конфиденциально: файл создаётся на вашем устройстве и содержит только выбранные заметки. Делитесь только с теми, кому доверяете.'},
       ja:{title:'ノートを共有',lead:'自分のノートを誰かに送ったり、送られたノートを追加したりできます。すべて端末内で行われ、アップロードはされません。',
         send_t:'ノートを送る',send_d:'バックアップからノートを選び、送る用の小さなファイルを作ります。',
         recv_t:'ノートを受け取る',recv_d:'共有ファイルがありますか？ノートを確認して自分のバックアップに追加します。',
@@ -246,7 +268,7 @@
         add_to:'自分のバックアップに追加',add_h:'これらのノートを追加する .jwlibrary バックアップを選択。更新版をダウンロードできます。',
         adopt_done:'{n} 件のノートを追加しました',adopt_done_h:'更新したバックアップをダウンロードし、JW Library に復元するとノートが表示されます。',download_updated:'更新したバックアップをダウンロード',
         loading:'バックアップを読み込み中…',building:'ファイルを作成中…',error:'そのファイルを読み込めませんでした。',
-        shared_tag:'共有',tag_label:'取り込むノートのタグ',pm_safe:'新しいノートとして追加されます — あなたのノートは置き換えられません。',ov_title:'一部の節は既にハイライト済み',ov_q:'{n} 件のハイライトは既にハイライト済みの節にあります。どう追加しますか？',ov_layer:'別レイヤーとして追加',ov_note:'ノートだけ取り込む',no_title:'無題',privacy:'プライベート：このファイルは端末内で作られ、選んだノートだけを含みます。信頼できる人とだけ共有してください。'},
+        shared_tag:'共有',tag_label:'取り込むノートのタグ',pm_safe:'新しいノートとして追加されます — あなたのノートは置き換えられません。',ov_title:'一部の節は既にハイライト済み',ov_q:'{n} 件のハイライトは既にハイライト済みの節にあります。どう追加しますか？',ov_layer:'別レイヤーとして追加',ov_note:'ノートだけ取り込む',cat_all:'すべて',cat_hl:'ハイライト',cat_note:'ノート',conf_intro:'これらは既にハイライト済みの節にあります：',imp_title:'バックアップに追加されました',more_hint:'他 {n} 件 — フィルターで絞り込み',no_title:'無題',privacy:'プライベート：このファイルは端末内で作られ、選んだノートだけを含みます。信頼できる人とだけ共有してください。'},
       ko:{title:'노트 공유',lead:'내 노트 일부를 다른 사람에게 보내거나, 받은 노트를 추가하세요. 모든 작업은 기기에서 이뤄지며 업로드되지 않습니다.',
         send_t:'노트 보내기',send_d:'백업에서 노트를 골라 보낼 작은 파일을 만듭니다.',
         recv_t:'노트 받기',recv_d:'공유 파일이 있나요? 노트를 미리 보고 내 백업에 추가하세요.',
@@ -265,7 +287,7 @@
         add_to:'내 백업에 추가',add_h:'이 노트를 추가할 .jwlibrary 백업을 선택하세요. 업데이트된 사본을 받게 됩니다.',
         adopt_done:'{n}개 노트를 백업에 추가했습니다',adopt_done_h:'업데이트된 백업을 다운로드하고 JW Library에 복원하면 노트가 보입니다.',download_updated:'업데이트된 백업 다운로드',
         loading:'백업을 읽는 중…',building:'파일을 만드는 중…',error:'그 파일을 읽을 수 없습니다.',
-        shared_tag:'공유됨',tag_label:'가져온 노트의 태그',pm_safe:'새 노트로 추가됩니다 — 기존 노트는 절대 교체되지 않습니다.',ov_title:'일부 구절은 이미 강조됨',ov_q:'{n}개의 강조 표시가 이미 강조한 구절에 있습니다. 어떻게 추가할까요?',ov_layer:'별도 레이어로 추가',ov_note:'노트만 가져오기',no_title:'제목 없음',privacy:'비공개: 이 파일은 기기에서 만들어지며 선택한 노트만 포함합니다. 신뢰하는 사람과만 공유하세요.'},
+        shared_tag:'공유됨',tag_label:'가져온 노트의 태그',pm_safe:'새 노트로 추가됩니다 — 기존 노트는 절대 교체되지 않습니다.',ov_title:'일부 구절은 이미 강조됨',ov_q:'{n}개의 강조 표시가 이미 강조한 구절에 있습니다. 어떻게 추가할까요?',ov_layer:'별도 레이어로 추가',ov_note:'노트만 가져오기',cat_all:'전체',cat_hl:'강조',cat_note:'노트',conf_intro:'다음은 이미 강조한 구절에 있습니다:',imp_title:'백업에 추가됨',more_hint:'+{n}개 더 — 필터로 좁히기',no_title:'제목 없음',privacy:'비공개: 이 파일은 기기에서 만들어지며 선택한 노트만 포함합니다. 신뢰하는 사람과만 공유하세요.'},
       tl:{title:'Ibahagi ang mga Tala',lead:'Magpadala ng ilang tala sa ibang tao, o magdagdag ng mga talang ipinadala sa iyo. Lahat ay nangyayari sa device mo; walang ina-upload.',
         send_t:'Magpadala ng tala',send_d:'Pumili ng mga tala mula sa backup mo at gumawa ng maliit na file na ipapadala.',
         recv_t:'Tumanggap ng tala',recv_d:'May ibinahaging file? Tingnan ang mga tala at idagdag sa backup mo.',
@@ -284,7 +306,7 @@
         add_to:'Idagdag sa backup ko',add_h:'Piliin ang .jwlibrary backup na pagdadagdagan ng mga talang ito. Makakakuha ka ng updated na kopya.',
         adopt_done:'Naidagdag ang {n} tala sa backup mo',adopt_done_h:'I-download ang updated na backup, tapos i-restore sa JW Library para makita ang mga tala.',download_updated:'I-download ang updated backup',
         loading:'Binabasa ang backup mo…',building:'Ginagawa ang file…',error:'Hindi mabasa ang file na iyon.',
-        shared_tag:'Ibinahagi',tag_label:'Tag para sa mga na-import na tala',pm_safe:'Idinaragdag bilang bagong tala — hindi kailanman papalitan ang iyong mga tala.',ov_title:'May mga tekstong naka-highlight na',ov_q:'{n} highlight ang nasa mga tekstong na-highlight mo na. Paano idaragdag?',ov_layer:'Idagdag bilang hiwalay na layer',ov_note:'Tala lang ang i-import',no_title:'Walang pamagat',privacy:'Pribado: ang file na ito ay ginawa sa device mo at naglalaman lang ng mga talang pinili mo. Ibahagi lang sa mga pinagkakatiwalaan.'}
+        shared_tag:'Ibinahagi',tag_label:'Tag para sa mga na-import na tala',pm_safe:'Idinaragdag bilang bagong tala — hindi kailanman papalitan ang iyong mga tala.',ov_title:'May mga tekstong naka-highlight na',ov_q:'{n} highlight ang nasa mga tekstong na-highlight mo na. Paano idaragdag?',ov_layer:'Idagdag bilang hiwalay na layer',ov_note:'Tala lang ang i-import',cat_all:'Lahat',cat_hl:'Mga highlight',cat_note:'Mga tala',conf_intro:'Ang mga talang ito ay nasa tekstong na-highlight mo na:',imp_title:'Naidagdag sa backup mo',more_hint:'+{n} pa — gamitin ang mga filter',no_title:'Walang pamagat',privacy:'Pribado: ang file na ito ay ginawa sa device mo at naglalaman lang ng mga talang pinili mo. Ibahagi lang sa mga pinagkakatiwalaan.'}
     };
     function getLang(){ try{ var l=localStorage.getItem('jwsync_lang'); if(l&&I18N[l]) return l; }catch(_){ } var n=(navigator.language||'en').slice(0,2); return I18N[n]?n:'en'; }
     function t(k,vars){ var L=I18N[getLang()]||I18N.en; var s=(L[k]!=null?L[k]:(I18N.en[k]!=null?I18N.en[k]:k)); if(vars) for(var v in vars) s=s.replace('{'+v+'}', vars[v]); return s; }
@@ -332,9 +354,27 @@
       return n;
     }
 
+    /* preview / summary rendering helpers */
+    var JWL_COLORS={1:'#fde047',2:'#86efac',3:'#7dd3fc',4:'#f9a8d4',5:'#fdba74',6:'#c4b5fd'};
+    function notePub(nd){ if(nd&&nd.pub) return String(nd.pub); if(nd&&nd.loc){ return pubLabel({BookNumber:nd.loc.BookNumber,ChapterNumber:nd.loc.ChapterNumber,LocTitle:nd.loc.Title,KeySymbol:nd.loc.KeySymbol}); } return ''; }
+    function noteRowHtml(nd){
+      var hl=noteHasHighlight(nd);
+      var col=hl?(JWL_COLORS[intval(nd.color)]||'#94a3b8'):null;
+      var dot=col?('<span class="sh-dot" style="background:'+col+'"></span>'):'<span class="sh-dot sh-dot-none"></span>';
+      var title=esc((nd.title&&String(nd.title).trim())||t('no_title'));
+      var ex=esc(stripHtml(String(nd.content||'')));
+      var pub=notePub(nd); var meta='';
+      if(pub) meta+='<span class="sh-pill sh-pill-pub">'+esc(pub)+'</span>';
+      (Array.isArray(nd.tags)?nd.tags:[]).slice(0,8).forEach(function(tg){ tg=String(tg||'').trim(); if(tg) meta+='<span class="sh-pill">'+esc(tg)+'</span>'; });
+      return '<div class="sh-nrow">'+dot+'<div class="sh-nbody"><div class="sh-ntitle">'+title+'</div>'+(ex?'<div class="sh-nex">'+ex+'</div>':'')+(meta?'<div class="sh-nmeta">'+meta+'</div>':'')+'</div></div>';
+    }
+    function findConflicts(db, notes, present){
+      var out=[]; notes.forEach(function(nd){ if(!noteHasHighlight(nd)) return; var locId=resolveLocationId(db, nd.loc, present, false); if(locId===null) return; var ex=existingRanges(db, locId); if(!ex.length) return; var rngs=normRanges(nd); if(rngs.some(function(r){ return ex.some(function(e){ return rangesOverlap(r,e); }); })) out.push(nd); });
+      return out;
+    }
     /* ───── home / mode chooser ───── */
     function renderHome(){
-      showNew(false);
+      showNew(false); document.body.classList.remove('sh-wide');
       document.getElementById('sh-htitle').textContent=t('title');
       var ic1='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
       var ic2='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>';
@@ -433,7 +473,7 @@
     /* ───── RECEIVE ───── */
     var recvEnv=null;
     function renderReceive(){
-      showNew(true);
+      showNew(true); document.body.classList.remove('sh-wide');
       setMain('<div class="sh-panel">'+stepsHtml('recv_how',['recv_s1','recv_s2','recv_s3'])+
         '<textarea class="sh-text" id="sh-paste" placeholder="'+esc(t('paste_ph'))+'"></textarea>'+
         '<div class="sh-footer"><button class="sh-btn sh-btn-ghost" id="sh-choose">'+esc(t('choose_file'))+'</button><button class="sh-btn" id="sh-prev">'+esc(t('preview'))+'</button></div>'+
@@ -445,19 +485,39 @@
       document.getElementById('sh-choose').onclick=function(){ pickFile('.json,.jwshare,application/json',function(f){ var r=new FileReader(); r.onload=function(){ ta.value=String(r.result||''); doPreview(); }; r.readAsText(f); }); };
       document.getElementById('sh-prev').onclick=doPreview;
       function doPreview(){
-        var out=document.getElementById('sh-prevout'); out.innerHTML='';
+        var out=document.getElementById('sh-prevout'); if(!out) return; out.innerHTML='';
         var env=null; try{ env=JSON.parse(document.getElementById('sh-paste').value); }catch(_){ }
-        if(!env||env.app!=='jwsync'||!Array.isArray(env.notes)){ out.innerHTML='<div class="sh-err">'+esc(t('invalid'))+'</div>'; return; }
-        recvEnv=env;
-        var list='';
-        env.notes.slice(0,200).forEach(function(nd){ list+='<div class="sh-item"><div class="sh-item-body"><div class="sh-item-title">'+esc((nd.title&&String(nd.title).trim())||t('no_title'))+'</div><div class="sh-item-ex">'+esc(stripHtml(String(nd.content||'')))+'</div></div></div>'; });
-        out.innerHTML='<h2 class="sh-section-title" style="margin-top:20px">'+esc(t('prev_t'))+' · '+esc(t('sel_count',{n:env.notes.length}))+'</h2>'+
-          '<p class="sh-section-help">'+esc(t('prev_h'))+'</p><div class="sh-list">'+list+'</div>'+
+        if(!env||env.app!=='jwsync'||!Array.isArray(env.notes)){ document.body.classList.remove('sh-wide'); out.innerHTML='<div class="sh-err">'+esc(t('invalid'))+'</div>'; return; }
+        recvEnv=env; document.body.classList.add('sh-wide');
+        var notes=env.notes, nHl=0, nPlain=0, tagCounts={};
+        notes.forEach(function(nd){ if(noteHasHighlight(nd)) nHl++; else nPlain++; (Array.isArray(nd.tags)?nd.tags:[]).forEach(function(tg){ tg=String(tg||'').trim(); if(tg) tagCounts[tg]=(tagCounts[tg]||0)+1; }); });
+        var tagNames=Object.keys(tagCounts).sort(function(a,b){ return tagCounts[b]-tagCounts[a]; });
+        var curFilter={type:'all'}, CAP=300;
+        function matches(nd){ if(curFilter.type==='all') return true; if(curFilter.type==='hl') return noteHasHighlight(nd); if(curFilter.type==='plain') return !noteHasHighlight(nd); if(curFilter.type==='tag') return (Array.isArray(nd.tags)?nd.tags:[]).some(function(tg){ return String(tg)===curFilter.tag; }); return true; }
+        function renderList(){
+          var shown=notes.filter(matches), html='';
+          for(var i=0;i<shown.length&&i<CAP;i++){ html+=noteRowHtml(shown[i]); }
+          if(shown.length>CAP) html+='<div class="sh-more">'+esc(t('more_hint',{n:shown.length-CAP}))+'</div>';
+          if(!shown.length) html+='<div class="sh-more">—</div>';
+          var lc=document.getElementById('sh-prevlist'); if(lc) lc.innerHTML=html;
+          Array.prototype.forEach.call(out.querySelectorAll('.sh-chip'),function(ch){ var key=curFilter.type==='tag'?('tag:'+curFilter.tag):curFilter.type; ch.classList.toggle('sh-chip-on', ch.getAttribute('data-f')===key); });
+        }
+        var chips='<button class="sh-chip" data-f="all">'+esc(t('cat_all'))+' ('+notes.length+')</button>';
+        if(nHl) chips+='<button class="sh-chip" data-f="hl">'+esc(t('cat_hl'))+' ('+nHl+')</button>';
+        if(nPlain) chips+='<button class="sh-chip" data-f="plain">'+esc(t('cat_note'))+' ('+nPlain+')</button>';
+        tagNames.slice(0,24).forEach(function(tg){ chips+='<button class="sh-chip" data-f="tag:'+esc(tg)+'">'+esc(tg)+' ('+tagCounts[tg]+')</button>'; });
+        out.innerHTML='<h2 class="sh-section-title" style="margin-top:20px">'+esc(t('prev_t'))+' · '+esc(t('sel_count',{n:notes.length}))+'</h2>'+
+          '<p class="sh-section-help">'+esc(t('prev_h'))+'</p>'+
+          '<div class="sh-chips">'+chips+'</div>'+
+          '<div class="sh-prevlist" id="sh-prevlist"></div>'+
           '<p class="sh-section-help" style="margin-top:16px">'+esc(t('add_h'))+'</p>'+
           '<div class="sh-tagrow"><label class="sh-taglabel" for="sh-tag">'+esc(t('tag_label'))+'</label><input id="sh-tag" class="sh-taginput" type="text" value="'+esc(t('shared_tag'))+'" maxlength="60"></div>'+
           '<p class="sh-safe"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:1px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>'+esc(t('pm_safe'))+'</span></p>'+
           '<button class="sh-btn" id="sh-addto">'+esc(t('add_to'))+'</button>';
+        renderList();
+        Array.prototype.forEach.call(out.querySelectorAll('.sh-chip'),function(ch){ ch.onclick=function(){ var f=ch.getAttribute('data-f'); if(f.indexOf('tag:')===0) curFilter={type:'tag',tag:f.slice(4)}; else curFilter={type:f}; renderList(); }; });
         document.getElementById('sh-addto').onclick=function(){ var tg=document.getElementById('sh-tag'); var tag=(tg&&String(tg.value||'').trim())||t('shared_tag'); pickFile('.jwlibrary',function(f){ adoptIntoBackup(f, env.notes, tag); }); };
+        try{ out.scrollIntoView({behavior:'smooth',block:'start'}); }catch(_){ try{ out.scrollIntoView(); }catch(__){} }
       }
     }
     var pendingAdopt=null;
@@ -467,18 +527,18 @@
       var locPresent=tableCols(db,'Location'); var noteCols=tableCols(db,'Note');
       var hasUserMark=tableCols(db,'UserMark').length>0; var umCols=hasUserMark?tableCols(db,'UserMark'):[];
       var hasBlockRange=tableCols(db,'BlockRange').length>0;
-      var added=0, highlights=0;
+      var added=0, highlights=0, imported=[];
       function tagId(name){ var s=String(name).replace(/'/g,"''"); var r=rows(db,"SELECT TagId FROM Tag WHERE Name='"+s+"' COLLATE NOCASE"); if(r.length) return r[0].TagId; db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]); return rows(db,'SELECT last_insert_rowid() AS id')[0].id; }
       function nextTagPos(tid){ var r=rows(db,'SELECT COALESCE(MAX(Position),-1)+1 AS p FROM TagMap WHERE TagId='+(tid|0)); return r.length?r[0].p:0; }
       try{ db.run('PRAGMA foreign_keys=OFF;'); }catch(_){ }
       notes.forEach(function(nd){ try{
         var title=(typeof nd.title==='string')?nd.title:''; var content=sanitizeNoteHtml((typeof nd.content==='string')?nd.content:'');
         var hasHl = !!(noteHasHighlight(nd) && hasUserMark && hasBlockRange && locPresent.length);
-        var locId=null, userMarkId=null, rngs=hasHl?normRanges(nd):[];
+        var locId=null, userMarkId=null, rngs=hasHl?normRanges(nd):[], mode='plain';
         if(hasHl){
           locId=resolveLocationId(db, nd.loc, locPresent, true);
           var overlaps = locId!==null && existingRanges(db, locId).some(function(e){ return rngs.some(function(r){ return rangesOverlap(r,e); }); });
-          var makeLayer = (!overlaps) || (overlapMode==='layer');
+          var makeLayer = (!overlaps) || (overlapMode==='layer'); mode=makeLayer?'layer':'note';
           if(makeLayer && locId!==null){
             var cc=['ColorIndex','LocationId','UserMarkGuid','Version'], vv=[intval(nd.color), locId, uuid(), 1];
             if(umCols.indexOf('StyleIndex')>=0){ cc.push('StyleIndex'); vv.push(intval(nd.style)); }
@@ -498,27 +558,39 @@
         if(locId!==null && noteCols.indexOf('LocationId')>=0){ nc.push('LocationId'); nv.push(locId); }
         db.run('INSERT INTO Note ('+nc.join(',')+') VALUES ('+nc.map(function(){return '?';}).join(',')+')', nv);
         var noteId=lastId(db);
-        var names=[label].concat(Array.isArray(nd.tags)?nd.tags:[]); var seen={};
-        names.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()]) return; seen[tn.toLowerCase()]=1; var tid=tagId(tn); try{ db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tid,noteId,nextTagPos(tid)]); }catch(_){ } });
+        var allTags=[label].concat(Array.isArray(nd.tags)?nd.tags:[]), seen={}, applied=[];
+        allTags.forEach(function(tn){ tn=String(tn||'').trim(); if(!tn||seen[tn.toLowerCase()]) return; seen[tn.toLowerCase()]=1; var tid=tagId(tn); try{ db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tid,noteId,nextTagPos(tid)]); applied.push(tn); }catch(_){ } });
+        imported.push({ title:nd.title, content:nd.content, pub:notePub(nd), loc:nd.loc, color:nd.color, ranges:nd.ranges, tags:applied, mode:mode });
         added++;
       }catch(e){ console.error('adopt',e); } });
-      return { added:added, highlights:highlights };
+      return { added:added, highlights:highlights, imported:imported };
     }
     function finishAdopt(ctx, notes, tagLabel, overlapMode, file){
       setMain('<div class="sh-state"><div class="sh-spin"></div><div>'+esc(t('building'))+'</div></div>');
+      var stats=null;
       return Promise.resolve().then(function(){
-        var stats=runAdopt(ctx.db, notes, tagLabel, overlapMode);
+        stats=runAdopt(ctx.db, notes, tagLabel, overlapMode);
         var bytes=ctx.db.export(); ctx.db.close(); ctx.zip.file(ctx.dbKey, bytes);
-        var added=stats.added;
-        return ctx.zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){ return { blob:blob, added:added, name:(file&&file.name)||'backup.jwlibrary' }; });
+        return ctx.zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){ return { blob:blob, added:stats.added, name:(file&&file.name)||'backup.jwlibrary' }; });
       }).then(function(res){
         var base=(res.name||'backup').replace(/\.jwlibrary$/i,'');
-        setMain('<div class="sh-panel"><p class="sh-ok">✓ '+esc(t('adopt_done',{n:res.added}))+'</p><p class="sh-section-help">'+esc(t('adopt_done_h'))+'</p><button class="sh-btn" id="sh-dlu">'+esc(t('download_updated'))+'</button></div>');
+        var imp=(stats&&stats.imported)||[], list='';
+        for(var i=0;i<imp.length&&i<300;i++){ list+=noteRowHtml(imp[i]); }
+        if(imp.length>300) list+='<div class="sh-more">'+esc(t('more_hint',{n:imp.length-300}))+'</div>';
+        setMain('<div class="sh-panel"><p class="sh-ok">✓ '+esc(t('adopt_done',{n:res.added}))+'</p><p class="sh-section-help">'+esc(t('adopt_done_h'))+'</p>'+
+          '<button class="sh-btn" id="sh-dlu">'+esc(t('download_updated'))+'</button>'+
+          (list?('<h2 class="sh-section-title" style="margin-top:22px">'+esc(t('imp_title'))+'</h2><div class="sh-prevlist" style="margin-top:8px">'+list+'</div>'):'')+'</div>');
         document.getElementById('sh-dlu').onclick=function(){ var url=URL.createObjectURL(res.blob); var a=document.createElement('a'); a.href=url; a.download='updated_'+base+'.jwlibrary'; document.body.appendChild(a); a.click(); document.body.removeChild(a); setTimeout(function(){URL.revokeObjectURL(url);},3000); };
       }).catch(function(e){ console.error(e); setMain('<div class="sh-state"><div class="sh-err">'+esc(t('error'))+'</div><button class="sh-btn sh-btn-ghost" id="sh-rb">'+esc(t('back'))+'</button></div>'); var rb=document.getElementById('sh-rb'); if(rb) rb.onclick=renderReceive; });
     }
-    function renderOverlapChoice(n){
-      setMain('<div class="sh-panel"><h2 class="sh-section-title">'+esc(t('ov_title'))+'</h2><p class="sh-section-help">'+esc(t('ov_q',{n:n}))+'</p><div class="sh-choice"><button class="sh-btn" id="sh-ov-layer">'+esc(t('ov_layer'))+'</button><button class="sh-btn sh-btn-ghost" id="sh-ov-note">'+esc(t('ov_note'))+'</button></div></div>');
+    function renderOverlapChoice(conflicts){
+      var n=conflicts.length, list='';
+      for(var i=0;i<conflicts.length&&i<200;i++){ list+=noteRowHtml(conflicts[i]); }
+      if(conflicts.length>200) list+='<div class="sh-more">'+esc(t('more_hint',{n:conflicts.length-200}))+'</div>';
+      setMain('<div class="sh-panel"><h2 class="sh-section-title">'+esc(t('ov_title'))+'</h2><p class="sh-section-help">'+esc(t('ov_q',{n:n}))+'</p>'+
+        '<p class="sh-section-help" style="margin-top:8px">'+esc(t('conf_intro'))+'</p>'+
+        '<div class="sh-conflict">'+list+'</div>'+
+        '<div class="sh-choice"><button class="sh-btn" id="sh-ov-layer">'+esc(t('ov_layer'))+'</button><button class="sh-btn sh-btn-ghost" id="sh-ov-note">'+esc(t('ov_note'))+'</button></div></div>');
       document.getElementById('sh-ov-layer').onclick=function(){ chooseAdopt('layer'); };
       document.getElementById('sh-ov-note').onclick=function(){ chooseAdopt('note'); };
     }
@@ -533,8 +605,8 @@
         .then(function(zip){ var k=Object.keys(zip.files).find(function(n){return /userdata\.db$/i.test(n);}); if(!k) throw new Error('no db'); return zip.file(k).async('uint8array').then(function(bytes){ return { zip:zip, dbKey:k, db:new SQL.Database(bytes) }; }); })
         .then(function(ctx){
           var present=tableCols(ctx.db,'Location');
-          var ov=countOverlaps(ctx.db, notes, present);
-          if(ov>0){ pendingAdopt={ ctx:ctx, notes:notes, tag:tagLabel, file:file }; renderOverlapChoice(ov); return; }
+          var conflicts=findConflicts(ctx.db, notes, present);
+          if(conflicts.length>0){ pendingAdopt={ ctx:ctx, notes:notes, tag:tagLabel, file:file }; renderOverlapChoice(conflicts); return; }
           return finishAdopt(ctx, notes, tagLabel, 'layer', file);
         })
         .catch(function(e){ console.error(e); setMain('<div class="sh-state"><div class="sh-err">'+esc(t('error'))+'</div><button class="sh-btn sh-btn-ghost" id="sh-rb">'+esc(t('back'))+'</button></div>'); var rb=document.getElementById('sh-rb'); if(rb) rb.onclick=renderReceive; });

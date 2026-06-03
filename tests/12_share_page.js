@@ -131,15 +131,32 @@ function bootShare() {
     await wait(40);
     win.__shRenderReceive();
     await wait(40);
-    const envelope = JSON.stringify({ v: 1, app: 'jwsync', kind: 'notes', notes: [
-      { title: 'Shared one', content: 'first shared note', tags: ['Study'] },
-      { title: 'Shared two', content: 'second shared note', tags: [] },
+    const envelope = JSON.stringify({ v: 2, app: 'jwsync', kind: 'notes', notes: [
+      { title: 'Shared one', content: 'first shared note', tags: ['Study'], pub: 'Genesis 1', color: 3,
+        loc: { BookNumber: 1, ChapterNumber: 1, IssueTagNumber: 0, KeySymbol: 'nwt', MepsLanguage: 0, Type: 0 },
+        ranges: [{ blockType: 2, identifier: 5, startToken: 0, endToken: 4 }] },
+      { title: 'Shared two', content: 'second shared note', tags: [], pub: 'Watchtower' },
     ] });
     doc.getElementById('sh-paste').value = envelope;
     doc.getElementById('sh-prev').click();
     async function until(p, l, ms = 4000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
-    await until(() => doc.querySelectorAll('#sh-prevout .sh-item').length === 2, 'preview list');
-    ok('shared notes preview (2 items, read-only)');
+    await until(() => doc.querySelectorAll('#sh-prevlist .sh-nrow').length === 2, 'preview list');
+    ok('shared notes preview (2 items, scrollable list)');
+    if (doc.body.classList.contains('sh-wide')) ok('preview widens the window');
+    else fail('preview did not widen the window');
+    const chips = [...doc.querySelectorAll('.sh-chip')].map(c => c.textContent);
+    if (chips.some(c => /All \(2\)/.test(c)) && chips.some(c => /Highlights \(1\)/.test(c)) && chips.some(c => /Notes \(1\)/.test(c)))
+      ok('category chips show counts (All / Highlights / Notes)');
+    else fail('category chips wrong: ' + chips.join(' | '));
+    if (chips.some(c => /Study \(1\)/.test(c))) ok('tag chip rendered');
+    else fail('tag chip missing: ' + chips.join(' | '));
+    if (doc.querySelectorAll('#sh-prevlist .sh-dot:not(.sh-dot-none)').length === 1) ok('highlighted note shows a colour dot');
+    else fail('colour dot count wrong');
+    // filter to Highlights only
+    [...doc.querySelectorAll('.sh-chip')].find(c => /Highlights/.test(c.textContent)).click();
+    await wait(20);
+    if (doc.querySelectorAll('#sh-prevlist .sh-nrow').length === 1) ok('filtering by Highlights narrows the list');
+    else fail('highlight filter did not narrow: ' + doc.querySelectorAll('#sh-prevlist .sh-nrow').length);
     if (doc.getElementById('sh-addto')) ok('"Add to my backup" action offered');
     else fail('add-to-backup action missing');
     dom.window.close();
@@ -165,6 +182,13 @@ function bootShare() {
     await until(() => doc.querySelector('.sh-ok'), 'adopt done screen');
     if (/2/.test(doc.querySelector('.sh-ok').textContent)) ok('adopt confirms 2 notes added');
     else fail('adopt count wrong: ' + doc.querySelector('.sh-ok').textContent);
+    // the done screen lists the imported notes
+    const impRows = doc.querySelectorAll('.sh-panel .sh-prevlist .sh-nrow');
+    if (impRows.length === 2) ok('done screen lists the 2 imported notes');
+    else fail('imported-notes summary wrong: ' + impRows.length);
+    if ([...impRows].some(r => /Gift/.test(r.textContent)) && [...impRows].some(r => /Grace/.test(r.textContent)))
+      ok('imported summary shows the note titles');
+    else fail('imported summary missing titles');
     const dlu = doc.getElementById('sh-dlu');
     if (dlu) { dlu.click(); await until(() => blob !== null, 'updated backup blob'); }
     else fail('download button missing');
@@ -187,6 +211,41 @@ function bootShare() {
       else fail('original note was altered');
       edb.close();
     }
+    dom.window.close();
+  }
+
+  section('Receive — conflict screen lists the clashing notes');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    win.__shRenderReceive(); await wait(20);
+    // backup already has a highlight on Genesis 1, tokens 0-4
+    const backupBuf = await buildBackup(SQL, [
+      { id: 1, title: 'My note', content: 'mine', loc: 1, hl: { color: 1, blockType: 2, identifier: 5, start: 0, end: 4 } },
+    ]);
+    const fileLike = { name: 'mybackup.jwlibrary', arrayBuffer: async () => backupBuf };
+    const incoming = [
+      { title: 'Clashes', content: 'overlapping', tags: ['Study'], pub: 'Genesis 1', color: 3,
+        loc: { BookNumber: 1, ChapterNumber: 1, DocumentId: null, Track: null, IssueTagNumber: 0, KeySymbol: 'nwt', MepsLanguage: 0, Type: 0 },
+        ranges: [{ blockType: 2, identifier: 5, startToken: 0, endToken: 4 }] },
+      { title: 'NoClash', content: 'elsewhere', tags: [], pub: 'Watchtower' },
+    ];
+    let blob = null;
+    win.URL.createObjectURL = (b) => { blob = b; return 'blob:upd'; };
+    win.URL.revokeObjectURL = () => {};
+    win.__shAdopt(fileLike, incoming, 'Shared');
+    async function until(p, l, ms = 9000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.getElementById('sh-ov-note'), 'conflict choice screen');
+    const confRows = doc.querySelectorAll('.sh-conflict .sh-nrow');
+    if (confRows.length === 1 && /Clashes/.test(confRows[0].textContent))
+      ok('conflict screen lists exactly the clashing note');
+    else fail('conflict list wrong: ' + confRows.length + ' [' + [...confRows].map(r => r.textContent.slice(0, 12)).join(',') + ']');
+    if (doc.getElementById('sh-ov-layer') && doc.getElementById('sh-ov-note')) ok('both conflict options offered');
+    else fail('conflict options missing');
+    doc.getElementById('sh-ov-note').click();
+    await until(() => doc.querySelector('.sh-ok'), 'done after note-only');
+    if (/2/.test(doc.querySelector('.sh-ok').textContent)) ok('both notes imported after choosing note-only');
+    else fail('post-conflict count wrong: ' + doc.querySelector('.sh-ok').textContent);
     dom.window.close();
   }
 
