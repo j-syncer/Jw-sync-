@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.34.0] — 2026-06-03
+
+### Added
+- **Receive a friend's shared notes right inside the Merge Tool.** If someone sent you a `.jwshare.json`, you can now:
+  - **Attach it before merging** — a "Got notes from a friend?" panel appears on the merge screen; the shared notes are folded into your merged backup automatically when the merge finishes.
+  - **Add them after merging** — the post-merge screen has a new **"Add notes a friend shared"** button that drops them into your freshly-merged file and gives you the updated download.
+- Adopted notes are tagged **"Shared"** (plus any tags the sender included) so you can always find what came from a friend. Everything stays on your device — nothing is uploaded.
+
+---
+
 ## [2.33.0] — 2026-06-03
 
 ### Changed

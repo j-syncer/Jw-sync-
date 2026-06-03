@@ -294,6 +294,19 @@ for (const path of FILES) {
     else ok('Two-level nav: language picker is a direct #site-nav child');
   }
 
+  // 8m) Receive shared notes in merge (v2.34.0, beta-only)
+  if (isBeta) {
+    if (c.includes('window.__jwAdoptSharedIntoBuffer') && c.includes('window.__jwParseShareEnvelope'))
+      ok('Receive-in-merge core API present');
+    else fail('Receive-in-merge core API missing');
+    if (c.includes('data-jwc-addshared') && c.includes('window.__jwReceivePickAndAdopt'))
+      ok('End-of-merge "add shared notes" button wired');
+    else fail('End-of-merge add-shared button missing');
+    if (c.includes('window.__jwReceiveOnCelebration') && c.includes('jwr-panel'))
+      ok('Pre-merge attach + auto-adopt hooks present');
+    else fail('Pre-merge receive hooks missing');
+  }
+
   // 8j2) Browse tab strip scrolls on overflow (mobile) — v2.30.0
   if (isBeta) {
     if (!/\.jb-tabs\{[^}]*overflow-x:auto/.test(c)) fail('Browse tab strip is not horizontally scrollable (mobile cut-off)');
