@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.41.0] — 2026-06-03
+
+### Added — Study Stats: four more showpieces (beta)
+- **Word Cloud** — analyzes the actual text of your notes (on-device) and shows the words you write most as a gorgeous sized, colored cloud — revealing *what* you study, not just how much.
+- **Your Study Story** — an animated milestone timeline: your first note, each growth stage you reached, your longest-streak start, your busiest day, and your latest note — in order.
+- **What's Next** — a motivating panel with a pace forecast ("~N weeks to your next stage") and progress bars toward your closest upcoming milestones.
+- **Shareable Card** — generate a beautiful image of your stats (your stage, signature, and headline numbers) to download or share, drawn on-device.
+
+All localized across 10 languages.
+
+---
+
 ## [2.40.0] — 2026-06-03
 
 ### Added — Study Stats "character sheet" (beta)

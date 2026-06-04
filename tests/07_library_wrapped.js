@@ -70,11 +70,11 @@ async function buildLibrary(SQL, opts) {
   db.run('INSERT INTO Location VALUES (3,66,1,null,null,null,"nwt",0,0,"Revelation")');
 
   const notes = opts.notes || [
-    { id: 1, guid: 'g1', title: 'Faith',  content: 'Hope',     lastMod: '2020-03-15 10:00:00', locId: 1 },
-    { id: 2, guid: 'g2', title: 'Love',   content: 'Patience', lastMod: '2021-06-20 12:00:00', locId: 1 },
-    { id: 3, guid: 'g3', title: 'Peace',  content: 'Calm',     lastMod: '2022-11-05 08:00:00', locId: 2 },
-    { id: 4, guid: 'g4', title: 'Joy',    content: 'Happy',    lastMod: '2023-01-30 09:00:00', locId: 2 },
-    { id: 5, guid: 'g5', title: 'Grace',  content: 'Gift',     lastMod: '2023-07-14 16:00:00', locId: 3 },
+    { id: 1, guid: 'g1', title: 'Faith',  content: 'faith hope trust endure',    lastMod: '2020-03-15 10:00:00', locId: 1 },
+    { id: 2, guid: 'g2', title: 'Love',   content: 'love patience kindness',      lastMod: '2021-06-20 12:00:00', locId: 1 },
+    { id: 3, guid: 'g3', title: 'Peace',  content: 'peace calm storm courage',    lastMod: '2022-11-05 08:00:00', locId: 2 },
+    { id: 4, guid: 'g4', title: 'Joy',    content: 'joy gladness heart rejoice',  lastMod: '2023-01-30 09:00:00', locId: 2 },
+    { id: 5, guid: 'g5', title: 'Grace',  content: 'grace gift mercy kindness',   lastMod: '2023-07-14 16:00:00', locId: 3 },
   ];
   notes.forEach(n => {
     db.run('INSERT INTO Note (NoteId,Guid,UserMarkId,LocationId,Title,Content,LastModified) VALUES (?,?,?,?,?,?,?)',
@@ -358,6 +358,32 @@ async function waitForStats(doc, timeoutMs) {
         const achTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /achiev|logro|conquist|réalis|erfolg|obiett|достиж|実績|업적|tagumpay/i.test(el.textContent));
         if (achTitle) ok('achievements section titled correctly');
         else fail('achievements title missing');
+
+        // ── v2.41 Word Cloud / Study Story / What's Next / Shareable Card ──
+        const wcWords = doc.querySelectorAll('.jww-wc-word');
+        if (wcWords.length >= 4) ok('word cloud rendered (' + wcWords.length + ' themed words)');
+        else fail('word cloud missing: ' + wcWords.length);
+        const stItems = doc.querySelectorAll('.jww-story .jww-st-item');
+        if (stItems.length >= 2) ok('study story timeline rendered (' + stItems.length + ' milestones)');
+        else fail('study story missing: ' + stItems.length);
+        const nxRows = doc.querySelectorAll('.jww-nx-row');
+        if (nxRows.length >= 1 && doc.querySelector('.jww-nx-fill')) ok("what's next milestones rendered (" + nxRows.length + ')');
+        else fail("what's next missing: " + nxRows.length);
+        const cardBtn = doc.getElementById('jww-card-dl');
+        if (cardBtn) ok('shareable card download button rendered');
+        else fail('shareable card button missing');
+        // exercise the card-draw path with a stubbed canvas (no real rendering in JSDOM)
+        let drewCard = false;
+        win.HTMLCanvasElement.prototype.getContext = function () {
+          drewCard = true;
+          return { createLinearGradient: () => ({ addColorStop() {} }), createRadialGradient: () => ({ addColorStop() {} }),
+            fillRect() {}, beginPath() {}, arc() {}, fill() {}, fillText() {}, save() {}, restore() {},
+            set fillStyle(v) {}, set font(v) {}, set textAlign(v) {}, set shadowColor(v) {}, set shadowBlur(v) {} };
+        };
+        win.HTMLCanvasElement.prototype.toBlob = function (cb) { cb(null); };
+        if (cardBtn) cardBtn.click();
+        if (drewCard) ok('card image is drawn on demand (canvas path runs)');
+        else fail('card draw path did not run');
       }
     }
     dom.window.close();
