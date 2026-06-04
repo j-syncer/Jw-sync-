@@ -339,6 +339,28 @@ async function waitForStats(doc, timeoutMs) {
         if (doc.querySelector('.jww-jr-sig') && (doc.querySelector('.jww-jr-sig').textContent || '').trim())
           ok('study signature persona shown');
         else fail('study signature missing');
+        // v2.42 stage description + "what it took" inline
+        if (doc.querySelector('.jww-jr-desc') && (doc.querySelector('.jww-jr-desc').textContent || '').trim().length > 10)
+          ok('stage description shown inline');
+        else fail('stage description missing');
+        if (doc.querySelector('.jww-jr-took') && doc.querySelector('.jww-jr-hint'))
+          ok('"what it took" + tap hint shown');
+        else fail('what-it-took / hint missing');
+        // tapping the stage opens the celebration/detail modal with description, requirement, and ladder
+        const jrClick = doc.querySelector('.jww-journey-click');
+        if (jrClick) {
+          jrClick.click();
+          const modal = doc.querySelector('.jww-stage-modal');
+          if (modal && (doc.querySelector('.jww-cel-stage').textContent || '').trim()) ok('stage detail modal opens on tap');
+          else fail('stage modal did not open');
+          if (modal && modal.querySelectorAll('.jww-cel-block').length === 3) ok('modal shows "what it says / what it took / your journey"');
+          else fail('modal blocks wrong: ' + (modal && modal.querySelectorAll('.jww-cel-block').length));
+          const rungs = modal ? modal.querySelectorAll('.jww-ladder .jww-rung') : [];
+          if (rungs.length === 6 && modal.querySelector('.jww-rung-cur')) ok('stage ladder shows all 6 levels with current highlighted');
+          else fail('stage ladder wrong: ' + rungs.length);
+          const xb = modal && modal.querySelector('.jww-x');
+          if (xb) { xb.click(); if (!doc.querySelector('.jww-stage-modal')) ok('stage modal closes'); else fail('modal did not close'); }
+        } else fail('journey not clickable');
         if (doc.querySelector('.jww-prof-area') && doc.querySelectorAll('.jww-prof-val').length === 6)
           ok('Study Profile trait radar rendered (6 traits)');
         else fail('profile radar wrong: ' + doc.querySelectorAll('.jww-prof-val').length);

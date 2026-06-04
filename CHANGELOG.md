@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.42.0] — 2026-06-03
+
+### Added — Study Journey: stages explained + level-up celebrations (beta)
+- **Each stage now means something.** Your Study Journey shows a short description of *what this stage says about you* and *what it took* to reach it, right on the card.
+- **Tap your stage** to open a beautiful detail view: a big glossy orb, your signature persona, the full meaning, the requirement you met, and **a ladder of all six stages** (Seed → Sprout → Sapling → Tree → Grove → Orchard) showing where you are and what's ahead.
+- **Level-up celebration.** When you reach a new stage, it's celebrated with a confetti burst and the detail view, so a promotion actually feels like a moment.
+- **Your stage is now lifetime-based** (total notes), so it stays consistent no matter which service year you're viewing.
+
+All localized across 10 languages.
+
+---
+
 ## [2.41.0] — 2026-06-03
 
 ### Added — Study Stats: four more showpieces (beta)
