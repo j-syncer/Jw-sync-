@@ -764,6 +764,8 @@ body.light #jws-loading { background:#f4f8ff; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  row-gap: 2px;
   padding: 0 20px;
   height: 48px;
   background: rgba(4,15,34,.92);
@@ -782,17 +784,38 @@ body.light #jws-loading { background:#f4f8ff; }
   letter-spacing: -.3px;
 }
 .site-nav-logo:hover { color: #ea580c; }
-.site-nav-links { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.site-nav-links { display: flex; align-items: center; gap: 6px; flex: 1 1 auto; justify-content: center; min-width: 0; }
 .site-nav-link {
   font-size: 13px;
   font-weight: 500;
   color: rgba(203,213,225,.7);
   text-decoration: none;
+  white-space: nowrap;
   padding: 6px 12px;
   border-radius: 6px;
   border: 1px solid transparent;
   transition: color .15s, background .15s, border-color .15s;
 }
+/* Shimmering nav link (Study Stats) */
+@keyframes navShimmer { 0% { background-position: 180% 0; } 100% { background-position: -80% 0; } }
+.site-nav-shimmer {
+  background-image: linear-gradient(100deg,
+    rgba(203,213,225,.72) 0%, rgba(203,213,225,.72) 42%,
+    #fde68a 49%, #fb923c 53%, #fde68a 57%,
+    rgba(203,213,225,.72) 64%, rgba(203,213,225,.72) 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: navShimmer 3.4s linear infinite;
+}
+.site-nav-shimmer:hover { background-color: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); }
+body.light .site-nav-shimmer {
+  background-image: linear-gradient(100deg,
+    rgba(71,85,105,.85) 0%, rgba(71,85,105,.85) 42%,
+    #d97706 49%, #ea580c 53%, #d97706 57%,
+    rgba(71,85,105,.85) 64%, rgba(71,85,105,.85) 100%);
+}
+@media (prefers-reduced-motion: reduce) { .site-nav-shimmer { animation: none; } }
 .site-nav-link:hover {
   color: #f1f5f9;
   background: rgba(255,255,255,.06);
@@ -1653,9 +1676,10 @@ body.jw-modal-open { overflow: hidden; }
   .landing-features { grid-template-columns: 1fr; gap: 12px; }
   .landing-hero { margin-bottom: 40px; }
 }
-@media (max-width: 480px) {
-  #site-nav { padding: 0 14px; }
+@media (max-width: 560px) {
+  #site-nav { padding: 4px 14px; height: auto; }
   .site-nav-link { padding: 6px 8px; font-size: 12px; }
+  .site-nav-links { order: 3; flex-basis: 100%; justify-content: center; padding-bottom: 6px; }
 }
 
 /* ── Light mode overrides for new components ── */
