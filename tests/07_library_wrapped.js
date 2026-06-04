@@ -589,8 +589,10 @@ async function waitForStats(doc, timeoutMs) {
     if (!appJs.includes('nav-btn-tools') && !appJs.includes('__jwOpenToolsMenu'))
       ok('Tools menu removed from app.js');
     else fail('Tools menu remnants still in app.js');
-    if (appJs.includes('nav-btn-wrapped')) ok('app top-bar Study Stats button restored');
-    else fail('nav-btn-wrapped (Study Stats) missing from app.js');
+    // v2.44.0: Study Stats moved from the in-app top bar to the site-nav link
+    if (!appJs.includes('nav-btn-wrapped') && html.includes('id="site-nav-stats"'))
+      ok('Study Stats lives in the site-nav (removed from app top bar)');
+    else fail('Study Stats nav move incomplete (stale nav-btn-wrapped or missing site-nav-stats)');
     if (html.includes('__jwGoHighlights') && html.includes('data-i18n="svc_stats_t"'))
       ok('home Study Stats card routes to __jwGoHighlights');
     else fail('Study Stats home card / __jwGoHighlights missing');

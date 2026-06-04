@@ -1369,15 +1369,29 @@ body.jw-modal-open { overflow: hidden; }
 }
 .jwc-download-status[hidden] { display: none; }
 .jwc-btn-highlights {
-  background: rgba(234,88,12,.12);
-  color: #fb923c;
+  position: relative;
+  background: transparent;
   border: 1px solid rgba(234,88,12,.35);
+  /* gold shimmer sweep on the label (matches the Study Stats nav link) */
+  background-image: linear-gradient(100deg,
+    #fb923c 0%, #fb923c 42%, #fffbeb 49%, #fde68a 53%, #fb923c 60%, #fb923c 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: navShimmer 3.4s linear infinite;
 }
-.jwc-btn-highlights:hover {
-  background: rgba(234,88,12,.2);
-  border-color: rgba(234,88,12,.6);
-  color: #fdba74;
+.jwc-btn-highlights::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: rgba(234,88,12,.12);
+  z-index: -1;
+  transition: background .15s;
 }
+.jwc-btn-highlights:hover { border-color: rgba(234,88,12,.6); }
+.jwc-btn-highlights:hover::before { background: rgba(234,88,12,.2); }
+@media (prefers-reduced-motion: reduce) { .jwc-btn-highlights { animation: none; } }
 .jwc-donate {
   margin-top: 20px;
   padding-top: 16px;

@@ -300,10 +300,10 @@ for (const path of FILES) {
     if (cssSrc.includes('prefers-reduced-motion: reduce) { .svc-card::after'))
       ok('Shimmer respects prefers-reduced-motion');
     else fail('Shimmer missing reduced-motion guard');
-    // in-app nav restored the individual Study Explorer + Study Stats buttons
-    if (allSrc.includes('nav-btn-browse') && allSrc.includes('nav-btn-wrapped'))
-      ok('App top-bar individual Study Explorer + Study Stats buttons restored');
-    else fail('App top-bar nav-btn-browse/nav-btn-wrapped not restored');
+    // in-app nav keeps Study Explorer; Study Stats moved to the site-nav (v2.44.0)
+    if (allSrc.includes('nav-btn-browse') && !allSrc.includes('nav-btn-wrapped'))
+      ok('App top-bar has Study Explorer; Study Stats button moved to site nav');
+    else fail('App top-bar nav-btn-browse missing or stale nav-btn-wrapped still present');
   }
 
   // 8l) Two-level mobile nav (v2.32.0): language picker sits beside the logo,
@@ -554,6 +554,11 @@ for (const path of FILES) {
     else ok('beta/styles.css defines .jwc-btn-outline');
     if (!css.includes('.jwc-download-status')) fail('beta/styles.css missing .jwc-download-status banner rule');
     else ok('beta/styles.css defines .jwc-download-status banner');
+    // v2.44.0: celebration "View Your Stats" button shimmers like the nav link
+    if (/\.jwc-btn-highlights\b[\s\S]*?animation:\s*navShimmer/.test(css)
+        && css.includes('prefers-reduced-motion: reduce) { .jwc-btn-highlights'))
+      ok('Celebration Study Stats button has shimmer (+ reduced-motion guard)');
+    else fail('Celebration Study Stats shimmer / reduced-motion guard missing');
   }
 }
 
