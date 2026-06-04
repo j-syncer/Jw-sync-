@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.43.0] — 2026-06-03
+
+### Changed — Study Journey: 60 levels across 12 tiers (beta)
+A much longer, more addictive climb for people who've been studying for years:
+- **60 levels** (up from 6 stages), grouped into **12 named tiers** — Seed, Sprout, Sapling, Young Tree, Tree, Blossom, Grove, Orchard, Garden, Vineyard, Forest, and Evergreen.
+- **Your level shows right in the orb,** and the orb's color **shifts smoothly as you climb** — every level looks a little different from the last.
+- **Early levels come fast** (a handful of notes gets you moving), while the summit — **Level 60, Evergreen** — takes a true lifetime of study, so there's always a higher level to reach for.
+- **Each tier has its own description** (what it says about you) and a level-up / new-tier **confetti celebration**, with a 12-tier ladder showing exactly where you are and what's ahead.
+- Your level is **lifetime-based**, so it only ever climbs.
+
+All localized across 10 languages.
+
+---
+
 ## [2.42.0] — 2026-06-03
 
 ### Added — Study Journey: stages explained + level-up celebrations (beta)

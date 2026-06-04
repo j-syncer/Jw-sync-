@@ -152,6 +152,7 @@ ${script}
   });
   const win = dom.window;
   win.localStorage.setItem('jwsync_lang', 'en');
+  win.localStorage.setItem('jwsync_hl_level', '60'); // neutralize auto level-up celebration in tests
   // Pre-inject deps (the real page loads them via CDN tags; we do it here)
   if (opts.deps !== false) {
     win.JSZip = JSZip;
@@ -346,6 +347,12 @@ async function waitForStats(doc, timeoutMs) {
         if (doc.querySelector('.jww-jr-took') && doc.querySelector('.jww-jr-hint'))
           ok('"what it took" + tap hint shown');
         else fail('what-it-took / hint missing');
+        // 60-level system: orb shows the numeric level
+        const orbLvl = doc.querySelector('.jww-orb-lvl');
+        if (orbLvl && /^\d+$/.test((orbLvl.textContent || '').trim())) ok('journey orb shows numeric level (' + orbLvl.textContent.trim() + ')');
+        else fail('orb level number missing');
+        if (doc.querySelector('.jww-jr-lvlrow') && /\b\d+\b/.test(doc.querySelector('.jww-jr-lvlrow').textContent || '')) ok('tier-of-12 row shown');
+        else fail('tier row missing');
         // tapping the stage opens the celebration/detail modal with description, requirement, and ladder
         const jrClick = doc.querySelector('.jww-journey-click');
         if (jrClick) {
@@ -356,8 +363,10 @@ async function waitForStats(doc, timeoutMs) {
           if (modal && modal.querySelectorAll('.jww-cel-block').length === 3) ok('modal shows "what it says / what it took / your journey"');
           else fail('modal blocks wrong: ' + (modal && modal.querySelectorAll('.jww-cel-block').length));
           const rungs = modal ? modal.querySelectorAll('.jww-ladder .jww-rung') : [];
-          if (rungs.length === 6 && modal.querySelector('.jww-rung-cur')) ok('stage ladder shows all 6 levels with current highlighted');
-          else fail('stage ladder wrong: ' + rungs.length);
+          if (rungs.length === 12 && modal.querySelector('.jww-rung-cur')) ok('tier ladder shows all 12 tiers with current highlighted');
+          else fail('tier ladder wrong: ' + rungs.length);
+          if (modal.querySelector('.jww-orb-lg .jww-orb-lvl') && (modal.querySelector('.jww-orb-lvl').textContent || '').trim().length) ok('modal orb shows the level number');
+          else fail('modal level number missing');
           const xb = modal && modal.querySelector('.jww-x');
           if (xb) { xb.click(); if (!doc.querySelector('.jww-stage-modal')) ok('stage modal closes'); else fail('modal did not close'); }
         } else fail('journey not clickable');
