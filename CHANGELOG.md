@@ -4,6 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.40.0] — 2026-06-03
+
+### Added — Study Stats "character sheet" (beta)
+A rich, personal layer on the Study Stats page — a sense of progression and identity, with no game-y language:
+- **Study Journey** — a glossy progression orb (Seed → Sprout → Sapling → Tree → Grove → Orchard) with a progress ring showing how far you are to the next stage, plus your **study signature** persona (e.g. "The Reflective Writer") drawn from your strongest trait.
+- **Study Profile** — a six-point trait radar scoring your **Consistency, Diligence, Depth, Breadth, Reflection,** and **Steadiness** from 0–100.
+- **Key Insights** — at-a-glance cards on *when* you study (busiest day, time of day, cadence — "every ~N days", busiest single day) and *how* (what share of highlights get a note, signature color, top tag, books explored, words written).
+- **Achievements wall** — **66** unlockable milestones as glossy medallions across ten categories (Notes, Highlights, Writing, Streaks, Coverage, Colors, Tags, Bookmarks, Rhythm, Dedication), with earned/locked states and an "X / N earned" progress bar. Includes coverage feats like the Four Gospels, the Torah, and the whole Hebrew/Greek Scriptures.
+
+All localized across 10 languages.
+
+---
+
 ## [2.39.0] — 2026-06-03
 
 ### Added — Study Stats (beta)

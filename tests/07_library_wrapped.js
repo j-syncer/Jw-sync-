@@ -331,9 +331,30 @@ async function waitForStats(doc, timeoutMs) {
         const depBars = doc.querySelectorAll('.jww-dep-bar');
         if (depBars.length === 5) ok('note-depth histogram rendered (5 buckets)');
         else fail('depth histogram buckets wrong: ' + depBars.length);
-        const badges = doc.querySelectorAll('.jww-badge');
-        if (badges.length === 8) ok('achievement badges rendered (8)');
-        else fail('badges count wrong: ' + badges.length);
+
+        // ── v2.40 Study Profile / Journey / Insights / Achievements ──
+        if (doc.querySelector('.jww-orb') && doc.querySelector('.jww-jr-stage') && doc.querySelector('.jww-jr-prog'))
+          ok('Study Journey progression orb rendered');
+        else fail('Study Journey missing');
+        if (doc.querySelector('.jww-jr-sig') && (doc.querySelector('.jww-jr-sig').textContent || '').trim())
+          ok('study signature persona shown');
+        else fail('study signature missing');
+        if (doc.querySelector('.jww-prof-area') && doc.querySelectorAll('.jww-prof-val').length === 6)
+          ok('Study Profile trait radar rendered (6 traits)');
+        else fail('profile radar wrong: ' + doc.querySelectorAll('.jww-prof-val').length);
+        const insCards = doc.querySelectorAll('.jww-ins-card');
+        if (insCards.length >= 5) ok('Key Insights cards rendered (' + insCards.length + ')');
+        else fail('insights cards missing: ' + insCards.length);
+        const medals = doc.querySelectorAll('.jww-medal');
+        if (medals.length >= 50) ok('achievements wall rendered (' + medals.length + ' medallions)');
+        else fail('achievements wall too small: ' + medals.length);
+        if (doc.querySelectorAll('.jww-medal-on').length >= 1) ok('at least one achievement earned');
+        else fail('no earned achievements');
+        if (doc.querySelector('.jww-ach-prog-fill') && /\d+ \/ \d+/.test((doc.querySelector('.jww-ach-prog-lbl') || {}).textContent || ''))
+          ok('achievements progress bar + count shown');
+        else fail('achievements progress missing');
+        if (doc.querySelectorAll('.jww-ach-cat').length >= 6) ok('achievements grouped into categories');
+        else fail('achievement categories missing: ' + doc.querySelectorAll('.jww-ach-cat').length);
         const achTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /achiev|logro|conquist|réalis|erfolg|obiett|достиж|実績|업적|tagumpay/i.test(el.textContent));
         if (achTitle) ok('achievements section titled correctly');
         else fail('achievements title missing');
