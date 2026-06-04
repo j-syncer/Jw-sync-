@@ -377,7 +377,7 @@ async function waitForStats(doc, timeoutMs) {
         if (insCards.length >= 5) ok('Key Insights cards rendered (' + insCards.length + ')');
         else fail('insights cards missing: ' + insCards.length);
         const medals = doc.querySelectorAll('.jww-medal');
-        if (medals.length >= 50) ok('achievements wall rendered (' + medals.length + ' medallions)');
+        if (medals.length >= 150) ok('achievements wall rendered (' + medals.length + ' medallions)');
         else fail('achievements wall too small: ' + medals.length);
         if (doc.querySelectorAll('.jww-medal-on').length >= 1) ok('at least one achievement earned');
         else fail('no earned achievements');
@@ -386,6 +386,33 @@ async function waitForStats(doc, timeoutMs) {
         else fail('achievements progress missing');
         if (doc.querySelectorAll('.jww-ach-cat').length >= 6) ok('achievements grouped into categories');
         else fail('achievement categories missing: ' + doc.querySelectorAll('.jww-ach-cat').length);
+        // v2.43: tiered, reveal-gated awards + rarity/Renown + filters
+        if (doc.querySelectorAll('.jww-ach-cat').length >= 12) ok('all 12 tiers represented as sections');
+        else fail('expected >=12 tier sections, got ' + doc.querySelectorAll('.jww-ach-cat').length);
+        if (doc.querySelectorAll('.jww-medal-locked').length >= 1) ok('higher-tier awards reveal-gated (locked/mystery medals present)');
+        else fail('no reveal-gated medals — gating not working');
+        if (doc.querySelector('.jww-cat-locked')) ok('locked tier section shown with unlock note');
+        else fail('locked tier section missing');
+        if (doc.querySelector('.jww-crest')) ok('tier crest emblem rendered');
+        else fail('tier crest missing');
+        if (doc.querySelector('.jww-medal-prog i')) ok('progress mini-bar on a near-complete award');
+        else fail('medal progress bar missing');
+        const renown = doc.querySelector('.jww-renown .jww-renown-n');
+        if (renown && /\d/.test(renown.textContent || '')) ok('Renown score shown (' + renown.textContent.trim() + ')');
+        else fail('Renown score missing');
+        const achTabs = doc.querySelectorAll('.jww-ach-tabs .jww-tab');
+        if (achTabs.length === 3) ok('filter tabs rendered (All / Earned / Locked)');
+        else fail('filter tabs wrong: ' + achTabs.length);
+        const earnedTab = Array.from(achTabs).find(t => t.getAttribute('data-flt') === 'earned');
+        const wall = doc.querySelector('.jww-ach-wall');
+        if (earnedTab && wall) {
+          earnedTab.click();
+          if (wall.classList.contains('jww-flt-earned') && earnedTab.classList.contains('jww-tab-on'))
+            ok('Earned filter activates and narrows the wall');
+          else fail('Earned filter did not activate');
+          const allTab = Array.from(achTabs).find(t => t.getAttribute('data-flt') === 'all');
+          if (allTab) allTab.click(); // restore
+        } else fail('Earned filter tab / wall missing');
         const achTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /achiev|logro|conquist|réalis|erfolg|obiett|достиж|実績|업적|tagumpay/i.test(el.textContent));
         if (achTitle) ok('achievements section titled correctly');
         else fail('achievements title missing');

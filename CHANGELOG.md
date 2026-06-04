@@ -4,6 +4,22 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.44.0] — 2026-06-04
+
+### Added — Achievements Gallery: ~200 awards across 12 tiers (beta)
+The Study Stats achievements wall grew from a flat set of medals into a deep, gorgeous collection that matches the 60-level / 12-tier journey:
+- **~200 awards**, organized under the **same 12 tiers** as your Study Journey, each tier shown in **its own color**.
+- **Reveal-gating:** awards above your current tier appear as locked **“???”** mysteries with a “Reach _[tier]_ to unlock _N_ more” hint — they light up the moment you climb into that tier.
+- **Rarity + Renown:** every award has a rarity (Common → Legendary) and is worth Renown points; your total **Renown score** is shown at the top as a second long-term goal.
+- **Tier crests** (a capstone emblem for each tier) and **“Tier Mastered”** bonuses for completing a whole tier.
+- **Secret awards** stay hidden until you earn them.
+- **Filter tabs** (All / Earned / Locked) and **progress mini-bars** on awards you’re close to earning.
+- Earned medals glow in their tier’s color; legendary awards shimmer.
+
+All new labels localized across 10 languages.
+
+---
+
 ## [2.43.0] — 2026-06-03
 
 ### Changed — Study Journey: 60 levels across 12 tiers (beta)
