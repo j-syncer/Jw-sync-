@@ -858,6 +858,51 @@ body.light .site-nav-shimmer {
   line-height: 1.65;
   margin: 0;
 }
+/* ── Unified button system (token-based base + semantic variants) ──
+   Reusable across the app. Existing feature-specific button classes
+   (.cta-btn*, .svc-card-btn, .simple-merge-btn) remain as aliases and
+   are normalised below to share these values for a cohesive look. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast), color var(--t-fast);
+}
+.btn:focus-visible { outline: 2px solid var(--color-orange); outline-offset: 2px; }
+.btn:disabled { cursor: not-allowed; opacity: .6; box-shadow: none; }
+.btn--primary {
+  background: var(--color-orange); color: #fff;
+  box-shadow: 0 1px 5px rgba(234,88,12,.35);
+}
+.btn--primary:hover { background: #c2410c; box-shadow: 0 2px 8px rgba(234,88,12,.5); color: #fff; }
+.btn--secondary {
+  background: transparent; color: #f1f5f9; font-weight: 600;
+  border-color: var(--color-border-strong);
+}
+.btn--secondary:hover { border-color: rgba(234,88,12,.6); background: rgba(234,88,12,.08); color: #fff; }
+.btn--ghost {
+  background: transparent; color: rgba(203,213,225,.85); font-weight: 600;
+  border: 1px dashed rgba(148,163,184,.32);
+}
+.btn--ghost:hover { border-color: rgba(234,88,12,.55); background: rgba(234,88,12,.06); color: #fff; }
+.btn--danger {
+  background: rgba(248,113,113,.1); color: var(--color-red, #f87171);
+  border-color: rgba(248,113,113,.25);
+}
+.btn--danger:hover { background: rgba(248,113,113,.2); color: #fff; }
+.btn--danger-solid { background: #dc2626; color: #fff; }
+.btn--danger-solid:hover { background: #b91c1c; color: #fff; }
+
 .cta-btn {
   display: inline-block;
   background: #ea580c;
@@ -874,6 +919,10 @@ body.light .site-nav-shimmer {
   background: #c2410c;
   box-shadow: 0 2px 8px rgba(234,88,12,.5);
   color: #fff;
+}
+.cta-btn:focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 2px;
 }
 .cta-row {
   display: inline-flex;
@@ -1831,8 +1880,8 @@ body.is-landing #jws-loading { display: none !important; }
   #site-nav { flex-wrap: wrap; height: auto; min-height: 48px; padding: 7px 16px; row-gap: 8px; column-gap: 8px; justify-content: flex-start; }
   .site-nav-logo { order: 1; flex: 0 0 auto; }
   .nav-lang-select { order: 2; margin-left: auto; flex: 0 0 auto; }
-  .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; justify-content: space-between; }
-  .site-nav-link { flex: 0 1 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 12px; }
+  .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; row-gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .site-nav-link { flex: 0 0 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 11px; }
 }
 
 

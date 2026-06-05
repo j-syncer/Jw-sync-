@@ -15,6 +15,8 @@
     .sh-htitle{color:#fb923c;font-weight:600;font-size:15px;flex-grow:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .sh-new{background:transparent;border:none;color:rgba(203,213,225,.7);font-size:14px;flex-shrink:0;cursor:pointer;font-family:inherit;padding:0}
     .sh-new:hover{color:#f1f5f9}
+    .sh-switch-slot{flex:1 1 auto;display:flex;align-items:center;justify-content:center;min-width:0}
+    @media (max-width:560px){.sh-htitle{display:none}}
     #sh-main{max-width:720px;margin:0 auto;padding:72px 16px 48px;min-height:100vh}
     .sh-hero{text-align:center;margin:6px 0 26px}
     .sh-eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#fb923c;font-weight:700;margin:0 0 6px}
@@ -104,12 +106,15 @@
   <header id="sh-header">
     <button type="button" class="sh-back" id="sh-back">← JW Sync</button>
     <span class="sh-htitle" id="sh-htitle">Share Notes</span>
+    <div id="sh-switch" class="sh-switch-slot"></div>
     <button type="button" class="sh-new" id="sh-new" style="display:none">Start over</button>
   </header>
   <main id="sh-main"></main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <!-- Cross-tool file session + tool switcher (shared across all JW Sync pages) -->
+  <script src="js/jw-session.js"></script>
   <script>
   (function(){
     'use strict';
@@ -402,10 +407,10 @@
     var sendState={ notes:[], sel:{}, fileName:'' };
     function loadBackup(file){
       setMain('<div class="sh-state"><div class="sh-spin"></div><div>'+esc(t('loading'))+'</div></div>');
-      var SQL;
+      var SQL, keepBuf;
       initSqlJs({locateFile:function(f){return SQLJS_CDN+f;}})
         .then(function(s){ SQL=s; return (file instanceof ArrayBuffer)?file:(file.arrayBuffer?file.arrayBuffer():new Promise(function(res,rej){var r=new FileReader();r.onload=function(){res(r.result);};r.onerror=rej;r.readAsArrayBuffer(file);})); })
-        .then(function(buf){ return JSZip.loadAsync(buf); })
+        .then(function(buf){ keepBuf=buf; return JSZip.loadAsync(buf); })
         .then(function(zip){ var k=Object.keys(zip.files).find(function(n){return /userdata\.db$/i.test(n);}); if(!k) throw new Error('no db'); return zip.file(k).async('uint8array'); })
         .then(function(bytes){
           var db=new SQL.Database(bytes);
@@ -417,6 +422,8 @@
           ns.forEach(function(n){ n._tags=tagMap[n.NoteId]||[]; n._ranges=(n.UserMarkId!=null)?(brMap[n.UserMarkId]||[]):[]; });
           db.close();
           sendState={ notes:ns, sel:{}, fileName:(file&&file.name)||'backup.jwlibrary' };
+          // Persist into the shared session so Merge/Stats/Explorer can reuse it.
+          try { if (window.JwSession && keepBuf) window.JwSession.put(keepBuf, sendState.fileName); } catch (_) {}
           renderSelect('');
         })
         .catch(function(e){ console.error(e); setMain('<div class="sh-state"><div class="sh-err">'+esc(t('error'))+'</div><button class="sh-btn sh-btn-ghost" id="sh-retry">'+esc(t('choose_backup'))+'</button></div>'); var rb=document.getElementById('sh-retry'); if(rb) rb.onclick=function(){ renderSendIntro(); }; });
@@ -617,15 +624,29 @@
     function readPending(){ return new Promise(function(resolve){ try{ var req=indexedDB.open(IDB_NAME,1); req.onupgradeneeded=function(e){ e.target.result.createObjectStore(IDB_STORE); }; req.onsuccess=function(e){ var db=e.target.result; var tx=db.transaction(IDB_STORE,'readwrite'); var g=tx.objectStore(IDB_STORE).get(IDB_KEY); g.onsuccess=function(){ var v=g.result; tx.objectStore(IDB_STORE).delete(IDB_KEY); db.close(); resolve(v||null); }; g.onerror=function(){ db.close(); resolve(null); }; }; req.onerror=function(){ resolve(null); }; }catch(_){ resolve(null); } }); }
 
     document.getElementById('sh-back').onclick=function(){ window.location.href='./'; };
-    document.getElementById('sh-new').onclick=renderHome;
+    document.getElementById('sh-new').onclick=function(){
+      // Privacy: forget the shared working file when the user starts over.
+      try { if (window.JwSession) window.JwSession.clear(); } catch (_) {}
+      renderHome();
+    };
 
     document.title=t('title')+' — JW Sync';
     document.getElementById('sh-htitle').textContent=t('title');
     document.getElementById('sh-back').textContent=t('back');
     document.getElementById('sh-new').textContent=t('start_over');
 
+    // Render the universal tool switcher into the header (no-op without the module).
+    try { if (window.JwSession) window.JwSession.mountSwitcher(document.getElementById('sh-switch'), 'share'); } catch (_) {}
+
     document.addEventListener('DOMContentLoaded',function(){});
-    readPending().then(function(p){ if(p&&p.buffer){ renderSendIntro(p.buffer); } else { renderHome(); } }).catch(renderHome);
+    // Prefer the persistent shared session (cross-tool), then the legacy
+    // one-shot inbox (jwsync_share_v1) for backward compatibility.
+    function shLegacyBoot(){ readPending().then(function(p){ if(p&&p.buffer){ renderSendIntro(p.buffer); } else { renderHome(); } }).catch(renderHome); }
+    if(window.JwSession){
+      window.JwSession.get().then(function(p){ if(p&&p.buffer){ renderSendIntro(p.buffer); } else { shLegacyBoot(); } }).catch(shLegacyBoot);
+    } else {
+      shLegacyBoot();
+    }
 
     // test hooks
     window.__shRenderHome=renderHome;
