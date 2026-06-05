@@ -4,6 +4,11 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.50.1] — 2026-06-05
+
+### Changed — "Renown" renamed to "Appreciation" (beta)
+The points earned from rarer awards are now called **Appreciation** instead of "Renown" — a humbler word that reflects gratitude for the insight gained, rather than personal fame. Updated in the achievements header and the awards explainer across all 11 languages.
+
 ## [2.50.0] — 2026-06-05
 
 ### Changed — Study Stats now open on All-Time, plus an awards explainer (beta)
