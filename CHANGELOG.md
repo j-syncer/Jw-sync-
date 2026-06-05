@@ -4,6 +4,12 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.50.0] — 2026-06-05
+
+### Changed — Study Stats now open on All-Time, plus an awards explainer (beta)
+- **Defaults to All Time.** Study Stats now open showing **every note across your whole library** instead of just the latest service year. You can still tap any **Service Year** tab to focus on a single year.
+- **Awards explainer.** A short blurb at the top of the Achievements wall explains how the gamified part works — earn awards by adding notes, highlighting verses, exploring more Bible books and keeping streaks; rarer awards grant more **Renown**; tap a tier to open it and use the filters to see what's left to unlock. Translated into all 11 languages.
+
 ## [2.49.0] — 2026-06-05
 
 ### Added — Swedish (Svenska) — the whole site is now translated (beta)

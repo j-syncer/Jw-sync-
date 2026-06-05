@@ -216,6 +216,14 @@ async function waitForStats(doc, timeoutMs) {
     else fail('sql.js CDN missing');
     if (html.includes('jwsync_hl_v1')) ok('IDB key jwsync_hl_v1 present');
     else fail('IDB key missing');
+    // Stats default to All Time (every note); service year is opt-in
+    if (/activeSY = null;\s*\/\/ default to All Time/.test(html))
+      ok('Study Stats default to All Time (activeSY = null)');
+    else fail('Study Stats should default to All Time');
+    // Gamification blurb at the top of the achievements wall
+    if (html.includes('jww-ach-intro') && html.includes("t('ach_intro')"))
+      ok('achievements intro blurb present (jww-ach-intro)');
+    else fail('achievements intro blurb missing');
     const bodyClose = (html.match(/<\/body>/g) || []).length;
     const htmlClose = (html.match(/<\/html>/g) || []).length;
     if (bodyClose === 1) ok('single </body>');
