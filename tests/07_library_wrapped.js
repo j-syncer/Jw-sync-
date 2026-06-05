@@ -443,11 +443,25 @@ async function waitForStats(doc, timeoutMs) {
         if (drewCard) ok('card image is drawn on demand (canvas path runs)');
         else fail('card draw path did not run');
 
-        // ── Study Map (knowledge graph) ──
+        // ── Study Map (standalone full-screen tool) ──
         const fireClick = (el) => el.dispatchEvent(new win.MouseEvent('click', { bubbles: true, cancelable: true }));
-        const mapSvg = doc.querySelector('.jww-map-svg');
-        if (mapSvg) ok('study map svg rendered');
+        // it lives behind a launch button in Study Stats — not inlined
+        if (!doc.querySelector('.jww-map-svg')) ok('study map is not inlined (opens as its own tool)');
+        else fail('study map should not be inlined before launch');
+        const openMapBtn = doc.getElementById('jww-open-map');
+        if (openMapBtn) ok('"Open Study Map" launch button rendered in Study Stats');
+        else fail('study map launch button missing');
+        if (openMapBtn) fireClick(openMapBtn);
+        const overlay = doc.getElementById('jww-map-overlay');
+        if (overlay && overlay.classList.contains('jww-mapov')) ok('launching opens the full-screen Study Map overlay');
+        else fail('study map overlay did not open');
+        const mapSvg = doc.querySelector('#jww-map-overlay .jww-map-svg');
+        if (mapSvg) ok('study map svg rendered in overlay');
         else fail('study map svg missing');
+        if (overlay && overlay.querySelector('.jww-mapov-fs')) ok('fullscreen button present');
+        else fail('fullscreen button missing');
+        if (overlay && overlay.querySelector('.jww-mapov-dl')) ok('download-image button present');
+        else fail('download button missing');
         const mapNodes = doc.querySelectorAll('.jww-map-node');
         if (mapNodes.length >= 1) ok('study map nodes rendered (' + mapNodes.length + ')');
         else fail('study map has no nodes');
@@ -499,6 +513,21 @@ async function waitForStats(doc, timeoutMs) {
             } else fail('chain remove button missing');
           } else fail('add-to-chain button missing in panel');
         }
+        // download-image path runs (stub the canvas/Image/URL pipeline)
+        let drewMap = false;
+        win.HTMLCanvasElement.prototype.getContext = function () {
+          return { fillRect() {}, drawImage() { drewMap = true; }, set fillStyle(v) {} };
+        };
+        win.HTMLCanvasElement.prototype.toBlob = function (cb) { cb(new win.Blob([''], { type: 'image/png' })); };
+        win.Image = function () { const self = this; Object.defineProperty(this, 'src', { set() { if (self.onload) self.onload(); } }); };
+        if (!win.URL.createObjectURL) win.URL.createObjectURL = () => 'blob:map';
+        if (!win.URL.revokeObjectURL) win.URL.revokeObjectURL = () => {};
+        const dlBtn = overlay && overlay.querySelector('.jww-mapov-dl');
+        if (dlBtn) { try { fireClick(dlBtn); } catch (_) {} if (drewMap) ok('download renders the map to a canvas (PNG export path runs)'); else fail('download path did not draw'); }
+        // closing the tool removes the overlay
+        const closeBtn = overlay && overlay.querySelector('.jww-mapov-close');
+        if (closeBtn) { fireClick(closeBtn); if (!doc.getElementById('jww-map-overlay')) ok('closing the tool removes the overlay'); else fail('overlay did not close'); }
+        else fail('close button missing');
       }
     }
     dom.window.close();

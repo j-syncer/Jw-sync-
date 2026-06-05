@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.46.0] — 2026-06-05
+
+### Changed — Study Map is now a standalone full-screen tool (beta)
+The Study Map graduated from an inline chart into its own dedicated tool:
+- **Launch button.** Study Stats now shows an **“Open Study Map”** button instead of embedding the graph — tap it to open the map as a focused, full-screen workspace.
+- **Go full-screen.** A **Fullscreen** button expands the map edge-to-edge for exploring large libraries (Esc or Close returns you to your stats).
+- **Download an image.** Export the current map (with all your connections and study chains) as a **PNG** to save or share.
+- Everything from before — Topics ↔ Notes views, layer toggles, the strength slider, drag, hover-to-spotlight, the click-through side panel, and manual study chains — now lives inside the tool, with more room to breathe.
+- New controls fully translated across all 10 languages.
+
 ## [2.45.0] — 2026-06-05
 
 ### Added — Study Map: an interactive knowledge graph of your notes (beta)
