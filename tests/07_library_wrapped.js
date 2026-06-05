@@ -442,6 +442,63 @@ async function waitForStats(doc, timeoutMs) {
         if (cardBtn) cardBtn.click();
         if (drewCard) ok('card image is drawn on demand (canvas path runs)');
         else fail('card draw path did not run');
+
+        // ── Study Map (knowledge graph) ──
+        const fireClick = (el) => el.dispatchEvent(new win.MouseEvent('click', { bubbles: true, cancelable: true }));
+        const mapSvg = doc.querySelector('.jww-map-svg');
+        if (mapSvg) ok('study map svg rendered');
+        else fail('study map svg missing');
+        const mapNodes = doc.querySelectorAll('.jww-map-node');
+        if (mapNodes.length >= 1) ok('study map nodes rendered (' + mapNodes.length + ')');
+        else fail('study map has no nodes');
+        const mapEdges = doc.querySelectorAll('.jww-map-edge');
+        if (mapEdges.length >= 1) ok('study map edges rendered (' + mapEdges.length + ')');
+        else fail('study map has no edges');
+        // clicking a node populates the side panel with the underlying notes
+        if (mapNodes.length) {
+          fireClick(mapNodes[0]);
+          const prows = doc.querySelectorAll('.jww-map-panel .jww-map-prow');
+          if (prows.length >= 1) ok('clicking a node lists its notes in the side panel (' + prows.length + ')');
+          else fail('node click did not populate panel');
+        }
+        // layer toggle hides a hub kind
+        const scripChip = doc.querySelector('.jww-map-chip[data-layer="scripture"]');
+        if (scripChip) {
+          fireClick(scripChip);
+          if (scripChip.classList.contains('jww-map-off')) ok('layer toggle switches off (scripture)');
+          else fail('layer toggle did not toggle off');
+          fireClick(scripChip); // restore
+        } else fail('layer toggle chip missing');
+        // view toggle to Notes re-renders without throwing
+        const notesView = doc.querySelector('.jww-map-view[data-view="notes"]');
+        if (notesView) {
+          fireClick(notesView);
+          if (doc.querySelectorAll('.jww-map-node').length >= 1) ok('Notes view re-renders the node set');
+          else fail('Notes view produced no nodes');
+        } else fail('Notes view toggle missing');
+        // manual study chains persist to localStorage and render
+        try { win.localStorage.removeItem('jwsync_chains_v1'); } catch (_) {}
+        const liveNodes = doc.querySelectorAll('.jww-map-node');
+        if (liveNodes.length) {
+          fireClick(liveNodes[0]);
+          const addBtn = doc.querySelector('.jww-map-addchain');
+          if (addBtn) {
+            fireClick(addBtn);
+            let stored = null; try { stored = JSON.parse(win.localStorage.getItem('jwsync_chains_v1')); } catch (_) {}
+            if (stored && stored.chains && stored.chains[0] && stored.chains[0].noteGuids.length >= 1)
+              ok('add-to-chain writes jwsync_chains_v1 (keyed by note Guid)');
+            else fail('chain not persisted to localStorage');
+            if (doc.querySelector('.jww-map-chains-list .jww-map-chain-row')) ok('study chain renders in the chains panel');
+            else fail('chain row not rendered');
+            const rmBtn = doc.querySelector('.jww-map-chain-rm');
+            if (rmBtn) {
+              fireClick(rmBtn);
+              let after = null; try { after = JSON.parse(win.localStorage.getItem('jwsync_chains_v1')); } catch (_) {}
+              if (!after || !after.chains.length) ok('removing the last chained note clears the chain');
+              else fail('chain not removed');
+            } else fail('chain remove button missing');
+          } else fail('add-to-chain button missing in panel');
+        }
       }
     }
     dom.window.close();

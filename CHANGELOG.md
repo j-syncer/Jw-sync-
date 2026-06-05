@@ -4,6 +4,17 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.45.0] — 2026-06-05
+
+### Added — Study Map: an interactive knowledge graph of your notes (beta)
+The Study Stats page now includes a **Study Map** — a private, in-browser graph that reveals how years of your notes connect to each other. Nothing leaves your device.
+- **See the connections you never tagged.** The map links your notes by **shared scripture** (notes on the same passage), **shared tags**, and **similar wording** (overlapping key terms) — all computed on your device, with no AI service and no upload.
+- **Topics ↔ Notes view.** Switch live between a clustered **Topics** view (themes, tags, and scriptures as hubs sized by how many notes touch them) and a **Notes** view of individual notes — pick whichever reads best for your library.
+- **Click to read.** Tap any point to open a side panel listing the notes behind it, with snippets and dates.
+- **Manual study chains.** Hand-link related notes into named **study chains** — saved privately on your device (keyed to each note, never written into your backup) and drawn as distinct threads on the map.
+- **Explore controls.** Toggle each connection layer on/off, drag nodes around, hover to spotlight a note's neighbors, and use the strength slider to focus on the strongest links.
+- Fully translated across all 10 languages.
+
 ## [2.44.0] — 2026-06-04
 
 ### Added — Achievements Gallery: ~200 awards across 12 tiers (beta)
