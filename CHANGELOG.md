@@ -4,6 +4,12 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.48.1] — 2026-06-05
+
+### Fixed — Cross-tool workspace (beta)
+- **Your merge file now actually follows you.** Previously, a backup uploaded in the **Merge** tool wasn't being remembered, so opening **Study Stats** still asked you to upload again. Any `.jwlibrary` you pick or drag in is now saved to the shared workspace, so it carries over to every tool.
+- **Fixed the cramped nav on phones.** The **Merging App** and **Study Stats** links were running together. The tool links now wrap onto a tidy, evenly-spaced second row on narrow screens instead of colliding.
+
 ## [2.48.0] — 2026-06-05
 
 ### Added — Your file follows you between tools (beta)

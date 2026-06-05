@@ -1880,8 +1880,8 @@ body.is-landing #jws-loading { display: none !important; }
   #site-nav { flex-wrap: wrap; height: auto; min-height: 48px; padding: 7px 16px; row-gap: 8px; column-gap: 8px; justify-content: flex-start; }
   .site-nav-logo { order: 1; flex: 0 0 auto; }
   .nav-lang-select { order: 2; margin-left: auto; flex: 0 0 auto; }
-  .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; justify-content: space-between; }
-  .site-nav-link { flex: 0 1 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 12px; }
+  .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; row-gap: 6px; justify-content: center; flex-wrap: wrap; }
+  .site-nav-link { flex: 0 0 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 11px; }
 }
 
 

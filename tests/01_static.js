@@ -616,6 +616,11 @@ section('Cross-tool session (jw-session.js)');
     if (idx.includes("Object.defineProperty(window,'__jwLastFile'"))
       ok('index.html mirrors __jwLastFile into the shared session');
     else fail('index.html __jwLastFile capture missing');
+    // The Merge upload doesn't set __jwLastFile, so a document-level file
+    // capture must persist any .jwlibrary the user picks/drops (v2.48.1 fix).
+    if (idx.includes("addEventListener('change'") && idx.includes("addEventListener('drop'") && idx.includes("'.jwlibrary'"))
+      ok('index.html captures any uploaded/dropped .jwlibrary into the session');
+    else fail('index.html global .jwlibrary capture missing (Merge uploads would not persist)');
     // Legacy hand-off + the tested string contract are preserved
     if (idx.includes('function __jwGoShare') && idx.includes("href='share.html'"))
       ok('legacy __jwGoShare contract preserved');
