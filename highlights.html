@@ -467,6 +467,32 @@
     body.light .jww-mapov{background:rgba(248,250,252,.98)}
     body.light .jww-mapov-title{color:#0f172a}
     body.light .jww-mapcta{background:#fff}
+    /* ── Achievements: collapsible shelves ── */
+    .jww-ach-cat-h{align-items:center;gap:9px;padding:9px 12px;border:1px solid rgba(71,85,105,.28);border-radius:11px;background:linear-gradient(180deg,rgba(30,41,59,.5),rgba(15,23,42,.32));cursor:pointer;user-select:none;margin-bottom:0;transition:background .15s,border-color .15s}
+    .jww-ach-cat-h:hover{background:linear-gradient(180deg,rgba(51,65,85,.55),rgba(15,23,42,.4));border-color:var(--tc)}
+    .jww-ach-cat-h:focus-visible{outline:2px solid var(--tc);outline-offset:2px}
+    .jww-cat-chev{color:var(--tc);display:inline-flex;flex:none;transition:transform .2s}
+    .jww-ach-cat.jww-cat-open>.jww-ach-cat-h .jww-cat-chev{transform:rotate(90deg)}
+    .jww-cat-bar{flex:1;height:5px;max-width:160px;border-radius:3px;background:rgba(148,163,184,.16);overflow:hidden}
+    .jww-cat-bar i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--tc),var(--tc2))}
+    .jww-cat-count{flex:none;color:#94a3b8;font-weight:700;font-size:12px;font-variant-numeric:tabular-nums}
+    .jww-cat-locked .jww-cat-chev,.jww-cat-locked .jww-cat-bar i{opacity:.5}
+    .jww-ach-cat .jww-ach-grid{display:none;margin-top:13px;animation:jwwShelf .25s ease}
+    .jww-ach-cat.jww-cat-open .jww-ach-grid,.jww-ach-wall.jww-allopen .jww-ach-grid{display:grid}
+    @keyframes jwwShelf{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+    /* ── Achievements: richer, per-medal-coloured medallions ── */
+    .jww-medal{--mc:var(--tc);--mc2:var(--tc2)}
+    .jww-medal-disc{position:relative;overflow:visible}
+    .jww-medal-disc svg{position:relative;z-index:2}
+    .jww-medal-on .jww-medal-disc{background:radial-gradient(circle at 34% 27%,#fff 0%,var(--mc) 47%,var(--mc2) 100%);color:#fff;border:none;box-shadow:0 0 0 1px rgba(255,255,255,.4) inset,0 6px 15px -6px var(--mc2),0 0 17px -4px var(--mc)}
+    .jww-medal-on .jww-medal-disc svg{color:#fff;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.4))}
+    .jww-medal-on:not(.jww-crest) .jww-medal-disc::before{content:'';position:absolute;inset:-3px;border-radius:50%;z-index:0;background:conic-gradient(from 210deg,var(--mc2),var(--mc),#fff,var(--mc),var(--mc2));-webkit-mask:radial-gradient(circle,transparent 59%,#000 62%);mask:radial-gradient(circle,transparent 59%,#000 62%)}
+    .jww-medal-on .jww-medal-disc::after{content:'';position:absolute;top:5px;left:8px;width:48%;height:36%;border-radius:50%;z-index:3;pointer-events:none;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.9),rgba(255,255,255,0) 72%)}
+    .jww-medal-on.jww-r4:not(.jww-crest) .jww-medal-disc::before{animation:jwwSpin 7s linear infinite}
+    @keyframes jwwSpin{to{transform:rotate(360deg)}}
+    .jww-crest.jww-medal-on .jww-medal-disc{background:radial-gradient(circle at 33% 27%,#fff,var(--tc) 52%,var(--tc2) 100%)}
+    body.light .jww-ach-cat-h{background:linear-gradient(180deg,#f1f5f9,#fff);border-color:#e2e8f0}
+    body.light .jww-cat-count{color:#475569}
   </style>
 </head>
 <body>
@@ -1092,6 +1118,17 @@
     var ACH_RENOWN = [5, 12, 30, 70, 150];
     var ACH_RARKEY = ['rar_common','rar_notable','rar_rare','rar_honored','rar_legendary'];
     var ACH_COLKEY = { 1:'col_yellow', 2:'col_green', 3:'col_blue', 4:'col_pink', 5:'col_orange', 6:'col_purple' };
+    var IC_CHEV = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>';
+    // Per-medal accent (light, dark) — keyed to the award's icon so hue encodes its category
+    var ACH_ICON_COL = [
+      [IC.note, ['#60a5fa','#1e40af']], [IC.highlight, ['#fbbf24','#92400e']], [IC.pen, ['#a78bfa','#5b21b6']],
+      [IC.flame, ['#fb7185','#9f1239']], [IC.calendar, ['#2dd4bf','#115e59']], [IC.trend, ['#4ade80','#166534']],
+      [IC.bookmark, ['#f472b6','#9d174d']], [IC.tag, ['#22d3ee','#155e75']], [IC.layers, ['#818cf8','#3730a3']],
+      [IC.book, ['#34d399','#065f46']], [IC.palette, ['#e879f9','#86198f']], [IC.clock, ['#38bdf8','#075985']],
+      [IC.gauge, ['#a3e635','#3f6212']], [IC.trophy, ['#fbbf24','#a16207']]
+    ];
+    var ACH_SEQ_PAL = [['#fb7185','#9f1239'],['#fb923c','#9a3412'],['#fbbf24','#92400e'],['#a3e635','#3f6212'],['#34d399','#065f46'],['#22d3ee','#155e75'],['#60a5fa','#1e40af'],['#a78bfa','#5b21b6'],['#e879f9','#86198f'],['#f472b6','#9d174d']];
+    function achColor(a){ for (var i = 0; i < ACH_ICON_COL.length; i++){ if (a.icon === ACH_ICON_COL[i][0]) return ACH_ICON_COL[i][1]; } return ACH_SEQ_PAL[(a.seq || 0) % ACH_SEQ_PAL.length]; }
     function levelForCount(n){ var L = 1; for (var i = 1; i <= MAXLVL; i++){ if (n >= THRESH[i]) L = i; } return L; }
     function tierForCount(n){ return tierOf(levelForCount(n)); }
     function clampTier(x){ return Math.max(0, Math.min(TIERS.length - 1, x)); }
@@ -1113,7 +1150,7 @@
       var prof = traitScores(s);
       var notes = s.notes || 0, hl = s.highlights || 0, words = s.words || 0, bm = s.bookmarks || 0, tags = s.tags || 0, books = s.bibleBooks || 0, avg = s.avgWords || 0, longest = s.longestNote || 0;
       var A = [], i;
-      function add(tier, on, icon, name, o){ o = o || {}; var tr = clampTier(o.ov != null ? o.ov : tier); A.push({ tier: tr, rarity: (o.rv != null ? o.rv : rarityForTier(tr)), on: !!on, icon: icon, name: name, secret: !!o.secret, crest: !!o.crest, master: !!o.master, cur: o.cur, tgt: o.tgt }); }
+      function add(tier, on, icon, name, o){ o = o || {}; var tr = clampTier(o.ov != null ? o.ov : tier); A.push({ seq: A.length, tier: tr, rarity: (o.rv != null ? o.rv : rarityForTier(tr)), on: !!on, icon: icon, name: name, secret: !!o.secret, crest: !!o.crest, master: !!o.master, cur: o.cur, tgt: o.tgt }); }
       function ms(cur, list, tk, icon){ list.forEach(function (v){ add(tierForCount(v), cur >= v, icon, fmt2(t(tk), nn(v)), { cur: Math.min(cur, v), tgt: v }); }); }
       function bk(b){ return s.bookHits && s.bookHits[b] > 0; }
       add(0, notes >= 1, IC.note, t('ach_firstnote'));
@@ -1197,8 +1234,14 @@
         var g = groups[ti]; if (!g || !g.length) continue;
         var tier = TIERS[ti], rev = ti <= curT, ec = g.filter(shown).length;
         g.sort(function (a, b){ return (a.crest ? 0 : a.master ? 2 : 1) - (b.crest ? 0 : b.master ? 2 : 1); });
-        body += '<div class="jww-ach-cat' + (rev ? '' : ' jww-cat-locked') + '" style="--tc:' + tier.col + ';--tc2:' + tier.c2 + '">'
-          + '<div class="jww-ach-cat-h"><span class="jww-cat-name">' + esc(t(tier.nk)) + '</span> <span>' + ec + '/' + g.length + '</span></div>';
+        var open = (ti === curT), barpct = Math.round(ec / g.length * 100);
+        body += '<div class="jww-ach-cat' + (rev ? '' : ' jww-cat-locked') + (open ? ' jww-cat-open' : '') + '" style="--tc:' + tier.col + ';--tc2:' + tier.c2 + '">'
+          + '<div class="jww-ach-cat-h" role="button" tabindex="0" aria-expanded="' + (open ? 'true' : 'false') + '">'
+          +   '<span class="jww-cat-chev">' + IC_CHEV + '</span>'
+          +   '<span class="jww-cat-name">' + esc(t(tier.nk)) + '</span>'
+          +   '<span class="jww-cat-bar"><i style="width:' + barpct + '%"></i></span>'
+          +   '<span class="jww-cat-count">' + ec + '/' + g.length + '</span>'
+          + '</div>';
         if (!rev) body += '<div class="jww-cat-locknote">' + IC_LOCK + esc(fmt2x(t('tier_unlocks_n'), t(tier.nk), g.length)) + '</div>';
         body += '<div class="jww-ach-grid">';
         g.forEach(function (a, idx){
@@ -1210,10 +1253,12 @@
           if (a.master) cls += ' jww-master';
           if (a.secret) cls += ' jww-secret';
           var nm = mystery ? '???' : a.name, disc = mystery ? IC_LOCK : a.icon;
+          var col = (a.crest || a.master) ? null : achColor(a);
+          var cstyle = 'animation-delay:' + (idx * 14) + 'ms' + (col ? (';--mc:' + col[0] + ';--mc2:' + col[1]) : '');
           var prog = '';
           if (rvd && !on && !a.secret && a.tgt){ var pgp = Math.round(clamp01(a.cur / a.tgt) * 100); prog = '<div class="jww-medal-prog"><i style="width:' + pgp + '%"></i></div>'; }
           var tip = mystery ? t('ach_secret_hint') : (a.name + ' · ' + t(ACH_RARKEY[a.rarity]));
-          body += '<div class="' + cls + '" data-state="' + (on ? 'earned' : 'locked') + '" title="' + esc(tip) + '" style="animation-delay:' + (idx * 14) + 'ms"><div class="jww-medal-disc">' + disc + '</div><div class="jww-medal-name">' + esc(nm) + '</div>' + prog + '</div>';
+          body += '<div class="' + cls + '" data-state="' + (on ? 'earned' : 'locked') + '" title="' + esc(tip) + '" style="' + cstyle + '"><div class="jww-medal-disc">' + disc + '</div><div class="jww-medal-name">' + esc(nm) + '</div>' + prog + '</div>';
         });
         body += '</div></div>';
       }
@@ -1221,13 +1266,21 @@
       return section(IC.trophy, fmt2(t('ach_title'), earned + '/' + total), body);
     }
     function wireAchFilters(body){
-      var tabs = body.querySelectorAll('.jww-ach-tabs .jww-tab'); if (!tabs.length) return;
       var wall = body.querySelector('.jww-ach-wall'); if (!wall) return;
+      // collapsible shelves
+      Array.prototype.forEach.call(wall.querySelectorAll('.jww-ach-cat-h'), function (h){
+        function toggle(){ var open = h.parentNode.classList.toggle('jww-cat-open'); h.setAttribute('aria-expanded', open ? 'true' : 'false'); }
+        h.addEventListener('click', toggle);
+        h.addEventListener('keydown', function (e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
+      });
+      var tabs = body.querySelectorAll('.jww-ach-tabs .jww-tab'); if (!tabs.length) return;
       Array.prototype.forEach.call(tabs, function (tb){ tb.addEventListener('click', function (){
         Array.prototype.forEach.call(tabs, function (o){ o.classList.remove('jww-tab-on'); });
         tb.classList.add('jww-tab-on');
+        var flt = tb.getAttribute('data-flt');
         wall.classList.remove('jww-flt-all','jww-flt-earned','jww-flt-locked');
-        wall.classList.add('jww-flt-' + tb.getAttribute('data-flt'));
+        wall.classList.add('jww-flt-' + flt);
+        wall.classList.toggle('jww-allopen', flt !== 'all'); // reveal matches across all shelves while filtering
       }); });
     }
 
