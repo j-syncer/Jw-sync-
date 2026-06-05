@@ -562,6 +562,98 @@ for (const path of FILES) {
   }
 }
 
+// ── Cross-tool file session + universal tool switcher (v2.48.0) ──────────
+section('Cross-tool session (jw-session.js)');
+{
+  const sessPath = REPO + '/beta/js/jw-session.js';
+  if (!fs.existsSync(sessPath)) fail('beta/js/jw-session.js missing');
+  else {
+    ok('beta/js/jw-session.js present');
+    const js = fs.readFileSync(sessPath, 'utf8');
+    // Parse-ability
+    try { new (require('vm').Script)(js); ok('jw-session.js parses'); }
+    catch (e) { fail('jw-session.js parse error: ' + e.message); }
+    // Public API
+    for (const api of ['put:', 'get:', 'clear:', 'goTo:', 'mountSwitcher:']) {
+      if (js.includes(api)) ok('JwSession exposes ' + api.replace(':', '()'));
+      else fail('JwSession missing ' + api);
+    }
+    // Shared, persistent (non-consuming) store + privacy TTL
+    if (js.includes("'jwsync_session_v1'")) ok('shared session DB jwsync_session_v1 present');
+    else fail('shared session DB name missing');
+    if (/TTL_MS\s*=/.test(js) && js.includes('clear()')) ok('privacy TTL + clear() present');
+    else fail('privacy TTL / clear missing');
+    // get() must NOT delete (non-consuming, unlike the legacy one-shot inbox)
+    const getBody = js.slice(js.indexOf('function get()'), js.indexOf('function clear()'));
+    if (getBody && !getBody.includes('.delete(')) ok('get() is non-consuming (no delete in read path)');
+    else fail('get() unexpectedly deletes the working file');
+    // Switcher covers all four tools
+    for (const tool of ['merge', 'stats', 'explorer', 'share']) {
+      if (js.includes("id: '" + tool + "'")) ok('switcher includes tool: ' + tool);
+      else fail('switcher missing tool: ' + tool);
+    }
+    // Localised switcher labels for all 10 languages
+    for (const lang of EXPECTED_LANGS) {
+      const re = new RegExp('\\b' + lang + ':\\s*\\{\\s*merge:');
+      if (re.test(js)) ok('switcher labels present for ' + lang);
+      else fail('switcher labels missing for ' + lang);
+    }
+  }
+
+  // All three surfaces load the shared module
+  for (const page of ['beta/index.html', 'beta/highlights.html', 'beta/share.html']) {
+    const src = fs.readFileSync(REPO + '/' + page, 'utf8');
+    if (src.includes('js/jw-session.js')) ok(page + ' loads js/jw-session.js');
+    else fail(page + ' does not load js/jw-session.js');
+  }
+
+  // index.html: Explorer entry + routing + capture, with localised nav label
+  {
+    const idx = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+    if (idx.includes('id="site-nav-explorer"') && idx.includes('function __jwGoExplorer'))
+      ok('index.html has Explorer nav link + __jwGoExplorer router');
+    else fail('index.html Explorer nav/route missing');
+    if (idx.includes("Object.defineProperty(window,'__jwLastFile'"))
+      ok('index.html mirrors __jwLastFile into the shared session');
+    else fail('index.html __jwLastFile capture missing');
+    // Legacy hand-off + the tested string contract are preserved
+    if (idx.includes('function __jwGoShare') && idx.includes("href='share.html'"))
+      ok('legacy __jwGoShare contract preserved');
+    else fail('legacy __jwGoShare contract broken');
+    let navExpOk = true;
+    const lm = idx.match(/window\.__JW_LANDING_I18N\s*=\s*(\{[\s\S]*?\});/);
+    try {
+      const o = JSON.parse(lm[1]);
+      navExpOk = EXPECTED_LANGS.every(l => o[l] && o[l].nav_explorer);
+    } catch (e) { navExpOk = false; }
+    if (navExpOk) ok('nav_explorer localised for all 10 languages');
+    else fail('nav_explorer i18n incomplete');
+  }
+
+  // highlights.html + share.html: switcher slot, mount, persist, and privacy-clear
+  {
+    const hl = fs.readFileSync(REPO + '/beta/highlights.html', 'utf8');
+    if (hl.includes('id="hl-switch"') && hl.includes("mountSwitcher(document.getElementById('hl-switch'), 'stats')"))
+      ok('highlights.html mounts the switcher (active: stats)');
+    else fail('highlights.html switcher mount missing');
+    if (hl.includes('window.JwSession.put(buffer') && hl.includes('window.JwSession.clear()'))
+      ok('highlights.html persists on load + clears on New file');
+    else fail('highlights.html persist/clear wiring missing');
+    if (hl.includes('jwsync_hl_v1')) ok('highlights.html keeps legacy one-shot fallback');
+    else fail('highlights.html legacy fallback removed');
+
+    const sh = fs.readFileSync(REPO + '/beta/share.html', 'utf8');
+    if (sh.includes('id="sh-switch"') && sh.includes("mountSwitcher(document.getElementById('sh-switch'), 'share')"))
+      ok('share.html mounts the switcher (active: share)');
+    else fail('share.html switcher mount missing');
+    if (sh.includes('window.JwSession.put(keepBuf') && sh.includes('window.JwSession.clear()'))
+      ok('share.html persists on load + clears on Start over');
+    else fail('share.html persist/clear wiring missing');
+    if (sh.includes('jwsync_share_v1')) ok('share.html keeps legacy one-shot fallback');
+    else fail('share.html legacy fallback removed');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

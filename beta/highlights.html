@@ -23,6 +23,8 @@
     .hl-new-btn { background: transparent; border: none; color: rgba(203,213,225,.7); font-size: 14px;
       flex-shrink: 0; transition: color .15s; cursor: pointer; font-family: inherit; padding: 0; }
     .hl-new-btn:hover { color: #f1f5f9; }
+    .hl-switch-slot { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-width: 0; }
+    @media (max-width: 560px) { .hl-title { display: none; } }
 
     /* ── main content area ── */
     #hl-main { padding-top: 52px; max-width: 740px; margin: 0 auto; padding: 68px 16px 40px;
@@ -500,6 +502,7 @@
   <header id="hl-header">
     <a href="./" class="hl-back-btn" id="hl-back">← JW Sync</a>
     <span class="hl-title">Your Study Stats</span>
+    <div id="hl-switch" class="hl-switch-slot"></div>
     <button type="button" class="hl-new-btn" id="hl-new-btn" style="display:none">New file</button>
   </header>
 
@@ -511,6 +514,8 @@
   <!-- Load deps eagerly — they start downloading as soon as the page visits -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+  <!-- Cross-tool file session + tool switcher (shared across all JW Sync pages) -->
+  <script src="js/jw-session.js"></script>
 
   <script>
   (function () {
@@ -1922,6 +1927,8 @@
               return;
             }
             loadedFilename = filename;
+            // Persist into the shared session so Merge/Explorer/Share can reuse it.
+            try { if (window.JwSession) window.JwSession.put(buffer, filename); } catch (_) {}
             loadedSYs = getAllSYs(loadedDb);
             activeSY = loadedSYs[0] || null;
             var nb = document.getElementById('hl-new-btn');
@@ -1996,22 +2003,36 @@
         try { if (loadedDb) loadedDb.close(); } catch (_) {}
         loadedDb = null;
         activeSY = null; loadedSYs = []; loadedFilename = '';
+        // Privacy: forget the shared working file when the user starts fresh.
+        try { if (window.JwSession) window.JwSession.clear(); } catch (_) {}
         showPicker();
       });
     }
 
+    // Render the universal tool switcher into the header (no-op without the module).
+    try {
+      if (window.JwSession) window.JwSession.mountSwitcher(document.getElementById('hl-switch'), 'stats');
+    } catch (_) {}
+
     // ── page startup ──
     document.addEventListener('DOMContentLoaded', function () {
       applyHeaderLang();
-      readPendingFile().then(function (pending) {
-        if (pending && pending.buffer) {
-          loadFromBuffer(pending.name || 'backup.jwlibrary', pending.buffer);
-        } else {
-          showPicker();
-        }
-      }).catch(function () {
-        showPicker();
-      });
+      // Prefer the persistent shared session (cross-tool), then the legacy
+      // one-shot inbox (jwsync_hl_v1) for backward compatibility.
+      function legacy() {
+        readPendingFile().then(function (pending) {
+          if (pending && pending.buffer) loadFromBuffer(pending.name || 'backup.jwlibrary', pending.buffer);
+          else showPicker();
+        }).catch(showPicker);
+      }
+      if (window.JwSession) {
+        window.JwSession.get().then(function (p) {
+          if (p && p.buffer) loadFromBuffer(p.name || 'backup.jwlibrary', p.buffer);
+          else legacy();
+        }).catch(legacy);
+      } else {
+        legacy();
+      }
     });
 
     // test hook — lets the test suite inject a file buffer without IDB

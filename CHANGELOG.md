@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.48.0] — 2026-06-05
+
+### Added — Your file follows you between tools (beta)
+The four tools — **Merge**, **Study Stats**, **Study Explorer**, and **Note Sharing** — used to feel like separate apps: open one, and you had to upload your backup again. Now they share one workspace:
+- **Universal tool switcher.** Every page shows a compact **Merge · Stats · Explorer · Share** switcher (with the current tool highlighted), so you can jump straight to any tool from anywhere — no more going back to the home page.
+- **No re-uploading.** Load your `.jwlibrary` once and it follows you between tools automatically. Check your Study Stats, hop to the Explorer to edit a note, then to Note Sharing — all on the same file.
+- **Still 100% private.** The working file is kept only in your own browser (IndexedDB), never uploaded. It is automatically forgotten after 12 hours, and **"New file" / "Start over" clears it immediately.**
+- The switcher is fully translated into all 10 languages.
+
 ## [2.47.1] — 2026-06-05
 
 ### Changed — Visual consistency pass (beta)
