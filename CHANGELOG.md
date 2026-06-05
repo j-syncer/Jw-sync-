@@ -4,6 +4,14 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.47.0] — 2026-06-05
+
+### Changed — Achievements are now tidy, collapsible shelves with richer medals (beta)
+The ~200-award wall no longer dumps everything on screen at once:
+- **Collapsible shelves.** Each tier is a tappable shelf that **starts collapsed** (only the tier you're currently working on is open), so you can browse calmly and **expand** the ones you want. Headers show a chevron, a tier progress bar, and an earned/total count.
+- **Smart filtering.** Choosing **Earned** or **Locked** automatically opens every shelf so you can see all matches at once; **All** returns to the tidy collapsed view.
+- **Richer, more colourful medals.** Earned awards now have **higher-quality, more nuanced medallions** — a glossy gem face, a metallic rim, and a **per-award accent colour keyed to its category** (notes, scriptures, streaks, colours, etc.), so the wall reads as a vibrant, varied collection. Legendary awards get a slowly rotating shine.
+
 ## [2.46.1] — 2026-06-05
 
 ### Fixed — Study Map fullscreen now expands just the map (beta)

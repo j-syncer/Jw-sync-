@@ -416,6 +416,27 @@ async function waitForStats(doc, timeoutMs) {
         const achTitle = Array.from(doc.querySelectorAll('.jww-sec-title')).find(el => /achiev|logro|conquist|réalis|erfolg|obiett|достиж|実績|업적|tagumpay/i.test(el.textContent));
         if (achTitle) ok('achievements section titled correctly');
         else fail('achievements title missing');
+        // v2.47: collapsible shelves + richer per-medal graphics
+        const allCats = doc.querySelectorAll('.jww-ach-cat');
+        const openCats = doc.querySelectorAll('.jww-ach-cat.jww-cat-open');
+        if (openCats.length >= 1 && openCats.length < allCats.length)
+          ok('award shelves collapsed by default (' + openCats.length + '/' + allCats.length + ' open)');
+        else fail('shelves not compacted: ' + openCats.length + '/' + allCats.length + ' open');
+        if (doc.querySelector('.jww-ach-cat-h .jww-cat-chev') && doc.querySelector('.jww-ach-cat-h .jww-cat-bar'))
+          ok('shelf headers show a chevron + progress bar');
+        else fail('shelf header chrome missing');
+        const closedHead = Array.from(doc.querySelectorAll('.jww-ach-cat:not(.jww-cat-open) > .jww-ach-cat-h'))[0];
+        if (closedHead) {
+          closedHead.click();
+          if (closedHead.parentNode.classList.contains('jww-cat-open')) ok('clicking a shelf header expands it');
+          else fail('shelf did not expand');
+          closedHead.click();
+          if (!closedHead.parentNode.classList.contains('jww-cat-open')) ok('clicking again collapses the shelf');
+          else fail('shelf did not collapse');
+        } else fail('no collapsed shelf to toggle');
+        const coloredMedal = Array.from(doc.querySelectorAll('.jww-medal-on')).find(m => /--mc:\s*#/.test(m.getAttribute('style') || ''));
+        if (coloredMedal) ok('earned medals carry a per-medal accent colour (--mc)');
+        else fail('no per-medal accent colour on earned medals');
 
         // ── v2.41 Word Cloud / Study Story / What's Next / Shareable Card ──
         const wcWords = doc.querySelectorAll('.jww-wc-word');
