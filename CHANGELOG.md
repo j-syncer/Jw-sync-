@@ -4,6 +4,14 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.47.1] — 2026-06-05
+
+### Changed — Visual consistency pass (beta)
+A first round of polish to make the interface feel more cohesive:
+- **Consistent button hovers.** Every primary (orange) button now *darkens* on hover instead of a few buttons lightening — the action buttons in Browse, the note-explorer CTA, and the import dialog now match the main "Merge" and service-card buttons.
+- **Keyboard focus ring on the main call-to-action.** The primary CTA button now shows a visible focus outline for keyboard and screen-reader users, matching the secondary buttons.
+- **Reusable button foundation.** Added a shared, design-token-based button system (`.btn` with primary/secondary/ghost/danger variants) so future buttons stay consistent automatically. Existing buttons are unchanged in appearance.
+
 ## [2.47.0] — 2026-06-05
 
 ### Changed — Achievements are now tidy, collapsible shelves with richer medals (beta)
