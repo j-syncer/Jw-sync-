@@ -28,7 +28,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv'];
 const REQUIRED_KEYS = ['title','intro','priv','add','empty','main','setmain','remove','saved',
   'mergenow','merging','done','needtwo','reminder','off','weekly','monthly','clear','clearconfirm',
   'banner','bannercta','dismiss','close','fab','error'];
@@ -205,7 +205,7 @@ function makeDom(seedRows) {
   section('i18n covers all 10 languages (static)');
   {
     const mod = extractModule();
-    const m = mod.match(/var I18N = \{[\s\S]*?\n  \};/);
+    const m = mod.match(/var I18N = \{[\s\S]*?\};\s*function/);
     if (!m) { fail('I18N object not found'); }
     else {
       // crude per-lang key presence check

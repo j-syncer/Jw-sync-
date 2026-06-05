@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.49.0] — 2026-06-05
+
+### Added — Swedish (Svenska) — the whole site is now translated (beta)
+JW Sync is now available in **Swedish** — its 11th language. Every surface is translated, not just the landing page:
+- The **Merge tool**, **Study Explorer**, **Study Stats** (including achievements, the Study Map, and your study journey), **Note Sharing**, the post-merge celebration, the Sync Hub, and all dialogs and messages.
+- Pick **🇸🇪 Svenska** from the language selector (top of the page) — your choice is remembered, and the new tool switcher is translated too.
+
 ## [2.48.1] — 2026-06-05
 
 ### Fixed — Cross-tool workspace (beta)

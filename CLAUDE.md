@@ -90,8 +90,8 @@ If you add a new user-facing feature, extend the relevant suite to cover it.
 
 ## Features Built (permanent reference)
 
-### Languages (10 total)
-`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl`
+### Languages (11 total)
+`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv`
 
 **Adding a language — critical gotcha:** The `TRANSLATIONS` object ends with `}},stripHTML=`. Insert a new language BETWEEN those two closing braces:
 ```python

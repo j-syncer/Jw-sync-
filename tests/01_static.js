@@ -13,7 +13,7 @@ function ok(msg) { console.log('  ✓', msg); }
 function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
-const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl'];
+const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv'];
 const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
 const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',
@@ -40,6 +40,9 @@ for (const path of FILES) {
   // v2.10.0: main app bundle may be extracted to js/app.js (beta) or still
   // inline (production until go-live). Resolve the source either way.
   const isBeta = path.endsWith('beta/index.html') || path.endsWith('beta\\index.html');
+  // Swedish ships to beta first; production gets it on go-live. Until then,
+  // only require the 11th language on the beta build.
+  const FILE_LANGS = isBeta ? EXPECTED_LANGS : EXPECTED_LANGS.filter(l => l !== 'sv');
   const appJsPath = path.replace(/index\.html$/, 'js/app.js');
   let bundleSrc, bundleSource;
   if (fs.existsSync(appJsPath) && fs.readFileSync(appJsPath, 'utf8').includes('TRANSLATIONS=')) {
@@ -85,7 +88,7 @@ for (const path of FILES) {
     ok('TRANSLATIONS parses');
   } catch (e) { fail('TRANSLATIONS parse failed: ' + e.message); continue; }
 
-  for (const lang of EXPECTED_LANGS) {
+  for (const lang of FILE_LANGS) {
     if (!trans[lang]) { fail('missing language: ' + lang); continue; }
     for (const key of REQUIRED_I18N_KEYS) {
       if (!trans[lang][key]) fail(`${lang}.${key} missing`);
@@ -96,7 +99,7 @@ for (const path of FILES) {
       }
     }
   }
-  if (Object.keys(trans).length === EXPECTED_LANGS.length) ok('TRANSLATIONS has exactly 10 languages');
+  if (Object.keys(trans).length === FILE_LANGS.length) ok('TRANSLATIONS has exactly ' + FILE_LANGS.length + ' languages');
   if (isBeta) ok(`Beta: all ${BETA_ONLY_KEYS.length} beta-only key(s) present across ${EXPECTED_LANGS.length} languages`);
 
   // 4) Browse I18N object parses + every lang has every required key
@@ -109,7 +112,7 @@ for (const path of FILES) {
   } catch (e) { fail('Browse I18N parse failed: ' + e.message); continue; }
 
   const browseKeys = isBeta ? BROWSE_REQUIRED_KEYS.concat(BROWSE_BETA_ONLY_KEYS) : BROWSE_REQUIRED_KEYS;
-  for (const lang of EXPECTED_LANGS) {
+  for (const lang of FILE_LANGS) {
     if (!browseI18n[lang]) { fail('Browse I18N missing ' + lang); continue; }
     let missing = browseKeys.filter(k => !browseI18n[lang][k]);
     if (missing.length) fail(`${lang} missing keys: ${missing.join(',')}`);
@@ -515,7 +518,7 @@ for (const path of FILES) {
     if (!c.includes('SELECT COUNT(*) FROM Note')) fail('celebration not querying merged db');
     else ok('celebration queries merged db via sql.js');
     // Translations: all 10 langs must have the celebration keys
-    for (const lang of EXPECTED_LANGS) {
+    for (const lang of FILE_LANGS) {
       const re = new RegExp(`${lang}:\\s*\\{[^}]*cele_title:`);
       if (!re.test(c)) fail(`celebration i18n missing for ${lang}`);
     }
@@ -543,7 +546,7 @@ for (const path of FILES) {
     if (!c.includes('data-jwc-donate')) fail('donate link hook missing');
     else ok('donate link has data-jwc-donate hook');
     // Donate prompt/cta strings translated for all 10 langs
-    for (const lang of EXPECTED_LANGS) {
+    for (const lang of FILE_LANGS) {
       const re = new RegExp(`${lang}:\\s*\\{[^}]*donate_prompt:`);
       if (!re.test(c)) fail(`donate i18n missing for ${lang}`);
     }
