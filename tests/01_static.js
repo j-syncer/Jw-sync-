@@ -40,9 +40,8 @@ for (const path of FILES) {
   // v2.10.0: main app bundle may be extracted to js/app.js (beta) or still
   // inline (production until go-live). Resolve the source either way.
   const isBeta = path.endsWith('beta/index.html') || path.endsWith('beta\\index.html');
-  // Swedish ships to beta first; production gets it on go-live. Until then,
-  // only require the 11th language on the beta build.
-  const FILE_LANGS = isBeta ? EXPECTED_LANGS : EXPECTED_LANGS.filter(l => l !== 'sv');
+  // Swedish is live on both beta and production.
+  const FILE_LANGS = EXPECTED_LANGS;
   const appJsPath = path.replace(/index\.html$/, 'js/app.js');
   let bundleSrc, bundleSource;
   if (fs.existsSync(appJsPath) && fs.readFileSync(appJsPath, 'utf8').includes('TRANSLATIONS=')) {
