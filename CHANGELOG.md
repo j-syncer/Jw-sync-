@@ -4,6 +4,12 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.50.2] — 2026-06-05
+
+### Changed — Accessibility & mobile polish (beta)
+- **More readable muted text.** Lightened the lowest-contrast helper text so it now meets WCAG AA contrast (dark and light themes) — labels, captions and hints are easier to read.
+- **Bigger touch targets.** On touch devices, the nav links, language picker and primary buttons are now at least 44px tall, making them easier to tap accurately.
+
 ## [2.50.1] — 2026-06-05
 
 ### Changed — "Renown" renamed to "Appreciation" (beta)
