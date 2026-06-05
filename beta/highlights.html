@@ -461,7 +461,8 @@
     .jww-mapov-body{flex:1;overflow:auto;padding:16px 18px}
     .jww-mapov .jww-map-svg{height:70vh;min-height:360px}
     .jww-mapov .jww-map-panel{max-height:70vh}
-    .jww-mapov:fullscreen{background:#040f22}
+    .jww-map-svg:fullscreen{width:100vw;height:100vh;border:none;border-radius:0;background:#040f22}
+    body.light .jww-map-svg:fullscreen{background:#f8fafc}
     @media(max-width:640px){.jww-mapov-btn span{display:none}.jww-mapov-btn{padding:7px 9px}.jww-mapov .jww-map-svg{height:54vh}}
     body.light .jww-mapov{background:rgba(248,250,252,.98)}
     body.light .jww-mapov-title{color:#0f172a}
@@ -1447,7 +1448,7 @@
       __jwMapTeardown = wireStudyMap(ov.querySelector('.jww-mapov-body'), graph);
       ov.querySelector('.jww-mapov-close').addEventListener('click', closeStudyMapOverlay);
       ov.querySelector('.jww-mapov-dl').addEventListener('click', function(){ var svg=ov.querySelector('.jww-map-svg'); if(svg) downloadStudyMapImage(svg, 'study-map.png'); });
-      ov.querySelector('.jww-mapov-fs').addEventListener('click', function(){ try { if(!document.fullscreenElement && ov.requestFullscreen){ ov.requestFullscreen().catch(function(){}); } else if(document.exitFullscreen){ document.exitFullscreen(); } } catch(_){} });
+      ov.querySelector('.jww-mapov-fs').addEventListener('click', function(){ var fsEl = ov.querySelector('.jww-map-svg'); try { if(!document.fullscreenElement && fsEl && fsEl.requestFullscreen){ fsEl.requestFullscreen().catch(function(){}); } else if(document.exitFullscreen){ document.exitFullscreen(); } } catch(_){} });
       __jwMapEsc = function(e){ if(e.key==='Escape') closeStudyMapOverlay(); };
       document.addEventListener('keydown', __jwMapEsc);
     }

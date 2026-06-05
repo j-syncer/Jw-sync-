@@ -4,6 +4,11 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.46.1] — 2026-06-05
+
+### Fixed — Study Map fullscreen now expands just the map (beta)
+The **Fullscreen** button in the Study Map tool now blows up **only the graph canvas** edge-to-edge, instead of the whole window with its header and side panels — a cleaner, distraction-free view of your connections. Esc returns you to the tool.
+
 ## [2.46.0] — 2026-06-05
 
 ### Changed — Study Map is now a standalone full-screen tool (beta)
