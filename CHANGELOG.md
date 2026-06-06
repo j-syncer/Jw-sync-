@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.53.1] — 2026-06-06
+
+### Improved — Ask Your Library: search while indexing, faster first-time build
+
+- **Search immediately.** Instead of waiting for all notes to be indexed, you can now type a question and get results as soon as the first batch of notes is ready. Results update automatically as more notes are added to the index.
+- **Faster indexing.** Batch size doubled (24 → 48 notes per pass), reducing the number of worker round-trips by half and cutting total first-time index time significantly.
+- **Clear expectations.** A "First-time only — saved to your device, instant next time" message now appears during the initial build so you know subsequent opens will be immediate.
+
+---
+
 ## [2.53.0] — 2026-06-06
 
 ### Added — Ask Your Library: private, on-device semantic search (beta)
