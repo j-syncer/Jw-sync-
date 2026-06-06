@@ -240,7 +240,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.50.2",
+      "softwareVersion": "2.53.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1119,6 +1119,42 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
   .jb-mobile-detail .jb-back{display:inline-flex;align-items:center;gap:4px}
   .jb-select{min-width:0;max-width:none;flex:1}
 }
+/* ── Ask Your Library (semantic search) ── */
+.jb-ask-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(234,88,12,.14);border:1px solid rgba(234,88,12,.5);color:#fdba74;padding:7px 13px;border-radius:8px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit}
+.jb-ask-btn:hover{background:rgba(234,88,12,.22);border-color:#ea580c;color:#fff}
+.jb-ask-btn.active{background:#ea580c;border-color:#ea580c;color:#fff}
+.jb-ask-btn svg{width:14px;height:14px}
+.jb-ask-panel{display:flex;flex-direction:column;height:100%;overflow:auto;padding:18px}
+.jb-ask-head{display:flex;align-items:center;gap:9px;font-size:16px;font-weight:800;color:#fff;margin-bottom:4px}
+.jb-ask-head svg{width:18px;height:18px;color:#fb923c}
+.jb-ask-sub{font-size:12.5px;color:#94a3b8;line-height:1.5;margin-bottom:14px}
+.jb-ask-bar{display:flex;gap:8px;margin-bottom:14px}
+.jb-ask-input{flex:1;background:#0a1224;border:1px solid #2a3548;border-radius:10px;padding:11px 14px;color:#e7eaf3;font-size:14px;font-family:inherit;outline:none}
+.jb-ask-input:focus{border-color:#ea580c}
+.jb-ask-input::placeholder{color:#5a6883}
+.jb-ask-go{background:#ea580c;border:none;color:#fff;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;flex:none}
+.jb-ask-go:hover{background:#c2410c}
+.jb-ask-go:disabled{opacity:.5;cursor:default}
+.jb-ask-enable{background:rgba(4,15,34,.55);border:1px solid #2a3548;border-radius:14px;padding:22px;text-align:center;max-width:520px;margin:8px auto}
+.jb-ask-enable h4{margin:0 0 8px;font-size:16px;color:#fff;font-weight:800}
+.jb-ask-enable p{margin:0 0 16px;font-size:13px;color:#94a3b8;line-height:1.55}
+.jb-ask-models{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.jb-ask-model-btn{flex:1;min-width:180px;max-width:230px;background:#0a1224;border:1px solid #2a3548;border-radius:12px;padding:15px;cursor:pointer;text-align:left;font-family:inherit;color:#e7eaf3;transition:border-color .12s,background .12s}
+.jb-ask-model-btn:hover{border-color:#ea580c;background:rgba(234,88,12,.08)}
+.jb-ask-model-name{font-size:14px;font-weight:800;color:#fdba74;margin-bottom:3px}
+.jb-ask-model-desc{font-size:11.5px;color:#94a3b8;line-height:1.45}
+.jb-ask-model-size{display:inline-block;margin-top:7px;font-size:11px;font-weight:700;color:#cbd5e1;background:rgba(71,85,105,.4);padding:2px 8px;border-radius:6px}
+.jb-ask-privacy{display:flex;align-items:flex-start;gap:7px;font-size:11.5px;color:#7d8aa8;line-height:1.5;margin-top:16px;justify-content:center}
+.jb-ask-privacy svg{width:14px;height:14px;color:#4ade80;flex:none;margin-top:1px}
+.jb-ask-prog{height:8px;border-radius:6px;background:rgba(71,85,105,.35);overflow:hidden;margin:14px auto 8px;max-width:520px}
+.jb-ask-prog-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#fb923c,#ea580c);width:0;transition:width .25s ease}
+.jb-ask-status{font-size:12.5px;color:#94a3b8;text-align:center;margin-bottom:6px}
+.jb-ask-results-head{font-size:12px;color:#7d8aa8;font-weight:700;margin-bottom:8px}
+.jb-ask-score{display:inline-block;font-size:10.5px;font-weight:800;color:#0b1220;background:#fdba74;border-radius:6px;padding:1px 7px;margin-left:auto;align-self:center;flex:none}
+.jb-ask-empty{color:#7d8aa8;font-size:13px;text-align:center;padding:30px 10px}
+.jb-ask-err{color:#fca5a5;font-size:12.5px;text-align:center;padding:10px;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:10px;margin:8px auto;max-width:520px}
+.jb-ask-rebuild{background:transparent;border:1px solid #2a3548;color:#94a3b8;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit}
+.jb-ask-rebuild:hover{border-color:#ea580c;color:#fdba74}
 </style>
 <script>
 window.__bootBrowse = function() {
@@ -1129,7 +1165,7 @@ window.__bootBrowse = function() {
 
   // ---------- i18n ----------
   var I18N = {
-    en:{title:"Study Explorer",search:"Search...",no_results:"Nothing matches your filters.",loading:"Loading library...",close:"Close",no_file:"Open a backup file first — pick one to browse.",pick_file:"Choose .jwlibrary file",count_one:"{n} item",count_many:"{n} items",color_all:"All colors",no_title:"Untitled",copy:"Copy",copied:"Copied",clear:"Clear",error:"Could not load:",pub_all:"All publications",tag_all:"All tags",back:"← Back",detail_empty:"Select an item from the list.",sort_newest:"Newest first",sort_oldest:"Oldest first",sort_pub:"By publication",modified:"Modified",no_content:"(No content)",too_many:"Showing first {n} of {total} — narrow the search.",pg_prev:"Prev",pg_next:"Next",pg_status:"Page {page} of {pages} · {total} results",err_corrupt:"This file isn't a readable .jwlibrary backup — it may be corrupted or the wrong type of file.",err_no_db:"This backup is missing its notes database (userData.db). Re-export it from JW Library.",err_not_sqlite:"The backup's database couldn't be opened — the file may be damaged.",tab_notes:"Notes",tab_highlights:"Highlights",tab_bookmarks:"Bookmarks",hl_label:"Highlight",hl_no_text:"Highlighted passage (text lives in the publication, not the backup).",hl_with_note:"With note",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Linked note:",edit:"Edit",save:"Save",cancel:"Cancel",delete_item:"Delete",export_db:"Export .jwlibrary",n_edits:"{n} edit",n_edits_many:"{n} edits",add_tag:"+ Add tag",new_tag_ph:"Tag name...",delete_note_confirm:"Delete this note? This cannot be undone.",delete_hl_confirm:"Delete this highlight? This cannot be undone.",delete_bm_confirm:"Delete this bookmark? This cannot be undone.",yes_delete:"Yes, delete",change_color:"Color",unsaved_exit:"You have {n} unsaved edit(s). Close without exporting?",title_label:"Title",content_label:"Content",tags_label:"Tags",hl_color_label:"Highlight color",bm_title_label:"Bookmark title",plain_text_note:"Formatting simplified to plain text on save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Underline",rte_bullets:"Bullet list",rich_text_note:"Edit with bold, italics and lists — formatting is kept",date_from:"From",date_to:"To",date_range:"Filter by date",extract_range:"Extract date range",extract_none:"No notes fall in this date range.",extract_hint:"Save a new .jwlibrary with only the notes in this date range.",copy_md:"Copy as Markdown",export_md:"Export Markdown",md_hint:"Download the notes shown as Markdown files (.zip)",sel_mode:"Select",sel_done:"Done",sel_all:"All",sel_none:"None",sel_count:"{n} selected",batch_tag:"Tag",batch_color:"Color",batch_delete:"Delete",batch_delete_confirm:"Delete {n}? You can Undo before exporting.",batch_tag_ph:"Tag name…",batch_add:"Add",undo:"Undo",redo:"Redo",tab_inputfields:"Study Answers",if_label:"Study answer",if_question:"Question",if_answer:"Your answer",if_empty:"(No answer yet)",delete_if_confirm:"Delete this study answer? You can Undo before exporting.",share_action:"Share",share_title:"Share notes",share_intro:"This makes a file you hand over yourself — nothing is uploaded. It contains the note text, so share only with people you trust.",share_count:"{n} notes",share_download:"Download file",share_copy:"Copy",share_tag:"Shared",receive_action:"Receive",receive_title:"Receive shared notes",receive_intro:"Paste shared text, or choose a .jwshare.json file someone sent you.",receive_paste_ph:"Paste shared notes here…",receive_choose:"Choose file",receive_preview:"Preview",receive_invalid:"That doesn't look like valid shared-notes data.",preview_readonly:"Preview",adopt:"Adopt {n} into my library",adopt_need_lib:"Open a backup first",adopted:"Adopted {n} notes (tagged \"Shared\").",open_share:"Share Notes →"},
+    en:{title:"Study Explorer",search:"Search...",no_results:"Nothing matches your filters.",loading:"Loading library...",close:"Close",no_file:"Open a backup file first — pick one to browse.",pick_file:"Choose .jwlibrary file",count_one:"{n} item",count_many:"{n} items",color_all:"All colors",no_title:"Untitled",copy:"Copy",copied:"Copied",clear:"Clear",error:"Could not load:",pub_all:"All publications",tag_all:"All tags",back:"← Back",detail_empty:"Select an item from the list.",sort_newest:"Newest first",sort_oldest:"Oldest first",sort_pub:"By publication",modified:"Modified",no_content:"(No content)",too_many:"Showing first {n} of {total} — narrow the search.",pg_prev:"Prev",pg_next:"Next",pg_status:"Page {page} of {pages} · {total} results",err_corrupt:"This file isn't a readable .jwlibrary backup — it may be corrupted or the wrong type of file.",err_no_db:"This backup is missing its notes database (userData.db). Re-export it from JW Library.",err_not_sqlite:"The backup's database couldn't be opened — the file may be damaged.",tab_notes:"Notes",tab_highlights:"Highlights",tab_bookmarks:"Bookmarks",hl_label:"Highlight",hl_no_text:"Highlighted passage (text lives in the publication, not the backup).",hl_with_note:"With note",bm_label:"Bookmark",bm_slot:"Slot {n}",linked_note:"Linked note:",edit:"Edit",save:"Save",cancel:"Cancel",delete_item:"Delete",export_db:"Export .jwlibrary",n_edits:"{n} edit",n_edits_many:"{n} edits",add_tag:"+ Add tag",new_tag_ph:"Tag name...",delete_note_confirm:"Delete this note? This cannot be undone.",delete_hl_confirm:"Delete this highlight? This cannot be undone.",delete_bm_confirm:"Delete this bookmark? This cannot be undone.",yes_delete:"Yes, delete",change_color:"Color",unsaved_exit:"You have {n} unsaved edit(s). Close without exporting?",title_label:"Title",content_label:"Content",tags_label:"Tags",hl_color_label:"Highlight color",bm_title_label:"Bookmark title",plain_text_note:"Formatting simplified to plain text on save",rte_bold:"Bold",rte_italic:"Italic",rte_underline:"Underline",rte_bullets:"Bullet list",rich_text_note:"Edit with bold, italics and lists — formatting is kept",date_from:"From",date_to:"To",date_range:"Filter by date",extract_range:"Extract date range",extract_none:"No notes fall in this date range.",extract_hint:"Save a new .jwlibrary with only the notes in this date range.",copy_md:"Copy as Markdown",export_md:"Export Markdown",md_hint:"Download the notes shown as Markdown files (.zip)",sel_mode:"Select",sel_done:"Done",sel_all:"All",sel_none:"None",sel_count:"{n} selected",batch_tag:"Tag",batch_color:"Color",batch_delete:"Delete",batch_delete_confirm:"Delete {n}? You can Undo before exporting.",batch_tag_ph:"Tag name…",batch_add:"Add",undo:"Undo",redo:"Redo",tab_inputfields:"Study Answers",if_label:"Study answer",if_question:"Question",if_answer:"Your answer",if_empty:"(No answer yet)",delete_if_confirm:"Delete this study answer? You can Undo before exporting.",share_action:"Share",share_title:"Share notes",share_intro:"This makes a file you hand over yourself — nothing is uploaded. It contains the note text, so share only with people you trust.",share_count:"{n} notes",share_download:"Download file",share_copy:"Copy",share_tag:"Shared",receive_action:"Receive",receive_title:"Receive shared notes",receive_intro:"Paste shared text, or choose a .jwshare.json file someone sent you.",receive_paste_ph:"Paste shared notes here…",receive_choose:"Choose file",receive_preview:"Preview",receive_invalid:"That doesn't look like valid shared-notes data.",preview_readonly:"Preview",adopt:"Adopt {n} into my library",adopt_need_lib:"Open a backup first",adopted:"Adopted {n} notes (tagged \"Shared\").",open_share:"Share Notes →",ask_btn:"Ask",ask_title:"Ask Your Library",ask_sub:"Search your notes by meaning, not just keywords — ask in plain language and find related notes even when they use different words. Runs entirely on your device.",ask_placeholder:"e.g. notes about staying loyal under pressure",ask_go:"Search",ask_enable_title:"Turn on semantic search",ask_enable_body:"A small language model runs in your browser to understand your notes. It downloads once, is cached for offline use, and nothing ever leaves your device.",ask_model_en_name:"English",ask_model_en_desc:"Best for notes written in English. Smaller, faster download.",ask_model_multi_name:"Multilingual",ask_model_multi_desc:"Understands 50+ languages — choose this if you write notes in more than one language.",ask_size_once:"~{n} MB · one-time",ask_privacy:"100% private — the model and your notes never leave this device.",ask_loading_model:"Downloading search model… {pct}%",ask_building:"Reading your notes… {done} / {total}",ask_ready:"Ready — ask a question above.",ask_searching:"Searching…",ask_results_head:"{n} most related notes",ask_no_results:"No related notes found. Try rephrasing your question.",ask_no_notes:"This library has no notes to search yet.",ask_err:"Couldn't load the search model. Check your connection and try again.",ask_rebuild:"Rebuild index",ask_match:"{pct}% match",ask_switch_model:"Use a different model"},
     es:{title:"Explorador de Estudio",search:"Buscar...",no_results:"Nada coincide con tus filtros.",loading:"Cargando biblioteca...",close:"Cerrar",no_file:"Abre primero un archivo de respaldo.",pick_file:"Elegir archivo .jwlibrary",count_one:"{n} elemento",count_many:"{n} elementos",color_all:"Todos los colores",no_title:"Sin título",copy:"Copiar",copied:"Copiado",clear:"Limpiar",error:"No se pudo cargar:",pub_all:"Todas las publicaciones",tag_all:"Todas las etiquetas",back:"← Volver",detail_empty:"Selecciona un elemento de la lista.",sort_newest:"Más recientes primero",sort_oldest:"Más antiguas primero",sort_pub:"Por publicación",modified:"Modificado",no_content:"(Sin contenido)",too_many:"Mostrando los primeros {n} de {total} — refina la búsqueda.",pg_prev:"Anterior",pg_next:"Siguiente",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este archivo no es una copia .jwlibrary legible: puede estar dañado o ser de tipo incorrecto.",err_no_db:"A esta copia le falta su base de datos de notas (userData.db). Vuelve a exportarla desde JW Library.",err_not_sqlite:"No se pudo abrir la base de datos de la copia: el archivo puede estar dañado.",tab_notes:"Notas",tab_highlights:"Resaltados",tab_bookmarks:"Marcadores",hl_label:"Resaltado",hl_no_text:"Pasaje resaltado (el texto está en la publicación, no en el respaldo).",hl_with_note:"Con nota",bm_label:"Marcador",bm_slot:"Posición {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Guardar",cancel:"Cancelar",delete_item:"Eliminar",export_db:"Exportar .jwlibrary",n_edits:"{n} edición",n_edits_many:"{n} ediciones",add_tag:"+ Agregar etiqueta",new_tag_ph:"Nombre de etiqueta...",delete_note_confirm:"¿Eliminar esta nota? Esta acción no se puede deshacer.",delete_hl_confirm:"¿Eliminar este resaltado? Esta acción no se puede deshacer.",delete_bm_confirm:"¿Eliminar este marcador? Esta acción no se puede deshacer.",yes_delete:"Sí, eliminar",change_color:"Color",unsaved_exit:"Tienes {n} edición(es) sin exportar. ¿Cerrar sin exportar?",title_label:"Título",content_label:"Contenido",tags_label:"Etiquetas",hl_color_label:"Color del resaltado",bm_title_label:"Título del marcador",plain_text_note:"El formato se simplifica a texto plano al guardar",rte_bold:"Negrita",rte_italic:"Cursiva",rte_underline:"Subrayado",rte_bullets:"Lista con viñetas",rich_text_note:"Edita con negrita, cursiva y listas — el formato se conserva",date_from:"Desde",date_to:"Hasta",date_range:"Filtrar por fecha",extract_range:"Extraer rango de fechas",extract_none:"Ninguna nota está en este rango de fechas.",extract_hint:"Guarda un nuevo .jwlibrary solo con las notas de este rango de fechas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Descarga las notas mostradas como archivos Markdown (.zip)",sel_mode:"Seleccionar",sel_done:"Listo",sel_all:"Todo",sel_none:"Ninguno",sel_count:"{n} seleccionados",batch_tag:"Etiqueta",batch_color:"Color",batch_delete:"Eliminar",batch_delete_confirm:"¿Eliminar {n}? Puedes deshacer antes de exportar.",batch_tag_ph:"Nombre de etiqueta…",batch_add:"Agregar",undo:"Deshacer",redo:"Rehacer",tab_inputfields:"Respuestas",if_label:"Respuesta de estudio",if_question:"Pregunta",if_answer:"Tu respuesta",if_empty:"(Sin respuesta aún)",delete_if_confirm:"¿Eliminar esta respuesta de estudio? Puedes deshacer antes de exportar.",share_action:"Compartir",share_title:"Compartir notas",share_intro:"Esto crea un archivo que tú mismo entregas — no se sube nada. Contiene el texto de las notas, así que compártelo solo con personas de confianza.",share_count:"{n} notas",share_download:"Descargar archivo",share_copy:"Copiar",share_tag:"Compartido",receive_action:"Recibir",receive_title:"Recibir notas compartidas",receive_intro:"Pega el texto compartido o elige un archivo .jwshare.json que te enviaron.",receive_paste_ph:"Pega aquí las notas compartidas…",receive_choose:"Elegir archivo",receive_preview:"Vista previa",receive_invalid:"Esto no parece datos de notas compartidas válidos.",preview_readonly:"Vista previa",adopt:"Adoptar {n} en mi biblioteca",adopt_need_lib:"Abre primero un respaldo",adopted:"Se adoptaron {n} notas (con la etiqueta \"Compartido\").",open_share:"Compartir notas →"},
     pt:{title:"Explorador de Estudo",search:"Pesquisar...",no_results:"Nada corresponde aos filtros.",loading:"Carregando biblioteca...",close:"Fechar",no_file:"Abra primeiro um arquivo de backup.",pick_file:"Escolher arquivo .jwlibrary",count_one:"{n} item",count_many:"{n} itens",color_all:"Todas as cores",no_title:"Sem título",copy:"Copiar",copied:"Copiado",clear:"Limpar",error:"Não foi possível carregar:",pub_all:"Todas as publicações",tag_all:"Todas as etiquetas",back:"← Voltar",detail_empty:"Selecione um item da lista.",sort_newest:"Mais recentes primeiro",sort_oldest:"Mais antigos primeiro",sort_pub:"Por publicação",modified:"Modificado",no_content:"(Sem conteúdo)",too_many:"Exibindo os primeiros {n} de {total} — refine a busca.",pg_prev:"Anterior",pg_next:"Próxima",pg_status:"Página {page} de {pages} · {total} resultados",err_corrupt:"Este arquivo não é um backup .jwlibrary legível — pode estar corrompido ou ser do tipo errado.",err_no_db:"Falta o banco de dados de notas (userData.db) neste backup. Exporte-o novamente no JW Library.",err_not_sqlite:"Não foi possível abrir o banco de dados do backup — o arquivo pode estar danificado.",tab_notes:"Notas",tab_highlights:"Marcações",tab_bookmarks:"Favoritos",hl_label:"Marcação",hl_no_text:"Trecho marcado (o texto está na publicação, não no backup).",hl_with_note:"Com nota",bm_label:"Favorito",bm_slot:"Posição {n}",linked_note:"Nota vinculada:",edit:"Editar",save:"Salvar",cancel:"Cancelar",delete_item:"Excluir",export_db:"Exportar .jwlibrary",n_edits:"{n} edição",n_edits_many:"{n} edições",add_tag:"+ Adicionar etiqueta",new_tag_ph:"Nome da etiqueta...",delete_note_confirm:"Excluir esta nota? Esta ação não pode ser desfeita.",delete_hl_confirm:"Excluir esta marcação? Esta ação não pode ser desfeita.",delete_bm_confirm:"Excluir este favorito? Esta ação não pode ser desfeita.",yes_delete:"Sim, excluir",change_color:"Cor",unsaved_exit:"Você tem {n} edição(ões) sem exportar. Fechar sem exportar?",title_label:"Título",content_label:"Conteúdo",tags_label:"Etiquetas",hl_color_label:"Cor da marcação",bm_title_label:"Título do favorito",plain_text_note:"Formatação simplificada para texto simples ao salvar",rte_bold:"Negrito",rte_italic:"Itálico",rte_underline:"Sublinhado",rte_bullets:"Lista com marcadores",rich_text_note:"Edite com negrito, itálico e listas — a formatação é mantida",date_from:"De",date_to:"Até",date_range:"Filtrar por data",extract_range:"Extrair intervalo de datas",extract_none:"Nenhuma nota está neste intervalo de datas.",extract_hint:"Salve um novo .jwlibrary apenas com as notas deste intervalo de datas.",copy_md:"Copiar como Markdown",export_md:"Exportar Markdown",md_hint:"Baixe as notas exibidas como arquivos Markdown (.zip)",sel_mode:"Selecionar",sel_done:"Concluir",sel_all:"Tudo",sel_none:"Nenhum",sel_count:"{n} selecionados",batch_tag:"Etiqueta",batch_color:"Cor",batch_delete:"Excluir",batch_delete_confirm:"Excluir {n}? Você pode desfazer antes de exportar.",batch_tag_ph:"Nome da etiqueta…",batch_add:"Adicionar",undo:"Desfazer",redo:"Refazer",tab_inputfields:"Respostas",if_label:"Resposta de estudo",if_question:"Pergunta",if_answer:"Sua resposta",if_empty:"(Sem resposta ainda)",delete_if_confirm:"Excluir esta resposta de estudo? Você pode desfazer antes de exportar.",share_action:"Compartilhar",share_title:"Compartilhar notas",share_intro:"Isto cria um arquivo que você mesmo entrega — nada é enviado. Ele contém o texto das notas, então compartilhe só com pessoas de confiança.",share_count:"{n} notas",share_download:"Baixar arquivo",share_copy:"Copiar",share_tag:"Compartilhado",receive_action:"Receber",receive_title:"Receber notas compartilhadas",receive_intro:"Cole o texto compartilhado ou escolha um arquivo .jwshare.json que enviaram a você.",receive_paste_ph:"Cole as notas compartilhadas aqui…",receive_choose:"Escolher arquivo",receive_preview:"Pré-visualizar",receive_invalid:"Isto não parece dados válidos de notas compartilhadas.",preview_readonly:"Pré-visualização",adopt:"Adotar {n} na minha biblioteca",adopt_need_lib:"Abra um backup primeiro",adopted:"{n} notas adotadas (com a etiqueta \"Compartilhado\").",open_share:"Compartilhar notas →"},
     fr:{title:"Explorateur d'étude",search:"Rechercher...",no_results:"Aucun résultat ne correspond.",loading:"Chargement de la bibliothèque...",close:"Fermer",no_file:"Ouvrez d'abord un fichier de sauvegarde.",pick_file:"Choisir un fichier .jwlibrary",count_one:"{n} élément",count_many:"{n} éléments",color_all:"Toutes les couleurs",no_title:"Sans titre",copy:"Copier",copied:"Copié",clear:"Effacer",error:"Impossible de charger :",pub_all:"Toutes les publications",tag_all:"Toutes les étiquettes",back:"← Retour",detail_empty:"Sélectionnez un élément dans la liste.",sort_newest:"Plus récents d'abord",sort_oldest:"Plus anciens d'abord",sort_pub:"Par publication",modified:"Modifié",no_content:"(Pas de contenu)",too_many:"Affichage des {n} premiers sur {total} — affinez la recherche.",pg_prev:"Préc.",pg_next:"Suiv.",pg_status:"Page {page} sur {pages} · {total} résultats",err_corrupt:"Ce fichier n'est pas une sauvegarde .jwlibrary lisible — il est peut-être corrompu ou d'un mauvais type.",err_no_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db). Réexportez-la depuis JW Library.",err_not_sqlite:"Impossible d'ouvrir la base de données de la sauvegarde — le fichier est peut-être endommagé.",tab_notes:"Notes",tab_highlights:"Surlignages",tab_bookmarks:"Signets",hl_label:"Surlignage",hl_no_text:"Passage surligné (le texte se trouve dans la publication, pas dans la sauvegarde).",hl_with_note:"Avec note",bm_label:"Signet",bm_slot:"Position {n}",linked_note:"Note liée :",edit:"Modifier",save:"Enregistrer",cancel:"Annuler",delete_item:"Supprimer",export_db:"Exporter .jwlibrary",n_edits:"{n} modification",n_edits_many:"{n} modifications",add_tag:"+ Ajouter étiquette",new_tag_ph:"Nom de l'étiquette...",delete_note_confirm:"Supprimer cette note ? Cette action est irréversible.",delete_hl_confirm:"Supprimer ce surlignage ? Cette action est irréversible.",delete_bm_confirm:"Supprimer ce signet ? Cette action est irréversible.",yes_delete:"Oui, supprimer",change_color:"Couleur",unsaved_exit:"Vous avez {n} modification(s) non exportée(s). Fermer sans exporter ?",title_label:"Titre",content_label:"Contenu",tags_label:"Étiquettes",hl_color_label:"Couleur du surlignage",bm_title_label:"Titre du signet",plain_text_note:"La mise en forme est simplifiée en texte brut lors de l'enregistrement",rte_bold:"Gras",rte_italic:"Italique",rte_underline:"Souligné",rte_bullets:"Liste à puces",rich_text_note:"Modifiez avec gras, italique et listes — la mise en forme est conservée",date_from:"Du",date_to:"Au",date_range:"Filtrer par date",extract_range:"Extraire la plage de dates",extract_none:"Aucune note dans cette plage de dates.",extract_hint:"Enregistrez un nouveau .jwlibrary avec seulement les notes de cette plage de dates.",copy_md:"Copier en Markdown",export_md:"Exporter Markdown",md_hint:"Téléchargez les notes affichées en fichiers Markdown (.zip)",sel_mode:"Sélectionner",sel_done:"Terminé",sel_all:"Tout",sel_none:"Aucun",sel_count:"{n} sélectionnés",batch_tag:"Étiquette",batch_color:"Couleur",batch_delete:"Supprimer",batch_delete_confirm:"Supprimer {n} ? Vous pouvez annuler avant l'export.",batch_tag_ph:"Nom de l'étiquette…",batch_add:"Ajouter",undo:"Annuler",redo:"Rétablir",tab_inputfields:"Réponses",if_label:"Réponse d'étude",if_question:"Question",if_answer:"Votre réponse",if_empty:"(Pas encore de réponse)",delete_if_confirm:"Supprimer cette réponse d'étude ? Vous pouvez annuler avant l'export.",share_action:"Partager",share_title:"Partager des notes",share_intro:"Cela crée un fichier que vous transmettez vous-même — rien n'est envoyé. Il contient le texte des notes, ne le partagez qu'avec des personnes de confiance.",share_count:"{n} notes",share_download:"Télécharger le fichier",share_copy:"Copier",share_tag:"Partagé",receive_action:"Recevoir",receive_title:"Recevoir des notes partagées",receive_intro:"Collez le texte partagé ou choisissez un fichier .jwshare.json qu'on vous a envoyé.",receive_paste_ph:"Collez les notes partagées ici…",receive_choose:"Choisir un fichier",receive_preview:"Aperçu",receive_invalid:"Cela ne ressemble pas à des données de notes partagées valides.",preview_readonly:"Aperçu",adopt:"Adopter {n} dans ma bibliothèque",adopt_need_lib:"Ouvrez d'abord une sauvegarde",adopted:"{n} notes adoptées (étiquetées \"Partagé\").",open_share:"Partager des notes →"},
@@ -1275,7 +1311,8 @@ window.__bootBrowse = function() {
     overlay: null,
     db: null, fileName: '', dirty: 0, editingId: null,
     SQL: null, undo: [], redo: [], selection: new Set(), selectMode: false, _inBatch: false, _batchUI: 'idle',
-    allInputFields: []
+    allInputFields: [],
+    askMode: false, askResults: [], askQuery: '', askPhase: 'idle', askProgress: 0, askError: ''
   };
 
   // ---------- DB mutations ----------
@@ -2156,6 +2193,8 @@ window.__bootBrowse = function() {
     if(!window.JSZip || !window.initSqlJs){ fail('Required libraries are not loaded yet.'); return; }
     // Close any existing DB
     if(state.db){ try{ state.db.close(); }catch(_){} state.db=null; }
+    // New file → previous semantic index no longer applies
+    state.askMode=false; state.askResults=[]; state.askQuery=''; state.askPhase='idle'; state.askError=''; ASK.vecs=null;
 
     new JSZip().loadAsync(file).then(function(zip){
       var dbName = Object.keys(zip.files).find(function(n){ return /userdata\.db$/i.test(n); });
@@ -2235,6 +2274,7 @@ window.__bootBrowse = function() {
   function renderBody(){
     var body=state.overlay.querySelector('.jb-body');
     body.innerHTML='';
+    if(state.askMode){ renderAsk(body); return; }
     var list=document.createElement('div'); list.className='jb-list';
     var total=state.filtered.length;
     var pages=Math.max(1, Math.ceil(total/PAGE_SIZE));
@@ -2629,6 +2669,10 @@ window.__bootBrowse = function() {
 
     // Toolbar
     var toolbar=document.createElement('div'); toolbar.className='jb-toolbar';
+    var askBtn=document.createElement('button'); askBtn.type='button'; askBtn.className='jb-ask-btn'+(state.askMode?' active':'');
+    askBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l2.2 6 6 2.2-6 2.2L13 19.5 10.8 13.5l-6-2.2 6-2.2zM5 3.5v3M3.5 5h3"/></svg><span>'+htmlEscape(t('ask_btn'))+'</span>';
+    askBtn.onclick=function(){ toggleAsk(askBtn); };
+    toolbar.appendChild(askBtn);
     var search=document.createElement('label'); search.className='jb-search';
     search.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7d8aa8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>';
     var inp=document.createElement('input'); inp.type='search'; inp.placeholder=t('search');
@@ -2698,9 +2742,174 @@ window.__bootBrowse = function() {
     state.search=''; state.color=''; state.tagId=''; state.pubId=''; state.dateFrom=''; state.dateTo='';
     state.activeType='notes'; state.dirty=0; state.fileName='';
     state.selectMode=false; if(state.selection) state.selection.clear(); state.undo=[]; state.redo=[]; state._batchUI='idle';
+    state.askMode=false; state.askResults=[]; state.askQuery=''; state.askPhase='idle'; state.askError='';
+    if(ASK.worker){ try{ ASK.worker.terminate(); }catch(_){} ASK.worker=null; } ASK.vecs=null; ASK.pending={}; ASK._onReady=null;
     document.removeEventListener('keydown',escHandler);
   }
   function escHandler(e){ if(e.key==='Escape') closeOverlay(); }
+
+  // ---------- Ask Your Library (on-device semantic search) ----------
+  var ASK = { worker:null, vecs:null, pending:{}, reqId:0, _onReady:null };
+  var ASK_MODELS = { en:23, multi:50 };
+
+  function getAskPref(){ try{ return JSON.parse(localStorage.getItem('jwsync_ask_v1')||'{}')||{}; }catch(_){ return {}; } }
+  function setAskPref(o){ try{ var p=getAskPref(); for(var k in o){ p[k]=o[k]; } localStorage.setItem('jwsync_ask_v1', JSON.stringify(p)); }catch(_){} }
+  function hashStr(s){ var h=5381; for(var i=0;i<s.length;i++){ h=((h<<5)+h+s.charCodeAt(i))|0; } return String(h); }
+  function dotProd(a,b){ var n=Math.min(a.length,b.length), s=0; for(var i=0;i<n;i++){ s+=a[i]*b[i]; } return s; }
+  function askNotes(){ var out=[]; (state.allNotes||[]).forEach(function(n){ var txt=((n.Title||'')+'\n'+stripHtml(n.Content||'')).replace(/\s+/g,' ').trim(); if(txt){ out.push({ note:n, text:txt, hash:hashStr(txt) }); } }); return out; }
+
+  // IndexedDB cache for note vectors (keyed by model + note id)
+  function idbOpen(){ return new Promise(function(res,rej){ try{ var r=indexedDB.open('jwsync_semantic',1); r.onupgradeneeded=function(){ var db=r.result; if(!db.objectStoreNames.contains('vecs')) db.createObjectStore('vecs',{keyPath:'key'}); }; r.onsuccess=function(){ res(r.result); }; r.onerror=function(){ rej(r.error); }; }catch(e){ rej(e); } }); }
+  function idbGetModel(model){ return idbOpen().then(function(db){ return new Promise(function(res){ var out={}; try{ var tx=db.transaction('vecs','readonly'); var cur=tx.objectStore('vecs').openCursor(); cur.onsuccess=function(){ var c=cur.result; if(c){ var v=c.value; if(v&&v.model===model){ out[v.noteId]={ hash:v.hash, vec:new Float32Array(v.vec) }; } c.continue(); } else { res(out); } }; cur.onerror=function(){ res(out); }; }catch(e){ res(out); } }); }).catch(function(){ return {}; }); }
+  function idbPutVec(model,noteId,hash,vec,dim){ idbOpen().then(function(db){ try{ var tx=db.transaction('vecs','readwrite'); tx.objectStore('vecs').put({ key:model+'|'+noteId, model:model, noteId:noteId, hash:hash, dim:dim, vec:vec.buffer.slice(0) }); }catch(e){} }).catch(function(){}); }
+  function idbClearModel(model){ return idbOpen().then(function(db){ return new Promise(function(res){ try{ var tx=db.transaction('vecs','readwrite'); var cur=tx.objectStore('vecs').openCursor(); cur.onsuccess=function(){ var c=cur.result; if(c){ if(c.value&&c.value.model===model) c.delete(); c.continue(); } else { res(); } }; cur.onerror=function(){ res(); }; }catch(e){ res(); } }); }).catch(function(){}); }
+
+  function ensureAskWorker(){
+    if(ASK.worker) return ASK.worker;
+    try{ ASK.worker=new Worker('./js/semantic-worker.js',{type:'module'}); }
+    catch(e){ state.askError=t('ask_err'); return null; }
+    ASK.worker.onmessage=function(ev){
+      var d=ev.data||{};
+      if(d.type==='modelProgress'){ if(d.total){ state.askProgress=Math.max(state.askProgress, Math.round((d.loaded/d.total)*100)); updateAskProgress(); } }
+      else if(d.type==='ready'){ var cb=ASK._onReady; ASK._onReady=null; if(cb) cb(); }
+      else if(d.type==='embedded'){ var p=ASK.pending[d.id]; if(p){ delete ASK.pending[d.id]; p(new Float32Array(d.buffer), d.dim, null); } }
+      else if(d.type==='error'){ if(d.id!=null&&ASK.pending[d.id]){ var q=ASK.pending[d.id]; delete ASK.pending[d.id]; q(null,null,d.message); } else { state.askError=t('ask_err'); state.askPhase='idle'; if(state.askMode) renderBody(); } }
+    };
+    ASK.worker.onerror=function(){ state.askError=t('ask_err'); state.askPhase='idle'; if(state.askMode) renderBody(); };
+    return ASK.worker;
+  }
+  function embedBatch(texts){ return new Promise(function(resolve,reject){ var w=ensureAskWorker(); if(!w){ reject(new Error('no worker')); return; } var id=++ASK.reqId; ASK.pending[id]=function(vec,dim,err){ if(err) reject(new Error(err)); else resolve({vec:vec,dim:dim}); }; w.postMessage({ type:'embed', id:id, texts:texts }); }); }
+
+  function startAskEngine(model){
+    state.askError=''; var w=ensureAskWorker(); if(!w){ state.askPhase='idle'; renderBody(); return; }
+    state.askPhase='loading'; state.askProgress=0; renderBody();
+    ASK._onReady=function(){ buildAskIndex(model); };
+    w.postMessage({ type:'load', model:model });
+  }
+  function buildAskIndex(model){
+    var notes=askNotes(); state.askTotal=notes.length; state.askDone=0;
+    if(!notes.length){ state.askPhase='ready'; ASK.vecs=[]; renderBody(); return; }
+    state.askPhase='building'; state.askProgress=0; renderBody();
+    idbGetModel(model).then(function(cached){
+      var need=[]; notes.forEach(function(n){ var c=cached[n.note.NoteId]; if(!c||c.hash!==n.hash) need.push(n); });
+      state.askDone=notes.length-need.length;
+      var B=24, i=0;
+      function step(){
+        if(i>=need.length){
+          ASK.vecs=notes.map(function(n){ var c=cached[n.note.NoteId]; return c?{ note:n.note, vec:c.vec }:null; }).filter(Boolean);
+          state.askPhase='ready'; state.askProgress=100; renderBody(); return;
+        }
+        var batch=need.slice(i,i+B); i+=B;
+        embedBatch(batch.map(function(x){ return x.text; })).then(function(r){
+          var dim=r.dim, arr=r.vec;
+          for(var j=0;j<batch.length;j++){ var v=arr.slice(j*dim,(j+1)*dim); cached[batch[j].note.NoteId]={ hash:batch[j].hash, vec:v }; idbPutVec(model,batch[j].note.NoteId,batch[j].hash,v,dim); }
+          state.askDone=Math.min(notes.length, state.askDone+batch.length);
+          state.askProgress=Math.round(state.askDone/notes.length*100); updateAskProgress();
+          step();
+        }).catch(function(){ state.askError=t('ask_err'); state.askPhase='idle'; renderBody(); });
+      }
+      step();
+    });
+  }
+  function doAskSearch(q){
+    q=(q||'').trim(); state.askQuery=q; state.askError='';
+    if(!q){ state.askResults=[]; renderBody(); return; }
+    if(state.askPhase!=='ready'||!ASK.vecs){ return; }
+    embedBatch([q]).then(function(r){
+      var qv=r.vec.subarray ? r.vec.subarray(0,r.dim) : r.vec.slice(0,r.dim);
+      var scored=ASK.vecs.map(function(e){ return { note:e.note, score:dotProd(qv,e.vec) }; });
+      scored.sort(function(a,b){ return b.score-a.score; });
+      state.askResults=scored.filter(function(s){ return s.score>0.12; }).slice(0,50);
+      state.selected=null; renderBody();
+    }).catch(function(){ state.askError=t('ask_err'); renderBody(); });
+  }
+
+  function updateAskProgress(){
+    if(!state.askMode||!state.overlay) return;
+    var f=state.overlay.querySelector('.jb-ask-prog-fill'); if(f) f.style.width=state.askProgress+'%';
+    var s=state.overlay.querySelector('.jb-ask-status');
+    if(s){ s.textContent = state.askPhase==='loading' ? t('ask_loading_model',{pct:state.askProgress}) : t('ask_building',{done:state.askDone||0,total:state.askTotal||0}); }
+  }
+
+  function toggleAsk(btn){ if(state.askMode){ closeAsk(); } else { openAsk(); } }
+  function openAsk(){
+    state.askMode=true; state.activeType='notes'; state.selected=null; state.editingId=null; state.askError='';
+    var b=state.overlay.querySelector('.jb-ask-btn'); if(b) b.classList.add('active');
+    var pref=getAskPref();
+    if(pref.model && state.askPhase==='idle' && !ASK.vecs){ startAskEngine(pref.model); }
+    else { renderBody(); }
+  }
+  function closeAsk(){ state.askMode=false; state.selected=null; var b=state.overlay.querySelector('.jb-ask-btn'); if(b) b.classList.remove('active'); applyFilter(); renderBody(); }
+
+  function renderAsk(body){
+    var list=document.createElement('div'); list.className='jb-list';
+    var panel=document.createElement('div'); panel.className='jb-ask-panel';
+    var head=document.createElement('div'); head.className='jb-ask-head';
+    head.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3l2.2 6 6 2.2-6 2.2L13 19.5 10.8 13.5l-6-2.2 6-2.2zM5 3.5v3M3.5 5h3"/></svg><span>'+htmlEscape(t('ask_title'))+'</span>';
+    panel.appendChild(head);
+    var sub=document.createElement('div'); sub.className='jb-ask-sub'; sub.textContent=t('ask_sub'); panel.appendChild(sub);
+
+    function emptyMsg(txt){ var d=document.createElement('div'); d.className='jb-ask-empty'; d.textContent=txt; return d; }
+    function appendDetail(){ var detail=document.createElement('div'); detail.className='jb-detail'; detail.appendChild(buildDetail(state.selected)); body.appendChild(detail); }
+    function finish(){ list.appendChild(panel); body.appendChild(list); appendDetail(); }
+
+    if(!askNotes().length){ panel.appendChild(emptyMsg(t('ask_no_notes'))); finish(); return; }
+    var pref=getAskPref();
+    if(!pref.model){
+      var card=document.createElement('div'); card.className='jb-ask-enable';
+      var h4=document.createElement('h4'); h4.textContent=t('ask_enable_title'); card.appendChild(h4);
+      var p=document.createElement('p'); p.textContent=t('ask_enable_body'); card.appendChild(p);
+      var models=document.createElement('div'); models.className='jb-ask-models';
+      [['en',t('ask_model_en_name'),t('ask_model_en_desc')],['multi',t('ask_model_multi_name'),t('ask_model_multi_desc')]].forEach(function(m){
+        var mb=document.createElement('button'); mb.type='button'; mb.className='jb-ask-model-btn';
+        mb.innerHTML='<div class="jb-ask-model-name">'+htmlEscape(m[1])+'</div><div class="jb-ask-model-desc">'+htmlEscape(m[2])+'</div><span class="jb-ask-model-size">'+htmlEscape(t('ask_size_once',{n:ASK_MODELS[m[0]]}))+'</span>';
+        mb.onclick=function(){ setAskPref({model:m[0]}); state.askPhase='idle'; ASK.vecs=null; startAskEngine(m[0]); };
+        models.appendChild(mb);
+      });
+      card.appendChild(models);
+      var priv=document.createElement('div'); priv.className='jb-ask-privacy';
+      priv.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>'+htmlEscape(t('ask_privacy'))+'</span>';
+      card.appendChild(priv);
+      panel.appendChild(card); finish(); return;
+    }
+
+    // Query bar (model chosen)
+    var bar=document.createElement('div'); bar.className='jb-ask-bar';
+    var inp=document.createElement('input'); inp.className='jb-ask-input'; inp.type='search'; inp.placeholder=t('ask_placeholder'); inp.value=state.askQuery||'';
+    inp.onkeydown=function(e){ if(e.key==='Enter'){ e.preventDefault(); doAskSearch(inp.value); } };
+    var go=document.createElement('button'); go.className='jb-ask-go'; go.textContent=t('ask_go'); go.disabled=(state.askPhase!=='ready');
+    go.onclick=function(){ doAskSearch(inp.value); };
+    bar.appendChild(inp); bar.appendChild(go); panel.appendChild(bar);
+
+    if(state.askPhase==='loading'||state.askPhase==='building'){
+      var st=document.createElement('div'); st.className='jb-ask-status';
+      st.textContent = state.askPhase==='loading' ? t('ask_loading_model',{pct:state.askProgress}) : t('ask_building',{done:state.askDone||0,total:state.askTotal||0});
+      panel.appendChild(st);
+      var pr=document.createElement('div'); pr.className='jb-ask-prog'; var pf=document.createElement('div'); pf.className='jb-ask-prog-fill'; pf.style.width=state.askProgress+'%'; pr.appendChild(pf); panel.appendChild(pr);
+    } else if(state.askError){
+      var er=document.createElement('div'); er.className='jb-ask-err'; er.textContent=state.askError; panel.appendChild(er);
+    } else if(state.askPhase==='ready'){
+      if(state.askResults && state.askResults.length){
+        var rh=document.createElement('div'); rh.className='jb-ask-results-head'; rh.textContent=t('ask_results_head',{n:state.askResults.length}); panel.appendChild(rh);
+        state.askResults.forEach(function(res){
+          var wrap=document.createElement('div'); wrap.style.position='relative';
+          var row=buildRow(res.note);
+          var sc=document.createElement('span'); sc.className='jb-ask-score'; sc.textContent=Math.round(res.score*100)+'%';
+          sc.style.position='absolute'; sc.style.top='10px'; sc.style.right='10px'; sc.style.pointerEvents='none';
+          wrap.appendChild(row); wrap.appendChild(sc); panel.appendChild(wrap);
+        });
+      } else if(state.askQuery){ panel.appendChild(emptyMsg(t('ask_no_results'))); }
+      else { panel.appendChild(emptyMsg(t('ask_ready'))); }
+      var ctl=document.createElement('div'); ctl.style.cssText='display:flex;gap:8px;margin-top:16px;flex-wrap:wrap';
+      var rb=document.createElement('button'); rb.className='jb-ask-rebuild'; rb.textContent=t('ask_rebuild');
+      rb.onclick=function(){ var m=getAskPref().model; ASK.vecs=null; state.askResults=[]; state.askQuery=''; idbClearModel(m).then(function(){ startAskEngine(m); }); };
+      var sw=document.createElement('button'); sw.className='jb-ask-rebuild'; sw.textContent=t('ask_switch_model');
+      sw.onclick=function(){ setAskPref({model:''}); state.askPhase='idle'; ASK.vecs=null; state.askResults=[]; state.askQuery=''; renderBody(); };
+      ctl.appendChild(rb); ctl.appendChild(sw); panel.appendChild(ctl);
+    }
+    finish();
+    if(state.askPhase==='ready'){ setTimeout(function(){ try{ var fi=panel.querySelector('.jb-ask-input'); if(fi){ var v=fi.value; fi.focus(); fi.value=''; fi.value=v; } }catch(_){} }, 0); }
+  }
 
   // ---------- public entry ----------
   window.__openJwBrowse = function(file){

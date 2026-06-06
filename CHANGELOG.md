@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.53.0] — 2026-06-06
+
+### Added — Ask Your Library: private, on-device semantic search (beta)
+
+The Study Explorer can now search your notes **by meaning, not just keywords**. Ask a question in plain language and find related notes even when they use completely different words — all computed in your browser, with nothing uploaded.
+
+- **Natural-language search.** Tap the new **Ask** button in the Study Explorer toolbar and type something like *"notes about staying loyal under pressure"* — you get back your most related notes, ranked with a **% match**, even if they never use those exact words.
+- **100% private and offline-capable.** A small language model runs entirely on your device. It downloads **once**, is cached for reuse (including offline), and your notes never leave your browser.
+- **Choose your model.** On first use you pick between a smaller **English** model (~23 MB) or a **Multilingual** model (~50 MB) that understands 50+ languages — ideal if you write notes in more than one language. You can switch models or rebuild the index anytime.
+- **Fast re-use.** Note embeddings are cached locally (IndexedDB), so re-opening Ask is instant and only new or edited notes are re-read.
+- Click any result to open it in the normal detail view, where you can read and edit it as usual.
+
 ## [2.52.0] — 2026-06-06
 
 ### Added — Study Achievements: keyword awards, shaped medals & clickable popups (production)
