@@ -18,7 +18,6 @@
  */
 
 const MODELS = {
-  fast: 'Xenova/all-MiniLM-L3-v2',
   en: 'Xenova/all-MiniLM-L6-v2',
   multi: 'Xenova/paraphrase-multilingual-MiniLM-L12-v2',
 };

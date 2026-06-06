@@ -2752,7 +2752,7 @@ window.__bootBrowse = function() {
 
   // ---------- Ask Your Library (on-device semantic search) ----------
   var ASK = { worker:null, vecs:null, pending:{}, reqId:0, _onReady:null, _ticker:null, _buildStart:0, _snap:null, _rates:[] };
-  var ASK_MODELS = { fast:11, en:23, multi:50 };
+  var ASK_MODELS = { en:23, multi:50 };
 
   function getAskPref(){ try{ return JSON.parse(localStorage.getItem('jwsync_ask_v1')||'{}')||{}; }catch(_){ return {}; } }
   function setAskPref(o){ try{ var p=getAskPref(); for(var k in o){ p[k]=o[k]; } localStorage.setItem('jwsync_ask_v1', JSON.stringify(p)); }catch(_){} }
@@ -2775,9 +2775,9 @@ window.__bootBrowse = function() {
       if(d.type==='modelProgress'){ if(d.total){ state.askProgress=Math.max(state.askProgress, Math.round((d.loaded/d.total)*100)); updateAskProgress(); } }
       else if(d.type==='ready'){ var cb=ASK._onReady; ASK._onReady=null; if(cb) cb(); }
       else if(d.type==='embedded'){ var p=ASK.pending[d.id]; if(p){ delete ASK.pending[d.id]; p(new Float32Array(d.buffer), d.dim, null); } }
-      else if(d.type==='error'){ if(d.id!=null&&ASK.pending[d.id]){ var q=ASK.pending[d.id]; delete ASK.pending[d.id]; q(null,null,d.message); } else { state.askError=t('ask_err'); state.askPhase='idle'; if(state.askMode) renderBody(); } }
+      else if(d.type==='error'){ if(d.id!=null&&ASK.pending[d.id]){ var q=ASK.pending[d.id]; delete ASK.pending[d.id]; q(null,null,d.message); } else { setAskPref({model:''}); state.askPhase='idle'; state.askError=t('ask_err'); if(state.askMode) renderBody(); } }
     };
-    ASK.worker.onerror=function(){ state.askError=t('ask_err'); state.askPhase='idle'; if(state.askMode) renderBody(); };
+    ASK.worker.onerror=function(){ setAskPref({model:''}); state.askPhase='idle'; state.askError=t('ask_err'); if(state.askMode) renderBody(); };
     return ASK.worker;
   }
   function embedBatch(texts){ return new Promise(function(resolve,reject){ var w=ensureAskWorker(); if(!w){ reject(new Error('no worker')); return; } var id=++ASK.reqId; ASK.pending[id]=function(vec,dim,err){ if(err) reject(new Error(err)); else resolve({vec:vec,dim:dim}); }; w.postMessage({ type:'embed', id:id, texts:texts }); }); }
@@ -2883,10 +2883,11 @@ window.__bootBrowse = function() {
     var pref=getAskPref();
     if(!pref.model){
       var card=document.createElement('div'); card.className='jb-ask-enable';
+      if(state.askError){ var erTop=document.createElement('div'); erTop.className='jb-ask-err'; erTop.style.marginBottom='12px'; erTop.textContent=state.askError; card.appendChild(erTop); state.askError=''; }
       var h4=document.createElement('h4'); h4.textContent=t('ask_enable_title'); card.appendChild(h4);
       var p=document.createElement('p'); p.textContent=t('ask_enable_body'); card.appendChild(p);
       var models=document.createElement('div'); models.className='jb-ask-models';
-      [['fast',t('ask_model_fast_name'),t('ask_model_fast_desc')],['en',t('ask_model_en_name'),t('ask_model_en_desc')],['multi',t('ask_model_multi_name'),t('ask_model_multi_desc')]].forEach(function(m){
+      [['en',t('ask_model_en_name'),t('ask_model_en_desc')],['multi',t('ask_model_multi_name'),t('ask_model_multi_desc')]].forEach(function(m){
         var mb=document.createElement('button'); mb.type='button'; mb.className='jb-ask-model-btn';
         mb.innerHTML='<div class="jb-ask-model-name">'+htmlEscape(m[1])+'</div><div class="jb-ask-model-desc">'+htmlEscape(m[2])+'</div><span class="jb-ask-model-size">'+htmlEscape(t('ask_size_once',{n:ASK_MODELS[m[0]]}))+'</span>';
         mb.onclick=function(){ setAskPref({model:m[0]}); state.askPhase='idle'; ASK.vecs=null; startAskEngine(m[0]); };
@@ -2923,8 +2924,6 @@ window.__bootBrowse = function() {
           }
         }
       }
-    } else if(state.askError){
-      var er=document.createElement('div'); er.className='jb-ask-err'; er.textContent=state.askError; panel.appendChild(er);
     } else if(state.askPhase==='ready'){
       if(state.askResults && state.askResults.length){
         var rh=document.createElement('div'); rh.className='jb-ask-results-head'; rh.textContent=t('ask_results_head',{n:state.askResults.length}); panel.appendChild(rh);
