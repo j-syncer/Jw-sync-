@@ -25,7 +25,8 @@ const BROWSE_REQUIRED_KEYS = [
   'error','pub_all','tag_all','back','detail_empty','sort_newest',
   'sort_oldest','sort_pub','modified','no_content','too_many',
   'tab_notes','tab_highlights','tab_bookmarks','hl_label','hl_no_text',
-  'hl_with_note','bm_label','bm_slot','linked_note'
+  'hl_with_note','bm_label','bm_slot','linked_note',
+  'change_file'
 ];
 // Browse keys that land on the beta build first (new features ship to beta).
 const BROWSE_BETA_ONLY_KEYS = [
