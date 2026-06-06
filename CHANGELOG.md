@@ -4,6 +4,24 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.51.0] — 2026-06-06
+
+### Added — Content-based achievements with unique shapes (beta)
+The Achievements wall gains **27 new content-aware awards** that read the actual words in your notes and reward spiritual depth of study:
+
+- **Way of Love** (4 tiers, heart-shaped medals) — earned when notes mention "love" (First Love → Agape at 75 notes).
+- **Living Faith** (3 tiers, shield-shaped medals) — notes with "faith" or "believe" (Seedling Faith → Shield of Faith, hidden).
+- **Blessed Hope** (2 tiers, star-shaped medals) — notes mentioning "hope" (Anchor of Hope → Hope Shines Bright, hidden).
+- **Prophetic Voice** (3 tiers, diamond-shaped medals) — notes exploring prophets/prophecy (A Prophet Speaks → The Seer, hidden).
+- **Voice of Wisdom** (2 tiers, octagon-shaped medals) — notes referencing wisdom (Voice of Wisdom → Heart of Wisdom, hidden).
+- **Amazing Grace** (2 tiers, shield-shaped medals) — notes with "grace" (Grace Received → Abounding Grace, hidden).
+- **Kingdom Seeker** (3 tiers, crown-shaped medals) — notes about the kingdom (Seek First → Kingdom Proclaimer, hidden).
+- **Prayer Devotion** (3 tiers, star-shaped medals) — notes referencing prayer (Closet Prayer → Night Watch, hidden).
+- **Peace That Surpasses** and **Joy Unspeakable** — small recognitions for consistently writing about peace and joy.
+- **Covenant Keeper** and **Seeker of Truth** — for notes exploring covenants/promises and truth.
+
+Each award family uses a **distinct medal shape** (heart, shield, 5-point star, diamond, crown, or octagon) so the shape itself tells you what theme it represents. Hidden achievements show `???` until earned.
+
 ## [2.50.2] — 2026-06-05
 
 ### Changed — Accessibility & mobile polish (beta)
