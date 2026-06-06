@@ -26,7 +26,9 @@ section('Semantic worker (beta/js/semantic-worker.js)');
 [
   ['English model wired', /Xenova\/all-MiniLM-L6-v2/],
   ['Multilingual model wired', /Xenova\/paraphrase-multilingual-MiniLM-L12-v2/],
-  ['loads transformers.js from CDN', /cdn\.jsdelivr\.net\/npm\/@xenova\/transformers/],
+  ['loads transformers.js from CDN', /cdn\.jsdelivr\.net\/npm\/@huggingface\/transformers/],
+  ['WebGPU device attempted', /device:\s*'webgpu'/],
+  ['WASM fallback present', /device:\s*'wasm'/],
   ['uses feature-extraction pipeline', /feature-extraction/],
   ['mean pooling + normalize', /pooling:\s*'mean'[\s\S]*normalize:\s*true/],
   ['handles load message', /msg\.type\s*===\s*'load'/],
