@@ -466,19 +466,28 @@ function __jwGoExplorer(){
 // On arrival: surface any persisted working file to the Merge app / Browse
 // module, and honour an #browse deep-link coming from another tool's switcher.
 (function(){
-  function tryBrowse(tries){
+  function openBrowse(){
+    var f=null;try{f=window.__jwLastFile||null;}catch(_){}
+    if(typeof window.__openJwBrowse==='function'){ window.__openJwBrowse(f||undefined); return; }
+    if(window.__jwBootBrowse){
+      window.__jwBootBrowse().then(function(){
+        var f2=null;try{f2=window.__jwLastFile||null;}catch(_){}
+        if(typeof window.__openJwBrowse==='function') window.__openJwBrowse(f2||undefined);
+      }).catch(function(){});
+    }
+  }
+  function tryBrowse(){
     if(location.hash!=='#browse')return;
-    if(typeof window.__openJwBrowse==='function'){ var f=null;try{f=window.__jwLastFile||null;}catch(_){} window.__openJwBrowse(f||undefined); return; }
-    if(tries>0) setTimeout(function(){tryBrowse(tries-1);},250);
+    openBrowse();
   }
   function init(){
     if(window.JwSession){
       window.JwSession.get().then(function(p){
         var has=false; try{has=!!window.__jwLastFile;}catch(_){}
         if(p&&p.buffer&&!has){ try{window.__jwLastFile=p.buffer;}catch(_){} }
-        tryBrowse(20);
-      }).catch(function(){tryBrowse(20);});
-    } else { tryBrowse(20); }
+        tryBrowse();
+      }).catch(function(){tryBrowse();});
+    } else { tryBrowse(); }
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
