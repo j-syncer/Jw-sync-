@@ -2751,7 +2751,7 @@ window.__bootBrowse = function() {
   function escHandler(e){ if(e.key==='Escape') closeOverlay(); }
 
   // ---------- Ask Your Library (on-device semantic search) ----------
-  var ASK = { worker:null, vecs:null, pending:{}, reqId:0, _onReady:null, _ticker:null, _buildStart:0, _snap:null };
+  var ASK = { worker:null, vecs:null, pending:{}, reqId:0, _onReady:null, _ticker:null, _buildStart:0, _snap:null, _rates:[] };
   var ASK_MODELS = { en:23, multi:50 };
 
   function getAskPref(){ try{ return JSON.parse(localStorage.getItem('jwsync_ask_v1')||'{}')||{}; }catch(_){ return {}; } }
@@ -2792,7 +2792,7 @@ window.__bootBrowse = function() {
     var notes=askNotes(); state.askTotal=notes.length; state.askDone=0;
     if(!notes.length){ state.askPhase='ready'; ASK.vecs=[]; renderBody(); return; }
     state.askPhase='building'; state.askProgress=0; renderBody();
-    ASK._buildStart=Date.now(); ASK._snap=null;
+    ASK._buildStart=Date.now(); ASK._snap=null; ASK._rates=[];
     if(ASK._ticker){ clearInterval(ASK._ticker); ASK._ticker=null; }
     ASK._ticker=setInterval(function(){
       if(state.askPhase!=='building'){ clearInterval(ASK._ticker); ASK._ticker=null; return; }
@@ -2801,10 +2801,10 @@ window.__bootBrowse = function() {
       if(snap&&snap.rate>0&&rawDone<total){ dispDone=Math.min(total, rawDone+(Date.now()-snap.time)*snap.rate); }
       var pct=Math.min(99, dispDone/total*100);
       var f=state.overlay&&state.overlay.querySelector('.jb-ask-prog-fill'); if(f) f.style.width=pct+'%';
-      var elapsed=(Date.now()-ASK._buildStart)/1000, eta='';
-      if(rawDone>2&&rawDone<total&&elapsed>1){
-        var secs=Math.ceil((total-rawDone)/(rawDone/elapsed));
-        eta=secs>=60?'~'+Math.floor(secs/60)+'m '+(secs%60)+'s left':'~'+secs+'s left';
+      var eta='';
+      if(snap&&snap.rate>0&&rawDone<total){
+        var etaSecs=Math.ceil((total-Math.min(total,dispDone))/(snap.rate*1000));
+        if(etaSecs>0) eta=etaSecs>=60?'~'+Math.floor(etaSecs/60)+'m '+(etaSecs%60)+'s left':'~'+etaSecs+'s left';
       }
       var s=state.overlay&&state.overlay.querySelector('.jb-ask-status');
       if(s){ s.textContent=t('ask_building',{done:Math.min(total,Math.round(dispDone)),total:total})+(eta?' · '+eta:''); }
@@ -2826,7 +2826,10 @@ window.__bootBrowse = function() {
           for(var j=0;j<batch.length;j++){ var v=arr.slice(j*dim,(j+1)*dim); cached[batch[j].note.NoteId]={ hash:batch[j].hash, vec:v }; idbPutVec(model,batch[j].note.NoteId,batch[j].hash,v,dim); }
           state.askDone=Math.min(notes.length, state.askDone+batch.length);
           ASK.vecs=notes.map(function(n){ var c=cached[n.note.NoteId]; return c?{ note:n.note, vec:c.vec }:null; }).filter(Boolean);
-          var batchMs=Math.max(1,Date.now()-batchStart); ASK._snap={time:Date.now(),done:state.askDone,rate:batch.length/batchMs};
+          var batchMs=Math.max(1,Date.now()-batchStart);
+          ASK._rates.push(batch.length/batchMs); if(ASK._rates.length>4) ASK._rates.shift();
+          var avgRate=ASK._rates.reduce(function(a,b){return a+b;},0)/ASK._rates.length;
+          ASK._snap={time:Date.now(),done:state.askDone,rate:avgRate};
           state.askProgress=Math.round(state.askDone/notes.length*100);
           step();
         }).catch(function(){ if(ASK._ticker){clearInterval(ASK._ticker);ASK._ticker=null;} state.askError=t('ask_err'); state.askPhase='idle'; renderBody(); });
