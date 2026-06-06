@@ -18,6 +18,7 @@
  */
 
 const MODELS = {
+  fast: 'Xenova/all-MiniLM-L3-v2',
   en: 'Xenova/all-MiniLM-L6-v2',
   multi: 'Xenova/paraphrase-multilingual-MiniLM-L12-v2',
 };
@@ -68,7 +69,7 @@ self.onmessage = async (e) => {
         self.postMessage({ type: 'error', id: msg.id, message: 'Model not loaded' });
         return;
       }
-      const texts = (msg.texts || []).map((s) => String(s == null ? '' : s).slice(0, 4000));
+      const texts = (msg.texts || []).map((s) => String(s == null ? '' : s).slice(0, 600));
       const out = await extractor(texts, { pooling: 'mean', normalize: true });
       const data = out.data instanceof Float32Array ? out.data : Float32Array.from(out.data);
       const dim = out.dims[out.dims.length - 1];

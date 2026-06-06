@@ -24,6 +24,7 @@ const html = fs.readFileSync(path.join(REPO, 'beta/index.html'), 'utf8');
 
 section('Semantic worker (beta/js/semantic-worker.js)');
 [
+  ['Light (L3) model wired', /Xenova\/all-MiniLM-L3-v2/],
   ['English model wired', /Xenova\/all-MiniLM-L6-v2/],
   ['Multilingual model wired', /Xenova\/paraphrase-multilingual-MiniLM-L12-v2/],
   ['loads transformers.js from CDN', /cdn\.jsdelivr\.net\/npm\/@xenova\/transformers/],
@@ -49,7 +50,7 @@ section('Browse "Ask" integration (beta/index.html)');
   ['IndexedDB vector cache', /indexedDB\.open\('jwsync_semantic'/],
   ['cosine via dot product (normalized)', /function dotProd\(/],
   ['model choice persisted', /jwsync_ask_v1/],
-  ['both model sizes offered', /ASK_MODELS\s*=\s*\{\s*en:\s*23,\s*multi:\s*50\s*\}/],
+  ['all three model sizes offered', /ASK_MODELS\s*=\s*\{\s*fast:\s*11,\s*en:\s*23,\s*multi:\s*50\s*\}/],
   ['ask state reset on close', /if\(ASK\.worker\)\{\s*try\{\s*ASK\.worker\.terminate/],
   ['ask state reset on new file', /New file → previous semantic index/],
 ].forEach(([label, re]) => { if (re.test(html)) ok(label); else fail('html missing: ' + label); });
@@ -65,7 +66,7 @@ if (!i18nMatch) {
   if (i18n && i18n.en) {
     const ASK_KEYS = [
       'ask_btn', 'ask_title', 'ask_sub', 'ask_placeholder', 'ask_go',
-      'ask_enable_title', 'ask_enable_body', 'ask_model_en_name', 'ask_model_en_desc',
+      'ask_enable_title', 'ask_enable_body', 'ask_model_fast_name', 'ask_model_fast_desc', 'ask_model_en_name', 'ask_model_en_desc',
       'ask_model_multi_name', 'ask_model_multi_desc', 'ask_size_once', 'ask_privacy',
       'ask_loading_model', 'ask_building', 'ask_ready', 'ask_searching',
       'ask_results_head', 'ask_no_results', 'ask_no_notes', 'ask_err',
