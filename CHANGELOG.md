@@ -4,6 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.52.0] — 2026-06-06
+
+### Added — Study Achievements: keyword awards, shaped medals & clickable popups (production)
+
+Shipping the full Study Achievements upgrade to production (`highlights.html`):
+
+- **27 content-aware keyword achievements.** JW Sync now reads your note text and awards medals for writing about love, faith, hope, prayer, prophecy, wisdom, grace, kingdom, peace, joy, truth and covenant — each keyword has 2–4 tiers from Common to Legendary.
+- **Shaped medal discs.** Keyword medals are rendered in seven distinct shapes — heart, shield, star, diamond, crown, scroll and teardrop — giving each spiritual theme its own visual identity.
+- **Appreciation badges.** Every earned medal with rarity ≥ 1 shows a small "+N" chip indicating its Appreciation point value.
+- **Distinguished Honors cabinet.** A special showcase at the bottom of the Achievements wall displays all your rare (rarity ≥ 2) earned medals in a golden highlight strip.
+- **Clickable medal popups.** Tap any medal — in the main wall or the cabinet — to open a popup showing its name, what it means, how to earn it, and its Appreciation value. Locked medals show a progress bar.
+- **Description keys for all named achievements.** Every achievement with a `dk` key now has a human-readable English description in the popup.
+
 ## [2.50.2] — 2026-06-05
 
 ### Changed — Accessibility & mobile polish (beta)
