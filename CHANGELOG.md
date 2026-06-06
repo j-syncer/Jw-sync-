@@ -4,6 +4,31 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.53.3] — 2026-06-06
+
+### Shipped to production — Ask Your Library + Study Explorer improvements
+
+All features from v2.53.0–v2.53.2 are now live on jwsync.org (not just /beta):
+
+- **Ask Your Library** semantic search is live in the main Study Explorer
+- **WebGPU acceleration** on Android Chrome 113+ / iOS 17+ — up to 10–30× faster indexing
+- **Study Explorer** nav button renamed and updated with a teal shimmer animation
+- **Explorer nav button** click now correctly boots the module before opening it
+- **Progress bar**, ETA countdown, and search-while-indexing are all in production
+
+---
+
+## [2.53.2] — 2026-06-06
+
+### Improved — Ask Your Library: faster model, larger batches
+
+- Upgraded to **transformers.js v3** with **WebGPU acceleration** — up to 10–30× faster on modern Android and iOS devices. Falls back to optimised WASM (quantized int8) on older browsers.
+- Batch size increased to 64 notes per pass for fewer worker round-trips.
+- Note text truncated to 600 characters before embedding (well within model limits) to cut tokenisation time.
+- Error recovery: if a model fails to load, the picker reappears so you can choose again without refreshing.
+
+---
+
 ## [2.53.1] — 2026-06-06
 
 ### Improved — Ask Your Library: search while indexing, faster first-time build
