@@ -26,7 +26,16 @@ const BROWSE_REQUIRED_KEYS = [
   'sort_oldest','sort_pub','modified','no_content','too_many',
   'tab_notes','tab_highlights','tab_bookmarks','hl_label','hl_no_text',
   'hl_with_note','bm_label','bm_slot','linked_note',
-  'change_file'
+  'change_file',
+  'ask_btn','ask_title','ask_sub','ask_placeholder','ask_go',
+  'ask_enable_title','ask_enable_body',
+  'ask_model_fast_name','ask_model_fast_desc',
+  'ask_model_en_name','ask_model_en_desc',
+  'ask_model_multi_name','ask_model_multi_desc',
+  'ask_size_once','ask_privacy',
+  'ask_loading_model','ask_building','ask_ready','ask_searching',
+  'ask_results_head','ask_no_results','ask_no_notes','ask_err',
+  'ask_rebuild','ask_match','ask_switch_model'
 ];
 // Browse keys that land on the beta build first (new features ship to beta).
 const BROWSE_BETA_ONLY_KEYS = [
