@@ -40,7 +40,8 @@ const BROWSE_REQUIRED_KEYS = [
 // Browse keys that land on the beta build first (new features ship to beta).
 const BROWSE_BETA_ONLY_KEYS = [
   'pg_prev','pg_next','pg_status','err_corrupt','err_no_db','err_not_sqlite',
-  'rte_bold','rte_italic','rte_underline','rte_bullets','rich_text_note'
+  'rte_bold','rte_italic','rte_underline','rte_bullets','rich_text_note',
+  'batch_tagged_ok'
 ];
 
 for (const path of FILES) {
