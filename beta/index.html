@@ -2302,7 +2302,7 @@ window.__bootBrowse = function() {
   function renderBody(){
     var body=state.overlay.querySelector('.jb-body');
     body.innerHTML='';
-    if(state.askMode){ renderAsk(body); return; }
+    if(state.askMode){ renderAsk(body); updateBatchBar(true); updateUndoButtons(); return; }
     var list=document.createElement('div'); list.className='jb-list';
     var total=state.filtered.length;
     var pages=Math.max(1, Math.ceil(total/PAGE_SIZE));
@@ -2970,7 +2970,7 @@ window.__bootBrowse = function() {
       ctl.appendChild(rb); ctl.appendChild(sw); panel.appendChild(ctl);
     }
     finish();
-    if(state.askPhase==='ready'){ setTimeout(function(){ try{ var fi=panel.querySelector('.jb-ask-input'); if(fi){ var v=fi.value; fi.focus(); fi.value=''; fi.value=v; } }catch(_){} }, 0); }
+    if(state.askPhase==='ready'&&!state.selectMode){ setTimeout(function(){ try{ var fi=panel.querySelector('.jb-ask-input'); if(fi){ var v=fi.value; fi.focus(); fi.value=''; fi.value=v; } }catch(_){} }, 0); }
   }
 
   // ---------- public entry ----------
