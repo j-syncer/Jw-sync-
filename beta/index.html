@@ -466,29 +466,34 @@ function __jwGoExplorer(){
 // On arrival: surface any persisted working file to the Merge app / Browse
 // module, and honour an #browse deep-link coming from another tool's switcher.
 (function(){
-  function openBrowse(){
-    var f=null;try{f=window.__jwLastFile||null;}catch(_){}
-    if(typeof window.__openJwBrowse==='function'){ window.__openJwBrowse(f||undefined); return; }
-    if(window.__jwBootBrowse){
-      window.__jwBootBrowse().then(function(){
-        var f2=null;try{f2=window.__jwLastFile||null;}catch(_){}
-        if(typeof window.__openJwBrowse==='function') window.__openJwBrowse(f2||undefined);
-      }).catch(function(){});
-    }
-  }
-  function tryBrowse(){
-    if(location.hash!=='#browse')return;
-    openBrowse();
-  }
+  // Capture the hash immediately — React and other scripts may change it later.
+  var _initHash = location.hash;
+  // Also honour a sessionStorage flag set by jw-session.js tool-switcher clicks.
+  var _wantBrowse = (_initHash === '#browse');
+  try { if(!_wantBrowse && sessionStorage.getItem('jwsync_open_browse')) _wantBrowse = true; } catch(_) {}
+
   function init(){
-    if(window.JwSession){
-      window.JwSession.get().then(function(p){
-        var has=false; try{has=!!window.__jwLastFile;}catch(_){}
-        if(p&&p.buffer&&!has){ try{window.__jwLastFile=p.buffer;}catch(_){} }
-        tryBrowse();
-      }).catch(function(){tryBrowse();});
-    } else { tryBrowse(); }
+    if(!_wantBrowse) return;
+    try { sessionStorage.removeItem('jwsync_open_browse'); } catch(_) {}
+
+    // Kick off both operations in parallel: restore file from IDB + boot Browse.
+    var fileReady = window.JwSession
+        ? window.JwSession.get().then(function(p){
+            var has=false; try{has=!!window.__jwLastFile;}catch(_){}
+            if(p&&p.buffer&&!has){ try{window.__jwLastFile=p.buffer;}catch(_){} }
+          }).catch(function(){})
+        : Promise.resolve();
+
+    var bootReady = window.__jwBootBrowse
+        ? window.__jwBootBrowse().catch(function(){})
+        : Promise.resolve();
+
+    Promise.all([fileReady, bootReady]).then(function(){
+        var f=null; try{f=window.__jwLastFile||null;}catch(_){}
+        if(typeof window.__openJwBrowse==='function') window.__openJwBrowse(f||undefined);
+    });
   }
+
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
 </script>
