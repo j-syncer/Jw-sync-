@@ -77,19 +77,18 @@
     .jww-stab{padding:13px 32px 15px;font-size:15px;font-weight:700;color:#64748b;cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;font-family:inherit;letter-spacing:.02em}
     .jww-stab:hover{color:#cbd5e1}
     .jww-stab.jww-stab-on{color:#ea580c;border-bottom-color:#ea580c}
-    /* Awards tab — always carries a warm gold hint */
-    .jww-stab-awards{color:rgba(251,191,36,.7)}
-    .jww-stab-awards:hover{color:#fbbf24}
+    /* Awards tab — always shimmers */
     @keyframes jww-shimmer{0%{background-position:-250% center}100%{background-position:250% center}}
-    .jww-stab-awards.jww-stab-on{
+    .jww-stab-awards{
       background:linear-gradient(90deg,#f59e0b,#c084fc,#ec4899,#fbbf24,#c084fc,#f59e0b);
       background-size:300% auto;
       -webkit-background-clip:text;
       -webkit-text-fill-color:transparent;
       background-clip:text;
-      border-bottom-color:#f59e0b;
-      animation:jww-shimmer 3s linear infinite
+      animation:jww-shimmer 4s linear infinite
     }
+    .jww-stab-awards:hover{animation-duration:2.5s}
+    .jww-stab-awards.jww-stab-on{border-bottom-color:#f59e0b;animation-duration:2.5s}
     .jww-pane-hidden{display:none}
 
     /* ── delta badges ── */
