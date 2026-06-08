@@ -2071,10 +2071,10 @@ window.__bootBrowse = function() {
     var sp=document.createElement('span'); sp.style.flex='1'; sp.style.minWidth='4px'; bar.appendChild(sp);
     if(state.selection.size===0){ state._batchUI='idle'; return; }
     if(state._batchUI==='tag'){
-      var inp=document.createElement('input'); inp.className='jb-batch-input'; inp.placeholder=t('batch_tag_ph'); bar.appendChild(inp);
+      var inp=document.createElement('input'); inp.className='jb-batch-input'; inp.type='text'; inp.setAttribute('enterkeyhint','done'); inp.placeholder=t('batch_tag_ph'); bar.appendChild(inp);
       jbBatchBtn(bar,t('batch_add'),function(){ var v=inp.value; state._batchUI='idle'; batchAddTag(v); });
       jbBatchBtn(bar,t('cancel'),function(){ state._batchUI='idle'; updateBatchBar(); });
-      inp.onkeydown=function(e){ if(e.key==='Enter'){ var v=inp.value; state._batchUI='idle'; batchAddTag(v); } else if(e.key==='Escape'){ state._batchUI='idle'; updateBatchBar(); } };
+      inp.onkeydown=function(e){ if(e.key==='Enter'){ var v=inp.value; state._batchUI='idle'; batchAddTag(v); } else if(e.key==='Escape'){ state._batchUI='idle'; updateBatchBar(); } }; inp.onblur=function(){ if(state._batchUI==='tag'&&inp.value.trim()){ var v=inp.value; state._batchUI='idle'; batchAddTag(v); } };
       if(!noFocus) setTimeout(function(){ try{ inp.focus(); }catch(_){} },30);
       return;
     }
