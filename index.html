@@ -1974,8 +1974,17 @@ window.__bootBrowse = function() {
 
   function rowId(r){ return r.NoteId||r.UserMarkId||r.BookmarkId||r.IfKey; }
   function selectedRows(){
-    var src=activeSource(), ids=state.selection, out=[];
-    src.forEach(function(r){ if(ids.has(rowId(r))) out.push(r); });
+    var ids=state.selection, seen=new Set(), out=[];
+    // In ask mode scan ask results first, then fall back to allNotes
+    var srcs=state.askMode
+      ?[(state.askResults||[]).map(function(r){return r.note;}),state.allNotes]
+      :[activeSource()];
+    srcs.forEach(function(src){
+      src.forEach(function(r){
+        var id=rowId(r);
+        if(ids.has(id)&&!seen.has(id)){ seen.add(id); out.push(r); }
+      });
+    });
     return out;
   }
   function toggleSelect(id){
@@ -2016,7 +2025,7 @@ window.__bootBrowse = function() {
   }
   function batchAddTag(name){
     name=(name||'').trim(); if(!name){ updateBatchBar(); return; }
-    var rows=selectedRows(); if(!rows.length){ updateBatchBar(); return; }
+    var rows=selectedRows(); if(!rows.length){ updateBatchBar(); try{ var tb=document.createElement('div'); tb.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1e293b;color:#f87171;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;z-index:99999;pointer-events:none'; tb.textContent='No notes selected'; document.body.appendChild(tb); setTimeout(function(){try{tb.parentNode.removeChild(tb);}catch(_){}},2500); }catch(_){} return; }
     snapshot(); state._inBatch=true;
     try{
       var safe=name.replace(/'/g,"''");
@@ -2737,7 +2746,7 @@ window.__bootBrowse = function() {
     };
     toolbar.appendChild(clearBtn);
     var selectBtn=document.createElement('button'); selectBtn.type='button'; selectBtn.className='jb-select-toggle'; selectBtn.textContent=t('sel_mode');
-    selectBtn.onclick=function(){ if(state.selectMode) exitSelectMode(); else enterSelectMode(); };
+    selectBtn.onclick=function(){ if(state.selectMode){  if(state._batchUI==='tag'){   var bi=state.overlay&&state.overlay.querySelector('.jb-batch-input');   var v=bi?bi.value.trim():'';   state._batchUI='idle';   if(v){ batchAddTag(v); return; }  }  exitSelectMode(); } else { enterSelectMode(); }};
     toolbar.appendChild(selectBtn);
     modal.appendChild(toolbar);
     var batchBar=document.createElement('div'); batchBar.className='jb-batch-bar'; batchBar.style.display='none'; modal.appendChild(batchBar);
