@@ -1323,6 +1323,7 @@
       A.forEach(function (a){ if (shown(a)){ earned++; renown += ACH_RENOWN[a.rarity] || 0; } });
       var pct = Math.round(earned / total * 100);
       var head = '<div class="jww-ach-intro">' + IC.spark + '<span>' + esc(t('ach_intro')) + '</span></div>'
+        + cabinetHtml(A, curT)
         + '<div class="jww-ach-top">'
         + '<div class="jww-ach-prog"><div class="jww-ach-prog-track"><div class="jww-ach-prog-fill" data-w="' + pct + '"></div></div><div class="jww-ach-prog-lbl">' + earned + ' / ' + total + '</div></div>'
         + '<div class="jww-renown" title="' + esc(t('renown_label')) + '">' + IC.spark + '<span class="jww-renown-n">' + renown.toLocaleString(loc) + '</span><span class="jww-renown-l">' + esc(t('renown_label')) + '</span></div>'
@@ -1368,7 +1369,6 @@
         });
         body += '</div></div>';
       }
-      body += cabinetHtml(A, curT);
       body += '</div>';
       return section(IC.trophy, fmt2(t('ach_title'), earned + '/' + total), body);
     }
