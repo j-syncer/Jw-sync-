@@ -74,9 +74,22 @@
 
     /* ── section tabs (Stats | Awards) ── */
     .jww-stabs{display:flex;gap:0;margin:22px 0 0;border-bottom:1px solid rgba(71,85,105,.3);padding-bottom:0}
-    .jww-stab{padding:9px 20px 11px;font-size:13px;font-weight:600;color:#64748b;cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;font-family:inherit;letter-spacing:.01em}
+    .jww-stab{padding:13px 32px 15px;font-size:15px;font-weight:700;color:#64748b;cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;font-family:inherit;letter-spacing:.02em}
     .jww-stab:hover{color:#cbd5e1}
     .jww-stab.jww-stab-on{color:#ea580c;border-bottom-color:#ea580c}
+    /* Awards tab — always carries a warm gold hint */
+    .jww-stab-awards{color:rgba(251,191,36,.7)}
+    .jww-stab-awards:hover{color:#fbbf24}
+    @keyframes jww-shimmer{0%{background-position:-250% center}100%{background-position:250% center}}
+    .jww-stab-awards.jww-stab-on{
+      background:linear-gradient(90deg,#f59e0b,#c084fc,#ec4899,#fbbf24,#c084fc,#f59e0b);
+      background-size:300% auto;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      border-bottom-color:#f59e0b;
+      animation:jww-shimmer 3s linear infinite
+    }
     .jww-pane-hidden{display:none}
 
     /* ── delta badges ── */
@@ -1818,7 +1831,7 @@
       // section tab switcher
       html += '<div class="jww-stabs" id="jww-stabs">'
         + '<button class="jww-stab' + (activeSectionPane==='stats'?' jww-stab-on':'') + '" data-pane="stats">' + esc(t('tab_stats')) + '</button>'
-        + '<button class="jww-stab' + (activeSectionPane==='awards'?' jww-stab-on':'') + '" data-pane="awards">' + esc(t('tab_awards')) + '</button>'
+        + '<button class="jww-stab jww-stab-awards' + (activeSectionPane==='awards'?' jww-stab-on':'') + '" data-pane="awards">' + esc(t('tab_awards')) + '</button>'
         + '</div>';
       // ── Stats pane ──
       html += '<div id="jww-pane-stats"' + (activeSectionPane!=='stats'?' class="jww-pane-hidden"':'') + '>';
