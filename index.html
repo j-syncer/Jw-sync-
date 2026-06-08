@@ -2042,6 +2042,10 @@ window.__bootBrowse = function() {
       });
       state._batchTaggedCount=tagged;
       state._batchUI='tagged';
+    }catch(e){
+      state._inBatch=false;
+      try{ var eb=document.createElement('div'); eb.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#7f1d1d;color:#fca5a5;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;z-index:99999;pointer-events:none'; eb.textContent='Tag error: '+(e&&e.message||String(e)); document.body.appendChild(eb); setTimeout(function(){try{eb.parentNode.removeChild(eb);}catch(_){}},4000); }catch(_){}
+      afterBatch(false); return;
     }finally{ state._inBatch=false; }
     afterBatch(false);
   }
@@ -2098,8 +2102,6 @@ window.__bootBrowse = function() {
       [1,2,3,4,5,6].forEach(function(ci){ var d=document.createElement('span'); d.className='jb-batch-dot'; d.style.background=COLORS[ci]; d.title=t('batch_color'); d.onclick=function(){ batchSetColor(ci); }; cw.appendChild(d); });
       bar.appendChild(cw);
     }
-    if(state.activeType==='notes') jbBatchBtn(bar,t('batch_tag'),function(){ state._batchUI='tag'; updateBatchBar(); });
-    if(state.activeType==='notes') jbBatchBtn(bar,t('share_action'),function(){ openShareExport(selectedRows()); });
     if(state._batchUI==='tagged'){
       var tc=document.createElement('span'); tc.className='jb-batch-count'; tc.style.color='#86efac';
       tc.textContent=t('batch_tagged_ok',{n:state._batchTaggedCount||state.selection.size}); bar.appendChild(tc);
@@ -2108,6 +2110,8 @@ window.__bootBrowse = function() {
       jbBatchBtn(bar,t('sel_done'),function(){ state._batchUI='idle'; exitSelectMode(); });
       return;
     }
+    if(state.activeType==='notes') jbBatchBtn(bar,t('batch_tag'),function(){ state._batchUI='tag'; updateBatchBar(); });
+    if(state.activeType==='notes') jbBatchBtn(bar,t('share_action'),function(){ openShareExport(selectedRows()); });
     jbBatchBtn(bar,t('batch_delete'),function(){ state._batchUI='del'; updateBatchBar(); },true);
   }
 
