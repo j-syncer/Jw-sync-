@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.53.4] — 2026-06-08
+
+### Fixed — Ask Your Library tag assignment
+
+- **Bug fix**: When selecting notes in Ask Your Library and adding a tag via the batch bar, the tag was not being applied if the user had previously been on the Highlights or Bookmarks tab. The "Select All" button was picking up the wrong item list (the previous tab's filtered results instead of the Ask results). Fixed so "Select All" in Ask mode always selects the visible Ask results.
+- Also restored the "tagged ✓" confirmation banner in the batch bar after applying a tag (it was accidentally placed outside its function).
+
+---
+
 ## [2.53.3] — 2026-06-06
 
 ### Shipped to production — Ask Your Library + Study Explorer improvements

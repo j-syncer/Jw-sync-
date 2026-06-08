@@ -1982,7 +1982,7 @@ window.__bootBrowse = function() {
     if(state.selection.has(id)) state.selection.delete(id); else state.selection.add(id);
     renderBody();
   }
-  function selectAllFiltered(){ state.filtered.forEach(function(r){ state.selection.add(rowId(r)); }); renderBody(); }
+  function selectAllFiltered(){ var src=state.askMode?(state.askResults||[]).map(function(r){return r.note;}):state.filtered; src.forEach(function(r){ state.selection.add(rowId(r)); }); renderBody(); }
   function clearSelection(){ state.selection.clear(); renderBody(); }
   function updateSelectBtn(){
     if(!state.overlay) return;
@@ -2091,15 +2091,15 @@ window.__bootBrowse = function() {
     }
     if(state.activeType==='notes') jbBatchBtn(bar,t('batch_tag'),function(){ state._batchUI='tag'; updateBatchBar(); });
     if(state.activeType==='notes') jbBatchBtn(bar,t('share_action'),function(){ openShareExport(selectedRows()); });
+    if(state._batchUI==='tagged'){
+      var tc=document.createElement('span'); tc.className='jb-batch-count'; tc.style.color='#86efac';
+      tc.textContent=t('batch_tagged_ok',{n:state._batchTaggedCount||state.selection.size}); bar.appendChild(tc);
+      var sp2=document.createElement('span'); sp2.style.flex='1'; sp2.style.minWidth='4px'; bar.appendChild(sp2);
+      jbBatchBtn(bar,t('export_db'),function(){ exportDb(); });
+      jbBatchBtn(bar,t('sel_done'),function(){ state._batchUI='idle'; exitSelectMode(); });
+      return;
+    }
     jbBatchBtn(bar,t('batch_delete'),function(){ state._batchUI='del'; updateBatchBar(); },true);
-  }
-  if(state._batchUI==='tagged'){
-    var tc=document.createElement('span'); tc.className='jb-batch-count'; tc.style.color='#86efac';
-    tc.textContent=t('batch_tagged_ok',{n:state._batchTaggedCount||state.selection.size}); bar.appendChild(tc);
-    var sp2=document.createElement('span'); sp2.style.flex='1'; sp2.style.minWidth='4px'; bar.appendChild(sp2);
-    jbBatchBtn(bar,t('export_db'),function(){ exportDb(); });
-    jbBatchBtn(bar,t('sel_done'),function(){ state._batchUI='idle'; exitSelectMode(); });
-    return;
   }
 
   // ---------- note sharing / adopt (v2.28) ----------
