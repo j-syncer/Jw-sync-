@@ -13,7 +13,7 @@
 //   3. With >=2 seeded devices the list renders and merge is enabled
 //   4. Clicking "Merge" drives the worker and, on {type:'done'}, downloads a
 //      file and stamps lastSync in localStorage
-//   5. i18n covers all 10 languages with the required keys (static)
+//   5. i18n covers all 12 languages with the required keys (static)
 //   6. The module targets ./js/merge-worker.js and its own prefs/DB keys
 const path = require('path');
 const fs = require('fs');
@@ -28,7 +28,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb'];
 const REQUIRED_KEYS = ['title','intro','priv','add','empty','main','setmain','remove','saved',
   'mergenow','merging','done','needtwo','reminder','off','weekly','monthly','clear','clearconfirm',
   'banner','bannercta','dismiss','close','fab','error'];
@@ -202,7 +202,7 @@ function makeDom(seedRows) {
     dom.window.close();
   }
 
-  section('i18n covers all 10 languages (static)');
+  section('i18n covers all 12 languages (static)');
   {
     const mod = extractModule();
     const m = mod.match(/var I18N = \{[\s\S]*?\};\s*function/);
@@ -213,7 +213,7 @@ function makeDom(seedRows) {
         const re = new RegExp('\\b' + lang + ':\\{');
         if (!re.test(mod)) { fail('language missing: ' + lang); return; }
       });
-      ok('all 10 language blocks present');
+      ok('all 12 language blocks present');
       // ensure each required key string appears at least LANGS.length times-ish (presence)
       let missing = [];
       REQUIRED_KEYS.forEach(k => {

@@ -45,7 +45,8 @@
     ja: { merge: '統合',       stats: '統計',           explorer: 'ノート',     share: '共有' },
     ko: { merge: '병합',       stats: '통계',           explorer: '탐색',       share: '공유' },
     tl: { merge: 'Pagsamahin', stats: 'Estadistika',  explorer: 'Explorer',  share: 'Ibahagi' },
-    sv: { merge: 'Slå ihop',   stats: 'Statistik',    explorer: 'Utforska',  share: 'Dela' }
+    sv: { merge: 'Slå ihop',   stats: 'Statistik',    explorer: 'Utforska',  share: 'Dela' },
+    ceb: { merge: 'Isagol',     stats: 'Estadistika',   explorer: 'Explorer',  share: 'Ipaambit' }
   };
 
   function lang() {

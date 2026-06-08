@@ -672,14 +672,14 @@ async function waitForStats(doc, timeoutMs) {
   }
 
   // ──────────────────────────────────────────────────────────────────
-  section('I18N coverage — all 10 languages in highlights.html');
+  section('I18N coverage — all 12 languages in highlights.html');
   {
     const html = fs.readFileSync(HL_PATH, 'utf8');
     const REQUIRED_KEYS = ['title','close','share','loading','error','highlights','bookmarks',
       'tags_label','notes_label','top_books','timeline','your_tags','hl_colors',
       'first_note','latest_note','study_span','no_notes','loading_tools','years_unit',
       'all_time','service_yr','no_data_sy'];
-    const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv'];
+    const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb'];
 
     let allGood = true;
     for (const key of REQUIRED_KEYS) {
@@ -690,7 +690,7 @@ async function waitForStats(doc, timeoutMs) {
     // Lang keys may be bare (en:{), single-quoted ('en':{), or double-quoted ("en":{)
     const missingLangs = LANGS.filter(l =>
       !html.includes(l + ':{') && !html.includes("'" + l + "':{") && !html.includes('"' + l + '":{'));
-    if (missingLangs.length === 0) ok('all 10 language objects present (' + LANGS.join(', ') + ')');
+    if (missingLangs.length === 0) ok('all 12 language objects present (' + LANGS.join(', ') + ')');
     else fail('missing language(s): ' + missingLangs.join(', '));
   }
 
@@ -713,8 +713,8 @@ async function waitForStats(doc, timeoutMs) {
     else fail('Study Stats home card / __jwGoHighlights missing');
     // wrp_open relabelled to "Study Stats" across all 10 app languages
     const openCount = (appJs.match(/wrp_open:/g) || []).length;
-    if (openCount === 11) ok('wrp_open present in all 11 app languages');
-    else fail('wrp_open count: expected 11, got ' + openCount);
+    if (openCount === 12) ok('wrp_open present in all 12 app languages');
+    else fail('wrp_open count: expected 12, got ' + openCount);
     if (appJs.includes('wrp_open:"Study Stats"')) ok('wrp_open relabelled to "Study Stats" (en)');
     else fail('wrp_open not relabelled to Study Stats');
   }
@@ -724,8 +724,8 @@ async function waitForStats(doc, timeoutMs) {
   {
     const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
     const count = (html.match(/cele_highlights:/g) || []).length;
-    if (count === 11) ok('cele_highlights present in all 11 celebration langs');
-    else fail('cele_highlights count: expected 10, got ' + count);
+    if (count === 12) ok('cele_highlights present in all 12 celebration langs');
+    else fail('cele_highlights count: expected 12, got ' + count);
     // Verify the highlights button is wired in the celebration overlay
     if (html.includes('data-jwc-highlights')) ok('data-jwc-highlights button present in celebration overlay');
     else fail('data-jwc-highlights missing from celebration overlay');

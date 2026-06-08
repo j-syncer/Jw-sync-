@@ -18,7 +18,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb'];
 
 function extractOffline() {
   const html = fs.readFileSync(HTML_PATH, 'utf8');
@@ -65,14 +65,14 @@ function extractOffline() {
     dom.window.close();
   }
 
-  section('Offline message localized in all 10 languages (static)');
+  section('Offline message localized in all 12 languages (static)');
   {
     const mod = extractOffline();
     const m = mod.match(/var I18N=\{([\s\S]*?)\};/);
     if (!m) { fail('offline I18N not found'); }
     else {
       let missing = LANGS.filter(l => !new RegExp('\\b' + l + ':"').test(mod));
-      if (missing.length === 0) ok('all 10 language strings present');
+      if (missing.length === 0) ok('all 12 language strings present');
       else fail('missing offline langs: ' + missing.join(','));
     }
   }

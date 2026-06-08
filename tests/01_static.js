@@ -13,7 +13,7 @@ function ok(msg) { console.log('  ✓', msg); }
 function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
-const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv'];
+const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb'];
 const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
 const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',
@@ -127,7 +127,7 @@ for (const path of FILES) {
     let missing = browseKeys.filter(k => !browseI18n[lang][k]);
     if (missing.length) fail(`${lang} missing keys: ${missing.join(',')}`);
   }
-  ok('Browse I18N: 10 langs each cover ' + browseKeys.length + ' keys');
+  ok('Browse I18N: 12 langs each cover ' + browseKeys.length + ' keys');
 
   // 4b) All JSON-LD structured-data blocks parse; SEO schema present (beta)
   const ldBlocks = [...c.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
@@ -175,13 +175,13 @@ for (const path of FILES) {
     if (!c.includes('window.__JW_LANDING_I18N'))
       fail('landing i18n fallback missing — language switch no-ops on cold landing');
     else ok('landing i18n fallback (window.__JW_LANDING_I18N) present');
-    // It must cover all 10 languages with the hero key.
+    // It must cover all 12 languages with the hero key.
     const lm = c.match(/window\.__JW_LANDING_I18N\s*=\s*(\{[\s\S]*?\});/);
     if (lm) {
       try {
         const li = JSON.parse(lm[1]);
         const ok10 = EXPECTED_LANGS.every(l => li[l] && li[l].hero_title);
-        if (ok10) ok('landing i18n covers all 10 languages'); else fail('landing i18n missing a language/hero_title');
+        if (ok10) ok('landing i18n covers all 12 languages'); else fail('landing i18n missing a language/hero_title');
       } catch (e) { fail('landing i18n JSON invalid: ' + e.message); }
     } else fail('landing i18n object not parseable');
   }
@@ -527,12 +527,12 @@ for (const path of FILES) {
     // Stats query path uses sql.js for the merged db
     if (!c.includes('SELECT COUNT(*) FROM Note')) fail('celebration not querying merged db');
     else ok('celebration queries merged db via sql.js');
-    // Translations: all 10 langs must have the celebration keys
+    // Translations: all 12 langs must have the celebration keys
     for (const lang of FILE_LANGS) {
       const re = new RegExp(`${lang}:\\s*\\{[^}]*cele_title:`);
       if (!re.test(c)) fail(`celebration i18n missing for ${lang}`);
     }
-    ok('celebration i18n present for all 10 languages');
+    ok('celebration i18n present for all 12 languages');
     // Restore guide steps for each platform
     for (const platform of ['ios', 'android', 'other']) {
       const re = new RegExp(`${platform}:\\s*\\[`);
@@ -555,12 +555,12 @@ for (const path of FILES) {
     else ok('donate link URL present (PayPal)');
     if (!c.includes('data-jwc-donate')) fail('donate link hook missing');
     else ok('donate link has data-jwc-donate hook');
-    // Donate prompt/cta strings translated for all 10 langs
+    // Donate prompt/cta strings translated for all 12 langs
     for (const lang of FILE_LANGS) {
       const re = new RegExp(`${lang}:\\s*\\{[^}]*donate_prompt:`);
       if (!re.test(c)) fail(`donate i18n missing for ${lang}`);
     }
-    ok('donate i18n present for all 10 languages');
+    ok('donate i18n present for all 12 languages');
     if (!css.includes('.jwc-donate')) fail('beta/styles.css missing .jwc-donate rule');
     else ok('beta/styles.css defines .jwc-donate');
     if (!css.includes('.jwc-btn-outline')) fail('beta/styles.css missing .jwc-btn-outline (Restore button) rule');
@@ -605,7 +605,7 @@ section('Cross-tool session (jw-session.js)');
       if (js.includes("id: '" + tool + "'")) ok('switcher includes tool: ' + tool);
       else fail('switcher missing tool: ' + tool);
     }
-    // Localised switcher labels for all 10 languages
+    // Localised switcher labels for all 12 languages
     for (const lang of EXPECTED_LANGS) {
       const re = new RegExp('\\b' + lang + ':\\s*\\{\\s*merge:');
       if (re.test(js)) ok('switcher labels present for ' + lang);
@@ -644,7 +644,7 @@ section('Cross-tool session (jw-session.js)');
       const o = JSON.parse(lm[1]);
       navExpOk = EXPECTED_LANGS.every(l => o[l] && o[l].nav_explorer);
     } catch (e) { navExpOk = false; }
-    if (navExpOk) ok('nav_explorer localised for all 10 languages');
+    if (navExpOk) ok('nav_explorer localised for all 12 languages');
     else fail('nav_explorer i18n incomplete');
   }
 

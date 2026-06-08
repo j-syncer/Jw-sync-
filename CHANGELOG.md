@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.54.0] — 2026-06-08
+
+### Cebuano language added (12th language)
+
+- **Cebuano (Bisaya)**: Full translation added across the entire app — landing page, merge flow, Study Explorer, Ask Your Library, celebration screen, Study Stats, awards, and all tool UIs
+- All 12 languages now live: English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean, Filipino, Swedish, Cebuano
+
+---
+
 ## [2.53.5] — 2026-06-08
 
 ### Shipped to production — Study Stats Awards tab + Ask tag fix
