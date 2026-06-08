@@ -672,6 +672,49 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
+// Merge Wizard + privacy badge (beta first) — markers, hooks, i18n coverage
+{
+  section('Merge Wizard + privacy badge (beta)');
+  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const blockCount = (beta.match(/<!-- ── Merge Wizard \+ Privacy Badge ─/g) || []).length;
+  if (blockCount === 1) ok('Merge Wizard block present exactly once');
+  else fail('Merge Wizard block count = ' + blockCount);
+
+  for (const cls of ['jw-priv-badge', 'jw-priv-how', 'jw-wiz-ov', 'jw-wiz-card',
+    'jw-wiz-steps', 'jw-wiz-num', 'jw-wiz-start', 'jw-wiz-skip']) {
+    if (beta.includes('.' + cls)) ok('wizard CSS class defined: .' + cls);
+    else fail('wizard CSS class missing: .' + cls);
+  }
+
+  if (beta.includes('jwsync_wizard_seen')) ok('wizard first-run flag wired (jwsync_wizard_seen)');
+  else fail('wizard first-run flag missing');
+  if (beta.includes('window.__jwOpenGuide') && beta.includes('data-jw-guide'))
+    ok('wizard reuses the existing export/restore guide via __jwOpenGuide');
+  else fail('wizard guide hand-off missing');
+  if (beta.includes('window.__jwOpenWizard')) ok('wizard reopen hook exposed (__jwOpenWizard)');
+  else fail('wizard reopen hook missing');
+  if (beta.includes('input[type="file"][accept=".jwlibrary"]:not([multiple])'))
+    ok('privacy badge targets the main file picker');
+  else fail('privacy badge picker selector missing');
+
+  // i18n: the wizard W object must cover every language with the required keys
+  const wm = beta.match(/__jwWizardInit[\s\S]*?var W=\{([\s\S]*?)\n {2}\};/);
+  if (!wm) { fail('wizard i18n object (W) not found'); }
+  else {
+    const WIZ_KEYS = ['close','badge','how','title','sub','s1t','s1d','s1btn',
+      's2t','s2d','s3t','s3d','s3btn','start','skip'];
+    let wizI18nOk = true;
+    for (const lang of EXPECTED_LANGS) {
+      const re = new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)');
+      const lm = wm[1].match(re);
+      if (!lm) { wizI18nOk = false; fail('wizard i18n missing language: ' + lang); continue; }
+      const missing = WIZ_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
+      if (missing.length) { wizI18nOk = false; fail('wizard i18n ' + lang + ' missing keys: ' + missing.join(',')); }
+    }
+    if (wizI18nOk) ok('wizard i18n covers all 12 languages × ' + WIZ_KEYS.length + ' keys');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

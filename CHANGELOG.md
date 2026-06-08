@@ -4,6 +4,17 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.55.0] — 2026-06-08
+
+### First-run Merge Wizard + point-of-action privacy badge (beta)
+
+- **Merge Wizard**: First-time visitors now see a friendly 3-step guide — Export your backups → Add & merge → Restore — that ties the existing platform-aware export and restore guides directly into the flow. The "Export" and "Restore" steps open the matching step-by-step guide for your device. Shown once, then dismissed for good.
+- **"How it works" link**: Returning users can reopen the wizard any time from the link in the privacy badge.
+- **Privacy badge at the file picker**: A subtle "100% private — your files never leave this device" badge now sits right above the main file picker, reassuring you exactly where it matters most that nothing is ever uploaded.
+- Both are fully localised across all 12 languages.
+
+---
+
 ## [2.54.0] — 2026-06-08
 
 ### Cebuano language added (12th language)
