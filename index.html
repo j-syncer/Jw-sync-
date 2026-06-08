@@ -1403,9 +1403,9 @@ window.__bootBrowse = function() {
         state.allTags.sort(function(a,b){ return a.Name.localeCompare(b.Name); });
         populateFilters();
       }
-      var maxPos=0;
-      existing.forEach(function(tg){ if((tg.pos||0)>maxPos) maxPos=tg.pos||0; });
-      state.db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tagId,noteId,maxPos+1]);
+      var maxPosRow=rowsFromExec(state.db,'SELECT COALESCE(MAX(Position),-1)+1 AS p FROM TagMap WHERE TagId='+(+tagId));
+      var maxPos=maxPosRow.length?maxPosRow[0].p:0;
+      state.db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tagId,noteId,maxPos]);
       var mr = rowsFromExec(state.db,'SELECT last_insert_rowid() AS id');
       var mapId=mr[0].id;
       if(!state.tagsByNote[noteId]) state.tagsByNote[noteId]=[];
@@ -2033,13 +2033,14 @@ window.__bootBrowse = function() {
       var tr=rowsFromExec(state.db,"SELECT TagId FROM Tag WHERE Name='"+safe+"' COLLATE NOCASE");
       var tagId = tr.length>0 ? tr[0].TagId : (state.db.run('INSERT INTO Tag (Name, Type) VALUES (?,1)',[name]), rowsFromExec(state.db,'SELECT last_insert_rowid() AS id')[0].id);
       var tagged=0;
+      var posBase=rowsFromExec(state.db,'SELECT COALESCE(MAX(Position),0)+1 AS p FROM TagMap WHERE TagId='+(+tagId))[0].p;
+      var posOff=0;
       rows.forEach(function(r){
         if(!r.NoteId) return;
         var ex=rowsFromExec(state.db,'SELECT 1 FROM TagMap WHERE NoteId='+(+r.NoteId)+' AND TagId='+(+tagId)+' LIMIT 1');
         if(ex.length) return;
-        var mp=rowsFromExec(state.db,'SELECT COALESCE(MAX(Position),0)+1 AS p FROM TagMap WHERE NoteId='+(+r.NoteId))[0].p;
-        state.db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tagId,r.NoteId,mp]);
-        tagged++;
+        state.db.run('INSERT INTO TagMap (TagId, NoteId, Position) VALUES (?,?,?)',[tagId,r.NoteId,posBase+posOff]);
+        posOff++; tagged++;
       });
       state._batchTaggedCount=tagged;
       state._batchUI='tagged';
