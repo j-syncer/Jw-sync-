@@ -1816,6 +1816,9 @@
         + '<button class="jww-stab jww-stab-awards' + (activeSectionPane==='awards'?' jww-stab-on':'') + '" data-pane="awards">' + esc(t('tab_awards')) + '</button>'
         + '</div>';
 
+      // ── Stats pane (hero + grid + all analytics) ──
+      html += '<div id="jww-pane-stats"' + (activeSectionPane!=='stats'?' class="jww-pane-hidden"':'') + '>';
+
       // hero
       html += '<div class="jww-hero">';
       html += '<div class="jww-filebadge">' + IC.file + '<span>' + esc(filename || 'backup.jwlibrary') + '</span></div>';
@@ -1842,8 +1845,6 @@
       html += '<div class="jww-cell">' + IC.tag + '<div class="jww-cell-num" data-count="' + s.tags + '">0</div><div class="jww-cell-lbl">' + esc(t('tags_label')) + allTimeSub + '</div></div>';
       html += '</div>';
 
-      // ── Stats pane ──
-      html += '<div id="jww-pane-stats"' + (activeSectionPane!=='stats'?' class="jww-pane-hidden"':'') + '>';
       // ── deep analytics: showcase charts ──
       html += profileRadarHtml(s);
       html += insightsHtml(s);
