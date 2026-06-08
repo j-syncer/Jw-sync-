@@ -4,9 +4,24 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.53.5] — 2026-06-08
+
+### Shipped to production — Study Stats Awards tab + Ask tag fix
+
+All features are now live on jwsync.org:
+
+- **Study Stats — Awards tab**: Stats and Awards are split into two tabs at the top of the page. The Awards tab has an animated shimmer effect. Clicking Stats hides the Awards content and vice versa.
+- **Distinguished Honors cabinet**: Always shows your top 3 rarest earned medals directly below the achievements intro — falls back to top 3 by rarity if no ultra-rare medals are earned yet.
+- **Merge celebration teaser**: After downloading your merged file, the celebration screen now shows your 3 most-rare earned medals and a shimmering "Explore Your Awards →" link.
+- **Donation prompt moved**: "Found JW Sync useful?" now appears right after the download confirmation banner, above the action buttons.
+- **Bug fix — Ask Your Library tag assignment**: Tags were not being applied when using "Select All" in Ask mode if the user had previously been on the Highlights or Bookmarks tab. Fixed so "Select All" always uses the visible Ask results.
+- **Bug fix**: Restored the "tagged ✓" green confirmation banner in the batch bar after bulk-tagging notes.
+
+---
+
 ## [2.53.4] — 2026-06-08
 
-### Fixed — Ask Your Library tag assignment
+### Fixed — Ask Your Library tag assignment (beta)
 
 - **Bug fix**: When selecting notes in Ask Your Library and adding a tag via the batch bar, the tag was not being applied if the user had previously been on the Highlights or Bookmarks tab. The "Select All" button was picking up the wrong item list (the previous tab's filtered results instead of the Ask results). Fixed so "Select All" in Ask mode always selects the visible Ask results.
 - Also restored the "tagged ✓" confirmation banner in the batch bar after applying a tag (it was accidentally placed outside its function).
