@@ -73,8 +73,8 @@
     .jww-sy-tabs-inline .jww-sy-tab{font-size:12px;padding:4px 10px}
 
     /* ── section tabs (Stats | Awards) ── */
-    .jww-stabs{display:flex;gap:0;margin:22px 0 0;border-bottom:1px solid rgba(71,85,105,.3);padding-bottom:0}
-    .jww-stab{padding:13px 32px 15px;font-size:15px;font-weight:700;color:#64748b;cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s;font-family:inherit;letter-spacing:.02em}
+    .jww-stabs{display:flex;gap:0;margin:0 0 22px;border-bottom:2px solid rgba(71,85,105,.25);padding-bottom:0}
+    .jww-stab{padding:14px 38px 16px;font-size:17px;font-weight:700;color:#64748b;cursor:pointer;border:none;background:transparent;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .2s,border-color .2s;font-family:inherit;letter-spacing:.02em}
     .jww-stab:hover{color:#cbd5e1}
     .jww-stab.jww-stab-on{color:#ea580c;border-bottom-color:#ea580c}
     /* Awards tab — always shimmers */
@@ -1810,6 +1810,12 @@
       // service year tab bar
       html += tabBarHtml(tabsMeta);
 
+      // section tab switcher (top-level nav)
+      html += '<div class="jww-stabs" id="jww-stabs">'
+        + '<button class="jww-stab' + (activeSectionPane==='stats'?' jww-stab-on':'') + '" data-pane="stats">' + esc(t('tab_stats')) + '</button>'
+        + '<button class="jww-stab jww-stab-awards' + (activeSectionPane==='awards'?' jww-stab-on':'') + '" data-pane="awards">' + esc(t('tab_awards')) + '</button>'
+        + '</div>';
+
       // hero
       html += '<div class="jww-hero">';
       html += '<div class="jww-filebadge">' + IC.file + '<span>' + esc(filename || 'backup.jwlibrary') + '</span></div>';
@@ -1836,11 +1842,6 @@
       html += '<div class="jww-cell">' + IC.tag + '<div class="jww-cell-num" data-count="' + s.tags + '">0</div><div class="jww-cell-lbl">' + esc(t('tags_label')) + allTimeSub + '</div></div>';
       html += '</div>';
 
-      // section tab switcher
-      html += '<div class="jww-stabs" id="jww-stabs">'
-        + '<button class="jww-stab' + (activeSectionPane==='stats'?' jww-stab-on':'') + '" data-pane="stats">' + esc(t('tab_stats')) + '</button>'
-        + '<button class="jww-stab jww-stab-awards' + (activeSectionPane==='awards'?' jww-stab-on':'') + '" data-pane="awards">' + esc(t('tab_awards')) + '</button>'
-        + '</div>';
       // ── Stats pane ──
       html += '<div id="jww-pane-stats"' + (activeSectionPane!=='stats'?' class="jww-pane-hidden"':'') + '>';
       // ── deep analytics: showcase charts ──
