@@ -4,6 +4,18 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.56.1] — 2026-06-09
+
+### Shipped to production
+
+All of the How-it-works improvements (v2.55.0–v2.56.0) are now live on jwsync.org, not just /beta:
+
+- **"How it works" card** with its two tabs — **Merging** (3-step guide) and **Other tools** (Study Explorer, Study Stats & Awards, Note Share & Receive, each with an Open shortcut).
+- **"How it works" button** sits above "Choose a tool"; the card opens only when clicked (no auto-popup).
+- **Privacy badge** above the file picker. All localised across 12 languages.
+
+---
+
 ## [2.56.0] — 2026-06-09
 
 ### "How it works" — now covers every tool (beta)
