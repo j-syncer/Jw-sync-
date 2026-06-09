@@ -680,14 +680,18 @@ section('Cross-tool session (jw-session.js)');
   if (blockCount === 1) ok('Merge Wizard block present exactly once');
   else fail('Merge Wizard block count = ' + blockCount);
 
-  for (const cls of ['jw-priv-badge', 'jw-priv-how', 'jw-wiz-ov', 'jw-wiz-card',
+  for (const cls of ['jw-priv-badge', 'jw-how-btn', 'jw-wiz-ov', 'jw-wiz-card',
     'jw-wiz-steps', 'jw-wiz-num', 'jw-wiz-start', 'jw-wiz-skip']) {
     if (beta.includes('.' + cls)) ok('wizard CSS class defined: .' + cls);
     else fail('wizard CSS class missing: .' + cls);
   }
 
-  if (beta.includes('jwsync_wizard_seen')) ok('wizard first-run flag wired (jwsync_wizard_seen)');
-  else fail('wizard first-run flag missing');
+  if (beta.includes('id="jw-how-btn"') && beta.includes('data-i18n="svc_heading"'))
+    ok('"How it works" trigger present above the tool chooser');
+  else fail('"How it works" trigger not placed above the tool chooser');
+  if (!beta.includes('setTimeout(openWizard'))
+    ok('wizard does not auto-open (opens only on click)');
+  else fail('wizard still auto-opens on first run');
   if (beta.includes('window.__jwOpenGuide') && beta.includes('data-jw-guide'))
     ok('wizard reuses the existing export/restore guide via __jwOpenGuide');
   else fail('wizard guide hand-off missing');

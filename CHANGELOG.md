@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.55.1] — 2026-06-09
+
+### Merge Wizard — quieter, on-demand (beta)
+
+- The **"How it works"** button now lives at the top of the landing, right above **"Choose a tool"**, so it's easy to find before you start.
+- The wizard **no longer pops up on its own** for first-time visitors — it opens only when you tap "How it works". The privacy badge stays put above the file picker as a quiet reassurance.
+
+---
+
 ## [2.55.0] — 2026-06-08
 
 ### First-run Merge Wizard + point-of-action privacy badge (beta)
