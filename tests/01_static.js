@@ -734,6 +734,33 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
+// Multilingual SEO — hreflang in <head> + complete sitemap (all 12 langs)
+{
+  section('Multilingual SEO (hreflang + sitemap)');
+  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const head = beta.slice(0, beta.indexOf('</head>'));
+  const headLangs = (head.match(/<link rel="alternate" hreflang="([a-z-]+)"/g) || [])
+    .map(s => s.match(/hreflang="([a-z-]+)"/)[1]);
+  const missingHead = EXPECTED_LANGS.filter(l => !headLangs.includes(l));
+  if (!missingHead.length && headLangs.includes('x-default'))
+    ok('head has hreflang for all 12 languages + x-default');
+  else fail('head hreflang incomplete (missing: ' + missingHead.join(',') + (headLangs.includes('x-default') ? '' : ',x-default') + ')');
+  if (EXPECTED_LANGS.filter(l => l !== 'en').every(l => head.includes('og:locale:alternate')))
+    ok('og:locale:alternate present for other locales');
+  else fail('og:locale:alternate missing');
+
+  const sm = fs.readFileSync(REPO + '/sitemap.xml', 'utf8');
+  const smLangs = [...new Set((sm.match(/hreflang="([a-z-]+)"/g) || [])
+    .map(s => s.match(/hreflang="([a-z-]+)"/)[1]))];
+  const missingSm = EXPECTED_LANGS.filter(l => !smLangs.includes(l));
+  if (!missingSm.length) ok('sitemap.xml covers all 12 languages');
+  else fail('sitemap.xml missing languages: ' + missingSm.join(','));
+  // every language must have its own <loc> entry too
+  const missingLoc = EXPECTED_LANGS.filter(l => !sm.includes('?lang=' + l + '</loc>'));
+  if (!missingLoc.length) ok('sitemap.xml has a <loc> per language');
+  else fail('sitemap.xml missing <loc> for: ' + missingLoc.join(','));
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

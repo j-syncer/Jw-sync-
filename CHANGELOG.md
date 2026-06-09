@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.56.2] — 2026-06-09
+
+### Multilingual SEO — discoverable in all 12 languages (beta)
+
+- Added **`hreflang`** alternate tags (all 12 languages + `x-default`) and **`og:locale:alternate`** tags to the page head, so search engines and social platforms know about every language version of the site.
+- **Rebuilt `sitemap.xml`** to include all 12 languages — previously it was missing Swedish and Cebuano — with a complete reciprocal hreflang set per URL and a fresh `lastmod`.
+- This lets the fully-translated site rank in the other 11 languages instead of only English. No visible UI change.
+
+---
+
 ## [2.56.1] — 2026-06-09
 
 ### Shipped to production
