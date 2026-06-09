@@ -681,10 +681,24 @@ section('Cross-tool session (jw-session.js)');
   else fail('Merge Wizard block count = ' + blockCount);
 
   for (const cls of ['jw-priv-badge', 'jw-how-btn', 'jw-wiz-ov', 'jw-wiz-card',
-    'jw-wiz-steps', 'jw-wiz-num', 'jw-wiz-start', 'jw-wiz-skip']) {
+    'jw-wiz-steps', 'jw-wiz-num', 'jw-wiz-start', 'jw-wiz-skip',
+    'jw-wiz-tab', 'jw-wiz-tools', 'jw-wiz-tool', 'jw-wiz-tool-open']) {
     if (beta.includes('.' + cls)) ok('wizard CSS class defined: .' + cls);
     else fail('wizard CSS class missing: .' + cls);
   }
+
+  // "Other tools" tab explains the Explorer / Stats+Awards / Share tools
+  if (beta.includes('data-jw-tab="merge"') && beta.includes('data-jw-tab="tools"') &&
+      beta.includes('data-jw-pane="tools"'))
+    ok('wizard has Merging + Other tools tabs');
+  else fail('wizard tool tabs missing');
+  if (beta.includes("toolHtml('explorer'") && beta.includes("toolHtml('stats'") &&
+      beta.includes("toolHtml('share'"))
+    ok('Other tools tab covers Explorer, Stats and Share');
+  else fail('Other tools tab tool list incomplete');
+  if (beta.includes('data-jw-open=') && beta.includes('function openTool'))
+    ok('each tool has a working Open action');
+  else fail('tool Open dispatch missing');
 
   if (beta.includes('id="jw-how-btn"') && beta.includes('data-i18n="svc_heading"'))
     ok('"How it works" trigger present above the tool chooser');
@@ -706,7 +720,8 @@ section('Cross-tool session (jw-session.js)');
   if (!wm) { fail('wizard i18n object (W) not found'); }
   else {
     const WIZ_KEYS = ['close','badge','how','title','sub','s1t','s1d','s1btn',
-      's2t','s2d','s3t','s3d','s3btn','start','skip'];
+      's2t','s2d','s3t','s3d','s3btn','start','skip',
+      'tab1','tab2','t_intro','exp_d','stat_d','shr_d','open'];
     let wizI18nOk = true;
     for (const lang of EXPECTED_LANGS) {
       const re = new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)');

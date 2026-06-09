@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.56.0] — 2026-06-09
+
+### "How it works" — now covers every tool (beta)
+
+- The How-it-works card has **two tabs**: **Merging** (the original 3-step guide) and a new **Other tools** tab.
+- **Other tools** explains what each tool does and how to use it — **Study Explorer** (search, edit, tag, Ask Your Library), **Study Stats** (totals, streaks, trends, plus the **Awards** medals tab), and **Note Share & Receive** — each with an **Open** shortcut that takes you straight there.
+- Tool names match the "Choose a tool" cards, fully localised across all 12 languages.
+
+---
+
 ## [2.55.1] — 2026-06-09
 
 ### Merge Wizard — quieter, on-demand (beta)
