@@ -822,6 +822,29 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
+// Collapsible tool sections (Extract / Bulk Color / Manage Tags)
+{
+  section('Collapsible tool sections');
+  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  if (beta.includes('Collapsible tool sections') && beta.includes('End Collapsible tool sections'))
+    ok('collapsible tool-sections block present');
+  else fail('collapsible tool-sections block missing');
+  // targets the three distinctive merge-tool header icons
+  if (["share", "palette", "tags"].every(i => beta.includes("'.lucide-' + n")) ||
+      beta.includes("var ICONS = ['share', 'palette', 'tags']"))
+    ok('targets share / palette / tags section icons');
+  else fail('section icon targeting changed');
+  if (beta.includes("data-jwopen") && beta.includes("data-jwtool"))
+    ok('uses React-safe data-* attributes for collapse state');
+  else fail('collapse state attributes missing');
+  if (beta.includes("/jsdom/i.test(navigator.userAgent"))
+    ok('observer guarded against JSDOM teardown');
+  else fail('JSDOM guard missing (tests may crash on teardown)');
+  if (beta.includes("[data-jwtool][data-jwopen=\"0\"] > :not(:first-child)"))
+    ok('collapsed CSS hides body, keeps header tab');
+  else fail('collapsed-state CSS missing');
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

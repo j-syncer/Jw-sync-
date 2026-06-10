@@ -146,6 +146,32 @@ All of the How-it-works improvements (v2.55.0–v2.56.0) are now live on jwsync.
 
 ---
 
+## [2.62.0] — 2026-06-10
+
+### Tidier merge tool: collapsible advanced sections (beta)
+
+- **Extract & Share**, **Bulk Color Changer**, and **Manage Tags** now collapse into three compact tabs in the merge tool. They're tucked away by default, so the page is shorter and you can scroll straight to the merge button.
+- Tap any tab to expand the full tool; tap again to collapse it. A chevron shows the state.
+- Your merge flow is unchanged — these are optional power tools, now out of the way until you want them.
+
+---
+
+## [2.61.0] — 2026-06-10
+
+### Juicy merge celebration: particles, rings & checkmarks (beta)
+
+- The merge celebration now feels truly rewarding: floating particles drift upward, animated rings fill as each stat counts up, and emerald checkmarks bounce in as each total completes.
+
+---
+
+## [2.60.0] — 2026-06-10
+
+### Elegant modal entrance animations (beta)
+
+- All modals (celebration, restore guide, conflict review) now open with a smooth, staggered entrance — the backdrop blurs in, then the title, content, and buttons reveal in sequence with premium easing.
+
+---
+
 ## [2.59.0] — 2026-06-10
 
 ### Celebration screen polish: animated stats counter (beta)

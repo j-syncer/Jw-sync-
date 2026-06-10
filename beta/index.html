@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.61.0",
+      "softwareVersion": "2.62.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -5320,6 +5320,117 @@ body.light .jwr-ntitle{color:#0b2e58}
 })();
 </script>
 <!-- ── End Merge Wizard + Privacy Badge ──────────────────── -->
+
+<!-- ── Collapsible tool sections (Extract / Bulk Color / Manage Tags) v2.62.0 ── -->
+<style>
+  /* Compact collapsed tab: hide everything but the header bar */
+  [data-jwtool][data-jwopen="0"] > :not(:first-child) { display: none !important; }
+  /* The header bar becomes a clickable tab */
+  [data-jwtool] > :first-child {
+    cursor: pointer;
+    position: relative;
+    padding-right: 44px !important;
+    user-select: none;
+    transition: background .18s ease;
+  }
+  [data-jwtool] > :first-child:hover { background: rgba(255,255,255,.04); }
+  /* Chevron indicator (pure CSS — survives React re-renders) */
+  [data-jwtool] > :first-child::after {
+    content: '';
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid rgba(148,163,184,.75);
+    border-bottom: 2px solid rgba(148,163,184,.75);
+    transform: translateY(-65%) rotate(45deg);
+    transition: transform .25s cubic-bezier(.16,1,.3,1), border-color .18s ease;
+  }
+  [data-jwtool] > :first-child:hover::after { border-color: #fb923c; }
+  /* Collapsed: chevron points right (▶). Expanded: points down (▼) */
+  [data-jwtool][data-jwopen="0"] > :first-child::after { transform: translateY(-50%) rotate(-45deg); }
+  /* When collapsed, make the tab feel slim + tidy */
+  [data-jwtool][data-jwopen="0"] { box-shadow: 0 1px 4px rgba(0,0,0,.25) !important; }
+  [data-jwtool][data-jwopen="0"] > :first-child { border-bottom-color: transparent !important; }
+  /* Smooth reveal of the body when expanding */
+  @keyframes jwtool-reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+  [data-jwtool][data-jwopen="1"] > :nth-child(2) { animation: jwtool-reveal .3s cubic-bezier(.16,1,.3,1); }
+</style>
+<script>
+(function () {
+  'use strict';
+  // The three merge-tool sections, keyed by their distinctive header icon.
+  // Lucide renders <i data-lucide="x"> into <svg class="lucide lucide-x">,
+  // so we match either form.
+  var ICONS = ['share', 'palette', 'tags'];
+  var SEL = ICONS.map(function (n) {
+    return '.lucide-' + n + ', [data-lucide="' + n + '"]';
+  }).join(', ');
+
+  function cardFor(iconEl) {
+    // Walk up to the section card (.rounded-2xl.shadow-lg).
+    var el = iconEl;
+    for (var i = 0; i < 6 && el; i++) {
+      if (el.classList &&
+          el.classList.contains('rounded-2xl') &&
+          el.classList.contains('shadow-lg')) return el;
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  function tagCards() {
+    var icons = document.querySelectorAll(SEL);
+    icons.forEach(function (ic) {
+      var card = cardFor(ic);
+      if (!card) return;
+      // Must be a real section card with an h2 title header — avoids false hits.
+      if (!card.querySelector('h2.font-bold')) return;
+      if (card.getAttribute('data-jwtool')) return; // already tagged
+      card.setAttribute('data-jwtool', '1');
+      card.setAttribute('data-jwopen', '0'); // collapsed by default
+    });
+  }
+
+  // Toggle via event delegation so we never attach listeners to React nodes.
+  document.addEventListener('click', function (e) {
+    var card = e.target.closest && e.target.closest('[data-jwtool]');
+    if (!card) return;
+    var header = card.firstElementChild;
+    if (!header || !header.contains(e.target)) return; // only header toggles
+    // Don't hijack clicks on real controls inside the header (buttons/links/inputs)
+    var ctrl = e.target.closest('button, a, input, select, textarea');
+    if (ctrl && ctrl !== header && header.contains(ctrl)) return;
+    card.setAttribute('data-jwopen', card.getAttribute('data-jwopen') === '1' ? '0' : '1');
+  }, true);
+
+  // Initial pass once the DOM is ready.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tagCards);
+  } else {
+    tagCards();
+  }
+
+  // Re-tag on DOM changes (React re-renders / route changes). data-* attrs
+  // survive React reconciliation, so state persists between renders; this only
+  // re-applies defaults to freshly-mounted cards. Skipped under the JSDOM test
+  // harness (browser-only enhancement; pending async work crashes teardown).
+  var isJsdom = typeof navigator !== 'undefined' && /jsdom/i.test(navigator.userAgent || '');
+  if (!isJsdom) {
+    var scheduled = false;
+    function schedule() {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(function () { scheduled = false; tagCards(); });
+    }
+    try {
+      new MutationObserver(schedule).observe(document.body, { childList: true, subtree: true });
+    } catch (_) {}
+  }
+})();
+</script>
+<!-- ── End Collapsible tool sections ─────────────────────── -->
 
 </body>
 </html>
