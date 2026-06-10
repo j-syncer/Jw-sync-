@@ -1937,8 +1937,8 @@ body.light .svc-card-desc { color: #475569; }
   content: ''; position: absolute; top: -60%; left: -60%; width: 42%; height: 220%; z-index: 0;
   background: linear-gradient(100deg, transparent 0%, rgba(var(--svc-l), .14) 42%, rgba(var(--svc-l), .30) 50%, rgba(var(--svc-l), .14) 58%, transparent 100%);
   transform: skewX(-16deg); pointer-events: none;
-  animation: svcShimmer 5s ease-in-out infinite;
 }
+.svc-card:hover::after { animation: svcShimmer .9s ease-out; }
 .svc-explorer::after { animation-delay: 1.15s; }
 .svc-stats::after    { animation-delay: 2.3s; }
 .svc-share::after    { animation-delay: 3.45s; }
@@ -1960,3 +1960,15 @@ body.light .svc-card-desc { color: #475569; }
   }
   .nav-lang-select { min-height: 44px; }
 }
+
+
+/* ── Beauty pass: hero depth glow + calmer card sheen (v2.58.1) ── */
+.landing-hero { position: relative; }
+.landing-hero::before {
+  content: ''; position: absolute; left: 50%; top: -60px; transform: translateX(-50%);
+  width: 720px; max-width: 132vw; height: 360px; z-index: 0; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(234,88,12,.15), rgba(234,88,12,.045) 46%, transparent 72%);
+}
+.landing-hero h1, .landing-hero p { position: relative; z-index: 1; }
+.landing-feat { transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease; }
+.landing-feat:hover { border-color: rgba(234,88,12,.4); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }

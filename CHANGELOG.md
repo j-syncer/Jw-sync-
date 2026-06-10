@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.58.1] — 2026-06-09
+
+### Visual polish — a more beautiful landing (beta)
+
+- **Hero depth**: a soft, static glow now sits behind the headline, giving the page a warmer focal point without any animated gradients.
+- **Calmer, classier tool cards**: the constant background shimmer is gone — instead each "Choose a tool" card plays a single, elegant accent sweep with a gentle lift *on hover*.
+- **Cohesive feature cards**: the feature tiles now respond on hover (subtle orange border + lift), matching the rest of the page.
+
+---
+
 ## [2.58.0] — 2026-06-09
 
 ### Safe Restore — confidence at the most important step (live)
