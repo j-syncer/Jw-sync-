@@ -1348,13 +1348,15 @@ body.jw-modal-open { overflow: hidden; }
   margin: 0 0 22px;
 }
 .jwc-stat {
+  position: relative;
   background: rgba(255,255,255,.04);
   border: 1px solid rgba(255,255,255,.07);
   border-radius: 12px;
   padding: 14px 8px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 8px;
 }
 .jwc-stat strong {
   font-size: clamp(20px, 4vw, 26px);
@@ -1691,13 +1693,6 @@ body.jw-modal-open { overflow: hidden; }
   pointer-events: none;
 }
 
-.jwc-stat {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
 .jwc-stat-ring {
   position: absolute;
   top: 50%;
