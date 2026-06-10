@@ -4,6 +4,82 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## Feature highlights — recent updates
+
+A themed summary of what's been added over the last few weeks, since the
+version-by-version notes below don't always capture the full picture. Everything
+runs in your browser — your files are never uploaded.
+
+### 📊 Study Stats
+- A dedicated Study Stats page: headline totals (notes, highlights, bookmarks,
+  tags), Service-Year and All-Time views, and year-over-year growth.
+- Private analytics: activity heatmap, longest/current streaks, weekly rhythm,
+  growth over time, and busiest hours and months.
+- Bible coverage across all 66 books, with a Hebrew/Greek-Scriptures split.
+- Visualizations: study gauges, a 24-hour study clock, seasonality radar,
+  highlight colour wheel, Bible-progress ring, note-depth histogram, word cloud.
+- A six-trait Study Profile (Consistency, Diligence, Depth, Breadth, Reflection,
+  Steadiness) and a "Study Signature" persona (e.g. Reflective Writer, Night Owl,
+  Morning/Afternoon/Evening Studier, Midnight Oil).
+- Your Study Story timeline, a "What's Next" forecast, and a Shareable Card.
+
+### 🏆 Achievements & Study Journey
+- Study Journey: 60 levels across 12 named tiers (Seed → … → Evergreen) with a
+  colour-shifting orb and level-up celebrations; lifetime-based.
+- ~200 awards with rarity (Common → Legendary) and "Appreciation" points.
+- Content-aware, themed medals (e.g. Prayer Warrior, Truth Seeker, Kingdom
+  Ambassador, Hopeful Heart, Wisdom Keeper) in distinct shapes.
+- Distinguished Honors cabinet, clickable medal popups with progress.
+
+### 🕸️ Study Map
+- A private, interactive knowledge graph linking notes by shared scripture,
+  shared tags, and similar wording.
+- Topics ↔ Notes views, hover-to-spotlight, drag, a strength slider, manual
+  "study chains", full-screen mode, and image (PNG) export.
+
+### 🔎 Study Explorer
+- Ask Your Library: on-device, offline-capable semantic search (find notes by
+  meaning, not keywords), with WebGPU acceleration and a choice of models.
+- Rich-text note editing (bold/italic/underline/lists) with formatting preserved.
+- Bulk editing (retag, recolour, delete) with full Undo/Redo.
+- Study Answers tab (view/edit JW Library fill-in answers).
+- Date-range extraction to a fresh backup; Markdown copy/export; pagination for
+  large libraries.
+
+### 🤝 Note Sharing
+- Send/receive specific notes as a small file (no server, no account).
+- Shared highlights travel with their notes; your own notes are never overwritten
+  (you choose how clashes are added); imported notes are tagged for easy finding.
+- A dedicated, step-by-step Share page.
+
+### 🔀 Merging
+- Pre-merge impact preview before anything downloads.
+- Merge Conflict Reviewer with side-by-side word-level diff and "Suggest best".
+- Saved Devices & Auto-Sync with weekly/monthly reminders.
+- Safe Restore reassurance, a share-your-result card, merge-performance
+  breakdown, and clearer file-error messages.
+
+### 🧭 Onboarding & workspace
+- Platform-aware "How it works" guide (export → merge → restore).
+- Redesigned home page with the four tools as cards.
+- One shared workspace — load a file once and it follows you between tools
+  (kept only in your browser, auto-cleared, wiped on "Start over").
+- Built-in sample notes to try without uploading.
+
+### 🌍 Languages
+- Added Swedish and Cebuano — the entire app (not just the home page) is now
+  translated into 12 languages.
+- Localized FAQ/How-to and per-language URLs.
+
+### ✨ Design, accessibility & performance
+- A visual refresh (softer hero, calmer card hovers, cleaner section styling).
+- Accessibility & mobile polish: higher-contrast text, larger touch targets,
+  offline indicator, swipe-between-tabs, haptic feedback.
+- Faster first load (lazy-loading/code-splitting) and improved SEO across all
+  12 languages.
+
+---
+
 ## [2.58.2] — 2026-06-09
 
 ### More visual polish — editorial touches (live)
