@@ -1396,6 +1396,10 @@ body.jw-modal-open { overflow: hidden; }
   background: transparent;
   color: #f1f5f9;
   border: 1px solid rgba(148,163,184,.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .jwc-btn-secondary:hover {
   border-color: rgba(234,88,12,.5);
@@ -1406,6 +1410,10 @@ body.jw-modal-open { overflow: hidden; }
   background: transparent;
   color: #fdba74;
   border: 1px solid rgba(234,88,12,.55);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .jwc-btn-outline:hover {
   background: rgba(234,88,12,.10);
@@ -1543,12 +1551,13 @@ body.jw-modal-open { overflow: hidden; }
   color: rgba(203,213,225,.7);
   cursor: pointer;
   font-family: inherit;
-  transition: background .15s, color .15s;
+  transition: all .2s ease;
 }
-.jwrg-tab:hover { color: #f1f5f9; }
+.jwrg-tab:hover { color: #f1f5f9; background: rgba(255,255,255,.06); }
 .jwrg-tab.active {
   background: rgba(234,88,12,.18);
   color: #fdba74;
+  box-shadow: 0 0 0 1px rgba(234,88,12,.2);
 }
 .jwrg-modes {
   display: flex;
@@ -1570,12 +1579,13 @@ body.jw-modal-open { overflow: hidden; }
   color: rgba(203,213,225,.75);
   cursor: pointer;
   font-family: inherit;
-  transition: background .15s, color .15s;
+  transition: all .2s ease;
 }
-.jwrg-mode:hover { color: #f1f5f9; }
+.jwrg-mode:hover { color: #f1f5f9; background: rgba(255,255,255,.06); }
 .jwrg-mode.active {
   background: #ea580c;
   color: #fff;
+  box-shadow: 0 0 0 1px rgba(234,88,12,.3);
 }
 .jwrg-steps {
   margin: 0 0 16px;
@@ -1585,6 +1595,10 @@ body.jw-modal-open { overflow: hidden; }
   font-size: 13.5px;
   line-height: 1.55;
   color: rgba(226,232,240,.92);
+  padding: 16px 14px 16px 20px;
+  background: rgba(71,85,105,.08);
+  border-radius: 10px;
+  margin: 0 0 16px;
 }
 .jwrg-steps li::marker { color: #fb923c; font-weight: 700; }
 .jwrg-steps strong { color: #fdba74; font-weight: 700; }
@@ -1613,9 +1627,11 @@ body.jw-modal-open { overflow: hidden; }
   font-weight: 700;
   cursor: pointer;
   font-family: inherit;
-  transition: background .15s;
+  transition: all .2s ease;
+  box-shadow: 0 1px 3px rgba(234,88,12,.3);
 }
-.jwrg-done:hover { background: #f97316; }
+.jwrg-done:hover { background: #f97316; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(234,88,12,.4); }
+.jwrg-done:active { transform: translateY(0); }
 
 @keyframes jwc-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes jwc-pop-in {
@@ -1626,6 +1642,16 @@ body.jw-modal-open { overflow: hidden; }
   0%   { transform: scale(.4); opacity: 0; }
   60%  { transform: scale(1.12); opacity: 1; }
   100% { transform: scale(1); }
+}
+
+/* ── Celebration screen polish: visual dividers + staggered entrance (v2.59.0) ── */
+.jwc-stats { position: relative; padding-bottom: 16px; }
+.jwc-stats::after {
+  content: ''; position: absolute; bottom: 0; left: 12%; right: 12%; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(71,85,105,.25) 50%, transparent 100%);
+}
+.jwc-stat strong {
+  display: inline-block; font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 520px) {
