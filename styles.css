@@ -2044,7 +2044,7 @@ body.is-landing #jws-loading { display: none !important; }
 /* ── Home service cards (v2.33.0) — four distinct, equal tools ── */
 .svc-section { max-width: 1000px; margin: 0 auto 6px; padding: 0 20px; }
 .svc-section-title { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fb923c; text-align: center; margin: 0 0 18px; }
-.svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.svc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
 .svc-card { display: flex; flex-direction: column; gap: 9px; background: rgba(4,15,34,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px 18px; transition: border-color .14s ease, transform .14s ease, box-shadow .14s ease; text-align: left; width: 100%; font-family: inherit; color: inherit; cursor: pointer; text-decoration: none; -webkit-appearance: none; appearance: none; }
 .svc-secondary { justify-content: center; margin-top: 20px; }
 .svc-card:hover { border-color: rgba(234,88,12,.55); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.28); }
@@ -2058,8 +2058,18 @@ body.light .svc-card { background: #fff; border-color: rgba(11,46,88,.12); }
 body.light .svc-card-merge { background: rgba(234,88,12,.05); border-color: rgba(234,88,12,.3); }
 body.light .svc-card-title { color: #0b2e58; }
 body.light .svc-card-desc { color: #475569; }
-@media (max-width: 900px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; gap: 12px; } .svc-section { margin-top: 8px; } }
+@media (max-width: 1100px) { .svc-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px)  { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px)  { .svc-grid { grid-template-columns: 1fr; gap: 12px; } .svc-section { margin-top: 8px; } }
+
+/* Backup Doctor card: orange-red health accent + NEW badge */
+.svc-doctor { --svc-a: 234,88,12; --svc-l: 251,146,60; }
+.svc-card-new {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  font: 800 9px/1 inherit; letter-spacing: .08em; color: #fff;
+  background: #ea580c; border-radius: 5px; padding: 4px 6px;
+  box-shadow: 0 1px 4px rgba(234,88,12,.5);
+}
 
 
 /* ── Home service tiles — per-card colored shimmer (v2.35.0) ── */
