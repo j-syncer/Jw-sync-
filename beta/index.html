@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.63.0",
+      "softwareVersion": "2.63.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -544,6 +544,12 @@ function __jwGoExplorer(){
             <h3 class="svc-card-title" data-i18n="svc_merge_t">Merge Tool</h3>
             <p class="svc-card-desc" data-i18n="svc_merge_d">Combine JW Library backups from all your devices into one.</p>
           </a>
+          <button type="button" class="svc-card svc-doctor" id="jbd-cta" onclick="window.__openJwDoctor&amp;&amp;window.__openJwDoctor()">
+            <span class="svc-card-new">NEW</span>
+            <div class="svc-card-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></div>
+            <h3 class="svc-card-title" data-i18n="svc_doctor_t">Backup Doctor</h3>
+            <p class="svc-card-desc" data-i18n="svc_doctor_d">Free health check — find and fix duplicates, empty notes and clutter.</p>
+          </button>
           <button type="button" class="svc-card svc-stats" onclick="__jwGoHighlights()">
             <div class="svc-card-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
             <h3 class="svc-card-title" data-i18n="svc_stats_t">Study Stats</h3>
@@ -560,14 +566,6 @@ function __jwGoExplorer(){
             <p class="svc-card-desc" data-i18n="svc_share_d">Send notes to a friend, or add notes they sent you.</p>
           </button>
         </div>
-        <button type="button" class="jbd-cta" id="jbd-cta" onclick="window.__openJwDoctor&amp;&amp;window.__openJwDoctor()">
-          <span class="jbd-cta-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></span>
-          <span class="jbd-cta-txt">
-            <span class="jbd-cta-title"><span data-i18n="svc_doctor_t">Backup Doctor</span><span class="jbd-new">NEW</span></span>
-            <span class="jbd-cta-desc" data-i18n="svc_doctor_d">Free health check — find and fix duplicates, empty notes and clutter.</span>
-          </span>
-          <span class="jbd-cta-arrow">&#8594;</span>
-        </button>
         <div class="cta-row svc-secondary">
           <button type="button" class="cta-btn-secondary" id="landing-demo-btn" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button>
           <button type="button" class="cta-btn-ghost" id="landing-howto-btn" data-howto-trigger data-i18n="cta_howto">First time? How it works</button>

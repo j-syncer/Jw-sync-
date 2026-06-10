@@ -289,9 +289,13 @@ for (const path of FILES) {
       fail('Home service section (.svc-grid) missing');
     else ok('Home service section (.svc-grid) present');
     const cards = (c.match(/class="svc-card[ "]/g) || []).length;
-    if (cards === 4) ok('Four distinct service cards present');
-    else fail('Expected 4 .svc-card, got ' + cards);
-    for (const k of ['svc_merge_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t'])
+    if (cards === 5) ok('Five service cards present (incl. Backup Doctor)');
+    else fail('Expected 5 .svc-card, got ' + cards);
+    // Backup Doctor sits 2nd, right after the Merge tool
+    if (/svc-card svc-card-merge[\s\S]*?svc-card svc-doctor/.test(c))
+      ok('Backup Doctor card placed directly after Merge tool');
+    else fail('Backup Doctor card not positioned after Merge tool');
+    for (const k of ['svc_merge_t', 'svc_doctor_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t'])
       if (!c.includes('data-i18n="' + k + '"')) fail('Service card i18n key missing: ' + k);
     // v2.34.1: whole cards are clickable tiles (no inner buttons / no &#8594; gibberish)
     if (!c.includes('svc-card-btn')) ok('cards are clickable tiles (no inner Open buttons)');
@@ -858,9 +862,12 @@ section('Cross-tool session (jw-session.js)');
   if (beta.includes('window.__jwDoctorInternals'))
     ok('test internals (runChecks/applyFixes) exposed');
   else fail('__jwDoctorInternals missing');
-  if (beta.includes('class="jbd-cta"') && beta.includes('data-i18n="svc_doctor_t"'))
-    ok('landing CTA banner present');
-  else fail('landing CTA banner missing');
+  if (beta.includes('class="svc-card svc-doctor"') && beta.includes('data-i18n="svc_doctor_t"'))
+    ok('Backup Doctor service card present');
+  else fail('Backup Doctor service card missing');
+  if (beta.includes('<span class="svc-card-new">NEW</span>'))
+    ok('Backup Doctor card keeps its NEW badge');
+  else fail('Backup Doctor NEW badge missing');
   // DOC_I18N coverage: all 12 languages × the load-bearing keys
   const dm = beta.match(/var DOC_I18N = \{([\s\S]*?)\n {2}\};/);
   if (!dm) fail('DOC_I18N object not found');
