@@ -1972,3 +1972,10 @@ body.light .svc-card-desc { color: #475569; }
 .landing-hero h1, .landing-hero p { position: relative; z-index: 1; }
 .landing-feat { transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease; }
 .landing-feat:hover { border-color: rgba(234,88,12,.4); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+
+/* ── Beauty pass II: editorial eyebrow + section accents (v2.58.2) ── */
+.svc-section-title { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.svc-section-title::before, .svc-section-title::after { content: ''; height: 1px; width: 40px; background: linear-gradient(to right, transparent, rgba(251,146,60,.6)); }
+.svc-section-title::after { background: linear-gradient(to left, transparent, rgba(251,146,60,.6)); }
+.landing-section-title { position: relative; padding-bottom: 16px; }
+.landing-section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 44px; height: 3px; border-radius: 2px; background: #ea580c; }

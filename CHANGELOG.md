@@ -4,9 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.58.2] — 2026-06-09
+
+### More visual polish — editorial touches (live)
+
+- **Refined "Choose a tool" eyebrow** — soft hairlines now flank the label for a cleaner, more editorial look.
+- **Section accents** — each major section heading gets a small orange underline accent, giving the page clearer rhythm and structure.
+- The full beauty pass (hero glow, calmer card hovers, feature-card hovers, and these touches) is now **live on jwsync.org**.
+
+---
+
 ## [2.58.1] — 2026-06-09
 
-### Visual polish — a more beautiful landing (beta)
+### Visual polish — a more beautiful landing (live)
 
 - **Hero depth**: a soft, static glow now sits behind the headline, giving the page a warmer focal point without any animated gradients.
 - **Calmer, classier tool cards**: the constant background shimmer is gone — instead each "Choose a tool" card plays a single, elegant accent sweep with a gentle lift *on hover*.
