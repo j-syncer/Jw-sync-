@@ -793,6 +793,35 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
+// Safe Restore confidence layer (celebration + restore guide, 12 langs)
+{
+  section('Safe Restore confidence layer');
+  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  if (beta.includes('function buildSafePanel')) ok('Safe Restore panel builder present');
+  else fail('buildSafePanel missing');
+  // used in BOTH the celebration and the restore guide (def + 2 call sites)
+  if ((beta.match(/buildSafePanel\(\)/g) || []).length >= 3)
+    ok('Safe Restore panel shown in celebration and restore guide');
+  else fail('Safe Restore panel not wired into both places');
+  if (beta.includes("'<div id=\"jwrg-warning\">' + buildSafePanel()"))
+    ok('restore guide warning upgraded to the Safe Restore panel');
+  else fail('restore guide still uses the old lone warning');
+
+  const sm = beta.match(/var SAFE_I18N=\{([\s\S]*?)\n {2}\};/);
+  if (!sm) fail('SAFE_I18N object not found');
+  else {
+    const SAFE_KEYS = ['safe_title', 'safe_originals', 'safe_master'];
+    let okAll = true;
+    for (const lang of EXPECTED_LANGS) {
+      const lm = sm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
+      if (!lm) { okAll = false; fail('SAFE_I18N missing language: ' + lang); continue; }
+      const miss = SAFE_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
+      if (miss.length) { okAll = false; fail('SAFE_I18N ' + lang + ' missing: ' + miss.join(',')); }
+    }
+    if (okAll) ok('SAFE_I18N covers all 12 languages × ' + SAFE_KEYS.length + ' keys');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

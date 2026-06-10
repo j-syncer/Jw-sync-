@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.58.0] — 2026-06-09
+
+### Safe Restore — confidence at the most important step (beta)
+
+Restoring is the one step that *replaces* what's on your device, so JW Sync now makes it reassuring and clear with a beautiful **Safe Restore** panel — shown both on the merge celebration screen and inside the restore guide:
+
+- **✓ Your originals are safe** — JW Sync never changes your original backups; the merged file is brand-new.
+- **⚠ Restoring replaces** the notes currently in JW Library on this device.
+- **★ Keep the combined file** as your master backup.
+
+Localised across all 12 languages, with the brand's calm navy/emerald/amber styling.
+
+---
+
 ## [2.57.0] — 2026-06-09
 
 ### Share your merge result + completed multilingual SEO (live)

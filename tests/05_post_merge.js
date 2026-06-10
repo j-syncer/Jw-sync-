@@ -265,10 +265,10 @@ async function waitForOverlay(doc, id, timeoutMs) {
         if (newSteps.length >= 4) ok('switching tabs re-renders the steps');
         else fail('switching tabs broke step rendering');
 
-        // Warning visible
-        const warning = guide.querySelector('.jwrg-warning');
-        if (warning && warning.textContent.length > 20) ok('restore guide shows warning text');
-        else fail('restore guide warning missing');
+        // Safe Restore panel visible (v2.58.0: warning upgraded to a 3-point safety panel)
+        const warning = guide.querySelector('#jwrg-warning');
+        if (warning && warning.textContent.length > 20) ok('restore guide shows Safe Restore panel');
+        else fail('restore guide Safe Restore panel missing');
 
         // IN/OUT mode toggle (v2.14.0 guided in/out flow)
         const modeBtns = guide.querySelectorAll('.jwrg-mode');
