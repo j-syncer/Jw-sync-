@@ -4489,27 +4489,28 @@ window.__bootBrowse = function() {
 .jsh-priv{color:#64748b;font-size:11.5px;margin:10px 0 16px;display:flex;gap:6px;align-items:flex-start}
 .jsh-list{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:8px}
 .jsh-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(71,85,105,.35);
-  border-radius:10px;background:rgba(4,15,34,.5)}
+  border-radius:10px;background:rgba(4,15,34,.5);transition:all 0.15s ease}
 .jsh-row.is-main{border-color:rgba(234,88,12,.55)}
 .jsh-row-name{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;color:#f1f5f9}
 .jsh-row-meta{font-size:11px;color:#64748b;margin-top:2px}
 .jsh-badge{font:700 10px/1 Inter,sans-serif;color:#fff;background:#ea580c;border-radius:5px;padding:3px 6px;letter-spacing:.3px}
 .jsh-setmain{background:none;border:1px solid rgba(71,85,105,.45);color:#94a3b8;border-radius:6px;
-  font-size:11px;padding:4px 8px;cursor:pointer}
-.jsh-setmain:hover{border-color:#ea580c;color:#fff}
-.jsh-rm{background:none;border:none;color:#64748b;cursor:pointer;font-size:16px;padding:2px 6px}
+  font-size:11px;padding:4px 8px;cursor:pointer;transition:all 0.15s ease}
+.jsh-setmain:hover{border-color:#ea580c;color:#fff;background:rgba(234,88,12,.06)}
+.jsh-rm{background:none;border:none;color:#64748b;cursor:pointer;font-size:16px;padding:2px 6px;transition:color 0.15s ease}
 .jsh-rm:hover{color:#f87171}
 .jsh-empty{color:#64748b;font-size:13px;text-align:center;padding:14px 0;border:1px dashed rgba(71,85,105,.4);
   border-radius:10px;margin-bottom:12px}
 .jsh-add{display:inline-flex;align-items:center;gap:7px;background:rgba(71,85,105,.25);
   border:1px solid rgba(71,85,105,.45);color:#cbd5e1;border-radius:9px;padding:9px 14px;
-  font:600 13px/1 Inter,sans-serif;cursor:pointer;width:100%;justify-content:center;margin-bottom:14px}
-.jsh-add:hover{border-color:#ea580c;color:#fff}
+  font:600 13px/1 Inter,sans-serif;cursor:pointer;width:100%;justify-content:center;margin-bottom:14px;transition:all 0.2s ease}
+.jsh-add:hover{border-color:#ea580c;color:#fff;background:rgba(234,88,12,.08)}
 .jsh-merge{display:block;width:100%;background:#ea580c;border:none;color:#fff;border-radius:10px;
-  padding:13px 16px;font:700 15px/1 Inter,sans-serif;cursor:pointer;box-shadow:0 1px 5px rgba(234,88,12,.4)}
-.jsh-merge:hover{background:#c2410c}
-.jsh-merge:disabled{background:rgba(71,85,105,.4);color:#94a3b8;cursor:not-allowed;box-shadow:none}
-.jsh-status{font-size:12.5px;color:#94a3b8;text-align:center;min-height:18px;margin:10px 0 0}
+  padding:13px 16px;font:700 15px/1 Inter,sans-serif;cursor:pointer;box-shadow:0 1px 5px rgba(234,88,12,.4);transition:all 0.2s ease}
+.jsh-merge:hover{background:#f97316;transform:translateY(-2px);box-shadow:0 4px 12px rgba(234,88,12,.5)}
+.jsh-merge:active{transform:translateY(0)}
+.jsh-merge:disabled{background:rgba(71,85,105,.4);color:#94a3b8;cursor:not-allowed;box-shadow:none;transform:none}
+.jsh-status{font-size:12.5px;color:#94a3b8;text-align:center;min-height:18px;margin:10px 0 0;transition:color 0.3s ease}
 .jsh-status.ok{color:#34d399}
 .jsh-status.err{color:#f87171}
 .jsh-divider{border:none;border-top:1px solid rgba(71,85,105,.3);margin:16px 0}
