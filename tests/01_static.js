@@ -761,6 +761,38 @@ section('Cross-tool session (jw-session.js)');
   else fail('sitemap.xml missing <loc> for: ' + missingLoc.join(','));
 }
 
+// Merge celebration — Share card (Web Share + branded image, 12 langs)
+{
+  section('Merge celebration Share card');
+  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  if (beta.includes('data-jwc-share')) ok('Share button present in celebration actions');
+  else fail('Share button missing from celebration');
+  if (beta.includes('function buildMergeCard') && beta.includes('toBlob'))
+    ok('branded result image generator present (buildMergeCard)');
+  else fail('share image generator missing');
+  if (beta.includes('function shareMerge') && beta.includes('navigator.canShare') &&
+      beta.includes('navigator.clipboard'))
+    ok('shareMerge uses Web Share with download + copy-link fallback');
+  else fail('shareMerge / fallbacks missing');
+  if (beta.includes('shareMerge(cached && cached.stats)'))
+    ok('Share button wired to the real merge stats');
+  else fail('Share button not wired');
+
+  const sm = beta.match(/var SHARE_I18N=\{([\s\S]*?)\n {2}\};/);
+  if (!sm) fail('SHARE_I18N object not found');
+  else {
+    const SHARE_KEYS = ['cele_share', 'share_headline', 'share_text'];
+    let okAll = true;
+    for (const lang of EXPECTED_LANGS) {
+      const lm = sm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
+      if (!lm) { okAll = false; fail('SHARE_I18N missing language: ' + lang); continue; }
+      const miss = SHARE_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
+      if (miss.length) { okAll = false; fail('SHARE_I18N ' + lang + ' missing: ' + miss.join(',')); }
+    }
+    if (okAll) ok('SHARE_I18N covers all 12 languages × ' + SHARE_KEYS.length + ' keys');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

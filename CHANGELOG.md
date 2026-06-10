@@ -4,6 +4,16 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.57.0] — 2026-06-09
+
+### Share your merge result + completed multilingual SEO (live)
+
+- **Share card on the merge celebration**: after a successful merge, a new **Share** button generates a clean, branded result image (your notes / highlights / bookmarks / tags totals) and shares it via the device's native share sheet — with automatic **download + copy-link fallback** where Web Share isn't available. Localised in all 12 languages.
+- **Multilingual SEO completed in production**: production was missing `hreflang` for Swedish and Cebuano and had no `og:locale:alternate` tags — both are now in place, so all 12 languages are fully discoverable.
+- Shipped to **jwsync.org** (not just /beta).
+
+---
+
 ## [2.56.2] — 2026-06-09
 
 ### Multilingual SEO — discoverable in all 12 languages (beta)
