@@ -146,6 +146,20 @@ All of the How-it-works improvements (v2.55.0–v2.56.0) are now live on jwsync.
 
 ---
 
+## [2.63.0] — 2026-06-10
+
+### 🩺 New tool: Backup Doctor (beta)
+
+A free, private health check for any `.jwlibrary` backup — and a one-click repair.
+
+- **Seven health checks**: duplicate notes, empty notes, duplicate highlights, stray highlight fragments, broken tag links, unused tags, and leftover location records.
+- **Beautiful scan**: an animated ECG pulse while each check runs, then an animated health-score ring (0–100) with a verdict — Excellent, Good, Fair, or Needs care.
+- **One-click "Clean & Download"**: removes everything fixable, compacts the database, and downloads a fresh `healthy_….jwlibrary` — your original file is never touched. Shows how much smaller the cleaned backup is.
+- **Smart & safe**: keeps the oldest copy of any duplicate, never deletes highlights that have notes attached, never touches the special Favorites tag, and only removes location records nothing else references.
+- New **Backup Doctor** banner on the home page, under "Choose a tool". Fully localised in all 12 languages.
+
+---
+
 ## [2.62.0] — 2026-06-10
 
 ### Tidier merge tool: collapsible advanced sections (beta)

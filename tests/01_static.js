@@ -845,6 +845,53 @@ section('Cross-tool session (jw-session.js)');
   else fail('collapsed-state CSS missing');
 }
 
+// Backup Doctor (v2.63.0)
+{
+  section('Backup Doctor');
+  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  if (beta.includes('── Backup Doctor (v') && beta.includes('── End Backup Doctor'))
+    ok('Backup Doctor block present');
+  else fail('Backup Doctor block missing');
+  if (beta.includes('window.__openJwDoctor = openDoctor'))
+    ok('window.__openJwDoctor exposed');
+  else fail('__openJwDoctor not exposed');
+  if (beta.includes('window.__jwDoctorInternals'))
+    ok('test internals (runChecks/applyFixes) exposed');
+  else fail('__jwDoctorInternals missing');
+  if (beta.includes('class="jbd-cta"') && beta.includes('data-i18n="svc_doctor_t"'))
+    ok('landing CTA banner present');
+  else fail('landing CTA banner missing');
+  // DOC_I18N coverage: all 12 languages × the load-bearing keys
+  const dm = beta.match(/var DOC_I18N = \{([\s\S]*?)\n {2}\};/);
+  if (!dm) fail('DOC_I18N object not found');
+  else {
+    const DOC_KEYS = ['title', 'sub', 'pick', 'scanning', 'c_dup_notes', 'c_empty_notes', 'c_dup_marks',
+      'c_orph_br', 'c_orph_tm', 'c_unused_tags', 'c_unused_loc', 'health', 'v_a', 'v_d',
+      'perfect', 'clean', 'done_t', 'safe', 'another', 'err_read', 'err_db'];
+    let okAll = true;
+    for (const lang of EXPECTED_LANGS) {
+      const lm = dm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
+      if (!lm) { okAll = false; fail('DOC_I18N missing language: ' + lang); continue; }
+      const miss = DOC_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
+      if (miss.length) { okAll = false; fail('DOC_I18N ' + lang + ' missing: ' + miss.join(',')); }
+    }
+    if (okAll) ok('DOC_I18N covers all 12 languages × ' + DOC_KEYS.length + ' keys');
+  }
+  // landing i18n keys for the CTA card
+  const lm2 = beta.match(/window\.__JW_LANDING_I18N = (\{.*?\});\n/s);
+  if (!lm2) fail('__JW_LANDING_I18N not found');
+  else {
+    let landing = null;
+    try { landing = JSON.parse(lm2[1]); } catch (_) {}
+    if (!landing) fail('__JW_LANDING_I18N no longer parses as JSON');
+    else {
+      const missing = EXPECTED_LANGS.filter(l => !landing[l] || !landing[l].svc_doctor_t || !landing[l].svc_doctor_d);
+      if (missing.length === 0) ok('svc_doctor_t/_d present in all 12 landing languages');
+      else fail('landing doctor keys missing for: ' + missing.join(','));
+    }
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');
