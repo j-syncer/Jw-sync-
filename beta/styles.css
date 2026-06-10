@@ -1674,19 +1674,21 @@ body.jw-modal-open { overflow: hidden; }
 }
 
 .jwc-particles {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 999;
+  overflow: hidden;
 }
 .jwc-particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
+  position: fixed;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ea580c, rgba(234,88,12,.2));
-  box-shadow: 0 0 12px rgba(234,88,12,.4);
+  background: radial-gradient(circle at 30% 30%, #ea580c, rgba(234,88,12,.1));
+  box-shadow: 0 0 16px rgba(234,88,12,.6), inset 0 0 8px rgba(234,88,12,.8);
   animation: float-particle linear forwards;
+  pointer-events: none;
 }
 
 .jwc-stat {
