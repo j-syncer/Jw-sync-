@@ -1396,6 +1396,10 @@ body.jw-modal-open { overflow: hidden; }
   background: transparent;
   color: #f1f5f9;
   border: 1px solid rgba(148,163,184,.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .jwc-btn-secondary:hover {
   border-color: rgba(234,88,12,.5);
@@ -1406,6 +1410,10 @@ body.jw-modal-open { overflow: hidden; }
   background: transparent;
   color: #fdba74;
   border: 1px solid rgba(234,88,12,.55);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 .jwc-btn-outline:hover {
   background: rgba(234,88,12,.10);
