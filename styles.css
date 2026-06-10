@@ -1274,8 +1274,10 @@ body.jw-modal-open { overflow: hidden; }
   position: absolute;
   inset: 0;
   background: rgba(4, 15, 34, .82);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  animation: modal-backdrop-blur .5s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+#jw-conflict-overlay .jcr-backdrop {
+  animation: modal-backdrop-blur .5s cubic-bezier(.16, 1, .3, 1) forwards;
 }
 .jwc-card, .jwrg-card {
   position: relative;
@@ -1290,7 +1292,7 @@ body.jw-modal-open { overflow: hidden; }
   border-radius: 18px;
   color: #f1f5f9;
   box-shadow: 0 24px 80px rgba(0,0,0,.6), 0 0 60px rgba(234,88,12,.18);
-  animation: jwc-pop-in .25s cubic-bezier(.16,1,.3,1);
+  animation: jwc-pop-in .4s cubic-bezier(.16, 1, .3, 1);
 }
 .jwc-close, .jwrg-close {
   position: absolute;
@@ -1642,6 +1644,36 @@ body.jw-modal-open { overflow: hidden; }
   0%   { transform: scale(.4); opacity: 0; }
   60%  { transform: scale(1.12); opacity: 1; }
   100% { transform: scale(1); }
+}
+
+/* ── Modal entrance stagger animations (v2.60.0) ── */
+@keyframes modal-element-fade-slide {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes modal-backdrop-blur {
+  from { backdrop-filter: blur(0px); -webkit-backdrop-filter: blur(0px); opacity: 0; }
+  to   { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 1; }
+}
+
+/* ── Modal entrance stagger animations: elegant sequenced reveals (v2.60.0) ── */
+.jwc-title, .jwrg-title, .jcr-title {
+  animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .1s both;
+}
+.jwc-subtitle, .jwrg-subtitle, .jcr-subtitle {
+  animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .15s both;
+}
+.jwc-stats, .jwrg-modes, .jwrg-tabs, .jcr-head {
+  animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .2s both;
+}
+.jwrg-steps, .jcr-body {
+  animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .25s both;
+}
+.jwc-actions, .jwrg-actions, .jcr-foot {
+  animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .3s both;
+}
+.jcr-more {
+  animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .28s both;
 }
 
 /* ── Celebration screen polish: visual dividers + staggered entrance (v2.59.0) ── */
