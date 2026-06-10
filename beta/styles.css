@@ -1628,6 +1628,16 @@ body.jw-modal-open { overflow: hidden; }
   100% { transform: scale(1); }
 }
 
+/* ── Celebration screen polish: visual dividers + staggered entrance (v2.59.0) ── */
+.jwc-stats { position: relative; padding-bottom: 16px; }
+.jwc-stats::after {
+  content: ''; position: absolute; bottom: 0; left: 12%; right: 12%; height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(71,85,105,.25) 50%, transparent 100%);
+}
+.jwc-stat strong {
+  display: inline-block; font-variant-numeric: tabular-nums;
+}
+
 @media (max-width: 520px) {
   .jwc-card, .jwrg-card { padding: 24px 18px 22px; border-radius: 14px; }
   .jwc-stats { gap: 6px; }

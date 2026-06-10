@@ -146,6 +146,15 @@ All of the How-it-works improvements (v2.55.0–v2.56.0) are now live on jwsync.
 
 ---
 
+## [2.59.0] — 2026-06-10
+
+### Celebration screen polish: animated stats counter (beta)
+
+- **Stats count-up animation**: The merge celebration now animates the stats numbers (notes, highlights, bookmarks, tags) counting up from 0 to their final values—adding visual polish and engagement to the post-merge moment.
+- **Visual dividers**: A subtle gradient line now separates the stats grid from the Safe Restore panel, improving visual hierarchy.
+
+---
+
 ## [2.56.0] — 2026-06-09
 
 ### "How it works" — now covers every tool (beta)
