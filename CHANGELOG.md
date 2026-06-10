@@ -6,7 +6,7 @@ All notable changes to JW Sync are recorded here.
 
 ## [2.58.0] — 2026-06-09
 
-### Safe Restore — confidence at the most important step (beta)
+### Safe Restore — confidence at the most important step (live)
 
 Restoring is the one step that *replaces* what's on your device, so JW Sync now makes it reassuring and clear with a beautiful **Safe Restore** panel — shown both on the merge celebration screen and inside the restore guide:
 

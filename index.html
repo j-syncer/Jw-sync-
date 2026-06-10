@@ -259,7 +259,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.57.0",
+      "softwareVersion": "2.58.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -3835,6 +3835,245 @@ window.__bootBrowse = function() {
    ceb:{cele_share:'Ipaambit',share_headline:'Nahiusa ang library!',share_text:'Bag-o lang nako gihiusa ang akong JW Library notes gamit ang JW Sync — usa ka libre ug pribado nga tool nga naghiusa sa imong mga nota, highlight ug bookmark gikan sa tanan nimong device. https://jwsync.org'}
   };
   function ts(k){var l;try{l=lang();}catch(_){l='en';}return (SHARE_I18N[l]&&SHARE_I18N[l][k])||SHARE_I18N.en[k]||k;}
+  var SAFE_I18N={
+   en:{safe_title:'Restore safely',safe_originals:'Your original backups are safe — JW Sync never changes them. This is a brand-new combined file.',safe_master:'Keep this combined file as your master backup.'},
+   es:{safe_title:'Restaura con seguridad',safe_originals:'Tus copias originales están a salvo: JW Sync nunca las modifica. Este es un archivo combinado totalmente nuevo.',safe_master:'Guarda este archivo combinado como tu copia maestra.'},
+   pt:{safe_title:'Restaure com segurança',safe_originals:'Seus backups originais estão seguros — o JW Sync nunca os altera. Este é um arquivo combinado totalmente novo.',safe_master:'Guarde este arquivo combinado como sua cópia mestra.'},
+   fr:{safe_title:'Restaurer en toute sécurité',safe_originals:'Vos sauvegardes d’origine sont intactes — JW Sync ne les modifie jamais. Ceci est un nouveau fichier combiné.',safe_master:'Conservez ce fichier combiné comme copie maîtresse.'},
+   de:{safe_title:'Sicher wiederherstellen',safe_originals:'Deine ursprünglichen Sicherungen sind sicher — JW Sync ändert sie nie. Dies ist eine brandneue kombinierte Datei.',safe_master:'Bewahre diese kombinierte Datei als deine Hauptsicherung auf.'},
+   it:{safe_title:'Ripristina in sicurezza',safe_originals:'I tuoi backup originali sono al sicuro: JW Sync non li modifica mai. Questo è un nuovo file combinato.',safe_master:'Conserva questo file combinato come copia principale.'},
+   ru:{safe_title:'Безопасное восстановление',safe_originals:'Ваши исходные копии в безопасности — JW Sync их не меняет. Это совершенно новый объединённый файл.',safe_master:'Сохраните этот объединённый файл как основную копию.'},
+   ja:{safe_title:'安全に復元',safe_originals:'元のバックアップは安全です。JW Syncが変更することはありません。これは新しく統合されたファイルです。',safe_master:'この統合ファイルをマスターバックアップとして保管してください。'},
+   ko:{safe_title:'안전하게 복원',safe_originals:'원본 백업은 안전합니다 — JW Sync는 절대 변경하지 않습니다. 이것은 완전히 새로운 통합 파일입니다.',safe_master:'이 통합 파일을 마스터 백업으로 보관하세요.'},
+   tl:{safe_title:'Mag-restore nang ligtas',safe_originals:'Ligtas ang iyong orihinal na mga backup — hindi ito kailanman binabago ng JW Sync. Ito ay isang bagong pinagsamang file.',safe_master:'Itago ang pinagsamang file na ito bilang iyong master backup.'},
+   sv:{safe_title:'Återställ tryggt',safe_originals:'Dina ursprungliga säkerhetskopior är trygga — JW Sync ändrar dem aldrig. Detta är en helt ny sammanslagen fil.',safe_master:'Spara den här sammanslagna filen som din huvudkopia.'},
+   ceb:{safe_title:'Pag-restore nga luwas',safe_originals:'Luwas ang imong orihinal nga mga backup — dili kini usbon sa JW Sync. Kini usa ka bag-ong gihiusa nga file.',safe_master:'Tipigi kini nga gihiusa nga file isip imong master backup.'}
+  };
+  function sg(k){var l;try{l=lang();}catch(_){l='en';}return (SAFE_I18N[l]&&SAFE_I18N[l][k])||SAFE_I18N.en[k]||k;}
+  function safeRow(color,bg,icon,text){return '<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;background:'+bg+'">'+'<span style="flex:0 0 auto;color:'+color+';line-height:0;margin-top:2px">'+icon+'</span>'+'<span style="flex:1 1 auto;font:500 13px/1.5 inherit;color:#cbd5e1">'+esc(text)+'</span></div>';}
+  function buildSafePanel(){var ck='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+    var wn='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>';
+    var st='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+    var sh='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>';
+    return '<div style="width:100%;box-sizing:border-box;text-align:left;margin:16px 0 2px;padding:16px;border-radius:14px;background:rgba(4,15,34,.6);border:1px solid rgba(71,85,105,.4)">'+'<div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;color:#34d399;font:700 13px/1.2 inherit">'+sh+'<span>'+esc(sg('safe_title'))+'</span></div>'+'<div style="display:flex;flex-direction:column;gap:8px">'+safeRow('#34d399','rgba(16,185,129,.08)',ck,sg('safe_originals'))+safeRow('#fbbf24','rgba(245,158,11,.09)',wn,t('guide_warning'))+safeRow('#fb923c','rgba(234,88,12,.09)',st,sg('safe_master'))+'</div></div>';}
+  function lang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
+  function t(k) { var l = lang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+  var GUIDE = {
+    ios: [
+      'Your merged backup file is downloaded — usually to your Downloads folder or wherever your browser saves files.',
+      'If you’re on a desktop, transfer the file to your iPhone or iPad (AirDrop, iCloud Drive, email, or any cloud service works).',
+      'On your iPhone or iPad, open the Files app and locate the .jwlibrary file.',
+      'Tap the file. iOS may ask which app to open it with — choose <strong>JW Library</strong>.',
+      'JW Library will prompt you to confirm restoring the backup. Confirm.',
+      'Done — your merged notes are now in JW Library.'
+    ],
+    android: [
+      'Your merged backup file is downloaded — usually to your Downloads folder.',
+      'If you’re on a desktop, transfer the .jwlibrary file to your Android device (Google Drive, email, USB, or any cloud service).',
+      'On your Android device, open your file manager and find the file.',
+      'Tap the file. Android may ask which app should open it — choose <strong>JW Library</strong>.',
+      'JW Library will ask to confirm the restore. Confirm.',
+      'Done — your merged notes are now in JW Library.'
+    ],
+    other: [
+      'Your merged backup file is on your computer.',
+      'To use it, transfer it to a device running JW Library — an iPhone, iPad, or Android phone/tablet.',
+      'Use cloud storage (iCloud, Google Drive, Dropbox), AirDrop, or USB to move the file across.',
+      'On your phone or tablet, tap the file and choose <strong>JW Library</strong> to open it.',
+      'Confirm the restore in JW Library.',
+      'Done — your merged notes are now in JW Library.'
+    ]
+  };
+
+  var EXPORT_GUIDE = {
+    ios: [
+      'Open JW Library on your iPhone or iPad.',
+      'Tap the menu (☰), then open <strong>Settings</strong> → <strong>Backup &amp; Restore</strong>.',
+      'Tap <strong>Create Backup</strong> — JW Library saves a .jwlibrary file and offers to share it.',
+      'Share the file somewhere this computer can reach it — AirDrop, iCloud Drive, Google Drive, or email it to yourself.',
+      'Repeat on every device whose notes you want to combine, so each one’s .jwlibrary file is gathered in one place.',
+      'Back here, add your main backup as the first file and the others as additional files, then merge.'
+    ],
+    android: [
+      'Open JW Library on your Android phone or tablet.',
+      'Tap the menu (☰), then open <strong>Settings</strong> → <strong>Backup &amp; Restore</strong>.',
+      'Tap <strong>Create Backup</strong> and choose where to save the .jwlibrary file.',
+      'Move the file to this computer — Google Drive, email, USB, or any cloud service works.',
+      'Repeat on every device you want to combine, gathering each .jwlibrary file in one place.',
+      'Back here, add your main backup as the first file and the others as additional files, then merge.'
+    ],
+    other: [
+      'Backups are created inside the JW Library app on a phone or tablet — not on desktop.',
+      'On each device: open JW Library → menu (☰) → <strong>Settings</strong> → <strong>Backup &amp; Restore</strong> → <strong>Create Backup</strong>.',
+      'Send each .jwlibrary file to this computer using cloud storage, AirDrop, email, or USB.',
+      'Gather every device’s backup file in one place — for example your Downloads folder.',
+      'Back here, add your main backup as the first file and the others as additional files, then merge.'
+    ]
+  };
+
+  // ── State ──────────────────────────────────────────────────────────
+  var lastSeenBlob = '';
+  var autoDownloadedFor = null;
+  var cached = null;
+
+  function detectPlatform() {
+    var ua = (navigator.userAgent || '');
+    if (/iPad|iPhone|iPod/i.test(ua)) return 'ios';
+    if (/Android/i.test(ua)) return 'android';
+    return 'other';
+  }
+  function isDemoMerge() {
+    var inputs = document.querySelectorAll('input[type="file"][accept=".jwlibrary"]');
+    for (var i = 0; i < inputs.length; i++) {
+      var fl = inputs[i].files;
+      if (fl && fl.length) {
+        for (var j = 0; j < fl.length; j++) {
+          if (fl[j].name.indexOf('JWSync_Demo_') === 0) return true;
+        }
+      }
+    }
+    return false;
+  }
+  function fireAnalytics(ev) {
+    try { if (typeof gtag === 'function') gtag('event', ev, { event_category: 'engagement' }); } catch (_) {}
+  }
+  function readDownloadName() {
+    var a = document.querySelector('a#download-btn[download]');
+    return (a && a.getAttribute('download')) || 'merged.jwlibrary';
+  }
+
+  // ── Trigger the download (click the existing React-rendered anchor) ──
+  function triggerDownload(opts) {
+    var dl = document.getElementById('download-btn');
+    if (!dl) return false;
+    var href = dl.getAttribute('href') || '';
+    if (href.indexOf('blob:') !== 0) return false;
+    try {
+      dl.click();
+      fireAnalytics(opts && opts.auto ? 'merge_auto_download' : 'merge_manual_download');
+      return true;
+    } catch (e) {
+      console.warn('[jwsync] download click blocked:', e);
+      return false;
+    }
+  }
+
+  window.__jwUpdateMergedCache = function (buf) {
+    try {
+      cached = cached || {};
+      cached.buffer = buf;
+      if (cached.blobUrl) { try { URL.revokeObjectURL(cached.blobUrl); } catch (_) {} }
+      cached.blobUrl = URL.createObjectURL(new Blob([buf], { type: 'application/octet-stream' }));
+    } catch (_) {}
+  };
+
+  function fetchStats(blobUrl) {
+    if (typeof window.JSZip !== 'function' || typeof window.initSqlJs !== 'function') {
+      return Promise.resolve(null);
+    }
+    return fetch(blobUrl)
+      .then(function (r) { return r.arrayBuffer(); })
+      .then(function (buf) {
+        cached = cached || {};
+        cached.buffer = buf;
+        return window.JSZip.loadAsync(buf);
+      })
+      .then(function (zip) {
+        var name = Object.keys(zip.files).find(function (f) { return /userdata\.db$/i.test(f); });
+        if (!name) throw new Error('userData.db not in zip');
+        return zip.file(name).async('uint8array');
+      })
+      .then(function (dbBytes) {
+        return window.initSqlJs({
+          locateFile: function (f) { return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f; }
+        }).then(function (SQL) {
+          var db = new SQL.Database(dbBytes);
+          function count(sql) {
+            try {
+              var r = db.exec(sql);
+              return (r[0] && r[0].values && r[0].values[0]) ? r[0].values[0][0] : 0;
+            } catch (_) { return 0; }
+          }
+          var s = {
+            notes: count('SELECT COUNT(*) FROM Note'),
+            highlights: count('SELECT COUNT(*) FROM UserMark'),
+            bookmarks: count('SELECT COUNT(*) FROM Bookmark'),
+            tags: count('SELECT COUNT(*) FROM Tag')
+          };
+          db.close();
+          return s;
+        });
+      })
+      .catch(function (e) { console.warn('[jwsync] stats query failed:', e); return null; });
+  }
+
+  // ── Render the celebration overlay ─────────────────────────────────
+  // ── Awards teaser ──
+  function ensureAwardsCss() {
+    if (document.getElementById('jwc-awards-css')) return;
+    var s = document.createElement('style'); s.id = 'jwc-awards-css';
+    s.textContent = '@keyframes jwca{0%{background-position:-200% center}100%{background-position:200% center}}'
+      + '.jwc-awards-link{background:linear-gradient(90deg,#f59e0b,#c084fc,#ec4899,#fbbf24,#c084fc,#f59e0b)!important;background-size:300% auto!important;-webkit-background-clip:text!important;-webkit-text-fill-color:transparent!important;background-clip:text!important;animation:jwca 3s linear infinite!important}';
+    document.head.appendChild(s);
+  }
+  function celebTopMedals(stats) {
+    var n=+(stats&&stats.notes)||0, h=+(stats&&stats.highlights)||0, b=+(stats&&stats.bookmarks)||0, tg=+(stats&&stats.tags)||0;
+    var all=[
+      [n,5000,'✍️',4,'5k '+t('stat_notes')],[n,2500,'✍️',3,'2,500 '+t('stat_notes')],
+      [n,1000,'✍️',3,'1k '+t('stat_notes')],[n,500,'✍️',2,'500 '+t('stat_notes')],
+      [n,250,'✍️',2,'250 '+t('stat_notes')],[n,100,'✍️',1,'100 '+t('stat_notes')],
+      [n,10,'✍️',0,'10 '+t('stat_notes')],[n,1,'✍️',0,t('stat_notes')],
+      [h,1000,'✨',3,'1k '+t('stat_highlights')],[h,500,'✨',2,'500 '+t('stat_highlights')],
+      [h,100,'✨',1,'100 '+t('stat_highlights')],[h,1,'✨',0,t('stat_highlights')],
+      [b,500,'🔖',2,'500 '+t('stat_bookmarks')],[b,100,'🔖',1,'100 '+t('stat_bookmarks')],
+      [b,1,'🔖',0,t('stat_bookmarks')],
+      [tg,50,'🏷',2,'50 '+t('stat_tags')],[tg,10,'🏷',1,'10 '+t('stat_tags')],[tg,1,'🏷',0,t('stat_tags')],
+    ];
+    var earned=all.filter(function(a){return a[0]>=a[1];});
+    earned.sort(function(a,b){return(b[3]-a[3])||(b[1]-a[1]);});
+    return earned.slice(0,3);
+  }
+  function showAwardsTeaser(ov, stats) {
+    var box=ov&&ov.querySelector('[data-jwc-awards]');
+    if(!box||box._shown) return;
+    var medals=celebTopMedals(stats||{});
+    if(!medals.length) return;
+    ensureAwardsCss();
+    var rarBg=['rgba(148,163,184,.12)','rgba(96,165,250,.15)','rgba(251,191,36,.15)','rgba(192,132,252,.2)','rgba(234,88,12,.15)'];
+    var rarBd=['#94a3b8','#60a5fa','#fbbf24','#c084fc','#ea580c'];
+    var chips=medals.map(function(m){
+      var r=Math.min(4,m[3]);
+      return '<div style="display:flex;flex-direction:column;align-items:center;gap:5px">'
+        +'<div style="width:46px;height:46px;border-radius:50%;background:'+rarBg[r]+';border:2px solid '+rarBd[r]+';display:flex;align-items:center;justify-content:center;font-size:20px">'+m[2]+'</div>'
+        +'<div style="font-size:10px;color:'+rarBd[r]+';font-weight:700;white-space:nowrap;max-width:68px;overflow:hidden;text-overflow:ellipsis">'+esc(m[4])+'</div>'
+        +'</div>';
+    }).join('');
+    box.innerHTML='<div style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:.07em;text-transform:uppercase;margin-bottom:11px">'+esc(t('cele_top_medals'))+'</div>'
+      +'<div style="display:flex;justify-content:center;gap:14px;margin-bottom:14px">'+chips+'</div>'
+      +'<a href="highlights.html" class="jwc-awards-link" style="display:inline-flex;align-items:center;gap:6px;padding:9px 22px;border-radius:8px;font-size:13.5px;font-weight:700;text-decoration:none;border:1px solid rgba(245,158,11,.3);background:rgba(0,0,0,0)">'+esc(t('cele_awards_btn'))+'</a>';
+    box.hidden=false; box._shown=true;
+  }
+  function buildPerfHtml() {
+    var T = null; try { T = window.__jwLastMergeTimings; } catch (_) {}
+    if (!T || !T.total) return '';
+    function ms(v) { v = Math.max(0, +v || 0); return v >= 1000 ? (Math.round(v / 100) / 10) + 's' : Math.round(v) + 'ms'; }
+    var total = T.total || 1;
+    var segs = [['prepare', t('perf_prepare'), '#60a5fa'], ['merge', t('perf_merge'), '#ea580c'], ['package', t('perf_package'), '#34d399']];
+    var bar = '', legend = '';
+    segs.forEach(function (s) {
+      var v = +T[s[0]] || 0, pct = Math.max(0, Math.min(100, v / total * 100));
+      if (pct > 0.4) bar += '<span style="width:' + pct.toFixed(1) + '%;background:' + s[2] + '"></span>';
+      legend += '<span style="display:inline-flex;align-items:center;gap:5px;margin-right:12px;font-size:11.5px;color:#94a3b8"><i style="width:9px;height:9px;border-radius:2px;background:' + s[2] + ';display:inline-block"></i>' + esc(s[1]) + ' ' + ms(v) + '</span>';
+    });
+    var tip = ((T.rows || 0) > 10000 || total > 60000) ? '<div style="margin-top:8px;font-size:12px;color:#fbbf24">' + esc(t('perf_tip_large')) + '</div>' : '';
+    return '<details class="jwc-perf" style="margin:4px 0 10px;text-align:left;border:1px solid rgba(71,85,105,.3);border-radius:10px;padding:10px 12px;background:rgba(255,255,255,.02)">' +
+      '<summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:#cbd5e1">' + esc(t('perf_title')) + ' · ' + ms(total) + '</summary>' +
+      '<div style="display:flex;height:10px;border-radius:6px;overflow:hidden;background:rgba(148,163,184,.12);margin:10px 0 8px">' + bar + '</div>' +
+      '<div>' + legend + '</div>' + tip + '</details>';
+  }
+
   function lang() { try { return localStorage.getItem('jwsync_lang') || 'en'; } catch (_) { return 'en'; } }
   function t(k) { var l = lang(); return (I18N[l] && I18N[l][k]) || I18N.en[k] || k; }
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
@@ -4100,6 +4339,7 @@ window.__bootBrowse = function() {
           '<div class="jwc-stat"><strong>' + stats.bookmarks + '</strong><span>' + esc(t('stat_bookmarks')) + '</span></div>' +
           '<div class="jwc-stat"><strong>' + stats.tags + '</strong><span>' + esc(t('stat_tags')) + '</span></div>' +
         '</div>' +
+        buildSafePanel() +
         buildPerfHtml() +
         // Download status banner — informs the user the download started
         '<div class="jwc-download-status" data-jwc-dl-status hidden>' +
@@ -4246,7 +4486,7 @@ window.__bootBrowse = function() {
           '<button data-platform="other" class="jwrg-tab' + (current === 'other' ? ' active' : '') + '" role="tab">' + esc(t('guide_tab_other')) + '</button>' +
         '</div>' +
         '<ol class="jwrg-steps" id="jwrg-steps"></ol>' +
-        '<div class="jwrg-warning" id="jwrg-warning"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>' + esc(t('guide_warning')) + '</span></div>' +
+        '<div id="jwrg-warning">' + buildSafePanel() + '</div>' +
         '<div class="jwrg-actions">' +
           '<button class="jwrg-done" type="button" data-jwrg-close>' + esc(t('guide_done')) + '</button>' +
         '</div>' +
