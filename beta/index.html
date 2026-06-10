@@ -5626,12 +5626,17 @@ body.light .jwr-ntitle{color:#0b2e58}
       }catch(_){}
     }) : Promise.resolve();
     return p.then(function(){
-      return st.zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}});
-    }).then(function(blob){
+      // Generate a raw buffer and wrap it in an application/octet-stream Blob
+      // (NOT JSZip's default application/zip) so browsers — iOS Safari in
+      // particular — save it as .jwlibrary, exactly like the merge tool does.
+      return st.zip.generateAsync({type:'arraybuffer',compression:'DEFLATE',compressionOptions:{level:6}});
+    }).then(function(buf){
+      var blob=new Blob([buf],{type:'application/octet-stream'});
       try{
+        var base=(st.name||'backup.jwlibrary').replace(/\.jwlibrary$/i,'');
         var url=URL.createObjectURL(blob);
         var a=document.createElement('a');
-        a.href=url; a.download='healthy_'+(st.name||'backup.jwlibrary');
+        a.href=url; a.download='healthy_'+base+'.jwlibrary';
         document.body.appendChild(a); a.click(); a.remove();
         setTimeout(function(){ URL.revokeObjectURL(url); },4000);
       }catch(_){}

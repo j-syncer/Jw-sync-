@@ -181,6 +181,59 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     if (totals.length === 4 && totals[0].textContent === '4') ok('totals strip rendered (4 notes)');
     else fail('totals strip wrong');
   }
+
+  section('Clean & Download produces a valid .jwlibrary');
+  // Capture the downloaded blob (type), its raw bytes, and the anchor filename.
+  let captured = null, dlName = null, blobBytes = null;
+  const RealBlob = win.Blob;
+  win.Blob = function (parts, opts) { if (parts && parts[0]) blobBytes = parts[0]; return new RealBlob(parts, opts); };
+  win.Blob.prototype = RealBlob.prototype;
+  win.URL.createObjectURL = (blob) => { captured = blob; return 'blob:doctor-test'; };
+  win.URL.revokeObjectURL = () => {};
+  const origCreate = doc.createElement.bind(doc);
+  doc.createElement = (tag) => {
+    const el = origCreate(tag);
+    if (String(tag).toLowerCase() === 'a') {
+      Object.defineProperty(el, 'click', { value: function () { dlName = el.getAttribute('download'); }, writable: true });
+    }
+    return el;
+  };
+  const cleanBtn = doc.querySelector('[data-jbd-clean]');
+  if (cleanBtn) {
+    cleanBtn.click();
+    let done = false;
+    for (let i = 0; i < 50; i++) { await sleep(150); if (doc.querySelector('.jbd-done-t')) { done = true; break; } }
+    doc.createElement = origCreate; // restore
+    if (done) ok('reached the success ("All fixed!") state');
+    else fail('never reached the done state after cleaning');
+    if (dlName && /\.jwlibrary$/i.test(dlName) && !/\.zip$/i.test(dlName))
+      ok('download filename ends in .jwlibrary (' + dlName + ')');
+    else fail('download filename not .jwlibrary: ' + dlName);
+    win.Blob = RealBlob; // restore
+    if (captured && captured.type === 'application/octet-stream')
+      ok('blob MIME is application/octet-stream (saves as .jwlibrary, not .zip)');
+    else fail('blob MIME wrong: ' + (captured && captured.type));
+    if (blobBytes) {
+      const rezip = await JSZip.loadAsync(Buffer.from(new Uint8Array(blobBytes)));
+      const dbKey = Object.keys(rezip.files).find(k => /userdata\.db$/i.test(k));
+      if (dbKey) ok('exported file is a real ZIP containing userData.db');
+      else fail('exported file has no userData.db');
+      if (rezip.file('manifest.json')) ok('manifest.json preserved in export');
+      else fail('manifest.json missing from export');
+      if (dbKey) {
+        const outBytes = await rezip.files[dbKey].async('uint8array');
+        const outDb = new SQL.Database(outBytes);
+        const noteCount = outDb.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
+        if (noteCount === 2) ok('exported DB opens and is clean (2 healthy notes)');
+        else fail('exported DB note count wrong: ' + noteCount);
+        outDb.close();
+      }
+    }
+  } else {
+    fail('clean button not available to exercise download');
+    doc.createElement = origCreate;
+  }
+
   // close cleanly so JSDOM can tear down
   const closeBtn = doc.querySelector('.jbd-x');
   if (closeBtn) closeBtn.click();
