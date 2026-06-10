@@ -1656,6 +1656,89 @@ body.jw-modal-open { overflow: hidden; }
   to   { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); opacity: 1; }
 }
 
+/* ── Celebration particles + completion rings (v2.61.0) ── */
+@keyframes float-particle {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0; }
+  5%   { opacity: 0.6; }
+  95%  { opacity: 0.1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0.5); opacity: 0; }
+}
+@keyframes ring-fill {
+  0%   { stroke-dashoffset: 283; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes checkmark-bounce {
+  0%   { transform: scale(0) rotate(-45deg); opacity: 0; }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.jwc-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.jwc-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ea580c, rgba(234,88,12,.2));
+  box-shadow: 0 0 12px rgba(234,88,12,.4);
+  animation: float-particle linear forwards;
+}
+
+.jwc-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.jwc-stat-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  opacity: 0;
+}
+.jwc-stat-ring::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2.5px solid transparent;
+  border-radius: 50%;
+  border-top-color: #34d399;
+  border-right-color: rgba(52,211,153,.3);
+  --ring-progress: 0;
+  opacity: calc(var(--ring-progress) * 0.8);
+  transform: rotate(calc(var(--ring-progress) * 360deg));
+  transition: opacity .1s linear;
+}
+.jwc-stat-ring.jwc-ring-animate {
+  opacity: 1;
+  animation: ring-fill 650ms cubic-bezier(.34,.66,.66,1) forwards;
+}
+.jwc-stat-check {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0) rotate(-45deg);
+  top: 50%;
+  left: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  filter: drop-shadow(0 2px 4px rgba(52,211,153,.5));
+}
+.jwc-stat-check.jwc-check-visible {
+  animation: checkmark-bounce .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+.jwc-stat-zero .jwc-stat strong {
+  color: #64748b;
+}
+
 /* ── Modal entrance stagger animations: elegant sequenced reveals (v2.60.0) ── */
 .jwc-title, .jwrg-title, .jcr-title {
   animation: modal-element-fade-slide .4s cubic-bezier(.16, 1, .3, 1) .1s both;

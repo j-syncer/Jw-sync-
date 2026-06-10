@@ -4122,6 +4122,7 @@ window.__bootBrowse = function() {
 
     var html =
       '<div class="jwc-backdrop" data-jwc-close></div>' +
+      '<div class="jwc-particles" aria-hidden="true"></div>' +
       '<div class="jwc-card" role="dialog" aria-modal="true" aria-labelledby="jwc-title">' +
         '<button class="jwc-close" type="button" data-jwc-close aria-label="' + esc(t('close')) + '">×</button>' +
         '<div class="jwc-icon" aria-hidden="true">' +
@@ -4130,10 +4131,10 @@ window.__bootBrowse = function() {
         '<h2 id="jwc-title" class="jwc-title">' + esc(t('cele_title')) + '</h2>' +
         '<p class="jwc-subtitle">' + esc(t('cele_subtitle')) + '</p>' +
         '<div class="jwc-stats">' +
-          '<div class="jwc-stat" data-jwc-stat-type="notes" data-jwc-stat-val="' + (stats.notes || '0') + '"><strong>0</strong><span>' + esc(t('stat_notes')) + '</span></div>' +
-          '<div class="jwc-stat" data-jwc-stat-type="highlights" data-jwc-stat-val="' + (stats.highlights || '0') + '"><strong>0</strong><span>' + esc(t('stat_highlights')) + '</span></div>' +
-          '<div class="jwc-stat" data-jwc-stat-type="bookmarks" data-jwc-stat-val="' + (stats.bookmarks || '0') + '"><strong>0</strong><span>' + esc(t('stat_bookmarks')) + '</span></div>' +
-          '<div class="jwc-stat" data-jwc-stat-type="tags" data-jwc-stat-val="' + (stats.tags || '0') + '"><strong>0</strong><span>' + esc(t('stat_tags')) + '</span></div>' +
+          '<div class="jwc-stat" data-jwc-stat-type="notes" data-jwc-stat-val="' + (stats.notes || '0') + '"><div class="jwc-stat-ring"></div><strong>0</strong><svg class="jwc-stat-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>' + esc(t('stat_notes')) + '</span></div>' +
+          '<div class="jwc-stat" data-jwc-stat-type="highlights" data-jwc-stat-val="' + (stats.highlights || '0') + '"><div class="jwc-stat-ring"></div><strong>0</strong><svg class="jwc-stat-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>' + esc(t('stat_highlights')) + '</span></div>' +
+          '<div class="jwc-stat" data-jwc-stat-type="bookmarks" data-jwc-stat-val="' + (stats.bookmarks || '0') + '"><div class="jwc-stat-ring"></div><strong>0</strong><svg class="jwc-stat-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>' + esc(t('stat_bookmarks')) + '</span></div>' +
+          '<div class="jwc-stat" data-jwc-stat-type="tags" data-jwc-stat-val="' + (stats.tags || '0') + '"><div class="jwc-stat-ring"></div><strong>0</strong><svg class="jwc-stat-check" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><span>' + esc(t('stat_tags')) + '</span></div>' +
         '</div>' +
         buildSafePanel() +
         buildPerfHtml() +
@@ -4176,6 +4177,25 @@ window.__bootBrowse = function() {
     document.body.classList.add('jw-modal-open');
     try { if (window.__jwReceiveOnCelebration) window.__jwReceiveOnCelebration(ov); } catch (_) {}
 
+    // Generate floating particles
+    var particlesContainer = ov.querySelector('.jwc-particles');
+    if (particlesContainer) {
+      for (var i = 0; i < 12; i++) {
+        var p = document.createElement('div');
+        p.className = 'jwc-particle';
+        var delay = Math.random() * 300;
+        var duration = 2500 + Math.random() * 1500;
+        var tx = (Math.random() - 0.5) * 300;
+        var ty = -300 - Math.random() * 100;
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.setProperty('--tx', tx + 'px');
+        p.style.setProperty('--ty', ty + 'px');
+        p.style.animation = 'float-particle ' + duration + 'ms ease-out ' + delay + 'ms forwards';
+        particlesContainer.appendChild(p);
+      }
+    }
+
     // Reflect auto-download status if it succeeded
     if (didAutoDl) {
       var status = ov.querySelector('[data-jwc-dl-status]');
@@ -4215,23 +4235,34 @@ window.__bootBrowse = function() {
 
     // Focus the primary (download) button
     if (dlBtn) setTimeout(function () { try { dlBtn.focus(); } catch (_) {} }, 50);
-    // Animate stats counting up
+    // Animate stats counting up with completion rings + checkmarks
     setTimeout(function() {
       var statEls = ov.querySelectorAll('[data-jwc-stat-val]');
-      statEls.forEach(function(el) {
+      var index = 0;
+      statEls.forEach(function(el, idx) {
         var target = parseInt(el.getAttribute('data-jwc-stat-val')) || 0;
-        if (target === 0) return;
+        if (target === 0) { el.classList.add('jwc-stat-zero'); return; }
         var strong = el.querySelector('strong');
-        if (!strong) return;
-        var start = 0, elapsed = 0, duration = 650;
-        var frame = setInterval(function() {
-          elapsed += 16;
-          var progress = Math.min(elapsed / duration, 1);
-          var easeOutQuart = 1 - Math.pow(1 - progress, 4);
-          var current = Math.floor(start + (target - start) * easeOutQuart);
-          strong.textContent = current;
-          if (progress >= 1) clearInterval(frame);
-        }, 16);
+        var ring = el.querySelector('.jwc-stat-ring');
+        var check = el.querySelector('.jwc-stat-check');
+        if (!strong || !ring || !check) return;
+        var delayOffset = idx * 180;
+        setTimeout(function() {
+          var start = 0, elapsed = 0, duration = 650;
+          ring.classList.add('jwc-ring-animate');
+          var frame = setInterval(function() {
+            elapsed += 16;
+            var progress = Math.min(elapsed / duration, 1);
+            var easeOutQuart = 1 - Math.pow(1 - progress, 4);
+            var current = Math.floor(start + (target - start) * easeOutQuart);
+            strong.textContent = current;
+            ring.style.setProperty('--ring-progress', progress);
+            if (progress >= 1) {
+              clearInterval(frame);
+              check.classList.add('jwc-check-visible');
+            }
+          }, 16);
+        }, delayOffset);
       });
     }, 120);
     document.addEventListener('keydown', escListener);
