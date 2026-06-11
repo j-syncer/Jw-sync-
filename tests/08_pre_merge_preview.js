@@ -129,47 +129,62 @@ async function waitForOverlay(doc, id, ms = 2000) {
     }
   }
 
-  section('Library Doctor opt-in checkbox (v2.64.0)');
+  section('Library Doctor results group on the card (v2.65.0)');
   {
     const dom = makeDom();
     const win = dom.window, doc = win.document;
-    let armed = 0;
-    win.__jwDoctorArmAfterMerge = () => { armed++; };
-    const p = win.__jwImpactPreview(counts);
+    if (typeof win.__jwDoctorCbLabel === 'function' && /Library Doctor/.test(win.__jwDoctorCbLabel()))
+      ok('__jwDoctorCbLabel exposed for the merge-page checkbox');
+    else fail('__jwDoctorCbLabel missing or wrong: ' + (win.__jwDoctorCbLabel && win.__jwDoctorCbLabel()));
+    // stub the Doctor's string table the way the real page provides it
+    win.__jwDoctorT = (k) => ({
+      title: 'Library Doctor', c_dup_notes: 'Duplicate notes', c_empty_notes: 'Empty notes',
+      c_dup_marks: 'Duplicate highlights', c_orph_br: 'Stray fragments', c_orph_tm: 'Broken tag links',
+      c_unused_tags: 'Unused tags', c_unused_loc: 'Leftover locations',
+      issues_one: '1 fixable issue found', issues_many: '{n} fixable issues found',
+      perfect: 'Perfect health — nothing to fix!', will_fix: 'These will be fixed automatically in your merged file.'
+    }[k] || k);
+    const report = { checks: { dup_notes: 2, empty_notes: 0, dup_marks: 1, orph_br: 0, orph_tm: 0, unused_tags: 0, unused_loc: 0 }, issues: 3 };
+    const p = win.__jwImpactPreview(counts, report);
     const overlay = await waitForOverlay(doc, 'jw-impact-overlay');
-    const cb = overlay && overlay.querySelector('[data-jip-doctor]');
-    if (cb) ok('doctor checkbox rendered above the actions'); else fail('doctor checkbox missing');
-    if (cb && !cb.checked) ok('checkbox defaults to unchecked'); else fail('checkbox should default unchecked');
-    if (overlay.querySelector('.jip-doctor span').textContent.includes('Library Doctor'))
-      ok('checkbox label mentions the Library Doctor');
-    else fail('checkbox label wrong: ' + overlay.querySelector('.jip-doctor span').textContent);
-    if (cb) cb.checked = true; // user opts in
+    const grp = overlay.querySelector('.jip-doc');
+    if (grp) ok('doctor group rendered on the Ready-to-merge card'); else fail('doctor group missing');
+    if (grp && grp.querySelector('.jip-doc-head').textContent === 'Library Doctor') ok('group titled Library Doctor');
+    else fail('group head wrong');
+    const docRows = grp ? grp.querySelectorAll('.jip-doc-row') : [];
+    if (docRows.length === 2) ok('only non-zero checks listed (2 rows)');
+    else fail('expected 2 doctor rows, got ' + docRows.length);
+    if (grp && grp.textContent.includes('3 fixable issues found')) ok('issue count line shown');
+    else fail('issue count line missing');
+    if (grp && grp.querySelector('.jip-doc-note')) ok('"will be fixed automatically" note shown');
+    else fail('will_fix note missing');
+    if (!overlay.querySelector('[data-jip-doctor]')) ok('old in-card checkbox is gone');
+    else fail('in-card checkbox still present');
     overlay.querySelector('[data-jip-go]').click();
     const res = await p;
-    if (res === true && armed === 1) ok('confirm with box ticked arms the Doctor (and still resolves true)');
-    else fail('arming wrong: resolved ' + res + ', armed ' + armed);
-    if (win.localStorage.getItem('jwsync_doctor_after_merge') === '1') ok('choice remembered (jwsync_doctor_after_merge=1)');
-    else fail('preference not persisted');
+    if (res === true) ok('confirm still resolves true with doctor group');
+    else fail('confirm resolved ' + res);
     dom.window.close();
   }
-  // remembered preference pre-ticks the box; confirming unticked disarms
+  // perfect-health report and no report at all
   {
     const dom = makeDom();
     const win = dom.window, doc = win.document;
-    win.localStorage.setItem('jwsync_doctor_after_merge', '1');
-    let armed = 0;
-    win.__jwDoctorArmAfterMerge = () => { armed++; };
-    const p = win.__jwImpactPreview(counts);
+    win.__jwDoctorT = (k) => (k === 'perfect' ? 'Perfect health — nothing to fix!' : k);
+    const p = win.__jwImpactPreview(counts, { checks: { dup_notes: 0, empty_notes: 0, dup_marks: 0, orph_br: 0, orph_tm: 0, unused_tags: 0, unused_loc: 0 }, issues: 0 });
     const overlay = await waitForOverlay(doc, 'jw-impact-overlay');
-    const cb = overlay && overlay.querySelector('[data-jip-doctor]');
-    if (cb && cb.checked) ok('remembered preference pre-ticks the box'); else fail('preference not restored');
-    if (cb) cb.checked = false; // user opts out this time
+    if (overlay.querySelector('.jip-doc-perfect')) ok('perfect-health line shown when 0 issues');
+    else fail('perfect line missing');
+    if (!overlay.querySelector('.jip-doc-row')) ok('no issue rows when 0 issues');
+    else fail('unexpected issue rows');
     overlay.querySelector('[data-jip-go]').click();
     await p;
-    if (armed === 0) ok('unticked box does not arm the Doctor');
-    else fail('doctor armed despite unticked box');
-    if (win.localStorage.getItem('jwsync_doctor_after_merge') === '0') ok('opt-out remembered');
-    else fail('opt-out not persisted');
+    const p2 = win.__jwImpactPreview(counts, null);
+    const overlay2 = await waitForOverlay(doc, 'jw-impact-overlay');
+    if (!overlay2.querySelector('.jip-doc')) ok('no doctor group when the box was not ticked');
+    else fail('doctor group rendered without a report');
+    overlay2.querySelector('[data-jip-go]').click();
+    await p2;
     dom.window.close();
   }
 

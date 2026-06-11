@@ -169,87 +169,68 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   else fail('clean is not idempotent: ' + JSON.stringify(fixed2));
   cleanDb.close();
 
-  section('Post-merge opt-in (__jwDoctorArmAfterMerge) — single-download flow');
-  if (typeof win.__jwDoctorArmAfterMerge !== 'function') fail('window.__jwDoctorArmAfterMerge not exposed');
-  else {
-    ok('window.__jwDoctorArmAfterMerge exposed');
-    const docD = win.document;
-    // a React-like download anchor that has no merged blob yet
-    const dlAnchor = docD.createElement('a');
-    dlAnchor.id = 'download-btn';
-    dlAnchor.setAttribute('href', '#');
-    docD.body.appendChild(dlAnchor);
-    // intercept every download anchor created from here on
-    let autoClicks = 0, autoDlName = null;
-    const origCreateA = docD.createElement.bind(docD);
-    docD.createElement = (tag) => {
-      const el = origCreateA(tag);
-      if (String(tag).toLowerCase() === 'a') {
-        Object.defineProperty(el, 'click', { value: function () { autoClicks++; autoDlName = el.getAttribute('download'); }, writable: true });
-      }
-      return el;
-    };
-    let fetchedUrl = null;
-    win.fetch = (url) => {
-      fetchedUrl = url;
-      return Promise.resolve({ blob: () => Promise.resolve(Buffer.from(new Uint8Array(jwlibBytes))) });
-    };
-    const RealFile = win.File;
-    win.File = undefined; // force the Blob fallback path (JSZip-friendly in node)
-    win.__jwDoctorArmAfterMerge();
-    if (win.__jwDoctorSuppressAutoDl === true) ok('arming raises the auto-download suppression flag');
-    else fail('suppression flag not set on arm');
-    await sleep(900);
-    if (!docD.querySelector('.jbd-overlay')) ok('doctor stays closed while the merge is still running');
-    else fail('doctor opened before any merged blob existed');
-    // merge "finishes": React gives the anchor a fresh blob: URL
-    dlAnchor.setAttribute('href', 'blob:merged-test');
-    dlAnchor.setAttribute('download', 'merged_test.jwlibrary');
-    let opened = false;
-    for (let i = 0; i < 60; i++) { await sleep(200); if (docD.querySelector('.jbd-overlay')) { opened = true; break; } }
-    if (fetchedUrl === 'blob:merged-test') ok('fetched the merged blob URL');
-    else fail('merged blob not fetched: ' + fetchedUrl);
-    if (opened) ok('doctor auto-opened on the merged file');
-    else fail('doctor never opened after the merge finished');
-    let reported = false;
-    for (let i = 0; i < 50; i++) { await sleep(200); if (docD.querySelector('.jbd-ring-fg')) { reported = true; break; } }
-    if (reported) ok('merged file scanned to a full report');
-    else fail('report never rendered for the merged file');
-    // the fixture has issues, so the clean must start by itself…
-    let autoDone = false;
-    for (let i = 0; i < 80; i++) { await sleep(200); if (docD.querySelector('.jbd-done-t')) { autoDone = true; break; } }
-    win.File = RealFile;
-    if (autoDone) ok('auto-clean ran to the done state without any click');
-    else fail('auto-clean never reached the done state');
-    if (autoClicks === 0) ok('nothing was downloaded automatically (single-download flow)');
-    else fail('unexpected automatic download: ' + autoDlName);
-    // …and the done state offers exactly one Download button
-    const dlBtn = docD.querySelector('[data-jbd-dl]');
-    if (dlBtn) ok('Download button offered for the cleaned file');
-    else fail('download button missing in auto mode');
-    if (dlBtn) {
-      win.URL.createObjectURL = () => 'blob:auto-dl';
-      win.URL.revokeObjectURL = () => {};
-      dlBtn.click();
-      await sleep(80);
-      if (autoClicks === 1 && /^healthy_.*\.jwlibrary$/i.test(autoDlName || ''))
-        ok('Download button delivers the healthy file (' + autoDlName + ')');
-      else fail('download wrong: clicks=' + autoClicks + ' name=' + autoDlName);
+  section('Worker-side Library Doctor (opts.doctorCheck, v2.65.0)');
+  {
+    const workerSrc = fs.readFileSync(REPO + '/beta/js/merge-worker.js', 'utf8');
+    const mBlock = workerSrc.match(/\/\/ ═+ Library Doctor[\s\S]*?\/\/ ═+ end Library Doctor/);
+    if (mBlock) ok('worker contains the Library Doctor block');
+    else fail('worker doctor block missing');
+    if (workerSrc.includes('p.doctorCheck') && workerSrc.includes('doctor: doctorReport'))
+      ok('worker scans on opts.doctorCheck and ships the report with the impact message');
+    else fail('worker doctorCheck gate wiring missing');
+    if (/if \(doctorReport && doctorReport\.issues > 0\) \{[\s\S]*?doctorFix\(a\)/.test(workerSrc))
+      ok('worker applies fixes only AFTER the user confirms the merge');
+    else fail('worker fix-after-confirm wiring missing');
+    if (mBlock) {
+      // run the worker's headless doctor against the same sick database
+      const fns = new Function(mBlock[0] + '\nreturn { doctorScan, doctorFix, dDupNotePairs };')();
+      const wDb = new SQL.Database(new Uint8Array(dbBytes));
+      const scan = fns.doctorScan(wDb);
+      let scanOk = scan.issues === 7;
+      for (const [k, n] of Object.entries(EXPECTED)) if (scan.checks[k] !== n) scanOk = false;
+      if (scanOk) ok('worker doctorScan finds exactly the 7 planted issues');
+      else fail('worker scan wrong: ' + JSON.stringify(scan));
+      const fixedN = fns.doctorFix(wDb);
+      if (fixedN === 7) ok('worker doctorFix repairs all 7');
+      else fail('worker fixed ' + fixedN);
+      const rescan = fns.doctorScan(wDb);
+      if (rescan.issues === 0) ok('worker re-scan is clean');
+      else fail('worker re-scan: ' + JSON.stringify(rescan));
+      const wq1 = wDb.exec('SELECT NoteId FROM Note ORDER BY NoteId')[0].values.flat();
+      if (JSON.stringify(wq1) === JSON.stringify([1, 3, 5, 6]))
+        ok('worker fix keeps verse-anchored same-text notes (n5+n6) intact');
+      else fail('worker note survivors wrong: ' + JSON.stringify(wq1));
+      const wTag = wDb.exec('SELECT NoteId FROM TagMap WHERE TagId=4')[0].values.flat();
+      if (JSON.stringify(wTag) === JSON.stringify([1])) ok('worker fix migrates the doomed duplicate\'s tag');
+      else fail('worker tag migration wrong: ' + JSON.stringify(wTag));
+      wDb.close();
     }
-    docD.createElement = origCreateA;
-    const xBtn = docD.querySelector('.jbd-x'); if (xBtn) xBtn.click();
-    dlAnchor.remove();
   }
 
-  section('Celebration honours the suppression flag (source check)');
+  section('Merge-page checkbox wiring (one-shot, source check)');
   {
+    const appSrc = fs.readFileSync(REPO + '/beta/js/app.js', 'utf8');
+    if (appSrc.includes('id:"doctor-merge-cb"') && appSrc.includes('id:"doctor-merge-row"'))
+      ok('checkbox rendered under the Create My Merged File button');
+    else fail('merge-page checkbox markup missing');
+    if (appSrc.includes('defaultChecked:!1')) ok('checkbox defaults to unticked');
+    else fail('checkbox default wrong');
+    if (appSrc.includes('__doctorOnce=!!__dcb.checked;__dcb.checked=!1'))
+      ok('vt() reads the box once and unticks it (one-time use)');
+    else fail('one-shot read/reset missing in vt()');
+    if (appSrc.includes('doctorCheck:__doctorOnce')) ok('flag forwarded to the worker as opts.doctorCheck');
+    else fail('opts.doctorCheck not forwarded');
+    if (appSrc.includes('window.__jwImpactPreview(d.counts,d.doctor||null)'))
+      ok('doctor report passed through to the impact card');
+    else fail('d.doctor passthrough missing');
+    if (appSrc.includes('window.__jwDoctorCbLabel')) ok('checkbox label comes from the localised Doctor strings');
+    else fail('localised label hook missing');
     const full = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
-    if (full.includes('opts.auto && window.__jwDoctorSuppressAutoDl'))
-      ok('celebration triggerDownload skips the auto download when the Doctor is armed');
-    else fail('celebration suppression guard missing');
-    if (full.includes("window.__jwDoctorSuppressAutoDl=false;\n        try{ var fa=document.getElementById('download-btn'); if(fa) fa.click(); }catch(_){}"))
-      ok('watcher falls back to the normal download on fetch failure');
-    else fail('watcher download fallback missing');
+    if (!full.includes('__jwDoctorSuppressAutoDl') && !full.includes('__jwDoctorArmAfterMerge'))
+      ok('superseded watcher/suppression machinery fully removed');
+    else fail('old watcher/suppression code still present');
+    if (full.includes('window.__jwDoctorT')) ok('doctor exposes __jwDoctorT for the impact card');
+    else fail('__jwDoctorT missing');
   }
 
   section('UI flow reaches the report');

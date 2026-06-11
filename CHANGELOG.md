@@ -80,6 +80,24 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.65.0] — 2026-06-11
+
+### Library Doctor moved into the merge itself (beta)
+- The opt-in now lives where it belongs: a small checkbox directly under
+  **Create My Merged File** on the merge page — "Health-check & clean the
+  merged file before downloading (Library Doctor)".
+- It's **one-time use**: always unticked by default, and unticks itself the
+  moment a merge starts. No remembered setting.
+- When ticked, the Doctor runs **silently inside the merge engine** — no
+  pop-up, no second screen. Its findings appear as a "Library Doctor" group
+  right on the **Ready to merge** card, alongside the merge numbers, with a
+  note that they'll be fixed automatically.
+- Confirming the merge applies the fixes before the file is packaged, so the
+  single download you already get is the final, healthy backup. Cancelling
+  changes nothing, as always.
+- The previous version's two-step flow (Doctor pop-up after the merge,
+  download suppression) is gone — one card, one confirm, one file.
+
 ## [2.64.1] — 2026-06-11
 
 ### Library Doctor merge opt-in — one download instead of two (beta)
