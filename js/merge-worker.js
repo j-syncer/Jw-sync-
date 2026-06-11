@@ -64,6 +64,142 @@ function classifyError(e) {
   return '';
 }
 
+// ═══ Library Doctor (opt-in via opts.doctorCheck) ═══════════════════════════
+// Headless version of the Library Doctor's health checks, run on the fully
+// merged database while the pre-merge impact preview is on screen. Results
+// ride along with the {type:'impact'} message; fixes are applied only after
+// the user confirms. Keep these queries in sync with the Doctor module in
+// beta/index.html (dupNotePairs / idsFor / applyFixes).
+const DOCTOR_CHECKS = ['dup_notes', 'empty_notes', 'dup_marks', 'orph_br', 'orph_tm', 'unused_tags', 'unused_loc'];
+
+function dCol(db, sql) { const r = db.exec(sql); return r[0] ? r[0].values.map(v => v[0]) : []; }
+function dHasTable(db, n) { return dCol(db, "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='" + n + "'")[0] > 0; }
+function dHasCol(db, tbl, cname) {
+  try {
+    const r = db.exec('PRAGMA table_info(' + tbl + ')');
+    if (!r[0]) return false;
+    const i = r[0].columns.indexOf('name');
+    return r[0].values.some(v => v[i] === cname);
+  } catch { return false; }
+}
+
+// Two notes are duplicates only when BOTH the text AND the anchor match:
+// same Title, Content, Location, BlockType and BlockIdentifier. Identical
+// text on a different verse/paragraph of the same chapter is NOT a
+// duplicate. The kept copy prefers the one linked to a highlight.
+function dDupNotePairs(db) {
+  if (!dHasTable(db, 'Note')) return [];
+  const bt  = dHasCol(db, 'Note', 'BlockType') ? 'IFNULL(BlockType,-1)' : '-1';
+  const bi  = dHasCol(db, 'Note', 'BlockIdentifier') ? 'IFNULL(BlockIdentifier,-1)' : '-1';
+  const btN = dHasCol(db, 'Note', 'BlockType') ? 'IFNULL(n.BlockType,-1)' : '-1';
+  const biN = dHasCol(db, 'Note', 'BlockIdentifier') ? 'IFNULL(n.BlockIdentifier,-1)' : '-1';
+  const keep = dHasCol(db, 'Note', 'UserMarkId')
+    ? 'COALESCE(MIN(CASE WHEN UserMarkId IS NOT NULL THEN NoteId END),MIN(NoteId))'
+    : 'MIN(NoteId)';
+  const r = db.exec(
+    "SELECT n.NoteId AS dup, g.keepId AS keep FROM Note n JOIN (" +
+    " SELECT IFNULL(Title,'') AS t, IFNULL(Content,'') AS c, IFNULL(LocationId,-1) AS l, " + bt + " AS bt, " + bi + " AS bi, " + keep + " AS keepId" +
+    " FROM Note WHERE (TRIM(IFNULL(Title,''))<>'' OR TRIM(IFNULL(Content,''))<>'')" +
+    " GROUP BY t, c, l, bt, bi HAVING COUNT(*)>1) g" +
+    " ON IFNULL(n.Title,'')=g.t AND IFNULL(n.Content,'')=g.c AND IFNULL(n.LocationId,-1)=g.l AND " + btN + "=g.bt AND " + biN + "=g.bi" +
+    " WHERE n.NoteId<>g.keepId");
+  return r[0] ? r[0].values.map(v => ({ dup: v[0], keep: v[1] })) : [];
+}
+
+function dIdsFor(db, key) {
+  switch (key) {
+    case 'dup_notes':
+      return dDupNotePairs(db).map(p => p.dup);
+    case 'empty_notes':
+      if (!dHasTable(db, 'Note')) return [];
+      return dCol(db, "SELECT NoteId FROM Note WHERE TRIM(IFNULL(Title,''))='' AND TRIM(IFNULL(Content,''))=''");
+    case 'dup_marks':
+      if (!dHasTable(db, 'UserMark') || !dHasTable(db, 'BlockRange')) return [];
+      return dCol(db,
+        "SELECT DISTINCT um2.UserMarkId FROM UserMark um1" +
+        " JOIN UserMark um2 ON um2.UserMarkId>um1.UserMarkId" +
+        "  AND IFNULL(um2.LocationId,-1)=IFNULL(um1.LocationId,-1)" +
+        "  AND IFNULL(um2.ColorIndex,-1)=IFNULL(um1.ColorIndex,-1)" +
+        " JOIN BlockRange b1 ON b1.UserMarkId=um1.UserMarkId" +
+        " JOIN BlockRange b2 ON b2.UserMarkId=um2.UserMarkId" +
+        "  AND IFNULL(b2.BlockType,-1)=IFNULL(b1.BlockType,-1)" +
+        "  AND IFNULL(b2.Identifier,-1)=IFNULL(b1.Identifier,-1)" +
+        "  AND IFNULL(b2.StartToken,-1)=IFNULL(b1.StartToken,-1)" +
+        "  AND IFNULL(b2.EndToken,-1)=IFNULL(b1.EndToken,-1)" +
+        " WHERE (SELECT COUNT(*) FROM BlockRange WHERE UserMarkId=um1.UserMarkId)=1" +
+        "  AND (SELECT COUNT(*) FROM BlockRange WHERE UserMarkId=um2.UserMarkId)=1" +
+        "  AND um2.UserMarkId NOT IN (SELECT IFNULL(UserMarkId,-1) FROM Note)");
+    case 'orph_br':
+      if (!dHasTable(db, 'BlockRange') || !dHasTable(db, 'UserMark')) return [];
+      return dCol(db, "SELECT BlockRangeId FROM BlockRange WHERE UserMarkId NOT IN (SELECT UserMarkId FROM UserMark)");
+    case 'orph_tm':
+      if (!dHasTable(db, 'TagMap') || !dHasTable(db, 'Note')) return [];
+      return dCol(db, "SELECT TagMapId FROM TagMap WHERE NoteId IS NOT NULL AND NoteId NOT IN (SELECT NoteId FROM Note)");
+    case 'unused_tags': {
+      if (!dHasTable(db, 'Tag')) return [];
+      const typeFilter = dHasCol(db, 'Tag', 'Type') ? "IFNULL(Type,1)=1 AND " : "";
+      const tmRef = dHasTable(db, 'TagMap') ? " AND TagId NOT IN (SELECT DISTINCT TagId FROM TagMap WHERE TagId IS NOT NULL)" : "";
+      return dCol(db, "SELECT TagId FROM Tag WHERE " + typeFilter + "1=1" + tmRef);
+    }
+    case 'unused_loc': {
+      if (!dHasTable(db, 'Location')) return [];
+      const refs = [];
+      [['Note', 'LocationId'], ['UserMark', 'LocationId'], ['Bookmark', 'LocationId'], ['Bookmark', 'PublicationLocationId'],
+       ['TagMap', 'LocationId'], ['InputField', 'LocationId'], ['PlaylistItemLocationMap', 'LocationId'], ['PlaylistMedia', 'LocationId']
+      ].forEach(tc => { if (dHasTable(db, tc[0]) && dHasCol(db, tc[0], tc[1])) refs.push('SELECT ' + tc[1] + ' FROM ' + tc[0] + ' WHERE ' + tc[1] + ' IS NOT NULL'); });
+      if (!refs.length) return [];
+      return dCol(db, 'SELECT LocationId FROM Location WHERE LocationId NOT IN (' + refs.join(' UNION ') + ')');
+    }
+    default: return [];
+  }
+}
+
+function doctorScan(db) {
+  const checks = {};
+  let issues = 0;
+  DOCTOR_CHECKS.forEach(k => {
+    let n = 0;
+    try { n = dIdsFor(db, k).length; } catch { n = 0; }
+    checks[k] = n; issues += n;
+  });
+  return { checks, issues };
+}
+
+function doctorFix(db) {
+  let fixed = 0;
+  const pairs = dDupNotePairs(db);
+  if (dHasTable(db, 'TagMap')) pairs.forEach(p => {
+    // keep tag assignments: move the removed copy's tags onto the kept copy
+    db.run('UPDATE TagMap SET NoteId=' + p.keep + ' WHERE NoteId=' + p.dup +
+           ' AND TagId IS NOT NULL AND TagId NOT IN (SELECT TagId FROM TagMap WHERE NoteId=' + p.keep + ' AND TagId IS NOT NULL)');
+  });
+  const delNotes = ids => {
+    if (!ids.length) return;
+    if (dHasTable(db, 'TagMap')) db.run('DELETE FROM TagMap WHERE NoteId IN (' + ids.join(',') + ')');
+    db.run('DELETE FROM Note WHERE NoteId IN (' + ids.join(',') + ')');
+    fixed += ids.length;
+  };
+  delNotes(pairs.map(p => p.dup));
+  delNotes(dIdsFor(db, 'empty_notes'));
+  const dm = dIdsFor(db, 'dup_marks');
+  if (dm.length) {
+    if (dHasTable(db, 'BlockRange')) db.run('DELETE FROM BlockRange WHERE UserMarkId IN (' + dm.join(',') + ')');
+    db.run('DELETE FROM UserMark WHERE UserMarkId IN (' + dm.join(',') + ')');
+    fixed += dm.length;
+  }
+  const ob = dIdsFor(db, 'orph_br');
+  if (ob.length) { db.run('DELETE FROM BlockRange WHERE BlockRangeId IN (' + ob.join(',') + ')'); fixed += ob.length; }
+  const ot = dIdsFor(db, 'orph_tm');
+  if (ot.length) { db.run('DELETE FROM TagMap WHERE TagMapId IN (' + ot.join(',') + ')'); fixed += ot.length; }
+  const ut = dIdsFor(db, 'unused_tags');
+  if (ut.length) { db.run('DELETE FROM Tag WHERE TagId IN (' + ut.join(',') + ')'); fixed += ut.length; }
+  const ul = dIdsFor(db, 'unused_loc');
+  if (ul.length) { db.run('DELETE FROM Location WHERE LocationId IN (' + ul.join(',') + ')'); fixed += ul.length; }
+  try { db.run('VACUUM'); } catch {}
+  return fixed;
+}
+// ═══ end Library Doctor ═════════════════════════════════════════════════════
+
 self.onmessage = async ({ data }) => {
   if (data.type === 'cancel') { cancelled = true; if (confirmResolver) { confirmResolver(false); confirmResolver = null; } return; }
   if (data.type === 'confirmMerge') { if (confirmResolver) { confirmResolver(true); confirmResolver = null; } return; }
@@ -525,15 +661,27 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
 
   // ── Pre-merge impact preview gate ──────────────────────────────────────
   if (p.previewConfirm) {
+    // Opt-in Library Doctor: scan the fully merged database headlessly and
+    // send the findings along with the impact card; fix them only after the
+    // user confirms. A scan failure never blocks the merge.
+    let doctorReport = null;
+    if (p.doctorCheck) {
+      log('Library Doctor: examining the merged result...');
+      try { doctorReport = doctorScan(a); } catch (e) { doctorReport = null; }
+    }
     self.postMessage({ type: 'impact', counts: {
       Note: f.Note, UserMark: f.UserMark, Bookmark: f.Bookmark, Tag: f.Tag,
       Updated: f.Updated, Deduplicated: f.Deduplicated, InputField: f.InputFields || 0
-    } });
+    }, doctor: doctorReport });
     const proceed = await new Promise(res => { confirmResolver = res; });
     if (!proceed) {
       try { a.close(); } catch {}
       a = null;
       return { cancelled: true };
+    }
+    if (doctorReport && doctorReport.issues > 0) {
+      log('Library Doctor: fixing ' + doctorReport.issues + ' issue(s)...');
+      try { f.Cleaned += doctorFix(a); } catch (e) { log('Library Doctor: cleanup skipped (' + (e && e.message) + ')', false); }
     }
   }
 

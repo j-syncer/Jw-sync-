@@ -82,7 +82,7 @@ runs in your browser — your files are never uploaded.
 
 ## [2.65.2] — 2026-06-11
 
-### Fixed (beta)
+### Fixed (live)
 - **"View Your Stats" on the celebration screen showed an older file.** The
   stats page prefers the shared working file (the cross-tool session), but the
   celebration only handed the merged result to an older one-shot mailbox — so
@@ -92,7 +92,7 @@ runs in your browser — your files are never uploaded.
 
 ## [2.65.1] — 2026-06-11
 
-### Fixed (beta)
+### Fixed (live)
 - **The "Ready to merge" card could overflow the screen on mobile** with no
   way to scroll — especially with a long Library Doctor findings list — cutting
   off the Merge & Download button. The card now caps itself to the screen
@@ -100,7 +100,7 @@ runs in your browser — your files are never uploaded.
 
 ## [2.65.0] — 2026-06-11
 
-### Library Doctor moved into the merge itself (beta)
+### Library Doctor moved into the merge itself (live)
 - The opt-in now lives where it belongs: a small checkbox directly under
   **Create My Merged File** on the merge page — "Health-check & clean the
   merged file before downloading (Library Doctor)".
