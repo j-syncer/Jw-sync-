@@ -146,6 +146,14 @@ All of the How-it-works improvements (v2.55.0–v2.56.0) are now live on jwsync.
 
 ---
 
+## [2.63.2] — 2026-06-10
+
+### Renamed: Backup Doctor → Library Doctor
+
+- The health-check tool is now called **Library Doctor** (localised in all 12 languages). Same one-tap checkup and private, one-click cleanup — just a clearer name.
+
+---
+
 ## [2.63.0] — 2026-06-10
 
 ### 🩺 New tool: Backup Doctor (beta)
