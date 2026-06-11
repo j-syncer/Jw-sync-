@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.65.2] — 2026-06-11
+
+### Fixed (beta)
+- **"View Your Stats" on the celebration screen showed an older file.** The
+  stats page prefers the shared working file (the cross-tool session), but the
+  celebration only handed the merged result to an older one-shot mailbox — so
+  you'd see stats for whatever file was loaded before the merge. The button now
+  makes the just-merged file the shared working file, so the stats you see are
+  for the exact file you just downloaded (and the other tools follow it too).
+
 ## [2.65.1] — 2026-06-11
 
 ### Fixed (beta)

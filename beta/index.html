@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.65.1",
+      "softwareVersion": "2.65.2",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -4319,22 +4319,35 @@ window.__bootBrowse = function() {
     var blobUrl = cached && cached.blobUrl;
     var name = (cached && cached.name) || 'merged.jwlibrary';
     var href = 'highlights.html';
-    if (!blobUrl) { window.location.href = href; return; }
+    var nav = function () { window.location.href = href; };
+    if (!blobUrl) { nav(); return; }
+    function legacyHandoff(buf) {
+      var req = indexedDB.open('jwsync_hl_v1', 1);
+      req.onupgradeneeded = function(e) { e.target.result.createObjectStore('pending'); };
+      req.onsuccess = function(e) {
+        var db = e.target.result;
+        var tx = db.transaction('pending', 'readwrite');
+        tx.objectStore('pending').put({ name: name, buffer: buf }, 'next');
+        tx.oncomplete = function() { db.close(); nav(); };
+        tx.onerror = function() { db.close(); nav(); };
+      };
+      req.onerror = nav;
+    }
     fetch(blobUrl)
       .then(function(r) { return r.arrayBuffer(); })
       .then(function(buf) {
-        var req = indexedDB.open('jwsync_hl_v1', 1);
-        req.onupgradeneeded = function(e) { e.target.result.createObjectStore('pending'); };
-        req.onsuccess = function(e) {
-          var db = e.target.result;
-          var tx = db.transaction('pending', 'readwrite');
-          tx.objectStore('pending').put({ name: name, buffer: buf }, 'next');
-          tx.oncomplete = function() { db.close(); window.location.href = href; };
-          tx.onerror = function() { db.close(); window.location.href = href; };
-        };
-        req.onerror = function() { window.location.href = href; };
+        // Make the just-merged file the shared working file: the Stats page
+        // prefers the cross-tool session over the one-shot inbox, so without
+        // this it would open whatever older file the session still held.
+        if (window.JwSession && window.JwSession.put) {
+          window.JwSession.put(buf, name).then(function (okPut) {
+            if (okPut) nav(); else legacyHandoff(buf);
+          }, function () { legacyHandoff(buf); });
+        } else {
+          legacyHandoff(buf);
+        }
       })
-      .catch(function() { window.location.href = href; });
+      .catch(nav);
   }
 
   function browseMerged() {

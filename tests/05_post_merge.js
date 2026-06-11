@@ -462,6 +462,29 @@ async function waitForOverlay(doc, id, timeoutMs) {
     dom.window.close();
   }
 
+  section('View Your Stats hands the JUST-MERGED file to the stats page (v2.65.2)');
+  {
+    // Source contract: goToHighlights must publish the merged buffer to the
+    // shared cross-tool session (which highlights.html prefers on startup),
+    // falling back to the legacy one-shot inbox only when JwSession is absent.
+    const html = fs.readFileSync(HTML_PATH, 'utf8');
+    const m = html.match(/function goToHighlights\(\) \{[\s\S]*?\n  \}/);
+    if (!m) fail('goToHighlights not found');
+    else {
+      const src = m[0];
+      if (src.includes('window.JwSession.put(buf, name)'))
+        ok('merged buffer written to the shared session (JwSession.put)');
+      else fail('goToHighlights does not update the shared session');
+      if (src.includes("indexedDB.open('jwsync_hl_v1'") && src.includes('legacyHandoff'))
+        ok('legacy one-shot inbox kept as fallback');
+      else fail('legacy inbox fallback missing');
+      const hl = fs.readFileSync(REPO + '/highlights.html', 'utf8');
+      if (hl.includes('window.JwSession.get()'))
+        ok('highlights.html reads the shared session on startup (receives the hand-off)');
+      else fail('highlights.html session startup missing');
+    }
+  }
+
   section('SUMMARY');
   if (failures === 0) { console.log('\nAll post-merge celebration checks passed.'); process.exit(0); }
   console.log('\nFAIL: ' + failures + ' check(s) failed.');
