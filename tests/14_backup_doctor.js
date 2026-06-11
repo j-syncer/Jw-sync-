@@ -169,7 +169,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   else fail('clean is not idempotent: ' + JSON.stringify(fixed2));
   cleanDb.close();
 
-  section('Post-merge opt-in (__jwDoctorArmAfterMerge)');
+  section('Post-merge opt-in (__jwDoctorArmAfterMerge) — single-download flow');
   if (typeof win.__jwDoctorArmAfterMerge !== 'function') fail('window.__jwDoctorArmAfterMerge not exposed');
   else {
     ok('window.__jwDoctorArmAfterMerge exposed');
@@ -179,6 +179,16 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     dlAnchor.id = 'download-btn';
     dlAnchor.setAttribute('href', '#');
     docD.body.appendChild(dlAnchor);
+    // intercept every download anchor created from here on
+    let autoClicks = 0, autoDlName = null;
+    const origCreateA = docD.createElement.bind(docD);
+    docD.createElement = (tag) => {
+      const el = origCreateA(tag);
+      if (String(tag).toLowerCase() === 'a') {
+        Object.defineProperty(el, 'click', { value: function () { autoClicks++; autoDlName = el.getAttribute('download'); }, writable: true });
+      }
+      return el;
+    };
     let fetchedUrl = null;
     win.fetch = (url) => {
       fetchedUrl = url;
@@ -187,6 +197,8 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const RealFile = win.File;
     win.File = undefined; // force the Blob fallback path (JSZip-friendly in node)
     win.__jwDoctorArmAfterMerge();
+    if (win.__jwDoctorSuppressAutoDl === true) ok('arming raises the auto-download suppression flag');
+    else fail('suppression flag not set on arm');
     await sleep(900);
     if (!docD.querySelector('.jbd-overlay')) ok('doctor stays closed while the merge is still running');
     else fail('doctor opened before any merged blob existed');
@@ -195,7 +207,6 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     dlAnchor.setAttribute('download', 'merged_test.jwlibrary');
     let opened = false;
     for (let i = 0; i < 60; i++) { await sleep(200); if (docD.querySelector('.jbd-overlay')) { opened = true; break; } }
-    win.File = RealFile;
     if (fetchedUrl === 'blob:merged-test') ok('fetched the merged blob URL');
     else fail('merged blob not fetched: ' + fetchedUrl);
     if (opened) ok('doctor auto-opened on the merged file');
@@ -204,8 +215,41 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     for (let i = 0; i < 50; i++) { await sleep(200); if (docD.querySelector('.jbd-ring-fg')) { reported = true; break; } }
     if (reported) ok('merged file scanned to a full report');
     else fail('report never rendered for the merged file');
+    // the fixture has issues, so the clean must start by itself…
+    let autoDone = false;
+    for (let i = 0; i < 80; i++) { await sleep(200); if (docD.querySelector('.jbd-done-t')) { autoDone = true; break; } }
+    win.File = RealFile;
+    if (autoDone) ok('auto-clean ran to the done state without any click');
+    else fail('auto-clean never reached the done state');
+    if (autoClicks === 0) ok('nothing was downloaded automatically (single-download flow)');
+    else fail('unexpected automatic download: ' + autoDlName);
+    // …and the done state offers exactly one Download button
+    const dlBtn = docD.querySelector('[data-jbd-dl]');
+    if (dlBtn) ok('Download button offered for the cleaned file');
+    else fail('download button missing in auto mode');
+    if (dlBtn) {
+      win.URL.createObjectURL = () => 'blob:auto-dl';
+      win.URL.revokeObjectURL = () => {};
+      dlBtn.click();
+      await sleep(80);
+      if (autoClicks === 1 && /^healthy_.*\.jwlibrary$/i.test(autoDlName || ''))
+        ok('Download button delivers the healthy file (' + autoDlName + ')');
+      else fail('download wrong: clicks=' + autoClicks + ' name=' + autoDlName);
+    }
+    docD.createElement = origCreateA;
     const xBtn = docD.querySelector('.jbd-x'); if (xBtn) xBtn.click();
     dlAnchor.remove();
+  }
+
+  section('Celebration honours the suppression flag (source check)');
+  {
+    const full = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+    if (full.includes('opts.auto && window.__jwDoctorSuppressAutoDl'))
+      ok('celebration triggerDownload skips the auto download when the Doctor is armed');
+    else fail('celebration suppression guard missing');
+    if (full.includes("window.__jwDoctorSuppressAutoDl=false;\n        try{ var fa=document.getElementById('download-btn'); if(fa) fa.click(); }catch(_){}"))
+      ok('watcher falls back to the normal download on fetch failure');
+    else fail('watcher download fallback missing');
   }
 
   section('UI flow reaches the report');

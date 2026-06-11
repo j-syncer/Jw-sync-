@@ -80,6 +80,22 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.64.1] — 2026-06-11
+
+### Library Doctor merge opt-in — one download instead of two (beta)
+- When the health-check box is ticked, the merged file no longer downloads
+  by itself. Instead the Doctor opens on it, **cleans it automatically**,
+  and then shows a single **Download your file** button — so you only ever
+  save one file: the final, healthy backup.
+- If the merge is already in perfect health, the Doctor says so and the same
+  single button downloads the merged file as-is.
+- If anything goes wrong on the way (the file can't be handed over), the
+  normal merged-file download happens exactly as before — you can never end
+  up without your file. The celebration screen also keeps its manual
+  "Download merged backup" button as a backup.
+- Checkbox label updated to match: "Health-check & clean the merged file
+  before downloading".
+
 ## [2.64.0] — 2026-06-11
 
 ### Library Doctor — health-check your merge as part of the flow (beta)
