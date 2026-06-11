@@ -5564,22 +5564,38 @@ body.light .jwr-ntitle{color:#0b2e58}
       case 'empty_notes':
         if(!hasTable(db,'Note')) return [];
         return col1(db,"SELECT NoteId FROM Note WHERE TRIM(IFNULL(Title,''))='' AND TRIM(IFNULL(Content,''))=''");
-      case 'dup_marks':
+      case 'dup_marks':{
         if(!hasTable(db,'UserMark')||!hasTable(db,'BlockRange')) return [];
-        return col1(db,
-          "SELECT DISTINCT um2.UserMarkId FROM UserMark um1"+
-          " JOIN UserMark um2 ON um2.UserMarkId>um1.UserMarkId"+
-          "  AND IFNULL(um2.LocationId,-1)=IFNULL(um1.LocationId,-1)"+
-          "  AND IFNULL(um2.ColorIndex,-1)=IFNULL(um1.ColorIndex,-1)"+
-          " JOIN BlockRange b1 ON b1.UserMarkId=um1.UserMarkId"+
-          " JOIN BlockRange b2 ON b2.UserMarkId=um2.UserMarkId"+
-          "  AND IFNULL(b2.BlockType,-1)=IFNULL(b1.BlockType,-1)"+
-          "  AND IFNULL(b2.Identifier,-1)=IFNULL(b1.Identifier,-1)"+
-          "  AND IFNULL(b2.StartToken,-1)=IFNULL(b1.StartToken,-1)"+
-          "  AND IFNULL(b2.EndToken,-1)=IFNULL(b1.EndToken,-1)"+
-          " WHERE (SELECT COUNT(*) FROM BlockRange WHERE UserMarkId=um1.UserMarkId)=1"+
-          "  AND (SELECT COUNT(*) FROM BlockRange WHERE UserMarkId=um2.UserMarkId)=1"+
-          "  AND um2.UserMarkId NOT IN (SELECT IFNULL(UserMarkId,-1) FROM Note)");
+        // O(n) JS grouping replaces the O(n²) SQL self-join.
+        // Fetch ALL single-blockrange marks so note-linked ones can still serve
+        // as the 'keep' reference; only return non-note-linked marks as duplicates.
+        var _rows=q(db,
+          "SELECT um.UserMarkId,IFNULL(um.LocationId,-1) AS loc,IFNULL(um.ColorIndex,-1) AS col,"+
+          "IFNULL(br.BlockType,-1) AS bt,IFNULL(br.Identifier,-1) AS bid,"+
+          "IFNULL(br.StartToken,-1) AS st,IFNULL(br.EndToken,-1) AS et"+
+          " FROM UserMark um JOIN BlockRange br ON br.UserMarkId=um.UserMarkId"+
+          " WHERE (SELECT COUNT(*) FROM BlockRange b2 WHERE b2.UserMarkId=um.UserMarkId)=1"+
+          " ORDER BY um.UserMarkId");
+        var _noteMarkSet={};
+        col1(db,"SELECT IFNULL(UserMarkId,-1) FROM Note WHERE UserMarkId IS NOT NULL")
+          .forEach(function(id){ _noteMarkSet[id]=true; });
+        var _grp={};
+        _rows.forEach(function(r){
+          var k=r.loc+'|'+r.col+'|'+r.bt+'|'+r.bid+'|'+r.st+'|'+r.et;
+          if(!_grp[k]) _grp[k]=[];
+          _grp[k].push(r.UserMarkId);
+        });
+        var _dups=[];
+        Object.keys(_grp).forEach(function(k){
+          var ids=_grp[k]; // ascending by UserMarkId (ORDER BY ensures this)
+          if(ids.length>1){
+            for(var j=1;j<ids.length;j++){
+              if(!_noteMarkSet[ids[j]]) _dups.push(ids[j]);
+            }
+          }
+        });
+        return _dups;
+      }
       case 'orph_br':
         if(!hasTable(db,'BlockRange')||!hasTable(db,'UserMark')) return [];
         return col1(db,"SELECT BlockRangeId FROM BlockRange WHERE UserMarkId NOT IN (SELECT UserMarkId FROM UserMark)");
