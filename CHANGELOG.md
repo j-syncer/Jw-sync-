@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.63.3] — 2026-06-11
+
+### Library Doctor — safer duplicate-note detection (beta)
+- Notes are now only treated as duplicates when their anchor matches too —
+  identical text on **different verses or paragraphs of the same chapter** is
+  never removed anymore.
+- When a true duplicate is removed, the kept copy is now the one linked to a
+  highlight (if any), and any tags that were only on the removed copy are
+  moved onto the kept note instead of being lost.
+
 ## [2.58.2] — 2026-06-09
 
 ### More visual polish — editorial touches (live)

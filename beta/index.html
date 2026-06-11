@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.63.2",
+      "softwareVersion": "2.63.3",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -5494,6 +5494,28 @@ body.light .jwr-ntitle{color:#0b2e58}
   function hasTable(db,n){ return qv(db,"SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='"+n+"'")>0; }
   function hasCol(db,tbl,cname){ try{ return q(db,'PRAGMA table_info('+tbl+')').some(function(r){ return r.name===cname; }); }catch(_){ return false; } }
 
+  // Two notes are duplicates only when BOTH the text AND the anchor match:
+  // same Title, Content, Location, BlockType and BlockIdentifier. Identical
+  // text on a different verse/paragraph of the same chapter is NOT a
+  // duplicate. The kept copy prefers the one linked to a highlight.
+  function dupNotePairs(db){
+    if(!hasTable(db,'Note')) return [];
+    var bt=hasCol(db,'Note','BlockType')?'IFNULL(BlockType,-1)':'-1',
+        bi=hasCol(db,'Note','BlockIdentifier')?'IFNULL(BlockIdentifier,-1)':'-1',
+        btN=hasCol(db,'Note','BlockType')?'IFNULL(n.BlockType,-1)':'-1',
+        biN=hasCol(db,'Note','BlockIdentifier')?'IFNULL(n.BlockIdentifier,-1)':'-1',
+        keep=hasCol(db,'Note','UserMarkId')
+          ? 'COALESCE(MIN(CASE WHEN UserMarkId IS NOT NULL THEN NoteId END),MIN(NoteId))'
+          : 'MIN(NoteId)';
+    return q(db,
+      "SELECT n.NoteId AS dup, g.keepId AS keep FROM Note n JOIN ("+
+      " SELECT IFNULL(Title,'') AS t, IFNULL(Content,'') AS c, IFNULL(LocationId,-1) AS l, "+bt+" AS bt, "+bi+" AS bi, "+keep+" AS keepId"+
+      " FROM Note WHERE (TRIM(IFNULL(Title,''))<>'' OR TRIM(IFNULL(Content,''))<>'')"+
+      " GROUP BY t, c, l, bt, bi HAVING COUNT(*)>1) g"+
+      " ON IFNULL(n.Title,'')=g.t AND IFNULL(n.Content,'')=g.c AND IFNULL(n.LocationId,-1)=g.l AND "+btN+"=g.bt AND "+biN+"=g.bi"+
+      " WHERE n.NoteId<>g.keepId");
+  }
+
   // ── Health checks ───────────────────────────────────────────────────
   var CHECKS=['dup_notes','empty_notes','dup_marks','orph_br','orph_tm','unused_tags','unused_loc'];
   var WEIGHTS={dup_notes:1.2,empty_notes:.4,dup_marks:.8,orph_br:.15,orph_tm:.15,unused_tags:.3,unused_loc:.02};
@@ -5501,11 +5523,7 @@ body.light .jwr-ntitle{color:#0b2e58}
   function idsFor(db,key){
     switch(key){
       case 'dup_notes':
-        if(!hasTable(db,'Note')) return [];
-        return col1(db,
-          "SELECT NoteId FROM Note WHERE (TRIM(IFNULL(Title,''))<>'' OR TRIM(IFNULL(Content,''))<>'') AND NoteId NOT IN ("+
-          " SELECT MIN(NoteId) FROM Note WHERE (TRIM(IFNULL(Title,''))<>'' OR TRIM(IFNULL(Content,''))<>'')"+
-          " GROUP BY IFNULL(Title,''), IFNULL(Content,''), IFNULL(LocationId,-1))");
+        return dupNotePairs(db).map(function(r){ return r.dup; });
       case 'empty_notes':
         if(!hasTable(db,'Note')) return [];
         return col1(db,"SELECT NoteId FROM Note WHERE TRIM(IFNULL(Title,''))='' AND TRIM(IFNULL(Content,''))=''");
@@ -5577,7 +5595,13 @@ body.light .jwr-ntitle{color:#0b2e58}
   }
   function applyFixes(db){
     var fixed={};
-    var dn=idsFor(db,'dup_notes');   delNotes(db,dn); fixed.dup_notes=dn.length;
+    var pairs=dupNotePairs(db);
+    if(hasTable(db,'TagMap')) pairs.forEach(function(p){
+      // keep tag assignments: move the removed copy's tags onto the kept copy
+      db.run('UPDATE TagMap SET NoteId='+p.keep+' WHERE NoteId='+p.dup+
+             ' AND TagId IS NOT NULL AND TagId NOT IN (SELECT TagId FROM TagMap WHERE NoteId='+p.keep+' AND TagId IS NOT NULL)');
+    });
+    var dn=pairs.map(function(p){ return p.dup; }); delNotes(db,dn); fixed.dup_notes=dn.length;
     var en=idsFor(db,'empty_notes'); delNotes(db,en); fixed.empty_notes=en.length;
     var dm=idsFor(db,'dup_marks');   delMarks(db,dm); fixed.dup_marks=dm.length;
     var ob=idsFor(db,'orph_br');     if(ob.length) db.run('DELETE FROM BlockRange WHERE BlockRangeId IN ('+ob.join(',')+')'); fixed.orph_br=ob.length;

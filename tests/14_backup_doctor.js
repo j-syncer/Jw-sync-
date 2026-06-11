@@ -58,18 +58,25 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   db.run("INSERT INTO BlockRange VALUES (4, 0, 1, 11, 30, 4)"); // different range → keep
   db.run("INSERT INTO BlockRange VALUES (5, 0, 9, 0, 5, 999)"); // ORPHAN fragment
 
-  // Notes: n1 healthy, n2 EXACT duplicate of n1, n3 healthy, n4 EMPTY
+  // Notes: n1 healthy, n2 EXACT duplicate of n1, n3 healthy, n4 EMPTY,
+  // n5+n6 SAME text in the SAME chapter (loc 1) but on DIFFERENT verses
+  // (BlockIdentifier 3 vs 7) — NOT duplicates, both must survive the clean.
   db.run("INSERT INTO Note VALUES (1, 'g-n1', 1, 1, 'Faith', 'Body about faith', '2026-01-01T00:00:00Z', '2026-01-01T00:00:00Z', NULL, NULL)");
   db.run("INSERT INTO Note VALUES (2, 'g-n2', NULL, 1, 'Faith', 'Body about faith', '2026-01-02T00:00:00Z', '2026-01-02T00:00:00Z', NULL, NULL)");
   db.run("INSERT INTO Note VALUES (3, 'g-n3', 3, 2, 'Hope', 'Body about hope', '2026-01-03T00:00:00Z', '2026-01-03T00:00:00Z', NULL, NULL)");
   db.run("INSERT INTO Note VALUES (4, 'g-n4', NULL, NULL, '', '  ', '2026-01-04T00:00:00Z', '2026-01-04T00:00:00Z', NULL, NULL)");
+  db.run("INSERT INTO Note VALUES (5, 'g-n5', NULL, 1, 'Reminder', 'Same words, different verse', '2026-01-05T00:00:00Z', '2026-01-05T00:00:00Z', 2, 3)");
+  db.run("INSERT INTO Note VALUES (6, 'g-n6', NULL, 1, 'Reminder', 'Same words, different verse', '2026-01-05T00:00:00Z', '2026-01-05T00:00:00Z', 2, 7)");
 
-  // Tags: Favorites (Type 0, no TagMap — must SURVIVE), used (Type 1), unused (Type 1)
+  // Tags: Favorites (Type 0, no TagMap — must SURVIVE), used (Type 1), unused (Type 1),
+  // Research (Type 1) only on the DOOMED duplicate n2 — must migrate to n1, not vanish
   db.run("INSERT INTO Tag VALUES (1, 0, 'Favorites')");
   db.run("INSERT INTO Tag VALUES (2, 1, 'Sermon')");
   db.run("INSERT INTO Tag VALUES (3, 1, 'OldUnused')");
+  db.run("INSERT INTO Tag VALUES (4, 1, 'Research')");
   db.run("INSERT INTO TagMap VALUES (1, NULL, NULL, 1, 2, 1)");      // Sermon → n1
   db.run("INSERT INTO TagMap VALUES (2, NULL, NULL, 999, 2, 2)");    // BROKEN link (note 999)
+  db.run("INSERT INTO TagMap VALUES (3, NULL, NULL, 2, 4, 1)");      // Research → n2 (doomed dup)
 
   // Bookmark keeps Location 2 referenced
   db.run("INSERT INTO Bookmark VALUES (1, 2, 2, 0, 'BM', NULL, NULL, NULL)");
@@ -112,8 +119,8 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     if (report.checks[k] === n) ok(`${k} = ${n}`);
     else fail(`${k}: expected ${n}, got ${report.checks[k]}`);
   }
-  if (report.totals.notes === 4 && report.totals.marks === 4 && report.totals.bm === 1 && report.totals.tags === 3)
-    ok('totals correct (4 notes / 4 highlights / 1 bookmark / 3 tags)');
+  if (report.totals.notes === 6 && report.totals.marks === 4 && report.totals.bm === 1 && report.totals.tags === 4)
+    ok('totals correct (6 notes / 4 highlights / 1 bookmark / 4 tags)');
   else fail('totals wrong: ' + JSON.stringify(report.totals));
   if (report.issues === 7) ok('7 total issues'); else fail('expected 7 issues, got ' + report.issues);
   if (report.score < 100 && report.score >= 35) ok('score reflects issues (' + report.score + ')');
@@ -130,13 +137,18 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   else fail('re-scan not clean: ' + JSON.stringify(after));
   // Healthy records survived
   const q1 = sickDb.exec("SELECT NoteId FROM Note ORDER BY NoteId")[0].values.flat();
-  if (JSON.stringify(q1) === JSON.stringify([1, 3])) ok('healthy notes n1+n3 survived; n2+n4 removed');
+  if (JSON.stringify(q1) === JSON.stringify([1, 3, 5, 6])) ok('healthy notes n1+n3 survived; n2+n4 removed');
   else fail('note survivors wrong: ' + JSON.stringify(q1));
+  if (q1.includes(5) && q1.includes(6)) ok('same-text notes on DIFFERENT verses of the same chapter both survived');
+  else fail('verse-anchored notes were wrongly deduped: ' + JSON.stringify(q1));
+  const tagOnKeeper = sickDb.exec("SELECT NoteId FROM TagMap WHERE TagId=4")[0].values.flat();
+  if (JSON.stringify(tagOnKeeper) === JSON.stringify([1])) ok("doomed duplicate's tag (Research) migrated to the kept note");
+  else fail('Research tag not migrated to keeper: ' + JSON.stringify(tagOnKeeper));
   const q2 = sickDb.exec("SELECT UserMarkId FROM UserMark ORDER BY UserMarkId")[0].values.flat();
   if (JSON.stringify(q2) === JSON.stringify([1, 3, 4])) ok('healthy marks m1+m3+m4 survived; m2 removed');
   else fail('mark survivors wrong: ' + JSON.stringify(q2));
   const q3 = sickDb.exec("SELECT Name FROM Tag ORDER BY TagId")[0].values.flat();
-  if (JSON.stringify(q3) === JSON.stringify(['Favorites', 'Sermon'])) ok('Favorites (Type 0) + used tag survived; unused removed');
+  if (JSON.stringify(q3) === JSON.stringify(['Favorites', 'Sermon', 'Research'])) ok('Favorites (Type 0) + used tags survived; unused removed');
   else fail('tag survivors wrong: ' + JSON.stringify(q3));
   const q4 = sickDb.exec("SELECT LocationId FROM Location ORDER BY LocationId")[0].values.flat();
   if (JSON.stringify(q4) === JSON.stringify([1, 2])) ok('referenced locations survived; leftover removed');
@@ -178,7 +190,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     if (cleanBtn) ok('Clean & Download button offered');
     else fail('clean button missing');
     const totals = doc.querySelectorAll('.jbd-total strong');
-    if (totals.length === 4 && totals[0].textContent === '4') ok('totals strip rendered (4 notes)');
+    if (totals.length === 4 && totals[0].textContent === '6') ok('totals strip rendered (6 notes)');
     else fail('totals strip wrong');
   }
 
@@ -224,7 +236,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
         const outBytes = await rezip.files[dbKey].async('uint8array');
         const outDb = new SQL.Database(outBytes);
         const noteCount = outDb.exec('SELECT COUNT(*) FROM Note')[0].values[0][0];
-        if (noteCount === 2) ok('exported DB opens and is clean (2 healthy notes)');
+        if (noteCount === 4) ok('exported DB opens and is clean (4 healthy notes)');
         else fail('exported DB note count wrong: ' + noteCount);
         outDb.close();
       }
