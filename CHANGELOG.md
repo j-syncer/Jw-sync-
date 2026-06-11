@@ -82,7 +82,7 @@ runs in your browser — your files are never uploaded.
 
 ## [2.63.3] — 2026-06-11
 
-### Library Doctor — safer duplicate-note detection (beta)
+### Library Doctor — safer duplicate-note detection (live)
 - Notes are now only treated as duplicates when their anchor matches too —
   identical text on **different verses or paragraphs of the same chapter** is
   never removed anymore.
