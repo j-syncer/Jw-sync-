@@ -169,6 +169,45 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   else fail('clean is not idempotent: ' + JSON.stringify(fixed2));
   cleanDb.close();
 
+  section('Post-merge opt-in (__jwDoctorArmAfterMerge)');
+  if (typeof win.__jwDoctorArmAfterMerge !== 'function') fail('window.__jwDoctorArmAfterMerge not exposed');
+  else {
+    ok('window.__jwDoctorArmAfterMerge exposed');
+    const docD = win.document;
+    // a React-like download anchor that has no merged blob yet
+    const dlAnchor = docD.createElement('a');
+    dlAnchor.id = 'download-btn';
+    dlAnchor.setAttribute('href', '#');
+    docD.body.appendChild(dlAnchor);
+    let fetchedUrl = null;
+    win.fetch = (url) => {
+      fetchedUrl = url;
+      return Promise.resolve({ blob: () => Promise.resolve(Buffer.from(new Uint8Array(jwlibBytes))) });
+    };
+    const RealFile = win.File;
+    win.File = undefined; // force the Blob fallback path (JSZip-friendly in node)
+    win.__jwDoctorArmAfterMerge();
+    await sleep(900);
+    if (!docD.querySelector('.jbd-overlay')) ok('doctor stays closed while the merge is still running');
+    else fail('doctor opened before any merged blob existed');
+    // merge "finishes": React gives the anchor a fresh blob: URL
+    dlAnchor.setAttribute('href', 'blob:merged-test');
+    dlAnchor.setAttribute('download', 'merged_test.jwlibrary');
+    let opened = false;
+    for (let i = 0; i < 60; i++) { await sleep(200); if (docD.querySelector('.jbd-overlay')) { opened = true; break; } }
+    win.File = RealFile;
+    if (fetchedUrl === 'blob:merged-test') ok('fetched the merged blob URL');
+    else fail('merged blob not fetched: ' + fetchedUrl);
+    if (opened) ok('doctor auto-opened on the merged file');
+    else fail('doctor never opened after the merge finished');
+    let reported = false;
+    for (let i = 0; i < 50; i++) { await sleep(200); if (docD.querySelector('.jbd-ring-fg')) { reported = true; break; } }
+    if (reported) ok('merged file scanned to a full report');
+    else fail('report never rendered for the merged file');
+    const xBtn = docD.querySelector('.jbd-x'); if (xBtn) xBtn.click();
+    dlAnchor.remove();
+  }
+
   section('UI flow reaches the report');
   win.__openJwDoctor(jwlibBytes);
   const doc = win.document;

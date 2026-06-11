@@ -129,6 +129,50 @@ async function waitForOverlay(doc, id, ms = 2000) {
     }
   }
 
+  section('Library Doctor opt-in checkbox (v2.64.0)');
+  {
+    const dom = makeDom();
+    const win = dom.window, doc = win.document;
+    let armed = 0;
+    win.__jwDoctorArmAfterMerge = () => { armed++; };
+    const p = win.__jwImpactPreview(counts);
+    const overlay = await waitForOverlay(doc, 'jw-impact-overlay');
+    const cb = overlay && overlay.querySelector('[data-jip-doctor]');
+    if (cb) ok('doctor checkbox rendered above the actions'); else fail('doctor checkbox missing');
+    if (cb && !cb.checked) ok('checkbox defaults to unchecked'); else fail('checkbox should default unchecked');
+    if (overlay.querySelector('.jip-doctor span').textContent.includes('Library Doctor'))
+      ok('checkbox label mentions the Library Doctor');
+    else fail('checkbox label wrong: ' + overlay.querySelector('.jip-doctor span').textContent);
+    if (cb) cb.checked = true; // user opts in
+    overlay.querySelector('[data-jip-go]').click();
+    const res = await p;
+    if (res === true && armed === 1) ok('confirm with box ticked arms the Doctor (and still resolves true)');
+    else fail('arming wrong: resolved ' + res + ', armed ' + armed);
+    if (win.localStorage.getItem('jwsync_doctor_after_merge') === '1') ok('choice remembered (jwsync_doctor_after_merge=1)');
+    else fail('preference not persisted');
+    dom.window.close();
+  }
+  // remembered preference pre-ticks the box; confirming unticked disarms
+  {
+    const dom = makeDom();
+    const win = dom.window, doc = win.document;
+    win.localStorage.setItem('jwsync_doctor_after_merge', '1');
+    let armed = 0;
+    win.__jwDoctorArmAfterMerge = () => { armed++; };
+    const p = win.__jwImpactPreview(counts);
+    const overlay = await waitForOverlay(doc, 'jw-impact-overlay');
+    const cb = overlay && overlay.querySelector('[data-jip-doctor]');
+    if (cb && cb.checked) ok('remembered preference pre-ticks the box'); else fail('preference not restored');
+    if (cb) cb.checked = false; // user opts out this time
+    overlay.querySelector('[data-jip-go]').click();
+    await p;
+    if (armed === 0) ok('unticked box does not arm the Doctor');
+    else fail('doctor armed despite unticked box');
+    if (win.localStorage.getItem('jwsync_doctor_after_merge') === '0') ok('opt-out remembered');
+    else fail('opt-out not persisted');
+    dom.window.close();
+  }
+
   section('Worker wires the impact gate');
   {
     const w = fs.readFileSync(REPO + '/beta/js/merge-worker.js', 'utf8');

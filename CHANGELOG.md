@@ -80,6 +80,18 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.64.0] — 2026-06-11
+
+### Library Doctor — health-check your merge as part of the flow (beta)
+- The "Ready to merge" window now has an opt-in checkbox: **"Also
+  health-check the merged file (Library Doctor)"**. Tick it, and as soon as
+  your merged backup is ready the Library Doctor opens automatically with
+  that exact file loaded — scan it, and if anything fixable turns up, one
+  click downloads the healthy copy too.
+- Your choice is remembered for next time. The merge itself is completely
+  unaffected either way — the Doctor only ever reads the finished file.
+- Localised in all 12 languages.
+
 ## [2.63.3] — 2026-06-11
 
 ### Library Doctor — safer duplicate-note detection (live)

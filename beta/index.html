@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.63.3",
+      "softwareVersion": "2.64.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -3757,27 +3757,32 @@ window.__bootBrowse = function() {
 .jip-btn-cancel:hover{border-color:rgba(148,163,184,.55);color:#fff}
 .jip-btn-go{background:#ea580c;color:#fff;border:0;box-shadow:0 1px 5px rgba(234,88,12,.35)}
 .jip-btn-go:hover{background:#c2410c}
+.jip-doctor{display:flex;align-items:center;gap:9px;margin:-8px 0 16px;padding:10px 12px;background:rgba(71,85,105,.12);border:1px solid rgba(71,85,105,.3);border-radius:9px;cursor:pointer}
+.jip-doctor:hover{border-color:rgba(234,88,12,.4)}
+.jip-doctor input{accent-color:#ea580c;width:15px;height:15px;flex:0 0 auto;cursor:pointer;margin:0}
+.jip-doctor span{font-size:12.5px;color:#cbd5e1;line-height:1.4}
 </style>
 <script>
 (function () {
   'use strict';
   if (window.__jwImpactPreview) return;
   var I18N = {
-    en:{title:'Ready to merge',sub:'Here’s what this merge will change. Review the numbers, then download your merged backup.',added:'Will be added',notes:'Notes',highlights:'Highlights',bookmarks:'Bookmarks',tags:'Tags',updated:'Notes updated (newer version wins)',deduped:'Duplicates skipped',confirm:'Merge & Download',cancel:'Cancel',study_answers:'Study answers'},
-    es:{title:'Listo para combinar',sub:'Esto es lo que cambiará esta combinación. Revisa los números y descarga tu copia combinada.',added:'Se añadirá',notes:'Notas',highlights:'Destacados',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas actualizadas (gana la más reciente)',deduped:'Duplicados omitidos',confirm:'Combinar y descargar',cancel:'Cancelar',study_answers:'Respuestas de estudio'},
-    pt:{title:'Pronto para combinar',sub:'Veja o que esta combinação vai alterar. Revise os números e baixe seu backup combinado.',added:'Será adicionado',notes:'Notas',highlights:'Destaques',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas atualizadas (vence a mais recente)',deduped:'Duplicatas ignoradas',confirm:'Combinar e baixar',cancel:'Cancelar',study_answers:'Respostas de estudo'},
-    fr:{title:'Prêt à fusionner',sub:'Voici ce que cette fusion va modifier. Vérifiez les chiffres, puis téléchargez votre sauvegarde fusionnée.',added:'Sera ajouté',notes:'Notes',highlights:'Surlignages',bookmarks:'Signets',tags:'Étiquettes',updated:'Notes mises à jour (la plus récente l’emporte)',deduped:'Doublons ignorés',confirm:'Fusionner et télécharger',cancel:'Annuler',study_answers:'Réponses d’étude'},
-    de:{title:'Bereit zum Zusammenführen',sub:'Das wird beim Zusammenführen geändert. Prüfe die Zahlen und lade dann deine Sicherung herunter.',added:'Wird hinzugefügt',notes:'Notizen',highlights:'Markierungen',bookmarks:'Lesezeichen',tags:'Tags',updated:'Aktualisierte Notizen (neuere gewinnt)',deduped:'Duplikate übersprungen',confirm:'Zusammenführen & herunterladen',cancel:'Abbrechen',study_answers:'Studienantworten'},
-    it:{title:'Pronto per l’unione',sub:'Ecco cosa cambierà questa unione. Controlla i numeri, poi scarica il backup unito.',added:'Verrà aggiunto',notes:'Note',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags:'Tag',updated:'Note aggiornate (vince la più recente)',deduped:'Duplicati saltati',confirm:'Unisci e scarica',cancel:'Annulla',study_answers:'Risposte di studio'},
-    ru:{title:'Готово к объединению',sub:'Вот что изменит это объединение. Проверьте числа и скачайте объединённую копию.',added:'Будет добавлено',notes:'Заметки',highlights:'Выделения',bookmarks:'Закладки',tags:'Метки',updated:'Обновлённые заметки (побеждает новейшая)',deduped:'Дубликаты пропущены',confirm:'Объединить и скачать',cancel:'Отмена',study_answers:'Ответы для изучения'},
-    ja:{title:'結合の準備ができました',sub:'この結合で変わる内容です。数値を確認してから、結合したバックアップをダウンロードしてください。',added:'追加されます',notes:'ノート',highlights:'ハイライト',bookmarks:'しおり',tags:'タグ',updated:'更新されたノート（新しい方を採用）',deduped:'重複をスキップ',confirm:'結合してダウンロード',cancel:'キャンセル',study_answers:'学習の回答'},
-    ko:{title:'병합 준비 완료',sub:'이 병합으로 변경될 내용입니다. 숫자를 확인한 뒤 병합된 백업을 다운로드하세요.',added:'추가됨',notes:'노트',highlights:'하이라이트',bookmarks:'북마크',tags:'태그',updated:'업데이트된 노트(최신 버전 우선)',deduped:'중복 건너뜀',confirm:'병합 및 다운로드',cancel:'취소',study_answers:'학습 답변'},
-    tl:{title:'Handa nang i-merge',sub:'Ito ang babaguhin ng merge na ito. Suriin ang mga numero, pagkatapos i-download ang iyong pinagsamang backup.',added:'Idaragdag',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update na nota (nananalo ang mas bago)',deduped:'Nilaktawang duplikado',confirm:'I-merge at i-download',cancel:'Kanselahin',study_answers:'Mga sagot sa pag-aaral'}
-  ,sv:{title:"Redo att slå ihop",sub:"Här är vad sammanslagningen ändrar. Granska siffrorna och ladda sedan ner din sammanslagna säkerhetskopia.",added:"Kommer att läggas till",notes:"Anteckningar",highlights:"Överstrykningar",bookmarks:"Bokmärken",tags:"Taggar",updated:"Uppdaterade anteckningar (nyare version vinner)",deduped:"Dubbletter överhoppade",confirm:"Slå ihop och ladda ner",cancel:"Avbryt",study_answers:"Studiesvar"},ceb:{title:'Andam na nga isagol',sub:'Mao kini ang pagbabago sa merge. Susihon ang mga numero, unya i-download ang imong gisagol nga backup.',added:'Iduganon',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update nga mga nota (mananaog ang mas bago)',deduped:'Gilaktawan nga mga duplicate',confirm:'Isagol ug i-download',cancel:'Ikansela',study_answers:'Mga tubag sa pagtuon'}};
+    en:{title:'Ready to merge',sub:'Here’s what this merge will change. Review the numbers, then download your merged backup.',added:'Will be added',notes:'Notes',highlights:'Highlights',bookmarks:'Bookmarks',tags:'Tags',updated:'Notes updated (newer version wins)',deduped:'Duplicates skipped',confirm:'Merge & Download',cancel:'Cancel',study_answers:'Study answers',doctor:'Also health-check the merged file (Library Doctor)'},
+    es:{title:'Listo para combinar',sub:'Esto es lo que cambiará esta combinación. Revisa los números y descarga tu copia combinada.',added:'Se añadirá',notes:'Notas',highlights:'Destacados',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas actualizadas (gana la más reciente)',deduped:'Duplicados omitidos',confirm:'Combinar y descargar',cancel:'Cancelar',study_answers:'Respuestas de estudio',doctor:'Revisar también el archivo combinado (Doctor de Biblioteca)'},
+    pt:{title:'Pronto para combinar',sub:'Veja o que esta combinação vai alterar. Revise os números e baixe seu backup combinado.',added:'Será adicionado',notes:'Notas',highlights:'Destaques',bookmarks:'Marcadores',tags:'Etiquetas',updated:'Notas atualizadas (vence a mais recente)',deduped:'Duplicatas ignoradas',confirm:'Combinar e baixar',cancel:'Cancelar',study_answers:'Respostas de estudo',doctor:'Examinar também o arquivo mesclado (Doutor da Biblioteca)'},
+    fr:{title:'Prêt à fusionner',sub:'Voici ce que cette fusion va modifier. Vérifiez les chiffres, puis téléchargez votre sauvegarde fusionnée.',added:'Sera ajouté',notes:'Notes',highlights:'Surlignages',bookmarks:'Signets',tags:'Étiquettes',updated:'Notes mises à jour (la plus récente l’emporte)',deduped:'Doublons ignorés',confirm:'Fusionner et télécharger',cancel:'Annuler',study_answers:'Réponses d’étude',doctor:'Vérifier aussi le fichier fusionné (Docteur de Bibliothèque)'},
+    de:{title:'Bereit zum Zusammenführen',sub:'Das wird beim Zusammenführen geändert. Prüfe die Zahlen und lade dann deine Sicherung herunter.',added:'Wird hinzugefügt',notes:'Notizen',highlights:'Markierungen',bookmarks:'Lesezeichen',tags:'Tags',updated:'Aktualisierte Notizen (neuere gewinnt)',deduped:'Duplikate übersprungen',confirm:'Zusammenführen & herunterladen',cancel:'Abbrechen',study_answers:'Studienantworten',doctor:'Zusammengeführte Datei zusätzlich prüfen (Bibliothek-Doktor)'},
+    it:{title:'Pronto per l’unione',sub:'Ecco cosa cambierà questa unione. Controlla i numeri, poi scarica il backup unito.',added:'Verrà aggiunto',notes:'Note',highlights:'Evidenziazioni',bookmarks:'Segnalibri',tags:'Tag',updated:'Note aggiornate (vince la più recente)',deduped:'Duplicati saltati',confirm:'Unisci e scarica',cancel:'Annulla',study_answers:'Risposte di studio',doctor:'Controlla anche il file unito (Dottore della Biblioteca)'},
+    ru:{title:'Готово к объединению',sub:'Вот что изменит это объединение. Проверьте числа и скачайте объединённую копию.',added:'Будет добавлено',notes:'Заметки',highlights:'Выделения',bookmarks:'Закладки',tags:'Метки',updated:'Обновлённые заметки (побеждает новейшая)',deduped:'Дубликаты пропущены',confirm:'Объединить и скачать',cancel:'Отмена',study_answers:'Ответы для изучения',doctor:'Также проверить объединённый файл (Доктор библиотеки)'},
+    ja:{title:'結合の準備ができました',sub:'この結合で変わる内容です。数値を確認してから、結合したバックアップをダウンロードしてください。',added:'追加されます',notes:'ノート',highlights:'ハイライト',bookmarks:'しおり',tags:'タグ',updated:'更新されたノート（新しい方を採用）',deduped:'重複をスキップ',confirm:'結合してダウンロード',cancel:'キャンセル',study_answers:'学習の回答',doctor:'結合したファイルも診断する（ライブラリードクター）'},
+    ko:{title:'병합 준비 완료',sub:'이 병합으로 변경될 내용입니다. 숫자를 확인한 뒤 병합된 백업을 다운로드하세요.',added:'추가됨',notes:'노트',highlights:'하이라이트',bookmarks:'북마크',tags:'태그',updated:'업데이트된 노트(최신 버전 우선)',deduped:'중복 건너뜀',confirm:'병합 및 다운로드',cancel:'취소',study_answers:'학습 답변',doctor:'병합된 파일도 검진하기 (라이브러리 닥터)'},
+    tl:{title:'Handa nang i-merge',sub:'Ito ang babaguhin ng merge na ito. Suriin ang mga numero, pagkatapos i-download ang iyong pinagsamang backup.',added:'Idaragdag',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update na nota (nananalo ang mas bago)',deduped:'Nilaktawang duplikado',confirm:'I-merge at i-download',cancel:'Kanselahin',study_answers:'Mga sagot sa pag-aaral',doctor:'Suriin din ang pinagsamang file (Library Doctor)'}
+  ,sv:{title:"Redo att slå ihop",sub:"Här är vad sammanslagningen ändrar. Granska siffrorna och ladda sedan ner din sammanslagna säkerhetskopia.",added:"Kommer att läggas till",notes:"Anteckningar",highlights:"Överstrykningar",bookmarks:"Bokmärken",tags:"Taggar",updated:"Uppdaterade anteckningar (nyare version vinner)",deduped:"Dubbletter överhoppade",confirm:"Slå ihop och ladda ner",cancel:"Avbryt",study_answers:"Studiesvar",doctor:"Hälsokolla även den sammanslagna filen (Biblioteksdoktorn)"},ceb:{title:'Andam na nga isagol',sub:'Mao kini ang pagbabago sa merge. Susihon ang mga numero, unya i-download ang imong gisagol nga backup.',added:'Iduganon',notes:'Mga nota',highlights:'Mga highlight',bookmarks:'Mga bookmark',tags:'Mga tag',updated:'Na-update nga mga nota (mananaog ang mas bago)',deduped:'Gilaktawan nga mga duplicate',confirm:'Isagol ug i-download',cancel:'Ikansela',study_answers:'Mga tubag sa pagtuon',doctor:'Susiha usab ang gisagol nga file (Library Doctor)'}};
   function curLang(){ try{return localStorage.getItem('jwsync_lang')||'en';}catch(_){return 'en';} }
   function t(k){ var l=curLang(); return (I18N[l]&&I18N[l][k])||I18N.en[k]||k; }
   function esc(s){ return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
 
+  function doctorPref(){ try{ return localStorage.getItem('jwsync_doctor_after_merge')==='1'; }catch(_){ return false; } }
   window.__jwImpactPreview = function (counts) {
     counts = counts || {};
     return new Promise(function (resolve) {
@@ -3801,6 +3806,7 @@ window.__bootBrowse = function() {
             row(t('updated'), counts.Updated, false)+
             row(t('deduped'), counts.Deduplicated, false)+
           '</div>'+
+          '<label class="jip-doctor"><input type="checkbox" data-jip-doctor'+(doctorPref()?' checked':'')+'><span>'+esc(t('doctor'))+'</span></label>'+
           '<div class="jip-actions">'+
             '<button type="button" class="jip-btn jip-btn-cancel" data-jip-cancel>'+esc(t('cancel'))+'</button>'+
             '<button type="button" class="jip-btn jip-btn-go" data-jip-go>'+esc(t('confirm'))+'</button>'+
@@ -3811,7 +3817,14 @@ window.__bootBrowse = function() {
       overlay.innerHTML = html;
       document.body.appendChild(overlay);
       overlay.querySelectorAll('[data-jip-cancel]').forEach(function(el){ el.addEventListener('click', function(){ done(false); }); });
-      overlay.querySelector('[data-jip-go]').addEventListener('click', function(){ done(true); });
+      overlay.querySelector('[data-jip-go]').addEventListener('click', function(){
+        var cb = overlay.querySelector('[data-jip-doctor]');
+        if (cb) {
+          try { localStorage.setItem('jwsync_doctor_after_merge', cb.checked ? '1' : '0'); } catch (_) {}
+          if (cb.checked && typeof window.__jwDoctorArmAfterMerge === 'function') window.__jwDoctorArmAfterMerge();
+        }
+        done(true);
+      });
       document.addEventListener('keydown', onKey);
     });
   };
@@ -5888,6 +5901,32 @@ body.light .jwr-ntitle{color:#0b2e58}
     cur={overlay:shell(), db:null, zip:null, dbKey:null, name:null, size:0, report:null};
     if(file) startScan(file); else renderPick();
   }
+
+  // ── Opt-in from the pre-merge preview: when the merge worker finishes
+  // (the React download anchor #download-btn gets a fresh blob: URL — the
+  // same signal the celebration overlay uses), fetch the merged file and
+  // open the Doctor on it. Purely additive: the merge pipeline is never
+  // touched, and any failure here simply does nothing.
+  var armIv=null;
+  window.__jwDoctorArmAfterMerge=function(){
+    if(armIv){ clearInterval(armIv); armIv=null; }
+    var a0=document.getElementById('download-btn');
+    var prev=(a0&&a0.getAttribute('href'))||'';
+    var tries=0;
+    armIv=setInterval(function(){
+      if(++tries>720){ clearInterval(armIv); armIv=null; return; }
+      var a=document.getElementById('download-btn');
+      var href=(a&&a.getAttribute('href'))||'';
+      if(href.indexOf('blob:')!==0 || href===prev) return;
+      clearInterval(armIv); armIv=null;
+      var name=a.getAttribute('download')||'merged.jwlibrary';
+      fetch(href).then(function(r){ return r.blob(); }).then(function(b){
+        var file; try{ file=new File([b],name,{type:'application/octet-stream'}); }catch(_){ file=b; }
+        // small delay so the celebration overlay mounts beneath first
+        setTimeout(function(){ openDoctor(file); },1200);
+      }).catch(function(){});
+    },500);
+  };
 
   window.__openJwDoctor = openDoctor;
   window.__jwDoctorInternals = { runChecks:runChecks, applyFixes:applyFixes, idsFor:idsFor };
