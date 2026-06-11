@@ -190,6 +190,13 @@ async function waitForOverlay(doc, id, ms = 2000) {
 
   section('Worker wires the impact gate');
   {
+    const html = fs.readFileSync(HTML_PATH, 'utf8');
+    const cardCss = (html.match(/\.jip-card\{[^}]*\}/) || [''])[0];
+    if (/max-height:calc\(100(d?)vh[^}]*overflow-y:auto/.test(cardCss))
+      ok('card capped to the viewport and scrollable (mobile overflow fix)');
+    else fail('.jip-card not scrollable: ' + cardCss);
+  }
+  {
     const w = fs.readFileSync(REPO + '/beta/js/merge-worker.js', 'utf8');
     if (w.includes('previewConfirm')) ok('worker honours opts.previewConfirm');
     else fail('worker previewConfirm gate missing');

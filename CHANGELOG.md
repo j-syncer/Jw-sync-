@@ -80,6 +80,14 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.65.1] — 2026-06-11
+
+### Fixed (beta)
+- **The "Ready to merge" card could overflow the screen on mobile** with no
+  way to scroll — especially with a long Library Doctor findings list — cutting
+  off the Merge & Download button. The card now caps itself to the screen
+  height and scrolls smoothly inside.
+
 ## [2.65.0] — 2026-06-11
 
 ### Library Doctor moved into the merge itself (beta)
