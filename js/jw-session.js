@@ -179,6 +179,7 @@
       } else {
         btn.addEventListener('click', (function (t) { return function (e) {
           e.preventDefault();
+          // Carry the working file: prefer a live File ref, else rely on the store.
           var live = null;
           try { live = window.__jwLastFile || null; } catch (_) {}
           // Signal index.html to auto-open Browse on arrival.

@@ -17,6 +17,17 @@ Do this automatically for any request. No need to ask, no feature branches.
 | `beta/index.html` | jwsync.org/beta | Every change, by default |
 | `index.html` | jwsync.org | Only on explicit "go live" |
 
+### ⚠️ Shared files ship to BOTH sites in lockstep
+The satellite pages and the tool-layer scripts are NOT beta-first — they must
+stay identical between the two sites. **Any edit to one copy must be applied to
+the other copy in the same commit:**
+`highlights.html`, `share.html`, `styles.css`, and everything in `js/`
+(each has a twin under `beta/`). `js/enhancements.js` is the one exception:
+its service-worker registration line legitimately differs (scope `/` vs
+`/beta/`). Test suite `15_parity.js` fails the build if the copies drift —
+this rule exists because the Awards tab once shipped to production only and
+was missing from beta for days.
+
 ### Git rules
 - Branch is **always `main`** — never create feature branches unless explicitly asked
 - Always `git push origin main` after every commit
@@ -39,15 +50,27 @@ cd tests && npm install --silent 2>/dev/null; npm test
 ```
 
 - `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
-- `npm test` chains all three suites (`01_static.js && 02_runtime.js && 03_regression.js`) and exits non-zero on the first failure.
-- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`.
+- `npm test` chains all 15 suites (`01_static.js` … `15_parity.js`) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`.
 
 **Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
 
-Suite coverage (~80 assertions):
-- **01_static.js** — both index.html files parse, TRANSLATIONS object is well-formed across all 10 languages, Browse i18n covers every required key, every CSS class referenced is defined, all hook/marker strings present.
+Suite coverage:
+- **01_static.js** — both index.html files parse, TRANSLATIONS object is well-formed across all 12 languages, Browse i18n covers every required key, every CSS class referenced is defined, all hook/marker strings present.
 - **02_runtime.js** — synthesises a `.jwlibrary` in-memory (zipped SQLite with the JW Library schema), boots the Browse module in JSDOM, drives every UI affordance (tab switching, color/tag/publication filters, search, sort, detail panes for notes/highlights/bookmarks, copy-to-clipboard, clear-all, close).
 - **03_regression.js** — merge worker still parses, every critical merge anchor is intact, HTML structure clean (one structural `</body>`/`</html>` outside scripts), cache version is set.
+- **04_lazy_load.js** — lazy-loading / code-splitting of the heavy modules.
+- **05_post_merge.js** — post-merge flows (celebration screen, downloads, hand-offs).
+- **06_conflict_review.js** — merge conflict review UI.
+- **07_library_wrapped.js** — Study Stats page (highlights.html) end-to-end.
+- **08_pre_merge_preview.js** — pre-merge preview card.
+- **09_scheduled_sync.js** — sync reminder scheduling.
+- **10_mobile_polish.js** — mobile-specific affordances.
+- **11_semantic_search.js** — semantic worker + Browse "Ask" integration.
+- **12_share_page.js** — share.html note-sharing page.
+- **13_receive_merge.js** — receive/adopt shared notes into a backup.
+- **14_backup_doctor.js** — Library Doctor scan/fix, standalone and inside the merge engine.
+- **15_parity.js** — beta/production drift guard: shared-file pairs identical, `enhancements.js` differs only by SW registration, and `CACHE_VERSION` bumped whenever a precached page changes (checks both working tree and git history).
 
 If you add a new user-facing feature, extend the relevant suite to cover it.
 
@@ -90,13 +113,29 @@ If you add a new user-facing feature, extend the relevant suite to cover it.
 
 ## Features Built (permanent reference)
 
-### Languages (11 total)
-`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv`
+### Languages (12 total)
+`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb`
 
-**Adding a language — critical gotcha:** The `TRANSLATIONS` object ends with `}},stripHTML=`. Insert a new language BETWEEN those two closing braces:
+**Adding a language:** the app's `TRANSLATIONS` is an alias —
+`TRANSLATIONS = window.__JW_LANDING_I18N;` — and `__JW_LANDING_I18N` is defined
+as one big **strict-JSON** object (one per index.html, near the top of a script
+block). The old `}},stripHTML=` anchor no longer exists. Safest method: locate
+the object by brace-balancing from the `__JW_LANDING_I18N = ` anchor, then
+round-trip it through `json`:
 ```python
-content.replace('}},stripHTML=', '}' + new_lang_block + '},stripHTML=', 1)
-# new_lang_block starts with ,xx:{...} and ends with }
+import json, re
+c = open('beta/index.html', encoding='utf-8').read()
+m = re.search(r'__JW_LANDING_I18N *= *', c)
+ts = m.end(); d = 0
+for i in range(ts, len(c)):
+    if c[i] == '{': d += 1
+    elif c[i] == '}':
+        d -= 1
+        if d == 0: e = i + 1; break
+obj = json.loads(c[ts:e])
+obj['xx'] = {...}  # same ~100 keys as obj['en']
+c = c[:ts] + json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + c[e:]
+open('beta/index.html', 'w', encoding='utf-8').write(c)
 ```
 
 ### Simple Mode
@@ -126,7 +165,7 @@ In-browser library manager for any `.jwlibrary` file — three tabs (Notes / Hig
   - Orange button in the Insights modal header (`.jb-browse-open-btn`, label key `brw_open`)
   - Public function: `window.__openJwBrowse(file)` — pass a `File`/`Blob`/`ArrayBuffer` or `undefined` (will prompt for one)
 - **File hand-off:** the main app's `ja()` function (the file loader that powers Insights) sets `window.__jwLastFile = e` so Browse can reuse the same upload.
-- **i18n:** Browse has its **own** `I18N` object inside the module (~55 keys × 10 languages). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React).
+- **i18n:** Browse has its **own** `I18N` object inside the module (~55 keys × all 12 languages). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React).
 - **Data:** Reads AND WRITES `Note`, `UserMark`, `Bookmark`, `Tag`, `TagMap`, `Location` on the main thread via sql.js — do NOT extend `merge-worker.js` (it's write-optimised).
 - Capped at 2000 displayed rows with a "narrow your search" hint.
 - **DB stays open** after load (`state.db`); `state.dirty` tracks change count; `state.editingId` tracks which item is in edit mode.
@@ -146,16 +185,18 @@ In-browser library manager for any `.jwlibrary` file — three tabs (Notes / Hig
 
 - **Python replacements only** — files are too large for Edit tool; use `open().read()` → `str.replace()` → `write()`
 - **Always verify anchors first** — check `content.count(anchor) == 1` before replacing
-- **Service worker** caches `index.html`. Bump `CACHE_VERSION` in `service-worker.js` (currently `jwsync-vN` — check the file) any time you ship a meaningful change to either index.html so PWA users pick it up
+- **Service worker** precaches `index.html`, `highlights.html`, and `share.html`. Bump `CACHE_VERSION` in `service-worker.js` (currently `jwsync-vN` — check the file) any time you ship a change to any of those pages (or their beta twins) so PWA users pick it up. Test suite `15_parity.js` fails if you forget.
+- **One-off Python patch scripts** from past sessions live in `scripts/` — they are historical records, not part of any build; don't re-run them.
 - **Mobile language picker** — on Android, the `<select>` renders as a native radio list. That IS the language selector; no separate component
 - **TRANSLATIONS validation** — verify after any language insertion:
   ```bash
   node -e "
   const c=require('fs').readFileSync('beta/index.html','utf8');
-  const ts=c.indexOf('TRANSLATIONS=')+13;
+  const m=c.match(/__JW_LANDING_I18N *= */);   // TRANSLATIONS is an alias of this
+  const ts=m.index+m[0].length;
   let d=0,e=ts;
   for(let i=ts;i<c.length;i++){if(c[i]==='{')d++;else if(c[i]==='}'){d--;if(d===0){e=i+1;break;}}}
-  const r=eval('('+c.slice(ts,e)+')');
+  const r=JSON.parse(c.slice(ts,e));           // strict JSON — parse, don't eval
   console.log(Object.keys(r));
   "
   ```

@@ -80,6 +80,21 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.66.0] — 2026-06-12
+
+### Added (beta)
+- **The Awards tab is now on the beta site's Study Stats page too** — the
+  Stats / Awards two-tab layout, themed medals, and the Distinguished Honors
+  cabinet had been live on jwsync.org since June 8 but never reached
+  jwsync.org/beta. Both sites now show the identical Stats page.
+
+### Internal
+- New automated drift guard (test suite 15): the shared pages and scripts that
+  ship to both sites must stay in sync, and the offline cache version must be
+  bumped whenever a cached page changes — the two mistakes behind the missing
+  Awards tab and the stale freeze fix can no longer slip through unnoticed.
+- One-off build scripts moved out of the repository root into `scripts/`.
+
 ## [2.65.3] — 2026-06-12
 
 ### Fixed (live)

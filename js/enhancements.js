@@ -571,7 +571,11 @@
           pollFor(
             'input[type="file"][accept=".jwlibrary"][multiple]:not([disabled])',
             function (secondaryInput) {
-              if (!secondaryInput) return resolve(false);
+              if (!secondaryInput) {
+                // Even without a second file, the main backup is loaded;
+                // partial success.
+                return resolve(false);
+              }
               injectInto(secondaryInput, file2);
               resolve(true);
             },
