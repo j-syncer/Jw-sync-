@@ -470,6 +470,7 @@
     var landingEl = document.getElementById('landing-view');
     var rootEl = document.getElementById('root');
     var navHome = document.getElementById('site-nav-home');
+    var navHomeLink = document.getElementById('site-nav-home-link');
     var navApp = document.getElementById('site-nav-app');
     var navForum = document.getElementById('site-nav-forum');
     var SEEN_KEY = 'jwsync_lp_seen';
@@ -486,6 +487,7 @@
       document.body.classList.toggle('is-landing', isLanding);
 
       if (navHome) navHome.classList.toggle('active', isLanding);
+      if (navHomeLink) navHomeLink.classList.toggle('active', isLanding);
       if (navApp) navApp.classList.toggle('active', !isLanding && !isForum);
       if (navForum) navForum.classList.toggle('active', isForum);
     }

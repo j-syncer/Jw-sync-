@@ -80,6 +80,15 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.68.0] — 2026-06-12
+
+### Added
+- **"Home" link in the site navigation (beta):** once inside the Merging App
+  there was no visible way back to the homepage — you had to know to click the
+  "JW Sync" logo to find the other tools (Library Doctor, Study Stats, …).
+  A "Home" link now sits first in the nav on every view, highlighted when
+  you're on the homepage, and translated in all 12 languages.
+
 ## [2.67.0] — 2026-06-12
 
 ### Added
