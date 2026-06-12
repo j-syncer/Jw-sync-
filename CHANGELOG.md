@@ -80,6 +80,20 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.65.3] — 2026-06-12
+
+### Fixed (live)
+- **Library Doctor could freeze during the duplicate-highlights check** on
+  large libraries. The check now uses a linear scan instead of a quadratic
+  SQL self-join, so it finishes in seconds even with tens of thousands of
+  highlights. (Shipped earlier; this release bumps the offline cache so
+  installed-app users actually receive it.)
+- **Jumping to Study Explorer from another tool now auto-opens Browse on the
+  beta site too** — the hand-off flag was only being set on production.
+- **Returning visitors on the production site no longer see the landing page
+  on every visit.** Once you've clicked "Launch" the site takes you straight
+  to the app, matching the beta site and the documented behaviour.
+
 ## [2.65.2] — 2026-06-11
 
 ### Fixed (live)

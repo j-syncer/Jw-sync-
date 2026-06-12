@@ -177,13 +177,17 @@
       if (tool.id === active) {
         btn.setAttribute('aria-current', 'page');
       } else {
-        btn.addEventListener('click', function (e) {
+        btn.addEventListener('click', (function (t) { return function (e) {
           e.preventDefault();
           // Carry the working file: prefer a live File ref, else rely on the store.
           var live = null;
           try { live = window.__jwLastFile || null; } catch (_) {}
-          goTo(tool.href, live);
-        });
+          // Signal index.html to auto-open Browse on arrival.
+          if (t.id === 'explorer') {
+            try { sessionStorage.setItem('jwsync_open_browse', '1'); } catch (_) {}
+          }
+          goTo(t.href, live);
+        }; })(tool));
       }
       wrap.appendChild(btn);
     });
