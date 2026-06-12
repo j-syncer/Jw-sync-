@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.67.0] — 2026-06-12
+
+### Added
+- **Hero merge visualization (beta):** the landing page now *shows* the product
+  at first glance — a split hero with two `.jwlibrary` backup files (phone +
+  tablet) flowing into a single merged library card, drawn with
+  highlight-coloured note lines and a "Never leaves your device" privacy badge.
+  Pure HTML/CSS (no images, ~3 KB), theme-aware (dark + light), localised in
+  all 12 languages, side-by-side on desktop and stacked on mobile.
+
 ## [2.66.0] — 2026-06-12
 
 ### Added (beta)
