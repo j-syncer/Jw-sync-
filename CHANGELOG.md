@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.72.0] — 2026-06-13
+
+### Changed (beta preview)
+- **The Community forum is now on-brand on jwsync.org/beta.** It previously
+  used a blue accent and a multi-colour gradient logo with emoji buttons. On
+  beta it now uses the orange brand colour, a flat orange logo, and clean line
+  icons on the New Post button and the Questions / Bugs / Features / General
+  filters (the category dropdown drops its emojis too). Production is unchanged
+  until this goes live.
+
 ## [2.71.0] — 2026-06-13
 
 ### Changed
