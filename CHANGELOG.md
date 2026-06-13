@@ -80,6 +80,18 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.73.0] — 2026-06-13
+
+### Changed (beta preview)
+- **The merge tool is cleaner and more professional on jwsync.org/beta.** The
+  redundant second header (a duplicate logo + language picker that sat right
+  under the site nav) is gone, and the toolbar no longer repeats Study Explorer
+  and Community (they already live in the site nav) — so there's a single nav
+  and one tidy toolbar. Emojis were removed from the tool's buttons (including
+  the main "Merge My Files Now!" button), and the app's warm-grey surfaces now
+  use the brand's cool navy. Works in dark and light themes and on mobile.
+  Production is unchanged until this goes live.
+
 ## [2.72.0] — 2026-06-13
 
 ### Changed (beta preview)

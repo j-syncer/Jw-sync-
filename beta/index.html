@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.72.0",
+      "softwareVersion": "2.73.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -396,6 +396,76 @@
 #forum-view .pill svg,#forum-view .btn svg{width:14px;height:14px;flex:none}
 #forum-view .pill svg{margin-right:4px}
 </style>
+<style id="beta-merge-redesign">
+/* ============================================================================
+   Merge-tool redesign — BETA preview only (production untouched).
+   ========================================================================== */
+/* 1) palette: warm stone -> cool navy/slate (dark mode only) */
+body:not(.light) #root .bg-stone-950{background-color:#05101f}
+body:not(.light) #root .bg-stone-900{background-color:#0a1424}
+body:not(.light) #root .bg-stone-800{background-color:#111f38}
+body:not(.light) #root .bg-stone-700{background-color:#1a2c4d}
+body:not(.light) #root .bg-stone-900\/50{background-color:rgba(10,20,36,.5)}
+body:not(.light) #root .bg-stone-900\/60{background-color:rgba(10,20,36,.6)}
+body:not(.light) #root .bg-stone-900\/40{background-color:rgba(10,20,36,.4)}
+body:not(.light) #root .bg-stone-800\/80{background-color:rgba(17,31,56,.8)}
+body:not(.light) #root .bg-stone-800\/50{background-color:rgba(17,31,56,.5)}
+body:not(.light) #root .bg-stone-800\/30{background-color:rgba(17,31,56,.3)}
+body:not(.light) #root .bg-stone-950\/50{background-color:rgba(5,16,31,.5)}
+body:not(.light) #root .bg-stone-700\/30{background-color:rgba(26,44,77,.3)}
+body:not(.light) #root .bg-stone-600\/30{background-color:rgba(36,57,94,.3)}
+body:not(.light) #root .border-stone-800{border-color:rgba(148,163,184,.12)}
+body:not(.light) #root .border-stone-700{border-color:rgba(148,163,184,.18)}
+body:not(.light) #root .border-stone-600{border-color:rgba(148,163,184,.26)}
+body:not(.light) #root .border-stone-800\/50{border-color:rgba(148,163,184,.08)}
+body:not(.light) #root .border-stone-700\/50{border-color:rgba(148,163,184,.13)}
+body:not(.light) #root .text-stone-100{color:#f1f5f9}
+body:not(.light) #root .text-stone-200{color:#e2e8f0}
+body:not(.light) #root .text-stone-300{color:#cbd5e1}
+body:not(.light) #root .text-stone-400{color:#94a3b8}
+body:not(.light) #root .text-stone-500{color:#64748b}
+body:not(.light) #root .text-stone-600{color:#475569}
+body:not(.light) #root .text-stone-700{color:#334155}
+body:not(.light) #root .placeholder-stone-600::placeholder{color:#475569}
+body:not(.light) #root .hover\:bg-stone-700:hover{background-color:#1a2c4d}
+body:not(.light) #root .hover\:bg-stone-800:hover{background-color:#111f38}
+body:not(.light) #root .hover\:bg-stone-800\/50:hover{background-color:rgba(17,31,56,.5)}
+body:not(.light) #root .hover\:bg-stone-700\/30:hover{background-color:rgba(26,44,77,.3)}
+body:not(.light) #root .hover\:text-stone-200:hover{color:#e2e8f0}
+body:not(.light) #root .hover\:text-stone-300:hover{color:#cbd5e1}
+body:not(.light) #root .hover\:text-stone-400:hover{color:#94a3b8}
+body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,184,.18)}
+/* 2) declutter: hide the redundant second header (logo + language picker; the
+      site nav already has both and its picker drives the app) */
+#root .h-13{display:none}
+/* toolbar now sits just below the site nav: a little air + a quiet divider */
+#root .overflow-x-auto.pb-2\.5{padding-top:6px;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid rgba(148,163,184,.10)}
+/* drop the toolbar's duplicate Study Explorer / Community (in the site nav) */
+#root .nav-btn-browse,#root .nav-btn-community{display:none}
+</style>
+<script id="beta-merge-deemoji">
+/* BETA-only: strip emojis from the merge tool's functional UI. Labels live in
+   the shared app.js, so we clean them in the DOM after React renders.
+   Childlist-only observer (we never observe characterData, so our own text
+   edits can't re-trigger it). */
+(function(){
+  var EMOJI=/[\u{1F000}-\u{1FAFF}\u2600-\u27BF\u2B00-\u2BFF\u25A0-\u25FF\u2300-\u23FF\u2261\uFE0F]/gu;
+  function strip(root){
+    if(!root)return;
+    root.querySelectorAll('.nav-btn,.simple-merge-btn,.nav-btn-demo').forEach(function(el){
+      el.childNodes.forEach(function(n){
+        if(n.nodeType===3&&EMOJI.test(n.nodeValue)){
+          n.nodeValue=n.nodeValue.replace(EMOJI,'').replace(/\s{2,}/g,' ').replace(/^\s+/,'');
+        }
+      });
+    });
+  }
+  function run(){strip(document.getElementById('root'));}
+  var t,mo=new MutationObserver(function(){clearTimeout(t);t=setTimeout(run,40);});
+  (function obs(){var r=document.getElementById('root');if(r){mo.observe(r,{childList:true,subtree:true});run();}else setTimeout(obs,200);})();
+})();
+</script>
+<!-- /beta-merge-redesign -->
 </head>
 <body class="min-h-screen flex flex-col font-sans">
 <div id="beta-banner">
