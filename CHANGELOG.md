@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.71.0] — 2026-06-13
+
+### Changed
+- **Study Stats loading and error screens now match the welcome card.** While
+  your file is being read, the spinner and "Analyzing your library…" message
+  now sit inside the same card, so opening a file feels like the card is
+  working rather than the page going blank. If a file can't be read, you get a
+  clean card with a red alert icon, the message, and an orange "Open File"
+  button to try again — consistent with the rest of the site.
+
 ## [2.70.0] — 2026-06-13
 
 ### Changed

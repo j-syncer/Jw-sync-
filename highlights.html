@@ -67,8 +67,10 @@
     .hl-error { display: flex; flex-direction: column; align-items: center; justify-content: center;
       min-height: 60vh; gap: 16px; text-align: center; }
     .hl-error-msg { color: #f87171; font-size: 15px; max-width: 340px; }
-    .hl-error-btn { background: transparent; border: 1px solid rgba(248,113,113,.4); color: #f87171;
-      border-radius: 8px; padding: 9px 20px; font-size: 14px; cursor: pointer; font-family: inherit; }
+    .hl-pick-icon-err { background: rgba(248,113,113,.12); border-color: rgba(248,113,113,.35); color: #f87171; }
+    .hl-error-btn { background: #ea580c; color: #fff; border: none;
+      border-radius: 8px; padding: 13px 28px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 4px; transition: background .15s; }
+    .hl-error-btn:hover { background: #c2410c; }
 
     /* ── Wrapped module styles (from /tmp/wrapped_block_v2.html) ── */
     .jww-pad{padding:0}
@@ -902,11 +904,19 @@
       return m;
     }
 
+    function hlCardWrap(inner) {
+      return '<div class="hl-pick"><div class="hl-pick-card">' + inner + '</div></div>';
+    }
+    var HL_ALERT_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>';
+    function hlErrorCard(msg) {
+      return hlCardWrap('<div class="hl-pick-icon hl-pick-icon-err">' + HL_ALERT_ICON + '</div><div class="hl-error-msg">' + esc(msg) + '</div><button class="hl-error-btn" id="hl-err-retry">' + esc(t('open_file')) + '</button>');
+    }
+
     function showSpinner(msg) {
-      setMain('<div class="hl-loading"><div class="hl-spin"></div><div class="hl-loading-msg">' + esc(msg) + '</div></div>');
+      setMain(hlCardWrap('<div class="hl-spin"></div><div class="hl-loading-msg">' + esc(msg) + '</div>'));
     }
     function showError(msg) {
-      setMain('<div class="hl-error"><div class="hl-error-msg">' + esc(msg) + '</div><button class="hl-error-btn" id="hl-err-retry">' + esc(t('open_file')) + '</button></div>');
+      setMain(hlErrorCard(msg));
       var btn = document.getElementById('hl-err-retry');
       if (btn) btn.addEventListener('click', showPicker);
     }
@@ -2117,7 +2127,7 @@
             if (!probe.notes && !probe.highlights && !probe.bookmarks && !probe.tags) {
               try { loadedDb.close(); } catch (_) {}
               loadedDb = null;
-              setMain('<div class="hl-error"><div class="hl-error-msg">' + esc(t('no_notes')) + '</div><button class="hl-error-btn" id="hl-err-retry">' + esc(t('open_file')) + '</button></div>');
+              setMain(hlErrorCard(t('no_notes')));
               var rb = document.getElementById('hl-err-retry');
               if (rb) rb.addEventListener('click', showPicker);
               return;
@@ -2132,7 +2142,7 @@
             renderFull();
           })
           .catch(function () {
-            setMain('<div class="hl-error"><div class="hl-error-msg">' + esc(t('error')) + '</div><button class="hl-error-btn" id="hl-err-retry">' + esc(t('open_file')) + '</button></div>');
+            setMain(hlErrorCard(t('error')));
             var rb = document.getElementById('hl-err-retry');
             if (rb) rb.addEventListener('click', showPicker);
           });
