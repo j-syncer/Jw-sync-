@@ -80,6 +80,18 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.70.0] — 2026-06-13
+
+### Changed
+- **Unified, more professional navigation across the tools.** The Study Stats
+  and Share pages now share one polished top bar that matches the main site:
+  a "JW Sync" wordmark logo, and a cross-tool navigation where each item
+  (Merge, Stats, Explorer, Share) now carries a crisp icon alongside its
+  label, with the active tool highlighted in the brand orange — the same
+  treatment as the main menu. The page title is no longer a competing orange,
+  so orange now signals only "where you are". On phones the navigation
+  collapses neatly to icons so nothing crowds or overflows.
+
 ## [2.69.0] — 2026-06-13
 
 ### Changed

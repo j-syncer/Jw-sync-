@@ -33,6 +33,13 @@
     { id: 'share',    href: 'share.html' }
   ];
 
+  var ICONS = {
+    merge: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M6 21V9a9 9 0 0 0 9 9"></path></svg>',
+    stats: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>',
+    explorer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+    share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>'
+  };
+
   // Short switcher labels in every supported language (kept tiny on purpose).
   var LABELS = {
     en: { merge: 'Merge',     stats: 'Stats',         explorer: 'Explorer',  share: 'Share' },
@@ -142,18 +149,19 @@
   function injectCss() {
     if (document.getElementById('jw-switch-css')) return;
     var css =
-      '.jw-switch{display:inline-flex;align-items:center;gap:2px;padding:3px;' +
-      'background:rgba(71,85,105,.22);border:1px solid rgba(255,255,255,.08);' +
-      'border-radius:9px;flex-wrap:nowrap}' +
-      '.jw-switch-btn{appearance:none;background:transparent;border:1px solid transparent;' +
-      'color:rgba(203,213,225,.72);font:600 12px/1 inherit;font-family:inherit;' +
-      'padding:6px 11px;border-radius:6px;cursor:pointer;white-space:nowrap;text-decoration:none;' +
+      '.jw-switch{display:inline-flex;align-items:center;gap:4px;flex-wrap:nowrap}' +
+      '.jw-switch-btn{display:inline-flex;align-items:center;gap:7px;appearance:none;background:transparent;' +
+      'border:1px solid transparent;color:rgba(203,213,225,.7);font:500 13px/1 inherit;font-family:inherit;' +
+      'padding:7px 12px;border-radius:7px;cursor:pointer;white-space:nowrap;text-decoration:none;' +
       'transition:color .15s,background .15s,border-color .15s}' +
-      '.jw-switch-btn:hover{color:#f1f5f9;background:rgba(255,255,255,.06)}' +
-      '.jw-switch-btn.jw-switch-on{color:#ea580c;background:rgba(234,88,12,.12);' +
-      'border-color:rgba(234,88,12,.3);cursor:default}' +
+      '.jw-switch-btn svg{width:15px;height:15px;flex:none;opacity:.85}' +
+      '.jw-switch-btn:hover{color:#f1f5f9;background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.1)}' +
+      '.jw-switch-btn.jw-switch-on{color:#ea580c;background:rgba(234,88,12,.1);' +
+      'border-color:rgba(234,88,12,.25);cursor:default}' +
+      '.jw-switch-btn.jw-switch-on svg{opacity:1}' +
       '.jw-switch-btn:focus-visible{outline:2px solid #ea580c;outline-offset:2px}' +
-      '@media(max-width:560px){.jw-switch{gap:0;padding:2px}.jw-switch-btn{padding:6px 8px;font-size:11px}}';
+      '@media(max-width:640px){.jw-switch{gap:2px}.jw-switch-btn{padding:7px 10px;font-size:12px;gap:6px}}' +
+      '@media(max-width:560px){.jw-switch-btn .jw-switch-lbl{display:none}.jw-switch-btn{padding:8px;gap:0}}';
     var st = document.createElement('style');
     st.id = 'jw-switch-css';
     st.textContent = css;
@@ -173,7 +181,11 @@
       var btn = document.createElement('a');
       btn.className = 'jw-switch-btn' + (tool.id === active ? ' jw-switch-on' : '');
       btn.href = tool.href;
-      btn.textContent = (L && L[tool.id]) || tool.id;
+      var lbl = (L && L[tool.id]) || tool.id;
+      btn.innerHTML = (ICONS[tool.id] || '') + '<span class="jw-switch-lbl"></span>';
+      var lblEl = btn.querySelector('.jw-switch-lbl');
+      if (lblEl) lblEl.textContent = lbl;
+      btn.setAttribute('aria-label', lbl);
       if (tool.id === active) {
         btn.setAttribute('aria-current', 'page');
       } else {
