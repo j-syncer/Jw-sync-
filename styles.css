@@ -1898,6 +1898,7 @@ body.jw-modal-open { overflow: hidden; }
 @media (max-width: 560px) {
   #site-nav { padding: 4px 14px; height: auto; }
   .site-nav-link { padding: 6px 8px; font-size: 12px; }
+  .nav-theme-btn { order: 2; flex: 0 0 auto; margin-left: auto; }
   .site-nav-links { order: 3; flex-basis: 100%; justify-content: center; padding-bottom: 6px; }
 }
 
@@ -1907,6 +1908,11 @@ body.light .site-nav-logo { color: #071a38; }
 body.light .site-nav-link { color: rgba(71,85,105,.8); }
 body.light .site-nav-link:hover { color: #071a38; background: rgba(11,46,88,.06); border-color: rgba(11,46,88,.15); }
 body.light .site-nav-link.active { color: #ea580c; background: rgba(234,88,12,.07); border-color: rgba(234,88,12,.3); }
+.nav-theme-btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:8px;border:1px solid rgba(148,163,184,.16);background:transparent;color:rgba(203,213,225,.7);cursor:pointer;transition:color .15s,background .15s,border-color .15s;flex-shrink:0;padding:0;font-size:0;}
+.nav-theme-btn:hover{color:#f1f5f9;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);}
+.nav-theme-btn svg{width:15px;height:15px;display:block;}
+body.light .nav-theme-btn{border-color:rgba(11,46,88,.15);color:#64748b;}
+body.light .nav-theme-btn:hover{color:#1e293b;background:rgba(11,46,88,.06);}
 body.light .landing-feat { background: #fff; border-color: rgba(11,46,88,.1); }
 body.light .landing-feat h3 { color: #071a38; }
 body.light .landing-feat p { color: rgba(71,85,105,.9); }
@@ -2035,7 +2041,8 @@ body.is-landing #jws-loading { display: none !important; }
   /* Two-level nav: row 1 = logo + language; row 2 = App / Community / Tools */
   #site-nav { flex-wrap: wrap; height: auto; min-height: 48px; padding: 7px 16px; row-gap: 8px; column-gap: 8px; justify-content: flex-start; }
   .site-nav-logo { order: 1; flex: 0 0 auto; }
-  .nav-lang-select { order: 2; margin-left: auto; flex: 0 0 auto; }
+  .nav-theme-btn { order: 2; flex: 0 0 auto; margin-left: auto; }
+  .nav-lang-select { order: 2; flex: 0 0 auto; }
   .site-nav-links { order: 3; flex: 1 0 100%; margin-left: 0; gap: 8px; row-gap: 6px; justify-content: center; flex-wrap: wrap; }
   .site-nav-link { flex: 0 0 auto; min-width: 0; overflow: visible; text-overflow: clip; white-space: nowrap; padding: 7px 11px; }
 }

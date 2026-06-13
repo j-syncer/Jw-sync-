@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.73.0",
+      "softwareVersion": "2.74.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -442,6 +442,8 @@ body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,
 #root .overflow-x-auto.pb-2\.5{padding-top:6px;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid rgba(148,163,184,.10)}
 /* drop the toolbar's duplicate Study Explorer / Community (in the site nav) */
 #root .nav-btn-browse,#root .nav-btn-community{display:none}
+/* theme toggle moved to site nav */
+#root .theme-toggle{display:none}
 </style>
 <script id="beta-merge-deemoji">
 /* BETA-only: strip emojis from the merge tool's functional UI. Labels live in
@@ -484,6 +486,7 @@ body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,
     <a href="share.html" id="site-nav-share" class="site-nav-link" data-i18n="nav_sharing" onclick="__jwGoShare();return false;">Note Sharing</a>
     <a href="#forum" id="site-nav-forum" class="site-nav-link" data-i18n="nav_community">Community</a>
   </div>
+  <button id="nav-theme-btn" class="nav-theme-btn" aria-label="Switch to light mode" title="Switch to light mode"></button>
   <select id="landing-lang-select" class="nav-lang-select" aria-label="Language">
       <option value="en">🇬🇧 English</option>
       <option value="es">🇪🇸 Español</option>
@@ -502,6 +505,34 @@ body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,
 <!-- Cross-tool file session: lets the working .jwlibrary follow you between
      Merge / Stats / Explorer / Share without re-uploading. -->
 <script src="js/jw-session.js"></script>
+<script id="site-theme-init">
+(function(){
+  var PK='jwsync_prefs_v1';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+  function isDark(){return !document.body.classList.contains('light');}
+  function getPrefs(){try{return JSON.parse(localStorage.getItem(PK)||'{}');}catch(e){return{};}}
+  function saveTheme(dark){try{var p=getPrefs();p.isDarkMode=dark;localStorage.setItem(PK,JSON.stringify(p));}catch(e){}}
+  function setIcon(btn,dark){btn.innerHTML=dark?MOON:SUN;btn.title=dark?'Switch to light mode':'Switch to dark mode';btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');}
+  function initBtn(id){
+    var btn=document.getElementById(id);
+    if(!btn)return;
+    setIcon(btn,isDark());
+    btn.addEventListener('click',function(){
+      var dark=isDark();
+      /* Try React's own toggle first so React state syncs */
+      var reactToggle=document.querySelector('.theme-toggle');
+      if(reactToggle){reactToggle.click();}
+      else{document.body.classList.toggle('light',dark);saveTheme(!dark);}
+    });
+    /* Keep icon in sync when React changes the theme */
+    var mo=new MutationObserver(function(){setIcon(btn,isDark());});
+    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){initBtn('nav-theme-btn');});}
+  else{initBtn('nav-theme-btn');}
+})();
+</script>
 <script>
 // Mirror every assignment to window.__jwLastFile into the shared session, so a
 // file loaded by the Merge app or Browse module is instantly reusable elsewhere.

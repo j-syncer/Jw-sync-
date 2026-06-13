@@ -326,7 +326,7 @@ for (const path of FILES) {
   // 8l) Two-level mobile nav (v2.32.0): language picker sits beside the logo,
   //     not inside .site-nav-links (so App/Community/Tools get a full row).
   if (isBeta) {
-    if (!/<\/div>\s*<select id="landing-lang-select"/.test(c))
+    if (!/<\/div>[\s\S]{0,300}<select id="landing-lang-select"/.test(c))
       fail('Language picker not moved out of .site-nav-links (two-level nav)');
     else ok('Two-level nav: language picker is a direct #site-nav child');
   }

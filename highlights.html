@@ -25,6 +25,18 @@
     .hl-new-btn:hover { color: #f1f5f9; }
     .hl-switch-slot { flex: 1 1 auto; display: flex; align-items: center; justify-content: center; min-width: 0; }
     @media (max-width: 560px) { .hl-title { display: none; } }
+    /* nav-theme-btn (theme toggle in header) */
+    .nav-theme-btn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;border:1px solid rgba(148,163,184,.16);background:transparent;color:rgba(203,213,225,.7);cursor:pointer;transition:color .15s,background .15s,border-color .15s;flex-shrink:0;padding:0;font-size:0;}
+    .nav-theme-btn:hover{color:#f1f5f9;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);}
+    .nav-theme-btn svg{width:14px;height:14px;display:block;}
+    body.light .nav-theme-btn{border-color:rgba(11,46,88,.15);color:#64748b;}
+    body.light .nav-theme-btn:hover{color:#1e293b;background:rgba(11,46,88,.06);}
+    /* light mode header */
+    body.light #hl-header{background:rgba(240,244,248,.97);border-bottom-color:rgba(11,46,88,.12);}
+    body.light .hl-back-btn{color:#071a38;}
+    body.light .hl-back-btn:hover{color:#ea580c;}
+    body.light .hl-title{color:rgba(71,85,105,.65);}
+    body.light .hl-new-btn{color:#64748b;}
 
     /* ── main content area ── */
     #hl-main { padding-top: 52px; max-width: 740px; margin: 0 auto; padding: 68px 16px 40px;
@@ -578,6 +590,7 @@
     body.light .jww-ach-cat-h{background:linear-gradient(180deg,#f1f5f9,#fff);border-color:#e2e8f0}
     body.light .jww-cat-count{color:#475569}
   </style>
+<script id="site-theme-early">(function(){try{var p=JSON.parse(localStorage.getItem('jwsync_prefs_v1')||'{}');if(p.isDarkMode===false)document.body.classList.add('light');}catch(e){}}());</script>
 </head>
 <body>
   <!-- Header -->
@@ -586,6 +599,7 @@
     <span class="hl-title">Your Study Stats</span>
     <div id="hl-switch" class="hl-switch-slot"></div>
     <button type="button" class="hl-new-btn" id="hl-new-btn" style="display:none">New file</button>
+    <button id="nav-theme-btn" class="nav-theme-btn" aria-label="Switch to light mode" title="Switch to light mode"></button>
   </header>
 
   <!-- Main content area -->
@@ -598,6 +612,31 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
   <!-- Cross-tool file session + tool switcher (shared across all JW Sync pages) -->
   <script src="js/jw-session.js"></script>
+<script id="hl-theme-init">
+(function(){
+  var PK='jwsync_prefs_v1';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+  function isDark(){return !document.body.classList.contains('light');}
+  function getPrefs(){try{return JSON.parse(localStorage.getItem(PK)||'{}');}catch(e){return{};}}
+  function saveTheme(dark){try{var p=getPrefs();p.isDarkMode=dark;localStorage.setItem(PK,JSON.stringify(p));}catch(e){}}
+  function setIcon(btn,dark){btn.innerHTML=dark?MOON:SUN;btn.title=dark?'Switch to light mode':'Switch to dark mode';btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');}
+  function initBtn(id){
+    var btn=document.getElementById(id);
+    if(!btn)return;
+    setIcon(btn,isDark());
+    btn.addEventListener('click',function(){
+      var dark=isDark();
+      document.body.classList.toggle('light',dark);
+      saveTheme(!dark);
+    });
+    var mo=new MutationObserver(function(){setIcon(btn,isDark());});
+    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){initBtn('nav-theme-btn');});}
+  else{initBtn('nav-theme-btn');}
+})();
+</script>
 
   <script>
   (function () {
