@@ -80,6 +80,12 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.68.1] — 2026-06-13
+
+### Shipped to production
+- The hero merge visualization (v2.67.0) and the "Home" navigation link
+  (v2.68.0) are now live on jwsync.org, not just /beta.
+
 ## [2.68.0] — 2026-06-12
 
 ### Added
