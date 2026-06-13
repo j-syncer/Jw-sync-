@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.69.0] — 2026-06-13
+
+### Changed
+- **Study Stats now opens with a polished welcome card** instead of a bare
+  title and button. It matches the rest of the site: a stats icon, a clear
+  prompt, the Open File button, and a privacy line ("Your file is read on
+  your device — nothing is uploaded"). You can now also **drag a .jwlibrary
+  file straight onto the card** to open it, with a highlight as you drag over.
+  Works in dark and light themes and is translated in all 12 languages.
+
 ## [2.68.1] — 2026-06-13
 
 ### Shipped to production
