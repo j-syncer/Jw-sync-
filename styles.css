@@ -2052,7 +2052,7 @@ body.is-landing #jws-loading { display: none !important; }
 
 
 /* ── Home service cards (v2.33.0) — four distinct, equal tools ── */
-.svc-section { max-width: 1000px; margin: 0 auto 6px; padding: 0 20px; }
+.svc-section { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 .svc-section-title { font-size: 13px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fb923c; text-align: center; margin: 0 0 18px; }
 .svc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
 .svc-card { display: flex; flex-direction: column; gap: 9px; background: rgba(4,15,34,.55); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 20px 18px; transition: border-color .14s ease, transform .14s ease, box-shadow .14s ease; text-align: left; width: 100%; font-family: inherit; color: inherit; cursor: pointer; text-decoration: none; -webkit-appearance: none; appearance: none; }

@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.76.2] — 2026-06-17
+
+### Home page spacing
+- Evened out the vertical rhythm of the landing page: the hero now has more breathing room above the tool grid, and the gap before the "Everything you need" section matches the spacing used between the other sections.
+
 ## [2.76.1] — 2026-06-17
 
 ### Accessibility
