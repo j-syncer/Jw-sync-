@@ -80,13 +80,6 @@ runs in your browser — your files are never uploaded.
 
 ---
 
-## [2.77.0] — 2026-06-17
-
-### Home page hero — real product preview
-- The landing hero now shows a realistic preview of the app instead of an abstract diagram: a browser-framed Study Explorer with a search bar, highlight-colour filters, and a list of real-looking study notes (titles, scripture references, and tags).
-- A floating "3 backups merged" badge and a "Never leaves your device" footer make the core promise — merge privately, in your browser — visible at a glance.
-- Fully theme-aware (light and dark) and responsive, with the preview labels localized across all 12 languages.
-
 ## [2.76.2] — 2026-06-17
 
 ### Home page spacing
