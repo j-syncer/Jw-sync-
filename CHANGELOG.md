@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.76.1] — 2026-06-17
+
+### Accessibility
+- Improved the contrast of the footer privacy tagline and the legal-notice disclosure links so they meet WCAG AA in both dark and light themes. (The main landing copy already passed; these footer items were the exceptions.)
+
 ## [2.76.0] — 2026-06-17
 
 ### Community page brought in line with the rest of the site

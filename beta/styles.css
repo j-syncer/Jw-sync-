@@ -1872,11 +1872,11 @@ body.jw-modal-open { overflow: hidden; }
 }
 
 /* ── Legal footer ── */
-.footer-tagline { font-size: 12px; color: rgba(148,163,184,.65); margin: 0 0 10px; }
+.footer-tagline { font-size: 12px; color: rgba(148,163,184,.8); margin: 0 0 10px; }
 .legal-details { font-size: 10px; }
 .legal-details summary {
   cursor: pointer;
-  color: rgba(148,163,184,.45);
+  color: rgba(148,163,184,.75);
   user-select: none;
   list-style: none;
   display: inline-flex;
@@ -1886,7 +1886,7 @@ body.jw-modal-open { overflow: hidden; }
 .legal-details summary::-webkit-details-marker { display: none; }
 .legal-details summary::before { content: '▶'; font-size: 8px; transition: transform .15s; }
 .legal-details[open] summary::before { transform: rotate(90deg); }
-.legal-details summary:hover { color: rgba(148,163,184,.7); }
+.legal-details summary:hover { color: rgba(148,163,184,.92); }
 .legal-body { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; text-align: justify; }
 
 /* ── Landing responsive ── */
@@ -1918,6 +1918,9 @@ body.light .landing-feat h3 { color: #071a38; }
 body.light .landing-feat p { color: rgba(71,85,105,.9); }
 body.light .landing-hero h1 { color: #071a38; }
 body.light .landing-hero p { color: rgba(71,85,105,.85); }
+body.light .footer-tagline { color: #475569; }
+body.light .legal-details summary { color: #475569; }
+body.light .legal-details summary:hover { color: #1e293b; }
 
 /* ── Forum view: missing classes ─────────────────────────────────────────── */
 
