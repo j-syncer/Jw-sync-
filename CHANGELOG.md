@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.78.3] — 2026-06-17
+
+### Fixes
+- Study Guide (PDF): fixed the print being cut off after ~2 pages. While the Note Explorer is open the app locks the page height, which was clipping the printout; the print layout now overrides that so the full guide is included.
+
 ## [2.78.2] — 2026-06-17
 
 ### Fixes
