@@ -80,6 +80,14 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.75.0] — 2026-06-17
+
+### Home page polish
+- The hero now leads with a clear primary call-to-action — **Launch App →** — alongside a quiet "Try with sample notes" option, so you can start without scrolling.
+- Unified the home page around the single orange brand accent: the tool cards and the "Study Stats" / "Study Explorer" navigation links no longer use competing cyan, violet, or amber colours.
+- Calmer, more focused motion: removed the always-on shimmer and glow loops from the navigation and buttons. Hover feedback is kept.
+- Harmonized the "Everything you need" feature cards with the tool cards above them — matching icon sizes, type scale, and hover lift for one cohesive look.
+
 ## [2.73.0] — 2026-06-13
 
 ### Changed (beta preview)
