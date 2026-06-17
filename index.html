@@ -761,11 +761,54 @@ body.light .lhv-foot{border-top-color:rgba(11,46,88,.1)}
 body.light .lhv-foot svg{color:#059669}
 body.light .lhv-foot span{color:rgba(71,85,105,.9)}
 </style>
+<style id="beta-home-refresh">
+/* ── Home page visual refresh (v2.75.0, beta-first) ──
+   Single brand accent, calmer motion, a hero call-to-action, and tool/
+   feature cards unified into one card language. Overrides styles.css
+   (linked earlier in <head>) without editing the shared file. */
+
+/* Hero call-to-action */
+.hero-cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;justify-content:center}
+.hero-cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-size:15px;font-weight:700;line-height:1;padding:13px 22px;border-radius:9px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s,box-shadow .15s,transform .15s;-webkit-appearance:none;appearance:none}
+.hero-cta-primary{background:#ea580c;color:#fff;border:1px solid #ea580c;box-shadow:0 1px 5px rgba(234,88,12,.35)}
+.hero-cta-primary:hover{background:#c2410c;border-color:#c2410c;box-shadow:0 4px 14px rgba(234,88,12,.45);transform:translateY(-1px)}
+.hero-cta-ghost{background:rgba(71,85,105,.18);color:#e2e8f0;border:1px solid rgba(148,163,184,.32)}
+.hero-cta-ghost:hover{background:rgba(71,85,105,.3);border-color:rgba(148,163,184,.5)}
+body.light .hero-cta-ghost{background:rgba(11,46,88,.05);color:#334155;border-color:rgba(11,46,88,.18)}
+body.light .hero-cta-ghost:hover{background:rgba(11,46,88,.09);border-color:rgba(11,46,88,.28)}
+@media (min-width:880px){.hero-cta-row{justify-content:flex-start}}
+
+/* Single-accent unification — every tool card uses the brand orange */
+.svc-explorer,.svc-stats,.svc-share{--svc-a:234,88,12;--svc-l:251,146,60}
+.svc-explorer::after,.svc-stats::after,.svc-share::after{animation-delay:0s}
+
+/* Nav links: drop the competing cyan/amber shimmer for a static orange accent */
+.site-nav-shimmer,.site-nav-shimmer-explorer{background:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:#fb923c;color:#fb923c;animation:none}
+body.light .site-nav-shimmer,body.light .site-nav-shimmer-explorer{-webkit-text-fill-color:#c2410c;color:#c2410c}
+
+/* Calmer motion — stop the always-on loops; hover feedback is preserved */
+.nav-btn-browse{animation:none}
+#landing-howto-btn{animation:none}
+#landing-howto-btn::after{animation:none;display:none}
+.site-nav-wrapped::after{animation:none;display:none}
+
+/* Feature cards harmonized with the tool cards above them */
+.landing-feat{transition:border-color .14s ease,transform .14s ease,box-shadow .14s ease}
+.landing-feat:hover{border-color:rgba(234,88,12,.5);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.28)}
+.landing-feat-icon{width:40px;height:40px;border-radius:11px;border-color:rgba(234,88,12,.3)}
+.landing-feat h3{font-size:15.5px;margin:0 0 7px}
+.landing-feat p{font-size:13.5px}
+body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
+</style>
     <section id="landing-view" style="display:none">
       <div class="landing-hero landing-hero-split">
         <div class="lhv-copy">
           <h1 data-i18n="hero_title">Merge JW Library backups privately in your browser</h1>
           <p data-i18n="hero_desc">Merge, browse, and edit your JW Library notes, highlights, and bookmarks — entirely in your browser. Your files never leave your device.</p>
+          <div class="hero-cta-row">
+            <a href="#app" class="hero-cta-btn hero-cta-primary" id="hero-launch-btn" data-i18n="cta_launch">Launch App →</a>
+            <button type="button" class="hero-cta-btn hero-cta-ghost" data-demo-trigger data-i18n="cta_try_demo">Try with sample notes</button>
+          </div>
         </div>
         <!-- ── Hero merge visualization (decorative) ── -->
         <div class="lhv" aria-hidden="true">
