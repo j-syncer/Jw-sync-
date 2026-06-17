@@ -80,6 +80,13 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.76.0] — 2026-06-17
+
+### Community page brought in line with the rest of the site
+- The Community/forum view now uses the same Inter typeface as the rest of JW Sync instead of a different font, for one consistent look.
+- Replaced the blue accents and the book emoji logo with the orange brand colour and a clean chat icon.
+- Voting, reaction, and hover highlights now use the brand orange instead of blue.
+
 ## [2.75.0] — 2026-06-17
 
 ### Home page polish
