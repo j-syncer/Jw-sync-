@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.78.1",
+      "softwareVersion": "2.78.2",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1929,7 +1929,7 @@ window.__bootBrowse = function() {
     return fm+'# '+title+'\n\n'+htmlToMarkdown(n.Content||'')+'\n';
   }
   // ---------- Printable study guide (PDF) ----------
-  var PG_PRINT_CSS='*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1e293b;margin:0;padding:24px 28px;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}.pg-cover{text-align:center;padding:40px 0 26px;border-bottom:3px solid #ea580c;margin-bottom:26px}.pg-brand{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#ea580c;margin-bottom:14px}.pg-cover h1{font-size:30px;font-weight:800;margin:0 0 10px;color:#0f172a;line-height:1.15}.pg-sub{font-size:13px;color:#64748b;margin:0}.pg-section{margin-bottom:16px}.pg-gh{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:#0f172a;margin:22px 0 12px;padding-bottom:7px;border-bottom:1px solid #e2e8f0}.pg-sw{display:inline-block;width:13px;height:13px;border-radius:50%;flex:none}.pg-gc{font-weight:600;color:#94a3b8;font-size:12px}.pg-note{border-left:4px solid #cbd5e1;padding:2px 0 2px 14px;margin:0 0 16px;page-break-inside:avoid;break-inside:avoid}.pg-nt{font-size:15px;font-weight:700;color:#1e293b;margin:0 0 4px}.pg-meta{font-size:11.5px;color:#94a3b8;margin-bottom:7px}.pg-content{font-size:13px;color:#334155;word-wrap:break-word;overflow-wrap:break-word}.pg-content p{margin:0 0 7px}.pg-content ul,.pg-content ol{margin:6px 0;padding-left:22px}.pg-tags{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}.pg-tags span{font-size:10.5px;font-weight:600;color:#c2410c;background:#fff3ea;border:1px solid #fcd9bd;border-radius:5px;padding:2px 8px}.pg-tags span:before{content:"#";opacity:.55}.pg-foot{margin-top:28px;padding-top:14px;border-top:1px solid #e2e8f0;text-align:center;font-size:11px;color:#94a3b8}@page{margin:16mm 14mm}@media print{.pg-note{margin-bottom:12px}.pg-cover{padding-top:8px}}';
+  var PG_PAGE_CSS='#pg-print-root{display:none}@media print{html,body{margin:0 !important;padding:0 !important;background:#fff !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}body>*:not(#pg-print-root){display:none !important}#pg-print-root{display:block !important}}#pg-print-root{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#1e293b;line-height:1.5}#pg-print-root *{box-sizing:border-box}#pg-print-root .pg-cover{text-align:center;padding:8px 0 26px;border-bottom:3px solid #ea580c;margin-bottom:26px}#pg-print-root .pg-brand{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#ea580c;margin-bottom:14px}#pg-print-root .pg-cover h1{font-size:28px;font-weight:800;margin:0 0 10px;color:#0f172a;line-height:1.15}#pg-print-root .pg-sub{font-size:13px;color:#64748b;margin:0}#pg-print-root .pg-section{margin-bottom:16px}#pg-print-root .pg-gh{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:#0f172a;margin:22px 0 12px;padding-bottom:7px;border-bottom:1px solid #e2e8f0}#pg-print-root .pg-sw{display:inline-block;width:13px;height:13px;border-radius:50%;flex:none}#pg-print-root .pg-gc{font-weight:600;color:#94a3b8;font-size:12px}#pg-print-root .pg-note{border-left:4px solid #cbd5e1;padding:2px 0 2px 14px;margin:0 0 14px;page-break-inside:avoid;break-inside:avoid}#pg-print-root .pg-nt{font-size:15px;font-weight:700;color:#1e293b;margin:0 0 4px}#pg-print-root .pg-meta{font-size:11.5px;color:#94a3b8;margin-bottom:7px}#pg-print-root .pg-content{font-size:13px;color:#334155;word-wrap:break-word;overflow-wrap:break-word}#pg-print-root .pg-content p{margin:0 0 7px}#pg-print-root .pg-content ul,#pg-print-root .pg-content ol{margin:6px 0;padding-left:22px}#pg-print-root .pg-tags{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}#pg-print-root .pg-tags span{font-size:10.5px;font-weight:600;color:#c2410c;background:#fff3ea;border:1px solid #fcd9bd;border-radius:5px;padding:2px 8px}#pg-print-root .pg-tags span:before{content:"#";opacity:.55}#pg-print-root .pg-foot{margin-top:28px;padding-top:14px;border-top:1px solid #e2e8f0;text-align:center;font-size:11px;color:#94a3b8}@page{margin:16mm 14mm}';
   function pgNoteSet(){ return (state.activeType==='notes') ? (state.filtered||[]) : (state.allNotes||[]); }
   function buildGuideHtml(opts){
     var notes=opts.notes||[];
@@ -1971,41 +1971,32 @@ window.__bootBrowse = function() {
       parts.push('</section>');
     });
     parts.push('<footer class="pg-foot">'+htmlEscape(t('pdf_made'))+' &middot; jwsync.org</footer>');
-    return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+htmlEscape(opts.title)+'</title><style>'+PG_PRINT_CSS+'</style></head><body>'+parts.join('')+'</body></html>';
+    return parts.join('');
   }
   function generateGuide(opts){
-    var html=buildGuideHtml(opts);
-    // Preferred path: a dedicated print window. A full document in its own
-    // window prints ALL pages reliably (a hidden/0-size iframe gets clipped to
-    // a page or two in Chrome/Safari). Opened synchronously inside the click
-    // gesture so pop-up blockers allow it.
-    var w=null;
-    try{ w=window.open('','_blank'); }catch(_){ w=null; }
-    if(w&&w.document){
-      try{
-        w.document.open(); w.document.write(html); w.document.close();
-        var fired=false;
-        function pr(){ if(fired)return; fired=true;
-          try{ w.focus(); w.onafterprint=function(){ try{ w.close(); }catch(_){ } }; w.print(); }catch(_){ }
-        }
-        if(w.document.readyState==='complete') setTimeout(pr,300);
-        else { try{ w.onload=function(){ setTimeout(pr,300); }; }catch(_){ } setTimeout(pr,900); }
-        return;
-      }catch(_){ try{ w.close(); }catch(__){ } }
+    var body=buildGuideHtml(opts);
+    // Print via a hidden, print-only container on the MAIN document. This is the
+    // only path that prints reliably across desktop AND iOS Safari — opening a
+    // new window or printing a hidden iframe fails on iOS ("problem printing the
+    // page"). #pg-print-root is hidden on screen and shown only for @media print,
+    // while every other top-level element is hidden during print.
+    var oldR=document.getElementById('pg-print-root'); if(oldR&&oldR.parentNode) oldR.parentNode.removeChild(oldR);
+    var oldS=document.getElementById('pg-print-style'); if(oldS&&oldS.parentNode) oldS.parentNode.removeChild(oldS);
+    var st=document.createElement('style'); st.id='pg-print-style'; st.textContent=PG_PAGE_CSS; document.head.appendChild(st);
+    var root=document.createElement('div'); root.id='pg-print-root'; root.setAttribute('role','document'); root.innerHTML=body; document.body.appendChild(root);
+    var cleaned=false, prevAfter=window.onafterprint;
+    function cleanup(){ if(cleaned)return; cleaned=true;
+      try{ window.removeEventListener('focus',onFocus); }catch(_){ }
+      if(root&&root.parentNode) root.parentNode.removeChild(root);
+      if(st&&st.parentNode) st.parentNode.removeChild(st);
+      if(window.onafterprint===afterPrint) window.onafterprint=prevAfter;
     }
-    // Fallback (pop-up blocked): an off-screen iframe sized to a real page so
-    // the print isn't clipped.
-    var ifr=document.createElement('iframe'); ifr.setAttribute('aria-hidden','true');
-    ifr.style.cssText='position:fixed;left:-10000px;top:0;width:820px;height:1160px;border:0;background:#fff';
-    document.body.appendChild(ifr);
-    var fw=ifr.contentWindow; var doc=fw.document; doc.open(); doc.write(html); doc.close();
-    var done=false;
-    function cleanup(){ if(ifr.parentNode) ifr.parentNode.removeChild(ifr); }
-    function go(){ if(done)return; done=true;
-      try{ fw.focus(); fw.onafterprint=function(){ setTimeout(cleanup,200); }; fw.print(); }catch(_){ cleanup(); return; }
-      setTimeout(cleanup,60000);
-    }
-    if(doc.readyState==='complete') setTimeout(go,250); else { ifr.onload=function(){ setTimeout(go,250); }; setTimeout(go,900); }
+    function onFocus(){ setTimeout(cleanup,300); }
+    function afterPrint(){ setTimeout(cleanup,200); if(typeof prevAfter==='function'){ try{ prevAfter(); }catch(_){ } } }
+    window.onafterprint=afterPrint;
+    try{ window.addEventListener('focus',onFocus); }catch(_){ }
+    setTimeout(cleanup,60000);
+    try{ window.focus(); window.print(); }catch(_){ cleanup(); }
   }
   function openStudyGuide(){
     if(document.getElementById('jbpg-overlay')) return;

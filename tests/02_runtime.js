@@ -705,23 +705,25 @@ function assertContains(text, needle, label) {
     assertEq(opts.length, 3, 'group-by has 3 options (publication/colour/none)');
     assertEq(dlg.querySelectorAll('.jbpg-check').length, 2, 'two include toggles (text + tags)');
 
-    // Generate with grouping = none, then inspect the produced print document.
+    // Generate with grouping = none, then inspect the produced print container.
     dlg.querySelector('.jbpg-select').value = 'none';
-    const ifrsBefore = doc.querySelectorAll('iframe').length;
     dlg.querySelector('.jbpg-btn').click(); // Save as PDF
     await waitFor(() => doc.querySelector('.jbpg-dlg') === null, 'dialog closes after generate');
     ok('dialog closes after Save as PDF');
-    await wait(450);
-    const ifr = Array.from(doc.querySelectorAll('iframe')).pop();
-    if (ifr && doc.querySelectorAll('iframe').length > ifrsBefore) {
-      const idoc = ifr.contentWindow.document;
-      assertEq(idoc.querySelectorAll('.pg-note').length, noteCount, 'guide renders one entry per note');
-      if (idoc.querySelector('.pg-cover h1')) ok('guide has a cover with a title');
+    await wait(200);
+    const printRoot = doc.getElementById('pg-print-root');
+    if (printRoot) {
+      assertEq(printRoot.querySelectorAll('.pg-note').length, noteCount, 'guide renders one entry per note');
+      if (printRoot.querySelector('.pg-cover h1')) ok('guide has a cover with a title');
       else fail('guide cover/title missing');
-      if (idoc.querySelector('.pg-foot')) ok('guide has a footer');
+      if (printRoot.querySelector('.pg-foot')) ok('guide has a footer');
       else fail('guide footer missing');
+      // print-only container must be display:none on screen
+      if (doc.getElementById('pg-print-style')) ok('print stylesheet injected');
+      else fail('print stylesheet missing');
+      printRoot.parentNode.removeChild(printRoot); // tidy up for later sections
     } else {
-      fail('no printable iframe was generated');
+      fail('no print container (#pg-print-root) was generated');
     }
   }
 
