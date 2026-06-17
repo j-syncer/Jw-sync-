@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.78.1] — 2026-06-17
+
+### Fixes
+- Study Guide (PDF): fixed printing only outputting the first page or two for large libraries. The guide now renders in a dedicated print window (with an off-screen, full-size fallback) so every page is included.
+
 ## [2.78.0] — 2026-06-17
 
 ### Printable Study Guide (PDF)

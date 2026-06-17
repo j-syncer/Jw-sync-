@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.78.0",
+      "softwareVersion": "2.78.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1975,14 +1975,34 @@ window.__bootBrowse = function() {
   }
   function generateGuide(opts){
     var html=buildGuideHtml(opts);
+    // Preferred path: a dedicated print window. A full document in its own
+    // window prints ALL pages reliably (a hidden/0-size iframe gets clipped to
+    // a page or two in Chrome/Safari). Opened synchronously inside the click
+    // gesture so pop-up blockers allow it.
+    var w=null;
+    try{ w=window.open('','_blank'); }catch(_){ w=null; }
+    if(w&&w.document){
+      try{
+        w.document.open(); w.document.write(html); w.document.close();
+        var fired=false;
+        function pr(){ if(fired)return; fired=true;
+          try{ w.focus(); w.onafterprint=function(){ try{ w.close(); }catch(_){ } }; w.print(); }catch(_){ }
+        }
+        if(w.document.readyState==='complete') setTimeout(pr,300);
+        else { try{ w.onload=function(){ setTimeout(pr,300); }; }catch(_){ } setTimeout(pr,900); }
+        return;
+      }catch(_){ try{ w.close(); }catch(__){ } }
+    }
+    // Fallback (pop-up blocked): an off-screen iframe sized to a real page so
+    // the print isn't clipped.
     var ifr=document.createElement('iframe'); ifr.setAttribute('aria-hidden','true');
-    ifr.style.cssText='position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
+    ifr.style.cssText='position:fixed;left:-10000px;top:0;width:820px;height:1160px;border:0;background:#fff';
     document.body.appendChild(ifr);
-    var w=ifr.contentWindow; var doc=w.document; doc.open(); doc.write(html); doc.close();
+    var fw=ifr.contentWindow; var doc=fw.document; doc.open(); doc.write(html); doc.close();
     var done=false;
     function cleanup(){ if(ifr.parentNode) ifr.parentNode.removeChild(ifr); }
     function go(){ if(done)return; done=true;
-      try{ w.focus(); w.onafterprint=function(){ setTimeout(cleanup,200); }; w.print(); }catch(_){ cleanup(); return; }
+      try{ fw.focus(); fw.onafterprint=function(){ setTimeout(cleanup,200); }; fw.print(); }catch(_){ cleanup(); return; }
       setTimeout(cleanup,60000);
     }
     if(doc.readyState==='complete') setTimeout(go,250); else { ifr.onload=function(){ setTimeout(go,250); }; setTimeout(go,900); }
