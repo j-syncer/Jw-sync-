@@ -80,6 +80,13 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.79.0] — 2026-06-17
+
+### Study Guide now exports a true PDF
+- The Study Guide now generates a real PDF file directly, instead of relying on the browser's print dialog. This fixes the printout being cut off after a couple of pages (especially on iPhone/iPad) — the full guide is always included, however many pages it runs to.
+- The PDF has a cover page, colour-coded note entries, publication and date, your note text and tags, and page numbers.
+- Notes written in scripts the PDF fonts don't cover (e.g. Cyrillic, Japanese, Korean) automatically fall back to the print-based guide.
+
 ## [2.78.3] — 2026-06-17
 
 ### Fixes

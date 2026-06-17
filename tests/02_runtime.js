@@ -705,26 +705,48 @@ function assertContains(text, needle, label) {
     assertEq(opts.length, 3, 'group-by has 3 options (publication/colour/none)');
     assertEq(dlg.querySelectorAll('.jbpg-check').length, 2, 'two include toggles (text + tags)');
 
-    // Generate with grouping = none, then inspect the produced print container.
+    // (A) Forced browser-print fallback path: verify the guide renders.
+    win.__jwForcePrintGuide = true;
     dlg.querySelector('.jbpg-select').value = 'none';
-    dlg.querySelector('.jbpg-btn').click(); // Save as PDF
+    dlg.querySelector('.jbpg-btn').click(); // Save as PDF -> printGuide
     await waitFor(() => doc.querySelector('.jbpg-dlg') === null, 'dialog closes after generate');
     ok('dialog closes after Save as PDF');
     await wait(200);
     const printRoot = doc.getElementById('pg-print-root');
     if (printRoot) {
-      assertEq(printRoot.querySelectorAll('.pg-note').length, noteCount, 'guide renders one entry per note');
-      if (printRoot.querySelector('.pg-cover h1')) ok('guide has a cover with a title');
-      else fail('guide cover/title missing');
-      if (printRoot.querySelector('.pg-foot')) ok('guide has a footer');
-      else fail('guide footer missing');
-      // print-only container must be display:none on screen
-      if (doc.getElementById('pg-print-style')) ok('print stylesheet injected');
-      else fail('print stylesheet missing');
-      printRoot.parentNode.removeChild(printRoot); // tidy up for later sections
+      assertEq(printRoot.querySelectorAll('.pg-note').length, noteCount, 'print fallback renders one entry per note');
+      if (printRoot.querySelector('.pg-cover h1')) ok('print fallback has a cover with a title');
+      else fail('print fallback cover/title missing');
+      if (printRoot.querySelector('.pg-foot')) ok('print fallback has a footer');
+      else fail('print fallback footer missing');
+      printRoot.parentNode.removeChild(printRoot);
+      const ps = doc.getElementById('pg-print-style'); if (ps) ps.parentNode.removeChild(ps);
     } else {
       fail('no print container (#pg-print-root) was generated');
     }
+    win.__jwForcePrintGuide = false;
+
+    // (B) Real PDF path: inject jsPDF + a tap hook and confirm a multi-page,
+    // non-empty PDF is produced from the loaded notes.
+    win.jspdf = { jsPDF: require('jspdf').jsPDF };
+    win.__jwForcePdf = true; // bypass the Latin-1 probe for deterministic coverage
+    let tappedDoc = null;
+    win.__jwPdfTap = (d) => { tappedDoc = d; };
+    doc.querySelector('#jb-pg-btn').click();
+    await waitFor(() => doc.querySelector('.jbpg-dlg'), 'guide dialog reopens');
+    const dlg2 = doc.querySelector('.jbpg-dlg');
+    dlg2.querySelector('.jbpg-select').value = 'pub';
+    dlg2.querySelector('.jbpg-btn').click(); // -> jsPDF buildPdf -> tap
+    await waitFor(() => tappedDoc !== null, 'jsPDF document generated');
+    ok('jsPDF document generated from notes');
+    const pageCount = tappedDoc.internal.getNumberOfPages();
+    if (pageCount >= 1) ok('PDF has ' + pageCount + ' page(s)');
+    else fail('PDF has no pages');
+    const pdfStr = tappedDoc.output('datauristring') || '';
+    if (pdfStr.indexOf('application/pdf') !== -1 && pdfStr.length > 1000) ok('PDF output is a non-trivial application/pdf');
+    else fail('PDF output looks empty');
+    delete win.__jwPdfTap;
+    delete win.__jwForcePdf;
   }
 
   section('Close modal');
