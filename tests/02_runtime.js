@@ -683,6 +683,48 @@ function assertContains(text, needle, label) {
   assertEq(doc.querySelector('.jb-filter-tag').value, '', 'Tag filter cleared');
   assertEq(doc.querySelector('.jb-filter-pub').value, '', 'Pub filter cleared');
 
+  section('Study Guide (PDF)');
+  {
+    const wait = (ms) => new Promise(r => setTimeout(r, ms));
+    // Back to the Notes tab (study guide builds from notes)
+    doc.querySelector('.jb-tab[data-type="notes"]').click();
+    await waitFor(() => doc.querySelectorAll('.jb-list .jb-note').length >= 1, 'notes tab for guide');
+    const noteCount = doc.querySelectorAll('.jb-list .jb-note').length;
+
+    const pgBtn = doc.querySelector('#jb-pg-btn');
+    if (pgBtn) ok('Study Guide button present in toolbar');
+    else fail('Study Guide button (#jb-pg-btn) missing');
+
+    pgBtn.click();
+    await waitFor(() => doc.querySelector('.jbpg-dlg'), 'study guide dialog opens');
+    ok('Study Guide dialog opened');
+    const dlg = doc.querySelector('.jbpg-dlg');
+    if (dlg.querySelector('.jbpg-input')) ok('dialog exposes a title field');
+    else fail('dialog missing title field');
+    const opts = dlg.querySelectorAll('.jbpg-select option');
+    assertEq(opts.length, 3, 'group-by has 3 options (publication/colour/none)');
+    assertEq(dlg.querySelectorAll('.jbpg-check').length, 2, 'two include toggles (text + tags)');
+
+    // Generate with grouping = none, then inspect the produced print document.
+    dlg.querySelector('.jbpg-select').value = 'none';
+    const ifrsBefore = doc.querySelectorAll('iframe').length;
+    dlg.querySelector('.jbpg-btn').click(); // Save as PDF
+    await waitFor(() => doc.querySelector('.jbpg-dlg') === null, 'dialog closes after generate');
+    ok('dialog closes after Save as PDF');
+    await wait(450);
+    const ifr = Array.from(doc.querySelectorAll('iframe')).pop();
+    if (ifr && doc.querySelectorAll('iframe').length > ifrsBefore) {
+      const idoc = ifr.contentWindow.document;
+      assertEq(idoc.querySelectorAll('.pg-note').length, noteCount, 'guide renders one entry per note');
+      if (idoc.querySelector('.pg-cover h1')) ok('guide has a cover with a title');
+      else fail('guide cover/title missing');
+      if (idoc.querySelector('.pg-foot')) ok('guide has a footer');
+      else fail('guide footer missing');
+    } else {
+      fail('no printable iframe was generated');
+    }
+  }
+
   section('Close modal');
   doc.querySelector('.jb-head-close').click();
   if (!doc.querySelector('.jb-overlay')) ok('Modal removed from DOM');

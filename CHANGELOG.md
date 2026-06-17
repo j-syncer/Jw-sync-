@@ -80,6 +80,14 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.78.0] — 2026-06-17
+
+### Printable Study Guide (PDF)
+- New **Study Guide** button in the Note Explorer toolbar: turn the notes you're viewing into a clean, printable PDF — print it or use your browser's "Save as PDF".
+- Choose a document title, group the notes by publication or by highlight colour (or leave them ungrouped), and optionally include the note text and tags.
+- The guide respects whatever you've filtered or searched, so you can export just a subset. Each entry shows its highlight colour, title, publication, date, content and tags, with a cover page and totals.
+- Available in all 12 languages, generated entirely in your browser — nothing is uploaded.
+
 ## [2.76.2] — 2026-06-17
 
 ### Home page spacing
