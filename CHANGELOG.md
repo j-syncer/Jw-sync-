@@ -80,6 +80,12 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.81.0] — 2026-06-19
+
+### A more beautiful merge tool (beta)
+- Big visual refresh of the merge screen: flat panels are now elevated glass cards with depth, a soft ambient glow sits behind the page, and the buttons have a real tactile feel — they lift on hover and press down when clicked.
+- Drop zones look like inviting drop targets, and the floating "files ready" bar is now a glassy, glowing action bar.
+
 ## [2.80.0] — 2026-06-19
 
 ### Merge tool — simpler by default (beta)

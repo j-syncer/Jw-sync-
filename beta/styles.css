@@ -2148,3 +2148,122 @@ body.light .svc-card-desc { color: #475569; }
 .jw-adv-toggle.jw-adv-on:hover{border-color:rgba(148,163,184,.7);color:#e2e8f0}
 body.light .jw-adv-toggle{border-color:rgba(234,88,12,.4);background:rgba(234,88,12,.07);color:#c2410c}
 body.light .jw-adv-toggle.jw-adv-on{border-color:rgba(100,116,139,.4);background:rgba(100,116,139,.1);color:#475569}
+
+/* ===================================================================
+   Beta visual refresh — modern, tactile merge experience
+   Scoped to html.jw-beta (dark mode only) so production + light theme
+   are untouched. Targets the merge tool's Tailwind class combos.
+   =================================================================== */
+
+/* Ambient backdrop glow — replaces the flat navy with depth */
+html.jw-beta body:not(.light){
+  background-color:#070c18;
+  background-image:
+    radial-gradient(1200px 700px at 50% -10%, rgba(234,88,12,.10), transparent 60%),
+    radial-gradient(900px 520px at 88% 4%, rgba(37,99,235,.08), transparent 55%),
+    radial-gradient(800px 600px at 6% 40%, rgba(234,88,12,.05), transparent 60%);
+  background-attachment:fixed;
+}
+
+/* Cards — flat stone panels become elevated glass surfaces */
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl{
+  background:linear-gradient(168deg, rgba(30,41,59,.78), rgba(12,19,36,.88));
+  border:1px solid rgba(148,163,184,.16);
+  border-radius:22px;
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,
+             0 24px 55px -26px rgba(0,0,0,.8);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  transition:box-shadow .25s ease, border-color .25s ease;
+}
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl:hover{
+  border-color:rgba(234,88,12,.28);
+  box-shadow:0 1px 0 rgba(255,255,255,.07) inset,
+             0 28px 60px -24px rgba(0,0,0,.82),
+             0 0 0 1px rgba(234,88,12,.06);
+}
+/* Card header strip — warm hairline + faint accent wash */
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl > div:first-child{
+  background:linear-gradient(180deg, rgba(234,88,12,.09), rgba(234,88,12,0));
+  border-bottom:1px solid rgba(148,163,184,.12);
+}
+
+/* Inner step panels (bg-black/10 p-5 rounded-xl) — recessed, with accent edge */
+html.jw-beta body:not(.light) .p-5.rounded-xl{
+  background:rgba(2,6,23,.42);
+  border:1px solid rgba(148,163,184,.10);
+  border-radius:16px;
+  box-shadow:0 1px 2px rgba(0,0,0,.25) inset;
+}
+
+/* Drop zones — make them feel like real, inviting drop targets */
+html.jw-beta body:not(.light) .border-dashed{
+  border-width:2px;
+  border-color:rgba(234,88,12,.40);
+  background:rgba(234,88,12,.05);
+  border-radius:14px;
+  padding-top:16px;padding-bottom:16px;
+  color:#fdba74;
+  transition:background .18s ease, border-color .18s ease, transform .12s ease, box-shadow .18s ease;
+}
+html.jw-beta body:not(.light) .border-dashed:hover{
+  background:rgba(234,88,12,.12);
+  border-color:rgba(234,88,12,.75);
+  transform:translateY(-1px);
+  box-shadow:0 8px 22px -12px rgba(234,88,12,.6);
+}
+
+/* Solid orange buttons — tactile: subtle sheen, lift on hover, press on active */
+html.jw-beta body:not(.light) [class*="bg-orange-600"]{
+  background-image:linear-gradient(180deg,#fb923c 0%,#ea580c 52%,#c2410c 100%);
+  border:none;
+  box-shadow:0 1px 0 rgba(255,255,255,.28) inset,
+             0 9px 20px -7px rgba(234,88,12,.55),
+             0 2px 4px rgba(0,0,0,.3);
+  transition:transform .12s cubic-bezier(.2,.8,.3,1), box-shadow .18s ease, filter .18s ease;
+}
+html.jw-beta body:not(.light) [class*="bg-orange-600"]:hover:not(:disabled){
+  transform:translateY(-1.5px);
+  filter:brightness(1.06);
+  box-shadow:0 1px 0 rgba(255,255,255,.32) inset,
+             0 14px 30px -8px rgba(234,88,12,.72),
+             0 3px 6px rgba(0,0,0,.32);
+}
+html.jw-beta body:not(.light) [class*="bg-orange-600"]:active:not(:disabled){
+  transform:translateY(1px);
+  filter:brightness(.97);
+  box-shadow:0 2px 4px rgba(0,0,0,.4) inset,
+             0 3px 8px -4px rgba(234,88,12,.5);
+}
+html.jw-beta body:not(.light) [class*="bg-orange-600"]:disabled{
+  background-image:none;
+  box-shadow:none;
+  transform:none;
+  filter:none;
+}
+
+/* Quiet outline-orange buttons — gentle lift so they feel pressable too */
+html.jw-beta body:not(.light) [class*="bg-orange-500/10"]{
+  transition:transform .12s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+html.jw-beta body:not(.light) [class*="bg-orange-500/10"]:hover{
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px -10px rgba(234,88,12,.5);
+}
+
+/* Floating "files ready" merge bar — glassy, glowing, premium */
+html.jw-beta body:not(.light) .fixed.bottom-4{
+  background:linear-gradient(180deg, rgba(22,30,50,.92), rgba(10,16,30,.95));
+  border:1px solid rgba(148,163,184,.18);
+  border-radius:16px;
+  box-shadow:0 22px 55px -18px rgba(0,0,0,.82),
+             0 0 0 1px rgba(255,255,255,.03),
+             0 0 44px -12px rgba(234,88,12,.28);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+}
+
+/* Card titles — a touch more presence */
+html.jw-beta body:not(.light) .font-bold.text-lg.text-white{
+  letter-spacing:-.01em;
+}
