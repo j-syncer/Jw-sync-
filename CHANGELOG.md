@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.81.1] — 2026-06-19
+
+### Deeper, more tactile merge tool (beta)
+- Pushed the merge tool's new look further: cards now have crisp beveled edges with a bright top highlight and layered shadows so they feel like real raised panels, inner sections sit recessed inside them, and every button (orange and gray) has a glossy, pressable 3D cap.
+
 ## [2.81.0] — 2026-06-19
 
 ### A more beautiful merge tool (beta)

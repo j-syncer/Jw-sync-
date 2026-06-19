@@ -2267,3 +2267,136 @@ html.jw-beta body:not(.light) .fixed.bottom-4{
 html.jw-beta body:not(.light) .font-bold.text-lg.text-white{
   letter-spacing:-.01em;
 }
+
+
+/* ===================================================================
+   Beta visual refresh v2 — deeper 3D / luxury depth
+   Stronger beveled edges, layered shadows, recessed inner panels,
+   tactile raised buttons (orange + slate). Overrides the v1 block
+   above by source order. Dark mode + beta only.
+   =================================================================== */
+
+/* Cards — raised slab with crisp top rim-light, dark base edge, stacked shadow */
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl{
+  background:linear-gradient(176deg, rgba(44,57,82,.82) 0%, rgba(21,30,51,.9) 46%, rgba(11,17,33,.95) 100%);
+  border:1px solid rgba(0,0,0,.55);
+  border-radius:22px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.17),
+    inset 0 0 0 1px rgba(255,255,255,.03),
+    inset 0 -14px 28px -18px rgba(0,0,0,.7),
+    0 1px 1px rgba(0,0,0,.5),
+    0 10px 22px -8px rgba(0,0,0,.55),
+    0 32px 58px -20px rgba(0,0,0,.72);
+}
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl:hover{
+  border-color:rgba(0,0,0,.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.21),
+    inset 0 0 0 1px rgba(234,88,12,.10),
+    inset 0 -14px 28px -18px rgba(0,0,0,.72),
+    0 1px 1px rgba(0,0,0,.5),
+    0 14px 28px -8px rgba(0,0,0,.6),
+    0 38px 66px -20px rgba(0,0,0,.76),
+    0 0 42px -16px rgba(234,88,12,.22);
+}
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl > div:first-child{
+  background:linear-gradient(180deg, rgba(234,88,12,.13), rgba(234,88,12,0));
+  border-bottom:1px solid rgba(0,0,0,.5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+/* Inner panels — recessed wells that sit inside the card */
+html.jw-beta body:not(.light) .p-5.rounded-xl,
+html.jw-beta body:not(.light) [class*="bg-orange-500/5"].rounded-xl,
+html.jw-beta body:not(.light) [class*="bg-orange-900/20"].rounded-lg,
+html.jw-beta body:not(.light) [class*="bg-black/10"].rounded-xl{
+  background:linear-gradient(180deg, rgba(2,6,18,.62), rgba(7,12,27,.42));
+  border:1px solid rgba(0,0,0,.42);
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 1px 0 rgba(255,255,255,.03);
+}
+
+/* Solid orange buttons — glossy raised cap with rim-light + press */
+html.jw-beta body:not(.light) [class*="bg-orange-600"]{
+  background-image:linear-gradient(180deg,#fb923c 0%,#f97316 40%,#ea580c 72%,#c2410c 100%);
+  border:1px solid #9a3412;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.5),
+    inset 0 -2px 5px rgba(124,45,18,.55),
+    0 2px 3px rgba(0,0,0,.38),
+    0 9px 20px -6px rgba(234,88,12,.62);
+  transition:transform .12s cubic-bezier(.2,.8,.3,1), box-shadow .18s ease, filter .18s ease;
+}
+html.jw-beta body:not(.light) [class*="bg-orange-600"]:hover:not(:disabled){
+  transform:translateY(-1.5px);
+  filter:brightness(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.55),
+    inset 0 -2px 5px rgba(124,45,18,.5),
+    0 3px 4px rgba(0,0,0,.4),
+    0 15px 30px -6px rgba(234,88,12,.78);
+}
+html.jw-beta body:not(.light) [class*="bg-orange-600"]:active:not(:disabled){
+  transform:translateY(1.5px);
+  filter:brightness(.96);
+  box-shadow:
+    inset 0 2px 6px rgba(124,45,18,.7),
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 2px 5px -2px rgba(0,0,0,.5);
+}
+html.jw-beta body:not(.light) [class*="bg-orange-600"]:disabled{
+  background-image:none;border:none;box-shadow:none;transform:none;filter:none;
+}
+
+/* Secondary slate buttons — same tactile cap so nothing reads flat */
+html.jw-beta body:not(.light) button[class*="bg-stone-800"]{
+  background-image:linear-gradient(180deg, rgba(84,98,124,.62), rgba(37,47,69,.78));
+  border:1px solid rgba(0,0,0,.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -2px 5px rgba(0,0,0,.42),
+    0 2px 3px rgba(0,0,0,.38),
+    0 7px 15px -6px rgba(0,0,0,.55);
+  transition:transform .12s cubic-bezier(.2,.8,.3,1), box-shadow .18s ease, filter .18s ease;
+}
+html.jw-beta body:not(.light) button[class*="bg-stone-800"]:hover{
+  transform:translateY(-1.5px);
+  filter:brightness(1.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -2px 5px rgba(0,0,0,.4),
+    0 3px 4px rgba(0,0,0,.4),
+    0 12px 24px -6px rgba(0,0,0,.6);
+}
+html.jw-beta body:not(.light) button[class*="bg-stone-800"]:active{
+  transform:translateY(1.5px);
+  filter:brightness(.95);
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* Drop zones — recessed wells with a gold dashed lip that lifts on hover */
+html.jw-beta body:not(.light) .border-dashed{
+  background:rgba(234,88,12,.06);
+  box-shadow:inset 0 2px 7px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.03);
+}
+html.jw-beta body:not(.light) .border-dashed:hover{
+  border-color:rgba(234,88,12,.8);
+  background:rgba(234,88,12,.12);
+  transform:translateY(-1px);
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.3), 0 10px 24px -12px rgba(234,88,12,.65);
+}
+
+/* Floating merge bar — beveled glass slab */
+html.jw-beta body:not(.light) .fixed.bottom-4{
+  border:1px solid rgba(0,0,0,.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.13),
+    0 2px 4px rgba(0,0,0,.5),
+    0 24px 55px -16px rgba(0,0,0,.85),
+    0 0 46px -12px rgba(234,88,12,.3);
+}
