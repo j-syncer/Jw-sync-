@@ -2137,3 +2137,14 @@ body.light .svc-card-desc { color: #475569; }
 .svc-section-title::after { background: linear-gradient(to left, transparent, rgba(251,146,60,.6)); }
 .landing-section-title { position: relative; padding-bottom: 16px; }
 .landing-section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 44px; height: 3px; border-radius: 2px; background: #ea580c; }
+
+
+/* ── Unified merge tool (beta): single "Advanced options" control ── */
+.jw-adv-toggle{display:inline-flex;align-items:center;gap:7px;padding:7px 15px;border-radius:999px;border:1px solid rgba(234,88,12,.45);background:rgba(234,88,12,.09);color:#fdba74;font-size:13px;font-weight:600;line-height:1;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background .15s ease,border-color .15s ease,color .15s ease}
+.jw-adv-toggle::after{content:"▾";font-size:11px;opacity:.85}
+.jw-adv-toggle:hover{background:rgba(234,88,12,.17);border-color:rgba(234,88,12,.65)}
+.jw-adv-toggle.jw-adv-on{border-color:rgba(71,85,105,.55);background:rgba(71,85,105,.2);color:#cbd5e1}
+.jw-adv-toggle.jw-adv-on::after{content:""}
+.jw-adv-toggle.jw-adv-on:hover{border-color:rgba(148,163,184,.7);color:#e2e8f0}
+body.light .jw-adv-toggle{border-color:rgba(234,88,12,.4);background:rgba(234,88,12,.07);color:#c2410c}
+body.light .jw-adv-toggle.jw-adv-on{border-color:rgba(100,116,139,.4);background:rgba(100,116,139,.1);color:#475569}

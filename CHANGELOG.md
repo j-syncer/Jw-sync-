@@ -80,6 +80,12 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.80.0] — 2026-06-19
+
+### Merge tool — simpler by default (beta)
+- Removed the confusing Simple/Full mode switch on the beta site. The merge tool now opens in the clean step-by-step flow by default, with a single quiet "Advanced options" button that reveals the full toolset when you want it — and tucks it away when you don't.
+- First step toward a calmer, more beautiful merge experience; more polish to follow.
+
 ## [2.79.1] — 2026-06-17
 
 ### Removed
