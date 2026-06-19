@@ -41,12 +41,7 @@ const BROWSE_REQUIRED_KEYS = [
 const BROWSE_BETA_ONLY_KEYS = [
   'pg_prev','pg_next','pg_status','err_corrupt','err_no_db','err_not_sqlite',
   'rte_bold','rte_italic','rte_underline','rte_bullets','rich_text_note',
-  'batch_tagged_ok',
-  // Printable study guide (PDF)
-  'pdf_btn','pdf_hint','pdf_dlg_title','pdf_dlg_sub','pdf_doc_title',
-  'pdf_group','pdf_group_pub','pdf_group_color','pdf_group_none',
-  'pdf_inc_tags','pdf_inc_text','pdf_make','pdf_default_title','pdf_count',
-  'pdf_made','pdf_no_color','pdf_other_pub','pdf_empty','pdf_generated'
+  'batch_tagged_ok'
 ];
 
 for (const path of FILES) {

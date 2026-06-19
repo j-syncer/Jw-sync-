@@ -80,35 +80,10 @@ runs in your browser — your files are never uploaded.
 
 ---
 
-## [2.79.0] — 2026-06-17
+## [2.79.1] — 2026-06-17
 
-### Study Guide now exports a true PDF
-- The Study Guide now generates a real PDF file directly, instead of relying on the browser's print dialog. This fixes the printout being cut off after a couple of pages (especially on iPhone/iPad) — the full guide is always included, however many pages it runs to.
-- The PDF has a cover page, colour-coded note entries, publication and date, your note text and tags, and page numbers.
-- Notes written in scripts the PDF fonts don't cover (e.g. Cyrillic, Japanese, Korean) automatically fall back to the print-based guide.
-
-## [2.78.3] — 2026-06-17
-
-### Fixes
-- Study Guide (PDF): fixed the print being cut off after ~2 pages. While the Note Explorer is open the app locks the page height, which was clipping the printout; the print layout now overrides that so the full guide is included.
-
-## [2.78.2] — 2026-06-17
-
-### Fixes
-- Study Guide (PDF): fixed "There was a problem printing the page" on iPhone/iPad. The guide now prints from the main page using a hidden print-only layout instead of a separate window, which works reliably on iOS Safari as well as desktop — and includes every page.
-
-## [2.78.1] — 2026-06-17
-
-### Fixes
-- Study Guide (PDF): fixed printing only outputting the first page or two for large libraries on desktop.
-
-## [2.78.0] — 2026-06-17
-
-### Printable Study Guide (PDF)
-- New **Study Guide** button in the Note Explorer toolbar: turn the notes you're viewing into a clean, printable PDF — print it or use your browser's "Save as PDF".
-- Choose a document title, group the notes by publication or by highlight colour (or leave them ungrouped), and optionally include the note text and tags.
-- The guide respects whatever you've filtered or searched, so you can export just a subset. Each entry shows its highlight colour, title, publication, date, content and tags, with a cover page and totals.
-- Available in all 12 languages, generated entirely in your browser — nothing is uploaded.
+### Removed
+- Removed the experimental printable Study Guide (PDF) from the beta build. It didn't print reliably across devices, so it has been pulled while we reconsider the approach. No other features are affected.
 
 ## [2.76.2] — 2026-06-17
 
