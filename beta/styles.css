@@ -2433,3 +2433,45 @@ html.jw-beta body:not(.light) .jw-shimmer-gold{     --m1:#241c0a; --m2:#3b2f12; 
 @media (prefers-reduced-motion: reduce){
   html.jw-beta body:not(.light) .jw-adv-bubble{ animation:none; background-position:46% 0; }
 }
+
+
+/* ---- The big "Merge My Files Now!" CTA: vibrant shimmer + energy pulse ---- */
+@keyframes jwBtnShimmer{ 0%{ background-position:0% 50%; } 100%{ background-position:200% 50%; } }
+@keyframes jwBtnPulse{
+  0%,100%{ box-shadow:0 6px 22px -6px rgba(234,88,12,.5), 0 0 0 0 rgba(245,158,11,0); }
+  50%{ box-shadow:0 9px 30px -6px rgba(234,88,12,.72), 0 0 24px 2px rgba(245,158,11,.4); }
+}
+
+html.jw-beta body:not(.light) .simple-merge-btn:not(:disabled){
+  background-image:linear-gradient(100deg,#c2410c 0%,#ea580c 17%,#f97316 33%,#fbbf24 50%,#f97316 67%,#ea580c 83%,#c2410c 100%) !important;
+  background-size:200% 100%;
+  border:1px solid rgba(124,45,18,.6);
+  color:#fff;
+  text-shadow:0 1px 2px rgba(124,45,18,.55);
+  animation:jwBtnShimmer 3.4s linear infinite, jwBtnPulse 2.2s ease-in-out infinite;
+  transition:transform .14s cubic-bezier(.2,.8,.3,1), filter .2s ease;
+}
+html.jw-beta body:not(.light) .simple-merge-btn:not(:disabled):hover{
+  opacity:1;
+  transform:translateY(-2px) scale(1.012);
+  filter:brightness(1.06) saturate(1.08);
+  animation-duration:1.5s, 1.3s;
+}
+html.jw-beta body:not(.light) .simple-merge-btn:not(:disabled):active{
+  transform:translateY(1px) scale(.997);
+}
+
+/* Disabled: a calm metallic slate (no longer dead gray), gentle drift */
+html.jw-beta body:not(.light) .simple-merge-btn:disabled{
+  background-image:linear-gradient(100deg,#1e2632,#334155,#1e2632) !important;
+  background-size:200% 100%;
+  color:#94a3b8 !important;
+  border:1px solid rgba(148,163,184,.16);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 2px 9px rgba(0,0,0,.3) !important;
+  animation:jwBtnShimmer 6.5s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html.jw-beta body:not(.light) .simple-merge-btn,
+  html.jw-beta body:not(.light) .simple-merge-btn:disabled{ animation:none !important; }
+}

@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.82.1] — 2026-06-19
+
+### Shimmering main merge button (beta)
+- The big "Merge My Files Now!" button now shimmers with a warm gold sheen and a gentle energy pulse when it's ready to use. When it's disabled it's a calm metallic slate instead of dead gray. Honors reduced-motion preferences.
+
 ## [2.82.0] — 2026-06-19
 
 ### Shimmering advanced-feature bubbles (beta)
