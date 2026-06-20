@@ -1,4 +1,4 @@
-var IS_BETA=(function(){try{return /(^|\/)beta(\/|$)/.test(location.pathname)}catch(e){return!1}})();try{if(IS_BETA&&typeof document!=='undefined')document.documentElement.classList.add('jw-beta')}catch(e){}
+var IS_BETA=true;try{if(IS_BETA&&typeof document!=='undefined')document.documentElement.classList.add('jw-beta')}catch(e){}
 // JW Sync main React app bundle. Lazy-loaded by the inline boot
 // loader in index.html when the user navigates to the app or clicks
 // Try Demo. Do not load this file with <script src=> directly — the

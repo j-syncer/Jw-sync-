@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.83.0] — 2026-06-20
+
+### Merge tool redesign now live
+- The redesigned merge experience — single "Advanced options" control instead of the Simple/Full switch, refined glass surfaces, tactile shimmering buttons, and per-feature metallic accents — is now live on the main site, not just the beta preview.
+
 ## [2.82.3] — 2026-06-19
 
 ### Shimmering "Create My Merged Backup" button (beta)
