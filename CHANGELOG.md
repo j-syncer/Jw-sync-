@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.81.3] — 2026-06-19
+
+### Finer detail + polish on the merge tool (beta)
+- Added a detail pass for a more professional finish: refined hairline panels, text fields with a clear focus glow, premium stat tiles with embossed numbers, a crafted glow on card-header icons, slim custom scrollbars, on-brand text selection, and crisper text rendering.
+
 ## [2.81.2] — 2026-06-19
 
 ### Sleeker, more refined merge tool (beta)

@@ -2303,3 +2303,90 @@ html.jw-beta body:not(.light) .fixed.bottom-4{
 
 /* Card titles — a hair tighter for a more refined wordmark feel */
 html.jw-beta body:not(.light) .font-bold.text-lg.text-white{ letter-spacing:-.01em; }
+
+
+/* ---- Detail pass: inputs, panels, stat tiles, chrome polish (beta dark) ---- */
+
+/* Crisper text rendering across the beta app */
+html.jw-beta body:not(.light){
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+/* On-brand text selection + focus ring */
+html.jw-beta ::selection{ background:rgba(234,88,12,.32); color:#fff; }
+html.jw-beta body:not(.light) :focus-visible{
+  outline:2px solid rgba(234,88,12,.65);
+  outline-offset:2px;
+}
+
+/* Slim, premium scrollbars */
+html.jw-beta body:not(.light){ scrollbar-width:thin; scrollbar-color:rgba(148,163,184,.35) transparent; }
+html.jw-beta body:not(.light) ::-webkit-scrollbar{ width:10px; height:10px; }
+html.jw-beta body:not(.light) ::-webkit-scrollbar-track{ background:transparent; }
+html.jw-beta body:not(.light) ::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg, rgba(120,130,150,.4), rgba(80,90,110,.35));
+  border-radius:999px; border:2px solid transparent; background-clip:padding-box;
+}
+html.jw-beta body:not(.light) ::-webkit-scrollbar-thumb:hover{
+  background:linear-gradient(180deg, rgba(234,88,12,.6), rgba(194,65,12,.5));
+  background-clip:padding-box;
+}
+
+/* Unify the many flat stone-900 panels into refined hairline surfaces */
+html.jw-beta body:not(.light) [class*="bg-stone-900"][class*="border-stone-700"],
+html.jw-beta body:not(.light) [class*="bg-stone-900"][class*="border-stone-800"]{
+  background-image:linear-gradient(180deg, rgba(255,255,255,.018), rgba(0,0,0,.14));
+  border-color:rgba(255,255,255,.075);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.03), 0 1px 2px rgba(0,0,0,.22);
+}
+
+/* Text inputs / textareas — recessed field with an orange focus glow */
+html.jw-beta body:not(.light) input[class*="bg-stone-900"],
+html.jw-beta body:not(.light) textarea[class*="bg-stone-900"]{
+  background-image:none;
+  background-color:rgba(0,0,0,.26);
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.4);
+  transition:border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+html.jw-beta body:not(.light) input[class*="bg-stone-900"]:focus,
+html.jw-beta body:not(.light) textarea[class*="bg-stone-900"]:focus{
+  outline:none;
+  border-color:rgba(234,88,12,.6);
+  background-color:rgba(0,0,0,.32);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.35), 0 0 0 3px rgba(234,88,12,.18);
+}
+/* Input wrappers that use focus-within get the same glow */
+html.jw-beta body:not(.light) [class*="focus-within:border"]:focus-within{
+  border-color:rgba(234,88,12,.6) !important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.35), 0 0 0 3px rgba(234,88,12,.16);
+}
+
+/* Stat tiles — refined raised mini-cards with embossed numerals */
+html.jw-beta body:not(.light) .bg-stone-800.rounded-lg.text-center{
+  background:linear-gradient(180deg, rgba(58,60,69,.7), rgba(34,36,44,.8));
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 1px 2px rgba(0,0,0,.3), 0 6px 14px -8px rgba(0,0,0,.4);
+}
+html.jw-beta body:not(.light) .bg-stone-800.rounded-lg.text-center [class*="text-2xl"]{
+  text-shadow:0 1px 0 rgba(0,0,0,.45);
+  letter-spacing:-.02em;
+}
+
+/* Card header icon — subtle accent glow so it reads as a crafted mark */
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl > div:first-child > svg:first-child,
+html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl > div:first-child > i:first-child{
+  filter:drop-shadow(0 1px 3px rgba(234,88,12,.45));
+}
+
+/* Section labels — refined letter-spacing for a more typographic feel */
+html.jw-beta body:not(.light) .uppercase.tracking-wider{ letter-spacing:.12em; }
+html.jw-beta body:not(.light) .font-bold.text-orange-400,
+html.jw-beta body:not(.light) .font-bold.text-amber-400{ letter-spacing:-.005em; }
+
+/* Top nav buttons — gentle premium hover lift */
+html.jw-beta body:not(.light) .nav-btn{ transition:color .15s ease, background .15s ease, transform .12s ease; }
+html.jw-beta body:not(.light) .nav-btn:hover{ transform:translateY(-1px); }
