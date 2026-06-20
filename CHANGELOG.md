@@ -80,6 +80,12 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.81.2] — 2026-06-19
+
+### Sleeker, more refined merge tool (beta)
+- Retuned the merge tool toward a calmer, more premium "Apple-like" finish: neutral graphite surfaces, fine hairline highlights and large soft shadows instead of heavy bevels, with the accent color used more sparingly.
+- The "100% private" badge is now a compact, embossed pill instead of a big empty box on mobile.
+
 ## [2.81.1] — 2026-06-19
 
 ### Deeper, more tactile merge tool (beta)
