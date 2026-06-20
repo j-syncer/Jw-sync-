@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.82.3] — 2026-06-19
+
+### Shimmering "Create My Merged Backup" button (beta)
+- The advanced-view "Create My Merged Backup" button now shimmers with the same gold sheen and pulse as the main merge button, and shows a calm metallic slate (instead of dead gray) when disabled. Honors reduced-motion preferences.
+
 ## [2.82.2] — 2026-06-19
 
 ### Shimmering download button (beta)

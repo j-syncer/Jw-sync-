@@ -2500,3 +2500,32 @@ html.jw-beta body:not(.light) .simple-download-btn:active{ transform:translateY(
 @media (prefers-reduced-motion: reduce){
   html.jw-beta body:not(.light) .simple-download-btn{ animation:none !important; }
 }
+
+
+/* ---- "Create My Merged Backup" CTA: same gold shimmer + pulse (beta dark) ---- */
+html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]:not(:disabled){
+  background-image:linear-gradient(100deg,#c2410c 0%,#ea580c 17%,#f97316 33%,#fbbf24 50%,#f97316 67%,#ea580c 83%,#c2410c 100%) !important;
+  background-size:200% 100%;
+  border:1px solid rgba(124,45,18,.6) !important;
+  color:#fff;
+  text-shadow:0 1px 2px rgba(124,45,18,.55);
+  animation:jwBtnShimmer 3.4s linear infinite, jwBtnPulse 2.2s ease-in-out infinite;
+}
+html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]:not(:disabled):hover{
+  filter:brightness(1.06) saturate(1.08);
+  animation-duration:1.5s, 1.3s;
+}
+/* Disabled: calm metallic slate instead of dead gray */
+html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]:disabled{
+  background-image:linear-gradient(100deg,#1e2632,#334155,#1e2632) !important;
+  background-size:200% 100%;
+  color:#94a3b8 !important;
+  border:1px solid rgba(148,163,184,.16) !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 2px 9px rgba(0,0,0,.3) !important;
+  animation:jwBtnShimmer 6.5s linear infinite;
+  opacity:1 !important;
+  transform:none !important;
+}
+@media (prefers-reduced-motion: reduce){
+  html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]{ animation:none !important; }
+}
