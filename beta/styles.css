@@ -2475,3 +2475,28 @@ html.jw-beta body:not(.light) .simple-merge-btn:disabled{
   html.jw-beta body:not(.light) .simple-merge-btn,
   html.jw-beta body:not(.light) .simple-merge-btn:disabled{ animation:none !important; }
 }
+
+
+/* ---- Post-merge "Download" CTA: emerald shimmer + pulse (beta dark) ---- */
+@keyframes jwDlPulse{
+  0%,100%{ box-shadow:0 6px 22px -6px rgba(16,185,129,.5), 0 0 0 0 rgba(52,211,153,0); }
+  50%{ box-shadow:0 9px 30px -6px rgba(16,185,129,.72), 0 0 24px 2px rgba(52,211,153,.42); }
+}
+html.jw-beta body:not(.light) .simple-download-btn{
+  background-image:linear-gradient(100deg,#15803d 0%,#16a34a 17%,#22c55e 33%,#86efac 50%,#22c55e 67%,#16a34a 83%,#15803d 100%) !important;
+  background-size:200% 100%;
+  border:1px solid rgba(6,95,70,.6);
+  color:#fff;
+  text-shadow:0 1px 2px rgba(6,78,59,.5);
+  animation:jwBtnShimmer 3.4s linear infinite, jwDlPulse 2.2s ease-in-out infinite;
+  transition:transform .14s cubic-bezier(.2,.8,.3,1), filter .2s ease;
+}
+html.jw-beta body:not(.light) .simple-download-btn:hover{
+  transform:translateY(-2px) scale(1.012);
+  filter:brightness(1.06) saturate(1.08);
+  animation-duration:1.5s, 1.3s;
+}
+html.jw-beta body:not(.light) .simple-download-btn:active{ transform:translateY(1px) scale(.997); }
+@media (prefers-reduced-motion: reduce){
+  html.jw-beta body:not(.light) .simple-download-btn{ animation:none !important; }
+}

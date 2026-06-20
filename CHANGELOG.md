@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.82.2] — 2026-06-19
+
+### Shimmering download button (beta)
+- The post-merge "Download" button now shimmers with an emerald sheen and gentle pulse, matching the main merge button so the whole flow feels cohesive. Honors reduced-motion preferences.
+
 ## [2.82.1] — 2026-06-19
 
 ### Shimmering main merge button (beta)
