@@ -2390,3 +2390,46 @@ html.jw-beta body:not(.light) .font-bold.text-amber-400{ letter-spacing:-.005em;
 /* Top nav buttons — gentle premium hover lift */
 html.jw-beta body:not(.light) .nav-btn{ transition:color .15s ease, background .15s ease, transform .12s ease; }
 html.jw-beta body:not(.light) .nav-btn:hover{ transform:translateY(-1px); }
+
+
+/* ---- Advanced feature bubbles: per-bubble metallic shimmer (beta dark) ---- */
+@keyframes jwShimmer{ 0%{ background-position:130% 0; } 100%{ background-position:-30% 0; } }
+
+html.jw-beta body:not(.light) .jw-adv-bubble{
+  position:relative;
+  background-image:linear-gradient(115deg,
+     var(--m1) 0%, var(--m2) 16%, var(--m1) 30%,
+     var(--mhi) 44%, var(--m2) 52%, var(--m1) 64%,
+     var(--m2) 82%, var(--m1) 100%) !important;
+  background-size:260% 100% !important;
+  background-repeat:no-repeat;
+  border:1px solid var(--medge) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 0 0 .5px rgba(0,0,0,.5),
+    0 14px 30px -16px rgba(0,0,0,.55),
+    0 0 26px -10px var(--mglow) !important;
+  animation:jwShimmer 7s linear infinite;
+  transition:box-shadow .3s ease, transform .2s ease;
+}
+html.jw-beta body:not(.light) .jw-adv-bubble:hover{
+  animation-duration:2.6s;
+  transform:translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.14),
+    0 0 0 .5px rgba(0,0,0,.5),
+    0 18px 36px -16px rgba(0,0,0,.6),
+    0 0 38px -8px var(--mglow) !important;
+}
+/* let the metallic sheen show through the (collapsed) header bar */
+html.jw-beta body:not(.light) .jw-adv-bubble > div:first-child{ background:transparent !important; }
+
+/* Per-bubble metallic hues */
+html.jw-beta body:not(.light) .jw-shimmer-emerald{  --m1:#0a2018; --m2:#0f3528; --mhi:#1f7252; --medge:rgba(52,211,153,.45);  --mglow:rgba(16,185,129,.55); }
+html.jw-beta body:not(.light) .jw-shimmer-sapphire{ --m1:#0a1c31; --m2:#102c48; --mhi:#1e5687; --medge:rgba(96,165,250,.45);  --mglow:rgba(59,130,246,.55); }
+html.jw-beta body:not(.light) .jw-shimmer-amethyst{ --m1:#1c0f2e; --m2:#2b1646; --mhi:#56307f; --medge:rgba(192,132,252,.45); --mglow:rgba(168,85,247,.55); }
+html.jw-beta body:not(.light) .jw-shimmer-gold{     --m1:#241c0a; --m2:#3b2f12; --mhi:#7d621f; --medge:rgba(251,191,36,.45);  --mglow:rgba(245,158,11,.55); }
+
+@media (prefers-reduced-motion: reduce){
+  html.jw-beta body:not(.light) .jw-adv-bubble{ animation:none; background-position:46% 0; }
+}

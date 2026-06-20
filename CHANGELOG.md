@@ -80,6 +80,11 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.82.0] — 2026-06-19
+
+### Shimmering advanced-feature bubbles (beta)
+- Each minimized advanced tool now has its own distinct metallic, shimmering accent: Extract & Share (emerald), Bulk Color Changer (sapphire), Manage Tags (amethyst), and Merge Settings (gold). The sheen drifts slowly and speeds up on hover. Honors reduced-motion preferences.
+
 ## [2.81.3] — 2026-06-19
 
 ### Finer detail + polish on the merge tool (beta)
