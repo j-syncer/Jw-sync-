@@ -80,6 +80,15 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.85.0] — 2026-06-21
+
+### The landing page now comes alive as you scroll
+- Sections gracefully rise into place the first time they enter view — the
+  hero, the tool cards, the feature grid, the how-to steps, and the FAQ each
+  fade and lift, with cards in a row staggering one after another.
+- It plays once per section (no looping, no distraction) and is completely
+  turned off for anyone who prefers reduced motion.
+
 ## [2.84.1] — 2026-06-21
 
 ### The merge tool now glows too

@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.84.1",
+      "softwareVersion": "2.85.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -6375,6 +6375,67 @@ body.light .jwr-ntitle{color:#0b2e58}
 })();
 </script>
 <!-- ── End Collapsible tool sections ─────────────────────── -->
+
+<!-- ── Landing entrance choreography (v2.85.0, beta-first) ──
+     One-shot fade/slide-up as sections scroll into view. Staggered per
+     group, scoped to #landing-view, fully disabled under reduced-motion. -->
+<style id="reveal-css">
+@media (prefers-reduced-motion:no-preference){
+  #landing-view [data-reveal]{
+    opacity:0;transform:translateY(22px);will-change:opacity,transform;
+    transition:opacity .68s cubic-bezier(.16,1,.3,1) var(--rd,0ms),
+               transform .68s cubic-bezier(.16,1,.3,1) var(--rd,0ms);
+  }
+  #landing-view [data-reveal].is-in{opacity:1;transform:none}
+}
+</style>
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  try{ if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return; }catch(_){}
+  var SOLO=['.landing-hero-split .lhv-copy','.landing-hero-split .lhv',
+            '.svc-section-title','.landing-section-title','.landing-howto>h2','.landing-faq>h2'];
+  var SETS=['.svc-grid>*','.landing-features>.landing-feat','.landing-steps>*','.landing-faq>.landing-faq-item'];
+  function tag(){
+    SOLO.forEach(function(sel){
+      var n=document.querySelectorAll(sel),k;
+      for(k=0;k<n.length;k++) n[k].setAttribute('data-reveal','');
+    });
+    SETS.forEach(function(sel){
+      var n=document.querySelectorAll(sel),counts=[],parents=[],k;
+      for(k=0;k<n.length;k++){
+        var el=n[k],p=el.parentNode,pi=parents.indexOf(p);
+        if(pi<0){pi=parents.length;parents.push(p);counts.push(0);}
+        var i=counts[pi]++;
+        el.setAttribute('data-reveal','');
+        el.style.setProperty('--rd',(Math.min(i,7)*70)+'ms');
+      }
+    });
+  }
+  var io=new IntersectionObserver(function(es){
+    for(var k=0;k<es.length;k++){ if(es[k].isIntersecting){ es[k].target.classList.add('is-in'); io.unobserve(es[k].target);} }
+  },{threshold:0.12,rootMargin:'0px 0px -6% 0px'});
+  function scan(){
+    var n=document.querySelectorAll('#landing-view [data-reveal]:not(.is-in)'),k;
+    for(k=0;k<n.length;k++) io.observe(n[k]);
+  }
+  function init(){
+    tag(); scan();
+    // Landing is shown after the app boots; re-scan when it becomes visible.
+    var lv=document.getElementById('landing-view');
+    if(lv){
+      try{
+        var mo=new MutationObserver(function(){ scan(); });
+        mo.observe(lv,{attributes:true,attributeFilter:['style','class']});
+      }catch(_){}
+    }
+    window.addEventListener('load',scan,{once:true});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
+<!-- ── End landing entrance choreography ─────────────────── -->
 
 </body>
 </html>
