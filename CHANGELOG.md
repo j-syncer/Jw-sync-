@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.84.0] — 2026-06-21
+
+### A more beautiful landing hero
+- The headline is now a true display title — larger, tighter, and weighted, with
+  graceful balanced line-wrapping so it never breaks awkwardly.
+- A soft, static orange "aurora" now glows behind the hero, giving the page
+  warmth and depth against the cool navy backdrop (no animation, no flicker).
+- A subtle orange accent underline sits beneath the headline, and the supporting
+  text was refined for cleaner rhythm and readability — in both dark and light.
+
 ## [2.83.0] — 2026-06-20
 
 ### Merge tool redesign now live

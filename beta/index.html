@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.83.0",
+      "softwareVersion": "2.84.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -691,6 +691,41 @@ body.light .lhv-flow-node{fill:rgba(234,88,12,.15)}
 body.light .lhv-foot{border-top-color:rgba(11,46,88,.1)}
 body.light .lhv-foot svg{color:#059669}
 body.light .lhv-foot span{color:rgba(71,85,105,.9)}
+
+/* ── Hero aurora + display typography (v2.84.0, beta-first) ──
+   Single accent (orange). Static radial bloom — no animation. */
+.landing-hero-split{position:relative}
+.landing-hero-split::before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  top:-130px;left:50%;transform:translateX(-50%);
+  width:min(124%,1120px);height:540px;
+  background:
+    radial-gradient(58% 60% at 50% 36%,rgba(234,88,12,.20),rgba(234,88,12,0) 70%),
+    radial-gradient(42% 52% at 20% 30%,rgba(249,115,22,.11),rgba(249,115,22,0) 70%),
+    radial-gradient(46% 56% at 82% 30%,rgba(148,163,184,.09),rgba(148,163,184,0) 72%);
+  filter:blur(10px);
+}
+.landing-hero-split>*{position:relative;z-index:1}
+body.light .landing-hero-split::before{
+  background:
+    radial-gradient(58% 60% at 50% 36%,rgba(234,88,12,.11),rgba(234,88,12,0) 70%),
+    radial-gradient(46% 56% at 82% 30%,rgba(11,46,88,.06),rgba(11,46,88,0) 72%);
+}
+.lhv-copy h1{
+  font-size:clamp(31px,5.4vw,50px);
+  font-weight:800;letter-spacing:-1.4px;line-height:1.06;
+  text-wrap:balance;color:#f4f8ff;
+  text-shadow:0 1px 38px rgba(234,88,12,.16);
+  margin-bottom:16px;
+}
+body.light .lhv-copy h1{color:#071a38;text-shadow:none}
+.lhv-copy h1::after{
+  content:"";display:block;width:54px;height:3px;border-radius:3px;
+  margin:18px auto 0;background:linear-gradient(90deg,#ea580c,#fb923c);
+}
+@media (min-width:880px){.lhv-copy h1::after{margin-left:0;margin-right:auto}}
+.lhv-copy p{font-size:clamp(15px,1.55vw,17px);line-height:1.62;color:rgba(232,240,255,.74)}
+body.light .lhv-copy p{color:rgba(7,26,56,.7)}
 </style>
 <style id="beta-home-refresh">
 /* ── Home page visual refresh (v2.75.0, beta-first) ──
