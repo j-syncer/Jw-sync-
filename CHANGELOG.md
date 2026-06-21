@@ -80,6 +80,13 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.85.1] — 2026-06-21
+
+### Scroll reveals now read clearly on phones
+- The entrance animation travels further and adds a subtle lift-and-scale, with
+  a longer stagger, so the effect is obvious on a narrow single-column layout —
+  not just on wide desktop rows. Still one-shot and reduced-motion-safe.
+
 ## [2.85.0] — 2026-06-21
 
 ### The landing page now comes alive as you scroll
