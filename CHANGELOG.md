@@ -80,6 +80,13 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.86.1] — 2026-06-21
+
+### A more premium look for the merge tool
+- The merge tool's panels and secondary buttons moved from a flat gray-slate to
+  a cool blue-slate with a subtle marble-like depth — two soft static blooms give
+  the cards a polished, premium feel without competing with the brand orange.
+
 ## [2.86.0] — 2026-06-21
 
 ### The polish reaches the merge tool itself

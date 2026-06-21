@@ -2167,8 +2167,11 @@ html.jw-beta body:not(.light){
 
 /* Cards — neutral graphite slab, fine top rim-light, large soft shadow */
 html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl{
-  background:linear-gradient(180deg, rgba(41,43,52,.82) 0%, rgba(28,30,38,.86) 50%, rgba(22,24,31,.9) 100%);
-  border:1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(125% 85% at 16% 0%, rgba(96,124,184,.11), rgba(96,124,184,0) 56%),
+    radial-gradient(95% 75% at 96% 102%, rgba(58,86,150,.13), rgba(58,86,150,0) 60%),
+    linear-gradient(165deg, rgba(31,42,67,.88) 0%, rgba(23,32,54,.90) 50%, rgba(16,24,44,.93) 100%);
+  border:1px solid rgba(150,178,232,.11);
   border-radius:20px;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.10),
@@ -2271,8 +2274,8 @@ html.jw-beta body:not(.light) [class*="bg-orange-600"]:disabled{
 
 /* Secondary slate buttons — refined neutral cap so nothing reads flat */
 html.jw-beta body:not(.light) button[class*="bg-stone-800"]{
-  background-image:linear-gradient(180deg, rgba(62,64,73,.92), rgba(40,42,50,.95));
-  border:1px solid rgba(255,255,255,.09);
+  background-image:linear-gradient(180deg, rgba(54,69,103,.93), rgba(35,46,73,.95));
+  border:1px solid rgba(150,178,232,.14);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.10),
     0 1px 2px rgba(0,0,0,.3),
