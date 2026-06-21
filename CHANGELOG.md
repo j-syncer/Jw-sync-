@@ -80,6 +80,13 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.84.1] — 2026-06-21
+
+### The merge tool now glows too
+- The main merge panel now carries the same warm orange "aurora" bleed as the
+  landing hero — a soft halo of brand color radiating from behind the card,
+  intensifying gently on hover. Beta dark mode only; production untouched.
+
 ## [2.84.0] — 2026-06-21
 
 ### A more beautiful landing hero
