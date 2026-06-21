@@ -2192,6 +2192,17 @@ html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl:hover{
     0 0 72px -14px rgba(234,88,12,.28),
     0 48px 110px -42px rgba(249,115,22,.24);
 }
+/* Mobile: viewport clips the sideways bleed, so bloom vertically instead */
+@media (max-width:700px){
+  html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl{
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.10),
+      0 0 0 .5px rgba(0,0,0,.4),
+      0 14px 28px -14px rgba(0,0,0,.5),
+      0 -22px 72px -26px rgba(234,88,12,.42),
+      0 34px 84px -30px rgba(249,115,22,.34);
+  }
+}
 /* Header — quiet neutral hairline, accent stays in the icon/text only */
 html.jw-beta body:not(.light) .bg-stone-800.rounded-2xl > div:first-child{
   background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0));

@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.85.1",
+      "softwareVersion": "2.86.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -6439,6 +6439,62 @@ body.light .jwr-ntitle{color:#0b2e58}
 })();
 </script>
 <!-- ── End landing entrance choreography ─────────────────── -->
+
+<!-- ── App/merge-view scroll choreography (v2.86.0, beta-first) ──
+     Cards in the merge tool rise into view as you scroll. Defensive by
+     design: the hidden state only applies under html.jw-app-reveal (added
+     only after the observer is live), every card carries a safety timer so
+     dynamic React UI can never get stuck invisible, and reduced-motion
+     short-circuits the whole thing. -->
+<style id="app-reveal-css">
+@media (prefers-reduced-motion:no-preference){
+  html.jw-app-reveal #root [data-areveal]{
+    opacity:0;transform:translateY(28px) scale(.99);will-change:opacity,transform;
+    transition:opacity .62s cubic-bezier(.16,1,.3,1),transform .62s cubic-bezier(.16,1,.3,1);
+  }
+  html.jw-app-reveal #root [data-areveal].is-in{opacity:1;transform:none}
+}
+</style>
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  try{ if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return; }catch(_){}
+  var root=document.getElementById('root');
+  if(!root) return;
+  var SEL='.bg-stone-800.rounded-2xl';
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){ if(es[i].isIntersecting){ es[i].target.classList.add('is-in'); io.unobserve(es[i].target);} }
+  },{threshold:0,rootMargin:'0px 0px -8% 0px'});
+  function arm(el){
+    if(el.getAttribute('data-areveal')!==null) return;
+    el.setAttribute('data-areveal','');
+    io.observe(el);
+    // Safety: guarantee visibility even if the observer never fires for it.
+    setTimeout(function(){ el.classList.add('is-in'); }, 2200);
+  }
+  function armAll(node){
+    if(node.nodeType!==1) return;
+    if(node.matches && node.matches(SEL)) arm(node);
+    if(node.querySelectorAll){ var n=node.querySelectorAll(SEL),k; for(k=0;k<n.length;k++) arm(n[k]); }
+  }
+  function start(){
+    document.documentElement.classList.add('jw-app-reveal');
+    armAll(root);
+    try{
+      var mo=new MutationObserver(function(muts){
+        for(var i=0;i<muts.length;i++){
+          var an=muts[i].addedNodes; if(!an) continue;
+          for(var j=0;j<an.length;j++) armAll(an[j]);
+        }
+      });
+      mo.observe(root,{childList:true,subtree:true});
+    }catch(_){}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start);
+  else start();
+})();
+</script>
+<!-- ── End app/merge-view scroll choreography ─────────────── -->
 
 </body>
 </html>

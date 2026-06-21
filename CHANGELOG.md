@@ -80,6 +80,16 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.86.0] — 2026-06-21
+
+### The polish reaches the merge tool itself
+- The merge tool's cards now rise gracefully into view as you scroll — the same
+  one-shot entrance as the landing page, now where you actually spend your time
+  on a phone. Reduced-motion users are unaffected.
+- The merge panel's warm orange glow was retuned for phones to bloom top and
+  bottom (the sideways glow was being clipped by the screen edges), so the
+  signature aurora is finally visible on mobile.
+
 ## [2.85.1] — 2026-06-21
 
 ### Scroll reveals now read clearly on phones
