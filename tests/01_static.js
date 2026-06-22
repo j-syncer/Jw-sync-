@@ -289,14 +289,21 @@ for (const path of FILES) {
       fail('Home service section (.svc-grid) missing');
     else ok('Home service section (.svc-grid) present');
     const cards = (c.match(/class="svc-card[ "]/g) || []).length;
-    if (cards === 5) ok('Five service cards present (incl. Backup Doctor)');
-    else fail('Expected 5 .svc-card, got ' + cards);
+    if (cards === 6) ok('Six service cards present (incl. Backup Doctor + Resurface)');
+    else fail('Expected 6 .svc-card, got ' + cards);
     // Backup Doctor sits 2nd, right after the Merge tool
     if (/svc-card svc-card-merge[\s\S]*?svc-card svc-doctor/.test(c))
       ok('Backup Doctor card placed directly after Merge tool');
     else fail('Backup Doctor card not positioned after Merge tool');
-    for (const k of ['svc_merge_t', 'svc_doctor_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t'])
+    for (const k of ['svc_merge_t', 'svc_doctor_t', 'svc_explorer_t', 'svc_stats_t', 'svc_share_t', 'svc_resurface_t'])
       if (!c.includes('data-i18n="' + k + '"')) fail('Service card i18n key missing: ' + k);
+    // v2.87.0: Resurface (Daily Review) module + card
+    if (c.includes('class="svc-card svc-resurface"') && c.includes('window.__openJwResurface'))
+      ok('Resurface service card present and wired');
+    else fail('Resurface service card missing or not wired');
+    if (/__openJwResurface *= *function/.test(c) && c.includes('jwsync_resurface_v1'))
+      ok('Resurface module present (public entry + persistence)');
+    else fail('Resurface module missing');
     // v2.34.1: whole cards are clickable tiles (no inner buttons / no &#8594; gibberish)
     if (!c.includes('svc-card-btn')) ok('cards are clickable tiles (no inner Open buttons)');
     else fail('svc-card-btn buttons should be gone (clickable tiles)');

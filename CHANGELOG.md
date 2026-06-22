@@ -80,6 +80,26 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.87.0] — 2026-06-22
+
+### 🌅 New tool: Resurface — your daily study review (beta)
+
+A brand-new reason to come back every day. Resurface gently brings your own
+past notes back to you — privately, entirely on your device.
+
+- **On this day.** Notes you wrote on today's date in years gone by float to
+  the top — rediscover an insight you'd long forgotten.
+- **A daily review deck.** Each day Resurface hands you a small set of notes to
+  revisit, using light spaced repetition so older and rarely-seen notes resurface
+  over time. Read each one, tap **Mark reviewed**, and move on.
+- **Build a streak.** Finishing the day's deck grows your review streak, with
+  your best streak and total notes reviewed shown when you're done.
+- **Remember this library (optional).** Tick "Remember this library on this
+  device" and your daily review is ready the moment you open it next time —
+  stored privately in your browser (IndexedDB), never uploaded.
+- Opens from the new **Resurface** card on the home page, reuses the file you've
+  already loaded in another tool, and is fully translated in all 12 languages.
+
 ## [2.86.1] — 2026-06-21
 
 ### A more premium look for the merge tool
