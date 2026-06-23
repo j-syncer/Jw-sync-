@@ -40,6 +40,7 @@ const IDENTICAL_PAIRS = [
   ['js/forum.js', 'beta/js/forum.js'],
   ['js/jw-session.js', 'beta/js/jw-session.js'],
   ['js/merge-worker.js', 'beta/js/merge-worker.js'],
+  ['js/resurface.js', 'beta/js/resurface.js'],
   ['js/semantic-worker.js', 'beta/js/semantic-worker.js'],
   ['highlights.html', 'beta/highlights.html'],
   ['share.html', 'beta/share.html'],

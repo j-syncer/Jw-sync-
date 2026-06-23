@@ -612,6 +612,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
   <!-- Cross-tool file session + tool switcher (shared across all JW Sync pages) -->
   <script src="js/jw-session.js"></script>
+  <script src="js/resurface.js"></script>
 <script id="hl-theme-init">
 (function(){
   var PK='jwsync_prefs_v1';
@@ -1894,6 +1895,7 @@
       html += '<p class="jww-bignum" data-count="' + s.notes + '">0</p>';
       html += '<p class="jww-bignum-label">' + esc(t('notes_label').toLowerCase()) + '</p>';
       html += '</div>';
+      html += '<div id="jw-resurface-mount"></div>';
 
       // notes delta badge markup
       var notesDelta = '';
@@ -2036,6 +2038,12 @@
       // wire tabs
       wireTabs(body);
       wireSectionTabs(body);
+      try {
+        var __rsMount = body.querySelector('#jw-resurface-mount');
+        if (__rsMount && window.JwResurface && loadedDb) {
+          window.JwResurface.mount(__rsMount, { notes: window.JwResurface.notesFromDb(loadedDb) });
+        }
+      } catch (_) {}
       wireAchFilters(body); wireAchMedals(body);
       var __openMapBtn = body.querySelector('#jww-open-map');
       if (__openMapBtn) __openMapBtn.addEventListener('click', function(){ openStudyMapOverlay(__graph); });

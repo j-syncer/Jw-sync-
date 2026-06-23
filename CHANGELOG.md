@@ -80,6 +80,23 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.87.1] — 2026-06-23
+
+### Resurface is now woven into the moments you're already in
+
+Based on feedback, Resurface is no longer a separate tool you have to open.
+Instead, the daily review now appears right where you already are:
+
+- **On the merge celebration screen.** After you combine your backups, a small
+  "Resurface" panel invites you to revisit a note you wrote on this day before
+  you move on.
+- **On the Study Stats page.** Your daily review sits at the top of your stats,
+  so checking your progress and revisiting a past note happen in one place.
+- The standalone home-page tool card and full-screen view have been removed —
+  Resurface is now a gentle add-on, not its own destination.
+- Your review streak and spaced-repetition schedule carry over unchanged and
+  are shared across both spots.
+
 ## [2.87.0] — 2026-06-22
 
 ### 🌅 New tool: Resurface — your daily study review (beta)
