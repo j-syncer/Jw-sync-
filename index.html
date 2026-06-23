@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.86.1",
+      "softwareVersion": "2.87.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1169,6 +1169,7 @@ body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
 
 <script src="js/forum.js"></script>
 <script src="js/enhancements.js"></script>
+<script src="js/resurface.js"></script>
 <!-- ── End enhancement layer ───────────────────────────── -->
 
 <!-- ── Mobile overflow hardfix ─────────────────────────── -->
@@ -4567,6 +4568,7 @@ window.__bootBrowse = function() {
           '<button class="jwc-btn jwc-btn-highlights" type="button" data-jwc-highlights>' + esc(t('cele_highlights')) + ' →</button>' +
           '<button class="jwc-btn jwc-btn-outline" type="button" data-jwc-addshared>' + esc(t('cele_addshared')) + '</button>' +
         '</div>' +
+        '<div data-jwc-resurface></div>' +
         (demo ?
           '<div class="jwc-demo-cta">' +
             '<strong>' + esc(t('cele_demo_title')) + '</strong>' +
@@ -4581,6 +4583,14 @@ window.__bootBrowse = function() {
     document.body.appendChild(ov);
     document.body.classList.add('jw-modal-open');
     try { if (window.__jwReceiveOnCelebration) window.__jwReceiveOnCelebration(ov); } catch (_) {}
+    try {
+      var __rsEl = ov.querySelector('[data-jwc-resurface]');
+      if (__rsEl && window.JwResurface && cached && cached.buffer) {
+        window.JwResurface.notesFromBuffer(cached.buffer.slice(0)).then(function (notes) {
+          if (notes && notes.length) window.JwResurface.mount(__rsEl, { notes: notes });
+        }).catch(function () {});
+      }
+    } catch (_) {}
 
     // Generate floating particles
     var particlesContainer = ov.querySelector('.jwc-particles');
