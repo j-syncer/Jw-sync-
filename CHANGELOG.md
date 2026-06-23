@@ -80,6 +80,24 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.88.0] — 2026-06-23
+
+### The home page now shows what's *inside* each tool
+
+The "Choose a tool" cards on the home page used to hint at only the surface of
+each tool. Now every card carries a short row of tags naming the powerful
+features tucked inside — so you can see at a glance what JW Sync can really do
+before you dive in:
+
+- **Merge Tool** — Conflict reviewer · Auto-sync
+- **Library Doctor** — Find duplicates · 1-tap fix
+- **Study Stats** — Achievements · Study Map
+- **Study Explorer** — Ask your library · Bulk edit
+- **Note Share & Receive** — No account · Highlights too
+
+These were always there; they were just hard to discover. The tags are fully
+translated into all 12 languages.
+
 ## [2.87.1] — 2026-06-23
 
 ### Resurface is now woven into the moments you're already in
