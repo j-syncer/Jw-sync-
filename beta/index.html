@@ -1021,6 +1021,10 @@ body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
             <label class="form-label">Your name <span style="color:var(--red)">*</span></label>
             <input class="form-input" id="new-author" type="text" maxlength="40" placeholder="How should we call you?"/>
         </div>
+        <div class="form-row">
+            <label class="form-label">Email <span style="font-weight:400;text-transform:none;font-size:10px;letter-spacing:0;color:var(--muted)">optional — get notified when someone replies</span></label>
+            <input class="form-input" id="new-email" type="email" maxlength="120" placeholder="your@email.com"/>
+        </div>
         <div class="form-actions">
             <button class="btn btn-ghost" onclick="toggleCompose()">Cancel</button>
             <button class="btn btn-primary" id="post-btn" onclick="submitPost()">Post →</button>

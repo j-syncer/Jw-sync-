@@ -125,19 +125,21 @@ async function submitPost() {
     const title  = document.getElementById('new-title').value.trim();
     const body   = document.getElementById('new-body').value.trim();
     const author = document.getElementById('new-author').value.trim();
+    const email  = (document.getElementById('new-email')?.value || '').trim() || null;
     const cat    = document.getElementById('new-cat').value;
     if (!title)  { toast('Please add a title.','error'); return; }
     if (!author) { toast('Please add your name.','error'); return; }
     const btn = document.getElementById('post-btn');
     btn.disabled = true; btn.textContent = 'Posting…';
     try {
-        const { error } = await db.from('posts').insert({ title, content: body||null, author, category: cat, votes: 0 });
+        const { error } = await db.from('posts').insert({ title, content: body||null, author, author_email: email, category: cat, votes: 0 });
         if (error) throw error;
-        ['new-title','new-body','new-author'].forEach(id => document.getElementById(id).value='');
+        ['new-title','new-body','new-author','new-email'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
         ['tc','bc'].forEach(id => document.getElementById(id).textContent='0');
         document.getElementById('compose-panel').classList.remove('open');
         toast('Posted! ✓');
         await load();
+        fetch('/api/notify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ type:'new_post', post:{ title, author, content: body, category: cat } }) }).catch(()=>{});
     } catch(e) {
         toast('Error: '+e.message,'error');
     } finally {
@@ -284,6 +286,13 @@ async function submitReply() {
         toast('Reply posted! ✓');
         await loadReplies(activePostId);
         await load(); // refresh reply counts
+        // Notify post author if they opted in with an email
+        const pid = activePostId;
+        db.from('posts').select('title,author,author_email').eq('id', pid).single().then(({ data: p }) => {
+            if (p?.author_email) {
+                fetch('/api/notify', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ type:'new_reply', post:{ title: p.title, author_name: p.author, author_email: p.author_email }, reply:{ author, content } }) }).catch(()=>{});
+            }
+        }).catch(()=>{});
     } catch(e) {
         toast('Error: '+e.message,'error');
     } finally {
