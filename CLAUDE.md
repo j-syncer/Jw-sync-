@@ -200,3 +200,204 @@ In-browser library manager for any `.jwlibrary` file — three tabs (Notes / Hig
   console.log(Object.keys(r));
   "
   ```
+
+---
+
+## JW Library Backup Editing
+
+The user sometimes asks to edit their `.jwlibrary` backup file — e.g. to pre-fill study article answer boxes, add highlights, and add notes so the article appears fully studied. This section documents the complete workflow.
+
+### What a .jwlibrary file is
+
+A `.jwlibrary` file is a **ZIP archive** containing:
+- `userData.db` — SQLite database with all user data
+- `manifest.json` and image assets
+
+Extract with Python's `zipfile` module, edit the SQLite DB, then repackage.
+
+### Relevant database tables
+
+| Table | Purpose |
+|-------|---------|
+| `Location` | Links content to a document. One row per article per context (see Two-Location rule below) |
+| `UserMark` | One row per highlight — stores ColorIndex and LocationId |
+| `BlockRange` | Token range for a highlight — `Identifier` = paragraph PID, `StartToken`/`EndToken` = word indices (0-based) |
+| `Note` | Freeform notes — `BlockIdentifier` = paragraph PID |
+| `InputField` | Study question answers — `TextTag` = the textarea's HTML id, `Value` = answer text |
+
+### ⚠️ CRITICAL: The Two-Location Rule
+
+JW Library uses **two separate Location rows** for the same article:
+
+| LocationId | MepsLanguage | Used for |
+|------------|-------------|---------|
+| Primary (e.g. 19732) | `0` (integer) | `UserMark`, `BlockRange`, `Note` |
+| Secondary (e.g. 19738) | `NULL` | `InputField` only |
+
+**InputField entries placed at the MepsLanguage=0 location will silently fail to appear in the app.** Always create a second Location with `MepsLanguage=NULL` for InputField entries. The two LocationIds are usually consecutive (original + 1 beyond the max existing ID).
+
+Check the pattern from any other article in the DB:
+```python
+c.execute("SELECT LocationId, MepsLanguage FROM Location WHERE DocumentId=? ORDER BY LocationId", (doc_id,))
+```
+
+### ⚠️ CRITICAL: TextTag IDs are NOT data-pid values
+
+The `TextTag` column in `InputField` matches the **`id` attribute of the `<textarea>` element** inside each answer box in the JW.org HTML — it does NOT match the `data-pid` of the surrounding `<div class="gen-field">`.
+
+The `data-pid` and the textarea `id` are completely different numbers. Always extract TextTag IDs from the HTML:
+
+```python
+import re
+html = open('article.html', encoding='utf-8').read()
+# Each result is (textarea_id, containing_gen_field_pid)
+for m in re.finditer(r'<textarea id="(tt\d+)"', html):
+    tag_id = m.group(1)
+    before = html[:m.start()]
+    pids = re.findall(r'class="gen-field"[^>]*data-pid="(\d+)"', before)
+    print(f'TextTag={tag_id}, gen-field pid={pids[-1] if pids else "?"}')
+```
+
+### ColorIndex values
+
+| Value | Color |
+|-------|-------|
+| 1 | Yellow |
+| 2 | Green |
+| 3 | Blue |
+| 4 | Red |
+| 5 | Orange |
+| 6 | Purple |
+
+### Token range calculation
+
+`BlockRange.StartToken` and `EndToken` are 0-based word indices (split on whitespace) within the paragraph text. Use this helper:
+
+```python
+def tok_range(text, phrase):
+    tokens = text.split()
+    offsets = []
+    pos = 0
+    for t in tokens:
+        idx = text.find(t, pos)
+        offsets.append((idx, idx + len(t)))
+        pos = idx + len(t)
+    p_start = text.find(phrase)
+    if p_start == -1:
+        raise ValueError(f"Phrase not found: {repr(phrase)}")
+    p_end = p_start + len(phrase)
+    s = e = None
+    for i, (ts, te) in enumerate(offsets):
+        if s is None and te > p_start: s = i
+        if ts < p_end: e = i
+    return s, e
+```
+
+Watch out for Unicode vs ASCII quotes in phrases — the paragraph text may use straight quotes while a copied phrase has curly quotes. Strip or normalize when needed.
+
+### Full workflow
+
+```python
+import sqlite3, uuid, zipfile, os
+
+ARCHIVE = "path/to/original.jwlibrary"
+OUT     = "path/to/output.jwlibrary"
+
+# 1. Extract fresh copy of DB
+with zipfile.ZipFile(ARCHIVE, 'r') as z:
+    z.extractall("work_dir/")
+DB = "work_dir/userData.db"
+
+# 2. Find the article's existing Location (MepsLanguage=0)
+conn = sqlite3.connect(DB)
+c = conn.cursor()
+row = c.execute("SELECT LocationId FROM Location WHERE DocumentId=? AND MepsLanguage=0", (doc_id,)).fetchone()
+LOC_UM = row[0]  # for UserMark / Note / BlockRange
+
+# 3. Create InputField location (MepsLanguage=NULL)
+max_loc = c.execute("SELECT MAX(LocationId) FROM Location").fetchone()[0]
+LOC_IF = max_loc + 1
+c.execute("""INSERT INTO Location
+             (LocationId,BookNumber,ChapterNumber,DocumentId,Track,
+              IssueTagNumber,KeySymbol,MepsLanguage,Type,Title,Specialty,Edition)
+             VALUES (?,NULL,NULL,?,NULL,?,'w',NULL,0,'',NULL,NULL)""",
+          (LOC_IF, doc_id, issue_tag))  # issue_tag e.g. 20260400 for April 2026
+
+# 4. Insert highlights
+um_id = c.execute("SELECT MAX(UserMarkId) FROM UserMark").fetchone()[0] + 1
+br_id = c.execute("SELECT MAX(BlockRangeId) FROM BlockRange").fetchone()[0] + 1
+for pid, color, phrase in HIGHLIGHTS:
+    s, e = tok_range(PARA[pid], phrase)
+    c.execute("INSERT INTO UserMark (UserMarkId,ColorIndex,LocationId,StyleIndex,UserMarkGuid,Version) VALUES (?,?,?,?,?,?)",
+              (um_id, color, LOC_UM, 0, str(uuid.uuid4()), 1))
+    c.execute("INSERT INTO BlockRange (BlockRangeId,BlockType,Identifier,StartToken,EndToken,UserMarkId) VALUES (?,?,?,?,?,?)",
+              (br_id, 1, pid, s, e, um_id))
+    um_id += 1; br_id += 1
+
+# 5. Insert InputField answers (at LOC_IF, NOT LOC_UM)
+for tag, value in INPUT_FIELDS:
+    c.execute("INSERT INTO InputField (LocationId,TextTag,Value) VALUES (?,?,?)",
+              (LOC_IF, tag, value))
+
+# 6. Insert notes
+n_id = c.execute("SELECT MAX(NoteId) FROM Note").fetchone()[0] + 1
+TS = "2026-06-24T12:00:00+00:00"
+for pid, title, content in NOTES:
+    c.execute("""INSERT INTO Note (NoteId,Guid,UserMarkId,LocationId,Title,Content,
+                                   LastModified,Created,BlockType,BlockIdentifier)
+                 VALUES (?,?,NULL,?,?,?,?,?,1,?)""",
+              (n_id, str(uuid.uuid4()), LOC_UM, title, content, TS, TS, pid))
+    n_id += 1
+
+c.execute("UPDATE LastModified SET LastModified=?", (TS,))
+conn.commit(); conn.close()
+
+# 7. Repackage
+with zipfile.ZipFile(ARCHIVE, 'r') as zin:
+    names = zin.namelist()
+with zipfile.ZipFile(OUT, 'w', compression=zipfile.ZIP_DEFLATED) as zout:
+    for name in names:
+        if name == 'userData.db':
+            zout.write(DB, 'userData.db')
+        else:
+            with zipfile.ZipFile(ARCHIVE, 'r') as zin:
+                zout.writestr(name, zin.read(name))
+```
+
+### How to get the article HTML and TextTags
+
+Fetch the article from JW.org using curl (the proxy handles HTTPS):
+
+```bash
+curl -sL "https://www.jw.org/en/library/magazines/watchtower-study-YYYYMM/article-name/" \
+  -o article.html
+```
+
+Or use the `finder` URL with `docid`:
+```bash
+curl -sL "https://www.jw.org/finder?srcid=jwlshare&wtlocale=E&prefer=lang&docid=XXXXXXX" \
+  -o article.html
+```
+
+Then extract all TextTags and paragraph PIDs with:
+```python
+import re
+html = open('article.html', encoding='utf-8').read()
+# All answer box TextTags
+print(re.findall(r'<textarea id="(tt\d+)"', html))
+# All gen-field (answer box) PIDs
+print(re.findall(r'class="gen-field"[^>]*data-pid="(\d+)"', html))
+# All paragraph PIDs
+print(re.findall(r'data-pid="(\d+)"', html))
+```
+
+### IssueTagNumber format
+
+For Watchtower study articles: `YYYYMM00` where MM is the **month of the magazine** (not the week), zero-padded, with `00` appended. Example: April 2026 issue → `20260400`. Find this in the existing Location row for any other article from the same issue:
+```python
+c.execute("SELECT IssueTagNumber FROM Location WHERE KeySymbol='w' AND MepsLanguage=0 LIMIT 5").fetchall()
+```
+
+### Preserving the user's existing data
+
+Always start from a **fresh extract of the original backup** — never re-run scripts on an already-modified DB. The user's original highlights are already in the DB at their LocationIds; adding new rows does not disturb them. Use `MAX(UserMarkId)+1`, `MAX(BlockRangeId)+1`, `MAX(NoteId)+1` for all new IDs.
