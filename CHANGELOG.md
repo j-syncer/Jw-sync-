@@ -80,6 +80,20 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.88.1] — 2026-07-02
+
+### Snappier taps everywhere (responsiveness fixes)
+
+Real-user monitoring showed a few interactions could freeze the page for over
+half a second on phones. All of them are fixed:
+
+- **Choosing a backup file** (the drop zones in Simple Mode and Full Mode) now
+  paints instantly — the heavy work of unzipping and scanning your backup is
+  deferred until after the screen has updated, so the tap never feels stuck.
+- **Study Explorer** — tapping a note/highlight/bookmark in the list now swaps
+  just the detail pane instead of rebuilding the whole list, and off-screen
+  rows no longer cost any rendering time. Long libraries feel much lighter.
+
 ## [2.88.0] — 2026-06-23
 
 ### The home page now shows what's *inside* each tool

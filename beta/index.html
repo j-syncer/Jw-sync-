@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.88.0",
+      "softwareVersion": "2.88.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1360,7 +1360,7 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jb-list{flex:1;overflow-y:auto;border-right:1px solid #1f2a3d;min-width:0}
 .jb-detail{flex:1;overflow-y:auto;padding:24px;min-width:0;background:#0a1224}
 .jb-detail-empty{display:flex;align-items:center;justify-content:center;height:100%;color:#5a6883;font-size:13px;padding:24px;text-align:center}
-.jb-note{padding:14px 18px;border-bottom:1px solid #1a2336;cursor:pointer;transition:background .12s;display:flex;flex-direction:column;gap:6px}
+.jb-note{padding:14px 18px;border-bottom:1px solid #1a2336;cursor:pointer;transition:background .12s;display:flex;flex-direction:column;gap:6px;content-visibility:auto;contain-intrinsic-size:auto 96px}
 .jb-note:hover{background:rgba(234,88,12,.06)}
 .jb-note.active{background:rgba(234,88,12,.12);border-left:3px solid #ea580c;padding-left:15px}
 .jb-note-title{font-weight:600;font-size:14px;color:#e7eaf3;line-height:1.35;display:flex;align-items:center;gap:8px}
@@ -2703,7 +2703,18 @@ window.__bootBrowse = function() {
         state.selected=r; state.editingId=null;
         state.overlay.classList.remove('jb-mobile-list');
         state.overlay.classList.add('jb-mobile-detail');
-        renderBody();
+        updateMobileView();
+        var list=state.overlay.querySelector('.jb-list');
+        var detail=state.overlay.querySelector('.jb-detail');
+        if(list&&detail){
+          var prev=list.querySelector('.jb-note.active');
+          if(prev&&prev!==row) prev.classList.remove('active');
+          row.classList.add('active');
+          detail.innerHTML='';
+          detail.appendChild(buildDetail(r));
+        } else {
+          renderBody();
+        }
       };
     }
     var built = state.activeType==='notes'?buildNoteRow(r,row):(state.activeType==='highlights'?buildHighlightRow(r,row):(state.activeType==='bookmarks'?buildBookmarkRow(r,row):buildInputFieldRow(r,row)));
