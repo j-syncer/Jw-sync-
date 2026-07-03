@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.88.0",
+      "softwareVersion": "2.88.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -6010,9 +6010,10 @@ body.light .jwr-ntitle{color:#0b2e58}
       var url=URL.createObjectURL(blob);
       var a=document.createElement('a');
       a.href=url; a.download='healthy_'+base+'.jwlibrary';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(function(){ URL.revokeObjectURL(url); },4000);
-    }catch(_){}
+      document.body.appendChild(a); a.click();
+      setTimeout(function(){ try{ a.remove(); }catch(_){ } URL.revokeObjectURL(url); },4000);
+      return true;
+    }catch(_){ return false; }
   }
 
   function exportCleaned(st){
@@ -6267,7 +6268,7 @@ body.light .jwr-ntitle{color:#0b2e58}
       '<p class="jbd-done-d">'+esc(t(autoMode&&blob?'done_ready':'done_d'))+'</p>'+
       sizeRow+
       '<div class="jbd-rows">'+fixedRows+'</div>'+
-      (autoMode&&blob ? '<button class="jbd-clean-btn" type="button" data-jbd-dl>'+ICON_DL+' <span>'+esc(t('download'))+'</span></button>' : '')+
+      (blob ? '<button class="jbd-clean-btn" type="button" data-jbd-dl>'+ICON_DL+' <span>'+esc(t('download'))+'</span></button>' : '')+
       '<div class="jbd-safe">'+ICON_SHIELD+'<span>'+esc(t('safe'))+'</span></div>'+
       '<button class="jbd-ghost-btn" type="button" data-jbd-again>'+esc(t('another'))+'</button>';
     var dlBtn=b.querySelector('[data-jbd-dl]');

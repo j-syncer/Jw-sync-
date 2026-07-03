@@ -80,6 +80,18 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.88.1] — 2026-07-03
+
+### More reliable downloads
+
+- The Library Doctor's "All fixed!" screen now always shows a **Download**
+  button, so if your browser silently blocks the automatic download you can
+  still save the cleaned backup with one tap. (Previously, a blocked
+  auto-download left you with no way to get the file.)
+- Download links no longer remove their anchor element the instant they're
+  clicked — a timing quirk that could cancel the download in some browsers
+  (notably Safari). The element is now cleaned up after the download starts.
+
 ## [2.88.0] — 2026-06-23
 
 ### The home page now shows what's *inside* each tool
