@@ -80,6 +80,27 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.89.0] — 2026-07-04
+
+### Share your merge to Instagram & social media
+
+The post-merge celebration now has a proper **Share** experience. Tap **Share**
+and you get a preview of a clean, branded card showing your combined totals —
+notes, highlights, bookmarks and tags — ready to post:
+
+- **See it before you share.** A preview of the square (1080×1080) card appears
+  right in the celebration, so you know exactly what your friends will see.
+- **One tap to share.** On a phone, tap **Share** and pick Instagram (Stories or
+  feed), WhatsApp, or anywhere else — the image comes along automatically.
+- **Save image** downloads the card so you can post it manually — handy on a
+  computer, where you save it and upload to Instagram.
+- **Copy caption** copies a friendly, ready-to-paste caption that invites others
+  to try JW Sync.
+- Encouraging, on-brand copy and full translations in all 12 languages.
+
+It's an easy way to celebrate combining your library — and to help friends
+discover a free, private way to sync their own JW Library notes.
+
 ## [2.88.0] — 2026-06-23
 
 ### The home page now shows what's *inside* each tool

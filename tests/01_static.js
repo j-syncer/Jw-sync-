@@ -788,14 +788,28 @@ section('Cross-tool session (jw-session.js)');
       beta.includes('navigator.clipboard'))
     ok('shareMerge uses Web Share with download + copy-link fallback');
   else fail('shareMerge / fallbacks missing');
-  if (beta.includes('shareMerge(cached && cached.stats)'))
-    ok('Share button wired to the real merge stats');
+  if (beta.includes('openSharePreview(cached && cached.stats)'))
+    ok('Share button wired to the real merge stats (via share preview)');
   else fail('Share button not wired');
+
+  // Share-preview overlay (Instagram/social) — shows the card, then shares
+  if (beta.includes('function openSharePreview') &&
+      beta.includes('jw-share-overlay') &&
+      beta.includes('data-jws-share') &&
+      beta.includes('data-jws-save') &&
+      beta.includes('data-jws-copy'))
+    ok('Share-preview overlay present with share / save / copy actions');
+  else fail('Share-preview overlay (openSharePreview) missing or incomplete');
+  if (beta.includes('data-jws-share') && beta.includes('shareMerge(stats)'))
+    ok('Preview Share button uses the real Web Share flow');
+  else fail('Preview Share button not wired to shareMerge');
 
   const sm = beta.match(/var SHARE_I18N=\{([\s\S]*?)\n {2}\};/);
   if (!sm) fail('SHARE_I18N object not found');
   else {
-    const SHARE_KEYS = ['cele_share', 'share_headline', 'share_text'];
+    const SHARE_KEYS = ['cele_share', 'share_headline', 'share_text',
+      'share_preview_title', 'share_preview_body', 'share_save', 'share_copy',
+      'share_copied', 'share_saved', 'share_hint'];
     let okAll = true;
     for (const lang of EXPECTED_LANGS) {
       const lm = sm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
