@@ -80,6 +80,25 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.90.0] — 2026-07-04
+
+### Library Doctor: review duplicates before anything is deleted
+
+Library Doctor now shows you exactly what it found **before** it cleans. After
+the health scan, tap **Review changes** to open a clear list:
+
+- **Every duplicate note laid out** — its title and a preview of the text, with
+  a **1 kept** / **N to remove** badge so you can see which copy stays and which
+  goes.
+- **A tick box on each item.** Uncheck any individual duplicate — or any other
+  cleanup category (empty notes, duplicate highlights, orphaned data, unused
+  tags and leftover locations) — and it's left completely untouched.
+- **Nothing is deleted until you confirm.** As always, your original file is
+  never changed; fixes go into a fresh copy you download.
+
+This comes straight from a community request — thank you Lukas! Fully translated
+in all 12 languages.
+
 ## [2.89.0] — 2026-07-04
 
 ### Share your merge to Instagram & social media

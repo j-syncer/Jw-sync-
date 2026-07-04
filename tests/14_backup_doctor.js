@@ -169,6 +169,51 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   else fail('clean is not idempotent: ' + JSON.stringify(fixed2));
   cleanDb.close();
 
+  section('Selective clean honours the review selection (v2.90.0)');
+  {
+    // Skip the duplicate note (keep n2) and skip unused tags/locations; everything
+    // else should still be fixed. Nothing the user unchecked may be touched.
+    const selDb = new SQL.Database(new Uint8Array(dbBytes));
+    const fixedSel = internals.applyFixes(selDb, {
+      excludeDup: { 2: true },
+      skip: { unused_tags: true, unused_loc: true }
+    });
+    if (fixedSel.dup_notes === 0) ok('unchecked duplicate note was NOT removed');
+    else fail('excluded duplicate was deleted anyway: ' + fixedSel.dup_notes);
+    if (fixedSel.unused_tags === 0 && fixedSel.unused_loc === 0) ok('skipped categories left untouched');
+    else fail('skipped categories were cleaned: ' + JSON.stringify(fixedSel));
+    if (fixedSel.empty_notes === 1 && fixedSel.dup_marks === 1 && fixedSel.orph_br === 1 && fixedSel.orph_tm === 1)
+      ok('remaining checked categories still fixed');
+    else fail('checked categories not fixed: ' + JSON.stringify(fixedSel));
+    const notesLeft = selDb.exec('SELECT NoteId FROM Note ORDER BY NoteId')[0].values.flat();
+    if (JSON.stringify(notesLeft) === JSON.stringify([1, 2, 3, 5, 6])) ok('kept duplicate n2 survived; empty n4 removed');
+    else fail('note survivors after selective clean wrong: ' + JSON.stringify(notesLeft));
+    const tagsLeft = selDb.exec('SELECT Name FROM Tag ORDER BY TagId')[0].values.flat();
+    if (tagsLeft.includes('OldUnused')) ok('unchecked unused tag preserved');
+    else fail('unused tag removed despite being unchecked: ' + JSON.stringify(tagsLeft));
+    selDb.close();
+  }
+
+  section('dupNoteGroups surfaces duplicate content for the review UI (v2.90.0)');
+  {
+    if (typeof internals.dupNoteGroups !== 'function') {
+      fail('dupNoteGroups not exposed on __jwDoctorInternals');
+    } else {
+      const gDb = new SQL.Database(new Uint8Array(dbBytes));
+      const groups = internals.dupNoteGroups(gDb);
+      if (groups && groups.length === 1) {
+        const g = groups[0];
+        if (g.count === 2 && g.dups.length === 1) ok('group reports 2 copies (1 kept + 1 removed)');
+        else fail('group counts wrong: ' + JSON.stringify({ count: g.count, dups: g.dups }));
+        if (g.title === 'Faith' && /faith/i.test(g.content)) ok('group carries the kept note title + content preview');
+        else fail('group content wrong: ' + JSON.stringify({ title: g.title, content: g.content }));
+      } else {
+        fail('dupNoteGroups did not return exactly one group: ' + JSON.stringify(groups));
+      }
+      gDb.close();
+    }
+  }
+
   section('Worker-side Library Doctor (opts.doctorCheck, v2.65.0)');
   {
     const workerSrc = fs.readFileSync(REPO + '/beta/js/merge-worker.js', 'utf8');
@@ -250,12 +295,36 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     const warnChips = doc.querySelectorAll('.jbd-chip-warn');
     if (warnChips.length === 7) ok('7 warning chips shown (one per planted issue)');
     else fail('expected 7 warning chips, got ' + warnChips.length);
-    const cleanBtn = doc.querySelector('[data-jbd-clean]');
-    if (cleanBtn) ok('Clean & Download button offered');
-    else fail('clean button missing');
+    const reviewBtn = doc.querySelector('[data-jbd-review]');
+    if (reviewBtn) ok('Review changes button offered (opens the pre-clean review)');
+    else fail('review button missing');
     const totals = doc.querySelectorAll('.jbd-total strong');
     if (totals.length === 4 && totals[0].textContent === '6') ok('totals strip rendered (6 notes)');
     else fail('totals strip wrong');
+  }
+
+  section('Review step lists the duplicate before anything is deleted');
+  const revBtn = doc.querySelector('[data-jbd-review]');
+  if (revBtn) {
+    revBtn.click();
+    let rv = false;
+    for (let i = 0; i < 30; i++) { await sleep(80); if (doc.querySelector('[data-jbd-confirm]')) { rv = true; break; } }
+    if (rv) ok('review screen rendered (Clean button now says confirm)');
+    else fail('review screen never rendered');
+    const dupItems = doc.querySelectorAll('.jbd-rv-item');
+    if (dupItems.length === 1) ok('exactly one duplicate note group listed for review');
+    else fail('expected 1 duplicate group in review, got ' + dupItems.length);
+    const listText = (doc.querySelector('.jbd-rv-list') || {}).textContent || '';
+    if (/Faith/.test(listText)) ok('duplicate note title/content shown so the user can check it');
+    else fail('duplicate content not surfaced in the review list');
+    const otherRows = doc.querySelectorAll('.jbd-rv-other');
+    if (otherRows.length === 6) ok('six other-cleanup categories listed with per-item checkboxes');
+    else fail('expected 6 other-cleanup rows, got ' + otherRows.length);
+    const back = doc.querySelector('[data-jbd-back]');
+    if (back) ok('Back button returns to the report without deleting');
+    else fail('Back button missing from review');
+  } else {
+    fail('no review button to open the review step');
   }
 
   section('Clean & Download produces a valid .jwlibrary');
@@ -274,7 +343,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     }
     return el;
   };
-  const cleanBtn = doc.querySelector('[data-jbd-clean]');
+  const cleanBtn = doc.querySelector('[data-jbd-confirm]');
   if (cleanBtn) {
     cleanBtn.click();
     let done = false;

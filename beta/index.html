@@ -264,7 +264,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.89.0",
+      "softwareVersion": "2.90.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -5880,23 +5880,44 @@ body.light .jwr-ntitle{color:#0b2e58}
   background:rgba(248,113,113,.08);border:1px solid rgba(248,113,113,.3)}
 @media (max-width:520px){.jbd-card{padding:22px 16px 18px;border-radius:14px}.jbd-totals{gap:6px}}
 @media (prefers-reduced-motion:reduce){.jbd-ecg path{animation:none}.jbd-ring-fg{transition:none}}
+/* ── Review step ── */
+.jbd-rv-head{margin:2px 0 12px;text-align:center}
+.jbd-rv-h{margin:0;font:800 18px/1.25 inherit;color:#f1f5f9}
+.jbd-rv-d{margin:6px 0 0;font:500 12.5px/1.5 inherit;color:#94a3b8}
+.jbd-rv-sec{margin:14px 0 8px;font:700 11px/1 inherit;letter-spacing:.05em;text-transform:uppercase;color:#64748b}
+.jbd-rv-list{display:flex;flex-direction:column;gap:8px}
+.jbd-rv-item{display:flex;gap:11px;align-items:flex-start;padding:12px 13px;border-radius:11px;cursor:pointer;background:rgba(4,15,34,.55);border:1px solid rgba(71,85,105,.35);transition:border-color .15s ease,background .15s ease}
+.jbd-rv-item:hover{border-color:rgba(234,88,12,.4)}
+.jbd-rv-cb{flex:0 0 auto;width:17px;height:17px;margin-top:1px;accent-color:#ea580c;cursor:pointer}
+.jbd-rv-main{display:flex;flex-direction:column;gap:4px;min-width:0;flex:1}
+.jbd-rv-title{font:700 13.5px/1.35 inherit;color:#e2e8f0;word-break:break-word}
+.jbd-rv-untitled{color:#64748b;font-weight:600;font-style:italic}
+.jbd-rv-prev{font:500 12px/1.5 inherit;color:#94a3b8;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+.jbd-rv-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.jbd-rv-badge{font:800 10.5px/1 inherit;padding:4px 8px;border-radius:6px;letter-spacing:.02em}
+.jbd-rv-keep{color:#34d399;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.35)}
+.jbd-rv-rm{color:#fca5a5;background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.32)}
+.jbd-rv-other{display:flex;align-items:center;gap:11px;padding:11px 13px;border-radius:11px;cursor:pointer;background:rgba(4,15,34,.55);border:1px solid rgba(71,85,105,.35);transition:border-color .15s ease}
+.jbd-rv-other:hover{border-color:rgba(234,88,12,.4)}
+.jbd-rv-other-label{flex:1;font:600 13px/1.35 inherit;color:#cbd5e1}
+.jbd-rv-warn{margin:12px 0 0;padding:10px 13px;border-radius:9px;font:600 12px/1.45 inherit;color:#fcd34d;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.32);text-align:center}
 </style>
 <script>
 (function () {
   'use strict';
   var DOC_I18N = {
-  en:{title:"Library Doctor",sub:"A private health check for your backup",priv:"100% private — your file never leaves this device.",pick:"Choose a .jwlibrary file",use_last:"Check {name}",scanning:"Examining your backup…",c_dup_notes:"Duplicate notes",c_empty_notes:"Empty notes",c_dup_marks:"Duplicate highlights",c_orph_br:"Stray highlight fragments",c_orph_tm:"Broken tag links",c_unused_tags:"Unused tags",c_unused_loc:"Leftover location records",l_notes:"notes",l_marks:"highlights",l_bm:"bookmarks",l_tags:"tags",health:"Health score",v_a:"Excellent",v_b:"Good",v_c:"Fair",v_d:"Needs care",issues_one:"1 fixable issue found",issues_many:"{n} fixable issues found",perfect:"Perfect health — nothing to fix!",clean:"Clean & Download",cleaning:"Cleaning…",done_t:"All fixed!",done_d:"Your cleaned backup is downloading.",smaller:"smaller",safe:"Your original file is never changed — fixes go into a new copy.",another:"Check another file",close:"Close",err_read:"Could not read this backup — it may be corrupted or the wrong type of file.",err_db:"This backup is missing its notes database (userData.db).",download:"Download your file",done_ready:"Your cleaned backup is ready to download.",will_fix:"These will be fixed automatically in your merged file."},
-  es:{title:"Doctor de Biblioteca",sub:"Un chequeo privado para tu copia de seguridad",priv:"100% privado — tu archivo nunca sale de este dispositivo.",pick:"Elegir archivo .jwlibrary",use_last:"Revisar {name}",scanning:"Examinando tu copia…",c_dup_notes:"Notas duplicadas",c_empty_notes:"Notas vacías",c_dup_marks:"Subrayados duplicados",c_orph_br:"Fragmentos de subrayado sueltos",c_orph_tm:"Enlaces de etiqueta rotos",c_unused_tags:"Etiquetas sin usar",c_unused_loc:"Registros de ubicación sobrantes",l_notes:"notas",l_marks:"subrayados",l_bm:"marcadores",l_tags:"etiquetas",health:"Puntuación de salud",v_a:"Excelente",v_b:"Buena",v_c:"Regular",v_d:"Necesita atención",issues_one:"1 problema corregible encontrado",issues_many:"{n} problemas corregibles encontrados",perfect:"¡Salud perfecta — nada que corregir!",clean:"Limpiar y Descargar",cleaning:"Limpiando…",done_t:"¡Todo corregido!",done_d:"Tu copia limpia se está descargando.",smaller:"más pequeña",safe:"Tu archivo original nunca se modifica — las correcciones van a una copia nueva.",another:"Revisar otro archivo",close:"Cerrar",err_read:"No se pudo leer esta copia — puede estar dañada o ser un tipo de archivo incorrecto.",err_db:"A esta copia le falta su base de datos de notas (userData.db).",download:"Descargar tu archivo",done_ready:"Tu copia limpia está lista para descargar.",will_fix:"Se corregirán automáticamente en tu archivo combinado."},
-  pt:{title:"Doutor da Biblioteca",sub:"Um exame privado para o seu backup",priv:"100% privado — seu arquivo nunca sai deste dispositivo.",pick:"Escolher arquivo .jwlibrary",use_last:"Examinar {name}",scanning:"Examinando seu backup…",c_dup_notes:"Notas duplicadas",c_empty_notes:"Notas vazias",c_dup_marks:"Destaques duplicados",c_orph_br:"Fragmentos de destaque soltos",c_orph_tm:"Vínculos de etiqueta quebrados",c_unused_tags:"Etiquetas sem uso",c_unused_loc:"Registros de local restantes",l_notes:"notas",l_marks:"destaques",l_bm:"marcadores",l_tags:"etiquetas",health:"Pontuação de saúde",v_a:"Excelente",v_b:"Boa",v_c:"Razoável",v_d:"Precisa de cuidado",issues_one:"1 problema corrigível encontrado",issues_many:"{n} problemas corrigíveis encontrados",perfect:"Saúde perfeita — nada para corrigir!",clean:"Limpar e Baixar",cleaning:"Limpando…",done_t:"Tudo corrigido!",done_d:"Seu backup limpo está sendo baixado.",smaller:"menor",safe:"Seu arquivo original nunca é alterado — as correções vão para uma nova cópia.",another:"Examinar outro arquivo",close:"Fechar",err_read:"Não foi possível ler este backup — pode estar corrompido ou ser o tipo errado de arquivo.",err_db:"Este backup está sem o banco de dados de notas (userData.db).",download:"Baixar seu arquivo",done_ready:"Seu backup limpo está pronto para baixar.",will_fix:"Serão corrigidos automaticamente no seu arquivo mesclado."},
-  fr:{title:"Docteur de Bibliothèque",sub:"Un bilan de santé privé pour votre sauvegarde",priv:"100 % privé — votre fichier ne quitte jamais cet appareil.",pick:"Choisir un fichier .jwlibrary",use_last:"Examiner {name}",scanning:"Examen de votre sauvegarde…",c_dup_notes:"Notes en double",c_empty_notes:"Notes vides",c_dup_marks:"Surlignages en double",c_orph_br:"Fragments de surlignage orphelins",c_orph_tm:"Liens d'étiquette cassés",c_unused_tags:"Étiquettes inutilisées",c_unused_loc:"Entrées de lieu superflues",l_notes:"notes",l_marks:"surlignages",l_bm:"signets",l_tags:"étiquettes",health:"Score de santé",v_a:"Excellent",v_b:"Bon",v_c:"Moyen",v_d:"À soigner",issues_one:"1 problème corrigeable trouvé",issues_many:"{n} problèmes corrigeables trouvés",perfect:"Santé parfaite — rien à corriger !",clean:"Nettoyer et Télécharger",cleaning:"Nettoyage…",done_t:"Tout est réparé !",done_d:"Votre sauvegarde nettoyée se télécharge.",smaller:"plus légère",safe:"Votre fichier d'origine n'est jamais modifié — les corrections vont dans une nouvelle copie.",another:"Examiner un autre fichier",close:"Fermer",err_read:"Impossible de lire cette sauvegarde — elle est peut-être corrompue ou du mauvais type.",err_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db).",download:"Télécharger votre fichier",done_ready:"Votre sauvegarde nettoyée est prête à télécharger.",will_fix:"Ils seront corrigés automatiquement dans votre fichier fusionné."},
-  de:{title:"Bibliothek-Doktor",sub:"Ein privater Gesundheitscheck für deine Sicherung",priv:"100 % privat — deine Datei verlässt dieses Gerät nie.",pick:".jwlibrary-Datei wählen",use_last:"{name} prüfen",scanning:"Deine Sicherung wird untersucht…",c_dup_notes:"Doppelte Notizen",c_empty_notes:"Leere Notizen",c_dup_marks:"Doppelte Markierungen",c_orph_br:"Verwaiste Markierungsfragmente",c_orph_tm:"Defekte Tag-Verknüpfungen",c_unused_tags:"Unbenutzte Tags",c_unused_loc:"Übrige Ortseinträge",l_notes:"Notizen",l_marks:"Markierungen",l_bm:"Lesezeichen",l_tags:"Tags",health:"Gesundheitswert",v_a:"Ausgezeichnet",v_b:"Gut",v_c:"Mittel",v_d:"Braucht Pflege",issues_one:"1 behebbares Problem gefunden",issues_many:"{n} behebbare Probleme gefunden",perfect:"Perfekte Gesundheit — nichts zu beheben!",clean:"Bereinigen & Herunterladen",cleaning:"Bereinige…",done_t:"Alles behoben!",done_d:"Deine bereinigte Sicherung wird heruntergeladen.",smaller:"kleiner",safe:"Deine Originaldatei wird nie verändert — Korrekturen kommen in eine neue Kopie.",another:"Weitere Datei prüfen",close:"Schließen",err_read:"Diese Sicherung konnte nicht gelesen werden — sie ist evtl. beschädigt oder der falsche Dateityp.",err_db:"Dieser Sicherung fehlt ihre Notizdatenbank (userData.db).",download:"Deine Datei herunterladen",done_ready:"Deine bereinigte Sicherung ist bereit zum Download.",will_fix:"Diese werden in deiner zusammengeführten Datei automatisch behoben."},
-  it:{title:"Dottore della Biblioteca",sub:"Un controllo privato per il tuo backup",priv:"100% privato — il tuo file non lascia mai questo dispositivo.",pick:"Scegli file .jwlibrary",use_last:"Esamina {name}",scanning:"Esame del tuo backup…",c_dup_notes:"Note duplicate",c_empty_notes:"Note vuote",c_dup_marks:"Evidenziazioni duplicate",c_orph_br:"Frammenti di evidenziazione orfani",c_orph_tm:"Collegamenti di etichetta rotti",c_unused_tags:"Etichette inutilizzate",c_unused_loc:"Record di posizione residui",l_notes:"note",l_marks:"evidenziazioni",l_bm:"segnalibri",l_tags:"etichette",health:"Punteggio di salute",v_a:"Eccellente",v_b:"Buono",v_c:"Discreto",v_d:"Da curare",issues_one:"1 problema risolvibile trovato",issues_many:"{n} problemi risolvibili trovati",perfect:"Salute perfetta — niente da correggere!",clean:"Pulisci e Scarica",cleaning:"Pulizia…",done_t:"Tutto sistemato!",done_d:"Il tuo backup pulito è in download.",smaller:"più leggero",safe:"Il file originale non viene mai modificato — le correzioni vanno in una nuova copia.",another:"Esamina un altro file",close:"Chiudi",err_read:"Impossibile leggere questo backup — potrebbe essere danneggiato o del tipo sbagliato.",err_db:"A questo backup manca il database delle note (userData.db).",download:"Scarica il tuo file",done_ready:"Il tuo backup pulito è pronto da scaricare.",will_fix:"Saranno corretti automaticamente nel file unito."},
-  ru:{title:"Доктор библиотеки",sub:"Приватная проверка здоровья вашей копии",priv:"100% приватно — файл никогда не покидает это устройство.",pick:"Выбрать файл .jwlibrary",use_last:"Проверить {name}",scanning:"Осматриваем вашу копию…",c_dup_notes:"Дубликаты заметок",c_empty_notes:"Пустые заметки",c_dup_marks:"Дубликаты выделений",c_orph_br:"Осиротевшие фрагменты выделений",c_orph_tm:"Битые связи тегов",c_unused_tags:"Неиспользуемые теги",c_unused_loc:"Лишние записи мест",l_notes:"заметки",l_marks:"выделения",l_bm:"закладки",l_tags:"теги",health:"Оценка здоровья",v_a:"Отлично",v_b:"Хорошо",v_c:"Средне",v_d:"Требует внимания",issues_one:"Найдена 1 исправимая проблема",issues_many:"Найдено исправимых проблем: {n}",perfect:"Идеальное здоровье — исправлять нечего!",clean:"Очистить и скачать",cleaning:"Очистка…",done_t:"Всё исправлено!",done_d:"Ваша очищенная копия скачивается.",smaller:"меньше",safe:"Исходный файл не изменяется — исправления попадают в новую копию.",another:"Проверить другой файл",close:"Закрыть",err_read:"Не удалось прочитать эту копию — возможно, она повреждена или неверного типа.",err_db:"В этой копии нет базы данных заметок (userData.db).",download:"Скачать ваш файл",done_ready:"Ваша очищенная копия готова к скачиванию.",will_fix:"Они будут автоматически исправлены в объединённом файле."},
-  ja:{title:"ライブラリードクター",sub:"バックアップのプライベート健康診断",priv:"100%プライベート — ファイルがこの端末から出ることはありません。",pick:".jwlibraryファイルを選択",use_last:"{name} を診断",scanning:"バックアップを検査中…",c_dup_notes:"重複したメモ",c_empty_notes:"空のメモ",c_dup_marks:"重複したハイライト",c_orph_br:"孤立したハイライト断片",c_orph_tm:"壊れたタグリンク",c_unused_tags:"未使用のタグ",c_unused_loc:"残された場所レコード",l_notes:"メモ",l_marks:"ハイライト",l_bm:"ブックマーク",l_tags:"タグ",health:"健康スコア",v_a:"非常に良好",v_b:"良好",v_c:"普通",v_d:"要ケア",issues_one:"修復可能な問題が1件見つかりました",issues_many:"修復可能な問題が{n}件見つかりました",perfect:"完璧な状態 — 修復は不要です！",clean:"クリーンアップしてダウンロード",cleaning:"クリーンアップ中…",done_t:"すべて修復しました！",done_d:"クリーンなバックアップをダウンロード中です。",smaller:"削減",safe:"元のファイルは変更されません — 修復は新しいコピーに適用されます。",another:"別のファイルを診断",close:"閉じる",err_read:"このバックアップを読み込めませんでした — 破損しているか、ファイル形式が違う可能性があります。",err_db:"このバックアップにはメモのデータベース（userData.db）がありません。",download:"ファイルをダウンロード",done_ready:"クリーンなバックアップの準備ができました。",will_fix:"結合ファイルでは自動的に修復されます。"},
-  ko:{title:"라이브러리 닥터",sub:"백업을 위한 프라이빗 건강 검진",priv:"100% 프라이빗 — 파일은 이 기기를 절대 벗어나지 않습니다.",pick:".jwlibrary 파일 선택",use_last:"{name} 검진하기",scanning:"백업을 검사하는 중…",c_dup_notes:"중복된 메모",c_empty_notes:"빈 메모",c_dup_marks:"중복된 하이라이트",c_orph_br:"고아 하이라이트 조각",c_orph_tm:"끊어진 태그 연결",c_unused_tags:"사용하지 않는 태그",c_unused_loc:"남은 위치 기록",l_notes:"메모",l_marks:"하이라이트",l_bm:"북마크",l_tags:"태그",health:"건강 점수",v_a:"최상",v_b:"양호",v_c:"보통",v_d:"관리 필요",issues_one:"수정 가능한 문제 1건 발견",issues_many:"수정 가능한 문제 {n}건 발견",perfect:"완벽한 상태 — 고칠 것이 없습니다!",clean:"정리 후 다운로드",cleaning:"정리 중…",done_t:"모두 수정했습니다!",done_d:"정리된 백업이 다운로드되고 있습니다.",smaller:"감소",safe:"원본 파일은 절대 변경되지 않습니다 — 수정 사항은 새 복사본에 적용됩니다.",another:"다른 파일 검진",close:"닫기",err_read:"이 백업을 읽을 수 없습니다 — 손상되었거나 잘못된 파일 형식일 수 있습니다.",err_db:"이 백업에는 메모 데이터베이스(userData.db)가 없습니다.",download:"파일 다운로드",done_ready:"정리된 백업이 준비되었습니다.",will_fix:"병합된 파일에서 자동으로 수정됩니다."},
-  tl:{title:"Library Doctor",sub:"Pribadong health check para sa iyong backup",priv:"100% pribado — hindi kailanman aalis ang iyong file sa device na ito.",pick:"Pumili ng .jwlibrary file",use_last:"Suriin ang {name}",scanning:"Sinusuri ang iyong backup…",c_dup_notes:"Mga duplicate na tala",c_empty_notes:"Mga walang lamang tala",c_dup_marks:"Mga duplicate na highlight",c_orph_br:"Mga ulilang piraso ng highlight",c_orph_tm:"Mga sirang tag link",c_unused_tags:"Mga hindi ginagamit na tag",c_unused_loc:"Mga natirang tala ng lokasyon",l_notes:"mga tala",l_marks:"mga highlight",l_bm:"mga bookmark",l_tags:"mga tag",health:"Health score",v_a:"Napakahusay",v_b:"Mabuti",v_c:"Katamtaman",v_d:"Kailangan ng pag-aalaga",issues_one:"1 maaayos na problema ang natagpuan",issues_many:"{n} maaayos na problema ang natagpuan",perfect:"Perpektong kalusugan — walang dapat ayusin!",clean:"Linisin at I-download",cleaning:"Naglilinis…",done_t:"Naayos na lahat!",done_d:"Dina-download na ang iyong malinis na backup.",smaller:"mas maliit",safe:"Hindi kailanman binabago ang orihinal mong file — ang mga pag-aayos ay napupunta sa bagong kopya.",another:"Suriin ang ibang file",close:"Isara",err_read:"Hindi mabasa ang backup na ito — maaaring sira o maling uri ng file.",err_db:"Walang notes database (userData.db) ang backup na ito.",download:"I-download ang iyong file",done_ready:"Handa nang i-download ang malinis mong backup.",will_fix:"Awtomatikong aayusin ang mga ito sa iyong pinagsamang file."},
-  sv:{title:"Biblioteksdoktorn",sub:"En privat hälsokontroll för din säkerhetskopia",priv:"100 % privat — din fil lämnar aldrig den här enheten.",pick:"Välj .jwlibrary-fil",use_last:"Undersök {name}",scanning:"Undersöker din säkerhetskopia…",c_dup_notes:"Dubblerade anteckningar",c_empty_notes:"Tomma anteckningar",c_dup_marks:"Dubblerade överstrykningar",c_orph_br:"Övergivna överstrykningsfragment",c_orph_tm:"Trasiga tagglänkar",c_unused_tags:"Oanvända taggar",c_unused_loc:"Kvarblivna platsposter",l_notes:"anteckningar",l_marks:"överstrykningar",l_bm:"bokmärken",l_tags:"taggar",health:"Hälsopoäng",v_a:"Utmärkt",v_b:"Bra",v_c:"Okej",v_d:"Behöver omsorg",issues_one:"1 åtgärdbart problem hittades",issues_many:"{n} åtgärdbara problem hittades",perfect:"Perfekt hälsa — inget att åtgärda!",clean:"Rensa och ladda ner",cleaning:"Rensar…",done_t:"Allt åtgärdat!",done_d:"Din rensade säkerhetskopia laddas ner.",smaller:"mindre",safe:"Din originalfil ändras aldrig — åtgärderna hamnar i en ny kopia.",another:"Undersök en annan fil",close:"Stäng",err_read:"Kunde inte läsa den här säkerhetskopian — den kan vara skadad eller fel filtyp.",err_db:"Den här säkerhetskopian saknar sin anteckningsdatabas (userData.db).",download:"Ladda ner din fil",done_ready:"Din rensade säkerhetskopia är redo att laddas ner.",will_fix:"Dessa åtgärdas automatiskt i din sammanslagna fil."},
-  ceb:{title:"Library Doctor",sub:"Pribadong health check para sa imong backup",priv:"100% pribado — dili gayud mogawas ang imong file niini nga device.",pick:"Pilia ang .jwlibrary file",use_last:"Susiha ang {name}",scanning:"Gisusi ang imong backup…",c_dup_notes:"Mga duplicate nga nota",c_empty_notes:"Mga walay sulod nga nota",c_dup_marks:"Mga duplicate nga highlight",c_orph_br:"Mga nabiyaan nga piraso sa highlight",c_orph_tm:"Mga naputol nga tag link",c_unused_tags:"Mga wala magamit nga tag",c_unused_loc:"Mga nahibilin nga rekord sa lokasyon",l_notes:"mga nota",l_marks:"mga highlight",l_bm:"mga bookmark",l_tags:"mga tag",health:"Health score",v_a:"Maayo kaayo",v_b:"Maayo",v_c:"Igo-igo",v_d:"Nagkinahanglan ug pag-atiman",issues_one:"1 ka maayos nga problema ang nakit-an",issues_many:"{n} ka maayos nga problema ang nakit-an",perfect:"Hingpit nga kahimsog — walay angay ayohon!",clean:"Limpyohi ug I-download",cleaning:"Naglimpyo…",done_t:"Naayo na ang tanan!",done_d:"Gi-download na ang imong limpyo nga backup.",smaller:"mas gamay",safe:"Dili gayud usbon ang imong orihinal nga file — ang mga pag-ayo moadto sa bag-ong kopya.",another:"Susiha ang laing file",close:"Sirado",err_read:"Dili mabasa kini nga backup — tingali nadaot o sayop nga klase sa file.",err_db:"Wala kini backup sa notes database (userData.db).",download:"I-download ang imong file",done_ready:"Andam na ang limpyo nimong backup nga i-download.",will_fix:"Awtomatikong ayohon kini sa imong gisagol nga file."}
+  en:{title:"Library Doctor",sub:"A private health check for your backup",priv:"100% private — your file never leaves this device.",pick:"Choose a .jwlibrary file",use_last:"Check {name}",scanning:"Examining your backup…",c_dup_notes:"Duplicate notes",c_empty_notes:"Empty notes",c_dup_marks:"Duplicate highlights",c_orph_br:"Stray highlight fragments",c_orph_tm:"Broken tag links",c_unused_tags:"Unused tags",c_unused_loc:"Leftover location records",l_notes:"notes",l_marks:"highlights",l_bm:"bookmarks",l_tags:"tags",health:"Health score",v_a:"Excellent",v_b:"Good",v_c:"Fair",v_d:"Needs care",issues_one:"1 fixable issue found",issues_many:"{n} fixable issues found",perfect:"Perfect health — nothing to fix!",clean:"Clean & Download",cleaning:"Cleaning…",done_t:"All fixed!",done_d:"Your cleaned backup is downloading.",smaller:"smaller",safe:"Your original file is never changed — fixes go into a new copy.",another:"Check another file",close:"Close",err_read:"Could not read this backup — it may be corrupted or the wrong type of file.",err_db:"This backup is missing its notes database (userData.db).",download:"Download your file",done_ready:"Your cleaned backup is ready to download.",will_fix:"These will be fixed automatically in your merged file.",review:"Review changes",rv_t:"Review before cleaning",rv_d:"Nothing is deleted until you tap Clean. Uncheck anything you'd like to keep.",rv_dups_h:"Duplicate notes",rv_other_h:"Other cleanup",rv_kept:"1 kept",rv_remove_n:"{n} to remove",rv_notitle:"(untitled note)",rv_none:"Select at least one item to clean.",back:"Back"},
+  es:{title:"Doctor de Biblioteca",sub:"Un chequeo privado para tu copia de seguridad",priv:"100% privado — tu archivo nunca sale de este dispositivo.",pick:"Elegir archivo .jwlibrary",use_last:"Revisar {name}",scanning:"Examinando tu copia…",c_dup_notes:"Notas duplicadas",c_empty_notes:"Notas vacías",c_dup_marks:"Subrayados duplicados",c_orph_br:"Fragmentos de subrayado sueltos",c_orph_tm:"Enlaces de etiqueta rotos",c_unused_tags:"Etiquetas sin usar",c_unused_loc:"Registros de ubicación sobrantes",l_notes:"notas",l_marks:"subrayados",l_bm:"marcadores",l_tags:"etiquetas",health:"Puntuación de salud",v_a:"Excelente",v_b:"Buena",v_c:"Regular",v_d:"Necesita atención",issues_one:"1 problema corregible encontrado",issues_many:"{n} problemas corregibles encontrados",perfect:"¡Salud perfecta — nada que corregir!",clean:"Limpiar y Descargar",cleaning:"Limpiando…",done_t:"¡Todo corregido!",done_d:"Tu copia limpia se está descargando.",smaller:"más pequeña",safe:"Tu archivo original nunca se modifica — las correcciones van a una copia nueva.",another:"Revisar otro archivo",close:"Cerrar",err_read:"No se pudo leer esta copia — puede estar dañada o ser un tipo de archivo incorrecto.",err_db:"A esta copia le falta su base de datos de notas (userData.db).",download:"Descargar tu archivo",done_ready:"Tu copia limpia está lista para descargar.",will_fix:"Se corregirán automáticamente en tu archivo combinado.",review:"Revisar cambios",rv_t:"Revisa antes de limpiar",rv_d:"No se elimina nada hasta que toques Limpiar. Desmarca lo que quieras conservar.",rv_dups_h:"Notas duplicadas",rv_other_h:"Otra limpieza",rv_kept:"1 conservada",rv_remove_n:"{n} a eliminar",rv_notitle:"(nota sin título)",rv_none:"Selecciona al menos un elemento para limpiar.",back:"Atrás"},
+  pt:{title:"Doutor da Biblioteca",sub:"Um exame privado para o seu backup",priv:"100% privado — seu arquivo nunca sai deste dispositivo.",pick:"Escolher arquivo .jwlibrary",use_last:"Examinar {name}",scanning:"Examinando seu backup…",c_dup_notes:"Notas duplicadas",c_empty_notes:"Notas vazias",c_dup_marks:"Destaques duplicados",c_orph_br:"Fragmentos de destaque soltos",c_orph_tm:"Vínculos de etiqueta quebrados",c_unused_tags:"Etiquetas sem uso",c_unused_loc:"Registros de local restantes",l_notes:"notas",l_marks:"destaques",l_bm:"marcadores",l_tags:"etiquetas",health:"Pontuação de saúde",v_a:"Excelente",v_b:"Boa",v_c:"Razoável",v_d:"Precisa de cuidado",issues_one:"1 problema corrigível encontrado",issues_many:"{n} problemas corrigíveis encontrados",perfect:"Saúde perfeita — nada para corrigir!",clean:"Limpar e Baixar",cleaning:"Limpando…",done_t:"Tudo corrigido!",done_d:"Seu backup limpo está sendo baixado.",smaller:"menor",safe:"Seu arquivo original nunca é alterado — as correções vão para uma nova cópia.",another:"Examinar outro arquivo",close:"Fechar",err_read:"Não foi possível ler este backup — pode estar corrompido ou ser o tipo errado de arquivo.",err_db:"Este backup está sem o banco de dados de notas (userData.db).",download:"Baixar seu arquivo",done_ready:"Seu backup limpo está pronto para baixar.",will_fix:"Serão corrigidos automaticamente no seu arquivo mesclado.",review:"Revisar alterações",rv_t:"Revise antes de limpar",rv_d:"Nada é excluído até você tocar em Limpar. Desmarque o que quiser manter.",rv_dups_h:"Notas duplicadas",rv_other_h:"Outra limpeza",rv_kept:"1 mantida",rv_remove_n:"{n} a remover",rv_notitle:"(nota sem título)",rv_none:"Selecione pelo menos um item para limpar.",back:"Voltar"},
+  fr:{title:"Docteur de Bibliothèque",sub:"Un bilan de santé privé pour votre sauvegarde",priv:"100 % privé — votre fichier ne quitte jamais cet appareil.",pick:"Choisir un fichier .jwlibrary",use_last:"Examiner {name}",scanning:"Examen de votre sauvegarde…",c_dup_notes:"Notes en double",c_empty_notes:"Notes vides",c_dup_marks:"Surlignages en double",c_orph_br:"Fragments de surlignage orphelins",c_orph_tm:"Liens d'étiquette cassés",c_unused_tags:"Étiquettes inutilisées",c_unused_loc:"Entrées de lieu superflues",l_notes:"notes",l_marks:"surlignages",l_bm:"signets",l_tags:"étiquettes",health:"Score de santé",v_a:"Excellent",v_b:"Bon",v_c:"Moyen",v_d:"À soigner",issues_one:"1 problème corrigeable trouvé",issues_many:"{n} problèmes corrigeables trouvés",perfect:"Santé parfaite — rien à corriger !",clean:"Nettoyer et Télécharger",cleaning:"Nettoyage…",done_t:"Tout est réparé !",done_d:"Votre sauvegarde nettoyée se télécharge.",smaller:"plus légère",safe:"Votre fichier d'origine n'est jamais modifié — les corrections vont dans une nouvelle copie.",another:"Examiner un autre fichier",close:"Fermer",err_read:"Impossible de lire cette sauvegarde — elle est peut-être corrompue ou du mauvais type.",err_db:"Cette sauvegarde n'a pas sa base de données de notes (userData.db).",download:"Télécharger votre fichier",done_ready:"Votre sauvegarde nettoyée est prête à télécharger.",will_fix:"Ils seront corrigés automatiquement dans votre fichier fusionné.",review:"Vérifier les changements",rv_t:"Vérifiez avant de nettoyer",rv_d:"Rien n'est supprimé tant que vous n'appuyez pas sur Nettoyer. Décochez ce que vous voulez garder.",rv_dups_h:"Notes en double",rv_other_h:"Autre nettoyage",rv_kept:"1 conservée",rv_remove_n:"{n} à supprimer",rv_notitle:"(note sans titre)",rv_none:"Sélectionnez au moins un élément à nettoyer.",back:"Retour"},
+  de:{title:"Bibliothek-Doktor",sub:"Ein privater Gesundheitscheck für deine Sicherung",priv:"100 % privat — deine Datei verlässt dieses Gerät nie.",pick:".jwlibrary-Datei wählen",use_last:"{name} prüfen",scanning:"Deine Sicherung wird untersucht…",c_dup_notes:"Doppelte Notizen",c_empty_notes:"Leere Notizen",c_dup_marks:"Doppelte Markierungen",c_orph_br:"Verwaiste Markierungsfragmente",c_orph_tm:"Defekte Tag-Verknüpfungen",c_unused_tags:"Unbenutzte Tags",c_unused_loc:"Übrige Ortseinträge",l_notes:"Notizen",l_marks:"Markierungen",l_bm:"Lesezeichen",l_tags:"Tags",health:"Gesundheitswert",v_a:"Ausgezeichnet",v_b:"Gut",v_c:"Mittel",v_d:"Braucht Pflege",issues_one:"1 behebbares Problem gefunden",issues_many:"{n} behebbare Probleme gefunden",perfect:"Perfekte Gesundheit — nichts zu beheben!",clean:"Bereinigen & Herunterladen",cleaning:"Bereinige…",done_t:"Alles behoben!",done_d:"Deine bereinigte Sicherung wird heruntergeladen.",smaller:"kleiner",safe:"Deine Originaldatei wird nie verändert — Korrekturen kommen in eine neue Kopie.",another:"Weitere Datei prüfen",close:"Schließen",err_read:"Diese Sicherung konnte nicht gelesen werden — sie ist evtl. beschädigt oder der falsche Dateityp.",err_db:"Dieser Sicherung fehlt ihre Notizdatenbank (userData.db).",download:"Deine Datei herunterladen",done_ready:"Deine bereinigte Sicherung ist bereit zum Download.",will_fix:"Diese werden in deiner zusammengeführten Datei automatisch behoben.",review:"Änderungen prüfen",rv_t:"Vor dem Bereinigen prüfen",rv_d:"Es wird nichts gelöscht, bis du auf Bereinigen tippst. Entferne den Haken bei allem, was du behalten möchtest.",rv_dups_h:"Doppelte Notizen",rv_other_h:"Weitere Bereinigung",rv_kept:"1 behalten",rv_remove_n:"{n} entfernen",rv_notitle:"(Notiz ohne Titel)",rv_none:"Wähle mindestens ein Element zum Bereinigen aus.",back:"Zurück"},
+  it:{title:"Dottore della Biblioteca",sub:"Un controllo privato per il tuo backup",priv:"100% privato — il tuo file non lascia mai questo dispositivo.",pick:"Scegli file .jwlibrary",use_last:"Esamina {name}",scanning:"Esame del tuo backup…",c_dup_notes:"Note duplicate",c_empty_notes:"Note vuote",c_dup_marks:"Evidenziazioni duplicate",c_orph_br:"Frammenti di evidenziazione orfani",c_orph_tm:"Collegamenti di etichetta rotti",c_unused_tags:"Etichette inutilizzate",c_unused_loc:"Record di posizione residui",l_notes:"note",l_marks:"evidenziazioni",l_bm:"segnalibri",l_tags:"etichette",health:"Punteggio di salute",v_a:"Eccellente",v_b:"Buono",v_c:"Discreto",v_d:"Da curare",issues_one:"1 problema risolvibile trovato",issues_many:"{n} problemi risolvibili trovati",perfect:"Salute perfetta — niente da correggere!",clean:"Pulisci e Scarica",cleaning:"Pulizia…",done_t:"Tutto sistemato!",done_d:"Il tuo backup pulito è in download.",smaller:"più leggero",safe:"Il file originale non viene mai modificato — le correzioni vanno in una nuova copia.",another:"Esamina un altro file",close:"Chiudi",err_read:"Impossibile leggere questo backup — potrebbe essere danneggiato o del tipo sbagliato.",err_db:"A questo backup manca il database delle note (userData.db).",download:"Scarica il tuo file",done_ready:"Il tuo backup pulito è pronto da scaricare.",will_fix:"Saranno corretti automaticamente nel file unito.",review:"Rivedi le modifiche",rv_t:"Controlla prima di pulire",rv_d:"Nulla viene eliminato finché non tocchi Pulisci. Deseleziona ciò che vuoi conservare.",rv_dups_h:"Note duplicate",rv_other_h:"Altra pulizia",rv_kept:"1 conservata",rv_remove_n:"{n} da rimuovere",rv_notitle:"(nota senza titolo)",rv_none:"Seleziona almeno un elemento da pulire.",back:"Indietro"},
+  ru:{title:"Доктор библиотеки",sub:"Приватная проверка здоровья вашей копии",priv:"100% приватно — файл никогда не покидает это устройство.",pick:"Выбрать файл .jwlibrary",use_last:"Проверить {name}",scanning:"Осматриваем вашу копию…",c_dup_notes:"Дубликаты заметок",c_empty_notes:"Пустые заметки",c_dup_marks:"Дубликаты выделений",c_orph_br:"Осиротевшие фрагменты выделений",c_orph_tm:"Битые связи тегов",c_unused_tags:"Неиспользуемые теги",c_unused_loc:"Лишние записи мест",l_notes:"заметки",l_marks:"выделения",l_bm:"закладки",l_tags:"теги",health:"Оценка здоровья",v_a:"Отлично",v_b:"Хорошо",v_c:"Средне",v_d:"Требует внимания",issues_one:"Найдена 1 исправимая проблема",issues_many:"Найдено исправимых проблем: {n}",perfect:"Идеальное здоровье — исправлять нечего!",clean:"Очистить и скачать",cleaning:"Очистка…",done_t:"Всё исправлено!",done_d:"Ваша очищенная копия скачивается.",smaller:"меньше",safe:"Исходный файл не изменяется — исправления попадают в новую копию.",another:"Проверить другой файл",close:"Закрыть",err_read:"Не удалось прочитать эту копию — возможно, она повреждена или неверного типа.",err_db:"В этой копии нет базы данных заметок (userData.db).",download:"Скачать ваш файл",done_ready:"Ваша очищенная копия готова к скачиванию.",will_fix:"Они будут автоматически исправлены в объединённом файле.",review:"Просмотреть изменения",rv_t:"Проверьте перед очисткой",rv_d:"Ничего не удаляется, пока вы не нажмёте «Очистить». Снимите отметку с того, что хотите сохранить.",rv_dups_h:"Повторяющиеся заметки",rv_other_h:"Прочая очистка",rv_kept:"1 останется",rv_remove_n:"удалить: {n}",rv_notitle:"(заметка без заголовка)",rv_none:"Выберите хотя бы один элемент для очистки.",back:"Назад"},
+  ja:{title:"ライブラリードクター",sub:"バックアップのプライベート健康診断",priv:"100%プライベート — ファイルがこの端末から出ることはありません。",pick:".jwlibraryファイルを選択",use_last:"{name} を診断",scanning:"バックアップを検査中…",c_dup_notes:"重複したメモ",c_empty_notes:"空のメモ",c_dup_marks:"重複したハイライト",c_orph_br:"孤立したハイライト断片",c_orph_tm:"壊れたタグリンク",c_unused_tags:"未使用のタグ",c_unused_loc:"残された場所レコード",l_notes:"メモ",l_marks:"ハイライト",l_bm:"ブックマーク",l_tags:"タグ",health:"健康スコア",v_a:"非常に良好",v_b:"良好",v_c:"普通",v_d:"要ケア",issues_one:"修復可能な問題が1件見つかりました",issues_many:"修復可能な問題が{n}件見つかりました",perfect:"完璧な状態 — 修復は不要です！",clean:"クリーンアップしてダウンロード",cleaning:"クリーンアップ中…",done_t:"すべて修復しました！",done_d:"クリーンなバックアップをダウンロード中です。",smaller:"削減",safe:"元のファイルは変更されません — 修復は新しいコピーに適用されます。",another:"別のファイルを診断",close:"閉じる",err_read:"このバックアップを読み込めませんでした — 破損しているか、ファイル形式が違う可能性があります。",err_db:"このバックアップにはメモのデータベース（userData.db）がありません。",download:"ファイルをダウンロード",done_ready:"クリーンなバックアップの準備ができました。",will_fix:"結合ファイルでは自動的に修復されます。",review:"変更を確認",rv_t:"クリーンアップ前に確認",rv_d:"「クリーン」をタップするまで何も削除されません。残したいものはチェックを外してください。",rv_dups_h:"重複したノート",rv_other_h:"その他の整理",rv_kept:"1件を保持",rv_remove_n:"{n}件を削除",rv_notitle:"(タイトルなしのノート)",rv_none:"整理する項目を1つ以上選んでください。",back:"戻る"},
+  ko:{title:"라이브러리 닥터",sub:"백업을 위한 프라이빗 건강 검진",priv:"100% 프라이빗 — 파일은 이 기기를 절대 벗어나지 않습니다.",pick:".jwlibrary 파일 선택",use_last:"{name} 검진하기",scanning:"백업을 검사하는 중…",c_dup_notes:"중복된 메모",c_empty_notes:"빈 메모",c_dup_marks:"중복된 하이라이트",c_orph_br:"고아 하이라이트 조각",c_orph_tm:"끊어진 태그 연결",c_unused_tags:"사용하지 않는 태그",c_unused_loc:"남은 위치 기록",l_notes:"메모",l_marks:"하이라이트",l_bm:"북마크",l_tags:"태그",health:"건강 점수",v_a:"최상",v_b:"양호",v_c:"보통",v_d:"관리 필요",issues_one:"수정 가능한 문제 1건 발견",issues_many:"수정 가능한 문제 {n}건 발견",perfect:"완벽한 상태 — 고칠 것이 없습니다!",clean:"정리 후 다운로드",cleaning:"정리 중…",done_t:"모두 수정했습니다!",done_d:"정리된 백업이 다운로드되고 있습니다.",smaller:"감소",safe:"원본 파일은 절대 변경되지 않습니다 — 수정 사항은 새 복사본에 적용됩니다.",another:"다른 파일 검진",close:"닫기",err_read:"이 백업을 읽을 수 없습니다 — 손상되었거나 잘못된 파일 형식일 수 있습니다.",err_db:"이 백업에는 메모 데이터베이스(userData.db)가 없습니다.",download:"파일 다운로드",done_ready:"정리된 백업이 준비되었습니다.",will_fix:"병합된 파일에서 자동으로 수정됩니다.",review:"변경 검토",rv_t:"정리 전에 검토하기",rv_d:"정리를 누르기 전까지는 아무것도 삭제되지 않습니다. 남기고 싶은 항목은 선택을 해제하세요.",rv_dups_h:"중복 노트",rv_other_h:"기타 정리",rv_kept:"1개 유지",rv_remove_n:"{n}개 삭제",rv_notitle:"(제목 없는 노트)",rv_none:"정리할 항목을 하나 이상 선택하세요.",back:"뒤로"},
+  tl:{title:"Library Doctor",sub:"Pribadong health check para sa iyong backup",priv:"100% pribado — hindi kailanman aalis ang iyong file sa device na ito.",pick:"Pumili ng .jwlibrary file",use_last:"Suriin ang {name}",scanning:"Sinusuri ang iyong backup…",c_dup_notes:"Mga duplicate na tala",c_empty_notes:"Mga walang lamang tala",c_dup_marks:"Mga duplicate na highlight",c_orph_br:"Mga ulilang piraso ng highlight",c_orph_tm:"Mga sirang tag link",c_unused_tags:"Mga hindi ginagamit na tag",c_unused_loc:"Mga natirang tala ng lokasyon",l_notes:"mga tala",l_marks:"mga highlight",l_bm:"mga bookmark",l_tags:"mga tag",health:"Health score",v_a:"Napakahusay",v_b:"Mabuti",v_c:"Katamtaman",v_d:"Kailangan ng pag-aalaga",issues_one:"1 maaayos na problema ang natagpuan",issues_many:"{n} maaayos na problema ang natagpuan",perfect:"Perpektong kalusugan — walang dapat ayusin!",clean:"Linisin at I-download",cleaning:"Naglilinis…",done_t:"Naayos na lahat!",done_d:"Dina-download na ang iyong malinis na backup.",smaller:"mas maliit",safe:"Hindi kailanman binabago ang orihinal mong file — ang mga pag-aayos ay napupunta sa bagong kopya.",another:"Suriin ang ibang file",close:"Isara",err_read:"Hindi mabasa ang backup na ito — maaaring sira o maling uri ng file.",err_db:"Walang notes database (userData.db) ang backup na ito.",download:"I-download ang iyong file",done_ready:"Handa nang i-download ang malinis mong backup.",will_fix:"Awtomatikong aayusin ang mga ito sa iyong pinagsamang file.",review:"Suriin ang mga pagbabago",rv_t:"Suriin bago maglinis",rv_d:"Walang buburahin hangga't hindi mo pinindot ang Linisin. Alisin sa check ang gusto mong itago.",rv_dups_h:"Dobleng mga tala",rv_other_h:"Iba pang paglilinis",rv_kept:"1 itatago",rv_remove_n:"{n} aalisin",rv_notitle:"(walang pamagat na tala)",rv_none:"Pumili ng kahit isang item na lilinisin.",back:"Bumalik"},
+  sv:{title:"Biblioteksdoktorn",sub:"En privat hälsokontroll för din säkerhetskopia",priv:"100 % privat — din fil lämnar aldrig den här enheten.",pick:"Välj .jwlibrary-fil",use_last:"Undersök {name}",scanning:"Undersöker din säkerhetskopia…",c_dup_notes:"Dubblerade anteckningar",c_empty_notes:"Tomma anteckningar",c_dup_marks:"Dubblerade överstrykningar",c_orph_br:"Övergivna överstrykningsfragment",c_orph_tm:"Trasiga tagglänkar",c_unused_tags:"Oanvända taggar",c_unused_loc:"Kvarblivna platsposter",l_notes:"anteckningar",l_marks:"överstrykningar",l_bm:"bokmärken",l_tags:"taggar",health:"Hälsopoäng",v_a:"Utmärkt",v_b:"Bra",v_c:"Okej",v_d:"Behöver omsorg",issues_one:"1 åtgärdbart problem hittades",issues_many:"{n} åtgärdbara problem hittades",perfect:"Perfekt hälsa — inget att åtgärda!",clean:"Rensa och ladda ner",cleaning:"Rensar…",done_t:"Allt åtgärdat!",done_d:"Din rensade säkerhetskopia laddas ner.",smaller:"mindre",safe:"Din originalfil ändras aldrig — åtgärderna hamnar i en ny kopia.",another:"Undersök en annan fil",close:"Stäng",err_read:"Kunde inte läsa den här säkerhetskopian — den kan vara skadad eller fel filtyp.",err_db:"Den här säkerhetskopian saknar sin anteckningsdatabas (userData.db).",download:"Ladda ner din fil",done_ready:"Din rensade säkerhetskopia är redo att laddas ner.",will_fix:"Dessa åtgärdas automatiskt i din sammanslagna fil.",review:"Granska ändringar",rv_t:"Granska innan du rensar",rv_d:"Inget raderas förrän du trycker på Rensa. Avmarkera det du vill behålla.",rv_dups_h:"Dubbletter av anteckningar",rv_other_h:"Övrig rensning",rv_kept:"1 behålls",rv_remove_n:"{n} tas bort",rv_notitle:"(anteckning utan titel)",rv_none:"Välj minst ett objekt att rensa.",back:"Tillbaka"},
+  ceb:{title:"Library Doctor",sub:"Pribadong health check para sa imong backup",priv:"100% pribado — dili gayud mogawas ang imong file niini nga device.",pick:"Pilia ang .jwlibrary file",use_last:"Susiha ang {name}",scanning:"Gisusi ang imong backup…",c_dup_notes:"Mga duplicate nga nota",c_empty_notes:"Mga walay sulod nga nota",c_dup_marks:"Mga duplicate nga highlight",c_orph_br:"Mga nabiyaan nga piraso sa highlight",c_orph_tm:"Mga naputol nga tag link",c_unused_tags:"Mga wala magamit nga tag",c_unused_loc:"Mga nahibilin nga rekord sa lokasyon",l_notes:"mga nota",l_marks:"mga highlight",l_bm:"mga bookmark",l_tags:"mga tag",health:"Health score",v_a:"Maayo kaayo",v_b:"Maayo",v_c:"Igo-igo",v_d:"Nagkinahanglan ug pag-atiman",issues_one:"1 ka maayos nga problema ang nakit-an",issues_many:"{n} ka maayos nga problema ang nakit-an",perfect:"Hingpit nga kahimsog — walay angay ayohon!",clean:"Limpyohi ug I-download",cleaning:"Naglimpyo…",done_t:"Naayo na ang tanan!",done_d:"Gi-download na ang imong limpyo nga backup.",smaller:"mas gamay",safe:"Dili gayud usbon ang imong orihinal nga file — ang mga pag-ayo moadto sa bag-ong kopya.",another:"Susiha ang laing file",close:"Sirado",err_read:"Dili mabasa kini nga backup — tingali nadaot o sayop nga klase sa file.",err_db:"Wala kini backup sa notes database (userData.db).",download:"I-download ang imong file",done_ready:"Andam na ang limpyo nimong backup nga i-download.",will_fix:"Awtomatikong ayohon kini sa imong gisagol nga file.",review:"Susiha ang mga kausaban",rv_t:"Susiha una sa dili pa manglimpyo",rv_d:"Walay mapapas hangtod nga imong i-tap ang Limpyo. Kuhaa ang check sa gusto nimong tipigan.",rv_dups_h:"Doble nga mga nota",rv_other_h:"Uban pang paglimpyo",rv_kept:"1 tipigan",rv_remove_n:"{n} tangtangon",rv_notitle:"(nota nga walay ulohan)",rv_none:"Pagpili ug labing menos usa ka butang nga limpyohan.",back:"Balik"}
   };
   function lang(){ try{ return localStorage.getItem('jwsync_lang')||'en'; }catch(_){ return 'en'; } }
   function t(k){ var l=lang(); return (DOC_I18N[l]&&DOC_I18N[l][k])||DOC_I18N.en[k]||k; }
@@ -6038,21 +6059,56 @@ body.light .jwr-ntitle{color:#0b2e58}
     if(hasTable(db,'BlockRange')) db.run('DELETE FROM BlockRange WHERE UserMarkId IN ('+list+')');
     db.run('DELETE FROM UserMark WHERE UserMarkId IN ('+list+')');
   }
-  function applyFixes(db){
+  // preview: strip tags/whitespace from note text for the review list
+  function preview(s){
+    var txt=String(s==null?'':s).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+    return txt.length>150 ? txt.slice(0,150)+'…' : txt;
+  }
+  // Group duplicate notes by the copy that will be KEPT, attaching that note's
+  // title + content so the review screen can show exactly what is about to be
+  // removed. Returns [{keep, dups:[ids], count, title, content}].
+  function dupNoteGroups(db){
+    var pairs=dupNotePairs(db);
+    if(!pairs.length) return [];
+    var byKeep={};
+    pairs.forEach(function(p){ (byKeep[p.keep]=byKeep[p.keep]||[]).push(p.dup); });
+    var ids={};
+    Object.keys(byKeep).forEach(function(k){ ids[k]=1; byKeep[k].forEach(function(d){ ids[d]=1; }); });
+    var idList=Object.keys(ids);
+    if(!idList.length) return [];
+    var meta={};
+    try{
+      q(db,"SELECT NoteId,IFNULL(Title,'') AS Title,IFNULL(Content,'') AS Content FROM Note WHERE NoteId IN ("+idList.join(',')+")")
+        .forEach(function(r){ meta[r.NoteId]={title:r.Title,content:r.Content}; });
+    }catch(_){}
+    return Object.keys(byKeep).map(function(keep){
+      var mrec=meta[keep]||{title:'',content:''};
+      var dups=byKeep[keep].map(Number);
+      return { keep:Number(keep), dups:dups, count:dups.length+1, title:mrec.title, content:mrec.content };
+    });
+  }
+  // sel (optional): { skip:{checkKey:true}, excludeDup:{dupNoteId:true} }
+  // With no argument every issue is fixed (unchanged behaviour). The review
+  // screen passes a selection so users can keep specific duplicates/categories.
+  function applyFixes(db, sel){
+    sel=sel||{};
+    var skip=sel.skip||{};
+    var excludeDup=sel.excludeDup||null;
     var fixed={};
     var pairs=dupNotePairs(db);
+    if(excludeDup) pairs=pairs.filter(function(p){ return !excludeDup[p.dup]; });
     if(hasTable(db,'TagMap')) pairs.forEach(function(p){
       // keep tag assignments: move the removed copy's tags onto the kept copy
       db.run('UPDATE TagMap SET NoteId='+p.keep+' WHERE NoteId='+p.dup+
              ' AND TagId IS NOT NULL AND TagId NOT IN (SELECT TagId FROM TagMap WHERE NoteId='+p.keep+' AND TagId IS NOT NULL)');
     });
     var dn=pairs.map(function(p){ return p.dup; }); delNotes(db,dn); fixed.dup_notes=dn.length;
-    var en=idsFor(db,'empty_notes'); delNotes(db,en); fixed.empty_notes=en.length;
-    var dm=idsFor(db,'dup_marks');   delMarks(db,dm); fixed.dup_marks=dm.length;
-    var ob=idsFor(db,'orph_br');     if(ob.length) db.run('DELETE FROM BlockRange WHERE BlockRangeId IN ('+ob.join(',')+')'); fixed.orph_br=ob.length;
-    var ot=idsFor(db,'orph_tm');     if(ot.length) db.run('DELETE FROM TagMap WHERE TagMapId IN ('+ot.join(',')+')'); fixed.orph_tm=ot.length;
-    var ut=idsFor(db,'unused_tags'); if(ut.length) db.run('DELETE FROM Tag WHERE TagId IN ('+ut.join(',')+')'); fixed.unused_tags=ut.length;
-    var ul=idsFor(db,'unused_loc');  if(ul.length) db.run('DELETE FROM Location WHERE LocationId IN ('+ul.join(',')+')'); fixed.unused_loc=ul.length;
+    var en=skip.empty_notes?[]:idsFor(db,'empty_notes'); delNotes(db,en); fixed.empty_notes=en.length;
+    var dm=skip.dup_marks?[]:idsFor(db,'dup_marks');   delMarks(db,dm); fixed.dup_marks=dm.length;
+    var ob=skip.orph_br?[]:idsFor(db,'orph_br');     if(ob.length) db.run('DELETE FROM BlockRange WHERE BlockRangeId IN ('+ob.join(',')+')'); fixed.orph_br=ob.length;
+    var ot=skip.orph_tm?[]:idsFor(db,'orph_tm');     if(ot.length) db.run('DELETE FROM TagMap WHERE TagMapId IN ('+ot.join(',')+')'); fixed.orph_tm=ot.length;
+    var ut=skip.unused_tags?[]:idsFor(db,'unused_tags'); if(ut.length) db.run('DELETE FROM Tag WHERE TagId IN ('+ut.join(',')+')'); fixed.unused_tags=ut.length;
+    var ul=skip.unused_loc?[]:idsFor(db,'unused_loc');  if(ul.length) db.run('DELETE FROM Location WHERE LocationId IN ('+ul.join(',')+')'); fixed.unused_loc=ul.length;
     try{ db.run('VACUUM'); }catch(_){}
     return fixed;
   }
@@ -6236,6 +6292,77 @@ body.light .jwr-ntitle{color:#0b2e58}
 
   function tier(score){ return score>=97?'a':score>=85?'b':score>=65?'c':'d'; }
 
+  // Shared clean routine: applies fixes (optionally a review selection),
+  // exports the cleaned copy, then shows the Done screen.
+  function doClean(btnEl, sel){
+    if(btnEl){ btnEl.disabled=true; btnEl.innerHTML='<span class="jbd-row-spin" style="border-top-color:#fff"></span> <span>'+esc(t('cleaning'))+'</span>'; }
+    setTimeout(function(){
+      if(!cur) return;
+      try{
+        var fixed=applyFixes(cur.db, sel||{});
+        exportCleaned(cur).then(function(blob){ if(cur) renderDone(fixed, blob||null); }).catch(function(){ if(cur) renderDone(fixed, null); });
+      }catch(_){ renderError('read'); }
+    }, 60);
+  }
+
+  // Review screen: lists the actual duplicate notes (title + preview) plus the
+  // other cleanup categories, each with a checkbox. Nothing is deleted until
+  // the user confirms; unchecking an item leaves it untouched.
+  function renderReview(){
+    var r=cur.report, b=body();
+    var groups=[]; try{ groups=dupNoteGroups(cur.db); }catch(_){ groups=[]; }
+    var otherKeys=CHECKS.filter(function(k){ return k!=='dup_notes' && (r.checks[k]||0)>0; });
+    var dupHtml=groups.map(function(g,idx){
+      var ttl=g.title&&g.title.trim() ? esc(g.title.trim()) : '<em class="jbd-rv-untitled">'+esc(t('rv_notitle'))+'</em>';
+      var prev=preview(g.content);
+      return '<label class="jbd-rv-item">'+
+          '<input type="checkbox" class="jbd-rv-cb" data-jbd-dupgrp="'+idx+'" checked>'+
+          '<span class="jbd-rv-main">'+
+            '<span class="jbd-rv-title">'+ttl+'</span>'+
+            (prev?'<span class="jbd-rv-prev">'+esc(prev)+'</span>':'')+
+            '<span class="jbd-rv-badges">'+
+              '<span class="jbd-rv-badge jbd-rv-keep">'+esc(t('rv_kept'))+'</span>'+
+              '<span class="jbd-rv-badge jbd-rv-rm">'+esc(t('rv_remove_n').replace('{n}', g.dups.length))+'</span>'+
+            '</span>'+
+          '</span>'+
+        '</label>';
+    }).join('');
+    var otherHtml=otherKeys.map(function(k){
+      return '<label class="jbd-rv-other">'+
+          '<input type="checkbox" class="jbd-rv-cb" data-jbd-cat="'+k+'" checked>'+
+          '<span class="jbd-rv-other-label">'+esc(t('c_'+k))+'</span>'+
+          '<span class="jbd-chip jbd-chip-warn">'+(r.checks[k]||0)+'</span>'+
+        '</label>';
+    }).join('');
+    b.innerHTML=
+      '<div class="jbd-rv-head">'+
+        '<h3 class="jbd-rv-h">'+esc(t('rv_t'))+'</h3>'+
+        '<p class="jbd-rv-d">'+esc(t('rv_d'))+'</p>'+
+      '</div>'+
+      (groups.length ? '<div class="jbd-rv-sec">'+esc(t('rv_dups_h'))+'</div><div class="jbd-rv-list">'+dupHtml+'</div>' : '')+
+      (otherKeys.length ? '<div class="jbd-rv-sec">'+esc(t('rv_other_h'))+'</div><div class="jbd-rv-list">'+otherHtml+'</div>' : '')+
+      '<p class="jbd-rv-warn" data-jbd-warn hidden>'+esc(t('rv_none'))+'</p>'+
+      '<button class="jbd-clean-btn" type="button" data-jbd-confirm>'+ICON_BROOM+' <span>'+esc(t('clean'))+'</span></button>'+
+      '<button class="jbd-ghost-btn" type="button" data-jbd-back>'+esc(t('back'))+'</button>'+
+      '<div class="jbd-safe">'+ICON_SHIELD+'<span>'+esc(t('safe'))+'</span></div>';
+    b.querySelector('[data-jbd-back]').addEventListener('click', renderReport);
+    var confirmBtn=b.querySelector('[data-jbd-confirm]');
+    confirmBtn.addEventListener('click', function(){
+      var excludeDup={}, anyDup=false;
+      b.querySelectorAll('[data-jbd-dupgrp]').forEach(function(cb){
+        var g=groups[+cb.getAttribute('data-jbd-dupgrp')];
+        if(cb.checked){ anyDup=true; }
+        else if(g){ g.dups.forEach(function(id){ excludeDup[id]=true; }); }
+      });
+      var skip={}, anyOther=false;
+      b.querySelectorAll('[data-jbd-cat]').forEach(function(cb){
+        if(cb.checked) anyOther=true; else skip[cb.getAttribute('data-jbd-cat')]=true;
+      });
+      if(!anyDup && !anyOther){ var w=b.querySelector('[data-jbd-warn]'); if(w) w.hidden=false; return; }
+      doClean(confirmBtn, {excludeDup:excludeDup, skip:skip});
+    });
+  }
+
   function renderReport(){
     var r=cur.report, b=body();
     var C=326.7, tr=tier(r.score);
@@ -6267,7 +6394,10 @@ body.light .jwr-ntitle{color:#0b2e58}
         ? '<p class="jbd-issues-line">'+esc((r.issues===1?t('issues_one'):t('issues_many')).replace('{n}', r.issues))+'</p>'
         : '<div class="jbd-perfect">'+ICON_CHECK+' '+esc(t('perfect'))+'</div>')+
       '<div class="jbd-rows">'+rows+'</div>'+
-      (r.issues>0 ? '<button class="jbd-clean-btn" type="button" data-jbd-clean>'+ICON_BROOM+' <span>'+esc(t('clean'))+'</span></button>'
+      (r.issues>0
+        ? (autoMode
+            ? '<button class="jbd-clean-btn" type="button" data-jbd-clean>'+ICON_BROOM+' <span>'+esc(t('clean'))+'</span></button>'
+            : '<button class="jbd-clean-btn" type="button" data-jbd-review>'+ICON_BROOM+' <span>'+esc(t('review'))+'</span></button>')
         : (autoMode ? '<button class="jbd-clean-btn" type="button" data-jbd-dlmerged>'+ICON_DL+' <span>'+esc(t('download'))+'</span></button>' : ''))+
       '<div class="jbd-safe">'+ICON_SHIELD+'<span>'+esc(t('safe'))+'</span></div>'+
       '<button class="jbd-ghost-btn" type="button" data-jbd-again>'+esc(t('another'))+'</button>';
@@ -6286,19 +6416,9 @@ body.light .jwr-ntitle{color:#0b2e58}
     },16);
 
     var cleanBtn=b.querySelector('[data-jbd-clean]');
-    if(cleanBtn) cleanBtn.addEventListener('click', function(){
-      cleanBtn.disabled=true;
-      cleanBtn.innerHTML='<span class="jbd-row-spin" style="border-top-color:#fff"></span> <span>'+esc(t('cleaning'))+'</span>';
-      setTimeout(function(){
-        if(!cur) return;
-        try{
-          var fixed=applyFixes(cur.db);
-          exportCleaned(cur).then(function(blob){
-            if(cur) renderDone(fixed, blob||null);
-          }).catch(function(){ if(cur) renderDone(fixed, null); });
-        }catch(_){ renderError('read'); }
-      }, 60);
-    });
+    if(cleanBtn) cleanBtn.addEventListener('click', function(){ doClean(cleanBtn); });
+    var reviewBtn=b.querySelector('[data-jbd-review]');
+    if(reviewBtn) reviewBtn.addEventListener('click', renderReview);
     b.querySelector('[data-jbd-again]').addEventListener('click', function(){
       try{ if(cur.db) cur.db.close(); }catch(_){}
       cur.db=null; cur.zip=null; cur.report=null;
@@ -6366,7 +6486,7 @@ body.light .jwr-ntitle{color:#0b2e58}
   // Localised Doctor strings for other modules (the pre-merge impact card
   // renders the worker's doctor report with these).
   window.__jwDoctorT = function(k){ return t(k); };
-  window.__jwDoctorInternals = { runChecks:runChecks, applyFixes:applyFixes, idsFor:idsFor };
+  window.__jwDoctorInternals = { runChecks:runChecks, applyFixes:applyFixes, idsFor:idsFor, dupNoteGroups:dupNoteGroups };
 })();
 </script>
 <!-- ── End Backup Doctor ─────────────────────────────────── -->
