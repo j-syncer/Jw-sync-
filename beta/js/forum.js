@@ -12,6 +12,11 @@ let db;  // assigned in jwsyncForumInit
 
 // ── State ─────────────────────────────────────────────────────
 let posts = [], filter = 'all', activePostId = null;
+// Threads are addressable at #forum/post/<id> so the browser back button
+// (and swipe-back on mobile) closes the post instead of leaving the
+// community — see openThread / closeThread / syncThreadRoute.
+const THREAD_HASH_RE = /^#forum\/post\/(.+)$/;
+let pendingThreadId = null; // deep-linked post id waiting for posts to load
 let votedP = new Set(JSON.parse(localStorage.getItem('vp') || '[]'));
 let votedR = new Set(JSON.parse(localStorage.getItem('vr') || '[]'));
 const saveVotes = () => {
@@ -57,6 +62,11 @@ async function load() {
         if (error) throw error;
         posts = data || [];
         render(); stats();
+        if (pendingThreadId) { // deep link arrived before the posts did
+            const id = pendingThreadId;
+            pendingThreadId = null;
+            showThread(id);
+        }
     } catch(e) {
         document.getElementById('post-list').innerHTML = `
             <div class="state-box">
@@ -167,14 +177,45 @@ async function votePost(id, btn) {
 }
 
 // ── Thread ────────────────────────────────────────────────────
-async function openThread(id) {
-    activePostId = id;
+// Entry point from the post list: navigate to the thread's hash route.
+// The hashchange handler (syncThreadRoute) does the actual rendering, so
+// the browser back button naturally returns to the post list.
+function openThread(id) {
+    const target = '#forum/post/' + encodeURIComponent(id);
+    if (location.hash === target) { showThread(id); return; }
+    location.hash = target;
+}
+
+function shownPosts() {
+    return filter === 'all' ? posts : posts.filter(p => p.category === filter);
+}
+
+async function showThread(id) {
     const post = posts.find(p=>p.id===id);
-    if (!post) return;
-    document.getElementById('overlay').classList.add('open');
+    if (!post) {
+        if (!posts.length) { pendingThreadId = id; return; } // opened via deep link before load() finished
+        toast('That post could not be found.','error');
+        if (THREAD_HASH_RE.test(location.hash)) history.replaceState(null, '', '#forum');
+        hideThread();
+        return;
+    }
+    activePostId = id;
+    const overlay = document.getElementById('overlay');
+    overlay.classList.add('open');
+    overlay.scrollTop = 0;
     document.body.style.overflow = 'hidden';
     const col = aColor(post.author);
     const voted = votedP.has(id);
+    const list = shownPosts();
+    const idx  = list.findIndex(p=>p.id===id);
+    const prev = idx > 0 ? list[idx-1] : null;
+    const next = idx >= 0 && idx < list.length-1 ? list[idx+1] : null;
+    const tnLabel = t => { t = String(t||''); return esc(t.length > 34 ? t.slice(0,32) + '…' : t); };
+    const navHtml = (prev || next) ? `
+        <div class="thread-nav">
+            ${prev?`<button class="react-btn thread-nav-btn" onclick="openThread('${esc(prev.id)}')" title="${esc(prev.title)}">← ${tnLabel(prev.title)}</button>`:'<span></span>'}
+            ${next?`<button class="react-btn thread-nav-btn" onclick="openThread('${esc(next.id)}')" title="${esc(next.title)}">${tnLabel(next.title)} →</button>`:'<span></span>'}
+        </div>` : '';
     document.getElementById('thread-post').innerHTML = `
         <div class="thread-card original">
             <div class="badges">
@@ -192,12 +233,25 @@ async function openThread(id) {
                 <button class="react-btn${voted?' voted':''}" id="tv-btn" onclick="votePostThread('${esc(id)}')">
                     ▲ <span id="tv-count">${post.votes}</span>
                 </button>
+                <button class="react-btn" onclick="copyThreadLink('${esc(id)}')" title="Copy a direct link to this post">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                    Copy link
+                </button>
             </div>
-        </div>`;
+        </div>` + navHtml;
     document.getElementById('replies-section').style.display = 'block';
     document.getElementById('reply-compose').style.display   = 'block';
     document.getElementById('replies-list').innerHTML = '<div style="padding:14px 0;color:var(--muted);font-size:13px">Loading replies…</div>';
     await loadReplies(id);
+}
+
+function copyThreadLink(id) {
+    const url = location.origin + location.pathname + '#forum/post/' + encodeURIComponent(id);
+    const done = () => toast('Link copied ✓');
+    const fail = () => toast('Could not copy the link.','error');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(done, fail);
+    } else { fail(); }
 }
 
 async function loadReplies(postId) {
@@ -292,10 +346,36 @@ async function submitReply() {
 }
 
 function closeThread() {
-    document.getElementById('overlay').classList.remove('open');
+    // Rewrite the URL back to the list without adding a history entry, so the
+    // in-page back button and the browser back button stay coherent.
+    if (THREAD_HASH_RE.test(location.hash)) history.replaceState(null, '', '#forum');
+    hideThread();
+}
+
+function hideThread() {
+    const overlay = document.getElementById('overlay');
+    if (overlay) overlay.classList.remove('open');
     document.body.style.overflow = '';
     activePostId = null;
 }
+
+// Keep the thread overlay in sync with the URL: opens the post named in the
+// hash, and closes the overlay when the hash leaves the thread route (browser
+// back/forward, or navigating to another part of the app). Also guarantees
+// the body scroll lock never leaks into the rest of the app.
+function syncThreadRoute() {
+    const m = location.hash.match(THREAD_HASH_RE);
+    if (m) {
+        const id = decodeURIComponent(m[1]);
+        if (id !== activePostId) showThread(id);
+    } else {
+        pendingThreadId = null;
+        const overlay = document.getElementById('overlay');
+        if (activePostId !== null || (overlay && overlay.classList.contains('open'))) hideThread();
+    }
+}
+window.addEventListener('hashchange', syncThreadRoute);
+syncThreadRoute();
 
 document.addEventListener('keydown', e => {
     if (e.key !== 'Escape') return;

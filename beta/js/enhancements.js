@@ -134,7 +134,9 @@
    */
   function setupForumRouting() {
     function update() {
-      var isForum = location.hash === '#forum';
+      // '#forum' is the post list; '#forum/post/<id>' is an open thread
+      // (routed inside forum.js). Both belong to the forum view.
+      var isForum = location.hash === '#forum' || location.hash.indexOf('#forum/') === 0;
       var forum = document.getElementById('forum-view');
       var navbar = document.getElementById('jw-navbar');
       if (!forum) return;
@@ -480,7 +482,7 @@
       var hash = location.hash;
       var hasSeenLanding = !!localStorage.getItem(SEEN_KEY);
       var isLanding = hash === '#home' || (hash === '' && !hasSeenLanding);
-      var isForum = hash === '#forum';
+      var isForum = hash === '#forum' || hash.indexOf('#forum/') === 0;
 
       if (landingEl) landingEl.style.display = isLanding ? '' : 'none';
       if (rootEl) rootEl.hidden = isLanding || isForum;

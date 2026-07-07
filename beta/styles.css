@@ -1999,8 +1999,20 @@ body.is-forum { background: var(--bg) !important; }
 #forum-view .overlay { display:none; position:fixed; top:48px; right:0; bottom:0; left:0; background:var(--bg); z-index:150; overflow-y:auto; }
 #forum-view .overlay.open { display:block; }
 #forum-view .thread-inner { max-width:700px; margin:0 auto; padding:20px 16px 48px; }
-#forum-view .thread-back { display:inline-flex; align-items:center; gap:6px; color:var(--muted); background:transparent; border:1px solid var(--border); border-radius:7px; padding:7px 14px; font-size:13px; cursor:pointer; font-family:'Inter',system-ui,sans-serif; transition:all .15s; margin-bottom:16px; }
+/* Back button stays pinned while scrolling a long thread */
+#forum-view .thread-back { position:sticky; top:10px; z-index:20; display:inline-flex; align-items:center; gap:6px; color:var(--muted); background:rgba(2,10,22,.92); -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); border:1px solid var(--border); border-radius:7px; padding:7px 14px; font-size:13px; cursor:pointer; font-family:'Inter',system-ui,sans-serif; transition:all .15s; margin-bottom:16px; }
 #forum-view .thread-back:hover { color:var(--text); border-color:var(--border2); }
+
+/* Prev/next post links under the opened post */
+#forum-view .thread-nav { display:flex; justify-content:space-between; gap:10px; margin:0 0 20px; }
+#forum-view .thread-nav-btn { max-width:48%; min-width:0; }
+
+/* On small screens the site nav wraps to two rows (taller than the 48px the
+   overlay assumes), which used to bury the back button behind the nav. Make
+   the thread view full-screen above the nav instead. */
+@media (max-width:600px) {
+  #forum-view .overlay { top:0; z-index:230; }
+}
 
 /* Thread card (opened post) */
 #forum-view .thread-card { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; padding:20px; margin-bottom:20px; }

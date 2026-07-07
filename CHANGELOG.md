@@ -80,6 +80,25 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.91.0] — 2026-07-07
+
+### Community navigation overhaul
+- Opening a post now gets its own address (`#forum/post/…`), so the browser or
+  phone back button closes the post and returns you to the post list instead of
+  kicking you out of the Community area entirely.
+- Fixed a bug where leaving a post via the browser back button froze scrolling
+  on the rest of the app until the page was reloaded.
+- Fixed the "← Back to community" button being hidden behind the navigation bar
+  on phones — the post view is now full-screen on small displays.
+- The "← Back to community" button now stays pinned to the top while you scroll
+  a long post, so the way back is always one tap away.
+- Previous / next links under each post let you move between posts without
+  returning to the list first.
+- New "Copy link" button on every post — share a direct link that opens that
+  exact post.
+- The standalone community page (forum.html) got the same back-button and
+  sticky-back-button fixes.
+
 ## [2.90.0] — 2026-07-04
 
 ### Library Doctor: review duplicates before anything is deleted
