@@ -80,6 +80,25 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.91.1] — 2026-07-11
+
+Performance release driven by Core Web Vitals field data (Cloudflare Web Analytics):
+interaction responsiveness (INP) and load-time tail (LCP) improvements.
+
+- **Faster Browse search** — typing in the Note Explorer search box no longer
+  re-parses every note's HTML on each pass; searchable text is now cached per
+  row (was up to ~770 ms of main-thread blocking on large libraries).
+- **Smoother file loading** — the backup scanner now yields to the browser
+  before opening the database, so the "file loaded" state paints immediately
+  and the next tap on the second drop zone isn't delayed (was up to ~700 ms).
+- **Snappier "Launch App"** — the hero CTA and "Try with sample notes" buttons
+  now pre-fetch the app bundle on hover/touch, like the other launch buttons.
+- **Faster first paint** — Google Analytics now loads after the page finishes
+  loading instead of competing with it; below-the-fold landing sections
+  (how-to, FAQ) skip rendering until scrolled into view.
+- **Less layout shift** — icon placeholders are sized before the icon library
+  swaps them in, so the app view no longer shifts when icons appear.
+
 ## [2.91.0] — 2026-07-07
 
 ### Community navigation overhaul
