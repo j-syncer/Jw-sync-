@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DW6WQ84Q2K"></script>
+    <!-- Google tag (gtag.js) — deferred to after load so it never competes
+         with first paint; the dataLayer stub queues events in the meantime -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-DW6WQ84Q2K');
+      (function(){
+        function loadGtag(){
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DW6WQ84Q2K';
+          document.head.appendChild(s);
+        }
+        if (document.readyState === 'complete') { setTimeout(loadGtag, 0); }
+        else {
+          window.addEventListener('load', function(){
+            (window.requestIdleCallback || function(f){ setTimeout(f, 200); })(loadGtag);
+          });
+        }
+      })();
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -179,7 +193,15 @@
     el.addEventListener('touchstart', fire, { passive: true });
   }
   function init() {
-    ['landing-launch-btn', 'landing-demo-btn', 'site-nav-app'].forEach(attachHoverPrefetch);
+    ['landing-launch-btn', 'landing-demo-btn', 'site-nav-app', 'hero-launch-btn'].forEach(attachHoverPrefetch);
+    try {
+      document.querySelectorAll('[data-demo-trigger]').forEach(function(el) {
+        var fire = function() { prefetchAll(); };
+        el.addEventListener('mouseenter', fire, { passive: true });
+        el.addEventListener('focus', fire);
+        el.addEventListener('touchstart', fire, { passive: true });
+      });
+    } catch (_) {}
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -834,6 +856,13 @@ body.light .site-nav-shimmer,body.light .site-nav-shimmer-explorer{-webkit-text-
 .landing-feat h3{font-size:15.5px;margin:0 0 7px}
 .landing-feat p{font-size:13.5px}
 body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
+</style>
+    <style id="perf-css">
+/* Below-the-fold landing sections skip layout/paint until scrolled near */
+.landing-howto,.landing-faq{content-visibility:auto;contain-intrinsic-size:auto 900px}
+/* Lucide swaps <i data-lucide> for <svg>; size the placeholder so the swap
+   doesn't shift layout (w-*/h-* utility classes need a non-inline display) */
+#root i[data-lucide]{display:inline-block}
 </style>
     <section id="landing-view" style="display:none">
       <div class="landing-hero landing-hero-split">
@@ -1616,6 +1645,10 @@ window.__bootBrowse = function() {
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
+  function fastStripHtml(s){
+    if(!s) return '';
+    return String(s).replace(/<[^>]*>/g,' ').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&quot;/gi,'"').replace(/&#39;/g,"'").replace(/\s+/g,' ').trim();
+  }
   function stripHtml(s){
     if(!s) return '';
     var d = document.createElement('div');
@@ -1731,12 +1764,14 @@ window.__bootBrowse = function() {
     db: null, fileName: '', dirty: 0, editingId: null,
     SQL: null, undo: [], redo: [], selection: new Set(), selectMode: false, _inBatch: false, _batchUI: 'idle', _batchTaggedCount: 0,
     allInputFields: [],
-    askMode: false, askResults: [], askQuery: '', askPhase: 'idle', askProgress: 0, askError: ''
+    askMode: false, askResults: [], askQuery: '', askPhase: 'idle', askProgress: 0, askError: '',
+    hayGen: 1
   };
 
   // ---------- DB mutations ----------
   function markDirty(){
     state.dirty++;
+    state.hayGen++;
     updateDirtyBadge();
   }
   function updateDirtyBadge(){
@@ -2695,11 +2730,14 @@ window.__bootBrowse = function() {
         if(!ts.some(function(tg){ return String(tg.id)===tagId; })) return false;
       }
       if(q){
-        var hay;
-        if(state.activeType==='notes') hay=((r.Title||'')+' '+stripHtml(r.Content||'')+' '+pubLabel(r)).toLowerCase();
-        else if(state.activeType==='highlights') hay=((r.NoteTitle||'')+' '+stripHtml(r.NoteContent||'')+' '+pubLabel(r)).toLowerCase();
-        else if(state.activeType==='inputfields') hay=((r.Value||'')+' '+pubLabel(r)).toLowerCase();
-        else hay=((r.Title||'')+' '+(r.Snippet||'')+' '+pubLabel(r)).toLowerCase();
+        var hay=r.__jbHay;
+        if(hay===undefined||r.__jbHayGen!==state.hayGen){
+          if(state.activeType==='notes') hay=((r.Title||'')+' '+fastStripHtml(r.Content||'')+' '+pubLabel(r)).toLowerCase();
+          else if(state.activeType==='highlights') hay=((r.NoteTitle||'')+' '+fastStripHtml(r.NoteContent||'')+' '+pubLabel(r)).toLowerCase();
+          else if(state.activeType==='inputfields') hay=((r.Value||'')+' '+pubLabel(r)).toLowerCase();
+          else hay=((r.Title||'')+' '+(r.Snippet||'')+' '+pubLabel(r)).toLowerCase();
+          r.__jbHay=hay; r.__jbHayGen=state.hayGen;
+        }
         if(hay.indexOf(q)===-1) return false;
       }
       return true;
