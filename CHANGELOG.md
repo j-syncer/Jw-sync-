@@ -4,6 +4,12 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.93.1] — 2026-07-13
+
+### Changed
+- Added a **Guides** tab to the homepage navigation bar (next to Community),
+  linking to the new Guides & How-tos section — translated in all 12 languages.
+
 ## [2.93.0] — 2026-07-13
 
 ### New: Guides & How-tos section (jwsync.org/guides/)
