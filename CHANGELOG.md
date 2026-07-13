@@ -80,6 +80,34 @@ runs in your browser — your files are never uploaded.
 
 ---
 
+## [2.92.0] — 2026-07-13
+
+### New tool: Reading Companion — a daily Bible reading plan with your notes beside you (beta)
+
+A brand-new daily habit, built around something no generic reading tracker can
+do: because JW Sync reads your own `.jwlibrary`, **today's reading shows the
+notes and highlights you yourself made on those exact chapters** — "you
+highlighted four verses in Psalm 37 two years ago." Reading the Bible through
+the lens of your own study history, 100% on your device.
+
+- **Pick an order and a pace.** Read in Bible order or in approximate
+  chronological order; finish in 3 months, 6 months, 1 year, 2 years, or set
+  your own chapters-per-day pace — with a live "you would finish around…"
+  preview.
+- **Today's reading, every day.** Each chapter is one tap away — links open
+  directly in JW Library (or Watchtower ONLINE LIBRARY) in your language.
+  Check chapters off as you read.
+- **Streaks without guilt.** Completing a day grows your streak; missing a day
+  just moves your forecast finish date. No overdue pile, ever.
+- **Your notes on today's chapters.** If you've loaded a backup in any JW Sync
+  tool, your own notes and highlight counts appear right under today's portion.
+- **Progress you can see.** A 66-book progress grid, chapters-read bar, and an
+  on-pace-to-finish forecast.
+- **Milestones.** Finish a book, the Hebrew-Aramaic Scriptures, the Christian
+  Greek Scriptures — and eventually the whole Bible.
+- Fully private (everything in your browser), fully translated in all 12
+  languages. Find it on the home page: **Reading Companion**.
+
 ## [2.91.1] — 2026-07-11
 
 Performance release driven by Core Web Vitals field data (Cloudflare Web Analytics):

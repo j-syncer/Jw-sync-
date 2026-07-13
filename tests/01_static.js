@@ -289,8 +289,9 @@ for (const path of FILES) {
       fail('Home service section (.svc-grid) missing');
     else ok('Home service section (.svc-grid) present');
     const cards = (c.match(/class="svc-card[ "]/g) || []).length;
-    if (cards === 5) ok('Five service cards present (incl. Backup Doctor)');
-    else fail('Expected 5 .svc-card, got ' + cards);
+    const expectedCards = c.includes('svc-reading') ? 6 : 5; // Reading Companion ships beta-first
+    if (cards === expectedCards) ok(expectedCards + ' service cards present');
+    else fail('Expected ' + expectedCards + ' .svc-card, got ' + cards);
     // Backup Doctor sits 2nd, right after the Merge tool
     if (/svc-card svc-card-merge[\s\S]*?svc-card svc-doctor/.test(c))
       ok('Backup Doctor card placed directly after Merge tool');
