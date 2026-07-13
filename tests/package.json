@@ -4,7 +4,7 @@
   "private": true,
   "description": "Static + JSDOM runtime + regression tests for jwsync.org. Run `npm install` once, then `npm test`.",
   "scripts": {
-    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js && node 04_lazy_load.js && node 05_post_merge.js && node 06_conflict_review.js && node 07_library_wrapped.js && node 08_pre_merge_preview.js && node 09_scheduled_sync.js && node 10_mobile_polish.js && node 11_semantic_search.js && node 12_share_page.js && node 13_receive_merge.js && node 14_backup_doctor.js && node 16_reading.js && node 15_parity.js",
+    "test": "node 01_static.js && node 02_runtime.js && node 03_regression.js && node 04_lazy_load.js && node 05_post_merge.js && node 06_conflict_review.js && node 07_library_wrapped.js && node 08_pre_merge_preview.js && node 09_scheduled_sync.js && node 10_mobile_polish.js && node 11_semantic_search.js && node 12_share_page.js && node 13_receive_merge.js && node 14_backup_doctor.js && node 16_reading.js && node 17_guides.js && node 15_parity.js",
     "test:receive": "node 13_receive_merge.js",
     "test:static": "node 01_static.js",
     "test:runtime": "node 02_runtime.js",
@@ -20,7 +20,8 @@
     "test:share": "node 12_share_page.js",
     "test:doctor": "node 14_backup_doctor.js",
     "test:parity": "node 15_parity.js",
-    "test:reading": "node 16_reading.js"
+    "test:reading": "node 16_reading.js",
+    "test:guides": "node 17_guides.js"
   },
   "dependencies": {
     "jsdom": "^24.1.3",
