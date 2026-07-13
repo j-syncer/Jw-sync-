@@ -4,6 +4,17 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.92.1] — 2026-07-13
+
+### Fixed
+- **Google can find jwsync.org again.** The production homepage had been
+  shipping a `noindex, nofollow` robots meta tag since v2.72.0 (introduced
+  accidentally during a head-section restructure), which told search engines
+  to drop the site from their index entirely. The tag is now `index, follow`.
+  The beta site (`/beta`) intentionally keeps `noindex` so it never competes
+  with the main site in search results.
+- Refreshed `sitemap.xml` last-modified dates to prompt a recrawl.
+
 ## Feature highlights — recent updates
 
 A themed summary of what's been added over the last few weeks, since the
