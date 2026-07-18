@@ -181,6 +181,47 @@ In-browser library manager for any `.jwlibrary` file — three tabs (Notes / Hig
 
 ---
 
+## 📖 Weekly Watchtower Study Annotation (personal `.jwlibrary` workflow)
+
+**Trigger:** the user uploads a `.jwlibrary` backup and says "study and annotate today's/this week's Watchtower" (any phrasing). This is a **file deliverable**, not a website change — nothing in the repo is edited, no commit needed. Do the whole thing without asking questions.
+
+### Step 1 — Identify the article
+- Week's schedule: `https://wol.jw.org/en/wol/meetings/r1/lp-e/<year>/<ISO week number>` → gives the study article title + link `https://wol.jw.org/en/wol/d/r1/lp-e/<DocumentId>`.
+- WebFetch's summarizer may refuse to reproduce article text — instead `curl` the article URL and parse the raw HTML yourself.
+- Study paragraphs are `<p id="pN" data-pid="N">`; questions are `class="qu"`; each question is followed by a `gen-field` div containing `<textarea id="ttNN">` (this id is the `InputField.TextTag` for the answer).
+
+### Step 2 — Open the backup
+`.jwlibrary` = ZIP containing `userData.db` (SQLite, schemaVersion 16), `manifest.json`, media files. Work on an extracted copy. Check what the user already has on the article's Location(s) — never duplicate or disturb their own notes/highlights.
+
+### Step 3 — Add three kinds of annotations
+All anchored to the article's Location row with `KeySymbol='w'`, `DocumentId=<id>`, `IssueTagNumber=<yyyymm00>`, **`MepsLanguage=0`, Type 0** (create if missing).
+
+**a) Gem notes** (~15–22 per article):
+- `Note` rows: `BlockType=1`, `BlockIdentifier = data-pid` of the paragraph (**NOT** the printed paragraph number), `Guid=uuid4`, `UserMarkId=NULL`, timestamps `YYYY-MM-DDTHH:MM:SSZ`.
+- Style: titles like `Greek gem: …` / `Hebrew gem: …` / `Gem: …` / `Modern parallel: …`; body 1–3 sentences, insightful and concise. Cover the theme text, most study paragraphs, opening/closing songs, and any box. Doctrinally consistent with JW understanding (e.g. holy spirit = God's active force).
+
+**b) Key-point highlights** (all paragraphs the user hasn't marked; key phrases only, never whole paragraphs):
+- `UserMark(UserMarkId, ColorIndex, LocationId, StyleIndex=0, UserMarkGuid=uuid4, Version=1)` + `BlockRange(BlockRangeId, BlockType=1, Identifier=data-pid, StartToken, EndToken, UserMarkId)`.
+- Color scheme: **1 yellow** = direct answer to the printed question · **2 green** = principles/scriptures/holy-spirit statements · **3 blue** = illustrations, definitions, tools · **4 pink** = heart statements / key definitions · **5 orange** = action commands · **6 purple** = warnings.
+- **Token numbering (critical):** strip zero-width chars (`​ ⁠ ﻿ ­`); split paragraph text on whitespace; within each chunk, a token is a maximal run matching `[A-Za-zÀ-ɏ’':\-\d]+`, and every other character is its own token. So `Jehovah’s`, `well-trained`, `6:5`, `3:1-7`, `607` are each ONE token; `.` `,` `“` `”` `(` `)` `—` are each their own token; `B.C.E.` is six. The printed paragraph number (`2 `, `3 `…) is **not** a token. Tokens are 0-indexed; `StartToken`/`EndToken` are inclusive.
+- **Always validate the tokenizer first** against the user's existing highlights in the same backup (reproduce their `BlockRange` ranges as sensible phrases) before inserting anything.
+
+**c) Study-question answers:**
+- `InputField(LocationId, TextTag, Value)` — one row per question textarea (`tt44`, `tt48`… from the HTML, plus the "How Would You Answer?" review box, e.g. `tt25/tt30/tt35`).
+- ⚠️ InputField rows attach to a **separate Location row with `MepsLanguage=NULL`** (same DocumentId/KeySymbol/IssueTagNumber, Type 0) — create it if missing. Notes/marks use the `MepsLanguage=0` row.
+- Answers: 1–3 sentences, drawn from the paragraph, woven with the gems, cite scriptures.
+
+### Step 4 — Repackage & deliver
+1. Update the `LastModified` table (single row) to the same timestamp.
+2. Sanity: `pragma integrity_check` = ok; `pragma foreign_key_check` count unchanged vs the pristine DB (the device's own backups already contain ~300 benign violations — do not "fix" them).
+3. Recompute `manifest.json → userDataBackup.hash` = SHA-256 hex of the new `userData.db`; update `lastModifiedDate`.
+4. Re-zip the same file list (deflate), name it `UserdataBackup_<YYYYMMDD>_Watchtower_Annotated.jwlibrary`, verify it round-trips, and send it to the user (import via JW Library → Personal Study → Backup and restore).
+
+### Reference — first run (July 13-19, 2026, doc 2026401)
+Delivered 22 notes, 43 highlights, 19 answers. Earlier articles annotated the same way: docs 2026367, 2026368 (notes + answers, `tt` tags stepping by 4). Existing user habits: colors 2/3/6 for their own marks; their highlights confirmed the tokenizer (e.g. pid 7 tokens 22-28 = "We are created with a special gift").
+
+---
+
 ## Gotchas & Tips
 
 - **Python replacements only** — files are too large for Edit tool; use `open().read()` → `str.replace()` → `write()`
