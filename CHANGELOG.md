@@ -4,6 +4,13 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.93.2] — 2026-07-21
+
+### Changed
+- On the post-download celebration window, the "support development" donation
+  link now sits directly above the **Download again** button, and is a little
+  larger with a subtle shimmer so it's easier to notice.
+
 ## [2.93.1] — 2026-07-13
 
 ### Changed
