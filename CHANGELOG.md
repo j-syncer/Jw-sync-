@@ -4,6 +4,14 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.94.0] — 2026-07-21
+
+### Added
+- The **"What else can JW Sync do?"** panel shown after a merge (Simple Mode)
+  now has an **Explore Full Mode →** button, so you can jump straight to the
+  advanced tools it describes instead of hunting for the mode switch.
+  Translated in all 12 languages.
+
 ## [2.93.2] — 2026-07-21
 
 ### Changed

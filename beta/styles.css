@@ -588,6 +588,8 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .discover-card:hover{border-color:var(--color-border-orange)}
 .discover-card-name{font-size:var(--text-sm);font-weight:700;color:var(--color-text-primary)}
 .discover-card-desc{font-size:var(--text-xs);color:#cbd5e1;line-height:1.6}
+.discover-fullmode-btn{display:block;width:100%;margin-bottom:12px;padding:11px;background:#ea580c;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s}
+.discover-fullmode-btn:hover{opacity:.9}
 .discover-community{font-size:12px;color:rgba(208,232,248,.4);text-align:center;margin-top:4px}
 .discover-community-link{color:#fb923c;text-decoration:none;transition:color .15s}
 .discover-community-link:hover{color:#ea580c;text-decoration:underline}

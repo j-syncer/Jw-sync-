@@ -14,7 +14,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
 const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb'];
-const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
+const REQUIRED_I18N_KEYS = ['brw_open', 'disc_open_full']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
 const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',
   'err_corrupt', 'err_no_db', 'err_not_sqlite', 'err_oversize', 'warn_oversize'];
@@ -922,6 +922,30 @@ section('Cross-tool session (jw-session.js)');
       else fail('landing doctor keys missing for: ' + missing.join(','));
     }
   }
+}
+
+// ── "Explore Full Mode" jump from the post-merge discover panel ──────────
+section('Discover panel → Full Mode jump');
+for (const appRel of ['beta/js/app.js', 'js/app.js']) {
+  const appPath = REPO + '/' + appRel;
+  const src = fs.readFileSync(appPath, 'utf8');
+  if (src.includes('window.__jwSetFullMode=function(){na(!1)')) {
+    ok(appRel + ': exposes __jwSetFullMode bridge (switches to Full Mode + saves pref)');
+  } else {
+    fail(appRel + ': __jwSetFullMode bridge missing — discover-panel button cannot switch modes');
+  }
+  if (/className:"discover-fullmode-btn"[\s\S]{0,120}window\.__jwSetFullMode/.test(src)
+      && src.includes('s("disc_open_full")')) {
+    ok(appRel + ': discover-fullmode-btn wired to __jwSetFullMode with disc_open_full label');
+  } else {
+    fail(appRel + ': discover-fullmode-btn not wired correctly');
+  }
+}
+for (const cssRel of ['beta/styles.css', 'styles.css']) {
+  const cssPath = REPO + '/' + cssRel;
+  const css = fs.readFileSync(cssPath, 'utf8');
+  if (css.includes('.discover-fullmode-btn')) ok(cssRel + ': .discover-fullmode-btn styled');
+  else fail(cssRel + ': .discover-fullmode-btn CSS missing');
 }
 
 section('SUMMARY');
