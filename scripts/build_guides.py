@@ -340,6 +340,340 @@ GUIDES = [
   ],
   "related": ["jw-library-study-stats", "search-jw-library-notes", "backup-jw-library"],
  },
+ {
+  "slug": "open-jwlibrary-file",
+  "group": "Getting started",
+  "title": "What Is a .jwlibrary File and How Do You Open It?",
+  "h1": "What is a .jwlibrary file — and how to open one on any device",
+  "description": "A .jwlibrary file is your JW Library backup: a single file holding every note, highlight, bookmark and tag. Here's what's inside it and how to open and read it.",
+  "intro": [
+   "When you back up JW Library you get a file ending in .jwlibrary. It's a single, portable package that contains everything from your personal study — notes, highlights, bookmarks, tags and playlists — in a compact database. It is not a document you open in Word or a PDF reader; it's designed to be restored back into JW Library.",
+   "But you don't have to restore it just to look inside. JW Sync opens a .jwlibrary file directly in your browser so you can read, search and edit its contents without touching your phone.",
+  ],
+  "steps": [
+   ("Get a .jwlibrary file", "It's created in JW Library: Personal Study → three-dot menu → Backup and Restore → Create a backup. That's the file we're talking about."),
+   ("Open it in JW Sync", "Go to jwsync.org and load the file into Study Explorer. It opens instantly, on your device — nothing is uploaded."),
+   ("Read and work with it", "Browse notes, highlights and bookmarks; search across everything; edit, retag or export. When you're done you can restore the file (or an edited copy) back into JW Library."),
+  ],
+  "sections": [
+   ("What's actually inside the file",
+    "Technically a .jwlibrary file is a zipped SQLite database plus a manifest. That's why renaming it to .zip sometimes happens by accident in transit — and why renaming it back to .jwlibrary fixes it. You never need to know any of that to use it, but it explains why the file is small, self-contained and identical across Android, iPhone, iPad and Windows."),
+   ("Opening it on a computer",
+    "The same jwsync.org page works on a laptop or desktop browser — handy for reading years of notes on a big screen, or doing bulk clean-up that would be tedious on a phone. There's nothing to install."),
+  ],
+  "faq": [
+   ("Can I open a .jwlibrary file in Excel or Notepad?", "Not usefully — it's a database, not a spreadsheet or text file. Open it in JW Sync to read it, or export your notes to Markdown/text from Study Explorer."),
+   ("Is it safe to open my backup in the browser?", "Yes. JW Sync reads the file locally in your browser tab; nothing is sent to a server, and your original file is never modified."),
+  ],
+  "related": ["backup-jw-library", "edit-jw-library-notes", "export-jw-library-notes"],
+ },
+ {
+  "slug": "jw-library-windows-pc",
+  "group": "Getting started",
+  "title": "Back Up and Merge JW Library on a Windows PC",
+  "h1": "Using JW Library backups on a Windows PC",
+  "description": "How to back up JW Library on Windows, and how to merge a PC backup with your phone and tablet so notes, highlights and bookmarks stay together on every device.",
+  "intro": [
+   "JW Library runs on Windows as well as phones and tablets, and it makes the same .jwlibrary backup file. That means your PC can be part of the same study library as your phone — as long as you merge the backups rather than restoring one over another.",
+  ],
+  "steps": [
+   ("Back up on Windows", "In the JW Library Windows app, open the menu, go to Backup and Restore, and create a backup. Save the .jwlibrary file somewhere easy to find."),
+   ("Back up your phone and tablet too", "On each device: Personal Study → three-dot menu → Backup and Restore → Create a backup."),
+   ("Merge them at jwsync.org", "Open jwsync.org in any browser on the PC and load all the backup files. JW Sync combines the notes, highlights, bookmarks and tags from every device into one merged .jwlibrary file — locally, nothing uploaded."),
+   ("Restore the merged file everywhere", "Restore the merged file in the Windows app and on each mobile device. Now the PC, phone and tablet all carry the complete library."),
+  ],
+  "sections": [
+   ("Why the PC is the easiest place to do this",
+    "A desktop browser makes loading several files, reviewing the merge preview and saving the result far quicker than tapping on a phone. Many people keep their master merge routine on the computer and just restore the merged file back to their mobile devices."),
+  ],
+  "faq": [
+   ("Does the Windows backup work with iPhone and Android backups?", "Yes — the .jwlibrary format is identical on every platform, so a Windows backup merges freely with phone and tablet backups."),
+   ("Do I need to install anything on the PC?", "No. JW Sync is a web page; it runs in Edge, Chrome or Firefox with nothing to install."),
+  ],
+  "related": ["merge-jw-library-backups", "sync-jw-library-multiple-devices", "open-jwlibrary-file"],
+ },
+ {
+  "slug": "recover-jw-library-notes-lost-phone",
+  "group": "Fixing problems",
+  "title": "How to Recover JW Library Notes After a Lost or Broken Phone",
+  "h1": "Recovering JW Library notes from a lost, broken or reset phone",
+  "description": "Lost your phone or had it reset with JW Library notes on it? What you can recover depends on your backups. Here's exactly how to get your notes back — and what to do next time.",
+  "intro": [
+   "Losing a phone is stressful enough without fearing you've lost years of study notes with it. Whether you can recover them comes down to one question: does a .jwlibrary backup exist anywhere outside that phone?",
+   "This guide walks through finding any backup you may have — even ones you forgot you made — and turning it back into a full JW Library on your new device.",
+  ],
+  "steps": [
+   ("Search every place a backup might be", "Check your email (search for “jwlibrary” or “backup”), Google Drive, iCloud Drive, OneDrive, Dropbox and your computer's Downloads folder. Backups are small files that are easy to forget you saved."),
+   ("Check your other devices", "If you ever used JW Library on a tablet or PC, it has its own study data — create a backup from it right now to preserve whatever it holds."),
+   ("Restore what you find on the new phone", "Install JW Library on the new device, then Backup and Restore → Restore, and load the .jwlibrary file. Your notes, highlights and bookmarks return."),
+   ("Merge if you find more than one backup", "Different devices or dates may each hold unique notes. Don't pick just one — load them all at jwsync.org, merge them into a single complete file, and restore that. Nothing is left behind."),
+  ],
+  "sections": [
+   ("If no backup exists anywhere",
+    "Be honest with yourself early: if the only copy of your notes lived on the lost phone and you never exported a backup, JW Library keeps no cloud copy to restore from. That's painful — and it's exactly why the habit below matters so much."),
+   ("Never be here again",
+    "Set a monthly backup reminder and store each .jwlibrary file off the phone (email it to yourself is enough). JW Sync can even remind you and merge your devices on a schedule. A file that lives in your inbox survives any phone."),
+  ],
+  "faq": [
+   ("Can JW Sync recover notes from a phone I no longer have?", "No tool can — recovery depends on a backup file existing somewhere. JW Sync's job is to read, repair and merge the backups you do have."),
+   ("My backup is old — is it still worth restoring?", "Absolutely. An old backup with most of your notes beats starting from nothing, and you can merge it with anything newer you find later."),
+  ],
+  "related": ["backup-jw-library", "merge-jw-library-backups", "fix-corrupted-jw-library-backup"],
+ },
+ {
+  "slug": "handle-merge-conflicts",
+  "group": "Fixing problems",
+  "title": "Same Note Edited on Two Devices? Handling Merge Conflicts",
+  "h1": "Handling merge conflicts: the same note edited on two devices",
+  "description": "When you edit the same JW Library note differently on two devices, merging has to choose a winner. The Conflict Reviewer shows both versions side by side so you decide — nothing is lost.",
+  "intro": [
+   "Most of merging is effortless — notes unique to each device simply combine. The one case that needs a decision is a genuine conflict: the same note, edited differently on two devices, so the two backups disagree about what it should say. JW Sync never guesses silently; it hands the choice to you.",
+  ],
+  "steps": [
+   ("Load both backups", "At jwsync.org, load the .jwlibrary files from both devices. JW Sync compares them as it merges."),
+   ("Open the Conflict Reviewer", "If any notes conflict, the reviewer lists them. Everything that didn't conflict is already merged — this step is only for the genuine clashes."),
+   ("Compare side by side", "Each conflict shows both versions with a word-level diff highlighting exactly what differs. “Suggest best” can pick the fuller version for you, or you choose the one to keep — per note."),
+   ("Finish and restore", "Once every conflict is resolved, download the merged file and restore it. Both devices now agree, with your chosen version of each note."),
+  ],
+  "sections": [
+   ("Why this beats just keeping the newest",
+    "“Newest wins” quietly deletes edits you may have wanted. Maybe the older version had a paragraph you removed by accident on the other device. Seeing both, word for word, means you never lose text without knowing it — which is the whole point of merging instead of overwriting."),
+   ("How conflicts happen in the first place",
+    "Usually from editing offline on two devices between merges, or restoring an old backup and then adding to it. Merging on a regular schedule keeps the number of conflicts small and the differences fresh in your memory."),
+  ],
+  "faq": [
+   ("Will I have to review hundreds of conflicts?", "Rarely. Only notes edited differently on both sides conflict; new notes, and notes changed on just one device, merge automatically. Most merges have a handful of conflicts or none."),
+   ("Can I change my mind after choosing?", "Yes — nothing is written to a device until you restore the merged file, and your original backups are never modified, so you can redo the merge."),
+  ],
+  "related": ["merge-jw-library-backups", "sync-jw-library-multiple-devices", "jw-library-restore-replaced-notes"],
+ },
+ {
+  "slug": "export-jw-library-notes",
+  "group": "Power tools",
+  "title": "How to Export JW Library Notes to Text or Markdown",
+  "h1": "Exporting your JW Library notes to text, Markdown or a fresh backup",
+  "description": "Get your JW Library notes out of the app: copy or export them as Markdown/plain text for use anywhere, or extract a selection into a new .jwlibrary backup. All in your browser.",
+  "intro": [
+   "Your study notes shouldn't be trapped inside one app. Sometimes you want them as plain text — to paste into a talk outline, a document, or your own notes app — and sometimes you want a clean backup containing just a subset. Study Explorer does both, reading your backup entirely in the browser.",
+  ],
+  "steps": [
+   ("Load your backup", "Create a backup in JW Library (Personal Study → Backup and Restore → Create a backup), then open jwsync.org and load it into Study Explorer."),
+   ("Find the notes you want", "Use search plus colour, tag and publication filters to narrow to exactly the notes you're after — one publication, one tag, one topic."),
+   ("Copy or export as Markdown/text", "Copy notes out as Markdown or plain text to paste anywhere. Formatting (bold, italic, lists) is preserved so structured notes stay structured."),
+   ("Or extract to a fresh backup", "Prefer a file? Export a selection or date range into a new .jwlibrary backup — useful for archiving a project or handing a specific set of notes to another device."),
+  ],
+  "sections": [
+   ("Why export at all",
+    "Notes are more useful when they can travel: into a document for a part on the meeting, into a personal wiki, into a printout for someone who doesn't use the app. Markdown keeps the structure while staying readable as plain text anywhere."),
+  ],
+  "faq": [
+   ("Does exporting change my JW Library notes?", "No. Export reads a copy of your backup in the browser; your original file and your app are untouched."),
+   ("Can I export everything at once?", "Yes — clear the filters to select your whole library, or narrow down first to export just part of it."),
+  ],
+  "related": ["edit-jw-library-notes", "extract-jw-library-notes-by-date", "open-jwlibrary-file"],
+ },
+ {
+  "slug": "organize-jw-library-tags",
+  "group": "Power tools",
+  "title": "How to Organize and Clean Up JW Library Tags",
+  "h1": "Organizing your JW Library tags: rename, merge and clean up in bulk",
+  "description": "Tags multiply over years of study. Rename a tag across every note, merge duplicates, and remove ones you no longer use — in bulk, in your browser, with full undo.",
+  "intro": [
+   "Tags are how you find notes later — but after a few years they sprawl. You end up with “Ministry”, “ministry” and “Field service” meaning the same thing, tags you made once and never reused, and inconsistent naming that makes filtering unreliable. JW Library gives you no way to fix this at scale. Study Explorer does.",
+  ],
+  "steps": [
+   ("Load your backup into Study Explorer", "At jwsync.org, load your .jwlibrary file. Filter by tag to see every tag and how many notes carry it."),
+   ("Rename a tag across all its notes", "Retag in bulk: rename a tag once and every note using it updates — no more editing notes one by one to fix a spelling."),
+   ("Merge duplicates", "Retag notes from a duplicate tag onto the canonical one, then drop the empty duplicate. “Ministry” and “ministry” become one clean tag."),
+   ("Remove tags you no longer use", "Select and delete stale tags in bulk. Everything is undoable, so an over-eager clean-up is never permanent."),
+   ("Export the tidied library", "Download the edited .jwlibrary and restore it in JW Library. Your tags are consistent everywhere."),
+  ],
+  "sections": [
+   ("A tag system that actually helps",
+    "Once tags are consistent, filtering becomes trustworthy — one tap shows every note on a theme, across every publication. It's the difference between tags as clutter and tags as a real index of your study."),
+  ],
+  "faq": [
+   ("Will bulk retagging touch the note text?", "No — it only changes which tags are attached. Your note titles and content stay exactly as written."),
+   ("Is there an undo if I make a mistake?", "Yes. Study Explorer has full undo/redo, and your original backup is never modified — the changes go into an exported copy."),
+  ],
+  "related": ["edit-jw-library-notes", "manage-jw-library-highlights", "search-jw-library-notes"],
+ },
+ {
+  "slug": "manage-jw-library-highlights",
+  "group": "Power tools",
+  "title": "How to Manage and Recolour JW Library Highlights",
+  "h1": "Managing your JW Library highlights: recolour and organize in bulk",
+  "description": "Bring order to years of JW Library highlights: change colours in bulk, give your colour code a consistent meaning, and browse every highlight in one place. In your browser.",
+  "intro": [
+   "Highlight colours only help if they mean something consistent. Over time most people's highlights drift — yellow meant one thing in 2019 and something else now, and there's no way in JW Library to see them all together or fix them at scale. Study Explorer gathers every highlight into one view and lets you recolour in bulk.",
+  ],
+  "steps": [
+   ("Load your backup", "At jwsync.org, open your .jwlibrary file in Study Explorer and switch to the Highlights tab."),
+   ("Browse and filter your highlights", "See every highlight in one list, filter by colour or publication, and search the highlighted text and any linked notes."),
+   ("Recolour in bulk", "Select many highlights and change their colour together — for example, unify everything you meant as “key scripture” to one colour across your whole library."),
+   ("Edit linked notes too", "Where a highlight has a note attached, edit that note's title and content right here as well."),
+   ("Export and restore", "Download the edited .jwlibrary and restore it in JW Library so your consistent colour code is on every device."),
+  ],
+  "sections": [
+   ("Decide what your colours mean",
+    "A simple scheme — one colour for main points, one for scriptures to memorise, one for questions to research — turns highlights into a study tool instead of decoration. Recolouring in bulk lets you apply that scheme retroactively to years of reading."),
+  ],
+  "faq": [
+   ("Can I see highlights that have no note attached?", "Yes — the Highlights tab shows all of them, with or without a linked note."),
+   ("Does recolouring affect the underlying text?", "No, it only changes the highlight colour; the publication text and your notes are untouched."),
+  ],
+  "related": ["organize-jw-library-tags", "edit-jw-library-notes", "jw-library-study-stats"],
+ },
+ {
+  "slug": "jw-library-study-answers",
+  "group": "Power tools",
+  "title": "View and Edit Your JW Library Fill-in Study Answers",
+  "h1": "Finding your JW Library study answers (fill-in answers) in one place",
+  "description": "Your typed answers to study-article and workbook questions are hidden in your backup. Study Explorer's Study Answers tab lets you read, search and edit them all at once.",
+  "intro": [
+   "As you study, you type answers into the fill-in boxes of study articles, the Watchtower, and meeting workbooks. They're saved in your backup — but JW Library only shows each one buried in its own publication. There's no single place to review everything you've written. Study Explorer's Study Answers tab is that place.",
+  ],
+  "steps": [
+   ("Load your backup into Study Explorer", "At jwsync.org, load your .jwlibrary file and open the Study Answers tab."),
+   ("Read all your answers together", "Every fill-in answer you've typed appears in one searchable list, so you can review a whole study article's worth of your own thinking at a glance."),
+   ("Search and edit", "Find an answer by its text, then edit and polish it in place — helpful when reviewing before a meeting or tidying up rushed wording."),
+   ("Export or restore", "Restore the edited file to carry your changes back to JW Library, or copy answers out as text for a talk or personal record."),
+  ],
+  "sections": [
+   ("Why this is useful before meetings",
+    "Reviewing your prepared answers in one continuous list — rather than scrolling each paragraph in the app — is a faster way to refresh what you planned to say, and to spot answers you left blank."),
+  ],
+  "faq": [
+   ("Are these the same as my personal notes?", "No — fill-in answers are the responses you typed into a publication's answer boxes. Study Explorer shows them on their own tab, separate from freeform notes."),
+   ("Is anything uploaded to read my answers?", "No. Like everything in JW Sync, your backup is read locally in the browser and never sent anywhere."),
+  ],
+  "related": ["edit-jw-library-notes", "export-jw-library-notes", "search-jw-library-notes"],
+ },
+ {
+  "slug": "extract-jw-library-notes-by-date",
+  "group": "Power tools",
+  "title": "Extract JW Library Notes from a Date Range into a New Backup",
+  "h1": "Extracting a date range of JW Library notes into a fresh backup",
+  "description": "Pull just the notes from a specific period — a service year, a convention, a study project — into their own clean .jwlibrary backup. Entirely in your browser.",
+  "intro": [
+   "Sometimes you want a slice of your library, not all of it: this year's notes for a review, everything from a convention, or a single project's research to pass to someone. Study Explorer can extract notes from a date range into a brand-new .jwlibrary backup, leaving your main library untouched.",
+  ],
+  "steps": [
+   ("Load your backup", "At jwsync.org, open your .jwlibrary file in Study Explorer."),
+   ("Set the date range", "Choose the start and end dates for the notes you want — a service year, a month, a specific event's dates."),
+   ("Extract to a new backup", "Export the matching notes into a fresh .jwlibrary file. It contains only that period's notes, highlights and their tags."),
+   ("Use the extracted file", "Restore it into JW Library for a focused review, archive it, or share it with someone who only needs that slice."),
+  ],
+  "sections": [
+   ("Good reasons to extract by date",
+    "A yearly archive of your study; a clean file of convention notes to keep separate; handing a study partner only the notes from a project you worked on together; or trimming a huge library into manageable, dated pieces — all without disturbing your main backup."),
+  ],
+  "faq": [
+   ("Does extracting remove those notes from my library?", "No. It copies the matching notes into a new file; your original backup keeps everything."),
+   ("What date does it use — when I wrote or last edited the note?", "It uses the note's own timestamps in the backup, so the range reflects when the notes were created or modified."),
+  ],
+  "related": ["export-jw-library-notes", "share-jw-library-notes", "edit-jw-library-notes"],
+ },
+ {
+  "slug": "connect-jw-library-notes-study-map",
+  "group": "Power tools",
+  "title": "See How Your JW Library Notes Connect — Study Map",
+  "h1": "Study Map: a private knowledge graph of your JW Library notes",
+  "description": "Study Map turns your JW Library notes into an interactive web, linking them by shared scriptures, shared tags and similar wording — so you can see the themes running through your study.",
+  "intro": [
+   "Years of notes hold connections you've never seen: the same scripture cited across a dozen entries, a theme you keep returning to, ideas that echo each other in different publications. Study Map draws those links as an interactive graph, so the shape of your own study becomes visible.",
+  ],
+  "steps": [
+   ("Open the Study Stats page and load a backup", "Go to jwsync.org/highlights.html and load your .jwlibrary file. Study Map reads it in your browser."),
+   ("Open Study Map", "Launch the map to see your notes as connected points, linked by shared scriptures, shared tags and similar wording."),
+   ("Explore the connections", "Switch between Topics and Notes views, hover to spotlight a note's links, drag things around, and use the strength slider to show only the closest connections. Full-screen mode gives you room to roam."),
+   ("Build and save study chains", "Draw your own manual “study chains” between related notes to capture a line of reasoning, and export the map as a PNG image to keep or share."),
+  ],
+  "sections": [
+   ("What the map reveals",
+    "Clusters show the themes you study most; a scripture linked to many notes shows a verse you keep coming back to; an isolated note might be a thread worth developing. It's a way to study your study — and to prepare talks by following the connections you've already made."),
+  ],
+  "faq": [
+   ("Do I need a lot of notes for the map to be useful?", "A modest library already shows connections; the richer your notes, the more the map reveals. Very small libraries will show a hint to add more notes first."),
+   ("Is the map private?", "Entirely. It's built in your browser from your backup and never uploaded; even the PNG export is generated on your device."),
+  ],
+  "related": ["jw-library-study-stats", "search-jw-library-notes", "review-old-jw-library-notes"],
+ },
+ {
+  "slug": "review-old-jw-library-notes",
+  "group": "Power tools",
+  "title": "How to Review Your Old JW Library Notes (So They Stick)",
+  "h1": "Reviewing old JW Library notes with Resurface — a little, often",
+  "description": "Notes you never revisit are notes you forget. Resurface shows what you wrote on this day in past years and builds a gentle spaced-repetition review, so past study keeps working for you.",
+  "intro": [
+   "Most study notes are written once and never seen again. That's a quiet waste — the insight was worth capturing, then it sank to the bottom of the library. Resurface brings your own past notes back to the surface, a few at a time, so revisiting them becomes a small daily habit instead of a someday project.",
+  ],
+  "steps": [
+   ("Open the Study Stats page and load a backup", "Go to jwsync.org/highlights.html and load your .jwlibrary file. Resurface reads your notes locally."),
+   ("See “On this day”", "Resurface surfaces notes you wrote on this date in previous years — “written two years ago today” — reconnecting you with past study at the moment it's most meaningful."),
+   ("Do a short daily review", "It presents a handful of notes to revisit and mark as reviewed. A little, often, is how study sticks — and a streak grows as you keep the habit."),
+   ("Come back tomorrow", "Spaced repetition schedules notes to reappear over time, so the ones worth remembering keep coming back until they're yours."),
+  ],
+  "sections": [
+   ("Why spaced repetition works",
+    "Reviewing something just as you're about to forget it is far more effective than cramming. By spreading a few notes across many days, Resurface turns your existing library into an ongoing, low-effort review that steadily deepens what you've studied."),
+  ],
+  "faq": [
+   ("Where does my review progress get saved?", "In your browser on your device — there's no account and nothing is uploaded. The streak and schedule are yours alone."),
+   ("Do I need new notes for this?", "No — Resurface works with the notes you've already written. The older your library, the more rewarding the “on this day” moments."),
+  ],
+  "related": ["jw-library-study-stats", "connect-jw-library-notes-study-map", "jw-library-achievements-streaks"],
+ },
+ {
+  "slug": "jw-library-achievements-streaks",
+  "group": "Power tools",
+  "title": "JW Library Study Streaks, Levels and Achievements",
+  "h1": "Turn your JW Library study into streaks, levels and awards",
+  "description": "See your study streaks, climb 60 levels across 12 tiers on your Study Journey, and unlock around 200 achievements — all read privately from your own JW Library backup.",
+  "intro": [
+   "Consistency is the hard part of personal study, and progress you can't see is easy to let slide. The Study Stats page turns your backup's history into something you can watch grow: streaks, levels and awards that reflect the study you've genuinely done — no goals imposed, just your own record made visible.",
+  ],
+  "steps": [
+   ("Open the Study Stats page", "Go to jwsync.org/highlights.html and load your .jwlibrary backup. Everything is computed in your browser."),
+   ("Check your streaks", "See your longest and current study streaks, your weekly rhythm, and your busiest hours and months — the pulse of your study habit."),
+   ("Climb your Study Journey", "Progress through 60 levels across 12 named tiers (Seed all the way to Evergreen), with a colour-shifting orb and level-up celebrations, based on your lifetime study."),
+   ("Collect achievements", "Unlock around 200 awards spanning Common to Legendary rarity, including content-aware, themed medals; open any medal to see your progress toward the next one."),
+  ],
+  "sections": [
+   ("Motivation without pressure",
+    "These aren't targets someone else set — they're a mirror of what you've already done. Seeing a streak you don't want to break, or a level almost reached, is a gentle nudge to keep the good habit going. And a Shareable Card sums up your year without exposing a single private note."),
+  ],
+  "faq": [
+   ("Do streaks and awards update on their own?", "They reflect the backup you load, so create a fresh backup to see your latest progress. Nothing runs in the background."),
+   ("Is any of this shared or uploaded?", "No. It's all computed locally from your backup; only the summary card is something you can choose to share, and it contains no note text."),
+  ],
+  "related": ["jw-library-study-stats", "review-old-jw-library-notes", "bible-reading-plan"],
+ },
+ {
+  "slug": "share-convention-assembly-notes",
+  "group": "Power tools",
+  "title": "How to Share Convention and Assembly Notes from JW Library",
+  "h1": "Sharing your convention, assembly and meeting notes",
+  "description": "Pass your convention, assembly or meeting notes to family and friends as a small file — without handing over your whole library or overwriting theirs. A practical use of note sharing.",
+  "intro": [
+   "You took careful notes through a convention; a friend who missed a session would love them; family members want the points for their own review. Sending your entire backup is overkill and would wipe out the receiver's own notes if restored. Note sharing lets you pass along exactly the notes you want — and lets the receiver keep everything they already have.",
+  ],
+  "steps": [
+   ("Load your backup on the Share page", "Go to jwsync.org/share.html and load your .jwlibrary file."),
+   ("Select just the convention notes", "Pick the notes to share — filter by the tag you used for the event, or by date, and select that set. Highlights attached to those notes come along."),
+   ("Send the small share file", "JW Sync makes a small file containing only those notes. Send it however you like — messaging app, email, AirDrop. No server, no account."),
+   ("Family and friends merge it in", "Each person opens the same page, loads your file with their own backup, and gets a new backup with your notes added. Their own notes are never overwritten, and your imported notes arrive tagged so they're easy to find."),
+  ],
+  "sections": [
+   ("A tag makes this effortless",
+    "If you tag your notes during the event (say, “2026 Convention”), selecting them afterward is one filter click. It's worth starting a fresh tag at the beginning of any convention, assembly or special meeting for exactly this reason."),
+  ],
+  "faq": [
+   ("Can I share with several people at once?", "Yes — the share file is just a file. Send it to as many people as you like; each merges it into their own library independently."),
+   ("Will my whole library be exposed?", "No. Only the notes you select are in the file; the rest of your library stays private."),
+  ],
+  "related": ["share-jw-library-notes", "extract-jw-library-notes-by-date", "organize-jw-library-tags"],
+ },
 ]
 
 GROUPS = ["Getting started", "Fixing problems", "Power tools"]

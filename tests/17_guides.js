@@ -27,6 +27,19 @@ const SLUGS = [
   'jw-library-study-stats',
   'share-jw-library-notes',
   'bible-reading-plan',
+  'open-jwlibrary-file',
+  'jw-library-windows-pc',
+  'recover-jw-library-notes-lost-phone',
+  'handle-merge-conflicts',
+  'export-jw-library-notes',
+  'organize-jw-library-tags',
+  'manage-jw-library-highlights',
+  'jw-library-study-answers',
+  'extract-jw-library-notes-by-date',
+  'connect-jw-library-notes-study-map',
+  'review-old-jw-library-notes',
+  'jw-library-achievements-streaks',
+  'share-convention-assembly-notes',
 ];
 
 let failures = 0;
