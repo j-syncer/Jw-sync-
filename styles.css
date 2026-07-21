@@ -1482,41 +1482,44 @@ body.jw-modal-open { overflow: hidden; }
   overflow: hidden;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
+  gap: 9px;
+  padding: 11px 20px;
   font-size: 14px;
-  color: rgba(203, 213, 225, .9);
+  color: rgba(203, 213, 225, .92);
   text-decoration: none;
-  border-radius: 10px;
-  background: rgba(244, 114, 182, .07);
-  border: 1px solid rgba(244, 114, 182, .2);
+  border-radius: 11px;
+  background: rgba(244, 114, 182, .08);
+  border: 1px solid rgba(244, 114, 182, .24);
   transition: color .15s, background .15s, border-color .15s;
 }
-.jwc-donate a::after {
+/* Moving highlight sweep — passes over the label + icon for a clear shimmer. */
+.jwc-donate a::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.28) 50%, transparent 100%);
-  transform: skewX(-20deg);
-  animation: jwc-donate-shimmer 3.4s ease-in-out infinite;
+  top: -50%;
+  left: -120%;
+  width: 70%;
+  height: 200%;
+  background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.5) 50%, transparent 80%);
+  transform: skewX(-18deg);
+  animation: jwc-donate-shimmer 2.8s linear infinite;
   pointer-events: none;
+  z-index: 2;
 }
 @keyframes jwc-donate-shimmer {
-  0% { left: -75%; }
-  55%, 100% { left: 130%; }
+  0%   { left: -120%; }
+  100% { left: 120%; }
 }
+.jwc-donate a > * { position: relative; z-index: 1; }
 .jwc-donate a strong { color: #f1f5f9; font-weight: 700; margin-right: 2px; }
-.jwc-donate a svg { color: #f472b6; transition: transform .2s; position: relative; z-index: 1; }
+.jwc-donate a svg { width: 18px; height: 18px; flex-shrink: 0; color: #f472b6; transition: transform .2s; }
 .jwc-donate a:hover {
   color: #fff;
-  background: rgba(244, 114, 182, .13);
-  border-color: rgba(244, 114, 182, .38);
+  background: rgba(244, 114, 182, .15);
+  border-color: rgba(244, 114, 182, .42);
 }
-.jwc-donate a:hover svg { transform: scale(1.18); }
-@media (prefers-reduced-motion: reduce) { .jwc-donate a::after { animation: none; display: none; } }
+.jwc-donate a:hover svg { transform: scale(1.15); }
+@media (prefers-reduced-motion: reduce) { .jwc-donate a::before { animation: none; opacity: 0; } }
 .jwc-demo-cta {
   margin-top: 22px;
   padding: 16px;
