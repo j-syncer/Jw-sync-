@@ -4,6 +4,26 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.95.1] — 2026-07-28
+
+### Fixed: Search Console "Alternate page with proper canonical tag"
+
+Google reported the site's 12 language URLs as unindexed because every one of
+them was a duplicate that pointed back at the homepage. The landing page is a
+single document that translates itself in the browser, so `?lang=es` and friends
+send Google byte-identical English HTML — submitting them as separate pages could
+never index anything extra, it only produced the warning.
+
+- `sitemap.xml` now submits the homepage once instead of 13 near-identical
+  copies, and points at `/forum` rather than the `/forum.html` URL the server
+  redirects away from.
+- Removed the `hreflang` alternates and the script that rewrote the canonical
+  link to the `?lang=` URL — two signals that contradicted the page's own
+  canonical tag.
+- Language links still work exactly as before: `?lang=es` continues to open the
+  site in Spanish and remember the choice.
+- `forum.html` now declares its canonical as `/forum`.
+
 ## [2.95.0] — 2026-07-21
 
 ### Added: 13 more guides in the Guides & How-tos section

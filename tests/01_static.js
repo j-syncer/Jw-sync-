@@ -749,31 +749,54 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
-// Multilingual SEO — hreflang in <head> + complete sitemap (all 12 langs)
+// Canonical hygiene — every submitted URL must be its own canonical.
+// The landing page is one document with client-side i18n, so ?lang= variants
+// serve byte-identical English HTML canonicalising to "/". Submitting them (or
+// pointing hreflang at them) made Search Console report the whole set as
+// "Alternate page with proper canonical tag" — indexing nothing extra.
 {
-  section('Multilingual SEO (hreflang + sitemap)');
-  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
-  const head = beta.slice(0, beta.indexOf('</head>'));
-  const headLangs = (head.match(/<link rel="alternate" hreflang="([a-z-]+)"/g) || [])
-    .map(s => s.match(/hreflang="([a-z-]+)"/)[1]);
-  const missingHead = EXPECTED_LANGS.filter(l => !headLangs.includes(l));
-  if (!missingHead.length && headLangs.includes('x-default'))
-    ok('head has hreflang for all 12 languages + x-default');
-  else fail('head hreflang incomplete (missing: ' + missingHead.join(',') + (headLangs.includes('x-default') ? '' : ',x-default') + ')');
-  if (EXPECTED_LANGS.filter(l => l !== 'en').every(l => head.includes('og:locale:alternate')))
-    ok('og:locale:alternate present for other locales');
-  else fail('og:locale:alternate missing');
-
+  section('Canonical hygiene (sitemap + hreflang)');
   const sm = fs.readFileSync(REPO + '/sitemap.xml', 'utf8');
-  const smLangs = [...new Set((sm.match(/hreflang="([a-z-]+)"/g) || [])
-    .map(s => s.match(/hreflang="([a-z-]+)"/)[1]))];
-  const missingSm = EXPECTED_LANGS.filter(l => !smLangs.includes(l));
-  if (!missingSm.length) ok('sitemap.xml covers all 12 languages');
-  else fail('sitemap.xml missing languages: ' + missingSm.join(','));
-  // every language must have its own <loc> entry too
-  const missingLoc = EXPECTED_LANGS.filter(l => !sm.includes('?lang=' + l + '</loc>'));
-  if (!missingLoc.length) ok('sitemap.xml has a <loc> per language');
-  else fail('sitemap.xml missing <loc> for: ' + missingLoc.join(','));
+  const locs = (sm.match(/<loc>([^<]+)<\/loc>/g) || [])
+    .map(s => s.match(/<loc>([^<]+)<\/loc>/)[1]);
+
+  const paramLocs = locs.filter(u => u.includes('?'));
+  if (!paramLocs.length) ok('sitemap.xml submits no parameterised URLs');
+  else fail('sitemap.xml submits URLs that canonicalise elsewhere: ' + paramLocs.join(', '));
+
+  // the asset server 307s /foo.html -> /foo, so a .html <loc> submits a redirect
+  const htmlLocs = locs.filter(u => u.endsWith('.html'));
+  if (!htmlLocs.length) ok('sitemap.xml submits no .html URLs (server redirects those)');
+  else fail('sitemap.xml submits redirecting .html URLs: ' + htmlLocs.join(', '));
+
+  if (locs.includes('https://jwsync.org/')) ok('sitemap.xml submits the landing page');
+  else fail('sitemap.xml is missing https://jwsync.org/');
+
+  for (const f of ['index.html', 'beta/index.html']) {
+    const head = (() => { const c = fs.readFileSync(REPO + '/' + f, 'utf8'); return c.slice(0, c.indexOf('</head>')); })();
+    const alts = (head.match(/<link rel="alternate" hreflang="[a-z-]+"[^>]*>/g) || []);
+    if (!alts.length) ok(f + ': no hreflang alternates pointing at canonicalised-away URLs');
+    else fail(f + ': ' + alts.length + ' hreflang alternate(s) still present');
+    // ?lang= must still select the UI language, it just must not rewrite canonical
+    if (head.includes("localStorage.setItem('jwsync_lang',p)")) ok(f + ': ?lang= still sets the UI language');
+    else fail(f + ': ?lang= no longer sets the UI language');
+    if (!/can\.href *= *u/.test(head)) ok(f + ': canonical is static, not rewritten by JS');
+    else fail(f + ': JS still rewrites the canonical link');
+    if (head.includes('og:locale:alternate')) ok(f + ': og:locale:alternate advertises the other locales');
+    else fail(f + ': og:locale:alternate missing');
+  }
+}
+
+// Canonical URLs must not point at a URL the server redirects away from
+{
+  section('Canonical targets resolve directly');
+  for (const f of ['forum.html', 'guides/index.html', 'guides/backup-jw-library.html']) {
+    const c = fs.readFileSync(REPO + '/' + f, 'utf8');
+    const m = c.match(/<link rel="canonical" href="([^"]+)">/);
+    if (!m) { fail(f + ': no canonical'); continue; }
+    if (!m[1].endsWith('.html')) ok(f + ': canonical -> ' + m[1]);
+    else fail(f + ': canonical points at a redirecting .html URL (' + m[1] + ')');
+  }
 }
 
 // Merge celebration — Share card (Web Share + branded image, 12 langs)
