@@ -209,7 +209,40 @@ All anchored to the article's Location row with `KeySymbol='w'`, `DocumentId=<id
 **c) Study-question answers:**
 - `InputField(LocationId, TextTag, Value)` — one row per question textarea (`tt44`, `tt48`… from the HTML, plus the "How Would You Answer?" review box, e.g. `tt25/tt30/tt35`).
 - ⚠️ InputField rows attach to a **separate Location row with `MepsLanguage=NULL`** (same DocumentId/KeySymbol/IssueTagNumber, Type 0) — create it if missing. Notes/marks use the `MepsLanguage=0` row.
-- Answers: 1–3 sentences, drawn from the paragraph, woven with the gems, cite scriptures.
+- Answers: 1–3 sentences **per persona**, drawn from the paragraph, woven with the gems, cite scriptures. See the persona roster below — every paragraph question is answered in the voice of one to three of the five commenters, never as a faceless summary.
+
+#### The five commenters (permanent cast — use on every article)
+
+Write each paragraph answer as if the congregation were commenting. Personas are fixed across weeks so the user gets to know them.
+
+| # | Persona | Who they are | Voice | Answers questions about… |
+|---|---------|--------------|-------|--------------------------|
+| 1 | **Rosa** | Sister, joyful and quirky, warm-hearted | Bright and personal, homey illustrations (kitchen, grandkids, service group), often ends on encouragement. Exclamation-friendly, never sappy | Application, gratitude, encouraging one another, hospitality, joy under trial |
+| 2 | **James** | Brother, serious and dignified | Measured and unhurried. Original-language words, historical/cultural background, cross-references, the "why beneath the why". Never jokes | Doctrine, prophecy, Bible context, motive, deeper reasons behind a command |
+| 3 | **Dave** | Brother, the quick wit — the one who gets the laugh | One dry, self-deprecating line, then lands a genuine point in the same breath. Short. Humour is always on himself or on ordinary human nature — **never** on Jehovah, the scriptures, the organization, or another person | Human weakness, procrastination, pride, "easier said than done" questions, practical illustrations |
+| 4 | **Tala** | Young sister, ~16, candid | Short, honest, unpolished. Will admit a struggle before applying the point. School, phones, friends, feeling different from peers | Peer pressure, doubts, standing firm, youth, social media, prayer |
+| 5 | **Naomi** | Veteran sister, decades in the truth | Calm and unhurried; usually one brief experience from years past ("I remember a sister who…"), then the lesson. Historical perspective on the organization | Endurance, loyalty, field service, waiting on Jehovah, past hardship, changes over the years |
+
+**Suggested alternates** (swap in if the user asks for variety): *Elena*, newly baptized, gives the plain first-principles answer that cuts through — or *Kofi*, an elder, answers from the shepherding side.
+
+**Assignment rules**
+- Match persona to question, not the reverse. Nobody answers every question; a persona who has nothing distinctive to add stays quiet.
+- **1–3 personas per question.** Roughly 40% of questions get one, 45% get two, 15% get three. Never four, never all five.
+- Per-article budget: **Rosa ≈ half the questions, James ≈ half** (they are the anchors) · **Dave max 4** and never on consecutive questions · **Tala 3–5** · **Naomi 3–5**.
+- When two share a question they must contribute **different content** — one gives the direct answer, the other adds an angle. No restating.
+- Order within a question: whoever answers the printed question most directly goes first.
+- Rosa and Dave are both light, but distinct: Rosa is *warm*, Dave is *funny*. If a Dave line could have been Rosa's, rewrite one of them.
+- No persona may open two answers in the same article with the same word or construction.
+- Every answer, whatever the voice, still has to be a correct answer to the printed question and doctrinally consistent with JW understanding. Humour and personality never come at the cost of accuracy.
+
+**Storage format** — plain text in `InputField.Value`, name prefix, blank line between speakers:
+```
+Rosa: …
+
+James: …
+```
+
+**Not persona-voiced:** the "How Would You Answer?" review boxes (keep those a clean 1–2 sentence summary) and the gem notes in (a) — those stay in the study-note voice.
 
 ### Step 4 — Repackage & deliver
 1. Update the `LastModified` table (single row) to the same timestamp.
