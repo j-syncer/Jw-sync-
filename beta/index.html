@@ -9,18 +9,27 @@
       gtag('js', new Date());
       gtag('config', 'G-DW6WQ84Q2K');
       (function(){
+        // v2.95.2: gtag.js is ~160 KiB of JS that no first paint needs, so it
+        // is held back until the visitor shows engagement (pointer/key/scroll)
+        // or 5s after load — whichever lands first. Events fired before then
+        // are queued in dataLayer and replayed once the library arrives.
+        var loaded = false, opts = { passive: true, capture: true },
+            EVENTS = ['pointerdown', 'keydown', 'touchstart', 'scroll'];
         function loadGtag(){
+          if (loaded) return;
+          loaded = true;
+          EVENTS.forEach(function(e){ window.removeEventListener(e, loadGtag, opts); });
           var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DW6WQ84Q2K';
           document.head.appendChild(s);
         }
-        if (document.readyState === 'complete') { setTimeout(loadGtag, 0); }
-        else {
-          window.addEventListener('load', function(){
-            (window.requestIdleCallback || function(f){ setTimeout(f, 200); })(loadGtag);
-          });
+        function arm(){
+          EVENTS.forEach(function(e){ window.addEventListener(e, loadGtag, opts); });
+          setTimeout(loadGtag, 5000);
         }
+        if (document.readyState === 'complete') { setTimeout(arm, 0); }
+        else { window.addEventListener('load', arm); }
       })();
     </script>
     <meta charset="UTF-8">
@@ -213,9 +222,15 @@
 <!-- ── End lazy boot loader ─────────────────────────────── -->
 <meta property="og:title" content="JW Sync — Merge JW Library Backups Privately in Your Browser"><meta property="og:description" content="Free privacy-first tool to merge JW Library backups from multiple devices. Combine notes, highlights, bookmarks and tags directly in your browser — your files never leave your device."><meta property="og:image" content="https://jwsync.org/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png" data-id="th-modified"><meta property="og:url" content="https://jwsync.org/"><meta property="og:type" content="website" data-id="th-modified">
     <!-- ── Design: Inter font ─────────────────────────────────── -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=optional" rel="stylesheet">
+    <!-- v2.95.2: Inter is loaded with display=optional, i.e. it is a pure
+         progressive enhancement — so the stylesheet must never block the
+         first paint. media="print" downloads it at low priority and the
+         onload handler promotes it once it has arrived. The two font
+         preconnects were dropped with it: nothing on the critical path
+         needs those origins any more, and Lighthouse warns when a page
+         opens more preconnects than it can justify. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=optional" media="print" onload="this.media='all';this.onload=null">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=optional"></noscript>
     <!-- ── End font ───────────────────────────────────────────── -->
 
     <!-- ── SEO: canonical, structured data, social cards ─────── -->
@@ -273,7 +288,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.95.1",
+      "softwareVersion": "2.95.2",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -514,7 +529,7 @@ body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,
 </nav>
 <!-- Cross-tool file session: lets the working .jwlibrary follow you between
      Merge / Stats / Explorer / Share without re-uploading. -->
-<script src="js/jw-session.js"></script>
+<script src="js/jw-session.js" defer></script>
 <script id="site-theme-init">
 (function(){
   var PK='jwsync_prefs_v1';
@@ -1121,9 +1136,9 @@ body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
 <!-- ── End embedded forum view ────────────────────────── -->
 
 
-<script src="js/forum.js"></script>
-<script src="js/enhancements.js"></script>
-<script src="js/resurface.js"></script>
+<script src="js/forum.js" defer></script>
+<script src="js/enhancements.js" defer></script>
+<script src="js/resurface.js" defer></script>
 <script src="js/reading.js"></script>
 <!-- ── End enhancement layer ───────────────────────────── -->
 
@@ -6655,8 +6670,10 @@ body.light .jwr-ntitle{color:#0b2e58}
 (function(){
   if(!('IntersectionObserver' in window)) return;
   try{ if(window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return; }catch(_){}
-  var SOLO=['.landing-hero-split .lhv-copy','.landing-hero-split .lhv',
-            '.svc-section-title','.landing-section-title','.landing-howto>h2','.landing-faq>h2'];
+  // v2.95.2: the hero copy and hero visual are deliberately NOT in this
+  // list. The <h1> inside .lhv-copy is the LCP element; starting it at
+  // opacity:0 and fading it in on intersection pushed LCP out by ~1.2s.
+  var SOLO=[            '.svc-section-title','.landing-section-title','.landing-howto>h2','.landing-faq>h2'];
   var SETS=['.svc-grid>*','.landing-features>.landing-feat','.landing-steps>*','.landing-faq>.landing-faq-item'];
   function tag(){
     SOLO.forEach(function(sel){

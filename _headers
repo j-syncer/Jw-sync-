@@ -1,0 +1,53 @@
+# Cloudflare static-asset headers.
+#
+# Lighthouse's "Use efficient cache lifetimes" audit fires because the default
+# asset response is revalidated on every hit. Rules below give the immutable-ish
+# assets a real TTL while keeping everything that carries a version marker
+# (HTML, the service worker, the manifest) on a must-revalidate policy so a
+# deploy is picked up on the next navigation.
+#
+# Rule matching: `*` is a splat and spans `/`, so `/*.css` also covers
+# `/beta/styles.css`. Globs below are deliberately non-overlapping — where two
+# rules match the same file the resulting Cache-Control is ambiguous.
+
+# ── Scripts ───────────────────────────────────────────────────────────────
+# Not content-hashed, so the TTL is a day rather than a year; stale-while-
+# revalidate keeps repeat visits instant while the refresh happens in the
+# background. service-worker.js is excluded on purpose (see below).
+/js/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/beta/js/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# ── Stylesheets ───────────────────────────────────────────────────────────
+/*.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+# ── Images and icons ──────────────────────────────────────────────────────
+/*.png
+  Cache-Control: public, max-age=2592000
+
+/*.ico
+  Cache-Control: public, max-age=2592000
+
+/*.svg
+  Cache-Control: public, max-age=2592000
+
+# ── Always revalidated ────────────────────────────────────────────────────
+# The service worker is the update channel for the PWA shell; caching it would
+# strand users on an old CACHE_VERSION.
+/service-worker.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.webmanifest
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/beta/
+  Cache-Control: public, max-age=0, must-revalidate

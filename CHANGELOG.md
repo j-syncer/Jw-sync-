@@ -4,6 +4,36 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.95.2] — 2026-08-02
+
+### Faster first paint on mobile (PageSpeed fixes)
+
+PageSpeed Insights reported an LCP element render delay of 1.26 s on the
+landing page even though the server responded in 30 ms — the page was ready
+long before it was allowed to show anything. Four changes remove the delay:
+
+- **The hero headline paints on the first frame.** It used to be part of the
+  scroll-entrance animation, so it started at `opacity: 0` and only faded in
+  once the intersection observer ran — i.e. after every deferred script had
+  executed. Hero copy and hero visual are now excluded from that animation;
+  everything below the fold still animates in on scroll.
+- **Site scripts no longer block the parser.** `jw-session.js`, `forum.js`,
+  `enhancements.js` and `resurface.js` are now `defer`red, so the browser can
+  finish building and painting the page while they download.
+- **The Inter webfont is off the critical path.** It already loaded with
+  `display=optional` (never blocking text), but its stylesheet was still
+  render-blocking; it now loads asynchronously, and the two font preconnects
+  it needed are gone.
+- **Analytics waits for the visitor.** `gtag.js` (~160 KiB) now loads on the
+  first scroll, tap or keypress, or 5 s after load — whichever comes first —
+  instead of immediately after page load.
+
+Also added a `_headers` file so scripts, stylesheets and images are served
+with real cache lifetimes, while HTML, the manifest and the service worker
+stay must-revalidate so deploys are picked up straight away.
+
+---
+
 ## [2.95.1] — 2026-07-28
 
 ### Fixed: Search Console "Alternate page with proper canonical tag"
