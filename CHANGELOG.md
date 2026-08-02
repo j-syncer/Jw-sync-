@@ -4,6 +4,32 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.95.3] — 2026-08-02
+
+### Fixed: low-contrast text (WCAG AA)
+
+PageSpeed's accessibility audit flagged two elements, and a full pixel-level
+sweep of every text run on the landing page, Study Stats, Note Sharing and all
+26 guide pages found the same three underlying colour problems:
+
+- **White on the brand orange was 3.56:1.** Solid orange fills that carry text
+  — the Launch App button, the support e-mail button, "NEW" badges, step
+  numbers, active tabs and chips, and the primary buttons throughout Study
+  Stats, Note Sharing and the guides — now use a deeper orange (5.18:1).
+  `#ea580c` stays the brand accent for rules, dividers, glows, borders and
+  icons, so the page still reads as the same colour. Hover states moved down
+  one step so they stay visibly distinct.
+- **The footer legal text was 3.05:1** against the near-black footer. It moved
+  one step up the palette to 4.78:1.
+- **Muted grey body text was 4.02:1** in the guide footers and on the Study
+  Stats file picker. It is now 5.54:1.
+
+Every text run on those pages now meets WCAG AA (4.5:1 for body text, 3:1 for
+large text), verified by sampling the real composited pixel behind each line —
+gradients and overlays included — rather than by reading the stylesheet.
+
+---
+
 ## [2.95.2] — 2026-08-02
 
 ### Faster first paint on mobile (PageSpeed fixes)
