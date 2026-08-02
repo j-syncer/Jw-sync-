@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clean Up Duplicate and Empty JW Library Notes | JW Sync Guides</title>
+<meta name="description" content="Restored a backup twice, or imported the same notes again? Library Doctor scans your .jwlibrary file in the browser, finds duplicates and empty notes, and produces a clean copy.">
+<link rel="canonical" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clean Up Duplicate and Empty JW Library Notes | JW Sync Guides">
+<meta property="og:description" content="Restored a backup twice, or imported the same notes again? Library Doctor scans your .jwlibrary file in the browser, finds duplicates and empty notes, and produces a clean copy.">
+<meta property="og:url" content="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Clean Up Duplicate and Empty JW Library Notes", "description": "Restored a backup twice, or imported the same notes again? Library Doctor scans your .jwlibrary file in the browser, finds duplicates and empty notes, and produces a clean copy.", "inLanguage": "en", "datePublished": "2026-08-02", "dateModified": "2026-08-02", "mainEntityOfPage": "https://jwsync.org/guides/clean-up-duplicate-jw-library-notes", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "Clean Up Duplicate and Empty JW Library Notes", "description": "Restored a backup twice, or imported the same notes again? Library Doctor scans your .jwlibrary file in the browser, finds duplicates and empty notes, and produces a clean copy.", "inLanguage": "en", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Back up first — as always", "text": "JW Library → Personal Study → Backup and Restore → Create a backup. Keep this file; it's your fallback."}, {"@type": "HowToStep", "position": 2, "name": "Run the health check", "text": "Open jwsync.org, load the backup and start Library Doctor. It examines the file's contents and structure without sending it anywhere."}, {"@type": "HowToStep", "position": 3, "name": "Read what it found", "text": "Duplicates, empty notes and other clutter are listed plainly, with counts, so you can see the scale of the problem before you change anything."}, {"@type": "HowToStep", "position": 4, "name": "Fix and download the clean copy", "text": "One tap applies the repairs and produces a new, cleaned .jwlibrary file. Your original is never modified."}, {"@type": "HowToStep", "position": 5, "name": "Restore the clean file", "text": "Backup and Restore → Restore, and pick the cleaned file. Your library is the same, minus the clutter."}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://jwsync.org/guides/"}, {"@type": "ListItem", "position": 3, "name": "Clean Up Duplicate and Empty JW Library Notes", "item": "https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Will it delete notes I actually want?", "acceptedAnswer": {"@type": "Answer", "text": "It removes exact duplicates and empty notes — material with nothing in it to lose. And because it writes a new file instead of editing yours, the original is always there to fall back on."}}, {"@type": "Question", "name": "Can it recover notes I deleted in the app?", "acceptedAnswer": {"@type": "Answer", "text": "No. If a note was deleted in JW Library before the backup was made, it isn't in the file to recover — an older backup is the place to look."}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-soft:#fb923c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);display:inline-flex;
+align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800}
+.hnav a{color:var(--muted);font-size:14px;margin-left:18px}
+.crumbs{font-size:13px;color:var(--muted);margin:26px 0 6px}
+.crumbs a{color:var(--muted)}
+h1{font-size:30px;line-height:1.25;margin:8px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:15px;margin:0 0 26px}
+h2{font-size:21px;margin:38px 0 10px;letter-spacing:-.01em}
+p{margin:0 0 16px}
+ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
+border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 4px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.cta{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:20px 22px;margin:34px 0}
+.cta strong{display:block;font-size:17px;margin-bottom:4px}
+.cta span{color:var(--muted);font-size:14.5px}
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent);color:#fff;font-weight:600;
+font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
+.faq dt{font-weight:600;margin:18px 0 4px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.related{margin:8px 0 0;padding:0;list-style:none}
+.related li{margin:0 0 8px}
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
+color:#64748b;font-size:12.5px}
+footer.site p{margin:0 0 10px}
+.gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
+@media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}
+.gcards a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;color:var(--txt);height:100%}
+.gcards a:hover{text-decoration:none;border-color:var(--accent)}
+.gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
+.gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}</style>
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="../"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="../guides/">Guides</a><a href="../forum.html">Community</a><a href="../">Open the app</a></nav></div></header><main class="wrap"><nav class="crumbs"><a href="../">JW Sync</a> › <a href="./">Guides</a> › Everyday scenarios</nav><h1>Clearing out duplicate notes, empty notes and clutter</h1><p class="lede">Restored a backup twice, or imported the same notes again? Library Doctor scans your .jwlibrary file in the browser, finds duplicates and empty notes, and produces a clean copy.</p><p>Libraries collect clutter. Restoring a backup onto a device that already had some of the same notes, importing a shared set twice, or years of half-written notes that never got finished — each leaves something behind, and JW Library gives you no way to sweep it up in bulk.</p><p>Library Doctor is a free health check for a .jwlibrary file. It scans the backup in your browser, tells you in plain language what it found, and fixes what&#x27;s fixable in one tap.</p><h2>Step by step</h2><ol class="steps"><li><h3>Back up first — as always</h3><p>JW Library → Personal Study → Backup and Restore → Create a backup. Keep this file; it&#x27;s your fallback.</p></li><li><h3>Run the health check</h3><p>Open jwsync.org, load the backup and start Library Doctor. It examines the file&#x27;s contents and structure without sending it anywhere.</p></li><li><h3>Read what it found</h3><p>Duplicates, empty notes and other clutter are listed plainly, with counts, so you can see the scale of the problem before you change anything.</p></li><li><h3>Fix and download the clean copy</h3><p>One tap applies the repairs and produces a new, cleaned .jwlibrary file. Your original is never modified.</p></li><li><h3>Restore the clean file</h3><p>Backup and Restore → Restore, and pick the cleaned file. Your library is the same, minus the clutter.</p></li></ol><div class="cta"><strong>Do it now — free, in your browser</strong><span>JW Sync merges, edits and analyses .jwlibrary backups entirely on your device. No account, no uploads, nothing installed.</span><a class="btn" href="../">Open JW Sync →</a></div><h2>How duplicates happen in the first place</h2><p>Almost always through a restore. If you restore a backup onto a device that already carried some of the same material — or restore the same file twice through different routes — the app has no way to know it has seen those notes before.</p><h2>Merging is the way to avoid them</h2><p>This is exactly why merging two backups is safer than restoring one over another: the merge detects material that already exists and keeps it once. The same checks run inside every merge, so a merged backup comes out clean even if the files going in weren&#x27;t.</p><h2>Frequently asked questions</h2><dl class="faq"><dt>Will it delete notes I actually want?</dt><dd>It removes exact duplicates and empty notes — material with nothing in it to lose. And because it writes a new file instead of editing yours, the original is always there to fall back on.</dd><dt>Can it recover notes I deleted in the app?</dt><dd>No. If a note was deleted in JW Library before the backup was made, it isn&#x27;t in the file to recover — an older backup is the place to look.</dd></dl><h2>Related guides</h2><ul class="related"><li><a href="fix-corrupted-jw-library-backup">Fix a Corrupted JW Library Backup That Won&#x27;t Restore</a></li><li><a href="merge-jw-library-backups">How to Merge JW Library Backups from Two Devices</a></li><li><a href="organize-jw-library-tags">How to Organize and Clean Up JW Library Tags</a></li></ul></main><footer class="site"><div class="wrap"><p><a href="../">JW Sync</a> · <a href="../guides/">All guides</a> · <a href="../forum.html">Community</a> · <a href="../highlights.html">Study Stats</a></p><p>JW Sync processes all data locally — your files never leave your device. Free to use; no account, no uploads.</p><p>“JW Library” is the property of the Watch Tower Bible and Tract Society of Pennsylvania. JW Sync is an independent utility and is not affiliated with or endorsed by it.</p></div></footer></body>
+</html>

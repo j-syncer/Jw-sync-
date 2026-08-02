@@ -153,7 +153,7 @@ GUIDES = [
    ("How big is a backup file?", "Usually a few megabytes even for very large libraries — email-attachment small."),
    ("Does creating a backup change anything on my phone?", "No. It only writes the file; your library is untouched."),
   ],
-  "related": ["jw-library-restore-replaced-notes", "merge-jw-library-backups", "fix-corrupted-jw-library-backup"],
+  "related": ["backup-jw-library-before-phone-repair", "jw-library-restore-replaced-notes", "merge-jw-library-backups", "fix-corrupted-jw-library-backup"],
  },
  {
   "slug": "jw-library-restore-replaced-notes",
@@ -208,7 +208,7 @@ GUIDES = [
    ("Is my data uploaded for the scan?", "No. The scan, the fixes and the export all run locally in the browser."),
    ("Can it recover notes deleted inside JW Library?", "No — it repairs file structure. Notes deleted in the app before the backup was made aren't in the file to recover."),
   ],
-  "related": ["jw-library-restore-replaced-notes", "backup-jw-library", "merge-jw-library-backups"],
+  "related": ["clean-up-duplicate-jw-library-notes", "jw-library-notes-missing-after-update", "backup-jw-library", "merge-jw-library-backups"],
  },
  {
   "slug": "edit-jw-library-notes",
@@ -313,7 +313,7 @@ GUIDES = [
    ("Does the receiver need JW Sync installed?", "Nothing is installed on either side — it's a web page. The receiver just needs the share file and their own backup."),
    ("Can I unshare or expire a shared file?", "The file is an ordinary file you sent — there's no server copy to expire. Share only what you'd share in any message."),
   ],
-  "related": ["edit-jw-library-notes", "merge-jw-library-backups", "backup-jw-library"],
+  "related": ["share-jw-library-notes-by-tag", "receive-shared-jw-library-notes", "share-notes-with-bible-student", "share-notes-with-study-group"],
  },
  {
   "slug": "bible-reading-plan",
@@ -418,7 +418,7 @@ GUIDES = [
    ("Can JW Sync recover notes from a phone I no longer have?", "No tool can — recovery depends on a backup file existing somewhere. JW Sync's job is to read, repair and merge the backups you do have."),
    ("My backup is old — is it still worth restoring?", "Absolutely. An old backup with most of your notes beats starting from nothing, and you can merge it with anything newer you find later."),
   ],
-  "related": ["backup-jw-library", "merge-jw-library-backups", "fix-corrupted-jw-library-backup"],
+  "related": ["jw-library-notes-missing-after-update", "backup-jw-library-before-phone-repair", "merge-jw-library-backups", "fix-corrupted-jw-library-backup"],
  },
  {
   "slug": "handle-merge-conflicts",
@@ -470,7 +470,7 @@ GUIDES = [
    ("Does exporting change my JW Library notes?", "No. Export reads a copy of your backup in the browser; your original file and your app are untouched."),
    ("Can I export everything at once?", "Yes — clear the filters to select your whole library, or narrow down first to export just part of it."),
   ],
-  "related": ["edit-jw-library-notes", "extract-jw-library-notes-by-date", "open-jwlibrary-file"],
+  "related": ["print-jw-library-notes", "share-talk-preparation-notes", "extract-jw-library-notes-by-date", "open-jwlibrary-file"],
  },
  {
   "slug": "organize-jw-library-tags",
@@ -496,7 +496,7 @@ GUIDES = [
    ("Will bulk retagging touch the note text?", "No — it only changes which tags are attached. Your note titles and content stay exactly as written."),
    ("Is there an undo if I make a mistake?", "Yes. Study Explorer has full undo/redo, and your original backup is never modified — the changes go into an exported copy."),
   ],
-  "related": ["edit-jw-library-notes", "manage-jw-library-highlights", "search-jw-library-notes"],
+  "related": ["share-jw-library-notes-by-tag", "edit-jw-library-notes", "manage-jw-library-highlights", "search-jw-library-notes"],
  },
  {
   "slug": "manage-jw-library-highlights",
@@ -547,7 +547,7 @@ GUIDES = [
    ("Are these the same as my personal notes?", "No — fill-in answers are the responses you typed into a publication's answer boxes. Study Explorer shows them on their own tab, separate from freeform notes."),
    ("Is anything uploaded to read my answers?", "No. Like everything in JW Sync, your backup is read locally in the browser and never sent anywhere."),
   ],
-  "related": ["edit-jw-library-notes", "export-jw-library-notes", "search-jw-library-notes"],
+  "related": ["weekly-meeting-preparation-jw-library-notes", "edit-jw-library-notes", "export-jw-library-notes", "search-jw-library-notes"],
  },
  {
   "slug": "extract-jw-library-notes-by-date",
@@ -660,7 +660,7 @@ GUIDES = [
   ],
   "steps": [
    ("Load your backup on the Share page", "Go to jwsync.org/share.html and load your .jwlibrary file."),
-   ("Select just the convention notes", "Pick the notes to share — filter by the tag you used for the event, or by date, and select that set. Highlights attached to those notes come along."),
+   ("Select just the convention notes", "Tick the notes to share. Searching for the event's publication or a word you used throughout brings the set up together, and highlights attached to those notes come along."),
    ("Send the small share file", "JW Sync makes a small file containing only those notes. Send it however you like — messaging app, email, AirDrop. No server, no account."),
    ("Family and friends merge it in", "Each person opens the same page, loads your file with their own backup, and gets a new backup with your notes added. Their own notes are never overwritten, and your imported notes arrive tagged so they're easy to find."),
   ],
@@ -672,11 +672,373 @@ GUIDES = [
    ("Can I share with several people at once?", "Yes — the share file is just a file. Send it to as many people as you like; each merges it into their own library independently."),
    ("Will my whole library be exposed?", "No. Only the notes you select are in the file; the rest of your library stays private."),
   ],
-  "related": ["share-jw-library-notes", "extract-jw-library-notes-by-date", "organize-jw-library-tags"],
+  "related": ["share-jw-library-notes", "receive-shared-jw-library-notes", "share-meeting-notes-with-family", "organize-jw-library-tags"],
+ },
+
+ # ── Scenario guides (v2.96.0) ────────────────────────────────────────────
+ {
+  "slug": "share-jw-library-notes-by-tag",
+  "group": "Sharing scenarios",
+  "date": "2026-08-02",
+  "title": "Share Only the JW Library Notes Under One Tag",
+  "h1": "Sharing just the notes carrying one tag",
+  "description": "Send one topic, one project or one student's worth of notes instead of your whole library — and your tags travel with them, so they arrive organised on the other side.",
+  "intro": [
+   "A tag is usually the natural unit of sharing. You tagged everything you gathered on a subject, everything from one event, or everything you go over with one person — and that set, not your whole library, is what the other person actually wants.",
+   "JW Sync's note sharing works note by note, so a tag is simply the list you tick. The notes keep their tags on the way out, which means the person receiving them can filter for exactly the same set inside their own library afterwards.",
+  ],
+  "steps": [
+   ("Make sure the notes carry the tag", "Tag them in JW Library as you go, or open your backup in Study Explorer at jwsync.org and use the tag editor to add a tag to notes in bulk. Consistent tagging now is what makes sharing a one-minute job later."),
+   ("See the tagged set first", "In Study Explorer, filter by that tag. You get the exact list — how many notes, which publications — so you know what you're about to hand over before you hand it over."),
+   ("Tick the same notes on the Share page", "Open jwsync.org/share.html, choose Send notes and load your backup. The search box matches note titles, note text and publication, so any word your tagged notes have in common brings them up together to tick."),
+   ("Create the file and send it", "JW Sync builds a small share file containing only the notes you ticked. Send it by chat, email or AirDrop — there is no server involved and no account on either side."),
+   ("They add it to their own backup", "The other person opens the same page, chooses Receive, previews the notes, and adds them to their backup. Your tags arrive with the notes, plus a label tag for the import, so the whole set is one filter away for them too."),
+  ],
+  "sections": [
+   ("Why share a tag rather than a backup",
+    "Handing over a full .jwlibrary backup gives away everything you have ever written, and restoring it would erase the other person's own notes. Sharing a tagged selection is the opposite on both counts: they see only what you chose, and they lose nothing of their own."),
+   ("Tags to keep for sharing",
+    "It is worth keeping a few tags that exist purely to be shared — an event name, a subject you research for others, the person you study with. When the moment comes to send something, there is no hunting: the set is already assembled."),
+  ],
+  "faq": [
+   ("Do my tags go across to the other person?", "Yes. Shared notes carry their tags, and the import is labelled with a tag of its own, so the receiver can find, review or remove the whole batch later."),
+   ("Does sharing remove the notes from my library?", "No. Sharing copies notes into a small file; your backup and your app are untouched."),
+   ("Can I send the same tag to several people?", "Yes — the share file is an ordinary file. Send it to as many people as you like, and each adds it to their own library independently."),
+  ],
+  "related": ["share-jw-library-notes", "organize-jw-library-tags", "receive-shared-jw-library-notes"],
+ },
+ {
+  "slug": "share-notes-with-bible-student",
+  "group": "Sharing scenarios",
+  "date": "2026-08-02",
+  "title": "Share JW Library Notes with a Bible Student",
+  "h1": "Sharing study notes with someone you study the Bible with",
+  "description": "Send the notes for a lesson — scriptures, illustrations, the points you prepared — straight into the other person's own JW Library, without touching anything they have written themselves.",
+  "intro": [
+   "When you prepare a study, most of the work ends up in your own notes: the extra scriptures, the illustration that made a point land, the answer to the question they asked last week. Reading it out is one thing; leaving them with a copy they can reread all week is another.",
+   "Note sharing puts your prepared notes into their library as real JW Library notes, attached to the same paragraphs and verses — not as a screenshot or a message they will scroll past.",
+  ],
+  "steps": [
+   ("Prepare the lesson's notes in JW Library", "Write the notes as you normally would, on the paragraphs and scriptures the lesson covers. Give them a tag — the person's name, or the publication — so the set is easy to select later."),
+   ("Open the Share page and load your backup", "Create a backup (Personal Study → Backup and Restore → Create a backup), then open jwsync.org/share.html, choose Send notes and load the file. It never leaves your device."),
+   ("Tick the notes for this lesson", "Search by the publication or a word you used, tick just this lesson's notes, and create the share file. Everything else in your library stays where it is."),
+   ("Send it and walk them through receiving", "They need a backup of their own first — Personal Study → Backup and Restore → Create a backup. Then they open jwsync.org/share.html, choose Receive, load your file and their backup, and download the updated backup."),
+   ("They restore it in JW Library", "Backup and Restore → Restore, choose the updated file, and your notes appear in their library alongside their own — tagged, so they know which ones came from you."),
+  ],
+  "sections": [
+   ("Their notes are never overwritten",
+    "This is the important difference from sending a backup. A restore replaces a device's whole library; receiving shared notes adds to it. Anything they have written themselves — including on the very same paragraphs — stays exactly as it was."),
+   ("A weekly rhythm that takes two minutes",
+    "Once both of you have done it a first time, the routine is short: prepare, tick, send, restore. Many find it easiest to send the notes right after preparing, so the student has them before the study rather than after."),
+  ],
+  "faq": [
+   ("Does the student need an account or an app installed?", "No account anywhere, and nothing to install beyond JW Library itself — the sharing page is an ordinary web page."),
+   ("What if the student has never made a backup?", "They make one first, in JW Library under Personal Study → Backup and Restore. Even an empty-looking library works; the backup is what the shared notes are added to."),
+   ("Can I take the notes back later?", "The file is yours to send or not send. Once someone has it, it is theirs, exactly like any message — so share what you would be comfortable sharing in writing."),
+  ],
+  "related": ["share-jw-library-notes-by-tag", "receive-shared-jw-library-notes", "share-jw-library-notes"],
+ },
+ {
+  "slug": "share-meeting-notes-with-family",
+  "group": "Sharing scenarios",
+  "date": "2026-08-02",
+  "title": "Share Meeting Notes with Your Family or Household",
+  "h1": "Sharing this week's meeting notes with the family",
+  "description": "Someone was sick, working or away — send them the week's notes as a small file they can add to their own JW Library, without either of you losing anything.",
+  "intro": [
+   "In most households everyone takes their own notes on their own device, and someone always misses a meeting. Reading your notes out over dinner works once; putting them in the other person's library is what lets them use the material later, in the place they will actually look for it.",
+   "Because sharing is note-by-note rather than backup-by-backup, several people can swap notes freely without anyone's library being overwritten.",
+  ],
+  "steps": [
+   ("Back up the device you took notes on", "JW Library → Personal Study → Backup and Restore → Create a backup."),
+   ("Select the week's notes", "At jwsync.org/share.html choose Send notes, load your backup, and tick the notes from this week's material — searching by the publication brings them together quickly."),
+   ("Send it in the family chat", "Create the share file and send it however the household already talks — messaging app, email, AirDrop. It is a small file with only the notes you ticked in it."),
+   ("Each person adds it to their own backup", "They open the same page, choose Receive, load your file with a backup of their own, download the updated backup and restore it in JW Library."),
+  ],
+  "sections": [
+   ("Everyone's library stays their own",
+    "Nobody's notes are replaced, and nobody has to hand over their whole library to take part. Imported notes arrive under a tag, so each person can see at a glance which notes came from someone else and delete the batch later if they would rather not keep it."),
+   ("Family worship: gather instead of scatter",
+    "The same tool works in the other direction. If everyone takes notes during family worship, one person can collect the others' share files into a single backup and end up with the household's combined notes on the same material."),
+  ],
+  "faq": [
+   ("Can children's devices take part?", "Any device that can run JW Library and open a web page can. The steps are identical on a phone, tablet or computer."),
+   ("Do we need to be on the same platform?", "No. Android, iPhone, iPad and the Windows app all use the same backup format, so notes cross between them without conversion."),
+  ],
+  "related": ["receive-shared-jw-library-notes", "share-convention-assembly-notes", "sync-jw-library-multiple-devices"],
+ },
+ {
+  "slug": "receive-shared-jw-library-notes",
+  "group": "Sharing scenarios",
+  "date": "2026-08-02",
+  "title": "Someone Sent Me JW Library Notes — How Do I Open Them?",
+  "h1": "Adding notes someone shared with you into your own JW Library",
+  "description": "You were sent a shared-notes file or a block of shared text. Here's how to preview it and add it to your own JW Library backup without losing a single note of your own.",
+  "intro": [
+   "Shared JW Library notes arrive as a small file (ending in .jwshare.json) or as a block of text pasted into a message. JW Library itself can't open either one — but you don't need it to. The receiving side of JW Sync reads the shared notes, shows you what's in them, and writes them into a backup of yours.",
+   "The whole exchange happens on your device. There's no account, nothing is uploaded, and your own notes are added to, never replaced.",
+  ],
+  "steps": [
+   ("Make a backup of your own library first", "In JW Library: Personal Study → Backup and Restore → Create a backup. This is the file the shared notes will be added to, so it should be current."),
+   ("Open the Share page and choose Receive", "Go to jwsync.org/share.html and pick Receive notes."),
+   ("Load what you were sent", "Choose the .jwshare.json file, or paste the shared text straight into the box if it came through as a message. Either way you get a read-only preview of every note before anything is written."),
+   ("Add them to your backup", "Load your own backup, choose the tag the imported notes should carry, and add them. JW Sync builds an updated backup file for you to download."),
+   ("Restore the updated backup in JW Library", "Personal Study → Backup and Restore → Restore, choose the updated file. The shared notes are now in your library, sitting on the right paragraphs and verses."),
+  ],
+  "sections": [
+   ("Nothing of yours is replaced",
+    "Shared notes are added as new notes. Even where a shared note lands on a paragraph you have already written on, both survive — yours untouched, theirs alongside it. The one thing to keep in mind is the ordinary rule of restoring: restore the updated backup, not an older one."),
+   ("Changed your mind later?",
+    "Every imported note carries the tag you chose when you added it. Open your backup in Study Explorer, filter by that tag, and you can review or delete the whole batch in one pass."),
+  ],
+  "faq": [
+   ("The file arrived renamed to .txt or opened as text — is it broken?", "No. Messaging apps often do that. Copy the text and paste it into the Receive box; it works exactly the same."),
+   ("Do I need the sender's whole backup?", "No. The share file contains only the notes they chose to send — nothing else from their library."),
+   ("Is anything uploaded when I preview the notes?", "No. Reading the shared file, previewing it and writing the updated backup all happen in your browser on your device."),
+  ],
+  "related": ["share-jw-library-notes", "share-jw-library-notes-by-tag", "backup-jw-library"],
+ },
+ {
+  "slug": "share-notes-with-study-group",
+  "group": "Sharing scenarios",
+  "date": "2026-08-02",
+  "title": "Share Research Notes with a Study Group",
+  "h1": "Sharing research with a group — and collecting theirs back",
+  "description": "One file, many people: send a set of research notes to everyone studying the same subject, and gather what they send back into a single, combined set of your own.",
+  "intro": [
+   "When several people are digging into the same subject, the research usually ends up scattered — one person found the cross-references, another the historical background, a third the illustrations. Reading each other's screenshots is not the same as having the material in your own library, on the same verses, searchable next year.",
+   "Because a share file is just a file, one export serves the whole group, and the same mechanism carries their work back to you.",
+  ],
+  "steps": [
+   ("Tag your research as you gather it", "Give the subject a tag in JW Library so the set stays together. In Study Explorer you can add a tag to notes in bulk if you didn't tag them at the time."),
+   ("Create one share file for the group", "At jwsync.org/share.html choose Send notes, load your backup, tick the research notes and create the file."),
+   ("Post it once", "Send the same file to everyone — a group chat, an email to several people, whatever the group already uses. There's no per-person setup and no server copy."),
+   ("Ask for theirs in return", "Each person can do exactly the same from their side. Add each file you receive to your backup in turn, giving each import its own tag — the sender's name works well — so you can always tell whose research is whose."),
+  ],
+  "sections": [
+   ("One combined set, still attributable",
+    "After a few rounds you have the group's whole research on the subject in your own library, on the right paragraphs and verses, with each contribution tagged by source. Search finds all of it at once; the tags let you separate it again whenever you want to."),
+   ("Nobody has to expose their library",
+    "Everyone shares only the notes they tick. The rest of each person's library — private study, personal reminders, everything else — never enters the file."),
+  ],
+  "faq": [
+   ("Is there a limit on how many notes I can share at once?", "Practically, no. Notes are small; a large set still produces a file you can send in a message."),
+   ("What if two people send me the same note?", "You'll see it twice, each under its sender's tag. Study Explorer's search makes near-duplicates easy to spot and delete."),
+   ("Can someone receive without sending anything back?", "Yes. Receiving and sending are independent — nobody is obliged to share to be able to add what they were given."),
+  ],
+  "related": ["share-jw-library-notes-by-tag", "receive-shared-jw-library-notes", "search-jw-library-notes"],
+ },
+ {
+  "slug": "share-talk-preparation-notes",
+  "group": "Sharing scenarios",
+  "date": "2026-08-02",
+  "title": "Hand Off the Research Behind a Talk or Assignment",
+  "h1": "Passing on your talk and assignment research",
+  "description": "You did the digging for a talk, a part or an assignment. Here's how to hand the research to whoever needs it next — as real notes in their library, or as plain text for a document.",
+  "intro": [
+   "Preparation is rarely used only once. The scriptures you chased down, the background you read, the way you finally decided to frame a point — someone covering the same material later would rather start from that than from a blank page.",
+   "JW Sync gives you two ways to pass it on, and they suit different people: as notes that land in the other person's JW Library, or as plain text they can paste into a document.",
+  ],
+  "steps": [
+   ("Pull the research together under one tag", "As you prepare, tag the notes with the theme or the assignment. If they're already written and untagged, open your backup in Study Explorer and tag them in bulk in a couple of minutes."),
+   ("Decide which form suits the other person", "Someone who studies in JW Library wants notes in their library. Someone building a document wants text. You can do both from the same set."),
+   ("To send notes: use the Share page", "At jwsync.org/share.html choose Send notes, load your backup, tick the research and create the file. They add it to their own backup and restore it — their own notes are untouched."),
+   ("To send text: export from Study Explorer", "Filter to the same set and copy or export it as Markdown or plain text. Formatting survives, so a structured outline stays structured when it's pasted into a document."),
+  ],
+  "sections": [
+   ("Keep a copy for yourself, in a form you'll find again",
+    "The same export is worth keeping for your own use. A tag plus a date range makes the whole preparation retrievable years later, which is exactly when you'll want it — and Study Explorer's date extraction turns any window of time into its own file."),
+  ],
+  "faq": [
+   ("Will the scriptures stay linked to the right verses?", "Yes — shared notes keep the paragraph and verse they were attached to, so they land in the right place in the other person's library."),
+   ("Can I share notes that have highlights on them?", "Yes. Highlights attached to the notes you share travel with them."),
+  ],
+  "related": ["export-jw-library-notes", "share-jw-library-notes", "extract-jw-library-notes-by-date"],
+ },
+ {
+  "slug": "weekly-meeting-preparation-jw-library-notes",
+  "group": "Everyday scenarios",
+  "date": "2026-08-02",
+  "title": "Prepare for the Meeting Using Notes You Already Wrote",
+  "h1": "Weekly preparation with the notes you already have",
+  "description": "You've studied this material before. Here's a short weekly routine that surfaces your old notes, highlights and fill-in answers on the same publication before you prepare again.",
+  "intro": [
+   "Most people prepare each week from a blank page, even though they've written on the same subject — sometimes the same scripture — several times before. That earlier thinking is sitting in your library; the only problem is that nothing brings it back to you at the right moment.",
+   "A five-minute routine at the start of preparation fixes that, and it uses nothing but the backup you already have.",
+  ],
+  "steps": [
+   ("Load a current backup in Study Explorer", "Create a backup in JW Library, then open it at jwsync.org. Everything is read in your browser."),
+   ("Search the subject before you start", "Search for the theme scripture, the subject or the publication. Whatever you wrote on it in past years comes up together, across every publication it appears in."),
+   ("Check your fill-in answers", "The Study Answers view collects the answers you typed into study questions, so previous rounds through the same material are there to build on rather than repeat."),
+   ("Add what's missing, then put it back", "Notes can be edited or added right there — title, text, tags, highlight colour. Export the edited backup and restore it in JW Library, and your preparation is in the app for the meeting."),
+  ],
+  "sections": [
+   ("Why the old notes matter",
+    "Reviewing what you concluded last time turns preparation into something cumulative. You stop rediscovering the same points and start building on them — and the notes you add this week become next round's starting point."),
+   ("A gentler version: let the notes come to you",
+    "If a weekly search feels like work, Resurface on the Study Stats page brings a few old notes back on its own each day, including ones you wrote on this date in past years. Same benefit, no routine to remember."),
+  ],
+  "faq": [
+   ("Does editing in the browser change my library directly?", "No. You export an updated backup and restore it in JW Library — the app is only ever changed by a restore you perform yourself."),
+   ("Is my backup uploaded when I search it?", "No. The file is read locally in your browser; nothing is sent anywhere."),
+  ],
+  "related": ["jw-library-study-answers", "search-jw-library-notes", "review-old-jw-library-notes"],
+ },
+ {
+  "slug": "print-jw-library-notes",
+  "group": "Everyday scenarios",
+  "date": "2026-08-02",
+  "title": "How to Print Your JW Library Notes",
+  "h1": "Getting your JW Library notes onto paper",
+  "description": "JW Library has no print button. Export your notes as text or Markdown, paste them into any document, and print — a study journal, a set of notes for someone without the app, or an archive.",
+  "intro": [
+   "There's no way to print from JW Library, and screenshots of a phone screen make poor reading. But the notes are yours, and getting them into a printable document is straightforward once you can read the backup file.",
+   "Study Explorer reads a .jwlibrary backup in your browser and lets you copy or export any selection of notes as plain text or Markdown — which every word processor, notes app and printer already understands.",
+  ],
+  "steps": [
+   ("Create a backup and open it", "JW Library → Personal Study → Backup and Restore → Create a backup, then load the file at jwsync.org."),
+   ("Narrow down to what you want on paper", "Filter by publication, tag, highlight colour or date range, or search for a subject. Printing everything is possible, but a filtered set usually makes a far more useful document."),
+   ("Copy or export as text or Markdown", "Take the selection out as Markdown or plain text. Bold, italics and lists survive, so structured notes stay structured on the page."),
+   ("Paste into a document and print", "Any word processor or notes app will do. Set the headings and margins you want, then print or save as PDF."),
+  ],
+  "sections": [
+   ("Making a study journal",
+    "A date range is the natural unit for a printed journal — a year of notes, or the period covering one publication. Extracting by date gives you a clean chronological set to print or bind, which is a satisfying thing to have off-screen."),
+   ("Printing for someone who doesn't use the app",
+    "Not everyone studies from a device. A printed set of notes on the current material is genuinely useful for someone who prefers paper, and it takes the same two minutes as any other export."),
+  ],
+  "faq": [
+   ("Can I print my highlights too?", "The highlights view lists the passages you've marked, and that list copies out as text alongside your notes."),
+   ("Does exporting change anything in JW Library?", "No. Exporting reads a copy of your backup; your original file and the app are untouched."),
+  ],
+  "related": ["export-jw-library-notes", "extract-jw-library-notes-by-date", "search-jw-library-notes"],
+ },
+ {
+  "slug": "clean-up-duplicate-jw-library-notes",
+  "group": "Everyday scenarios",
+  "date": "2026-08-02",
+  "title": "Clean Up Duplicate and Empty JW Library Notes",
+  "h1": "Clearing out duplicate notes, empty notes and clutter",
+  "description": "Restored a backup twice, or imported the same notes again? Library Doctor scans your .jwlibrary file in the browser, finds duplicates and empty notes, and produces a clean copy.",
+  "intro": [
+   "Libraries collect clutter. Restoring a backup onto a device that already had some of the same notes, importing a shared set twice, or years of half-written notes that never got finished — each leaves something behind, and JW Library gives you no way to sweep it up in bulk.",
+   "Library Doctor is a free health check for a .jwlibrary file. It scans the backup in your browser, tells you in plain language what it found, and fixes what's fixable in one tap.",
+  ],
+  "steps": [
+   ("Back up first — as always", "JW Library → Personal Study → Backup and Restore → Create a backup. Keep this file; it's your fallback."),
+   ("Run the health check", "Open jwsync.org, load the backup and start Library Doctor. It examines the file's contents and structure without sending it anywhere."),
+   ("Read what it found", "Duplicates, empty notes and other clutter are listed plainly, with counts, so you can see the scale of the problem before you change anything."),
+   ("Fix and download the clean copy", "One tap applies the repairs and produces a new, cleaned .jwlibrary file. Your original is never modified."),
+   ("Restore the clean file", "Backup and Restore → Restore, and pick the cleaned file. Your library is the same, minus the clutter."),
+  ],
+  "sections": [
+   ("How duplicates happen in the first place",
+    "Almost always through a restore. If you restore a backup onto a device that already carried some of the same material — or restore the same file twice through different routes — the app has no way to know it has seen those notes before."),
+   ("Merging is the way to avoid them",
+    "This is exactly why merging two backups is safer than restoring one over another: the merge detects material that already exists and keeps it once. The same checks run inside every merge, so a merged backup comes out clean even if the files going in weren't."),
+  ],
+  "faq": [
+   ("Will it delete notes I actually want?", "It removes exact duplicates and empty notes — material with nothing in it to lose. And because it writes a new file instead of editing yours, the original is always there to fall back on."),
+   ("Can it recover notes I deleted in the app?", "No. If a note was deleted in JW Library before the backup was made, it isn't in the file to recover — an older backup is the place to look."),
+  ],
+  "related": ["fix-corrupted-jw-library-backup", "merge-jw-library-backups", "organize-jw-library-tags"],
+ },
+ {
+  "slug": "backup-jw-library-before-phone-repair",
+  "group": "Everyday scenarios",
+  "date": "2026-08-02",
+  "title": "Back Up JW Library Before a Factory Reset or Repair",
+  "h1": "Before a factory reset, a repair or selling the phone",
+  "description": "A reset wipes JW Library's notes with everything else, and phone-transfer tools don't carry them. Make a backup, verify it actually opens, then reset with nothing at risk.",
+  "intro": [
+   "Reset the phone, send it in for repair, or hand it on to someone else, and JW Library's personal study data goes with it. Photos and apps come back from a cloud backup; years of notes, highlights and bookmarks generally do not, because phone-transfer tools skip the app's private data.",
+   "The fix takes five minutes, and the step people miss is the one that matters most: checking that the backup file is genuinely readable before the device is wiped.",
+  ],
+  "steps": [
+   ("Create the backup", "JW Library → Personal Study → Backup and Restore → Create a backup. You get a .jwlibrary file — usually only a few megabytes."),
+   ("Get it off the device", "Email it to yourself, or put it in Drive, iCloud or a computer folder. A backup that only exists on the phone you're about to wipe isn't a backup."),
+   ("Verify it opens before you wipe anything", "Load the file at jwsync.org and look at it — the notes, highlights and bookmarks should all be there, and the health check will flag anything wrong with the file. This is the whole point of the exercise: finding out the file is unreadable afterwards is too late."),
+   ("Reset, then restore", "After the reset or repair, install JW Library, sign in, then Backup and Restore → Restore and choose your file."),
+   ("Used a loaner phone in between? Merge, don't overwrite", "If you took notes on a temporary device, back that one up too and merge both files at jwsync.org before restoring — otherwise restoring the old backup erases whatever you wrote while you waited."),
+  ],
+  "sections": [
+   ("Why verification is worth the extra minute",
+    "Interrupted transfers, cloud drives that mangle files and extensions renamed in transit all produce backups that look fine in a folder and fail at restore. Opening the file first turns a silent problem into one you can still fix, while the original device still has the data."),
+   ("Keep the file after the restore",
+    "Don't delete it once the new device is working. Old backups are the only way back from a note deleted by accident months later, and they cost nothing to keep."),
+  ],
+  "faq": [
+   ("Will my downloaded publications come back?", "The backup carries your personal study data — notes, highlights, bookmarks, tags and playlists. Publications simply re-download afterwards."),
+   ("Does the file work if I switch to a different phone brand or platform?", "Yes. The .jwlibrary format is the same on Android, iPhone, iPad and Windows."),
+  ],
+  "related": ["backup-jw-library", "recover-jw-library-notes-lost-phone", "transfer-jw-library-notes-new-phone"],
+ },
+ {
+  "slug": "jw-library-notes-missing-after-update",
+  "group": "Fixing problems",
+  "date": "2026-08-02",
+  "title": "JW Library Notes Missing After an Update or Reinstall",
+  "h1": "Notes gone after an app update, reinstall or restore",
+  "description": "Your notes vanished after updating, reinstalling or signing in again. What to do first, what not to do, and how to get them back without losing anything you've written since.",
+  "intro": [
+   "It's an unpleasant moment: JW Library opens, and the notes aren't there. Before anything else, one piece of advice — don't rush. Most of what makes this situation unrecoverable is done in the first ten minutes, by overwriting the very backup that still contains the missing notes.",
+   "Work through the steps below in order. The goal is to end up with one file containing both the old notes and anything you've written since.",
+  ],
+  "steps": [
+   ("Don't overwrite your backups yet", "Resist creating a fresh backup on top of an old one, and don't restore anything blindly. An older backup file is the most likely place your notes still exist."),
+   ("Hunt for the newest backup you have", "Check email attachments, Google Drive, iCloud Drive, your computer's downloads folder and any other device you have restored to. Backups are small, so people often have more copies than they remember."),
+   ("Look inside the file before restoring it", "Load the candidate at jwsync.org and see what's actually in it — how many notes, from which publications, up to what date. That tells you whether it's the right file to use, before you commit to a restore."),
+   ("Back up the current device too", "Even if it looks empty, back it up. If you've written anything since the notes disappeared, this file is the only copy of it."),
+   ("Merge the two, then restore", "Merge the old backup with the current one at jwsync.org. The result contains the recovered notes and everything written since, with duplicates kept once. Restore that merged file — never the old backup on its own."),
+  ],
+  "sections": [
+   ("Why restoring the old backup on its own is the wrong move",
+    "A restore replaces the device's library outright. If you restore an old backup directly, you get the missing notes back and lose everything written after that backup was made. Merging first is what makes the recovery lossless."),
+   ("If the backup itself won't restore",
+    "A file that errors out during restore isn't necessarily lost. Run the health check on it — damage from interrupted downloads, cloud sync or a renamed extension is often repairable, and a cleaned copy will restore normally."),
+  ],
+  "faq": [
+   ("Are the notes still on the device somewhere?", "Not in a form you can get at from outside the app. Recovery realistically means an earlier backup file — which is why keeping old ones matters so much."),
+   ("Does signing in again bring notes back?", "No. Personal study data isn't held in an account; it lives on the device and travels only through backup files."),
+   ("What if the only backup I have is months old?", "Merge it with a backup of the device as it is now. You'll recover everything the old file has, and keep everything the device still has, without choosing between them."),
+  ],
+  "related": ["jw-library-restore-replaced-notes", "recover-jw-library-notes-lost-phone", "fix-corrupted-jw-library-backup"],
+ },
+ {
+  "slug": "help-family-member-move-jw-library-notes",
+  "group": "Everyday scenarios",
+  "date": "2026-08-02",
+  "title": "Help a Family Member Move Their JW Library Notes",
+  "h1": "Helping someone else move or rescue their JW Library notes",
+  "description": "You're the one who gets asked to fix the phone. Here's the shortest reliable path to move a relative's JW Library notes to a new device — including how to do it without reading their notes.",
+  "intro": [
+   "Sooner or later someone hands you their phone and a new one beside it. JW Library's notes are the part that won't move on its own, and they're often the part that matters most — years of study that no transfer tool will carry across.",
+   "The process is the same as doing it for yourself, with one extra consideration worth thinking about first: whose device the work happens on.",
+  ],
+  "steps": [
+   ("Talk them through making a backup on the old device", "JW Library → Personal Study → the three-dot menu → Backup and Restore → Create a backup. It saves a .jwlibrary file. If you're not with them, this part they can do over the phone."),
+   ("Get the file where you need it", "Have them email it to themselves, or share it to you. It's small enough to send through any messaging app."),
+   ("Check the file opens", "Load it at jwsync.org and confirm the notes are there. Doing this before the old device is wiped or handed on is what turns a bad surprise into a non-event."),
+   ("Merge if the new device already has notes", "If they've been using the new phone for a while, back that one up too and merge both files — otherwise restoring the old backup deletes everything they've written on the new device."),
+   ("Walk them through the restore", "On the new device: Backup and Restore → Restore, choose the file. Notes, highlights, bookmarks and tags all appear."),
+  ],
+  "sections": [
+   ("Doing it without reading their notes",
+    "Personal study notes are personal. If you'd rather not see them — or they'd rather you didn't — do the whole thing on their device: it's a web page, so you can open jwsync.org on their phone or tablet, load their files there and never have the backup on your own machine. Nothing is uploaded either way, but this way the file never leaves their hands."),
+   ("Leave them with a backup they can find",
+    "Before you give the phone back, make sure the backup file is somewhere they'll be able to find again — their own email or cloud drive, not just your downloads folder. Next time, they may not need you at all."),
+  ],
+  "faq": [
+   ("Can I do this remotely?", "Yes. If they can create a backup and send you the file, everything else works at a distance — and the restore is a few taps you can talk them through."),
+   ("They have an Android and the new one is an iPhone. Does that matter?", "No. The backup format is identical across Android, iPhone, iPad and Windows."),
+   ("What if they never made a backup and the old phone is gone?", "Then there's nothing to recover from — the data lived on that device. It's worth setting up a habit of regular backups on the new phone straight away."),
+  ],
+  "related": ["transfer-jw-library-notes-new-phone", "backup-jw-library-before-phone-repair", "jw-library-android-to-iphone"],
  },
 ]
 
-GROUPS = ["Getting started", "Fixing problems", "Power tools"]
+GROUPS = ["Getting started", "Sharing scenarios", "Everyday scenarios",
+          "Fixing problems", "Power tools"]
 
 # ── Template ──────────────────────────────────────────────────────────────
 CSS = """
@@ -779,14 +1141,15 @@ def site_header(root):
             f'</div></header>')
 
 def guide_jsonld(g, canonical):
+    published = g.get("date", TODAY)
     graph = [
         {
             "@type": "Article",
             "headline": g["title"],
             "description": g["description"],
             "inLanguage": "en",
-            "datePublished": TODAY,
-            "dateModified": TODAY,
+            "datePublished": published,
+            "dateModified": published,
             "mainEntityOfPage": canonical,
             "image": f"{SITE}/og-image.png",
             "author": {"@type": "Organization", "name": "JW Sync", "url": SITE},

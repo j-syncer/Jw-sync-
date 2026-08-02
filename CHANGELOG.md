@@ -4,6 +4,36 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.96.0] — 2026-08-02
+
+### Added: 12 scenario guides in the Guides & How-tos section
+
+The guides section grows from 25 to 37 pages. Where the existing guides explain
+a feature, these explain a situation — the moment someone actually reaches for
+the tool — which is also how people search for it.
+
+Two new sections on `/guides/`:
+
+- **Sharing scenarios** — share only the notes under one tag; share study notes
+  with someone you study the Bible with; send the week's meeting notes to the
+  family; open notes somebody shared with you; swap research with a study group;
+  hand off the research behind a talk or assignment.
+- **Everyday scenarios** — prepare for the meeting using notes you already
+  wrote; print your notes; clear out duplicate and empty notes with Library
+  Doctor; back up before a factory reset or repair; help a family member move
+  their notes.
+
+Also added under **Fixing problems**: what to do when notes are missing after an
+app update, reinstall or restore — including the mistake that makes it
+unrecoverable.
+
+- Each page carries Article + HowTo + BreadcrumbList + FAQPage structured data,
+  a unique title and meta description, steps, FAQs and related-guide links.
+- The 12 new URLs are in `sitemap.xml`, and existing guides now link to the new
+  ones, so the whole section is better connected internally.
+- Corrected a step in the convention-notes guide that described selecting notes
+  by tag filter on the share page; selection there is by search and ticking.
+
 ## [2.95.1] — 2026-07-28
 
 ### Fixed: Search Console "Alternate page with proper canonical tag"

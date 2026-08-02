@@ -40,6 +40,18 @@ const SLUGS = [
   'review-old-jw-library-notes',
   'jw-library-achievements-streaks',
   'share-convention-assembly-notes',
+  'share-jw-library-notes-by-tag',
+  'share-notes-with-bible-student',
+  'share-meeting-notes-with-family',
+  'receive-shared-jw-library-notes',
+  'share-notes-with-study-group',
+  'share-talk-preparation-notes',
+  'weekly-meeting-preparation-jw-library-notes',
+  'print-jw-library-notes',
+  'clean-up-duplicate-jw-library-notes',
+  'backup-jw-library-before-phone-repair',
+  'jw-library-notes-missing-after-update',
+  'help-family-member-move-jw-library-notes',
 ];
 
 let failures = 0;
