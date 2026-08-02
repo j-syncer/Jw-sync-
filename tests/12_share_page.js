@@ -50,6 +50,16 @@ async function buildBackup(SQL, notes) {
     }
     db.run('INSERT INTO Note (NoteId,Guid,UserMarkId,Title,Content,LastModified,LocationId) VALUES (?,?,?,?,?,?,?)',
       [n.id, 'g' + n.id, umId, n.title, n.content, n.date || '2024-01-01 00:00:00', n.loc || 1]);
+    (n.tags || []).forEach((name, i) => {
+      let r = db.exec('SELECT TagId FROM Tag WHERE Name=' + JSON.stringify(name));
+      let tagId = r.length ? r[0].values[0][0] : null;
+      if (tagId == null) {
+        db.run('INSERT INTO Tag (Type, Name) VALUES (1,?)', [name]);
+        tagId = db.exec('SELECT last_insert_rowid()')[0].values[0][0];
+      }
+      const pos = db.exec('SELECT COALESCE(MAX(Position),-1)+1 FROM TagMap WHERE TagId=' + tagId)[0].values[0][0];
+      db.run('INSERT INTO TagMap (NoteId, TagId, Position) VALUES (?,?,?)', [n.id, tagId, pos]);
+    });
   });
   const bytes = db.export(); db.close();
   const zip = new JSZip(); zip.file('userData.db', bytes); zip.file('manifest.json', JSON.stringify({ version: 1, name: 'Test' }));
@@ -122,6 +132,76 @@ function bootShare() {
     const plain = env.notes.find(n => n.title === 'Love');
     if (plain && !plain.loc && !plain.ranges) ok('non-highlighted note has no highlight payload');
     else fail('plain note unexpectedly carries highlight payload');
+    dom.window.close();
+  }
+
+  section('Send — filter the picker by tag');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    const buf = await buildBackup(SQL, [
+      { id: 1, title: 'Faith', content: 'Hope and trust', tags: ['Bible study'] },
+      { id: 2, title: 'Love', content: 'Patience and kindness', tags: ['Bible study', 'Convention'] },
+      { id: 3, title: 'Peace', content: 'Calm in the storm' },
+    ]);
+    win.__shLoadBackup({ name: 'tags.jwlibrary', arrayBuffer: async () => buf });
+    async function until(p, l, ms = 8000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.querySelectorAll('.sh-list .sh-item').length === 3, 'note list');
+    const sel = doc.getElementById('sh-tag');
+    if (sel) ok('tag filter rendered when the backup has tags'); else fail('#sh-tag missing');
+    const opts = sel ? [...sel.options].map(o => o.value) : [];
+    if (opts.length === 3 && opts[0] === '' && opts.includes('Bible study') && opts.includes('Convention'))
+      ok('tag filter lists every tag plus an all-tags option');
+    else fail('tag options wrong: ' + JSON.stringify(opts));
+    if (sel && /\(2\)/.test([...sel.options].find(o => o.value === 'Bible study').textContent))
+      ok('tag option shows how many notes carry it');
+    else fail('tag counts missing from options');
+    if (/Bible study/.test(doc.querySelector('.sh-list .sh-item .sh-item-meta').textContent))
+      ok('note rows show their tags');
+    else fail('tags not shown on note rows');
+
+    sel.value = 'Bible study';
+    sel.onchange();
+    await until(() => doc.querySelectorAll('.sh-list .sh-item').length === 2, 'filtered list');
+    ok('choosing a tag narrows the list to that tag');
+
+    doc.getElementById('sh-all').click();
+    await until(() => /2/.test(doc.getElementById('sh-count').textContent), 'tagged notes selected');
+    ok('select-all ticks exactly the tagged notes (one-click tag share)');
+    if (doc.getElementById('sh-tag').value === 'Bible study') ok('tag filter survives the re-render');
+    else fail('tag filter reset after select-all');
+
+    doc.getElementById('sh-create').click();
+    await until(() => doc.getElementById('sh-json'), 'share result');
+    const env = JSON.parse(doc.getElementById('sh-json').value);
+    const titles = env.notes.map(n => n.title).sort();
+    if (env.notes.length === 2 && titles.join(',') === 'Faith,Love')
+      ok('only the tagged notes end up in the share file');
+    else fail('wrong notes shared: ' + JSON.stringify(titles));
+    if (env.notes.every(n => (n.tags || []).includes('Bible study')))
+      ok('tags travel with the shared notes');
+    else fail('tags missing from envelope');
+    dom.window.close();
+  }
+
+  section('Send — search matches tag names, and empty results say so');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    const buf = await buildBackup(SQL, [
+      { id: 1, title: 'Faith', content: 'Hope and trust', tags: ['Bible study'] },
+      { id: 2, title: 'Peace', content: 'Calm in the storm' },
+    ]);
+    win.__shLoadBackup({ name: 'tags2.jwlibrary', arrayBuffer: async () => buf });
+    async function until(p, l, ms = 8000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.querySelectorAll('.sh-list .sh-item').length === 2, 'note list');
+    const q = doc.getElementById('sh-q');
+    q.value = 'bible study'; q.oninput();
+    await until(() => doc.querySelectorAll('.sh-list .sh-item').length === 1, 'search by tag name');
+    ok('the search box also matches tag names');
+    doc.getElementById('sh-q').value = 'zzzz'; doc.getElementById('sh-q').oninput();
+    await until(() => doc.querySelector('.sh-empty'), 'empty state');
+    ok('an empty result shows a "nothing matches" message');
     dom.window.close();
   }
 

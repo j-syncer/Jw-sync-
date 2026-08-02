@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.97.0] — 2026-08-02
+
+### Added: tag filter in the Share page's note picker
+
+Picking the notes to share used to mean searching and ticking. Sharing is
+usually organised around a tag, though — an event, a subject, the person you
+study with — so the picker now filters by tag directly.
+
+- A tag dropdown above the note list shows every tag in the backup with the
+  number of notes carrying it. Choose one and the list narrows to those notes;
+  **Select all** then ticks exactly that set, so sharing a tag is two clicks.
+- Each note in the list shows the tags it carries, so you can see what you are
+  about to send.
+- The search box now matches tag names as well as titles, note text and
+  publication, and it combines with the tag filter to narrow further.
+- An empty result now says so instead of showing a blank list.
+- The tag filter is hidden for backups that have no tags, and it survives
+  select-all and search re-renders.
+
+The sharing guides were updated to describe the one-click flow, including the
+convention-notes guide, which had described a tag filter before one existed.
+
 ## [2.96.0] — 2026-08-02
 
 ### Added: 12 scenario guides in the Guides & How-tos section

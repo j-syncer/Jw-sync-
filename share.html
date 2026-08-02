@@ -57,6 +57,10 @@
     .sh-toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
     .sh-search{flex:1;min-width:160px;display:flex;align-items:center;gap:8px;background:#0a1224;border:1px solid #2a3548;border-radius:10px;padding:9px 12px}
     .sh-search input{flex:1;background:transparent;border:0;outline:0;color:#e7eaf3;font-size:14px}
+    .sh-tagsel{background:#0a1224;border:1px solid #2a3548;border-radius:10px;color:#cbd5e1;padding:9px 11px;font-size:13px;font-family:inherit;max-width:200px;cursor:pointer;outline:0}
+    .sh-tagsel:hover{border-color:#475569}
+    body.light .sh-tagsel{background:#fff;color:#0b2e58;border-color:rgba(11,46,88,.2)}
+    .sh-empty{padding:26px 16px;text-align:center;color:#64748b;font-size:13px}
     .sh-mini{background:transparent;border:1px solid #2a3548;color:#94a3b8;padding:7px 11px;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit}
     .sh-mini:hover{border-color:#475569;color:#fff}
     .sh-list{max-height:46vh;overflow-y:auto;border:1px solid rgba(71,85,105,.3);border-radius:12px}
@@ -182,7 +186,7 @@
         choose_backup:'Open my backup',pick_help:'Choose a .jwlibrary backup to pick notes from. It never leaves your device.',
         sel_title:'Select the notes to share',sel_help:'Tap a note to tick it. Only the notes you tick are included.',
         search_ph:'Search notes…',sel_all:'Select all',sel_none:'Clear',sel_count:'{n} selected',
-        create_file:'Create share file',no_sel:'Tick at least one note first.',no_notes:'No notes found in this backup.',
+        create_file:'Create share file',no_sel:'Tick at least one note first.',no_notes:'No notes found in this backup.',tag_all:'All tags',no_match:'Nothing matches your filters.',
         made_t:'Your share file is ready',made_h:'Send this to the other person. They open JW Sync → Share → Receive, then choose this file.',
         download:'Download file',copy:'Copy text',copied:'Copied!',
         recv_how:'How receiving works',recv_s1:'Paste the shared text, or choose the .jwshare.json file you were sent.',recv_s2:'Preview the notes to make sure they look right.',recv_s3:'Add them into one of your own backups, then restore that backup to JW Library.',
@@ -201,7 +205,7 @@
         choose_backup:'Abrir mi copia',pick_help:'Elige una copia .jwlibrary para seleccionar notas. Nunca sale de tu dispositivo.',
         sel_title:'Selecciona las notas a compartir',sel_help:'Toca una nota para marcarla. Solo se incluyen las que marques.',
         search_ph:'Buscar notas…',sel_all:'Seleccionar todo',sel_none:'Limpiar',sel_count:'{n} seleccionadas',
-        create_file:'Crear archivo',no_sel:'Marca al menos una nota.',no_notes:'No se encontraron notas en esta copia.',
+        create_file:'Crear archivo',no_sel:'Marca al menos una nota.',no_notes:'No se encontraron notas en esta copia.',tag_all:'Todas las etiquetas',no_match:'Nada coincide con tus filtros.',
         made_t:'Tu archivo está listo',made_h:'Envíalo a la otra persona. Abre JW Sync → Compartir → Recibir y elige este archivo.',
         download:'Descargar archivo',copy:'Copiar texto',copied:'¡Copiado!',
         recv_how:'Cómo funciona recibir',recv_s1:'Pega el texto compartido o elige el archivo .jwshare.json que te enviaron.',recv_s2:'Previsualiza las notas para confirmar.',recv_s3:'Agrégalas a una de tus copias y luego restaura esa copia en JW Library.',
@@ -220,7 +224,7 @@
         choose_backup:'Abrir meu backup',pick_help:'Escolha um backup .jwlibrary para selecionar notas. Ele nunca sai do seu dispositivo.',
         sel_title:'Selecione as notas para compartilhar',sel_help:'Toque numa nota para marcá-la. Só as marcadas são incluídas.',
         search_ph:'Buscar notas…',sel_all:'Selecionar tudo',sel_none:'Limpar',sel_count:'{n} selecionadas',
-        create_file:'Criar arquivo',no_sel:'Marque pelo menos uma nota.',no_notes:'Nenhuma nota encontrada neste backup.',
+        create_file:'Criar arquivo',no_sel:'Marque pelo menos uma nota.',no_notes:'Nenhuma nota encontrada neste backup.',tag_all:'Todas as etiquetas',no_match:'Nada corresponde aos filtros.',
         made_t:'Seu arquivo está pronto',made_h:'Envie para a outra pessoa. Ela abre JW Sync → Compartilhar → Receber e escolhe este arquivo.',
         download:'Baixar arquivo',copy:'Copiar texto',copied:'Copiado!',
         recv_how:'Como receber',recv_s1:'Cole o texto compartilhado ou escolha o arquivo .jwshare.json.',recv_s2:'Veja as notas para conferir.',recv_s3:'Adicione-as a um backup e depois restaure esse backup no JW Library.',
@@ -239,7 +243,7 @@
         choose_backup:'Ouvrir ma sauvegarde',pick_help:'Choisissez une sauvegarde .jwlibrary pour sélectionner des notes. Elle ne quitte jamais votre appareil.',
         sel_title:'Sélectionnez les notes à partager',sel_help:'Touchez une note pour la cocher. Seules les notes cochées sont incluses.',
         search_ph:'Rechercher des notes…',sel_all:'Tout sélectionner',sel_none:'Effacer',sel_count:'{n} sélectionnées',
-        create_file:'Créer le fichier',no_sel:'Cochez au moins une note.',no_notes:'Aucune note dans cette sauvegarde.',
+        create_file:'Créer le fichier',no_sel:'Cochez au moins une note.',no_notes:'Aucune note dans cette sauvegarde.',tag_all:'Toutes les étiquettes',no_match:'Aucun résultat ne correspond.',
         made_t:'Votre fichier est prêt',made_h:'Envoyez-le à l’autre personne. Elle ouvre JW Sync → Partager → Recevoir et choisit ce fichier.',
         download:'Télécharger',copy:'Copier le texte',copied:'Copié !',
         recv_how:'Comment recevoir',recv_s1:'Collez le texte partagé ou choisissez le fichier .jwshare.json reçu.',recv_s2:'Affichez les notes pour vérifier.',recv_s3:'Ajoutez-les à une sauvegarde, puis restaurez-la dans JW Library.',
@@ -258,7 +262,7 @@
         choose_backup:'Mein Backup öffnen',pick_help:'Wähle ein .jwlibrary-Backup, um Notizen auszuwählen. Es verlässt nie dein Gerät.',
         sel_title:'Wähle die Notizen zum Teilen',sel_help:'Tippe eine Notiz an, um sie anzuhaken. Nur angehakte Notizen werden aufgenommen.',
         search_ph:'Notizen suchen…',sel_all:'Alle auswählen',sel_none:'Leeren',sel_count:'{n} ausgewählt',
-        create_file:'Datei erstellen',no_sel:'Hake mindestens eine Notiz an.',no_notes:'Keine Notizen in diesem Backup.',
+        create_file:'Datei erstellen',no_sel:'Hake mindestens eine Notiz an.',no_notes:'Keine Notizen in diesem Backup.',tag_all:'Alle Stichwörter',no_match:'Keine Treffer für die Filter.',
         made_t:'Deine Datei ist fertig',made_h:'Sende sie an die andere Person. Sie öffnet JW Sync → Teilen → Empfangen und wählt diese Datei.',
         download:'Datei herunterladen',copy:'Text kopieren',copied:'Kopiert!',
         recv_how:'So funktioniert das Empfangen',recv_s1:'Füge den geteilten Text ein oder wähle die erhaltene .jwshare.json-Datei.',recv_s2:'Sieh dir die Notizen zur Kontrolle an.',recv_s3:'Füge sie einem Backup hinzu und stelle dieses dann in JW Library wieder her.',
@@ -277,7 +281,7 @@
         choose_backup:'Apri il mio backup',pick_help:'Scegli un backup .jwlibrary per selezionare le note. Non lascia mai il tuo dispositivo.',
         sel_title:'Seleziona le note da condividere',sel_help:'Tocca una nota per selezionarla. Vengono incluse solo quelle selezionate.',
         search_ph:'Cerca note…',sel_all:'Seleziona tutto',sel_none:'Pulisci',sel_count:'{n} selezionate',
-        create_file:'Crea file',no_sel:'Seleziona almeno una nota.',no_notes:'Nessuna nota in questo backup.',
+        create_file:'Crea file',no_sel:'Seleziona almeno una nota.',no_notes:'Nessuna nota in questo backup.',tag_all:'Tutte le etichette',no_match:'Nessun risultato per i filtri.',
         made_t:'Il tuo file è pronto',made_h:'Invialo all’altra persona. Apre JW Sync → Condividi → Ricevi e sceglie questo file.',
         download:'Scarica file',copy:'Copia testo',copied:'Copiato!',
         recv_how:'Come ricevere',recv_s1:'Incolla il testo condiviso o scegli il file .jwshare.json ricevuto.',recv_s2:'Vedi le note per controllare.',recv_s3:'Aggiungile a un backup, poi ripristina quel backup in JW Library.',
@@ -296,7 +300,7 @@
         choose_backup:'Открыть мою копию',pick_help:'Выберите копию .jwlibrary, чтобы отметить заметки. Она не покидает устройство.',
         sel_title:'Выберите заметки для отправки',sel_help:'Коснитесь заметки, чтобы отметить. Включаются только отмеченные.',
         search_ph:'Поиск заметок…',sel_all:'Выбрать все',sel_none:'Очистить',sel_count:'Выбрано: {n}',
-        create_file:'Создать файл',no_sel:'Отметьте хотя бы одну заметку.',no_notes:'В этой копии нет заметок.',
+        create_file:'Создать файл',no_sel:'Отметьте хотя бы одну заметку.',no_notes:'В этой копии нет заметок.',tag_all:'Все теги',no_match:'Ничего не найдено.',
         made_t:'Ваш файл готов',made_h:'Отправьте его другому человеку. Он открывает JW Sync → Поделиться → Получить и выбирает этот файл.',
         download:'Скачать файл',copy:'Копировать текст',copied:'Скопировано!',
         recv_how:'Как получить',recv_s1:'Вставьте присланный текст или выберите файл .jwshare.json.',recv_s2:'Просмотрите заметки для проверки.',recv_s3:'Добавьте их в копию, затем восстановите её в JW Library.',
@@ -315,7 +319,7 @@
         choose_backup:'バックアップを開く',pick_help:'ノートを選ぶ .jwlibrary バックアップを選択。端末から出ません。',
         sel_title:'共有するノートを選択',sel_help:'ノートをタップしてチェック。チェックしたものだけが含まれます。',
         search_ph:'ノートを検索…',sel_all:'すべて選択',sel_none:'クリア',sel_count:'{n} 件選択',
-        create_file:'共有ファイルを作成',no_sel:'少なくとも1件チェックしてください。',no_notes:'このバックアップにノートがありません。',
+        create_file:'共有ファイルを作成',no_sel:'少なくとも1件チェックしてください。',no_notes:'このバックアップにノートがありません。',tag_all:'すべてのタグ',no_match:'フィルターに一致する項目はありません。',
         made_t:'共有ファイルができました',made_h:'相手に送ってください。相手は JW Sync → 共有 → 受け取る を開き、このファイルを選びます。',
         download:'ファイルをダウンロード',copy:'テキストをコピー',copied:'コピーしました',
         recv_how:'受け取り方',recv_s1:'共有テキストを貼り付けるか、受け取った .jwshare.json ファイルを選びます。',recv_s2:'ノートを確認します。',recv_s3:'自分のバックアップに追加し、それを JW Library に復元します。',
@@ -334,7 +338,7 @@
         choose_backup:'내 백업 열기',pick_help:'노트를 고를 .jwlibrary 백업을 선택하세요. 기기를 벗어나지 않습니다.',
         sel_title:'공유할 노트 선택',sel_help:'노트를 탭하여 체크하세요. 체크한 노트만 포함됩니다.',
         search_ph:'노트 검색…',sel_all:'전체 선택',sel_none:'지우기',sel_count:'{n}개 선택',
-        create_file:'공유 파일 만들기',no_sel:'노트를 하나 이상 체크하세요.',no_notes:'이 백업에 노트가 없습니다.',
+        create_file:'공유 파일 만들기',no_sel:'노트를 하나 이상 체크하세요.',no_notes:'이 백업에 노트가 없습니다.',tag_all:'모든 태그',no_match:'필터와 일치하는 항목이 없습니다.',
         made_t:'공유 파일이 준비됐습니다',made_h:'상대에게 보내세요. 상대는 JW Sync → 공유 → 받기 를 열고 이 파일을 선택합니다.',
         download:'파일 다운로드',copy:'텍스트 복사',copied:'복사됨!',
         recv_how:'받는 방법',recv_s1:'공유된 텍스트를 붙여넣거나 받은 .jwshare.json 파일을 선택하세요.',recv_s2:'노트를 미리 확인하세요.',recv_s3:'내 백업에 추가한 뒤 그 백업을 JW Library에 복원하세요.',
@@ -353,7 +357,7 @@
         choose_backup:'Buksan ang backup ko',pick_help:'Pumili ng .jwlibrary backup para mamili ng tala. Hindi ito lalabas ng device mo.',
         sel_title:'Piliin ang mga talang ibabahagi',sel_help:'I-tap ang tala para i-tsek. Ang naka-tsek lang ang isasama.',
         search_ph:'Maghanap ng tala…',sel_all:'Piliin lahat',sel_none:'I-clear',sel_count:'{n} napili',
-        create_file:'Gumawa ng file',no_sel:'Mag-tsek ng kahit isang tala.',no_notes:'Walang talang nakita sa backup na ito.',
+        create_file:'Gumawa ng file',no_sel:'Mag-tsek ng kahit isang tala.',no_notes:'Walang talang nakita sa backup na ito.',tag_all:'Lahat ng tag',no_match:'Walang tumugma sa mga filter.',
         made_t:'Handa na ang file mo',made_h:'Ipadala ito sa kabila. Bubuksan nila ang JW Sync → Ibahagi → Tumanggap at pipiliin ang file na ito.',
         download:'I-download ang file',copy:'Kopyahin ang teksto',copied:'Nakopya!',
         recv_how:'Paano tumanggap',recv_s1:'I-paste ang ibinahaging teksto o pumili ng .jwshare.json file.',recv_s2:'Tingnan ang mga tala para masiguro.',recv_s3:'Idagdag ang mga ito sa backup, tapos i-restore ang backup na iyon sa JW Library.',
@@ -364,7 +368,7 @@
         adopt_done:'Naidagdag ang {n} tala sa backup mo',adopt_done_h:'I-download ang updated na backup, tapos i-restore sa JW Library para makita ang mga tala.',download_updated:'I-download ang updated backup',
         loading:'Binabasa ang backup mo…',building:'Ginagawa ang file…',error:'Hindi mabasa ang file na iyon.',
         shared_tag:'Ibinahagi',tag_label:'Tag para sa mga na-import na tala',pm_safe:'Idinaragdag bilang bagong tala — hindi kailanman papalitan ang iyong mga tala.',ov_title:'May mga tekstong naka-highlight na',ov_q:'{n} highlight ang nasa mga tekstong na-highlight mo na. Paano idaragdag?',ov_layer:'Idagdag bilang hiwalay na layer',ov_note:'Tala lang ang i-import',cat_all:'Lahat',cat_hl:'Mga highlight',cat_note:'Mga tala',conf_intro:'Ang mga talang ito ay nasa tekstong na-highlight mo na:',imp_title:'Naidagdag sa backup mo',more_hint:'+{n} pa — gamitin ang mga filter',no_title:'Walang pamagat',privacy:'Pribado: ang file na ito ay ginawa sa device mo at naglalaman lang ng mga talang pinili mo. Ibahagi lang sa mga pinagkakatiwalaan.'}
-    ,sv:{title:"Dela anteckningar",lead:"Skicka några av dina anteckningar till en annan person — eller lägg till anteckningar någon skickat dig. Allt sker på din enhet; inget laddas upp.",send_t:"Skicka anteckningar",send_d:"Välj anteckningar från din säkerhetskopia och skapa en liten fil att skicka till någon.",recv_t:"Ta emot anteckningar",recv_d:"Fått en delad fil? Förhandsgranska anteckningarna och lägg till dem i din egen säkerhetskopia.",back:"← JW Sync",start_over:"Börja om",send_how:"Så fungerar det att skicka",send_s1:"Öppna en av dina JW Library-säkerhetskopior (en .jwlibrary-fil).",send_s2:"Bocka för de anteckningar du vill dela.",send_s3:"Skapa filen och skicka den hur du vill — e-post, chatt, AirDrop. Den andra personen öppnar JW Sync → Dela → Ta emot.",choose_backup:"Öppna min säkerhetskopia",pick_help:"Välj en .jwlibrary-säkerhetskopia att välja anteckningar från. Den lämnar aldrig din enhet.",sel_title:"Välj anteckningarna att dela",sel_help:"Tryck på en anteckning för att bocka för den. Endast de anteckningar du bockar för inkluderas.",search_ph:"Sök anteckningar…",sel_all:"Markera alla",sel_none:"Rensa",sel_count:"{n} markerade",create_file:"Skapa delningsfil",no_sel:"Bocka för minst en anteckning först.",no_notes:"Inga anteckningar hittades i den här säkerhetskopian.",made_t:"Din delningsfil är klar",made_h:"Skicka denna till den andra personen. De öppnar JW Sync → Dela → Ta emot och väljer sedan den här filen.",download:"Ladda ner fil",copy:"Kopiera text",copied:"Kopierat!",recv_how:"Så fungerar det att ta emot",recv_s1:"Klistra in den delade texten eller välj .jwshare.json-filen du fått.",recv_s2:"Förhandsgranska anteckningarna för att se att de ser rätt ut.",recv_s3:"Lägg till dem i en av dina egna säkerhetskopior och återställ sedan den säkerhetskopian till JW Library.",paste_ph:"Klistra in delade anteckningar här, eller släpp en .jwshare.json-fil…",choose_file:"Välj fil",preview:"Förhandsgranska",invalid:"Det där ser inte ut att vara en giltig fil med delade anteckningar.",prev_t:"Delade anteckningar (förhandsgranskning)",prev_h:"Dessa är skrivskyddade. För att behålla dem, lägg till dem i en av dina säkerhetskopior nedan.",add_to:"Lägg till i min säkerhetskopia",add_h:"Välj den .jwlibrary-säkerhetskopia du vill lägga till de här anteckningarna i. Du får en uppdaterad kopia att ladda ner.",adopt_done:"Lade till {n} anteckningar i din säkerhetskopia",adopt_done_h:"Ladda ner den uppdaterade säkerhetskopian och återställ den sedan i JW Library för att se anteckningarna.",download_updated:"Ladda ner uppdaterad säkerhetskopia",loading:"Läser din säkerhetskopia…",building:"Skapar fil…",error:"Kunde inte läsa den filen.",shared_tag:"Delad",tag_label:"Tagg för importerade anteckningar",pm_safe:"Tillagda som nya anteckningar — dina egna anteckningar ersätts aldrig.",ov_title:"Vissa verser är redan överstrukna",ov_q:"{n} överstrykning(ar) hamnar på verser du redan strukit över. Hur ska vi lägga till dem?",ov_layer:"Lägg till som ett separat lager",ov_note:"Importera endast anteckning",cat_all:"Alla",cat_hl:"Överstrykningar",cat_note:"Anteckningar",conf_intro:"Dessa anteckningar är på verser du redan strukit över:",imp_title:"Tillagt i din säkerhetskopia",more_hint:"+{n} till — använd filtren ovan för att begränsa",no_title:"Namnlös",privacy:"Privat: den här filen skapas på din enhet och innehåller endast de anteckningar du valt. Dela den bara med personer du litar på."}};
+    ,sv:{title:"Dela anteckningar",lead:"Skicka några av dina anteckningar till en annan person — eller lägg till anteckningar någon skickat dig. Allt sker på din enhet; inget laddas upp.",send_t:"Skicka anteckningar",send_d:"Välj anteckningar från din säkerhetskopia och skapa en liten fil att skicka till någon.",recv_t:"Ta emot anteckningar",recv_d:"Fått en delad fil? Förhandsgranska anteckningarna och lägg till dem i din egen säkerhetskopia.",back:"← JW Sync",start_over:"Börja om",send_how:"Så fungerar det att skicka",send_s1:"Öppna en av dina JW Library-säkerhetskopior (en .jwlibrary-fil).",send_s2:"Bocka för de anteckningar du vill dela.",send_s3:"Skapa filen och skicka den hur du vill — e-post, chatt, AirDrop. Den andra personen öppnar JW Sync → Dela → Ta emot.",choose_backup:"Öppna min säkerhetskopia",pick_help:"Välj en .jwlibrary-säkerhetskopia att välja anteckningar från. Den lämnar aldrig din enhet.",sel_title:"Välj anteckningarna att dela",sel_help:"Tryck på en anteckning för att bocka för den. Endast de anteckningar du bockar för inkluderas.",search_ph:"Sök anteckningar…",sel_all:"Markera alla",sel_none:"Rensa",sel_count:"{n} markerade",create_file:"Skapa delningsfil",no_sel:"Bocka för minst en anteckning först.",no_notes:"Inga anteckningar hittades i den här säkerhetskopian.",tag_all:"Alla taggar",no_match:"Inget matchar dina filter.",made_t:"Din delningsfil är klar",made_h:"Skicka denna till den andra personen. De öppnar JW Sync → Dela → Ta emot och väljer sedan den här filen.",download:"Ladda ner fil",copy:"Kopiera text",copied:"Kopierat!",recv_how:"Så fungerar det att ta emot",recv_s1:"Klistra in den delade texten eller välj .jwshare.json-filen du fått.",recv_s2:"Förhandsgranska anteckningarna för att se att de ser rätt ut.",recv_s3:"Lägg till dem i en av dina egna säkerhetskopior och återställ sedan den säkerhetskopian till JW Library.",paste_ph:"Klistra in delade anteckningar här, eller släpp en .jwshare.json-fil…",choose_file:"Välj fil",preview:"Förhandsgranska",invalid:"Det där ser inte ut att vara en giltig fil med delade anteckningar.",prev_t:"Delade anteckningar (förhandsgranskning)",prev_h:"Dessa är skrivskyddade. För att behålla dem, lägg till dem i en av dina säkerhetskopior nedan.",add_to:"Lägg till i min säkerhetskopia",add_h:"Välj den .jwlibrary-säkerhetskopia du vill lägga till de här anteckningarna i. Du får en uppdaterad kopia att ladda ner.",adopt_done:"Lade till {n} anteckningar i din säkerhetskopia",adopt_done_h:"Ladda ner den uppdaterade säkerhetskopian och återställ den sedan i JW Library för att se anteckningarna.",download_updated:"Ladda ner uppdaterad säkerhetskopia",loading:"Läser din säkerhetskopia…",building:"Skapar fil…",error:"Kunde inte läsa den filen.",shared_tag:"Delad",tag_label:"Tagg för importerade anteckningar",pm_safe:"Tillagda som nya anteckningar — dina egna anteckningar ersätts aldrig.",ov_title:"Vissa verser är redan överstrukna",ov_q:"{n} överstrykning(ar) hamnar på verser du redan strukit över. Hur ska vi lägga till dem?",ov_layer:"Lägg till som ett separat lager",ov_note:"Importera endast anteckning",cat_all:"Alla",cat_hl:"Överstrykningar",cat_note:"Anteckningar",conf_intro:"Dessa anteckningar är på verser du redan strukit över:",imp_title:"Tillagt i din säkerhetskopia",more_hint:"+{n} till — använd filtren ovan för att begränsa",no_title:"Namnlös",privacy:"Privat: den här filen skapas på din enhet och innehåller endast de anteckningar du valt. Dela den bara med personer du litar på."}};
     function getLang(){ try{ var l=localStorage.getItem('jwsync_lang'); if(l&&I18N[l]) return l; }catch(_){ } var n=(navigator.language||'en').slice(0,2); return I18N[n]?n:'en'; }
     function t(k,vars){ var L=I18N[getLang()]||I18N.en; var s=(L[k]!=null?L[k]:(I18N.en[k]!=null?I18N.en[k]:k)); if(vars) for(var v in vars) s=s.replace('{'+v+'}', vars[v]); return s; }
     function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
@@ -456,7 +460,7 @@
       document.getElementById('sh-open-backup').onclick=function(){ pickFile('.jwlibrary',function(f){ loadBackup(f); }); };
       if(prefill) loadBackup(prefill);
     }
-    var sendState={ notes:[], sel:{}, fileName:'' };
+    var sendState={ notes:[], sel:{}, fileName:'', tag:'' };
     function loadBackup(file){
       setMain('<div class="sh-state"><div class="sh-spin"></div><div>'+esc(t('loading'))+'</div></div>');
       var SQL, keepBuf;
@@ -473,34 +477,48 @@
           rows(db,"SELECT br.UserMarkId, br.BlockType, br.Identifier, br.StartToken, br.EndToken FROM BlockRange br").forEach(function(r){ (brMap[r.UserMarkId]=brMap[r.UserMarkId]||[]).push({blockType:r.BlockType,identifier:r.Identifier,startToken:r.StartToken,endToken:r.EndToken}); });
           ns.forEach(function(n){ n._tags=tagMap[n.NoteId]||[]; n._ranges=(n.UserMarkId!=null)?(brMap[n.UserMarkId]||[]):[]; });
           db.close();
-          sendState={ notes:ns, sel:{}, fileName:(file&&file.name)||'backup.jwlibrary' };
+          sendState={ notes:ns, sel:{}, fileName:(file&&file.name)||'backup.jwlibrary', tag:'' };
           // Persist into the shared session so Merge/Stats/Explorer can reuse it.
           try { if (window.JwSession && keepBuf) window.JwSession.put(keepBuf, sendState.fileName); } catch (_) {}
           renderSelect('');
         })
         .catch(function(e){ console.error(e); setMain('<div class="sh-state"><div class="sh-err">'+esc(t('error'))+'</div><button class="sh-btn sh-btn-ghost" id="sh-retry">'+esc(t('choose_backup'))+'</button></div>'); var rb=document.getElementById('sh-retry'); if(rb) rb.onclick=function(){ renderSendIntro(); }; });
     }
+    function tagList(ns){
+      var m={};
+      ns.forEach(function(n){ (n._tags||[]).forEach(function(tg){ if(tg) m[tg]=(m[tg]||0)+1; }); });
+      return Object.keys(m).sort(function(a,b){ return a.localeCompare(b); })
+        .map(function(k){ return {name:k, n:m[k]}; });
+    }
     function renderSelect(q){
       var ns=sendState.notes;
       if(!ns.length){ setMain('<div class="sh-state"><div>'+esc(t('no_notes'))+'</div></div>'); return; }
       var ql=(q||'').toLowerCase();
-      var shown=ns.filter(function(n){ if(!ql) return true; return ((n.Title||'')+' '+stripHtml(n.Content||'')+' '+pubLabel(n)).toLowerCase().indexOf(ql)>=0; });
+      var tags=tagList(ns);
+      if(sendState.tag && !tags.some(function(tg){ return tg.name===sendState.tag; })) sendState.tag='';
+      var shown=ns.filter(function(n){
+        if(sendState.tag && (n._tags||[]).indexOf(sendState.tag)<0) return false;
+        if(!ql) return true;
+        return ((n.Title||'')+' '+stripHtml(n.Content||'')+' '+pubLabel(n)+' '+(n._tags||[]).join(' ')).toLowerCase().indexOf(ql)>=0;
+      });
       var selCount=Object.keys(sendState.sel).filter(function(k){return sendState.sel[k];}).length;
-      var list='';
+      var list=shown.length?'':'<div class="sh-empty">'+esc(t('no_match'))+'</div>';
       shown.slice(0,1000).forEach(function(n){
         var on=!!sendState.sel[n.NoteId];
         list+='<div class="sh-item'+(on?' sel':'')+'" data-id="'+n.NoteId+'"><span class="sh-check"></span>'+
           '<div class="sh-item-body"><div class="sh-item-title">'+esc((n.Title&&n.Title.trim())||t('no_title'))+'</div>'+
           '<div class="sh-item-ex">'+esc(stripHtml(n.Content||'')||'—')+'</div>'+
-          '<div class="sh-item-meta">'+esc(pubLabel(n))+'</div></div></div>';
+          '<div class="sh-item-meta">'+esc(pubLabel(n)+((n._tags||[]).length?' · '+(n._tags||[]).slice(0,3).join(' · ')+((n._tags||[]).length>3?' +'+((n._tags||[]).length-3):''):''))+'</div></div></div>';
       });
       setMain('<div class="sh-filebadge">📄 '+esc(sendState.fileName)+'</div>'+
         '<h2 class="sh-section-title">'+esc(t('sel_title'))+'</h2><p class="sh-section-help">'+esc(t('sel_help'))+'</p>'+
         '<div class="sh-toolbar"><label class="sh-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7d8aa8" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="sh-q" type="search" placeholder="'+esc(t('search_ph'))+'" value="'+esc(q||'')+'"></label>'+
-          '<button class="sh-mini" id="sh-all">'+esc(t('sel_all'))+'</button><button class="sh-mini" id="sh-none">'+esc(t('sel_none'))+'</button></div>'+
+          (tags.length?'<select class="sh-tagsel" id="sh-tag" aria-label="'+esc(t('tag_all'))+'"><option value="">'+esc(t('tag_all'))+'</option>'+tags.map(function(tg){ return '<option value="'+esc(tg.name)+'"'+(tg.name===sendState.tag?' selected':'')+'>'+esc(tg.name)+' ('+tg.n+')</option>'; }).join('')+'</select>':'')+'<button class="sh-mini" id="sh-all">'+esc(t('sel_all'))+'</button><button class="sh-mini" id="sh-none">'+esc(t('sel_none'))+'</button></div>'+
         '<div class="sh-list" id="sh-list">'+list+'</div>'+
         '<div class="sh-footer"><span class="sh-count" id="sh-count">'+esc(t('sel_count',{n:selCount}))+'</span><button class="sh-btn" id="sh-create"'+(selCount?'':' disabled')+'>'+esc(t('create_file'))+'</button></div>'+
         '<p class="sh-note">🔒 '+esc(t('privacy'))+'</p>');
+      var tagEl=document.getElementById('sh-tag');
+      if(tagEl) tagEl.onchange=function(){ sendState.tag=tagEl.value; renderSelect(q); };
       var qEl=document.getElementById('sh-q'); var deb;
       qEl.oninput=function(){ clearTimeout(deb); deb=setTimeout(function(){ renderSelect(qEl.value); var nq=document.getElementById('sh-q'); if(nq){ nq.focus(); nq.selectionStart=nq.value.length; } },200); };
       function refreshCount(){ var c=Object.keys(sendState.sel).filter(function(k){return sendState.sel[k];}).length; document.getElementById('sh-count').textContent=t('sel_count',{n:c}); document.getElementById('sh-create').disabled=!c; }

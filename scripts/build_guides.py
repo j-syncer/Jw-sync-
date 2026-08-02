@@ -301,7 +301,7 @@ GUIDES = [
    "JW Library has no way to give another person a copy of specific notes. Sending your whole backup would work — but it hands over everything, and restoring it would wipe the receiver's own library. JW Sync's note sharing solves both problems: pick exactly which notes to share, and the receiver adds them without losing anything.",
   ],
   "steps": [
-   ("Pick the notes to share", "On the Share page at jwsync.org/share.html, load your backup and select the notes — a handful from one talk, everything under a tag, whatever you choose. Highlights attached to those notes travel along."),
+   ("Pick the notes to share", "On the Share page at jwsync.org/share.html, load your backup and select the notes — a handful from one talk, or everything under a tag in one click with the picker's tag filter. Highlights attached to those notes travel along."),
    ("Send the share file", "JW Sync produces a small file containing only the selected notes. Send it by any channel you like — messaging app, email, AirDrop. There is no server and no account; the file is the whole exchange."),
    ("The receiver merges it in", "Your friend opens the same page, loads the share file together with their own backup, and gets a new backup with your notes added. Their own notes are never overwritten — if a shared note clashes with one of theirs, they choose how it's added — and imported notes arrive tagged, so they're easy to find, review or remove later."),
   ],
@@ -491,6 +491,8 @@ GUIDES = [
   "sections": [
    ("A tag system that actually helps",
     "Once tags are consistent, filtering becomes trustworthy — one tap shows every note on a theme, across every publication. It's the difference between tags as clutter and tags as a real index of your study."),
+   ("Consistent tags make sharing a two-click job",
+    "The note picker on the Share page has its own tag filter, so a clean tag is also the fastest way to send someone a set of notes: choose the tag, hit Select all, create the file. Sloppy tags cost you twice — once when you look for notes, and again when you try to share them."),
   ],
   "faq": [
    ("Will bulk retagging touch the note text?", "No — it only changes which tags are attached. Your note titles and content stay exactly as written."),
@@ -660,13 +662,13 @@ GUIDES = [
   ],
   "steps": [
    ("Load your backup on the Share page", "Go to jwsync.org/share.html and load your .jwlibrary file."),
-   ("Select just the convention notes", "Tick the notes to share. Searching for the event's publication or a word you used throughout brings the set up together, and highlights attached to those notes come along."),
+   ("Select just the convention notes", "Pick the event's tag from the tag filter in the note picker and hit Select all — the list is already exactly the notes you tagged. Highlights attached to those notes come along."),
    ("Send the small share file", "JW Sync makes a small file containing only those notes. Send it however you like — messaging app, email, AirDrop. No server, no account."),
    ("Family and friends merge it in", "Each person opens the same page, loads your file with their own backup, and gets a new backup with your notes added. Their own notes are never overwritten, and your imported notes arrive tagged so they're easy to find."),
   ],
   "sections": [
    ("A tag makes this effortless",
-    "If you tag your notes during the event (say, “2026 Convention”), selecting them afterward is one filter click. It's worth starting a fresh tag at the beginning of any convention, assembly or special meeting for exactly this reason."),
+    "If you tag your notes during the event (say, “2026 Convention”), selecting them afterward is one filter click and a Select all. It's worth starting a fresh tag at the beginning of any convention, assembly or special meeting for exactly this reason."),
   ],
   "faq": [
    ("Can I share with several people at once?", "Yes — the share file is just a file. Send it to as many people as you like; each merges it into their own library independently."),
@@ -689,19 +691,22 @@ GUIDES = [
   ],
   "steps": [
    ("Make sure the notes carry the tag", "Tag them in JW Library as you go, or open your backup in Study Explorer at jwsync.org and use the tag editor to add a tag to notes in bulk. Consistent tagging now is what makes sharing a one-minute job later."),
-   ("See the tagged set first", "In Study Explorer, filter by that tag. You get the exact list — how many notes, which publications — so you know what you're about to hand over before you hand it over."),
-   ("Tick the same notes on the Share page", "Open jwsync.org/share.html, choose Send notes and load your backup. The search box matches note titles, note text and publication, so any word your tagged notes have in common brings them up together to tick."),
+   ("Open the Share page and load your backup", "Go to jwsync.org/share.html, choose Send notes and load your .jwlibrary file. It's read in your browser and never leaves your device."),
+   ("Pick the tag from the filter, then Select all", "The note picker has a tag filter listing every tag in your backup with the number of notes under it. Choose your tag and the list narrows to exactly those notes; Select all ticks the lot. That's the whole selection — two clicks."),
    ("Create the file and send it", "JW Sync builds a small share file containing only the notes you ticked. Send it by chat, email or AirDrop — there is no server involved and no account on either side."),
    ("They add it to their own backup", "The other person opens the same page, chooses Receive, previews the notes, and adds them to their backup. Your tags arrive with the notes, plus a label tag for the import, so the whole set is one filter away for them too."),
   ],
   "sections": [
    ("Why share a tag rather than a backup",
     "Handing over a full .jwlibrary backup gives away everything you have ever written, and restoring it would erase the other person's own notes. Sharing a tagged selection is the opposite on both counts: they see only what you chose, and they lose nothing of their own."),
+   ("Narrowing further, or sharing across tags",
+    "The tag filter and the search box work together: pick a tag, then type a word to reduce it further, and Select all still ticks only what's in front of you. Searching also matches tag names, so a keyword shared by several tags gathers them in one pass. Each note in the list shows the tags it carries, so you can see what you're sending before you send it."),
    ("Tags to keep for sharing",
     "It is worth keeping a few tags that exist purely to be shared — an event name, a subject you research for others, the person you study with. When the moment comes to send something, there is no hunting: the set is already assembled."),
   ],
   "faq": [
    ("Do my tags go across to the other person?", "Yes. Shared notes carry their tags, and the import is labelled with a tag of its own, so the receiver can find, review or remove the whole batch later."),
+   ("What if a note has several tags?", "It appears under each of them in the filter, and all of its tags travel with it. Filtering by one tag never strips the others."),
    ("Does sharing remove the notes from my library?", "No. Sharing copies notes into a small file; your backup and your app are untouched."),
    ("Can I send the same tag to several people?", "Yes — the share file is an ordinary file. Send it to as many people as you like, and each adds it to their own library independently."),
   ],
@@ -721,7 +726,7 @@ GUIDES = [
   "steps": [
    ("Prepare the lesson's notes in JW Library", "Write the notes as you normally would, on the paragraphs and scriptures the lesson covers. Give them a tag — the person's name, or the publication — so the set is easy to select later."),
    ("Open the Share page and load your backup", "Create a backup (Personal Study → Backup and Restore → Create a backup), then open jwsync.org/share.html, choose Send notes and load the file. It never leaves your device."),
-   ("Tick the notes for this lesson", "Search by the publication or a word you used, tick just this lesson's notes, and create the share file. Everything else in your library stays where it is."),
+   ("Tick the notes for this lesson", "Filter the picker by the tag you used and hit Select all, or search and tick them one by one. Create the share file — everything else in your library stays where it is."),
    ("Send it and walk them through receiving", "They need a backup of their own first — Personal Study → Backup and Restore → Create a backup. Then they open jwsync.org/share.html, choose Receive, load your file and their backup, and download the updated backup."),
    ("They restore it in JW Library", "Backup and Restore → Restore, choose the updated file, and your notes appear in their library alongside their own — tagged, so they know which ones came from you."),
   ],
@@ -751,7 +756,7 @@ GUIDES = [
   ],
   "steps": [
    ("Back up the device you took notes on", "JW Library → Personal Study → Backup and Restore → Create a backup."),
-   ("Select the week's notes", "At jwsync.org/share.html choose Send notes, load your backup, and tick the notes from this week's material — searching by the publication brings them together quickly."),
+   ("Select the week's notes", "At jwsync.org/share.html choose Send notes, load your backup, and tick this week's notes — searching by the publication brings them together quickly, and if you tag the week's notes the tag filter gathers them in one click."),
    ("Send it in the family chat", "Create the share file and send it however the household already talks — messaging app, email, AirDrop. It is a small file with only the notes you ticked in it."),
    ("Each person adds it to their own backup", "They open the same page, choose Receive, load your file with a backup of their own, download the updated backup and restore it in JW Library."),
   ],
@@ -811,7 +816,7 @@ GUIDES = [
   ],
   "steps": [
    ("Tag your research as you gather it", "Give the subject a tag in JW Library so the set stays together. In Study Explorer you can add a tag to notes in bulk if you didn't tag them at the time."),
-   ("Create one share file for the group", "At jwsync.org/share.html choose Send notes, load your backup, tick the research notes and create the file."),
+   ("Create one share file for the group", "At jwsync.org/share.html choose Send notes, load your backup, pick the subject's tag from the tag filter, hit Select all and create the file."),
    ("Post it once", "Send the same file to everyone — a group chat, an email to several people, whatever the group already uses. There's no per-person setup and no server copy."),
    ("Ask for theirs in return", "Each person can do exactly the same from their side. Add each file you receive to your backup in turn, giving each import its own tag — the sender's name works well — so you can always tell whose research is whose."),
   ],
@@ -842,7 +847,7 @@ GUIDES = [
   "steps": [
    ("Pull the research together under one tag", "As you prepare, tag the notes with the theme or the assignment. If they're already written and untagged, open your backup in Study Explorer and tag them in bulk in a couple of minutes."),
    ("Decide which form suits the other person", "Someone who studies in JW Library wants notes in their library. Someone building a document wants text. You can do both from the same set."),
-   ("To send notes: use the Share page", "At jwsync.org/share.html choose Send notes, load your backup, tick the research and create the file. They add it to their own backup and restore it — their own notes are untouched."),
+   ("To send notes: use the Share page", "At jwsync.org/share.html choose Send notes, load your backup, filter by the tag you used and hit Select all, then create the file. They add it to their own backup and restore it — their own notes are untouched."),
    ("To send text: export from Study Explorer", "Filter to the same set and copy or export it as Markdown or plain text. Formatting survives, so a structured outline stays structured when it's pasted into a document."),
   ],
   "sections": [
