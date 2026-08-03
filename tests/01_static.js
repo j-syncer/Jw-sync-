@@ -971,6 +971,78 @@ for (const cssRel of ['beta/styles.css', 'styles.css']) {
   else fail(cssRel + ': .discover-fullmode-btn CSS missing');
 }
 
+// ── Accessibility: one main landmark + WCAG AA text contrast ────────────
+// Lighthouse flagged jwsync.org for "Document does not have a main landmark"
+// and two 4.5:1 contrast failures (the contact button, the footer line).
+section('Accessibility — landmark + contrast');
+
+function relLum(hex) {
+  const h = hex.replace('#', '');
+  const ch = (s) => {
+    const v = parseInt(s, 16) / 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * ch(h.slice(0, 2)) + 0.7152 * ch(h.slice(2, 4)) + 0.0722 * ch(h.slice(4, 6));
+}
+function contrast(a, b) {
+  const la = relLum(a), lb = relLum(b);
+  return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+}
+
+for (const f of FILES) {
+  const name = path.relative(REPO, f);
+  const html = fs.readFileSync(f, 'utf8');
+  const mains = (html.match(/<main\b/g) || []).length;
+  if (html.includes('<main id="site-main"') && mains === 2) {
+    // 2 = the page's own landmark + the embedded (hidden) forum view's
+    ok(name + ': has a #site-main landmark wrapping the page content');
+  } else {
+    fail(name + ': expected one #site-main landmark plus the forum view\'s (<main> count: ' + mains + ')');
+  }
+  // white on the brand orange is 3.6:1 — the contact button uses the darker shade
+  if (/mailto:jwsyncsupport@gmail\.com"[^>]*background:#c2410c/.test(html))
+    ok(name + ': contact button uses the AA-contrast orange');
+  else fail(name + ': contact button is back on a sub-4.5:1 orange');
+  if (/<footer class="bg-stone-950[^"]*text-stone-400/.test(html))
+    ok(name + ': footer body text is stone-400, not the sub-AA stone-500');
+  else fail(name + ': footer text colour regressed below AA');
+}
+for (const cssRel of ['beta/styles.css', 'styles.css']) {
+  const css = fs.readFileSync(REPO + '/' + cssRel, 'utf8');
+  if (/body\.is-forum #site-main \{ display: none; \}/.test(css))
+    ok(cssRel + ': page landmark hidden while the forum view shows its own');
+  else fail(cssRel + ': two <main> landmarks can be visible at once on #forum');
+  const badge = css.match(/\.svc-card-new \{[^}]*\}/);
+  if (badge && /background: #c2410c/.test(badge[0]))
+    ok(cssRel + ': NEW badge uses the AA-contrast orange');
+  else fail(cssRel + ': NEW badge back on a sub-4.5:1 orange');
+}
+// The footer's colours come from the project's own tailwind.css, where the
+// "stone" scale is a custom blue ramp — read the real values, don't assume.
+const tw = fs.readFileSync(REPO + '/tailwind.css', 'utf8');
+function twColor(cls, prop) {
+  const m = tw.match(new RegExp('\\.' + cls + '\\{[^}]*' + prop + ':rgb\\((\\d+) (\\d+) (\\d+)'));
+  return m && '#' + [m[1], m[2], m[3]].map(n => (+n).toString(16).padStart(2, '0')).join('');
+}
+const footerBg = twColor('bg-stone-950', 'background-color');
+const footerFg = twColor('text-stone-400', 'color');
+const footerOld = twColor('text-stone-500', 'color');
+if (footerBg && footerFg && footerOld) {
+  const now = contrast(footerFg, footerBg), before = contrast(footerOld, footerBg);
+  if (now >= 4.5) ok('footer text (stone-400 on stone-950): ' + now.toFixed(2) + ':1');
+  else fail('footer text below AA: ' + now.toFixed(2) + ':1');
+  if (before < 4.5) ok('the old stone-500 really was below AA (' + before.toFixed(2) + ':1)');
+  else fail('stone-500 now passes — this guard is testing the wrong colours');
+} else {
+  fail('could not read the stone palette out of tailwind.css');
+}
+[['#ffffff', '#c2410c', 'white on button orange'],
+ ['#94a3b8', '#040f22', 'muted body text on page background']].forEach(([fg, bg, label]) => {
+  const r = contrast(fg, bg);
+  if (r >= 4.5) ok(label + ': ' + r.toFixed(2) + ':1');
+  else fail(label + ' below AA: ' + r.toFixed(2) + ':1');
+});
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

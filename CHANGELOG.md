@@ -4,6 +4,31 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.98.1] — 2026-08-02
+
+### Fixed: the accessibility issues PageSpeed Insights reported
+
+Lighthouse flagged three things on jwsync.org; all three are fixed.
+
+- **No main landmark.** The landing content, the merge app and the contact card
+  now sit inside a single `<main>`, so screen-reader users get a "skip to main
+  content" target. The embedded Community view has its own `<main>`, so the
+  page's landmark is hidden while that view is open — a document must expose
+  exactly one.
+- **Contact button contrast.** White on the brand orange is 3.6:1, below the
+  4.5:1 minimum for text under 19px. The support-email button now uses a
+  slightly deeper shade of the same orange: 5.2:1.
+- **Footer contrast.** The footer's links line was 4.1:1 against the near-black
+  footer; its text is now one step lighter, at 7.8:1.
+
+The same white-on-orange problem appeared in two more places, so those are
+fixed too: the "NEW" badge on the tool cards, and the buttons and numbered
+step markers on the guide pages. The guide footer, at 4.0:1, was lightened to
+6.6:1.
+
+Tests now compute the actual WCAG contrast ratios for these colour pairs, so a
+future palette change can't quietly drop them back below AA.
+
 ## [2.98.0] — 2026-08-02
 
 ### Go live: Reading Companion card and Library Doctor auto-mode

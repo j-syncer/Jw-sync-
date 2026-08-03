@@ -273,7 +273,7 @@
         "Free and open source",
         "Available in 10 languages"
       ],
-      "softwareVersion": "2.98.0",
+      "softwareVersion": "2.98.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -778,6 +778,8 @@ body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
    doesn't shift layout (w-*/h-* utility classes need a non-inline display) */
 #root i[data-lucide]{display:inline-block}
 </style>
+<!-- ── Main landmark: landing content + merge app + contact ─── -->
+<main id="site-main" class="flex flex-col flex-grow">
     <section id="landing-view" style="display:none">
       <div class="landing-hero landing-hero-split">
         <div class="lhv-copy">
@@ -972,14 +974,16 @@ body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
         <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#fb923c;margin-bottom:10px">Get in touch</div>
         <h2 style="font-size:24px;font-weight:700;color:#f1f5f9;margin:0 0 12px;line-height:1.3">Have a question or need help?</h2>
         <p style="color:#94a3b8;font-size:14px;line-height:1.65;margin:0 0 22px">Whether you hit a snag, have feedback, or just want to say hello — reach out and we'll get back to you.</p>
-        <a href="mailto:jwsyncsupport@gmail.com" style="display:inline-flex;align-items:center;gap:9px;background:#ea580c;color:#fff;font-weight:700;font-size:15px;padding:13px 30px;border-radius:12px;text-decoration:none;box-shadow:0 1px 5px rgba(0,0,0,.4)">
+        <a href="mailto:jwsyncsupport@gmail.com" style="display:inline-flex;align-items:center;gap:9px;background:#c2410c;color:#fff;font-weight:700;font-size:15px;padding:13px 30px;border-radius:12px;text-decoration:none;box-shadow:0 1px 5px rgba(0,0,0,.4)">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             jwsyncsupport@gmail.com
         </a>
     </div>
 </section>
 <!-- ── End contact card ──────────────────────────────────── -->
-    <footer class="bg-stone-950 border-t border-stone-800 text-stone-500 text-[10px] md:text-xs p-6 mt-8">
+</main>
+<!-- ── End main landmark ────────────────────────────────── -->
+    <footer class="bg-stone-950 border-t border-stone-800 text-stone-400 text-[10px] md:text-xs p-6 mt-8">
         <div class="max-w-5xl mx-auto">
             <p style="margin:0 0 10px"><a href="guides/" style="color:#fb923c">Guides &amp; How-tos</a> &middot; <a href="forum.html" style="color:#fb923c">Community</a> &middot; <a href="highlights.html" style="color:#fb923c">Study Stats</a></p><p class="footer-tagline" data-i18n="footer_tagline">JW Sync processes all data locally — your files never leave your device.</p>
             <details class="legal-details">

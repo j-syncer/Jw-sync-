@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Back Up JW Library Before a Factory Reset or Repair", "description": "A reset wipes JW Library's notes with everything else, and phone-transfer tools don't carry them. Make a backup, verify it actually opens, then reset with nothing at risk.", "inLanguage": "en", "datePublished": "2026-08-02", "dateModified": "2026-08-02", "mainEntityOfPage": "https://jwsync.org/guides/backup-jw-library-before-phone-repair", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "Back Up JW Library Before a Factory Reset or Repair", "description": "A reset wipes JW Library's notes with everything else, and phone-transfer tools don't carry them. Make a backup, verify it actually opens, then reset with nothing at risk.", "inLanguage": "en", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Create the backup", "text": "JW Library → Personal Study → Backup and Restore → Create a backup. You get a .jwlibrary file — usually only a few megabytes."}, {"@type": "HowToStep", "position": 2, "name": "Get it off the device", "text": "Email it to yourself, or put it in Drive, iCloud or a computer folder. A backup that only exists on the phone you're about to wipe isn't a backup."}, {"@type": "HowToStep", "position": 3, "name": "Verify it opens before you wipe anything", "text": "Load the file at jwsync.org and look at it — the notes, highlights and bookmarks should all be there, and the health check will flag anything wrong with the file. This is the whole point of the exercise: finding out the file is unreadable afterwards is too late."}, {"@type": "HowToStep", "position": 4, "name": "Reset, then restore", "text": "After the reset or repair, install JW Library, sign in, then Backup and Restore → Restore and choose your file."}, {"@type": "HowToStep", "position": 5, "name": "Used a loaner phone in between? Merge, don't overwrite", "text": "If you took notes on a temporary device, back that one up too and merge both files at jwsync.org before restoring — otherwise restoring the old backup erases whatever you wrote while you waited."}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://jwsync.org/guides/"}, {"@type": "ListItem", "position": 3, "name": "Back Up JW Library Before a Factory Reset or Repair", "item": "https://jwsync.org/guides/backup-jw-library-before-phone-repair"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Will my downloaded publications come back?", "acceptedAnswer": {"@type": "Answer", "text": "The backup carries your personal study data — notes, highlights, bookmarks, tags and playlists. Publications simply re-download afterwards."}}, {"@type": "Question", "name": "Does the file work if I switch to a different phone brand or platform?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The .jwlibrary format is the same on Android, iPhone, iPad and Windows."}}]}]}</script>
 <style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
---muted:#94a3b8;--accent:#ea580c;--accent-soft:#fb923c}
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--txt);
 font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -42,7 +42,7 @@ p{margin:0 0 16px}
 ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
 ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
 ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
-border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
 display:flex;align-items:center;justify-content:center}
 ol.steps h3{margin:0 0 4px;font-size:16.5px}
 ol.steps p{margin:0;color:var(--muted);font-size:15px}
@@ -50,7 +50,7 @@ ol.steps p{margin:0;color:var(--muted);font-size:15px}
 padding:20px 22px;margin:34px 0}
 .cta strong{display:block;font-size:17px;margin-bottom:4px}
 .cta span{color:var(--muted);font-size:14.5px}
-.cta .btn{display:inline-block;margin-top:14px;background:var(--accent);color:#fff;font-weight:600;
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
 font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
 .cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
 .faq dt{font-weight:600;margin:18px 0 4px}
@@ -58,7 +58,7 @@ font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0
 .related{margin:8px 0 0;padding:0;list-style:none}
 .related li{margin:0 0 8px}
 footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
-color:#64748b;font-size:12.5px}
+color:#8b99ad;font-size:12.5px}
 footer.site p{margin:0 0 10px}
 .gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
 @media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}

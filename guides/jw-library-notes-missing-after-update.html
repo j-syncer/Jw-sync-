@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "JW Library Notes Missing After an Update or Reinstall", "description": "Your notes vanished after updating, reinstalling or signing in again. What to do first, what not to do, and how to get them back without losing anything you've written since.", "inLanguage": "en", "datePublished": "2026-08-02", "dateModified": "2026-08-02", "mainEntityOfPage": "https://jwsync.org/guides/jw-library-notes-missing-after-update", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "JW Library Notes Missing After an Update or Reinstall", "description": "Your notes vanished after updating, reinstalling or signing in again. What to do first, what not to do, and how to get them back without losing anything you've written since.", "inLanguage": "en", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Don't overwrite your backups yet", "text": "Resist creating a fresh backup on top of an old one, and don't restore anything blindly. An older backup file is the most likely place your notes still exist."}, {"@type": "HowToStep", "position": 2, "name": "Hunt for the newest backup you have", "text": "Check email attachments, Google Drive, iCloud Drive, your computer's downloads folder and any other device you have restored to. Backups are small, so people often have more copies than they remember."}, {"@type": "HowToStep", "position": 3, "name": "Look inside the file before restoring it", "text": "Load the candidate at jwsync.org and see what's actually in it — how many notes, from which publications, up to what date. That tells you whether it's the right file to use, before you commit to a restore."}, {"@type": "HowToStep", "position": 4, "name": "Back up the current device too", "text": "Even if it looks empty, back it up. If you've written anything since the notes disappeared, this file is the only copy of it."}, {"@type": "HowToStep", "position": 5, "name": "Merge the two, then restore", "text": "Merge the old backup with the current one at jwsync.org. The result contains the recovered notes and everything written since, with duplicates kept once. Restore that merged file — never the old backup on its own."}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://jwsync.org/guides/"}, {"@type": "ListItem", "position": 3, "name": "JW Library Notes Missing After an Update or Reinstall", "item": "https://jwsync.org/guides/jw-library-notes-missing-after-update"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Are the notes still on the device somewhere?", "acceptedAnswer": {"@type": "Answer", "text": "Not in a form you can get at from outside the app. Recovery realistically means an earlier backup file — which is why keeping old ones matters so much."}}, {"@type": "Question", "name": "Does signing in again bring notes back?", "acceptedAnswer": {"@type": "Answer", "text": "No. Personal study data isn't held in an account; it lives on the device and travels only through backup files."}}, {"@type": "Question", "name": "What if the only backup I have is months old?", "acceptedAnswer": {"@type": "Answer", "text": "Merge it with a backup of the device as it is now. You'll recover everything the old file has, and keep everything the device still has, without choosing between them."}}]}]}</script>
 <style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
---muted:#94a3b8;--accent:#ea580c;--accent-soft:#fb923c}
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--txt);
 font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -42,7 +42,7 @@ p{margin:0 0 16px}
 ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
 ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
 ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
-border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
 display:flex;align-items:center;justify-content:center}
 ol.steps h3{margin:0 0 4px;font-size:16.5px}
 ol.steps p{margin:0;color:var(--muted);font-size:15px}
@@ -50,7 +50,7 @@ ol.steps p{margin:0;color:var(--muted);font-size:15px}
 padding:20px 22px;margin:34px 0}
 .cta strong{display:block;font-size:17px;margin-bottom:4px}
 .cta span{color:var(--muted);font-size:14.5px}
-.cta .btn{display:inline-block;margin-top:14px;background:var(--accent);color:#fff;font-weight:600;
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
 font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
 .cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
 .faq dt{font-weight:600;margin:18px 0 4px}
@@ -58,7 +58,7 @@ font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0
 .related{margin:8px 0 0;padding:0;list-style:none}
 .related li{margin:0 0 8px}
 footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
-color:#64748b;font-size:12.5px}
+color:#8b99ad;font-size:12.5px}
 footer.site p{margin:0 0 10px}
 .gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
 @media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}

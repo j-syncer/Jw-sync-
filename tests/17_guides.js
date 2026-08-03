@@ -109,6 +109,43 @@ for (const [slug, c] of Object.entries(pages)) {
      (bad.length ? ' (bad: ' + bad.join(', ') + ')' : ''));
 }
 
+console.log('== Text contrast (WCAG AA, 4.5:1) ==');
+{
+  const relLum = (hex) => {
+    const h = hex.replace('#', '');
+    const ch = (s) => {
+      const v = parseInt(s, 16) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * ch(h.slice(0, 2)) + 0.7152 * ch(h.slice(2, 4)) + 0.0722 * ch(h.slice(4, 6));
+  };
+  const contrast = (a, b) => {
+    const la = relLum(a), lb = relLum(b);
+    return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+  };
+  const page = pages[SLUGS[0]] || '';
+  const v = (name) => {
+    const m = page.match(new RegExp('--' + name + ':(#[0-9a-f]{6})', 'i'));
+    return m && m[1];
+  };
+  const bg = v('bg'), muted = v('muted'), soft = v('accent-soft'), strong = v('accent-strong');
+  const footer = (page.match(/footer\.site\{[^}]*color:(#[0-9a-f]{6})/i) || [])[1];
+  const pairs = [
+    ['#ffffff', strong, 'CTA button label on the button'],
+    [muted, bg, 'muted body text on the page'],
+    [soft, bg, 'links on the page'],
+    [footer, bg, 'footer text on the page'],
+  ];
+  for (const [fg, back, label] of pairs) {
+    if (!fg || !back) { ok(false, label + ': colour not found in the generated CSS'); continue; }
+    const r = contrast(fg, back);
+    ok(r >= 4.5, label + ': ' + r.toFixed(2) + ':1' + (r >= 4.5 ? '' : ' — below AA'));
+  }
+  // the step numerals sit on a solid fill too, so they need the same shade
+  ok(/background:var\(--accent-strong\);color:#fff;font-weight:700;font-size:15px/.test(page),
+     'numbered step markers use the AA-contrast accent');
+}
+
 console.log('== Sitemap coverage ==');
 const sm = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
 ok(sm.includes('<loc>https://jwsync.org/guides/</loc>'), 'sitemap lists guides index');

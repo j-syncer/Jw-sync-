@@ -18,7 +18,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "See How Your JW Library Notes Connect — Study Map", "description": "Study Map turns your JW Library notes into an interactive web, linking them by shared scriptures, shared tags and similar wording — so you can see the themes running through your study.", "inLanguage": "en", "datePublished": "2026-07-13", "dateModified": "2026-07-13", "mainEntityOfPage": "https://jwsync.org/guides/connect-jw-library-notes-study-map", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "See How Your JW Library Notes Connect — Study Map", "description": "Study Map turns your JW Library notes into an interactive web, linking them by shared scriptures, shared tags and similar wording — so you can see the themes running through your study.", "inLanguage": "en", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Open the Study Stats page and load a backup", "text": "Go to jwsync.org/highlights.html and load your .jwlibrary file. Study Map reads it in your browser."}, {"@type": "HowToStep", "position": 2, "name": "Open Study Map", "text": "Launch the map to see your notes as connected points, linked by shared scriptures, shared tags and similar wording."}, {"@type": "HowToStep", "position": 3, "name": "Explore the connections", "text": "Switch between Topics and Notes views, hover to spotlight a note's links, drag things around, and use the strength slider to show only the closest connections. Full-screen mode gives you room to roam."}, {"@type": "HowToStep", "position": 4, "name": "Build and save study chains", "text": "Draw your own manual “study chains” between related notes to capture a line of reasoning, and export the map as a PNG image to keep or share."}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://jwsync.org/guides/"}, {"@type": "ListItem", "position": 3, "name": "See How Your JW Library Notes Connect — Study Map", "item": "https://jwsync.org/guides/connect-jw-library-notes-study-map"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I need a lot of notes for the map to be useful?", "acceptedAnswer": {"@type": "Answer", "text": "A modest library already shows connections; the richer your notes, the more the map reveals. Very small libraries will show a hint to add more notes first."}}, {"@type": "Question", "name": "Is the map private?", "acceptedAnswer": {"@type": "Answer", "text": "Entirely. It's built in your browser from your backup and never uploaded; even the PNG export is generated on your device."}}]}]}</script>
 <style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
---muted:#94a3b8;--accent:#ea580c;--accent-soft:#fb923c}
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--txt);
 font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
@@ -42,7 +42,7 @@ p{margin:0 0 16px}
 ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
 ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
 ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
-border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:15px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
 display:flex;align-items:center;justify-content:center}
 ol.steps h3{margin:0 0 4px;font-size:16.5px}
 ol.steps p{margin:0;color:var(--muted);font-size:15px}
@@ -50,7 +50,7 @@ ol.steps p{margin:0;color:var(--muted);font-size:15px}
 padding:20px 22px;margin:34px 0}
 .cta strong{display:block;font-size:17px;margin-bottom:4px}
 .cta span{color:var(--muted);font-size:14.5px}
-.cta .btn{display:inline-block;margin-top:14px;background:var(--accent);color:#fff;font-weight:600;
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
 font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
 .cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
 .faq dt{font-weight:600;margin:18px 0 4px}
@@ -58,7 +58,7 @@ font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0
 .related{margin:8px 0 0;padding:0;list-style:none}
 .related li{margin:0 0 8px}
 footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
-color:#64748b;font-size:12.5px}
+color:#8b99ad;font-size:12.5px}
 footer.site p{margin:0 0 10px}
 .gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
 @media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}
