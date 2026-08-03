@@ -120,9 +120,14 @@ ok(sm.includes('<loc>https://jwsync.org/guides/</loc>'), 'sitemap lists guides i
 }
 
 console.log('== Landing pages link to guides ==');
-for (const f of ['index.html', 'beta/index.html']) {
-  const c = fs.readFileSync(path.join(ROOT, f), 'utf8');
-  ok(c.includes('href="guides/"'), f + ' links to guides/');
+// Production sits at / so a relative "guides/" resolves; beta sits at /beta/,
+// where a relative link would 404 — it must use the absolute /guides/ path.
+ok(fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').includes('href="guides/"'),
+   'index.html links to guides/');
+{
+  const c = fs.readFileSync(path.join(ROOT, 'beta/index.html'), 'utf8');
+  ok(c.includes('href="/guides/"') && !/href="guides\/"/.test(c),
+     'beta/index.html links to /guides/ (absolute — /beta/guides/ does not exist)');
 }
 
 console.log('\n== SUMMARY ==\n');

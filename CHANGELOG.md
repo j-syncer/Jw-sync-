@@ -4,6 +4,15 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.97.1] — 2026-08-02
+
+### Fixed: Guides link 404'd on the beta site
+
+The Guides links in the beta site's nav bar and footer were relative, so from
+`/beta/` they pointed at `/beta/guides/`, which does not exist — the guides are
+a single set served from `/guides/`. Both links are now absolute. Production
+was unaffected.
+
 ## [2.97.0] — 2026-08-02
 
 ### Added: tag filter in the Share page's note picker
