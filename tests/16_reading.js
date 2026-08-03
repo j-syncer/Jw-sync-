@@ -15,7 +15,7 @@
 //      state + streak chip; state survives a remount
 //   5. Notes integration: synthetic .jwlibrary → notes render under today's
 //      chapters, highlight counts extracted per chapter
-//   6. beta/index.html wiring: script tag, tool card, landing i18n keys
+//   6. landing-page wiring on both index.html files: script tag, tool card, i18n
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
@@ -274,24 +274,27 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
   if (!w2.doc.querySelector('.jr-overlay')) ok('overlay closes');
   else fail('overlay did not close');
 
-  section('beta/index.html wiring');
-  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
-  if (beta.includes('<script src="js/reading.js"></script>')) ok('reading.js script tag present');
-  else fail('reading.js script tag missing');
-  if (beta.includes('class="svc-card svc-reading"') && beta.includes('id="jw-reading-live"'))
-    ok('Reading Companion tool card present with live-state hook');
-  else fail('tool card / live hook missing');
-  if (beta.includes('window.JwReading&amp;&amp;window.JwReading.open()')) ok('card opens JwReading');
-  else fail('card onclick missing');
-  const lm2 = beta.match(/window\.__JW_LANDING_I18N = (\{.*?\});\n/s);
-  let landing = null;
-  try { landing = JSON.parse(lm2[1]); } catch (_) {}
-  if (!landing) fail('__JW_LANDING_I18N no longer parses as JSON');
-  else {
-    const missing = LANGS.filter(l => !landing[l] || !landing[l].svc_reading_t || !landing[l].svc_reading_d ||
-      !landing[l].svc_reading_g1 || !landing[l].svc_reading_g2);
-    if (missing.length === 0) ok('svc_reading_* present in all 12 landing languages');
-    else fail('landing reading keys missing for: ' + missing.join(','));
+  // The card went live on production in v2.98.0, so both landing pages carry it.
+  for (const page of ['beta/index.html', 'index.html']) {
+    section(page + ' wiring');
+    const html = fs.readFileSync(REPO + '/' + page, 'utf8');
+    if (html.includes('<script src="js/reading.js"></script>')) ok('reading.js script tag present');
+    else fail('reading.js script tag missing');
+    if (html.includes('class="svc-card svc-reading"') && html.includes('id="jw-reading-live"'))
+      ok('Reading Companion tool card present with live-state hook');
+    else fail('tool card / live hook missing');
+    if (html.includes('window.JwReading&amp;&amp;window.JwReading.open()')) ok('card opens JwReading');
+    else fail('card onclick missing');
+    const lm2 = html.match(/window\.__JW_LANDING_I18N = (\{.*?\});\n/s);
+    let landing = null;
+    try { landing = JSON.parse(lm2[1]); } catch (_) {}
+    if (!landing) fail('__JW_LANDING_I18N no longer parses as JSON');
+    else {
+      const missing = LANGS.filter(l => !landing[l] || !landing[l].svc_reading_t || !landing[l].svc_reading_d ||
+        !landing[l].svc_reading_g1 || !landing[l].svc_reading_g2);
+      if (missing.length === 0) ok('svc_reading_* present in all 12 landing languages');
+      else fail('landing reading keys missing for: ' + missing.join(','));
+    }
   }
   if (fs.readFileSync(REPO + '/js/reading.js', 'utf8') === fs.readFileSync(REPO + '/beta/js/reading.js', 'utf8'))
     ok('js/reading.js twins identical');

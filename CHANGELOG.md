@@ -4,6 +4,30 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.98.0] — 2026-08-02
+
+### Go live: Reading Companion card and Library Doctor auto-mode
+
+Two features that had been sitting in beta are now on jwsync.org.
+
+- **Reading Companion** now has its own card on the landing page, carrying the
+  NEW badge (moved off Library Doctor, which has been live for a while), with
+  its description and tags in all 12 languages. `js/reading.js` was already
+  shipping to both sites, so only the landing-page wiring was missing.
+- **Library Doctor auto-mode** — the code path that lets the Doctor be opened
+  in "scan, clean and hand back one download" mode, plus its Download-your-file
+  and cleaned-backup-ready strings in all 12 languages.
+
+Also fixed while promoting:
+
+- Production had the merge-tool redesign `<style>` and its companion script
+  **twice** — a duplicated block left by an earlier go-live, which meant two
+  elements sharing each id and two MutationObservers stripping emoji from the
+  same nodes. Production now carries one copy, as beta always did.
+- `index.html` and `beta/index.html` now differ only by the five things that
+  should differ between them: title, canonical, robots, the BETA banner and
+  the guides link.
+
 ## [2.97.1] — 2026-08-02
 
 ### Fixed: Guides link 404'd on the beta site
