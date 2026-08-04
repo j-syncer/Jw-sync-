@@ -4,6 +4,30 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.1.0] — 2026-08-04
+
+### Added: all 37 guides in Spanish
+
+The guide library — every walkthrough, every FAQ, every troubleshooting page —
+is now available in Spanish at `jwsync.org/guides/es/`. That is the full set,
+not a sampler: merging backups from two devices, moving from Android to
+iPhone, rescuing a backup that won't restore, the Study Explorer, the Library
+Doctor, the Reading Companion, all of it.
+
+- Spanish readers landing on `/es/` now get a **Guías y tutoriales** link that
+  goes to the Spanish guide index rather than the English one.
+- Each Spanish guide is its own indexable page with a Spanish `<title>`,
+  description and structured data, cross-linked to its English and Arabic
+  twins — so a search in Spanish can find it.
+- The English guides keep their existing URLs, so nothing that already ranks
+  moves.
+
+The remaining ten languages are being translated the same way, one at a time.
+A language only appears in the guide switcher and the sitemap once its
+translation is complete, so nobody is ever sent to a half-English page.
+
+---
+
 ## [3.0.0] — 2026-08-04
 
 ### Added: a real home page in every language

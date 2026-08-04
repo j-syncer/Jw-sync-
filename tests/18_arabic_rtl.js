@@ -180,6 +180,22 @@ section('Arabic guide tree');
     }
     if (!bad) ok('all ' + checked + ' Arabic guides: lang/dir, canonical, hreflang, JSON-LD, no English chrome');
 
+    // A localized page whose nav or footer links `../../guides/` drops the
+    // reader back into English — the link reads "Guías" and lands on the
+    // English index. Every translated tree is checked, not just Arabic.
+    const trees = fs.readdirSync(path.join(REPO, 'guides'), { withFileTypes: true })
+      .filter(d => d.isDirectory()).map(d => d.name);
+    let leaked = 0;
+    for (const l of trees) {
+      for (const f of fs.readdirSync(path.join(REPO, 'guides', l)).filter(x => x.endsWith('.html'))) {
+        const c = fs.readFileSync(path.join(REPO, 'guides', l, f), 'utf8');
+        const chrome = (c.match(/<nav class="hnav">[\s\S]*?<\/nav>/) || [''])[0]
+          + (c.match(/<footer[\s\S]*?<\/footer>/) || [''])[0];
+        if (/href="\.\.\/\.\.\/guides\/"/.test(chrome)) { fail(l + '/' + f + ': nav or footer links the English guide index'); leaked++; }
+      }
+    }
+    if (!leaked) ok('localized guide chrome stays inside its own language (' + trees.join(', ') + ')');
+
     // The English pages must keep their original URLs and canonicals.
     const enGuide = read('guides/backup-jw-library.html');
     if (enGuide.includes('<link rel="canonical" href="https://jwsync.org/guides/backup-jw-library">'))

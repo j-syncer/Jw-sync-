@@ -1133,16 +1133,25 @@ def footer(root, lang):
     t = CHROME[lang]
     return (
         '<footer class="site"><div class="wrap">'
-        '<p><a href="%s">JW Sync</a> · <a href="%sguides/">%s</a> · '
+        '<p><a href="%s">JW Sync</a> · <a href="%s">%s</a> · '
         '<a href="%sforum.html">%s</a> · <a href="%shighlights.html">%s</a></p>'
         '<p>%s</p><p>%s</p>'
         '</div></footer>'
-    ) % (root, root, esc(t["footer_all_guides"]),
+    ) % (root, guides_index_href(root, lang), esc(t["footer_all_guides"]),
          root, esc(t["footer_community"]), root, esc(t["footer_stats"]),
          esc(t["footer_privacy"]), esc(t["footer_disclaimer"]))
 
 def esc(s):
     return html.escape(s, quote=True)
+
+def guides_index_href(root, lang):
+    """Relative href of *this language's* guide index.
+
+    A localized page linking `root + "guides/"` would send the reader back
+    to the English tree — the nav and footer must stay inside the language.
+    """
+    return root + "guides/" + ("" if lang == "en" else lang + "/")
+
 
 def guide_url(slug, lang):
     """Canonical URL of a guide (or of the index when slug is None)."""
@@ -1203,7 +1212,8 @@ def site_header(root, lang, slug):
     app = root + ("" if lang == "en" else "?lang=" + lang)
     return (f'<header class="site"><div class="wrap">'
             f'<a class="brand" href="{app}"><span class="dot">JW</span>JW Sync</a>'
-            f'<nav class="hnav"><a href="{root}guides/">{esc(t["nav_guides"])}</a>'
+            f'<nav class="hnav"><a href="{guides_index_href(root, lang)}">'
+            f'{esc(t["nav_guides"])}</a>'
             f'<a href="{root}forum.html">{esc(t["nav_community"])}</a>'
             f'<a href="{app}">{esc(t["nav_open_app"])}</a>'
             f'{lang_picker(slug, lang, root)}</nav>'
@@ -1254,7 +1264,8 @@ def guide_jsonld(g, canonical, lang="en"):
             "@type": "BreadcrumbList",
             "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "JW Sync", "item": SITE + "/"},
-                {"@type": "ListItem", "position": 2, "name": "Guides", "item": SITE + "/guides/"},
+                {"@type": "ListItem", "position": 2,
+                 "name": CHROME[lang]["crumb_guides"], "item": guide_url(None, lang)},
                 {"@type": "ListItem", "position": 3, "name": g["title"], "item": canonical},
             ],
         },

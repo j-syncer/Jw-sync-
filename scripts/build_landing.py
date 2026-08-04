@@ -45,8 +45,11 @@ import i18n_tool as t  # noqa: E402
 SITE = "https://jwsync.org"
 LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar"]
 RTL_LANGS = {"ar"}
-# Languages whose guide tree exists; the rest link to the English guides.
-GUIDE_LANGS = {"en", "ar"}
+# Derived, not hand-listed: a language gets a /guides/<lang>/ link the moment
+# its translations land in guides_i18n.GUIDE_TEXT, and never before — so this
+# can neither lag behind a new language nor link at a tree that is not built.
+from guides_i18n import GUIDE_TEXT  # noqa: E402
+GUIDE_LANGS = set(GUIDE_TEXT) | {"en"}
 
 LANG_NAME = {
     "en": "English", "es": "Español", "pt": "Português", "fr": "Français",

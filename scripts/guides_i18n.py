@@ -61,6 +61,53 @@ CHROME = {
             "Power tools": "Power tools",
         },
     },
+    "es": {
+        "lang_name": "Español",
+        "lang_label": "Idioma",
+        "og_locale": "es_ES",
+        "site_guides": "Guías de JW Sync",
+        "nav_guides": "Guías",
+        "nav_community": "Comunidad",
+        "nav_open_app": "Abrir la app",
+        "crumb_guides": "Guías",
+        "h_steps": "Paso a paso",
+        "h_faq": "Preguntas frecuentes",
+        "h_related": "Guías relacionadas",
+        "cta_title": "Hazlo ahora: gratis, en tu navegador",
+        "cta_body": "JW Sync combina, edita y analiza copias de seguridad .jwlibrary "
+                    "enteramente en tu dispositivo. Sin cuenta, sin subir nada, sin "
+                    "instalar nada.",
+        "cta_btn": "Abrir JW Sync →",
+        "index_title": "Guías de copias de seguridad, sincronización y notas de JW Library | JW Sync",
+        "index_desc": "Guías prácticas para las copias de seguridad de JW Library: combinar "
+                      "copias de dos dispositivos, pasar tus notas a un teléfono nuevo, migrar "
+                      "de Android a iPhone, arreglar una copia que no se restaura, editar y "
+                      "buscar en tus notas, y mucho más.",
+        "index_h1": "Guías y tutoriales",
+        "index_lede": "Todo sobre las copias de seguridad de JW Library, en pasos claros: "
+                      "combinar dispositivos, cambiar de teléfono, rescatar notas y sacarle "
+                      "más partido a la biblioteca que ya tienes. Todas las herramientas "
+                      "mencionadas funcionan gratis en tu navegador: tus archivos nunca se "
+                      "suben a ningún sitio.",
+        "index_cta_title": "Sáltate la lectura: abre la herramienta",
+        "index_cta_body": "Combinar dos copias de seguridad lleva alrededor de un minuto y la "
+                          "app te guía en todo momento.",
+        "footer_all_guides": "Todas las guías",
+        "footer_community": "Comunidad",
+        "footer_stats": "Estadísticas de estudio",
+        "footer_privacy": "JW Sync procesa todos los datos localmente: tus archivos nunca salen "
+                          "de tu dispositivo. Es gratis; sin cuenta y sin subir nada.",
+        "footer_disclaimer": "«JW Library» es propiedad de la Watch Tower Bible and Tract "
+                             "Society of Pennsylvania. JW Sync es una utilidad independiente y "
+                             "no está afiliada a ella ni cuenta con su respaldo.",
+        "groups": {
+            "Getting started": "Para empezar",
+            "Sharing scenarios": "Casos para compartir",
+            "Everyday scenarios": "Situaciones del día a día",
+            "Fixing problems": "Solución de problemas",
+            "Power tools": "Herramientas avanzadas",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -109,7 +156,9 @@ CHROME = {
 # Populated from guides_ar.py so this module stays navigable; the split is
 # purely for readability.
 from guides_ar import GUIDES_AR  # noqa: E402
+from guides_es import GUIDES_ES  # noqa: E402
 
 GUIDE_TEXT = {
+    "es": GUIDES_ES,
     "ar": GUIDES_AR,
 }
