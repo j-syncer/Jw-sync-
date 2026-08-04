@@ -202,6 +202,55 @@ CHROME = {
             "Power tools": "Outils avancés",
         },
     },
+    "de": {
+        "lang_name": "Deutsch",
+        "lang_label": "Sprache",
+        "og_locale": "de_DE",
+        "site_guides": "JW-Sync-Anleitungen",
+        "nav_guides": "Anleitungen",
+        "nav_community": "Community",
+        "nav_open_app": "App öffnen",
+        "crumb_guides": "Anleitungen",
+        "h_steps": "Schritt für Schritt",
+        "h_faq": "Häufige Fragen",
+        "h_related": "Verwandte Anleitungen",
+        "cta_title": "Mach es jetzt — kostenlos, in deinem Browser",
+        "cta_body": "JW Sync führt .jwlibrary-Sicherungen zusammen, bearbeitet und "
+                    "analysiert sie vollständig auf deinem Gerät. Ohne Konto, ohne Uploads, "
+                    "ohne Installation.",
+        "cta_btn": "JW Sync öffnen →",
+        "index_title": "Anleitungen zu JW-Library-Sicherungen, Sync und Notizen | JW Sync",
+        "index_desc": "Praktische Anleitungen rund um JW-Library-Sicherungen: Sicherungen von "
+                      "zwei Geräten zusammenführen, Notizen aufs neue Handy bringen, von "
+                      "Android aufs iPhone wechseln, eine Sicherung reparieren, die sich "
+                      "nicht wiederherstellen lässt, Notizen bearbeiten und durchsuchen, und "
+                      "mehr.",
+        "index_h1": "Anleitungen und Tipps",
+        "index_lede": "Alles rund um JW-Library-Sicherungen, in klaren Schritten: Geräte "
+                      "zusammenführen, aufs neue Handy wechseln, Notizen retten und mehr aus "
+                      "der Bibliothek holen, die du längst hast. Jedes genannte Werkzeug "
+                      "läuft kostenlos in deinem Browser — deine Dateien werden nie "
+                      "hochgeladen.",
+        "index_cta_title": "Lesen überspringen — einfach das Werkzeug öffnen",
+        "index_cta_body": "Zwei Sicherungen zusammenzuführen dauert etwa eine Minute, und die "
+                          "App führt dich hindurch.",
+        "footer_all_guides": "Alle Anleitungen",
+        "footer_community": "Community",
+        "footer_stats": "Studienstatistik",
+        "footer_privacy": "JW Sync verarbeitet alle Daten lokal — deine Dateien verlassen nie "
+                          "dein Gerät. Kostenlos; ohne Konto, ohne Uploads.",
+        "footer_disclaimer": "„JW Library“ ist Eigentum der Watch Tower Bible and Tract "
+                             "Society of Pennsylvania. JW Sync ist ein unabhängiges "
+                             "Hilfsprogramm und steht in keiner Verbindung zu ihr und wird "
+                             "von ihr nicht unterstützt.",
+        "groups": {
+            "Getting started": "Erste Schritte",
+            "Sharing scenarios": "Notizen weitergeben",
+            "Everyday scenarios": "Alltagssituationen",
+            "Fixing problems": "Probleme lösen",
+            "Power tools": "Fortgeschrittene Werkzeuge",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -253,10 +302,12 @@ from guides_ar import GUIDES_AR  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
+from guides_de import GUIDES_DE  # noqa: E402
 
 GUIDE_TEXT = {
     "es": GUIDES_ES,
     "pt": GUIDES_PT,
     "fr": GUIDES_FR,
+    "de": GUIDES_DE,
     "ar": GUIDES_AR,
 }

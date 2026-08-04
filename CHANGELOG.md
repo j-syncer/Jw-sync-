@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.4.0] — 2026-08-04
+
+### Added: all 37 guides in German
+
+The complete guide library is now available in German at
+`jwsync.org/guides/de/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/de/` now links **Anleitungen und Tipps** to the German guide index.
+- Each German guide is its own indexable page with a German title, description
+  and structured data, cross-linked to its English, Spanish, Portuguese,
+  French and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
 ## [3.3.0] — 2026-08-04
 
 ### Added: all 37 guides in French
