@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.3.0] — 2026-08-04
+
+### Added: all 37 guides in French
+
+The complete guide library is now available in French at
+`jwsync.org/guides/fr/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/fr/` now links **Guides et tutoriels** to the French guide index.
+- Each French guide is its own indexable page with a French title, description
+  and structured data, cross-linked to its English, Spanish, Portuguese and
+  Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
 ## [3.2.0] — 2026-08-04
 
 ### Added: all 37 guides in Portuguese

@@ -285,6 +285,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -296,6 +297,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -307,6 +309,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -318,6 +333,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -329,6 +345,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/merge-jw-library-backups"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -340,6 +357,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/merge-jw-library-backups"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -351,6 +369,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/merge-jw-library-backups"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/merge-jw-library-backups</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/merge-jw-library-backups"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -362,6 +393,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/merge-jw-library-backups"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/merge-jw-library-backups"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/merge-jw-library-backups"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -373,6 +405,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/sync-jw-library-multiple-devices"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -384,6 +417,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/sync-jw-library-multiple-devices"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -395,6 +429,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/sync-jw-library-multiple-devices"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/sync-jw-library-multiple-devices</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/sync-jw-library-multiple-devices"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -406,6 +453,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/sync-jw-library-multiple-devices"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/sync-jw-library-multiple-devices"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/sync-jw-library-multiple-devices"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -417,6 +465,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/transfer-jw-library-notes-new-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -428,6 +477,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/transfer-jw-library-notes-new-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -439,6 +489,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/transfer-jw-library-notes-new-phone"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/transfer-jw-library-notes-new-phone</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/transfer-jw-library-notes-new-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -450,6 +513,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/transfer-jw-library-notes-new-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/transfer-jw-library-notes-new-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/transfer-jw-library-notes-new-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -461,6 +525,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-android-to-iphone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -472,6 +537,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-android-to-iphone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -483,6 +549,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-android-to-iphone"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-android-to-iphone</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-android-to-iphone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -494,6 +573,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-android-to-iphone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-android-to-iphone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-android-to-iphone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -505,6 +585,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -516,6 +597,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -527,6 +609,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/backup-jw-library</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -538,6 +633,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -549,6 +645,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -560,6 +657,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -571,6 +669,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-restore-replaced-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -582,6 +693,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-restore-replaced-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-restore-replaced-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -593,6 +705,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -604,6 +717,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -615,6 +729,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/fix-corrupted-jw-library-backup</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -626,6 +753,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/fix-corrupted-jw-library-backup"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -637,6 +765,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/edit-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -648,6 +777,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/edit-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -659,6 +789,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/edit-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/edit-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/edit-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -670,6 +813,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/edit-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/edit-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/edit-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -681,6 +825,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/search-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -692,6 +837,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/search-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -703,6 +849,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/search-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/search-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/search-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -714,6 +873,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/search-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/search-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/search-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -725,6 +885,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-stats"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -736,6 +897,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-stats"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -747,6 +909,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-stats"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-study-stats</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-stats"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -758,6 +933,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-stats"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-stats"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-stats"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -769,6 +945,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -780,6 +957,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -791,6 +969,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -802,6 +993,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -813,6 +1005,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/bible-reading-plan"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -824,6 +1017,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/bible-reading-plan"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -835,6 +1029,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/bible-reading-plan"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/bible-reading-plan</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/bible-reading-plan"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -846,6 +1053,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/bible-reading-plan"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/bible-reading-plan"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/bible-reading-plan"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -857,6 +1065,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/open-jwlibrary-file"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -868,6 +1077,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/open-jwlibrary-file"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -879,6 +1089,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/open-jwlibrary-file"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/open-jwlibrary-file</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/open-jwlibrary-file"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -890,6 +1113,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/open-jwlibrary-file"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/open-jwlibrary-file"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/open-jwlibrary-file"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -901,6 +1125,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-windows-pc"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -912,6 +1137,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-windows-pc"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -923,6 +1149,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-windows-pc"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-windows-pc</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-windows-pc"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -934,6 +1173,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-windows-pc"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-windows-pc"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-windows-pc"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -945,6 +1185,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/recover-jw-library-notes-lost-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -956,6 +1197,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/recover-jw-library-notes-lost-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -967,6 +1209,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/recover-jw-library-notes-lost-phone"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/recover-jw-library-notes-lost-phone</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/recover-jw-library-notes-lost-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -978,6 +1233,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/recover-jw-library-notes-lost-phone"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/recover-jw-library-notes-lost-phone"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/recover-jw-library-notes-lost-phone"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -989,6 +1245,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/handle-merge-conflicts"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1000,6 +1257,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/handle-merge-conflicts"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1011,6 +1269,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/handle-merge-conflicts"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/handle-merge-conflicts</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/handle-merge-conflicts"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1022,6 +1293,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/handle-merge-conflicts"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/handle-merge-conflicts"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/handle-merge-conflicts"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1033,6 +1305,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/export-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1044,6 +1317,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/export-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1055,6 +1329,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/export-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/export-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/export-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1066,6 +1353,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/export-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/export-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/export-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1077,6 +1365,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/organize-jw-library-tags"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1088,6 +1377,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/organize-jw-library-tags"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1099,6 +1389,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/organize-jw-library-tags"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/organize-jw-library-tags</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/organize-jw-library-tags"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1110,6 +1413,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/organize-jw-library-tags"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/organize-jw-library-tags"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/organize-jw-library-tags"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1121,6 +1425,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/manage-jw-library-highlights"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1132,6 +1437,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/manage-jw-library-highlights"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1143,6 +1449,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/manage-jw-library-highlights"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/manage-jw-library-highlights</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/manage-jw-library-highlights"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1154,6 +1473,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/manage-jw-library-highlights"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/manage-jw-library-highlights"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/manage-jw-library-highlights"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1165,6 +1485,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-answers"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1176,6 +1497,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-answers"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1187,6 +1509,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-answers"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-study-answers</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-answers"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1198,6 +1533,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-study-answers"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-study-answers"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-study-answers"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1209,6 +1545,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/extract-jw-library-notes-by-date"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1220,6 +1557,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/extract-jw-library-notes-by-date"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1231,6 +1569,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/extract-jw-library-notes-by-date"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/extract-jw-library-notes-by-date</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/extract-jw-library-notes-by-date"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1242,6 +1593,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/extract-jw-library-notes-by-date"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/extract-jw-library-notes-by-date"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/extract-jw-library-notes-by-date"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1253,6 +1605,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/connect-jw-library-notes-study-map"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1264,6 +1617,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/connect-jw-library-notes-study-map"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1275,6 +1629,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/connect-jw-library-notes-study-map"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/connect-jw-library-notes-study-map</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/connect-jw-library-notes-study-map"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1286,6 +1653,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/connect-jw-library-notes-study-map"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/connect-jw-library-notes-study-map"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/connect-jw-library-notes-study-map"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1297,6 +1665,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/review-old-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1308,6 +1677,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/review-old-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1319,6 +1689,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/review-old-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/review-old-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/review-old-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1330,6 +1713,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/review-old-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/review-old-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/review-old-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1341,6 +1725,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-achievements-streaks"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1352,6 +1737,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-achievements-streaks"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1363,6 +1749,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-achievements-streaks"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-achievements-streaks</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-achievements-streaks"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1374,6 +1773,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-achievements-streaks"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-achievements-streaks"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-achievements-streaks"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1385,6 +1785,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-convention-assembly-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1396,6 +1797,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-convention-assembly-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1407,6 +1809,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-convention-assembly-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-convention-assembly-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-convention-assembly-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1418,6 +1833,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-convention-assembly-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-convention-assembly-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-convention-assembly-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1429,6 +1845,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes-by-tag"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1440,6 +1857,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes-by-tag"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1451,6 +1869,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes-by-tag"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-jw-library-notes-by-tag</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes-by-tag"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1462,6 +1893,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-jw-library-notes-by-tag"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-jw-library-notes-by-tag"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-jw-library-notes-by-tag"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1473,6 +1905,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-bible-student"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1484,6 +1917,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-bible-student"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1495,6 +1929,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-bible-student"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-notes-with-bible-student</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-bible-student"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1506,6 +1953,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-bible-student"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-bible-student"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-bible-student"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1517,6 +1965,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-meeting-notes-with-family"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1528,6 +1977,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-meeting-notes-with-family"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1539,6 +1989,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-meeting-notes-with-family"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-meeting-notes-with-family</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-meeting-notes-with-family"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1550,6 +2013,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-meeting-notes-with-family"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-meeting-notes-with-family"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-meeting-notes-with-family"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1561,6 +2025,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/receive-shared-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1572,6 +2037,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/receive-shared-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1583,6 +2049,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/receive-shared-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/receive-shared-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/receive-shared-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1594,6 +2073,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/receive-shared-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/receive-shared-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/receive-shared-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1605,6 +2085,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-study-group"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1616,6 +2097,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-study-group"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1627,6 +2109,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-study-group"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-notes-with-study-group</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-study-group"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1638,6 +2133,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-notes-with-study-group"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-notes-with-study-group"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-notes-with-study-group"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1649,6 +2145,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-talk-preparation-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1660,6 +2157,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-talk-preparation-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1671,6 +2169,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-talk-preparation-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/share-talk-preparation-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-talk-preparation-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1682,6 +2193,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/share-talk-preparation-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/share-talk-preparation-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/share-talk-preparation-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1693,6 +2205,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/weekly-meeting-preparation-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1704,6 +2217,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/weekly-meeting-preparation-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1715,6 +2229,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/weekly-meeting-preparation-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/weekly-meeting-preparation-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/weekly-meeting-preparation-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1726,6 +2253,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/weekly-meeting-preparation-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/weekly-meeting-preparation-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/weekly-meeting-preparation-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1737,6 +2265,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/print-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1748,6 +2277,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/print-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1759,6 +2289,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/print-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/print-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/print-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1770,6 +2313,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/print-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/print-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/print-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1781,6 +2325,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/clean-up-duplicate-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1792,6 +2337,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/clean-up-duplicate-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1803,6 +2349,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/clean-up-duplicate-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/clean-up-duplicate-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/clean-up-duplicate-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1814,6 +2373,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/clean-up-duplicate-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/clean-up-duplicate-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/clean-up-duplicate-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1825,6 +2385,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library-before-phone-repair"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1836,6 +2397,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library-before-phone-repair"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1847,6 +2409,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library-before-phone-repair"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/backup-jw-library-before-phone-repair</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library-before-phone-repair"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1858,6 +2433,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/backup-jw-library-before-phone-repair"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/backup-jw-library-before-phone-repair"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/backup-jw-library-before-phone-repair"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1869,6 +2445,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-notes-missing-after-update"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1880,6 +2457,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-notes-missing-after-update"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1891,6 +2469,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-notes-missing-after-update"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/jw-library-notes-missing-after-update</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-notes-missing-after-update"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1902,6 +2493,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-notes-missing-after-update"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/jw-library-notes-missing-after-update"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-notes-missing-after-update"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1913,6 +2505,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/help-family-member-move-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1924,6 +2517,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/help-family-member-move-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1935,6 +2529,19 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/help-family-member-move-jw-library-notes"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/guides/fr/help-family-member-move-jw-library-notes</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/help-family-member-move-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -1946,6 +2553,7 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/guides/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/help-family-member-move-jw-library-notes"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/help-family-member-move-jw-library-notes"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/help-family-member-move-jw-library-notes"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
