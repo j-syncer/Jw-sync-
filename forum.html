@@ -695,6 +695,14 @@ load();
         else el.appendChild(document.createTextNode(p));});
     });
   }
+  // The tab title and meta description are derived from strings that are
+  // already translated, so the forum needs no extra copy to localize them.
+  function meta(){
+    if(T.logo_sub)document.title='JW Sync — '+T.logo_sub;
+    var dm=document.querySelector('meta[name="description"]');
+    if(dm&&T.hero_sub)dm.setAttribute('content',T.hero_sub);
+  }
+  meta();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);
   else apply();
 }());

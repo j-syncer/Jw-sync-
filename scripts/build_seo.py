@@ -111,18 +111,27 @@ def og_locale_block(langs, indent="    "):
 
 
 # ── 1. <head> tags ────────────────────────────────────────────────────────
-def patch_page(rel, canonical, langs):
+def patch_page(rel, canonical, langs, set_canonical=True):
     """Set the canonical and the og:locale run. Deliberately no hreflang —
-    see the module docstring."""
+    see the module docstring.
+
+    set_canonical=False leaves an existing canonical alone, for pages that
+    legitimately point somewhere other than `canonical`.
+    """
     path = os.path.join(REPO, rel)
     c = io.open(path, encoding="utf-8").read()
     orig = c
 
     canon_tag = '<link rel="canonical" href="%s">' % canonical
-    if canon_tag not in c:
+    if set_canonical and canon_tag not in c:
         c = re.sub(r'<link rel="canonical" href="[^"]*">', canon_tag, c) \
             if '<link rel="canonical"' in c else \
             c.replace("</head>", canon_tag + "\n</head>", 1)
+    if not set_canonical:
+        # Anchor the og:locale block on whatever canonical the page already has.
+        m = re.search(r'<link rel="canonical" href="[^"]*">', c)
+        if m:
+            canon_tag = m.group(0)
 
     # Any hreflang left over from an earlier build is removed: the shell's
     # ?lang= URLs canonicalise back to this page, so alternates over them
@@ -263,10 +272,16 @@ def main():
     for rel, canonical, _p, _f in QUERY_PAGES:
         patch_page(rel, canonical, LANGS)
         beta = os.path.join("beta", rel)
-        if os.path.exists(os.path.join(REPO, beta)):
-            # beta is noindex; it still gets the tags so the two copies stay
-            # byte-identical where 15_parity.js requires it.
-            patch_page(beta, canonical, LANGS)
+        if not os.path.exists(os.path.join(REPO, beta)):
+            continue
+        # The beta shell has its own canonical (https://jwsync.org/beta/) and
+        # must keep it — handing it the production URL gave it two conflicting
+        # canonical tags. The satellite twins have no canonical of their own
+        # and must stay byte-identical to production for 15_parity.js, so they
+        # take the production URL, which is also the right signal for a
+        # noindex staging copy.
+        patch_page(beta, canonical, LANGS,
+                   set_canonical=(rel != "index.html"))
     for rel, canonical, _p, _f in STATIC_PAGES:
         patch_page(rel, canonical, ["en"])
 

@@ -749,6 +749,29 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
+// Exactly one canonical per page, pointing where that page should point.
+{
+  section('Canonical tags are singular and correct');
+  const WANT = {
+    'index.html': 'https://jwsync.org/',
+    // The beta shell canonicalises to itself, not to production: it is a
+    // separate noindex document. It briefly carried both and so contradicted
+    // itself.
+    'beta/index.html': 'https://jwsync.org/beta/',
+    'highlights.html': 'https://jwsync.org/highlights',
+    'share.html': 'https://jwsync.org/share',
+    'forum.html': 'https://jwsync.org/forum',
+  };
+  for (const [f, want] of Object.entries(WANT)) {
+    const c = fs.readFileSync(REPO + '/' + f, 'utf8');
+    const all = c.match(/<link rel="canonical" href="([^"]*)">/g) || [];
+    if (all.length !== 1) { fail(f + ': ' + all.length + ' canonical tags', all.join(' ')); continue; }
+    const href = all[0].match(/href="([^"]*)"/)[1];
+    if (href === want) ok(f + ' -> ' + href);
+    else fail(f + ': canonical is ' + href + ', expected ' + want);
+  }
+}
+
 // Generated <head> blocks must be replaced on rebuild, never stacked.
 {
   section('SEO marker blocks are singular');

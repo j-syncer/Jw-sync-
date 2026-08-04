@@ -4,6 +4,19 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.99.2] — 2026-08-04
+
+### Fixed
+
+- **The community forum's browser-tab title and search description** were
+  still English in every language. Both now follow your chosen language; they
+  are built from wording that was already translated, so there is no new copy
+  to keep in sync.
+- **The beta test site carried two conflicting canonical URLs**, one pointing
+  at itself and one at the production site. It now points only at itself.
+
+---
+
 ## [2.99.1] — 2026-08-04
 
 ### Fixed: parts of the interface that were English in every language
