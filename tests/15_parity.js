@@ -46,6 +46,7 @@ const IDENTICAL_PAIRS = [
   ['highlights.html', 'beta/highlights.html'],
   ['share.html', 'beta/share.html'],
   ['styles.css', 'beta/styles.css'],
+  ['rtl.css', 'beta/rtl.css'],
 ];
 
 IDENTICAL_PAIRS.forEach(function (pair) {

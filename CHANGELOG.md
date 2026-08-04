@@ -4,6 +4,50 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.99.0] — 2026-08-04
+
+### Added: Arabic — the site's first right-to-left language
+
+JW Sync now speaks Arabic, and the whole interface flips to read right-to-left
+when you pick it. Choose **العربية** from the language menu, or open any page
+with `?lang=ar`.
+
+- **Every screen is translated** — the landing page, the merge app, Study
+  Explorer, Study Stats, Note Sharing, Library Doctor, Reading Companion,
+  Resurface, the conflict reviewer, the merge celebration and the tool
+  switcher. 1,027 strings across all 30 dictionaries.
+- **Real right-to-left layout**, not just Arabic text in a left-to-right page.
+  Navigation, cards, step lists, toolbars, modals and the Explorer's list and
+  detail panes all mirror. The direction is set before the page paints, so
+  there is no flash of the wrong layout.
+- **Mixed-language notes read correctly.** If your interface is Arabic but a
+  note is written in English, that note keeps its own direction — no more full
+  stops jumping to the wrong end of the line.
+- **Bible chapter links** open in Arabic on jw.org.
+- **All 37 guides are available in Arabic** at `jwsync.org/guides/ar/`, with a
+  language switcher on every guide page. The English guides keep their
+  existing URLs.
+
+### Added: multilingual SEO
+
+- **Localized page title and description in all 13 languages.** Previously
+  every language shared the English title and meta description; each language
+  now gets its own, so search results and shared links read in your language.
+- **The Arabic guides are properly indexable** — each one is a real page with
+  its own canonical URL, `hreflang` alternates linking it to its English twin,
+  and Arabic structured data. All 114 guide URLs are in the sitemap.
+- **Fixed:** the Schema.org `inLanguage` list had never been updated when
+  Swedish shipped, so it advertised 11 of the 12 languages the site served. It
+  is now generated from a single language list along with everything else.
+- **Fixed:** `sitemap.xml` submitted `highlights.html` and `share.html`, which
+  the server redirects; those pages also had no canonical URL of their own.
+  Both now use their extensionless URLs.
+- **Fixed:** opening a tool with `?lang=` deep link (as the Arabic guides do)
+  left parts of the page in English, because only the landing page remembered
+  the choice. Every page now does.
+
+---
+
 ## [2.98.1] — 2026-08-02
 
 ### Fixed: the accessibility issues PageSpeed Insights reported

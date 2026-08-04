@@ -30,6 +30,10 @@ const { JSDOM } = require('jsdom');
 const JSZip = require('jszip');
 const initSqlJs = require('sql.js');
 
+// Every UI language the site ships. Adding one here makes the coverage
+// checks below guard it automatically.
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar'];
+
 const REPO = path.join(__dirname, '..');
 const HL_PATH = REPO + '/beta/highlights.html';
 const SQL_OPTS = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) };
@@ -713,8 +717,8 @@ async function waitForStats(doc, timeoutMs) {
     else fail('Study Stats home card / __jwGoHighlights missing');
     // wrp_open relabelled to "Study Stats" across all 10 app languages
     const openCount = (appJs.match(/wrp_open:/g) || []).length;
-    if (openCount === 12) ok('wrp_open present in all 12 app languages');
-    else fail('wrp_open count: expected 12, got ' + openCount);
+    if (openCount === LANGS.length) ok('wrp_open present in all ' + LANGS.length + ' app languages');
+    else fail('wrp_open count: expected ' + LANGS.length + ', got ' + openCount);
     if (appJs.includes('wrp_open:"Study Stats"')) ok('wrp_open relabelled to "Study Stats" (en)');
     else fail('wrp_open not relabelled to Study Stats');
   }
@@ -724,8 +728,8 @@ async function waitForStats(doc, timeoutMs) {
   {
     const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
     const count = (html.match(/cele_highlights:/g) || []).length;
-    if (count === 12) ok('cele_highlights present in all 12 celebration langs');
-    else fail('cele_highlights count: expected 12, got ' + count);
+    if (count === LANGS.length) ok('cele_highlights present in all ' + LANGS.length + ' celebration langs');
+    else fail('cele_highlights count: expected ' + LANGS.length + ', got ' + count);
     // Verify the highlights button is wired in the celebration overlay
     if (html.includes('data-jwc-highlights')) ok('data-jwc-highlights button present in celebration overlay');
     else fail('data-jwc-highlights missing from celebration overlay');

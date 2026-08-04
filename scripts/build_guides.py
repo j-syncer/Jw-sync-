@@ -12,9 +12,24 @@ import html
 import json
 import os
 import re
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from guides_i18n import CHROME, GUIDE_TEXT  # noqa: E402
 
 SITE = "https://jwsync.org"
 TODAY = "2026-07-13"
+
+# English lives at /guides/<slug>; every other language at /guides/<lang>/<slug>,
+# so the existing URLs — and their rankings — are untouched.
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar"]
+RTL_LANGS = {"ar"}
+
+# Languages that actually have translated guide copy. A language listed in
+# LANGS but absent here keeps pointing at the English guides, and is left out
+# of the hreflang cluster — announcing an alternate that does not exist is
+# worse for SEO than announcing none.
+TRANSLATED = sorted(set(GUIDE_TEXT) | {"en"})
 
 # ── Guide content ─────────────────────────────────────────────────────────
 # order here = order on guides/index.html
@@ -1097,31 +1112,75 @@ padding:16px 18px;color:var(--txt);height:100%}
 .gcards a:hover{text-decoration:none;border-color:var(--accent)}
 .gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
 .gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}
+.glang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;margin-left:14px;font-family:inherit;
+max-width:150px}
+.glang:hover{border-color:var(--accent)}
 """.strip()
 
-FOOTER = (
- '<footer class="site"><div class="wrap">'
- '<p><a href="{root}">JW Sync</a> · <a href="{root}guides/">All guides</a> · '
- '<a href="{root}forum.html">Community</a> · <a href="{root}highlights.html">Study Stats</a></p>'
- '<p>JW Sync processes all data locally — your files never leave your device. '
- 'Free to use; no account, no uploads.</p>'
- '<p>“JW Library” is the property of the Watch Tower Bible and Tract Society of Pennsylvania. '
- 'JW Sync is an independent utility and is not affiliated with or endorsed by it.</p>'
- '</div></footer>'
-)
+# The guides are self-contained static pages with no external stylesheet, so
+# they carry their own small RTL block rather than linking the site's rtl.css.
+RTL_CSS = """<style>
+body{direction:rtl}
+.hnav a{margin-left:0;margin-right:18px}
+ol.steps li{padding:0 52px 20px 0}
+ol.steps li::before{left:auto;right:0}
+.glang{margin-left:0;margin-right:14px}
+code,.lede code{unicode-bidi:isolate}
+</style>"""
+
+def footer(root, lang):
+    t = CHROME[lang]
+    return (
+        '<footer class="site"><div class="wrap">'
+        '<p><a href="%s">JW Sync</a> · <a href="%sguides/">%s</a> · '
+        '<a href="%sforum.html">%s</a> · <a href="%shighlights.html">%s</a></p>'
+        '<p>%s</p><p>%s</p>'
+        '</div></footer>'
+    ) % (root, root, esc(t["footer_all_guides"]),
+         root, esc(t["footer_community"]), root, esc(t["footer_stats"]),
+         esc(t["footer_privacy"]), esc(t["footer_disclaimer"]))
 
 def esc(s):
     return html.escape(s, quote=True)
 
-def head(title, description, canonical, jsonld):
+def guide_url(slug, lang):
+    """Canonical URL of a guide (or of the index when slug is None)."""
+    base = SITE + "/guides/" + ("" if lang == "en" else lang + "/")
+    return base + (slug if slug else "")
+
+
+def alternates(slug):
+    """hreflang cluster for one guide across every translated language."""
+    out = ['<link rel="alternate" hreflang="x-default" href="%s">' % guide_url(slug, "en")]
+    for l in TRANSLATED:
+        out.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, guide_url(slug, l)))
+    return "\n".join(out)
+
+
+def lang_picker(slug, lang, root):
+    """A plain <select> that navigates — no JS bundle on these static pages."""
+    opts = []
+    for l in TRANSLATED:
+        sel = " selected" if l == lang else ""
+        opts.append('<option value="%s"%s>%s</option>'
+                    % (guide_url(slug, l), sel, CHROME[l]["lang_name"]))
+    return ('<select class="glang" aria-label="%s" '
+            'onchange="location.href=this.value">%s</select>'
+            % (esc(CHROME[lang]["lang_label"]), "".join(opts)))
+
+
+def head(title, description, canonical, jsonld, lang="en", slug=None):
+    d = ' dir="rtl"' if lang in RTL_LANGS else ""
     return f"""<!DOCTYPE html>
-<html lang="en">
+<html lang="{lang}"{d}>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
 <link rel="canonical" href="{canonical}">
+{alternates(slug)}
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#040f22">
 <link rel="icon" href="/favicon.ico">
@@ -1132,27 +1191,46 @@ def head(title, description, canonical, jsonld):
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{SITE}/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="{CHROME[lang]["og_locale"]}">
 <script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>
 <style>{CSS}</style>
+{RTL_CSS if lang in RTL_LANGS else ""}
 </head>
 <body>"""
 
-def site_header(root):
+def site_header(root, lang, slug):
+    t = CHROME[lang]
+    app = root + ("" if lang == "en" else "?lang=" + lang)
     return (f'<header class="site"><div class="wrap">'
-            f'<a class="brand" href="{root}"><span class="dot">JW</span>JW Sync</a>'
-            f'<nav class="hnav"><a href="{root}guides/">Guides</a>'
-            f'<a href="{root}forum.html">Community</a>'
-            f'<a href="{root}">Open the app</a></nav>'
+            f'<a class="brand" href="{app}"><span class="dot">JW</span>JW Sync</a>'
+            f'<nav class="hnav"><a href="{root}guides/">{esc(t["nav_guides"])}</a>'
+            f'<a href="{root}forum.html">{esc(t["nav_community"])}</a>'
+            f'<a href="{app}">{esc(t["nav_open_app"])}</a>'
+            f'{lang_picker(slug, lang, root)}</nav>'
             f'</div></header>')
 
-def guide_jsonld(g, canonical):
+def localize(g, lang):
+    """Merge the language's copy over the English guide record.
+
+    Untranslated fields fall back to English, so a partially translated
+    language still produces a valid page rather than a KeyError.
+    """
+    if lang == "en":
+        return g
+    tr = GUIDE_TEXT.get(lang, {}).get(g["slug"], {})
+    out = dict(g)
+    out.update(tr)
+    return out
+
+
+def guide_jsonld(g, canonical, lang="en"):
     published = g.get("date", TODAY)
     graph = [
         {
             "@type": "Article",
             "headline": g["title"],
             "description": g["description"],
-            "inLanguage": "en",
+            "inLanguage": lang,
             "datePublished": published,
             "dateModified": published,
             "mainEntityOfPage": canonical,
@@ -1164,7 +1242,7 @@ def guide_jsonld(g, canonical):
             "@type": "HowTo",
             "name": g["title"],
             "description": g["description"],
-            "inLanguage": "en",
+            "inLanguage": lang,
             "totalTime": "PT5M",
             "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}],
             "step": [
@@ -1192,51 +1270,55 @@ def guide_jsonld(g, canonical):
         })
     return {"@context": "https://schema.org", "@graph": graph}
 
-def build_guide(g):
-    canonical = f"{SITE}/guides/{g['slug']}"
-    root = "../"
-    by_slug = {x["slug"]: x for x in GUIDES}
-    parts = [head(g["title"] + " | JW Sync Guides", g["description"], canonical,
-                  guide_jsonld(g, canonical))]
-    parts.append(site_header(root))
+def build_guide(g_en, lang="en"):
+    g = localize(g_en, lang)
+    t = CHROME[lang]
+    slug = g_en["slug"]
+    canonical = guide_url(slug, lang)
+    # /guides/<slug> is one level below the root; /guides/<lang>/<slug> is two.
+    root = "../" if lang == "en" else "../../"
+    parts = [head(g["title"] + " | " + t["site_guides"], g["description"], canonical,
+                  guide_jsonld(g, canonical, lang), lang, slug)]
+    parts.append(site_header(root, lang, slug))
     parts.append('<main class="wrap">')
     parts.append(f'<nav class="crumbs"><a href="{root}">JW Sync</a> › '
-                 f'<a href="./">Guides</a> › {esc(g["group"])}</nav>')
+                 f'<a href="./">{esc(t["crumb_guides"])}</a> › '
+                 f'{esc(t["groups"][g_en["group"]])}</nav>')
     parts.append(f"<h1>{esc(g['h1'])}</h1>")
     parts.append(f'<p class="lede">{esc(g["description"])}</p>')
     for p in g["intro"]:
         parts.append(f"<p>{esc(p)}</p>")
-    parts.append("<h2>Step by step</h2><ol class=\"steps\">")
+    parts.append(f'<h2>{esc(t["h_steps"])}</h2><ol class="steps">')
     for name, text in g["steps"]:
         parts.append(f"<li><h3>{esc(name)}</h3><p>{esc(text)}</p></li>")
     parts.append("</ol>")
-    parts.append('<div class="cta"><strong>Do it now — free, in your browser</strong>'
-                 '<span>JW Sync merges, edits and analyses .jwlibrary backups entirely on your '
-                 'device. No account, no uploads, nothing installed.</span>'
-                 f'<a class="btn" href="{root}">Open JW Sync →</a></div>')
+    app = root + ("" if lang == "en" else "?lang=" + lang)
+    parts.append(f'<div class="cta"><strong>{esc(t["cta_title"])}</strong>'
+                 f'<span>{esc(t["cta_body"])}</span>'
+                 f'<a class="btn" href="{app}">{esc(t["cta_btn"])}</a></div>')
     for h2, body in g["sections"]:
         parts.append(f"<h2>{esc(h2)}</h2><p>{esc(body)}</p>")
     if g.get("faq"):
-        parts.append('<h2>Frequently asked questions</h2><dl class="faq">')
+        parts.append(f'<h2>{esc(t["h_faq"])}</h2><dl class="faq">')
         for q, a in g["faq"]:
             parts.append(f"<dt>{esc(q)}</dt><dd>{esc(a)}</dd>")
         parts.append("</dl>")
-    parts.append('<h2>Related guides</h2><ul class="related">')
-    for slug in g["related"]:
-        r = by_slug[slug]
-        parts.append(f'<li><a href="{slug}">{esc(r["title"])}</a></li>')
+    parts.append(f'<h2>{esc(t["h_related"])}</h2><ul class="related">')
+    by_slug = {x["slug"]: x for x in GUIDES}
+    for rel in g_en["related"]:
+        r = localize(by_slug[rel], lang)
+        parts.append(f'<li><a href="{rel}">{esc(r["title"])}</a></li>')
     parts.append("</ul></main>")
-    parts.append(FOOTER.format(root=root))
+    parts.append(footer(root, lang))
     parts.append("</body>\n</html>\n")
     return "".join(parts)
 
-def build_index():
-    canonical = f"{SITE}/guides/"
-    root = "../"
-    title = "JW Library Backup, Sync & Notes Guides | JW Sync"
-    description = ("Practical guides for JW Library backups: merge backups from two devices, "
-                   "transfer notes to a new phone, move Android to iPhone, fix a backup that "
-                   "won't restore, edit and search your notes, and more.")
+def build_index(lang="en"):
+    t = CHROME[lang]
+    canonical = guide_url(None, lang)
+    root = "../" if lang == "en" else "../../"
+    title = t["index_title"]
+    description = t["index_desc"]
     jsonld = {
         "@context": "https://schema.org",
         "@graph": [
@@ -1245,60 +1327,68 @@ def build_index():
                 "name": title,
                 "description": description,
                 "url": canonical,
-                "inLanguage": "en",
+                "inLanguage": lang,
                 "isPartOf": {"@type": "WebSite", "name": "JW Sync", "url": SITE},
             },
             {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     {"@type": "ListItem", "position": 1, "name": "JW Sync", "item": SITE + "/"},
-                    {"@type": "ListItem", "position": 2, "name": "Guides", "item": canonical},
+                    {"@type": "ListItem", "position": 2,
+                     "name": t["crumb_guides"], "item": canonical},
                 ],
             },
         ],
     }
-    parts = [head(title, description, canonical, jsonld)]
-    parts.append(site_header(root))
+    parts = [head(title, description, canonical, jsonld, lang, None)]
+    parts.append(site_header(root, lang, None))
     parts.append('<main class="wrap">')
-    parts.append(f'<nav class="crumbs"><a href="{root}">JW Sync</a> › Guides</nav>')
-    parts.append("<h1>Guides &amp; how-tos</h1>")
-    parts.append('<p class="lede">Everything about JW Library backups, in plain steps: merging '
-                 'devices, moving to a new phone, rescuing notes, and getting more out of the '
-                 'library you already have. Every tool mentioned runs free in your browser — '
-                 'your files are never uploaded.</p>')
+    parts.append(f'<nav class="crumbs"><a href="{root}">JW Sync</a> › '
+                 f'{esc(t["crumb_guides"])}</nav>')
+    parts.append(f'<h1>{esc(t["index_h1"])}</h1>')
+    parts.append(f'<p class="lede">{esc(t["index_lede"])}</p>')
     for group in GROUPS:
-        parts.append(f"<h2>{esc(group)}</h2><ul class=\"gcards\">")
-        for g in GUIDES:
-            if g["group"] != group:
+        parts.append(f'<h2>{esc(t["groups"][group])}</h2><ul class="gcards">')
+        for g_en in GUIDES:
+            if g_en["group"] != group:
                 continue
-            parts.append(f'<li><a href="{g["slug"]}"><strong>{esc(g["title"])}</strong>'
+            g = localize(g_en, lang)
+            parts.append(f'<li><a href="{g_en["slug"]}"><strong>{esc(g["title"])}</strong>'
                          f'<span>{esc(g["description"])}</span></a></li>')
         parts.append("</ul>")
-    parts.append('<div class="cta"><strong>Skip the reading — just open the tool</strong>'
-                 '<span>Merging two backups takes about a minute and the app walks you through '
-                 'it.</span>'
-                 f'<a class="btn" href="{root}">Open JW Sync →</a></div>')
+    app = root + ("" if lang == "en" else "?lang=" + lang)
+    parts.append(f'<div class="cta"><strong>{esc(t["index_cta_title"])}</strong>'
+                 f'<span>{esc(t["index_cta_body"])}</span>'
+                 f'<a class="btn" href="{app}">{esc(t["cta_btn"])}</a></div>')
     parts.append("</main>")
-    parts.append(FOOTER.format(root=root))
+    parts.append(footer(root, lang))
     parts.append("</body>\n</html>\n")
     return "".join(parts)
 
+
 def main():
     repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    outdir = os.path.join(repo, "guides")
-    os.makedirs(outdir, exist_ok=True)
-    for g in GUIDES:
-        path = os.path.join(outdir, g["slug"] + ".html")
-        html_out = build_guide(g)
-        json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
-                             html_out, re.S).group(1))  # sanity: JSON-LD parses
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(html_out)
-        print("wrote", os.path.relpath(path, repo))
-    with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(build_index())
-    print("wrote guides/index.html")
-    print(f"{len(GUIDES)} guides + index")
+    written = 0
+    for lang in TRANSLATED:
+        outdir = os.path.join(repo, "guides") if lang == "en" \
+            else os.path.join(repo, "guides", lang)
+        os.makedirs(outdir, exist_ok=True)
+        for g in GUIDES:
+            html_out = build_guide(g, lang)
+            # sanity: the JSON-LD block must still parse after templating
+            json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
+                                 html_out, re.S).group(1))
+            with open(os.path.join(outdir, g["slug"] + ".html"), "w", encoding="utf-8") as f:
+                f.write(html_out)
+            written += 1
+        with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(build_index(lang))
+        written += 1
+        print("wrote guides/%s%d pages"
+              % ("" if lang == "en" else lang + "/", len(GUIDES) + 1))
+    print("%d guides x %d languages (+index) = %d pages"
+          % (len(GUIDES), len(TRANSLATED), written))
+
 
 if __name__ == "__main__":
     main()

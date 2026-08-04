@@ -11,11 +11,11 @@
  * Old caches are cleaned up on activate.
  */
 
-const CACHE_VERSION = 'jwsync-v177';
+const CACHE_VERSION = 'jwsync-v178';
 const SHELL_CACHE = CACHE_VERSION + '-shell';
 const RUNTIME_CACHE = CACHE_VERSION + '-runtime';
 
-const SHELL = ['./', './index.html', './highlights.html', './share.html'];
+const SHELL = ['./', './index.html', './highlights.html', './share.html', './rtl.css'];
 
 const CDN_HOSTS = [
   'cdn.jsdelivr.net',
