@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.6.0] — 2026-08-04
+
+### Added: all 37 guides in Russian
+
+The complete guide library is now available in Russian at
+`jwsync.org/guides/ru/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/ru/` now links **Руководства и инструкции** to the Russian guide index.
+- Each Russian guide is its own indexable page with a Russian title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German, Italian and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
 ## [3.5.0] — 2026-08-04
 
 ### Added: all 37 guides in Italian

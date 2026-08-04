@@ -297,6 +297,54 @@ CHROME = {
             "Power tools": "Strumenti avanzati",
         },
     },
+    "ru": {
+        "lang_name": "Русский",
+        "lang_label": "Язык",
+        "og_locale": "ru_RU",
+        "site_guides": "Руководства JW Sync",
+        "nav_guides": "Руководства",
+        "nav_community": "Сообщество",
+        "nav_open_app": "Открыть приложение",
+        "crumb_guides": "Руководства",
+        "h_steps": "Шаг за шагом",
+        "h_faq": "Частые вопросы",
+        "h_related": "Похожие руководства",
+        "cta_title": "Сделайте это сейчас — бесплатно, прямо в браузере",
+        "cta_body": "JW Sync объединяет, редактирует и анализирует резервные копии .jwlibrary "
+                    "целиком на вашем устройстве. Без учётной записи, без загрузки файлов, "
+                    "без установки.",
+        "cta_btn": "Открыть JW Sync →",
+        "index_title": "Руководства по резервным копиям, синхронизации и заметкам JW Library | JW Sync",
+        "index_desc": "Практические руководства по резервным копиям JW Library: объединить "
+                      "копии с двух устройств, перенести заметки на новый телефон, перейти с "
+                      "Android на iPhone, починить копию, которая не восстанавливается, "
+                      "редактировать заметки и искать по ним, и многое другое.",
+        "index_h1": "Руководства и инструкции",
+        "index_lede": "Всё о резервных копиях JW Library, понятными шагами: объединить "
+                      "устройства, перейти на новый телефон, спасти заметки и извлечь больше "
+                      "из той библиотеки, которая у вас уже есть. Каждый упомянутый "
+                      "инструмент работает бесплатно в вашем браузере — ваши файлы никогда не "
+                      "отправляются.",
+        "index_cta_title": "Пропустите чтение — просто откройте инструмент",
+        "index_cta_body": "Объединение двух копий занимает около минуты, и приложение "
+                          "проведёт вас по шагам.",
+        "footer_all_guides": "Все руководства",
+        "footer_community": "Сообщество",
+        "footer_stats": "Статистика изучения",
+        "footer_privacy": "JW Sync обрабатывает все данные локально — ваши файлы никогда не "
+                          "покидают устройство. Бесплатно; без учётной записи и без загрузки "
+                          "файлов.",
+        "footer_disclaimer": "«JW Library» принадлежит Watch Tower Bible and Tract Society of "
+                             "Pennsylvania. JW Sync — независимая утилита, не связанная с ней "
+                             "и не одобренная ею.",
+        "groups": {
+            "Getting started": "Начало работы",
+            "Sharing scenarios": "Как делиться заметками",
+            "Everyday scenarios": "Повседневные ситуации",
+            "Fixing problems": "Решение проблем",
+            "Power tools": "Продвинутые инструменты",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -350,6 +398,7 @@ from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
 from guides_de import GUIDES_DE  # noqa: E402
 from guides_it import GUIDES_IT  # noqa: E402
+from guides_ru import GUIDES_RU  # noqa: E402
 
 GUIDE_TEXT = {
     "es": GUIDES_ES,
@@ -357,5 +406,6 @@ GUIDE_TEXT = {
     "fr": GUIDES_FR,
     "de": GUIDES_DE,
     "it": GUIDES_IT,
+    "ru": GUIDES_RU,
     "ar": GUIDES_AR,
 }
