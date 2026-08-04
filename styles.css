@@ -2595,3 +2595,18 @@ html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]:disa
 @media (prefers-reduced-motion: reduce){
   html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]{ animation:none !important; }
 }
+
+
+/* ── Navbar tool row: wrap instead of clipping ─────────────────────────────
+   The row is capped at max-w-5xl and scrolls horizontally, while the privacy
+   pill right-aligns itself with margin-left:auto. Inside a flex row that is
+   already overflowing, an auto margin does not right-align — it parks the
+   pill past the visible edge, where the scroll container clips it. The badge
+   was cut off mid-word at 1280px in every language (English lost "browser";
+   German ran 279px over).
+   Above 640px the row wraps, so every control stays readable no matter how
+   long the translation is. Below that the horizontal scroll is kept: it is
+   the intended affordance on a phone, where wrapping would eat the screen. */
+@media (min-width: 640px) {
+  .jw-nav-tools { flex-wrap: wrap; overflow-x: visible; row-gap: 6px; }
+}

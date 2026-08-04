@@ -130,16 +130,22 @@ def patch_page(rel, canonical, langs):
     c = re.sub(r'\n?<!-- SEO:hreflang -->.*?<!-- /SEO:hreflang -->', "", c, flags=re.S)
     c = re.sub(r'\n?\s*<link rel="alternate" hreflang="[a-z-]+"[^>]*>', "", c)
 
-    # The pre-existing hand-written og:locale run is replaced wholesale so the
-    # generated block stays the single source of truth.
+    # Rebuild the og:locale run from scratch: drop every previously generated
+    # block and any hand-written tags, then emit exactly one. Stripping the
+    # tags but leaving the markers used to hand splice() an empty block to
+    # match, so pages with no og:type (highlights, share) grew one more empty
+    # marker pair on every run.
+    c = re.sub(r'\n?<!-- SEO:oglocale -->.*?<!-- /SEO:oglocale -->', "", c, flags=re.S)
     c = re.sub(r'\n?\s*<meta property="og:locale(?::alternate)?" content="[^"]*">', "", c)
+    block = marker("oglocale", og_locale_block(langs))
     og_anchor = '<meta property="og:type"'
     if og_anchor in c:
         line_end = c.index(">", c.index(og_anchor)) + 1
-        head, tail = c[:line_end], c[line_end:]
-        c = head + "\n" + marker("oglocale", og_locale_block(langs)) + tail
+        c = c[:line_end] + "\n" + block + c[line_end:]
     else:
-        c = splice(c, "oglocale", og_locale_block(langs), canon_tag)
+        if c.count(canon_tag) != 1:
+            sys.exit("ABORT %s: canonical anchor x%d" % (rel, c.count(canon_tag)))
+        c = c.replace(canon_tag, canon_tag + "\n" + block, 1)
 
     if c != orig:
         io.open(path, "w", encoding="utf-8").write(c)

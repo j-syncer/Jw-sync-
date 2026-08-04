@@ -749,6 +749,136 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
+// Generated <head> blocks must be replaced on rebuild, never stacked.
+{
+  section('SEO marker blocks are singular');
+  const PAGES = ['index.html', 'beta/index.html', 'highlights.html',
+    'beta/highlights.html', 'share.html', 'beta/share.html', 'forum.html'];
+  let bad = 0;
+  for (const f of PAGES) {
+    const c = fs.readFileSync(REPO + '/' + f, 'utf8');
+    for (const name of ['oglocale', 'hreflang']) {
+      const opens = (c.match(new RegExp('<!-- SEO:' + name + ' -->', 'g')) || []).length;
+      const want = name === 'hreflang' ? 0 : 1;   // hreflang is deliberately absent
+      if (opens !== want) { fail(f + ': ' + opens + ' SEO:' + name + ' block(s), expected ' + want); bad++; }
+    }
+  }
+  if (!bad) ok('every page has exactly one og:locale block and no hreflang block');
+}
+
+// ── Nothing user-facing may be hardcoded English ─────────────────────────
+// Three surfaces shipped English to all thirteen languages for a long time
+// because nothing checked them: the navbar (labels + every title= tooltip),
+// the in-app language picker (which silently stopped at Swedish, so Cebuano
+// users could not switch back to Cebuano), and the whole community forum.
+{
+  section('No hardcoded English in the app navbar');
+  const appJs = fs.readFileSync(REPO + '/js/app.js', 'utf8');
+  const navStart = appJs.indexOf('id:"jw-navbar"');
+  if (navStart < 0) {
+    fail('could not locate the navbar render');
+  } else {
+    const nav = appJs.slice(navStart, navStart + 4000);
+    // Literals that used to sit in the render. Each must now be an s() lookup.
+    const FORBIDDEN = [
+      '"Advanced options"', '"‹ Simple view"', '"Show advanced tools"',
+      '"Back to the simple view"', '"Simple — step', '"Full Mode — all',
+      '"Try with sample notes"', '"Open Note Explorer"', '"Community — ',
+      '"Open on another device"', '"Switch to Light Mode"', '"Switch to Dark Mode"',
+      '⚡ Full"', '✦ Simple"', ' Community"', ' Share"',
+    ];
+    const found = FORBIDDEN.filter(f => nav.includes(f));
+    if (!found.length) ok('navbar renders every label and tooltip through s()');
+    else fail(found.length + ' hardcoded English string(s) in the navbar', found.join(' | '));
+
+    // The keys those lookups need, in every language.
+    const NAV_KEYS = ['nav_adv_options', 'nav_simple_view', 'nav_adv_show_title',
+      'nav_adv_back_title', 'mode_simple', 'mode_full', 'mode_simple_title',
+      'mode_full_title', 'nav_demo_title', 'nav_browse_title',
+      'nav_community_title', 'nav_share_btn', 'nav_share_title',
+      'theme_to_light', 'theme_to_dark'];
+    let missing = [];
+    for (const k of NAV_KEYS) {
+      const n = (appJs.match(new RegExp('[,{]' + k + ':', 'g')) || []).length;
+      if (n !== EXPECTED_LANGS.length) missing.push(k + ' x' + n);
+    }
+    if (!missing.length)
+      ok('all ' + NAV_KEYS.length + ' navbar keys present in ' + EXPECTED_LANGS.length + ' languages');
+    else fail('navbar key coverage gaps: ' + missing.join(', '));
+  }
+
+  section('In-app language picker lists every language');
+  {
+    const appJs = fs.readFileSync(REPO + '/js/app.js', 'utf8');
+    const m = appJs.match(/NAV_LANGS=\[(.*?)\],TRANSLATIONS=/s);
+    if (!m) fail('NAV_LANGS not found — picker may be hand-written again');
+    else {
+      const codes = [...m[1].matchAll(/\["([a-z]{2,3})",/g)].map(x => x[1]);
+      const missing = EXPECTED_LANGS.filter(l => !codes.includes(l));
+      if (!missing.length) ok('picker offers all ' + codes.length + ' languages');
+      else fail('picker is missing: ' + missing.join(', '));
+      if (appJs.includes('NAV_LANGS.map(')) ok('picker is generated from the list, not hand-written');
+      else fail('picker no longer renders from NAV_LANGS');
+    }
+  }
+
+  section('Community forum is translated');
+  {
+    const forum = fs.readFileSync(REPO + '/forum.html', 'utf8');
+    const forumJs = fs.readFileSync(REPO + '/js/forum.js', 'utf8');
+    const m = forum.match(/window\.__FORUM_I18N=(\{.*?\});<\/script>/s);
+    if (!m) { fail('__FORUM_I18N dictionary missing from forum.html'); }
+    else {
+      let dict;
+      try { dict = JSON.parse(m[1]); } catch (e) { dict = null; fail('__FORUM_I18N does not parse'); }
+      if (dict) {
+        const langs = Object.keys(dict);
+        const missing = EXPECTED_LANGS.filter(l => !langs.includes(l));
+        if (!missing.length) ok('forum dictionary covers all ' + langs.length + ' languages');
+        else fail('forum dictionary missing: ' + missing.join(', '));
+
+        const enKeys = Object.keys(dict.en || {});
+        const gaps = [];
+        for (const l of langs) {
+          const miss = enKeys.filter(k => !(k in dict[l]));
+          if (miss.length) gaps.push(l + ':' + miss.slice(0, 3).join(','));
+        }
+        if (!gaps.length) ok('every forum key present in every language (' + enKeys.length + ' keys)');
+        else fail('forum key gaps: ' + gaps.join(' | '));
+
+        // Counted strings must carry CLDR plural categories, not a bare string:
+        // Arabic needs six forms and Russian four, and "3 ردًا" is wrong.
+        for (const l of ['ar', 'ru']) {
+          const v = dict[l] && dict[l].n_replies;
+          if (v && typeof v === 'object' && v.few && v.other)
+            ok(l + ': reply count uses plural categories (few/other present)');
+          else fail(l + ': n_replies is not plural-aware — counts 3-10 would be wrong');
+        }
+      }
+    }
+
+    // Markup hooks + the applier
+    for (const [attr, min] of [['data-i18n=', 20], ['data-i18n-ph=', 5], ['data-i18n-opt=', 4]]) {
+      const n = (forum.match(new RegExp(attr, 'g')) || []).length;
+      if (n >= min) ok('forum markup: ' + n + ' ' + attr + ' hooks');
+      else fail('forum markup: only ' + n + ' ' + attr + ' hooks (expected >= ' + min + ')');
+    }
+    if (forum.includes('id="forum-i18n"') && forum.includes('window.__forumT'))
+      ok('forum applier installed and exposes __forumT for the runtime');
+    else fail('forum i18n applier missing');
+
+    // Runtime copy must go through FT(), not literals.
+    const LEFTOVERS = ["'Please add a title.'", "'Posted! ✓'", "'Already upvoted!'",
+      "'No posts yet'", "'Be the first to post!'", "'just now'", "' ago'",
+      "'No replies yet", "'Posting…'"];
+    const stuck = LEFTOVERS.filter(s => forumJs.includes(s));
+    if (!stuck.length) ok('forum runtime strings all read from the dictionary');
+    else fail(stuck.length + ' hardcoded string(s) left in js/forum.js', stuck.join(' | '));
+    if (forumJs.includes('const FT =')) ok('js/forum.js has the FT() lookup helper');
+    else fail('FT() helper missing from js/forum.js');
+  }
+}
+
 // Canonical hygiene — every submitted URL must be its own canonical.
 // The landing page is one document with client-side i18n, so ?lang= variants
 // serve byte-identical English HTML canonicalising to "/". Submitting them (or

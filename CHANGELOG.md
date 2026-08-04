@@ -4,6 +4,40 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [2.99.1] — 2026-08-04
+
+### Fixed: parts of the interface that were English in every language
+
+These were not Arabic-specific — each one showed English to all thirteen
+languages, in some cases since the feature shipped.
+
+- **The app toolbar is translated.** "Advanced options", the Simple/Full mode
+  toggle, the Community and Share buttons and every hover tooltip were written
+  as English literals, so they stayed English no matter which language you
+  chose. All fifteen now come from the translation files.
+- **The in-app language menu lists every language again.** It was written out
+  by hand and stopped at Swedish, so anyone using the app in Cebuano could not
+  switch back to Cebuano from inside it. Arabic was missing too. The menu is
+  now generated from one list, so it cannot fall behind again.
+- **The community forum is translated.** forum.jwsync.org was the last
+  English-only part of the site: the whole page — headings, the new-post form,
+  filters, counters, empty states and every status message — now follows your
+  chosen language, in all thirteen.
+- **Reply and time counts read correctly in Arabic and Russian.** Both
+  languages need more than a singular/plural pair; "3 replies" was rendering
+  with the wrong ending. Counts now use each language's real plural rules, so
+  Arabic gets its dual and its 3–10 form and Russian gets its 2–4 form.
+- **Duplicate metadata in the page head.** The script that maintains the
+  social/locale tags left an empty block behind each time it ran, so several
+  pages had collected five of them. It now rebuilds the block instead of
+  stacking, and a test keeps it that way.
+- **The privacy badge is no longer cut off.** "100% Private — runs in your
+  browser" was clipped mid-word in the toolbar at normal window sizes in every
+  language (German ran furthest over). The toolbar now wraps instead of
+  clipping; on phones it still scrolls sideways as before.
+
+---
+
 ## [2.99.0] — 2026-08-04
 
 ### Added: Arabic — the site's first right-to-left language

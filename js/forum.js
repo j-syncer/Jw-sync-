@@ -26,21 +26,28 @@ const saveVotes = () => {
 
 // ── Utils ─────────────────────────────────────────────────────
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// UI copy lives in window.__FORUM_I18N (embedded in forum.html) and is read
+// through the helper the page installs. The fallback keeps this file usable if
+// the script order ever changes.
+const FT = (k, n) => (window.__forumT ? window.__forumT(k, n) : k);
+
 const ago = iso => {
     const m = Math.floor((Date.now() - new Date(iso)) / 60000);
-    if (m < 1) return 'just now';
-    if (m < 60) return m + 'm ago';
+    if (m < 1) return FT('ago_now');
+    if (m < 60) return FT('ago_m', m);
     const h = Math.floor(m/60);
-    if (h < 24) return h + 'h ago';
+    if (h < 24) return FT('ago_h', h);
     const d = Math.floor(h/24);
-    return d < 7 ? d + 'd ago' : new Date(iso).toLocaleDateString();
+    // Past a week an absolute date is clearer, and toLocaleDateString already
+    // formats it for the reader's locale.
+    return d < 7 ? FT('ago_d', d) : new Date(iso).toLocaleDateString();
 };
 const aColor = n => {
     const c = ['#f97316','#60a5fa','#22c55e','#a78bfa','#f472b6','#fb923c','#34d399','#38bdf8'];
     let h = 0; for (const x of String(n||'?')) h = (h*31 + x.charCodeAt(0)) & 0xffffffff;
     return c[Math.abs(h) % c.length];
 };
-const catLabel = c => ({question:'❓ Question',bug:'🐛 Bug',feature:'💡 Feature',general:'💬 General'}[c]||c);
+const catLabel = c => ({question:'❓ '+FT('cat_question'),bug:'🐛 '+FT('cat_bug'),feature:'💡 '+FT('cat_feature'),general:'💬 '+FT('cat_general')}[c]||c);
 const catCls   = c => 'cat-'+(c||'general');
 const cc = (src, dst, max) => { const el = document.getElementById(dst); if(el) el.textContent = document.getElementById(src)?.value?.length||0; };
 
@@ -82,7 +89,7 @@ function render() {
     const shown = filter === 'all' ? posts : posts.filter(p => p.category === filter);
     const list  = document.getElementById('post-list');
     if (!shown.length) {
-        list.innerHTML = `<div class="state-box"><div class="icon">💬</div><h3>${filter==='all'?'No posts yet':'No posts here'}</h3><p>${filter==='all'?'Be the first to post!':'Try a different filter.'}</p></div>`;
+        list.innerHTML = `<div class="state-box"><div class="icon">💬</div><h3>${filter==='all'?FT('no_posts_yet'):FT('no_posts_here')}</h3><p>${filter==='all'?FT('be_first'):FT('try_filter')}</p></div>`;
         return;
     }
     list.innerHTML = shown.map(p => {
@@ -103,7 +110,7 @@ function render() {
                 ${p.content?`<div class="post-excerpt">${esc(p.content)}</div>`:''}
                 <div class="post-meta">
                     <span class="meta-chip"><div class="avatar-sm" style="background:${col}">${esc((p.author[0]||'?').toUpperCase())}</div>${esc(p.author)}</span>
-                    <span class="meta-chip reply-chip">💬 ${rc} ${rc===1?'reply':'replies'}</span>
+                    <span class="meta-chip reply-chip">💬 ${FT('n_replies', rc)}</span>
                     <span class="meta-chip mono">${ago(p.created_at)}</span>
                 </div>
             </div>
@@ -136,20 +143,20 @@ async function submitPost() {
     const body   = document.getElementById('new-body').value.trim();
     const author = document.getElementById('new-author').value.trim();
     const cat    = document.getElementById('new-cat').value;
-    if (!title)  { toast('Please add a title.','error'); return; }
-    if (!author) { toast('Please add your name.','error'); return; }
+    if (!title)  { toast(FT('err_title'),'error'); return; }
+    if (!author) { toast(FT('err_name'),'error'); return; }
     const btn = document.getElementById('post-btn');
-    btn.disabled = true; btn.textContent = 'Posting…';
+    btn.disabled = true; btn.textContent = FT('posting');
     try {
         const { error } = await db.from('posts').insert({ title, content: body||null, author, category: cat, votes: 0 });
         if (error) throw error;
         ['new-title','new-body','new-author'].forEach(id => document.getElementById(id).value='');
         ['tc','bc'].forEach(id => document.getElementById(id).textContent='0');
         document.getElementById('compose-panel').classList.remove('open');
-        toast('Posted! ✓');
+        toast(FT('posted'));
         await load();
     } catch(e) {
-        toast('Error: '+e.message,'error');
+        toast(FT('err_generic')+e.message,'error');
     } finally {
         btn.disabled = false; btn.textContent = 'Post →';
     }
@@ -157,7 +164,7 @@ async function submitPost() {
 
 // ── Vote post ─────────────────────────────────────────────────
 async function votePost(id, btn) {
-    if (votedP.has(id)) { toast('Already upvoted!','error',1800); return; }
+    if (votedP.has(id)) { toast(FT('already_voted'),'error',1800); return; }
     const post = posts.find(p=>p.id===id);
     if (post) post.votes++;
     const el = document.getElementById('pv-'+id);
@@ -172,7 +179,7 @@ async function votePost(id, btn) {
         if (post) post.votes--;
         if (el) el.textContent = post?.votes??'';
         btn?.classList.remove('voted');
-        toast('Vote failed: '+e.message,'error');
+        toast(FT('vote_failed')+e.message,'error');
     }
 }
 
@@ -194,7 +201,7 @@ async function showThread(id) {
     const post = posts.find(p=>p.id===id);
     if (!post) {
         if (!posts.length) { pendingThreadId = id; return; } // opened via deep link before load() finished
-        toast('That post could not be found.','error');
+        toast(FT('not_found'),'error');
         if (THREAD_HASH_RE.test(location.hash)) history.replaceState(null, '', '#forum');
         hideThread();
         return;
@@ -247,8 +254,8 @@ async function showThread(id) {
 
 function copyThreadLink(id) {
     const url = location.origin + location.pathname + '#forum/post/' + encodeURIComponent(id);
-    const done = () => toast('Link copied ✓');
-    const fail = () => toast('Could not copy the link.','error');
+    const done = () => toast(FT('link_copied'));
+    const fail = () => toast(FT('copy_failed'),'error');
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(done, fail);
     } else { fail(); }
@@ -260,7 +267,7 @@ async function loadReplies(postId) {
         if (error) throw error;
         const replies = data||[];
         document.getElementById('replies-hdr').textContent =
-            replies.length===0 ? 'No replies yet — be the first!' : `${replies.length} ${replies.length===1?'reply':'replies'}`;
+            replies.length===0 ? FT('no_replies') : FT('n_replies', replies.length);
         document.getElementById('replies-list').innerHTML = replies.length===0 ? '' : replies.map(r => {
             const col = aColor(r.author);
             const voted = votedR.has(r.id);
@@ -283,7 +290,7 @@ async function loadReplies(postId) {
 }
 
 async function votePostThread(id) {
-    if (votedP.has(id)) { toast('Already upvoted!','error',1800); return; }
+    if (votedP.has(id)) { toast(FT('already_voted'),'error',1800); return; }
     const post = posts.find(p=>p.id===id);
     if (post) post.votes++;
     const tc = document.getElementById('tv-count');
@@ -300,12 +307,12 @@ async function votePostThread(id) {
         if (post) post.votes--;
         if (tc) tc.textContent = post?.votes??'';
         document.getElementById('tv-btn')?.classList.remove('voted');
-        toast('Vote failed: '+e.message,'error');
+        toast(FT('vote_failed')+e.message,'error');
     }
 }
 
 async function voteReply(id, btn) {
-    if (votedR.has(id)) { toast('Already upvoted!','error',1800); return; }
+    if (votedR.has(id)) { toast(FT('already_voted'),'error',1800); return; }
     const el = document.getElementById('rv-'+id);
     let cur = parseInt(el?.textContent||'0')+1;
     if (el) el.textContent = cur;
@@ -318,7 +325,7 @@ async function voteReply(id, btn) {
         votedR.delete(id); saveVotes();
         if (el) el.textContent = cur-1;
         btn.classList.remove('voted');
-        toast('Vote failed: '+e.message,'error');
+        toast(FT('vote_failed')+e.message,'error');
     }
 }
 
@@ -326,20 +333,20 @@ async function submitReply() {
     if (!activePostId) return;
     const author  = document.getElementById('r-author').value.trim();
     const content = document.getElementById('r-text').value.trim();
-    if (!author)  { toast('Please add your name.','error'); return; }
-    if (!content) { toast('Reply cannot be empty.','error'); return; }
+    if (!author)  { toast(FT('err_name'),'error'); return; }
+    if (!content) { toast(FT('reply_empty'),'error'); return; }
     const btn = document.getElementById('reply-btn');
-    btn.disabled = true; btn.textContent = 'Posting…';
+    btn.disabled = true; btn.textContent = FT('posting');
     try {
         const { error } = await db.from('replies').insert({ post_id:activePostId, author, content, votes:0, is_solution:false });
         if (error) throw error;
         document.getElementById('r-text').value = '';
         document.getElementById('rc').textContent = '0';
-        toast('Reply posted! ✓');
+        toast(FT('reply_posted'));
         await loadReplies(activePostId);
         await load(); // refresh reply counts
     } catch(e) {
-        toast('Error: '+e.message,'error');
+        toast(FT('err_generic')+e.message,'error');
     } finally {
         btn.disabled = false; btn.textContent = 'Reply →';
     }
@@ -398,7 +405,7 @@ window.jwsyncForumInit = async function () {
                 var s = document.createElement('script');
                 s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
                 s.onload = resolve;
-                s.onerror = function () { reject(new Error('Could not load forum library')); };
+                s.onerror = function () { reject(new Error(FT('lib_failed'))); };
                 document.head.appendChild(s);
             });
         }
