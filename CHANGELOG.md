@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.2.0] — 2026-08-04
+
+### Added: all 37 guides in Portuguese
+
+The complete guide library is now available in Portuguese at
+`jwsync.org/guides/pt/` — every walkthrough, FAQ and troubleshooting page, not
+a subset. Merging backups from two devices, moving from Android to iPhone,
+rescuing a backup that won't restore, the Study Explorer, the Library Doctor,
+the Reading Companion: all of it.
+
+- `/pt/` now links **Guias e tutoriais** to the Portuguese guide index rather
+  than the English one.
+- Each Portuguese guide is its own indexable page with a Portuguese title,
+  description and structured data, cross-linked to its English, Spanish and
+  Arabic twins.
+- English guide URLs are unchanged.
+
+Nine languages to go; each is added the same way, and a language only appears
+in the guide switcher and the sitemap once its translation is complete.
+
+---
+
 ## [3.1.0] — 2026-08-04
 
 ### Added: all 37 guides in Spanish

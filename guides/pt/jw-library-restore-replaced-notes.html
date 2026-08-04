@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A restauração do JW Library substituiu suas notas? Como recuperá-las | Guias do JW Sync</title>
+<meta name="description" content="A restauração do JW Library é uma troca completa, não uma mesclagem — as notas feitas depois da data do backup parecem ter sumido. Se você ainda tem os dois arquivos de backup, nada foi perdido. Veja a solução.">
+<link rel="canonical" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/jw-library-restore-replaced-notes">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/guides/jw-library-restore-replaced-notes">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/jw-library-restore-replaced-notes">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A restauração do JW Library substituiu suas notas? Como recuperá-las | Guias do JW Sync">
+<meta property="og:description" content="A restauração do JW Library é uma troca completa, não uma mesclagem — as notas feitas depois da data do backup parecem ter sumido. Se você ainda tem os dois arquivos de backup, nada foi perdido. Veja a solução.">
+<meta property="og:url" content="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="pt_BR">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "A restauração do JW Library substituiu suas notas? Como recuperá-las", "description": "A restauração do JW Library é uma troca completa, não uma mesclagem — as notas feitas depois da data do backup parecem ter sumido. Se você ainda tem os dois arquivos de backup, nada foi perdido. Veja a solução.", "inLanguage": "pt", "datePublished": "2026-07-13", "dateModified": "2026-07-13", "mainEntityOfPage": "https://jwsync.org/guides/pt/jw-library-restore-replaced-notes", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "A restauração do JW Library substituiu suas notas? Como recuperá-las", "description": "A restauração do JW Library é uma troca completa, não uma mesclagem — as notas feitas depois da data do backup parecem ter sumido. Se você ainda tem os dois arquivos de backup, nada foi perdido. Veja a solução.", "inLanguage": "pt", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Pare — não restaure de novo", "text": "Cada restauração substitui os dados atuais do aparelho. Faça uma pausa antes que mais alguma coisa desapareça."}, {"@type": "HowToStep", "position": 2, "name": "Faça um backup do aparelho como ele está agora", "text": "Estudo Pessoal → Backup e Restauração → Criar um backup. Isso preserva o estado atual, seja ele qual for."}, {"@type": "HowToStep", "position": 3, "name": "Encontre o backup com as notas que sumiram", "text": "O arquivo .jwlibrary que você usou para restaurar, ou um anterior — procure no seu e-mail, no Drive, no iCloud e na pasta de downloads."}, {"@type": "HowToStep", "position": 4, "name": "Mescle os dois arquivos em jwsync.org", "text": "Carregue os dois backups. O JW Sync combina todas as notas, destaques, marcadores e etiquetas dos dois em um novo arquivo — no seu navegador, sem enviar nada. Versões conflitantes da mesma nota aparecem lado a lado para você escolher."}, {"@type": "HowToStep", "position": 5, "name": "Restaure o arquivo mesclado", "text": "Backup e Restauração → Restaurar com o .jwlibrary mesclado. Os dois conjuntos de notas estão de volta no aparelho."}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "Guias", "item": "https://jwsync.org/guides/pt/"}, {"@type": "ListItem", "position": 3, "name": "A restauração do JW Library substituiu suas notas? Como recuperá-las", "item": "https://jwsync.org/guides/pt/jw-library-restore-replaced-notes"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "A mesclagem vai duplicar as notas que existem nos dois backups?", "acceptedAnswer": {"@type": "Answer", "text": "Não — itens idênticos são detectados e mantidos uma única vez. Só versões realmente diferentes da mesma nota são separadas para revisão."}}, {"@type": "Question", "name": "Isso resolve um backup que não restaura de jeito nenhum?", "acceptedAnswer": {"@type": "Answer", "text": "Normalmente isso é dano no arquivo, e não sobrescrita — veja abaixo o guia sobre consertar um backup danificado."}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);display:inline-flex;
+align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800}
+.hnav a{color:var(--muted);font-size:14px;margin-left:18px}
+.crumbs{font-size:13px;color:var(--muted);margin:26px 0 6px}
+.crumbs a{color:var(--muted)}
+h1{font-size:30px;line-height:1.25;margin:8px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:15px;margin:0 0 26px}
+h2{font-size:21px;margin:38px 0 10px;letter-spacing:-.01em}
+p{margin:0 0 16px}
+ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 4px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.cta{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:20px 22px;margin:34px 0}
+.cta strong{display:block;font-size:17px;margin-bottom:4px}
+.cta span{color:var(--muted);font-size:14.5px}
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
+.faq dt{font-weight:600;margin:18px 0 4px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.related{margin:8px 0 0;padding:0;list-style:none}
+.related li{margin:0 0 8px}
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}
+.gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
+@media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}
+.gcards a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;color:var(--txt);height:100%}
+.gcards a:hover{text-decoration:none;border-color:var(--accent)}
+.gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
+.gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}
+.glang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;margin-left:14px;font-family:inherit;
+max-width:150px}
+.glang:hover{border-color:var(--accent)}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="../../?lang=pt"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="../../guides/pt/">Guias</a><a href="../../forum.html">Comunidade</a><a href="../../?lang=pt">Abrir o app</a><select class="glang" aria-label="Idioma" onchange="location.href=this.value"><option value="https://jwsync.org/guides/ar/jw-library-restore-replaced-notes">العربية</option><option value="https://jwsync.org/guides/jw-library-restore-replaced-notes">English</option><option value="https://jwsync.org/guides/es/jw-library-restore-replaced-notes">Español</option><option value="https://jwsync.org/guides/pt/jw-library-restore-replaced-notes" selected>Português</option></select></nav></div></header><main class="wrap"><nav class="crumbs"><a href="../../">JW Sync</a> › <a href="./">Guias</a> › Resolvendo problemas</nav><h1>A restauração substituiu suas notas? Veja como juntar os dois backups</h1><p class="lede">A restauração do JW Library é uma troca completa, não uma mesclagem — as notas feitas depois da data do backup parecem ter sumido. Se você ainda tem os dois arquivos de backup, nada foi perdido. Veja a solução.</p><p>É um momento horrível: você restaura um backup em um aparelho que já tinha notas e a restauração substitui tudo — as notas feitas desde aquele backup parecem ter sumido. Isso acontece porque o Backup e Restauração do JW Library é uma troca completa, não uma mesclagem.</p><p>O ponto principal: se o trabalho mais recente ainda existe em algum arquivo de backup, nada foi realmente perdido. A solução é mesclar os dois backups em vez de escolher entre eles.</p><h2>Passo a passo</h2><ol class="steps"><li><h3>Pare — não restaure de novo</h3><p>Cada restauração substitui os dados atuais do aparelho. Faça uma pausa antes que mais alguma coisa desapareça.</p></li><li><h3>Faça um backup do aparelho como ele está agora</h3><p>Estudo Pessoal → Backup e Restauração → Criar um backup. Isso preserva o estado atual, seja ele qual for.</p></li><li><h3>Encontre o backup com as notas que sumiram</h3><p>O arquivo .jwlibrary que você usou para restaurar, ou um anterior — procure no seu e-mail, no Drive, no iCloud e na pasta de downloads.</p></li><li><h3>Mescle os dois arquivos em jwsync.org</h3><p>Carregue os dois backups. O JW Sync combina todas as notas, destaques, marcadores e etiquetas dos dois em um novo arquivo — no seu navegador, sem enviar nada. Versões conflitantes da mesma nota aparecem lado a lado para você escolher.</p></li><li><h3>Restaure o arquivo mesclado</h3><p>Backup e Restauração → Restaurar com o .jwlibrary mesclado. Os dois conjuntos de notas estão de volta no aparelho.</p></li></ol><div class="cta"><strong>Faça agora — de graça, no seu navegador</strong><span>O JW Sync mescla, edita e analisa backups .jwlibrary inteiramente no seu aparelho. Sem conta, sem envio de arquivos, sem instalar nada.</span><a class="btn" href="../../?lang=pt">Abrir o JW Sync →</a></div><h2>E se não houver backup das notas mais recentes?</h2><p>Se a única cópia das notas mais recentes estava no aparelho e uma restauração já passou por cima delas, o próprio JW Library não oferece como desfazer. É por isso que o passo 2 acima — fazer um backup do estado atual antes de qualquer coisa — importa tanto sempre que algo parecer errado. Daqui para a frente, a rotina de mesclar primeiro torna o problema estruturalmente impossível.</p><h2>Perguntas frequentes</h2><dl class="faq"><dt>A mesclagem vai duplicar as notas que existem nos dois backups?</dt><dd>Não — itens idênticos são detectados e mantidos uma única vez. Só versões realmente diferentes da mesma nota são separadas para revisão.</dd><dt>Isso resolve um backup que não restaura de jeito nenhum?</dt><dd>Normalmente isso é dano no arquivo, e não sobrescrita — veja abaixo o guia sobre consertar um backup danificado.</dd></dl><h2>Guias relacionados</h2><ul class="related"><li><a href="fix-corrupted-jw-library-backup">Consertar um backup danificado do JW Library que não restaura</a></li><li><a href="merge-jw-library-backups">Como mesclar backups do JW Library de dois aparelhos</a></li><li><a href="backup-jw-library">Como fazer backup do JW Library do jeito certo</a></li></ul></main><footer class="site"><div class="wrap"><p><a href="../../">JW Sync</a> · <a href="../../guides/pt/">Todos os guias</a> · <a href="../../forum.html">Comunidade</a> · <a href="../../highlights.html">Estatísticas de Estudo</a></p><p>O JW Sync processa todos os dados localmente — seus arquivos nunca saem do seu aparelho. É gratuito; sem conta e sem envio de arquivos.</p><p>“JW Library” é propriedade da Watch Tower Bible and Tract Society of Pennsylvania. O JW Sync é um utilitário independente, não é afiliado a ela nem por ela endossado.</p></div></footer></body>
+</html>

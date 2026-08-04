@@ -108,6 +108,52 @@ CHROME = {
             "Power tools": "Herramientas avanzadas",
         },
     },
+    "pt": {
+        "lang_name": "Português",
+        "lang_label": "Idioma",
+        "og_locale": "pt_BR",
+        "site_guides": "Guias do JW Sync",
+        "nav_guides": "Guias",
+        "nav_community": "Comunidade",
+        "nav_open_app": "Abrir o app",
+        "crumb_guides": "Guias",
+        "h_steps": "Passo a passo",
+        "h_faq": "Perguntas frequentes",
+        "h_related": "Guias relacionados",
+        "cta_title": "Faça agora — de graça, no seu navegador",
+        "cta_body": "O JW Sync mescla, edita e analisa backups .jwlibrary inteiramente no seu "
+                    "aparelho. Sem conta, sem envio de arquivos, sem instalar nada.",
+        "cta_btn": "Abrir o JW Sync →",
+        "index_title": "Guias de backup, sincronização e notas do JW Library | JW Sync",
+        "index_desc": "Guias práticos para os backups do JW Library: mesclar backups de dois "
+                      "aparelhos, transferir notas para um celular novo, migrar do Android "
+                      "para o iPhone, consertar um backup que não restaura, editar e "
+                      "pesquisar suas notas, e muito mais.",
+        "index_h1": "Guias e tutoriais",
+        "index_lede": "Tudo sobre os backups do JW Library, em passos simples: mesclar "
+                      "aparelhos, mudar de celular, resgatar notas e tirar mais proveito da "
+                      "biblioteca que você já tem. Todas as ferramentas citadas rodam de "
+                      "graça no seu navegador — seus arquivos nunca são enviados.",
+        "index_cta_title": "Pule a leitura — abra logo a ferramenta",
+        "index_cta_body": "Mesclar dois backups leva cerca de um minuto, e o app guia você "
+                          "pelo caminho.",
+        "footer_all_guides": "Todos os guias",
+        "footer_community": "Comunidade",
+        "footer_stats": "Estatísticas de Estudo",
+        "footer_privacy": "O JW Sync processa todos os dados localmente — seus arquivos nunca "
+                          "saem do seu aparelho. É gratuito; sem conta e sem envio de "
+                          "arquivos.",
+        "footer_disclaimer": "“JW Library” é propriedade da Watch Tower Bible and Tract "
+                             "Society of Pennsylvania. O JW Sync é um utilitário "
+                             "independente, não é afiliado a ela nem por ela endossado.",
+        "groups": {
+            "Getting started": "Para começar",
+            "Sharing scenarios": "Casos de compartilhamento",
+            "Everyday scenarios": "Situações do dia a dia",
+            "Fixing problems": "Resolvendo problemas",
+            "Power tools": "Ferramentas avançadas",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -157,8 +203,10 @@ CHROME = {
 # purely for readability.
 from guides_ar import GUIDES_AR  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
+from guides_pt import GUIDES_PT  # noqa: E402
 
 GUIDE_TEXT = {
     "es": GUIDES_ES,
+    "pt": GUIDES_PT,
     "ar": GUIDES_AR,
 }

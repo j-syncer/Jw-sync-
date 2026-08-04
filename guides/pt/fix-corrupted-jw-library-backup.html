@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consertar um backup danificado do JW Library que não restaura | Guias do JW Sync</title>
+<meta name="description" content="O JW Library se recusa a restaurar seu arquivo .jwlibrary? O Doutor da Biblioteca examina o backup no seu navegador, conserta os problemas mais comuns e entrega uma cópia limpa que restaura.">
+<link rel="canonical" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/guides/fix-corrupted-jw-library-backup">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Consertar um backup danificado do JW Library que não restaura | Guias do JW Sync">
+<meta property="og:description" content="O JW Library se recusa a restaurar seu arquivo .jwlibrary? O Doutor da Biblioteca examina o backup no seu navegador, conserta os problemas mais comuns e entrega uma cópia limpa que restaura.">
+<meta property="og:url" content="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="pt_BR">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Consertar um backup danificado do JW Library que não restaura", "description": "O JW Library se recusa a restaurar seu arquivo .jwlibrary? O Doutor da Biblioteca examina o backup no seu navegador, conserta os problemas mais comuns e entrega uma cópia limpa que restaura.", "inLanguage": "pt", "datePublished": "2026-07-13", "dateModified": "2026-07-13", "mainEntityOfPage": "https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "Consertar um backup danificado do JW Library que não restaura", "description": "O JW Library se recusa a restaurar seu arquivo .jwlibrary? O Doutor da Biblioteca examina o backup no seu navegador, conserta os problemas mais comuns e entrega uma cópia limpa que restaura.", "inLanguage": "pt", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "Abra o JW Sync e carregue o arquivo problemático", "text": "Acesse jwsync.org e carregue o arquivo .jwlibrary que não restaura. (Se o arquivo chegou renomeado para .zip, renomeie de volta para .jwlibrary primeiro — só isso já resolve muitos casos.)"}, {"@type": "HowToStep", "position": 2, "name": "Rode o exame do Doutor da Biblioteca", "text": "O Doutor examina a estrutura interna do backup e lista, em linguagem simples, o que encontrou — de esquisitices inofensivas a dano de verdade."}, {"@type": "HowToStep", "position": 3, "name": "Aplique os reparos", "text": "Um toque conserta o que é reparável. O Doutor nunca altera seu arquivo original; ele gera uma cópia limpa, então o original fica intacto como reserva."}, {"@type": "HowToStep", "position": 4, "name": "Baixe e restaure o arquivo consertado", "text": "Restaure o .jwlibrary limpo por Backup e Restauração → Restaurar no JW Library."}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "Guias", "item": "https://jwsync.org/guides/pt/"}, {"@type": "ListItem", "position": 3, "name": "Consertar um backup danificado do JW Library que não restaura", "item": "https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Meus dados são enviados para o exame?", "acceptedAnswer": {"@type": "Answer", "text": "Não. O exame, os reparos e a exportação acontecem todos localmente, no navegador."}}, {"@type": "Question", "name": "Ele recupera notas apagadas dentro do JW Library?", "acceptedAnswer": {"@type": "Answer", "text": "Não — ele conserta a estrutura do arquivo. Notas apagadas no aplicativo antes de o backup ser feito não estão no arquivo para serem recuperadas."}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);display:inline-flex;
+align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800}
+.hnav a{color:var(--muted);font-size:14px;margin-left:18px}
+.crumbs{font-size:13px;color:var(--muted);margin:26px 0 6px}
+.crumbs a{color:var(--muted)}
+h1{font-size:30px;line-height:1.25;margin:8px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:15px;margin:0 0 26px}
+h2{font-size:21px;margin:38px 0 10px;letter-spacing:-.01em}
+p{margin:0 0 16px}
+ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 4px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.cta{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:20px 22px;margin:34px 0}
+.cta strong{display:block;font-size:17px;margin-bottom:4px}
+.cta span{color:var(--muted);font-size:14.5px}
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
+.faq dt{font-weight:600;margin:18px 0 4px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.related{margin:8px 0 0;padding:0;list-style:none}
+.related li{margin:0 0 8px}
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}
+.gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
+@media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}
+.gcards a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;color:var(--txt);height:100%}
+.gcards a:hover{text-decoration:none;border-color:var(--accent)}
+.gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
+.gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}
+.glang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;margin-left:14px;font-family:inherit;
+max-width:150px}
+.glang:hover{border-color:var(--accent)}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="../../?lang=pt"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="../../guides/pt/">Guias</a><a href="../../forum.html">Comunidade</a><a href="../../?lang=pt">Abrir o app</a><select class="glang" aria-label="Idioma" onchange="location.href=this.value"><option value="https://jwsync.org/guides/ar/fix-corrupted-jw-library-backup">العربية</option><option value="https://jwsync.org/guides/fix-corrupted-jw-library-backup">English</option><option value="https://jwsync.org/guides/es/fix-corrupted-jw-library-backup">Español</option><option value="https://jwsync.org/guides/pt/fix-corrupted-jw-library-backup" selected>Português</option></select></nav></div></header><main class="wrap"><nav class="crumbs"><a href="../../">JW Sync</a> › <a href="./">Guias</a> › Resolvendo problemas</nav><h1>Consertando um backup danificado do JW Library com o Doutor da Biblioteca</h1><p class="lede">O JW Library se recusa a restaurar seu arquivo .jwlibrary? O Doutor da Biblioteca examina o backup no seu navegador, conserta os problemas mais comuns e entrega uma cópia limpa que restaura.</p><p>Às vezes o JW Library rejeita um arquivo de backup — a restauração falha, dá erro ou o arquivo não abre. Causas comuns: um download interrompido, um serviço de nuvem que estragou o arquivo, uma extensão alterada no caminho ou inconsistências internas acumuladas ao longo de anos de uso.</p><p>O JW Sync traz o Doutor da Biblioteca, um verificador que examina um arquivo .jwlibrary e conserta os problemas mais comuns — inteiramente no seu navegador, sem que o arquivo jamais saia do seu aparelho.</p><h2>Passo a passo</h2><ol class="steps"><li><h3>Abra o JW Sync e carregue o arquivo problemático</h3><p>Acesse jwsync.org e carregue o arquivo .jwlibrary que não restaura. (Se o arquivo chegou renomeado para .zip, renomeie de volta para .jwlibrary primeiro — só isso já resolve muitos casos.)</p></li><li><h3>Rode o exame do Doutor da Biblioteca</h3><p>O Doutor examina a estrutura interna do backup e lista, em linguagem simples, o que encontrou — de esquisitices inofensivas a dano de verdade.</p></li><li><h3>Aplique os reparos</h3><p>Um toque conserta o que é reparável. O Doutor nunca altera seu arquivo original; ele gera uma cópia limpa, então o original fica intacto como reserva.</p></li><li><h3>Baixe e restaure o arquivo consertado</h3><p>Restaure o .jwlibrary limpo por Backup e Restauração → Restaurar no JW Library.</p></li></ol><div class="cta"><strong>Faça agora — de graça, no seu navegador</strong><span>O JW Sync mescla, edita e analisa backups .jwlibrary inteiramente no seu aparelho. Sem conta, sem envio de arquivos, sem instalar nada.</span><a class="btn" href="../../?lang=pt">Abrir o JW Sync →</a></div><h2>O Doutor também roda em toda mesclagem</h2><p>As mesmas verificações acontecem automaticamente dentro do motor de mesclagem, então um backup mesclado sempre sai limpo — mesmo quando um dos arquivos de entrada tinha problemas que você nem sabia que existiam.</p><h2>Quando um arquivo não tem conserto</h2><p>Se o arquivo foi cortado a ponto de os dados simplesmente não estarem mais nele, nenhuma ferramenta consegue inventá-los de volta. O Doutor vai dizer isso honestamente em vez de entregar um arquivo duvidoso — e esse é o sinal para procurar uma cópia anterior no e-mail, no Drive ou no iCloud, o que também explica por que vale a pena guardar backups antigos.</p><h2>Perguntas frequentes</h2><dl class="faq"><dt>Meus dados são enviados para o exame?</dt><dd>Não. O exame, os reparos e a exportação acontecem todos localmente, no navegador.</dd><dt>Ele recupera notas apagadas dentro do JW Library?</dt><dd>Não — ele conserta a estrutura do arquivo. Notas apagadas no aplicativo antes de o backup ser feito não estão no arquivo para serem recuperadas.</dd></dl><h2>Guias relacionados</h2><ul class="related"><li><a href="clean-up-duplicate-jw-library-notes">Limpar notas duplicadas e vazias do JW Library</a></li><li><a href="jw-library-notes-missing-after-update">Notas do JW Library sumiram depois de uma atualização ou reinstalação</a></li><li><a href="backup-jw-library">Como fazer backup do JW Library do jeito certo</a></li><li><a href="merge-jw-library-backups">Como mesclar backups do JW Library de dois aparelhos</a></li></ul></main><footer class="site"><div class="wrap"><p><a href="../../">JW Sync</a> · <a href="../../guides/pt/">Todos os guias</a> · <a href="../../forum.html">Comunidade</a> · <a href="../../highlights.html">Estatísticas de Estudo</a></p><p>O JW Sync processa todos os dados localmente — seus arquivos nunca saem do seu aparelho. É gratuito; sem conta e sem envio de arquivos.</p><p>“JW Library” é propriedade da Watch Tower Bible and Tract Society of Pennsylvania. O JW Sync é um utilitário independente, não é afiliado a ela nem por ela endossado.</p></div></footer></body>
+</html>
