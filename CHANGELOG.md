@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.5.0] — 2026-08-04
+
+### Added: all 37 guides in Italian
+
+The complete guide library is now available in Italian at
+`jwsync.org/guides/it/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/it/` now links **Guide e istruzioni** to the Italian guide index.
+- Each Italian guide is its own indexable page with an Italian title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
 ## [3.4.0] — 2026-08-04
 
 ### Added: all 37 guides in German
