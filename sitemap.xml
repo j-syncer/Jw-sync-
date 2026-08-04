@@ -3,6 +3,260 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://jwsync.org/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/es/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/pt/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/de/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/it/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/ko/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/tl/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/sv/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/ceb/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jwsync.org/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://jwsync.org/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://jwsync.org/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://jwsync.org/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://jwsync.org/it/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/"/>
+    <xhtml:link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/"/>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/"/>
+    <xhtml:link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/"/>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>

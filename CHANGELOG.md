@@ -4,6 +4,32 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.0.0] — 2026-08-04
+
+### Added: a real home page in every language
+
+Until now jwsync.org had one home page. Picking a language changed the words
+on screen, but search engines only ever saw the English one — the page is a
+single document that translates itself in the browser, so Google treated all
+thirteen versions as the same page and indexed only English.
+
+There is now a genuine home page for each language, at `jwsync.org/es/`,
+`/pt/`, `/fr/`, `/de/`, `/it/`, `/ru/`, `/ja/`, `/ko/`, `/tl/`, `/sv/`,
+`/ceb/` and `/ar/`. Each one is a real page in that language — the headline,
+what the tool does, all six tools, the four-step walkthrough and the FAQ — so
+someone searching in their own language can now find JW Sync in it.
+
+- **English keeps `jwsync.org/`.** Its address does not change, so nothing it
+  has already earned in search is disturbed.
+- **Every version points at all the others**, which is how search engines know
+  they are the same page in different languages and show the right one.
+- **Arabic reads right-to-left**, and its page links to the Arabic guides;
+  languages whose guides are not translated yet link to the English ones.
+- The wording is not new: it comes from the copy already translated and in use
+  in the app, so nothing here has gone out in a language nobody has read.
+
+---
+
 ## [2.99.2] — 2026-08-04
 
 ### Fixed

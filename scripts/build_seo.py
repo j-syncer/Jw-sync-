@@ -18,23 +18,25 @@ after adding a language or a page:
 
     python3 scripts/build_seo.py
 
-Note on scope — why the app shell gets no hreflang:
+Note on scope — where hreflang may point:
 
-The landing page, Study Stats and Share are single documents with client-side
-i18n. A ?lang=xx URL serves byte-identical English HTML whose canonical points
-back at "/", so an hreflang cluster over those URLs advertises alternates that
-Google collapses straight back into the canonical — Search Console reported
-the whole set as "Alternate page with proper canonical tag" and indexed
-nothing extra. 01_static.js guards against re-introducing it.
+Never at a ?lang=xx URL. Those serve byte-identical English HTML that
+canonicalises back to "/", so an hreflang cluster over them advertises
+alternates Google collapses straight into the canonical — Search Console
+reported the whole set as "Alternate page with proper canonical tag" and
+indexed nothing extra. 01_static.js still guards against that specifically.
 
-hreflang therefore only goes where the alternates are genuinely separate
-documents: the guides, which are pre-rendered per language at /guides/<lang>/
-with their own self-referencing canonicals. Those tags are emitted by
-build_guides.py; this script only puts the matching URLs in the sitemap.
+hreflang goes only where the alternates are genuinely separate documents with
+their own self-referencing canonicals. Three sets qualify:
 
-Serving the app shell per language would need it pre-rendered per language
-too. Until then the shell still localizes its <title> and description at
-runtime, which helps the reader even though it does not help indexing.
+  /            <-> /<lang>/          pre-rendered by build_landing.py
+  /guides/     <-> /guides/<lang>/   pre-rendered by build_guides.py
+
+The guides emit their own tags; this script emits the landing cluster on "/"
+and puts every URL in the sitemap.
+
+Study Stats and Share have no per-language documents, so they still declare
+none — they localize at runtime for the reader, which helps nobody's index.
 """
 import datetime
 import io
@@ -46,6 +48,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from guides_i18n import GUIDE_TEXT  # noqa: E402
 import build_guides  # noqa: E402
+import build_landing  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://jwsync.org"
@@ -111,12 +114,14 @@ def og_locale_block(langs, indent="    "):
 
 
 # ── 1. <head> tags ────────────────────────────────────────────────────────
-def patch_page(rel, canonical, langs, set_canonical=True):
-    """Set the canonical and the og:locale run. Deliberately no hreflang —
-    see the module docstring.
+def patch_page(rel, canonical, langs, set_canonical=True, hreflang=None):
+    """Set the canonical, the hreflang cluster and the og:locale run.
 
     set_canonical=False leaves an existing canonical alone, for pages that
     legitimately point somewhere other than `canonical`.
+    hreflang=<fn(lang)->url> emits a cluster; None emits none. Pass it only
+    for pages whose alternates are real separate documents — see the module
+    docstring.
     """
     path = os.path.join(REPO, rel)
     c = io.open(path, encoding="utf-8").read()
@@ -133,11 +138,13 @@ def patch_page(rel, canonical, langs, set_canonical=True):
         if m:
             canon_tag = m.group(0)
 
-    # Any hreflang left over from an earlier build is removed: the shell's
-    # ?lang= URLs canonicalise back to this page, so alternates over them
-    # index nothing (see docstring).
+    # Rebuild the cluster from scratch so a stale one can never survive.
     c = re.sub(r'\n?<!-- SEO:hreflang -->.*?<!-- /SEO:hreflang -->', "", c, flags=re.S)
     c = re.sub(r'\n?\s*<link rel="alternate" hreflang="[a-z-]+"[^>]*>', "", c)
+    if hreflang:
+        c = c.replace(canon_tag,
+                      canon_tag + "\n" + marker("hreflang", hreflang_block(hreflang, langs)),
+                      1)
 
     # Rebuild the og:locale run from scratch: drop every previously generated
     # block and any hand-written tags, then emit exactly one. Stripping the
@@ -246,9 +253,13 @@ def url_entry(loc, alts, priority, changefreq, lastmod=TODAY):
 
 def build_sitemap():
     blocks = []
-    # One entry per shell page, no ?lang= variants: they canonicalise back to
-    # the same URL, so submitting them only produces duplicate-URL reports.
-    for _rel, canonical, prio, freq in QUERY_PAGES + STATIC_PAGES:
+    # The landing page and its pre-rendered per-language twins form one
+    # cluster. Still no ?lang= variants anywhere: those canonicalise back to
+    # the page they came from, so submitting them only produces duplicates.
+    landing_alts = {l: build_landing.page_url(l) for l in LANGS}
+    for l in LANGS:
+        blocks.append(url_entry(build_landing.page_url(l), landing_alts, "1.0", "weekly"))
+    for _rel, canonical, prio, freq in QUERY_PAGES[1:] + STATIC_PAGES:
         blocks.append(url_entry(canonical, None, prio, freq))
 
     # Guides: the index plus every slug, once per translated language.
@@ -270,7 +281,9 @@ def build_sitemap():
 def main():
     print("head tags:")
     for rel, canonical, _p, _f in QUERY_PAGES:
-        patch_page(rel, canonical, LANGS)
+        # Only the landing page has per-language twins to point at.
+        patch_page(rel, canonical, LANGS,
+                   hreflang=(build_landing.page_url if rel == "index.html" else None))
         beta = os.path.join("beta", rel)
         if not os.path.exists(os.path.join(REPO, beta)):
             continue

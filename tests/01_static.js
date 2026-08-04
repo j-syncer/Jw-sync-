@@ -782,7 +782,8 @@ section('Cross-tool session (jw-session.js)');
     const c = fs.readFileSync(REPO + '/' + f, 'utf8');
     for (const name of ['oglocale', 'hreflang']) {
       const opens = (c.match(new RegExp('<!-- SEO:' + name + ' -->', 'g')) || []).length;
-      const want = name === 'hreflang' ? 0 : 1;   // hreflang is deliberately absent
+      // Only the landing page has per-language twins to point at.
+      const want = name === 'hreflang' ? (f === 'index.html' ? 1 : 0) : 1;
       if (opens !== want) { fail(f + ': ' + opens + ' SEO:' + name + ' block(s), expected ' + want); bad++; }
     }
   }
@@ -903,10 +904,13 @@ section('Cross-tool session (jw-session.js)');
 }
 
 // Canonical hygiene — every submitted URL must be its own canonical.
-// The landing page is one document with client-side i18n, so ?lang= variants
-// serve byte-identical English HTML canonicalising to "/". Submitting them (or
-// pointing hreflang at them) made Search Console report the whole set as
-// "Alternate page with proper canonical tag" — indexing nothing extra.
+// The original lesson: ?lang= variants serve byte-identical English HTML that
+// canonicalises to "/", so submitting them — or pointing hreflang at them —
+// made Search Console report the whole set as "Alternate page with proper
+// canonical tag", indexing nothing extra.
+// That rule is unchanged. What changed is that real per-language documents now
+// exist at /<lang>/ (build_landing.py), so hreflang is legitimate again — but
+// only ever between distinct paths, never at a query parameter.
 {
   section('Canonical hygiene (sitemap + hreflang)');
   const sm = fs.readFileSync(REPO + '/sitemap.xml', 'utf8');
@@ -927,9 +931,19 @@ section('Cross-tool session (jw-session.js)');
 
   for (const f of ['index.html', 'beta/index.html']) {
     const head = (() => { const c = fs.readFileSync(REPO + '/' + f, 'utf8'); return c.slice(0, c.indexOf('</head>')); })();
-    const alts = (head.match(/<link rel="alternate" hreflang="[a-z-]+"[^>]*>/g) || []);
-    if (!alts.length) ok(f + ': no hreflang alternates pointing at canonicalised-away URLs');
-    else fail(f + ': ' + alts.length + ' hreflang alternate(s) still present');
+    const alts = (head.match(/<link rel="alternate" hreflang="[a-z-]+" href="([^"]*)"/g) || [])
+      .map(s => s.match(/href="([^"]*)"/)[1]);
+    const param = alts.filter(u => u.includes('?'));
+    if (param.length) fail(f + ': hreflang points at parameterised URLs: ' + param.join(', '));
+    else ok(f + ': no hreflang points at a canonicalised-away ?lang= URL');
+    // beta is noindex and has no per-language twins, so it declares none.
+    const wantCluster = f === 'index.html';
+    if (wantCluster && alts.length === EXPECTED_LANGS.length + 1)
+      ok(f + ': hreflang cluster covers ' + EXPECTED_LANGS.length + ' languages + x-default');
+    else if (wantCluster)
+      fail(f + ': cluster has ' + alts.length + ' entries, expected ' + (EXPECTED_LANGS.length + 1));
+    else if (!alts.length) ok(f + ': declares no hreflang (noindex, no per-language twins)');
+    else fail(f + ': ' + alts.length + ' hreflang on a noindex page');
     // ?lang= must still select the UI language, it just must not rewrite canonical
     if (head.includes("localStorage.setItem('jwsync_lang',p)")) ok(f + ': ?lang= still sets the UI language');
     else fail(f + ': ?lang= no longer sets the UI language');

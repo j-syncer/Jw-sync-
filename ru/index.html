@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW Sync — Объединяйте резервные копии JW Library конфиденциально в браузере</title>
+<meta name="description" content="Объединяйте, просматривайте и редактируйте свои заметки, выделения и закладки JW Library — полностью в браузере. Ваши файлы никогда не покидают устройство.">
+<link rel="canonical" href="https://jwsync.org/ru/">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/es/">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/">
+<link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/">
+<link rel="alternate" hreflang="de" href="https://jwsync.org/de/">
+<link rel="alternate" hreflang="it" href="https://jwsync.org/it/">
+<link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/">
+<link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/">
+<link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/">
+<link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/">
+<link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/">
+<link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="JW Sync — Объединяйте резервные копии JW Library конфиденциально в браузере">
+<meta property="og:description" content="Объединяйте, просматривайте и редактируйте свои заметки, выделения и закладки JW Library — полностью в браузере. Ваши файлы никогда не покидают устройство.">
+<meta property="og:url" content="https://jwsync.org/ru/">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "JW Sync", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "url": "https://jwsync.org/ru/", "inLanguage": "ru", "description": "Объединяйте, просматривайте и редактируйте свои заметки, выделения и закладки JW Library — полностью в браузере. Ваши файлы никогда не покидают устройство.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "inLanguage": "ru", "mainEntity": [{"@type": "Question", "name": "Мои данные в безопасности?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Всё работает в вашем браузере. Никакие файлы не отправляются на серверы."}}, {"@type": "Question", "name": "Может ли это повредить мою копию?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Инструмент работает с копией в памяти. Ваш оригинальный файл никогда не изменяется."}}, {"@type": "Question", "name": "Почему объединённый файл показывает 0 добавленных заметок?", "acceptedAnswer": {"@type": "Answer", "text": "Обычно все заметки уже есть в основном файле. Попробуйте отключить 'Пропускать дубликаты'."}}, {"@type": "Question", "name": "Что если я редактировал заметку на обоих устройствах?", "acceptedAnswer": {"@type": "Answer", "text": "Используйте 'Умно: Оставить самую новую' для сохранения последней правки."}}, {"@type": "Question", "name": "Можно ли объединить более двух файлов?", "acceptedAnswer": {"@type": "Answer", "text": "Да! Добавьте столько вторичных файлов, сколько хотите, в шаге 2."}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c;
+--green:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;
+flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);
+display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;
+font-weight:800}
+.hnav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hnav a{color:var(--muted);font-size:14px}
+.lp-lang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;font-family:inherit;max-width:160px}
+.lp-lang:hover{border-color:var(--accent)}
+.hero{padding:54px 0 12px}
+h1{font-size:38px;line-height:1.18;margin:0 0 14px;letter-spacing:-.015em}
+.lede{color:var(--muted);font-size:17px;margin:0 0 26px;max-width:660px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15.5px;padding:12px 26px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--txt);font-weight:600;
+font-size:15px;padding:11px 22px;border-radius:10px;display:inline-block}
+.btn-ghost:hover{text-decoration:none;border-color:var(--accent)}
+.privacy{display:inline-flex;align-items:center;gap:8px;margin:24px 0 0;padding:6px 12px;
+border-radius:9px;font-size:12.5px;font-weight:600;color:#6ee7a8;
+background:rgba(16,30,23,.7);border:1px solid rgba(52,211,153,.16)}
+.privacy .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+h2{font-size:23px;margin:52px 0 14px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;margin:0;padding:0;list-style:none}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.grid li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.grid strong{display:block;font-size:16px;margin-bottom:5px}
+.grid span{color:var(--muted);font-size:14.5px;display:block}
+.tags{margin:11px 0 0;padding:0;list-style:none;display:flex;gap:7px;flex-wrap:wrap}
+.tags li{background:rgba(234,88,12,.1);border:1px solid rgba(234,88,12,.25);color:var(--accent-soft);
+font-size:12px;padding:3px 9px;border-radius:20px}
+ol.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 54px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:33px;height:33px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 5px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.faq dt{font-weight:600;margin:20px 0 5px;font-size:16px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.cta-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:22px 24px;margin:38px 0 0}
+.cta-card strong{display:block;font-size:17px;margin-bottom:5px}
+.cta-card span{color:var(--muted);font-size:14.5px}
+footer.site{border-top:1px solid var(--line);margin-top:58px;padding:26px 0 44px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="/?lang=ru"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="/?lang=ru">Главная</a><a href="/guides/">Руководства</a><a href="/highlights">Статистика изучения</a><a href="/share">Обмен заметками</a><a href="/forum">Сообщество</a><select class="lp-lang" aria-label="Русский" onchange="location.href=this.value"><option value="https://jwsync.org/">English</option><option value="https://jwsync.org/es/">Español</option><option value="https://jwsync.org/pt/">Português</option><option value="https://jwsync.org/fr/">Français</option><option value="https://jwsync.org/de/">Deutsch</option><option value="https://jwsync.org/it/">Italiano</option><option value="https://jwsync.org/ru/" selected>Русский</option><option value="https://jwsync.org/ja/">日本語</option><option value="https://jwsync.org/ko/">한국어</option><option value="https://jwsync.org/tl/">Filipino</option><option value="https://jwsync.org/sv/">Svenska</option><option value="https://jwsync.org/ceb/">Cebuano</option><option value="https://jwsync.org/ar/">العربية</option></select></nav></div></header><main class="wrap"><section class="hero"><h1>Объединяйте резервные копии JW Library конфиденциально в браузере</h1><p class="lede">Объединяйте, просматривайте и редактируйте свои заметки, выделения и закладки JW Library — полностью в браузере. Ваши файлы никогда не покидают устройство.</p><div class="cta-row"><a class="btn" href="/?lang=ru">Открыть приложение →</a><a class="btn-ghost" href="/?lang=ru">Попробовать с примерами</a></div><div class="privacy"><span class="dot"></span>100% конфиденциально — работает в браузере</div></section><h2>Что он умеет</h2><ul class="grid"><li><strong>Только локальная обработка</strong><span>Всё объединение происходит в браузере через WebAssembly. Нет сервера. Нет загрузок. Полная конфиденциальность.</span></li><li><strong>Теги и выделения объединены</strong><span>Интеллектуально объединяет теги, выделения, закладки и заметки на полях из всех резервных копий.</span></li><li><strong>Извлечение по дате</strong><span>Извлекайте содержимое из определённой даты резервной копии для точного восстановления данных на любой момент.</span></li><li><strong>Просмотр и редактирование заметок</strong><span>Ищите по всей библиотеке, редактируйте заметки, управляйте тегами, меняйте цвета выделений и скачайте обновлённую копию.</span></li><li><strong>Проверьте перед загрузкой</strong><span>Узнайте, какие заметки были изменены на нескольких устройствах, и выберите, какую версию оставить — без чёрного ящика.</span></li></ul><h2>Выберите инструмент</h2><ul class="grid"><li><strong>Слияние</strong><span>Объедините резервные копии JW Library со всех устройств в одну.</span><ul class="tags"><li>Разбор конфликтов</li><li>Автосинхронизация</li></ul></li><li><strong>Обзор изучения</strong><span>Ищите, редактируйте, помечайте и упорядочивайте заметки в копии.</span><ul class="tags"><li>Спросите библиотеку</li><li>Массовое редактирование</li></ul></li><li><strong>Статистика изучения</strong><span>Смотрите серии, итоги и тенденции вашего изучения.</span><ul class="tags"><li>Достижения</li><li>Карта изучения</li></ul></li><li><strong>Обмен заметками</strong><span>Отправьте заметки другу или добавьте присланные вам.</span><ul class="tags"><li>Без аккаунта</li><li>И выделения</li></ul></li><li><strong>Доктор библиотеки</strong><span>Бесплатная проверка: находит и устраняет дубликаты, пустые заметки и мусор.</span><ul class="tags"><li>Поиск дубликатов</li><li>Исправить в 1 клик</li></ul></li><li><strong>Спутник чтения</strong><span>Читайте Библию по ежедневному плану — рядом с вашими заметками.</span><ul class="tags"><li>Ежедневные планы</li><li>Серии и вехи</li></ul></li></ul><h2>Как это работает</h2><ol class="steps"><li><h3>Создайте резервную копию в JW Library</h3><p>Откройте JW Library на вашем устройстве. Перейдите на вкладку Личное изучение, нажмите значок резервного копирования и выберите Создать резервную копию. Сохраните файл .jwlibrary.</p></li><li><h3>Загрузите файлы сюда</h3><p>Загрузите основную копию в Шаг 1. Если вы объединяете с другого устройства, добавьте её в Шаг 2. Вы можете добавить столько файлов, сколько нужно.</p></li><li><h3>Настройте и обработайте</h3><p>Выберите, что импортировать: Заметки, Выделения или Закладки. Используйте менеджер тегов для переименования. Включите Авто-тегирование. Нажмите Объединить.</p></li><li><h3>Скачайте и восстановите</h3><p>Скачайте новый файл .jwlibrary. Откройте JW Library, перейдите к Резервной копии и выберите Восстановить. Выберите скачанный файл.</p></li></ol><h2>Частые вопросы</h2><dl class="faq"><dt>Мои данные в безопасности?</dt><dd>Да. Всё работает в вашем браузере. Никакие файлы не отправляются на серверы.</dd><dt>Может ли это повредить мою копию?</dt><dd>Нет. Инструмент работает с копией в памяти. Ваш оригинальный файл никогда не изменяется.</dd><dt>Почему объединённый файл показывает 0 добавленных заметок?</dt><dd>Обычно все заметки уже есть в основном файле. Попробуйте отключить &#x27;Пропускать дубликаты&#x27;.</dd><dt>Что если я редактировал заметку на обоих устройствах?</dt><dd>Используйте &#x27;Умно: Оставить самую новую&#x27; для сохранения последней правки.</dd><dt>Можно ли объединить более двух файлов?</dt><dd>Да! Добавьте столько вторичных файлов, сколько хотите, в шаге 2.</dd></dl><a class="cta-card" href="/guides/"><strong>Руководства и инструкции</strong><span>Пошаговая помощь: как создать резервную копию, объединить, перенести и восстановить заметки JW Library.</span></a></main><footer class="site"><div class="wrap"><p>JW Sync обрабатывает все данные локально — ваши файлы никогда не покидают устройство.</p><p>«JW Library» принадлежит Watch Tower Bible and Tract Society of Pennsylvania. JW Sync — независимая утилита, не связанная с ней и не одобренная ею.</p></div></footer></body>
+</html>

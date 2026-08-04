@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW Sync — JW-Library-Backups privat im Browser zusammenführen</title>
+<meta name="description" content="Führe deine JW-Library-Notizen, Hervorhebungen und Lesezeichen zusammen, durchsuche und bearbeite sie — alles in deinem Browser. Deine Dateien verlassen nie dein Gerät.">
+<link rel="canonical" href="https://jwsync.org/de/">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/es/">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/">
+<link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/">
+<link rel="alternate" hreflang="de" href="https://jwsync.org/de/">
+<link rel="alternate" hreflang="it" href="https://jwsync.org/it/">
+<link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/">
+<link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/">
+<link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/">
+<link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/">
+<link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/">
+<link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:title" content="JW Sync — JW-Library-Backups privat im Browser zusammenführen">
+<meta property="og:description" content="Führe deine JW-Library-Notizen, Hervorhebungen und Lesezeichen zusammen, durchsuche und bearbeite sie — alles in deinem Browser. Deine Dateien verlassen nie dein Gerät.">
+<meta property="og:url" content="https://jwsync.org/de/">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "JW Sync", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "url": "https://jwsync.org/de/", "inLanguage": "de", "description": "Führe deine JW-Library-Notizen, Hervorhebungen und Lesezeichen zusammen, durchsuche und bearbeite sie — alles in deinem Browser. Deine Dateien verlassen nie dein Gerät.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "inLanguage": "de", "mainEntity": [{"@type": "Question", "name": "Sind meine Daten sicher?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Alles läuft in Ihrem Browser. Keine Dateien werden auf Server hochgeladen."}}, {"@type": "Question", "name": "Kann dies mein Backup beschädigen?", "acceptedAnswer": {"@type": "Answer", "text": "Nein. Das Tool arbeitet mit einer Kopie im Speicher. Ihre Originaldatei wird nie verändert."}}, {"@type": "Question", "name": "Warum zeigt die Datei 0 hinzugefügte Notizen?", "acceptedAnswer": {"@type": "Answer", "text": "Meistens sind alle Notizen bereits in der Hauptdatei vorhanden. Deaktivieren Sie 'Exakte Duplikate überspringen'."}}, {"@type": "Question", "name": "Was wenn ich eine Notiz auf beiden Geräten bearbeitet habe?", "acceptedAnswer": {"@type": "Answer", "text": "Verwenden Sie 'Intelligent: Neueste Version behalten' für die aktuellste Bearbeitung."}}, {"@type": "Question", "name": "Kann ich mehr als zwei Dateien zusammenführen?", "acceptedAnswer": {"@type": "Answer", "text": "Ja! Fügen Sie so viele Dateien wie gewünscht in Schritt 2 hinzu."}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c;
+--green:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;
+flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);
+display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;
+font-weight:800}
+.hnav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hnav a{color:var(--muted);font-size:14px}
+.lp-lang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;font-family:inherit;max-width:160px}
+.lp-lang:hover{border-color:var(--accent)}
+.hero{padding:54px 0 12px}
+h1{font-size:38px;line-height:1.18;margin:0 0 14px;letter-spacing:-.015em}
+.lede{color:var(--muted);font-size:17px;margin:0 0 26px;max-width:660px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15.5px;padding:12px 26px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--txt);font-weight:600;
+font-size:15px;padding:11px 22px;border-radius:10px;display:inline-block}
+.btn-ghost:hover{text-decoration:none;border-color:var(--accent)}
+.privacy{display:inline-flex;align-items:center;gap:8px;margin:24px 0 0;padding:6px 12px;
+border-radius:9px;font-size:12.5px;font-weight:600;color:#6ee7a8;
+background:rgba(16,30,23,.7);border:1px solid rgba(52,211,153,.16)}
+.privacy .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+h2{font-size:23px;margin:52px 0 14px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;margin:0;padding:0;list-style:none}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.grid li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.grid strong{display:block;font-size:16px;margin-bottom:5px}
+.grid span{color:var(--muted);font-size:14.5px;display:block}
+.tags{margin:11px 0 0;padding:0;list-style:none;display:flex;gap:7px;flex-wrap:wrap}
+.tags li{background:rgba(234,88,12,.1);border:1px solid rgba(234,88,12,.25);color:var(--accent-soft);
+font-size:12px;padding:3px 9px;border-radius:20px}
+ol.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 54px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:33px;height:33px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 5px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.faq dt{font-weight:600;margin:20px 0 5px;font-size:16px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.cta-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:22px 24px;margin:38px 0 0}
+.cta-card strong{display:block;font-size:17px;margin-bottom:5px}
+.cta-card span{color:var(--muted);font-size:14.5px}
+footer.site{border-top:1px solid var(--line);margin-top:58px;padding:26px 0 44px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="/?lang=de"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="/?lang=de">Startseite</a><a href="/guides/">Anleitungen</a><a href="/highlights">Studienstatistik</a><a href="/share">Notizen teilen</a><a href="/forum">Community</a><select class="lp-lang" aria-label="Deutsch" onchange="location.href=this.value"><option value="https://jwsync.org/">English</option><option value="https://jwsync.org/es/">Español</option><option value="https://jwsync.org/pt/">Português</option><option value="https://jwsync.org/fr/">Français</option><option value="https://jwsync.org/de/" selected>Deutsch</option><option value="https://jwsync.org/it/">Italiano</option><option value="https://jwsync.org/ru/">Русский</option><option value="https://jwsync.org/ja/">日本語</option><option value="https://jwsync.org/ko/">한국어</option><option value="https://jwsync.org/tl/">Filipino</option><option value="https://jwsync.org/sv/">Svenska</option><option value="https://jwsync.org/ceb/">Cebuano</option><option value="https://jwsync.org/ar/">العربية</option></select></nav></div></header><main class="wrap"><section class="hero"><h1>JW-Library-Backups privat im Browser zusammenführen</h1><p class="lede">Führe deine JW-Library-Notizen, Hervorhebungen und Lesezeichen zusammen, durchsuche und bearbeite sie — alles in deinem Browser. Deine Dateien verlassen nie dein Gerät.</p><div class="cta-row"><a class="btn" href="/?lang=de">App starten →</a><a class="btn-ghost" href="/?lang=de">Mit Beispielnotizen testen</a></div><div class="privacy"><span class="dot"></span>100% Privat — läuft in Ihrem Browser</div></section><h2>Was es kann</h2><ul class="grid"><li><strong>Nur lokale Verarbeitung</strong><span>Die gesamte Zusammenführung erfolgt im Browser über WebAssembly. Kein Server. Keine Uploads. Vollständige Privatsphäre.</span></li><li><strong>Tags und Hervorhebungen zusammengeführt</strong><span>Kombiniert intelligent Tags, Hervorhebungen, Lesezeichen und Randnotizen aus all Ihren Backups.</span></li><li><strong>Datumsbasierte Extraktion</strong><span>Extrahieren Sie Inhalte aus einem bestimmten Backup-Datum, um genau das wiederherzustellen, was Sie zu jedem Zeitpunkt hatten.</span></li><li><strong>Notizen durchsuchen und bearbeiten</strong><span>Durchsuchen Sie Ihre gesamte Bibliothek, bearbeiten Sie Notizen, verwalten Sie Tags, ändern Sie Hervorhebungsfarben und laden Sie das aktualisierte Backup herunter.</span></li><li><strong>Prüfen vor dem Download</strong><span>Sieh genau, welche Notizen auf mehreren Geräten bearbeitet wurden, und wähle, welche Version bleibt — keine Blackbox.</span></li></ul><h2>Wähle ein Werkzeug</h2><ul class="grid"><li><strong>Zusammenführen</strong><span>Führe JW-Library-Backups all deiner Geräte zu einem zusammen.</span><ul class="tags"><li>Konfliktprüfung</li><li>Auto-Sync</li></ul></li><li><strong>Studien-Explorer</strong><span>Durchsuche, bearbeite, tagge und ordne jede Notiz eines Backups.</span><ul class="tags"><li>Bibliothek fragen</li><li>Sammelbearbeitung</li></ul></li><li><strong>Studienstatistik</strong><span>Sieh deine Serien, Summen und Trends beim Studium.</span><ul class="tags"><li>Erfolge</li><li>Studienkarte</li></ul></li><li><strong>Notizen teilen &amp; empfangen</strong><span>Sende Notizen an Freunde oder füge erhaltene hinzu.</span><ul class="tags"><li>Kein Konto</li><li>Inkl. Hervorhebungen</li></ul></li><li><strong>Bibliothek-Doktor</strong><span>Kostenloser Gesundheitscheck — findet und behebt Duplikate, leere Notizen und Ballast.</span><ul class="tags"><li>Duplikate finden</li><li>Fix per Klick</li></ul></li><li><strong>Lesebegleiter</strong><span>Folge einem täglichen Bibelleseplan — mit deinen eigenen Notizen daneben.</span><ul class="tags"><li>Tagespläne</li><li>Serien &amp; Meilensteine</li></ul></li></ul><h2>So funktioniert es</h2><ol class="steps"><li><h3>Backup in JW Library erstellen</h3><p>Öffnen Sie JW Library auf Ihrem Gerät. Gehen Sie zum Tab Persönliches Studium, tippen Sie auf das Backup-Symbol und wählen Sie Backup erstellen. Speichern Sie die .jwlibrary-Datei.</p></li><li><h3>Dateien hier hochladen</h3><p>Laden Sie Ihr Haupt-Backup in Schritt 1 hoch. Wenn Sie von einem anderen Gerät zusammenführen, fügen Sie es in Schritt 2 hinzu. Sie können beliebig viele Dateien hinzufügen.</p></li><li><h3>Einstellungen und Verarbeitung</h3><p>Wählen Sie, was importiert werden soll: Notizen, Markierungen oder Lesezeichen. Nutzen Sie den Tag-Manager zum Umbenennen. Aktivieren Sie Auto-Tagging. Klicken Sie auf Zusammenführen.</p></li><li><h3>Herunterladen und Wiederherstellen</h3><p>Laden Sie Ihre neue .jwlibrary-Datei herunter. Öffnen Sie JW Library, gehen Sie zu Backup und tippen Sie auf Wiederherstellen. Wählen Sie die heruntergeladene Datei.</p></li></ol><h2>Häufige Fragen</h2><dl class="faq"><dt>Sind meine Daten sicher?</dt><dd>Ja. Alles läuft in Ihrem Browser. Keine Dateien werden auf Server hochgeladen.</dd><dt>Kann dies mein Backup beschädigen?</dt><dd>Nein. Das Tool arbeitet mit einer Kopie im Speicher. Ihre Originaldatei wird nie verändert.</dd><dt>Warum zeigt die Datei 0 hinzugefügte Notizen?</dt><dd>Meistens sind alle Notizen bereits in der Hauptdatei vorhanden. Deaktivieren Sie &#x27;Exakte Duplikate überspringen&#x27;.</dd><dt>Was wenn ich eine Notiz auf beiden Geräten bearbeitet habe?</dt><dd>Verwenden Sie &#x27;Intelligent: Neueste Version behalten&#x27; für die aktuellste Bearbeitung.</dd><dt>Kann ich mehr als zwei Dateien zusammenführen?</dt><dd>Ja! Fügen Sie so viele Dateien wie gewünscht in Schritt 2 hinzu.</dd></dl><a class="cta-card" href="/guides/"><strong>Anleitungen und Tipps</strong><span>Schritt-für-Schritt-Hilfe zum Sichern, Zusammenführen, Übertragen und Retten deiner JW-Library-Notizen.</span></a></main><footer class="site"><div class="wrap"><p>JW Sync verarbeitet alle Daten lokal — Ihre Dateien verlassen nie Ihr Gerät.</p><p>„JW Library“ ist Eigentum der Watch Tower Bible and Tract Society of Pennsylvania. JW Sync ist ein unabhängiges Hilfsprogramm und steht in keiner Verbindung zu ihr und wird von ihr nicht unterstützt.</p></div></footer></body>
+</html>

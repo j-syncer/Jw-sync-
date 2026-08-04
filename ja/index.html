@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW Sync — JWライブラリーのバックアップをブラウザで非公開に統合</title>
+<meta name="description" content="JWライブラリーのメモ、ハイライト、ブックマークを、ブラウザ上で統合・閲覧・編集できます。ファイルはデバイスから外に出ません。">
+<link rel="canonical" href="https://jwsync.org/ja/">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/es/">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/">
+<link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/">
+<link rel="alternate" hreflang="de" href="https://jwsync.org/de/">
+<link rel="alternate" hreflang="it" href="https://jwsync.org/it/">
+<link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/">
+<link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/">
+<link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/">
+<link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/">
+<link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/">
+<link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="JW Sync — JWライブラリーのバックアップをブラウザで非公開に統合">
+<meta property="og:description" content="JWライブラリーのメモ、ハイライト、ブックマークを、ブラウザ上で統合・閲覧・編集できます。ファイルはデバイスから外に出ません。">
+<meta property="og:url" content="https://jwsync.org/ja/">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "JW Sync", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "url": "https://jwsync.org/ja/", "inLanguage": "ja", "description": "JWライブラリーのメモ、ハイライト、ブックマークを、ブラウザ上で統合・閲覧・編集できます。ファイルはデバイスから外に出ません。", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "inLanguage": "ja", "mainEntity": [{"@type": "Question", "name": "データは安全ですか？", "acceptedAnswer": {"@type": "Answer", "text": "はい。すべてブラウザ内で動作します。ファイルはサーバーに送信されません。"}}, {"@type": "Question", "name": "バックアップが破損する可能性はありますか？", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。ツールはメモリ内のコピーで作業します。元のファイルは変更されません。"}}, {"@type": "Question", "name": "マージしたファイルに追加ノートが0件と表示されるのはなぜですか？", "acceptedAnswer": {"@type": "Answer", "text": "通常、全てのノートがメインファイルに既に存在します。「完全な重複をスキップ」を無効にしてみてください。"}}, {"@type": "Question", "name": "両方のデバイスでノートを編集した場合はどうなりますか？", "acceptedAnswer": {"@type": "Answer", "text": "「スマート: 最新バージョンを保持」を使用して最新の編集を保存してください。"}}, {"@type": "Question", "name": "2つ以上のファイルをマージできますか？", "acceptedAnswer": {"@type": "Answer", "text": "はい！ステップ2で好きなだけファイルを追加できます。"}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c;
+--green:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;
+flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);
+display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;
+font-weight:800}
+.hnav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hnav a{color:var(--muted);font-size:14px}
+.lp-lang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;font-family:inherit;max-width:160px}
+.lp-lang:hover{border-color:var(--accent)}
+.hero{padding:54px 0 12px}
+h1{font-size:38px;line-height:1.18;margin:0 0 14px;letter-spacing:-.015em}
+.lede{color:var(--muted);font-size:17px;margin:0 0 26px;max-width:660px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15.5px;padding:12px 26px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--txt);font-weight:600;
+font-size:15px;padding:11px 22px;border-radius:10px;display:inline-block}
+.btn-ghost:hover{text-decoration:none;border-color:var(--accent)}
+.privacy{display:inline-flex;align-items:center;gap:8px;margin:24px 0 0;padding:6px 12px;
+border-radius:9px;font-size:12.5px;font-weight:600;color:#6ee7a8;
+background:rgba(16,30,23,.7);border:1px solid rgba(52,211,153,.16)}
+.privacy .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+h2{font-size:23px;margin:52px 0 14px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;margin:0;padding:0;list-style:none}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.grid li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.grid strong{display:block;font-size:16px;margin-bottom:5px}
+.grid span{color:var(--muted);font-size:14.5px;display:block}
+.tags{margin:11px 0 0;padding:0;list-style:none;display:flex;gap:7px;flex-wrap:wrap}
+.tags li{background:rgba(234,88,12,.1);border:1px solid rgba(234,88,12,.25);color:var(--accent-soft);
+font-size:12px;padding:3px 9px;border-radius:20px}
+ol.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 54px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:33px;height:33px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 5px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.faq dt{font-weight:600;margin:20px 0 5px;font-size:16px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.cta-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:22px 24px;margin:38px 0 0}
+.cta-card strong{display:block;font-size:17px;margin-bottom:5px}
+.cta-card span{color:var(--muted);font-size:14.5px}
+footer.site{border-top:1px solid var(--line);margin-top:58px;padding:26px 0 44px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="/?lang=ja"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="/?lang=ja">ホーム</a><a href="/guides/">ガイド</a><a href="/highlights">学習統計</a><a href="/share">ノート共有</a><a href="/forum">コミュニティ</a><select class="lp-lang" aria-label="日本語" onchange="location.href=this.value"><option value="https://jwsync.org/">English</option><option value="https://jwsync.org/es/">Español</option><option value="https://jwsync.org/pt/">Português</option><option value="https://jwsync.org/fr/">Français</option><option value="https://jwsync.org/de/">Deutsch</option><option value="https://jwsync.org/it/">Italiano</option><option value="https://jwsync.org/ru/">Русский</option><option value="https://jwsync.org/ja/" selected>日本語</option><option value="https://jwsync.org/ko/">한국어</option><option value="https://jwsync.org/tl/">Filipino</option><option value="https://jwsync.org/sv/">Svenska</option><option value="https://jwsync.org/ceb/">Cebuano</option><option value="https://jwsync.org/ar/">العربية</option></select></nav></div></header><main class="wrap"><section class="hero"><h1>JWライブラリーのバックアップをブラウザで非公開に統合</h1><p class="lede">JWライブラリーのメモ、ハイライト、ブックマークを、ブラウザ上で統合・閲覧・編集できます。ファイルはデバイスから外に出ません。</p><div class="cta-row"><a class="btn" href="/?lang=ja">アプリを開く →</a><a class="btn-ghost" href="/?lang=ja">サンプルノートで試す</a></div><div class="privacy"><span class="dot"></span>100% プライベート — ブラウザ内で動作</div></section><h2>できること</h2><ul class="grid"><li><strong>ローカル処理のみ</strong><span>すべての統合はWebAssemblyでブラウザ内で行われます。サーバーなし。アップロードなし。完全なプライバシー。</span></li><li><strong>タグとハイライトを統合</strong><span>すべてのバックアップからタグ、ハイライト、ブックマーク、欄外メモをインテリジェントに統合します。</span></li><li><strong>日付指定による抽出</strong><span>特定のバックアップ日のコンテンツを抽出して、任意の時点のデータを正確に復元できます。</span></li><li><strong>メモの閲覧と編集</strong><span>ライブラリ全体を検索し、メモを編集し、タグを管理し、ハイライトの色を変更して更新されたバックアップをダウンロードできます。</span></li><li><strong>ダウンロード前に確認</strong><span>複数の端末で編集されたメモを正確に確認し、残すバージョンを選べます。ブラックボックスはありません。</span></li></ul><h2>ツールを選ぶ</h2><ul class="grid"><li><strong>結合ツール</strong><span>すべての端末のJW Libraryバックアップを1つに結合します。</span><ul class="tags"><li>競合レビュー</li><li>自動同期</li></ul></li><li><strong>学習ノート</strong><span>バックアップ内のすべてのノートを検索・編集・タグ付け・整理。</span><ul class="tags"><li>ライブラリに質問</li><li>一括編集</li></ul></li><li><strong>学習統計</strong><span>学習の連続記録・合計・傾向を確認できます。</span><ul class="tags"><li>実績</li><li>学習マップ</li></ul></li><li><strong>ノートの共有と受信</strong><span>友達にノートを送るか、受け取ったノートを追加します。</span><ul class="tags"><li>アカウント不要</li><li>ハイライトも</li></ul></li><li><strong>ライブラリードクター</strong><span>無料ヘルスチェック — 重複や空のメモ、不要データを見つけて修復。</span><ul class="tags"><li>重複を検出</li><li>ワンタップ修正</li></ul></li><li><strong>通読コンパニオン</strong><span>毎日の計画に沿って聖書を通読。自分のノートをすぐ隣に。</span><ul class="tags"><li>毎日の計画</li><li>連続記録と節目</li></ul></li></ul><h2>使い方</h2><ol class="steps"><li><h3>JWライブラリでバックアップを作成</h3><p>デバイスでJWライブラリを開きます。個人研究タブに移動し、バックアップアイコンをタップして「バックアップを作成」を選択します。.jwlibraryファイルを保存してください。</p></li><li><h3>ファイルをここにアップロード</h3><p>ステップ1にメインバックアップをアップロードします。iPadなど別のデバイスから統合する場合は、ステップ2に追加します。複数のファイルを追加できます。</p></li><li><h3>設定と処理</h3><p>インポートするもの（ノート、ハイライト、ブックマーク）を選択します。タグマネージャーでタグを整理します。自動タグ付けを有効にして「結合」をクリックします。</p></li><li><h3>ダウンロードと復元</h3><p>新しい.jwlibraryファイルをダウンロードします。JWライブラリを開き、バックアップに戻って「バックアップを復元」をタップし、ダウンロードしたファイルを選択します。</p></li></ol><h2>よくある質問</h2><dl class="faq"><dt>データは安全ですか？</dt><dd>はい。すべてブラウザ内で動作します。ファイルはサーバーに送信されません。</dd><dt>バックアップが破損する可能性はありますか？</dt><dd>いいえ。ツールはメモリ内のコピーで作業します。元のファイルは変更されません。</dd><dt>マージしたファイルに追加ノートが0件と表示されるのはなぜですか？</dt><dd>通常、全てのノートがメインファイルに既に存在します。「完全な重複をスキップ」を無効にしてみてください。</dd><dt>両方のデバイスでノートを編集した場合はどうなりますか？</dt><dd>「スマート: 最新バージョンを保持」を使用して最新の編集を保存してください。</dd><dt>2つ以上のファイルをマージできますか？</dt><dd>はい！ステップ2で好きなだけファイルを追加できます。</dd></dl><a class="cta-card" href="/guides/"><strong>ガイドと手順</strong><span>JW Library のノートのバックアップ・統合・移行・復旧を、手順を追って説明します。</span></a></main><footer class="site"><div class="wrap"><p>JW Syncはすべてのデータをローカルで処理します — ファイルはデバイスから外に出ません。</p><p>「JW Library」は Watch Tower Bible and Tract Society of Pennsylvania の所有物です。JW Sync は独立したユーティリティであり、同協会とは関係がなく、承認も受けていません。</p></div></footer></body>
+</html>
