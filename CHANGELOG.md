@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.7.0] — 2026-08-04
+
+### Added: all 37 guides in Japanese
+
+The complete guide library is now available in Japanese at
+`jwsync.org/guides/ja/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/ja/` now links **ガイドと手順** to the Japanese guide index.
+- Each Japanese guide is its own indexable page with a Japanese title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German, Italian, Russian and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
 ## [3.6.0] — 2026-08-04
 
 ### Added: all 37 guides in Russian

@@ -345,6 +345,51 @@ CHROME = {
             "Power tools": "Продвинутые инструменты",
         },
     },
+    "ja": {
+        "lang_name": "日本語",
+        "lang_label": "言語",
+        "og_locale": "ja_JP",
+        "site_guides": "JW Sync ガイド",
+        "nav_guides": "ガイド",
+        "nav_community": "コミュニティー",
+        "nav_open_app": "アプリを開く",
+        "crumb_guides": "ガイド",
+        "h_steps": "手順",
+        "h_faq": "よくある質問",
+        "h_related": "関連ガイド",
+        "cta_title": "今すぐどうぞ — 無料、ブラウザーの中で",
+        "cta_body": "JW Sync は .jwlibrary バックアップの統合・編集・分析を、すべてあなたの"
+                    "端末で行います。アカウント不要、アップロードなし、インストール不要です。",
+        "cta_btn": "JW Sync を開く →",
+        "index_title": "JW Library のバックアップ・同期・ノートのガイド | JW Sync",
+        "index_desc": "JW Library のバックアップに関する実用的なガイド：2台の端末の"
+                      "バックアップを統合する、ノートを新しいスマホへ移す、Android から "
+                      "iPhone へ移行する、復元できないバックアップを直す、ノートを編集・"
+                      "検索する、ほか多数。",
+        "index_h1": "ガイドと手順",
+        "index_lede": "JW Library のバックアップのすべてを、分かりやすい手順で。端末の統合、"
+                      "新しいスマホへの移行、ノートの救出、そして今あるライブラリーを"
+                      "もっと活かす方法。紹介するツールはすべて、ブラウザーの中で無料で"
+                      "動きます——ファイルがアップロードされることはありません。",
+        "index_cta_title": "読むのは後回しで、まずツールを開く",
+        "index_cta_body": "2つのバックアップの統合は1分ほどで、アプリが手順を案内します。",
+        "footer_all_guides": "すべてのガイド",
+        "footer_community": "コミュニティー",
+        "footer_stats": "研究統計",
+        "footer_privacy": "JW Sync はすべてのデータをローカルで処理します——ファイルが端末を"
+                          "出ることはありません。無料で、アカウントもアップロードも"
+                          "ありません。",
+        "footer_disclaimer": "「JW Library」は Watch Tower Bible and Tract Society of "
+                             "Pennsylvania の所有物です。JW Sync は独立したユーティリティで"
+                             "あり、同協会とは関係がなく、承認も受けていません。",
+        "groups": {
+            "Getting started": "はじめに",
+            "Sharing scenarios": "ノートを共有する",
+            "Everyday scenarios": "日々の場面で",
+            "Fixing problems": "問題を解決する",
+            "Power tools": "上級ツール",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -399,8 +444,10 @@ from guides_fr import GUIDES_FR  # noqa: E402
 from guides_de import GUIDES_DE  # noqa: E402
 from guides_it import GUIDES_IT  # noqa: E402
 from guides_ru import GUIDES_RU  # noqa: E402
+from guides_ja import GUIDES_JA  # noqa: E402
 
 GUIDE_TEXT = {
+    "ja": GUIDES_JA,
     "es": GUIDES_ES,
     "pt": GUIDES_PT,
     "fr": GUIDES_FR,
