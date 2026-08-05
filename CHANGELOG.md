@@ -4,6 +4,32 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.14.0] — 2026-08-05
+
+### Improved: the ten most-read English guides are now full answers
+
+The guide library was built for coverage — 37 topics, 13 languages — and the
+pages were short: a median of 530 words, with 31 of the 37 under 600. That is
+thin for the questions they answer. The ten highest-intent guides have been
+rewritten to **1,226–1,320 words**, roughly triple their previous length.
+
+The new material is the part that was missing — what is actually inside a
+`.jwlibrary` file, why Restore replaces your library instead of merging into
+it, how duplicate detection matches items by GUID, why a scan reporting
+hundreds of orphaned rows is normal rather than damage, and why a hand-edited
+backup stops restoring once the manifest hash no longer matches.
+
+Deepened: merging backups · transferring to a new phone · backing up ·
+Android to iPhone · syncing multiple devices · notes missing after an update ·
+recovering from a lost phone · repairing a corrupted backup · exporting notes ·
+opening a .jwlibrary file.
+
+The twelve translations of these guides are unchanged in this release and keep
+their own (shorter) copy — no English text appears on a localized page. They
+are brought up to the same depth in per-language passes.
+
+---
+
 ## [3.13.0] — 2026-08-05
 
 ### Improved: the thirteen language trees are now linked, not just labelled
