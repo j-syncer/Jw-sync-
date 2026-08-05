@@ -4,6 +4,31 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.13.0] — 2026-08-05
+
+### Improved: the thirteen language trees are now linked, not just labelled
+
+Every guide already declared its twelve translations with `hreflang`, but the
+only way to reach one was a `<select onchange>` — a control Google does not
+follow. The translations were annotated and unlinked. Each of the 494 guide
+pages now ends with **This guide in other languages**, a row of real links to
+the same guide in all thirteen languages.
+
+- Each language landing page (`/es/`, `/ja/`, …) now opens with **Popular
+  guides**, twelve direct links in that language. They previously linked five
+  URLs and not one individual guide, leaving all 37 behind a single hub link.
+- Localized pages now keep readers in their language when they leave for the
+  Study Stats, Share and Community pages — those links carried no language and
+  dropped a Spanish reader onto an English page.
+- The app is described as the same `WebApplication` entity in all thirteen
+  languages; the localized pages had declared a barer `SoftwareApplication`
+  with no publisher, version or image.
+- The English feature list said "Available in 10 languages". It is 13.
+
+No URL changed and no page was renamed, so nothing that already ranked moved.
+
+---
+
 ## [3.12.0] — 2026-08-05
 
 ### Added: all 37 guides in Cebuano — the guide library is now complete in all 13 languages

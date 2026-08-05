@@ -1,106 +1,119 @@
 {
- "en": {
-  "lp_features": "What it does",
-  "lp_how": "How it works",
-  "lp_faq": "Frequently asked questions",
-  "lp_guides": "Guides and how-tos",
-  "lp_guides_d": "Step-by-step help for backing up, merging, moving and rescuing your JW Library notes.",
-  "lp_disclaimer": "“JW Library” is the property of the Watch Tower Bible and Tract Society of Pennsylvania. JW Sync is an independent utility and is not affiliated with or endorsed by it."
- },
- "es": {
-  "lp_features": "Qué hace",
-  "lp_how": "Cómo funciona",
-  "lp_faq": "Preguntas frecuentes",
-  "lp_guides": "Guías y tutoriales",
-  "lp_guides_d": "Ayuda paso a paso para respaldar, combinar, trasladar y recuperar tus notas de JW Library.",
-  "lp_disclaimer": "«JW Library» es propiedad de la Watch Tower Bible and Tract Society of Pennsylvania. JW Sync es una utilidad independiente y no está afiliada a ella ni cuenta con su respaldo."
- },
- "pt": {
-  "lp_features": "O que ele faz",
-  "lp_how": "Como funciona",
-  "lp_faq": "Perguntas frequentes",
-  "lp_guides": "Guias e tutoriais",
-  "lp_guides_d": "Ajuda passo a passo para fazer backup, mesclar, transferir e recuperar suas notas do JW Library.",
-  "lp_disclaimer": "“JW Library” é propriedade da Watch Tower Bible and Tract Society of Pennsylvania. O JW Sync é um utilitário independente, não é afiliado a ela nem por ela endossado."
- },
- "fr": {
-  "lp_features": "Ce qu'il fait",
-  "lp_how": "Comment ça marche",
-  "lp_faq": "Questions fréquentes",
-  "lp_guides": "Guides et tutoriels",
-  "lp_guides_d": "Une aide pas à pas pour sauvegarder, fusionner, transférer et récupérer vos notes JW Library.",
-  "lp_disclaimer": "« JW Library » est la propriété de la Watch Tower Bible and Tract Society of Pennsylvania. JW Sync est un utilitaire indépendant, sans lien avec elle ni approbation de sa part."
- },
- "de": {
-  "lp_features": "Was es kann",
-  "lp_how": "So funktioniert es",
-  "lp_faq": "Häufige Fragen",
-  "lp_guides": "Anleitungen und Tipps",
-  "lp_guides_d": "Schritt-für-Schritt-Hilfe zum Sichern, Zusammenführen, Übertragen und Retten deiner JW-Library-Notizen.",
-  "lp_disclaimer": "„JW Library“ ist Eigentum der Watch Tower Bible and Tract Society of Pennsylvania. JW Sync ist ein unabhängiges Hilfsprogramm und steht in keiner Verbindung zu ihr und wird von ihr nicht unterstützt."
- },
- "it": {
-  "lp_features": "Che cosa fa",
-  "lp_how": "Come funziona",
-  "lp_faq": "Domande frequenti",
-  "lp_guides": "Guide e tutorial",
-  "lp_guides_d": "Aiuto passo passo per salvare, unire, trasferire e recuperare le tue note di JW Library.",
-  "lp_disclaimer": "«JW Library» è proprietà della Watch Tower Bible and Tract Society of Pennsylvania. JW Sync è un'utilità indipendente, non affiliata a essa né da essa approvata."
- },
- "ru": {
-  "lp_features": "Что он умеет",
-  "lp_how": "Как это работает",
-  "lp_faq": "Частые вопросы",
-  "lp_guides": "Руководства и инструкции",
-  "lp_guides_d": "Пошаговая помощь: как создать резервную копию, объединить, перенести и восстановить заметки JW Library.",
-  "lp_disclaimer": "«JW Library» принадлежит Watch Tower Bible and Tract Society of Pennsylvania. JW Sync — независимая утилита, не связанная с ней и не одобренная ею."
- },
- "ja": {
-  "lp_features": "できること",
-  "lp_how": "使い方",
-  "lp_faq": "よくある質問",
-  "lp_guides": "ガイドと手順",
-  "lp_guides_d": "JW Library のノートのバックアップ・統合・移行・復旧を、手順を追って説明します。",
-  "lp_disclaimer": "「JW Library」は Watch Tower Bible and Tract Society of Pennsylvania の所有物です。JW Sync は独立したユーティリティであり、同協会とは関係がなく、承認も受けていません。"
- },
- "ko": {
-  "lp_features": "무엇을 할 수 있나요",
-  "lp_how": "이용 방법",
-  "lp_faq": "자주 묻는 질문",
-  "lp_guides": "안내와 사용법",
-  "lp_guides_d": "JW Library 노트를 백업하고, 병합하고, 옮기고, 복구하는 방법을 단계별로 안내합니다.",
-  "lp_disclaimer": "‘JW Library’는 Watch Tower Bible and Tract Society of Pennsylvania의 소유입니다. JW Sync는 독립적인 도구로, 해당 협회와 제휴하거나 승인을 받지 않았습니다."
- },
- "tl": {
-  "lp_features": "Ano ang magagawa nito",
-  "lp_how": "Paano ito gumagana",
-  "lp_faq": "Mga madalas itanong",
-  "lp_guides": "Mga gabay at paano-gawin",
-  "lp_guides_d": "Sunod-sunod na tulong sa pag-backup, pagsasama, paglipat at pagsagip ng iyong mga nota sa JW Library.",
-  "lp_disclaimer": "Ang “JW Library” ay pag-aari ng Watch Tower Bible and Tract Society of Pennsylvania. Ang JW Sync ay isang malayang kasangkapan at hindi kaugnay nito ni inendorso man nito."
- },
- "sv": {
-  "lp_features": "Vad det gör",
-  "lp_how": "Så fungerar det",
-  "lp_faq": "Vanliga frågor",
-  "lp_guides": "Guider och instruktioner",
-  "lp_guides_d": "Steg-för-steg-hjälp med att säkerhetskopiera, slå ihop, flytta och rädda dina JW Library-anteckningar.",
-  "lp_disclaimer": "”JW Library” tillhör Watch Tower Bible and Tract Society of Pennsylvania. JW Sync är ett fristående verktyg som varken är knutet till eller godkänt av dem."
- },
- "ceb": {
-  "lp_features": "Unsay mahimo niini",
-  "lp_how": "Unsaon kini paglihok",
-  "lp_faq": "Kanunayng gipangutana",
-  "lp_guides": "Mga giya ug pamaagi",
-  "lp_guides_d": "Tabang matag lakang sa pag-backup, pagsagol, pagbalhin ug pagluwas sa imong mga nota sa JW Library.",
-  "lp_disclaimer": "Ang “JW Library” gipanag-iya sa Watch Tower Bible and Tract Society of Pennsylvania. Ang JW Sync usa ka independenteng himan ug walay kalabotan niini ni giuyonan niini."
- },
- "ar": {
-  "lp_features": "ماذا يفعل",
-  "lp_how": "كيف يعمل",
-  "lp_faq": "الأسئلة الشائعة",
-  "lp_guides": "الأدلة وطرق العمل",
-  "lp_guides_d": "مساعدة خطوة بخطوة على النسخ الاحتياطي والدمج والنقل وإنقاذ ملاحظاتك في JW Library.",
-  "lp_disclaimer": "«JW Library» ملك لجمعية برج المراقبة للكتاب المقدس والكراريس في بنسلفانيا. JW Sync أداة مستقلة وليست تابعة لها ولا معتمدة منها."
- }
+  "en": {
+    "lp_features": "What it does",
+    "lp_how": "How it works",
+    "lp_faq": "Frequently asked questions",
+    "lp_guides": "Guides and how-tos",
+    "lp_guides_d": "Step-by-step help for backing up, merging, moving and rescuing your JW Library notes.",
+    "lp_popular": "Popular guides",
+    "lp_disclaimer": "“JW Library” is the property of the Watch Tower Bible and Tract Society of Pennsylvania. JW Sync is an independent utility and is not affiliated with or endorsed by it."
+  },
+  "es": {
+    "lp_features": "Qué hace",
+    "lp_how": "Cómo funciona",
+    "lp_faq": "Preguntas frecuentes",
+    "lp_guides": "Guías y tutoriales",
+    "lp_guides_d": "Ayuda paso a paso para respaldar, combinar, trasladar y recuperar tus notas de JW Library.",
+    "lp_popular": "Guías populares",
+    "lp_disclaimer": "«JW Library» es propiedad de la Watch Tower Bible and Tract Society of Pennsylvania. JW Sync es una utilidad independiente y no está afiliada a ella ni cuenta con su respaldo."
+  },
+  "pt": {
+    "lp_features": "O que ele faz",
+    "lp_how": "Como funciona",
+    "lp_faq": "Perguntas frequentes",
+    "lp_guides": "Guias e tutoriais",
+    "lp_guides_d": "Ajuda passo a passo para fazer backup, mesclar, transferir e recuperar suas notas do JW Library.",
+    "lp_popular": "Guias populares",
+    "lp_disclaimer": "“JW Library” é propriedade da Watch Tower Bible and Tract Society of Pennsylvania. O JW Sync é um utilitário independente, não é afiliado a ela nem por ela endossado."
+  },
+  "fr": {
+    "lp_features": "Ce qu'il fait",
+    "lp_how": "Comment ça marche",
+    "lp_faq": "Questions fréquentes",
+    "lp_guides": "Guides et tutoriels",
+    "lp_guides_d": "Une aide pas à pas pour sauvegarder, fusionner, transférer et récupérer vos notes JW Library.",
+    "lp_popular": "Guides populaires",
+    "lp_disclaimer": "« JW Library » est la propriété de la Watch Tower Bible and Tract Society of Pennsylvania. JW Sync est un utilitaire indépendant, sans lien avec elle ni approbation de sa part."
+  },
+  "de": {
+    "lp_features": "Was es kann",
+    "lp_how": "So funktioniert es",
+    "lp_faq": "Häufige Fragen",
+    "lp_guides": "Anleitungen und Tipps",
+    "lp_guides_d": "Schritt-für-Schritt-Hilfe zum Sichern, Zusammenführen, Übertragen und Retten deiner JW-Library-Notizen.",
+    "lp_popular": "Beliebte Anleitungen",
+    "lp_disclaimer": "„JW Library“ ist Eigentum der Watch Tower Bible and Tract Society of Pennsylvania. JW Sync ist ein unabhängiges Hilfsprogramm und steht in keiner Verbindung zu ihr und wird von ihr nicht unterstützt."
+  },
+  "it": {
+    "lp_features": "Che cosa fa",
+    "lp_how": "Come funziona",
+    "lp_faq": "Domande frequenti",
+    "lp_guides": "Guide e tutorial",
+    "lp_guides_d": "Aiuto passo passo per salvare, unire, trasferire e recuperare le tue note di JW Library.",
+    "lp_popular": "Guide più lette",
+    "lp_disclaimer": "«JW Library» è proprietà della Watch Tower Bible and Tract Society of Pennsylvania. JW Sync è un'utilità indipendente, non affiliata a essa né da essa approvata."
+  },
+  "ru": {
+    "lp_features": "Что он умеет",
+    "lp_how": "Как это работает",
+    "lp_faq": "Частые вопросы",
+    "lp_guides": "Руководства и инструкции",
+    "lp_guides_d": "Пошаговая помощь: как создать резервную копию, объединить, перенести и восстановить заметки JW Library.",
+    "lp_popular": "Популярные руководства",
+    "lp_disclaimer": "«JW Library» принадлежит Watch Tower Bible and Tract Society of Pennsylvania. JW Sync — независимая утилита, не связанная с ней и не одобренная ею."
+  },
+  "ja": {
+    "lp_features": "できること",
+    "lp_how": "使い方",
+    "lp_faq": "よくある質問",
+    "lp_guides": "ガイドと手順",
+    "lp_guides_d": "JW Library のノートのバックアップ・統合・移行・復旧を、手順を追って説明します。",
+    "lp_popular": "人気のガイド",
+    "lp_disclaimer": "「JW Library」は Watch Tower Bible and Tract Society of Pennsylvania の所有物です。JW Sync は独立したユーティリティであり、同協会とは関係がなく、承認も受けていません。"
+  },
+  "ko": {
+    "lp_features": "무엇을 할 수 있나요",
+    "lp_how": "이용 방법",
+    "lp_faq": "자주 묻는 질문",
+    "lp_guides": "안내와 사용법",
+    "lp_guides_d": "JW Library 노트를 백업하고, 병합하고, 옮기고, 복구하는 방법을 단계별로 안내합니다.",
+    "lp_popular": "인기 가이드",
+    "lp_disclaimer": "‘JW Library’는 Watch Tower Bible and Tract Society of Pennsylvania의 소유입니다. JW Sync는 독립적인 도구로, 해당 협회와 제휴하거나 승인을 받지 않았습니다."
+  },
+  "tl": {
+    "lp_features": "Ano ang magagawa nito",
+    "lp_how": "Paano ito gumagana",
+    "lp_faq": "Mga madalas itanong",
+    "lp_guides": "Mga gabay at paano-gawin",
+    "lp_guides_d": "Sunod-sunod na tulong sa pag-backup, pagsasama, paglipat at pagsagip ng iyong mga nota sa JW Library.",
+    "lp_popular": "Mga sikat na gabay",
+    "lp_disclaimer": "Ang “JW Library” ay pag-aari ng Watch Tower Bible and Tract Society of Pennsylvania. Ang JW Sync ay isang malayang kasangkapan at hindi kaugnay nito ni inendorso man nito."
+  },
+  "sv": {
+    "lp_features": "Vad det gör",
+    "lp_how": "Så fungerar det",
+    "lp_faq": "Vanliga frågor",
+    "lp_guides": "Guider och instruktioner",
+    "lp_guides_d": "Steg-för-steg-hjälp med att säkerhetskopiera, slå ihop, flytta och rädda dina JW Library-anteckningar.",
+    "lp_popular": "Populära guider",
+    "lp_disclaimer": "”JW Library” tillhör Watch Tower Bible and Tract Society of Pennsylvania. JW Sync är ett fristående verktyg som varken är knutet till eller godkänt av dem."
+  },
+  "ceb": {
+    "lp_features": "Unsay mahimo niini",
+    "lp_how": "Unsaon kini paglihok",
+    "lp_faq": "Kanunayng gipangutana",
+    "lp_guides": "Mga giya ug pamaagi",
+    "lp_guides_d": "Tabang matag lakang sa pag-backup, pagsagol, pagbalhin ug pagluwas sa imong mga nota sa JW Library.",
+    "lp_popular": "Bantog nga mga giya",
+    "lp_disclaimer": "Ang “JW Library” gipanag-iya sa Watch Tower Bible and Tract Society of Pennsylvania. Ang JW Sync usa ka independenteng himan ug walay kalabotan niini ni giuyonan niini."
+  },
+  "ar": {
+    "lp_features": "ماذا يفعل",
+    "lp_how": "كيف يعمل",
+    "lp_faq": "الأسئلة الشائعة",
+    "lp_guides": "الأدلة وطرق العمل",
+    "lp_guides_d": "مساعدة خطوة بخطوة على النسخ الاحتياطي والدمج والنقل وإنقاذ ملاحظاتك في JW Library.",
+    "lp_popular": "أدلة شائعة",
+    "lp_disclaimer": "«JW Library» ملك لجمعية برج المراقبة للكتاب المقدس والكراريس في بنسلفانيا. JW Sync أداة مستقلة وليست تابعة لها ولا معتمدة منها."
+  }
 }

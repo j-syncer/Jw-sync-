@@ -20,6 +20,7 @@ CHROME = {
     "en": {
         "lang_name": "English",
         "lang_label": "Language",
+        "lang_other": "This guide in other languages",
         "og_locale": "en_US",
         "site_guides": "JW Sync Guides",
         "nav_guides": "Guides",
@@ -64,6 +65,7 @@ CHROME = {
     "es": {
         "lang_name": "Español",
         "lang_label": "Idioma",
+        "lang_other": "Esta guía en otros idiomas",
         "og_locale": "es_ES",
         "site_guides": "Guías de JW Sync",
         "nav_guides": "Guías",
@@ -111,6 +113,7 @@ CHROME = {
     "pt": {
         "lang_name": "Português",
         "lang_label": "Idioma",
+        "lang_other": "Este guia em outros idiomas",
         "og_locale": "pt_BR",
         "site_guides": "Guias do JW Sync",
         "nav_guides": "Guias",
@@ -157,6 +160,7 @@ CHROME = {
     "fr": {
         "lang_name": "Français",
         "lang_label": "Langue",
+        "lang_other": "Ce guide dans d’autres langues",
         "og_locale": "fr_FR",
         "site_guides": "Guides JW Sync",
         "nav_guides": "Guides",
@@ -205,6 +209,7 @@ CHROME = {
     "de": {
         "lang_name": "Deutsch",
         "lang_label": "Sprache",
+        "lang_other": "Diese Anleitung in anderen Sprachen",
         "og_locale": "de_DE",
         "site_guides": "JW-Sync-Anleitungen",
         "nav_guides": "Anleitungen",
@@ -254,6 +259,7 @@ CHROME = {
     "it": {
         "lang_name": "Italiano",
         "lang_label": "Lingua",
+        "lang_other": "Questa guida in altre lingue",
         "og_locale": "it_IT",
         "site_guides": "Guide di JW Sync",
         "nav_guides": "Guide",
@@ -300,6 +306,7 @@ CHROME = {
     "ru": {
         "lang_name": "Русский",
         "lang_label": "Язык",
+        "lang_other": "Это руководство на других языках",
         "og_locale": "ru_RU",
         "site_guides": "Руководства JW Sync",
         "nav_guides": "Руководства",
@@ -348,6 +355,7 @@ CHROME = {
     "ja": {
         "lang_name": "日本語",
         "lang_label": "言語",
+        "lang_other": "このガイドを他の言語で読む",
         "og_locale": "ja_JP",
         "site_guides": "JW Sync ガイド",
         "nav_guides": "ガイド",
@@ -393,6 +401,7 @@ CHROME = {
     "ko": {
         "lang_name": "한국어",
         "lang_label": "언어",
+        "lang_other": "다른 언어로 된 이 가이드",
         "og_locale": "ko_KR",
         "site_guides": "JW Sync 안내",
         "nav_guides": "안내",
@@ -437,6 +446,7 @@ CHROME = {
     "tl": {
         "lang_name": "Filipino",
         "lang_label": "Wika",
+        "lang_other": "Ang gabay na ito sa ibang wika",
         "og_locale": "tl_PH",
         "site_guides": "Mga Gabay sa JW Sync",
         "nav_guides": "Mga Gabay",
@@ -485,6 +495,7 @@ CHROME = {
     "sv": {
         "lang_name": "Svenska",
         "lang_label": "Språk",
+        "lang_other": "Den här guiden på andra språk",
         "og_locale": "sv_SE",
         "site_guides": "JW Sync-guider",
         "nav_guides": "Guider",
@@ -530,6 +541,7 @@ CHROME = {
     "ceb": {
         "lang_name": "Cebuano",
         "lang_label": "Pinulongan",
+        "lang_other": "Kini nga giya sa ubang pinulongan",
         "og_locale": "ceb_PH",
         "site_guides": "Mga Giya sa JW Sync",
         "nav_guides": "Mga Giya",
@@ -578,6 +590,7 @@ CHROME = {
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
+        "lang_other": "هذا الدليل بلغات أخرى",
         "og_locale": "ar_SA",
         "site_guides": "أدلة JW Sync",
         "nav_guides": "الأدلة",

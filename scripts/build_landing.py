@@ -160,6 +160,15 @@ ol.steps p{margin:0;color:var(--muted);font-size:15px}
 padding:22px 24px;margin:38px 0 0}
 .cta-card strong{display:block;font-size:17px;margin-bottom:5px}
 .cta-card span{color:var(--muted);font-size:14.5px}
+.lp-guides{margin:44px 0 0}
+.lp-guides h2{margin:0 0 14px}
+.lp-gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 22px;padding:0;list-style:none}
+@media(min-width:640px){.lp-gcards{grid-template-columns:1fr 1fr}}
+.lp-gcards a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;color:var(--txt);height:100%}
+.lp-gcards a:hover{text-decoration:none;border-color:var(--accent)}
+.lp-gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
+.lp-gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}
 footer.site{border-top:1px solid var(--line);margin-top:58px;padding:26px 0 44px;
 color:#8b99ad;font-size:12.5px}
 footer.site p{margin:0 0 10px}
@@ -201,18 +210,84 @@ def lang_picker(lang):
             % (esc(LANG_NAME[lang]), opts))
 
 
+_VERSION_RE = re.compile(r'"softwareVersion"\s*:\s*"([0-9.]+)"')
+
+
+def app_version():
+    """Read softwareVersion off the English page so the two can never diverge."""
+    c = io.open(os.path.join(REPO, "index.html"), encoding="utf-8").read()
+    m = _VERSION_RE.search(c)
+    if not m:
+        sys.exit("build_landing: no softwareVersion in index.html")
+    return m.group(1)
+
+
+# Guides worth a direct link from the landing page. Slugs are English keys and
+# are the same in every language; GUIDE_TEXT supplies the localized wording.
+POPULAR_GUIDES = [
+    "merge-jw-library-backups",
+    "transfer-jw-library-notes-new-phone",
+    "backup-jw-library",
+    "jw-library-android-to-iphone",
+    "sync-jw-library-multiple-devices",
+    "jw-library-notes-missing-after-update",
+    "recover-jw-library-notes-lost-phone",
+    "fix-corrupted-jw-library-backup",
+    "export-jw-library-notes",
+    "share-jw-library-notes",
+    "organize-jw-library-tags",
+    "jw-library-windows-pc",
+]
+
+
+def popular_guides(lang, C):
+    """A grid of guide links, so the landing page is not a dead end.
+
+    Before this the page linked five URLs and not one guide: all 37 sat behind
+    a single hub link, two clicks from the only page in the cluster with
+    external links pointing at it. Titles come from that language's own
+    GUIDE_TEXT, so the anchor text matches the guide it points at.
+    """
+    txt = GUIDE_TEXT.get(lang)
+    if not txt:
+        return ""
+    items = []
+    for slug in POPULAR_GUIDES:
+        g = txt.get(slug)
+        if not g:
+            sys.exit("build_landing: %s missing guide %r" % (lang, slug))
+        items.append('<li><a href="/guides/%s/%s"><strong>%s</strong>'
+                     '<span>%s</span></a></li>'
+                     % (lang, slug, esc(g["title"]), esc(g["description"])))
+    return ('<section class="lp-guides"><h2>%s</h2><ul class="lp-gcards">%s</ul></section>'
+            % (esc(C["lp_popular"]), "".join(items)))
+
+
 def jsonld(lang, L, A):
     return {
         "@context": "https://schema.org",
         "@graph": [
+            # Must stay the same @type, and carry the same trust properties, as
+            # the English node in index.html. Google consolidates an entity
+            # across a hreflang cluster; when "/" declared WebApplication and
+            # every /<lang>/ declared a barer SoftwareApplication, the cluster
+            # described two different things and the localized nodes were the
+            # weaker of the two.
             {
-                "@type": "SoftwareApplication",
+                "@type": "WebApplication",
                 "name": "JW Sync",
-                "applicationCategory": "UtilitiesApplication",
-                "operatingSystem": "Any (web browser)",
+                "applicationCategory": "UtilityApplication",
+                "operatingSystem": "Web Browser",
+                "browserRequirements": "Requires modern web browser with JavaScript enabled",
                 "url": page_url(lang),
                 "inLanguage": lang,
                 "description": L["hero_desc"],
+                "isAccessibleForFree": True,
+                "softwareVersion": app_version(),
+                "image": SITE + "/og-image.png",
+                "screenshot": SITE + "/og-image.png",
+                "downloadUrl": page_url(lang),
+                "author": {"@type": "Organization", "name": "JW Sync", "url": SITE + "/"},
                 "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
             },
             {
@@ -233,6 +308,10 @@ def build(lang, landing, app, chrome):
     url = page_url(lang)
     d = ' dir="rtl"' if lang in RTL_LANGS else ""
     app_href = "/" if lang == "en" else "/?lang=%s" % lang
+    # highlights/share/forum read ?lang=, so a localized landing page has to
+    # carry its language across instead of dropping the reader into English.
+    # Internal links only — never hreflang or sitemap (see 01_static.js).
+    q = "" if lang == "en" else "?lang=%s" % lang
     p = []
     p.append(f"""<!DOCTYPE html>
 <html lang="{lang}"{d}>
@@ -266,9 +345,9 @@ def build(lang, landing, app, chrome):
              '<nav class="hnav">'
              f'<a href="{app_href}">{esc(L["nav_home"])}</a>'
              f'<a href="{guides_url(lang)}">{esc(L["nav_guides"])}</a>'
-             f'<a href="/highlights">{esc(L["nav_stats"])}</a>'
-             f'<a href="/share">{esc(L["nav_sharing"])}</a>'
-             f'<a href="/forum">{esc(L["nav_community"])}</a>'
+             f'<a href="/highlights{q}">{esc(L["nav_stats"])}</a>'
+             f'<a href="/share{q}">{esc(L["nav_sharing"])}</a>'
+             f'<a href="/forum{q}">{esc(L["nav_community"])}</a>'
              f'{lang_picker(lang)}'
              '</nav></div></header>')
 
@@ -294,6 +373,7 @@ def build(lang, landing, app, chrome):
     # tools
     p.append(f'<h2>{esc(L["svc_heading"])}</h2><ul class="grid">')
     for key, _icon, href in TOOLS:
+        href = href + q if href in ("/highlights", "/share") else href
         p.append(f'<li><strong>{esc(L["svc_%s_t" % key])}</strong>'
                  f'<span>{esc(L["svc_%s_d" % key])}</span>'
                  f'<ul class="tags"><li>{esc(L["svc_%s_g1" % key])}</li>'
@@ -314,6 +394,7 @@ def build(lang, landing, app, chrome):
     p.append("</dl>")
 
     # guides
+    p.append(popular_guides(lang, C))
     p.append(f'<a class="cta-card" href="{guides_url(lang)}">'
              f'<strong>{esc(C["lp_guides"])}</strong>'
              f'<span>{esc(C["lp_guides_d"])}</span></a>')

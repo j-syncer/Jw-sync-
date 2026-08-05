@@ -1116,6 +1116,11 @@ padding:16px 18px;color:var(--txt);height:100%}
 font-size:13px;padding:4px 8px;border-radius:8px;margin-left:14px;font-family:inherit;
 max-width:150px}
 .glang:hover{border-color:var(--accent)}
+.glangs{border-top:1px solid var(--line);margin-top:30px;padding-top:18px}
+.glangs b{display:block;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.glangs a{display:inline-block;color:#8b99ad;font-size:12.5px;margin:0 14px 6px 0}
+.glangs a:hover{color:var(--accent)}
+.glangs a[aria-current]{color:var(--txt);font-weight:600}
 """.strip()
 
 # The guides are self-contained static pages with no external stylesheet, so
@@ -1129,16 +1134,24 @@ ol.steps li::before{left:auto;right:0}
 code,.lede code{unicode-bidi:isolate}
 </style>"""
 
-def footer(root, lang):
+def footer(root, lang, slug=None):
     t = CHROME[lang]
+    # The app and the two satellite pages all read ?lang=, so a localized guide
+    # must carry its language across. Linking them bare sent a Spanish reader to
+    # an English page and pointed every localized guide's outbound links at the
+    # English URLs. (Internal links only — ?lang= must never appear in hreflang
+    # or the sitemap; see the canonical-hygiene block in tests/01_static.js.)
+    q = "" if lang == "en" else "?lang=" + lang
     return (
         '<footer class="site"><div class="wrap">'
+        '%s'
         '<p><a href="%s">JW Sync</a> · <a href="%s">%s</a> · '
-        '<a href="%sforum.html">%s</a> · <a href="%shighlights.html">%s</a></p>'
+        '<a href="%sforum.html%s">%s</a> · <a href="%shighlights.html%s">%s</a></p>'
         '<p>%s</p><p>%s</p>'
         '</div></footer>'
-    ) % (root, guides_index_href(root, lang), esc(t["footer_all_guides"]),
-         root, esc(t["footer_community"]), root, esc(t["footer_stats"]),
+    ) % (lang_links(slug, lang),
+         root + q, guides_index_href(root, lang), esc(t["footer_all_guides"]),
+         root, q, esc(t["footer_community"]), root, q, esc(t["footer_stats"]),
          esc(t["footer_privacy"]), esc(t["footer_disclaimer"]))
 
 def esc(s):
@@ -1165,6 +1178,23 @@ def alternates(slug):
     for l in TRANSLATED:
         out.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, guide_url(slug, l)))
     return "\n".join(out)
+
+
+def lang_links(slug, lang):
+    """The same set as lang_picker, as links a crawler can actually follow.
+
+    lang_picker is a <select onchange>: fine for readers, invisible to Google,
+    which does not treat <option value> as a link. Without this the thirteen
+    translations of a guide were asserted by hreflang and reachable by zero
+    internal links, so nothing pointed at a translation but the <head>.
+    """
+    out = []
+    for l in TRANSLATED:
+        cur = ' aria-current="page"' if l == lang else ""
+        out.append('<a href="%s" hreflang="%s" lang="%s"%s>%s</a>'
+                   % (guide_url(slug, l), l, l, cur, CHROME[l]["lang_name"]))
+    return ('<nav class="glangs"><b>%s</b>%s</nav>'
+            % (esc(CHROME[lang]["lang_other"]), "".join(out)))
 
 
 def lang_picker(slug, lang, root):
@@ -1320,7 +1350,7 @@ def build_guide(g_en, lang="en"):
         r = localize(by_slug[rel], lang)
         parts.append(f'<li><a href="{rel}">{esc(r["title"])}</a></li>')
     parts.append("</ul></main>")
-    parts.append(footer(root, lang))
+    parts.append(footer(root, lang, g_en["slug"]))
     parts.append("</body>\n</html>\n")
     return "".join(parts)
 
