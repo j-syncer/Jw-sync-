@@ -17,6 +17,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { inlineModules } = require('./helpers/page-source');
 
 const REPO = path.join(__dirname, '..');
 const HTML_PATH = REPO + '/beta/index.html';
@@ -28,7 +29,7 @@ function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function makeDom() {
-  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const html = inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH);
   const m = html.match(/<!-- ── Pre-merge Impact Preview \(v2\.16\.0\) ─[\s\S]*?<!-- ── End Pre-merge Impact Preview ─[─]*\s*-->/);
   if (!m) { fail('Pre-merge Impact Preview block not found in beta/index.html'); process.exit(1); }
   const page = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${m[0]}</body></html>`;

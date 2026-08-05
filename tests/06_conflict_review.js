@@ -18,6 +18,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { inlineModules } = require('./helpers/page-source');
 const JSZip = require('jszip');
 const initSqlJs = require('sql.js');
 
@@ -67,7 +68,7 @@ async function readNotes(SQL, buf) {
 // ── Boot the reviewer module in a fresh JSDOM, optionally wiring deps ──
 function makeReviewerDom(opts) {
   opts = opts || {};
-  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const html = inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH);
   const m = html.match(/<!-- ── Merge Conflict Reviewer \(v2\.11\.0\) ─[\s\S]*?<!-- ── End Merge Conflict Reviewer ─[─]*\s*-->/);
   if (!m) return null;
   const block = m[0];

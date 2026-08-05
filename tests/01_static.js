@@ -2,6 +2,8 @@ const path = require('path');
 const REPO = path.join(__dirname, '..');
 // Static checks: parse-ability, anchor presence, i18n completeness, CSS classes used == defined.
 const fs = require('fs');
+const { browseJs, browseCss } = require('./helpers/browse-source');
+const { withModules } = require('./helpers/page-source');
 
 const FILES = [
   REPO + '/beta/index.html',
@@ -74,15 +76,13 @@ for (const path of FILES) {
     ok('main app bundle parses (' + bundleSrc.length + ' bytes, ' + bundleSource + ')');
   } catch (e) { fail('main app parse failed: ' + e.message); }
 
-  // 2) Browse module parses (still inline in both files)
-  const m = c.match(/<!-- ── Note Explorer \(Browse\) ─[\s\S]*?<\/script>\s*<!-- ── End Note Explorer/);
-  if (!m) { fail('Browse block missing'); continue; }
-  const sm = m[0].match(/<script>([\s\S]*?)<\/script>/);
-  let browseSrc;
+  // 2) Browse module parses. v3.8.0 moved it to js/browse.js on the pages that
+  //    lazy-load it; production keeps the inline copy until go-live.
+  const browseSrc = browseJs(path);
+  if (browseSrc == null) { fail('Browse module not found (inline or js/browse.js)'); continue; }
   try {
-    browseSrc = sm[1];
     new Function(browseSrc);
-    ok('Browse module <script> parses (' + browseSrc.length + ' bytes)');
+    ok('Browse module parses (' + browseSrc.length + ' bytes)');
   } catch (e) { fail('Browse parse failed: ' + e.message); continue; }
 
   // 3) TRANSLATIONS object parses and has all langs + required keys
@@ -121,6 +121,11 @@ for (const path of FILES) {
     ok('Browse I18N parses');
   } catch (e) { fail('Browse I18N parse failed: ' + e.message); continue; }
 
+  // Feature-presence checks below search the page *and* every module v3.8.0
+  // lifted out of it (js/browse.js, js/doctor.js, …). Structural checks keep
+  // using `c` so "must not be inline" assertions stay meaningful.
+  const cAll = withModules(path);
+
   const browseKeys = isBeta ? BROWSE_REQUIRED_KEYS.concat(BROWSE_BETA_ONLY_KEYS) : BROWSE_REQUIRED_KEYS;
   for (const lang of FILE_LANGS) {
     if (!browseI18n[lang]) { fail('Browse I18N missing ' + lang); continue; }
@@ -145,9 +150,8 @@ for (const path of FILES) {
   }
 
   // 5) Critical CSS classes referenced in module code exist in <style>
-  const styleMatch = m[0].match(/<style>([\s\S]*?)<\/style>/);
-  if (!styleMatch) { fail('Browse <style> block missing'); continue; }
-  const css = styleMatch[1];
+  const css = browseCss(path);
+  if (!css) { fail('Browse <style> block missing'); continue; }
   const CRITICAL_CLASSES = [
     'jb-overlay','jb-modal','jb-head','jb-head-close','jb-tabs','jb-tab','jb-tab.active','jb-tab-count',
     'jb-toolbar','jb-search','jb-select','jb-clear','jb-colors','jb-color-dot','jb-body','jb-list','jb-detail',
@@ -204,11 +208,11 @@ for (const path of FILES) {
 
   // 8b) Beta-only: Saved Devices & Auto-Sync (Sync Hub, v2.20.0)
   if (isBeta) {
-    if (!c.includes('window.__jwOpenSyncHub')) fail('Sync Hub (window.__jwOpenSyncHub) missing');
+    if (!cAll.includes('window.__jwOpenSyncHub')) fail('Sync Hub (window.__jwOpenSyncHub) missing');
     else ok('Sync Hub module present');
     if (!c.includes('jsh-fab') || !c.includes('jsh-merge')) fail('Sync Hub markup/CSS missing');
     else ok('Sync Hub launcher + merge controls present');
-    if (!c.includes("new Worker('./js/merge-worker.js')")) fail('Sync Hub does not drive merge-worker.js');
+    if (!cAll.includes("new Worker('./js/merge-worker.js')")) fail('Sync Hub does not drive merge-worker.js');
     else ok('Sync Hub drives merge-worker.js directly');
   }
 
@@ -216,13 +220,13 @@ for (const path of FILES) {
   if (isBeta) {
     if (!c.includes('jb-filter-date') || !c.includes('jb-extract-btn')) fail('Browse date-range controls missing');
     else ok('Browse date-range filter + extract controls present');
-    if (!c.includes('function extractByDate')) fail('extractByDate() missing');
+    if (!cAll.includes('function extractByDate')) fail('extractByDate() missing');
     else ok('extractByDate() present');
   }
 
   // 8d) Smart Conflict Suggestions (v2.22.0, beta-only)
   if (isBeta) {
-    if (!c.includes('data-jcr-suggest') || !c.includes('function suggestFor')) fail('Conflict suggestion engine missing');
+    if (!cAll.includes('data-jcr-suggest') || !cAll.includes('function suggestFor')) fail('Conflict suggestion engine missing');
     else ok('Conflict "Suggest best" engine present');
     if (!c.includes('jcr-suggestion-badge') || !c.includes('jcr-suggested')) fail('Conflict suggestion styles missing');
     else ok('Conflict suggestion badge/highlight styles present');
@@ -230,7 +234,7 @@ for (const path of FILES) {
 
   // 8e) Markdown sharing & export (v2.23.0, beta-only)
   if (isBeta) {
-    if (!c.includes('function noteToMarkdown') || !c.includes('function exportMarkdown')) fail('Markdown export helpers missing');
+    if (!cAll.includes('function noteToMarkdown') || !cAll.includes('function exportMarkdown')) fail('Markdown export helpers missing');
     else ok('Markdown export helpers present');
     if (!c.includes('jb-md-btn')) fail('Markdown export button missing');
     else ok('Markdown export button present');
@@ -240,16 +244,16 @@ for (const path of FILES) {
   if (isBeta) {
     if (!c.includes('jw-offline-banner') || !c.includes('window.__jwHaptic')) fail('Offline banner / haptic helper missing');
     else ok('Offline banner + haptic helper present');
-    if (!c.includes('function switchTo') || !c.includes('switchByOffset') || !c.includes('touchstart')) fail('Browse swipe-to-switch missing');
+    if (!cAll.includes('function switchTo') || !cAll.includes('switchByOffset') || !cAll.includes('touchstart')) fail('Browse swipe-to-switch missing');
     else ok('Browse swipe-to-switch tabs present');
   }
 
   // 8g) Bulk manager + Undo/Redo (v2.26.0, beta-only)
   if (isBeta) {
-    if (!c.includes('function snapshot') || !c.includes('function doUndo') || !c.includes('function doRedo') || !c.includes('function hydrateFromDb'))
+    if (!cAll.includes('function snapshot') || !cAll.includes('function doUndo') || !cAll.includes('function doRedo') || !cAll.includes('function hydrateFromDb'))
       fail('Undo/redo infrastructure missing');
     else ok('Undo/redo infrastructure present');
-    if (!c.includes('function batchDelete') || !c.includes('function batchAddTag') || !c.includes('function batchSetColor'))
+    if (!cAll.includes('function batchDelete') || !cAll.includes('function batchAddTag') || !cAll.includes('function batchSetColor'))
       fail('Batch operations missing');
     else ok('Batch operations present');
     if (!c.includes('jb-select-toggle') || !c.includes('jb-batch-bar') || !c.includes('jb-check') || !c.includes('jb-undo'))
@@ -259,17 +263,17 @@ for (const path of FILES) {
 
   // 8h) Study Questions / Input Fields (v2.27.0, beta-only)
   if (isBeta) {
-    if (!c.includes('function buildInputFieldRow') || !c.includes('function saveInputField') || !c.includes('function deleteInputField'))
+    if (!cAll.includes('function buildInputFieldRow') || !cAll.includes('function saveInputField') || !cAll.includes('function deleteInputField'))
       fail('Input Field (Study Answers) functions missing');
     else ok('Input Field (Study Answers) functions present');
-    if (!c.includes("['inputfields',t('tab_inputfields')]") || !c.includes('state.allInputFields'))
+    if (!cAll.includes("['inputfields',t('tab_inputfields')]") || !cAll.includes('state.allInputFields'))
       fail('Study Answers tab wiring missing');
     else ok('Study Answers tab wired');
   }
 
   // 8i) Note sharing (v2.28.0 in-Browse quick share + v2.30.0 dedicated page)
   if (isBeta) {
-    if (!c.includes('function openShareExport') || !c.includes('function buildShareEnvelope'))
+    if (!cAll.includes('function openShareExport') || !cAll.includes('function buildShareEnvelope'))
       fail('Quick-share functions missing');
     else ok('Quick-share functions present');
     if (!c.includes('function __jwGoShare') || !c.includes("href='share.html'"))
@@ -301,7 +305,7 @@ for (const path of FILES) {
     // v2.87.1: Resurface is now an embedded panel (no standalone tool card),
     // mounted inside the merge celebration card via the shared engine.
     if (isBeta) {
-      if (c.includes('data-jwc-resurface') && c.includes('js/resurface.js'))
+      if (cAll.includes('data-jwc-resurface') && cAll.includes('js/resurface.js'))
         ok('Resurface embedded in celebration card (shared engine wired)');
       else fail('Resurface celebration integration missing');
       if (!c.includes('class="svc-card svc-resurface"'))
@@ -344,13 +348,13 @@ for (const path of FILES) {
 
   // 8m) Receive shared notes in merge (v2.34.0, beta-only)
   if (isBeta) {
-    if (c.includes('window.__jwAdoptSharedIntoBuffer') && c.includes('window.__jwParseShareEnvelope'))
+    if (cAll.includes('window.__jwAdoptSharedIntoBuffer') && cAll.includes('window.__jwParseShareEnvelope'))
       ok('Receive-in-merge core API present');
     else fail('Receive-in-merge core API missing');
-    if (c.includes('data-jwc-addshared') && c.includes('window.__jwReceivePickAndAdopt'))
+    if (cAll.includes('data-jwc-addshared') && cAll.includes('window.__jwReceivePickAndAdopt'))
       ok('End-of-merge "add shared notes" button wired');
     else fail('End-of-merge add-shared button missing');
-    if (c.includes('window.__jwReceiveOnCelebration') && c.includes('jwr-panel'))
+    if (cAll.includes('window.__jwReceiveOnCelebration') && cAll.includes('jwr-panel'))
       ok('Pre-merge attach + auto-adopt hooks present');
     else fail('Pre-merge receive hooks missing');
   }
@@ -363,7 +367,7 @@ for (const path of FILES) {
 
   // 8j) Merge performance dashboard (v2.29.0, beta-only)
   if (isBeta) {
-    if (!c.includes('function buildPerfHtml') || !c.includes('jwc-perf') || !c.includes('__jwLastMergeTimings'))
+    if (!cAll.includes('function buildPerfHtml') || !cAll.includes('jwc-perf') || !cAll.includes('__jwLastMergeTimings'))
       fail('Merge performance section missing');
     else ok('Merge performance section present');
   }
@@ -379,11 +383,11 @@ for (const path of FILES) {
     // v2.8.0: the demo no longer carries an inline DEMO_B64 — it generates two
     // synthetic backups at click time via enhancements.js's buildDemoBackups,
     // then injects them into the React file pickers for a real merge demo.
-    if (!c.includes('__jwInjectMergeDemo')) fail('merge-demo injector helper not referenced');
+    if (!cAll.includes('__jwInjectMergeDemo')) fail('merge-demo injector helper not referenced');
     else ok('merge-demo injector helper referenced (__jwInjectMergeDemo)');
-    if (!c.includes('__jwBuildDemoBackups')) fail('demo builder helper not referenced');
+    if (!cAll.includes('__jwBuildDemoBackups')) fail('demo builder helper not referenced');
     else ok('demo builder helper referenced (__jwBuildDemoBackups)');
-    if (!c.includes('jw-demo-banner')) fail('demo guidance banner id missing');
+    if (!cAll.includes('jw-demo-banner')) fail('demo guidance banner id missing');
     else ok('demo guidance banner referenced (#jw-demo-banner)');
     if (!c.includes('Try Demo') || !c.includes('merge flow')) fail('merge-flow marker comment missing');
     else ok('merge-flow Demo handler marker present');
@@ -399,39 +403,39 @@ for (const path of FILES) {
     else ok('React internal nav demo button present');
     if (!allSrc.includes('simple-mode-teaser-btn-demo')) fail('Simple Mode teaser demo button missing');
     else ok('Simple Mode teaser demo button present');
-    if (!c.includes('window.__jwOpenDemo')) fail('window.__jwOpenDemo not exposed');
+    if (!cAll.includes('window.__jwOpenDemo')) fail('window.__jwOpenDemo not exposed');
     else ok('window.__jwOpenDemo exposed for React buttons');
     if (!c.includes('data-demo-trigger')) fail('data-demo-trigger attribute missing');
     else ok('data-demo-trigger attribute present');
 
     // Guided in/out flow (v2.14.0)
-    if (!c.includes('EXPORT_GUIDE')) fail('EXPORT_GUIDE object missing (export walkthrough)');
+    if (!cAll.includes('EXPORT_GUIDE')) fail('EXPORT_GUIDE object missing (export walkthrough)');
     else ok('EXPORT_GUIDE export-steps object present');
-    if (!c.includes('window.__jwOpenGuide')) fail('window.__jwOpenGuide not exposed');
+    if (!cAll.includes('window.__jwOpenGuide')) fail('window.__jwOpenGuide not exposed');
     else ok('window.__jwOpenGuide exposed');
     if (!c.includes('id="landing-howto-btn"')) fail('landing-howto-btn missing');
     else ok('landing "How it works" button present');
     if (!c.includes('data-howto-trigger')) fail('data-howto-trigger attribute missing');
     else ok('data-howto-trigger attribute present');
-    if (!c.includes('jwrg-mode')) fail('jwrg-mode IN/OUT toggle markup missing');
+    if (!cAll.includes('jwrg-mode')) fail('jwrg-mode IN/OUT toggle markup missing');
     else ok('guide IN/OUT mode toggle (.jwrg-mode) present');
 
     // Robust error handling + Browse pagination (v2.15.0)
     if (!c.includes('jb-pager')) fail('Browse pager markup/CSS missing (.jb-pager)');
     else ok('Browse pagination (.jb-pager) present');
-    if (!c.includes('PAGE_SIZE')) fail('Browse PAGE_SIZE constant missing');
+    if (!cAll.includes('PAGE_SIZE')) fail('Browse PAGE_SIZE constant missing');
     else ok('Browse PAGE_SIZE windowing present');
 
     // Pre-merge impact preview (v2.16.0)
-    if (!c.includes('window.__jwImpactPreview')) fail('window.__jwImpactPreview module missing');
+    if (!cAll.includes('window.__jwImpactPreview')) fail('window.__jwImpactPreview module missing');
     else ok('pre-merge impact preview (__jwImpactPreview) present');
     if (!c.includes('jip-card')) fail('impact preview markup/CSS missing (.jip-card)');
     else ok('impact preview modal (.jip-card) present');
 
     // Rich-text note editing (v2.17.0)
-    if (!c.includes('sanitizeNoteHtml')) fail('sanitizeNoteHtml allow-list sanitizer missing');
+    if (!cAll.includes('sanitizeNoteHtml')) fail('sanitizeNoteHtml allow-list sanitizer missing');
     else ok('sanitizeNoteHtml sanitizer present');
-    if (!c.includes('buildRteEditor')) fail('buildRteEditor (WYSIWYG) missing');
+    if (!cAll.includes('buildRteEditor')) fail('buildRteEditor (WYSIWYG) missing');
     else ok('rich-text editor (buildRteEditor) present');
     if (!c.includes('jb-edit-rte')) fail('rich-text editor markup/CSS missing (.jb-edit-rte)');
     else ok('rich-text editor (.jb-edit-rte) present');
@@ -471,7 +475,7 @@ for (const path of FILES) {
     else ok('lazy boot loader script block present');
     if (!c.includes("rel = 'prefetch'") && !c.includes('rel=\'prefetch\'')) fail('prefetch link logic missing');
     else ok('prefetch logic present (hover / idle)');
-    if (!c.includes('jw-demo-loading')) fail('demo loading state CSS class missing');
+    if (!cAll.includes('jw-demo-loading')) fail('demo loading state CSS class missing');
     else ok('jw-demo-loading state class referenced');
 
     // v2.10.0: main app bundle is now external (beta only). Verify:
@@ -498,9 +502,25 @@ for (const path of FILES) {
     else ok('boot loader has loadAppBundle()');
     if (!c.includes("'js/app.js'") && !c.includes('"js/app.js"')) fail('boot loader does not reference js/app.js');
     else ok('boot loader references js/app.js');
-    if (!c.includes("appLink.href = 'js/app.js'") && !c.includes('appLink.href = "js/app.js"')) {
+    if (!c.includes("'js/app.js'") || !c.includes("appLink.rel = 'prefetch'")) {
       fail('js/app.js not in the hover/idle prefetch list');
     } else { ok('js/app.js is in the prefetch list'); }
+
+    // v3.8.0: the Browse module is external and lazy too.
+    if (/<!-- ── Note Explorer \(Browse\) ─[\s\S]*?<script>[\s\S]*?<\/script>\s*<!-- ── End Note Explorer/.test(c)) {
+      fail('Browse module still inline in HTML (extraction did not happen)');
+    } else { ok('Browse module NOT inline in beta/index.html (extracted)'); }
+    if (!fs.existsSync(REPO + '/beta/js/browse.js')) fail('beta/js/browse.js does not exist');
+    else {
+      const b = fs.readFileSync(REPO + '/beta/js/browse.js', 'utf8');
+      if (b.includes('window.__bootBrowse = function()')) ok('beta/js/browse.js exists and defines __bootBrowse');
+      else fail('beta/js/browse.js missing the __bootBrowse wrapper');
+    }
+    if (!c.includes('function loadBrowseBundle()')) fail('boot loader missing loadBrowseBundle()');
+    else ok('boot loader has loadBrowseBundle()');
+    if (/<script[^>]*src=["']js\/browse\.js["']/.test(c)) {
+      fail('js/browse.js eagerly loaded via <script src>');
+    } else { ok('js/browse.js NOT eagerly loaded'); }
     if (/<script[^>]*src=["']js\/app\.js["']/.test(c.slice(0, c.indexOf('</head>')))) {
       fail('js/app.js eagerly loaded via <script src> in <head>');
     } else { ok('js/app.js NOT eagerly loaded in <head>'); }
@@ -535,23 +555,23 @@ for (const path of FILES) {
     // 13) v2.9.0 post-merge celebration + Restore Guide
     if (!c.includes('Post-merge celebration')) fail('post-merge celebration script block missing');
     else ok('post-merge celebration script block present');
-    if (!c.includes('jw-celebrate-overlay')) fail('celebration overlay id missing');
+    if (!cAll.includes('jw-celebrate-overlay')) fail('celebration overlay id missing');
     else ok('celebration overlay referenced (#jw-celebrate-overlay)');
-    if (!c.includes('jw-restore-overlay')) fail('restore guide overlay id missing');
+    if (!cAll.includes('jw-restore-overlay')) fail('restore guide overlay id missing');
     else ok('restore guide overlay referenced (#jw-restore-overlay)');
     // Stats query path uses sql.js for the merged db
-    if (!c.includes('SELECT COUNT(*) FROM Note')) fail('celebration not querying merged db');
+    if (!cAll.includes('SELECT COUNT(*) FROM Note')) fail('celebration not querying merged db');
     else ok('celebration queries merged db via sql.js');
     // Translations: all 12 langs must have the celebration keys
     for (const lang of FILE_LANGS) {
       const re = new RegExp(`${lang}:\\s*\\{[^}]*cele_title:`);
-      if (!re.test(c)) fail(`celebration i18n missing for ${lang}`);
+      if (!re.test(cAll)) fail(`celebration i18n missing for ${lang}`);
     }
     ok('celebration i18n present for all 12 languages');
     // Restore guide steps for each platform
     for (const platform of ['ios', 'android', 'other']) {
       const re = new RegExp(`${platform}:\\s*\\[`);
-      if (!re.test(c)) fail(`restore guide steps missing for platform: ${platform}`);
+      if (!re.test(cAll)) fail(`restore guide steps missing for platform: ${platform}`);
     }
     ok('restore guide steps defined for ios / android / other');
     if (!css.includes('#jw-celebrate-overlay')) fail('beta/styles.css missing #jw-celebrate-overlay rule');
@@ -560,20 +580,20 @@ for (const path of FILES) {
     else ok('beta/styles.css defines #jw-restore-overlay');
 
     // 14) v2.9.1: auto-download + manual download button + donate link
-    if (!c.includes('data-jwc-download')) fail('celebration missing Download button (data-jwc-download)');
+    if (!cAll.includes('data-jwc-download')) fail('celebration missing Download button (data-jwc-download)');
     else ok('celebration has Download button');
-    if (!c.includes('triggerDownload')) fail('celebration missing triggerDownload function (auto-download path)');
+    if (!cAll.includes('triggerDownload')) fail('celebration missing triggerDownload function (auto-download path)');
     else ok('celebration auto-download path (triggerDownload) present');
-    if (!c.includes('autoDownloadedFor')) fail('celebration missing auto-download dedup guard');
+    if (!cAll.includes('autoDownloadedFor')) fail('celebration missing auto-download dedup guard');
     else ok('celebration auto-download one-shot guard present');
-    if (!c.includes('paypal.com/paypalme/jwsync')) fail('donate link URL missing');
+    if (!cAll.includes('paypal.com/paypalme/jwsync')) fail('donate link URL missing');
     else ok('donate link URL present (PayPal)');
-    if (!c.includes('data-jwc-donate')) fail('donate link hook missing');
+    if (!cAll.includes('data-jwc-donate')) fail('donate link hook missing');
     else ok('donate link has data-jwc-donate hook');
     // Donate prompt/cta strings translated for all 12 langs
     for (const lang of FILE_LANGS) {
       const re = new RegExp(`${lang}:\\s*\\{[^}]*donate_prompt:`);
-      if (!re.test(c)) fail(`donate i18n missing for ${lang}`);
+      if (!re.test(cAll)) fail(`donate i18n missing for ${lang}`);
     }
     ok('donate i18n present for all 12 languages');
     if (!css.includes('.jwc-donate')) fail('beta/styles.css missing .jwc-donate rule');
@@ -690,7 +710,7 @@ section('Cross-tool session (jw-session.js)');
 // Merge Wizard + privacy badge (beta first) — markers, hooks, i18n coverage
 {
   section('Merge Wizard + privacy badge (beta)');
-  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const beta = withModules(REPO + '/beta/index.html');
   const blockCount = (beta.match(/<!-- ── Merge Wizard \+ Privacy Badge ─/g) || []).length;
   if (blockCount === 1) ok('Merge Wizard block present exactly once');
   else fail('Merge Wizard block count = ' + blockCount);
@@ -969,7 +989,7 @@ section('Cross-tool session (jw-session.js)');
 // Merge celebration — Share card (Web Share + branded image, 12 langs)
 {
   section('Merge celebration Share card');
-  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const beta = withModules(REPO + '/beta/index.html');
   if (beta.includes('data-jwc-share')) ok('Share button present in celebration actions');
   else fail('Share button missing from celebration');
   if (beta.includes('function buildMergeCard') && beta.includes('toBlob'))
@@ -1015,7 +1035,7 @@ section('Cross-tool session (jw-session.js)');
 // Safe Restore confidence layer (celebration + restore guide, 12 langs)
 {
   section('Safe Restore confidence layer');
-  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const beta = withModules(REPO + '/beta/index.html');
   if (beta.includes('function buildSafePanel')) ok('Safe Restore panel builder present');
   else fail('buildSafePanel missing');
   // used in BOTH the celebration and the restore guide (def + 2 call sites)
@@ -1067,7 +1087,7 @@ section('Cross-tool session (jw-session.js)');
 // Backup Doctor (v2.63.0)
 {
   section('Backup Doctor');
-  const beta = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const beta = withModules(REPO + '/beta/index.html');
   if (beta.includes('── Backup Doctor (v') && beta.includes('── End Backup Doctor'))
     ok('Backup Doctor block present');
   else fail('Backup Doctor block missing');

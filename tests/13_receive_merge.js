@@ -4,6 +4,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { inlineModules } = require('./helpers/page-source');
 const JSZip = require('jszip');
 const initSqlJs = require('sql.js');
 
@@ -32,7 +33,8 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
   ok(`built .jwlibrary (${jwlib.byteLength} bytes, 1 existing note)`);
 
   section('Load the Receive module in JSDOM');
-  const html = fs.readFileSync(path.join(__dirname, '../beta/index.html'), 'utf8');
+  const PAGE = path.join(__dirname, '../beta/index.html');
+  const html = inlineModules(fs.readFileSync(PAGE, 'utf8'), PAGE);
   const m = html.match(/<!-- ── Receive shared notes in merge \(v[\d.]+\)[\s\S]*?<!-- ── End Receive shared notes in merge ─[─]*\s*-->/);
   if (!m) { fail('Receive module block not found'); console.log('\nFAIL'); process.exit(1); }
   const dom = new JSDOM(`<!DOCTYPE html><html><body>${m[0]}</body></html>`, { url: 'https://jwsync.org/beta/', runScripts: 'dangerously', pretendToBeVisual: true });

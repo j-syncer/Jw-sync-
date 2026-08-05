@@ -11,6 +11,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { inlineModules, withModules } = require('./helpers/page-source');
 const JSZip = require('jszip');
 const initSqlJs = require('sql.js');
 
@@ -94,7 +95,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   const EXPECTED = { dup_notes: 1, empty_notes: 1, dup_marks: 1, orph_br: 1, orph_tm: 1, unused_tags: 1, unused_loc: 1 };
 
   section('Boot the Doctor module in JSDOM');
-  const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+  const html = inlineModules(fs.readFileSync(REPO + '/beta/index.html', 'utf8'), REPO + '/beta/index.html');
   const m = html.match(/<!-- ── Backup Doctor \(v[\d.]+\) ─[\s\S]*?<!-- ── End Backup Doctor ─[─]*\s*-->/);
   if (!m) { fail('Backup Doctor block not found in beta/index.html'); process.exit(1); }
   const pageHtml = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${m[0]}</body></html>`;
@@ -270,7 +271,7 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
     else fail('d.doctor passthrough missing');
     if (appSrc.includes('window.__jwDoctorCbLabel')) ok('checkbox label comes from the localised Doctor strings');
     else fail('localised label hook missing');
-    const full = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+    const full = withModules(REPO + '/beta/index.html');
     if (!full.includes('__jwDoctorSuppressAutoDl') && !full.includes('__jwDoctorArmAfterMerge'))
       ok('superseded watcher/suppression machinery fully removed');
     else fail('old watcher/suppression code still present');

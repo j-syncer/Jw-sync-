@@ -37,6 +37,16 @@ console.log('== Production/beta pairs must be identical ==');
 
 const IDENTICAL_PAIRS = [
   ['js/app.js', 'beta/js/app.js'],
+  // v3.8.0: feature modules lifted out of index.html.
+  ['js/browse.js', 'beta/js/browse.js'],
+  ['js/demo.js', 'beta/js/demo.js'],
+  ['js/conflict-review.js', 'beta/js/conflict-review.js'],
+  ['js/impact-preview.js', 'beta/js/impact-preview.js'],
+  ['js/post-merge.js', 'beta/js/post-merge.js'],
+  ['js/sync-hub.js', 'beta/js/sync-hub.js'],
+  ['js/receive.js', 'beta/js/receive.js'],
+  ['js/wizard.js', 'beta/js/wizard.js'],
+  ['js/doctor.js', 'beta/js/doctor.js'],
   ['js/forum.js', 'beta/js/forum.js'],
   ['js/jw-session.js', 'beta/js/jw-session.js'],
   ['js/merge-worker.js', 'beta/js/merge-worker.js'],

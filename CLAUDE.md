@@ -78,10 +78,43 @@ If you add a new user-facing feature, extend the relevant suite to cover it.
 
 ## Codebase Overview
 
-- **Single-file React SPA** — all JS is minified and embedded directly in the HTML files
-- **No build system** — edit the HTML files directly with Python string replacements
-- Files are ~440KB+; use Python `str.replace()` for all edits, never the Edit tool
+- **React SPA, no build system** — edit the HTML and `js/*.js` files directly with
+  Python string replacements. Files are large; use Python `str.replace()` for all
+  edits, never the Edit tool.
 - `styles.css` / `beta/styles.css` exist but the HTML files also have embedded `<style>` blocks
+
+### ⚠️ Where the JavaScript lives (changed in v3.8.0)
+
+`beta/index.html` used to carry ~550 KB of inline `<script>`. That inline weight
+was the cause of a 4.7 s First Contentful Paint: the bytes rode in the HTML
+document at the browser's highest priority and starved the render-blocking CSS.
+Nine modules now live in `js/` instead. **Do not move feature code back inline.**
+
+| File | Loaded | Entry point |
+|------|--------|-------------|
+| `js/app.js` | lazily, by `bootApp()` | `window.__bootApp()` |
+| `js/browse.js` | lazily, by `bootBrowse()` | `window.__bootBrowse()` → `__openJwBrowse` |
+| `js/demo.js` | `<script defer>` | `window.__jwOpenDemo` |
+| `js/conflict-review.js` | `<script defer>` | `window.__jwConflictReview` |
+| `js/impact-preview.js` | `<script defer>` | `window.__jwImpactPreview` |
+| `js/post-merge.js` | `<script defer>` | `window.__jwOpenGuide` |
+| `js/sync-hub.js` | `<script defer>` | `window.__jwOpenSyncHub` |
+| `js/receive.js` | `<script defer>` | `window.__jwReceive*` |
+| `js/wizard.js` | `<script defer>` | `window.__jwOpenWizard` |
+| `js/doctor.js` | `<script defer>` | `window.__openJwDoctor` |
+
+The HTML keeps each module's `<!-- ── Name ── -->` marker comments and its
+`<style>` block — several suites still locate features by those markers.
+
+When a test needs to search "everything this page ships", use the helpers rather
+than reading the HTML directly:
+
+- `tests/helpers/page-source.js` — `withModules(page)` for feature-presence
+  checks, `inlineModules(html, page)` to give JSDOM the page a browser sees
+- `tests/helpers/browse-source.js` — `browseJs` / `browseCss` / `browseBlock`
+
+Structural assertions ("must NOT be inline", script-tag shape) must keep reading
+the page itself, or they will pass against the module file.
 - `loadPrefs()` / `savePrefs({key:val})` — localStorage persistence via key `jwsync_prefs_v1`
 - Language preference stored separately via key `jwsync_lang`
 

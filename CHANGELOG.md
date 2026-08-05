@@ -4,7 +4,7 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
-## [3.8.0] — 2026-08-04
+## [3.9.0] — 2026-08-05
 
 ### Added: all 37 guides in Korean
 
@@ -16,6 +16,56 @@ The complete guide library is now available in Korean at
   description and structured data, cross-linked to its English, Spanish,
   Portuguese, French, German, Italian, Russian, Japanese and Arabic twins.
 - English guide URLs are unchanged.
+
+---
+
+## [3.8.0] — 2026-08-05
+
+### Changed: the landing page loads about three times less
+
+PageSpeed Insights was reporting First Contentful Paint and Largest
+Contentful Paint at 4.7 s on mobile. Total Blocking Time was fine (20 ms) and
+layout shift was fine (0.006), so nothing was slow to *run* — the page was
+simply slow to *arrive*.
+
+`index.html` was 719 KB, and 552 KB of that was inline `<script>`: feature
+modules that are not on screen at first paint. Because they were inline, those
+bytes rode in the HTML document at the browser's highest priority, starving
+the render-blocking stylesheets of bandwidth on a slow connection. Nothing
+could paint until the CSS finally squeezed through.
+
+Nine modules moved out of the page into `js/`, with no change to what they do:
+
+| Module | Was inline | Now |
+|---|---|---|
+| `js/browse.js` (Study Explorer) | 185 KB | fetched only when you open the Explorer |
+| `js/post-merge.js` (celebration + restore guide) | 77 KB | deferred |
+| `js/doctor.js` (Library Doctor) | 53 KB | deferred |
+| `js/receive.js` (adopt shared notes) | 36 KB | deferred |
+| `js/conflict-review.js` | 30 KB | deferred |
+| `js/sync-hub.js` (Saved Devices) | 25 KB | deferred |
+| `js/wizard.js` ("How it works") | 23 KB | deferred |
+| `js/demo.js` ("Try Demo") | 14 KB | deferred |
+| `js/impact-preview.js` | 10 KB | deferred |
+
+**The HTML document went from 719 KB to 232 KB — 214 KB to 64 KB over the
+wire.** The modules are also cached on their own now, so a page update no
+longer forces a re-download of all of them.
+
+Three smaller blockers on the path to first paint went away too:
+
+- The Google Fonts stylesheet no longer blocks rendering. It was already
+  `display=optional`, meaning the fallback font is used whenever Inter loses
+  the race, so blocking on it bought nothing.
+- `rtl.css` now loads only for right-to-left languages instead of for all
+  thirteen. Arabic still gets it inside `<head>` before first paint, so there
+  is no flash of unstyled direction.
+- `js/jw-session.js` is deferred. It sat between the parser and the page
+  headline, so the parser stopped for a full network round trip before it
+  could even discover the text you came to read.
+
+No feature changed. Every module keeps its existing entry point and runs in
+the same order it always did.
 
 ---
 

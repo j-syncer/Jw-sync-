@@ -13,6 +13,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { inlineModules, withModules } = require('./helpers/page-source');
 
 const REPO = path.join(__dirname, '..');
 const HTML_PATH = REPO + '/beta/index.html';
@@ -23,7 +24,9 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
 function readHtml() {
-  return fs.readFileSync(HTML_PATH, 'utf8')
+  // v3.8.0: feature modules are external; JSDOM won't fetch them, so inline
+  // them back to exercise the page a browser actually gets.
+  return inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH)
     .replace(/<script async src="https:\/\/www\.googletagmanager\.com[\s\S]*?<\/script>/, '')
     .replace(/<script>\s*window\.dataLayer[\s\S]*?gtag\('config'[^)]*\);\s*<\/script>/, '')
     .replace(/<script src="js\/forum\.js"><\/script>/, '')
@@ -467,7 +470,7 @@ async function waitForOverlay(doc, id, timeoutMs) {
     // Source contract: goToHighlights must publish the merged buffer to the
     // shared cross-tool session (which highlights.html prefers on startup),
     // falling back to the legacy one-shot inbox only when JwSession is absent.
-    const html = fs.readFileSync(HTML_PATH, 'utf8');
+    const html = withModules(HTML_PATH);
     const m = html.match(/function goToHighlights\(\) \{[\s\S]*?\n  \}/);
     if (!m) fail('goToHighlights not found');
     else {

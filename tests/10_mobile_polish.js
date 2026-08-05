@@ -100,9 +100,8 @@ function extractOffline() {
     const zip = new JSZip(); zip.file('userData.db', dbBytes);
     const jwlibBytes = await zip.generateAsync({ type: 'nodebuffer' });
 
-    const html = fs.readFileSync(HTML_PATH, 'utf8');
-    const mm = html.match(/<!-- ── Note Explorer \(Browse\) ─[\s\S]*?<!-- ── End Note Explorer ─[─]*\s*-->/);
-    const page = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${mm[0]}</body></html>`;
+    const mm = require('./helpers/browse-source').browseBlock(HTML_PATH);
+    const page = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>${mm}</body></html>`;
     const dom = new JSDOM(page, { url: 'https://jwsync.org/beta/', runScripts: 'dangerously', pretendToBeVisual: true });
     const win = dom.window, doc = win.document;
     win.JSZip = JSZip;
