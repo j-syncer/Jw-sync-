@@ -75,6 +75,16 @@ GUIDES_FR["merge-jw-library-backups"] = {
          "La fusion ne modifie jamais vos fichiers d'origine — elle produit une sauvegarde "
          "toute neuve, vos originaux restent donc intacts en filet de sécurité. Et comme tout "
          "s'exécute côté navigateur, aucune donnée ne quitte votre appareil."),
+        ("Ce que contient réellement un fichier .jwlibrary",
+         "Une sauvegarde .jwlibrary est une archive ZIP. Renommez une copie en .zip et ouvrez-la : vous y trouverez userData.db, une base de données SQLite contenant toutes les notes, les surlignages, les signets et les étiquettes que vous avez créés, ainsi qu'un petit manifest.json qui décrit la sauvegarde. Vos notes sont dans la table Note, les surlignages dans UserMark et BlockRange, les signets dans Bookmark, les étiquettes dans Tag et TagMap. Comprendre que la sauvegarde est une base de données complète, et non un ensemble de fichiers séparés, explique tout le reste de cette page : c'est pourquoi une restauration est tout ou rien, et pourquoi deux sauvegardes peuvent être combinées."),
+        ("Pourquoi la restauration de JW Library ne peut pas fusionner",
+         "Lors d'une restauration, JW Library ne lit pas votre sauvegarde pour ajouter ce qui manque à ce qui est déjà sur l'appareil : il remplace la base de données de l'appareil par celle du fichier. C'est un choix délibéré et sûr, car il garantit que l'appareil se retrouve dans un état connu, mais cela signifie que restaurer la sauvegarde de la tablette sur le téléphone efface tout ce que le téléphone avait et que la tablette n'avait pas. Aucun réglage ne change cela, et c'est précisément la lacune que comble une fusion : elle produit un fichier unique contenant déjà le travail des deux appareils, si bien que l'appareil sur lequel vous le restaurez se retrouve complet."),
+        ("Comment les doublons sont détectés",
+         "Chaque note, surlignage et signet porte un GUID, un identifiant unique attribué à la création et conservé dans toutes les sauvegardes suivantes. Quand le même élément apparaît dans deux sauvegardes, les deux exemplaires portent le même GUID : il est reconnu comme un seul élément et conservé une fois. C'est pourquoi fusionner deux fois les mêmes fichiers ne double rien, et pourquoi vous pouvez refusionner chaque semaine sans risque. Lorsque les GUID correspondent mais que le texte diffère — la même note modifiée sur les deux appareils — la résolution automatique est impossible : l'élément apparaît dans le Comparateur de conflits avec une comparaison mot à mot pour que vous choisissiez."),
+        ("Ce qui ne se trouve pas dans la sauvegarde",
+         "Une sauvegarde ne contient que vos données d'étude personnelle. Les publications téléchargées, les traductions de la Bible, les vidéos et l'audio n'y figurent pas, et c'est pourquoi les fichiers de sauvegarde sont petits : quelques mégaoctets même après des années d'étude. Après une restauration sur un nouvel appareil, il faudra peut-être retélécharger les publications que vous lisez régulièrement. Rien de ce que vous avez écrit n'en pâtit : les notes sont ancrées aux publications par référence, elles se rattachent donc dès que la publication est présente."),
+        ("Si la fusion indique 0 note ajoutée",
+         "C'est presque toujours exact, et non un défaut. Cela signifie que toutes les notes du second fichier existaient déjà dans le premier — fréquent si vous avez fusionné récemment, ou si un appareil est simplement en retard sur l'autre. Consultez l'aperçu : il liste ce qu'apporte chaque fichier avant toute écriture. Si vous attendiez de nouveaux éléments et n'en voyez aucun, vérifiez que vous avez sauvegardé l'appareil après la séance d'étude que vous cherchez, car une sauvegarde ne contient que ce qui existait au moment où elle a été créée."),
     ],
     "faq": [
         ("Puis-je fusionner plus de deux sauvegardes ?",
@@ -87,6 +97,14 @@ GUIDES_FR["merge-jw-library-backups"] = {
         ("Est-ce que ça marche entre Android et iPhone ?",
          "Oui. Le format .jwlibrary est identique sur Android, iOS, iPadOS et Windows : les "
          "sauvegardes de plateformes différentes fusionnent sans aucune conversion."),
+        ("Dois-je fusionner dans un ordre précis ?",
+         "Non. La fusion ne dépend pas de l'ordre : le même ensemble de fichiers donne le même résultat quel que soit celui que vous chargez en premier. L'ordre ne change que le fichier pris comme base dans le résumé de l'aperçu."),
+        ("Qu'advient-il des étiquettes présentes sur un seul appareil ?",
+         "Elles sont conservées intactes, ainsi que les liens entre les étiquettes et les notes qu'elles marquent. Si les deux appareils ont une étiquette portant le même nom, elle est traitée comme une seule et reçoit les notes des deux."),
+        ("Quelle taille fait le fichier fusionné ?",
+         "À peu près la somme des originaux moins les doublons, soit généralement quelques mégaoctets. Les sauvegardes ne contiennent aucun média de publication, donc même une bibliothèque très annotée tient dans un courriel."),
+        ("Puis-je annuler une restauration ?",
+         "Pas depuis JW Library, et c'est pourquoi conserver vos sauvegardes d'origine compte. La fusion ne modifie jamais les fichiers que vous chargez : vos sauvegardes antérieures restent exactement telles quelles et peuvent être restaurées si vous voulez revenir en arrière."),
     ],
 }
 
@@ -97,6 +115,7 @@ GUIDES_FR["sync-jw-library-multiple-devices"] = {
                    "routine simple et privée pour garder notes, surlignages et signets "
                    "identiques sur votre téléphone, votre tablette et votre ordinateur.",
     "intro": [
+        "La plupart de ceux qui étudient sur deux appareils découvrent le problème de la même façon : les notes écrites sur la tablette ne sont pas sur le téléphone, et restaurer la sauvegarde de l'un sur l'autre effacerait ce que ce dernier possédait. JW Library ne propose aucune synchronisation, et sa restauration est délibérément tout ou rien : garder les appareils alignés demande une routine, pas un réglage.",
         "JW Library ne synchronise pas les données d'étude personnelle entre appareils — il "
         "n'existe pas de compte qui porte vos notes du téléphone à la tablette. Le mécanisme "
         "officiel, c'est Sauvegarde et restauration, et une restauration remplace purement et "
@@ -134,6 +153,20 @@ GUIDES_FR["sync-jw-library-multiple-devices"] = {
          "une fois par semaine est confortable. Une tablette qui ne sort que pour les "
          "réunions : une fois par mois suffit largement. Attendre plus longtemps signifie "
          "seulement que la fusion aura davantage à réunir — rien ne se perd entre deux tours."),
+        ("Pourquoi il n'y a pas de vraie synchronisation",
+         "JW Library n'a aucun compte qui transporte les données d'étude personnelle d'un appareil à l'autre. Les notes, les surlignages et les signets vivent dans une base de données à l'intérieur de chaque appareil et y restent. Le seul mécanisme officiel pour les déplacer est Sauvegarde et restauration, et une restauration remplace les données de l'appareil cible au lieu de les combiner. Deux appareils utilisés séparément divergent donc définitivement, sauf si quelque chose les fusionne — ce qui est précisément l'objet de la routine ci-dessous."),
+        ("Conserver un fichier maître",
+         "La routine fonctionne mieux si vous traitez un fichier fusionné comme le maître courant. À chaque cycle, sauvegardez tous les appareils, fusionnez ces sauvegardes et restaurez le résultat partout. Le fichier fusionné devient le maître du cycle suivant. Conserver les maîtres datés dans le nuage vous donne à la fois un mécanisme de synchronisation et une archive : si vous supprimez quelque chose par erreur, un maître antérieur le contient encore."),
+        ("Ce qui arrive si vous laissez un appareil de côté un moment",
+         "Rien n'est perdu. Un appareil resté hors de plusieurs cycles porte simplement des données plus anciennes ; quand vous finissez par l'inclure, ses notes se fusionnent avec le reste et les éléments répétés sont appariés par GUID au lieu d'être dupliqués. La seule situation qui demande une décision est la même note modifiée sur deux appareils depuis la dernière fusion, et elle apparaît dans le Comparateur de conflits avec les deux versions côte à côte."),
+        ("À quelle fréquence est-ce suffisant",
+         "Ajustez-la à la quantité de travail que vous accepteriez de refaire. Hebdomadaire convient si vous étudiez sur deux appareils presque tous les jours ; mensuel suffit largement si l'un sert occasionnellement. L'essentiel est de le faire avant toute opération irréversible — changement de téléphone, réinitialisation, réparation — car c'est là qu'une divergence devient une perte."),
+        ("Téléphone, tablette et application Windows ensemble",
+         "La routine se moque du nombre d'appareils et de leur système. Sauvegardez chacun, fusionnez-les tous en une passe, restaurez le fichier fusionné partout. Un ordinateur Windows servant à la préparation et un téléphone utilisé aux réunions se combinent exactement comme deux téléphones, car toutes les plateformes écrivent le même format de sauvegarde."),
+        ("Réduire les conflits avant qu'ils n'apparaissent",
+         "Les conflits ne surviennent que lorsque la même note est modifiée sur deux appareils entre deux fusions. En pratique c'est rare, et cela le devient encore plus si vous écrivez sur un seul appareil à la fois : en lisant n'importe où, mais en saisissant là où vous saisissez d'habitude. Fusionner plus souvent réduit aussi la fenêtre pendant laquelle une divergence peut se produire, ce qui vaut mieux que d'essayer de se rappeler quel appareil détient la version la plus récente."),
+        ("Ce que la routine rapporte",
+         "L'intérêt de garder les appareils fusionnés n'est pas la propreté : c'est que chaque appareil devient une sauvegarde complète de votre bibliothèque d'étude. Perdez ou cassez l'un d'eux et les autres contiennent encore tout, ce qui fait passer le pire scénario d'années de notes perdues à un simple désagrément. C'est une position plus solide que celle offerte par n'importe quelle habitude de sauvegarde sur un seul appareil."),
     ],
     "faq": [
         ("JW Sync tourne-t-il en arrière-plan ?",
@@ -143,6 +176,16 @@ GUIDES_FR["sync-jw-library-multiple-devices"] = {
         ("Puis-je synchroniser trois appareils ou plus ?",
          "Oui. Sauvegardez chacun, chargez tous les fichiers, fusionnez une fois, restaurez "
          "le fichier fusionné partout."),
+        ("Et si j'ai modifié la même note sur deux appareils ?",
+         "Les deux versions sont conservées jusqu'à votre choix. Le Comparateur de conflits les affiche côte à côte avec une comparaison mot à mot, ou vous pouvez le laisser suggérer la version la plus complète."),
+        ("L'ordre de restauration a-t-il de l'importance ?",
+         "Non. Une fois le fichier fusionné créé, le restaurer sur chaque appareil les met tous dans le même état complet, dans l'ordre qui vous arrange."),
+        ("Puis-je synchroniser trois appareils ou plus ?",
+         "Oui. Sauvegardez chacun et chargez-les tous dans la même fusion : aucune limite n'est liée au nombre d'appareils."),
+        ("Est-ce automatisable ?",
+         "Pas entièrement, car JW Library n'a pas d'API de synchronisation et l'étape de restauration se déroule dans l'application. La routine manuelle prend environ deux minutes une fois prise en main."),
+        ("Dois-je fusionner si je ne fais que lire sur le second appareil ?",
+         "Si vous n'y annotez jamais, il vous suffit d'y restaurer de temps en temps pour qu'il porte vos notes actuelles."),
     ],
 }
 
@@ -154,6 +197,7 @@ GUIDES_FR["transfer-jw-library-notes-new-phone"] = {
                    ".jwlibrary — et comment fusionner si vous avez déjà pris des notes sur le "
                    "nouvel appareil.",
     "intro": [
+        "Changer de téléphone est le moment où l'on perd le plus souvent des années de notes JW Library — non parce que le transfert est difficile, mais parce qu'il doit être fait volontairement avant que l'ancien appareil ne soit effacé. Les données d'étude personnelle ne suivent pas de façon fiable lors d'un transfert classique entre téléphones, et JW Library n'en conserve aucune copie dans un compte.",
         "Les outils de transfert de téléphone déplacent vos applications et vos photos, mais "
         "ils ne transfèrent pas de façon fiable les données d'étude personnelle de JW "
         "Library. Le moyen sûr d'emporter vos notes, surlignages, signets et étiquettes vers "
@@ -185,6 +229,20 @@ GUIDES_FR["transfer-jw-library-notes-new-phone"] = {
          "Si le fichier de sauvegarde arrive sur un iPhone renommé en .zip, renommez-le en "
          ".jwlibrary avant de restaurer — le contenu est intact ; seule l'extension a changé "
          "en route."),
+        ("À faire avant d'effacer ou de rendre l'ancien téléphone",
+         "La sauvegarde doit être créée pendant que l'ancien téléphone fonctionne encore et que JW Library y est toujours installé. Une fois l'appareil réinitialisé, repris ou transmis, les notes partent avec lui : JW Library ne conserve aucune copie infonuagique des données d'étude personnelle, et une sauvegarde du téléphone comme Google One ou une sauvegarde d'appareil iCloud restaure souvent un instantané plus ancien des données de l'application, voire aucun. Créez d'abord le fichier .jwlibrary, mettez-le en lieu sûr et vérifiez que vous le voyez avant d'effacer quoi que ce soit."),
+        ("Récupérer le fichier depuis l'ancien téléphone",
+         "Sous Android, le fichier est écrit dans le dossier que vous choisissez — généralement Téléchargements ou Documents — et vous pouvez le déplacer avec n'importe quel gestionnaire de fichiers, vous l'envoyer par courriel ou le déposer dans le nuage. Sur iPhone, la feuille de partage apparaît dès la création : enregistrez-le dans Fichiers, envoyez-le par AirDrop vers le nouveau téléphone ou expédiez-le-vous. La méthode n'a pas d'importance et ne peut pas corrompre le fichier : un .jwlibrary est une archive unique qui arrive intacte ou n'arrive pas."),
+        ("Pourquoi une application de transfert entre téléphones ne suffit pas",
+         "Des outils comme Smart Switch, Transfert vers iOS ou une restauration iCloud copient les applications et les données système, mais les bases de données privées des applications sont souvent ignorées, restaurées partiellement ou restaurées depuis un point antérieur. On découvre régulièrement le manque des semaines plus tard, quand l'ancien téléphone n'est plus là. Traitez le fichier .jwlibrary comme la copie de référence et le transfert du téléphone comme un confort : s'il apporte vos notes, restaurer votre propre sauvegarde par-dessus ne coûte rien."),
+        ("Vérifiez que le transfert a fonctionné",
+         "Après la restauration sur le nouveau téléphone, ouvrez deux ou trois publications que vous avez annotées récemment et vérifiez que les notes, les couleurs de surlignage et les signets sont là. Un contrôle plus rapide consiste à ouvrir le fichier de sauvegarde lui-même dans votre navigateur avant d'effacer l'ancien appareil : vous voyez toutes les notes, tous les surlignages et tous les signets qu'il contient, donc vous savez ce qui doit apparaître. N'effacez l'ancien téléphone qu'une fois le nouveau vérifié."),
+        ("Si vous changez aussi de tablette ou d'ordinateur",
+         "Le même fichier convient partout. Si vous configurez en même temps un nouveau téléphone et une tablette, restaurez le même fichier .jwlibrary sur les deux : ils démarrent identiques. Ils divergeront ensuite selon ce que vous étudiez sur chacun, alors autant décider maintenant si vous les garderez fusionnés régulièrement ou si vous traiterez l'un comme l'appareil principal."),
+        ("Si le nouveau téléphone contient déjà des notes",
+         "Cela arrive quand on utilise le nouvel appareil une semaine avant de s'occuper du transfert. Une restauration directe remplacerait ce travail par les données de l'ancien téléphone. Sauvegardez d'abord le nouveau téléphone, fusionnez ce fichier avec la sauvegarde de l'ancien et restaurez le résultat : les deux ensembles de notes se retrouvent dans une seule bibliothèque au lieu que l'un écrase l'autre."),
+        ("Que faire une fois le nouveau téléphone opérationnel",
+         "Vérifiez avant de vous séparer de quoi que ce soit. Ouvrez sur le nouveau téléphone quelques publications annotées récemment et confirmez la présence des notes, des couleurs et des signets ; ensuite seulement, effacez ou rendez l'ancien appareil, dans cet ordre et jamais l'inverse. Une fois installé, placez une sauvegarde hors du téléphone, car la situation qui vous a amené sur cette page reviendra au prochain changement."),
     ],
     "faq": [
         ("Est-ce que cela transfère aussi mes publications téléchargées ?",
@@ -194,6 +252,16 @@ GUIDES_FR["transfer-jw-library-notes-new-phone"] = {
         ("Est-ce grave si les téléphones ont des versions d'Android différentes ?",
          "Non. Le format .jwlibrary est le même partout, y compris entre versions d'Android "
          "et entre Android et iPhone."),
+        ("Puis-je récupérer mes notes si l'ancien téléphone n'est plus là ?",
+         "Seulement s'il existe un fichier .jwlibrary quelque part : dans Fichiers, Téléchargements, un courriel que vous vous êtes envoyé ou le nuage. Sans lui, il n'y a rien à restaurer, car les données d'étude personnelle ne sont stockées que sur l'appareil."),
+        ("Les deux téléphones doivent-ils avoir la même version de JW Library ?",
+         "Elles n'ont pas besoin d'être identiques, mais mettez le nouveau téléphone à jour vers la version actuelle avant de restaurer. Une sauvegarde créée par une version plus récente peut utiliser un schéma de base de données qu'une application plus ancienne ne comprend pas."),
+        ("Devrai-je retélécharger mes publications ?",
+         "Généralement oui, car les médias des publications ne font pas partie de la sauvegarde. Vos notes se rattachent à chaque publication dès qu'elle est téléchargée, donc rien de ce que vous avez écrit n'est perdu entre-temps."),
+        ("Combien de temps cela prend-il en tout ?",
+         "Quelques minutes. Créer la sauvegarde prend quelques secondes, déplacer le fichier dépend de la méthode et la restauration est rapide. Le plus long est de retélécharger les publications, ce qui peut se faire en arrière-plan."),
+        ("Puis-je le faire sans Wi-Fi ?",
+         "Le transfert lui-même oui, par AirDrop ou par câble. Retélécharger les publications sur le nouvel appareil demande une connexion."),
     ],
 }
 
@@ -204,6 +272,7 @@ GUIDES_FR["jw-library-android-to-iphone"] = {
                    "Comment transférer vos notes, surlignages et signets d'une plateforme à "
                    "l'autre — et fusionner si les deux appareils ont des notes.",
     "intro": [
+        "Passer d'Android à iPhone semble être le cas difficile ; c'est le cas facile. JW Library écrit le même format de sauvegarde sur toutes les plateformes où il fonctionne, donc transporter une bibliothèque d'étude d'Android vers iOS est la même opération qu'entre deux téléphones Android : aucune conversion, aucun format d'exportation à choisir, rien de perdu au passage.",
         "Changer de plateforme, c'est le moment où l'on craint de perdre des années de notes "
         "d'étude : les applications de transfert Android vers iPhone ignorent purement et "
         "simplement les données de JW Library. La bonne nouvelle : le format de sauvegarde de "
@@ -234,6 +303,22 @@ GUIDES_FR["jw-library-android-to-iphone"] = {
          "D'iPhone à Android, d'Android à Android, pour ajouter un iPad comme deuxième "
          "appareil d'étude ou pour passer à l'application Windows : le fichier de sauvegarde "
          "est la langue commune de tous."),
+        ("Pourquoi le format est identique sur les deux plateformes",
+         "JW Library utilise le même format de sauvegarde partout où il fonctionne : Android, iOS, iPadOS et Windows. Un fichier .jwlibrary est une archive ZIP contenant une base de données SQLite aux mêmes tables et au même schéma, quel que soit l'appareil qui l'a écrite. Il n'y a pas d'étape de conversion, pas de va-et-vient d'exportation et d'importation, rien de spécifique à une plateforme dans le fichier. Une sauvegarde Android se restaure sur un iPhone exactement comme le ferait une sauvegarde iPhone."),
+        ("La seule partie qui change vraiment",
+         "Pas le fichier, seulement la façon de mettre la main dessus. Sous Android, la sauvegarde est enregistrée dans un dossier que vous choisissez et se déplace avec n'importe quel gestionnaire de fichiers. Sur iPhone, elle passe par la feuille de partage vers Fichiers, AirDrop ou ce que vous préférez. La friction rencontrée en changeant de plateforme se situe toujours à cette étape de manipulation, jamais dans la compatibilité. Courriel, nuage ou AirDrop conviennent également : l'archive arrive intacte ou pas du tout."),
+        ("Couleurs de surlignage, étiquettes et réponses d'étude",
+         "Tout survit. Les couleurs de surlignage sont enregistrées sous forme d'indice numérique — jaune, vert, bleu, rose, orange et violet — et s'affichent de la même façon sur toutes les plateformes. Les étiquettes et les liens entre étiquettes et notes suivent, tout comme les réponses saisies dans les champs des questions d'étude. Ce que vous voyez sur l'iPhone après la restauration correspond à ce que vous aviez sur l'appareil Android."),
+        ("Si iOS refuse de vous laisser choisir le fichier",
+         "Enregistrez d'abord le fichier dans l'application Fichiers, puis sélectionnez-le depuis là plutôt que depuis une pièce jointe de courriel ou l'aperçu d'une messagerie. Certaines applications remettent à iOS une copie temporaire d'aperçu au lieu du vrai fichier, et JW Library ne peut pas l'ouvrir. Si le fichier est arrivé en pièce jointe, touchez-le, choisissez Enregistrer dans Fichiers et restaurez depuis Fichiers."),
+        ("Préparez l'iPhone avant de restaurer",
+         "Installez JW Library depuis l'App Store et mettez-le à jour vers la version actuelle avant toute restauration. Une sauvegarde écrite par une version plus récente peut utiliser un schéma de base de données qu'une version antérieure ne comprend pas, et la restauration sera simplement refusée. Aucune connexion à un compte n'est nécessaire : les données d'étude personnelle sont dans le fichier que vous restaurez, pas dans un compte."),
+        ("Si vous avez déjà commencé à étudier sur l'iPhone",
+         "Sauvegardez d'abord l'iPhone. Restaurer le fichier Android par-dessus remplacerait tout ce que vous avez écrit depuis le changement. Fusionner les deux sauvegardes produit un fichier contenant les deux, que vous restaurez ensuite : l'historique Android et les nouvelles notes de l'iPhone se retrouvent dans la même bibliothèque."),
+        ("Garder les deux téléphones en service ensuite",
+         "Certains conservent l'ancien Android comme second lecteur plutôt que de le retirer. Cela fonctionne, mais les deux divergeront dès que vous annoterez sur l'un et l'autre, faute de synchronisation entre eux. Si vous comptez utiliser les deux, prévoyez de fusionner leurs sauvegardes régulièrement plutôt que de supposer qu'ils restent alignés."),
+        ("Après le changement",
+         "Laissez à l'iPhone le temps de retélécharger les publications que vous utilisez le plus, puis vérifiez quelques publications annotées pour confirmer que tout est arrivé : notes, couleurs de surlignage, signets et étiquettes. Conservez le fichier de sauvegarde Android même une fois le changement terminé : c'est un instantané daté de votre bibliothèque, et le garder ne coûte rien."),
     ],
     "faq": [
         ("Ai-je besoin d'un ordinateur ?",
@@ -242,6 +327,20 @@ GUIDES_FR["jw-library-android-to-iphone"] = {
         ("Les couleurs de mes surlignages survivent-elles au transfert ?",
          "Oui — les surlignages gardent leurs couleurs, les notes gardent leurs étiquettes et "
          "les signets gardent leur place."),
+        ("Ai-je besoin d'un ordinateur pour cela ?",
+         "Non. AirDrop, le courriel ou n'importe quelle application de stockage infonuagique déplace le fichier directement entre les deux téléphones."),
+        ("Cela fonctionne-t-il dans l'autre sens, d'iPhone vers Android ?",
+         "Oui, à l'identique. Les mêmes étapes fonctionnent dans toutes les directions, y compris depuis et vers l'application Windows."),
+        ("L'iPhone aura-t-il besoin des mêmes publications téléchargées ?",
+         "Oui, puisque les médias des publications ne font pas partie d'une sauvegarde. Les notes se rattachent à chaque publication dès son téléchargement."),
+        ("Dois-je conserver le téléphone Android ensuite ?",
+         "Non, une fois que vous avez vérifié que les notes sont présentes sur l'iPhone. Contrôlez quelques publications annotées avant d'effacer ou de rendre l'ancien appareil."),
+        ("Le transfert fonctionne-t-il pour les réponses aux questions d'étude ?",
+         "Oui. Les réponses saisies font partie des données d'étude personnelle et suivent avec le reste."),
+        ("Y a-t-il un risque de perdre des notes lors du changement ?",
+         "Pas si vous conservez la sauvegarde Android. La restauration écrit sur l'iPhone et ne modifie jamais le fichier qu'elle lit : l'original reste intact comme filet de sécurité. Gardez-le jusqu'à ce que vous ayez vérifié que l'iPhone a tout, et idéalement après aussi : c'est un instantané daté de votre bibliothèque."),
+        ("Et si le téléphone Android ne crée pas la sauvegarde ?",
+         "Vérifiez d'abord l'espace disponible, l'application ayant besoin de place pour écrire le fichier. Si c'est l'application elle-même qui échoue, la mettre à jour ou redémarrer l'appareil règle généralement le problème. Les données restent intactes pendant ce temps."),
     ],
 }
 
@@ -252,6 +351,7 @@ GUIDES_FR["backup-jw-library"] = {
                    "de surlignages et de signets d'étude JW Library — et l'erreur classique "
                    "qui prend tout le monde de court.",
     "intro": [
+        "Tout ce que vous avez marqué dans JW Library — chaque note, chaque surlignage, chaque signet et chaque étiquette — n'existe qu'à un seul endroit : l'appareil que vous tenez. Aucun compte n'en garde de copie et aucune synchronisation infonuagique automatique n'existe. Une sauvegarde est la seule chose qui sépare une bibliothèque d'étude bâtie sur des années d'un téléphone perdu, réinitialisé ou remplacé.",
         "Une bonne sauvegarde JW Library prend une demi-minute et protège des années d'étude "
         "accumulée. Presque toutes les histoires de perte de données commencent pareil : "
         "aucun fichier .jwlibrary récent n'existait quand le téléphone a été perdu, "
@@ -283,6 +383,20 @@ GUIDES_FR["backup-jw-library"] = {
          "chacune avec des notes uniques. Vous n'avez jamais à choisir entre les deux — "
          "fusionnez-les en un seul fichier complet sur jwsync.org, gratuitement et en privé, "
          "directement dans le navigateur."),
+        ("Ce que le fichier contient, et ce qu'il ne contient pas",
+         "La sauvegarde conserve vos données d'étude personnelle : notes, surlignages et leurs couleurs, signets, étiquettes et les réponses saisies dans les champs des questions d'étude. Elle ne conserve pas les publications : ni Bibles, ni périodiques, ni livres, ni vidéos, ni audio. C'est pourquoi une sauvegarde représentant des années d'étude ne pèse que quelques mégaoctets, et pourquoi restaurer sur un nouvel appareil vous laisse retélécharger des publications alors que chaque note écrite est déjà revenue à sa place."),
+        ("Combien de sauvegardes conserver",
+         "Plus d'une. Ce qui coûte leurs notes aux gens est rarement un fichier perdu : c'est une bonne sauvegarde écrasée par une mauvaise, ou une restauration effectuée sur le mauvais appareil. Comme les fichiers sont petits, il n'y a aucune raison de supprimer les anciens : conservez-les datés dans un dossier infonuagique. Une sauvegarde d'il y a six mois ne perd pas sa valeur même si vous en avez de plus récentes, car tout ce que vous avez supprimé par erreur depuis s'y trouve encore."),
+        ("Où les conserver",
+         "N'importe où, sauf uniquement sur l'appareil lui-même. Un dossier dans Drive, iCloud, Dropbox ou OneDrive couvre le cas qui compte le plus : l'appareil perdu, volé, réinitialisé ou endommagé. Vous envoyer le fichier par courriel fonctionne aussi et a l'avantage de le dater. Le fichier contient vos propres notes d'étude : traitez-le avec le soin que vous accorderiez à tout document personnel."),
+        ("Vérifier une sauvegarde avant de compter dessus",
+         "Une sauvegarde que vous n'avez jamais ouverte est une hypothèse, pas un filet de sécurité. Vous pouvez ouvrir un fichier .jwlibrary dans votre navigateur et voir exactement quelles notes, quels surlignages et quels signets il contient : une vérification de trente secondes qui transforme l'hypothèse en fait. Cela compte surtout juste avant une opération irréversible : réinitialisation d'usine, reprise, réparation ou grosse mise à jour du système."),
+        ("Les moments où il vaut la peine de sauvegarder",
+         "Tout moment où l'appareil change de mains ou d'état : mise à jour du système, réinitialisation d'usine, réparation ou changement d'écran, reprise, ou transmission de l'appareil à quelqu'un. Ajoutez-y la fin de tout ce que vous détesteriez refaire : une assemblée, un congrès, une période de préparation d'un discours. Les sauvegardes sont rapides et peu coûteuses, donc la bonne habitude consiste à les lier à des événements plutôt qu'au calendrier."),
+        ("Une sauvegarde du téléphone n'est pas une sauvegarde de JW Library",
+         "Google One, une sauvegarde d'appareil iCloud ou l'outil de transfert du fabricant travaillent au niveau de l'appareil et traitent les données privées des applications de façon inégale. Il arrive régulièrement qu'une restauration complète du téléphone ramène les applications et les réglages mais pas les notes d'étude, ou une version datant de plusieurs semaines. Le fichier .jwlibrary est la seule copie dont vous contrôlez et pouvez vérifier le contenu : traitez la sauvegarde du téléphone comme un bonus, pas comme le plan."),
+        ("En faire une habitude qui tient",
+         "La routine qui tient vraiment est celle rattachée à quelque chose que vous faites déjà : sauvegarder en terminant la préparation de la semaine, ou le jour où vous réglez vos autres tâches périodiques. Enregistrez toujours dans le même dossier pour que les fichiers s'accumulent au même endroit, et laissez-y les anciens. Un dossier de sauvegardes datées remontant à des années est la forme la plus robuste que cela puisse prendre, et l'entretenir prend quelques secondes par semaine."),
     ],
     "faq": [
         ("Quelle taille fait un fichier de sauvegarde ?",
@@ -290,6 +404,16 @@ GUIDES_FR["backup-jw-library"] = {
          "d'une pièce jointe."),
         ("Créer une sauvegarde change-t-il quelque chose sur mon téléphone ?",
          "Non. Cela écrit seulement le fichier ; votre bibliothèque n'est pas touchée."),
+        ("La sauvegarde inclut-elle mes publications téléchargées ?",
+         "Non. Uniquement les données d'étude personnelle. Les publications se retéléchargent sur le nouvel appareil et vos notes s'y rattachent automatiquement."),
+        ("Puis-je ouvrir une sauvegarde pour voir ce qu'elle contient ?",
+         "Oui. Vous pouvez ouvrir un fichier .jwlibrary dans votre navigateur et parcourir toutes les notes, tous les surlignages et tous les signets qu'il contient, sans rien installer et sans que le fichier quitte votre appareil."),
+        ("Les sauvegardes expirent-elles ?",
+         "Non. Un fichier .jwlibrary reste restaurable indéfiniment. Restaurez dans une version actuelle de JW Library plutôt que dans une ancienne, l'application lisant les formats de sauvegarde antérieurs mais pas les plus récents."),
+        ("Dois-je sauvegarder avant chaque réunion ?",
+         "Ce n'est pas nécessaire. Liez les sauvegardes aux événements susceptibles de vous coûter des données — mises à jour, réparations, nouveaux appareils — plus un rythme régulier proportionné à ce que vous accepteriez de refaire."),
+        ("Vaut-il la peine de garder des sauvegardes d'il y a des années ?",
+         "Oui. Elles sont petites, et tout ce que vous avez supprimé par erreur depuis s'y trouve encore."),
     ],
 }
 
@@ -353,6 +477,7 @@ GUIDES_FR["fix-corrupted-jw-library-backup"] = {
                    "bibliothèque analyse la sauvegarde dans votre navigateur, répare les "
                    "problèmes courants et produit une copie propre qui se restaure.",
     "intro": [
+        "Une sauvegarde qui ne se restaure pas n'est pas forcément une sauvegarde qui a perdu vos notes. La plupart des fichiers décrits comme corrompus sont structurellement sains et refusés pour une raison réparable, ou abîmés pendant le transfert d'une manière qu'une nouvelle copie règle. Il vaut la peine de passer en revue les causes avant de renoncer au fichier.",
         "Il arrive que JW Library refuse un fichier de sauvegarde : la restauration échoue, "
         "renvoie une erreur, ou le fichier ne s'ouvre pas. Causes fréquentes : un "
         "téléchargement interrompu, un espace de stockage en ligne qui a abîmé le fichier, une "
@@ -389,6 +514,20 @@ GUIDES_FR["fix-corrupted-jw-library-backup"] = {
          "produire un fichier douteux — et c'est le signal qu'il faut chercher une copie plus "
          "ancienne dans vos e-mails, sur Drive ou iCloud, ce qui explique aussi pourquoi il "
          "vaut la peine de garder les vieilles sauvegardes."),
+        ("Ce que corrompu signifie généralement",
+         "En pratique, il s'agit rarement de données abîmées. Les causes courantes sont un fichier tronqué au transfert — écourté par un envoi qui a échoué ou par une messagerie qui l'a compressé — ou une archive intacte contenant des incohérences internes que l'application refuse. Comme un .jwlibrary est une archive ZIP enveloppant une base SQLite, le problème peut venir de l'une ou l'autre couche, et elles appellent des remèdes différents : un fichier tronqué ne se répare pas et doit être récupéré à nouveau ; une base incohérente, généralement si."),
+        ("Ce qu'une analyse vérifie réellement",
+         "Une analyse contrôle que l'archive s'ouvre, que userData.db est une base SQLite lisible qui passe un contrôle d'intégrité, que le schéma correspond à ce qu'attend JW Library, et que le manifeste concorde avec la base qu'il décrit — y compris l'empreinte que l'application utilise pour confirmer que le fichier n'a pas été modifié. Un écart entre le manifeste et la base est l'une des raisons les plus fréquentes de refus d'une sauvegarde techniquement saine, et il se répare directement."),
+        ("Les lignes orphelines sont généralement sans gravité",
+         "L'analyse d'une vraie sauvegarde signale souvent des lignes renvoyant à quelque chose qui n'existe plus : un surlignage pointant vers un emplacement de publication qui a bougé, par exemple. Les sauvegardes de JW Library elles-mêmes en contiennent couramment des centaines et se restaurent sans broncher. C'est une conséquence normale de la mise à jour des publications au fil du temps, non un signe de dommage, et il n'est pas nécessaire de les supprimer pour que le fichier fonctionne."),
+        ("Sauver des notes d'un fichier qui ne se restaure pas",
+         "Même quand une sauvegarde ne peut pas être réparée au point d'être acceptée par JW Library, les notes qu'elle contient restent souvent lisibles. Ouvrir le fichier dans votre navigateur permet de voir et de copier directement le texte, ce qui transforme un fichier inutilisable en matière d'étude récupérée. Si vous disposez d'une seconde sauvegarde plus ancienne qui se restaure, le contenu lisible du fichier abîmé peut lui être réuni plutôt que retapé."),
+        ("Quand la restauration échoue sans message clair",
+         "JW Library refuse souvent un fichier sans expliquer pourquoi. Les causes les plus fréquentes sont un manifeste dont l'empreinte ne correspond plus à la base qu'il décrit, un fichier tronqué au transfert, ou une sauvegarde écrite par une version de l'application plus récente que celle dans laquelle vous restaurez. La première se répare, la deuxième exige de récupérer à nouveau le fichier à la source, et la troisième se règle en mettant l'application à jour avant de restaurer."),
+        ("L'éviter la prochaine fois",
+         "L'essentiel des dommages survient en transit. Déplacez les sauvegardes comme des fichiers et non via quoi que ce soit susceptible de les recompresser, et préférez le nuage, AirDrop ou un câble aux messageries. Après le transfert, vérifiez que la taille correspond à l'original : un fichier nettement plus petit que celui envoyé a été tronqué, et aucune réparation ne ramènera des octets qui ne sont jamais arrivés."),
+        ("Si rien ne marche",
+         "Un fichier irréparable peut malgré tout être lisible, et le lire suffit souvent : le texte des notes se récupère directement même quand JW Library refuse le fichier. Combinez cela avec une sauvegarde plus ancienne qui se restaure et vous obtenez généralement l'essentiel de votre bibliothèque. Avant de juger un fichier inutilisable, ouvrez-le et voyez ce qu'il contient vraiment."),
     ],
     "faq": [
         ("Mes données sont-elles envoyées pour l'analyse ?",
@@ -397,6 +536,16 @@ GUIDES_FR["fix-corrupted-jw-library-backup"] = {
         ("Peut-il récupérer des notes supprimées dans JW Library ?",
          "Non — il répare la structure du fichier. Les notes supprimées dans l'application "
          "avant la sauvegarde ne sont pas dans le fichier, donc pas récupérables."),
+        ("Réparer le fichier fait-il perdre des notes ?",
+         "Les réparations travaillent sur une copie et traitent des problèmes de structure, pas de contenu. Votre fichier d'origine n'est jamais modifié : il reste disponible si vous voulez recommencer."),
+        ("Pourquoi ma sauvegarde s'est-elle corrompue ?",
+         "Le plus souvent le fichier a été altéré en transit : envoyé via une application qui l'a compressé ou tronqué, ou un téléversement qui n'a pas abouti. Le transférer à nouveau depuis la source règle généralement la question."),
+        ("Une analyse peut-elle récupérer des notes supprimées dans JW Library ?",
+         "Non. Une fois supprimée dans l'application et une nouvelle sauvegarde faite, la note n'est plus dans ce fichier. Une sauvegarde antérieure à la suppression la contiendra encore."),
+        ("La taille du fichier indique-t-elle s'il est tronqué ?",
+         "Souvent oui. Comparez-la à l'original si vous l'avez encore ; un écart important signifie que le transfert n'est pas allé à son terme."),
+        ("Une sauvegarde qui s'ouvre dans le navigateur se restaurera-t-elle à coup sûr ?",
+         "Ce n'est pas une garantie, mais c'est un signe fort que l'archive et la base sont saines, ce qui écarte les défaillances les plus courantes."),
     ],
 }
 
@@ -656,6 +805,7 @@ GUIDES_FR["open-jwlibrary-file"] = {
                    "contenant chaque note, surlignage, signet et étiquette. Voici ce qu'il "
                    "contient et comment l'ouvrir et le lire.",
     "intro": [
+        "Un fichier .jwlibrary paraît opaque, et il ne l'est pas. C'est une archive ZIP ordinaire autour d'une base de données SQLite ordinaire, ce qui signifie que vous pouvez lire votre propre sauvegarde — voir exactement quelles notes, quels surlignages et quels signets elle contient — sans JW Library et sans rien installer du tout.",
         "Quand vous sauvegardez JW Library, vous obtenez un fichier se terminant par "
         ".jwlibrary. C'est un paquet unique et portable qui contient tout votre étude "
         "personnelle — notes, surlignages, signets, étiquettes et listes de lecture — dans une "
@@ -688,6 +838,20 @@ GUIDES_FR["open-jwlibrary-file"] = {
          "La même page jwsync.org fonctionne dans le navigateur d'un portable ou d'un fixe — "
          "pratique pour lire des années de notes sur grand écran, ou faire un nettoyage en "
          "lot qui serait fastidieux sur un téléphone. Rien à installer."),
+        ("Ce qu'est réellement le fichier",
+         "Un fichier .jwlibrary est une archive ZIP portant une autre extension. À l'intérieur se trouvent userData.db — une base SQLite contenant vos notes, surlignages, signets et étiquettes — et manifest.json, un petit fichier décrivant la sauvegarde et comportant une empreinte de la base que JW Library utilise pour confirmer que le fichier n'a pas été modifié. Rien n'y est propriétaire ni chiffré : c'est une archive standard autour d'une base de données standard."),
+        ("L'ouvrir sans JW Library",
+         "Vous n'avez besoin ni de l'application ni d'aucun logiciel pour lire votre propre sauvegarde. Ouvrir le fichier dans votre navigateur affiche toutes les notes, tous les surlignages et tous les signets qu'il contient, avec recherche et filtres, et le fichier ne quitte jamais votre appareil : il est lu localement, non téléversé. C'est le moyen le plus rapide de confirmer qu'une sauvegarde contient bien ce que vous croyez avant une réinitialisation, une reprise ou une restauration sur un nouveau téléphone."),
+        ("Regarder à l'intérieur manuellement",
+         "Si la curiosité vous prend, copiez le fichier, renommez la copie en .zip et ouvrez-la avec n'importe quel outil d'archivage. Vous verrez userData.db et manifest.json. Ouvrir la base demande un visualiseur SQLite, et les tables portent le nom de ce qu'elles contiennent : Note, UserMark, Bookmark, Tag. Travaillez toujours sur une copie : modifier la base à la main sans mettre à jour l'empreinte du manifeste produit un fichier que JW Library refusera de restaurer."),
+        ("Modifier sans risque",
+         "Les notes peuvent être corrigées, réétiquetées, recolorées ou supprimées hors de l'application, et le résultat exporté comme un nouveau fichier .jwlibrary que vous restaurez normalement. La règle qui rend cela sûr est de conserver l'original : modifiez une copie, restaurez le fichier modifié, et si quelque chose ne correspond pas à vos attentes, l'original intact est toujours là pour revenir en arrière."),
+        ("Lire une sauvegarde sur un téléphone",
+         "Aucun ordinateur n'est nécessaire. Ouvrir le fichier dans un navigateur mobile fonctionne de la même façon, ce qui est utile quand la sauvegarde est déjà sur le téléphone et que vous voulez en vérifier le contenu avant de restaurer ou d'effacer l'appareil. Le fichier est lu localement : cela fonctionne sans autre connexion que celle du chargement de la page."),
+        ("Pourquoi l'empreinte du manifeste compte",
+         "manifest.json enregistre une empreinte de userData.db. JW Library s'en sert pour confirmer que la base n'a pas été modifiée depuis l'écriture de la sauvegarde : un fichier dont la base a été modifiée sans recalcul de l'empreinte est refusé à la restauration. C'est la raison la plus fréquente pour laquelle une sauvegarde modifiée à la main cesse de fonctionner, et pourquoi passer par un outil qui réécrit le manifeste est plus sûr que de toucher directement à la base."),
+        ("À quoi cela sert",
+         "Pouvoir lire une sauvegarde change ce qu'une sauvegarde vaut. Vous pouvez confirmer qu'un fichier contient bien ce que vous croyez avant d'effacer un téléphone, vérifier si un ancien fichier mérite d'être restauré, retrouver une note que vous savez avoir écrite sans fouiller l'application, ou récupérer du texte dans un fichier que JW Library refuse. Rien de tout cela n'exige de confier le fichier à qui que ce soit : il est lu sur votre propre appareil."),
     ],
     "faq": [
         ("Puis-je ouvrir un fichier .jwlibrary dans Excel ou le Bloc-notes ?",
@@ -697,6 +861,16 @@ GUIDES_FR["open-jwlibrary-file"] = {
         ("Est-il sûr d'ouvrir ma sauvegarde dans le navigateur ?",
          "Oui. JW Sync lit le fichier localement, dans l'onglet de votre navigateur ; rien "
          "n'est envoyé à un serveur, et votre fichier d'origine n'est jamais modifié."),
+        ("Puis-je simplement le renommer en .zip ?",
+         "Oui, sur une copie. Le renommer ne modifie pas le contenu et permet à n'importe quel outil d'archivage de vous montrer ce qu'il y a dedans."),
+        ("Ouvrir le fichier le modifie-t-il ?",
+         "Non. Lire une sauvegarde — dans le navigateur ou un outil d'archivage — la laisse identique octet pour octet. Seul un enregistrement ou une exportation produit un nouveau fichier."),
+        ("Dois-je être en ligne ?",
+         "Uniquement pour charger la page. Le fichier est lu sur votre appareil et non téléversé : vos notes ne circulent jamais sur le réseau."),
+        ("Puis-je ouvrir une sauvegarde envoyée par quelqu'un d'autre ?",
+         "Oui, le format n'est lié ni à un appareil ni à un compte. Savoir s'il faut la restaurer est une autre question, puisqu'une restauration remplace votre propre bibliothèque."),
+        ("Dois-je installer quelque chose pour regarder à l'intérieur ?",
+         "Non. Un navigateur suffit pour lire les notes ; seule l'inspection manuelle de la base demande un visualiseur SQLite."),
     ],
 }
 
@@ -755,6 +929,7 @@ GUIDES_FR["recover-jw-library-notes-lost-phone"] = {
                    "vous pouvez récupérer dépend de vos sauvegardes. Voici exactement comment "
                    "retrouver vos notes — et quoi faire la prochaine fois.",
     "intro": [
+        "Quand un téléphone est perdu, volé ou irrémédiablement endommagé, la survie de vos notes JW Library tient à une seule question : existe-t-il une sauvegarde .jwlibrary quelque part en dehors de cet appareil ? Si oui, tout ce qu'elle contient revient. Cette page explique comment en trouver une, comment la restaurer sur n'importe quel appareil de remplacement, et que faire quand la seule sauvegarde dont vous disposez est ancienne.",
         "Perdre un téléphone est déjà bien assez stressant sans craindre d'avoir perdu des "
         "années de notes d'étude avec. Pouvoir les récupérer se ramène à une seule question : "
         "existe-t-il une sauvegarde .jwlibrary quelque part en dehors de ce téléphone ?",
@@ -791,6 +966,20 @@ GUIDES_FR["recover-jw-library-notes-lost-phone"] = {
          "ailleurs que sur le téléphone (vous l'envoyer par e-mail suffit). JW Sync peut même "
          "vous le rappeler et fusionner vos appareils à intervalle régulier. Un fichier qui "
          "vit dans votre boîte de réception survit à n'importe quel téléphone."),
+        ("Où une sauvegarde peut déjà exister",
+         "Avant de conclure qu'il n'y en a aucune, vérifiez partout où un fichier a pu être enregistré : les dossiers Téléchargements et Documents de tout ordinateur auquel vous avez connecté le téléphone, les éléments envoyés de votre messagerie, les applications de messagerie par lesquelles vous avez pu l'envoyer, et chaque compte infonuagique que vous utilisez. Beaucoup ont créé une sauvegarde une fois, il y a des mois, et l'ont oubliée — et une sauvegarde vieille de plusieurs mois contient encore la grande majorité d'une bibliothèque d'étude."),
+        ("Restaurer sur un autre téléphone ou une autre plateforme",
+         "L'appareil de remplacement n'a pas besoin de correspondre à celui qui est perdu. Une sauvegarde d'un téléphone Android se restaure sur un iPhone et inversement, le format étant identique sous Android, iOS, iPadOS et Windows. Installez JW Library sur le nouvel appareil, mettez-le à jour vers la version actuelle, puis restaurez via Étude personnelle → Sauvegarde et restauration."),
+        ("Si vous n'avez qu'une sauvegarde ancienne ou partielle",
+         "Restaurez-la quand même. Récupérer l'essentiel de vos notes n'est pas un lot de consolation : c'est le résultat. Si vous trouvez plus tard une seconde sauvegarde différente, les deux peuvent être fusionnées en un fichier contenant tout des deux : restaurer la plus ancienne maintenant ne vous empêche pas d'y ajouter ensuite."),
+        ("Ce qui ne peut pas être récupéré",
+         "S'il n'existe aucune sauvegarde sous quelque forme que ce soit, les données d'étude personnelle ne peuvent pas être récupérées. Elles ne sont stockées que dans le stockage privé de l'application, sur l'appareil, et ni JW Library ni une sauvegarde infonuagique au niveau du téléphone ne les préservent de façon fiable. Cela mérite d'être dit clairement, car c'est la raison d'être de la routine présentée sur ce site."),
+        ("Vérifiez avant d'effacer l'appareil à distance",
+         "Si le téléphone est perdu plutôt que détruit et que vous envisagez un effacement à distance, cherchez d'abord les sauvegardes existantes : l'effacement est irréversible et supprime la dernière chance d'en créer une. Si l'appareil est simplement égaré et toujours joignable, créer une sauvegarde à distance est impossible, mais les données restent intactes tant qu'il n'est ni effacé ni réinitialisé."),
+        ("Faire en sorte que cela n'arrive pas deux fois",
+         "Si un téléphone perdu coûte des années d'étude, c'est que la seule copie était sur le téléphone. Une fois la restauration faite sur un appareil de remplacement, placez le jour même une sauvegarde hors de l'appareil, et répétez à un rythme que vous tiendrez réellement. Les fichiers sont assez petits pour être tous conservés indéfiniment sans coût."),
+        ("S'il n'y a vraiment aucune sauvegarde",
+         "Alors la réponse honnête est que les notes ne peuvent pas être récupérées, et il vaut mieux l'entendre que continuer à chercher. Ce que vous pouvez faire, c'est que cette perte soit la dernière : installez JW Library sur le remplaçant et, avant d'avoir reconstitué quoi que ce soit qui mérite d'être perdu, créez une sauvegarde et placez-la hors de l'appareil. À partir de là, le même événement ne vous coûte rien."),
     ],
     "faq": [
         ("JW Sync peut-il récupérer des notes d'un téléphone que je n'ai plus ?",
@@ -801,6 +990,16 @@ GUIDES_FR["recover-jw-library-notes-lost-phone"] = {
          "Absolument. Une vieille sauvegarde contenant l'essentiel de vos notes vaut mieux que "
          "repartir de zéro, et vous pourrez la fusionner plus tard avec tout ce que vous "
          "trouverez de plus récent."),
+        ("JW Library conserve-t-il une copie de mes notes dans le nuage ?",
+         "Non. Les données d'étude personnelle restent sur l'appareil, sauf si vous créez vous-même un fichier de sauvegarde."),
+        ("Peut-on récupérer des notes sur un téléphone à l'écran cassé ?",
+         "Parfois : si le téléphone s'allume encore et peut être piloté, ou si un réparateur peut faire fonctionner l'affichage, JW Library peut toujours créer une sauvegarde. Les données sont intactes tant que le stockage l'est."),
+        ("Une ancienne sauvegarde se restaure-t-elle encore dans l'application actuelle ?",
+         "Oui. JW Library lit les formats de sauvegarde antérieurs. Mettez d'abord l'application à jour et restaurez dans la version actuelle."),
+        ("J'ai trouvé deux anciennes sauvegardes — laquelle utiliser ?",
+         "Aucune séparément : fusionnez-les. Le résultat contient tout des deux, y compris ce qui figurait dans la plus ancienne et avait été supprimé à la date de la plus récente."),
+        ("Puis-je voir ce que contient une sauvegarde avant de la restaurer ?",
+         "Oui. Ouvrez le fichier dans votre navigateur et parcourez d'abord ses notes, surlignages et signets, pour savoir ce que vous restaurez."),
     ],
 }
 
@@ -867,6 +1066,7 @@ GUIDES_FR["export-jw-library-notes"] = {
                    "sélection vers une nouvelle sauvegarde .jwlibrary. Le tout dans votre "
                    "navigateur.",
     "intro": [
+        "Les notes écrites dans JW Library sont faciles à lire dans l'application et malcommodes à utiliser ailleurs : dans un document, dans un plan de discours, sur papier, ou entre les mains de quelqu'un qui n'utilise pas l'application. L'exportation règle cela, et la décision principale n'est pas comment exporter mais combien : une exportation filtrée est presque toujours plus utile que tout d'un coup.",
         "Vos notes d'étude ne devraient pas rester prisonnières d'une seule application. "
         "Parfois vous les voulez en texte brut — pour les coller dans un plan de discours, un "
         "document ou votre propre application de notes — et parfois vous voulez une sauvegarde "
@@ -896,6 +1096,20 @@ GUIDES_FR["export-jw-library-notes"] = {
          "partie à la réunion, vers un wiki personnel, vers une impression destinée à "
          "quelqu'un qui n'utilise pas l'application. Le Markdown préserve la structure tout en "
          "restant lisible comme du texte brut, partout."),
+        ("Choisir un format",
+         "Le texte brut est le plus portable et se colle proprement dans n'importe quel document ou courriel. La sortie mise en forme préserve la structure des notes longues et convient à l'impression ou au partage. Si vous voulez récupérer les notes dans JW Library plus tard — sur un autre appareil, ou dans la bibliothèque de quelqu'un d'autre — conservez le fichier .jwlibrary lui-même plutôt qu'une exportation texte, car lui seul préserve les liens entre notes, surlignages, étiquettes et l'endroit exact de la publication où ils sont ancrés."),
+        ("N'exporter qu'une partie de votre bibliothèque",
+         "Une exportation complète représentant des années d'étude est rarement ce que l'on veut. Restreindre d'abord — à une étiquette, une publication, une couleur de surlignage ou une plage de dates — produit quelque chose d'utilisable, comme toutes les notes étiquetées pour un discours, ou tout ce qui a été écrit pendant un congrès. Les filtres qui restreignent l'affichage restreignent l'exportation : ce que vous voyez est ce que vous obtenez."),
+        ("Ce qui voyage avec le texte, et ce qui ne voyage pas",
+         "Une exportation emporte vos mots. Elle n'emporte pas les ancres qui relient une note à un paragraphe précis d'une publication précise, car ces références n'ont de sens que dans JW Library. C'est la raison pratique de conserver aussi des sauvegardes : une exportation sert à lire, imprimer et partager hors de l'application, tandis qu'un fichier .jwlibrary est ce qui replace les notes dans une bibliothèque avec leur contexte intact."),
+        ("Rassembler tout pour un discours ou une tâche",
+         "C'est la raison la plus courante d'exporter. Filtrez sur l'étiquette, la publication ou la plage de dates concernée, vérifiez le résultat et n'exportez que cela. Vous obtenez un document unique contenant les notes pertinentes et les passages surlignés, dans l'ordre où ils apparaissent, plutôt qu'un déversement ingérable de toute votre bibliothèque."),
+        ("Partager des notes avec quelqu'un",
+         "Deux choses différentes se cachent derrière le partage. Si l'autre personne veut lire vos notes, l'exportation texte convient : elle s'ouvre partout et ne demande aucun logiciel particulier. Si elle veut les notes dans sa propre bibliothèque JW Library, ancrées aux mêmes paragraphes et portant ses étiquettes et couleurs, alors c'est un fichier .jwlibrary qu'il vous faut, car une exportation texte ne peut rien replacer dans l'application."),
+        ("Conserver une archive encore lisible dans longtemps",
+         "Les exportations valent aussi pour elles-mêmes. Une copie en texte brut de vos notes d'étude s'ouvrira encore dans trente ans avec des logiciels que personne n'a écrits, ce qu'aucun format propre à une application ne peut promettre. Conserver les deux — le .jwlibrary pour restaurer et une exportation texte pour lire — ne coûte presque rien et couvre les deux avenirs."),
+        ("Exportation ou sauvegarde : ce dont vous avez besoin",
+         "Les deux répondent à des questions différentes. Une exportation sert à utiliser vos notes hors de JW Library : lire, imprimer, citer, envoyer à quelqu'un. Une sauvegarde .jwlibrary sert à les remettre dans JW Library, sur cet appareil ou un autre, avec chaque ancre, étiquette et couleur intactes. Aucune ne remplace l'autre, et rien n'empêche d'avoir les deux."),
     ],
     "faq": [
         ("Exporter modifie-t-il mes notes JW Library ?",
@@ -904,6 +1118,20 @@ GUIDES_FR["export-jw-library-notes"] = {
         ("Puis-je tout exporter d'un coup ?",
          "Oui — effacez les filtres pour sélectionner toute votre bibliothèque, ou restreignez "
          "d'abord pour n'en exporter qu'une partie."),
+        ("Puis-je récupérer mes notes dans Word ou Google Docs ?",
+         "Oui : exportez en texte et collez. Le texte arrive avec sa structure intacte et peut être mis en forme ensuite."),
+        ("Les surlignages sont-ils exportés en plus des notes ?",
+         "Oui, y compris le passage surligné et sa couleur, si bien qu'une copie imprimée montre à la fois ce que vous avez marqué et ce que vous avez écrit."),
+        ("Puis-je tout exporter d'un coup ?",
+         "Oui, même si une exportation filtrée est généralement plus utile. Tout peut être exporté en une passe quand vous voulez une copie complète."),
+        ("Puis-je exporter les réponses saisies dans les questions d'étude ?",
+         "Oui. Les réponses saisies font partie de vos données d'étude personnelle et s'exportent avec les notes et les surlignages."),
+        ("L'exportation indique-t-elle à quelle publication appartient chaque note ?",
+         "Oui, l'exportation identifie l'origine de chaque note, même si l'ancre sous-jacente ne fonctionne que dans JW Library."),
+        ("Exporter change-t-il quelque chose dans ma bibliothèque ?",
+         "Non. Une exportation lit vos données et écrit un fichier distinct ; rien dans JW Library n'est modifié, déplacé ni supprimé."),
+        ("Puis-je exporter depuis une sauvegarde plutôt que depuis l'application ?",
+         "Oui. Un fichier .jwlibrary peut être ouvert directement et ses notes exportées, ce qui est utile quand les notes voulues sont dans une ancienne sauvegarde et non sur votre appareil actuel."),
     ],
 }
 
@@ -1879,6 +2107,7 @@ GUIDES_FR["jw-library-notes-missing-after-update"] = {
                    "une reconnexion. Que faire en premier, ce qu'il ne faut pas faire, et "
                    "comment les récupérer sans perdre ce que vous avez écrit depuis.",
     "intro": [
+        "Ouvrir JW Library après une mise à jour et constater la disparition de ses notes est inquiétant, et dans la grande majorité des cas elles sont récupérables. Ce qui compte, c'est ce que vous faites dans les minutes qui suivent — précisément, ne pas faire la seule chose qui transforme une situation récupérable en perte définitive.",
         "C'est un moment désagréable : JW Library s'ouvre, et les notes n'y sont pas. Avant "
         "toute chose, un conseil — ne vous précipitez pas. L'essentiel de ce qui rend cette "
         "situation irrécupérable se fait dans les dix premières minutes, en écrasant "
@@ -1919,6 +2148,16 @@ GUIDES_FR["jw-library-notes-missing-after-update"] = {
          "bilan de santé — les dégâts dus à un téléchargement interrompu, à une "
          "synchronisation cloud ou à une extension renommée sont souvent réparables, et une "
          "copie nettoyée se restaure normalement."),
+        ("D'abord : ne créez pas encore de nouvelle sauvegarde",
+         "Si les notes ont disparu, résistez au réflexe de sauvegarder immédiatement. Une sauvegarde capture l'état actuel, et si l'état actuel est vide vous risquez d'écraser le bon fichier que vous aviez déjà. Cherchez d'abord quelles sauvegardes existent — dans Téléchargements, Fichiers, le courriel ou le nuage — et décidez seulement ensuite. Rien sur l'appareil ne s'améliore grâce à une sauvegarde faite dans la panique."),
+        ("Pourquoi une mise à jour peut sembler effacer des notes",
+         "La cause habituelle n'est pas une suppression. Une mise à jour peut laisser l'application pointer vers une base de données neuve et vide alors que l'ancienne est toujours sur le disque ; une réinstallation — y compris celle effectuée automatiquement par une mise à jour de magasin interrompue — démarre l'application de zéro ; et sur les appareils partagés ou à plusieurs profils, l'application peut tourner sous un profil différent. Dans tous les cas, les notes ne sont pas tant supprimées que non chargées, et c'est pourquoi une restauration depuis une sauvegarde ramène généralement tout proprement."),
+        ("Récupérer une ancienne sauvegarde sans jeter le travail récent",
+         "Si vous avez étudié depuis la création de la sauvegarde, une restauration simple échange une perte contre une autre : elle ramène les anciennes notes et supprime les plus récentes. Le contournement consiste à sauvegarder l'état actuel dans un fichier distinct, à le fusionner avec l'ancienne sauvegarde pour que les deux ensembles de notes coexistent dans un seul fichier, puis à restaurer le résultat. Vous obtenez les notes récupérées et les récentes ensemble au lieu de devoir choisir."),
+        ("Si l'application s'est réinstallée toute seule",
+         "Une réinstallation vide le stockage privé de l'application : tout ce qui n'est pas dans une sauvegarde est irrécupérable, aucune copie infonuagique ne pouvant servir de recours. Vérifiez tous les endroits où un fichier .jwlibrary a pu être enregistré avant de conclure qu'il n'y en a aucun, y compris le dossier d'envoi de votre messagerie et tout stockage infonuagique que vous avez déjà utilisé. Dès que vous en trouvez un, restaurez-le, puis conservez désormais les sauvegardes hors de l'appareil."),
+        ("Une fois tout revenu",
+         "Quand vos notes sont restaurées, faites une sauvegarde de plus et rangez-la hors de l'appareil : l'épisode que vous venez de traverser en est l'argument. Si vous avez dû fusionner une ancienne sauvegarde avec l'état actuel pour en arriver là, conservez aussi les deux fichiers sources : ce sont des instantanés datés, et en avoir davantage est précisément ce qui a rendu la récupération possible."),
     ],
     "faq": [
         ("Les notes sont-elles encore quelque part sur l'appareil ?",
@@ -1932,6 +2171,14 @@ GUIDES_FR["jw-library-notes-missing-after-update"] = {
          "Fusionnez-la avec une sauvegarde de l'appareil tel qu'il est aujourd'hui. Vous "
          "récupérez tout ce que contient l'ancien fichier et gardez tout ce que l'appareil a "
          "encore, sans avoir à choisir."),
+        ("Mes notes ont-elles vraiment disparu ?",
+         "Pas nécessairement. S'il existe une sauvegarde quelque part, tout ce qu'elle contient est entièrement récupérable. Seul le travail réalisé après la sauvegarde la plus récente est irrécupérable."),
+        ("Puis-je combiner une ancienne sauvegarde avec ce qui est sur l'appareil ?",
+         "Oui : sauvegardez d'abord l'état actuel, fusionnez-le avec l'ancienne et restaurez le résultat. Les deux ensembles de notes se retrouvent dans la même bibliothèque."),
+        ("Restaurer une ancienne sauvegarde supprimera-t-il mes notes récentes ?",
+         "À elle seule, oui, car une restauration remplace les données de l'appareil. Fusionnez d'abord la sauvegarde actuelle avec l'ancienne et restaurez le fichier fusionné."),
+        ("Dois-je réinstaller l'application pour régler cela ?",
+         "Non : réinstaller vide le stockage privé de l'application et supprime toute chance de récupérer ce qui reste sur l'appareil. Cherchez d'abord une sauvegarde existante et gardez la réinstallation comme dernier recours, une fois que vous en avez une."),
     ],
 }
 
