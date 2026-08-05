@@ -171,10 +171,8 @@ function assertContains(text, needle, label) {
 
   section('Boot JSDOM with Browse module');
   // Extract Browse module from the live file
-  const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
-  const m = html.match(/<!-- ── Note Explorer \(Browse\) ─[\s\S]*?<!-- ── End Note Explorer ─[─]*\s*-->/);
-  if (!m) { fail('Browse block not found in beta/index.html'); process.exit(1); }
-  const browseBlock = m[0];
+  const browseBlock = require('./helpers/browse-source').browseBlock(REPO + '/beta/index.html');
+  if (!browseBlock) { fail('Browse module not found for beta/index.html'); process.exit(1); }
 
   // Build minimal page that provides what the module expects.
   const pageHtml = `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>

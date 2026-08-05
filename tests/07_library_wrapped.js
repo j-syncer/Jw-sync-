@@ -27,6 +27,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { withModules } = require('./helpers/page-source');
 const JSZip = require('jszip');
 const initSqlJs = require('sql.js');
 
@@ -726,7 +727,7 @@ async function waitForStats(doc, timeoutMs) {
   // ──────────────────────────────────────────────────────────────────
   section('Celebration screen: cele_highlights i18n key in all 10 langs');
   {
-    const html = fs.readFileSync(REPO + '/beta/index.html', 'utf8');
+    const html = withModules(REPO + '/beta/index.html');
     const count = (html.match(/cele_highlights:/g) || []).length;
     if (count === LANGS.length) ok('cele_highlights present in all ' + LANGS.length + ' celebration langs');
     else fail('cele_highlights count: expected ' + LANGS.length + ', got ' + count);

@@ -18,6 +18,7 @@
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
+const { inlineModules } = require('./helpers/page-source');
 
 const REPO = path.join(__dirname, '..');
 const HTML_PATH = REPO + '/beta/index.html';
@@ -35,7 +36,7 @@ const REQUIRED_KEYS = ['title','intro','priv','add','empty','main','setmain','re
 
 // ── Extract just the Sync Hub module (style + script) from beta/index.html ──
 function extractModule() {
-  const html = fs.readFileSync(HTML_PATH, 'utf8');
+  const html = inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH);
   const m = html.match(/<!-- ── Saved Devices & Auto-Sync \(Sync Hub[\s\S]*?<!-- ── End Saved Devices & Auto-Sync ─[─]*\s*-->/);
   if (!m) { fail('Sync Hub module block not found in beta/index.html'); process.exit(1); }
   return m[0];

@@ -20,7 +20,9 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
 const worker = fs.readFileSync(path.join(REPO, 'beta/js/semantic-worker.js'), 'utf8');
-const html = fs.readFileSync(path.join(REPO, 'beta/index.html'), 'utf8');
+// The Browse module moved to beta/js/browse.js in v3.4.0; the helper finds it
+// wherever it currently lives.
+const html = require('./helpers/browse-source').browseJs(path.join(REPO, 'beta/index.html'));
 
 section('Semantic worker (beta/js/semantic-worker.js)');
 [
