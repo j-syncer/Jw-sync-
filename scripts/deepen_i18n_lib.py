@@ -69,32 +69,50 @@ def _lit(s):
     return '"%s"' % s.replace("\\", "\\\\")
 
 
-def _record_span(src, slug):
-    m = re.search(r'\n "%s": \{\n' % re.escape(slug), src)
+# The language files come in two literal styles and the inserter has to match
+# whichever the file already uses, or the module stops parsing:
+#
+#   dict   (es, ar)     " slug": {            keys at 2, entries at 3
+#   assign (the rest)   GUIDES_XX["slug"] = { keys at 4, entries at 8
+STYLES = {
+    "dict":   dict(open=r'\n "%s": \{\n', close="\n },\n", key=2, entry=3),
+    "assign": dict(open=r'\nGUIDES_[A-Z]+\["%s"\] = \{\n', close="\n}\n", key=4, entry=8),
+}
+
+
+def style_of(src):
+    return "assign" if re.search(r'\nGUIDES_[A-Z]+\["[a-z0-9-]+"\] = \{', src) else "dict"
+
+
+def _record_span(src, slug, st):
+    m = re.search(STYLES[st]["open"] % re.escape(slug), src)
     if not m:
         sys.exit("!! record not found: %s" % slug)
-    end = src.find("\n },\n", m.start() + 1)
+    end = src.find(STYLES[st]["close"], m.start() + 1)
     if end < 0:
         sys.exit("!! record end not found: %s" % slug)
     return m.start(), end
 
 
-def _append(src, slug, field, entries):
-    start, end = _record_span(src, slug)
+def _append(src, slug, field, entries, st):
+    s = STYLES[st]
+    ki, ei = " " * s["key"], " " * s["entry"]
+    start, end = _record_span(src, slug, st)
     rec = src[start:end]
-    key = '\n  "%s": [\n' % field
+    key = '\n%s"%s": [\n' % (ki, field)
     at = rec.find(key)
     if at < 0:
         sys.exit("!! %s: no %s field" % (slug, field))
-    close = rec.find("\n  ],", at)
+    close = rec.find("\n%s]," % ki, at)
     if close < 0:
         sys.exit("!! %s: unterminated %s" % (slug, field))
     if field == "intro":
         # prepended, matching how the English pass inserted it
-        block = "".join("   %s,\n" % _lit(e) for e in entries)
+        block = "".join("%s%s,\n" % (ei, _lit(e)) for e in entries)
         rec = rec[:at + len(key)] + block + rec[at + len(key):]
     else:
-        block = "".join("   (%s,\n    %s),\n" % (_lit(a), _lit(b)) for a, b in entries)
+        block = "".join("%s(%s,\n%s %s),\n" % (ei, _lit(a), ei, _lit(b))
+                        for a, b in entries)
         rec = rec[:close + 1] + block + rec[close + 1:]
     return src[:start] + rec + src[end:]
 
@@ -105,10 +123,11 @@ def apply_lang(lang, data, sentinel):
     src = io.open(p, encoding="utf-8").read()
     if sentinel in src:
         sys.exit("%s already deepened — nothing to do" % lang)
+    st = style_of(src)
     for slug, fields in data.items():
         for field in FIELDS:
             if fields.get(field):
-                src = _append(src, slug, field, fields[field])
+                src = _append(src, slug, field, fields[field], st)
     io.open(p, "w", encoding="utf-8").write(src)
     print("%s: deepened %d guides" % (lang, len(data)))
 
