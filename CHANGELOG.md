@@ -4,6 +4,26 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.12.0] — 2026-08-05
+
+### Added: all 37 guides in Cebuano — the guide library is now complete in all 13 languages
+
+The complete guide library is now available in Cebuano at
+`jwsync.org/guides/ceb/`, and with it every language JW Sync supports has the
+full set. What began as one English guide tree is now thirteen: **481 guide
+pages plus 13 indexes**, each a real indexable document in its own language.
+
+- `/ceb/` now links **Mga giya ug pamaagi** to the Cebuano guide index.
+- Every guide, in every language, is self-canonical and sits in a reciprocal
+  hreflang cluster with its twelve twins, so a search in any of the thirteen
+  languages can find the page written in it.
+- English guide URLs never moved through any of this, so nothing that already
+  ranked was disturbed.
+
+The sitemap now submits 510 URLs.
+
+---
+
 ## [3.11.0] — 2026-08-05
 
 ### Added: all 37 guides in Swedish

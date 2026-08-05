@@ -527,6 +527,54 @@ CHROME = {
             "Power tools": "Avancerade verktyg",
         },
     },
+    "ceb": {
+        "lang_name": "Cebuano",
+        "lang_label": "Pinulongan",
+        "og_locale": "ceb_PH",
+        "site_guides": "Mga Giya sa JW Sync",
+        "nav_guides": "Mga Giya",
+        "nav_community": "Komunidad",
+        "nav_open_app": "Ablihi ang app",
+        "crumb_guides": "Mga Giya",
+        "h_steps": "Lakang-lakang",
+        "h_faq": "Kanunayng gipangutana",
+        "h_related": "Kalabot nga mga giya",
+        "cta_title": "Buhata kini karon — libre, sa imong browser",
+        "cta_body": "Hiusahon, i-edit ug tugkaron sa JW Sync ang mga .jwlibrary nga backup nga "
+                    "bug-os sa imong device. Walay account, walay gi-upload, walay gi-install.",
+        "cta_btn": "Ablihi ang JW Sync →",
+        "index_title": "Mga giya sa backup, sync ug nota sa JW Library | JW Sync",
+        "index_desc": "Praktikal nga mga giya alang sa mga backup sa JW Library: paghiusa sa "
+                      "backup gikan sa duha ka device, pagbalhin sa mga nota ngadto sa bag-ong "
+                      "cellphone, pagbalhin gikan Android ngadto iPhone, pag-ayo sa backup nga "
+                      "dili mapasig-uli, pag-edit ug pagpangita sa imong mga nota, ug daghan "
+                      "pa.",
+        "index_h1": "Mga giya ug pamaagi",
+        "index_lede": "Ang tanan bahin sa mga backup sa JW Library, sa tin-aw nga mga lakang: "
+                      "paghiusa sa mga device, pagbalhin ngadto sa bag-ong cellphone, pagluwas "
+                      "sa mga nota, ug pagpahimulos pa sa library nga anaa na nimo. Ang matag "
+                      "kagamitan nga gihisgotan modagan nga libre sa imong browser — wala gayod "
+                      "gi-upload ang imong mga file.",
+        "index_cta_title": "Laktawi ang pagbasa — ablihi na lang ang kagamitan",
+        "index_cta_body": "Mga usa ka minuto ang paghiusa sa duha ka backup, ug giyahan ka sa "
+                          "app sa matag lakang.",
+        "footer_all_guides": "Tanang giya",
+        "footer_community": "Komunidad",
+        "footer_stats": "Study Stats",
+        "footer_privacy": "Giproseso sa JW Sync ang tanang datos sa device mismo — wala gayod "
+                          "mobiya ang imong mga file sa imong device. Libre; walay account, "
+                          "walay gi-upload.",
+        "footer_disclaimer": "Ang “JW Library” gipanag-iya sa Watch Tower Bible and Tract "
+                             "Society of Pennsylvania. Ang JW Sync usa ka independenteng himan "
+                             "ug walay kalabotan niini ni giuyonan niini.",
+        "groups": {
+            "Getting started": "Pagsugod",
+            "Sharing scenarios": "Pagpaambit sa mga nota",
+            "Everyday scenarios": "Mga adlaw-adlaw nga kahimtang",
+            "Fixing problems": "Pagsulbad sa mga problema",
+            "Power tools": "Mga abanteng kagamitan",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -585,12 +633,14 @@ from guides_ja import GUIDES_JA  # noqa: E402
 from guides_ko import GUIDES_KO  # noqa: E402
 from guides_tl import GUIDES_TL  # noqa: E402
 from guides_sv import GUIDES_SV  # noqa: E402
+from guides_ceb import GUIDES_CEB  # noqa: E402
 
 GUIDE_TEXT = {
     "ja": GUIDES_JA,
     "ko": GUIDES_KO,
     "tl": GUIDES_TL,
     "sv": GUIDES_SV,
+    "ceb": GUIDES_CEB,
     "es": GUIDES_ES,
     "pt": GUIDES_PT,
     "fr": GUIDES_FR,
