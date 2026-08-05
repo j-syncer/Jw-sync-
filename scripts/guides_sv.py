@@ -71,6 +71,16 @@ GUIDES_SV["merge-jw-library-backups"] = {
          "Sammanslagningen ändrar aldrig dina ursprungliga filer — den skapar en helt ny "
          "säkerhetskopia, så originalen finns kvar orörda som reserv. Och eftersom allt körs i "
          "webbläsaren lämnar inga data din enhet."),
+        ("Vad en .jwlibrary-fil faktiskt innehåller",
+         "En .jwlibrary-säkerhetskopia är ett ZIP-arkiv. Byt namn på en kopia till .zip och öppna den, så hittar du userData.db — en SQLite-databas med alla anteckningar, markeringar, bokmärken och etiketter du någonsin skapat — och en liten manifest.json som beskriver kopian. Dina anteckningar ligger i tabellen Note, markeringarna i UserMark och BlockRange, bokmärkena i Bookmark och etiketterna i Tag och TagMap. När du förstår att säkerhetskopian är en komplett databas och inte en samling lösa filer faller allt annat på den här sidan på plats: därför är en återställning allt eller inget, och därför går två kopior att slå ihop över huvud taget."),
+        ("Varför JW Librarys egen återställning inte kan slå ihop",
+         "Vid återställning läser JW Library inte din säkerhetskopia för att lägga till det som saknas på enheten. Programmet ersätter enhetens databas med den i filen. Det är medvetet och säkert konstruerat, eftersom enheten garanterat hamnar i ett känt läge, men det innebär att om du återställer surfplattans kopia på telefonen försvinner allt som fanns på telefonen men inte på plattan. Ingen inställning ändrar det, och det är precis den luckan en sammanslagning fyller: den skapar en enda fil som redan innehåller båda enheternas arbete, så att den enhet du återställer den på blir komplett."),
+        ("Så upptäcks dubbletter",
+         "Varje anteckning, markering och bokmärke bär ett GUID — en unik identifierare som tilldelas när posten skapas och bevaras i alla senare säkerhetskopior. När samma post finns i två kopior bär båda exemplaren samma GUID, så den känns igen som en post och behålls en gång. Därför dubbleras ingenting om du slår ihop samma två filer två gånger, och därför kan du tryggt slå ihop på nytt varje vecka. När GUID stämmer men texten skiljer sig — samma anteckning redigerad på båda enheterna — går det inte att lösa automatiskt, så posten visas i Konfliktgranskaren med en jämförelse ord för ord så att du väljer."),
+        ("Vad som inte finns i säkerhetskopian",
+         "En säkerhetskopia innehåller bara dina personliga studiedata. Nedladdade publikationer, bibelöversättningar, video och ljud ingår inte, och det är därför kopiorna är små — vanligtvis några megabyte även efter många års studium. Efter en återställning på en ny enhet kan du behöva ladda ner de publikationer du läser regelbundet igen. Ingenting du skrivit påverkas av det: anteckningar är förankrade i publikationer via referenser och kopplas tillbaka så snart publikationen finns på plats."),
+        ("Om sammanslagningen rapporterar 0 tillagda anteckningar",
+         "Det stämmer nästan alltid och är inget fel. Det betyder att alla anteckningar i den andra filen redan fanns i den första — vanligt om du slagit ihop nyligen, eller om en enhet helt enkelt ligger efter den andra. Titta i förhandsgranskningen: den visar vad varje fil bidrar med innan något skrivs. Om du väntade dig nya poster och inte ser några, kontrollera att du säkerhetskopierade enheten efter det studiepass du letar efter — en säkerhetskopia innehåller bara det som fanns i det ögonblick den skapades."),
     ],
     "faq": [
         ("Kan jag slå ihop fler än två säkerhetskopior?",
@@ -83,6 +93,14 @@ GUIDES_SV["merge-jw-library-backups"] = {
         ("Fungerar det mellan Android och iPhone?",
          "Ja. .jwlibrary-formatet är identiskt på Android, iOS, iPadOS och Windows, så "
          "säkerhetskopior från olika plattformar slås ihop utan någon konvertering."),
+        ("Måste jag slå ihop i en viss ordning?",
+         "Nej. Sammanslagningen är oberoende av ordning — samma uppsättning filer ger samma resultat oavsett vilken du laddar först. Ordningen påverkar bara vilken fil som räknas som utgångspunkt i förhandsgranskningens sammanfattning."),
+        ("Vad händer med etiketter som bara finns på en enhet?",
+         "De följer med oförändrade, tillsammans med kopplingarna mellan etiketterna och de anteckningar de märker. Om båda enheterna har en etikett med samma namn behandlas den som en enda och får anteckningarna från båda."),
+        ("Hur stor blir den sammanslagna filen?",
+         "Ungefär som originalen tillsammans minus dubbletterna — i regel fortfarande bara några megabyte. Säkerhetskopior innehåller inga publikationsmedier, så även ett hårt annoterat bibliotek ryms i ett mejl."),
+        ("Kan jag ångra en återställning?",
+         "Inte inifrån JW Library, och därför är det viktigt att spara originalkopiorna. Sammanslagningen ändrar aldrig filerna du laddar in, så dina kopior från före sammanslagningen finns kvar exakt som de var och kan återställas om du vill backa."),
     ],
 }
 
@@ -93,6 +111,7 @@ GUIDES_SV["sync-jw-library-multiple-devices"] = {
                    "enkel och privat rutin som håller anteckningar, markeringar och bokmärken "
                    "identiska på mobilen, surfplattan och datorn.",
     "intro": [
+        "De flesta som studerar på två enheter upptäcker problemet på samma sätt: anteckningarna som skrevs på surfplattan finns inte på telefonen, och att återställa den enas kopia på den andra skulle radera det den hade. JW Library erbjuder ingen synkronisering, och dess återställning är medvetet allt eller inget, så att hålla enheterna i takt kräver en rutin snarare än en inställning.",
         "JW Library synkroniserar inte personliga studiedata mellan enheter — det finns inget "
         "konto som flyttar dina anteckningar från mobilen till surfplattan. Den officiella "
         "vägen är Säkerhetskopiera och återställ, och en återställning ersätter enhetens data "
@@ -127,6 +146,20 @@ GUIDES_SV["sync-jw-library-multiple-devices"] = {
          "i veckan är bekvämt. En surfplatta som bara plockas fram till mötena: en gång i "
          "månaden räcker gott. Att vänta längre betyder bara att sammanslagningen har mer att "
          "förena — inget går förlorat mellan omgångarna."),
+        ("Varför det inte finns någon riktig synkronisering",
+         "JW Library har inget konto som bär personliga studiedata mellan enheter. Anteckningar, markeringar och bokmärken lever i en databas inuti varje enhet och stannar där. Det enda officiella sättet att flytta dem är Säkerhetskopiera och återställ, och en återställning ersätter målenhetens data i stället för att kombinera dem. Två enheter som används oberoende av varandra glider därför isär permanent om inte något slår ihop dem — vilket är hela poängen med rutinen nedan."),
+        ("Håll en huvudfil",
+         "Rutinen fungerar bäst om du behandlar en sammanslagen fil som den aktuella huvudfilen. Varje omgång: säkerhetskopiera alla enheter, slå ihop kopiorna och återställ resultatet överallt. Den sammanslagna filen blir sedan huvudfil för nästa omgång. Att spara de daterade huvudfilerna i molnet ger dig både en synkroniseringsmekanism och ett arkiv — om du raderar något av misstag finns det kvar i en tidigare huvudfil."),
+        ("Vad som händer om du hoppar över en enhet ett tag",
+         "Ingenting går förlorat. En enhet som stått utanför flera omgångar bär helt enkelt äldre data; när du till slut tar med den slås dess anteckningar ihop med allt annat, och återkommande poster paras via GUID i stället för att dubbleras. Det enda som kräver ett beslut är samma anteckning redigerad på två enheter sedan förra sammanslagningen, och den visas i Konfliktgranskaren med båda versionerna sida vid sida."),
+        ("Hur ofta som räcker",
+         "Anpassa det efter hur mycket arbete du skulle ogilla att göra om. Varje vecka passar om du studerar på två enheter nästan dagligen; varje månad räcker gott om den ena används sporadiskt. Det viktiga är att göra det före allt oåterkalleligt — ett telefonbyte, en återställning, en reparation — för det är då en avvikelse blir en förlust."),
+        ("Telefon, surfplatta och Windows-appen tillsammans",
+         "Rutinen bryr sig inte om hur många enheter det gäller eller vad de kör. Säkerhetskopiera var och en, slå ihop dem alla i ett svep och återställ den sammanslagna filen överallt. En Windows-dator för förberedelse och en telefon för mötena kombineras precis som två telefoner, eftersom alla plattformar skriver samma säkerhetskopieformat."),
+        ("Minska konflikterna innan de uppstår",
+         "Konflikter uppstår bara när samma anteckning redigeras på två enheter mellan två sammanslagningar. I praktiken är det sällsynt, och det blir ännu sällsyntare om du skriver på en enhet i taget — läs var du vill, men skriv där du brukar skriva. Att slå ihop oftare krymper också fönstret då en avvikelse kan uppstå, vilket fungerar bättre än att försöka minnas vilken enhet som har den nyaste versionen."),
+        ("Var rutinen lönar sig",
+         "Värdet av att hålla enheterna sammanslagna är inte ordningen — det är att varje enhet blir en fullständig säkerhetskopia av ditt studiebibliotek. Tappar eller förstör du någon av dem bär de andra fortfarande allt, vilket förvandlar värsta fallet från år av förlorade anteckningar till ett besvär. Det är ett starkare läge än någon vana att säkerhetskopiera på en enda enhet kan ge."),
     ],
     "faq": [
         ("Körs JW Sync i bakgrunden?",
@@ -136,6 +169,16 @@ GUIDES_SV["sync-jw-library-multiple-devices"] = {
         ("Kan jag synkronisera tre eller fler enheter?",
          "Ja. Säkerhetskopiera varje enhet, ladda in alla filerna, slå ihop en gång och "
          "återställ den sammanslagna filen överallt."),
+        ("Tänk om jag redigerat samma anteckning på två enheter?",
+         "Båda versionerna behålls tills du väljer. Konfliktgranskaren visar dem sida vid sida med en jämförelse ord för ord, eller så låter du den föreslå den mer utförliga."),
+        ("Spelar ordningen jag återställer i någon roll?",
+         "Nej. När den sammanslagna filen väl är skapad försätter en återställning av den varje enhet i samma fullständiga läge, i vilken ordning som passar dig."),
+        ("Kan jag hålla tre eller fler enheter i takt?",
+         "Ja. Säkerhetskopiera var och en och ladda in dem alla i samma sammanslagning — det finns ingen gräns kopplad till antalet enheter."),
+        ("Går det att automatisera?",
+         "Inte fullt ut, eftersom JW Library saknar ett synkroniseringsgränssnitt och återställningssteget sker i appen. Den manuella rutinen tar ungefär två minuter när du vant dig."),
+        ("Måste jag slå ihop om jag bara läser på den andra enheten?",
+         "Om du aldrig annoterar där behöver du bara återställa på den då och då så att den bär dina aktuella anteckningar."),
     ],
 }
 
@@ -146,6 +189,7 @@ GUIDES_SV["transfer-jw-library-notes-new-phone"] = {
                    "etiketter i JW Library till en ny mobil med en .jwlibrary-säkerhetskopia — "
                    "och hur du slår ihop om du redan skrivit anteckningar på den nya mobilen.",
     "intro": [
+        "Ett telefonbyte är det enskilt vanligaste tillfället då många års anteckningar i JW Library går förlorade — inte för att flytten är svår, utan för att den måste göras medvetet innan den gamla enheten raderas. Personliga studiedata följer inte tillförlitligt med vid en vanlig överföring mellan telefoner, och JW Library sparar ingen kopia av dem i något konto.",
         "Verktyg för mobilflytt tar med appar och foton, men de flyttar inte tillförlitligt JW "
         "Librarys personliga studiedata. Det säkra sättet att få med dina anteckningar, "
         "markeringar, bokmärken och etiketter till en ny mobil är JW Librarys egen "
@@ -174,6 +218,20 @@ GUIDES_SV["transfer-jw-library-notes-new-phone"] = {
         ("Ett vanligt problem på iPhone",
          "Om säkerhetskopian når iPhone omdöpt till .zip, döp om den till .jwlibrary innan du "
          "återställer — innehållet är intakt; bara filändelsen ändrades på vägen."),
+        ("Gör det här innan den gamla telefonen raderas eller lämnas in",
+         "Säkerhetskopian måste skapas medan den gamla telefonen fortfarande fungerar och JW Library finns kvar på den. När enheten återställts, lämnats in eller getts bort försvinner anteckningarna med den: JW Library sparar ingen molnkopia av personliga studiedata, och en telefonkopia som Google One eller en enhetskopia i iCloud återställer ofta en äldre ögonblicksbild av appens data, eller ingen alls. Skapa .jwlibrary-filen först, lägg den på en säker plats och se att du hittar den innan du raderar något."),
+        ("Så får du ut filen ur den gamla telefonen",
+         "På Android skrivs filen till den mapp du väljer — vanligtvis Nedladdningar eller Dokument — och kan flyttas med vilken filhanterare som helst, mejlas till dig själv eller läggas i molnet. På iPhone visas delningsmenyn så snart kopian skapats: spara den i Filer, skicka den med AirDrop till den nya telefonen eller skicka den till dig själv. Metoden spelar ingen roll och kan inte skada filen: en .jwlibrary är ett enda arkiv som antingen kommer fram helt eller inte alls."),
+        ("Varför en överföringsapp mellan telefoner inte räcker",
+         "Verktyg som Smart Switch, Flytta till iOS eller en iCloud-återställning kopierar appar och systemdata, men appars egna databaser hoppas ofta över, återställs delvis eller återställs från en tidigare tidpunkt. Luckan upptäcks regelbundet först veckor senare, när den gamla telefonen är borta. Betrakta .jwlibrary-filen som den gällande kopian och telefonöverföringen som en bekvämlighet — om den råkar få med dina anteckningar kostar det ingenting att återställa din egen kopia ovanpå."),
+        ("Kontrollera att flytten verkligen fungerade",
+         "Öppna två eller tre publikationer du nyligen annoterat på den nya telefonen efter återställningen och se att anteckningar, markeringsfärger och bokmärken finns där. En snabbare kontroll är att öppna själva säkerhetskopian i webbläsaren innan du raderar den gamla enheten — du ser varje anteckning, markering och bokmärke den innehåller och vet därmed vad som borde dyka upp. Radera den gamla telefonen först när den nya är kontrollerad."),
+        ("Om du samtidigt byter surfplatta eller dator",
+         "Samma fil fungerar överallt. Om du ställer in en ny telefon och en surfplatta samtidigt kan du återställa samma .jwlibrary-fil på båda, så börjar de likadant. Därefter glider de isär igen allteftersom du studerar på var och en, så det är värt att bestämma redan nu om du ska slå ihop dem regelbundet eller behandla en av dem som huvudenhet."),
+        ("Om den nya telefonen redan har anteckningar",
+         "Det händer när man använt den nya enheten en vecka innan man tar tag i flytten. En rak återställning skulle ersätta det arbetet med den gamla telefonens data. Säkerhetskopiera den nya telefonen först, slå ihop den filen med den gamlas kopia och återställ resultatet — båda uppsättningarna anteckningar hamnar i ett bibliotek i stället för att den ena skriver över den andra."),
+        ("Vad du gör när den nya telefonen är igång",
+         "Kontrollera innan du gör dig av med något. Öppna några nyligen annoterade publikationer på den nya telefonen och bekräfta att anteckningar, färger och bokmärken finns; radera eller lämna först därefter in den gamla enheten — i den ordningen och aldrig tvärtom. När allt sitter, lägg en säkerhetskopia utanför telefonen, för situationen som förde dig hit återkommer vid nästa byte."),
     ],
     "faq": [
         ("Följer mina nedladdade publikationer med?",
@@ -183,6 +241,16 @@ GUIDES_SV["transfer-jw-library-notes-new-phone"] = {
         ("Spelar det roll om mobilerna har olika Android-versioner?",
          "Nej. .jwlibrary-formatet är detsamma överallt, även mellan Android-versioner och "
          "mellan Android och iPhone."),
+        ("Kan jag flytta anteckningarna om den gamla telefonen redan är borta?",
+         "Bara om det finns en .jwlibrary-fil någonstans — i Filer, Nedladdningar, ett mejl till dig själv eller i molnet. Utan den finns inget att återställa, eftersom personliga studiedata bara lagras på enheten."),
+        ("Måste båda telefonerna ha samma version av JW Library?",
+         "De behöver inte stämma exakt, men uppdatera den nya telefonen till aktuell version innan du återställer. En kopia skapad av en nyare version kan använda ett databasschema som en äldre app inte förstår."),
+        ("Måste jag ladda ner publikationerna igen?",
+         "Oftast ja — publikationsmedier ingår inte i säkerhetskopian. Dina anteckningar kopplas tillbaka till varje publikation så snart den laddats ner, så ingenting du skrivit går förlorat under tiden."),
+        ("Hur lång tid tar det hela?",
+         "Några minuter. Att skapa kopian tar sekunder, att flytta filen beror på metoden och återställningen går snabbt. Det som tar längst är att ladda ner publikationerna igen, och det kan ske i bakgrunden."),
+        ("Går det utan wifi?",
+         "Själva överföringen ja, via AirDrop eller kabel. Att ladda ner publikationerna igen på den nya enheten kräver uppkoppling."),
     ],
 }
 
@@ -193,6 +261,7 @@ GUIDES_SV["jw-library-android-to-iphone"] = {
                    "anteckningar, markeringar och bokmärken mellan plattformar — och så slår "
                    "du ihop om båda enheterna har anteckningar.",
     "intro": [
+        "Att byta mellan Android och iPhone låter som det svåra fallet, men är det lätta. JW Library skriver samma säkerhetskopieformat på alla plattformar där det körs, så att flytta ett studiebibliotek från Android till iOS är samma sak som att flytta det mellan två Android-telefoner — ingen konvertering, inget exportformat att välja, ingenting som tappas på vägen.",
         "Plattformsbytet är stunden då många är rädda att förlora år av studieanteckningar — "
         "flyttappar från Android till iPhone hoppar helt över JW Librarys data. Den goda "
         "nyheten: JW Librarys säkerhetskopieformat är identiskt på Android, iPhone, iPad och "
@@ -222,6 +291,22 @@ GUIDES_SV["jw-library-android-to-iphone"] = {
          "Från iPhone till Android, från Android till Android, när du lägger till en iPad som "
          "andra studieenhet eller när du går över till Windows-appen — säkerhetskopian är det "
          "gemensamma språket för dem alla."),
+        ("Varför formatet är identiskt på båda plattformarna",
+         "JW Library använder samma säkerhetskopieformat överallt där det körs — Android, iOS, iPadOS och Windows. En .jwlibrary-fil är ett ZIP-arkiv med en SQLite-databas som har samma tabeller och samma schema oavsett vilken enhet som skrivit den. Det finns inget konverteringssteg, ingen turnerande export och import, och ingenting plattformsspecifikt inuti filen. En Android-kopia återställs på en iPhone precis som en iPhone-kopia skulle göra."),
+        ("Den enda delen som verkligen skiljer sig",
+         "Inte filen — bara hur du får tag i den. På Android sparas kopian i en mapp du väljer och kan flyttas med vilken filhanterare som helst. På iPhone går den via delningsmenyn till Filer, AirDrop eller vad du föredrar. Det som skaver vid ett plattformsbyte sitter alltid i det här hanteringssteget, aldrig i kompatibiliteten. Mejl, moln eller AirDrop fungerar lika bra; arkivet kommer fram helt eller inte alls."),
+        ("Markeringsfärger, etiketter och studiesvar",
+         "Allt överlever. Markeringsfärger lagras som ett numeriskt index — gult, grönt, blått, rosa, orange och lila — och ser likadana ut på alla plattformar. Etiketter och kopplingarna mellan etiketter och anteckningar följer med, liksom svaren du skrivit i studiefrågornas fält. Det du ser på iPhone efter återställningen är det du hade på Android-enheten."),
+        ("Om iOS inte låter dig välja filen",
+         "Spara filen i appen Filer först och välj den därifrån, i stället för från en mejlbilaga eller förhandsvisningen i en meddelandeapp. Vissa appar lämnar en tillfällig förhandskopia till iOS i stället för den riktiga filen, och den kan JW Library inte öppna. Om filen kom som bilaga: tryck på den, välj Spara i Filer och återställ därifrån."),
+        ("Förbered iPhonen innan du återställer",
+         "Installera JW Library från App Store och uppdatera till aktuell version innan du återställer något. En kopia som skrivits av en nyare version kan använda ett databasschema som en äldre version inte förstår, och då avvisas återställningen helt enkelt. Du behöver inte logga in någonstans: personliga studiedata finns i filen du återställer, inte i ett konto."),
+        ("Om du redan börjat studera på iPhonen",
+         "Säkerhetskopiera iPhonen först. Att återställa Android-filen rakt ovanpå skulle ersätta allt du skrivit sedan bytet. Att slå ihop de två kopiorna ger en fil som innehåller båda, som du sedan återställer — historiken från Android och de nya iPhone-anteckningarna hamnar i samma bibliotek."),
+        ("Att fortsätta använda båda telefonerna",
+         "Vissa behåller den gamla Android-enheten som en andra läsenhet i stället för att pensionera den. Det fungerar, men de två glider isär så snart du annoterar på båda, eftersom det inte finns någon synkronisering mellan dem. Om du tänker använda båda bör du räkna med att slå ihop deras kopior med jämna mellanrum snarare än att anta att de förblir lika."),
+        ("Efter bytet",
+         "Ge iPhonen tid att ladda ner de publikationer du använder mest, och kontrollera sedan några annoterade för att bekräfta att allt kommit fram: anteckningar, markeringsfärger, bokmärken och etiketter. Behåll Android-kopian även efter att bytet är klart: den är en daterad ögonblicksbild av ditt bibliotek, och att spara den kostar ingenting."),
     ],
     "faq": [
         ("Behöver jag en dator för det här?",
@@ -229,6 +314,20 @@ GUIDES_SV["jw-library-android-to-iphone"] = {
         ("Överlever mina markeringsfärger flytten?",
          "Ja — markeringarna behåller sina färger, anteckningarna sina etiketter och "
          "bokmärkena sina platser."),
+        ("Behöver jag en dator för det här?",
+         "Nej. AirDrop, mejl eller vilken molntjänstapp som helst flyttar filen direkt mellan de två telefonerna."),
+        ("Fungerar det åt andra hållet, från iPhone till Android?",
+         "Ja, likadant. Samma steg fungerar i alla riktningar, även till och från Windows-appen."),
+        ("Behöver iPhonen samma publikationer nedladdade?",
+         "Ja, eftersom publikationsmedier inte ingår i en säkerhetskopia. Anteckningarna kopplas tillbaka till varje publikation så snart den laddats ner."),
+        ("Måste jag behålla Android-telefonen efteråt?",
+         "Nej, när du kontrollerat att anteckningarna finns på iPhonen. Titta på några annoterade publikationer innan du raderar eller lämnar in den gamla enheten."),
+        ("Fungerar överföringen för svaren på studiefrågorna?",
+         "Ja. Inskrivna svar är en del av de personliga studiedata och följer med allt annat."),
+        ("Finns det någon risk att förlora anteckningar vid bytet?",
+         "Inte om du behåller Android-kopian. Återställningen skriver till iPhonen och ändrar aldrig filen den läser, så originalet finns kvar orört som reserv. Behåll det tills du bekräftat att iPhonen har allt, och gärna även efteråt."),
+        ("Tänk om Android-telefonen inte skapar någon säkerhetskopia?",
+         "Kontrollera ledigt utrymme först, eftersom appen behöver plats att skriva filen. Om det är appen själv som krånglar brukar en uppdatering eller en omstart av enheten lösa det. Dina data är oförändrade under tiden."),
     ],
 }
 
@@ -239,6 +338,7 @@ GUIDES_SV["backup-jw-library"] = {
                    "och bokmärken i JW Library — och det vanliga misstaget som överraskar "
                    "många.",
     "intro": [
+        "Allt du markerat i JW Library — varje anteckning, varje markering, varje bokmärke och etikett — finns på exakt en plats: enheten i din hand. Det finns inget konto som håller en kopia och ingen automatisk molnsynkronisering. En säkerhetskopia är det enda som står mellan ett studiebibliotek uppbyggt under år och en förlorad, återställd eller utbytt telefon.",
         "En ordentlig säkerhetskopia av JW Library tar en halv minut och skyddar år av samlat "
         "studium. Nästan alla berättelser om förlorade data börjar likadant: det fanns ingen "
         "färsk .jwlibrary-fil när mobilen tappades bort, återställdes eller byttes ut.",
@@ -266,6 +366,20 @@ GUIDES_SV["backup-jw-library"] = {
          "Det händer: en från mobilen, en äldre från surfplattan, båda med egna anteckningar. "
          "Du behöver aldrig välja mellan dem — slå ihop dem till en komplett fil på "
          "jwsync.org, gratis och privat, direkt i webbläsaren."),
+        ("Vad filen innehåller och vad den inte innehåller",
+         "Säkerhetskopian bevarar dina personliga studiedata: anteckningar, markeringar och deras färger, bokmärken, etiketter och svaren du skrivit in i studiefrågornas fält. Den bevarar inte publikationerna — varken biblar, tidskrifter, böcker, video eller ljud. Det är därför en kopia av många års studium bara upptar några megabyte, och därför en återställning på en ny enhet lämnar dig att ladda ner publikationer medan varje anteckning du skrivit redan är tillbaka på sin plats."),
+        ("Hur många kopior du bör spara",
+         "Fler än en. Det som kostar folk deras anteckningar är sällan en förlorad fil — det är en bra kopia som skrivits över av en dålig, eller en återställning som gjorts på fel enhet. Eftersom filerna är små finns ingen anledning att radera de gamla: spara dem daterade i en mapp i molnet. En kopia från ett halvår tillbaka blir inte värdelös bara för att du har nyare, för allt du råkat radera sedan dess finns fortfarande kvar i den."),
+        ("Var du sparar dem",
+         "Var som helst utom bara på enheten själv. En mapp i Drive, iCloud, Dropbox eller OneDrive täcker det fall som betyder mest — att enheten tappas bort, blir stulen, återställs eller går sönder. Att mejla filen till dig själv fungerar också och har den nyttiga bieffekten att den blir daterad. Filen innehåller dina egna studieanteckningar, så hantera den lika omsorgsfullt som vilket personligt dokument som helst."),
+        ("Kontrollera en säkerhetskopia innan du litar på den",
+         "En säkerhetskopia du aldrig öppnat är ett antagande, inte ett skyddsnät. Du kan öppna en .jwlibrary-fil i webbläsaren och se exakt vilka anteckningar, markeringar och bokmärken den innehåller — en kontroll på trettio sekunder som gör antagandet till ett faktum. Det spelar störst roll strax före något oåterkalleligt: en fabriksåterställning, en inbytesaffär, en reparation eller en större systemuppdatering."),
+        ("Tillfällena det är värt att säkerhetskopiera inför",
+         "Varje tillfälle då enheten byter ägare eller tillstånd: en systemuppdatering, en fabriksåterställning, en reparation eller ett skärmbyte, ett inbyte, eller att enheten ges vidare. Lägg till slutet på allt du skulle ogilla att göra om — en sammankomst, ett kretsbesök, en period av talförberedelse. Säkerhetskopior går snabbt och kostar lite, så den användbara vanan är att knyta dem till händelser snarare än till kalendern."),
+        ("En telefonkopia är inte en JW Library-kopia",
+         "Google One, en enhetskopia i iCloud eller tillverkarens överföringsverktyg arbetar på enhetsnivå och behandlar appars egna data ojämnt. Det visar sig regelbundet att en fullständig telefonåterställning gav tillbaka appar och inställningar men inte studieanteckningarna, eller gav tillbaka en version från flera veckor tidigare. .jwlibrary-filen är den enda kopia vars innehåll du styr över och kan kontrollera, så betrakta telefonkopian som en bonus och inte som planen."),
+        ("Gör det till en vana som håller",
+         "Rutinen som verkligen håller är den som hänger på något du redan gör: säkerhetskopiera när du är klar med veckans förberedelse, eller samma dag som du sköter andra återkommande sysslor. Spara alltid i samma mapp så att filerna samlas på ett ställe, och låt de gamla ligga kvar. En mapp med daterade kopior som sträcker sig år tillbaka är den mest robusta formen av det här, och att underhålla den tar sekunder i veckan."),
     ],
     "faq": [
         ("Hur stor är en säkerhetskopia?",
@@ -273,6 +387,16 @@ GUIDES_SV["backup-jw-library"] = {
          "e-postbilaga."),
         ("Ändras något i mobilen när jag skapar en säkerhetskopia?",
          "Nej. Den skriver bara filen; ditt bibliotek rörs inte."),
+        ("Ingår mina nedladdade publikationer i säkerhetskopian?",
+         "Nej. Bara personliga studiedata. Publikationerna laddas ner igen på den nya enheten, och dina anteckningar kopplas tillbaka till dem automatiskt."),
+        ("Kan jag öppna en säkerhetskopia för att se vad som finns i den?",
+         "Ja. Du kan öppna en .jwlibrary-fil i webbläsaren och bläddra bland alla anteckningar, markeringar och bokmärken den innehåller, utan att installera något och utan att filen lämnar din enhet."),
+        ("Slutar säkerhetskopior gälla?",
+         "Nej. En .jwlibrary-fil går att återställa hur länge som helst. Återställ i en aktuell version av JW Library snarare än en gammal, eftersom appen läser äldre kopieformat men inte nyare."),
+        ("Bör jag säkerhetskopiera före varje möte?",
+         "Det behövs inte. Knyt kopiorna till händelser som skulle kunna kosta dig data — uppdateringar, reparationer, nya enheter — plus en regelbunden takt som motsvarar hur mycket studium du skulle ogilla att göra om."),
+        ("Är det värt att spara kopior från flera år tillbaka?",
+         "Ja. De är små, och allt du råkat radera sedan dess finns fortfarande kvar i dem."),
     ],
 }
 
@@ -335,6 +459,7 @@ GUIDES_SV["fix-corrupted-jw-library-backup"] = {
                    "säkerhetskopian i din webbläsare, reparerar de vanliga problemen och ger "
                    "dig en ren kopia som går att återställa.",
     "intro": [
+        "En säkerhetskopia som inte går att återställa är inte nödvändigtvis en kopia som förlorat dina anteckningar. De flesta filer folk beskriver som skadade är strukturellt hela och avvisas av ett åtgärdbart skäl, eller har tagit skada under överföringen på ett sätt som en ny kopia löser. Det är värt att gå igenom orsakerna innan du skriver av filen.",
         "Ibland vägrar JW Library en säkerhetskopia — återställningen misslyckas, ger ett fel "
         "eller så går filen inte att öppna. Vanliga orsaker: en avbruten nedladdning, en "
         "molntjänst som förvanskat filen, en filändelse som ändrats på vägen, eller inre "
@@ -368,6 +493,20 @@ GUIDES_SV["fix-corrupted-jw-library-backup"] = {
          "uppfinna dem igen. Doktorn säger det ärligt i stället för att lämna ifrån sig en "
          "tvivelaktig fil — och det är signalen att leta efter en tidigare kopia i e-posten, "
          "Drive eller iCloud, vilket också är skälet att spara gamla säkerhetskopior."),
+        ("Vad skadad brukar betyda",
+         "I praktiken handlar det sällan om trasiga data. De vanliga orsakerna är en fil som kapats under överföringen — förkortad av en misslyckad uppladdning eller av en meddelandeapp som komprimerat den — eller ett arkiv som är helt men innehåller inre motsägelser som appen avvisar. Eftersom en .jwlibrary är ett ZIP runt en SQLite-databas kan problemet sitta i vilket av de två lagren som helst, och de kräver olika åtgärder: en kapad fil går inte att reparera och måste hämtas på nytt; en motsägelsefull databas går oftast att reparera."),
+        ("Vad en genomsökning faktiskt kontrollerar",
+         "En genomsökning verifierar att arkivet öppnas, att userData.db är en läsbar SQLite-databas som klarar en integritetskontroll, att schemat motsvarar det JW Library förväntar sig, och att manifestet stämmer med databasen det beskriver — inklusive den kontrollsumma appen använder för att bekräfta att filen inte ändrats. En avvikelse mellan manifest och databas är ett av de vanligaste skälen till att en tekniskt felfri kopia avvisas vid återställning, och det går att åtgärda direkt."),
+        ("Föräldralösa rader är oftast ofarliga",
+         "En genomsökning av en verklig kopia rapporterar ofta rader som pekar på något som inte längre finns — till exempel en markering som pekar på en plats i en publikation som flyttats. JW Librarys egna kopior innehåller rutinmässigt hundratals sådana och återställs utan invändningar. De är en normal följd av att publikationer uppdateras med tiden, inte ett tecken på skada, och de behöver inte rensas för att filen ska fungera."),
+        ("Rädda anteckningar ur en fil som inte går att återställa",
+         "Även när en kopia inte kan repareras tillräckligt för att JW Library ska acceptera den är anteckningarna inuti ofta fortfarande läsbara. Att öppna filen i webbläsaren låter dig se och kopiera texten direkt, vilket förvandlar en oanvändbar fil till räddat studiematerial. Har du en andra, äldre kopia som går att återställa kan det läsbara innehållet från den skadade föras samman med den i stället för att skrivas av."),
+        ("När återställningen misslyckas utan tydligt felmeddelande",
+         "JW Library avvisar ofta en fil utan att förklara varför. Vanligast är ett manifest vars kontrollsumma inte längre stämmer med databasen det beskriver, en fil som kapats under överföringen, eller en kopia skriven av en nyare appversion än den du återställer i. Det första går att åtgärda, det andra kräver att filen hämtas på nytt från källan, och det tredje löses genom att uppdatera appen före återställningen."),
+        ("Undvik det nästa gång",
+         "Merparten av skadorna uppstår under transporten. Flytta kopior som filer och inte via något som kan komprimera om dem, och välj molnet, AirDrop eller en kabel framför meddelandeappar. Kontrollera efter överföringen att storleken stämmer med originalet — en fil som är märkbart mindre än den du skickade har kapats, och ingen reparation ger tillbaka byte som aldrig kom fram."),
+        ("Om ingenting fungerar",
+         "En fil som inte går att reparera kan ändå vara läsbar, och att läsa den räcker ofta — anteckningstexten går att rädda direkt även när JW Library avvisar filen. Kombinera det med en äldre kopia som går att återställa så har du oftast merparten av biblioteket kvar. Innan du dömer ut en fil: öppna den och se vad som faktiskt finns i den."),
     ],
     "faq": [
         ("Laddas mina data upp för granskningen?",
@@ -375,6 +514,16 @@ GUIDES_SV["fix-corrupted-jw-library-backup"] = {
         ("Kan den återskapa anteckningar som raderats inne i JW Library?",
          "Nej — den reparerar filens struktur. Anteckningar som raderats i appen innan "
          "säkerhetskopian skapades finns inte i filen att återskapa."),
+        ("Går några anteckningar förlorade när filen repareras?",
+         "Reparationer arbetar på en kopia och rör strukturella problem, inte innehåll. Din originalfil ändras aldrig, så den finns kvar om du vill börja om."),
+        ("Varför blev min säkerhetskopia skadad?",
+         "Oftast ändrades filen under transporten — skickad via en app som komprimerade eller kapade den, eller en uppladdning som inte blev klar. Att överföra filen på nytt från källan brukar lösa det."),
+        ("Kan en genomsökning rädda anteckningar jag raderat inuti JW Library?",
+         "Nej. När den raderats i appen och en ny kopia tagits finns anteckningen inte kvar i den filen. En kopia från före raderingen innehåller den fortfarande."),
+        ("Kan filstorleken avslöja om den är kapad?",
+         "Ofta ja. Jämför med originalet om du har det kvar; en tydlig skillnad betyder att överföringen inte slutfördes."),
+        ("Går en kopia som öppnas i webbläsaren garanterat att återställa?",
+         "Inte garanterat, men det är ett starkt tecken på att arkivet och databasen är hela, vilket utesluter de vanligaste felen."),
     ],
 }
 
@@ -623,6 +772,7 @@ GUIDES_SV["open-jwlibrary-file"] = {
                    "anteckning, markering, bokmärke och etikett. Här är vad den innehåller och "
                    "hur du öppnar och läser den.",
     "intro": [
+        "En .jwlibrary-fil ser ogenomtränglig ut, och är det inte. Den är ett helt vanligt ZIP-arkiv runt en helt vanlig SQLite-databas, vilket betyder att du kan läsa din egen säkerhetskopia — se exakt vilka anteckningar, markeringar och bokmärken den innehåller — utan JW Library och utan att installera någonting alls.",
         "När du säkerhetskopierar JW Library får du en fil som slutar på .jwlibrary. Det är ett "
         "enda, flyttbart paket som innehåller allt från ditt personliga studium — anteckningar, "
         "markeringar, bokmärken, etiketter och spellistor — i en kompakt databas. Det är inget "
@@ -655,6 +805,20 @@ GUIDES_SV["open-jwlibrary-file"] = {
          "Samma sida jwsync.org fungerar i webbläsaren på en laptop eller stationär dator — "
          "praktiskt för att läsa år av anteckningar på en stor skärm, eller för storstädning "
          "som skulle vara tröttsam på mobilen. Inget behöver installeras."),
+        ("Vad filen faktiskt är",
+         "En .jwlibrary-fil är ett ZIP-arkiv med en annan filändelse. Inuti finns userData.db — en SQLite-databas med dina anteckningar, markeringar, bokmärken och etiketter — och manifest.json, en liten fil som beskriver kopian och innehåller en kontrollsumma för databasen som JW Library använder för att bekräfta att filen inte ändrats. Ingenting i den är proprietärt eller krypterat; det är ett standardarkiv runt en standarddatabas."),
+        ("Öppna den utan JW Library",
+         "Du behöver varken appen eller någon programvara för att läsa din egen säkerhetskopia. Att öppna filen i webbläsaren visar alla anteckningar, markeringar och bokmärken den innehåller, med sökning och filtrering, och filen lämnar aldrig din enhet — den läses lokalt i stället för att laddas upp. Det är snabbaste sättet att bekräfta att en kopia innehåller det du tror, före en återställning, ett inbyte eller en återställning på en ny telefon."),
+        ("Titta inuti manuellt",
+         "Är du nyfiken: kopiera filen, byt namn på kopian till .zip och öppna den med valfritt arkivverktyg. Du ser userData.db och manifest.json. Att öppna databasen kräver en SQLite-visare, och tabellerna heter det de innehåller — Note, UserMark, Bookmark, Tag. Arbeta alltid på en kopia: att redigera databasen för hand utan att uppdatera manifestets kontrollsumma ger en fil som JW Library vägrar återställa."),
+        ("Redigera tryggt",
+         "Anteckningar kan rättas, märkas om, färgas om eller raderas utanför appen, och resultatet exporteras som en ny .jwlibrary-fil som du återställer på vanligt sätt. Regeln som håller det tryggt är att behålla originalet: redigera en kopia, återställ den redigerade filen, och om något inte blev som du tänkt finns det orörda originalet kvar att gå tillbaka till."),
+        ("Läsa en säkerhetskopia på en telefon",
+         "Du behöver ingen dator. Att öppna filen i en mobil webbläsare fungerar likadant, vilket är praktiskt när kopian redan ligger på telefonen och du vill bekräfta innehållet före en återställning eller innan du raderar enheten. Filen läses lokalt, så det fungerar utan annan uppkoppling än den som laddar sidan."),
+        ("Varför manifestets kontrollsumma spelar roll",
+         "manifest.json noterar en kontrollsumma för userData.db. JW Library använder den för att bekräfta att databasen inte ändrats sedan kopian skrevs, så en fil vars databas redigerats utan att kontrollsumman räknats om avvisas vid återställning. Det är det enskilt vanligaste skälet till att en handredigerad kopia slutar fungera, och skälet till att redigera via ett verktyg som skriver om manifestet är säkrare än att gå direkt på databasen."),
+        ("Vad det här är bra för",
+         "Att kunna läsa en säkerhetskopia ändrar vad en säkerhetskopia är värd. Du kan bekräfta att en fil innehåller det du tror innan du raderar en telefon, se om en gammal fil är värd att återställa, hitta en anteckning du vet att du skrivit utan att leta igenom appen, eller rädda text ur en fil som JW Library inte accepterar. Inget av det kräver att du anförtror filen åt någon — den läses på din egen enhet."),
     ],
     "faq": [
         ("Kan jag öppna en .jwlibrary-fil i Excel eller Anteckningar?",
@@ -664,6 +828,16 @@ GUIDES_SV["open-jwlibrary-file"] = {
         ("Är det säkert att öppna min säkerhetskopia i webbläsaren?",
          "Ja. JW Sync läser filen lokalt i din webbläsarflik; ingenting skickas till en server, "
          "och din ursprungliga fil ändras aldrig."),
+        ("Kan jag bara byta namn på den till .zip?",
+         "Ja, på en kopia. Namnbytet ändrar inte innehållet och låter vilket arkivverktyg som helst visa dig vad som finns inuti."),
+        ("Ändras filen av att jag öppnar den?",
+         "Nej. Att läsa en säkerhetskopia — i webbläsaren eller ett arkivverktyg — lämnar den byte för byte oförändrad. Först när du sparar eller exporterar skapas en ny fil."),
+        ("Måste jag vara uppkopplad?",
+         "Bara för att ladda sidan. Filen läses på din enhet och laddas inte upp, så dina anteckningar färdas aldrig över nätet."),
+        ("Kan jag öppna en säkerhetskopia som någon annan skickat mig?",
+         "Ja, formatet är inte bundet till en enhet eller ett konto. Om du bör återställa den är en annan fråga, eftersom en återställning ersätter ditt eget bibliotek."),
+        ("Måste jag installera något för att titta inuti?",
+         "Nej. En webbläsare räcker för att läsa anteckningarna; bara manuell granskning av själva databasen kräver en SQLite-visare."),
     ],
 }
 
@@ -718,6 +892,7 @@ GUIDES_SV["recover-jw-library-notes-lost-phone"] = {
                    "Vad du kan rädda beror på dina säkerhetskopior. Så får du tillbaka dina "
                    "anteckningar — och så gör du nästa gång.",
     "intro": [
+        "När en telefon tappas bort, blir stulen eller går sönder bortom räddning avgörs dina JW Library-anteckningars öde av en enda fråga: finns det en .jwlibrary-kopia någonstans utanför den enheten? Om den gör det kommer allt i den tillbaka. Den här sidan handlar om hur du hittar en, hur du återställer den på vilken ersättningsenhet som helst, och vad du gör när den enda kopia du har är gammal.",
         "Att tappa bort en mobil är stressigt nog utan rädslan att år av studieanteckningar gick "
         "med. Om du kan rädda dem avgörs av en enda fråga: finns det en "
         ".jwlibrary-säkerhetskopia någonstans utanför den mobilen?",
@@ -753,6 +928,20 @@ GUIDES_SV["recover-jw-library-notes-lost-phone"] = {
          ".jwlibrary-fil utanför mobilen (att mejla den till dig själv räcker). JW Sync kan till "
          "och med påminna dig och slå ihop dina enheter enligt schema. En fil som ligger i "
          "inkorgen överlever vilken mobil som helst."),
+        ("Var det redan kan finnas en kopia",
+         "Innan du drar slutsatsen att ingen finns: leta överallt där en fil kan ha sparats. Mapparna Nedladdningar och Dokument på varje dator du kopplat telefonen till, skickat i mejlen, meddelandeappar du kan ha skickat filen genom, och varje molnkonto du använder. Många skapade en kopia en gång, för månader sedan, och glömde bort det — och en månader gammal kopia innehåller fortfarande det allra mesta av ett studiebibliotek."),
+        ("Återställa på en annan telefon eller plattform",
+         "Ersättningsenheten behöver inte motsvara den förlorade. En kopia från en Android-telefon återställs på en iPhone och tvärtom, eftersom formatet är identiskt på Android, iOS, iPadOS och Windows. Installera JW Library på den nya enheten, uppdatera till aktuell version och återställ via Personligt studium → Säkerhetskopiera och återställ."),
+        ("Om allt du har är en gammal eller ofullständig kopia",
+         "Återställ den ändå. Att få tillbaka merparten av dina anteckningar är inget tröstpris — det är resultatet. Om du senare hittar en andra, annan kopia kan de två slås ihop till en fil med allt från båda, så att återställa den äldre nu hindrar dig inte från att fylla på senare."),
+        ("Vad som inte går att rädda",
+         "Om ingen kopia finns i någon form går personliga studiedata inte att få tillbaka. De lagras bara i appens egna lagringsutrymme på enheten, och varken JW Library eller en molnkopia på telefonnivå bevarar dem tillförlitligt. Det är värt att säga rakt ut, för det är själva skälet till att rutinen på den här sajten finns."),
+        ("Kontrollera innan enheten raderas på distans",
+         "Om telefonen är borttappad snarare än förstörd och du överväger en fjärradering: leta efter befintliga kopior först. Raderingen går inte att ångra och tar bort den sista chansen att någon skapar en. Är enheten bara på villovägar och fortfarande nåbar går det inte att skapa en kopia på distans, men data ligger kvar oförändrade så länge den varken raderas eller återställs."),
+        ("Se till att det inte händer igen",
+         "Skälet till att en förlorad telefon kostar folk år av studium är att den enda kopian låg på telefonen. När du återställt på en ersättningsenhet: lägg en kopia utanför enheten samma dag, och upprepa i en takt du faktiskt håller. Filerna är små nog att spara allihop hur länge som helst utan kostnad."),
+        ("Om det verkligen inte finns någon kopia",
+         "Då är det ärliga svaret att anteckningarna inte går att få tillbaka, och det är bättre att höra det än att fortsätta leta. Det du kan göra är att låta förlusten bli den sista: installera JW Library på ersättaren och skapa en kopia utanför enheten innan du byggt upp något som skulle svida att förlora. Från den punkten kostar samma händelse dig ingenting."),
     ],
     "faq": [
         ("Kan JW Sync rädda anteckningar från en mobil jag inte längre har?",
@@ -762,6 +951,16 @@ GUIDES_SV["recover-jw-library-notes-lost-phone"] = {
         ("Min säkerhetskopia är gammal — är den ändå värd att återställa?",
          "Absolut. En gammal säkerhetskopia med det mesta av dina anteckningar är långt bättre "
          "än att börja från noll, och du kan slå ihop den senare med allt nyare du hittar."),
+        ("Sparar JW Library en kopia av mina anteckningar i molnet?",
+         "Nej. Personliga studiedata stannar på enheten om du inte själv skapar en säkerhetskopia."),
+        ("Går anteckningar att rädda från en telefon med trasig skärm?",
+         "Ibland — om telefonen fortfarande startar och går att styra, eller om en verkstad kan driva skärmen, kan JW Library fortfarande skapa en kopia. Data är oskadda så länge lagringen är det."),
+        ("Går en gammal kopia fortfarande att återställa i den aktuella appen?",
+         "Ja. JW Library läser äldre kopieformat. Uppdatera appen först och återställ i aktuell version."),
+        ("Jag hittade två gamla kopior — vilken ska jag använda?",
+         "Ingen av dem ensam: slå ihop dem. Resultatet innehåller allt från båda, inklusive sådant som fanns i den äldre och redan hunnit raderas när den nyare togs."),
+        ("Kan jag se vad som finns i en kopia innan jag återställer den?",
+         "Ja. Öppna filen i webbläsaren och bläddra igenom dess anteckningar, markeringar och bokmärken först, så vet du vad du återställer."),
     ],
 }
 
@@ -823,6 +1022,7 @@ GUIDES_SV["export-jw-library-notes"] = {
                    "som Markdown eller vanlig text för användning var som helst, eller plocka "
                    "ut ett urval till en ny .jwlibrary-säkerhetskopia. Allt i webbläsaren.",
     "intro": [
+        "Anteckningar skrivna i JW Library är lätta att läsa inuti appen och otympliga att använda någon annanstans — i ett dokument, i ett talutkast, på papper, eller i händerna på någon som inte använder appen. Export löser det, och huvudbeslutet är inte hur du exporterar utan hur mycket: en filtrerad export är nästan alltid mer användbar än allt på en gång.",
         "Dina studieanteckningar ska inte sitta fast i en enda app. Ibland vill du ha dem som "
         "vanlig text — att klistra in i ett talutkast, ett dokument eller din egen "
         "anteckningsapp — och ibland vill du ha en ren säkerhetskopia med bara en delmängd. "
@@ -851,6 +1051,20 @@ GUIDES_SV["export-jw-library-notes"] = {
          "Anteckningar är mer användbara när de kan resa: in i ett dokument för en uppgift på "
          "mötet, in i en personlig wiki, in i en utskrift till någon som inte använder appen. "
          "Markdown behåller strukturen och är samtidigt läsbar som vanlig text överallt."),
+        ("Välja format",
+         "Ren text är mest portabel och klistras in snyggt i vilket dokument eller mejl som helst. Formaterad utdata bevarar strukturen i långa anteckningar och passar för utskrift eller delning. Vill du ha tillbaka anteckningarna i JW Library senare — på en annan enhet, eller i någon annans bibliotek — spara själva .jwlibrary-filen i stället för en textexport, eftersom bara den bevarar kopplingarna mellan anteckningar, markeringar, etiketter och den exakta plats i publikationen de är förankrade vid."),
+        ("Exportera bara en del av biblioteket",
+         "En fullständig export av många års studium är sällan det du vill ha. Att avgränsa först — till en etikett, en publikation, en markeringsfärg eller ett datumintervall — ger något du faktiskt kan använda, som alla anteckningar märkta för ett tal, eller allt skrivet under en sammankomst. Samma filter som avgränsar vyn avgränsar exporten, så det du ser är det du får."),
+        ("Vad som följer med texten och vad som inte gör det",
+         "En export bär med sig dina ord. Den bär inte med sig ankarna som binder en anteckning till ett bestämt stycke i en bestämd publikation, eftersom de referenserna bara betyder något inuti JW Library. Det är det praktiska skälet att spara säkerhetskopior också: en export är till för att läsa, skriva ut och dela utanför appen, medan en .jwlibrary-fil är det som lägger tillbaka anteckningarna i ett bibliotek med sitt sammanhang intakt."),
+        ("Samla ihop allt inför ett tal eller ett uppdrag",
+         "Det är det vanligaste skälet att exportera. Filtrera på etiketten, publikationen eller datumintervallet materialet ligger under, kontrollera resultatet och exportera bara det. Du får ett enda dokument med de relevanta anteckningarna och de avsnitt du markerat, i den ordning de förekommer, i stället för en ohanterlig tömning av hela ditt bibliotek."),
+        ("Dela anteckningar med någon annan",
+         "Två olika saker döljer sig bakom att dela. Vill den andra personen läsa dina anteckningar är en textexport rätt: den öppnas överallt och kräver ingen särskild programvara. Vill personen ha anteckningarna inuti sitt eget JW Library, förankrade vid samma stycken och med sina etiketter och färger, då är det en .jwlibrary-fil du vill ha, eftersom en textexport inte kan lägga tillbaka något i appen."),
+        ("Behålla ett arkiv du kan läsa långt senare",
+         "Exporter är värda något i sig själva. En kopia av dina studieanteckningar i ren text går fortfarande att öppna om trettio år, i program ingen ännu skrivit, och det kan inget appspecifikt format lova. Att behålla båda — .jwlibrary för återställning och en textexport för läsning — kostar nästan ingenting och täcker båda framtiderna."),
+        ("Export eller säkerhetskopia — vilket du behöver",
+         "De besvarar olika frågor. En export är till för att använda anteckningarna utanför JW Library: läsa, skriva ut, citera, skicka till någon. En .jwlibrary-kopia är till för att lägga tillbaka dem i JW Library, på den här enheten eller en annan, med varje ankare, etikett och färg intakt. Ingendera ersätter den andra, och det finns ingen anledning att inte ha båda."),
     ],
     "faq": [
         ("Ändrar exporten mina anteckningar i JW Library?",
@@ -859,6 +1073,20 @@ GUIDES_SV["export-jw-library-notes"] = {
         ("Kan jag exportera allt på en gång?",
          "Ja — rensa filtren för att välja hela biblioteket, eller smalna av först för att bara "
          "exportera en del."),
+        ("Kan jag få in mina anteckningar i Word eller Google Dokument?",
+         "Ja — exportera som text och klistra in. Texten kommer med sin struktur intakt och kan formateras därifrån."),
+        ("Exporteras markeringar lika väl som anteckningar?",
+         "Ja, inklusive det markerade avsnittet och dess färg, så att en utskrift visar både vad du markerat och vad du skrivit."),
+        ("Kan jag exportera allt på en gång?",
+         "Ja, även om en filtrerad export oftast är mer användbar. Allt kan exporteras i ett svep när du vill ha en fullständig kopia."),
+        ("Kan jag exportera svaren jag skrivit in i studiefrågorna?",
+         "Ja. Inskrivna svar är en del av dina personliga studiedata och exporteras tillsammans med anteckningar och markeringar."),
+        ("Framgår det av exporten vilken publikation varje anteckning hör till?",
+         "Ja, exporten anger var varje anteckning kommer ifrån, även om själva ankaret bara fungerar inuti JW Library."),
+        ("Ändrar en export något i mitt bibliotek?",
+         "Nej. En export läser dina data och skriver en separat fil; ingenting inuti JW Library ändras, flyttas eller tas bort."),
+        ("Kan jag exportera från en säkerhetskopia i stället för från appen?",
+         "Ja. En .jwlibrary-fil kan öppnas direkt och dess anteckningar exporteras, vilket är användbart när anteckningarna du vill åt ligger i en gammal kopia och inte på din nuvarande enhet."),
     ],
 }
 
@@ -1790,6 +2018,7 @@ GUIDES_SV["jw-library-notes-missing-after-update"] = {
                    "ny inloggning. Vad du ska göra först, vad du inte ska göra, och hur du får "
                    "tillbaka dem utan att förlora något du skrivit sedan dess.",
     "intro": [
+        "Att öppna JW Library efter en uppdatering och hitta anteckningarna borta är oroande, och i de allra flesta fall går de att få tillbaka. Det som avgör är vad du gör de närmaste minuterna — närmare bestämt att inte göra det enda som förvandlar ett räddningsbart läge till en definitiv förlust.",
         "Det är ett obehagligt ögonblick: JW Library öppnas, och anteckningarna är inte där. "
         "Före allt annat ett råd — stressa inte. Det mesta som gör den här situationen "
         "oåterkallelig görs under de första tio minuterna, genom att man skriver över just den "
@@ -1829,6 +2058,16 @@ GUIDES_SV["jw-library-notes-missing-after-update"] = {
          "En fil som ger fel under återställningen är inte nödvändigtvis förlorad. Kör "
          "hälsokontrollen på den — skador från avbrutna nedladdningar, molnsynkning eller en "
          "omdöpt filändelse går ofta att reparera, och en rensad kopia återställs normalt."),
+        ("Först: skapa ingen ny säkerhetskopia än",
+         "Om anteckningarna försvunnit: motstå reflexen att säkerhetskopiera direkt. En säkerhetskopia fångar det aktuella läget, och om det aktuella läget är det tomma riskerar du att skriva över den bra fil du redan hade. Ta först reda på vilka kopior som finns — i Nedladdningar, Filer, mejlen eller molnet — och bestäm dig först därefter. Ingenting på enheten blir bättre av en kopia tagen i panik."),
+        ("Varför en uppdatering kan se ut att radera anteckningar",
+         "Den vanliga orsaken är inte radering. En uppdatering kan lämna appen pekande mot en ny, tom databas medan den gamla ligger kvar på disken; en ominstallation — även en som en halvt misslyckad butiksuppdatering utfört automatiskt — startar appen från noll; och på delade enheter eller enheter med flera profiler kan appen hamna under en annan profil. I samtliga fall är anteckningarna snarare inte inlästa än raderade, och det är också därför en återställning från säkerhetskopia oftast tar tillbaka allt utan problem."),
+        ("Hämta tillbaka en gammal kopia utan att kasta det nya arbetet",
+         "Om du studerat sedan kopian skapades byter en rak återställning en förlust mot en annan: den tar tillbaka de gamla anteckningarna och tar bort det nyare. Vägen runt är att säkerhetskopiera det aktuella läget till en separat fil, slå ihop den med den äldre kopian så att båda uppsättningarna anteckningar finns i en fil, och återställa resultatet. Du får de återfunna och de nya anteckningarna tillsammans i stället för att behöva välja."),
+        ("Om appen installerade om sig själv",
+         "En ominstallation tömmer appens egna lagringsutrymme, så allt som inte finns i en säkerhetskopia går inte att få tillbaka — det finns ingen molnkopia att falla tillbaka på. Kontrollera varenda plats där en .jwlibrary-fil kan ha sparats innan du drar slutsatsen att ingen finns, inklusive mappen för skickat i mejlen och alla molntjänster du någonsin sparat till. När du hittar en: återställ den, och förvara därefter kopiorna utanför enheten."),
+        ("När allt är tillbaka",
+         "När anteckningarna är återställda: ta en kopia till och lägg den utanför enheten — det du just varit med om är argumentet för det. Om du behövde slå ihop en gammal kopia med det aktuella läget för att komma hit, spara även de två källfilerna: de är daterade ögonblicksbilder, och att ha flera av dem var precis det som gjorde räddningen möjlig."),
     ],
     "faq": [
         ("Finns anteckningarna kvar någonstans på enheten?",
@@ -1841,6 +2080,14 @@ GUIDES_SV["jw-library-notes-missing-after-update"] = {
          "Slå ihop den med en säkerhetskopia av enheten som den ser ut nu. Du får tillbaka allt "
          "den gamla filen har och behåller allt enheten fortfarande har, utan att behöva välja "
          "mellan dem."),
+        ("Är mina anteckningar verkligen borta?",
+         "Inte nödvändigtvis. Finns det en säkerhetskopia någonstans går allt i den att få tillbaka fullt ut. Det enda som inte går att rädda är arbete gjort efter den senaste kopian."),
+        ("Kan jag kombinera en gammal kopia med det som finns på enheten nu?",
+         "Ja — säkerhetskopiera det aktuella läget först, slå ihop det med den äldre och återställ resultatet. Båda uppsättningarna anteckningar hamnar i samma bibliotek."),
+        ("Raderar en återställning av en gammal kopia mina nya anteckningar?",
+         "På egen hand, ja, eftersom en återställning ersätter enhetens data. Slå ihop den aktuella kopian med den gamla först och återställ den sammanslagna filen."),
+        ("Bör jag installera om appen för att fixa det?",
+         "Nej — en ominstallation tömmer appens egna lagringsutrymme och tar bort varje chans att rädda det som fortfarande finns på enheten. Leta efter en befintlig kopia först, och betrakta ominstallationen som en sista utväg när du har en."),
     ],
 }
 
