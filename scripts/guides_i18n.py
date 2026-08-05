@@ -434,6 +434,54 @@ CHROME = {
             "Power tools": "고급 도구",
         },
     },
+    "tl": {
+        "lang_name": "Filipino",
+        "lang_label": "Wika",
+        "og_locale": "tl_PH",
+        "site_guides": "Mga Gabay sa JW Sync",
+        "nav_guides": "Mga Gabay",
+        "nav_community": "Komunidad",
+        "nav_open_app": "Buksan ang app",
+        "crumb_guides": "Mga Gabay",
+        "h_steps": "Hakbang-hakbang",
+        "h_faq": "Mga madalas itanong",
+        "h_related": "Mga kaugnay na gabay",
+        "cta_title": "Gawin mo na ngayon — libre, sa browser mo",
+        "cta_body": "Pinagsasama, ine-edit at sinusuri ng JW Sync ang mga .jwlibrary na "
+                    "backup nang buong-buo sa device mo. Walang account, walang ina-upload, "
+                    "walang ini-install.",
+        "cta_btn": "Buksan ang JW Sync →",
+        "index_title": "Mga gabay sa backup, sync at nota ng JW Library | JW Sync",
+        "index_desc": "Mga praktikal na gabay para sa mga backup ng JW Library: pagsamahin "
+                      "ang mga backup mula sa dalawang device, ilipat ang mga nota sa bagong "
+                      "cellphone, lumipat mula Android patungong iPhone, ayusin ang backup na "
+                      "ayaw maisauli, i-edit at hanapin ang mga nota mo, at marami pa.",
+        "index_h1": "Mga gabay at paano-gawin",
+        "index_lede": "Lahat tungkol sa mga backup ng JW Library, sa malilinaw na hakbang: "
+                      "pagsasama ng mga device, paglipat sa bagong cellphone, pagsagip ng mga "
+                      "nota, at higit pang pakinabang sa library na mayroon ka na. Libreng "
+                      "tumatakbo sa browser mo ang bawat kagamitang nabanggit — hindi "
+                      "kailanman ina-upload ang mga file mo.",
+        "index_cta_title": "Laktawan ang pagbabasa — buksan na lang ang kagamitan",
+        "index_cta_body": "Mga isang minuto lang ang pagsasama ng dalawang backup, at "
+                          "gagabayan ka ng app sa bawat hakbang.",
+        "footer_all_guides": "Lahat ng gabay",
+        "footer_community": "Komunidad",
+        "footer_stats": "Study Stats",
+        "footer_privacy": "Sa device mismo pinoproseso ng JW Sync ang lahat ng datos — hindi "
+                          "kailanman umaalis ang mga file mo sa device mo. Libre; walang "
+                          "account, walang ina-upload.",
+        "footer_disclaimer": "Ang “JW Library” ay pag-aari ng Watch Tower Bible and Tract "
+                             "Society of Pennsylvania. Ang JW Sync ay isang malayang "
+                             "kasangkapan at hindi kaugnay nito ni inendorso man nito.",
+        "groups": {
+            "Getting started": "Pagsisimula",
+            "Sharing scenarios": "Pagbabahagi ng mga nota",
+            "Everyday scenarios": "Mga pang-araw-araw na sitwasyon",
+            "Fixing problems": "Pag-aayos ng problema",
+            "Power tools": "Mga masusing kagamitan",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -490,10 +538,12 @@ from guides_it import GUIDES_IT  # noqa: E402
 from guides_ru import GUIDES_RU  # noqa: E402
 from guides_ja import GUIDES_JA  # noqa: E402
 from guides_ko import GUIDES_KO  # noqa: E402
+from guides_tl import GUIDES_TL  # noqa: E402
 
 GUIDE_TEXT = {
     "ja": GUIDES_JA,
     "ko": GUIDES_KO,
+    "tl": GUIDES_TL,
     "es": GUIDES_ES,
     "pt": GUIDES_PT,
     "fr": GUIDES_FR,

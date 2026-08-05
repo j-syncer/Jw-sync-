@@ -4,6 +4,24 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.10.0] — 2026-08-05
+
+### Added: all 37 guides in Tagalog
+
+The complete guide library is now available in Tagalog at
+`jwsync.org/guides/tl/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/tl/` now links **Mga gabay at paano-gawin** to the Tagalog guide index.
+- Each Tagalog guide is its own indexable page with a Tagalog title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German, Italian, Russian, Japanese, Korean and Arabic
+  twins.
+- English guide URLs are unchanged.
+
+Two languages left: Swedish and Cebuano.
+
+---
+
 ## [3.9.0] — 2026-08-05
 
 ### Added: all 37 guides in Korean

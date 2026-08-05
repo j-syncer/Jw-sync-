@@ -135,9 +135,17 @@ function git(args) {
 
   // Committed history: the last commit touching a precached page must be the
   // CACHE_VERSION-bump commit itself, or an ancestor of it.
+  //
+  // --diff-merges=first-parent matters here. `git log -G` produces no diff for
+  // a merge commit by default, so a CACHE_VERSION bump made while resolving a
+  // merge is invisible to the plain form — while `log -- <paths>` *does*
+  // report that same merge as the last commit touching a page. The two halves
+  // then disagree and the check fails on a build that is in fact correct.
   try {
     const hPages = git('log -1 --format=%H -- ' + PRECACHED.join(' '));
-    const hBump = git('log -1 --format=%H -G"CACHE_VERSION" -- service-worker.js');
+    // -s suppresses the patch: --diff-merges turns it back on, which would
+    // otherwise land in the captured output alongside %H.
+    const hBump = git('log -1 -s --format=%H --diff-merges=first-parent -G"CACHE_VERSION" -- service-worker.js');
     if (!hPages || !hBump) {
       ok('history: nothing to compare yet');
     } else if (hPages === hBump) {
