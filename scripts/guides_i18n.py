@@ -482,6 +482,51 @@ CHROME = {
             "Power tools": "Mga masusing kagamitan",
         },
     },
+    "sv": {
+        "lang_name": "Svenska",
+        "lang_label": "Språk",
+        "og_locale": "sv_SE",
+        "site_guides": "JW Sync-guider",
+        "nav_guides": "Guider",
+        "nav_community": "Gemenskap",
+        "nav_open_app": "Öppna appen",
+        "crumb_guides": "Guider",
+        "h_steps": "Steg för steg",
+        "h_faq": "Vanliga frågor",
+        "h_related": "Relaterade guider",
+        "cta_title": "Gör det nu — gratis, i din webbläsare",
+        "cta_body": "JW Sync slår ihop, redigerar och analyserar .jwlibrary-säkerhetskopior "
+                    "helt på din enhet. Inget konto, inga uppladdningar, ingen installation.",
+        "cta_btn": "Öppna JW Sync →",
+        "index_title": "Guider om JW Library-säkerhetskopior, synk och anteckningar | JW Sync",
+        "index_desc": "Praktiska guider för JW Library-säkerhetskopior: slå ihop kopior från "
+                      "två enheter, flytta anteckningar till en ny mobil, gå från Android till "
+                      "iPhone, reparera en säkerhetskopia som inte går att återställa, "
+                      "redigera och söka i dina anteckningar, och mycket mer.",
+        "index_h1": "Guider och instruktioner",
+        "index_lede": "Allt om JW Library-säkerhetskopior, i tydliga steg: slå ihop enheter, "
+                      "byta till en ny mobil, rädda anteckningar och få ut mer av biblioteket "
+                      "du redan har. Varje verktyg som nämns körs gratis i din webbläsare — "
+                      "dina filer laddas aldrig upp.",
+        "index_cta_title": "Hoppa över läsningen — öppna verktyget direkt",
+        "index_cta_body": "Att slå ihop två säkerhetskopior tar ungefär en minut, och appen "
+                          "leder dig genom det.",
+        "footer_all_guides": "Alla guider",
+        "footer_community": "Gemenskap",
+        "footer_stats": "Studiestatistik",
+        "footer_privacy": "JW Sync behandlar all data lokalt — dina filer lämnar aldrig din "
+                          "enhet. Gratis att använda; inget konto, inga uppladdningar.",
+        "footer_disclaimer": "”JW Library” tillhör Watch Tower Bible and Tract Society of "
+                             "Pennsylvania. JW Sync är ett fristående verktyg som varken är "
+                             "knutet till eller godkänt av dem.",
+        "groups": {
+            "Getting started": "Kom igång",
+            "Sharing scenarios": "Dela anteckningar",
+            "Everyday scenarios": "Vardagliga situationer",
+            "Fixing problems": "Lösa problem",
+            "Power tools": "Avancerade verktyg",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -539,11 +584,13 @@ from guides_ru import GUIDES_RU  # noqa: E402
 from guides_ja import GUIDES_JA  # noqa: E402
 from guides_ko import GUIDES_KO  # noqa: E402
 from guides_tl import GUIDES_TL  # noqa: E402
+from guides_sv import GUIDES_SV  # noqa: E402
 
 GUIDE_TEXT = {
     "ja": GUIDES_JA,
     "ko": GUIDES_KO,
     "tl": GUIDES_TL,
+    "sv": GUIDES_SV,
     "es": GUIDES_ES,
     "pt": GUIDES_PT,
     "fr": GUIDES_FR,

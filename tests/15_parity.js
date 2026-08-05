@@ -165,6 +165,31 @@ function git(args) {
   }
 })();
 
+// ── The two shells must claim the same release ─────────────────────────────
+// index.html and beta/index.html are deliberately not byte-identical, so the
+// pair check above cannot cover them — which let softwareVersion drift once
+// already: a `git checkout index.html` during an unrelated test reverted the
+// bump in production while beta kept it, and every existing check still
+// passed. The version is in the Schema.org block search engines read, so a
+// stale one is wrong in public, not just untidy.
+(function shellVersionsAgree() {
+  console.log('\n== Landing shells declare the same softwareVersion ==');
+  const re = /"softwareVersion": *"([^"]*)"/;
+  const got = {};
+  for (const f of ['index.html', 'beta/index.html']) {
+    const m = re.exec(read(f));
+    if (!m) { fail(f + ': no softwareVersion in the JSON-LD block'); return; }
+    got[f] = m[1];
+  }
+  if (got['index.html'] === got['beta/index.html']) {
+    ok('both shells declare ' + got['index.html']);
+  } else {
+    fail('softwareVersion has drifted: index.html says ' + got['index.html'] +
+      ', beta/index.html says ' + got['beta/index.html'],
+      'Set both to the release you are shipping.');
+  }
+})();
+
 // ── Summary ────────────────────────────────────────────────────────────────
 console.log('\n== SUMMARY ==\n');
 if (failCount) {

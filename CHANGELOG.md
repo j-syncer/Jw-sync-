@@ -4,6 +4,30 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.11.0] — 2026-08-05
+
+### Added: all 37 guides in Swedish
+
+The complete guide library is now available in Swedish at
+`jwsync.org/guides/sv/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/sv/` now links **Guider och instruktioner** to the Swedish guide index.
+- Each Swedish guide is its own indexable page with a Swedish title,
+  description and structured data, cross-linked to its eleven twins.
+- English guide URLs are unchanged.
+
+### Fixed: the two landing shells had drifted apart in version
+
+`index.html` was still declaring version 3.9.0 in its Schema.org block while
+`beta/index.html` said 3.10.0 — the production bump was reverted by an
+unrelated `git checkout` and nothing caught it, because the two files are
+deliberately not byte-identical and no check compared them. Both now declare
+3.11.0, and the parity suite fails if they ever disagree again.
+
+One language left: Cebuano.
+
+---
+
 ## [3.10.0] — 2026-08-05
 
 ### Added: all 37 guides in Tagalog
