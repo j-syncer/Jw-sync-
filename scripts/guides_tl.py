@@ -75,6 +75,16 @@ GUIDES_TL["merge-jw-library-backups"] = {
          "Hindi kailanman binabago ng pagsasama ang orihinal mong mga file — gumagawa ito ng "
          "bagong-bagong backup, kaya buo pa rin ang mga orihinal bilang panangga. At dahil "
          "sa browser lahat tumatakbo, walang datos na umaalis sa device mo."),
+        ("Ano talaga ang laman ng isang .jwlibrary na file",
+         "Ang backup na .jwlibrary ay isang ZIP archive. Kopyahin ito, palitan ang pangalan ng kopya ng .zip at buksan: makikita mo ang userData.db, isang SQLite database na naglalaman ng lahat ng nota, highlight, bookmark at tag na nagawa mo, kasama ang maliit na manifest.json na naglalarawan sa backup. Nasa talahanayang Note ang iyong mga nota, nasa UserMark at BlockRange ang mga highlight, nasa Bookmark ang mga bookmark, at nasa Tag at TagMap ang mga tag. Kapag naunawaan mong ang backup ay isang buong database at hindi tipak-tipak na mga file, malilinawan ang lahat ng iba pa sa pahinang ito: iyan ang dahilan kung bakit ang pagsasauli ay lahat-o-wala, at kung bakit puwedeng pagsamahin ang dalawang backup."),
+        ("Bakit hindi makapagsama ang sariling Pagsasauli ng JW Library",
+         "Kapag nagsasauli, hindi binabasa ng JW Library ang backup mo para idagdag ang kulang sa nasa device na. Pinapalitan nito ang database ng device ng nasa file. Sinadya at ligtas ang disenyong ito dahil tiyak na kilalang kalagayan ang matatapos sa device, pero ang ibig sabihin ay kapag isinauli mo sa telepono ang backup ng tablet, mawawala ang lahat ng nasa telepono na wala sa tablet. Walang setting na makapagbabago nito, at iyan mismo ang puwang na pinupunan ng pagsasama: gumagawa ito ng iisang file na naglalaman na ng gawa ng dalawang device, kaya kumpleto ang device na pagsasaulian mo."),
+        ("Paano natutukoy ang mga duplicate",
+         "May GUID ang bawat nota, highlight at bookmark — isang natatanging pagkakakilanlan na ipinagkakaloob sa paggawa at napananatili sa lahat ng sumunod na backup. Kapag lumitaw ang parehong bagay sa dalawang backup, iisa ang GUID ng dalawang kopya, kaya nakikilala itong iisang bagay at isang beses lang iniingatan. Kaya nga hindi dumodoble ang anuman kahit dalawang beses mong pagsamahin ang parehong dalawang file, at kaya ligtas kang makapag-uulit linggo-linggo. Kapag tugma ang GUID pero magkaiba ang teksto — iisang nota na binago sa dalawang device — hindi ito kusang malulutas, kaya lumilitaw ito sa Conflict Reviewer nang may salita-por-salitang paghahambing para ikaw ang pumili."),
+        ("Ano ang wala sa backup",
+         "Datos lang ng personal mong pag-aaral ang dala ng backup. Hindi kasama ang mga na-download na publikasyon, salin ng Bibliya, video at audio, at kaya maliliit ang mga file ng backup — karaniwang ilang megabyte lang kahit taon-taong pag-aaral. Pagkatapos magsauli sa bagong device, baka kailanganin mong i-download uli ang mga publikasyong madalas mong basahin. Walang naaapektuhan sa isinulat mo: naka-angkla ang mga nota sa mga publikasyon sa pamamagitan ng reperensiya, kaya muli itong dumidikit pagdating ng publikasyon."),
+        ("Kung 0 ang naidagdag na nota ayon sa pagsasama",
+         "Halos palaging tama ito, hindi depekto. Ibig sabihin, nasa unang file na ang lahat ng nota sa pangalawa — karaniwan kapag kamakailan ka lang nagsama, o kapag mas luma lang ang isang device kaysa sa isa. Tingnan ang preview: inilalahad nito kung ano ang dala ng bawat file bago pa may maisulat. Kung umaasa kang may bago at wala kang nakikita, tiyakin mong ginawa mo ang backup ng device pagkatapos ng pag-aaral na hinahanap mo, dahil ang laman lang ng backup ay ang umiiral noong ginawa ito."),
     ],
     "faq": [
         ("Puwede bang mahigit dalawang backup ang pagsamahin?",
@@ -88,6 +98,14 @@ GUIDES_TL["merge-jw-library-backups"] = {
          "Oo. Pareho ang .jwlibrary na format sa Android, iOS, iPadOS at Windows, kaya "
          "nagsasama ang mga backup mula sa magkaibang plataporma nang walang anumang "
          "conversion."),
+        ("Kailangan ba ng partikular na pagkakasunod-sunod sa pagsasama?",
+         "Hindi. Walang kinalaman ang pagkakasunod-sunod — pareho ang lalabas sa iisang pangkat ng mga file, alinman ang unahin mo. Ang tanging naaapektuhan ay kung aling file ang ituturing na batayan sa buod ng preview."),
+        ("Ano ang mangyayari sa mga tag na nasa iisang device lang?",
+         "Buo silang naililipat, pati ang ugnayan ng mga tag at ng mga notang minarkahan nila. Kung pareho ang pangalan ng tag sa dalawang device, iisa ang ituturing at mapupunta rito ang mga nota mula sa dalawa."),
+        ("Gaano kalaki ang pinagsamang file?",
+         "Halos kasinlaki ng dalawang orihinal na pinagsama, bawas ang mga duplicate — karaniwang ilang megabyte pa rin. Walang media ng publikasyon sa mga backup, kaya kahit napakaraming markang aklatan ay kasya pa rin sa email."),
+        ("Puwede bang bawiin ang isang pagsasauli?",
+         "Hindi mula sa loob ng JW Library, at iyan ang dahilan kung bakit mahalagang itago ang orihinal mong mga backup. Hindi kailanman binabago ng pagsasama ang mga file na inilo-load mo, kaya nananatiling gayon ang mga backup mo bago ang pagsasama at maisasauli kung gusto mong bumalik."),
     ],
 }
 
@@ -98,6 +116,7 @@ GUIDES_TL["sync-jw-library-multiple-devices"] = {
                    "ang simple at pribadong rutina para manatiling magkatulad ang mga nota, "
                    "highlight at bookmark sa cellphone, tablet at computer mo.",
     "intro": [
+        "Halos lahat ng nag-aaral sa dalawang device ay iisa ang paraan ng pagkatuklas sa suliranin: wala sa telepono ang mga notang isinulat sa tablet, at kung isasauli ang backup ng isa sa isa pa ay mabubura ang nasa huli. Walang inaalok na pag-sync ang JW Library, at sinadyang lahat-o-wala ang pagsasauli nito, kaya kailangan ng gawain at hindi ng setting para manatiling magkatugma ang mga device.",
         "Hindi sini-sync ng JW Library ang datos ng personal na pag-aaral sa pagitan ng mga "
         "device — walang account na magdadala ng mga nota mo mula sa cellphone patungo sa "
         "tablet. Ang opisyal na paraan ay Backup at Pagsasauli, at pinapalitan ng pagsasauli "
@@ -135,6 +154,20 @@ GUIDES_TL["sync-jw-library-multiple-devices"] = {
          "kumportable ang minsan sa isang linggo. Tablet na lumalabas lang tuwing pulong: "
          "sapat na ang minsan sa isang buwan. Ang tanging bunga ng mas mahabang paghihintay "
          "ay mas marami ang pagsasamahin — walang nawawala sa pagitan ng bawat ulit."),
+        ("Bakit walang tunay na pag-sync",
+         "Walang account ang JW Library na nagdadala ng datos ng personal na pag-aaral mula sa isang device tungo sa isa pa. Nasa database sa loob ng bawat device ang mga nota, highlight at bookmark, at doon sila nananatili. Ang tanging opisyal na paraan para ilipat ang mga ito ay ang Backup at Pagsasauli, at pinapalitan ng pagsasauli ang datos ng patutunguhang device sa halip na pagsamahin. Kaya nagkakalayo nang tuluyan ang dalawang device na hiwalay na ginagamit, maliban kung may magsasama sa kanila — at iyan mismo ang layunin ng gawain sa ibaba."),
+        ("Magpanatili ng isang pangunahing file",
+         "Pinakamainam ang gawaing ito kung ituturing mong pangunahin sa kasalukuyan ang isang pinagsamang file. Sa bawat ikot, i-backup ang lahat ng device, pagsamahin ang mga backup na iyon, at isauli ang bunga saanman. Ang pinagsamang file ang magiging pangunahin sa susunod na ikot. Ang pag-iingat ng may-petsang pangunahing file sa cloud ay nagbibigay sa iyo ng paraan ng pag-sync at ng talaan nang sabay: kung may mabura kang hindi sinasadya, naroon pa rin ito sa naunang pangunahing file."),
+        ("Ano ang mangyayari kung malalaktawan mo ang isang device nang matagal",
+         "Walang nawawala. Ang device na nalaktawan sa ilang ikot ay simpleng may mas lumang datos; kapag naisama mo na rin, sumasanib ang mga nota nito sa lahat ng iba pa at pinagtutugma sa pamamagitan ng GUID ang mga paulit-ulit na bagay sa halip na dumoble. Ang tanging kalagayang kailangan ng pasiya ay ang iisang notang binago sa dalawang device mula nang huling pagsamahin, at lumilitaw iyon sa Conflict Reviewer nang magkatabi ang dalawang bersiyon."),
+        ("Gaano kadalas ang sapat",
+         "Iakma sa dami ng gawaing ayaw mong ulitin. Bagay ang lingguhan kung halos araw-araw kang nag-aaral sa dalawang device; sobra-sobra na ang buwanan kung paminsan-minsan lang ang isa. Ang mahalaga ay gawin ito bago ang anumang hindi na mababawi — pagpapalit ng telepono, pag-reset, pagpapaayos — dahil doon nagiging pagkawala ang pagkakalayo."),
+        ("Telepono, tablet at ang app para sa Windows nang sabay",
+         "Walang pakialam ang gawaing ito kung ilan ang device o ano ang pinapatakbo ng mga ito. I-backup ang bawat isa, pagsamahin lahat sa isang hakbang, isauli ang pinagsamang file saanman. Nagsasama ang kompyuter na Windows na ginagamit sa paghahanda at ang teleponong dala sa pulong gaya mismo ng dalawang telepono, dahil iisang anyo ng backup ang isinusulat ng bawat plataporma."),
+        ("Bawasan ang salungatan bago pa ito mangyari",
+         "Nangyayari lang ang salungatan kapag binago ang iisang nota sa dalawang device sa pagitan ng mga pagsasama. Sa katotohanan, bihira ito, at lalo pang bumibihira kung sa isang device ka lang magsusulat — magbasa saanman, pero magtipa kung saan ka karaniwang nagtitipa. Ang mas madalas na pagsasama ay nagpapaikli rin sa panahong maaaring mangyari ang pagkakalayo, at mas mabisa ito kaysa sa pagsisikap na tandaan kung aling device ang may pinakabagong bersiyon."),
+        ("Kung saan sumasagot ang gawaing ito",
+         "Ang halaga ng pagpapanatiling pinagsama ang mga device ay hindi ang kaayusan — ito ay ang pagiging buong backup ng bawat device sa aklatan ng iyong pag-aaral. Mawala man o masira ang alinman sa kanila, dala pa rin ng iba ang lahat, at ginagawa nitong abala lamang ang dating pinakamasamang kalagayan ng taon-taong nawawalang nota. Mas matatag itong kalagayan kaysa sa maibibigay ng anumang ugali ng pag-backup sa iisang device."),
     ],
     "faq": [
         ("Tumatakbo ba ang JW Sync sa background?",
@@ -144,6 +177,16 @@ GUIDES_TL["sync-jw-library-multiple-devices"] = {
         ("Puwede bang tatlo o higit pang device ang i-sync?",
          "Oo. I-backup ang bawat isa, i-load ang lahat ng file, pagsamahin nang minsan, at "
          "isauli ang pinagsamang file sa lahat."),
+        ("Paano kung binago ko ang iisang nota sa dalawang device?",
+         "Iniingatan ang dalawang bersiyon hanggang pumili ka. Ipinapakita ng Conflict Reviewer ang mga ito nang magkatabi na may salita-por-salitang paghahambing, o puwede mong ipasuggest ang mas kumpleto."),
+        ("Mahalaga ba ang pagkakasunod-sunod ng pagsasauli?",
+         "Hindi. Kapag nagawa na ang pinagsamang file, ang pagsasauli nito sa bawat device ay naglalagay sa lahat sa iisang buong kalagayan, sa anumang pagkakasunod-sunod na akma sa iyo."),
+        ("Puwede bang tatlo o higit pang device?",
+         "Oo. I-backup ang bawat isa at i-load lahat sa iisang pagsasama — walang hangganang nakatali sa dami ng device."),
+        ("Puwede ba itong gawing awtomatiko?",
+         "Hindi lubusan, dahil walang API ng pag-sync ang JW Library at nangyayari sa loob ng app ang hakbang ng pagsasauli. Mga dalawang minuto ang manwal na gawain kapag nasanay ka na."),
+        ("Kailangan ko bang magsama kung nagbabasa lang ako sa pangalawang device?",
+         "Kung hindi ka kailanman nagmamarka roon, sapat nang magsauli ka rito paminsan-minsan para dalhin nito ang kasalukuyan mong mga nota."),
     ],
 }
 
@@ -154,6 +197,7 @@ GUIDES_TL["transfer-jw-library-notes-new-phone"] = {
                    "sa JW Library patungo sa bagong cellphone gamit ang .jwlibrary na backup "
                    "— at kung paano magsama kung may nota ka na sa bagong cellphone.",
     "intro": [
+        "Ang pagpapalit ng telepono ang pinakamadalas na sandali kung kailan nawawala ang taon-taong nota sa JW Library — hindi dahil mahirap ang paglilipat, kundi dahil kailangan itong sadyain bago pa mabura ang lumang device. Hindi maaasahang kasama ang datos ng personal na pag-aaral sa karaniwang paglilipat mula telepono tungo sa telepono, at walang itinatagong kopya nito ang JW Library sa anumang account.",
         "Inililipat ng mga tool sa paglilipat ng cellphone ang mga app at litrato, pero hindi "
         "maaasahang nadadala ng mga ito ang datos ng personal na pag-aaral sa JW Library. Ang "
         "maaasahang paraan para madala ang mga nota, highlight, bookmark at tag mo sa bagong "
@@ -184,6 +228,20 @@ GUIDES_TL["transfer-jw-library-notes-new-phone"] = {
          "Kung dumating sa iPhone ang backup na file na napalitan ang pangalan ng .zip, "
          "ibalik ito sa .jwlibrary bago isauli — maayos ang laman; ang extension lang ang "
          "nagbago sa daan."),
+        ("Gawin ito bago burahin o ipagpalit ang lumang telepono",
+         "Kailangang gawin ang backup habang gumagana pa ang lumang telepono at naka-install pa rito ang JW Library. Kapag na-reset na ang device, naipagpalit o naipasa sa iba, kasama nitong mawawala ang mga nota: walang itinatagong kopya sa cloud ang JW Library para sa datos ng personal na pag-aaral, at ang backup ng buong telepono gaya ng Google One o backup ng device sa iCloud ay madalas na nagsasauli ng mas lumang kalagayan ng datos ng app, o wala man lang. Gawin muna ang .jwlibrary na file, ilagay sa ligtas na lugar, at tiyaking nakikita mo ito bago ka magbura ng kahit ano."),
+        ("Paano ilabas ang file mula sa lumang telepono",
+         "Sa Android, naisusulat ang file sa folder na pinili mo — kadalasan ay Downloads o Documents — at mailILipat ito ng anumang file manager, mai-email mo sa sarili mo, o mailalagay sa cloud. Sa iPhone, lumilitaw ang share sheet pagkagawa mismo ng backup: i-save sa Files, ipadala sa bagong telepono sa AirDrop, o ipadala sa sarili mo. Walang bisa ang paraan at hindi nito masisira ang file: iisang archive ang .jwlibrary, kaya buo itong dumarating o hindi dumarating."),
+        ("Bakit hindi sapat ang app na panlipat mula telepono tungo sa telepono",
+         "Ang mga kasangkapang gaya ng Smart Switch, Move to iOS o pagsasauli mula sa iCloud ay kumokopya ng mga app at datos ng sistema, pero madalas na nalalaktawan, bahagya lang naisasauli, o naisasauli mula sa mas naunang panahon ang pribadong database ng bawat app. Karaniwang natutuklasan ang kulang pagkalipas ng ilang linggo, kapag wala na ang lumang telepono. Ituring mong ang .jwlibrary na file ang tunay na kopya at ang paglilipat ng telepono ay ginhawa lang: kung nagkataóng dala nito ang mga nota mo, walang mawawala kung isasauli mo pa rin ang sarili mong backup sa ibabaw."),
+        ("Tiyaking talagang umubra ang paglilipat",
+         "Pagkatapos magsauli sa bagong telepono, magbukas ng dalawa o tatlong publikasyong kamakailan mong minarkahan at tiyaking naroon ang mga nota, kulay ng highlight at bookmark. Mas mabilis na pagsusuri: buksan mismo ang file ng backup sa iyong browser bago mo burahin ang lumang device — makikita mo ang bawat nota, highlight at bookmark na nasa loob, kaya alam mo kung ano ang dapat lumitaw. Burahin lang ang lumang telepono kapag napatunayan mo na ang bago."),
+        ("Kung sabay ka ring lilipat sa tablet o kompyuter",
+         "Pareho ang file na gagana saanman. Kung sabay mong isasaayos ang bagong telepono at tablet, isauli ang parehong .jwlibrary na file sa dalawa at magsisimula silang magkatulad. Mula roon, muli silang maghihiwalay ayon sa pinag-aaralan mo sa bawat isa, kaya mainam nang magpasya ngayon kung pagsasama-samahin mo sila paminsan-minsan o ituturing mong pangunahin ang isa."),
+        ("Kung may nota na ang bagong telepono",
+         "Nangyayari ito kapag isang linggo mo nang ginagamit ang bagong device bago mo asikasuhin ang paglilipat. Papalitan ng datos ng lumang telepono ang gawang iyon kung tuwirang magsasauli ka. Gawin muna ang backup ng bagong telepono, pagsamahin ito sa backup ng luma, at isauli ang bunga — mapupunta sa iisang aklatan ang dalawang pangkat ng nota sa halip na patungan ng isa ang isa."),
+        ("Ano ang gagawin kapag umaandar na ang bagong telepono",
+         "Suriin bago mo pakawalan ang kahit ano. Magbukas sa bagong telepono ng ilang publikasyong kamakailan mong minarkahan at tiyaking naroon ang mga nota, kulay at bookmark; saka mo lang burahin o ipagpalit ang lumang device — ganito ang pagkakasunod-sunod at huwag kailanman baligtarin. Kapag maayos na, maglagay ng backup sa labas ng telepono, dahil babalik ang kalagayang nagdala sa iyo sa pahinang ito sa susunod mong pagpapalit."),
     ],
     "faq": [
         ("Malilipat din ba ang mga na-download kong publikasyon?",
@@ -193,6 +251,16 @@ GUIDES_TL["transfer-jw-library-notes-new-phone"] = {
         ("May epekto ba kung magkaiba ang bersiyon ng Android ng mga cellphone?",
          "Wala. Pareho ang .jwlibrary na format saanman, pati na sa pagitan ng mga bersiyon "
          "ng Android at sa pagitan ng Android at iPhone."),
+        ("MailILipat ko pa ba ang mga nota kung wala na ang lumang telepono?",
+         "Kung may .jwlibrary na file sa kung saan lang: sa Files, Downloads, isang email sa sarili mo o sa cloud. Kung wala, walang maisasauli, dahil sa device lang nakaimbak ang datos ng personal na pag-aaral."),
+        ("Kailangan bang pareho ang bersiyon ng JW Library sa dalawang telepono?",
+         "Hindi kailangang eksaktong magkatugma, pero i-update ang bagong telepono sa kasalukuyang bersiyon bago magsauli. Ang backup na gawa ng mas bagong bersiyon ay maaaring gumamit ng istruktura ng database na hindi nauunawaan ng mas lumang app."),
+        ("Kakailanganin ko bang i-download uli ang mga publikasyon?",
+         "Kadalasan ay oo — walang media ng publikasyon sa backup. Muling dumidikit ang mga nota mo sa bawat publikasyon pagka-download nito, kaya walang mawawala sa isinulat mo samantala."),
+        ("Gaano katagal ang lahat?",
+         "Ilang minuto. Ilang segundo lang ang paggawa ng backup, nakadepende sa paraan ang paglilipat ng file, at mabilis ang pagsasauli. Ang pinakamatagal ay ang muling pag-download ng mga publikasyon, at puwede itong tumakbo sa likod."),
+        ("Puwede bang gawin ito nang walang Wi-Fi?",
+         "Ang paglilipat mismo, oo, sa AirDrop o kable. Kailangan ng koneksiyon sa muling pag-download ng mga publikasyon sa bagong device."),
     ],
 }
 
@@ -203,6 +271,7 @@ GUIDES_TL["jw-library-android-to-iphone"] = {
                    "ilipat ang mga nota, highlight at bookmark sa magkaibang plataporma — at "
                    "kung paano magsama kung may nota ang dalawang device.",
     "intro": [
+        "Mukhang mahirap ang paglipat sa pagitan ng Android at iPhone, pero ito ang madali. Iisang anyo ng backup ang isinusulat ng JW Library sa bawat plataporma kung saan ito tumatakbo, kaya ang paglilipat ng aklatan ng pag-aaral mula Android tungong iOS ay katulad na katulad ng paglilipat sa pagitan ng dalawang Android na telepono — walang pagpapalit ng anyo, walang pipiliing format ng pag-export, walang nawawala sa daan.",
         "Ang paglipat ng plataporma ang sandaling kinatatakutan ng marami na mawala ang "
         "taon-taong nota sa pag-aaral — laktaw nang laktaw ang mga app na panlipat mula "
         "Android papuntang iPhone sa datos ng JW Library. Ang magandang balita: pareho ang "
@@ -232,6 +301,22 @@ GUIDES_TL["jw-library-android-to-iphone"] = {
          "iPhone papuntang Android, Android papuntang Android, pagdaragdag ng iPad bilang "
          "pangalawang device sa pag-aaral, o paglipat sa Windows app — ang backup na file ang "
          "karaniwang wika ng lahat ng ito."),
+        ("Bakit magkatulad ang anyo sa dalawang plataporma",
+         "Iisang anyo ng backup ang ginagamit ng JW Library saanman ito tumakbo — Android, iOS, iPadOS at Windows. Ang .jwlibrary na file ay isang ZIP na naglalaman ng SQLite database na may parehong talahanayan at parehong istruktura, anuman ang device na sumulat nito. Walang hakbang ng pagpapalit ng anyo, walang balikang pag-export at pag-import, at walang bahaging nakatali sa plataporma sa loob ng file. Naisasauli ang backup mula sa Android sa iPhone gaya mismo ng gagawin ng backup mula sa iPhone."),
+        ("Ang tanging bahaging talagang nagkakaiba",
+         "Hindi ang file — ang paraan lang ng pagkuha rito. Sa Android, naise-save ang backup sa folder na pinili mo at mailILipat ng anumang file manager. Sa iPhone, dumadaan ito sa share sheet patungong Files, AirDrop, o kung saan mo gusto. Ang hirap na nararanasan sa paglipat ng plataporma ay laging nasa hakbang na ito ng paghawak, hindi kailanman sa pagkakatugma. Umuubra nang pantay ang email, cloud o AirDrop; buo ang dating ng archive o hindi ito dumarating."),
+        ("Kulay ng highlight, mga tag at sagot sa pag-aaral",
+         "Nananatili ang lahat. Nakaimbak bilang bilang ang kulay ng mga highlight — dilaw, berde, asul, rosas, kahel at lila — at pare-pareho ang anyo sa anumang plataporma. Naililipat ang mga tag at ang ugnayan ng tag at nota, gayundin ang mga sagot na tinipa sa mga patlang ng tanong sa pag-aaral. Ang makikita mo sa iPhone pagkatapos magsauli ay iyon mismo ang nasa Android mong device."),
+        ("Kung hindi ka payagan ng iOS na piliin ang file",
+         "I-save muna ang file sa Files app, saka piliin mula roon sa halip na mula sa kalakip ng email o sa preview ng isang messaging app. May mga app na nagbibigay sa iOS ng pansamantalang kopyang pang-preview sa halip na ang tunay na file, at hindi ito mabubuksan ng JW Library. Kung dumating ang file bilang kalakip, pindutin ito, piliin ang Save to Files, at magsauli mula sa Files."),
+        ("Ihanda ang iPhone bago magsauli",
+         "I-install ang JW Library mula sa App Store at i-update ito sa kasalukuyang bersiyon bago ka magsauli ng anuman. Ang backup na isinulat ng mas bagong bersiyon ay maaaring gumamit ng istruktura ng database na hindi nauunawaan ng mas lumang bersiyon, at basta na lang tatanggihan ang pagsasauli. Hindi kailangang mag-sign in kahit saan: nasa file na isinasauli mo ang datos ng personal na pag-aaral, hindi sa isang account."),
+        ("Kung nakapagsimula ka nang mag-aral sa iPhone",
+         "I-backup muna ang iPhone. Papalitan ng tuwirang pagsasauli ng file mula sa Android ang lahat ng isinulat mo mula nang lumipat ka. Ang pagsasama ng dalawang backup ay gumagawa ng file na naglalaman ng pareho, na isasauli mo — mapupunta sa iisang aklatan ang kasaysayan mula sa Android at ang bagong nota sa iPhone."),
+        ("Kung gagamitin mo pa rin ang dalawang telepono",
+         "May mga nag-iingat sa lumang Android bilang pangalawang pambasa sa halip na itabi na ito. Umuubra iyon, pero maghihiwalay sila sa sandaling magmarka ka sa dalawa, dahil walang pag-sync sa pagitan nila. Kung balak mong gamitin ang dalawa, ihanda mo ang sarili mong pagsamahin ang kanilang mga backup paminsan-minsan sa halip na akalaing mananatili silang magkatugma."),
+        ("Pagkatapos ng paglipat",
+         "Bigyan ng panahon ang iPhone na muling i-download ang mga publikasyong pinakamadalas mong gamitin, saka suriin ang ilang minarkahan para tiyaking dumating ang lahat: mga nota, kulay ng highlight, bookmark at tag. Itago ang file ng backup mula sa Android kahit tapos na ang paglipat: isa itong may-petsang larawan ng iyong aklatan, at walang gastos ang pag-iingat nito."),
     ],
     "faq": [
         ("Kailangan ko ba ng computer para dito?",
@@ -240,6 +325,20 @@ GUIDES_TL["jw-library-android-to-iphone"] = {
         ("Mananatili ba ang mga kulay ng highlight ko?",
          "Oo — nananatili ang kulay ng mga highlight, ang tag ng mga nota, at ang puwesto ng "
          "mga bookmark."),
+        ("Kailangan ko ba ng kompyuter para dito?",
+         "Hindi. Ang AirDrop, email o anumang app ng cloud storage ay tuwirang naglilipat ng file sa pagitan ng dalawang telepono."),
+        ("Umuubra ba ito sa kabilang direksiyon, mula iPhone tungong Android?",
+         "Oo, gayon din. Umuubra ang parehong hakbang sa kahit anong direksiyon, pati na sa app para sa Windows."),
+        ("Kakailanganin ba ng iPhone ang parehong na-download na publikasyon?",
+         "Oo, dahil walang media ng publikasyon sa backup. Dumidikit uli ang mga nota sa bawat publikasyon pagka-download nito."),
+        ("Kailangan ko bang itago ang Android na telepono pagkatapos?",
+         "Hindi na, kapag natiyak mong nasa iPhone na ang mga nota. Suriin ang ilang minarkahang publikasyon bago burahin o ipagpalit ang lumang device."),
+        ("Naililipat ba ang mga sagot sa tanong sa pag-aaral?",
+         "Oo. Bahagi ng datos ng personal na pag-aaral ang mga tinipang sagot at kasama ito sa lahat ng iba pa."),
+        ("May panganib bang mawalan ng nota sa paglipat?",
+         "Wala kung itatago mo ang backup mula sa Android. Sumusulat ang pagsasauli sa iPhone at hindi kailanman binabago ang file na binabasa nito, kaya buo ang orihinal bilang kapalit. Itago ito hanggang matiyak mong nasa iPhone na ang lahat, at mabuti nang pati pagkatapos."),
+        ("Paano kung hindi makagawa ng backup ang Android na telepono?",
+         "Suriin muna ang natitirang espasyo, dahil kailangan ng app ng lugar para isulat ang file. Kung ang mismong app ang may problema, kadalasang naaayos ito sa pag-update o pag-restart ng device. Buo pa rin ang datos habang inaayos mo ito."),
     ],
 }
 
@@ -250,6 +349,7 @@ GUIDES_TL["backup-jw-library"] = {
                    "highlight at bookmark mo sa JW Library — at ang karaniwang pagkakamaling "
                    "nabibiktima ang marami.",
     "intro": [
+        "Lahat ng minarkahan mo sa JW Library — bawat nota, bawat highlight, bawat bookmark at tag — ay nasa iisang lugar lang: ang device na hawak mo. Walang account na may kopya at walang awtomatikong pag-sync sa cloud. Ang backup lang ang nakatayo sa pagitan ng aklatan ng pag-aaral na tinipon mo sa loob ng maraming taon at ng nawala, na-reset o napalitang telepono.",
         "Kalahating minuto lang ang wastong backup ng JW Library at iniingatan nito ang "
         "taon-taong naipong pag-aaral. Halos pare-pareho ang simula ng mga kuwento ng "
         "nawalang datos: walang kamakailang .jwlibrary na file nang mawala, ma-reset o "
@@ -280,6 +380,20 @@ GUIDES_TL["backup-jw-library"] = {
          "may sariling mga nota ang bawat isa. Hindi mo kailangang mamili sa dalawa — "
          "pagsamahin ang mga ito sa isang kumpletong file sa jwsync.org, libre at pribado, sa "
          "browser mismo."),
+        ("Ano ang laman ng file, at ano ang wala",
+         "Iniingatan ng backup ang datos ng personal mong pag-aaral: mga nota, highlight at ang kulay ng mga ito, bookmark, tag, at ang mga sagot na tinipa mo sa mga patlang ng tanong sa pag-aaral. Hindi nito iniingatan ang mismong mga publikasyon — walang Bibliya, magasin, aklat, video o audio. Kaya nga ilang megabyte lang ang backup ng taon-taong pag-aaral, at kaya kapag nagsauli ka sa bagong device ay nagda-download ka pa ng mga publikasyon samantalang nasa lugar na ang bawat notang isinulat mo."),
+        ("Ilang backup ang dapat itago",
+         "Higit sa isa. Ang bagay na kumukuha ng mga nota ng tao ay bihirang nawawalang file — mas madalas na magandang backup na napatungan ng masama, o pagsasauli sa maling device. Dahil maliliit ang mga file, walang dahilan para burahin ang luma: itago ang mga ito nang may petsa sa isang folder sa cloud. Hindi nawawalan ng halaga ang backup na anim na buwan na ang tanda kahit may mas bago ka na, dahil ang anumang nabura mo nang hindi sinasadya mula noon ay naroon pa rin sa loob."),
+        ("Saan itago ang mga ito",
+         "Kahit saan basta hindi lang sa mismong device. Sagot na ng folder sa Drive, iCloud, Dropbox o OneDrive ang pinakamahalagang kalagayan — ang mawala, manakaw, ma-reset o masira ang device. Umuubra rin ang pag-email ng file sa sarili mo, at may bentahe pang mailalagay nito ang petsa. Nasa file ang sarili mong mga nota sa pag-aaral, kaya pakitunguhan ito gaya ng anumang personal na dokumento."),
+        ("Suriin ang backup bago ka umasa rito",
+         "Ang backup na hindi mo pa nabuksan ay palagay, hindi kaligtasan. Puwede mong buksan ang .jwlibrary na file sa iyong browser at makita mismo kung anong mga nota, highlight at bookmark ang laman nito — tatlumpung segundong pagsusuri na gumagawang katotohanan ang palagay. Pinakamahalaga ito bago mismo ang isang bagay na hindi na mababawi: factory reset, pagpapalit ng device, pagpapaayos, o malaking pag-update ng sistema."),
+        ("Ang mga sandaling sulit magbackup",
+         "Anumang punto na nagpapalit ng may-ari o kalagayan ang device: pag-update ng sistema, factory reset, pagpapaayos o pagpapalit ng screen, pagpapalit ng device, o pagbibigay nito sa iba. Idagdag pa ang katapusan ng anumang ayaw mong ulitin — isang kombensiyon, isang asamblea, isang panahon ng paghahanda ng pahayag. Mabilis at mura ang mga backup, kaya ang kapaki-pakinabang na ugali ay iugnay ang mga ito sa mga pangyayari at hindi sa kalendaryo."),
+        ("Ang backup ng telepono ay hindi backup ng JW Library",
+         "Ang Google One, ang backup ng device sa iCloud o ang kasangkapang panlipat ng gumawa ng telepono ay gumagana sa antas ng device at hindi pare-pareho ang pagtrato sa pribadong datos ng mga app. Karaniwan nang natutuklasan ng mga tao na ibinalik ng buong pagsasauli ng telepono ang mga app at setting pero hindi ang mga nota sa pag-aaral, o ibinalik ang bersiyong ilang linggo nang nakaraan. Ang .jwlibrary na file ang tanging kopyang kontrolado mo ang laman at kaya mong suriin, kaya ituring mong bonus ang backup ng telepono, hindi ang plano."),
+        ("Gawin itong ugaling tatagal",
+         "Ang gawaing talagang tumatagal ay ang nakakabit sa isang bagay na ginagawa mo na: magbackup pagkatapos mong ihanda ang linggo, o sa mismong araw na inaasikaso mo ang ibang panapanahong gawain. Palaging mag-save sa iisang folder para sa iisang lugar magtipon ang mga file, at iwan doon ang mga luma. Ang folder ng mga backup na may petsa na umaabot sa maraming taon ang pinakamatibay na anyo nito, at ilang segundo lang bawat linggo ang panatilihin ito."),
     ],
     "faq": [
         ("Gaano kalaki ang isang backup na file?",
@@ -287,6 +401,16 @@ GUIDES_TL["backup-jw-library"] = {
          "attachment sa email."),
         ("May binabago ba sa cellphone ko ang paggawa ng backup?",
          "Wala. Isinusulat lang nito ang file; buo pa rin ang library mo."),
+        ("Kasama ba sa backup ang mga na-download kong publikasyon?",
+         "Hindi. Datos lang ng personal na pag-aaral. Muling nada-download ang mga publikasyon sa bagong device, at kusang dumidikit uli rito ang mga nota mo."),
+        ("Puwede ko bang buksan ang backup para makita ang laman?",
+         "Oo. Puwede mong buksan ang .jwlibrary na file sa iyong browser at tingnan ang lahat ng nota, highlight at bookmark na nasa loob, nang walang ini-install at nang hindi lumalabas ang file sa device mo."),
+        ("Nag-e-expire ba ang mga backup?",
+         "Hindi. Nananatiling maisasauli ang .jwlibrary na file kahit kailan. Magsauli sa kasalukuyang bersiyon ng JW Library sa halip na sa luma, dahil nababasa ng app ang mas lumang anyo ng backup pero hindi ang mas bago."),
+        ("Dapat ba akong magbackup bago ang bawat pulong?",
+         "Hindi kailangan. Iugnay ang mga backup sa mga pangyayaring maaaring magpawala ng datos — mga update, pagpapaayos, bagong device — kasama ang panapanahong ritmong akma sa dami ng pag-aaral na ayaw mong ulitin."),
+        ("Sulit bang itago ang mga backup mula pa noong nakaraang taon?",
+         "Oo. Maliliit ang mga ito, at ang anumang nabura mo nang hindi sinasadya mula noon ay naroon pa rin sa loob."),
     ],
 }
 
@@ -349,6 +473,7 @@ GUIDES_TL["fix-corrupted-jw-library-backup"] = {
                    "Library Doctor ang backup sa browser mo, inaayos ang karaniwang problema, "
                    "at gumagawa ng malinis na kopyang naisasauli.",
     "intro": [
+        "Ang backup na hindi naisasauli ay hindi kinakailangang backup na nawalan ng mga nota mo. Karamihan sa mga file na inilalarawan ng mga tao bilang sira ay maayos ang istruktura at tinatanggihan dahil sa isang bagay na maaaring ayusin, o nasira sa paglilipat sa paraang naaayos ng bagong kopya. Sulit dumaan sa mga sanhi bago mo isuko ang file.",
         "Kung minsan ay ayaw tanggapin ng JW Library ang isang backup na file — nabibigo ang "
         "pagsasauli, may error, o ayaw magbukas ng file. Karaniwang dahilan: naputol na "
         "download, cloud drive na nakasira sa file, extension na napalitan sa daan, o mga "
@@ -385,6 +510,20 @@ GUIDES_TL["fix-corrupted-jw-library-backup"] = {
          "ng kaduda-dudang file — at iyon ang hudyat para maghanap ng mas lumang kopya sa "
          "email, Drive o iCloud, na siya ring dahilan kung bakit sulit ang pag-iingat ng mga "
          "lumang backup."),
+        ("Ano ang karaniwang ibig sabihin ng sira",
+         "Sa katotohanan, bihirang sirang datos ito. Ang karaniwang sanhi ay file na naputol sa paglilipat — pinaikli ng nabigong pag-upload o ng messaging app na nag-compress nito — o archive na buo pero may hindi magkatugmang bahagi sa loob na tinatanggihan ng app. Dahil ang .jwlibrary ay ZIP na bumabalot sa SQLite database, maaaring nasa alinman sa dalawang patong ang suliranin, at magkaiba ang kailangang lunas. Hindi maaayos ang naputol na file at kailangang kunin uli; ang hindi magkatugmang database ay karaniwang naaayos."),
+        ("Ano talaga ang sinusuri ng isang pag-scan",
+         "Tinitiyak ng pag-scan na bumubukas ang archive, na ang userData.db ay nababasang SQLite database na pumapasa sa pagsusuri ng integridad, na tugma ang istruktura sa inaasahan ng JW Library, at na sang-ayon ang manifest sa database na inilalarawan nito — pati ang hash na ginagamit ng app para tiyaking hindi nabago ang file. Ang hindi pagkakatugma ng manifest at database ang isa sa pinakakaraniwang dahilan kung bakit tinatanggihan sa pagsasauli ang backup na maayos naman sa teknikal, at tuwiran itong naaayos."),
+        ("Karaniwang walang pinsala ang mga naulilang tala",
+         "Madalas mag-ulat ang pag-scan ng tunay na backup ng mga talang tumuturo sa isang bagay na wala na — halimbawa, isang highlight na nakaturo sa lugar ng publikasyong lumipat. Ang mismong mga backup ng JW Library ay kadalasang naglalaman ng daan-daan nito at naisasauli nang walang reklamo. Karaniwang bunga ito ng pag-update ng mga publikasyon sa paglipas ng panahon at hindi patunay ng pinsala, at hindi kailangang linisin ang mga ito para gumana ang file."),
+        ("Pagsagip ng mga nota mula sa file na hindi naisasauli",
+         "Kahit hindi maayos ang backup nang sapat para tanggapin ito ng JW Library, madalas na nababasa pa rin ang mga notang nasa loob. Ang pagbukas ng file sa iyong browser ay nagbibigay-daan sa iyong makita at makopya nang tuwiran ang teksto ng nota, at ginagawa nitong nabawing materyal sa pag-aaral ang isang file na hindi na magagamit. Kung may pangalawa at mas lumang backup kang naisasauli, mapagsasama sa loob nito ang nababasang laman ng sirang file sa halip na muling itipa."),
+        ("Kapag nabigo ang pagsasauli nang walang malinaw na error",
+         "Madalas tanggihan ng JW Library ang file nang hindi ipinapaliwanag kung bakit. Ang pinakamadalas na sanhi ay manifest na ang hash ay hindi na tugma sa database na inilalarawan nito, file na naputol sa paglilipat, o backup na isinulat ng bersiyon ng app na mas bago kaysa sa pinagsasaulian mo. Naaayos ang una, kailangang kunin uli sa pinagmulan ang pangalawa, at naaayos ang pangatlo sa pag-update ng app bago magsauli."),
+        ("Paano ito maiiwasan sa susunod",
+         "Halos lahat ng pinsala ay nangyayari sa daan. Ilipat ang mga backup bilang file at hindi sa pamamagitan ng anumang maaaring mag-compress muli, at piliin ang cloud, AirDrop o kable kaysa sa mga messaging app. Pagkatapos maglipat, tiyaking tugma ang laki sa orihinal — ang file na kapansin-pansing mas maliit kaysa sa ipinadala mo ay naputol, at walang pag-aayos na magbabalik ng byte na hindi naman dumating."),
+        ("Kung wala nang umuubra",
+         "Ang file na hindi maaayos ay maaaring nababasa pa rin, at madalas na sapat na ang mabasa ito — nababawi nang tuwiran ang teksto ng nota kahit tinatanggihan ng JW Library ang file. Pagsamahin ito sa anumang mas lumang backup na naisasauli at karaniwang mananatili sa iyo ang nakararaming bahagi ng aklatan. Bago mo ipasyang wala nang silbi ang isang file, buksan ito at tingnan kung ano talaga ang nasa loob."),
     ],
     "faq": [
         ("Ina-upload ba ang datos ko para sa pagsusuri?",
@@ -393,6 +532,16 @@ GUIDES_TL["fix-corrupted-jw-library-backup"] = {
         ("Kaya ba nitong mabawi ang mga notang binura sa loob ng JW Library?",
          "Hindi — ang istruktura ng file ang inaayos nito. Ang mga notang binura sa app bago "
          "gawin ang backup ay wala sa file para mabawi pa."),
+        ("May mawawala bang nota sa pag-aayos ng file?",
+         "Sa kopya gumagana ang pag-aayos at tumutugon ito sa suliranin ng istruktura, hindi ng nilalaman. Hindi kailanman binabago ang orihinal mong file, kaya nananatili itong magagamit kung gusto mong magsimula uli."),
+        ("Bakit nasira ang backup ko?",
+         "Kadalasan, nabago ang file sa daan — ipinadala sa app na nag-compress o nagputol nito, o hindi natapos na pag-upload. Karaniwang naaayos ito sa muling paglilipat mula sa pinagmulan."),
+        ("Nakakabawi ba ang pag-scan ng mga notang binura ko sa loob ng JW Library?",
+         "Hindi. Kapag nabura na sa app at nakagawa ng bagong backup, wala na ang nota sa file na iyon. Naroon pa rin ito sa backup na mas nauna sa pagbura."),
+        ("Masasabi ba sa laki ng file kung naputol ito?",
+         "Madalas, oo. Ihambing sa orihinal kung nasa iyo pa; ang malaking pagkakaiba ay nangangahulugang hindi natapos ang paglilipat."),
+        ("Tiyak bang maisasauli ang backup na bumubukas sa browser?",
+         "Hindi tiyak, pero malakas itong palatandaan na maayos ang archive at ang database, na nag-aalis sa pinakakaraniwang pagkabigo."),
     ],
 }
 
@@ -651,6 +800,7 @@ GUIDES_TL["open-jwlibrary-file"] = {
                    "naglalaman ng bawat nota, highlight, bookmark at tag. Narito ang laman "
                    "nito at kung paano ito buksan at basahin.",
     "intro": [
+        "Mukhang hindi mababasa ang .jwlibrary na file, pero hindi naman. Karaniwang ZIP archive ito sa paligid ng karaniwang SQLite database, na nangangahulugang mababasa mo ang sarili mong backup — makikita mismo kung anong mga nota, highlight at bookmark ang laman nito — nang walang JW Library at nang wala kang ini-install kahit ano.",
         "Kapag nag-backup ka ng JW Library, may makukuha kang file na nagtatapos sa "
         ".jwlibrary. Isa itong nag-iisa at nadadalang pakete na naglalaman ng lahat ng nasa "
         "personal mong pag-aaral — mga nota, highlight, bookmark, tag at playlist — sa isang "
@@ -683,6 +833,20 @@ GUIDES_TL["open-jwlibrary-file"] = {
          "Gumagana rin ang parehong pahinang jwsync.org sa browser ng laptop o desktop — "
          "madaling gamitin para basahin ang taon-taong nota sa malaking screen, o para sa "
          "maramihang paglilinis na nakakapagod sa cellphone. Walang kailangang i-install."),
+        ("Ano talaga ang file",
+         "Ang .jwlibrary na file ay ZIP archive na iba lang ang extension. Nasa loob nito ang userData.db — isang SQLite database na may mga nota, highlight, bookmark at tag mo — at ang manifest.json, isang maliit na file na naglalarawan sa backup, kasama ang hash ng database na ginagamit ng JW Library para tiyaking hindi nabago ang file. Walang pag-aari o naka-encrypt dito; karaniwang archive ito sa paligid ng karaniwang database."),
+        ("Pagbukas nito nang walang JW Library",
+         "Hindi mo kailangan ang app, ni anumang software, para basahin ang sarili mong backup. Ipinapakita ng pagbukas ng file sa iyong browser ang lahat ng nota, highlight at bookmark na nasa loob, may paghahanap at pagsala, at hindi kailanman lumalabas ang file sa device mo — binabasa ito sa lugar mismo sa halip na i-upload. Ito ang pinakamabilis na paraan para tiyaking naglalaman ang backup ng inaakala mo bago ang isang reset, pagpapalit ng device, o pagsasauli sa bagong telepono."),
+        ("Pagsilip sa loob nang manwal",
+         "Kung interesado ka, kopyahin ang file, palitan ang pangalan ng kopya ng .zip at buksan sa anumang kasangkapan sa archive. Makikita mo ang userData.db at ang manifest.json. Kailangan ng SQLite viewer para buksan ang database, at ipinangalan ang mga talahanayan sa laman nila — Note, UserMark, Bookmark, Tag. Palaging sa kopya magtrabaho: ang pagbabago sa database nang manwal nang hindi ina-update ang hash sa manifest ay gumagawa ng file na tatanggihang isauli ng JW Library."),
+        ("Ligtas na pagbabago",
+         "Puwedeng itama, palitan ng tag, palitan ng kulay o burahin ang mga nota sa labas ng app, at i-export ang bunga bilang bagong .jwlibrary na file na isasauli mo nang normal. Ang tuntuning gumagawa nitong ligtas ay ang pag-iingat sa orihinal: baguhin ang kopya, isauli ang binagong file, at kung may hindi naaayon sa inaasahan mo, naroon pa rin ang hindi ginalaw na orihinal na mababalikan."),
+        ("Pagbasa ng backup sa telepono",
+         "Hindi kailangan ng kompyuter. Gumagana rin ang pagbukas ng file sa browser ng telepono, na kapaki-pakinabang kapag nasa telepono na ang backup at gusto mong tiyakin ang laman nito bago magsauli o bago burahin ang device. Binabasa ang file sa lugar mismo, kaya gumagana ito nang walang koneksiyon maliban sa pag-load ng pahina."),
+        ("Bakit mahalaga ang hash sa manifest",
+         "Itinatala ng manifest.json ang hash ng userData.db. Ginagamit ito ng JW Library para tiyaking hindi nabago ang database mula nang isulat ang backup, kaya tinatanggihan sa pagsasauli ang file na binago ang database nang hindi muling kinuwenta ang hash. Ito ang pinakakaraniwang dahilan kung bakit tumitigil sa paggana ang backup na binago nang manwal, at ang dahilan kung bakit mas ligtas ang pagbabago sa pamamagitan ng kasangkapang muling sumusulat ng manifest kaysa sa tuwirang paggalaw sa database."),
+        ("Para saan ito kapaki-pakinabang",
+         "Binabago ng kakayahang basahin ang backup ang mismong halaga ng backup. Matitiyak mong naglalaman ang file ng inaakala mo bago mo burahin ang telepono, matitingnan kung sulit isauli ang lumang file, mahahanap ang notang alam mong isinulat mo nang hindi naghahalungkat sa app, o mababawi ang teksto mula sa file na hindi tinatanggap ng JW Library. Wala sa mga ito ang nangangailangang ipagkatiwala mo ang file kaninuman — sa sarili mong device ito binabasa."),
     ],
     "faq": [
         ("Puwede ko bang buksan ang .jwlibrary na file sa Excel o Notepad?",
@@ -692,6 +856,16 @@ GUIDES_TL["open-jwlibrary-file"] = {
         ("Ligtas bang buksan ang backup ko sa browser?",
          "Oo. Binabasa ng JW Sync ang file sa loob ng tab ng browser mo; walang ipinapadala sa "
          "server, at hindi kailanman binabago ang orihinal mong file."),
+        ("Puwede ko bang basta palitan ng .zip ang pangalan?",
+         "Oo, sa isang kopya. Hindi binabago ng pagpapalit ng pangalan ang nilalaman, at nagbibigay-daan ito sa anumang kasangkapan sa archive na ipakita sa iyo ang nasa loob."),
+        ("Nababago ba ang file kapag binuksan?",
+         "Hindi. Ang pagbasa ng backup — sa browser o sa kasangkapan sa archive — ay nag-iiwan ditong walang pinagbago kahit sa antas ng byte. Bagong file lang ang nabubuo kapag nag-save o nag-export ka."),
+        ("Kailangan ko bang naka-online?",
+         "Para lang ma-load ang pahina. Binabasa ang file sa device mo at hindi ito ina-upload, kaya hindi kailanman dumadaan sa network ang mga nota mo."),
+        ("Puwede ko bang buksan ang backup na ipinadala sa akin ng iba?",
+         "Oo, hindi nakatali ang anyo sa isang device o account. Ibang usapan kung dapat mo bang isauli ito, dahil pinapalitan ng pagsasauli ang sarili mong aklatan."),
+        ("May kailangan ba akong i-install para makasilip sa loob?",
+         "Wala. Sapat na ang browser para basahin ang mga nota; ang manwal na pagsusuri lang sa mismong database ang nangangailangan ng SQLite viewer."),
     ],
 }
 
@@ -746,6 +920,7 @@ GUIDES_TL["recover-jw-library-notes-lost-phone"] = {
                    "mababawi mo ay nakasalalay sa mga backup mo. Narito kung paano eksaktong "
                    "mababawi ang mga nota — at kung ano ang gagawin sa susunod.",
     "intro": [
+        "Kapag nawala, nanakaw o nasirang tuluyan ang telepono, ang pananatili ng mga nota mo sa JW Library ay nakasalalay sa iisang tanong: may .jwlibrary na backup ba sa kung saan sa labas ng device na iyon? Kung mayroon, bumabalik ang lahat ng nasa loob nito. Sinasaklaw ng pahinang ito kung paano makahanap ng isa, kung paano ito isauli sa anumang kapalit na device, at kung ano ang gagawin kung luma na ang tanging backup na mayroon ka.",
         "Sapat nang nakakastress ang pagkawala ng cellphone nang wala pang takot na kasama "
         "nitong nawala ang taon-taong nota sa pag-aaral. Nakasalalay sa isang tanong ang "
         "pagbawi: may .jwlibrary na backup ba kahit saan sa labas ng cellphone na iyon?",
@@ -781,6 +956,20 @@ GUIDES_TL["recover-jw-library-notes-lost-phone"] = {
          "labas ng cellphone (sapat nang i-email mo ito sa sarili mo). Kaya ka pang "
          "paalalahanan ng JW Sync at pagsamahin ang mga device mo nang regular. Nabubuhay "
          "nang mas matagal kaysa sa kahit anong cellphone ang file na nasa inbox mo."),
+        ("Kung saan maaaring may backup na",
+         "Bago mo tapusing wala, suriin ang lahat ng lugar kung saan maaaring na-save ang file: ang folder ng Downloads at Documents ng anumang kompyuter na pinagkabitan mo ng telepono, ang mga naipadala sa email, ang mga messaging app kung saan maaaring naipadala mo ang file, at bawat cloud account na ginagamit mo. Madalas na minsang gumawa ng backup ang tao, ilang buwan na ang nakalipas, at nalimutan — at ang backup na ilang buwan na ay naglalaman pa rin ng nakararaming bahagi ng aklatan ng pag-aaral."),
+        ("Pagsasauli sa ibang telepono o plataporma",
+         "Hindi kailangang katulad ng nawala ang kapalit na device. Naisasauli sa iPhone ang backup mula sa Android na telepono at gayundin sa kabaligtaran, dahil magkatulad ang anyo sa Android, iOS, iPadOS at Windows. I-install ang JW Library sa bagong device, i-update ito sa kasalukuyang bersiyon, saka magsauli sa Personal na Pag-aaral → Backup at Pagsasauli."),
+        ("Kung luma o bahagya lang ang backup na mayroon ka",
+         "Isauli pa rin. Ang pagbawi ng nakararaming bahagi ng mga nota mo ay hindi pang-aliw — iyon ang bunga. Kung may makita kang pangalawa at ibang backup mamaya, puwedeng pagsamahin ang dalawa sa isang file na naglalaman ng lahat mula sa dalawa, kaya hindi hadlang sa pagdaragdag mamaya ang pagsasauli ng mas luma ngayon."),
+        ("Ano ang hindi na mababawi",
+         "Kung walang backup sa anumang anyo, hindi na mababawi ang datos ng personal na pag-aaral. Nasa pribadong imbakan lang ito ng app sa device, at hindi maaasahang iniingatan ito ng JW Library ni ng backup sa cloud sa antas ng telepono. Sulit itong sabihin nang tuwiran, dahil ito mismo ang dahilan kung bakit umiiral ang gawaing nasa sityong ito."),
+        ("Suriin bago burahin ang device mula sa malayo",
+         "Kung nawala lang at hindi nasira ang telepono, at iniisip mong burahin ito mula sa malayo, maghanap muna ng umiiral na backup: hindi na mababawi ang pagbura at inaalis nito ang huling pagkakataong may makagawa ng isa. Kung naiwala lang ito at naaabot pa, hindi puwedeng gumawa ng backup mula sa malayo, pero buo pa rin ang datos hangga't hindi ito binubura o nire-reset."),
+        ("Para hindi na maulit",
+         "Ang dahilan kung bakit nagkakahalaga ng taon-taong pag-aaral ang nawalang telepono ay dahil nasa telepono lang ang tanging kopya. Kapag nakapagsauli ka na sa kapalit na device, maglagay ng backup sa labas ng device sa mismong araw ding iyon, at ulitin sa ritmong talagang matutupad mo. Sapat na maliliit ang mga file para itago lahat nang walang katapusan nang walang gastos."),
+        ("Kung talagang walang backup",
+         "Kung gayon, ang tapat na sagot ay hindi na mababawi ang mga nota, at mas mabuting marinig iyon kaysa magpatuloy sa paghahanap. Ang magagawa mo ay gawin itong huling pagkawala: i-install ang JW Library sa kapalit, at bago ka pa nakapagtipon ng anumang ikalulungkot mong mawala, gumawa ng backup at ilagay sa labas ng device. Mula roon, wala kang mawawala sa parehong pangyayari."),
     ],
     "faq": [
         ("Kaya bang bawiin ng JW Sync ang mga nota mula sa cellphone na wala na sa akin?",
@@ -791,6 +980,16 @@ GUIDES_TL["recover-jw-library-notes-lost-phone"] = {
          "Talagang sulit. Mas mabuti ang lumang backup na may halos lahat ng nota mo kaysa "
          "magsimula sa wala, at puwede mo itong pagsamahin sa mas bago kung may makita ka "
          "pang iba."),
+        ("May kopya ba ang JW Library ng mga nota ko sa cloud?",
+         "Wala. Nananatili sa device ang datos ng personal na pag-aaral maliban kung ikaw mismo ang gagawa ng file ng backup."),
+        ("Nababawi ba ang mga nota sa teleponong basag ang screen?",
+         "Kung minsan — kung bumubukas pa ang telepono at makokontrol, o kung kayang paandarin ng repair shop ang display, makakagawa pa rin ng backup ang JW Library. Buo ang datos hangga't buo ang imbakan."),
+        ("Naisasauli pa ba ang lumang backup sa kasalukuyang app?",
+         "Oo. Nababasa ng JW Library ang mas lumang anyo ng backup. I-update muna ang app at magsauli sa kasalukuyang bersiyon."),
+        ("Nakakita ako ng dalawang lumang backup — alin ang gagamitin ko?",
+         "Wala sa kanilang mag-isa: pagsamahin sila. Naglalaman ang bunga ng lahat mula sa dalawa, pati ng nasa mas luma na nabura na noong panahon ng mas bago."),
+        ("Puwede ko bang makita ang laman ng backup bago isauli?",
+         "Oo. Buksan ang file sa iyong browser at tingnan muna ang mga nota, highlight at bookmark nito, para alam mo ang isasauli mo."),
     ],
 }
 
@@ -854,6 +1053,7 @@ GUIDES_TL["export-jw-library-notes"] = {
                    "mga ito bilang Markdown o payak na teksto para magamit kahit saan, o kumuha "
                    "ng piling bahagi tungo sa bagong .jwlibrary na backup. Lahat sa browser mo.",
     "intro": [
+        "Ang mga notang isinulat sa JW Library ay madaling basahin sa loob ng app at mahirap gamitin saanman pa — sa isang dokumento, sa balangkas ng pahayag, sa papel, o sa kamay ng taong hindi gumagamit ng app. Nilulutas ito ng pag-export, at ang pangunahing pasiya ay hindi kung paano mag-export kundi kung gaano karami: halos palaging mas kapaki-pakinabang ang sinalang pag-export kaysa sa lahat nang sabay-sabay.",
         "Hindi dapat nakakulong sa isang app ang mga nota mo sa pag-aaral. Minsan gusto mo "
         "silang payak na teksto — para idikit sa balangkas ng pahayag, sa isang dokumento, o "
         "sa sarili mong notes app — at minsan naman ay malinis na backup na may bahagi lang "
@@ -882,6 +1082,20 @@ GUIDES_TL["export-jw-library-notes"] = {
          "sa atas sa pulong, sa personal na wiki, sa nakalimbag na kopya para sa hindi "
          "gumagamit ng app. Iniingatan ng Markdown ang istruktura habang nananatiling "
          "nababasa bilang payak na teksto kahit saan."),
+        ("Pagpili ng anyo",
+         "Ang payak na teksto ang pinakamadaling dalhin at malinis na naididikit sa anumang dokumento o email. Iniingatan ng may-format na labas ang balangkas ng mahahabang nota at bagay sa pag-print o pagbabahagi. Kung gusto mong maibalik ang mga nota sa loob ng JW Library mamaya — sa ibang device, o sa aklatan ng iba — itago ang mismong .jwlibrary na file sa halip na pag-export ng teksto, dahil iyon lang ang nag-iingat sa ugnayan ng mga nota, highlight, tag at ng eksaktong lugar sa publikasyon kung saan sila nakaangkla."),
+        ("Pag-export ng bahagi lang ng aklatan",
+         "Bihirang ang buong pag-export ng taon-taong pag-aaral ang gusto mo. Ang paunang pagsala — sa isang tag, publikasyon, kulay ng highlight, o saklaw ng petsa — ay gumagawa ng isang bagay na talagang magagamit mo, gaya ng lahat ng notang may tag para sa isang pahayag, o lahat ng isinulat sa isang kombensiyon. Ang mga salaan ding nagpapaliit sa tanawin ay nagpapaliit sa pag-export, kaya ang nakikita mo ang siyang makukuha mo."),
+        ("Ano ang kasamang naglalakbay ng teksto, at ano ang hindi",
+         "Dala ng pag-export ang mga salita mo. Hindi nito dala ang mga angklang nag-uugnay sa nota sa isang tiyak na talata ng isang tiyak na publikasyon, dahil may kahulugan lang ang mga reperensiyang iyon sa loob ng JW Library. Ito ang praktikal na dahilan para mag-ingat din ng mga backup: ang pag-export ay para sa pagbasa, pag-print at pagbabahagi sa labas ng app, samantalang ang .jwlibrary na file ang naglalagay muli ng mga nota sa aklatan nang buo ang konteksto."),
+        ("Pagtitipon ng lahat para sa isang pahayag o atas",
+         "Ito ang pinakakaraniwang dahilan ng pag-export. Salain ayon sa tag, publikasyon o saklaw ng petsa kung saan nakalagay ang materyal, suriin ang bunga, at i-export lang iyon. Ang makukuha mo ay iisang dokumentong naglalaman ng mga kaugnay na nota at ng mga bahaging na-highlight mo, sa pagkakasunod-sunod ng paglitaw ng mga ito, sa halip na hindi mapangasiwaang buhos ng buong aklatan."),
+        ("Pagbabahagi ng mga nota sa iba",
+         "May dalawang magkaibang bagay na tinutukoy ng pagbabahagi. Kung gustong basahin ng ibang tao ang mga nota mo, tama ang pag-export ng teksto — bumubukas ito saanman at walang kailangang natatanging programa. Kung gusto niyang nasa loob ng sarili niyang JW Library ang mga nota, nakaangkla sa parehong talata at may dala niyang tag at kulay, ang kailangan mo ay .jwlibrary na file, dahil walang maibabalik sa app ang pag-export ng teksto."),
+        ("Pag-iingat ng talaang mababasa mo pa makalipas ang matagal",
+         "Sulit din ang mga pag-export sa ganang sarili. Bubukas pa rin makalipas ang tatlumpung taon ang kopyang payak na teksto ng mga nota mo sa pag-aaral, sa mga programang wala pang sumusulat ngayon, at hindi iyan maipapangako ng anumang anyong pag-aari ng isang app. Ang pag-iingat sa dalawa — ang .jwlibrary para sa pagsasauli at ang pag-export ng teksto para sa pagbasa — ay halos walang gastos at sumasaklaw sa dalawang kinabukasan."),
+        ("Pag-export o backup — alin ang kailangan mo",
+         "Magkaiba ang sinasagot nilang tanong. Ang pag-export ay para gamitin ang mga nota mo sa labas ng JW Library: pagbasa, pag-print, pagsipi, pagpapadala sa iba. Ang .jwlibrary na backup ay para maibalik ang mga ito sa JW Library, sa device na ito o sa iba, nang buo ang bawat angkla, tag at kulay. Walang kapalit ang isa sa isa, at walang dahilan para hindi mo taglayin pareho."),
     ],
     "faq": [
         ("Nagbabago ba ang mga nota ko sa JW Library kapag nag-export?",
@@ -890,6 +1104,20 @@ GUIDES_TL["export-jw-library-notes"] = {
         ("Puwede bang i-export lahat nang sabay?",
          "Oo — burahin ang mga salang para piliin ang buong library, o mag-salang muna para "
          "i-export ang bahagi lang."),
+        ("Puwede ko bang dalhin ang mga nota ko sa Word o Google Docs?",
+         "Oo — mag-export bilang teksto at idikit. Dumarating ang teksto nang buo ang balangkas at mabibigyan ng estilo mula roon."),
+        ("Nae-export din ba ang mga highlight kasama ng mga nota?",
+         "Oo, pati ang bahaging na-highlight at ang kulay nito, kaya ipinapakita ng nakalimbag na kopya kung ano ang minarkahan mo at kung ano ang isinulat mo."),
+        ("Puwede bang i-export ang lahat nang sabay?",
+         "Oo, bagaman kadalasang mas kapaki-pakinabang ang sinalang pag-export. Puwedeng i-export ang lahat sa isang hakbang kapag gusto mo ng buong kopya."),
+        ("Puwede ko bang i-export ang mga sagot na tinipa ko sa mga tanong sa pag-aaral?",
+         "Oo. Bahagi ng datos ng personal mong pag-aaral ang mga tinipang sagot at nae-export ito kasama ng mga nota at highlight."),
+        ("Kasama ba sa pag-export kung aling publikasyon ang pinagmulan ng bawat nota?",
+         "Oo, ipinapakita ng pag-export kung saan nanggaling ang bawat nota, kahit ang mismong angkla ay gumagana lang sa loob ng JW Library."),
+        ("May nababago ba sa aklatan ko ang pag-export?",
+         "Wala. Binabasa ng pag-export ang datos mo at sumusulat ng hiwalay na file; walang nababago, nailILipat o naaalis sa loob ng JW Library."),
+        ("Puwede bang mag-export mula sa backup sa halip na sa app?",
+         "Oo. Puwedeng tuwirang buksan ang .jwlibrary na file at i-export ang mga nota nito, na kapaki-pakinabang kapag nasa lumang backup at hindi sa kasalukuyan mong device ang mga notang gusto mo."),
     ],
 }
 
@@ -1856,6 +2084,7 @@ GUIDES_TL["jw-library-notes-missing-after-update"] = {
                    "in ulit. Kung ano ang unang gagawin, kung ano ang huwag gagawin, at kung "
                    "paano mababawi ang mga ito nang hindi nawawala ang isinulat mo simula noon.",
     "intro": [
+        "Nakakabahala ang magbukas ng JW Library pagkatapos ng update at makitang wala na ang mga nota mo, at sa karamihan ng pagkakataon ay nababawi ang mga ito. Ang mahalaga ay ang gagawin mo sa susunod na ilang minuto — sa partikular, ang hindi paggawa ng iisang bagay na gumagawang tuluyang pagkawala ang isang kalagayang nababawi pa.",
         "Hindi kaaya-ayang sandali: bumukas ang JW Library, at wala ang mga nota. Bago ang "
         "anupaman, isang payo — huwag magmadali. Karamihan sa nagpapawalang-bawi sa "
         "sitwasyong ito ay nangyayari sa unang sampung minuto, sa pag-overwrite mismo sa "
@@ -1896,6 +2125,16 @@ GUIDES_TL["jw-library-notes-missing-after-update"] = {
          "dito ang health check — kadalasang naaayos ang pinsalang mula sa naputol na "
          "download, cloud sync o napalitang extension, at normal na naisasauli ang nalinis na "
          "kopya."),
+        ("Una: huwag ka munang gumawa ng bagong backup",
+         "Kung nawala ang mga nota, labanan ang pagnanais na agad magbackup. Kinukunan ng backup ang kasalukuyang kalagayan, at kung walang laman ang kasalukuyang kalagayan ay may panganib kang patungan ang mabuting file na mayroon ka na. Alamin muna kung anong mga backup ang umiiral — sa Downloads, Files, email o cloud — at saka magpasya. Walang gumagaling sa device dahil sa backup na ginawa sa gulat."),
+        ("Bakit para bang binubura ng update ang mga nota",
+         "Karaniwang hindi pagbura ang dahilan. Maaaring iwan ng update ang app na nakaturo sa bago at walang lamang database habang nasa imbakan pa rin ang luma; ang muling pag-install — pati ang kusang ginawa ng update sa store na kalahating nabigo — ay nagpapasimula sa app mula sa wala; at sa mga device na may maraming gumagamit o profile, maaaring tumakbo ang app sa ilalim ng ibang profile. Sa lahat ng ito, hindi gaanong nabura ang mga nota kundi hindi lang naipapasok, at kaya karaniwang malinis na naibabalik ng pagsasauli mula sa backup ang lahat."),
+        ("Bawiin ang lumang backup nang hindi itinatapon ang bagong gawa",
+         "Kung nakapag-aral ka na mula nang gawin ang backup, ang basta pagsasauli ay pagpapalit ng isang pagkawala sa iba: ibinabalik nito ang lumang nota at inaalis ang mas bago. Ang paraan para maiwasan ito ay i-backup ang kasalukuyang kalagayan sa hiwalay na file, pagsamahin ito sa mas lumang backup para nasa iisang file ang dalawang pangkat ng nota, at isauli ang bunga. Mapapasaiyo nang sabay ang nabawing nota at ang kamakailan sa halip na pumili sa dalawa."),
+        ("Kung kusang muling na-install ang app",
+         "Nililinis ng muling pag-install ang pribadong imbakan ng app, kaya hindi na mababawi ang anumang wala sa backup — walang kopya sa cloud na maaasahan. Suriin ang lahat ng lugar kung saan maaaring na-save ang .jwlibrary na file bago mo tapusing wala nito, pati na ang folder ng mga naipadala sa email at anumang cloud storage na nagamit mo na. Pagkakita mo ng isa, isauli ito, at mula noon ay itago ang mga backup sa labas ng device."),
+        ("Kapag nakabalik na ang lahat",
+         "Kapag naisauli na ang mga nota mo, gumawa ng isa pang backup at itago sa labas ng device — ang pinagdaanan mo mismo ang katuwiran nito. Kung kinailangan mong pagsamahin ang lumang backup at ang kasalukuyang kalagayan para makarating dito, itago rin ang dalawang pinagmulang file: mga may-petsang larawan ang mga ito, at ang pagkakaroon ng marami sa kanila ang mismong dahilan kung bakit naging posible ang pagbawi."),
     ],
     "faq": [
         ("Nasa device pa ba kahit saan ang mga nota?",
@@ -1909,6 +2148,14 @@ GUIDES_TL["jw-library-notes-missing-after-update"] = {
          "Pagsamahin ito sa backup ng device sa kasalukuyang kalagayan nito. Mababawi mo ang "
          "lahat ng laman ng lumang file, at mapananatili ang lahat ng nasa device pa rin, nang "
          "hindi kailangang mamili sa dalawa."),
+        ("Talaga bang wala na ang mga nota ko?",
+         "Hindi naman kinakailangan. Kung may backup sa kung saan, ganap na nababawi ang lahat ng nasa loob nito. Ang hindi na mababawi ay ang gawa lang pagkatapos ng pinakahuling backup."),
+        ("Puwede ko bang pagsamahin ang lumang backup at ang nasa device ngayon?",
+         "Oo — i-backup muna ang kasalukuyang kalagayan, pagsamahin ito sa mas luma, at isauli ang bunga. Mapupunta sa iisang aklatan ang dalawang pangkat ng nota."),
+        ("Buburahin ba ng pagsasauli ng lumang backup ang kamakailan kong mga nota?",
+         "Kung iyon lang ang gagawin, oo, dahil pinapalitan ng pagsasauli ang datos ng device. Pagsamahin muna ang kasalukuyang backup at ang luma, at isauli ang pinagsamang file."),
+        ("Dapat ko bang i-install uli ang app para maayos ito?",
+         "Hindi — nililinis ng muling pag-install ang pribadong imbakan ng app at inaalis ang anumang pag-asang mabawi ang nasa device pa. Maghanap muna ng umiiral na backup, at ituring na huling paraan ang muling pag-install kapag mayroon ka na nito."),
     ],
 }
 
