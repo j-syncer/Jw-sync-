@@ -390,6 +390,50 @@ CHROME = {
             "Power tools": "上級ツール",
         },
     },
+    "ko": {
+        "lang_name": "한국어",
+        "lang_label": "언어",
+        "og_locale": "ko_KR",
+        "site_guides": "JW Sync 안내",
+        "nav_guides": "안내",
+        "nav_community": "커뮤니티",
+        "nav_open_app": "앱 열기",
+        "crumb_guides": "안내",
+        "h_steps": "단계별 안내",
+        "h_faq": "자주 묻는 질문",
+        "h_related": "관련 안내",
+        "cta_title": "지금 해 보세요 — 무료로, 브라우저에서",
+        "cta_body": "JW Sync는 .jwlibrary 백업의 병합과 편집, 분석을 모두 당신의 기기에서 "
+                    "처리합니다. 계정도, 업로드도, 설치도 필요 없습니다.",
+        "cta_btn": "JW Sync 열기 →",
+        "index_title": "JW Library 백업·동기화·노트 안내 | JW Sync",
+        "index_desc": "JW Library 백업을 위한 실용적인 안내입니다. 두 기기의 백업 병합하기, "
+                      "노트를 새 휴대전화로 옮기기, 안드로이드에서 아이폰으로 이동하기, "
+                      "복원되지 않는 백업 고치기, 노트 편집하고 검색하기 등을 다룹니다.",
+        "index_h1": "안내와 사용법",
+        "index_lede": "JW Library 백업에 관한 모든 것을 쉬운 단계로 담았습니다. 기기 병합하기, "
+                      "새 휴대전화로 옮기기, 노트 되찾기, 그리고 이미 가진 라이브러리를 더 잘 "
+                      "활용하기. 소개하는 모든 도구는 브라우저에서 무료로 작동하며, 파일이 "
+                      "업로드되는 일은 없습니다.",
+        "index_cta_title": "읽는 건 나중에 — 바로 도구를 열어 보세요",
+        "index_cta_body": "백업 두 개를 병합하는 데 1분 남짓이면 되고, 앱이 단계별로 "
+                          "안내합니다.",
+        "footer_all_guides": "전체 안내",
+        "footer_community": "커뮤니티",
+        "footer_stats": "연구 통계",
+        "footer_privacy": "JW Sync는 모든 데이터를 기기 안에서 처리합니다 — 파일이 기기를 "
+                          "떠나지 않습니다. 무료이며 계정도 업로드도 없습니다.",
+        "footer_disclaimer": "‘JW Library’는 Watch Tower Bible and Tract Society of "
+                             "Pennsylvania의 소유입니다. JW Sync는 독립적인 도구로, 해당 "
+                             "협회와 제휴하거나 승인을 받지 않았습니다.",
+        "groups": {
+            "Getting started": "시작하기",
+            "Sharing scenarios": "노트 나누기",
+            "Everyday scenarios": "일상 속 상황",
+            "Fixing problems": "문제 해결",
+            "Power tools": "고급 도구",
+        },
+    },
     "ar": {
         "lang_name": "العربية",
         "lang_label": "اللغة",
@@ -445,9 +489,11 @@ from guides_de import GUIDES_DE  # noqa: E402
 from guides_it import GUIDES_IT  # noqa: E402
 from guides_ru import GUIDES_RU  # noqa: E402
 from guides_ja import GUIDES_JA  # noqa: E402
+from guides_ko import GUIDES_KO  # noqa: E402
 
 GUIDE_TEXT = {
     "ja": GUIDES_JA,
+    "ko": GUIDES_KO,
     "es": GUIDES_ES,
     "pt": GUIDES_PT,
     "fr": GUIDES_FR,

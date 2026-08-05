@@ -4,6 +4,21 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.8.0] — 2026-08-04
+
+### Added: all 37 guides in Korean
+
+The complete guide library is now available in Korean at
+`jwsync.org/guides/ko/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/ko/` now links **안내와 사용법** to the Korean guide index.
+- Each Korean guide is its own indexable page with a Korean title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German, Italian, Russian, Japanese and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
 ## [3.7.0] — 2026-08-04
 
 ### Added: all 37 guides in Japanese

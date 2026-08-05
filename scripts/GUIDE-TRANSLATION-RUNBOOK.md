@@ -4,7 +4,7 @@ Translating the 37 static guides into one more language. One language per
 pass; each pass ends with a push to `main`.
 
 **Status:** en ✅ · ar ✅ · es ✅ · pt ✅ · fr ✅ · de ✅ · it ✅ · ru ✅ · ja ✅ ·
-ko ⬜ · tl ⬜ · sv ⬜ · ceb ⬜
+ko ✅ · tl ⬜ · sv ⬜ · ceb ⬜
 
 ## The pass
 
