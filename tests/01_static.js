@@ -76,7 +76,7 @@ for (const path of FILES) {
     ok('main app bundle parses (' + bundleSrc.length + ' bytes, ' + bundleSource + ')');
   } catch (e) { fail('main app parse failed: ' + e.message); }
 
-  // 2) Browse module parses. v3.4.0 moved it to js/browse.js on the pages that
+  // 2) Browse module parses. v3.8.0 moved it to js/browse.js on the pages that
   //    lazy-load it; production keeps the inline copy until go-live.
   const browseSrc = browseJs(path);
   if (browseSrc == null) { fail('Browse module not found (inline or js/browse.js)'); continue; }
@@ -121,7 +121,7 @@ for (const path of FILES) {
     ok('Browse I18N parses');
   } catch (e) { fail('Browse I18N parse failed: ' + e.message); continue; }
 
-  // Feature-presence checks below search the page *and* every module v3.4.0
+  // Feature-presence checks below search the page *and* every module v3.8.0
   // lifted out of it (js/browse.js, js/doctor.js, …). Structural checks keep
   // using `c` so "must not be inline" assertions stay meaningful.
   const cAll = withModules(path);
@@ -506,7 +506,7 @@ for (const path of FILES) {
       fail('js/app.js not in the hover/idle prefetch list');
     } else { ok('js/app.js is in the prefetch list'); }
 
-    // v3.4.0: the Browse module is external and lazy too.
+    // v3.8.0: the Browse module is external and lazy too.
     if (/<!-- ── Note Explorer \(Browse\) ─[\s\S]*?<script>[\s\S]*?<\/script>\s*<!-- ── End Note Explorer/.test(c)) {
       fail('Browse module still inline in HTML (extraction did not happen)');
     } else { ok('Browse module NOT inline in beta/index.html (extracted)'); }

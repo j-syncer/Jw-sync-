@@ -1,7 +1,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
    browse.js — Note Explorer (Study Explorer) module
    ----------------------------------------------------------------------------
-   Lifted out of index.html in v3.4.0: 185 KB of inline script sat in the
+   Lifted out of index.html in v3.8.0: 185 KB of inline script sat in the
    document on every page load, at document priority, competing with the
    render-blocking CSS for bandwidth. It is now fetched on demand by
    bootBrowse() in the lazy boot loader, and cached independently of the page.

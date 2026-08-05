@@ -4,7 +4,7 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
-## [3.4.0] — 2026-08-05
+## [3.8.0] — 2026-08-05
 
 ### Changed: the landing page loads about three times less
 
@@ -51,6 +51,66 @@ Three smaller blockers on the path to first paint went away too:
 
 No feature changed. Every module keeps its existing entry point and runs in
 the same order it always did.
+
+---
+
+## [3.7.0] — 2026-08-04
+
+### Added: all 37 guides in Japanese
+
+The complete guide library is now available in Japanese at
+`jwsync.org/guides/ja/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/ja/` now links **ガイドと手順** to the Japanese guide index.
+- Each Japanese guide is its own indexable page with a Japanese title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German, Italian, Russian and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
+## [3.6.0] — 2026-08-04
+
+### Added: all 37 guides in Russian
+
+The complete guide library is now available in Russian at
+`jwsync.org/guides/ru/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/ru/` now links **Руководства и инструкции** to the Russian guide index.
+- Each Russian guide is its own indexable page with a Russian title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German, Italian and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
+## [3.5.0] — 2026-08-04
+
+### Added: all 37 guides in Italian
+
+The complete guide library is now available in Italian at
+`jwsync.org/guides/it/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/it/` now links **Guide e istruzioni** to the Italian guide index.
+- Each Italian guide is its own indexable page with an Italian title,
+  description and structured data, cross-linked to its English, Spanish,
+  Portuguese, French, German and Arabic twins.
+- English guide URLs are unchanged.
+
+---
+
+## [3.4.0] — 2026-08-04
+
+### Added: all 37 guides in German
+
+The complete guide library is now available in German at
+`jwsync.org/guides/de/` — every walkthrough, FAQ and troubleshooting page.
+
+- `/de/` now links **Anleitungen und Tipps** to the German guide index.
+- Each German guide is its own indexable page with a German title, description
+  and structured data, cross-linked to its English, Spanish, Portuguese,
+  French and Arabic twins.
+- English guide URLs are unchanged.
 
 ---
 

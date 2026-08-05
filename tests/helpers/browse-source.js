@@ -2,7 +2,7 @@
 /**
  * browse-source.js — locate the Note Explorer (Browse) module.
  *
- * v3.4.0 lifted the module's 185 KB <script> out of the page and into
+ * v3.8.0 lifted the module's 185 KB <script> out of the page and into
  * js/browse.js, fetched on demand by bootBrowse(). The <style> block stays in
  * the page. Production keeps the old inline copy until a "go live", so the
  * suites have to handle both shapes — same duality 01_static.js already

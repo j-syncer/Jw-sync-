@@ -83,7 +83,7 @@ If you add a new user-facing feature, extend the relevant suite to cover it.
   edits, never the Edit tool.
 - `styles.css` / `beta/styles.css` exist but the HTML files also have embedded `<style>` blocks
 
-### ⚠️ Where the JavaScript lives (changed in v3.4.0)
+### ⚠️ Where the JavaScript lives (changed in v3.8.0)
 
 `beta/index.html` used to carry ~550 KB of inline `<script>`. That inline weight
 was the cause of a 4.7 s First Contentful Paint: the bytes rode in the HTML

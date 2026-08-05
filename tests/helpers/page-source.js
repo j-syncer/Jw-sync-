@@ -2,7 +2,7 @@
 /**
  * page-source.js — "everything this page ships".
  *
- * v3.4.0 lifted nine feature modules out of index.html into js/*.js so the HTML
+ * v3.8.0 lifted nine feature modules out of index.html into js/*.js so the HTML
  * document stopped carrying 500 KB of inline script on every page load. The
  * code did not change, only where it lives, so the suites that assert a feature
  * is present need a haystack spanning the page *and* its modules.
@@ -18,7 +18,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Modules extracted from index.html in v3.4.0, in document order.
+// Modules extracted from index.html in v3.8.0, in document order.
 const EXTRACTED = [
   'browse.js', 'demo.js', 'conflict-review.js', 'impact-preview.js',
   'post-merge.js', 'sync-hub.js', 'receive.js', 'wizard.js', 'doctor.js',
@@ -43,7 +43,7 @@ function withModules(pageAbs) {
 module.exports = { EXTRACTED, moduleSrc, withModules };
 
 /**
- * Swap the `<script src="js/NAME.js" defer>` tags v3.4.0 introduced back for
+ * Swap the `<script src="js/NAME.js" defer>` tags v3.8.0 introduced back for
  * the module source, so JSDOM (which does not fetch external scripts) sees the
  * same page a browser does. Only touches the extracted modules; lazily fetched
  * bundles like js/browse.js have no tag and stay lazy, which is what the

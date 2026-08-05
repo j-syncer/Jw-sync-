@@ -24,7 +24,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
 function readHtml() {
-  // v3.4.0: feature modules are external; JSDOM won't fetch them, so inline
+  // v3.8.0: feature modules are external; JSDOM won't fetch them, so inline
   // them back to exercise the page a browser actually gets.
   return inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH)
     .replace(/<script async src="https:\/\/www\.googletagmanager\.com[\s\S]*?<\/script>/, '')

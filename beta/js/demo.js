@@ -1,7 +1,7 @@
 /* ──────────────────────────────────────────────────────────────────────────
    demo.js — Demo handler — the "Try Demo" merge flow on the landing page.
    ----------------------------------------------------------------------------
-   Lifted out of index.html in v3.4.0. It used to be an inline <script>, which
+   Lifted out of index.html in v3.8.0. It used to be an inline <script>, which
    meant its bytes rode in the HTML document at document priority on every page
    load, starving the render-blocking CSS on slow connections. It is now a
    deferred external file: same execution order, off the critical path, and

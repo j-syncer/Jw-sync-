@@ -22,7 +22,7 @@ function section(name) { console.log('\n== ' + name + ' =='); }
 const { inlineModules } = require('./helpers/page-source');
 
 function readHtml() {
-  // v3.4.0: the feature modules are external now. JSDOM does not fetch them,
+  // v3.8.0: the feature modules are external now. JSDOM does not fetch them,
   // so inline them back to test the page a browser actually gets.
   return inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH)
     // Drop google tag inline scripts (they reference uninitialised dataLayer in JSDOM)
@@ -90,11 +90,11 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     // v2.10.0: __bootApp is now defined by the EXTERNAL js/app.js, so it is
     // NOT present at HTML-parse time. (That's the win — landing visitors
     // don't download the bundle.) The boot loader will set it later when
-    // js/app.js arrives. v3.4.0 did the same to the Browse module, so
+    // js/app.js arrives. v3.8.0 did the same to the Browse module, so
     // __bootBrowse is not present at parse time either.
     if (typeof realBootApp === 'undefined') ok('main app extracted: __bootApp NOT inline (v2.10.0)');
     else fail('__bootApp was inline at parse time — extraction did not happen');
-    if (typeof realBootBrowse === 'undefined') ok('Browse extracted: __bootBrowse NOT inline (v3.4.0)');
+    if (typeof realBootBrowse === 'undefined') ok('Browse extracted: __bootBrowse NOT inline (v3.8.0)');
     else fail('__bootBrowse was inline at parse time — extraction did not happen');
     if (typeof dom.window.__jwBootApp === 'function') ok('boot loader exposed __jwBootApp');
     else fail('__jwBootApp not exposed');
@@ -130,7 +130,7 @@ function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
     const appBundle = requested.filter(u => /js\/app\.js$/.test(u));
     if (appBundle.length === 0) ok('first-time landing: NO js/app.js requested (code-split win)');
     else fail('first-time landing leaked js/app.js: ' + appBundle.length + 'x');
-    // v3.4.0: the same must hold for the 185 KB Browse module.
+    // v3.8.0: the same must hold for the 185 KB Browse module.
     const browseBundle = requested.filter(u => /js\/browse\.js$/.test(u));
     if (browseBundle.length === 0) ok('first-time landing: NO js/browse.js requested (code-split win)');
     else fail('first-time landing leaked js/browse.js: ' + browseBundle.length + 'x');
