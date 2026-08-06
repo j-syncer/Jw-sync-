@@ -4,6 +4,32 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.15.0] — 2026-08-05
+
+### Improved: the ten most-read guides are now full answers in all 13 languages
+
+v3.14.0 rewrote the ten highest-intent guides in English, roughly tripling
+them. This release finishes the job: the same depth now exists in all twelve
+translations, so a reader searching in Cebuano or Arabic gets the same answer
+an English reader gets — not a shorter one.
+
+- **130 guide pages** rewritten in total, each with the material that was
+  missing: what is actually inside a `.jwlibrary` file, why Restore replaces
+  your library instead of merging into it, how duplicate detection matches
+  items by GUID, why a scan reporting hundreds of orphaned rows is normal, and
+  why a hand-edited backup stops restoring once the manifest hash no longer
+  matches.
+- Every translation follows the glossary its own file documents, including the
+  German *du*, the Russian lowercase *вы*, the Korean 합쇼체 register, and the
+  Arabic convention of wrapping bare file extensions in LEFT-TO-RIGHT MARK so
+  the leading dot does not move.
+- `check_guide_lang.py` reports 37/37 guides and 0 problems for all twelve
+  languages.
+
+No URL changed and no page was renamed.
+
+---
+
 ## [3.14.0] — 2026-08-05
 
 ### Improved: the ten most-read English guides are now full answers
