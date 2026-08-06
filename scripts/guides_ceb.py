@@ -74,6 +74,16 @@ GUIDES_CEB["merge-jw-library-backups"] = {
          "Wala gayod usba sa paghiusa ang imong orihinal nga mga file — maghimo kini ug "
          "bag-ong backup, busa magpabiling buo ang mga orihinal isip andam nga kopya. Ug "
          "tungod kay sa browser modagan ang tanan, walay datos nga mobiya sa imong device."),
+        ("Unsa gyoy sulod sa usa ka .jwlibrary nga file",
+         "Ang .jwlibrary nga backup usa ka ZIP archive. Kopyaha kini, ilisi ang ngalan sa kopya og .zip ug ablihi: makita nimo ang userData.db, usa ka SQLite database nga naglangkob sa tanang nota, highlight, bookmark ug tag nga imong nahimo, uban ang gamayng manifest.json nga naghubit sa backup. Ang imong mga nota anaa sa lamesang Note, ang mga highlight sa UserMark ug BlockRange, ang mga bookmark sa Bookmark, ug ang mga tag sa Tag ug TagMap. Kon masabtan nimo nga ang backup usa ka kompletong database ug dili tinipik-tipik nga mga file, matin-aw ang tanan nga uban pa niining panid: mao nay hinungdan nga ang pagpasig-uli tanan-o-wala, ug mao nay hinungdan nga mahiusa ang duha ka backup."),
+        ("Nganong dili makahiusa ang kaugalingong Pagpasig-uli sa JW Library",
+         "Sa dihang magpasig-uli, ang JW Library dili mobasa sa imong backup aron idugang ang kulang sa naa na sa device. Giilisan niini ang database sa device sa naa sa file. Tinuyo ug luwas kining disenyoha kay sigurado nga masayod ka sa kahimtang sa device, apan ang buot ipasabot mao nga kon ipasig-uli nimo sa telepono ang backup sa tablet, mawala ang tanan nga naa sa telepono nga wala sa tablet. Walay setting nga makausab niini, ug mao gyod kanang luna nga pun-an sa paghiusa: naghimo kini og usa lang ka file nga naglangkob na sa buhat sa duha ka device, busa kompleto ang device nga imong pasig-ulian."),
+        ("Giunsa pag-ila ang mga doble",
+         "Ang matag nota, highlight ug bookmark adunay GUID — usa ka talagsaong ilhanan nga gihatag sa paghimo ug gitipigan sa tanang sunod nga backup. Kon ang samang butang makita sa duha ka backup, pareho ang GUID sa duha ka kopya, busa mailhan kini nga usa lang ka butang ug tipigan makausa. Mao nay hinungdan nga walay modoble bisan duha ka higayon nimong hiusahon ang samang duha ka file, ug mao nay hinungdan nga luwas kang makausab-usab matag semana. Kon parehas ang GUID apan lahi ang teksto — samang nota nga giusab sa duha ka device — dili kini masulbad awtomatiko, busa makita kini sa Conflict Reviewer uban ang pulong-por-pulong nga pagtandi aron ikaw ang mopili."),
+        ("Unsa ang wala sa backup",
+         "Datos lang sa imong personal nga pagtuon ang dala sa backup. Wala apil ang gi-download nga mga publikasyon, hubad sa Bibliya, video ug audio, ug mao nay hinungdan nga gagmay ang mga file sa backup — kasagaran pipila lang ka megabyte bisan tuig-tuig nga pagtuon. Human magpasig-uli sa bag-ong device, basin kinahanglan nimong i-download pag-usab ang mga publikasyon nga kanunay nimong basahon. Walay maapektohan sa imong gisulat: ang mga nota nakaangkla sa mga publikasyon pinaagi sa reperensiya, busa mobalik dayon ang kalambigitan inigkaanaa sa publikasyon."),
+        ("Kon 0 ang nadugang nga nota sumala sa paghiusa",
+         "Halos kanunay husto kini, dili depekto. Ang buot ipasabot, naa na sa unang file ang tanang nota sa ikaduha — komon kon bag-o pa kang naghiusa, o kon mas daan lang ang usa ka device kay sa lain. Tan-awa ang preview: gilista niini kon unsay dala sa matag file sa dili pa may masulat. Kon nagdahom kag bag-o ug walay makita, siguroha nga nakahimo kag backup sa device human sa pagtuon nga imong gipangita, kay ang sulod lang sa backup mao ang naa sa panahon nga gihimo kini."),
     ],
     "faq": [
         ("Mahimo bang hiusahon ang kapin sa duha ka backup?",
@@ -86,6 +96,14 @@ GUIDES_CEB["merge-jw-library-backups"] = {
         ("Molihok ba kini tali sa Android ug iPhone?",
          "Oo. Managsama ang .jwlibrary nga format sa Android, iOS, iPadOS ug Windows, busa "
          "ang mga backup gikan sa lainlaing plataporma maghiusa nga walay conversion."),
+        ("Kinahanglan ba og piho nga han-ay sa paghiusa?",
+         "Dili. Walay labot ang han-ay — pareho ra ang resulta sa samang pundok sa mga file, bisan asa nimo unahon. Ang maapektohan lang mao kon unsang file ang isipon nga sukaranan sa lagom sa preview."),
+        ("Unsay mahitabo sa mga tag nga naa lang sa usa ka device?",
+         "Kompleto silang mabalhin, apil ang kalambigitan sa mga tag ug sa mga nota nga ilang gimarkahan. Kon pareho ang ngalan sa tag sa duha ka device, usa ra ang isipon ug makuha niini ang mga nota gikan sa duha."),
+        ("Unsa kadako ang gihiusang file?",
+         "Halos sama sa duha ka orihinal nga gidugtong, minus ang mga doble — kasagaran pipila lang gihapon ka megabyte. Walay media sa publikasyon sa mga backup, busa bisan ang tibuok nga librarya nga daghag marka mohaom pa sa email."),
+        ("Mabawi ba nako ang usa ka pagpasig-uli?",
+         "Dili gikan sa sulod sa JW Library, ug mao nay hinungdan nga importante ang pagtipig sa orihinal nimong mga backup. Wala gyoy giusab ang paghiusa sa mga file nga imong gikarga, busa nagpabilin ang imong mga backup sa wala pa ang paghiusa ug mapasig-uli kon buot nimong mobalik."),
     ],
 }
 
@@ -96,6 +114,7 @@ GUIDES_CEB["sync-jw-library-multiple-devices"] = {
                    "simple ug pribadong rutina aron magpabiling pareho ang mga nota, "
                    "highlight ug bookmark sa imong cellphone, tablet ug kompyuter.",
     "intro": [
+        "Halos tanan nga nagtuon sa duha ka device managsama ang paagi sa pagkakaplag sa suliran: wala sa telepono ang mga nota nga gisulat sa tablet, ug kon ipasig-uli ang backup sa usa sa lain, mapapas ang naa sa ulahi. Walay gitanyag nga pag-sync ang JW Library, ug tinuyo nga tanan-o-wala ang pagpasig-uli niini, busa kinahanglag rutina ug dili setting aron magpabiling parehas ang mga device.",
         "Wala i-sync sa JW Library ang datos sa personal nga pagtuon tali sa mga device — "
         "walay account nga modala sa imong mga nota gikan sa cellphone ngadto sa tablet. Ang "
         "opisyal nga paagi mao ang Backup ug Pagpasig-uli, ug ang pagpasig-uli mopuli sa "
@@ -134,6 +153,20 @@ GUIDES_CEB["sync-jw-library-multiple-devices"] = {
          "gamiton: komportable ang kausa sa usa ka semana. Tablet nga mogawas lang sa mga "
          "tigom: igo na ang kausa sa usa ka bulan. Ang paghulat ug dugay nagpasabot lang nga "
          "mas daghan ang hiusahon — walay mawala tali sa mga hugna."),
+        ("Nganong walay tinuod nga pag-sync",
+         "Walay account ang JW Library nga magdala sa datos sa personal nga pagtuon gikan sa usa ka device ngadto sa lain. Anaa sa database sulod sa matag device ang mga nota, highlight ug bookmark, ug didto sila magpabilin. Ang bugtong opisyal nga paagi sa pagbalhin niini mao ang Backup ug Pagpasig-uli, ug giilisan sa pagpasig-uli ang datos sa padulngang device imbes hiusahon. Busa magkalayo hangtod sa hangtod ang duha ka device nga gigamit nga bulag, gawas kon adunay mohiusa kanila — ug mao gyod kana ang tumong sa rutina sa ubos."),
+        ("Pagbaton og usa ka nag-unang file",
+         "Labing molihok kining rutinaha kon isipon nimo nga karon nga nag-unang file ang usa ka gihiusang file. Sa matag lisok, backup-i ang tanang device, hiusaha kadtong mga backup, ug ipasig-uli ang resulta bisan asa. Ang gihiusang file mahimong nag-unang file sa sunod nga lisok. Ang pagtipig sa mga nag-unang file nga may petsa sa cloud maghatag kanimo og paagi sa pag-sync ug talaan nga dungan: kon may mapapas ka nga wala tuyoa, anaa pa kini sa unang nag-unang file."),
+        ("Unsay mahitabo kon molaktaw kag usa ka device og taas-taas",
+         "Walay mawala. Ang device nga nalaktawan sa pipila ka lisok adunay mas daang datos lang; inig-apil na nimo, mohiusa ang mga nota niini sa tanan nga uban pa ug ang mga balik-balik nga butang ipares pinaagi sa GUID imbes modoble. Ang bugtong kahimtang nga nagkinahanglag hukom mao ang samang nota nga giusab sa duha ka device sukad sa katapusang paghiusa, ug makita kana sa Conflict Reviewer nga magtapad ang duha ka bersiyon."),
+        ("Unsa ka subsob ang igo",
+         "Ipahaom sa gidaghanon sa buhat nga dili nimo gustong balikon. Haom ang matag semana kon halos adlaw-adlaw kang magtuon sa duha ka device; sobra na ang matag bulan kon usahay ra gamiton ang usa. Ang importante mao ang paghimo niini sa dili pa ang bisan unsa nga dili na mabawi — pag-ilis og telepono, pag-reset, pag-ayo — kay didto mahimong kapildihan ang pagkalahi."),
+        ("Telepono, tablet ug ang app para sa Windows nga dungan",
+         "Walay labot niining rutinaha kon pila ka device o unsay ilang gidagan. Backup-i ang matag usa, hiusaha silang tanan sa usa ka lakang, ipasig-uli ang gihiusang file bisan asa. Ang kompyuter nga Windows nga gigamit sa pag-andam ug ang telepono nga dad-on sa tigom mohiusa sama gyod sa duha ka telepono, kay managsamang porma sa backup ang isulat sa matag plataporma."),
+        ("Pagkunhod sa panagbangi sa dili pa kini motungha",
+         "Motungha lang ang panagbangi kon ang samang nota giusab sa duha ka device tali sa mga paghiusa. Sa tinuoray, talagsa ra kini, ug mas motalagsa pa kon sa usa lang ka device ka mosulat — magbasa bisan asa, apan mag-type kon asa ka kanunayng mag-type. Ang mas subsob nga paghiusa magpamubo usab sa panahon nga mahitabo ang pagkalahi, ug mas molihok kini kay sa pagsulay paghinumdom kon asang device ang adunay labing bag-ong bersiyon."),
+        ("Asa mobayad ang rutina",
+         "Ang bili sa pagtipig sa mga device nga gihiusa dili ang kahapsay — mao ang pagkahimong kompletong backup sa matag device sa librarya sa imong pagtuon. Mawala man o madaot ang bisan kinsa kanila, anaa pa gihapon ang tanan sa uban, ug naghimo kini sa labing daotang kahimtang gikan sa tuig-tuig nga nawalang nota ngadto sa usa lang ka kahasol. Mas lig-on kining posisyona kay sa mahatag sa bisan unsang batasan sa pagbackup sa usa lang ka device."),
     ],
     "faq": [
         ("Modagan ba ang JW Sync sa background?",
@@ -143,6 +176,16 @@ GUIDES_CEB["sync-jw-library-multiple-devices"] = {
         ("Mahimo bang i-sync ang tulo o labaw pa ka device?",
          "Oo. I-backup ang matag usa, i-load ang tanang file, hiusaha kausa, ug ipasig-uli "
          "ang gihiusang file sa tanan."),
+        ("Unsa man kon giusab nako ang samang nota sa duha ka device?",
+         "Tipigan ang duha ka bersiyon hangtod mopili ka. Ipakita sila sa Conflict Reviewer nga magtapad uban ang pulong-por-pulong nga pagtandi, o mahimong pasugyoton nimo kini sa mas kompleto."),
+        ("Importante ba ang han-ay sa akong pagpasig-uli?",
+         "Dili. Kon nahimo na ang gihiusang file, ang pagpasig-uli niini sa matag device magbutang kanilang tanan sa samang kompletong kahimtang, sa bisan unsang han-ay nga haom kanimo."),
+        ("Mahimo bang tulo o kapin pang device?",
+         "Oo. Backup-i ang matag usa ug ikarga silang tanan sa samang paghiusa — walay utlanan nga nakahigot sa gidaghanon sa device."),
+        ("Mahimo ba kining awtomatiko?",
+         "Dili sa hingpit, kay walay API sa pag-sync ang JW Library ug sulod sa app mahitabo ang lakang sa pagpasig-uli. Mga duha ka minuto ang manwal nga rutina kon naanad ka na."),
+        ("Kinahanglan ba kong mohiusa kon magbasa lang ko sa ikaduhang device?",
+         "Kon wala ka gyoy gimarkahan didto, igo na nga magpasig-uli ka niini matag karon ug unya aron madala niini ang imong karon nga mga nota."),
     ],
 }
 
@@ -153,6 +196,7 @@ GUIDES_CEB["transfer-jw-library-notes-new-phone"] = {
                    "JW Library ngadto sa bag-ong cellphone gamit ang .jwlibrary nga backup — "
                    "ug unsaon paghiusa kon naay nota na sa bag-ong cellphone.",
     "intro": [
+        "Ang pag-ilis og telepono mao ang labing komon nga higayon nga mawala ang tuig-tuig nga mga nota sa JW Library — dili tungod kay lisod ang pagbalhin, kondili tungod kay kinahanglan kining tuyoon sa dili pa mapapas ang daang device. Ang datos sa personal nga pagtuon dili kasaligan nga mokuyog sa ordinaryong pagbalhin tali sa mga telepono, ug walay gitipigang kopya niini ang JW Library sa bisan unsang account.",
         "Ang mga tool sa pagbalhin ug cellphone modala sa mga app ug hulagway, apan dili "
         "kasaligan nga madala nila ang datos sa personal nga pagtuon sa JW Library. Ang "
         "kasaligang paagi aron madala ang imong mga nota, highlight, bookmark ug tag ngadto "
@@ -183,6 +227,20 @@ GUIDES_CEB["transfer-jw-library-notes-new-phone"] = {
          "Kon moabot sa iPhone ang backup nga file nga giilisan ug .zip, ibalik kini sa "
          ".jwlibrary sa dili pa magpasig-uli — maayo ra ang sulod; ang extension lang ang "
          "nausab sa dalan."),
+        ("Buhata kini sa dili pa mapapas o maibayad ang daang telepono",
+         "Ang backup kinahanglang himoon samtang naglihok pa ang daang telepono ug naa pa niini ang JW Library. Inig-reset sa device, inigbayloay o inighatag ngadto sa lain, mawala ang mga nota uban niini: walay gitipigang kopya sa cloud ang JW Library alang sa datos sa personal nga pagtuon, ug ang backup sa tibuok telepono sama sa Google One o backup sa device sa iCloud kanunayng magpasig-uli og mas daan nga kahimtang sa datos sa app, o wala gyod. Himoa una ang .jwlibrary nga file, ibutang sa luwas nga dapit, ug siguroha nga makita nimo kini sa dili pa ka mopapas og bisan unsa."),
+        ("Unsaon pagkuha sa file gikan sa daang telepono",
+         "Sa Android, isulat ang file sa folder nga imong gipili — kasagaran Downloads o Documents — ug mabalhin kini sa bisan unsang file manager, ma-email nimo sa imong kaugalingon, o mabutang sa cloud. Sa iPhone, mogawas ang share sheet dayon inighimo sa backup: i-save sa Files, ipadala sa bag-ong telepono pinaagi sa AirDrop, o ipadala sa imong kaugalingon. Walay bili ang paagi ug dili kini makadaot sa file: usa lang ka archive ang .jwlibrary, busa moabot kining kompleto o dili moabot."),
+        ("Nganong dili igo ang app nga pangbalhin tali sa mga telepono",
+         "Ang mga himan sama sa Smart Switch, Move to iOS o pagpasig-uli gikan sa iCloud nagkopya sa mga app ug datos sa sistema, apan kanunayng malaktawan, mapasig-uli og tinipik, o mapasig-uli gikan sa mas sayo nga panahon ang pribadong database sa matag app. Kasagarang mamatikdan ang kulang human sa pipila ka semana, kon wala na ang daang telepono. Isipa ang .jwlibrary nga file nga mao ang tinuod nga kopya ug ang pagbalhin sa telepono usa lang ka kahayahay — kon natingala nga nadala niini ang imong mga nota, walay mawala kon ipasig-uli gihapon nimo ang kaugalingon nimong backup ibabaw niini."),
+        ("Siguroha nga milihok gyod ang pagbalhin",
+         "Human magpasig-uli sa bag-ong telepono, ablihi ang duha o tulo ka publikasyon nga bag-o lang nimong gimarkahan ug siguroha nga anaa ang mga nota, kolor sa highlight ug mga bookmark. Mas paspas nga pagsusi: ablihi mismo ang file sa backup diha sa imong browser sa dili pa nimo papason ang daang device — makita nimo ang matag nota, highlight ug bookmark nga sulod niini, busa nahibalo ka kon unsay angay motungha. Papasa ang daang telepono kon napamatud-an na nimo ang bag-o."),
+        ("Kon mobalhin ka usab og tablet o kompyuter",
+         "Ang samang file molihok bisan asa. Kon dungan nimong i-set up ang bag-ong telepono ug tablet, ipasig-uli ang samang .jwlibrary nga file sa duha ug mosugod silang parehas. Gikan didto, magkalahi na usab sila sumala sa imong tun-an sa matag usa, busa maayong makahukom ka karon kon hiusahon ba nimo sila matag karon ug unya o isipon ang usa nga mao ang nag-unang device."),
+        ("Kon naa nay nota ang bag-ong telepono",
+         "Mahitabo kini kon usa ka semana na nimong gigamit ang bag-ong device sa dili pa nimo asikasohon ang pagbalhin. Ilisan sa datos sa daang telepono ang maong buhat kon diretso kang magpasig-uli. Himoa una ang backup sa bag-ong telepono, hiusaha kini sa backup sa daan, ug ipasig-uli ang resulta — mahiadto sa usa ka librarya ang duha ka pundok sa nota imbes tabonan sa usa ang lain."),
+        ("Unsay buhaton kon naglihok na ang bag-ong telepono",
+         "Susiha sa dili pa ka mobuhi og bisan unsa. Ablihi sa bag-ong telepono ang pipila ka publikasyon nga bag-o lang gimarkahan ug siguroha nga anaa ang mga nota, kolor ug bookmark; unya pa papasa o ibayad ang daang device — kining han-aya ug ayaw gayod baliha. Kon nahusay na, pagbutang og backup sa gawas sa telepono, kay mobalik ang kahimtang nga nagdala kanimo niining panid sa sunod nimong pag-ilis."),
     ],
     "faq": [
         ("Mabalhin ba pod ang akong na-download nga mga publikasyon?",
@@ -192,6 +250,16 @@ GUIDES_CEB["transfer-jw-library-notes-new-phone"] = {
         ("Importante ba kon lahi ang bersiyon sa Android sa mga cellphone?",
          "Dili. Managsama ang .jwlibrary nga format bisan asa, apil tali sa mga bersiyon sa "
          "Android ug tali sa Android ug iPhone."),
+        ("Mabalhin pa ba nako ang mga nota kon wala na ang daang telepono?",
+         "Kon aduna lay .jwlibrary nga file sa bisan asa: sa Files, Downloads, usa ka email ngadto sa imong kaugalingon o sa cloud. Kon wala, walay mapasig-uli, kay sa device lang gitipigan ang datos sa personal nga pagtuon."),
+        ("Kinahanglan bang parehas ang bersiyon sa JW Library sa duha ka telepono?",
+         "Dili kinahanglang eksaktong parehas, apan i-update ang bag-ong telepono ngadto sa karon nga bersiyon sa dili pa magpasig-uli. Ang backup nga hinimo sa mas bag-ong bersiyon mahimong mogamit og estruktura sa database nga dili masabtan sa mas daang app."),
+        ("Kinahanglan ba nakong i-download pag-usab ang mga publikasyon?",
+         "Kasagaran oo — walay media sa publikasyon sa backup. Mobalik dayon ang kalambigitan sa imong mga nota sa matag publikasyon inig-download niini, busa walay mawala sa imong gisulat sa maong panahon."),
+        ("Unsa ka dugay ang tanan?",
+         "Pipila ka minuto. Pipila lang ka segundo ang paghimo sa backup, nagdepende sa paagi ang pagbalhin sa file, ug paspas ang pagpasig-uli. Ang labing dugay mao ang pag-download pag-usab sa mga publikasyon, ug mahimo kining modagan sa luyo."),
+        ("Mahimo ba kini nga walay Wi-Fi?",
+         "Ang pagbalhin mismo oo, pinaagi sa AirDrop o kable. Kinahanglag koneksiyon ang pag-download pag-usab sa mga publikasyon sa bag-ong device."),
     ],
 }
 
@@ -202,6 +270,7 @@ GUIDES_CEB["jw-library-android-to-iphone"] = {
                    "pagbalhin ang imong mga nota, highlight ug bookmark tali sa mga "
                    "plataporma — ug unsaon paghiusa kon naay nota ang duha ka device.",
     "intro": [
+        "Ang pagbalhin tali sa Android ug iPhone morag mao ang lisod nga kaso, apan mao hinuon ang sayon. Managsamang porma sa backup ang isulat sa JW Library sa matag plataporma nga iyang gidagan, busa ang pagbalhin sa librarya sa pagtuon gikan sa Android ngadto sa iOS mao ra ang samang buluhaton sa pagbalhin niini tali sa duha ka Android nga telepono — walay pag-usab og porma, walay pilion nga porma sa pag-export, ug walay mawala sa dalan.",
         "Ang pag-ilis ug plataporma mao ang panahon nga mahadlok ang daghan nga mawala ang "
         "tuig-tuig nga nota sa pagtuon — gilaktawan gayod sa mga app sa pagbalhin gikan "
         "Android ngadto iPhone ang datos sa JW Library. Ang maayong balita: managsama ang "
@@ -230,6 +299,22 @@ GUIDES_CEB["jw-library-android-to-iphone"] = {
          "Gikan iPhone ngadto Android, gikan Android ngadto Android, sa pagdugang ug iPad "
          "isip ikaduhang device sa pagtuon, o sa pagbalhin ngadto sa Windows app — ang backup "
          "nga file mao ang komon nga pinulongan nilang tanan."),
+        ("Nganong parehas ang porma sa duha ka plataporma",
+         "Managsamang porma sa backup ang gamiton sa JW Library bisan asa kini modagan — Android, iOS, iPadOS ug Windows. Ang .jwlibrary nga file usa ka ZIP nga naglangkob og SQLite database nga adunay parehas nga mga lamesa ug parehas nga estruktura, bisan unsang device ang nagsulat niini. Walay lakang sa pag-usab og porma, walay balik-balik nga pag-export ug pag-import, ug walay bahin nga nagsalig sa plataporma sulod sa file. Mapasig-uli ang backup gikan sa Android sa iPhone sama gyod sa buhaton sa backup gikan sa iPhone."),
+        ("Ang bugtong bahin nga tinuod nga lahi",
+         "Dili ang file — ang paagi lang sa pagkuha niini. Sa Android, ma-save ang backup sa folder nga imong gipili ug mabalhin sa bisan unsang file manager. Sa iPhone, moagi kini sa share sheet ngadto sa Files, AirDrop, o bisan asa nimo gusto. Ang kalisdanan nga masugatan sa pagbalhin og plataporma kanunayng anaa niining lakang sa pagkupot, dili gayod sa pagkaangay. Molihok nga managsama ang email, cloud o AirDrop; moabot ang archive nga kompleto o dili gyod moabot."),
+        ("Kolor sa highlight, mga tag ug mga tubag sa pagtuon",
+         "Mabilin ang tanan. Gitipigan ingong numero ang kolor sa mga highlight — dalag, berde, asul, rosas, kahel ug lila — ug parehas ang panagway sa bisan unsang plataporma. Mabalhin ang mga tag ug ang kalambigitan sa tag ug nota, ingon man ang mga tubag nga gi-type sa mga luna sa pangutana sa pagtuon. Ang imong makita sa iPhone human sa pagpasig-uli mao gyod ang naa sa imong Android nga device."),
+        ("Kon dili ka tugotan sa iOS nga mopili sa file",
+         "I-save una ang file sa Files app, unya pilia gikan didto imbes gikan sa gilakip sa email o sa preview sa messaging app. Adunay mga app nga mohatag sa iOS og temporaryong kopya para sa preview imbes sa tinuod nga file, ug dili kini maablihan sa JW Library. Kon miabot ang file ingong lakip, pislita kini, pilia ang Save to Files, ug magpasig-uli gikan sa Files."),
+        ("Andama ang iPhone sa dili pa magpasig-uli",
+         "I-install ang JW Library gikan sa App Store ug i-update kini ngadto sa karon nga bersiyon sa dili pa ka magpasig-uli og bisan unsa. Ang backup nga gisulat sa mas bag-ong bersiyon mahimong mogamit og estruktura sa database nga dili masabtan sa mas daang bersiyon, ug basta na lang isalikway ang pagpasig-uli. Dili kinahanglang mag-sign in bisan asa: anaa sa file nga imong gipasig-uli ang datos sa personal nga pagtuon, dili sa usa ka account."),
+        ("Kon nakasugod ka nag pagtuon sa iPhone",
+         "Backup-i una ang iPhone. Ilisan sa diretsong pagpasig-uli sa file gikan sa Android ang tanan nga imong gisulat sukad ka mibalhin. Ang paghiusa sa duha ka backup maghimo og file nga naglangkob sa duha, nga imong ipasig-uli — mahiadto sa samang librarya ang kasaysayan gikan sa Android ug ang bag-ong mga nota sa iPhone."),
+        ("Kon gamiton pa gihapon nimo ang duha ka telepono",
+         "Adunay mga tawo nga magtipig sa daang Android ingong ikaduhang basahanan imbes ipahulay na kini. Molihok kana, apan magkalahi sila inigmarka nimo sa duha, kay walay pag-sync tali kanila. Kon tuyoon nimong gamiton ang duha, andama ang imong kaugalingon nga hiusahon ang ilang mga backup matag karon ug unya imbes maghunahuna nga magpabilin silang parehas."),
+        ("Human sa pagbalhin",
+         "Hatagi og panahon ang iPhone sa pag-download pag-usab sa mga publikasyon nga labing kanunay nimong gamiton, unya susiha ang pipila ka gimarkahan aron masiguro nga miabot ang tanan: mga nota, kolor sa highlight, bookmark ug tag. Tipigi ang file sa backup gikan sa Android bisan human na ang pagbalhin: usa kini ka hulagway nga may petsa sa imong librarya, ug walay bayad ang pagtipig niini."),
     ],
     "faq": [
         ("Kinahanglan ba nako ug kompyuter alang niini?",
@@ -238,6 +323,20 @@ GUIDES_CEB["jw-library-android-to-iphone"] = {
         ("Mapreserbar ba ang mga kolor sa akong highlight?",
          "Oo — magpabilin ang kolor sa mga highlight, ang tag sa mga nota, ug ang lugar sa "
          "mga bookmark."),
+        ("Kinahanglan ba nakog kompyuter niini?",
+         "Wala. Ang AirDrop, email o bisan unsang app sa cloud storage magbalhin sa file diretso tali sa duha ka telepono."),
+        ("Molihok ba kini sa laing direksiyon, gikan sa iPhone ngadto sa Android?",
+         "Oo, mao ra gihapon. Molihok ang samang mga lakang sa bisan unsang direksiyon, apil sa app para sa Windows."),
+        ("Kinahanglan ba sa iPhone ang samang gi-download nga mga publikasyon?",
+         "Oo, kay walay media sa publikasyon sa backup. Mobalik ang kalambigitan sa mga nota sa matag publikasyon inig-download niini."),
+        ("Kinahanglan ba nakong tipigan ang Android nga telepono human niini?",
+         "Dili na, kon napamatud-an nimo nga anaa na sa iPhone ang mga nota. Susiha ang pipila ka gimarkahang publikasyon sa dili pa papason o ibayad ang daang device."),
+        ("Mabalhin ba ang mga tubag sa pangutana sa pagtuon?",
+         "Oo. Bahin sa datos sa personal nga pagtuon ang gi-type nga mga tubag ug mokuyog kini sa tanan nga uban pa."),
+        ("Aduna bay peligro nga mawad-an og nota sa pagbalhin?",
+         "Wala kon tipigan nimo ang backup gikan sa Android. Nagsulat ang pagpasig-uli sa iPhone ug wala gyoy giusab sa file nga iyang gibasa, busa kompleto ang orihinal ingong kapuli. Tipigi kini hangtod masiguro nimo nga anaa na sa iPhone ang tanan, ug maayo unta bisan human niana."),
+        ("Unsa man kon dili makahimo og backup ang Android nga telepono?",
+         "Susiha una ang nahibiling luna, kay nagkinahanglan ang app og dapit nga sulatan sa file. Kon ang mismong app ang naay problema, kasagarang masulbad kini sa pag-update o pag-restart sa device. Kompleto pa gihapon ang datos samtang gisulbad nimo kini."),
     ],
 }
 
@@ -248,6 +347,7 @@ GUIDES_CEB["backup-jw-library"] = {
                    "highlight ug bookmark sa imong pagtuon sa JW Library — ug ang komon nga "
                    "sayop nga nakalit sa daghan.",
     "intro": [
+        "Ang tanan nga imong gimarkahan sa JW Library — matag nota, matag highlight, matag bookmark ug tag — anaa sa usa lang ka dapit: ang device nga imong gikuptan. Walay account nga adunay kopya ug walay awtomatikong pag-sync sa cloud. Ang backup lamang ang nagbarog tali sa librarya sa pagtuon nga gitukod sulod sa mga tuig ug sa nawala, na-reset o giilisan nga telepono.",
         "Ang husto nga backup sa JW Library mokabat ug tunga sa minuto ug manalipod sa "
         "tuig-tuig nga natigom nga pagtuon. Halos parehas ang sinugdanan sa mga sugilanon bahin "
         "sa nawad-ang datos: walay bag-o nga .jwlibrary nga file dihang nawala, na-reset o "
@@ -277,6 +377,20 @@ GUIDES_CEB["backup-jw-library"] = {
          "matag usa naay kaugalingong nota. Dili gyod nimo kinahanglang mopili tali kanila — "
          "hiusaha sila ngadto sa usa ka kompletong file sa jwsync.org, libre ug pribado, sa "
          "browser mismo."),
+        ("Unsay sulod sa file, ug unsay wala",
+         "Gitipigan sa backup ang datos sa imong personal nga pagtuon: mga nota, highlight ug ang kolor niini, bookmark, tag, ug ang mga tubag nga imong gi-type sa mga luna sa pangutana sa pagtuon. Wala niini tipigi ang mismong mga publikasyon — walay Bibliya, magasin, libro, video o audio. Mao nay hinungdan nga pipila lang ka megabyte ang backup sa tuig-tuig nga pagtuon, ug mao nay hinungdan nga kon magpasig-uli ka sa bag-ong device, mag-download ka pa og mga publikasyon samtang anaa na sa lugar ang matag notang imong gisulat."),
+        ("Pila ka backup ang tipigan",
+         "Kapin sa usa. Ang butang nga nagkuha sa mga nota sa mga tawo talagsa rang nawalang file — mas kanunay nga maayong backup nga natabonan sa dautan, o pagpasig-uli nga nahimo sa sayop nga device. Tungod kay gagmay ang mga file, walay hinungdan sa pagpapas sa daan: tipigi kini nga may petsa sa usa ka folder sa cloud. Dili mawad-an og bili ang backup nga unom ka bulan na bisan may mas bag-o ka na, kay ang bisan unsa nga imong napapas nga wala tuyoa sukad niadto anaa pa gihapon sa sulod."),
+        ("Asa kini tipigan",
+         "Bisan asa basta dili lang sa mismong device. Ang folder sa Drive, iCloud, Dropbox o OneDrive motabon sa kahimtang nga labing importante — nga mawala, makawat, ma-reset o madaot ang device. Ang pag-email sa file ngadto sa imong kaugalingon molihok usab ug adunay bentaha nga mabutangan kinig petsa. Anaa sa file ang kaugalingon nimong mga nota sa pagtuon, busa atimana kini sama sa bisan unsang personal nga dokumento."),
+        ("Susiha ang backup sa dili pa ka mosalig niini",
+         "Ang backup nga wala pa nimo maablihi usa ka pangagpas, dili kaluwasan. Mahimo nimong ablihan ang .jwlibrary nga file sa imong browser ug makita mismo kon unsang mga nota, highlight ug bookmark ang sulod niini — usa ka katloan ka segundo nga pagsusi nga naghimo sa pangagpas nga kamatuoran. Labing importante kini sa dili pa gyod ang usa ka butang nga dili na mabawi: factory reset, pagbaylo sa device, pag-ayo, o dakong update sa sistema."),
+        ("Ang mga higayon nga takos magbackup",
+         "Bisan unsang punto nga mag-ilis og tag-iya o kahimtang ang device: update sa sistema, factory reset, pag-ayo o pag-ilis og screen, pagbaylo, o paghatag sa device ngadto sa lain. Idugang ang katapusan sa bisan unsa nga dili nimo gustong balikon — usa ka kombensiyon, usa ka asembliya, usa ka panahon sa pag-andam og pakigpulong. Paspas ug barato ang mga backup, busa ang mapuslanong batasan mao ang paghigot niini sa mga hitabo imbes sa kalendaryo."),
+        ("Ang backup sa telepono dili backup sa JW Library",
+         "Ang Google One, ang backup sa device sa iCloud o ang himan sa pagbalhin sa naghimo sa telepono naglihok sa lebel sa device ug dili managsama ang pag-atiman sa pribadong datos sa mga app. Kanunayng mahibaloan sa mga tawo nga gibalik sa hingpit nga pagpasig-uli sa telepono ang mga app ug setting apan dili ang mga nota sa pagtuon, o gibalik ang bersiyon nga pipila ka semana na. Ang .jwlibrary nga file mao ang bugtong kopya nga ikaw ang nagkontrol sa sulod ug makasusi, busa isipa ang backup sa telepono nga dugang, dili ang plano."),
+        ("Himoa kining batasan nga molungtad",
+         "Ang rutina nga tinuod nga molungtad mao ang nakakabit sa usa ka butang nga imong gibuhat na: magbackup inighuman nimo sa pag-andam sa semana, o sa samang adlaw nga imong asikasohon ang ubang kanunayng buluhaton. Kanunayng i-save sa samang folder aron sa usa ka dapit magtapok ang mga file, ug pasagdi didto ang mga daan. Ang folder sa mga backup nga may petsa nga moabot og mga tuig mao ang labing lig-ong porma niini, ug pipila lang ka segundo matag semana ang pagmentinar niini."),
     ],
     "faq": [
         ("Unsa ka dako ang backup nga file?",
@@ -284,6 +398,16 @@ GUIDES_CEB["backup-jw-library"] = {
          "attachment sa email."),
         ("Naay mausab ba sa akong cellphone kon maghimo kog backup?",
          "Wala. Isulat lang niini ang file; wala matandog ang imong library."),
+        ("Apil ba sa backup ang akong gi-download nga mga publikasyon?",
+         "Dili. Datos lang sa personal nga pagtuon. Ma-download pag-usab ang mga publikasyon sa bag-ong device, ug mobalik dayon ang kalambigitan sa imong mga nota niini."),
+        ("Mahimo ba nakong ablihan ang backup aron makita ang sulod?",
+         "Oo. Mahimo nimong ablihan ang .jwlibrary nga file sa imong browser ug tan-awon ang tanang nota, highlight ug bookmark nga sulod niini, nga walay i-install ug nga dili mogawas ang file sa imong device."),
+        ("May kalitaan ba ang mga backup?",
+         "Wala. Magpabiling mapasig-uli ang .jwlibrary nga file bisan kanus-a. Magpasig-uli sa karon nga bersiyon sa JW Library imbes sa daan, kay mabasa sa app ang mas daang porma sa backup apan dili ang mas bag-o."),
+        ("Kinahanglan ba kong magbackup sa dili pa ang matag tigom?",
+         "Dili kinahanglan. Ihigot ang mga backup sa mga hitabo nga makakuha og datos — mga update, pag-ayo, bag-ong device — dugang ang kanunayng ritmo nga haom sa gidaghanon sa pagtuon nga dili nimo gustong balikon."),
+        ("Takos bang tipigan ang mga backup gikan pa sa miaging mga tuig?",
+         "Oo. Gagmay kini, ug ang bisan unsa nga imong napapas nga wala tuyoa sukad niadto anaa pa gihapon sa sulod."),
     ],
 }
 
@@ -345,6 +469,7 @@ GUIDES_CEB["fix-corrupted-jw-library-backup"] = {
                    "Library Doctor ang backup sa imong browser, ayohon ang komon nga mga "
                    "problema, ug maghatag ug limpyo nga kopya nga mapasig-uli.",
     "intro": [
+        "Ang backup nga dili mapasig-uli dili kinahanglang backup nga nawad-an sa imong mga nota. Kadaghanan sa mga file nga gihubit sa mga tawo nga daot maayo ra ang estruktura ug gisalikway tungod sa usa ka butang nga maayo pa, o nadaot sa pagbalhin sa paagi nga masulbad sa bag-ong kopya. Takos nga agian ang mga hinungdan sa dili pa nimo biyaan ang file.",
         "Usahay dili dawaton sa JW Library ang backup nga file — mapakyas ang pagpasig-uli, "
         "may error, o dili moabli ang file. Komon nga hinungdan: naputol nga download, cloud "
         "drive nga nakadaot sa file, extension nga nausab sa dalan, o mga internal nga "
@@ -380,6 +505,20 @@ GUIDES_CEB["fix-corrupted-jw-library-backup"] = {
          "niini pag-usab. Isulti kini sa Doctor nga prangka imbes maghatag ug duhaduhaan nga "
          "file — ug kana ang timailhan nga mangita ug mas sayo nga kopya sa email, Drive o "
          "iCloud, nga maoy usa usab ka rason nganong bililhon ang pagtipig sa daang backup."),
+        ("Unsay kasagarang buot ipasabot sa daot",
+         "Sa tinuoray, talagsa rang daot nga datos kini. Ang komon nga hinungdan mao ang file nga naputol sa pagbalhin — gipamub-an sa napakyas nga pag-upload o sa messaging app nga nag-compress niini — o archive nga kompleto apan adunay dili magkatakdo nga bahin sa sulod nga gisalikway sa app. Tungod kay ang .jwlibrary usa ka ZIP nga naglukot sa SQLite database, mahimong anaa sa bisan hain sa duha ka lut-od ang suliran, ug lahi ang gikinahanglang tambal. Dili maayo ang naputol nga file ug kinahanglang kuhaon pag-usab; kasagarang maayo ang dili magkatakdo nga database."),
+        ("Unsay tinuod nga gisusi sa usa ka pag-scan",
+         "Gipamatud-an sa pag-scan nga moabli ang archive, nga ang userData.db usa ka mabasang SQLite database nga mopasar sa pagsusi sa integridad, nga motakdo ang estruktura sa gipaabot sa JW Library, ug nga mouyon ang manifest sa database nga gihubit niini — apil ang hash nga gamiton sa app aron masiguro nga wala mausab ang file. Ang dili pagtakdo sa manifest ug database maoy usa sa labing komon nga hinungdan nga gisalikway sa pagpasig-uli ang backup nga maayo ra sa teknikal, ug diretso kining maayo."),
+        ("Kasagarang walay kadaot ang mga ilong nga rekord",
+         "Kanunayng motaho ang pag-scan sa tinuod nga backup og mga rekord nga nagtudlo sa butang nga wala na — pananglitan, usa ka highlight nga nagtudlo sa dapit sa publikasyon nga nabalhin. Ang mismong mga backup sa JW Library kanunayng naglangkob og gatusan niini ug mapasig-uli nga walay reklamo. Normal kining sangputanan sa pag-update sa mga publikasyon sa paglabay sa panahon ug dili timailhan sa kadaot, ug dili kinahanglang hinloan aron molihok ang file."),
+        ("Pagluwas sa mga nota gikan sa file nga dili mapasig-uli",
+         "Bisan kon dili maayo ang backup nga igo aron dawaton kini sa JW Library, kanunayng mabasa pa gihapon ang mga nota sa sulod. Ang pag-abli sa file sa imong browser magtugot kanimo nga makita ug makopya diretso ang teksto sa nota, ug naghimo kini sa file nga dili na magamit ngadto sa naluwas nga materyal sa pagtuon. Kon aduna kay ikaduha ug mas daang backup nga mapasig-uli, mahiusa ngadto niini ang mabasang sulod sa nadaot imbes i-type pag-usab."),
+        ("Kon mapakyas ang pagpasig-uli nga walay tin-aw nga sayop",
+         "Kanunayng isalikway sa JW Library ang file nga walay gipasabot nga hinungdan. Ang labing komon mao ang manifest nga ang hash dili na motakdo sa database nga gihubit niini, file nga naputol sa pagbalhin, o backup nga gisulat sa bersiyon sa app nga mas bag-o kay sa imong gipasig-ulian. Maayo ang una, kinahanglang kuhaon pag-usab gikan sa tinubdan ang ikaduha, ug masulbad ang ikatulo pinaagi sa pag-update sa app sa dili pa magpasig-uli."),
+        ("Paglikay niini sa sunod",
+         "Halos tanang kadaot mahitabo sa dalan. Balhina ang mga backup ingong file ug dili pinaagi sa bisan unsa nga makahimo og bag-ong compress, ug pilia ang cloud, AirDrop o kable kay sa mga messaging app. Human sa pagbalhin, siguroha nga motakdo ang gidak-on sa orihinal — ang file nga tataw nga mas gamay kay sa imong gipadala naputol, ug walay pag-ayo nga makabalik sa byte nga wala gyod moabot."),
+        ("Kon wala gyoy molihok",
+         "Ang file nga dili maayo mahimo pa gihapong mabasa, ug kasagarang igo na ang mabasa kini — mabawi diretso ang teksto sa nota bisan kon isalikway sa JW Library ang file. Hiusaha kini sa bisan unsang mas daang backup nga mapasig-uli ug kasagarang magpabilin kanimo ang kadaghanang bahin sa librarya. Sa dili pa nimo hukman nga wala nay pulos ang file, ablihi kini ug tan-awa kon unsa gyoy sulod."),
     ],
     "faq": [
         ("Gi-upload ba ang akong datos alang sa pagsusi?",
@@ -387,6 +526,16 @@ GUIDES_CEB["fix-corrupted-jw-library-backup"] = {
         ("Makabawi ba kini sa mga nota nga gipapas sulod sa JW Library?",
          "Dili — ang istruktura sa file ang iyang ayohon. Ang mga nota nga gipapas sa app sa "
          "dili pa nahimo ang backup wala sa file aron mabawi pa."),
+        ("Aduna bay nota nga mawala sa pag-ayo sa file?",
+         "Sa kopya molihok ang pag-ayo ug gitubag niini ang suliran sa estruktura, dili sa sulod. Wala gyoy giusab sa orihinal nimong file, busa magpabilin kining magamit kon buot nimong magsugod pag-usab."),
+        ("Nganong nadaot ang akong backup?",
+         "Kasagaran, nausab ang file sa dalan — gipadala pinaagi sa app nga nag-compress o nagputol niini, o pag-upload nga wala mahuman. Kasagarang masulbad kini sa pagbalhin pag-usab gikan sa tinubdan."),
+        ("Makabawi ba ang pag-scan sa mga nota nga akong gipapas sulod sa JW Library?",
+         "Dili. Inigkapapas na sa app ug inighimo og bag-ong backup, wala na ang nota nianang file. Anaa pa gihapon kini sa backup nga mas sayo kay sa pagpapas."),
+        ("Masulti ba sa gidak-on sa file kon naputol ba kini?",
+         "Kasagaran, oo. Itandi sa orihinal kon anaa pa kini nimo; ang dakong kalainan nagpasabot nga wala mahuman ang pagbalhin."),
+        ("Sigurado ba nga mapasig-uli ang backup nga moabli sa browser?",
+         "Dili sigurado, apan lig-on kining timailhan nga maayo ang archive ug ang database, nga nagkuha sa labing komon nga mga kapakyasan."),
     ],
 }
 
@@ -650,6 +799,7 @@ GUIDES_CEB["open-jwlibrary-file"] = {
                    "nga naay matag nota, highlight, bookmark ug tag. Ania ang sulod niini ug "
                    "kon unsaon kini pag-abli ug pagbasa.",
     "intro": [
+        "Ang .jwlibrary nga file morag dili masabtan, apan dili diay. Ordinaryo lang kining ZIP archive palibot sa ordinaryong SQLite database, nga nagpasabot nga mabasa nimo ang kaugalingon nimong backup — makita mismo kon unsang mga nota, highlight ug bookmark ang sulod niini — nga walay JW Library ug nga walay bisan unsa nga i-install.",
         "Kon mag-backup ka sa JW Library, makakuha kag file nga matapos sa .jwlibrary. Usa "
         "kini ka nag-inusarang madala nga pakete nga naglangkob sa tanan sa imong personal nga "
         "pagtuon — mga nota, highlight, bookmark, tag ug playlist — sa usa ka siksik nga "
@@ -682,6 +832,20 @@ GUIDES_CEB["open-jwlibrary-file"] = {
          "Molihok usab ang samang panid nga jwsync.org sa browser sa laptop o desktop — "
          "mapuslanon sa pagbasa sa tuig-tuig nga nota sa dakong screen, o sa tinapok nga "
          "paghinlo nga makahago sa cellphone. Walay kinahanglang i-install."),
+        ("Unsa gyod ang file",
+         "Ang .jwlibrary nga file usa ka ZIP archive nga lahi lang ang extension. Sulod niini ang userData.db — usa ka SQLite database nga adunay imong mga nota, highlight, bookmark ug tag — ug ang manifest.json, gamayng file nga naghubit sa backup ug naglakip og hash sa database nga gamiton sa JW Library aron masiguro nga wala mausab ang file. Walay tag-iya o naka-encrypt niini; ordinaryong archive lang kini palibot sa ordinaryong database."),
+        ("Pag-abli niini nga walay JW Library",
+         "Dili nimo kinahanglan ang app, ni bisan unsang software, aron mabasa ang kaugalingon nimong backup. Ang pag-abli sa file sa imong browser magpakita sa tanang nota, highlight ug bookmark nga sulod niini, uban ang pagpangita ug pagsala, ug wala gyoy paggawas ang file sa imong device — gibasa kini sa dapit mismo imbes i-upload. Mao kini ang labing paspas nga paagi sa pagsiguro nga naglangkob ang backup sa imong gihunahuna sa dili pa ang reset, pagbaylo, o pagpasig-uli sa bag-ong telepono."),
+        ("Pagtan-aw sa sulod sa manwal nga paagi",
+         "Kon interesado ka, kopyaha ang file, ilisi ang ngalan sa kopya og .zip ug ablihi sa bisan unsang himan sa archive. Makita nimo ang userData.db ug ang manifest.json. Nagkinahanglag SQLite viewer ang pag-abli sa database, ug ginganlan ang mga lamesa sumala sa ilang sulod — Note, UserMark, Bookmark, Tag. Kanunayng magtrabaho sa kopya: ang pag-usab sa database sa manwal nga paagi nga wala i-update ang hash sa manifest maghimo og file nga isalikway sa JW Library nga pasig-ulion."),
+        ("Luwas nga pag-usab",
+         "Mahimong tul-iron, ilisan og tag, ilisan og kolor o papason ang mga nota sa gawas sa app, ug i-export ang resulta ingong bag-ong .jwlibrary nga file nga imong pasig-ulion sa naandan. Ang lagda nga naghimo niining luwas mao ang pagtipig sa orihinal: usba ang kopya, ipasig-uli ang giusab nga file, ug kon may dili motakdo sa imong gipaabot, anaa pa gihapon ang wala hilabti nga orihinal nga kabalikan."),
+        ("Pagbasa sa backup sa telepono",
+         "Dili kinahanglan ang kompyuter. Molihok usab ang pag-abli sa file sa browser sa telepono, nga mapuslanon kon anaa na sa telepono ang backup ug buot nimong masiguro ang sulod niini sa dili pa magpasig-uli o sa dili pa papason ang device. Gibasa ang file sa dapit mismo, busa molihok kini nga walay laing koneksiyon gawas sa pag-load sa panid."),
+        ("Nganong importante ang hash sa manifest",
+         "Girekord sa manifest.json ang hash sa userData.db. Gigamit kini sa JW Library aron masiguro nga wala mausab ang database sukad gisulat ang backup, busa isalikway sa pagpasig-uli ang file nga giusab ang database nga wala kuwentaha pag-usab ang hash. Mao kini ang labing komon nga hinungdan nga mohunong sa paglihok ang backup nga giusab sa manwal nga paagi, ug ang hinungdan nga mas luwas ang pag-usab pinaagi sa himan nga nagsulat pag-usab sa manifest kay sa diretsong paghilabot sa database."),
+        ("Alang sa unsa kini mapuslanon",
+         "Ang katakos sa pagbasa sa backup nag-usab sa mismong bili sa backup. Masiguro nimo nga naglangkob ang file sa imong gihunahuna sa dili pa nimo papason ang telepono, matan-aw kon takos bang pasig-ulion ang daang file, makita ang notang nahibaloan nimong imong gisulat nga dili magkalot sa app, o mabawi ang teksto gikan sa file nga dili dawaton sa JW Library. Wala niini ang nagkinahanglan nga itugyan nimo ang file kang bisan kinsa — sa kaugalingon nimong device kini gibasa."),
     ],
     "faq": [
         ("Mahimo ba nakong ablihan ang .jwlibrary nga file sa Excel o Notepad?",
@@ -691,6 +855,16 @@ GUIDES_CEB["open-jwlibrary-file"] = {
         ("Luwas ba ang pag-abli sa akong backup sa browser?",
          "Oo. Basahon sa JW Sync ang file sulod sa tab sa imong browser; walay ipadala sa "
          "server, ug wala gayod usba ang imong orihinal nga file."),
+        ("Mahimo ba nakong basta ilisan og .zip ang ngalan?",
+         "Oo, sa usa ka kopya. Wala giusab sa pag-ilis og ngalan ang sulod, ug gitugotan niini ang bisan unsang himan sa archive nga ipakita kanimo ang naa sa sulod."),
+        ("Mausab ba ang file kon ablihan?",
+         "Dili. Ang pagbasa sa backup — sa browser o sa himan sa archive — magbilin niini nga walay kausaban bisan sa lebel sa byte. Bag-ong file lang ang mahimo kon mag-save o mag-export ka."),
+        ("Kinahanglan ba kong naka-online?",
+         "Alang lang sa pag-load sa panid. Gibasa ang file sa imong device ug wala kini i-upload, busa wala gyoy pag-agi sa network ang imong mga nota."),
+        ("Mahimo ba nakong ablihan ang backup nga gipadala kanako sa lain?",
+         "Oo, dili nakahigot ang porma sa usa ka device o account. Laing hisgotanan kon angay ba nimo kining ipasig-uli, kay giilisan sa pagpasig-uli ang kaugalingon nimong librarya."),
+        ("May kinahanglan ba kong i-install aron makatan-aw sa sulod?",
+         "Wala. Igo na ang browser aron basahon ang mga nota; ang manwal nga pagsusi lang sa mismong database ang nagkinahanglag SQLite viewer."),
     ],
 }
 
@@ -745,6 +919,7 @@ GUIDES_CEB["recover-jw-library-notes-lost-phone"] = {
                    "mabawi nimo nagdepende sa imong mga backup. Ania kon unsaon gyod pagbawi "
                    "sa imong mga nota — ug unsay buhaton sa sunod nga higayon.",
     "intro": [
+        "Kon mawala, makawat o madaot nga dili na maayo ang telepono, ang pagkabuhi sa imong mga nota sa JW Library nagsalig sa usa lang ka pangutana: aduna bay .jwlibrary nga backup sa bisan asa gawas nianang device? Kon aduna, mobalik ang tanan nga sulod niini. Gitabonan niining panid kon unsaon pagpangita og usa, kon unsaon kini pagpasig-uli sa bisan unsang kapuli nga device, ug unsay buhaton kon daan na ang bugtong backup nga naa nimo.",
         "Igo na gyoy makapaguol ang pagkawala sa cellphone bisan walay kahadlok nga nawala pod "
         "ang tuig-tuig nga nota sa pagtuon. Kon mabawi ba nimo sila nagdepende sa usa ka "
         "pangutana: naa bay .jwlibrary nga backup bisan asa sa gawas nianang cellphone?",
@@ -781,6 +956,20 @@ GUIDES_CEB["recover-jw-library-notes-lost-phone"] = {
          "file sa gawas sa cellphone (igo na ang pag-email niini sa imong kaugalingon). "
          "Mahimo pa kang pahinumdoman sa JW Sync ug hiusahon ang imong mga device nga regular. "
          "Ang file nga anaa sa imong inbox mabuhi ug mas dugay kay sa bisan unsang cellphone."),
+        ("Asa mahimong adunay backup na",
+         "Sa dili pa nimo hukman nga wala, susiha ang tanang dapit diin mahimong na-save ang file: ang folder sa Downloads ug Documents sa bisan unsang kompyuter nga imong gikonektahan sa telepono, ang mga gipadala sa email, ang mga messaging app diin mahimong napadala nimo ang file, ug matag cloud account nga imong gigamit. Kanunayng nakahimo og backup ang tawo kausa, pipila ka bulan na ang milabay, ug nalimot — ug ang backup nga pipila ka bulan na naglangkob pa gihapon sa kadaghanang bahin sa librarya sa pagtuon."),
+        ("Pagpasig-uli sa laing telepono o plataporma",
+         "Dili kinahanglang sama sa nawala ang kapuli nga device. Mapasig-uli sa iPhone ang backup gikan sa Android nga telepono ug mao usab sa kabaliskaran, kay parehas ang porma sa Android, iOS, iPadOS ug Windows. I-install ang JW Library sa bag-ong device, i-update kini ngadto sa karon nga bersiyon, unya magpasig-uli sa Personal nga Pagtuon → Backup ug Pagpasig-uli."),
+        ("Kon daan o tinipik lang ang backup nga naa nimo",
+         "Ipasig-uli gihapon. Ang pagbawi sa kadaghanang bahin sa imong mga nota dili paglipay — mao kana ang resulta. Kon may makita kang ikaduha ug laing backup unya, mahimong hiusahon ang duha ngadto sa usa ka file nga naglangkob sa tanan gikan sa duha, busa dili babag sa pagdugang unya ang pagpasig-uli sa mas daan karon."),
+        ("Unsa ang dili na mabawi",
+         "Kon walay backup sa bisan unsang porma, dili na mabawi ang datos sa personal nga pagtuon. Anaa lang kini sa pribadong storage sa app sa device, ug dili kasaligan nga tipigan kini sa JW Library ni sa backup sa cloud sa lebel sa telepono. Takos kining isulti nga prangka, kay mao gyoy hinungdan nga naglungtad ang rutina niining sitiyoha."),
+        ("Susiha sa dili pa papason ang device gikan sa layo",
+         "Kon nawala lang ug wala madaot ang telepono, ug naghunahuna kang papason kini gikan sa layo, pangitaa una ang naglungtad nga mga backup: dili na mabawi ang pagpapas ug gikuha niini ang ulahing higayon nga makahimo og usa. Kon nasaag lang kini ug maabot pa, dili mahimo ang paghimo og backup gikan sa layo, apan kompleto pa gihapon ang datos samtang wala kini papasa o i-reset."),
+        ("Aron dili na kini mausab",
+         "Ang hinungdan nga ang nawala nga telepono makakuha og tuig-tuig nga pagtuon mao nga ang bugtong kopya anaa sa telepono. Kon nakapasig-uli ka na sa kapuli nga device, pagbutang og backup sa gawas sa device sa samang adlaw, ug balika sa ritmo nga tinuod nimong matuman. Igo ka gagmay ang mga file aron tipigan silang tanan hangtod sa hangtod nga walay bayad."),
+        ("Kon tinuod nga walay backup",
+         "Nan ang matinud-anong tubag mao nga dili na mabawi ang mga nota, ug mas maayong madungog kana kay sa magpadayon sa pagpangita. Ang mahimo nimo mao ang paghimo niini nga katapusang kapildihan: i-install ang JW Library sa kapuli, ug sa dili pa ka nakatukod og bisan unsa nga masakit mawala, paghimo og backup ug ibutang sa gawas sa device. Sukad niadto, walay mawala kanimo sa samang hitabo."),
     ],
     "faq": [
         ("Mabawi ba sa JW Sync ang mga nota gikan sa cellphone nga wala na nako?",
@@ -791,6 +980,16 @@ GUIDES_CEB["recover-jw-library-notes-lost-phone"] = {
          "Bililhon gyod. Mas maayo ang daang backup nga naay kadaghanan sa imong mga nota kay "
          "sa pagsugod sa wala, ug mahimo nimo kining hiusahon unya sa bisan unsang mas bag-o "
          "nga imong makit-an."),
+        ("Aduna bay kopya sa akong mga nota ang JW Library sa cloud?",
+         "Wala. Magpabilin sa device ang datos sa personal nga pagtuon gawas kon ikaw mismo ang maghimo og file sa backup."),
+        ("Mabawi ba ang mga nota gikan sa telepono nga buak ang screen?",
+         "Usahay — kon moandar pa ang telepono ug makontrol, o kon mapaandar sa repair shop ang display, makahimo pa gihapon og backup ang JW Library. Kompleto ang datos samtang kompleto ang storage."),
+        ("Mapasig-uli pa ba ang daang backup sa karon nga app?",
+         "Oo. Mabasa sa JW Library ang mas daang porma sa backup. I-update una ang app ug magpasig-uli sa karon nga bersiyon."),
+        ("Nakakita kog duha ka daang backup — hain ang akong gamiton?",
+         "Wala kanila nga mag-inusara: hiusaha sila. Naglangkob ang resulta sa tanan gikan sa duha, apil ang naa sa mas daan nga napapas na sa panahon sa mas bag-o."),
+        ("Makita ba nako ang sulod sa backup sa dili pa kini ipasig-uli?",
+         "Oo. Ablihi ang file sa imong browser ug tan-awa una ang mga nota, highlight ug bookmark niini, aron mahibalo ka sa imong ipasig-uli."),
     ],
 }
 
@@ -856,6 +1055,7 @@ GUIDES_CEB["export-jw-library-notes"] = {
                    "kuhaa ang usa ka pinili ngadto sa bag-ong .jwlibrary nga backup. Tanan sa "
                    "browser mo.",
     "intro": [
+        "Ang mga nota nga gisulat sa JW Library sayon basahon sulod sa app ug lisod gamiton bisan asa pa — sa usa ka dokumento, sa balangkas sa pakigpulong, sa papel, o sa kamot sa tawo nga wala mogamit sa app. Gisulbad kini sa pag-export, ug ang nag-unang hukom dili kon unsaon pag-export kondili kon unsa kadaghan: halos kanunayng mas mapuslanon ang sinala nga pag-export kay sa tanan nga dungan.",
         "Dili unta makulong sa usa ka app ang imong mga nota sa pagtuon. Usahay gusto nimo "
         "sila isip yanong teksto — aron itapot sa balangkas sa pakigpulong, sa usa ka "
         "dokumento, o sa imong kaugalingong notes app — ug usahay gusto nimo ug limpyo nga "
@@ -885,6 +1085,20 @@ GUIDES_CEB["export-jw-library-notes"] = {
          "asaynment sa tigom, ngadto sa personal nga wiki, ngadto sa giimprinta para sa "
          "wala mogamit sa app. Gitipigan sa Markdown ang han-ay samtang mabasa gihapon isip "
          "yanong teksto bisan asa."),
+        ("Pagpili og porma",
+         "Ang yano nga teksto mao ang labing sayon dad-on ug hapsay nga ma-paste sa bisan unsang dokumento o email. Gitipigan sa may-porma nga gula ang balangkas sa taas nga mga nota ug haom kini sa pag-print o pagpaambit. Kon buot nimong makabalik ang mga nota sulod sa JW Library unya — sa laing device, o sa librarya sa lain — tipigi ang mismong .jwlibrary nga file imbes ang pag-export sa teksto, kay kana ra ang nagtipig sa kalambigitan sa mga nota, highlight, tag ug sa eksaktong dapit sa publikasyon diin sila nakaangkla."),
+        ("Pag-export sa bahin lang sa librarya",
+         "Talagsa rang mao ang hingpit nga pag-export sa tuig-tuig nga pagtuon ang imong gusto. Ang unang pagpiho — sa usa ka tag, publikasyon, kolor sa highlight, o gilay-on sa petsa — maghimo og butang nga tinuod nimong magamit, sama sa tanang notang may tag alang sa usa ka pakigpulong, o tanang gisulat sa usa ka kombensiyon. Ang samang mga salaan nga nagpaminos sa panan-awon nagpaminos sa pag-export, busa ang imong makita mao gyoy imong makuha."),
+        ("Unsay mokuyog sa teksto, ug unsay dili",
+         "Dala sa pag-export ang imong mga pulong. Wala niini dala ang mga angkla nga naghigot sa nota sa piho nga parapo sa piho nga publikasyon, kay adunay kahulogan lang kadtong mga reperensiya sulod sa JW Library. Mao kini ang praktikal nga hinungdan sa pagtipig usab og mga backup: ang pag-export alang sa pagbasa, pag-print ug pagpaambit sa gawas sa app, samtang ang .jwlibrary nga file mao ang nagbutang balik sa mga nota sa librarya nga kompleto ang konteksto."),
+        ("Pagtigom sa tanan alang sa pakigpulong o asaynment",
+         "Mao kini ang labing komon nga hinungdan sa pag-export. Salaa sumala sa tag, publikasyon o gilay-on sa petsa diin nahimutang ang materyal, susiha ang resulta, ug i-export lang kana. Ang imong makuha usa ka dokumento nga naglangkob sa may kalabotang mga nota ug sa mga bahin nga imong gi-highlight, sa han-ay sa ilang pagtungha, imbes dili madumala nga pagbubo sa tibuok librarya."),
+        ("Pagpaambit sa mga nota ngadto sa lain",
+         "Duha ka lahi nga butang ang gipasabot sa pagpaambit. Kon buot lang basahon sa lain ang imong mga nota, husto ang pag-export sa teksto — moabli kini bisan asa ug walay kinahanglang linaing programa. Kon buot niyang anaa sa sulod sa iyang kaugalingong JW Library ang mga nota, nakaangkla sa samang parapo ug may iyang mga tag ug kolor, nan ang kinahanglan nimo usa ka .jwlibrary nga file, kay walay maibalik sa app ang pag-export sa teksto."),
+        ("Pagtipig og talaan nga imong mabasa pa human sa dugayng panahon",
+         "Takos usab ang mga pag-export sa ilang kaugalingon. Ang kopya sa imong mga nota sa pagtuon sa yano nga teksto moabli pa human sa katloan ka tuig sa mga programa nga wala pa gani gisulat ni bisan kinsa, ug dili kana masaad sa bisan unsang porma nga iya sa usa ka app. Ang pagtipig sa duha — ang .jwlibrary alang sa pagpasig-uli ug ang pag-export sa teksto alang sa pagbasa — halos walay bayad ug motabon sa duha ka umaabot."),
+        ("Pag-export o backup — hain ang imong gikinahanglan",
+         "Lahi ang gitubag nilang pangutana. Ang pag-export alang sa paggamit sa imong mga nota sa gawas sa JW Library: pagbasa, pag-print, pagkutlo, pagpadala ngadto sa lain. Ang .jwlibrary nga backup alang sa pagbutang balik niini sa JW Library, niining device o sa lain, nga kompleto ang matag angkla, tag ug kolor. Walay kapuli ang usa sa lain, ug walay hinungdan nga dili nimo baton ang duha."),
     ],
     "faq": [
         ("Mausab ba ang akong mga nota sa JW Library kon mag-export?",
@@ -893,6 +1107,20 @@ GUIDES_CEB["export-jw-library-notes"] = {
         ("Mahimo ba nakong i-export ang tanan nga dungan?",
          "Oo — hawa-i ang mga salaan aron pilion ang tibuok library, o pig-ota una aron "
          "i-export ang bahin lang."),
+        ("Madala ba nako ang akong mga nota ngadto sa Word o Google Docs?",
+         "Oo — i-export ingong teksto ug i-paste. Moabot ang teksto nga kompleto ang balangkas ug mahatagan og estilo gikan didto."),
+        ("Ma-export ba ang mga highlight ingon man ang mga nota?",
+         "Oo, apil ang bahin nga gi-highlight ug ang kolor niini, busa ipakita sa naimprentang kopya ang imong gimarkahan ug ang imong gisulat."),
+        ("Mahimo ba nakong i-export ang tanan nga dungan?",
+         "Oo, bisan tuod kasagarang mas mapuslanon ang sinala nga pag-export. Ma-export ang tanan sa usa ka lakang kon buot kag kompletong kopya."),
+        ("Mahimo ba nakong i-export ang mga tubag nga akong gi-type sa mga pangutana sa pagtuon?",
+         "Oo. Bahin sa datos sa imong personal nga pagtuon ang gi-type nga mga tubag ug ma-export kini uban sa mga nota ug highlight."),
+        ("Apil ba sa pag-export kon hain nga publikasyon ang gigikanan sa matag nota?",
+         "Oo, gipakita sa pag-export kon asa gikan ang matag nota, bisan tuod ang mismong angkla molihok lang sulod sa JW Library."),
+        ("May mausab ba sa akong librarya ang pag-export?",
+         "Wala. Gibasa sa pag-export ang imong datos ug nagsulat og bulag nga file; walay mausab, mabalhin o makuha sulod sa JW Library."),
+        ("Mahimo bang mag-export gikan sa backup imbes gikan sa app?",
+         "Oo. Mahimong ablihan diretso ang .jwlibrary nga file ug i-export ang mga nota niini, nga mapuslanon kon anaa sa daang backup ug dili sa imong karon nga device ang mga notang imong gusto."),
     ],
 }
 
@@ -1863,6 +2091,7 @@ GUIDES_CEB["jw-library-notes-missing-after-update"] = {
                    "pag-sign in pag-usab. Unsay buhaton una, unsay dili buhaton, ug unsaon "
                    "pagbawi kanila nga walay mawala sa imong gisulat sukad niadto.",
     "intro": [
+        "Makapabalaka ang pag-abli sa JW Library human sa update ug pagkakita nga wala na ang imong mga nota, ug sa kadaghanan sa mga higayon mabawi kini. Ang importante mao ang imong buhaton sa mosunod nga pipila ka minuto — sa piho, ang dili paghimo sa bugtong butang nga naghimo sa kahimtang nga mabawi pa ngadto sa hingpit nga kapildihan.",
         "Dili maayong higayon: moabli ang JW Library, ug wala ang mga nota. Sa dili pa ang "
         "tanan, usa ka tambag — ayaw pagdali. Kadaghanan sa naghimo niining kahimtanga nga dili "
         "mabawi mahitabo sa unang napulo ka minuto, pinaagi sa pag-overwrite gyod sa backup nga "
@@ -1903,6 +2132,16 @@ GUIDES_CEB["jw-library-notes-missing-after-update"] = {
          "Dili gayod nawala ang file nga naay error sa pagpasig-uli. Padagana niini ang health "
          "check — kasagaran maayohan ang kadaot gikan sa naputol nga download, cloud sync o "
          "nailisan nga extension, ug normal nga mapasig-uli ang nahinloan nga kopya."),
+        ("Una: ayaw usa paghimo og bag-ong backup",
+         "Kon nawala ang mga nota, sukli ang tinguha nga magbackup dayon. Gikuha sa backup ang karon nga kahimtang, ug kon walay sulod ang karon nga kahimtang adunay peligro nga matabonan nimo ang maayong file nga naa na nimo. Susiha una kon unsang mga backup ang anaa — sa Downloads, Files, email o cloud — ug unya pa mohukom. Walay maayo sa device tungod sa backup nga hinimo sa kakuyaw."),
+        ("Nganong morag gipapas sa update ang mga nota",
+         "Kasagarang dili pagpapas ang hinungdan. Mahimong biyaan sa update ang app nga nagtutok sa bag-o ug walay sulod nga database samtang anaa pa sa storage ang daan; ang pag-install pag-usab — apil ang awtomatikong gihimo sa update sa store nga napakyas sa tunga — magsugod sa app gikan sa wala; ug sa mga device nga giambitan o adunay daghang profile, mahimong modagan ang app ubos sa laing profile. Sa tanan niini, dili kaayo napapas ang mga nota kondili wala lang ma-load, ug mao nay hinungdan nga kasagarang mahinlo nga makabalik ang tanan pinaagi sa pagpasig-uli gikan sa backup."),
+        ("Pagbawi sa daang backup nga dili isalikway ang bag-ong buhat",
+         "Kon nakatuon ka na sukad gihimo ang backup, ang basta pagpasig-uli usa ka pag-ilis sa usa ka kapildihan ngadto sa lain: gibalik niini ang daang nota ug gikuha ang mas bag-o. Ang paagi sa paglikay mao ang pagbackup sa karon nga kahimtang ngadto sa bulag nga file, paghiusa niini sa mas daang backup aron anaa sa usa ka file ang duha ka pundok sa nota, ug pagpasig-uli sa resulta. Maangkon nimo nga dungan ang nabawing nota ug ang bag-o imbes mopili tali kanila."),
+        ("Kon nag-install pag-usab ang app sa iyang kaugalingon",
+         "Gihinloan sa pag-install pag-usab ang pribadong storage sa app, busa dili na mabawi ang bisan unsa nga wala sa backup — walay kopya sa cloud nga kasaligan. Susiha ang tanang dapit diin mahimong na-save ang .jwlibrary nga file sa dili pa nimo hukman nga wala niini, apil ang folder sa mga gipadala sa email ug bisan unsang cloud storage nga imong nagamit na. Inigkakita nimo og usa, ipasig-uli kini, ug sukad niadto tipigi ang mga backup sa gawas sa device."),
+        ("Kon nakabalik na ang tanan",
+         "Kon napasig-uli na ang imong mga nota, paghimo pag og usa ka backup ug ibutang sa gawas sa device — ang imong giagian mao gyoy hinungdan niini. Kon kinahanglan nimong hiusahon ang daang backup ug ang karon nga kahimtang aron makaabot dinhi, tipigi usab ang duha ka tinubdang file: mga hulagway kini nga may petsa, ug ang pagbaton og daghan niini mao gyoy naghimong posible sa pagbawi."),
     ],
     "faq": [
         ("Anaa pa ba ang mga nota bisan asa sa device?",
@@ -1916,6 +2155,14 @@ GUIDES_CEB["jw-library-notes-missing-after-update"] = {
          "Hiusaha kini sa backup sa device sa kasamtangan niining kahimtang. Mabawi nimo ang "
          "tanan nga anaa sa daang file ug mahuptan ang tanan nga anaa pa sa device, nga dili "
          "kinahanglang mopili tali kanila."),
+        ("Nawala ba gyod ang akong mga nota?",
+         "Dili kinahanglan. Kon adunay backup sa bisan asa, hingpit nga mabawi ang tanan nga sulod niini. Ang dili na mabawi mao lamang ang buhat human sa labing bag-ong backup."),
+        ("Mahimo ba nakong hiusahon ang daang backup ug ang naa sa device karon?",
+         "Oo — backup-i una ang karon nga kahimtang, hiusaha kini sa mas daan, ug ipasig-uli ang resulta. Mahiadto sa samang librarya ang duha ka pundok sa nota."),
+        ("Papason ba sa pagpasig-uli sa daang backup ang akong bag-ong mga nota?",
+         "Kon kana ra ang buhaton, oo, kay giilisan sa pagpasig-uli ang datos sa device. Hiusaha una ang karon nga backup ug ang daan, ug ipasig-uli ang gihiusang file."),
+        ("Kinahanglan ba nakong i-install pag-usab ang app aron maayo kini?",
+         "Dili — gihinloan sa pag-install pag-usab ang pribadong storage sa app ug gikuha ang bisan unsang paglaom nga mabawi ang naa pa sa device. Pangitaa una ang naglungtad nga backup, ug isipa ang pag-install pag-usab ingong ulahing paagi kon naa na kini nimo."),
     ],
 }
 
