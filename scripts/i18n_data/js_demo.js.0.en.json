@@ -1,0 +1,8 @@
+{
+ "banner_title": "Demo mode",
+ "banner_body": "Two sample backups are loaded. Click <strong>Preview Merge</strong> to see how they combine, then <strong>Confirm Merge</strong> to download the result.",
+ "banner_dismiss": "Dismiss demo",
+ "err_generic": "Could not start the demo — please check your connection and try again.",
+ "err_inject": "Could not load the sample files into the app. Please refresh and try again.",
+ "overwrite_warn": "Starting the demo will replace your currently loaded files. Continue?"
+}

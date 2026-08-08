@@ -219,5 +219,22 @@
   "nav_share_title": "افتح على جهاز آخر",
   "theme_to_light": "التبديل إلى الوضع الفاتح",
   "theme_to_dark": "التبديل إلى الوضع الداكن"
+ },
+ "he": {
+  "nav_adv_options": "אפשרויות מתקדמות",
+  "nav_simple_view": "‹ תצוגה פשוטה",
+  "nav_adv_show_title": "הצגת כלים מתקדמים",
+  "nav_adv_back_title": "חזרה לתצוגה הפשוטה",
+  "mode_simple": "פשוט",
+  "mode_full": "מלא",
+  "mode_simple_title": "פשוט — אשף שלב אחר שלב",
+  "mode_full_title": "מצב מלא — כל הכלים המתקדמים",
+  "nav_demo_title": "נסו עם הערות לדוגמה",
+  "nav_browse_title": "פתיחת סייר ההערות",
+  "nav_community_title": "קהילה — שאלו שאלות, דווחו על תקלות",
+  "nav_share_btn": "שיתוף",
+  "nav_share_title": "פתיחה במכשיר אחר",
+  "theme_to_light": "מעבר למצב בהיר",
+  "theme_to_dark": "מעבר למצב כהה"
  }
 }

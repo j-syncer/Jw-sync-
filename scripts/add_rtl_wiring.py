@@ -32,7 +32,7 @@ MARKER = "jw-dir-init"
 # switcher in English.
 SNIPPET = """<script id="jw-dir-init">
 (function(){var R={ar:1,he:1,fa:1,ur:1},
-V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar'];
+V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];
 function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');}
 window.__jwRTL=R;window.__jwApplyDir=a;
 try{var q=(location.search.match(/[?&]lang=([a-z-]{2,5})/)||[])[1];

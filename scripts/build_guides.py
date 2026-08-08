@@ -22,8 +22,8 @@ TODAY = "2026-07-13"
 
 # English lives at /guides/<slug>; every other language at /guides/<lang>/<slug>,
 # so the existing URLs — and their rankings — are untouched.
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar"]
-RTL_LANGS = {"ar"}
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he"]
+RTL_LANGS = {"ar", "he"}
 
 # Languages that actually have translated guide copy. A language listed in
 # LANGS but absent here keeps pointing at the English guides, and is left out

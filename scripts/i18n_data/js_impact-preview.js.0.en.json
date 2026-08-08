@@ -1,0 +1,15 @@
+{
+ "title": "Ready to merge",
+ "sub": "Here’s what this merge will change. Review the numbers, then download your merged backup.",
+ "added": "Will be added",
+ "notes": "Notes",
+ "highlights": "Highlights",
+ "bookmarks": "Bookmarks",
+ "tags": "Tags",
+ "updated": "Notes updated (newer version wins)",
+ "deduped": "Duplicates skipped",
+ "confirm": "Merge & Download",
+ "cancel": "Cancel",
+ "study_answers": "Study answers",
+ "doctor": "Health-check & clean the merged file before downloading (Library Doctor)"
+}

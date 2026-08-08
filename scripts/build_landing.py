@@ -43,8 +43,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import i18n_tool as t  # noqa: E402
 
 SITE = "https://jwsync.org"
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar"]
-RTL_LANGS = {"ar"}
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he"]
+RTL_LANGS = {"ar", "he"}
 # Derived, not hand-listed: a language gets a /guides/<lang>/ link the moment
 # its translations land in guides_i18n.GUIDE_TEXT, and never before — so this
 # can neither lag behind a new language nor link at a tree that is not built.
@@ -55,12 +55,12 @@ LANG_NAME = {
     "en": "English", "es": "Español", "pt": "Português", "fr": "Français",
     "de": "Deutsch", "it": "Italiano", "ru": "Русский", "ja": "日本語",
     "ko": "한국어", "tl": "Filipino", "sv": "Svenska", "ceb": "Cebuano",
-    "ar": "العربية",
+    "ar": "العربية", "he": "עברית",
 }
 LOCALE = {
     "en": "en_US", "es": "es_ES", "pt": "pt_BR", "fr": "fr_FR", "de": "de_DE",
     "it": "it_IT", "ru": "ru_RU", "ja": "ja_JP", "ko": "ko_KR", "tl": "tl_PH",
-    "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA",
+    "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL",
 }
 
 TOOLS = [

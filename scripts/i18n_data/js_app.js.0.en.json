@@ -153,5 +153,20 @@
  "smt_browse_desc": "Search, filter, and read every note and highlight in your library. No merge required.",
  "smt_browse_btn": "Open Explorer →",
  "wrp_open": "Study Stats",
- "wrp_stats": "Your Service Year Highlights"
+ "wrp_stats": "Your Service Year Highlights",
+ "nav_adv_options": "Advanced options",
+ "nav_simple_view": "‹ Simple view",
+ "nav_adv_show_title": "Show advanced tools",
+ "nav_adv_back_title": "Back to the simple view",
+ "mode_simple": "Simple",
+ "mode_full": "Full",
+ "mode_simple_title": "Simple — step-by-step wizard",
+ "mode_full_title": "Full Mode — all advanced tools",
+ "nav_demo_title": "Try with sample notes",
+ "nav_browse_title": "Open Note Explorer",
+ "nav_community_title": "Community — ask questions, report bugs",
+ "nav_share_btn": "Share",
+ "nav_share_title": "Open on another device",
+ "theme_to_light": "Switch to Light Mode",
+ "theme_to_dark": "Switch to Dark Mode"
 }

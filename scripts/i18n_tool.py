@@ -34,10 +34,20 @@ FILES = [
     "beta/index.html",
     "highlights.html",
     "share.html",
+    "forum.html",
     "js/app.js",
+    "js/browse.js",
+    "js/conflict-review.js",
+    "js/demo.js",
+    "js/doctor.js",
+    "js/impact-preview.js",
     "js/jw-session.js",
+    "js/post-merge.js",
     "js/reading.js",
+    "js/receive.js",
     "js/resurface.js",
+    "js/sync-hub.js",
+    "js/wizard.js",
 ]
 
 # beta/index.html carries the same twelve dictionaries as the root copy with
