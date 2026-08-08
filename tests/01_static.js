@@ -15,7 +15,7 @@ function ok(msg) { console.log('  ✓', msg); }
 function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
-const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar'];
+const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];
 const REQUIRED_I18N_KEYS = ['brw_open', 'disc_open_full']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
 const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',

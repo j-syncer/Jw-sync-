@@ -30,15 +30,38 @@ MARKER = "jw-dir-init"
 # link (the Arabic guides link straight into the tools) rendered Arabic page
 # copy while jw-session.js, which reads only localStorage, still drew the tool
 # switcher in English.
-SNIPPET = """<script id="jw-dir-init">
-(function(){var R={ar:1,he:1,fa:1,ur:1},
-V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];
-function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');}
-window.__jwRTL=R;window.__jwApplyDir=a;
+# The allow-list and the RTL set are shared by both snippet variants below.
+_V = "V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];"
+_TAIL = """window.__jwRTL=R;window.__jwApplyDir=a;
 try{var q=(location.search.match(/[?&]lang=([a-z-]{2,5})/)||[])[1];
 if(q&&V.indexOf(q)>=0)localStorage.setItem('jwsync_lang',q);else q=null;
 a(q||localStorage.getItem('jwsync_lang')||'en');}catch(e){a('en');}}());
 </script>"""
+
+# Two variants, because the two app shells and the satellite pages load the
+# stylesheet differently — and re-running this script must not "helpfully"
+# collapse them back into one. The app shells inject rtl.css from inside the
+# bootstrap, so the 12 LTR languages never put a render-blocking stylesheet on
+# the critical path (that was a deliberate first-paint fix; an earlier version
+# of this file predated it and silently reverted it when re-run). The satellite
+# pages still use a plain <link> and are not on the first-paint critical path.
+SNIPPET_LAZY = """<script id="jw-dir-init">
+(function(){var R={ar:1,he:1,fa:1,ur:1},
+""" + _V + """
+function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');
+/* rtl.css is only meaningful for RTL languages — loading it for the other 12
+   put a render-blocking stylesheet on every visitor's critical path. Injected
+   here (still inside <head>) so RTL keeps its pre-paint, flash-free load. */
+if(R[l]&&!document.getElementById('jw-rtl-css')){var k=document.createElement('link');
+k.id='jw-rtl-css';k.rel='stylesheet';k.href='rtl.css';
+(document.head||document.documentElement).appendChild(k);}}
+""" + _TAIL
+
+SNIPPET_LINKED = """<script id="jw-dir-init">
+(function(){var R={ar:1,he:1,fa:1,ur:1},
+""" + _V + """
+function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');}
+""" + _TAIL
 
 RTL_LINK = '<link rel="stylesheet" href="%srtl.css">'
 
@@ -54,18 +77,25 @@ def edit(path, fn):
     print("patched", path)
 
 
-def insert_head(c, css_prefix):
-    """Add (or refresh) the bootstrap + rtl.css link just before </head>."""
+def insert_head(c, css_prefix, snippet=SNIPPET_LINKED):
+    """Add (or refresh) the bootstrap just before </head>.
+
+    A page that already carries the marker keeps whichever loading strategy it
+    was built with — only the snippet body is refreshed — so re-running this
+    never changes how a page fetches rtl.css.
+    """
     if MARKER in c:
         # Replace the existing block so the script stays re-runnable.
         start = c.index('<script id="%s">' % MARKER)
         end = c.index("</script>", start) + len("</script>")
-        out = c[:start] + SNIPPET + c[end:]
+        out = c[:start] + snippet + c[end:]
         return out if out != c else None
     anchor = "</head>"
     if c.count(anchor) != 1:
         sys.exit("ABORT: %d </head> anchors" % c.count(anchor))
-    block = SNIPPET + "\n" + (RTL_LINK % css_prefix) + "\n"
+    block = snippet + "\n"
+    if snippet is SNIPPET_LINKED:
+        block += (RTL_LINK % css_prefix) + "\n"
     return c.replace(anchor, block + anchor, 1)
 
 
@@ -82,7 +112,7 @@ I18N_HOOK_NEW = """  function applyLandingI18n(lang,translations){
 for f in ("index.html", "beta/index.html"):
     def patch_app(c, f=f):
         prefix = "" if f == "index.html" else ""
-        c2 = insert_head(c, prefix)
+        c2 = insert_head(c, prefix, SNIPPET_LAZY)
         c = c2 if c2 is not None else c
         if I18N_HOOK_NEW not in c:
             if c.count(I18N_HOOK_OLD) != 1:

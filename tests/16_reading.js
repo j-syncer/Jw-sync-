@@ -30,7 +30,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function eq(a, b, label) { if (a === b) ok(label + ' (' + a + ')'); else fail(label + ': expected ' + b + ', got ' + a); }
 
-const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb'];
+const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he'];
 const REQUIRED_KEYS = ['brand', 'tagline', 'choose_plan', 'plan_canon', 'plan_canon_d', 'plan_chrono', 'plan_chrono_d',
   'choose_pace', 'pace_3m', 'pace_6m', 'pace_1y', 'pace_2y', 'pace_custom', 'per_day', 'finish_by', 'start',
   'today', 'read', 'streak_days', 'done_t', 'done_s', 'come_back', 'progress', 'chapters_read', 'forecast',
@@ -167,6 +167,31 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
   eq(all.filter(h => h === 'all').length, 1, 'whole-Bible milestone fires once');
   eq(E.todayInfo(st, '2026-02-01').finished, true, 'plan reports finished');
 
+  // Brace-match a language's block rather than pattern-matching it. The
+  // hand-written entries are pretty-printed ("en: {" spanning several lines)
+  // while a language spliced in by scripts/i18n_tool.py is compact
+  // ("he:{...}" on one line). A regex keyed to the pretty form silently fails
+  // to find the compact ones — which is how Arabic came to be dropped from
+  // this check's language list instead of the check being fixed.
+  function langBlock(body, lang) {
+    const m = body.match(new RegExp('(^|[,{\\s])["\']?' + lang + '["\']?\\s*:\\s*\\{'));
+    if (!m) return null;
+    const start = body.indexOf('{', m.index + m[0].length - 1);
+    let depth = 0;
+    for (let j = start; j < body.length; j++) {
+      const ch = body[j];
+      if (ch === '"' || ch === "'") {              // step over string literals
+        const quote = ch;
+        for (j++; j < body.length; j++) {
+          if (body[j] === '\\') { j++; continue; }
+          if (body[j] === quote) break;
+        }
+      } else if (ch === '{') depth++;
+      else if (ch === '}' && --depth === 0) return body.slice(start + 1, j);
+    }
+    return null;
+  }
+
   section('I18N coverage');
   const src = fs.readFileSync(REPO + '/js/reading.js', 'utf8');
   const im = src.match(/var I18N = \{([\s\S]*?)\n {2}\};/);
@@ -174,12 +199,12 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
   else {
     let okAll = true;
     for (const lang of LANGS) {
-      const lm = im[1].match(new RegExp('\\b' + lang + ': \\{([\\s\\S]*?)\\}(?:,\\n|\\n|$)'));
-      if (!lm) { okAll = false; fail('I18N missing language: ' + lang); continue; }
-      const miss = REQUIRED_KEYS.filter(k => !new RegExp('(^|[,{]) ?' + k + ':').test(lm[1]));
+      const lm = langBlock(im[1], lang);
+      if (lm === null) { okAll = false; fail('I18N missing language: ' + lang); continue; }
+      const miss = REQUIRED_KEYS.filter(k => !new RegExp('(^|[,{]) ?' + k + ':').test(lm));
       if (miss.length) { okAll = false; fail('I18N ' + lang + ' missing: ' + miss.join(',')); }
     }
-    if (okAll) ok('I18N covers all 12 languages × ' + REQUIRED_KEYS.length + ' keys');
+    if (okAll) ok('I18N covers all ' + LANGS.length + ' languages × ' + REQUIRED_KEYS.length + ' keys');
   }
 
   section('UI: onboarding → active plan → done state (JSDOM)');

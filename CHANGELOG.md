@@ -4,6 +4,37 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.16.0] — 2026-08-08
+
+### Added: Hebrew — the site's 14th language, and its second right-to-left one
+
+Hebrew (`he`) is now a full language, not a partial one. Every part of the
+site a reader can reach is translated:
+
+- **The whole interface** — 1,100 strings across the merge app, Study
+  Explorer, Study Stats, Note Sharing, Library Doctor, Reading Companion,
+  Resurface, the setup wizard, the conflict reviewer and the community forum.
+- **All 37 guides**, at `/guides/he/`, plus a pre-rendered Hebrew landing
+  page at `/he/`.
+- **Right-to-left layout**, applied before first paint so the page never
+  renders left-to-right and then visibly reflows.
+- **Findable in search** — the Hebrew pages carry their own canonicals,
+  `hreflang` alternates, `og:locale` and JSON-LD `inLanguage`, and all 38
+  new URLs are in `sitemap.xml`.
+
+Bible-chapter links now open in Hebrew on jw.org rather than defaulting to
+English, and the language picker carries עברית.
+
+### Fixed: the language-coverage guard was checking less than it claimed
+
+`i18n_tool.py`'s file list still described the site as it was before v3.8.0
+moved nine feature modules out of `index.html` into `js/`. The coverage check
+that `18_arabic_rtl.js` runs reads that list, so it had been verifying 8 of
+the 20 string tables. It now covers all 20 — Arabic passes clean against the
+full set, and any future language is held to the same bar.
+
+---
+
 ## [3.15.0] — 2026-08-05
 
 ### Improved: the ten most-read guides are now full answers in all 13 languages

@@ -630,12 +630,48 @@ CHROME = {
             "Power tools": "أدوات متقدّمة",
         },
     },
+    "he": {
+        "lang_name": "עברית",
+        "lang_label": "שפה",
+        "lang_other": "המדריך הזה בשפות אחרות",
+        "og_locale": "he_IL",
+        "site_guides": "מדריכי JW Sync",
+        "nav_guides": "מדריכים",
+        "nav_community": "קהילה",
+        "nav_open_app": "פתיחת היישום",
+        "crumb_guides": "מדריכים",
+        "h_steps": "שלב אחר שלב",
+        "h_faq": "שאלות נפוצות",
+        "h_related": "מדריכים קשורים",
+        "cta_title": "עשו את זה עכשיו — בחינם, בדפדפן שלכם",
+        "cta_body": "‏JW Sync ממזג, עורך ומנתח גיבויי ‎.jwlibrary‎ לגמרי על המכשיר שלכם. בלי חשבון, בלי העלאות, בלי שום התקנה.",
+        "cta_btn": "פתחו את JW Sync ←",
+        "index_title": "מדריכים לגיבוי, לסנכרון ולהערות של JW Library | JW Sync",
+        "index_desc": "מדריכים מעשיים לגיבויים של JW Library: מיזוג גיבויים משני מכשירים, העברת הערות לטלפון חדש, מעבר מאנדרואיד לאייפון, תיקון גיבוי שלא מצליח להשתחזר, עריכה וחיפוש בהערות שלכם, ועוד.",
+        "index_h1": "מדריכים והדרכות",
+        "index_lede": "כל מה שקשור לגיבויים של JW Library, בשלבים פשוטים: מיזוג מכשירים, מעבר לטלפון חדש, הצלת הערות, והפקת יותר מהספרייה שכבר יש לכם. כל כלי שמוזכר רץ בחינם בדפדפן שלכם — הקבצים שלכם לעולם לא מועלים.",
+        "index_cta_title": "דלגו על הקריאה — פשוט פתחו את הכלי",
+        "index_cta_body": "מיזוג של שני גיבויים לוקח בערך דקה והיישום מלווה אתכם בתהליך.",
+        "footer_all_guides": "כל המדריכים",
+        "footer_community": "קהילה",
+        "footer_stats": "סטטיסטיקת לימוד",
+        "footer_privacy": "‏JW Sync מעבד את כל הנתונים מקומית — הקבצים שלכם לעולם לא עוזבים את המכשיר. השימוש חינמי; בלי חשבון, בלי העלאות.",
+        "footer_disclaimer": "\u201cJW Library\u201d הוא רכושה של אגודת המצפה, המקרא והחוברות של פנסילבניה. JW Sync הוא כלי עצמאי ואינו מסונף אליה או מאושר על ידה.",
+        "groups": {
+            "Getting started": "צעדים ראשונים",
+            "Sharing scenarios": "תרחישי שיתוף",
+            "Everyday scenarios": "תרחישים יומיומיים",
+            "Fixing problems": "פתרון בעיות",
+            "Power tools": "כלים מתקדמים",
+        },
+    },
 }
 
 # ── Per-guide translations ───────────────────────────────────────────────
 # Populated from guides_ar.py so this module stays navigable; the split is
 # purely for readability.
 from guides_ar import GUIDES_AR  # noqa: E402
+from guides_he import GUIDES_HE  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -661,4 +697,5 @@ GUIDE_TEXT = {
     "it": GUIDES_IT,
     "ru": GUIDES_RU,
     "ar": GUIDES_AR,
+    "he": GUIDES_HE,
 }

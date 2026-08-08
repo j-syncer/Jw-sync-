@@ -246,6 +246,7 @@
     <meta property="og:locale:alternate" content="sv_SE">
     <meta property="og:locale:alternate" content="ceb_PH">
     <meta property="og:locale:alternate" content="ar_SA">
+    <meta property="og:locale:alternate" content="he_IL">
 <!-- /SEO:oglocale -->
     <!-- ── Design: Inter font ─────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -274,6 +275,7 @@
     <link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/">
     <link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/">
     <link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/">
+    <link rel="alternate" hreflang="he" href="https://jwsync.org/he/">
 <!-- /SEO:hreflang -->
     <meta name="keywords" content="JW Sync, JW Library backup, merge JW Library, jwlibrary merger, JW Library notes, JW Library highlights, JW Library tags, JW Library sync, JW backup merge tool">
     <meta name="author" content="JW Sync">
@@ -316,7 +318,7 @@
         "Free and open source",
         "Available in 13 languages"
       ],
-      "softwareVersion": "3.15.0",
+      "softwareVersion": "3.16.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -325,7 +327,7 @@
         "name": "JW Sync",
         "url": "https://jwsync.org/"
       },
-      "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar"]
+      "inLanguage": ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he"]
     }
     </script>
     <script type="application/ld+json" id="ld-faq">
@@ -523,7 +525,13 @@ body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,
 <script id="jw-dir-init">
 (function(){var R={ar:1,he:1,fa:1,ur:1},
 V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];
-function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');}
+function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');
+/* rtl.css is only meaningful for RTL languages — loading it for the other 12
+   put a render-blocking stylesheet on every visitor's critical path. Injected
+   here (still inside <head>) so RTL keeps its pre-paint, flash-free load. */
+if(R[l]&&!document.getElementById('jw-rtl-css')){var k=document.createElement('link');
+k.id='jw-rtl-css';k.rel='stylesheet';k.href='rtl.css';
+(document.head||document.documentElement).appendChild(k);}}
 window.__jwRTL=R;window.__jwApplyDir=a;
 try{var q=(location.search.match(/[?&]lang=([a-z-]{2,5})/)||[])[1];
 if(q&&V.indexOf(q)>=0)localStorage.setItem('jwsync_lang',q);else q=null;
@@ -1778,7 +1786,7 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
     ja:"オフラインです — マージは引き続き使え、ノートはこの端末に保存されます。",
     ko:"오프라인 상태입니다 — 병합은 계속 작동하고 노트는 이 기기에 남아 있습니다.",
     tl:"Offline ka — gumagana pa rin ang pagsasama at nananatili sa device na ito ang iyong mga tala."
-  ,sv:"Du är offline — sammanslagning fungerar ändå och dina anteckningar stannar på den här enheten.",ceb:"Offline ka — nagtrabaho gihapon ang pagsagol ug nagpabilin sa kining device ang imong mga nota."};
+  ,sv:"Du är offline — sammanslagning fungerar ändå och dina anteckningar stannar på den här enheten.",ceb:"Offline ka — nagtrabaho gihapon ang pagsagol ug nagpabilin sa kining device ang imong mga nota.",ar:"أنت غير متصل — الدمج ما زال يعمل وملاحظاتك تبقى على هذا الجهاز.",he:"אתם במצב לא מקוון — המיזוג עדיין עובד וההערות שלכם נשארות במכשיר הזה."};
   function msg(){ var l; try{ l=localStorage.getItem('jwsync_lang'); }catch(_){ } return (l&&I18N[l])?I18N[l]:I18N.en; }
 
   var bar=null;
