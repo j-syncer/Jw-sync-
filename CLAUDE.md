@@ -209,17 +209,27 @@ All anchored to the article's Location row with `KeySymbol='w'`, `DocumentId=<id
 **c) Study-question answers:**
 - `InputField(LocationId, TextTag, Value)` — one row per question textarea (`tt44`, `tt48`… from the HTML, plus the "How Would You Answer?" review box, e.g. `tt25/tt30/tt35`).
 - ⚠️ InputField rows attach to a **separate Location row with `MepsLanguage=NULL`** (same DocumentId/KeySymbol/IssueTagNumber, Type 0) — create it if missing. Notes/marks use the `MepsLanguage=0` row.
-- Answers: 1–3 sentences **per persona**, drawn from the paragraph, woven with the gems, cite scriptures. See the persona roster below — every paragraph question is answered in the voice of one to three of the five commenters, never as a faceless summary.
+- Answers: **short and plain — 1–2 sentences**, the direct answer to the printed question with its scripture. No personas here. This box is the answer the user could read out at the meeting; the personality lives in the persona notes (see below).
+
+**d) Persona comments — coloured highlight + attached note:**
+Each commenter's remark is a `Note` **attached to a `UserMark` in that persona's own colour**, not text in the answer box. Tapping the highlight in JW Library opens the comment.
+- Colour is the persona's identity and never changes: **Rosa = 4 pink · James = 3 blue · Dave = 5 orange · Tala = 6 purple · Naomi = 2 green.** (Yellow 1 stays free for a plain key-point mark.)
+- Build each one as: `UserMark(ColorIndex=<persona colour>, LocationId=<MepsLanguage=0 row>, StyleIndex=0, UserMarkGuid=uuid4, Version=1)` + `BlockRange(BlockType=1, Identifier=data-pid, StartToken, EndToken)` + `Note(UserMarkId=<that mark>, LocationId=<same>, BlockType=1, BlockIdentifier=data-pid, Title='<persona name>', Content='<the comment>')`.
+- **Title is just the persona's first name** — that is what shows in the note list.
+- Anchor the highlight on the phrase the comment is actually about, in the paragraph that question covers. Keep it to a phrase, never a whole paragraph.
+- **Never overlap a highlight the user already has, or one you just placed.** Read the existing `BlockRange` rows for the Location first, keep a running occupied-set per pid, and if a chosen phrase collides, move to another phrase. The user's own marks are never modified or deleted.
+- Comments are **short — 1–2 sentences, ~25 words.** Cut anything that restates the paragraph.
+- Add one unattached note titled `Colour key: who is speaking` on the first paragraph, listing which colour is which persona.
 
 #### The five commenters (permanent cast — use on every article)
 
-Write each paragraph answer as if the congregation were commenting. Personas are fixed across weeks so the user gets to know them.
+Personas are fixed across weeks so the user gets to know them. They speak in the attached colour notes, never in the answer box.
 
 | # | Persona | Who they are | Voice | Answers questions about… |
 |---|---------|--------------|-------|--------------------------|
 | 1 | **Rosa** | Sister, joyful and quirky, warm-hearted | Bright and personal, homey illustrations (kitchen, grandkids, service group), often ends on encouragement. Exclamation-friendly, never sappy | Application, gratitude, encouraging one another, hospitality, joy under trial |
 | 2 | **James** | Brother, serious and dignified | Measured and unhurried. Original-language words, historical/cultural background, cross-references, the "why beneath the why". Never jokes | Doctrine, prophecy, Bible context, motive, deeper reasons behind a command |
-| 3 | **Dave** | Brother, the quick wit — the one who gets the laugh | One dry, self-deprecating line, then lands a genuine point in the same breath. Short. Humour is always on himself or on ordinary human nature — **never** on Jehovah, the scriptures, the organization, or another person | Human weakness, procrastination, pride, "easier said than done" questions, practical illustrations |
+| 3 | **Dave** | Brother, the quick wit — the one who gets the laugh | **Genuinely funny, and the funniest thing in the article.** Two sentences at most: set up an honest admission about himself, then turn it so the point lands *through* the joke rather than after it. Best device is catching himself in a double standard ("when I do it, it's concern; when it's done to me, it's gossip"). Undersell the punch line — no exclamation marks, no winking. Humour is always on himself or on ordinary human nature — **never** on Jehovah, the scriptures, the organization, or another person | Human weakness, procrastination, pride, double standards, "easier said than done" questions, practical illustrations |
 | 4 | **Tala** | Young sister, ~16, candid | Short, honest, unpolished. Will admit a struggle before applying the point. School, phones, friends, feeling different from peers | Peer pressure, doubts, standing firm, youth, social media, prayer |
 | 5 | **Naomi** | Veteran sister, decades in the truth | Calm and unhurried; usually one brief experience from years past ("I remember a sister who…"), then the lesson. Historical perspective on the organization | Endurance, loyalty, field service, waiting on Jehovah, past hardship, changes over the years |
 
@@ -228,21 +238,13 @@ Write each paragraph answer as if the congregation were commenting. Personas are
 **Assignment rules**
 - Match persona to question, not the reverse. Nobody answers every question; a persona who has nothing distinctive to add stays quiet.
 - **1–3 personas per question.** Roughly 40% of questions get one, 45% get two, 15% get three. Never four, never all five.
-- Per-article budget: **Rosa ≈ half the questions, James ≈ half** (they are the anchors) · **Dave max 4** and never on consecutive questions · **Tala 3–5** · **Naomi 3–5**.
-- When two share a question they must contribute **different content** — one gives the direct answer, the other adds an angle. No restating.
-- Order within a question: whoever answers the printed question most directly goes first.
+- Per-article budget, scaled to the question count: **Rosa ≈ half the questions, James ≈ half** (they are the anchors) · **Dave max 4** and never on consecutive questions · **Tala 3–5** · **Naomi 3–5**.
+- When two share a question they must contribute **different content** — one keys off the direct answer, the other adds an angle. No restating.
 - Rosa and Dave are both light, but distinct: Rosa is *warm*, Dave is *funny*. If a Dave line could have been Rosa's, rewrite one of them.
-- No persona may open two answers in the same article with the same word or construction.
-- Every answer, whatever the voice, still has to be a correct answer to the printed question and doctrinally consistent with JW understanding. Humour and personality never come at the cost of accuracy.
+- No persona may open two comments in the same article with the same word or construction.
+- Every comment, whatever the voice, still has to be true to the printed question and doctrinally consistent with JW understanding. Humour and personality never come at the cost of accuracy.
 
-**Storage format** — plain text in `InputField.Value`, name prefix, blank line between speakers:
-```
-Rosa: …
-
-James: …
-```
-
-**Not persona-voiced:** the "How Would You Answer?" review boxes (keep those a clean 1–2 sentence summary) and the gem notes in (a) — those stay in the study-note voice.
+**Not persona-voiced:** the review / "How Would You Answer?" boxes (a clean 1–2 sentence summary) and the gem notes in (a) — those stay in the study-note voice with no highlight attached.
 
 ### Step 4 — Repackage & deliver
 1. Update the `LastModified` table (single row) to the same timestamp.
@@ -250,8 +252,15 @@ James: …
 3. Recompute `manifest.json → userDataBackup.hash` = SHA-256 hex of the new `userData.db`; update `lastModifiedDate`.
 4. Re-zip the same file list (deflate), name it `UserdataBackup_<YYYYMMDD>_Watchtower_Annotated.jwlibrary`, verify it round-trips, and send it to the user (import via JW Library → Personal Study → Backup and restore).
 
-### Reference — first run (July 13-19, 2026, doc 2026401)
-Delivered 22 notes, 43 highlights, 19 answers. Earlier articles annotated the same way: docs 2026367, 2026368 (notes + answers, `tt` tags stepping by 4). Existing user habits: colors 2/3/6 for their own marks; their highlights confirmed the tokenizer (e.g. pid 7 tokens 22-28 = "We are created with a special gift").
+### Reference — past runs
+- **doc 2026401** (July 13-19, 2026), first run: 22 notes, 43 highlights, 19 answers. Earlier articles annotated the same way: docs 2026367, 2026368 (notes + answers, `tt` tags stepping by 4).
+- **doc 2026403** (July 27-Aug 2): personas introduced, still written inside `InputField.Value` — superseded by the coloured-note scheme below.
+- **doc 2026404** (Aug 3-9), first run of the coloured persona notes: 16 short answers, 23 persona notes on their own coloured marks, 12 gem notes + colour key. The user already had 13 highlights of their own on pids 23-26 (colors 2/3/4/6) — all routed around, none touched.
+
+Existing user habits: they mark in colors 2/3/4/6; their own highlights are the tokenizer check every week (reproduce their `BlockRange` ranges as sensible phrases before inserting anything).
+
+### Gotcha — drop caps
+The first word of the article's opening paragraph is set in caps in the HTML (`HAVE you ever…`, `SOME of Jehovah's servants…`). Match the case exactly when locating an anchor phrase, or the token lookup fails.
 
 ---
 
