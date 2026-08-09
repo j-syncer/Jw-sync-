@@ -20,12 +20,27 @@ Injection is idempotent — a table that already has the language is skipped.
 Mirror `js/*` and the satellite pages to `beta/` afterwards; `15_parity.js`
 enforces it.
 
+`i18n_tool.py` finds `lang: { … }` objects only. Two string tables are flat
+`lang: "string"` maps and are therefore invisible to it — patch them by hand:
+the offline banner in both `index.html` files, and the `*.json` data files in
+`i18n_data/` (`landing_chrome`, `navbar`, `forum`). Arabic was missing from the
+offline banner for months because nothing looked.
+
 ## 2. Plumbing
 
-`add_arabic_plumbing.py` shows the three places outside the dictionaries that
-enumerate languages: the `?lang=` allow-list, the nav `<select>`, and
-`reading.js`'s jw.org `wtlocale` map. Add the new code to `V` in
-`add_rtl_wiring.py`'s snippet too.
+There are **four** places outside the dictionaries that enumerate languages:
+the `?lang=` allow-list, the nav `<select>`, `NAV_LANGS` in `js/app.js` (a
+second, independent picker), and `reading.js`'s jw.org `wtlocale` map. Add the
+new code to `V` in `add_rtl_wiring.py`'s snippet too.
+
+Copy the newest plumbing script — `add_polish_plumbing.py` — not
+`add_arabic_plumbing.py`, which predates `NAV_LANGS` and only covers three of
+the four.
+
+⚠️ Verify the `wtlocale` code against the live jw.org finder before using it.
+jw.org serves English for any code it does not recognise, so a wrong value
+fails completely silently. Hebrew shipped as `HB` (not a real code; the correct
+one is `Q`) and served English for two releases.
 
 ## 3. Direction
 

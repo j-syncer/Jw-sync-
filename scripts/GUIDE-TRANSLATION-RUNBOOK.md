@@ -4,7 +4,7 @@ Translating the 37 static guides into one more language. One language per
 pass; each pass ends with a push to `main`.
 
 **Status:** en ✅ · ar ✅ · es ✅ · pt ✅ · fr ✅ · de ✅ · it ✅ · ru ✅ · ja ✅ ·
-ko ✅ · tl ✅ · sv ✅ · ceb ✅
+ko ✅ · tl ✅ · sv ✅ · ceb ✅ · he ✅ · uk ✅ · pl ✅  (16 languages)
 
 ## The pass
 
@@ -46,7 +46,10 @@ ko ✅ · tl ✅ · sv ✅ · ceb ✅
 
 ## Notes
 
-- Minor version bump per language (3.1.0 = es, 3.2.0 = pt, …).
+- Minor version bump per language (3.1.0 = es, 3.2.0 = pt, … 3.16.0 = he,
+  3.17.0 = uk, 3.18.0 = pl).
+- Verify the jw.org wtlocale code before writing it — see the language
+  runbook in CLAUDE.md. An unrecognised code silently serves English.
 - English guide URLs and canonicals must never change — they already rank.
 - Terminology is per-language and should stay consistent across all 37 guides;
   the glossary each language settled on is at the top of its

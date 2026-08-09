@@ -50,13 +50,13 @@ cd tests && npm install --silent 2>/dev/null; npm test
 ```
 
 - `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
-- `npm test` chains all 15 suites (`01_static.js` … `15_parity.js`) and exits non-zero on the first failure.
-- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`.
+- `npm test` chains all 19 suites (`01_static.js` … `19_landing_pages.js`) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`.
 
 **Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
 
 Suite coverage:
-- **01_static.js** — both index.html files parse, TRANSLATIONS object is well-formed across all 12 languages, Browse i18n covers every required key, every CSS class referenced is defined, all hook/marker strings present.
+- **01_static.js** — both index.html files parse, TRANSLATIONS object is well-formed across every language in `EXPECTED_LANGS`, Browse i18n covers every required key, every CSS class referenced is defined, all hook/marker strings present, canonical/hreflang hygiene.
 - **02_runtime.js** — synthesises a `.jwlibrary` in-memory (zipped SQLite with the JW Library schema), boots the Browse module in JSDOM, drives every UI affordance (tab switching, color/tag/publication filters, search, sort, detail panes for notes/highlights/bookmarks, copy-to-clipboard, clear-all, close).
 - **03_regression.js** — merge worker still parses, every critical merge anchor is intact, HTML structure clean (one structural `</body>`/`</html>` outside scripts), cache version is set.
 - **04_lazy_load.js** — lazy-loading / code-splitting of the heavy modules.
@@ -71,8 +71,31 @@ Suite coverage:
 - **13_receive_merge.js** — receive/adopt shared notes into a backup.
 - **14_backup_doctor.js** — Library Doctor scan/fix, standalone and inside the merge engine.
 - **15_parity.js** — beta/production drift guard: shared-file pairs identical, `enhancements.js` differs only by SW registration, and `CACHE_VERSION` bumped whenever a precached page changes (checks both working tree and git history).
+- **16_reading.js** — Reading Companion: plan data (1,189 chapters both orders), engine (portions, self-healing carry-over, streaks, forecast, milestones), i18n coverage, JSDOM UI, notes integration — **and the jw.org wtlocale table** (see the language runbook below).
+- **17_guides.js** — the 37 static guides in every language: structure, canonicals, cross-links.
+- **18_arabic_rtl.js** — RTL guard: dictionary coverage, `?lang=` allow-list, nav picker, wtlocale presence, `dir="rtl"` applied before first paint, `rtl.css` not stale.
+- **19_landing_pages.js** — the pre-rendered `/<lang>/` landing pages: they exist with correct `lang`/`dir`, are self-canonical with a reciprocal hreflang cluster, serve real translated copy (not JS-filled), carry substantive content, and are in the sitemap.
 
 If you add a new user-facing feature, extend the relevant suite to cover it.
+
+### ⚠️ When a guard fails on a new language, fix the guard — don't narrow it
+
+Three languages in a row each exposed a check that had been quietly *shrunk to
+keep passing* instead of repaired, so the thing it was supposed to protect went
+unprotected for months:
+
+| Guard | How it had been narrowed | Real fix |
+|-------|--------------------------|----------|
+| `i18n_check.py` coverage | `i18n_tool.FILES` still described the pre-v3.8.0 layout, so it checked **8 of 20** tables | list every file holding a dictionary |
+| `16_reading.js` i18n | regex assumed pretty-printed `en: {`, so it could not see the compact blocks `i18n_tool.py` splices in — Arabic was dropped from its language list rather than the regex fixed | brace-match instead of pattern-match |
+| `10_mobile_polish.js` offline | language list left at 12 because the offline banner had no Arabic | add the missing translations |
+| `19_landing_pages.js` copy | compared raw dictionary text to HTML the builder escapes; broke on Ukrainian's apostrophe (`Об'єднуйте` ships as `Об&#x27;єднуйте`) | compare against the escaped form |
+| various `LANGS` lists | drifted to 12 or 13 while the site had more | keep at the full set |
+
+The tell is always the same: a check fails on a correct page, and the quickest
+way to green is to make the check ask for less. Resist it — that is how Arabic
+ended up unverified in four places. **A guard that fails on a new language is
+usually right that something is wrong; it is just wrong about what.**
 
 ---
 
@@ -146,30 +169,117 @@ the page itself, or they will pass against the module file.
 
 ## Features Built (permanent reference)
 
-### Languages (12 total)
-`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb`
+### Languages (16 total)
+`en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
 
-**Adding a language:** the app's `TRANSLATIONS` is an alias —
-`TRANSLATIONS = window.__JW_LANDING_I18N;` — and `__JW_LANDING_I18N` is defined
-as one big **strict-JSON** object (one per index.html, near the top of a script
-block). The old `}},stripHTML=` anchor no longer exists. Safest method: locate
-the object by brace-balancing from the `__JW_LANDING_I18N = ` anchor, then
-round-trip it through `json`:
-```python
-import json, re
-c = open('beta/index.html', encoding='utf-8').read()
-m = re.search(r'__JW_LANDING_I18N *= *', c)
-ts = m.end(); d = 0
-for i in range(ts, len(c)):
-    if c[i] == '{': d += 1
-    elif c[i] == '}':
-        d -= 1
-        if d == 0: e = i + 1; break
-obj = json.loads(c[ts:e])
-obj['xx'] = {...}  # same ~100 keys as obj['en']
-c = c[:ts] + json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + c[e:]
-open('beta/index.html', 'w', encoding='utf-8').write(c)
+RTL: `ar`, `he`. Everything else is LTR.
+
+---
+
+## 🌍 Adding a language — the runbook
+
+**Do not hand-edit the HTML.** Everything is generated. The old brace-balancing
+recipe that used to live here is obsolete: `scripts/i18n_tool.py` finds and
+splices every dictionary, and the builders regenerate the pages.
+
+Reference implementations, newest first — copy the most recent one:
+`add_polish_plumbing.py`, `add_ukrainian_plumbing.py`, `add_hebrew_plumbing.py`.
+
+### Step 0 — verify the jw.org locale code FIRST
+
+⚠️ **The quietest bug in the codebase.** `js/reading.js` has a `WTLOCALE` map
+that turns a language into jw.org's own code for Bible-chapter deep links.
+jw.org serves **English for any code it does not recognise** — no error, no
+warning, the feature just silently works in the wrong language.
+
+Hebrew shipped as `HB` (the obvious-looking abbreviation, not a real code) and
+served English to Hebrew readers for two releases before anyone noticed. Never
+infer this value. Check it:
+
+```bash
+curl -sL "https://www.jw.org/finder?wtlocale=<CODE>&pub=nwtsty&bible=1001000" \
+  | grep -o '<html[^>]*lang="[a-z-]*"'
 ```
+
+The code is **not** the ISO code, and near-misses fail silently: `PL`, `UK` and
+`HB` all serve English. Verified values, asserted on every run by the
+`VERIFIED` table in `tests/16_reading.js`:
+
+```
+en E    es S    pt T    fr F    de X    it I    ru U    ja J
+ko KO   tl TG   sv Z    ceb CV  ar A    he Q    uk K    pl P
+```
+
+Add a row there for each new language, or the map can drift back out of step
+with the picker without anything objecting.
+
+### Step 1 — plumbing (4 places, all outside the dictionaries)
+
+Copy the newest `add_*_plumbing.py`, change the anchors, run it. It patches:
+
+1. the `?lang=` allow-list `var V=[…]` in both index.html files
+2. the nav `<option>` picker in both index.html files
+3. **`NAV_LANGS` in `js/app.js`** — a *second, independent* picker
+4. `WTLOCALE` in `js/reading.js`
+
+> `add_arabic_plumbing.py` only knew about (1), (2) and (4) — it predates
+> `NAV_LANGS` being extracted out of the HTML — which is why Hebrew needed a
+> separate patch after `01_static.js` caught it. Always do both pickers.
+
+Then add the code to `LANGS` (+ `LOCALE`, `LANG_NAME`, and `RTL_LANGS` if
+right-to-left) in `build_guides.py`, `build_landing.py`, `build_seo.py`.
+
+### Step 2 — UI strings (~1,100 keys, 20 tables)
+
+```bash
+python3 scripts/i18n_tool.py extract en   # -> scripts/i18n_data/*.en.json
+# write scripts/i18n_data/<file>.<lang>.json for each, same keys, same order
+python3 scripts/i18n_tool.py inject <lang>
+python3 scripts/i18n_check.py <lang>      # must exit 0
+```
+
+Two tables `i18n_tool.py` cannot see, because they are flat `lang:"string"`
+maps rather than `lang:{…}` objects — patch them by hand:
+
+- the **offline banner** inside the `<!-- ── Offline indicator + haptics ── -->`
+  block in both index.html files (Arabic was missing from it for months
+  because nothing looked)
+- `scripts/i18n_data/landing_chrome.json`, `navbar.json`, `forum.json`
+
+**Keep `dk_kw_*` keyword words in English** (highlights.html). Those awards
+match a literal English word with a SQL `LIKE`; translating the quoted word
+would make the stated criterion untrue.
+
+### Step 3 — the 37 guides (~122k characters, ~85% of the total work)
+
+Write `scripts/guides_<lang>.py` defining `GUIDES_<LANG>`, add `CHROME["<lang>"]`
+(27 keys incl. the 5-entry `groups` map) to `guides_i18n.py`, register it in
+`GUIDE_TEXT`, then `python3 scripts/check_guide_lang.py <lang>` (must be
+`37/37, 0 problems`). Dump the English source in batches with
+`python3 scripts/dump_guides.py <start> <end>` and append batch by batch —
+building the module in one pass is unwieldy.
+
+### Step 4 — build, test, ship
+
+```bash
+python3 scripts/build_guides.py && python3 scripts/build_landing.py \
+  && python3 scripts/build_seo.py && python3 scripts/build_rtl.py
+```
+Then mirror `js/*` + `highlights.html` + `share.html` to `beta/` (but
+`git checkout beta/js/enhancements.js` — it legitimately differs), add the code
+to the `LANGS`/`EXPECTED_LANGS`/`RTL` lists in `tests/*.js` **and to the
+`VERIFIED` wtlocale table in `16_reading.js`**, bump `softwareVersion` in both
+index.html files and `CACHE_VERSION` in `service-worker.js`, add a `CHANGELOG.md`
+entry, run the full suite to exit 0.
+
+### Cost, and the cheap option
+
+UI strings ≈ 30k characters; the guides ≈ 122k. So a language is **~85% guides**.
+`build_landing.py` derives the `/guides/<lang>/` link from `GUIDE_TEXT` and
+`build_seo.py` only puts a language in the hreflang cluster once it appears
+there — so **you can ship a language's UI without its guides** and the SEO layer
+will correctly decline to advertise the incomplete tree. Useful for testing
+demand before committing to the guide translation.
 
 ### Simple Mode
 - Default ON for first-time visitors; restores saved pref via `loadPrefs().simpleMode`
@@ -198,7 +308,7 @@ In-browser library manager for any `.jwlibrary` file — three tabs (Notes / Hig
   - Orange button in the Insights modal header (`.jb-browse-open-btn`, label key `brw_open`)
   - Public function: `window.__openJwBrowse(file)` — pass a `File`/`Blob`/`ArrayBuffer` or `undefined` (will prompt for one)
 - **File hand-off:** the main app's `ja()` function (the file loader that powers Insights) sets `window.__jwLastFile = e` so Browse can reuse the same upload.
-- **i18n:** Browse has its **own** `I18N` object inside the module (~55 keys × all 12 languages). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React).
+- **i18n:** Browse has its **own** `I18N` object inside `js/browse.js` (141 keys × every language). Only `brw_open` lives in the main `TRANSLATIONS` (because the trigger button renders inside React). `i18n_tool.py` handles it like any other table.
 - **Data:** Reads AND WRITES `Note`, `UserMark`, `Bookmark`, `Tag`, `TagMap`, `Location` on the main thread via sql.js — do NOT extend `merge-worker.js` (it's write-optimised).
 - Capped at 2000 displayed rows with a "narrow your search" hint.
 - **DB stays open** after load (`state.db`); `state.dirty` tracks change count; `state.editingId` tracks which item is in edit mode.
@@ -259,6 +369,8 @@ Delivered 22 notes, 43 highlights, 19 answers. Earlier articles annotated the sa
 
 - **Python replacements only** — files are too large for Edit tool; use `open().read()` → `str.replace()` → `write()`
 - **Always verify anchors first** — check `content.count(anchor) == 1` before replacing
+- **A stale `scripts/*.py` will happily undo a later fix.** `add_rtl_wiring.py` carried its own copy of the `<head>` bootstrap. Re-running it overwrote the shipped one and silently reverted a first-paint fix (rtl.css had been made lazy so it stopped blocking render for the 14 LTR languages). Before re-running any patch script, diff what it *writes* against what is actually in the file — the script is not necessarily the newer of the two.
+- **Bugs that produce no error are the expensive ones.** Two hit this codebase: the jw.org wtlocale falling back to English, and a language table that no tooling could see. Neither failed a test, a build, or a page load. When a field is "an opaque code someone else's system interprets", verify it against that system rather than reasoning about it.
 - **Service worker** precaches `index.html`, `highlights.html`, and `share.html`. Bump `CACHE_VERSION` in `service-worker.js` (currently `jwsync-vN` — check the file) any time you ship a change to any of those pages (or their beta twins) so PWA users pick it up. Test suite `15_parity.js` fails if you forget.
 - **One-off Python patch scripts** from past sessions live in `scripts/` — they are historical records, not part of any build; don't re-run them.
 - **Mobile language picker** — on Android, the `<select>` renders as a native radio list. That IS the language selector; no separate component
