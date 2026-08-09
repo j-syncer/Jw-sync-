@@ -840,6 +840,41 @@ CHROME = {
             "Power tools": "進階工具",
         },
     },
+    "vi": {
+        "lang_name": "Tiếng Việt",
+        "lang_label": "Ngôn ngữ",
+        "lang_other": "Hướng dẫn này trong các ngôn ngữ khác",
+        "og_locale": "vi_VN",
+        "site_guides": "Hướng dẫn JW Sync",
+        "nav_guides": "Hướng dẫn",
+        "nav_community": "Cộng đồng",
+        "nav_open_app": "Mở ứng dụng",
+        "crumb_guides": "Hướng dẫn",
+        "h_steps": "Từng bước một",
+        "h_faq": "Câu hỏi thường gặp",
+        "h_related": "Hướng dẫn liên quan",
+        "cta_title": "Làm ngay bây giờ — miễn phí, ngay trong trình duyệt",
+        "cta_body": "JW Sync hợp nhất, chỉnh sửa và phân tích các bản sao lưu .jwlibrary hoàn toàn trên thiết bị của bạn. Không cần tài khoản, không tải lên, không phải cài gì cả.",
+        "cta_btn": "Mở JW Sync →",
+        "index_title": "Hướng dẫn về sao lưu, đồng bộ và ghi chú JW Library | JW Sync",
+        "index_desc": "Hướng dẫn thiết thực về bản sao lưu JW Library: hợp nhất bản sao lưu từ hai thiết bị, chuyển ghi chú sang điện thoại mới, đổi từ Android sang iPhone, sửa bản sao lưu không khôi phục được, chỉnh sửa và tìm kiếm ghi chú, và nhiều nữa.",
+        "index_h1": "Hướng dẫn và cách làm",
+        "index_lede": "Mọi điều về bản sao lưu JW Library, qua những bước đơn giản: hợp nhất các thiết bị, chuyển sang điện thoại mới, cứu lấy ghi chú, và tận dụng tốt hơn thư viện bạn đang có. Mọi công cụ được nhắc đến đều chạy miễn phí trong trình duyệt của bạn — tập tin của bạn không bao giờ được tải lên.",
+        "index_cta_title": "Không muốn đọc — cứ mở thẳng công cụ",
+        "index_cta_body": "Hợp nhất hai bản sao lưu chỉ mất khoảng một phút, và ứng dụng sẽ dẫn bạn đi từng bước.",
+        "footer_all_guides": "Tất cả hướng dẫn",
+        "footer_community": "Cộng đồng",
+        "footer_stats": "Thống kê học hỏi",
+        "footer_privacy": "JW Sync xử lý mọi dữ liệu tại chỗ — tập tin của bạn không bao giờ rời khỏi thiết bị. Miễn phí sử dụng; không cần tài khoản, không tải lên.",
+        "footer_disclaimer": "“JW Library” là tài sản của Watch Tower Bible and Tract Society of Pennsylvania. JW Sync là một tiện ích độc lập, không liên kết với và không được tổ chức này chứng thực.",
+        "groups": {
+            "Getting started": "Bắt đầu",
+            "Sharing scenarios": "Tình huống chia sẻ",
+            "Everyday scenarios": "Tình huống hằng ngày",
+            "Fixing problems": "Khắc phục sự cố",
+            "Power tools": "Công cụ nâng cao",
+        },
+    },
 }
 
 # ── Per-guide translations ───────────────────────────────────────────────
@@ -852,6 +887,7 @@ from guides_pl import GUIDES_PL  # noqa: E402
 from guides_zh_hans import GUIDES_ZH_HANS  # noqa: E402
 from guides_zh_hant import GUIDES_ZH_HANT  # noqa: E402
 from guides_yue_hant import GUIDES_YUE_HANT  # noqa: E402
+from guides_vi import GUIDES_VI  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -883,4 +919,5 @@ GUIDE_TEXT = {
     "zh-Hans": GUIDES_ZH_HANS,
     "zh-Hant": GUIDES_ZH_HANT,
     "yue-Hant": GUIDES_YUE_HANT,
+    "vi": GUIDES_VI,
 }

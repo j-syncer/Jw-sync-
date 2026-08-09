@@ -4,6 +4,29 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.20.0] — 2026-08-09
+
+### Added: Vietnamese — the site's 20th language
+
+Vietnamese (`vi`) ships complete:
+
+- **The whole interface** — 1,100 strings across the merge app, Study
+  Explorer, Study Stats, Note Sharing, Library Doctor, Reading Companion,
+  Resurface, the setup wizard, the conflict reviewer and the community forum.
+- **All 37 guides**, at `/guides/vi/`, plus a pre-rendered Vietnamese landing
+  page at `/vi/`.
+- **Findable in search** — own canonicals, `hreflang` alternates, `og:locale`
+  and sitemap entries.
+- **Bible chapter links open in Vietnamese.** Reading Companion uses jw.org's
+  `VT`, checked against the live finder. This was worth checking: `VI` — the
+  language's own ISO code, and the obvious guess — serves **Russian**, and `V`
+  serves **Slovak**. Neither errors.
+
+The language menu now offers 20 languages, and the guide tree stands at 760
+pages.
+
+---
+
 ## [3.19.0] — 2026-08-09
 
 ### Added: Chinese — in all three variants jw.org itself publishes

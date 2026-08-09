@@ -185,9 +185,9 @@ the page itself, or they will pass against the module file.
 
 ## Features Built (permanent reference)
 
-### Languages (19 total)
+### Languages (20 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
-`zh-Hans` `zh-Hant` `yue-Hant`
+`zh-Hans` `zh-Hant` `yue-Hant` `vi`
 
 RTL: `ar`, `he`. Everything else is LTR.
 
@@ -231,8 +231,13 @@ The code is **not** the ISO code, and near-misses fail silently: `PL`, `UK` and
 ```
 en E    es S    pt T    fr F    de X    it I    ru U    ja J
 ko KO   tl TG   sv Z    ceb CV  ar A    he Q    uk K    pl P
-zh-Hans CHS     zh-Hant CH      yue-Hant CHC
+zh-Hans CHS     zh-Hant CH      yue-Hant CHC     vi VT
 ```
+
+Vietnamese is the sharpest illustration of why this step exists: `VI` — the
+language's own ISO code, and the first thing anyone would try — serves
+**Russian**, and `V` serves **Slovak**. Not English, not an error: a Bible
+chapter in a different language entirely.
 
 If jw.org splits a language into variants, split it the same way rather than
 picking one — the codes above are three separate entries because jw.org serves
@@ -302,13 +307,22 @@ Write `scripts/guides_<lang>.py` defining `GUIDES_<LANG>`, add `CHROME["<lang>"]
 `python3 scripts/dump_guides.py <start> <end>` and append batch by batch —
 building the module in one pass is unwieldy.
 
-**Prefer the JSON-batch route.** `scripts/build_chinese_guides.py` reads one
-JSON file per batch (`{lang: {slug: {...}}}`) and generates the `.py` modules,
+**Prefer the JSON-batch route.** `scripts/build_lang_guides.py` is the general
+form — pass it a language and a batch directory. (`build_chinese_guides.py` is
+the Chinese-only variant, which additionally derives zh-Hant by conversion.)
+It reads one JSON file per batch (`{lang: {slug: {...}}}`) and generates the
+`.py` module,
 which is strictly better than appending to a Python file by hand: the batch is
 valid JSON or it is not, a slug translated twice aborts instead of silently
 winning, and re-running is idempotent. It also reports `n/37 translated` with
-the missing slugs named, so progress is never guessed at. Adapt it rather than
-hand-writing a `guides_<lang>.py`.
+the missing slugs named, so progress is never guessed at, and it writes an
+empty stub on the first run so registering the language in `guides_i18n.py`
+before generating the module does not deadlock the import.
+
+Add the language to `META` there, plus `STRAY` (scripts its copy must never
+contain) and, for a Latin-script language with obligatory diacritics,
+`DIACRITIC` — a long Vietnamese paragraph with no tone marks at all is
+stripped or untranslated text, not a stylistic choice.
 
 #### If you are tempted to machine-convert one language into another
 
