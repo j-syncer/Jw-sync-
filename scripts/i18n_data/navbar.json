@@ -321,5 +321,22 @@
     "nav_share_title": "喺第部裝置度打開",
     "theme_to_light": "轉做淺色模式",
     "theme_to_dark": "轉做深色模式"
+  },
+  "vi": {
+    "nav_adv_options": "Tùy chọn nâng cao",
+    "nav_simple_view": "‹ Chế độ đơn giản",
+    "nav_adv_show_title": "Hiện các công cụ nâng cao",
+    "nav_adv_back_title": "Quay lại chế độ đơn giản",
+    "mode_simple": "Đơn giản",
+    "mode_full": "Đầy đủ",
+    "mode_simple_title": "Đơn giản — trợ lý từng bước",
+    "mode_full_title": "Chế độ đầy đủ — mọi công cụ nâng cao",
+    "nav_demo_title": "Thử với ghi chú mẫu",
+    "nav_browse_title": "Mở Trình khám phá ghi chú",
+    "nav_community_title": "Cộng đồng — đặt câu hỏi, báo lỗi",
+    "nav_share_btn": "Chia sẻ",
+    "nav_share_title": "Mở trên thiết bị khác",
+    "theme_to_light": "Chuyển sang Chế độ sáng",
+    "theme_to_dark": "Chuyển sang Chế độ tối"
   }
 }

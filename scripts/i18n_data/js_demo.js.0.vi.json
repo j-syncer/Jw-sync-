@@ -1,0 +1,8 @@
+{
+ "banner_title": "Chế độ dùng thử",
+ "banner_body": "Đã tải hai bản sao lưu mẫu. Nhấn <strong>Xem trước khi hợp nhất</strong> để thấy chúng kết hợp ra sao, rồi nhấn <strong>Xác nhận hợp nhất</strong> để tải kết quả về.",
+ "banner_dismiss": "Đóng bản dùng thử",
+ "err_generic": "Không thể bắt đầu bản dùng thử — vui lòng kiểm tra kết nối và thử lại.",
+ "err_inject": "Không thể tải các tập tin mẫu vào ứng dụng. Vui lòng tải lại trang và thử lại.",
+ "overwrite_warn": "Bắt đầu bản dùng thử sẽ thay thế các tập tin bạn đang tải. Tiếp tục chứ?"
+}
