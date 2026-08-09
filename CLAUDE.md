@@ -97,6 +97,22 @@ way to green is to make the check ask for less. Resist it — that is how Arabic
 ended up unverified in four places. **A guard that fails on a new language is
 usually right that something is wrong; it is just wrong about what.**
 
+Chinese made the same point in a new shape. A language key is written `en:`
+while the tag is a bare JS identifier and `"zh-Hans":` once it is not — a
+BCP-47 tag with a script subtag contains a hyphen and cannot be an unquoted
+key — and `\b` never matches before a quote. Nine regexes across five suites
+therefore reported perfectly good pages as missing the language:
+
+| Guard | What it could not see |
+|-------|-----------------------|
+| `01_static.js` ×7 | `'\\b' + lang + ':'` — celebration, donate, switcher, wizard, SHARE_I18N, SAFE_I18N, DOC_I18N |
+| `09`, `10` | the same shape inline |
+| `19_landing_pages.js` | `hreflang="[a-z-]+"` cannot match a title-case script subtag |
+
+The fix in `01_static.js` is one `KEY(lang)` helper every coverage regex now
+builds its key fragment from, so the *next* tag shape widens the guards once
+instead of dropping a language out of each of them.
+
 ---
 
 ## Codebase Overview
@@ -169,10 +185,17 @@ the page itself, or they will pass against the module file.
 
 ## Features Built (permanent reference)
 
-### Languages (16 total)
+### Languages (19 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
+`zh-Hans` `zh-Hant` `yue-Hant`
 
 RTL: `ar`, `he`. Everything else is LTR.
+
+Chinese is three languages here, matching jw.org's own split rather than
+inventing one: Mandarin Simplified (`zh-Hans`), Mandarin Traditional
+(`zh-Hant`), Cantonese Traditional (`yue-Hant`). Cantonese is a different
+language in its grammar and function words (嘅 唔 係 喺 咗 啲 佢 冇 畀), not
+Mandarin in Traditional characters — a converter cannot produce it.
 
 ---
 
@@ -208,7 +231,13 @@ The code is **not** the ISO code, and near-misses fail silently: `PL`, `UK` and
 ```
 en E    es S    pt T    fr F    de X    it I    ru U    ja J
 ko KO   tl TG   sv Z    ceb CV  ar A    he Q    uk K    pl P
+zh-Hans CHS     zh-Hant CH      yue-Hant CHC
 ```
+
+If jw.org splits a language into variants, split it the same way rather than
+picking one — the codes above are three separate entries because jw.org serves
+three separate sites, and `CHT`, `CAN` and `ZH` all look plausible and all
+serve English.
 
 Add a row there for each new language, or the map can drift back out of step
 with the picker without anything objecting.
@@ -221,6 +250,12 @@ Copy the newest `add_*_plumbing.py`, change the anchors, run it. It patches:
 2. the nav `<option>` picker in both index.html files
 3. **`NAV_LANGS` in `js/app.js`** — a *second, independent* picker
 4. `WTLOCALE` in `js/reading.js`
+
+Anchor on `var V=` for (1), not the bare list: `add_rtl_wiring.py` derives its
+own copy of the allow-list out of index.html, so the short form now matches
+twice. If the code is a BCP-47 tag with a hyphen it must be **quoted** wherever
+it is a JS object key — `i18n_tool.py` does this for you, and `add_chinese_
+plumbing.py` is the reference for the four enumeration points.
 
 > `add_arabic_plumbing.py` only knew about (1), (2) and (4) — it predates
 > `NAV_LANGS` being extracted out of the HTML — which is why Hebrew needed a
@@ -266,6 +301,40 @@ Write `scripts/guides_<lang>.py` defining `GUIDES_<LANG>`, add `CHROME["<lang>"]
 `37/37, 0 problems`). Dump the English source in batches with
 `python3 scripts/dump_guides.py <start> <end>` and append batch by batch —
 building the module in one pass is unwieldy.
+
+**Prefer the JSON-batch route.** `scripts/build_chinese_guides.py` reads one
+JSON file per batch (`{lang: {slug: {...}}}`) and generates the `.py` modules,
+which is strictly better than appending to a Python file by hand: the batch is
+valid JSON or it is not, a slug translated twice aborts instead of silently
+winning, and re-running is idempotent. It also reports `n/37 translated` with
+the missing slugs named, so progress is never guessed at. Adapt it rather than
+hand-writing a `guides_<lang>.py`.
+
+#### If you are tempted to machine-convert one language into another
+
+Only two of the site's languages are close enough for that to be a real
+option, and even there OpenCC alone was not safe. `s2twp` made two mistakes on
+this copy that no test, build or page load would have caught:
+
+| Simplified | s2twp gave | Should be | Why it matters |
+|---|---|---|---|
+| 项目 | 專案 | 項目 | "project" vs "item" — every guide means item |
+| 合并 | 合並 *sometimes* | 合併 | its segmenter occasionally swallowed the 并; the site's most important verb came out two ways on one page |
+
+So `build_chinese_guides.py` hides the load-bearing vocabulary behind
+placeholders (`TERMS`) and lets the converter see only ordinary prose, then
+fails the build on any known-wrong form (`BANNED`). Note what is *not* banned:
+`文件` must become `檔案` when it means "file", but `s2twp` also turns `文档`
+into `文件`, which is the correct Traditional name for the Documents folder —
+banning the string would fail the build on a correct page. **A conversion that
+is wrong is worse than one that is missing**, because nothing downstream
+objects to fluent, plausible, incorrect text.
+
+The same script also rejects stray scripts (Cyrillic, Hebrew, Arabic, Thai,
+Hangul, kana) in Chinese copy. That guard exists because a Cyrillic
+`материал` reached a Cantonese paragraph and reads as a plausible word at a
+glance. Any language whose copy should be written in one script deserves the
+equivalent check.
 
 ### Step 4 — build, test, ship
 
