@@ -4,6 +4,36 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.17.0] — 2026-08-09
+
+### Added: Ukrainian — the site's 15th language
+
+Ukraine has one of the largest populations of JW Library users in Europe, and
+until now the site offered them Russian or nothing. Ukrainian (`uk`) is now a
+complete language, not a partial one:
+
+- **The whole interface** — 1,100 strings across the merge app, Study
+  Explorer, Study Stats, Note Sharing, Library Doctor, Reading Companion,
+  Resurface, the setup wizard, the conflict reviewer and the community forum.
+- **All 37 guides**, at `/guides/uk/`, plus a pre-rendered Ukrainian landing
+  page at `/uk/`.
+- **Findable in search** — own canonicals, `hreflang` alternates, `og:locale`
+  and JSON-LD `inLanguage`, with all 39 new URLs in `sitemap.xml` (588 total).
+
+Bible-chapter links open in Ukrainian on jw.org. The wtlocale code is `K`,
+checked against the live finder rather than inferred — the plausible-looking
+`UK` silently serves English, and a wrong code here fails quietly.
+
+### Fixed: both language pickers now stay in step
+
+The site has two independent language pickers: the `<select>` in index.html
+and `NAV_LANGS` in js/app.js. add_arabic_plumbing.py predated the second one
+and only ever patched the first, so Hebrew had to be added to `NAV_LANGS`
+separately after 01_static.js caught the omission. The Ukrainian plumbing
+script covers both, so the next language cannot repeat it.
+
+---
+
 ## [3.16.0] — 2026-08-08
 
 ### Added: Hebrew — the site's 14th language, and its second right-to-left one

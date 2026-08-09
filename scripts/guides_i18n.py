@@ -665,6 +665,41 @@ CHROME = {
             "Power tools": "כלים מתקדמים",
         },
     },
+    "uk": {
+        "lang_name": "Українська",
+        "lang_label": "Мова",
+        "lang_other": "Цей посібник іншими мовами",
+        "og_locale": "uk_UA",
+        "site_guides": "Посібники JW Sync",
+        "nav_guides": "Посібники",
+        "nav_community": "Спільнота",
+        "nav_open_app": "Відкрити програму",
+        "crumb_guides": "Посібники",
+        "h_steps": "Крок за кроком",
+        "h_faq": "Часті запитання",
+        "h_related": "Пов'язані посібники",
+        "cta_title": "Зробіть це зараз — безкоштовно, у вашому браузері",
+        "cta_body": "JW Sync об'єднує, редагує й аналізує резервні копії .jwlibrary цілком на вашому пристрої. Без облікового запису, без надсилання на сервер, без встановлення.",
+        "cta_btn": "Відкрити JW Sync →",
+        "index_title": "Посібники з резервних копій, синхронізації та нотаток JW Library | JW Sync",
+        "index_desc": "Практичні посібники з резервних копій JW Library: об'єднання копій із двох пристроїв, перенесення нотаток на новий телефон, перехід з Android на iPhone, виправлення копії, яка не відновлюється, редагування й пошук у ваших нотатках тощо.",
+        "index_h1": "Посібники та інструкції",
+        "index_lede": "Усе про резервні копії JW Library простими кроками: об'єднання пристроїв, перехід на новий телефон, порятунок нотаток і краще використання бібліотеки, яку ви вже маєте. Кожен згаданий інструмент працює безкоштовно у вашому браузері — ваші файли ніколи не надсилаються на сервер.",
+        "index_cta_title": "Не хочете читати — просто відкрийте інструмент",
+        "index_cta_body": "Об'єднання двох копій займає близько хвилини, і програма проведе вас крок за кроком.",
+        "footer_all_guides": "Усі посібники",
+        "footer_community": "Спільнота",
+        "footer_stats": "Статистика вивчення",
+        "footer_privacy": "JW Sync обробляє всі дані локально — ваші файли ніколи не залишають ваш пристрій. Користування безкоштовне; без облікового запису, без надсилання на сервер.",
+        "footer_disclaimer": "\u201cJW Library\u201d є власністю Watch Tower Bible and Tract Society of Pennsylvania. JW Sync — незалежна утиліта, не пов'язана з нею і не схвалена нею.",
+        "groups": {
+            "Getting started": "Перші кроки",
+            "Sharing scenarios": "Сценарії поширення",
+            "Everyday scenarios": "Щоденні сценарії",
+            "Fixing problems": "Розв'язання проблем",
+            "Power tools": "Потужні інструменти",
+        },
+    },
 }
 
 # ── Per-guide translations ───────────────────────────────────────────────
@@ -672,6 +707,7 @@ CHROME = {
 # purely for readability.
 from guides_ar import GUIDES_AR  # noqa: E402
 from guides_he import GUIDES_HE  # noqa: E402
+from guides_uk import GUIDES_UK  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -698,4 +734,5 @@ GUIDE_TEXT = {
     "ru": GUIDES_RU,
     "ar": GUIDES_AR,
     "he": GUIDES_HE,
+    "uk": GUIDES_UK,
 }

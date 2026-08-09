@@ -25,7 +25,7 @@ const path = require('path');
 
 const REPO = path.join(__dirname, '..');
 const SITE = 'https://jwsync.org';
-const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he'];
+const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk'];
 const RTL = new Set(['ar', 'he']);
 
 let pass = 0, failCount = 0;
@@ -96,14 +96,24 @@ section('Translated copy is baked into the HTML');
   }
   const dict = JSON.parse(idx.slice(ts, e));
 
+  // build_landing.py runs every string through html.escape(quote=True), so the
+  // copy is not in the page verbatim the moment a language uses an apostrophe
+  // or a quote. Ukrainian was the first to do so ("Об'єднуйте…" ships as
+  // "Об&#x27;єднуйте…"), which failed this check against a perfectly correct
+  // page. Compare against the escaped form so the assertion tracks what the
+  // builder actually emits.
+  const esc = (s) => s
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+
   let bad = 0;
   for (const l of LANGS) {
     if (l === 'en') continue;   // "/" is the app shell; it localizes at runtime
     const c = read(l);
-    const hero = dict[l].hero_title;
+    const hero = esc(dict[l].hero_title);
     if (!c.includes(hero)) { fail(l + ': hero text not in the served HTML'); bad++; continue; }
-    if (c.includes(dict.en.hero_title)) { fail(l + ': English hero leaked into the page'); bad++; continue; }
-    if (!c.includes(dict[l].hero_desc)) { fail(l + ': hero description missing'); bad++; }
+    if (c.includes(esc(dict.en.hero_title))) { fail(l + ': English hero leaked into the page'); bad++; continue; }
+    if (!c.includes(esc(dict[l].hero_desc))) { fail(l + ': hero description missing'); bad++; }
   }
   if (!bad) ok('every localized page serves its own translated hero, no English fallback');
 }

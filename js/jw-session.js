@@ -53,7 +53,7 @@
     ko: { merge: '병합',       stats: '통계',           explorer: '탐색',       share: '공유' },
     tl: { merge: 'Pagsamahin', stats: 'Estadistika',  explorer: 'Explorer',  share: 'Ibahagi' },
     sv: { merge: 'Slå ihop',   stats: 'Statistik',    explorer: 'Utforska',  share: 'Dela' },
-    ceb: { merge: 'Isagol',     stats: 'Estadistika',   explorer: 'Explorer',  share: 'Ipaambit' },he:{merge:"מיזוג",stats:"סטטיסטיקה",explorer:"סייר",share:"שיתוף"},ar:{merge:"دمج",stats:"إحصاءات",explorer:"مستكشف",share:"مشاركة"}
+    ceb: { merge: 'Isagol',     stats: 'Estadistika',   explorer: 'Explorer',  share: 'Ipaambit' },uk:{merge:"Об'єднання",stats:"Статистика",explorer:"Оглядач",share:"Поділитися"},he:{merge:"מיזוג",stats:"סטטיסטיקה",explorer:"סייר",share:"שיתוף"},ar:{merge:"دمج",stats:"إحصاءات",explorer:"مستكشف",share:"مشاركة"}
   };
 
   function lang() {
