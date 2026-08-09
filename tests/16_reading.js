@@ -172,7 +172,7 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
     if (!m) { fail('WTLOCALE map not found in js/reading.js'); }
     else {
       const got = {};
-      for (const p of m[1].matchAll(/([a-z-]{2,5}):\s*'([A-Z]{1,3})'/g)) got[p[1]] = p[2];
+      for (const p of m[1].matchAll(/['\"]?([A-Za-z-]{2,12})['\"]?:\s*'([A-Z]{1,3})'/g)) got[p[1]] = p[2];
       let bad = 0;
       for (const [lang, code] of Object.entries(VERIFIED)) {
         if (got[lang] !== code) {

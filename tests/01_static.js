@@ -851,13 +851,44 @@ section('Cross-tool session (jw-session.js)');
     else fail('navbar key coverage gaps: ' + missing.join(', '));
   }
 
+  // Two independent ?lang= allow-lists exist: `var V=[…]` at the top of
+  // index.html, and `V=[…]` inside the jw-dir-init snippet that every page
+  // carries. The plumbing scripts patch the first (it has `var`); the snippet
+  // is written by add_rtl_wiring.py. They diverged once — uk and pl reached the
+  // first and not the second — which broke ?lang= persistence on the satellite
+  // pages, the precise failure the snippet exists to prevent. Assert they agree
+  // on every page.
+  section('The two ?lang= allow-lists agree on every page');
+  {
+    const idx = fs.readFileSync(REPO + '/index.html', 'utf8');
+    const canonical = (idx.match(/var (V=\[[^\]]*\])/) || [])[1];
+    if (!canonical) fail('could not read the ?lang= allow-list from index.html');
+    else {
+      const PAGES = ['index.html', 'beta/index.html', 'highlights.html',
+        'beta/highlights.html', 'share.html', 'beta/share.html', 'forum.html'];
+      let bad = 0;
+      for (const f of PAGES) {
+        const c = fs.readFileSync(REPO + '/' + f, 'utf8');
+        const i = c.indexOf('jw-dir-init');
+        if (i < 0) { fail(f + ': no jw-dir-init snippet'); bad++; continue; }
+        const snip = c.slice(i, c.indexOf('</script>', i));
+        const got = (snip.match(/V=\[[^\]]*\]/) || [])[0];
+        if (got !== canonical) {
+          fail(f + ': dir-bootstrap allow-list differs from index.html', got || '(none)');
+          bad++;
+        }
+      }
+      if (!bad) ok('all ' + PAGES.length + ' pages carry the same allow-list as index.html');
+    }
+  }
+
   section('In-app language picker lists every language');
   {
     const appJs = fs.readFileSync(REPO + '/js/app.js', 'utf8');
     const m = appJs.match(/NAV_LANGS=\[(.*?)\],TRANSLATIONS=/s);
     if (!m) fail('NAV_LANGS not found — picker may be hand-written again');
     else {
-      const codes = [...m[1].matchAll(/\["([a-z]{2,3})",/g)].map(x => x[1]);
+      const codes = [...m[1].matchAll(/\["([A-Za-z-]{2,12})",/g)].map(x => x[1]);
       const missing = EXPECTED_LANGS.filter(l => !codes.includes(l));
       if (!missing.length) ok('picker offers all ' + codes.length + ' languages');
       else fail('picker is missing: ' + missing.join(', '));
@@ -951,7 +982,7 @@ section('Cross-tool session (jw-session.js)');
 
   for (const f of ['index.html', 'beta/index.html']) {
     const head = (() => { const c = fs.readFileSync(REPO + '/' + f, 'utf8'); return c.slice(0, c.indexOf('</head>')); })();
-    const alts = (head.match(/<link rel="alternate" hreflang="[a-z-]+" href="([^"]*)"/g) || [])
+    const alts = (head.match(/<link rel="alternate" hreflang="[A-Za-z-]+" href="([^"]*)"/g) || [])
       .map(s => s.match(/href="([^"]*)"/)[1]);
     const param = alts.filter(u => u.includes('?'));
     if (param.length) fail(f + ': hreflang points at parameterised URLs: ' + param.join(', '));

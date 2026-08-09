@@ -197,9 +197,20 @@ def obj_to_js(obj, style):
     """
     parts = []
     for k, v in obj.items():
-        key = json.dumps(k, ensure_ascii=False) if style == "json" else k
+        key = json.dumps(k, ensure_ascii=False) if style == "json" else js_key(k)
         parts.append("%s:%s" % (key, json.dumps(v, ensure_ascii=False)))
     return "{" + ",".join(parts) + "}"
+
+
+# A bare object key has to be a valid JS identifier. Every UI string key is
+# (hero_title, cta_launch, …), but BCP-47 language tags are not: `zh-Hans:` is
+# a SyntaxError, parsed as subtraction. Quote anything that does not qualify so
+# hyphenated tags can be spliced into the 18 bare-style tables unchanged.
+_IDENT = re.compile(r"^[A-Za-z_$][A-Za-z0-9_$]*$")
+
+
+def js_key(k):
+    return k if _IDENT.match(k) else json.dumps(k, ensure_ascii=False)
 
 
 def detect_style(src):
@@ -259,7 +270,7 @@ def cmd_inject(lang):
             obj = json.load(io.open(src, encoding="utf-8"))
             tail_src = text[s["obj_start"]:s["obj_end"]]
             style = detect_style(tail_src)
-            key = '"%s"' % lang if style == "json" else lang
+            key = '"%s"' % lang if style == "json" else js_key(lang)
             block = ",%s:%s" % (key, obj_to_js(obj, style))
             text = text[:s["obj_end"]] + block + text[s["obj_end"]:]
             total += 1

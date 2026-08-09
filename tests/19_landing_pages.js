@@ -73,7 +73,7 @@ section('hreflang cluster is complete and reciprocal');
   // The failure this whole exercise exists to avoid.
   let param = 0;
   for (const l of LANGS) {
-    for (const m of read(l).matchAll(/hreflang="[a-z-]+" href="([^"]*)"/g)) {
+    for (const m of read(l).matchAll(/hreflang="[A-Za-z-]+" href="([^"]*)"/g)) {
       if (m[1].includes('?')) param++;
     }
   }

@@ -509,7 +509,7 @@ body:not(.light) #root .hover\:border-stone-700:hover{border-color:rgba(148,163,
 <!-- /beta-merge-redesign -->
 <script id="jw-dir-init">
 (function(){var R={ar:1,he:1,fa:1,ur:1},
-V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];
+V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl'];
 function a(l){var d=document.documentElement;l=l||'en';d.setAttribute('lang',l);d.setAttribute('dir',R[l]?'rtl':'ltr');
 /* rtl.css is only meaningful for RTL languages — loading it for the other 12
    put a render-blocking stylesheet on every visitor's critical path. Injected
@@ -518,7 +518,7 @@ if(R[l]&&!document.getElementById('jw-rtl-css')){var k=document.createElement('l
 k.id='jw-rtl-css';k.rel='stylesheet';k.href='rtl.css';
 (document.head||document.documentElement).appendChild(k);}}
 window.__jwRTL=R;window.__jwApplyDir=a;
-try{var q=(location.search.match(/[?&]lang=([a-z-]{2,5})/)||[])[1];
+try{var q=(location.search.match(/[?&]lang=([A-Za-z-]{2,12})/)||[])[1];
 if(q&&V.indexOf(q)>=0)localStorage.setItem('jwsync_lang',q);else q=null;
 a(q||localStorage.getItem('jwsync_lang')||'en');}catch(e){a('en');}}());
 </script>

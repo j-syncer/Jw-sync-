@@ -16,6 +16,7 @@ patched below. Idempotent — every insertion checks for its marker first.
 """
 import io
 import os
+import re
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,10 +31,27 @@ MARKER = "jw-dir-init"
 # link (the Arabic guides link straight into the tools) rendered Arabic page
 # copy while jw-session.js, which reads only localStorage, still drew the tool
 # switcher in English.
-# The allow-list and the RTL set are shared by both snippet variants below.
-_V = "V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he'];"
+#
+# The allow-list is **derived from index.html**, never hardcoded. It used to be
+# a second copy of the list, and the two silently diverged: add_*_plumbing.py
+# patches `var V=[…]` (with `var`), which does not match this snippet's `V=[…]`,
+# so Ukrainian and Polish were added to one list and not the other. The result
+# was the exact bug this snippet exists to prevent — ?lang=uk / ?lang=pl deep
+# links from the guides into the satellite pages did not persist, leaving the
+# tool switcher in English. tests/01_static.js now asserts the two agree.
+def _allow_list():
+    c = io.open(os.path.join(REPO, "index.html"), encoding="utf-8").read()
+    # `var V=[…],p=new URLSearchParams…` — the list is followed by a comma, not
+    # a semicolon, so do not anchor on one.
+    m = re.search(r"var (V=\[[^\]]*\])", c)
+    if not m:
+        sys.exit("ABORT: could not find the ?lang= allow-list in index.html")
+    return m.group(1) + ";"
+
+
+_V = _allow_list()
 _TAIL = """window.__jwRTL=R;window.__jwApplyDir=a;
-try{var q=(location.search.match(/[?&]lang=([a-z-]{2,5})/)||[])[1];
+try{var q=(location.search.match(/[?&]lang=([A-Za-z-]{2,12})/)||[])[1];
 if(q&&V.indexOf(q)>=0)localStorage.setItem('jwsync_lang',q);else q=null;
 a(q||localStorage.getItem('jwsync_lang')||'en');}catch(e){a('en');}}());
 </script>"""
