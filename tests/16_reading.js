@@ -149,6 +149,45 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
   if (E.chapterUrl(1, 1).includes('bible=01001000')) ok('Genesis 1 zero-padded correctly');
   else fail('Genesis 1 url wrong: ' + E.chapterUrl(1, 1));
 
+  // ── jw.org locale codes ────────────────────────────────────────────────
+  // A wrong code here is the quietest bug in the codebase: jw.org serves
+  // English for anything it does not recognise, so every chapter link opens
+  // in the wrong language and nothing anywhere fails. Hebrew shipped as 'HB'
+  // — the obvious-looking abbreviation, and not a code jw.org knows — and it
+  // took adding a later language to notice.
+  //
+  // Each pair below was confirmed by fetching the finder URL and reading the
+  // <html lang> it served. Re-verify before changing one, and add a row here
+  // whenever a language is added, or the map can drift back out of step with
+  // the picker without any test objecting.
+  section('jw.org wtlocale codes');
+  {
+    const VERIFIED = {
+      en: 'E', es: 'S', pt: 'T', fr: 'F', de: 'X', it: 'I', ru: 'U', ja: 'J',
+      ko: 'KO', tl: 'TG', sv: 'Z', ceb: 'CV', ar: 'A', he: 'Q', uk: 'K',
+    };
+    const src = fs.readFileSync(REPO + '/js/reading.js', 'utf8');
+    const m = src.match(/var WTLOCALE = \{([^}]*)\}/);
+    if (!m) { fail('WTLOCALE map not found in js/reading.js'); }
+    else {
+      const got = {};
+      for (const p of m[1].matchAll(/([a-z-]{2,5}):\s*'([A-Z]{1,3})'/g)) got[p[1]] = p[2];
+      let bad = 0;
+      for (const [lang, code] of Object.entries(VERIFIED)) {
+        if (got[lang] !== code) {
+          fail('wtlocale ' + lang + ' is ' + JSON.stringify(got[lang]) + ', verified value is ' + code);
+          bad++;
+        }
+      }
+      // Every language the picker offers needs an entry, or its readers get
+      // English chapter links.
+      for (const lang of LANGS) {
+        if (!got[lang]) { fail('wtlocale has no entry for ' + lang + ' — chapter links would open in English'); bad++; }
+      }
+      if (!bad) ok('all ' + LANGS.length + ' languages map to their verified jw.org code');
+    }
+  }
+
   section('Engine: milestones');
   st = blankState();
   let hits = [];

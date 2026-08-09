@@ -47,10 +47,13 @@ PICKER_OLD = '<option value="ar">🇸🇦 العربية</option>'
 PICKER_NEW = ('<option value="ar">🇸🇦 العربية</option>\n'
               '      <option value="he">🇮🇱 עברית</option>')
 
-# jw.org's own code for Hebrew. Without it the Bible-chapter links that
-# reading.js builds would silently open in English for Hebrew readers.
+# jw.org's own code for Hebrew, checked against the live finder: wtlocale=Q
+# serves lang="he". This was first shipped as "HB", which looks like the
+# obvious abbreviation and is not a code jw.org knows — it falls through to
+# English, so every Bible-chapter link reading.js built opened in English for
+# Hebrew readers, with nothing failing to give it away.
 WTLOCALE_OLD = "ceb: 'CV', ar: 'A' }"
-WTLOCALE_NEW = "ceb: 'CV', ar: 'A', he: 'HB' }"
+WTLOCALE_NEW = "ceb: 'CV', ar: 'A', he: 'Q' }"
 
 for f in ("index.html", "beta/index.html"):
     patch(f, [(LANG_LIST_OLD, LANG_LIST_NEW), (PICKER_OLD, PICKER_NEW)])

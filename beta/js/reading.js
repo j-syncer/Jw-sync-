@@ -48,7 +48,7 @@
   var HLC = { 1: '#fde68a', 2: '#bbf7d0', 3: '#bfdbfe', 4: '#fbcfe8', 5: '#fed7aa', 6: '#e9d5ff' };
   var SQL_BASE = 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/';
   var SKEY = 'jwsync_reading_v1';
-  var WTLOCALE = { en: 'E', es: 'S', pt: 'T', fr: 'F', de: 'X', it: 'I', ru: 'U', ja: 'J', ko: 'KO', tl: 'TG', sv: 'Z', ceb: 'CV', ar: 'A', he: 'HB', uk: 'K' };
+  var WTLOCALE = { en: 'E', es: 'S', pt: 'T', fr: 'F', de: 'X', it: 'I', ru: 'U', ja: 'J', ko: 'KO', tl: 'TG', sv: 'Z', ceb: 'CV', ar: 'A', he: 'Q', uk: 'K' };
 
   function pad2(n) { return n < 10 ? '0' + n : '' + n; }
   function pad3(n) { return n < 10 ? '00' + n : (n < 100 ? '0' + n : '' + n); }
