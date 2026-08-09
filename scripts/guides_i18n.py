@@ -700,6 +700,41 @@ CHROME = {
             "Power tools": "Потужні інструменти",
         },
     },
+    "pl": {
+        "lang_name": "Polski",
+        "lang_label": "Język",
+        "lang_other": "Ten poradnik w innych językach",
+        "og_locale": "pl_PL",
+        "site_guides": "Poradniki JW Sync",
+        "nav_guides": "Poradniki",
+        "nav_community": "Społeczność",
+        "nav_open_app": "Otwórz aplikację",
+        "crumb_guides": "Poradniki",
+        "h_steps": "Krok po kroku",
+        "h_faq": "Częste pytania",
+        "h_related": "Powiązane poradniki",
+        "cta_title": "Zrób to teraz — bezpłatnie, w przeglądarce",
+        "cta_body": "JW Sync scala, edytuje i analizuje kopie zapasowe .jwlibrary w całości na Twoim urządzeniu. Bez konta, bez wysyłania na serwer, bez instalowania czegokolwiek.",
+        "cta_btn": "Otwórz JW Sync →",
+        "index_title": "Poradniki o kopiach zapasowych, synchronizacji i notatkach JW Library | JW Sync",
+        "index_desc": "Praktyczne poradniki o kopiach zapasowych JW Library: scalanie kopii z dwóch urządzeń, przenoszenie notatek na nowy telefon, przejście z Androida na iPhone'a, naprawa kopii, która się nie przywraca, edycja i wyszukiwanie notatek i więcej.",
+        "index_h1": "Poradniki i instrukcje",
+        "index_lede": "Wszystko o kopiach zapasowych JW Library w prostych krokach: scalanie urządzeń, przejście na nowy telefon, ratowanie notatek i lepsze wykorzystanie biblioteki, którą już masz. Każde wymienione narzędzie działa bezpłatnie w Twojej przeglądarce — Twoje pliki nigdy nie są wysyłane na serwer.",
+        "index_cta_title": "Nie chcesz czytać — po prostu otwórz narzędzie",
+        "index_cta_body": "Scalenie dwóch kopii zajmuje około minuty, a aplikacja przeprowadzi Cię przez to krok po kroku.",
+        "footer_all_guides": "Wszystkie poradniki",
+        "footer_community": "Społeczność",
+        "footer_stats": "Statystyki studium",
+        "footer_privacy": "JW Sync przetwarza wszystkie dane lokalnie — Twoje pliki nigdy nie opuszczają urządzenia. Korzystanie jest bezpłatne; bez konta, bez wysyłania na serwer.",
+        "footer_disclaimer": "\u201cJW Library\u201d jest własnością Watch Tower Bible and Tract Society of Pennsylvania. JW Sync to niezależne narzędzie, niezwiązane z nią ani przez nią nieautoryzowane.",
+        "groups": {
+            "Getting started": "Pierwsze kroki",
+            "Sharing scenarios": "Scenariusze udostępniania",
+            "Everyday scenarios": "Scenariusze codzienne",
+            "Fixing problems": "Rozwiązywanie problemów",
+            "Power tools": "Narzędzia zaawansowane",
+        },
+    },
 }
 
 # ── Per-guide translations ───────────────────────────────────────────────
@@ -708,6 +743,7 @@ CHROME = {
 from guides_ar import GUIDES_AR  # noqa: E402
 from guides_he import GUIDES_HE  # noqa: E402
 from guides_uk import GUIDES_UK  # noqa: E402
+from guides_pl import GUIDES_PL  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -735,4 +771,5 @@ GUIDE_TEXT = {
     "ar": GUIDES_AR,
     "he": GUIDES_HE,
     "uk": GUIDES_UK,
+    "pl": GUIDES_PL,
 }

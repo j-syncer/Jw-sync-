@@ -253,5 +253,22 @@
   "nav_share_title": "Відкрити на іншому пристрої",
   "theme_to_light": "Перейти на світлу тему",
   "theme_to_dark": "Перейти на темну тему"
+ },
+ "pl": {
+  "nav_adv_options": "Opcje zaawansowane",
+  "nav_simple_view": "‹ Widok prosty",
+  "nav_adv_show_title": "Pokaż narzędzia zaawansowane",
+  "nav_adv_back_title": "Powrót do widoku prostego",
+  "mode_simple": "Prosty",
+  "mode_full": "Pełny",
+  "mode_simple_title": "Prosty — kreator krok po kroku",
+  "mode_full_title": "Tryb pełny — wszystkie narzędzia zaawansowane",
+  "nav_demo_title": "Wypróbuj na przykładowych notatkach",
+  "nav_browse_title": "Otwórz eksplorator notatek",
+  "nav_community_title": "Społeczność — zadawaj pytania, zgłaszaj błędy",
+  "nav_share_btn": "Udostępnij",
+  "nav_share_title": "Otwórz na innym urządzeniu",
+  "theme_to_light": "Przełącz na tryb jasny",
+  "theme_to_dark": "Przełącz na tryb ciemny"
  }
 }

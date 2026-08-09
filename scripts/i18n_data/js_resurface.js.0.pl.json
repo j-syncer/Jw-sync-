@@ -1,0 +1,16 @@
+{
+ "brand": "Przypomnienie",
+ "on_this_day": "Tego dnia",
+ "w_years": "Napisano {n} lat temu",
+ "w_year": "Napisano rok temu",
+ "w_months": "Napisano {n} miesięcy temu",
+ "w_month": "Napisano w zeszłym miesiącu",
+ "w_recent": "Napisano niedawno",
+ "count_sep": "z",
+ "reflect": "Oznacz jako przejrzane",
+ "next": "Dalej",
+ "done_title": "Wszystko przejrzane",
+ "done_sub": "Przejrzałeś dzisiejsze notatki. Po trochu, ale regularnie — tak wiedza zostaje na dłużej.",
+ "come_back": "Wróć jutro po kolejne.",
+ "streak_days": "Passa: {n} dni"
+}

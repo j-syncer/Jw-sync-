@@ -25,7 +25,7 @@ const path = require('path');
 
 const REPO = path.join(__dirname, '..');
 const SITE = 'https://jwsync.org';
-const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk'];
+const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk', 'pl'];
 const RTL = new Set(['ar', 'he']);
 
 let pass = 0, failCount = 0;

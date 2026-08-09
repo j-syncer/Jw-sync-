@@ -133,5 +133,14 @@
   "lp_guides_d": "Покрокова допомога зі створення резервних копій, об'єднання, перенесення та порятунку ваших нотаток з JW Library.",
   "lp_popular": "Популярні посібники",
   "lp_disclaimer": "«JW Library» є власністю Watch Tower Bible and Tract Society of Pennsylvania. JW Sync — незалежна утиліта, не пов'язана з нею і не схвалена нею."
+ },
+ "pl": {
+  "lp_features": "Co to potrafi",
+  "lp_how": "Jak to działa",
+  "lp_faq": "Częste pytania",
+  "lp_guides": "Poradniki i instrukcje",
+  "lp_guides_d": "Pomoc krok po kroku przy tworzeniu kopii zapasowych, scalaniu, przenoszeniu i ratowaniu notatek z JW Library.",
+  "lp_popular": "Popularne poradniki",
+  "lp_disclaimer": "„JW Library” jest własnością Watch Tower Bible and Tract Society of Pennsylvania. JW Sync to niezależne narzędzie, niezwiązane z nią ani przez nią nieautoryzowane."
  }
 }

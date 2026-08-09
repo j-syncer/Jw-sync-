@@ -4,6 +4,38 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.18.0] — 2026-08-09
+
+### Added: Polish — the site's 16th language
+
+Poland has one of the largest populations of JW Library users in Europe and
+high smartphone penetration, so a browser-based tool is a good fit. Polish
+(`pl`) ships complete:
+
+- **The whole interface** — 1,100 strings across the merge app, Study
+  Explorer, Study Stats, Note Sharing, Library Doctor, Reading Companion,
+  Resurface, the setup wizard, the conflict reviewer and the community forum.
+- **All 37 guides**, at `/guides/pl/`, plus a pre-rendered Polish landing
+  page at `/pl/`.
+- **Findable in search** — own canonicals, `hreflang` alternates, `og:locale`
+  and JSON-LD `inLanguage`, with all 39 new URLs in `sitemap.xml` (627 total).
+
+Bible-chapter links open in Polish on jw.org (wtlocale `P`, verified).
+
+### Fixed: Hebrew Bible links were opening in English
+
+Hebrew shipped in v3.16.0 with the jw.org locale code `HB`. That is not a code
+jw.org recognises, and unrecognised codes fall through to English — so every
+Bible-chapter link the Reading Companion built for Hebrew readers opened in
+English. Nothing failed; the feature simply worked in the wrong language.
+
+The correct code is `Q`. The whole map has now been checked against the live
+finder and every other language was already right. 16_reading.js carries the
+verified pairs and requires an entry for every language the picker offers, so
+the map can no longer drift silently.
+
+---
+
 ## [3.17.0] — 2026-08-09
 
 ### Added: Ukrainian — the site's 15th language

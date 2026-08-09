@@ -43,7 +43,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import i18n_tool as t  # noqa: E402
 
 SITE = "https://jwsync.org"
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk"]
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl"]
 RTL_LANGS = {"ar", "he"}
 # Derived, not hand-listed: a language gets a /guides/<lang>/ link the moment
 # its translations land in guides_i18n.GUIDE_TEXT, and never before — so this
@@ -55,12 +55,12 @@ LANG_NAME = {
     "en": "English", "es": "Español", "pt": "Português", "fr": "Français",
     "de": "Deutsch", "it": "Italiano", "ru": "Русский", "ja": "日本語",
     "ko": "한국어", "tl": "Filipino", "sv": "Svenska", "ceb": "Cebuano",
-    "ar": "العربية", "he": "עברית", "uk": "Українська",
+    "ar": "العربية", "he": "עברית", "uk": "Українська", "pl": "Polski",
 }
 LOCALE = {
     "en": "en_US", "es": "es_ES", "pt": "pt_BR", "fr": "fr_FR", "de": "de_DE",
     "it": "it_IT", "ru": "ru_RU", "ja": "ja_JP", "ko": "ko_KR", "tl": "tl_PH",
-    "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL", "uk": "uk_UA",
+    "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL", "uk": "uk_UA", "pl": "pl_PL",
 }
 
 TOOLS = [

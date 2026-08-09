@@ -1,0 +1,8 @@
+{
+ "banner_title": "Tryb demonstracyjny",
+ "banner_body": "Wczytano dwie przykładowe kopie zapasowe. Kliknij <strong>Podgląd scalania</strong>, aby zobaczyć, jak zostaną połączone, a następnie <strong>Potwierdź scalanie</strong>, aby pobrać wynik.",
+ "banner_dismiss": "Zamknij demonstrację",
+ "err_generic": "Nie udało się uruchomić demonstracji — sprawdź połączenie i spróbuj ponownie.",
+ "err_inject": "Nie udało się wczytać przykładowych plików do aplikacji. Odśwież stronę i spróbuj ponownie.",
+ "overwrite_warn": "Uruchomienie demonstracji zastąpi obecnie wczytane pliki. Kontynuować?"
+}

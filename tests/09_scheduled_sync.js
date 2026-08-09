@@ -29,7 +29,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl'];
 const REQUIRED_KEYS = ['title','intro','priv','add','empty','main','setmain','remove','saved',
   'mergenow','merging','done','needtwo','reminder','off','weekly','monthly','clear','clearconfirm',
   'banner','bannercta','dismiss','close','fab','error'];
