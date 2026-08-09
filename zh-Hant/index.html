@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW Sync——在瀏覽器中私密合並 JW Library 備份</title>
+<meta name="description" content="合併、瀏覽和編輯你的 JW Library 筆記、標註和書籤——全部在瀏覽器中完成。你的檔案絕不會離開你的裝置。">
+<link rel="canonical" href="https://jwsync.org/zh-Hant/">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/es/">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/pt/">
+<link rel="alternate" hreflang="fr" href="https://jwsync.org/fr/">
+<link rel="alternate" hreflang="de" href="https://jwsync.org/de/">
+<link rel="alternate" hreflang="it" href="https://jwsync.org/it/">
+<link rel="alternate" hreflang="ru" href="https://jwsync.org/ru/">
+<link rel="alternate" hreflang="ja" href="https://jwsync.org/ja/">
+<link rel="alternate" hreflang="ko" href="https://jwsync.org/ko/">
+<link rel="alternate" hreflang="tl" href="https://jwsync.org/tl/">
+<link rel="alternate" hreflang="sv" href="https://jwsync.org/sv/">
+<link rel="alternate" hreflang="ceb" href="https://jwsync.org/ceb/">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/ar/">
+<link rel="alternate" hreflang="he" href="https://jwsync.org/he/">
+<link rel="alternate" hreflang="uk" href="https://jwsync.org/uk/">
+<link rel="alternate" hreflang="pl" href="https://jwsync.org/pl/">
+<link rel="alternate" hreflang="zh-Hans" href="https://jwsync.org/zh-Hans/">
+<link rel="alternate" hreflang="zh-Hant" href="https://jwsync.org/zh-Hant/">
+<link rel="alternate" hreflang="yue-Hant" href="https://jwsync.org/yue-Hant/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:title" content="JW Sync——在瀏覽器中私密合並 JW Library 備份">
+<meta property="og:description" content="合併、瀏覽和編輯你的 JW Library 筆記、標註和書籤——全部在瀏覽器中完成。你的檔案絕不會離開你的裝置。">
+<meta property="og:url" content="https://jwsync.org/zh-Hant/">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "JW Sync", "applicationCategory": "UtilityApplication", "operatingSystem": "Web Browser", "browserRequirements": "Requires modern web browser with JavaScript enabled", "url": "https://jwsync.org/zh-Hant/", "inLanguage": "zh-Hant", "description": "合併、瀏覽和編輯你的 JW Library 筆記、標註和書籤——全部在瀏覽器中完成。你的檔案絕不會離開你的裝置。", "isAccessibleForFree": true, "softwareVersion": "3.18.0", "image": "https://jwsync.org/og-image.png", "screenshot": "https://jwsync.org/og-image.png", "downloadUrl": "https://jwsync.org/zh-Hant/", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org/"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "FAQPage", "inLanguage": "zh-Hant", "mainEntity": [{"@type": "Question", "name": "我的資料安全嗎？", "acceptedAnswer": {"@type": "Answer", "text": "安全。一切都完全在你的瀏覽器中執行。沒有任何檔案會被上傳到伺服器。你的筆記絕不會離開你的裝置。"}}, {"@type": "Question", "name": "這會損壞我的備份嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。工具始終在記憶體中的資料副本上操作。你裝置上原來的 .jwlibrary 檔案絕不會被修改。"}}, {"@type": "Question", "name": "為什麼合併後的檔案顯示新增了 0 條筆記？", "acceptedAnswer": {"@type": "Answer", "text": "這通常說明次要檔案中的所有筆記在主檔案裡都已存在。如果你認為筆記被錯誤跳過，可以試著關閉「跳過完全重複的內容」。"}}, {"@type": "Question", "name": "如果兩臺裝置上有內容相同但修改不同的筆記怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "請使用「智慧：保留最近儲存的版本」這一衝突設定。它會為出現在兩個備份中的每條筆記保留最新的修改。"}}, {"@type": "Question", "name": "可以合併兩個以上的檔案嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以！在第 2 步中新增任意多個次要檔案，它們會逐個合併到你的主檔案中。"}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c;
+--green:#22c55e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;
+flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);
+display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;
+font-weight:800}
+.hnav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.hnav a{color:var(--muted);font-size:14px}
+.lp-lang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;font-family:inherit;max-width:160px}
+.lp-lang:hover{border-color:var(--accent)}
+.hero{padding:54px 0 12px}
+h1{font-size:38px;line-height:1.18;margin:0 0 14px;letter-spacing:-.015em}
+.lede{color:var(--muted);font-size:17px;margin:0 0 26px;max-width:660px}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15.5px;padding:12px 26px;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.btn:hover{text-decoration:none;filter:brightness(1.07)}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--txt);font-weight:600;
+font-size:15px;padding:11px 22px;border-radius:10px;display:inline-block}
+.btn-ghost:hover{text-decoration:none;border-color:var(--accent)}
+.privacy{display:inline-flex;align-items:center;gap:8px;margin:24px 0 0;padding:6px 12px;
+border-radius:9px;font-size:12.5px;font-weight:600;color:#6ee7a8;
+background:rgba(16,30,23,.7);border:1px solid rgba(52,211,153,.16)}
+.privacy .dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+h2{font-size:23px;margin:52px 0 14px;letter-spacing:-.01em}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;margin:0;padding:0;list-style:none}
+@media(min-width:700px){.grid{grid-template-columns:1fr 1fr}}
+.grid li{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:18px 20px}
+.grid strong{display:block;font-size:16px;margin-bottom:5px}
+.grid span{color:var(--muted);font-size:14.5px;display:block}
+.tags{margin:11px 0 0;padding:0;list-style:none;display:flex;gap:7px;flex-wrap:wrap}
+.tags li{background:rgba(234,88,12,.1);border:1px solid rgba(234,88,12,.25);color:var(--accent-soft);
+font-size:12px;padding:3px 9px;border-radius:20px}
+ol.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 22px 54px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:33px;height:33px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 5px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.faq dt{font-weight:600;margin:20px 0 5px;font-size:16px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.cta-card{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:22px 24px;margin:38px 0 0}
+.cta-card strong{display:block;font-size:17px;margin-bottom:5px}
+.cta-card span{color:var(--muted);font-size:14.5px}
+.lp-guides{margin:44px 0 0}
+.lp-guides h2{margin:0 0 14px}
+.lp-gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:0 0 22px;padding:0;list-style:none}
+@media(min-width:640px){.lp-gcards{grid-template-columns:1fr 1fr}}
+.lp-gcards a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;color:var(--txt);height:100%}
+.lp-gcards a:hover{text-decoration:none;border-color:var(--accent)}
+.lp-gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
+.lp-gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}
+footer.site{border-top:1px solid var(--line);margin-top:58px;padding:26px 0 44px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="/?lang=zh-Hant"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="/?lang=zh-Hant">首頁</a><a href="/guides/">指南</a><a href="/highlights?lang=zh-Hant">研究統計</a><a href="/share?lang=zh-Hant">筆記分享</a><a href="/forum?lang=zh-Hant">社群</a><select class="lp-lang" aria-label="繁體中文" onchange="location.href=this.value"><option value="https://jwsync.org/">English</option><option value="https://jwsync.org/es/">Español</option><option value="https://jwsync.org/pt/">Português</option><option value="https://jwsync.org/fr/">Français</option><option value="https://jwsync.org/de/">Deutsch</option><option value="https://jwsync.org/it/">Italiano</option><option value="https://jwsync.org/ru/">Русский</option><option value="https://jwsync.org/ja/">日本語</option><option value="https://jwsync.org/ko/">한국어</option><option value="https://jwsync.org/tl/">Filipino</option><option value="https://jwsync.org/sv/">Svenska</option><option value="https://jwsync.org/ceb/">Cebuano</option><option value="https://jwsync.org/ar/">العربية</option><option value="https://jwsync.org/he/">עברית</option><option value="https://jwsync.org/uk/">Українська</option><option value="https://jwsync.org/pl/">Polski</option><option value="https://jwsync.org/zh-Hans/">简体中文</option><option value="https://jwsync.org/zh-Hant/" selected>繁體中文</option><option value="https://jwsync.org/yue-Hant/">粵語</option></select></nav></div></header><main class="wrap"><section class="hero"><h1>在瀏覽器中私密地合併 JW Library 備份</h1><p class="lede">合併、瀏覽和編輯你的 JW Library 筆記、標註和書籤——全部在瀏覽器中完成。你的檔案絕不會離開你的裝置。</p><div class="cta-row"><a class="btn" href="/?lang=zh-Hant">開啟應用 →</a><a class="btn-ghost" href="/?lang=zh-Hant">用示例筆記試試</a></div><div class="privacy"><span class="dot"></span>100% 私密——在你的瀏覽器中執行</div></section><h2>它能做什麼</h2><ul class="grid"><li><strong>只在本地處理</strong><span>所有合併都透過 WebAssembly 在你的瀏覽器中完成。沒有伺服器，不上傳，完全私密。</span></li><li><strong>標籤與標註一併合併</strong><span>智慧整合你所有備份中的標籤、標註、書籤和旁註。</span></li><li><strong>按日期提取</strong><span>從特定日期的備份中提取內容，精確還原你在任一時間點擁有的資料。</span></li><li><strong>瀏覽並編輯筆記</strong><span>搜尋整個書庫，編輯筆記、管理標籤、修改標註顏色，然後下載更新後的備份。</span></li><li><strong>下載前先核對</strong><span>清楚看到哪些筆記在多臺裝置上被修改過，並自行決定保留哪個版本——絕無黑箱操作。</span></li></ul><h2>選擇一個工具</h2><ul class="grid"><li><strong>合併工具</strong><span>把你所有裝置上的 JW Library 備份合併成一個。</span><ul class="tags"><li>衝突檢查</li><li>自動同步</li></ul></li><li><strong>研究瀏覽器</strong><span>搜尋、編輯、標記和整理備份中的每一條筆記。</span><ul class="tags"><li>問問你的書庫</li><li>批次編輯</li></ul></li><li><strong>研究統計</strong><span>檢視你的連續研究天數、總量和長期趨勢。</span><ul class="tags"><li>成就</li><li>研究地圖</li></ul></li><li><strong>筆記分享與接收</strong><span>把筆記發給朋友，或新增他們發給你的筆記。</span><ul class="tags"><li>無需賬號</li><li>標註同樣支援</li></ul></li><li><strong>書庫醫生</strong><span>免費體檢——找出並修復重複項、空白筆記和雜亂資料。</span><ul class="tags"><li>查詢重複項</li><li>一鍵修復</li></ul></li><li><strong>讀經伴侶</strong><span>跟隨每日讀經計劃——你自己的筆記就在旁邊。</span><ul class="tags"><li>每日計劃</li><li>連續天數與里程碑</li></ul></li></ul><h2>使用方法</h2><ol class="steps"><li><h3>在 JW Library 中建立備份</h3><p>在裝置上開啟 JW Library 應用。進入「個人研究」標籤，點擊備份圖示（雲朵/箭頭），然後點擊「建立備份」。把 .jwlibrary 檔案儲存到裝置儲存中。</p></li><li><h3>在這裡上傳你的檔案</h3><p>把主備份拖到第 1 步（主備份）。如果要合併 iPad 等其他裝置的內容，請在第 2 步新增該備份。你可以新增任意多個次要檔案。</p></li><li><h3>配置設定並處理</h3><p>選擇要帶過來的內容：筆記、標註或書籤。用標籤管理器重新命名混亂的標籤。開啟「自動標記匯入內容」為次要檔案的內容加標籤。然後點擊「合併」。</p></li><li><h3>下載並還原</h3><p>下載新的 .jwlibrary 檔案。開啟 JW Library，回到備份頁面，點擊「從備份還原」。選擇你下載的檔案，你的筆記和標註就會出現。</p></li></ol><h2>常見問題</h2><dl class="faq"><dt>我的資料安全嗎？</dt><dd>安全。一切都完全在你的瀏覽器中執行。沒有任何檔案會被上傳到伺服器。你的筆記絕不會離開你的裝置。</dd><dt>這會損壞我的備份嗎？</dt><dd>不會。工具始終在記憶體中的資料副本上操作。你裝置上原來的 .jwlibrary 檔案絕不會被修改。</dd><dt>為什麼合併後的檔案顯示新增了 0 條筆記？</dt><dd>這通常說明次要檔案中的所有筆記在主檔案裡都已存在。如果你認為筆記被錯誤跳過，可以試著關閉「跳過完全重複的內容」。</dd><dt>如果兩臺裝置上有內容相同但修改不同的筆記怎麼辦？</dt><dd>請使用「智慧：保留最近儲存的版本」這一衝突設定。它會為出現在兩個備份中的每條筆記保留最新的修改。</dd><dt>可以合併兩個以上的檔案嗎？</dt><dd>可以！在第 2 步中新增任意多個次要檔案，它們會逐個合併到你的主檔案中。</dd></dl><a class="cta-card" href="/guides/"><strong>指南與教學</strong><span>一步一步教你備份、合併、轉移和搶救你的 JW Library 筆記。</span></a></main><footer class="site"><div class="wrap"><p>JW Sync 完全在本地處理資料——你的檔案絕不會離開你的裝置。</p><p>「JW Library」是 Watch Tower Bible and Tract Society of Pennsylvania 的財產。JW Sync 是獨立的實用工具，與其並無關聯，也未獲其認可。</p></div></footer></body>
+</html>

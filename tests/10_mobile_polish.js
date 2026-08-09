@@ -18,7 +18,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant'];
 
 function extractOffline() {
   const html = fs.readFileSync(HTML_PATH, 'utf8');
@@ -71,7 +71,9 @@ function extractOffline() {
     const m = mod.match(/var I18N=\{([\s\S]*?)\};/);
     if (!m) { fail('offline I18N not found'); }
     else {
-      let missing = LANGS.filter(l => !new RegExp('\\b' + l + ':"').test(mod));
+      // Quoted keys too: `"zh-Hans":"…"` is how a hyphenated BCP-47 tag has
+      // to be written, and \b does not match between `{`/`,` and `"`.
+      let missing = LANGS.filter(l => !new RegExp('(?:^|[,{\\s])"?' + l + '"?\\s*:\\s*"').test(mod));
       if (missing.length === 0) ok('all 12 language strings present');
       else fail('missing offline langs: ' + missing.join(','));
     }

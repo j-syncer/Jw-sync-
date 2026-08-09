@@ -1,0 +1,8 @@
+{
+ "banner_title": "示範模式",
+ "banner_body": "已經載入咗兩個範例備份。撳<strong>預覽合併</strong>睇吓佢哋點樣合埋，然後撳<strong>確認合併</strong>就可以下載結果。",
+ "banner_dismiss": "關閉示範",
+ "err_generic": "起動唔到示範——請檢查吓網絡連線再試過。",
+ "err_inject": "載入唔到範例檔案。請重新整理版面再試過。",
+ "overwrite_warn": "起動示範會取代而家載入咗嘅檔案。要繼續嗎？"
+}

@@ -1,0 +1,16 @@
+{
+ "brand": "回顾",
+ "on_this_day": "历史上的今天",
+ "w_years": "写于 {n} 年前",
+ "w_year": "写于一年前",
+ "w_months": "写于 {n} 个月前",
+ "w_month": "写于上个月",
+ "w_recent": "最近写的",
+ "count_sep": "/",
+ "reflect": "标记为已回顾",
+ "next": "下一条",
+ "done_title": "今天的回顾已完成",
+ "done_sub": "你已回顾完今天的笔记。少量而经常，学到的才留得住。",
+ "come_back": "明天再来看更多。",
+ "streak_days": "连续 {n} 天"
+}

@@ -1,0 +1,16 @@
+{
+ "brand": "回顧",
+ "on_this_day": "歷史上的今天",
+ "w_years": "寫於 {n} 年前",
+ "w_year": "寫於一年前",
+ "w_months": "寫於 {n} 個月前",
+ "w_month": "寫於上個月",
+ "w_recent": "最近寫的",
+ "count_sep": "/",
+ "reflect": "標記為已回顧",
+ "next": "下一條",
+ "done_title": "今天的回顧已完成",
+ "done_sub": "你已回顧完今天的筆記。少量而經常，學到的才留得住。",
+ "come_back": "明天再來看更多。",
+ "streak_days": "連續 {n} 天"
+}

@@ -1,0 +1,8 @@
+{
+ "banner_title": "演示模式",
+ "banner_body": "已載入兩個示例備份。點擊<strong>預覽合併</strong>檢視它們如何合併，然後點擊<strong>確認合併</strong>下載結果。",
+ "banner_dismiss": "關閉演示",
+ "err_generic": "無法啟動演示——請檢查網路連線後重試。",
+ "err_inject": "無法將示例檔案載入到應用中。請重新整理頁面後重試。",
+ "overwrite_warn": "啟動演示會替換當前已載入的檔案。要繼續嗎？"
+}

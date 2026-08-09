@@ -15,7 +15,14 @@ function ok(msg) { console.log('  ✓', msg); }
 function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
-const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl'];
+const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant'];
+
+// A dictionary's language key is written `en:` while the tag is a bare JS
+// identifier and `"zh-Hans":` once it is not — a BCP-47 tag with a script
+// subtag contains a hyphen and cannot be an unquoted key. Every coverage regex
+// below builds its key fragment here, so a new tag *shape* widens the guards
+// rather than quietly dropping the language out of each of them.
+const KEY = (lang) => '(?:^|[,{\\s])"?' + lang + '"?\\s*:';
 const REQUIRED_I18N_KEYS = ['brw_open', 'disc_open_full']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
 const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',
@@ -564,7 +571,7 @@ for (const path of FILES) {
     else ok('celebration queries merged db via sql.js');
     // Translations: all 12 langs must have the celebration keys
     for (const lang of FILE_LANGS) {
-      const re = new RegExp(`${lang}:\\s*\\{[^}]*cele_title:`);
+      const re = new RegExp(KEY(lang) + '\\s*\\{[^}]*cele_title:');
       if (!re.test(cAll)) fail(`celebration i18n missing for ${lang}`);
     }
     ok('celebration i18n present for all 12 languages');
@@ -592,7 +599,7 @@ for (const path of FILES) {
     else ok('donate link has data-jwc-donate hook');
     // Donate prompt/cta strings translated for all 12 langs
     for (const lang of FILE_LANGS) {
-      const re = new RegExp(`${lang}:\\s*\\{[^}]*donate_prompt:`);
+      const re = new RegExp(KEY(lang) + '\\s*\\{[^}]*donate_prompt:');
       if (!re.test(cAll)) fail(`donate i18n missing for ${lang}`);
     }
     ok('donate i18n present for all 12 languages');
@@ -642,7 +649,7 @@ section('Cross-tool session (jw-session.js)');
     }
     // Localised switcher labels for all 12 languages
     for (const lang of EXPECTED_LANGS) {
-      const re = new RegExp('\\b' + lang + ':\\s*\\{\\s*merge:');
+      const re = new RegExp(KEY(lang) + '\\s*\\{\\s*merge:');
       if (re.test(js)) ok('switcher labels present for ' + lang);
       else fail('switcher labels missing for ' + lang);
     }
@@ -759,7 +766,7 @@ section('Cross-tool session (jw-session.js)');
       'tab1','tab2','t_intro','exp_d','stat_d','shr_d','open'];
     let wizI18nOk = true;
     for (const lang of EXPECTED_LANGS) {
-      const re = new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)');
+      const re = new RegExp(KEY(lang) + '\\{([\\s\\S]*?)\\}\\s*(?:,|$)');
       const lm = wm[1].match(re);
       if (!lm) { wizI18nOk = false; fail('wizard i18n missing language: ' + lang); continue; }
       const missing = WIZ_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
@@ -1054,7 +1061,7 @@ section('Cross-tool session (jw-session.js)');
       'share_copied', 'share_saved', 'share_hint'];
     let okAll = true;
     for (const lang of EXPECTED_LANGS) {
-      const lm = sm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
+      const lm = sm[1].match(new RegExp(KEY(lang) + '\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
       if (!lm) { okAll = false; fail('SHARE_I18N missing language: ' + lang); continue; }
       const miss = SHARE_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
       if (miss.length) { okAll = false; fail('SHARE_I18N ' + lang + ' missing: ' + miss.join(',')); }
@@ -1083,7 +1090,7 @@ section('Cross-tool session (jw-session.js)');
     const SAFE_KEYS = ['safe_title', 'safe_originals', 'safe_master'];
     let okAll = true;
     for (const lang of EXPECTED_LANGS) {
-      const lm = sm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
+      const lm = sm[1].match(new RegExp(KEY(lang) + '\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
       if (!lm) { okAll = false; fail('SAFE_I18N missing language: ' + lang); continue; }
       const miss = SAFE_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
       if (miss.length) { okAll = false; fail('SAFE_I18N ' + lang + ' missing: ' + miss.join(',')); }
@@ -1143,7 +1150,7 @@ section('Cross-tool session (jw-session.js)');
       'perfect', 'clean', 'done_t', 'safe', 'another', 'err_read', 'err_db'];
     let okAll = true;
     for (const lang of EXPECTED_LANGS) {
-      const lm = dm[1].match(new RegExp('\\b' + lang + ':\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
+      const lm = dm[1].match(new RegExp(KEY(lang) + '\\{([\\s\\S]*?)\\}\\s*(?:,|$)'));
       if (!lm) { okAll = false; fail('DOC_I18N missing language: ' + lang); continue; }
       const miss = DOC_KEYS.filter(k => !new RegExp('(^|[,{])' + k + ':').test(lm[1]));
       if (miss.length) { okAll = false; fail('DOC_I18N ' + lang + ' missing: ' + miss.join(',')); }

@@ -25,7 +25,7 @@ const path = require('path');
 
 const REPO = path.join(__dirname, '..');
 const SITE = 'https://jwsync.org';
-const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk', 'pl'];
+const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk', 'pl', 'zh-Hans', 'zh-Hant', 'yue-Hant'];
 const RTL = new Set(['ar', 'he']);
 
 let pass = 0, failCount = 0;
@@ -62,7 +62,10 @@ section('hreflang cluster is complete and reciprocal');
     const canon = (c.match(/<link rel="canonical" href="([^"]*)"/) || [])[1];
     if (canon !== url(l)) { fail(l + ': canonical is ' + canon + ', expected ' + url(l)); bad++; }
     const alts = {};
-    for (const m of c.matchAll(/hreflang="([a-z-]+)" href="([^"]*)"/g)) alts[m[1]] = m[2];
+    // [A-Za-z-], not [a-z-]: BCP-47 writes the script subtag in title case
+    // (zh-Hans, yue-Hant), so a lowercase-only class silently matches none of
+    // the Chinese alternates and reports a perfectly good cluster as missing.
+    for (const m of c.matchAll(/hreflang="([A-Za-z-]+)" href="([^"]*)"/g)) alts[m[1]] = m[2];
     for (const o of LANGS) {
       if (alts[o] !== url(o)) { fail(l + ': alternate for ' + o + ' is ' + alts[o]); bad++; }
     }

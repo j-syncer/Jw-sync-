@@ -1,0 +1,8 @@
+{
+ "banner_title": "演示模式",
+ "banner_body": "已加载两个示例备份。点击<strong>预览合并</strong>查看它们如何合并，然后点击<strong>确认合并</strong>下载结果。",
+ "banner_dismiss": "关闭演示",
+ "err_generic": "无法启动演示——请检查网络连接后重试。",
+ "err_inject": "无法将示例文件加载到应用中。请刷新页面后重试。",
+ "overwrite_warn": "启动演示会替换当前已加载的文件。要继续吗？"
+}

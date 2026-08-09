@@ -1,0 +1,16 @@
+{
+ "brand": "重溫",
+ "on_this_day": "今日呢一日",
+ "w_years": "{n} 年前寫嘅",
+ "w_year": "一年前寫嘅",
+ "w_months": "{n} 個月前寫嘅",
+ "w_month": "上個月寫嘅",
+ "w_recent": "最近先寫嘅",
+ "count_sep": "/",
+ "reflect": "標記為已重溫",
+ "next": "下一條",
+ "done_title": "今日嘅重溫做完喇",
+ "done_sub": "你已經重溫咗今日嘅筆記。每次少少、經常做，學到嘅嘢先至記得住。",
+ "come_back": "聽日再返嚟睇多啲。",
+ "streak_days": "連續 {n} 日"
+}

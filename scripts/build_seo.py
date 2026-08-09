@@ -54,11 +54,12 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://jwsync.org"
 TODAY = datetime.date.today().isoformat()
 
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl"]
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant"]
 LOCALE = {
     "en": "en_US", "es": "es_ES", "pt": "pt_BR", "fr": "fr_FR", "de": "de_DE",
     "it": "it_IT", "ru": "ru_RU", "ja": "ja_JP", "ko": "ko_KR", "tl": "tl_PH",
     "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL", "uk": "uk_UA", "pl": "pl_PL",
+    "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", "yue-Hant": "zh_HK",
 }
 GUIDE_LANGS = sorted(set(GUIDE_TEXT) | {"en"})
 
