@@ -226,8 +226,16 @@ Copy the newest `add_*_plumbing.py`, change the anchors, run it. It patches:
 > `NAV_LANGS` being extracted out of the HTML — which is why Hebrew needed a
 > separate patch after `01_static.js` caught it. Always do both pickers.
 
-Then add the code to `LANGS` (+ `LOCALE`, `LANG_NAME`, and `RTL_LANGS` if
-right-to-left) in `build_guides.py`, `build_landing.py`, `build_seo.py`.
+Then add the code to the builders. They do **not** all define the same
+variables — add it to the ones each file actually has:
+
+| | `LANGS` | `RTL_LANGS` | `LANG_NAME` | `LOCALE` |
+|---|---|---|---|---|
+| `build_guides.py`  | ✅ | ✅ | — | — |
+| `build_landing.py` | ✅ | ✅ | ✅ | ✅ |
+| `build_seo.py`     | ✅ | — | — | ✅ |
+
+(`RTL_LANGS` only matters for a right-to-left language.)
 
 ### Step 2 — UI strings (~1,100 keys, 20 tables)
 
@@ -274,12 +282,25 @@ entry, run the full suite to exit 0.
 
 ### Cost, and the cheap option
 
-UI strings ≈ 30k characters; the guides ≈ 122k. So a language is **~85% guides**.
-`build_landing.py` derives the `/guides/<lang>/` link from `GUIDE_TEXT` and
-`build_seo.py` only puts a language in the hreflang cluster once it appears
-there — so **you can ship a language's UI without its guides** and the SEO layer
-will correctly decline to advertise the incomplete tree. Useful for testing
-demand before committing to the guide translation.
+UI strings ≈ 30k characters; the guides ≈ 122k. So a language is **~85% guides**,
+which means **you can ship a language's UI without its guides** and the SEO layer
+handles it correctly on its own. Useful for testing demand before committing to
+the guide translation.
+
+There are **two** hreflang clusters and they are gated differently — this is
+what makes the split safe:
+
+- the **landing** cluster (`/` ↔ `/<lang>/`) is driven by `LANGS`, so a UI-only
+  language does get its `/<lang>/` page, its alternates and its sitemap entry;
+- the **guides** cluster (`/guides/` ↔ `/guides/<lang>/`) is driven by
+  `GUIDE_LANGS`, which is derived from `guides_i18n.GUIDE_TEXT`
+  (`build_seo.py`, `build_landing.py`).
+
+So a language absent from `GUIDE_TEXT` is fully advertised as a landing page and
+not advertised at all as a guide tree. Its landing page still shows the "Guides
+and how-tos" link, but `guides_url()` points it at the English `/guides/` rather
+than a `/guides/<lang>/` that does not exist — a deliberate fallback, not a 404.
+Nothing has to be remembered or switched off by hand.
 
 ### Simple Mode
 - Default ON for first-time visitors; restores saved pref via `loadPrefs().simpleMode`
