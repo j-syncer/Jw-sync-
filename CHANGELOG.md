@@ -4,6 +4,42 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.19.0] — 2026-08-09
+
+### Added: Chinese — in all three variants jw.org itself publishes
+
+Chinese is not one language on jw.org, and it is not one language here either.
+Rather than picking a single "Chinese" and leaving most readers with the wrong
+one, the site now ships the same three-way split jw.org uses:
+
+- **简体中文 — `zh-Hans`** — Mandarin, Simplified script.
+- **繁體中文 — `zh-Hant`** — Mandarin, Traditional script, Taiwan vocabulary
+  (檔案, 資料庫, 軟體).
+- **粵語 — `yue-Hant`** — Cantonese, Traditional script, written the way
+  Cantonese is actually written (嘅 唔 係 喺 咗 啲 佢 冇 畀), not Mandarin in
+  Traditional characters. A Cantonese reader who wanted Mandarin can pick it
+  from the same menu.
+
+Each variant ships complete:
+
+- **The whole interface** — 1,100 strings across the merge app, Study Explorer,
+  Study Stats, Note Sharing, Library Doctor, Reading Companion, Resurface, the
+  setup wizard, the conflict reviewer and the community forum.
+- **All 37 guides** — at `/guides/zh-Hans/`, `/guides/zh-Hant/` and
+  `/guides/yue-Hant/`, plus pre-rendered landing pages at `/zh-Hans/`,
+  `/zh-Hant/` and `/yue-Hant/`.
+- **Findable in search** — own canonicals, `hreflang` alternates, `og:locale`
+  and sitemap entries, so each variant is indexed as its own page rather than
+  collapsing into one.
+- **Bible chapter links open in the right language** — Reading Companion's
+  jw.org deep links use `CHS`, `CH` and `CHC`, each checked against the live
+  finder rather than guessed. jw.org silently serves English for any code it
+  does not recognise, so this is verified, not inferred.
+
+The language menu now offers 19 languages.
+
+---
+
 ## [3.18.0] — 2026-08-09
 
 ### Added: Polish — the site's 16th language
