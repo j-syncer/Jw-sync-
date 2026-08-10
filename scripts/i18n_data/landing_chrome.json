@@ -178,5 +178,14 @@
     "lp_guides_d": "Hướng dẫn từng bước để sao lưu, hợp nhất, chuyển và cứu lấy ghi chú JW Library của bạn.",
     "lp_popular": "Hướng dẫn phổ biến",
     "lp_disclaimer": "“JW Library” là tài sản của Watch Tower Bible and Tract Society of Pennsylvania. JW Sync là một tiện ích độc lập, không liên kết với và không được tổ chức này chứng thực."
+  },
+  "hu": {
+    "lp_features": "Mit tud",
+    "lp_how": "Hogyan működik",
+    "lp_faq": "Gyakori kérdések",
+    "lp_guides": "Útmutatók és leírások",
+    "lp_guides_d": "Lépésről lépésre segítség a JW Library-jegyzeteid mentéséhez, egyesítéséhez, átköltöztetéséhez és megmentéséhez.",
+    "lp_popular": "Népszerű útmutatók",
+    "lp_disclaimer": "A „JW Library” a Watch Tower Bible and Tract Society of Pennsylvania tulajdona. A JW Sync független segédeszköz, amely nem áll kapcsolatban vele, és nem is támogatja azt."
   }
 }

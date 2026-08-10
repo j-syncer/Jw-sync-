@@ -1,0 +1,16 @@
+{
+ "brand": "Felidézés",
+ "on_this_day": "A mai napon",
+ "w_years": "{n} éve írtad",
+ "w_year": "Egy éve írtad",
+ "w_months": "{n} hónapja írtad",
+ "w_month": "Múlt hónapban írtad",
+ "w_recent": "Nemrég írtad",
+ "count_sep": "/",
+ "reflect": "Átnézettnek jelöl",
+ "next": "Tovább",
+ "done_title": "Mindent átnéztél",
+ "done_sub": "Átnézted a mai jegyzeteket. Keveset, de gyakran — így marad meg a tanulmányozás.",
+ "come_back": "Gyere vissza holnap még többért.",
+ "streak_days": "{n} napos sorozat"
+}

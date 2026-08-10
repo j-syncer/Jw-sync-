@@ -1,0 +1,8 @@
+{
+ "banner_title": "Bemutató mód",
+ "banner_body": "Két mintamentés van betöltve. Kattints az <strong>Egyesítés előnézete</strong> gombra, hogy lásd, hogyan állnak össze, majd az <strong>Egyesítés megerősítése</strong> gombra az eredmény letöltéséhez.",
+ "banner_dismiss": "Bemutató bezárása",
+ "err_generic": "Nem sikerült elindítani a bemutatót — ellenőrizd a kapcsolatot, és próbáld újra.",
+ "err_inject": "Nem sikerült betölteni a mintafájlokat az alkalmazásba. Frissítsd az oldalt, és próbáld újra.",
+ "overwrite_warn": "A bemutató indítása lecseréli a jelenleg betöltött fájljaidat. Folytatod?"
+}

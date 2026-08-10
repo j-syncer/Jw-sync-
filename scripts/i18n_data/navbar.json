@@ -338,5 +338,22 @@
     "nav_share_title": "Mở trên thiết bị khác",
     "theme_to_light": "Chuyển sang Chế độ sáng",
     "theme_to_dark": "Chuyển sang Chế độ tối"
+  },
+  "hu": {
+    "nav_adv_options": "Haladó beállítások",
+    "nav_simple_view": "‹ Egyszerű nézet",
+    "nav_adv_show_title": "Haladó eszközök megjelenítése",
+    "nav_adv_back_title": "Vissza az egyszerű nézetre",
+    "mode_simple": "Egyszerű",
+    "mode_full": "Teljes",
+    "mode_simple_title": "Egyszerű — lépésről lépésre varázsló",
+    "mode_full_title": "Teljes mód — minden haladó eszköz",
+    "nav_demo_title": "Próbáld ki mintajegyzetekkel",
+    "nav_browse_title": "Jegyzetböngésző megnyitása",
+    "nav_community_title": "Közösség — kérdezz, jelents hibát",
+    "nav_share_btn": "Megosztás",
+    "nav_share_title": "Megnyitás másik eszközön",
+    "theme_to_light": "Váltás világos módra",
+    "theme_to_dark": "Váltás sötét módra"
   }
 }
