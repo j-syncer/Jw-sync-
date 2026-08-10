@@ -22,7 +22,7 @@ TODAY = "2026-07-13"
 
 # English lives at /guides/<slug>; every other language at /guides/<lang>/<slug>,
 # so the existing URLs — and their rankings — are untouched.
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu"]
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu", "hi"]
 RTL_LANGS = {"ar", "he"}
 
 # Languages that actually have translated guide copy. A language listed in
@@ -30,6 +30,24 @@ RTL_LANGS = {"ar", "he"}
 # of the hreflang cluster — announcing an alternate that does not exist is
 # worse for SEO than announcing none.
 TRANSLATED = sorted(set(GUIDE_TEXT) | {"en"})
+
+
+def langs_for(slug):
+    """Languages that actually have *this* guide, English always first.
+
+    A language may ship its guides a few at a time — the runbook's cheap
+    option, now at slug granularity. Before this existed, registering a
+    language in GUIDE_TEXT with one translated guide published all 37 pages
+    under /guides/<lang>/, 36 of them English prose at a translated URL,
+    each self-canonical and each in the sitemap and hreflang cluster. That is
+    duplicate content pointed at by the very cluster meant to disambiguate it
+    — worse than not having the page. So every cluster, picker, index listing
+    and written file is decided per slug, not per language.
+    """
+    if slug is None:                       # the /guides/ index itself
+        return TRANSLATED
+    return ["en"] + [l for l in TRANSLATED
+                     if l != "en" and slug in GUIDE_TEXT.get(l, {})]
 
 # ── Guide content ─────────────────────────────────────────────────────────
 # order here = order on guides/index.html
@@ -1422,7 +1440,7 @@ def guide_url(slug, lang):
 def alternates(slug):
     """hreflang cluster for one guide across every translated language."""
     out = ['<link rel="alternate" hreflang="x-default" href="%s">' % guide_url(slug, "en")]
-    for l in TRANSLATED:
+    for l in langs_for(slug):
         out.append('<link rel="alternate" hreflang="%s" href="%s">' % (l, guide_url(slug, l)))
     return "\n".join(out)
 
@@ -1436,7 +1454,7 @@ def lang_links(slug, lang):
     internal links, so nothing pointed at a translation but the <head>.
     """
     out = []
-    for l in TRANSLATED:
+    for l in langs_for(slug):
         cur = ' aria-current="page"' if l == lang else ""
         out.append('<a href="%s" hreflang="%s" lang="%s"%s>%s</a>'
                    % (guide_url(slug, l), l, l, cur, CHROME[l]["lang_name"]))
@@ -1447,7 +1465,7 @@ def lang_links(slug, lang):
 def lang_picker(slug, lang, root):
     """A plain <select> that navigates — no JS bundle on these static pages."""
     opts = []
-    for l in TRANSLATED:
+    for l in langs_for(slug):
         sel = " selected" if l == lang else ""
         opts.append('<option value="%s"%s>%s</option>'
                     % (guide_url(slug, l), sel, CHROME[l]["lang_name"]))
@@ -1640,6 +1658,8 @@ def build_index(lang="en"):
         for g_en in GUIDES:
             if g_en["group"] != group:
                 continue
+            if lang not in langs_for(g_en["slug"]):
+                continue   # not translated yet — no English page at a hi/ URL
             g = localize(g_en, lang)
             parts.append(f'<li><a href="{g_en["slug"]}"><strong>{esc(g["title"])}</strong>'
                          f'<span>{esc(g["description"])}</span></a></li>')
@@ -1662,6 +1682,8 @@ def main():
             else os.path.join(repo, "guides", lang)
         os.makedirs(outdir, exist_ok=True)
         for g in GUIDES:
+            if lang not in langs_for(g["slug"]):
+                continue
             html_out = build_guide(g, lang)
             # sanity: the JSON-LD block must still parse after templating
             json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',
@@ -1672,8 +1694,8 @@ def main():
         with open(os.path.join(outdir, "index.html"), "w", encoding="utf-8") as f:
             f.write(build_index(lang))
         written += 1
-        print("wrote guides/%s%d pages"
-              % ("" if lang == "en" else lang + "/", len(GUIDES) + 1))
+        n = sum(1 for g in GUIDES if lang in langs_for(g["slug"])) + 1
+        print("wrote guides/%s%d pages" % ("" if lang == "en" else lang + "/", n))
     print("%d guides x %d languages (+index) = %d pages"
           % (len(GUIDES), len(TRANSLATED), written))
 

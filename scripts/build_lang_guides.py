@@ -44,6 +44,9 @@ _NON_LATIN = "[Ѐ-ӿ֐-ۿ฀-๿가-힯぀-ヿ一-鿿]"
 STRAY = {
     "vi": re.compile(_NON_LATIN),
     "hu": re.compile(_NON_LATIN),
+    # Hindi is Devanagari, so the Latin-script class is the wrong
+    # guard: allow Devanagari + ASCII product names, reject the rest.
+    "hi": re.compile("[Ѐ-ӿ֐-ۿ฀-๿가-힯぀-ヿ一-鿿]"),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -55,6 +58,9 @@ DIACRITIC = {
     # (kerek/kérek, tor/tör/tőr), so unaccented copy is not a stylistic choice
     # either — it is a different set of words, or ASCII-mangled text.
     "hu": re.compile("[áéíóöőúüű]", re.I),
+    # Hindi has no Latin diacritics; the equivalent "is this really the
+    # language" check is that the prose is in Devanagari at all.
+    "hi": re.compile("[ऀ-ॿ]"),
 }
 
 META = {
@@ -109,6 +115,32 @@ META = {
   talk                előadás
   Hebrew Scriptures   Héber Iratok
   Greek Scriptures    Görög Iratok""",
+    },
+    "hi": {
+        "name": "Hindi",
+        "upper": "HI",
+        "glossary": """Glossary settled on for the guides:
+
+  backup              बैकअप
+  to merge / merge    मर्ज करना / मर्ज
+  notes               नोट
+  highlights          हाइलाइट
+  bookmarks           बुकमार्क
+  tags                टैग
+  device              डिवाइस
+  to restore          रीस्टोर करना
+  Personal Study      निजी अध्ययन
+  Backup and Restore  बैकअप और रीस्टोर
+  browser             ब्राउज़र
+  database            डेटाबेस
+  Conflict Reviewer   टकराव जाँच
+  duplicate           डुप्लिकेट
+  publication         प्रकाशन
+  meeting             सभा
+  convention          अधिवेशन
+  talk                भाषण
+  Hebrew Scriptures   इब्रानी शास्त्र
+  Greek Scriptures    यूनानी शास्त्र""",
     },
 }
 

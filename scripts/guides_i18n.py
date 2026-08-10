@@ -910,6 +910,41 @@ CHROME = {
             "Power tools": "Haladó eszközök",
         },
     },
+    "hi": {
+        "lang_name": "हिन्दी",
+        "lang_label": "भाषा",
+        "lang_other": "यह गाइड दूसरी भाषाओं में",
+        "og_locale": "hi_IN",
+        "site_guides": "JW Sync गाइड",
+        "nav_guides": "गाइड",
+        "nav_community": "समुदाय",
+        "nav_open_app": "ऐप खोलें",
+        "crumb_guides": "गाइड",
+        "h_steps": "कदम-दर-कदम",
+        "h_faq": "अक्सर पूछे जाने वाले सवाल",
+        "h_related": "मिलती-जुलती गाइड",
+        "cta_title": "अभी कीजिए — मुफ़्त, आपके ब्राउज़र में",
+        "cta_body": "JW Sync .jwlibrary बैकअप पूरी तरह आपके ही डिवाइस पर मर्ज करता, बदलता और जाँचता है। कोई खाता नहीं, कोई अपलोड नहीं, कुछ भी इंस्टॉल करने की ज़रूरत नहीं।",
+        "cta_btn": "JW Sync खोलें →",
+        "index_title": "JW Library बैकअप, सिंक और नोट गाइड | JW Sync",
+        "index_desc": "JW Library बैकअप के काम की गाइड: दो डिवाइस के बैकअप मर्ज करना, नए फ़ोन पर नोट ले जाना, Android से iPhone पर जाना, रीस्टोर न होने वाला बैकअप ठीक करना, नोट बदलना और खोजना, और भी बहुत कुछ।",
+        "index_h1": "गाइड और तरीके",
+        "index_lede": "JW Library बैकअप के बारे में सब कुछ, आसान कदमों में: डिवाइस मर्ज करना, नए फ़ोन पर जाना, नोट बचाना, और जो लाइब्रेरी पहले से है उससे ज़्यादा फ़ायदा उठाना। यहाँ बताया हर टूल आपके ब्राउज़र में मुफ़्त चलता है — आपकी फ़ाइलें कभी अपलोड नहीं होतीं।",
+        "index_cta_title": "पढ़ना छोड़िए — सीधे टूल खोलिए",
+        "index_cta_body": "दो बैकअप मर्ज करने में करीब एक मिनट लगता है, और ऐप आपको हर कदम बताता है।",
+        "footer_all_guides": "सभी गाइड",
+        "footer_community": "समुदाय",
+        "footer_stats": "अध्ययन आँकड़े",
+        "footer_privacy": "JW Sync सारा डेटा आपके ही डिवाइस पर प्रोसेस करता है — आपकी फ़ाइलें कभी बाहर नहीं जातीं। इस्तेमाल मुफ़्त; न खाता, न अपलोड।",
+        "footer_disclaimer": "“JW Library” Watch Tower Bible and Tract Society of Pennsylvania की संपत्ति है। JW Sync एक स्वतंत्र सहायक टूल है, जिसका उससे कोई संबंध नहीं है और न ही उसने इसे मान्यता दी है।",
+        "groups": {
+            "Getting started": "शुरुआत",
+            "Sharing scenarios": "साझा करने की स्थितियाँ",
+            "Everyday scenarios": "रोज़मर्रा की स्थितियाँ",
+            "Fixing problems": "समस्याएँ सुलझाना",
+            "Power tools": "उन्नत टूल",
+        },
+    },
 }
 
 # ── Per-guide translations ───────────────────────────────────────────────
@@ -924,6 +959,7 @@ from guides_zh_hant import GUIDES_ZH_HANT  # noqa: E402
 from guides_yue_hant import GUIDES_YUE_HANT  # noqa: E402
 from guides_vi import GUIDES_VI  # noqa: E402
 from guides_hu import GUIDES_HU  # noqa: E402
+from guides_hi import GUIDES_HI  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -957,4 +993,5 @@ GUIDE_TEXT = {
     "yue-Hant": GUIDES_YUE_HANT,
     "vi": GUIDES_VI,
     "hu": GUIDES_HU,
+    "hi": GUIDES_HI,
 }

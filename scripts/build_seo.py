@@ -54,12 +54,12 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SITE = "https://jwsync.org"
 TODAY = datetime.date.today().isoformat()
 
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu"]
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu", "hi"]
 LOCALE = {
     "en": "en_US", "es": "es_ES", "pt": "pt_BR", "fr": "fr_FR", "de": "de_DE",
     "it": "it_IT", "ru": "ru_RU", "ja": "ja_JP", "ko": "ko_KR", "tl": "tl_PH",
     "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL", "uk": "uk_UA", "pl": "pl_PL",
-    "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", "yue-Hant": "zh_HK", "vi": "vi_VN", "hu": "hu_HU",
+    "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", "yue-Hant": "zh_HK", "vi": "vi_VN", "hu": "hu_HU", "hi": "hi_IN",
 }
 GUIDE_LANGS = sorted(set(GUIDE_TEXT) | {"en"})
 
@@ -266,9 +266,13 @@ def build_sitemap():
     # Guides: the index plus every slug, once per translated language.
     guide_targets = [None] + [g["slug"] for g in build_guides.GUIDES]
     for slug in guide_targets:
-        alts = {l: build_guides.guide_url(slug, l) for l in GUIDE_LANGS}
+        # Per slug, not per language: a guide only exists in the languages
+        # that translated it (build_guides.langs_for), so submitting the whole
+        # language set would list URLs that are not written.
+        langs = build_guides.langs_for(slug)
+        alts = {l: build_guides.guide_url(slug, l) for l in langs}
         prio = "0.8" if slug is None else "0.7"
-        for l in GUIDE_LANGS:
+        for l in langs:
             blocks.append(url_entry(build_guides.guide_url(slug, l), alts, prio, "monthly"))
 
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'

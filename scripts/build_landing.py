@@ -43,12 +43,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import i18n_tool as t  # noqa: E402
 
 SITE = "https://jwsync.org"
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu"]
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu", "hi"]
 RTL_LANGS = {"ar", "he"}
 # Derived, not hand-listed: a language gets a /guides/<lang>/ link the moment
 # its translations land in guides_i18n.GUIDE_TEXT, and never before — so this
 # can neither lag behind a new language nor link at a tree that is not built.
 from guides_i18n import GUIDE_TEXT  # noqa: E402
+import build_guides  # noqa: E402
 GUIDE_LANGS = set(GUIDE_TEXT) | {"en"}
 
 LANG_NAME = {
@@ -57,13 +58,13 @@ LANG_NAME = {
     "ko": "한국어", "tl": "Filipino", "sv": "Svenska", "ceb": "Cebuano",
     "ar": "العربية", "he": "עברית", "uk": "Українська", "pl": "Polski",
     "zh-Hans": "简体中文", "zh-Hant": "繁體中文", "yue-Hant": "粵語",
-    "vi": "Tiếng Việt", "hu": "Magyar",
+    "vi": "Tiếng Việt", "hu": "Magyar", "hi": "हिन्दी",
 }
 LOCALE = {
     "en": "en_US", "es": "es_ES", "pt": "pt_BR", "fr": "fr_FR", "de": "de_DE",
     "it": "it_IT", "ru": "ru_RU", "ja": "ja_JP", "ko": "ko_KR", "tl": "tl_PH",
     "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL", "uk": "uk_UA", "pl": "pl_PL",
-    "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", "yue-Hant": "zh_HK", "vi": "vi_VN", "hu": "hu_HU",
+    "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", "yue-Hant": "zh_HK", "vi": "vi_VN", "hu": "hu_HU", "hi": "hi_IN",
 }
 
 TOOLS = [
@@ -242,6 +243,15 @@ POPULAR_GUIDES = [
     "jw-library-windows-pc",
 ]
 
+# popular_guides() now skips a slug a language has not translated, so a typo in
+# the list above would silently drop a card everywhere instead of failing. Check
+# the slugs once against the canonical English set, which is what they name.
+_ALL_SLUGS = {g["slug"] for g in build_guides.GUIDES}
+_UNKNOWN = [s for s in POPULAR_GUIDES if s not in _ALL_SLUGS]
+if _UNKNOWN:
+    sys.exit("build_landing: POPULAR_GUIDES names no such guide: %s"
+             % ", ".join(_UNKNOWN))
+
 
 def popular_guides(lang, C):
     """A grid of guide links, so the landing page is not a dead end.
@@ -258,10 +268,16 @@ def popular_guides(lang, C):
     for slug in POPULAR_GUIDES:
         g = txt.get(slug)
         if not g:
-            sys.exit("build_landing: %s missing guide %r" % (lang, slug))
+            # Not translated yet, so /guides/<lang>/<slug> was never written
+            # (build_guides.langs_for decides that per slug, not per language).
+            # Linking it anyway would be a 404; hard-exiting here would mean a
+            # language could not ship its UI before all 37 guides exist. Skip.
+            continue
         items.append('<li><a href="/guides/%s/%s"><strong>%s</strong>'
                      '<span>%s</span></a></li>'
                      % (lang, slug, esc(g["title"]), esc(g["description"])))
+    if not items:
+        return ""
     return ('<section class="lp-guides"><h2>%s</h2><ul class="lp-gcards">%s</ul></section>'
             % (esc(C["lp_popular"]), "".join(items)))
 

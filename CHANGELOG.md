@@ -4,6 +4,34 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.22.0] — 2026-08-10
+
+### Added: Hindi — the site's 22nd language
+
+Hindi (`hi`) ships its interface complete: the app, the Study Browser, the
+Reading Companion, Study Stats, the share and receive pages, the Library
+Doctor, the forum and the pre-rendered `/hi/` landing page are all in Hindi.
+The language picker in the nav and the `?lang=hi` link both select it.
+
+Bible-chapter links open jw.org in Hindi (`wtlocale=HI`, verified against
+jw.org — `H1` serves Hungarian and `IN` serves Indonesian).
+
+**Guides:** one guide is translated so far — "दो डिवाइस के JW Library बैकअप
+कैसे मर्ज करें" at `/guides/hi/merge-jw-library-backups`. The other 36 are
+being translated and will appear as they land.
+
+### Changed: a guide is now published per language *per guide*
+
+Previously a language was either in the guide tree or out of it, all 37 at
+once. A language that had translated some of its guides published the rest as
+English prose sitting at a translated URL — self-canonical, in the sitemap, and
+inside the very hreflang cluster meant to disambiguate it. Now each guide's
+language cluster, sitemap entry, index listing, language picker and written
+file are decided per guide, so a partially translated language advertises
+exactly the pages it actually has.
+
+---
+
 ## [3.21.0] — 2026-08-10
 
 ### Added: Hungarian — the site's 21st language

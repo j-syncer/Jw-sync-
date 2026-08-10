@@ -355,5 +355,22 @@
     "nav_share_title": "Megnyitás másik eszközön",
     "theme_to_light": "Váltás világos módra",
     "theme_to_dark": "Váltás sötét módra"
+  },
+  "hi": {
+    "nav_adv_options": "उन्नत विकल्प",
+    "nav_simple_view": "‹ सरल दृश्य",
+    "nav_adv_show_title": "उन्नत टूल दिखाएँ",
+    "nav_adv_back_title": "सरल दृश्य पर वापस",
+    "mode_simple": "सरल",
+    "mode_full": "पूरा",
+    "mode_simple_title": "सरल — कदम-दर-कदम मार्गदर्शक",
+    "mode_full_title": "पूरा मोड — सभी उन्नत टूल",
+    "nav_demo_title": "नमूना नोटों के साथ आज़माएँ",
+    "nav_browse_title": "नोट एक्सप्लोरर खोलें",
+    "nav_community_title": "समुदाय — सवाल पूछें, गड़बड़ी बताएँ",
+    "nav_share_btn": "साझा करें",
+    "nav_share_title": "दूसरे डिवाइस पर खोलें",
+    "theme_to_light": "उजले मोड में जाएँ",
+    "theme_to_dark": "गहरे मोड में जाएँ"
   }
 }

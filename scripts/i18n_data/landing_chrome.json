@@ -187,5 +187,14 @@
     "lp_guides_d": "Lépésről lépésre segítség a JW Library-jegyzeteid mentéséhez, egyesítéséhez, átköltöztetéséhez és megmentéséhez.",
     "lp_popular": "Népszerű útmutatók",
     "lp_disclaimer": "A „JW Library” a Watch Tower Bible and Tract Society of Pennsylvania tulajdona. A JW Sync független segédeszköz, amely nem áll kapcsolatban vele, és nem is támogatja azt."
+  },
+  "hi": {
+    "lp_features": "यह क्या करता है",
+    "lp_how": "यह कैसे काम करता है",
+    "lp_faq": "अक्सर पूछे जाने वाले सवाल",
+    "lp_guides": "गाइड और तरीके",
+    "lp_guides_d": "अपने JW Library नोटों का बैकअप लेने, उन्हें मर्ज करने, दूसरे डिवाइस पर ले जाने और वापस पाने में कदम-दर-कदम मदद।",
+    "lp_popular": "लोकप्रिय गाइड",
+    "lp_disclaimer": "“JW Library” Watch Tower Bible and Tract Society of Pennsylvania की संपत्ति है। JW Sync एक स्वतंत्र सहायक टूल है, जिसका उससे कोई संबंध नहीं है और न ही उसने इसे मान्यता दी है।"
   }
 }
