@@ -910,6 +910,41 @@ CHROME = {
             "Power tools": "Haladó eszközök",
         },
     },
+    "id": {
+        "lang_name": "Bahasa Indonesia",
+        "lang_label": "Bahasa",
+        "lang_other": "Panduan ini dalam bahasa lain",
+        "og_locale": "id_ID",
+        "site_guides": "Panduan JW Sync",
+        "nav_guides": "Panduan",
+        "nav_community": "Komunitas",
+        "nav_open_app": "Buka aplikasinya",
+        "crumb_guides": "Panduan",
+        "h_steps": "Langkah demi langkah",
+        "h_faq": "Pertanyaan yang sering diajukan",
+        "h_related": "Panduan terkait",
+        "cta_title": "Lakukan sekarang — gratis, di peramban Anda",
+        "cta_body": "JW Sync menggabungkan, mengubah, dan menganalisis cadangan .jwlibrary sepenuhnya di perangkat Anda. Tanpa akun, tanpa unggahan, tanpa perlu memasang apa pun.",
+        "cta_btn": "Buka JW Sync →",
+        "index_title": "Panduan Cadangan, Sinkronisasi & Catatan JW Library | JW Sync",
+        "index_desc": "Panduan praktis untuk cadangan JW Library: menggabungkan cadangan dari dua perangkat, memindahkan catatan ke ponsel baru, beralih dari Android ke iPhone, memperbaiki cadangan yang tidak mau dipulihkan, mengubah dan mencari catatan Anda, dan banyak lagi.",
+        "index_h1": "Panduan & cara pakai",
+        "index_lede": "Segala hal tentang cadangan JW Library, dengan langkah yang sederhana: menggabungkan perangkat, pindah ke ponsel baru, menyelamatkan catatan, dan memanfaatkan lebih banyak dari perpustakaan yang sudah Anda miliki. Setiap alat yang disebutkan berjalan gratis di peramban Anda — berkas Anda tidak pernah diunggah.",
+        "index_cta_title": "Lewati bacaannya — langsung buka alatnya",
+        "index_cta_body": "Menggabungkan dua cadangan hanya perlu sekitar semenit dan aplikasinya akan memandu Anda.",
+        "footer_all_guides": "Semua panduan",
+        "footer_community": "Komunitas",
+        "footer_stats": "Statistik Pelajaran",
+        "footer_privacy": "JW Sync memproses semua data secara lokal — berkas Anda tidak pernah meninggalkan perangkat Anda. Gratis; tanpa akun, tanpa unggahan.",
+        "footer_disclaimer": "“JW Library” adalah milik Watch Tower Bible and Tract Society of Pennsylvania. JW Sync adalah alat bantu independen yang tidak berafiliasi dengan maupun didukung olehnya.",
+        "groups": {
+            "Getting started": "Memulai",
+            "Sharing scenarios": "Skenario berbagi",
+            "Everyday scenarios": "Skenario sehari-hari",
+            "Fixing problems": "Mengatasi masalah",
+            "Power tools": "Alat canggih",
+        },
+    },
     "hi": {
         "lang_name": "हिन्दी",
         "lang_label": "भाषा",
@@ -960,6 +995,7 @@ from guides_yue_hant import GUIDES_YUE_HANT  # noqa: E402
 from guides_vi import GUIDES_VI  # noqa: E402
 from guides_hu import GUIDES_HU  # noqa: E402
 from guides_hi import GUIDES_HI  # noqa: E402
+from guides_id import GUIDES_ID  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -994,4 +1030,5 @@ GUIDE_TEXT = {
     "vi": GUIDES_VI,
     "hu": GUIDES_HU,
     "hi": GUIDES_HI,
+    "id": GUIDES_ID,
 }

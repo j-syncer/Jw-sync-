@@ -1,0 +1,8 @@
+{
+ "banner_title": "Mode demo",
+ "banner_body": "Dua contoh cadangan sudah dimuat. Klik <strong>Pratinjau Gabungan</strong> untuk melihat hasil penggabungannya, lalu <strong>Konfirmasi Gabungan</strong> untuk mengunduh hasilnya.",
+ "banner_dismiss": "Tutup demo",
+ "err_generic": "Demo tidak dapat dimulai — silakan periksa koneksi Anda lalu coba lagi.",
+ "err_inject": "Contoh berkas tidak dapat dimuat ke dalam aplikasi. Silakan muat ulang halaman lalu coba lagi.",
+ "overwrite_warn": "Memulai demo akan mengganti berkas yang sedang dimuat. Lanjutkan?"
+}

@@ -185,9 +185,9 @@ the page itself, or they will pass against the module file.
 
 ## Features Built (permanent reference)
 
-### Languages (22 total)
+### Languages (23 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
-`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi`
+`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id`
 
 RTL: `ar`, `he`. Everything else is LTR.
 
@@ -258,7 +258,13 @@ Copy the newest `add_*_plumbing.py`, change the anchors, run it. It patches:
 
 Anchor on `var V=` for (1), not the bare list: `add_rtl_wiring.py` derives its
 own copy of the allow-list out of index.html, so the short form now matches
-twice. If the code is a BCP-47 tag with a hyphen it must be **quoted** wherever
+twice. That second copy — the `jw-dir-init` `<head>` bootstrap — lives on
+**all seven** pages (both index.html files, both highlights.html, both
+share.html, and forum.html) and `01_static.js` asserts it matches `var V=`
+exactly. Patch it in the plumbing script (see `add_indonesian_plumbing.py`
+step 5); do **not** "just re-run `add_rtl_wiring.py`" as the older scripts
+advise, because that script predates the shipped bootstrap and re-running it
+reverts the first-paint fix. If the code is a BCP-47 tag with a hyphen it must be **quoted** wherever
 it is a JS object key — `i18n_tool.py` does this for you, and `add_chinese_
 plumbing.py` is the reference for the four enumeration points.
 

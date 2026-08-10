@@ -47,6 +47,10 @@ STRAY = {
     # Hindi is Devanagari, so the Latin-script class is the wrong
     # guard: allow Devanagari + ASCII product names, reject the rest.
     "hi": re.compile("[Ѐ-ӿ֐-ۿ฀-๿가-힯぀-ヿ一-鿿]"),
+    # Indonesian is Latin-script with no obligatory diacritics, so it gets
+    # the stray-script guard but no DIACRITIC entry — an unaccented
+    # Indonesian paragraph is simply correct Indonesian.
+    "id": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -64,6 +68,27 @@ DIACRITIC = {
 }
 
 META = {
+    "id": {
+        "name": "Indonesian",
+        "upper": "ID",
+        "glossary": """Glossary settled on for all 37 guides:
+
+  backup              cadangan
+  to merge / merge    menggabungkan / gabungan
+  notes               catatan
+  highlights          sorotan
+  bookmarks           penanda
+  tags                label
+  device              perangkat
+  file                berkas
+  browser             peramban
+  to restore          memulihkan
+  to back up          mencadangkan
+  publication         publikasi
+  study               pelajaran
+
+JW Library, .jwlibrary, JW Sync and jwsync.org are never translated.""",
+    },
     "vi": {
         "name": "Vietnamese",
         "upper": "VI",

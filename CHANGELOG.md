@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.24.0] — 2026-08-10
+
+### Added: Indonesian — the site's 23rd language
+
+Indonesian (`id`) ships its interface complete: the app, the Study Explorer,
+the Reading Companion, Study Stats, the share and receive pages, the Library
+Doctor, the forum and the pre-rendered `/id/` landing page are all in
+Indonesian. The nav picker and `?lang=id` both select it.
+
+Bible-chapter links open jw.org in Indonesian (`wtlocale=IN`, verified against
+jw.org). This is the sharpest example yet of why that check exists: `ID` — the
+language's own ISO code, and the first thing anyone would try — serves
+**English**, `I` serves **Italian**, and `INS` serves Indonesian **Sign
+Language**. Only `IN` is right.
+
+**Guides:** one guide is translated so far — "Cara Menggabungkan Cadangan JW
+Library dari Dua Perangkat" at `/guides/id/merge-jw-library-backups`. The other
+36 are being translated and will appear as they land; per-slug gating means
+only the translated one is published, linked and submitted.
+
+---
+
 ## [3.23.0] — 2026-08-10
 
 ### Hindi is now complete — all 37 guides
