@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.22.1] — 2026-08-10
+
+### Fixed: two script-loading errors reported by PageSpeed Insights
+
+**Icons were never loading.** The icon library was requested from a cdnjs URL
+that has always returned 404 — cdnjs does not host Lucide at all, under any
+path. Every visitor silently lost all 79 interface icons; the loader treated
+them as decorative and swallowed the error, so nothing ever surfaced it. The
+same version now loads from jsDelivr, which the service worker already
+recognised as a known CDN host.
+
+**A single failed request no longer breaks the app.** Cloudflare intermittently
+answered `js/app.js` and `js/browse.js` with a 503, and because a `<script>` tag
+reports every failure as a bare `onerror` with no status, one transient blip
+looked identical to a permanent 404 and dropped the visitor on the "Could not
+load the app" screen. All script loads — the app bundle, the Study Browser
+bundle and the CDN libraries — now retry three times with backoff before giving
+up, so a momentary edge error costs a few hundred milliseconds instead of the
+session.
+
+---
+
 ## [3.22.0] — 2026-08-10
 
 ### Added: Hindi — the site's 22nd language

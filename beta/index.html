@@ -30,6 +30,7 @@
     <meta name="description" content="Free, private tool to merge JW Library backups from all your devices — combine notes, highlights, bookmarks and tags in your browser. Files never uploaded.">
     
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://api.qrserver.com">
     <meta name="theme-color" content="#040f22">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -54,23 +55,42 @@
     reactDom: 'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
     jszip:    'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
     sqljs:    'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js',
-    lucide:   'https://cdnjs.cloudflare.com/ajax/libs/lucide/0.292.0/umd/lucide.min.js'
+    lucide:   'https://cdn.jsdelivr.net/npm/lucide@0.292.0/dist/umd/lucide.min.js'
   };
-  var loaders = Object.create(null);
-  function loadScript(name) {
-    if (loaders[name]) return loaders[name];
-    var src = CDN[name];
-    loaders[name] = new Promise(function(resolve, reject) {
+  // v3.8.1: a <script> tag surfaces every failure as a bare onerror with no
+  // status code, so a transient 503 from the edge looked identical to a hard
+  // 404 and killed the boot. Retry blind with backoff; the query param keeps a
+  // negatively-cached edge response (or a SW runtime entry) from being reused.
+  var RETRY_DELAYS = [400, 1200, 3000];
+  function injectScript(src, crossOrigin) {
+    return new Promise(function(resolve, reject) {
       var s = document.createElement('script');
       s.src = src;
       s.async = true;
-      s.crossOrigin = 'anonymous';
+      if (crossOrigin) s.crossOrigin = 'anonymous';
       s.onload = function() { resolve(); };
       s.onerror = function() {
-        delete loaders[name];
-        reject(new Error('Failed to load ' + name));
+        if (s.parentNode) s.parentNode.removeChild(s);
+        reject(new Error('Failed to load ' + src));
       };
       document.head.appendChild(s);
+    });
+  }
+  function loadWithRetry(src, crossOrigin, attempt) {
+    attempt = attempt || 0;
+    var url = attempt ? src + (src.indexOf('?') >= 0 ? '&' : '?') + 'retry=' + attempt : src;
+    return injectScript(url, crossOrigin).catch(function(err) {
+      if (attempt >= RETRY_DELAYS.length) throw err;
+      return new Promise(function(res) { setTimeout(res, RETRY_DELAYS[attempt]); })
+        .then(function() { return loadWithRetry(src, crossOrigin, attempt + 1); });
+    });
+  }
+  var loaders = Object.create(null);
+  function loadScript(name) {
+    if (loaders[name]) return loaders[name];
+    loaders[name] = loadWithRetry(CDN[name], true).catch(function(err) {
+      delete loaders[name];
+      throw err;
     });
     return loaders[name];
   }
@@ -86,16 +106,9 @@
   var appBundleLoader = null;
   function loadAppBundle() {
     if (appBundleLoader) return appBundleLoader;
-    appBundleLoader = new Promise(function(resolve, reject) {
-      var s = document.createElement('script');
-      s.src = 'js/app.js';
-      s.async = true;
-      s.onload = function() { resolve(); };
-      s.onerror = function() {
-        appBundleLoader = null;
-        reject(new Error('Failed to load js/app.js'));
-      };
-      document.head.appendChild(s);
+    appBundleLoader = loadWithRetry('js/app.js', false).catch(function(err) {
+      appBundleLoader = null;
+      throw err;
     });
     return appBundleLoader;
   }
@@ -121,16 +134,9 @@
   var browseBundleLoader = null;
   function loadBrowseBundle() {
     if (browseBundleLoader) return browseBundleLoader;
-    browseBundleLoader = new Promise(function(resolve, reject) {
-      var s = document.createElement('script');
-      s.src = 'js/browse.js';
-      s.async = true;
-      s.onload = function() { resolve(); };
-      s.onerror = function() {
-        browseBundleLoader = null;
-        reject(new Error('Failed to load js/browse.js'));
-      };
-      document.head.appendChild(s);
+    browseBundleLoader = loadWithRetry('js/browse.js', false).catch(function(err) {
+      browseBundleLoader = null;
+      throw err;
     });
     return browseBundleLoader;
   }
@@ -309,7 +315,7 @@
         "Free and open source",
         "Available in 13 languages"
       ],
-      "softwareVersion": "3.22.0",
+      "softwareVersion": "3.22.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",

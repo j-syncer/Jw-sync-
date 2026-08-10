@@ -453,21 +453,67 @@ for (const path of FILES) {
     //   - CDN script tags must NOT be in <head> (eager loading would defeat the point)
     //   - The main app and Browse module must be wrapped in __bootApp / __bootBrowse
     //   - The boot loader must expose __jwBootApp / __jwBootBrowse
-    const CDN_SCRIPTS_IN_HEAD = [
-      'cdnjs.cloudflare.com/ajax/libs/react/18.2.0',
-      'cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0',
-      'cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1',
-      'cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0',
-      'cdnjs.cloudflare.com/ajax/libs/lucide',
-    ];
     const headEnd = c.indexOf('</head>');
     const headSection = c.slice(0, headEnd);
-    let eagerCdn = CDN_SCRIPTS_IN_HEAD.filter(u => headSection.includes('<script') && headSection.includes(u) && /<script[^>]*src="[^"]*cdnjs/.test(headSection));
-    // Stronger check: look for any <script src="cdnjs..."> in head
-    if (/<script[^>]*src="https:\/\/cdnjs\.cloudflare\.com/.test(headSection)) {
+    // Any known CDN host, not just cdnjs — the boot loader now pulls Lucide
+    // from jsDelivr, and an eager <script src> to *any* of them defeats the
+    // lazy load just as thoroughly.
+    if (/<script[^>]*src="https:\/\/(cdnjs\.cloudflare\.com|cdn\.jsdelivr\.net|unpkg\.com)/.test(headSection)) {
       fail('CDN <script src> still present in <head> — lazy-load broken');
     } else {
       ok('no eager CDN <script> tags in <head>');
+    }
+
+    // ── Every CDN URL the boot loader ships must actually exist ────────────
+    // Lucide was requested from cdnjs for months and 404'd every single time:
+    // cdnjs does not host the library at all, under any path. Nothing caught
+    // it because the loader treats icons as decorative and swallows the error.
+    // So the URLs are pinned here the same way the jw.org wtlocale codes are
+    // pinned in 16_reading.js — each one confirmed with a real request:
+    //   curl -sSI <url>   ->   200
+    const VERIFIED_CDN = [
+      'https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js',
+      'https://cdn.jsdelivr.net/npm/lucide@0.292.0/dist/umd/lucide.min.js',
+    ];
+    const loaderStart = c.indexOf('Lazy boot loader');
+    const cdnMap = c.slice(loaderStart, c.indexOf('var loaders', loaderStart));
+    const shippedCdn = (cdnMap.match(/'https:\/\/[^']+'/g) || []).map(s => s.slice(1, -1));
+    if (!shippedCdn.length) {
+      fail('boot loader CDN map not found — cannot verify library URLs');
+    } else if (isBeta) {
+      // Production inherits these on the next go-live; beta is the gate.
+      const unverified = shippedCdn.filter(u => VERIFIED_CDN.indexOf(u) === -1);
+      if (unverified.length) {
+        fail('boot loader requests unverified CDN URL(s): ' + unverified.join(', ') +
+          ' — confirm each returns 200 and add it to VERIFIED_CDN');
+      } else {
+        ok(`all ${shippedCdn.length} boot-loader CDN URLs are verified-reachable`);
+      }
+      const missing = VERIFIED_CDN.filter(u => shippedCdn.indexOf(u) === -1);
+      if (missing.length) fail('verified CDN URL no longer shipped: ' + missing.join(', '));
+    }
+
+    // ── Transient failures must be retried ────────────────────────────────
+    // A <script> tag reports a 503 and a 404 identically (bare onerror, no
+    // status), so one flaky edge response used to drop the visitor on the
+    // fatal-error screen. Cloudflare served exactly that for js/app.js and
+    // js/browse.js.
+    if (isBeta) {
+      if (!c.includes('loadWithRetry')) {
+        fail('boot loader has no retry — a single transient 503 kills the app');
+      } else {
+        ok('boot loader retries failed script loads');
+        for (const bundle of ['js/app.js', 'js/browse.js']) {
+          const re = new RegExp("loadWithRetry\\('" + bundle.replace('.', '\\.') + "'");
+          if (!re.test(c)) fail(bundle + ' bundle loader does not go through loadWithRetry');
+          else ok(bundle + ' loaded with retry');
+        }
+        if (!/loadWithRetry\(CDN\[name\]/.test(c)) fail('CDN libraries not loaded with retry');
+        else ok('CDN libraries loaded with retry');
+      }
     }
 
     if (!c.includes('window.__bootApp')) fail('main app not wrapped in window.__bootApp');
