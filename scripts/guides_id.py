@@ -65,4 +65,968 @@ GUIDES_ID = {
    ("Bisakah pemulihan dibatalkan?", "Tidak dari dalam JW Library, dan itulah sebabnya menyimpan cadangan asli Anda itu penting. Penggabungan tidak pernah mengubah berkas yang Anda muat, jadi cadangan sebelum penggabungan tetap persis seperti semula dan bisa dipulihkan kalau Anda ingin kembali."),
   ],
  },
+
+ "sync-jw-library-multiple-devices": {
+  "title": "Cara Menyinkronkan JW Library di Beberapa Perangkat",
+  "h1": "Cara menjaga JW Library tetap sama di beberapa perangkat",
+  "description": "JW Library tidak punya sinkronisasi bawaan antarperangkat. Inilah rutinitas sederhana dan pribadi agar catatan, sorotan, dan penanda Anda sama persis di ponsel, tablet, dan komputer.",
+  "intro": [
+   "Kebanyakan orang yang belajar di dua perangkat menemukan masalahnya dengan cara yang sama: catatan yang ditulis di tablet tidak ada di ponsel, dan memulihkan cadangan satu perangkat ke perangkat lain akan menghapus semua isi perangkat itu. JW Library tidak menyediakan sinkronisasi, dan fitur Pemulihannya memang sengaja bersifat semua-atau-tidak-sama-sekali, jadi menjaga perangkat tetap selaras butuh rutinitas, bukan sekadar pengaturan.",
+   "JW Library tidak menyinkronkan data pelajaran pribadi antarperangkat — tidak ada akun yang membawa catatan Anda dari ponsel ke tablet. Mekanisme resminya adalah Cadangan dan Pemulihan, dan pemulihan mengganti data perangkat sepenuhnya. Jadi bagaimana caranya menjaga dua atau tiga perangkat tetap sama tanpa kehilangan apa pun?",
+   "Jawabannya adalah rutinitas singkat gabungkan-lalu-pulihkan. Dilakukan mingguan atau bulanan, ini hanya perlu sekitar dua menit dan membuat setiap perangkat membawa perpustakaan Anda yang lengkap.",
+  ],
+  "steps": [
+   ("Cadangkan setiap perangkat", "Di setiap perangkat: Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Anda akan mendapat satu berkas .jwlibrary per perangkat."),
+   ("Gabungkan cadangannya di jwsync.org", "Muat semua berkasnya. JW Sync menyatukan catatan, sorotan, penanda, dan label dari setiap perangkat menjadi satu berkas .jwlibrary gabungan — langsung di peramban Anda, tanpa ada yang diunggah."),
+   ("Pulihkan berkas gabungannya di setiap perangkat", "Cadangan dan Pemulihan → Pulihkan, lalu pilih berkas gabungannya. Kini setiap perangkat sama dan lengkap."),
+   ("Biarkan JW Sync mengingatkan Anda", "Aktifkan pengingat sinkronisasi (mingguan atau bulanan) di JW Sync, dan ia akan menyenggol Anda saat waktunya mengulangi rutinitas ini. Ia juga mengingat perangkat yang Anda simpan, sehingga setiap putaran berikutnya lebih cepat."),
+  ],
+  "sections": [
+   ("Kenapa tidak sekadar memulihkan cadangan terbaru?", "Karena “terbaru” hanya mencerminkan satu perangkat. Kalau Anda menulis catatan perhimpunan di ponsel dan catatan pelajaran di tablet pada minggu yang sama, masing-masing cadangan punya isi yang tidak dimiliki yang lain. Memulihkan salah satunya di atas yang lain akan menghilangkan separuh hasil kerja Anda. Menggabungkan lebih dulu itulah yang membuat rutinitas ini aman."),
+   ("Seberapa sering saya harus menyinkronkan?", "Sesuaikan dengan cara Anda belajar. Dua perangkat aktif yang dipakai setiap hari: mingguan terasa pas. Tablet yang hanya keluar saat perhimpunan: bulanan sudah lebih dari cukup. Menunda lebih lama hanya berarti ada lebih banyak yang harus disatukan — tidak pernah ada yang hilang di antara putaran."),
+   ("Kenapa tidak ada sinkronisasi yang sesungguhnya", "JW Library tidak punya akun yang membawa data pelajaran pribadi antarperangkat. Catatan, sorotan, dan penanda tersimpan dalam basis data di masing-masing perangkat dan tetap di sana. Satu-satunya mekanisme resmi untuk memindahkannya adalah Cadangan dan Pemulihan, dan pemulihan mengganti data perangkat tujuan sepenuhnya, bukan menyatukannya. Jadi dua perangkat yang dipakai sendiri-sendiri akan menyimpang selamanya kecuali ada yang menggabungkannya — dan itulah seluruh maksud rutinitas di bawah ini."),
+   ("Menyimpan satu berkas utama", "Rutinitas ini paling lancar kalau Anda memperlakukan satu berkas gabungan sebagai berkas utama yang berlaku. Setiap siklus, cadangkan semua perangkat, gabungkan cadangan itu, lalu pulihkan hasilnya di mana-mana. Berkas gabungan itu kemudian menjadi berkas utama untuk siklus berikutnya. Menyimpan berkas-berkas utama bertanggal di penyimpanan awan memberi Anda sekaligus mekanisme sinkronisasi dan arsip berjalan — kalau Anda tidak sengaja menghapus sesuatu, berkas utama yang lebih lama masih memuatnya."),
+   ("Bagaimana kalau sebuah perangkat terlewat cukup lama", "Tidak ada yang hilang. Perangkat yang terlewat beberapa siklus sekadar membawa data yang lebih lama; begitu akhirnya Anda sertakan, catatannya menyatu bersama yang lain dan item yang sama dikenali lewat GUID, bukan digandakan. Satu-satunya keadaan yang butuh keputusan adalah catatan yang sama diubah di dua perangkat sejak terakhir digabungkan, dan itu dimunculkan di Peninjau Konflik dengan kedua versinya ditampilkan berdampingan."),
+   ("Seberapa sering itu cukup sering", "Ukurlah dari seberapa banyak pekerjaan yang tidak rela Anda ulangi. Mingguan cocok bagi yang belajar di dua perangkat hampir setiap hari; bulanan sudah cukup kalau satu perangkat jarang dipakai. Yang penting adalah melakukannya sebelum hal yang tidak bisa dibatalkan — ganti ponsel, setel ulang, perbaikan — karena saat itulah penyimpangan berubah menjadi kehilangan."),
+   ("Ponsel, tablet, dan aplikasi Windows sekaligus", "Rutinitas ini tidak peduli berapa banyak perangkat yang terlibat atau apa sistemnya. Cadangkan masing-masing, gabungkan semuanya dalam satu kali jalan, lalu pulihkan berkas gabungannya di mana-mana. Komputer Windows yang dipakai untuk persiapan dan ponsel yang dipakai di perhimpunan menyatu persis seperti dua ponsel, karena setiap platform menulis format cadangan yang sama."),
+   ("Mengurangi konflik sebelum terjadi", "Konflik hanya muncul kalau catatan yang sama diubah di dua perangkat di antara dua penggabungan. Dalam praktiknya itu jarang, dan makin jarang lagi kalau Anda menulis di satu perangkat saja pada satu waktu — membaca di mana pun, tapi mengetik di tempat Anda biasa mengetik. Menggabungkan lebih sering juga mempersempit jendela terjadinya penyimpangan, dan itu solusi yang lebih baik daripada mencoba mengingat perangkat mana yang memuat versi terbaru."),
+   ("Di mana rutinitas ini benar-benar berbuah", "Nilai dari menjaga perangkat tetap tergabung bukanlah kerapiannya — melainkan bahwa setiap perangkat menjadi cadangan lengkap dari perpustakaan pelajaran Anda. Kehilangan atau merusak salah satunya tidak masalah karena yang lain masih membawa semuanya, sehingga kemungkinan terburuk berubah dari kehilangan catatan bertahun-tahun menjadi sekadar merepotkan. Itu posisi yang jauh lebih kuat daripada yang bisa diberikan kebiasaan mencadangkan satu perangkat saja."),
+  ],
+  "faq": [
+   ("Apakah JW Sync berjalan di latar belakang?", "Tidak — ini halaman web, bukan layanan yang terpasang. Tidak ada yang memindai perangkat Anda. Anda menjalankan rutinitas ini saat Anda mau; pengingatnya bersifat opsional dan hanya berupa notifikasi."),
+   ("Bisakah saya menyinkronkan tiga perangkat atau lebih?", "Bisa. Cadangkan masing-masing, muat semua berkasnya, gabungkan sekali, lalu pulihkan berkas gabungannya di mana-mana."),
+   ("Bagaimana kalau saya mengubah catatan yang sama di dua perangkat?", "Kedua versinya disimpan sampai Anda memilih. Peninjau Konflik menampilkannya berdampingan dengan perbedaan kata demi kata, atau Anda bisa membiarkannya menyarankan versi yang lebih lengkap."),
+   ("Apakah urutan pemulihannya berpengaruh?", "Tidak. Begitu berkas gabungannya jadi, memulihkannya di setiap perangkat membuat semua perangkat berada dalam keadaan lengkap yang sama, dalam urutan apa pun yang Anda suka."),
+   ("Bisakah tiga perangkat atau lebih disinkronkan?", "Bisa. Cadangkan masing-masing dan muat semuanya ke dalam penggabungan yang sama — tidak ada batasan yang terkait jumlah perangkat."),
+   ("Bisakah ini dibuat berjalan otomatis?", "Tidak sepenuhnya, karena JW Library tidak punya API sinkronisasi dan langkah pemulihan terjadi di dalam aplikasi. Rutinitas manualnya hanya perlu sekitar dua menit begitu Anda terbiasa."),
+   ("Perlukah saya menggabungkan kalau saya hanya membaca di perangkat kedua?", "Kalau Anda tidak pernah menulis apa pun di sana, Anda hanya perlu memulihkan ke perangkat itu sesekali agar ia memuat catatan Anda yang terkini."),
+  ],
+ },
+
+ "transfer-jw-library-notes-new-phone": {
+  "title": "Cara Memindahkan Catatan JW Library ke Ponsel Baru",
+  "h1": "Cara memindahkan catatan JW Library ke ponsel baru",
+  "description": "Langkah demi langkah: pindahkan semua catatan, sorotan, penanda, dan label JW Library Anda ke ponsel baru dengan cadangan .jwlibrary — dan cara menggabungkan kalau Anda sudah membuat catatan di ponsel baru.",
+  "intro": [
+   "Membeli ponsel baru adalah momen paling umum orang kehilangan catatan JW Library bertahun-tahun — bukan karena pemindahannya sulit, tapi karena harus dilakukan dengan sengaja sebelum perangkat lama dihapus. Data pelajaran pribadi tidak ikut terbawa dalam pemindahan ponsel-ke-ponsel biasa, dan JW Library tidak menyimpan salinannya di akun mana pun.",
+   "Alat pemindah ponsel memindahkan aplikasi dan foto Anda, tapi tidak andal dalam memindahkan data pelajaran pribadi JW Library. Cara yang bisa diandalkan untuk membawa catatan, sorotan, penanda, dan label Anda ke ponsel baru adalah berkas cadangan JW Library sendiri — hanya perlu beberapa menit dan bekerja lintas platform.",
+  ],
+  "steps": [
+   ("Buat cadangan di ponsel lama", "Buka JW Library → Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Ini menyimpan berkas .jwlibrary yang memuat semua data pelajaran Anda."),
+   ("Pindahkan berkasnya ke ponsel baru", "Kirim lewat surel ke diri sendiri, atau pakai Google Drive, iCloud, AirDrop, atau kabel USB. Berkasnya kecil — biasanya beberapa megabita."),
+   ("Pulihkan di ponsel baru", "Pasang JW Library, lalu Pelajaran Pribadi → Cadangan dan Pemulihan → Pulihkan, dan pilih berkas .jwlibrary-nya. Semua catatan, sorotan, penanda, dan label akan muncul."),
+  ],
+  "sections": [
+   ("Sudah membuat catatan di ponsel baru? Gabungkan, jangan ditimpa", "Memulihkan akan mengganti apa pun yang ada di perangkat. Kalau Anda sudah memakai ponsel baru beberapa waktu dan ada catatannya sendiri, jangan memulihkan di atasnya — cadangkan juga ponsel barunya, lalu gabungkan cadangan lama dan baru menjadi satu berkas di jwsync.org (gratis, di peramban Anda, tanpa ada yang diunggah) dan pulihkan berkas gabungannya. Kedua kumpulan catatan Anda tetap aman."),
+   ("Satu jebakan umum di iPhone", "Kalau berkas cadangan sampai di iPhone dengan nama berubah menjadi .zip, ganti namanya kembali menjadi .jwlibrary sebelum dipulihkan — isinya baik-baik saja; hanya ekstensinya yang berubah di perjalanan."),
+   ("Lakukan ini sebelum ponsel lama dihapus atau ditukar tambah", "Cadangan harus dibuat selagi ponsel lama masih berfungsi dan JW Library masih terpasang. Begitu perangkat disetel ulang, ditukar tambah, atau diberikan kepada orang lain, catatannya ikut hilang — JW Library tidak menyimpan salinan awan untuk data pelajaran pribadi, dan cadangan tingkat ponsel seperti Google One atau cadangan perangkat iCloud biasanya memulihkan data aplikasi dari titik waktu yang lebih lama, atau tidak sama sekali. Buat berkas .jwlibrary-nya dulu, simpan di tempat aman, dan pastikan Anda bisa melihatnya sebelum menghapus apa pun."),
+   ("Mengeluarkan berkasnya dari ponsel lama", "Di Android berkasnya ditulis ke folder yang Anda pilih — biasanya Downloads atau Documents — dan Anda bisa memindahkannya dengan pengelola berkas apa pun, mengirimnya ke surel Anda sendiri, atau menaruhnya di penyimpanan awan. Di iPhone lembar berbagi muncul begitu cadangannya dibuat: simpan ke Files, AirDrop ke ponsel baru, atau kirim ke diri Anda sendiri. Cara pemindahannya tidak berpengaruh dan tidak bisa merusak berkasnya; .jwlibrary adalah satu arsip yang entah sampai utuh atau tidak sampai sama sekali."),
+   ("Kenapa aplikasi pemindah ponsel-ke-ponsel tidak cukup", "Alat seperti Smart Switch, Move to iOS, atau pemulihan iCloud menyalin aplikasi dan data sistem, tapi basis data milik aplikasi sering dilewati, dipulihkan sebagian, atau dipulihkan dari titik waktu yang lebih lama. Orang rutin menemukan celah ini berminggu-minggu kemudian, saat ponsel lamanya sudah tidak ada. Perlakukan berkas .jwlibrary sebagai salinan yang sah dan pemindahan ponsel sekadar kemudahan — kalau pemindahan itu kebetulan membawa catatan Anda, memulihkan cadangan Anda sendiri di atasnya sama sekali tidak merugikan."),
+   ("Pastikan pemindahannya benar-benar berhasil", "Setelah memulihkan di ponsel baru, buka dua tiga publikasi yang belakangan ini Anda beri catatan dan pastikan catatan, warna sorotan, dan penandanya semua ada. Cara yang lebih cepat adalah membuka berkas cadangannya sendiri di peramban Anda sebelum menghapus perangkat lama — Anda bisa melihat setiap catatan, sorotan, dan penanda yang dimuatnya, jadi Anda tahu apa yang seharusnya muncul. Hapus ponsel lama hanya setelah ponsel baru terbukti benar."),
+   ("Menyiapkan tablet atau komputer sekaligus", "Berkas yang sama berlaku di mana-mana. Kalau Anda menyiapkan ponsel dan tablet baru bersamaan, pulihkan berkas .jwlibrary yang sama di keduanya dan keduanya akan berangkat dari keadaan yang sama. Sejak titik itu keduanya akan menyimpang lagi seiring Anda belajar di masing-masing, jadi ada baiknya memutuskan sekarang apakah Anda akan rutin menggabungkannya atau memperlakukan salah satunya sebagai yang utama."),
+   ("Kalau ponsel baru sudah ada catatannya", "Ini terjadi kalau Anda memakai perangkat baru selama seminggu sebelum sempat memindahkan datanya. Pemulihan langsung akan mengganti hasil kerja itu dengan data ponsel lama. Cadangkan ponsel barunya dulu, gabungkan berkas itu dengan cadangan ponsel lama, lalu pulihkan hasil gabungannya — kedua kumpulan catatan berakhir dalam satu perpustakaan, bukan yang satu menimpa yang lain."),
+   ("Setelah ponsel baru berjalan", "Pastikan dulu sebelum membuang apa pun. Buka beberapa publikasi yang belakangan Anda beri catatan di ponsel baru dan pastikan catatan, warna, dan penandanya semua ada, baru kemudian hapus atau tukar tambah perangkat lamanya — dengan urutan itu, jangan pernah terbalik. Begitu semuanya mapan, taruh sebuah cadangan di luar ponsel, karena keadaan yang membawa Anda ke halaman ini akan datang lagi pada pergantian ponsel berikutnya."),
+  ],
+  "faq": [
+   ("Apakah ini juga memindahkan publikasi yang sudah saya unduh?", "Cadangan membawa data pelajaran pribadi Anda — catatan, sorotan, penanda, label, dan daftar putar. Publikasi cukup diunduh ulang di ponsel baru."),
+   ("Apakah berpengaruh kalau kedua ponsel memakai versi Android yang berbeda?", "Tidak. Format .jwlibrary sama di mana-mana, termasuk antarversi Android dan antara Android dan iPhone."),
+   ("Bisakah saya memindahkan catatan kalau ponsel lama sudah tidak ada?", "Hanya kalau ada berkas cadangan .jwlibrary di suatu tempat — di Files, Downloads, surel ke diri sendiri, atau penyimpanan awan. Tanpa itu tidak ada yang bisa dipulihkan, karena data pelajaran pribadi hanya tersimpan di perangkat."),
+   ("Apakah kedua ponsel harus memakai versi JW Library yang sama?", "Tidak harus sama persis, tapi perbarui ponsel baru ke versi terkini sebelum memulihkan. Cadangan yang dibuat versi lebih baru bisa memakai skema basis data yang tidak dipahami aplikasi versi lama."),
+   ("Apakah saya harus mengunduh ulang publikasi saya?", "Biasanya ya — media publikasi bukan bagian dari cadangan. Catatan Anda menempel kembali ke setiap publikasi begitu publikasi itu diunduh, jadi tidak ada tulisan Anda yang hilang untuk sementara."),
+   ("Berapa lama keseluruhannya?", "Beberapa menit. Membuat cadangan hanya hitungan detik, memindahkan berkasnya tergantung cara Anda, dan pemulihannya cepat. Yang paling lama adalah mengunduh ulang publikasi, dan itu bisa berjalan di latar belakang."),
+   ("Bisakah ini dilakukan tanpa Wi-Fi?", "Pemindahannya bisa, lewat AirDrop atau kabel. Mengunduh ulang publikasi di perangkat baru memerlukan koneksi."),
+  ],
+ },
+
+ "jw-library-android-to-iphone": {
+  "title": "Pindahkan JW Library dari Android ke iPhone (Semua Catatan Aman)",
+  "h1": "Memindahkan JW Library dari Android ke iPhone atau iPad — tanpa kehilangan satu catatan pun",
+  "description": "Format cadangan .jwlibrary sama persis di Android dan iOS. Cara memindahkan catatan, sorotan, dan penanda Anda antarplatform — dan cara menggabungkan kalau kedua perangkat sudah punya catatan.",
+  "intro": [
+   "Beralih antara Android dan iPhone terdengar seperti kasus yang sulit, padahal justru yang paling mudah. JW Library menulis format cadangan yang sama di setiap platform tempatnya berjalan, jadi memindahkan perpustakaan pelajaran dari Android ke iOS sama saja dengan memindahkannya antara dua ponsel Android — tanpa konversi, tanpa perlu memilih format ekspor, tanpa ada yang hilang di tengah jalan.",
+   "Berganti platform adalah saat orang paling takut kehilangan catatan pelajaran bertahun-tahun — aplikasi pemindah Android-ke-iPhone melewatkan data JW Library sepenuhnya. Kabar baiknya: format cadangan JW Library sama persis di Android, iPhone, iPad, dan Windows, jadi perpindahan lintas platform hanyalah mencadangkan, memindahkan berkas, dan memulihkan.",
+  ],
+  "steps": [
+   ("Cadangkan di ponsel Android", "JW Library → Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Simpan berkas .jwlibrary-nya."),
+   ("Kirim berkasnya ke iPhone atau iPad", "Surel, Google Drive, iCloud Drive — apa pun yang bisa memindahkan berkas. Kalau iOS mengganti namanya menjadi .zip di perjalanan, ganti kembali menjadi .jwlibrary."),
+   ("Pulihkan di perangkat baru", "Pasang JW Library, masuk, lalu Cadangan dan Pemulihan → Pulihkan dan pilih berkasnya. Catatan, sorotan, penanda, label, dan daftar putar semuanya ikut."),
+  ],
+  "sections": [
+   ("Kalau iPhone sudah ada catatannya", "Pemulihan mengganti data perangkat. Kalau perangkat baru sudah membawa catatannya sendiri, cadangkan juga perangkat itu lalu gabungkan kedua cadangan menjadi satu berkas dulu di jwsync.org — penggabungan menyatukan kedua perpustakaan di peramban Anda tanpa mengunggah apa pun — baru pulihkan berkas gabungannya. Tidak ada yang hilang dari kedua sisi."),
+   ("Langkah yang sama berlaku ke segala arah", "iPhone ke Android, Android ke Android, menambahkan iPad sebagai perangkat pelajaran kedua, atau pindah ke aplikasi Windows — berkas cadangan adalah bahasa bersama di antara semuanya."),
+   ("Kenapa formatnya sama persis di kedua platform", "JW Library memakai format cadangan yang sama di mana pun ia berjalan — Android, iOS, iPadOS, dan Windows. Berkas .jwlibrary adalah ZIP berisi basis data SQLite dengan tabel dan skema yang sama, perangkat mana pun yang menulisnya. Tidak ada langkah konversi, tidak ada tarian ekspor-lalu-impor, dan tidak ada apa pun di dalam berkas itu yang khas satu platform. Cadangan Android dipulihkan di iPhone persis seperti cadangan iPhone."),
+   ("Satu-satunya bagian yang memang berbeda", "Bukan berkasnya — hanya cara mendapatkannya. Di Android cadangan disimpan ke folder pilihan Anda dan bisa dipindahkan dengan pengelola berkas apa pun. Di iPhone ia lewat lembar berbagi menuju Files, AirDrop, atau apa pun yang Anda pilih. Hambatan yang dialami orang saat berpindah platform selalu ada di langkah penanganan ini, tidak pernah soal kecocokan. Surel, penyimpanan awan, atau AirDrop semuanya bisa; arsipnya sampai utuh atau tidak sampai sama sekali."),
+   ("Warna sorotan, label, dan jawaban pelajaran", "Semuanya selamat. Warna sorotan disimpan sebagai indeks angka — kuning, hijau, biru, merah muda, oranye, dan ungu — dan tampil sama di setiap platform. Label dan kaitan antara label dan catatan ikut berpindah, begitu pula jawaban yang diketik di kolom pertanyaan pelajaran. Apa yang Anda lihat di iPhone setelah pemulihan adalah apa yang tadinya ada di perangkat Android."),
+   ("Kalau iOS tidak mau membiarkan Anda memilih berkasnya", "Simpan berkasnya ke aplikasi Files dulu, lalu pilih dari sana, bukan dari lampiran surel atau pratinjau aplikasi obrolan. Sebagian aplikasi memberi iOS salinan pratinjau sementara alih-alih berkas aslinya, dan JW Library tidak bisa membukanya. Kalau berkasnya datang sebagai lampiran, ketuk, pilih Save to Files, lalu pulihkan dari Files."),
+   ("Siapkan iPhone-nya sebelum memulihkan", "Pasang JW Library dari App Store dan perbarui ke versi terkini sebelum memulihkan apa pun. Cadangan yang ditulis versi aplikasi yang lebih baru bisa memakai skema basis data yang tidak dipahami versi lama, dan pemulihannya akan langsung ditolak. Tidak perlu masuk ke akun apa pun — data pelajaran pribadi ada di berkas yang Anda pulihkan, bukan di sebuah akun."),
+   ("Kalau Anda sudah mulai belajar di iPhone", "Cadangkan iPhone-nya dulu. Memulihkan berkas Android langsung di atasnya akan mengganti apa pun yang Anda tulis sejak berpindah. Menggabungkan kedua cadangan menghasilkan satu berkas yang memuat keduanya, dan itulah yang Anda pulihkan — riwayat dari Android dan catatan baru di iPhone berakhir dalam perpustakaan yang sama."),
+   ("Tetap memakai kedua ponsel sesudahnya", "Sebagian orang menyimpan perangkat Android lama sebagai pembaca kedua alih-alih memensiunkannya. Itu bisa saja, tapi keduanya akan menyimpang begitu Anda menulis di keduanya, karena tidak ada sinkronisasi di antaranya. Kalau memang berniat memakai keduanya, rencanakan untuk menggabungkan cadangannya secara berkala, jangan berasumsi keduanya akan tetap selaras."),
+   ("Setelah perpindahan", "Beri iPhone waktu untuk mengunduh ulang publikasi yang paling sering Anda pakai, lalu periksa beberapa publikasi yang berisi catatan untuk memastikan semuanya sampai — catatan, warna sorotan, penanda, dan label. Simpan berkas cadangan Android bahkan setelah perpindahan selesai: itu adalah potret bertanggal dari perpustakaan Anda, dan menyimpannya tidak memakan biaya apa pun."),
+  ],
+  "faq": [
+   ("Apakah saya perlu komputer untuk ini?", "Tidak. Seluruh perpindahan bisa dilakukan ponsel-ke-ponsel lewat surel atau penyimpanan awan."),
+   ("Apakah warna sorotan saya akan selamat?", "Ya — sorotan mempertahankan warnanya, catatan mempertahankan labelnya, dan penanda mempertahankan tempatnya."),
+   ("Apakah ini butuh komputer?", "Tidak. AirDrop, surel, atau aplikasi penyimpanan awan mana pun memindahkan berkasnya langsung antara kedua ponsel."),
+   ("Apakah bisa sebaliknya — iPhone ke Android?", "Bisa, persis sama. Langkah yang sama berlaku ke segala arah, termasuk dari dan ke aplikasi Windows."),
+   ("Apakah iPhone perlu mengunduh publikasi yang sama?", "Ya, karena media publikasi bukan bagian dari cadangan. Catatan menempel kembali ke setiap publikasi begitu publikasi itu diunduh."),
+   ("Apakah saya perlu menyimpan ponsel Android-nya sesudah itu?", "Tidak, setelah Anda memastikan catatannya ada di iPhone. Periksa beberapa publikasi yang berisi catatan sebelum menghapus atau menukar tambah perangkat lama."),
+   ("Apakah pemindahan ini juga membawa jawaban pertanyaan pelajaran?", "Ya. Jawaban yang diketik adalah bagian dari data pelajaran pribadi dan ikut berpindah bersama semuanya."),
+   ("Adakah risiko kehilangan catatan dalam perpindahan ini?", "Tidak, asalkan Anda menyimpan cadangan Android-nya. Pemulihan menulis ke iPhone dan tidak pernah mengubah berkas yang dibacanya, jadi berkas aslinya tetap utuh sebagai cadangan pengaman. Simpanlah sampai Anda memastikan iPhone punya semuanya, dan idealnya sesudah itu juga — itu potret bertanggal dari perpustakaan Anda."),
+   ("Bagaimana kalau ponsel Android-nya tidak mau membuat cadangan?", "Periksa dulu ruang penyimpanannya, karena aplikasi butuh tempat untuk menulis berkasnya. Kalau aplikasinya sendiri yang bermasalah, memperbaruinya atau memulai ulang perangkat biasanya menyelesaikannya. Data Anda tetap utuh selama Anda menelusuri masalahnya."),
+  ],
+ },
+
+ "backup-jw-library": {
+  "title": "Cara Mencadangkan JW Library dengan Benar",
+  "h1": "Cara mencadangkan JW Library dengan benar",
+  "description": "Rutinitas cadangan 30 detik yang melindungi catatan pelajaran, sorotan, dan penanda JW Library bertahun-tahun — dan kesalahan umum yang sering menjebak orang.",
+  "intro": [
+   "Semua yang Anda tandai di JW Library — setiap catatan, setiap sorotan, setiap penanda dan label — hanya ada di satu tempat: perangkat di tangan Anda. Tidak ada akun yang menyimpan salinannya dan tidak ada sinkronisasi awan otomatis. Cadangan adalah satu-satunya hal yang berdiri di antara perpustakaan pelajaran yang dibangun bertahun-tahun dan ponsel yang hilang, disetel ulang, atau diganti.",
+   "Cadangan JW Library yang benar hanya perlu setengah menit dan melindungi pelajaran yang menumpuk bertahun-tahun. Kebanyakan kisah kehilangan data bermula dengan cara yang sama: tidak ada berkas .jwlibrary yang baru saat ponsel hilang, disetel ulang, atau diganti.",
+  ],
+  "steps": [
+   ("Buat cadangannya", "Buka JW Library → Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Hasilnya berkas .jwlibrary berisi setiap catatan, sorotan, penanda, dan label."),
+   ("Simpan di luar ponsel", "Kirim ke surel Anda sendiri, atau simpan ke Google Drive, iCloud, atau OneDrive. Cadangan yang hanya ada di ponsel akan lenyap bersama ponselnya."),
+   ("Ulangi secara berkala", "Bulanan sudah menjadi patokan yang baik; sebelum ganti ponsel, setel ulang, atau pembaruan sistem, itu wajib. Simpan juga salinan yang lama — berkasnya kecil, dan cadangan lama sudah menyelamatkan banyak orang."),
+  ],
+  "sections": [
+   ("Kesalahan umum: memercayai cadangan awan ponsel itu sendiri", "Cadangan seluruh ponsel (Google One, cadangan perangkat iCloud) sering memulihkan salinan lama data JW Library — atau tidak sama sekali. Berkas .jwlibrary adalah satu-satunya cadangan yang sepenuhnya Anda kendalikan dan bisa Anda bawa antarplatform. Perlakukan cadangan ponsel sebagai bonus, bukan sebagai rencana."),
+   ("Berakhir dengan dua cadangan berbeda?", "Itu wajar: satu cadangan dari ponsel, satu yang lebih lama dari tablet, masing-masing punya catatan yang khas. Anda tidak pernah harus memilih di antara keduanya — gabungkan menjadi satu berkas lengkap di jwsync.org, gratis dan pribadi, langsung di peramban."),
+   ("Apa isi berkasnya, dan apa yang tidak", "Cadangan memuat data pelajaran pribadi Anda: catatan, sorotan beserta warnanya, penanda, label, dan jawaban yang Anda ketik di kolom pertanyaan pelajaran. Ia tidak memuat publikasinya sendiri — tidak ada Alkitab, majalah, buku, video, atau audio. Itulah sebabnya cadangan pelajaran bertahun-tahun biasanya hanya beberapa megabita, dan sebabnya memulihkan di perangkat baru membuat Anda perlu mengunduh ulang publikasi sementara setiap catatan yang Anda tulis sudah kembali di tempatnya."),
+   ("Berapa banyak cadangan yang perlu disimpan", "Simpan lebih dari satu. Kegagalan yang membuat orang kehilangan catatannya jarang berupa berkas yang hilang — melainkan cadangan bagus yang tertimpa cadangan buruk, atau pemulihan yang dilakukan di perangkat yang keliru. Karena berkasnya kecil, tidak ada alasan menghapus yang lama: simpan bertanggal dalam satu folder di penyimpanan awan. Cadangan dari enam bulan lalu tidak jadi tak berguna meski Anda sudah punya yang lebih baru, karena apa pun yang Anda hapus tanpa sengaja sejak itu masih ada di dalamnya."),
+   ("Di mana menyimpannya", "Di mana saja asal bukan hanya di perangkat itu sendiri. Sebuah folder di Drive, iCloud, Dropbox, atau OneDrive menutupi kasus yang paling penting — perangkat hilang, dicuri, disetel ulang, atau rusak. Mengirim berkasnya ke surel Anda sendiri juga bisa, dan punya efek samping yang berguna: tanggalnya tercatat. Berkas itu memuat catatan pelajaran Anda sendiri, jadi perlakukan dengan kehati-hatian yang sama seperti dokumen pribadi mana pun."),
+   ("Memastikan cadangan sebelum Anda mengandalkannya", "Cadangan yang belum pernah Anda buka adalah asumsi, bukan jaring pengaman. Anda bisa membuka berkas .jwlibrary di peramban Anda dan melihat persis catatan, sorotan, dan penanda apa saja yang dimuatnya — pemeriksaan tiga puluh detik yang mengubah asumsi menjadi fakta. Ini paling penting tepat sebelum sesuatu yang tidak bisa dibatalkan: setel ulang pabrik, tukar tambah, perbaikan, atau peningkatan sistem besar."),
+   ("Momen yang layak didahului cadangan", "Setiap titik saat perangkat berpindah tangan atau berganti keadaan: peningkatan sistem, setel ulang pabrik, perbaikan atau penggantian layar, tukar tambah, atau memberikan perangkat kepada orang lain. Tambahkan juga akhir dari apa pun yang tidak rela Anda ulangi — sebuah kebaktian, kebaktian wilayah, atau masa panjang persiapan khotbah. Cadangan itu murah dan cepat, jadi kebiasaan yang berguna adalah mengaitkannya dengan peristiwa, bukan dengan kalender."),
+   ("Cadangan ponsel bukanlah cadangan JW Library", "Google One, cadangan perangkat iCloud, atau alat pemindah dari pabrikan bekerja di tingkat perangkat dan memperlakukan data milik aplikasi secara tidak konsisten. Orang rutin mendapati bahwa pemulihan ponsel penuh mengembalikan aplikasi dan pengaturannya tapi bukan catatan pelajarannya, atau mengembalikan versi dari beberapa minggu sebelumnya. Berkas .jwlibrary adalah satu-satunya salinan yang isinya Anda kendalikan dan bisa Anda periksa, jadi perlakukan cadangan tingkat ponsel sebagai bonus, bukan sebagai rencana."),
+   ("Menjadikannya kebiasaan yang bertahan", "Rutinitas yang benar-benar bertahan adalah yang menempel pada sesuatu yang sudah Anda lakukan: cadangkan setelah selesai menyiapkan bahan minggu itu, atau pada hari yang sama saat Anda mengurus hal rutin lainnya. Simpan ke folder yang sama setiap kali agar berkasnya menumpuk di satu tempat, dan biarkan yang lama tetap di sana. Sebuah folder berisi cadangan bertanggal yang membentang bertahun-tahun ke belakang adalah bentuk paling kokoh dari kebiasaan ini, dan merawatnya hanya perlu hitungan detik seminggu."),
+  ],
+  "faq": [
+   ("Seberapa besar berkas cadangan itu?", "Biasanya beberapa megabita bahkan untuk perpustakaan yang sangat besar — cukup kecil untuk dilampirkan di surel."),
+   ("Apakah membuat cadangan mengubah sesuatu di ponsel saya?", "Tidak. Ia hanya menulis berkasnya; perpustakaan Anda tidak tersentuh."),
+   ("Apakah cadangan memuat publikasi yang sudah saya unduh?", "Tidak. Hanya data pelajaran pribadi. Publikasi diunduh ulang di perangkat baru, dan catatan Anda menempel kembali padanya secara otomatis."),
+   ("Bisakah saya membuka cadangan untuk memeriksa isinya?", "Bisa. Anda dapat membuka berkas .jwlibrary di peramban Anda dan menelusuri setiap catatan, sorotan, dan penanda yang dimuatnya, tanpa memasang apa pun dan tanpa berkasnya meninggalkan perangkat Anda."),
+   ("Apakah cadangan punya masa kedaluwarsa?", "Tidak. Berkas .jwlibrary tetap bisa dipulihkan tanpa batas waktu. Pulihkan ke versi JW Library yang terkini, bukan yang lama, karena aplikasi membaca format cadangan yang lebih lama tapi bukan yang lebih baru."),
+   ("Haruskah saya mencadangkan sebelum setiap perhimpunan?", "Tidak perlu. Kaitkan cadangan dengan peristiwa yang bisa merenggut data Anda — pembaruan, perbaikan, perangkat baru — ditambah irama rutin yang sepadan dengan seberapa banyak pelajaran yang tidak rela Anda ulangi."),
+   ("Apakah cadangan dari bertahun-tahun lalu layak disimpan?", "Ya. Ukurannya kecil, dan apa pun yang Anda hapus tanpa sengaja sejak itu masih ada di dalamnya."),
+  ],
+ },
+
+ "jw-library-restore-replaced-notes": {
+  "title": "Pemulihan JW Library Mengganti Catatan Anda? Cara Mendapatkannya Kembali",
+  "h1": "Pemulihan mengganti catatan Anda? Begini cara menyatukan kedua cadangan",
+  "description": "Pemulihan JW Library adalah penggantian total, bukan penggabungan — catatan yang dibuat setelah tanggal cadangan tampak hilang. Kalau kedua berkas cadangan masih ada, tidak ada yang benar-benar hilang. Inilah solusinya.",
+  "intro": [
+   "Momennya memang mengerikan: Anda memulihkan sebuah cadangan ke perangkat yang sudah ada catatannya, dan pemulihan itu mengganti semuanya — catatan yang Anda buat sejak cadangan itu tampak lenyap. Ini terjadi karena Cadangan dan Pemulihan JW Library adalah penggantian total, bukan penggabungan.",
+   "Fakta kuncinya: kalau hasil kerja yang lebih baru masih ada di suatu berkas cadangan, sebenarnya tidak ada yang hilang. Solusinya adalah menggabungkan kedua cadangan itu, bukan memilih salah satunya.",
+  ],
+  "steps": [
+   ("Berhenti — jangan memulihkan lagi", "Setiap pemulihan mengganti data perangkat yang sekarang. Berhentilah sejenak sebelum ada lagi yang lenyap."),
+   ("Cadangkan perangkatnya dalam keadaan saat ini", "Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan. Ini mengamankan keadaan sekarang, apa pun isinya."),
+   ("Temukan cadangan yang memuat catatan yang hilang", "Berkas .jwlibrary yang tadi Anda pulihkan, atau yang lebih lama — periksa surel, Drive, iCloud, dan folder unduhan Anda."),
+   ("Gabungkan kedua berkas di jwsync.org", "Muat kedua cadangannya. JW Sync menyatukan semua catatan, sorotan, penanda, dan label dari keduanya menjadi satu berkas baru — di peramban Anda, tanpa ada yang diunggah. Versi yang saling bertentangan dari catatan yang sama ditampilkan berdampingan untuk Anda pilih."),
+   ("Pulihkan berkas gabungannya", "Cadangan dan Pemulihan → Pulihkan dengan .jwlibrary gabungan itu. Kedua kumpulan catatan kembali ada di perangkat."),
+  ],
+  "sections": [
+   ("Bagaimana kalau tidak ada cadangan untuk catatan yang lebih baru?", "Kalau satu-satunya salinan catatan yang lebih baru itu ada di perangkat dan sebuah pemulihan sudah menimpanya, JW Library sendiri tidak menyediakan pembatalan. Inilah sebabnya langkah 2 di atas — mencadangkan keadaan sekarang sebelum melakukan apa pun — begitu penting setiap kali data terlihat janggal. Ke depannya, rutinitas gabungkan-dulu membuat masalah ini mustahil terjadi."),
+  ],
+  "faq": [
+   ("Apakah penggabungan akan menggandakan catatan yang ada di kedua cadangan?", "Tidak — item yang identik dikenali dan disimpan sekali saja. Hanya versi yang benar-benar berbeda dari catatan yang sama yang ditandai untuk ditinjau."),
+   ("Bisakah ini memperbaiki cadangan yang sama sekali tidak mau dipulihkan?", "Itu biasanya kerusakan berkas, bukan penimpaan — lihat panduan memperbaiki cadangan yang rusak di bawah."),
+  ],
+ },
+
+ "fix-corrupted-jw-library-backup": {
+  "title": "Perbaiki Cadangan JW Library Rusak yang Tidak Mau Dipulihkan",
+  "h1": "Memperbaiki cadangan JW Library yang rusak dengan Library Doctor",
+  "description": "JW Library menolak memulihkan berkas .jwlibrary Anda? Library Doctor memindai cadangannya di peramban Anda, memperbaiki masalah yang umum, dan menghasilkan salinan bersih yang bisa dipulihkan.",
+  "intro": [
+   "Cadangan yang tidak mau dipulihkan belum tentu cadangan yang catatannya sudah hilang. Kebanyakan berkas yang orang sebut rusak sebenarnya utuh secara struktur dan ditolak karena alasan yang bisa diperbaiki, atau rusak saat pemindahan dengan cara yang bisa diselesaikan oleh salinan baru. Ada baiknya menelusuri penyebabnya sebelum menganggap berkas itu tamat.",
+   "Kadang JW Library menolak sebuah berkas cadangan — pemulihannya gagal, muncul kesalahan, atau berkasnya tidak mau terbuka. Penyebab umumnya: unduhan yang terputus, penyimpanan awan yang merusak berkasnya, ekstensi yang berubah di perjalanan, atau ketidakkonsistenan internal yang menumpuk selama bertahun-tahun pemakaian.",
+   "JW Sync menyertakan Library Doctor, pemeriksa yang memindai berkas .jwlibrary dan memperbaiki masalah yang umum — sepenuhnya di peramban Anda, tanpa berkasnya pernah meninggalkan perangkat Anda.",
+  ],
+  "steps": [
+   ("Buka JW Sync dan muat berkas bermasalahnya", "Kunjungi jwsync.org lalu muat berkas .jwlibrary yang tidak mau dipulihkan. (Kalau berkasnya datang dengan nama berubah menjadi .zip, ganti dulu namanya kembali menjadi .jwlibrary — itu saja sudah menyelesaikan banyak kasus.)"),
+   ("Jalankan pemindaian Library Doctor", "Doctor memeriksa struktur internal cadangan itu dan mencantumkan apa saja yang ditemukannya — dari keanehan yang tak berbahaya sampai kerusakan sungguhan — dengan bahasa yang jelas."),
+   ("Terapkan perbaikannya", "Satu ketukan memperbaiki apa yang bisa diperbaiki. Doctor tidak pernah mengubah berkas asli Anda; ia menghasilkan salinan yang sudah dibersihkan, jadi berkas aslinya tetap utuh sebagai cadangan pengaman."),
+   ("Unduh lalu pulihkan berkas yang sudah diperbaiki", "Pulihkan .jwlibrary yang sudah bersih itu lewat Cadangan dan Pemulihan → Pulihkan di JW Library."),
+  ],
+  "sections": [
+   ("Doctor juga berjalan pada setiap penggabungan", "Pemeriksaan yang sama berjalan otomatis di dalam mesin penggabung, jadi cadangan gabungan selalu keluar dalam keadaan bersih — bahkan ketika salah satu berkas masukannya punya masalah yang tidak pernah Anda ketahui."),
+   ("Kalau sebuah berkas sudah tak bisa diperbaiki", "Kalau berkasnya terpotong sedemikian parah sampai datanya memang tidak ada di dalamnya, tidak ada alat yang bisa mengarangnya kembali. Doctor akan mengatakannya terus terang alih-alih menghasilkan berkas yang meragukan — dan itulah isyarat untuk mencari salinan yang lebih lama di surel, Drive, atau iCloud, yang sekaligus menjelaskan mengapa menyimpan cadangan lama itu berharga."),
+   ("Apa arti “rusak” yang sebenarnya", "Dalam praktiknya, jarang sekali datanya yang rusak. Penyebab umumnya adalah berkas yang terpotong saat pemindahan — terputus oleh unggahan yang gagal atau aplikasi obrolan yang memampatkannya — atau arsip yang utuh tapi memuat ketidakkonsistenan internal yang ditolak aplikasi. Karena berkas .jwlibrary adalah ZIP yang membungkus basis data SQLite, masalahnya bisa ada di lapisan mana pun, dan keduanya butuh penanganan berbeda. Berkas yang terpotong tidak bisa diperbaiki dan harus diambil ulang; basis data yang tidak konsisten biasanya bisa."),
+   ("Apa yang sebenarnya diperiksa oleh pemindaian", "Pemindaian memastikan bahwa arsipnya bisa dibuka, bahwa userData.db adalah basis data SQLite yang bisa dibaca dan lolos pemeriksaan keutuhan, bahwa skemanya sesuai dengan yang diharapkan JW Library, dan bahwa manifesnya cocok dengan basis data yang dijelaskannya — termasuk hash yang dipakai aplikasi untuk memastikan berkasnya tidak diubah. Ketidakcocokan antara manifes dan basis data adalah salah satu alasan paling umum sebuah cadangan yang secara teknis baik-baik saja ditolak saat pemulihan, dan itu bisa diperbaiki dengan mudah."),
+   ("Baris yatim biasanya tidak berbahaya", "Pemindaian atas cadangan sungguhan sering melaporkan baris yang merujuk ke sesuatu yang sudah tidak ada — misalnya sorotan yang menunjuk ke lokasi publikasi yang sudah bergeser. Cadangan buatan JW Library sendiri rutin memuat ratusan baris seperti itu dan tetap dipulihkan tanpa keluhan. Itu akibat wajar dari publikasi yang diperbarui dari waktu ke waktu, bukan bukti kerusakan, dan membersihkannya tidak diperlukan agar berkasnya berfungsi."),
+   ("Menyelamatkan catatan dari berkas yang tidak mau dipulihkan", "Bahkan ketika sebuah cadangan tidak bisa diperbaiki sampai JW Library mau menerimanya, catatan di dalamnya sering masih bisa dibaca. Membuka berkasnya di peramban Anda memungkinkan Anda melihat dan menyalin teks catatannya langsung, sehingga berkas yang tak terpakai berubah menjadi bahan pelajaran yang terselamatkan. Kalau Anda punya cadangan kedua yang lebih lama dan bisa dipulihkan, isi yang masih terbaca dari berkas yang rusak bisa disatukan dengannya alih-alih diketik ulang."),
+   ("Kalau pemulihan gagal tanpa pesan kesalahan yang jelas", "JW Library sering menolak sebuah berkas tanpa menjelaskan alasannya. Penyebab yang paling sering adalah manifes yang hash-nya tidak lagi cocok dengan basis data yang dijelaskannya, berkas yang terpotong saat pemindahan, atau cadangan yang ditulis versi aplikasi yang lebih baru daripada versi tempat Anda memulihkannya. Yang pertama bisa diperbaiki, yang kedua menuntut berkasnya diambil ulang dari sumber aslinya, dan yang ketiga selesai dengan memperbarui aplikasinya sebelum memulihkan."),
+   ("Menghindarinya lain kali", "Sebagian besar kerusakan terjadi di perjalanan. Pindahkan cadangan sebagai berkas, bukan lewat apa pun yang mungkin memampatkannya ulang, dan pilih penyimpanan awan, AirDrop, atau kabel daripada aplikasi obrolan. Setelah memindahkan, pastikan ukuran berkasnya sama dengan aslinya — berkas yang jelas lebih kecil daripada yang Anda kirim berarti terpotong, dan tidak ada perbaikan yang bisa mengembalikan bita yang memang tidak pernah sampai."),
+   ("Kalau tidak ada yang berhasil", "Berkas yang tidak bisa diperbaiki pun masih bisa dibaca, dan sering kali itu sudah cukup — teks catatannya bisa diambil langsung bahkan ketika JW Library menolak berkasnya. Satukan itu dengan cadangan lama mana pun yang bisa dipulihkan, dan biasanya sebagian besar perpustakaan Anda tetap utuh. Sebelum menyimpulkan sebuah berkas tak terpakai lagi, bukalah dan lihat apa yang sebenarnya ada di dalamnya."),
+  ],
+  "faq": [
+   ("Apakah data saya diunggah untuk pemindaian ini?", "Tidak. Pemindaian, perbaikan, dan ekspornya semua berjalan di peramban Anda."),
+   ("Bisakah ini mengembalikan catatan yang dihapus di dalam JW Library?", "Tidak — ia memperbaiki struktur berkas. Catatan yang dihapus di aplikasi sebelum cadangan dibuat memang tidak ada di berkas itu untuk dikembalikan."),
+   ("Apakah memperbaiki berkasnya akan menghilangkan catatan?", "Perbaikan bekerja pada salinan dan menangani masalah struktur, bukan isi. Berkas asli Anda tidak pernah diubah, jadi tetap tersedia kalau Anda ingin mengulang dari awal."),
+   ("Kenapa cadangan saya bisa rusak?", "Paling sering berkasnya berubah di perjalanan — dikirim lewat aplikasi yang memampatkan atau memotongnya, atau unggahan yang tidak selesai. Memindahkan berkasnya lagi dari sumber aslinya biasanya menyelesaikannya."),
+   ("Bisakah pemindaian mengembalikan catatan yang saya hapus di dalam JW Library?", "Tidak. Begitu dihapus di aplikasi lalu cadangan baru dibuat, catatan itu sudah tidak ada di berkas tersebut. Cadangan lama yang dibuat sebelum penghapusan masih memuatnya."),
+   ("Bisakah saya tahu dari ukuran berkasnya apakah ia terpotong?", "Sering kali bisa. Bandingkan dengan aslinya kalau Anda masih menyimpannya; selisih yang besar berarti pemindahannya tidak selesai."),
+   ("Apakah cadangan yang bisa dibuka di peramban pasti bisa dipulihkan?", "Tidak dijamin, tapi itu pertanda kuat bahwa arsip dan basis datanya sehat, yang menyingkirkan kegagalan-kegagalan yang paling umum."),
+  ],
+ },
+
+ "edit-jw-library-notes": {
+  "title": "Lihat dan Ubah Catatan JW Library di Peramban Anda",
+  "h1": "Lihat, cari, dan ubah catatan JW Library Anda — Penjelajah Pelajaran",
+  "description": "Buka cadangan .jwlibrary mana pun di peramban Anda untuk menelusuri, mencari, mengubah, melabeli ulang, mengganti warna, dan membersihkan catatan, sorotan, serta penanda JW Library Anda sekaligus. Tanpa ada yang diunggah.",
+  "intro": [
+   "JW Library dibuat untuk mencatat, bukan untuk mengelola ribuan catatan. Penjelajah Pelajaran membuka cadangan .jwlibrary mana pun langsung di peramban Anda dan mengubahnya menjadi pengelola perpustakaan yang bisa dicari dan disunting — catatan, sorotan, dan penanda dalam satu tempat, tanpa ada yang diunggah ke mana pun.",
+  ],
+  "steps": [
+   ("Muat sebuah cadangan", "Buat cadangan di JW Library (Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan), lalu buka jwsync.org dan muat berkasnya ke Penjelajah Pelajaran."),
+   ("Telusuri dan cari semuanya", "Tiga tab — Catatan, Sorotan, Penanda — dengan pencarian teks penuh serta saringan warna, label, dan publikasi. Ada pula tab Jawaban Pelajaran yang menampilkan jawaban isian Anda dari publikasi."),
+   ("Ubah di tempat", "Buka catatan mana pun untuk mengubah judul dan isinya dengan format teks kaya (tebal, miring, garis bawah, daftar), mengganti warna sorotannya, serta menambah atau menghapus label. Penanda dan warna sorotan bisa diubah dengan cara yang sama."),
+   ("Bersihkan sekaligus", "Pilih banyak catatan sekaligus untuk dilabeli ulang, diganti warnanya, atau dihapus bersama-sama — lengkap dengan batalkan/ulangi, jadi salah langkah tidak pernah fatal. Anda juga bisa mengambil catatan dalam rentang tanggal ke cadangan baru, atau menyalin catatan sebagai Markdown."),
+   ("Ekspor perpustakaan yang sudah diubah", "Unduh .jwlibrary yang sudah diubah lalu pulihkan di JW Library. Kini perubahan Anda ada di perangkat."),
+  ],
+  "sections": [
+   ("Kenapa mengubahnya di peramban dan bukan di aplikasi?", "Karena skalanya. Mengganti nama sebuah label di 300 catatan, mengubah warna setiap sorotan kuning dalam satu publikasi, atau menghapus penanda basi bertahun-tahun hanya perlu hitungan menit di sini, tapi berjam-jam mengetuk di aplikasi. Berkas yang diekspor adalah cadangan standar yang dipulihkan JW Library seperti cadangan lainnya."),
+  ],
+  "faq": [
+   ("Apakah menyunting menyentuh cadangan asli saya?", "Tidak — perubahan dilakukan pada salinan di peramban dan disimpan ke berkas baru hasil ekspor. Berkas aslinya tetap seperti semula."),
+   ("Apakah ada batas ukuran perpustakaan?", "Perpustakaan yang sangat besar dibagi per halaman agar penelusuran tetap cepat; pencarian dan saringan tetap bekerja atas seluruh isinya."),
+  ],
+ },
+
+ "search-jw-library-notes": {
+  "title": "Cari Catatan JW Library Berdasarkan Makna — Tanya Perpustakaan Anda",
+  "h1": "Tanya Perpustakaan Anda: mencari catatan JW Library berdasarkan makna",
+  "description": "Pencarian semantik untuk catatan JW Library Anda: temukan catatan yang samar-samar Anda ingat hanya dengan menggambarkannya, bahkan saat kata persisnya tidak teringat. Berjalan di perangkat, bisa luring, sepenuhnya pribadi.",
+  "intro": [
+   "Setiap orang yang punya catatan bertahun-tahun tahu masalahnya: Anda ingat pernah menulis tentang bertekun menghadapi ujian dengan sukacita, tapi catatannya tidak memuat kata “ketekunan”, jadi pencarian kata kunci tidak menemukan apa pun. Tanya Perpustakaan Anda mencari berdasarkan makna — gambarkan gagasannya, dan ia memunculkan catatan yang paling dekat dengannya, dengan kata-kata apa pun catatan itu ditulis.",
+   "Semuanya berjalan sepenuhnya di perangkat Anda: model bahasanya diunduh sekali ke dalam peramban lalu bekerja secara luring sesudahnya, dengan percepatan WebGPU bila tersedia. Catatan Anda tidak pernah dikirim ke mana pun.",
+  ],
+  "steps": [
+   ("Muat sebuah cadangan ke Penjelajah Pelajaran", "Di jwsync.org, muat berkas .jwlibrary Anda lalu buka tab Tanya."),
+   ("Biarkan modelnya bersiap sekali", "Pada pemakaian pertama, model di perangkat akan diunduh dan mengindeks catatan Anda. Ini hanya terjadi sekali; sesudahnya ia bekerja seketika, bahkan secara luring."),
+   ("Bertanyalah dengan kata-kata Anda sendiri", "Ketik apa yang Anda ingat — “catatan tentang bersabar dengan orang baru dalam pelayanan”, “penguatan untuk perintis yang patah semangat” — dan catatan yang paling dekat akan muncul, diurutkan menurut maknanya."),
+  ],
+  "sections": [
+   ("Bedanya dengan pencarian biasa", "Pencarian kata kunci mencocokkan huruf; pencarian semantik mencocokkan gagasan. Pertanyaan tentang “kecemasan” juga menemukan catatan yang ditulis dengan kata “khawatir”, “kekhawatiran hidup”, atau kutipan ayat bertema itu. Kedua jenis pencarian tersedia di Penjelajah Pelajaran — keduanya saling melengkapi."),
+   ("Pribadi sejak rancangannya", "Ini bukan layanan AI berbasis awan. Modelnya berjalan di dalam tab peramban Anda, indeksnya tersimpan di perangkat Anda, dan menutup tab mengakhiri semuanya. Tidak ada apa pun tentang catatan Anda yang meninggalkan mesin Anda."),
+  ],
+  "faq": [
+   ("Apakah ini butuh perangkat yang bertenaga?", "Ponsel atau laptop masa kini menanganinya dengan baik; di perangkat ber-WebGPU ia paling cepat. Tersedia pilihan ukuran model yang bisa disesuaikan dengan perangkat keras Anda."),
+   ("Apakah ini bekerja dalam bahasa saya?", "Ya — pencarian bekerja pada bahasa apa pun yang dipakai dalam catatan Anda, dan antarmukanya diterjemahkan ke setiap bahasa yang didukung JW Sync."),
+  ],
+ },
+
+ "jw-library-study-stats": {
+  "title": "Lihat Statistik Pelajaran JW Library Anda: Rentetan, Peta Panas & Penghargaan",
+  "h1": "Statistik pelajaran JW Library Anda: rentetan, peta panas, cakupan, dan penghargaan",
+  "description": "Ubah cadangan JW Library menjadi analitik pelajaran yang pribadi — total, peta panas aktivitas, rentetan, cakupan Alkitab di 66 buku, profil kepribadian pelajaran, dan sekitar 200 penghargaan.",
+  "intro": [
+   "Berkas cadangan Anda diam-diam merekam riwayat pelajaran bertahun-tahun — kapan Anda mencatat, apa yang Anda soroti, buku mana yang sudah Anda jelajahi. Halaman Statistik Pelajaran membaca cadangan .jwlibrary dan mengubah riwayat itu menjadi dasbor pribadi, yang dihitung sepenuhnya di peramban Anda.",
+  ],
+  "steps": [
+   ("Buat sebuah cadangan", "Di JW Library: Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan."),
+   ("Buka halaman Statistik Pelajaran", "Kunjungi jwsync.org/highlights.html lalu muat berkasnya."),
+   ("Jelajahi kisah pelajaran Anda", "Total utama, tampilan Tahun Dinas dan Sepanjang Masa, pertumbuhan dari tahun ke tahun — lalu bagian-bagian serunya di bawah."),
+  ],
+  "sections": [
+   ("Apa yang akan Anda lihat", "Peta panas aktivitas beserta rentetan terpanjang dan terkini Anda; irama mingguan, jam dan bulan tersibuk; cakupan Alkitab di seluruh 66 buku dengan pembagian Kitab Ibrani/Yunani; roda warna sorotan, histogram kedalaman catatan, dan awan kata; serta jam pelajaran 24 jam dan radar pola musiman."),
+   ("Profil, perjalanan, dan penghargaan", "Profil Pelajaran bersisi enam sifat (Konsistensi, Ketekunan, Kedalaman, Keluasan, Perenungan, Keteguhan) lengkap dengan persona “Ciri Khas Pelajaran”; Perjalanan Pelajaran sepanjang 60 level dalam 12 tingkat bernama; dan sekitar 200 penghargaan dari Umum sampai Legendaris, termasuk medali yang peka terhadap isi catatan. Sebuah Kartu untuk Dibagikan merangkum tahun Anda tanpa memperlihatkan satu catatan pun."),
+   ("Alasan harian untuk kembali", "Panel Munculkan Lagi menampilkan catatan yang Anda tulis pada hari ini di tahun-tahun sebelumnya dan menyusun tinjauan berjarak yang lembut — sedikit demi sedikit, tapi rutin, begitulah pelajaran melekat."),
+  ],
+  "faq": [
+   ("Apakah ada yang diunggah dari semua ini?", "Tidak. Cadangannya diurai di peramban Anda; statistiknya tidak pernah meninggalkan perangkat Anda."),
+   ("Apakah statistiknya diperbarui otomatis?", "Statistiknya mencerminkan cadangan yang Anda muat — buat cadangan baru untuk melihat statistik yang baru."),
+  ],
+ },
+
+ "share-jw-library-notes": {
+  "title": "Cara Membagikan Catatan JW Library kepada Teman",
+  "h1": "Cara membagikan catatan JW Library kepada teman — tanpa server",
+  "description": "Kirim catatan JW Library pilihan (beserta sorotannya) kepada teman sebagai berkas kecil — tanpa server, tanpa akun. Penerimanya menggabungkannya tanpa menimpa catatannya sendiri.",
+  "intro": [
+   "JW Library tidak punya cara untuk memberikan salinan catatan tertentu kepada orang lain. Mengirim seluruh cadangan Anda memang bisa — tapi itu menyerahkan semuanya, dan memulihkannya akan menghapus perpustakaan si penerima. Berbagi catatan di JW Sync menyelesaikan kedua masalah itu: pilih persis catatan mana yang ingin dibagikan, dan penerimanya menambahkannya tanpa kehilangan apa pun.",
+  ],
+  "steps": [
+   ("Pilih catatan yang akan dibagikan", "Di halaman Bagikan pada jwsync.org/share.html, muat cadangan Anda lalu pilih catatannya — beberapa saja dari satu khotbah, atau seluruh isi sebuah label dengan satu klik lewat saringan label pada pemilih catatan. Sorotan yang menempel pada catatan itu ikut serta."),
+   ("Kirim berkas berbaginya", "JW Sync menghasilkan berkas kecil yang hanya memuat catatan pilihan Anda. Kirim lewat saluran apa pun yang Anda suka — aplikasi pesan, surel, AirDrop. Tidak ada server dan tidak ada akun; berkas itulah seluruh pertukarannya."),
+   ("Penerimanya menggabungkannya", "Teman Anda membuka halaman yang sama, memuat berkas berbagi itu bersama cadangannya sendiri, dan mendapat cadangan baru dengan catatan Anda di dalamnya. Catatannya sendiri tidak pernah tertimpa — kalau ada catatan berbagi yang berbenturan dengan miliknya, dia yang memilih bagaimana catatan itu ditambahkan — dan catatan yang diimpor datang sudah berlabel, jadi mudah ditemukan, ditinjau, atau dihapus kemudian."),
+  ],
+  "sections": [
+   ("Kegunaan yang bagus", "Meneruskan hasil penelitian kepada teman belajar, membagikan catatan perhimpunan kepada seseorang yang berhalangan hadir, memberi penyiar baru sekumpulan catatan awal untuk sebuah publikasi, atau memindahkan catatan sebuah proyek tertentu kepada anggota keluarga — semuanya tanpa memperlihatkan sisa perpustakaan siapa pun."),
+  ],
+  "faq": [
+   ("Apakah penerimanya perlu memasang JW Sync?", "Tidak ada yang dipasang di kedua sisi — ini halaman web. Penerimanya cukup punya berkas berbagi itu dan cadangannya sendiri."),
+   ("Bisakah saya membatalkan berbagi atau memberi masa berlaku pada berkasnya?", "Berkas itu adalah berkas biasa yang Anda kirim — tidak ada salinan di server yang bisa dikedaluwarsakan. Bagikan hanya apa yang bersedia Anda bagikan lewat pesan apa pun."),
+  ],
+ },
+
+ "bible-reading-plan": {
+  "title": "Jadwal Pembacaan Alkitab Harian Ditemani Catatan Anda Sendiri",
+  "h1": "Teman Pembacaan: jadwal pembacaan Alkitab ditemani catatan Anda sendiri",
+  "description": "Jadwal pembacaan Alkitab harian yang pribadi, yang menampilkan catatan dan sorotan yang Anda buat pada pasal-pasal hari ini. Pilih kecepatan Anda, pertahankan rentetan, dan saksikan kisi 66 buku terisi.",
+  "intro": [
+   "Banyak aplikasi menawarkan jadwal pembacaan Alkitab. Teman Pembacaan melakukan sesuatu yang tidak bisa dilakukan aplikasi lain: karena ia membaca cadangan .jwlibrary Anda sendiri, bacaan hari ini datang bersama catatan dan sorotan yang Anda buat sendiri pada pasal-pasal itu — “dua tahun lalu Anda menyoroti empat ayat di Mazmur 37.” Membaca lewat kacamata riwayat pelajaran Anda sendiri, sepenuhnya di perangkat Anda.",
+  ],
+  "steps": [
+   ("Pilih urutan dan kecepatan", "Baca sesuai urutan Alkitab atau kira-kira sesuai kronologi; selesaikan dalam 3 bulan, 6 bulan, 1 tahun, 2 tahun, atau tentukan sendiri berapa pasal per hari — lengkap dengan pratinjau langsung “Anda akan selesai sekitar…”."),
+   ("Baca bagian hari ini", "Setiap pasal hanya sejauh satu ketukan, membuka langsung di JW Library atau Watchtower ONLINE LIBRARY dalam bahasa Anda. Centangi pasalnya sambil jalan."),
+   ("Bawa serta catatan Anda (opsional)", "Muat sebuah cadangan di alat JW Sync mana pun, dan catatan Anda sendiri beserta jumlah sorotannya akan muncul tepat di bawah pasal hari ini."),
+   ("Saksikan kemajuannya terbentuk", "Kisi 66 buku terisi seiring Anda membaca, lengkap dengan bilah pasal terbaca, perkiraan sesuai kecepatan, dan tonggak untuk menyelesaikan setiap buku, Kitab-Kitab Ibrani-Aram, Kitab-Kitab Yunani — dan seluruh Alkitab."),
+  ],
+  "sections": [
+   ("Rentetan tanpa rasa bersalah", "Menyelesaikan satu hari menambah rentetan Anda; melewatkan satu hari sekadar menggeser perkiraan tanggal selesainya. Tidak ada tumpukan tunggakan — jadwalnya menyesuaikan diri dengan kehidupan Anda, bukan memarahi Anda."),
+  ],
+  "faq": [
+   ("Apakah saya harus memuat cadangan untuk memakainya?", "Tidak — jadwal, rentetan, dan kemajuannya berjalan sendiri. Cadangan hanya menambahkan catatan pribadi Anda ke bacaan setiap hari."),
+   ("Apakah kemajuan pembacaan saya bersifat pribadi?", "Ya. Kemajuannya tersimpan di peramban pada perangkat Anda — tidak ada akun dan tidak ada yang diunggah."),
+  ],
+ },
+
+ "open-jwlibrary-file": {
+  "title": "Apa Itu Berkas .jwlibrary dan Bagaimana Cara Membukanya?",
+  "h1": "Apa itu berkas .jwlibrary — dan cara membukanya di perangkat apa pun",
+  "description": "Berkas .jwlibrary adalah cadangan JW Library Anda: satu berkas yang memuat setiap catatan, sorotan, penanda, dan label. Inilah isinya dan cara membuka serta membacanya.",
+  "intro": [
+   "Berkas .jwlibrary tampak tertutup rapat, padahal tidak. Ia adalah arsip ZIP biasa yang membungkus basis data SQLite biasa, artinya Anda bisa membaca cadangan Anda sendiri — melihat persis catatan, sorotan, dan penanda apa saja yang dimuatnya — tanpa JW Library dan tanpa memasang apa pun.",
+   "Saat Anda mencadangkan JW Library, Anda mendapat berkas berakhiran .jwlibrary. Itu satu paket ringkas yang bisa dibawa ke mana-mana dan memuat segala isi pelajaran pribadi Anda — catatan, sorotan, penanda, label, dan daftar putar — dalam sebuah basis data yang padat. Ini bukan dokumen yang Anda buka di Word atau pembaca PDF; ia dirancang untuk dipulihkan kembali ke JW Library.",
+   "Tapi Anda tidak perlu memulihkannya hanya untuk melihat isinya. JW Sync membuka berkas .jwlibrary langsung di peramban Anda sehingga Anda bisa membaca, mencari, dan mengubah isinya tanpa menyentuh ponsel Anda.",
+  ],
+  "steps": [
+   ("Dapatkan sebuah berkas .jwlibrary", "Berkas ini dibuat di JW Library: Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Itulah berkas yang kita bicarakan."),
+   ("Buka di JW Sync", "Kunjungi jwsync.org lalu muat berkasnya ke Penjelajah Pelajaran. Ia terbuka seketika, di perangkat Anda — tanpa ada yang diunggah."),
+   ("Baca dan kerjakan isinya", "Telusuri catatan, sorotan, dan penanda; cari di seluruh isinya; ubah, labeli ulang, atau ekspor. Setelah selesai Anda bisa memulihkan berkasnya (atau salinan yang sudah diubah) kembali ke JW Library."),
+  ],
+  "sections": [
+   ("Apa yang sebenarnya ada di dalam berkasnya", "Secara teknis berkas .jwlibrary adalah basis data SQLite yang di-zip beserta sebuah manifes. Itulah sebabnya namanya kadang tak sengaja berubah menjadi .zip di perjalanan — dan sebabnya menggantinya kembali menjadi .jwlibrary menyelesaikan masalah. Anda sama sekali tidak perlu tahu itu untuk memakainya, tapi hal itu menjelaskan mengapa berkasnya kecil, mandiri, dan sama persis di Android, iPhone, iPad, dan Windows."),
+   ("Membukanya di komputer", "Halaman jwsync.org yang sama bekerja di peramban laptop atau desktop — praktis untuk membaca catatan bertahun-tahun di layar besar, atau melakukan pembersihan massal yang melelahkan kalau dikerjakan di ponsel. Tidak ada yang perlu dipasang."),
+   ("Sebenarnya berkas ini apa", "Berkas .jwlibrary adalah arsip ZIP dengan ekstensi yang berbeda. Di dalamnya ada userData.db — basis data SQLite yang memuat catatan, sorotan, penanda, dan label Anda — beserta manifest.json, berkas kecil yang menjelaskan cadangan itu, termasuk hash basis datanya yang dipakai JW Library untuk memastikan berkasnya tidak diubah. Tidak ada yang bersifat tertutup atau terenkripsi di dalamnya; ia arsip standar yang membungkus basis data standar."),
+   ("Membukanya tanpa JW Library", "Anda tidak butuh aplikasinya, atau perangkat lunak apa pun, untuk membaca cadangan Anda sendiri. Membuka berkasnya di peramban menampilkan setiap catatan, sorotan, dan penanda yang dimuatnya, lengkap dengan pencarian dan penyaringan, dan berkasnya tidak pernah meninggalkan perangkat Anda — ia dibaca di tempat, bukan diunggah. Inilah cara tercepat memastikan bahwa sebuah cadangan memuat apa yang Anda kira sebelum menyetel ulang, menukar tambah, atau memulihkan ke ponsel baru."),
+   ("Mengintip isinya secara manual", "Kalau Anda penasaran, salin berkasnya, ganti nama salinannya menjadi .zip, lalu buka dengan alat arsip apa pun. Anda akan melihat userData.db dan manifest.json. Membuka basis datanya butuh penampil SQLite, dan nama tabelnya sesuai isinya — Note, UserMark, Bookmark, Tag. Selalu kerjakan pada salinan: menyunting basis datanya dengan tangan tanpa memperbarui hash manifesnya menghasilkan berkas yang akan ditolak JW Library saat dipulihkan."),
+   ("Menyunting dengan aman", "Catatan bisa diperbaiki, dilabeli ulang, diganti warnanya, atau dihapus di luar aplikasi, lalu hasilnya diekspor sebagai berkas .jwlibrary baru yang Anda pulihkan seperti biasa. Aturan yang menjaga ini tetap aman adalah menyimpan berkas aslinya: sunting salinannya, pulihkan berkas hasil suntingan, dan kalau ada yang tidak sesuai harapan, berkas asli yang tak tersentuh masih ada untuk Anda kembali."),
+   ("Membaca cadangan di ponsel", "Anda tidak butuh komputer. Membuka berkasnya di peramban ponsel bekerja dengan cara yang sama, dan itu berguna kalau cadangannya sudah ada di ponsel dan Anda ingin memastikan isinya sebelum memulihkan atau sebelum menghapus perangkat. Berkasnya dibaca di tempat, jadi ini tetap berjalan tanpa koneksi setelah halamannya dimuat."),
+   ("Kenapa hash manifes itu penting", "manifest.json mencatat sebuah hash dari userData.db. JW Library memakainya untuk memastikan basis datanya tidak berubah sejak cadangan itu ditulis, jadi berkas yang basis datanya disunting tanpa hash-nya dihitung ulang akan ditolak saat dipulihkan. Ini alasan paling umum sebuah cadangan yang disunting manual berhenti berfungsi, dan sebabnya menyunting lewat alat yang menulis ulang manifesnya lebih aman daripada menyunting basis datanya langsung."),
+   ("Ini berguna untuk apa", "Bisa membaca sebuah cadangan mengubah nilai cadangan itu sendiri. Anda bisa memastikan sebuah berkas memuat apa yang Anda kira sebelum menghapus ponsel, memeriksa apakah berkas lama layak dipulihkan, menemukan catatan yang Anda yakin pernah tulis tanpa mengubek-ubek aplikasi, atau menyelamatkan teks dari berkas yang ditolak JW Library. Semuanya tanpa perlu memercayakan berkas itu kepada siapa pun — ia dibaca di perangkat Anda sendiri."),
+  ],
+  "faq": [
+   ("Bisakah saya membuka berkas .jwlibrary di Excel atau Notepad?", "Tidak dengan hasil yang berguna — ini basis data, bukan lembar kerja atau berkas teks. Bukalah di JW Sync untuk membacanya, atau ekspor catatan Anda ke Markdown/teks dari Penjelajah Pelajaran."),
+   ("Apakah aman membuka cadangan saya di peramban?", "Ya. JW Sync membaca berkasnya di dalam tab peramban Anda; tidak ada yang dikirim ke server, dan berkas asli Anda tidak pernah diubah."),
+   ("Bisakah saya sekadar mengganti namanya menjadi .zip?", "Bisa, pada salinannya. Mengganti nama tidak mengubah isinya, dan itu memungkinkan alat arsip apa pun menunjukkan isinya kepada Anda."),
+   ("Apakah membuka berkasnya akan mengubahnya?", "Tidak. Membaca sebuah cadangan — di peramban atau di alat arsip — membiarkannya sama persis bita demi bita. Berkas baru hanya tercipta saat Anda menyimpan atau mengekspor."),
+   ("Apakah saya harus daring?", "Hanya untuk memuat halamannya. Berkasnya sendiri dibaca di perangkat Anda, tidak diunggah, jadi catatan Anda tidak pernah melintas di jaringan."),
+   ("Bisakah saya membuka cadangan yang dikirim orang lain?", "Bisa, formatnya tidak terikat pada perangkat atau akun. Apakah Anda sebaiknya memulihkannya adalah pertanyaan terpisah, karena pemulihan mengganti perpustakaan Anda sendiri."),
+   ("Apakah saya perlu memasang sesuatu untuk melihat isinya?", "Tidak. Peramban sudah cukup untuk membaca catatannya; hanya pemeriksaan manual atas basis datanya sendiri yang butuh penampil SQLite."),
+  ],
+ },
+
+ "jw-library-windows-pc": {
+  "title": "Mencadangkan dan Menggabungkan JW Library di PC Windows",
+  "h1": "Memakai cadangan JW Library di PC Windows",
+  "description": "Cara mencadangkan JW Library di Windows, dan cara menggabungkan cadangan PC dengan ponsel serta tablet Anda agar catatan, sorotan, dan penanda tetap menyatu di setiap perangkat.",
+  "intro": [
+   "JW Library berjalan di Windows selain di ponsel dan tablet, dan ia membuat berkas cadangan .jwlibrary yang sama. Artinya PC Anda bisa menjadi bagian dari perpustakaan pelajaran yang sama dengan ponsel Anda — asalkan Anda menggabungkan cadangannya, bukan memulihkan yang satu di atas yang lain.",
+  ],
+  "steps": [
+   ("Cadangkan di Windows", "Di aplikasi JW Library untuk Windows, buka menunya, masuk ke Cadangan dan Pemulihan, lalu buat cadangan. Simpan berkas .jwlibrary-nya di tempat yang mudah ditemukan."),
+   ("Cadangkan juga ponsel dan tablet Anda", "Di setiap perangkat: Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan."),
+   ("Gabungkan di jwsync.org", "Buka jwsync.org di peramban mana pun pada PC lalu muat semua berkas cadangannya. JW Sync menyatukan catatan, sorotan, penanda, dan label dari setiap perangkat menjadi satu berkas .jwlibrary gabungan — di perangkat Anda sendiri, tanpa ada yang diunggah."),
+   ("Pulihkan berkas gabungannya di mana-mana", "Pulihkan berkas gabungan itu di aplikasi Windows dan di setiap perangkat seluler. Kini PC, ponsel, dan tablet semuanya membawa perpustakaan yang lengkap."),
+  ],
+  "sections": [
+   ("Kenapa PC adalah tempat termudah untuk melakukannya", "Peramban desktop membuat pemuatan beberapa berkas sekaligus, peninjauan pratinjau penggabungan, dan penyimpanan hasilnya jauh lebih cepat ketimbang mengetuk-ngetuk di ponsel. Banyak orang menjalankan rutinitas penggabungan utamanya di komputer lalu tinggal memulihkan berkas gabungannya kembali ke perangkat seluler mereka."),
+  ],
+  "faq": [
+   ("Apakah cadangan Windows bisa dipakai bersama cadangan iPhone dan Android?", "Bisa — format .jwlibrary sama persis di setiap platform, jadi cadangan Windows menyatu dengan bebas bersama cadangan ponsel dan tablet."),
+   ("Apakah saya perlu memasang sesuatu di PC?", "Tidak. JW Sync adalah halaman web; ia berjalan di Edge, Chrome, atau Firefox tanpa perlu memasang apa pun."),
+  ],
+ },
+
+ "recover-jw-library-notes-lost-phone": {
+  "title": "Cara Menyelamatkan Catatan JW Library Setelah Ponsel Hilang atau Rusak",
+  "h1": "Menyelamatkan catatan JW Library dari ponsel yang hilang, rusak, atau disetel ulang",
+  "description": "Ponsel Anda hilang atau disetel ulang padahal ada catatan JW Library di dalamnya? Apa yang bisa diselamatkan bergantung pada cadangan Anda. Inilah cara persisnya mendapatkan catatan Anda kembali — dan apa yang harus dilakukan lain kali.",
+  "intro": [
+   "Saat sebuah ponsel hilang, dicuri, atau rusak sampai tak terpakai, selamat tidaknya catatan JW Library Anda bergantung pada satu pertanyaan: apakah ada berkas cadangan .jwlibrary di suatu tempat di luar perangkat itu? Kalau ada, semua isinya bisa kembali. Halaman ini membahas cara menemukannya, cara memulihkannya ke perangkat pengganti mana pun, dan apa yang harus dilakukan kalau satu-satunya cadangan yang Anda punya sudah lama.",
+   "Kehilangan ponsel sudah cukup membuat stres tanpa ditambah ketakutan kehilangan catatan pelajaran bertahun-tahun bersamanya. Bisa tidaknya catatan itu diselamatkan bergantung pada satu pertanyaan: apakah ada berkas cadangan .jwlibrary di suatu tempat di luar ponsel itu?",
+   "Panduan ini menuntun Anda menemukan cadangan apa pun yang mungkin Anda punya — bahkan yang sudah Anda lupa pernah dibuat — lalu mengubahnya kembali menjadi JW Library yang utuh di perangkat baru Anda.",
+  ],
+  "steps": [
+   ("Cari di setiap tempat yang mungkin memuat cadangan", "Periksa surel Anda (cari “jwlibrary” atau “backup”), Google Drive, iCloud Drive, OneDrive, Dropbox, dan folder Downloads di komputer Anda. Cadangan adalah berkas kecil yang mudah terlupakan pernah disimpan."),
+   ("Periksa perangkat Anda yang lain", "Kalau Anda pernah memakai JW Library di tablet atau PC, perangkat itu punya data pelajarannya sendiri — buatlah cadangan darinya sekarang juga untuk mengamankan apa pun yang dimuatnya."),
+   ("Pulihkan apa yang Anda temukan di ponsel baru", "Pasang JW Library di perangkat baru, lalu Cadangan dan Pemulihan → Pulihkan, dan muat berkas .jwlibrary-nya. Catatan, sorotan, dan penanda Anda kembali."),
+   ("Gabungkan kalau Anda menemukan lebih dari satu cadangan", "Perangkat atau tanggal yang berbeda bisa masing-masing memuat catatan yang khas. Jangan memilih salah satu saja — muat semuanya di jwsync.org, gabungkan menjadi satu berkas yang lengkap, lalu pulihkan berkas itu. Tidak ada yang tertinggal."),
+  ],
+  "sections": [
+   ("Kalau memang tidak ada cadangan di mana pun", "Jujurlah pada diri sendiri sejak awal: kalau satu-satunya salinan catatan Anda ada di ponsel yang hilang itu dan Anda tidak pernah mengekspor cadangan, JW Library tidak menyimpan salinan awan yang bisa dipulihkan. Itu menyakitkan — dan justru itulah sebabnya kebiasaan di bawah ini begitu penting."),
+   ("Jangan sampai berada di sini lagi", "Pasang pengingat cadangan bulanan dan simpan setiap berkas .jwlibrary di luar ponsel (mengirimnya ke surel Anda sendiri sudah cukup). JW Sync bahkan bisa mengingatkan Anda dan menggabungkan perangkat Anda secara terjadwal. Berkas yang tinggal di kotak masuk Anda selamat dari ponsel mana pun."),
+   ("Di mana cadangan mungkin sudah ada", "Sebelum menyimpulkan tidak ada, periksalah setiap tempat berkas itu mungkin tersimpan: folder Downloads dan Documents di komputer mana pun yang pernah Anda sambungkan ke ponsel, folder surel terkirim Anda, aplikasi obrolan yang mungkin pernah Anda pakai mengirim berkas itu, dan setiap akun penyimpanan awan yang Anda pakai. Orang sering membuat cadangan sekali, berbulan-bulan lalu, dan melupakannya — dan cadangan berusia berbulan-bulan pun masih memuat sebagian besar isi perpustakaan pelajaran."),
+   ("Memulihkan ke ponsel atau platform yang berbeda", "Perangkat penggantinya tidak harus sama dengan yang hilang. Cadangan dari ponsel Android bisa dipulihkan di iPhone dan sebaliknya, karena formatnya sama persis di Android, iOS, iPadOS, dan Windows. Pasang JW Library di perangkat baru, perbarui ke versi terkini, lalu pulihkan lewat Pelajaran Pribadi → Cadangan dan Pemulihan."),
+   ("Kalau yang Anda punya hanya cadangan lama atau sebagian", "Pulihkan saja. Menyelamatkan sebagian besar catatan Anda bukan hadiah hiburan — itulah hasilnya. Kalau nanti Anda menemukan cadangan kedua yang berbeda, keduanya bisa digabungkan menjadi satu berkas yang memuat isi keduanya, jadi memulihkan yang lebih lama sekarang tidak menghalangi Anda menambahkannya nanti."),
+   ("Apa yang tidak bisa diselamatkan", "Kalau tidak ada cadangan dalam bentuk apa pun, data pelajaran pribadi tidak bisa diambil kembali. Ia hanya tersimpan di penyimpanan pribadi aplikasi pada perangkat itu, dan baik JW Library maupun cadangan awan tingkat ponsel tidak menjaganya dengan andal. Ini layak diketahui apa adanya, karena itulah alasan seluruh rutinitas di situs ini ada."),
+   ("Periksa sebelum perangkatnya dihapus dari jarak jauh", "Kalau ponselnya hilang, bukan rusak, dan Anda sedang mempertimbangkan penghapusan jarak jauh, carilah dulu cadangan yang mungkin sudah ada — penghapusan itu tidak bisa dibatalkan dan menghilangkan kesempatan terakhir siapa pun untuk membuatnya. Kalau perangkatnya sekadar terselip dan masih terjangkau, membuat cadangan dari jarak jauh memang tidak mungkin, tapi datanya tetap utuh selama ponselnya tidak dihapus atau disetel ulang."),
+   ("Memastikan ini tidak terjadi dua kali", "Alasan ponsel hilang merenggut pelajaran bertahun-tahun adalah karena satu-satunya salinan ada di ponsel itu. Setelah memulihkan ke perangkat pengganti, taruh sebuah cadangan di luar perangkat pada hari yang sama, dan ulangi dengan irama yang benar-benar bisa Anda jaga. Berkasnya cukup kecil sehingga menyimpan semuanya selamanya tidak memakan biaya apa pun."),
+   ("Kalau benar-benar tidak ada cadangan", "Maka jawaban jujurnya adalah catatan itu tidak bisa diambil kembali, dan lebih baik mendengarnya daripada terus mencari. Yang bisa Anda lakukan adalah memastikan kehilangan ini yang terakhir: pasang JW Library di perangkat pengganti, dan sebelum Anda membangun kembali apa pun yang sayang untuk hilang, buat sebuah cadangan lalu taruh di luar perangkat. Sejak titik itu, peristiwa yang sama tidak akan merugikan Anda sama sekali."),
+  ],
+  "faq": [
+   ("Bisakah JW Sync menyelamatkan catatan dari ponsel yang sudah tidak saya miliki?", "Tidak ada alat yang bisa — penyelamatan bergantung pada adanya berkas cadangan di suatu tempat. Tugas JW Sync adalah membaca, memperbaiki, dan menggabungkan cadangan yang memang Anda punya."),
+   ("Cadangan saya sudah lama — apakah masih layak dipulihkan?", "Tentu saja. Cadangan lama yang memuat sebagian besar catatan Anda jauh lebih baik daripada memulai dari nol, dan Anda bisa menggabungkannya dengan apa pun yang lebih baru yang Anda temukan nanti."),
+   ("Apakah JW Library menyimpan salinan awan dari catatan saya?", "Tidak. Data pelajaran pribadi tetap ada di perangkat kecuali Anda sendiri membuat berkas cadangan."),
+   ("Bisakah catatan diselamatkan dari ponsel yang layarnya rusak?", "Kadang bisa — kalau ponselnya masih menyala dan bisa dikendalikan, atau tempat servis bisa menampilkan layarnya, JW Library masih bisa membuat cadangan. Datanya utuh selama penyimpanannya utuh."),
+   ("Apakah cadangan lama masih bisa dipulihkan ke aplikasi versi sekarang?", "Bisa. JW Library membaca format cadangan yang lebih lama. Perbarui aplikasinya dulu lalu pulihkan ke versi terkini."),
+   ("Saya menemukan dua cadangan lama — yang mana yang harus saya pakai?", "Jangan salah satu saja. Gabungkan keduanya: hasilnya memuat semua isi keduanya, termasuk apa pun yang ada di berkas lama tapi sudah terhapus pada saat berkas yang lebih baru dibuat."),
+   ("Bisakah saya memeriksa isi sebuah cadangan sebelum memulihkannya?", "Bisa. Buka berkasnya di peramban Anda dan telusuri catatan, sorotan, serta penandanya dulu, sehingga Anda tahu apa yang sedang Anda pulihkan."),
+  ],
+ },
+
+ "handle-merge-conflicts": {
+  "title": "Catatan yang Sama Diubah di Dua Perangkat? Menangani Konflik Penggabungan",
+  "h1": "Menangani konflik penggabungan: catatan yang sama diubah di dua perangkat",
+  "description": "Ketika Anda mengubah catatan JW Library yang sama secara berbeda di dua perangkat, penggabungan harus memilih pemenangnya. Peninjau Konflik menampilkan kedua versinya berdampingan supaya Anda yang memutuskan — tidak ada yang hilang.",
+  "intro": [
+   "Sebagian besar proses penggabungan berjalan tanpa hambatan — catatan yang hanya ada di masing-masing perangkat cukup disatukan. Satu-satunya kasus yang butuh keputusan adalah konflik yang sesungguhnya: catatan yang sama, diubah secara berbeda di dua perangkat, sehingga kedua cadangan tidak sepakat tentang apa isinya. JW Sync tidak pernah menebak diam-diam; ia menyerahkan pilihannya kepada Anda.",
+  ],
+  "steps": [
+   ("Muat kedua cadangan", "Di jwsync.org, muat berkas .jwlibrary dari kedua perangkat. JW Sync membandingkannya sambil menggabungkan."),
+   ("Buka Peninjau Konflik", "Kalau ada catatan yang berkonflik, peninjaunya akan mencantumkannya. Semua yang tidak berkonflik sudah tergabung — langkah ini hanya untuk benturan yang sesungguhnya."),
+   ("Bandingkan berdampingan", "Setiap konflik menampilkan kedua versinya dengan perbedaan kata demi kata yang menyoroti persis apa yang berbeda. “Sarankan yang terbaik” bisa memilihkan versi yang lebih lengkap untuk Anda, atau Anda sendiri yang memilih mana yang disimpan — per catatan."),
+   ("Selesaikan lalu pulihkan", "Setelah semua konflik terselesaikan, unduh berkas gabungannya lalu pulihkan. Kini kedua perangkat sepakat, dengan versi setiap catatan yang Anda pilih."),
+  ],
+  "sections": [
+   ("Kenapa ini lebih baik daripada sekadar menyimpan yang terbaru", "“Yang terbaru menang” diam-diam menghapus suntingan yang mungkin Anda inginkan. Bisa jadi versi yang lebih lama memuat satu paragraf yang tanpa sengaja Anda hapus di perangkat yang lain. Melihat keduanya, kata demi kata, berarti Anda tidak pernah kehilangan teks tanpa menyadarinya — dan itulah seluruh maksud menggabungkan alih-alih menimpa."),
+   ("Bagaimana konflik bisa muncul sejak awal", "Biasanya karena menyunting secara luring di dua perangkat di antara dua penggabungan, atau memulihkan cadangan lama lalu menambahkan sesuatu padanya. Menggabungkan secara terjadwal membuat jumlah konfliknya tetap sedikit dan perbedaannya masih segar dalam ingatan Anda."),
+  ],
+  "faq": [
+   ("Apakah saya harus meninjau ratusan konflik?", "Jarang sekali. Hanya catatan yang diubah secara berbeda di kedua sisi yang berkonflik; catatan baru, dan catatan yang hanya diubah di satu perangkat, digabungkan otomatis. Kebanyakan penggabungan punya segelintir konflik atau tidak sama sekali."),
+   ("Bisakah saya berubah pikiran setelah memilih?", "Bisa — tidak ada yang ditulis ke perangkat sampai Anda memulihkan berkas gabungannya, dan cadangan asli Anda tidak pernah diubah, jadi Anda bisa mengulang penggabungannya."),
+  ],
+ },
+
+ "export-jw-library-notes": {
+  "title": "Cara Mengekspor Catatan JW Library ke Teks atau Markdown",
+  "h1": "Mengekspor catatan JW Library Anda ke teks, Markdown, atau cadangan baru",
+  "description": "Keluarkan catatan JW Library Anda dari aplikasinya: salin atau ekspor sebagai Markdown/teks biasa untuk dipakai di mana saja, atau ambil sebagian ke dalam cadangan .jwlibrary baru. Semuanya di peramban Anda.",
+  "intro": [
+   "Catatan yang ditulis di JW Library mudah dibaca di dalam aplikasinya dan merepotkan dipakai di tempat lain — di sebuah dokumen, di kerangka khotbah, di atas kertas, atau di tangan orang yang tidak memakai aplikasi itu. Mengekspor menyelesaikan hal itu, dan keputusan utamanya bukan bagaimana mengekspor melainkan seberapa banyak: ekspor yang sudah disaring hampir selalu lebih berguna daripada semuanya sekaligus.",
+   "Catatan pelajaran Anda tidak seharusnya terkurung dalam satu aplikasi. Kadang Anda menginginkannya sebagai teks biasa — untuk ditempelkan ke kerangka khotbah, sebuah dokumen, atau aplikasi catatan Anda sendiri — dan kadang Anda menginginkan cadangan bersih yang hanya memuat sebagian. Penjelajah Pelajaran melakukan keduanya, dan membaca cadangan Anda sepenuhnya di peramban.",
+  ],
+  "steps": [
+   ("Muat cadangan Anda", "Buat cadangan di JW Library (Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan), lalu buka jwsync.org dan muat berkasnya ke Penjelajah Pelajaran."),
+   ("Temukan catatan yang Anda inginkan", "Pakai pencarian ditambah saringan warna, label, dan publikasi untuk mempersempit hingga persis catatan yang Anda cari — satu publikasi, satu label, satu topik."),
+   ("Salin atau ekspor sebagai Markdown/teks", "Salin catatannya sebagai Markdown atau teks biasa untuk ditempelkan ke mana saja. Formatnya (tebal, miring, daftar) dipertahankan, jadi catatan yang tersusun rapi tetap tersusun rapi."),
+   ("Atau ambil ke dalam cadangan baru", "Lebih suka berkas? Ekspor sebagian pilihan atau rentang tanggal ke dalam cadangan .jwlibrary baru — berguna untuk mengarsipkan sebuah proyek atau menyerahkan sekumpulan catatan tertentu ke perangkat lain."),
+  ],
+  "sections": [
+   ("Kenapa perlu mengekspor sama sekali", "Catatan menjadi lebih berguna kalau bisa dibawa ke mana-mana: ke dalam dokumen untuk sebuah bagian di perhimpunan, ke dalam catatan pribadi, ke dalam cetakan untuk orang yang tidak memakai aplikasinya. Markdown mempertahankan strukturnya sekaligus tetap terbaca sebagai teks biasa di mana pun."),
+   ("Memilih format", "Teks biasa paling mudah dibawa ke mana-mana dan menempel dengan rapi di dokumen atau surel mana pun. Keluaran berformat mempertahankan struktur catatan yang panjang dan cocok untuk dicetak atau dibagikan. Kalau Anda ingin catatannya kembali ke dalam JW Library nanti — di perangkat lain, atau untuk perpustakaan orang lain — simpanlah berkas .jwlibrary-nya, bukan ekspor teks, karena hanya berkas itu yang mempertahankan kaitan antara catatan, sorotan, label, dan letak persisnya di dalam publikasi."),
+   ("Mengekspor hanya sebagian perpustakaan Anda", "Ekspor penuh atas pelajaran bertahun-tahun jarang menjadi yang Anda butuhkan. Mempersempit dulu — ke sebuah label, publikasi, warna sorotan, atau rentang tanggal — menghasilkan sesuatu yang benar-benar bisa dipakai, misalnya setiap catatan berlabel untuk sebuah khotbah, atau segala yang ditulis selama satu kebaktian. Saringan yang mempersempit tampilan juga mempersempit ekspornya, jadi apa yang Anda lihat itulah yang Anda dapat."),
+   ("Apa yang ikut bersama teksnya, dan apa yang tidak", "Ekspor membawa kata-kata Anda. Ia tidak membawa jangkar yang mengikat sebuah catatan ke paragraf tertentu dari publikasi tertentu, karena rujukan itu hanya bermakna di dalam JW Library. Inilah alasan praktis untuk menyimpan cadangan selain ekspor: ekspor untuk membaca, mencetak, dan berbagi di luar aplikasi, sedangkan berkas .jwlibrary adalah yang mengembalikan catatan ke dalam perpustakaan lengkap dengan konteksnya."),
+   ("Menyatukan semua bahan untuk satu khotbah atau tugas", "Ini alasan paling umum untuk mengekspor. Saring ke label, publikasi, atau rentang tanggal tempat bahannya berada, periksa hasilnya, lalu ekspor bagian itu saja. Yang Anda dapat adalah satu dokumen berisi catatan yang relevan dan bagian-bagian yang Anda soroti, sesuai urutan kemunculannya, bukan tumpahan tak terkendali dari seluruh perpustakaan Anda."),
+   ("Membagikan catatan kepada orang lain", "Ada dua hal berbeda yang orang maksud dengan berbagi. Kalau orang itu ingin membaca catatan Anda, ekspor teks yang tepat — bisa dibuka di mana saja dan tidak butuh perangkat lunak khusus. Kalau dia ingin catatannya masuk ke dalam JW Library miliknya sendiri, tertaut ke paragraf yang sama dan membawa label serta warnanya, maka berkas .jwlibrary-lah yang Anda butuhkan, karena ekspor teks tidak bisa mengembalikan apa pun ke dalam aplikasi."),
+   ("Menyimpan arsip yang masih bisa Anda baca nanti", "Ekspor juga layak dibuat demi dirinya sendiri. Salinan teks biasa dari catatan pelajaran Anda masih akan bisa dibuka tiga puluh tahun lagi oleh perangkat lunak yang belum ditulis siapa pun, dan itu bukan sesuatu yang bisa dijanjikan format khas aplikasi mana pun. Menyimpan keduanya — .jwlibrary untuk dipulihkan dan ekspor teks untuk dibaca — nyaris tidak memakan biaya dan menutupi kedua kemungkinan masa depan itu."),
+   ("Ekspor atau cadangan — mana yang Anda butuhkan", "Keduanya menjawab pertanyaan yang berbeda. Ekspor untuk memakai catatan Anda di luar JW Library: membaca, mencetak, mengutip, mengirimkannya kepada seseorang. Cadangan .jwlibrary untuk mengembalikannya ke dalam JW Library, di perangkat ini atau perangkat lain, dengan setiap jangkar, label, dan warnanya utuh. Tidak satu pun bisa menggantikan yang lain, dan tidak ada alasan untuk tidak menyimpan keduanya."),
+  ],
+  "faq": [
+   ("Apakah mengekspor mengubah catatan JW Library saya?", "Tidak. Ekspor membaca salinan cadangan Anda di peramban; berkas asli dan aplikasi Anda tidak tersentuh."),
+   ("Bisakah saya mengekspor semuanya sekaligus?", "Bisa — hapus saringannya untuk memilih seluruh perpustakaan Anda, atau persempit dulu untuk mengekspor sebagiannya saja."),
+   ("Bisakah catatan saya masuk ke Word atau Google Docs?", "Bisa — ekspor sebagai teks lalu tempelkan. Teksnya datang dengan strukturnya utuh dan bisa diperindah dari sana."),
+   ("Apakah sorotan ikut terekspor selain catatan?", "Ya, termasuk bagian yang disoroti dan warnanya, sehingga salinan cetaknya menunjukkan apa yang Anda tandai selain apa yang Anda tulis."),
+   ("Bisakah semuanya diekspor sekaligus?", "Bisa, meski ekspor yang disaring biasanya lebih berguna. Semuanya bisa diekspor dalam satu kali jalan kalau Anda memang menginginkan salinan lengkap."),
+   ("Bisakah saya mengekspor jawaban yang saya ketik di pertanyaan pelajaran?", "Bisa. Jawaban pelajaran yang diketik adalah bagian dari data pelajaran pribadi Anda dan bisa diekspor bersama catatan dan sorotan."),
+   ("Apakah ekspornya menyertakan publikasi asal setiap catatan?", "Ya, ekspornya menunjukkan dari mana setiap catatan berasal, meskipun jangkar di baliknya hanya berfungsi di dalam JW Library."),
+   ("Apakah mengekspor mengubah sesuatu di perpustakaan saya?", "Tidak. Ekspor membaca data Anda lalu menulis berkas terpisah; tidak ada apa pun di JW Library yang diubah, dipindah, atau dihapus olehnya."),
+   ("Bisakah saya mengekspor dari sebuah cadangan alih-alih dari aplikasinya?", "Bisa. Berkas .jwlibrary bisa dibuka langsung dan catatannya diekspor, dan itu berguna kalau catatan yang Anda inginkan ada di cadangan lama, bukan di perangkat Anda sekarang."),
+  ],
+ },
+
+ "organize-jw-library-tags": {
+  "title": "Cara Merapikan dan Membersihkan Label JW Library",
+  "h1": "Merapikan label JW Library Anda: ganti nama, satukan, dan bersihkan sekaligus",
+  "description": "Label berkembang biak selama bertahun-tahun belajar. Ganti nama sebuah label di seluruh catatan, satukan yang kembar, dan hapus yang sudah tidak Anda pakai — sekaligus, di peramban Anda, lengkap dengan pembatalan.",
+  "intro": [
+   "Label adalah cara Anda menemukan catatan di kemudian hari — tapi setelah beberapa tahun, label jadi berserakan. Anda berakhir dengan “Pelayanan”, “pelayanan”, dan “Dinas lapangan” yang maksudnya sama, label yang dibuat sekali lalu tak pernah dipakai lagi, dan penamaan yang tidak konsisten sehingga penyaringan jadi tak bisa diandalkan. JW Library tidak memberi Anda cara membereskan ini dalam skala besar. Penjelajah Pelajaran memberikannya.",
+  ],
+  "steps": [
+   ("Muat cadangan Anda ke Penjelajah Pelajaran", "Di jwsync.org, muat berkas .jwlibrary Anda. Saring menurut label untuk melihat setiap label dan berapa catatan yang memakainya."),
+   ("Ganti nama sebuah label di seluruh catatannya", "Labeli ulang sekaligus: ganti nama sebuah label sekali dan setiap catatan yang memakainya ikut diperbarui — tak perlu lagi menyunting catatan satu per satu hanya untuk membetulkan ejaan."),
+   ("Satukan yang kembar", "Labeli ulang catatan dari label kembar ke label yang resmi, lalu buang label kembar yang sudah kosong. “Pelayanan” dan “pelayanan” menjadi satu label yang bersih."),
+   ("Hapus label yang sudah tidak Anda pakai", "Pilih lalu hapus label basi sekaligus. Semuanya bisa dibatalkan, jadi pembersihan yang terlalu bersemangat tidak pernah bersifat permanen."),
+   ("Ekspor perpustakaan yang sudah rapi", "Unduh .jwlibrary yang sudah diubah lalu pulihkan di JW Library. Kini label Anda konsisten di mana-mana."),
+  ],
+  "sections": [
+   ("Sistem label yang benar-benar membantu", "Begitu label konsisten, penyaringan jadi bisa dipercaya — satu ketukan menampilkan setiap catatan tentang sebuah tema, dari seluruh publikasi. Itulah bedanya antara label sebagai kekacauan dan label sebagai indeks sungguhan atas pelajaran Anda."),
+   ("Label yang konsisten membuat berbagi jadi pekerjaan dua klik", "Pemilih catatan di halaman Bagikan punya saringan labelnya sendiri, jadi label yang bersih juga merupakan cara tercepat mengirimkan sekumpulan catatan kepada seseorang: pilih labelnya, tekan Pilih semua, buat berkasnya. Label yang serampangan merugikan Anda dua kali — sekali saat mencari catatan, dan sekali lagi saat mencoba membagikannya."),
+  ],
+  "faq": [
+   ("Apakah pelabelan ulang massal menyentuh teks catatannya?", "Tidak — ia hanya mengubah label mana yang menempel. Judul dan isi catatan Anda tetap persis seperti yang Anda tulis."),
+   ("Adakah pembatalan kalau saya membuat kesalahan?", "Ada. Penjelajah Pelajaran punya batalkan/ulangi yang lengkap, dan cadangan asli Anda tidak pernah diubah — perubahannya masuk ke salinan hasil ekspor."),
+  ],
+ },
+
+ "manage-jw-library-highlights": {
+  "title": "Cara Mengelola dan Mengganti Warna Sorotan JW Library",
+  "h1": "Mengelola sorotan JW Library Anda: ganti warna dan rapikan sekaligus",
+  "description": "Tertibkan sorotan JW Library bertahun-tahun: ubah warnanya sekaligus, beri kode warna Anda makna yang konsisten, dan telusuri setiap sorotan dalam satu tempat. Di peramban Anda.",
+  "intro": [
+   "Warna sorotan hanya membantu kalau maknanya konsisten. Seiring waktu sorotan kebanyakan orang jadi melenceng — kuning berarti satu hal pada 2019 dan hal lain sekarang, dan tidak ada cara di JW Library untuk melihat semuanya sekaligus atau membetulkannya dalam skala besar. Penjelajah Pelajaran mengumpulkan setiap sorotan ke dalam satu tampilan dan membiarkan Anda mengganti warnanya sekaligus.",
+  ],
+  "steps": [
+   ("Muat cadangan Anda", "Di jwsync.org, buka berkas .jwlibrary Anda di Penjelajah Pelajaran lalu beralih ke tab Sorotan."),
+   ("Telusuri dan saring sorotan Anda", "Lihat setiap sorotan dalam satu daftar, saring menurut warna atau publikasi, dan cari di dalam teks yang disoroti maupun catatan yang tertaut padanya."),
+   ("Ganti warnanya sekaligus", "Pilih banyak sorotan lalu ubah warnanya bersama-sama — misalnya, seragamkan semua yang Anda maksudkan sebagai “ayat kunci” menjadi satu warna di seluruh perpustakaan Anda."),
+   ("Sunting juga catatan yang tertaut", "Kalau sebuah sorotan punya catatan yang menempel, judul dan isi catatan itu bisa Anda sunting di sini juga."),
+   ("Ekspor lalu pulihkan", "Unduh .jwlibrary yang sudah diubah lalu pulihkan di JW Library agar kode warna Anda yang konsisten ada di setiap perangkat."),
+  ],
+  "sections": [
+   ("Putuskan makna warna-warna Anda", "Skema sederhana — satu warna untuk pokok utama, satu untuk ayat yang ingin dihafal, satu untuk pertanyaan yang perlu diteliti — mengubah sorotan menjadi alat belajar, bukan sekadar hiasan. Mengganti warna sekaligus memungkinkan Anda menerapkan skema itu secara surut ke bacaan bertahun-tahun."),
+  ],
+  "faq": [
+   ("Bisakah saya melihat sorotan yang tidak punya catatan?", "Bisa — tab Sorotan menampilkan semuanya, baik yang punya catatan tertaut maupun tidak."),
+   ("Apakah mengganti warna memengaruhi teks di baliknya?", "Tidak, ia hanya mengubah warna sorotannya; teks publikasi dan catatan Anda tidak tersentuh."),
+  ],
+ },
+
+ "jw-library-study-answers": {
+  "title": "Lihat dan Ubah Jawaban Isian Pelajaran JW Library Anda",
+  "h1": "Menemukan jawaban pelajaran JW Library Anda (jawaban isian) dalam satu tempat",
+  "description": "Jawaban yang Anda ketik untuk pertanyaan artikel pelajaran dan buku kerja tersembunyi di dalam cadangan Anda. Tab Jawaban Pelajaran di Penjelajah Pelajaran membiarkan Anda membaca, mencari, dan menyuntingnya sekaligus.",
+  "intro": [
+   "Selagi belajar, Anda mengetik jawaban ke dalam kotak isian artikel pelajaran, Menara Pengawal, dan buku kerja perhimpunan. Semuanya tersimpan di cadangan Anda — tapi JW Library hanya menampilkannya satu per satu, terkubur di dalam publikasinya masing-masing. Tidak ada satu tempat untuk meninjau semua yang pernah Anda tulis. Tab Jawaban Pelajaran di Penjelajah Pelajaran adalah tempat itu.",
+  ],
+  "steps": [
+   ("Muat cadangan Anda ke Penjelajah Pelajaran", "Di jwsync.org, muat berkas .jwlibrary Anda lalu buka tab Jawaban Pelajaran."),
+   ("Baca semua jawaban Anda sekaligus", "Setiap jawaban isian yang pernah Anda ketik muncul dalam satu daftar yang bisa dicari, sehingga Anda bisa meninjau buah pikiran Anda sendiri untuk satu artikel pelajaran penuh dalam sekali pandang."),
+   ("Cari dan sunting", "Temukan sebuah jawaban lewat teksnya, lalu sunting dan perhalus di tempat — berguna saat meninjau sebelum perhimpunan atau merapikan kalimat yang tadinya ditulis terburu-buru."),
+   ("Ekspor atau pulihkan", "Pulihkan berkas yang sudah disunting untuk membawa perubahan Anda kembali ke JW Library, atau salin jawabannya sebagai teks untuk sebuah khotbah atau catatan pribadi."),
+  ],
+  "sections": [
+   ("Kenapa ini berguna sebelum perhimpunan", "Meninjau jawaban yang sudah Anda siapkan dalam satu daftar yang berkesinambungan — alih-alih menggulir setiap paragraf di aplikasi — adalah cara yang lebih cepat untuk menyegarkan apa yang hendak Anda katakan, sekaligus melihat jawaban mana yang masih kosong."),
+  ],
+  "faq": [
+   ("Apakah ini sama dengan catatan pribadi saya?", "Bukan — jawaban isian adalah tanggapan yang Anda ketik ke dalam kotak jawaban sebuah publikasi. Penjelajah Pelajaran menampilkannya di tabnya sendiri, terpisah dari catatan bebas."),
+   ("Apakah ada yang diunggah untuk membaca jawaban saya?", "Tidak. Seperti semua hal di JW Sync, cadangan Anda dibaca di peramban Anda dan tidak pernah dikirim ke mana pun."),
+  ],
+ },
+
+ "extract-jw-library-notes-by-date": {
+  "title": "Ambil Catatan JW Library dari Rentang Tanggal ke Cadangan Baru",
+  "h1": "Mengambil catatan JW Library dalam rentang tanggal ke cadangan baru",
+  "description": "Tarik hanya catatan dari periode tertentu — satu tahun dinas, sebuah kebaktian, sebuah proyek pelajaran — ke dalam cadangan .jwlibrary-nya sendiri yang bersih. Sepenuhnya di peramban Anda.",
+  "intro": [
+   "Kadang Anda menginginkan sepotong perpustakaan Anda, bukan seluruhnya: catatan tahun ini untuk ditinjau, segala sesuatu dari sebuah kebaktian, atau hasil penelitian satu proyek untuk diserahkan kepada seseorang. Penjelajah Pelajaran bisa mengambil catatan dari sebuah rentang tanggal ke dalam cadangan .jwlibrary yang benar-benar baru, tanpa menyentuh perpustakaan utama Anda.",
+  ],
+  "steps": [
+   ("Muat cadangan Anda", "Di jwsync.org, buka berkas .jwlibrary Anda di Penjelajah Pelajaran."),
+   ("Tentukan rentang tanggalnya", "Pilih tanggal mulai dan tanggal akhir untuk catatan yang Anda inginkan — satu tahun dinas, satu bulan, atau tanggal sebuah acara tertentu."),
+   ("Ambil ke dalam cadangan baru", "Ekspor catatan yang cocok ke dalam berkas .jwlibrary yang baru. Berkas itu hanya memuat catatan, sorotan, dan label dari periode tersebut."),
+   ("Pakai berkas hasil pengambilannya", "Pulihkan ke JW Library untuk peninjauan yang terfokus, arsipkan, atau bagikan kepada seseorang yang hanya membutuhkan potongan itu."),
+  ],
+  "sections": [
+   ("Alasan bagus untuk mengambil berdasarkan tanggal", "Arsip tahunan atas pelajaran Anda; berkas bersih berisi catatan kebaktian yang ingin disimpan terpisah; menyerahkan kepada teman belajar hanya catatan dari proyek yang Anda kerjakan bersama; atau memangkas perpustakaan raksasa menjadi potongan-potongan bertanggal yang mudah ditangani — semuanya tanpa mengusik cadangan utama Anda."),
+  ],
+  "faq": [
+   ("Apakah pengambilan ini menghapus catatan itu dari perpustakaan saya?", "Tidak. Ia menyalin catatan yang cocok ke berkas baru; cadangan asli Anda tetap memuat semuanya."),
+   ("Tanggal apa yang dipakainya — saat saya menulis atau terakhir menyunting catatannya?", "Ia memakai cap waktu catatan itu sendiri di dalam cadangan, jadi rentangnya mencerminkan kapan catatan itu dibuat atau diubah."),
+  ],
+ },
+
+ "connect-jw-library-notes-study-map": {
+  "title": "Lihat Bagaimana Catatan JW Library Anda Saling Terhubung — Peta Pelajaran",
+  "h1": "Peta Pelajaran: jaringan pengetahuan pribadi dari catatan JW Library Anda",
+  "description": "Peta Pelajaran mengubah catatan JW Library Anda menjadi jaring interaktif, menautkannya lewat ayat bersama, label bersama, dan kemiripan kata — sehingga Anda bisa melihat tema-tema yang mengalir di sepanjang pelajaran Anda.",
+  "intro": [
+   "Catatan bertahun-tahun menyimpan kaitan yang belum pernah Anda lihat: ayat yang sama dikutip di belasan catatan, tema yang terus-menerus Anda datangi kembali, gagasan yang saling bergema di publikasi berbeda. Peta Pelajaran menggambar kaitan-kaitan itu sebagai grafik interaktif, sehingga bentuk pelajaran Anda sendiri menjadi terlihat.",
+  ],
+  "steps": [
+   ("Buka halaman Statistik Pelajaran lalu muat sebuah cadangan", "Kunjungi jwsync.org/highlights.html lalu muat berkas .jwlibrary Anda. Peta Pelajaran membacanya di peramban Anda."),
+   ("Buka Peta Pelajaran", "Jalankan petanya untuk melihat catatan Anda sebagai titik-titik yang terhubung, tertaut lewat ayat bersama, label bersama, dan kemiripan kata."),
+   ("Jelajahi kaitan-kaitannya", "Beralih antara tampilan Topik dan Catatan, arahkan kursor untuk menyorot kaitan sebuah catatan, seret-seret isinya, dan pakai penggeser kekuatan untuk hanya menampilkan kaitan yang paling erat. Mode layar penuh memberi Anda ruang untuk berkeliling."),
+   ("Bangun dan simpan rantai pelajaran", "Gambar sendiri “rantai pelajaran” antara catatan yang berkaitan untuk merekam sebuah alur penalaran, dan ekspor petanya sebagai gambar PNG untuk disimpan atau dibagikan."),
+  ],
+  "sections": [
+   ("Apa yang diperlihatkan petanya", "Gugusan menunjukkan tema yang paling sering Anda pelajari; sebuah ayat yang tertaut ke banyak catatan menunjukkan ayat yang terus Anda datangi kembali; dan catatan yang berdiri sendiri bisa jadi benang yang layak dikembangkan. Ini cara mempelajari pelajaran Anda sendiri — sekaligus menyiapkan khotbah dengan mengikuti kaitan yang sudah Anda buat."),
+  ],
+  "faq": [
+   ("Apakah petanya butuh banyak catatan supaya berguna?", "Perpustakaan yang sederhana pun sudah menunjukkan kaitan; makin kaya catatan Anda, makin banyak yang diperlihatkan petanya. Perpustakaan yang sangat kecil akan menampilkan saran untuk menambah catatan lebih dulu."),
+   ("Apakah petanya bersifat pribadi?", "Sepenuhnya. Ia dibangun di peramban Anda dari cadangan Anda dan tidak pernah diunggah; bahkan ekspor PNG-nya pun dibuat di perangkat Anda."),
+  ],
+ },
+
+ "review-old-jw-library-notes": {
+  "title": "Cara Meninjau Catatan Lama JW Library Anda (Supaya Melekat)",
+  "h1": "Meninjau catatan lama JW Library dengan Munculkan Lagi — sedikit demi sedikit, tapi rutin",
+  "description": "Catatan yang tidak pernah Anda datangi kembali adalah catatan yang Anda lupakan. Munculkan Lagi menampilkan apa yang Anda tulis pada hari ini di tahun-tahun lalu dan menyusun tinjauan berjarak yang lembut, agar pelajaran lama terus bekerja untuk Anda.",
+  "intro": [
+   "Kebanyakan catatan pelajaran ditulis sekali lalu tak pernah dilihat lagi. Itu pemborosan yang senyap — wawasannya layak direkam, lalu tenggelam ke dasar perpustakaan. Munculkan Lagi mengangkat catatan lama Anda sendiri kembali ke permukaan, beberapa saja setiap kali, sehingga mendatanginya kembali menjadi kebiasaan kecil harian, bukan proyek yang “nanti saja”.",
+  ],
+  "steps": [
+   ("Buka halaman Statistik Pelajaran lalu muat sebuah cadangan", "Kunjungi jwsync.org/highlights.html lalu muat berkas .jwlibrary Anda. Munculkan Lagi membaca catatan Anda di tempat."),
+   ("Lihat “Pada hari ini”", "Munculkan Lagi memunculkan catatan yang Anda tulis pada tanggal ini di tahun-tahun sebelumnya — “ditulis dua tahun lalu hari ini” — menghubungkan Anda kembali dengan pelajaran lama tepat saat hal itu paling bermakna."),
+   ("Lakukan tinjauan harian yang singkat", "Ia menyodorkan beberapa catatan untuk Anda datangi kembali dan tandai sebagai sudah ditinjau. Sedikit demi sedikit, tapi rutin — begitulah pelajaran melekat — dan rentetan Anda bertambah selama kebiasaan itu Anda jaga."),
+   ("Kembalilah besok", "Pengulangan berjarak menjadwalkan catatan untuk muncul kembali dari waktu ke waktu, sehingga yang layak diingat terus datang lagi sampai benar-benar menjadi milik Anda."),
+  ],
+  "sections": [
+   ("Kenapa pengulangan berjarak berhasil", "Meninjau sesuatu tepat ketika Anda hampir melupakannya jauh lebih ampuh daripada menjejalkan sekaligus. Dengan menyebar beberapa catatan ke banyak hari, Munculkan Lagi mengubah perpustakaan yang sudah Anda miliki menjadi tinjauan berkelanjutan yang ringan, yang perlahan-lahan memperdalam apa yang telah Anda pelajari."),
+  ],
+  "faq": [
+   ("Di mana kemajuan tinjauan saya disimpan?", "Di peramban pada perangkat Anda — tidak ada akun dan tidak ada yang diunggah. Rentetan dan jadwalnya sepenuhnya milik Anda."),
+   ("Apakah saya perlu catatan baru untuk ini?", "Tidak — Munculkan Lagi bekerja dengan catatan yang sudah Anda tulis. Makin tua perpustakaan Anda, makin menyenangkan momen “pada hari ini”-nya."),
+  ],
+ },
+
+ "jw-library-achievements-streaks": {
+  "title": "Rentetan, Level, dan Penghargaan Pelajaran JW Library",
+  "h1": "Ubah pelajaran JW Library Anda menjadi rentetan, level, dan penghargaan",
+  "description": "Lihat rentetan pelajaran Anda, daki 60 level dalam 12 tingkat pada Perjalanan Pelajaran Anda, dan buka sekitar 200 penghargaan — semuanya dibaca secara pribadi dari cadangan JW Library Anda sendiri.",
+  "intro": [
+   "Konsistensi adalah bagian tersulit dari pelajaran pribadi, dan kemajuan yang tidak terlihat mudah sekali diabaikan. Halaman Statistik Pelajaran mengubah riwayat cadangan Anda menjadi sesuatu yang bisa Anda saksikan bertumbuh: rentetan, level, dan penghargaan yang mencerminkan pelajaran yang sungguh-sungguh Anda lakukan — tanpa target yang dipaksakan, sekadar catatan Anda sendiri yang dibuat terlihat.",
+  ],
+  "steps": [
+   ("Buka halaman Statistik Pelajaran", "Kunjungi jwsync.org/highlights.html lalu muat cadangan .jwlibrary Anda. Semuanya dihitung di peramban Anda."),
+   ("Periksa rentetan Anda", "Lihat rentetan pelajaran terpanjang dan terkini Anda, irama mingguan Anda, serta jam dan bulan tersibuk Anda — denyut dari kebiasaan belajar Anda."),
+   ("Daki Perjalanan Pelajaran Anda", "Melajulah melewati 60 level dalam 12 tingkat bernama (dari Benih sampai Selalu Hijau), lengkap dengan bola cahaya yang berganti warna dan perayaan naik level, berdasarkan pelajaran Anda sepanjang masa."),
+   ("Kumpulkan penghargaan", "Buka sekitar 200 penghargaan dari kelangkaan Umum sampai Legendaris, termasuk medali bertema yang peka terhadap isi catatan; buka medali mana pun untuk melihat kemajuan Anda menuju yang berikutnya."),
+  ],
+  "sections": [
+   ("Dorongan tanpa tekanan", "Ini bukan target yang ditetapkan orang lain — ini cermin dari apa yang sudah Anda lakukan. Melihat rentetan yang tidak ingin Anda putuskan, atau level yang tinggal sedikit lagi tercapai, adalah dorongan lembut untuk meneruskan kebiasaan baik itu. Dan Kartu untuk Dibagikan merangkum tahun Anda tanpa memperlihatkan satu pun catatan pribadi."),
+  ],
+  "faq": [
+   ("Apakah rentetan dan penghargaan diperbarui dengan sendirinya?", "Semuanya mencerminkan cadangan yang Anda muat, jadi buatlah cadangan baru untuk melihat kemajuan terkini Anda. Tidak ada yang berjalan di latar belakang."),
+   ("Apakah ada yang dibagikan atau diunggah dari ini?", "Tidak. Semuanya dihitung di perangkat Anda dari cadangan Anda; hanya kartu ringkasan yang bisa Anda pilih untuk dibagikan, dan kartu itu tidak memuat teks catatan apa pun."),
+  ],
+ },
+
+ "share-convention-assembly-notes": {
+  "title": "Cara Membagikan Catatan Kebaktian dari JW Library",
+  "h1": "Membagikan catatan kebaktian, kebaktian wilayah, dan perhimpunan Anda",
+  "description": "Teruskan catatan kebaktian atau perhimpunan Anda kepada keluarga dan teman sebagai berkas kecil — tanpa menyerahkan seluruh perpustakaan Anda atau menimpa milik mereka. Pemakaian praktis dari berbagi catatan.",
+  "intro": [
+   "Anda mencatat dengan saksama sepanjang sebuah kebaktian; teman yang melewatkan satu sesi pasti senang mendapatkannya; anggota keluarga menginginkan pokok-pokoknya untuk mereka tinjau sendiri. Mengirim seluruh cadangan Anda jelas berlebihan dan akan menghapus catatan si penerima kalau dipulihkan. Berbagi catatan memungkinkan Anda meneruskan persis catatan yang Anda inginkan — dan membiarkan penerimanya menyimpan semua yang sudah dia punya.",
+  ],
+  "steps": [
+   ("Muat cadangan Anda di halaman Bagikan", "Kunjungi jwsync.org/share.html lalu muat berkas .jwlibrary Anda."),
+   ("Pilih catatan kebaktiannya saja", "Ambil label acaranya dari saringan label di pemilih catatan lalu tekan Pilih semua — daftarnya sudah persis berisi catatan yang Anda labeli. Sorotan yang menempel pada catatan itu ikut serta."),
+   ("Kirim berkas berbagi yang kecil itu", "JW Sync membuat berkas kecil yang hanya memuat catatan tersebut. Kirim sesuka Anda — aplikasi pesan, surel, AirDrop. Tanpa server, tanpa akun."),
+   ("Keluarga dan teman menggabungkannya", "Setiap orang membuka halaman yang sama, memuat berkas Anda bersama cadangannya sendiri, dan mendapat cadangan baru dengan catatan Anda di dalamnya. Catatan mereka sendiri tidak pernah tertimpa, dan catatan Anda yang diimpor datang sudah berlabel sehingga mudah ditemukan."),
+  ],
+  "sections": [
+   ("Sebuah label membuat ini jadi sangat mudah", "Kalau Anda melabeli catatan Anda selama acaranya berlangsung (misalnya “Kebaktian 2026”), memilihnya sesudah itu hanya perlu satu klik saringan dan satu Pilih semua. Justru karena inilah membuat label baru di awal setiap kebaktian, kebaktian wilayah, atau perhimpunan istimewa sangat berharga."),
+  ],
+  "faq": [
+   ("Bisakah saya membagikannya kepada beberapa orang sekaligus?", "Bisa — berkas berbagi hanyalah sebuah berkas. Kirim kepada sebanyak apa pun orang yang Anda mau; masing-masing menggabungkannya ke perpustakaannya sendiri secara terpisah."),
+   ("Apakah seluruh perpustakaan saya akan terlihat?", "Tidak. Hanya catatan yang Anda pilih yang ada di berkas itu; sisa perpustakaan Anda tetap pribadi."),
+  ],
+ },
+
+ "share-jw-library-notes-by-tag": {
+  "title": "Bagikan Hanya Catatan JW Library di Bawah Satu Label",
+  "h1": "Membagikan hanya catatan yang membawa satu label",
+  "description": "Kirim satu topik, satu proyek, atau catatan untuk satu pelajar alih-alih seluruh perpustakaan Anda — dan label Anda ikut serta, sehingga semuanya tiba dalam keadaan tertata di sisi sana.",
+  "intro": [
+   "Label biasanya adalah satuan berbagi yang paling alami. Anda melabeli segala yang Anda kumpulkan tentang sebuah pokok, segala dari satu acara, atau segala yang Anda bahas bersama satu orang — dan kumpulan itulah, bukan seluruh perpustakaan Anda, yang sebenarnya diinginkan orang lain.",
+   "Berbagi catatan di JW Sync bekerja per catatan, jadi sebuah label sekadar menjadi daftar yang Anda centang. Catatannya membawa serta labelnya saat keluar, artinya orang yang menerimanya bisa menyaring kumpulan yang persis sama di dalam perpustakaannya sendiri sesudahnya.",
+  ],
+  "steps": [
+   ("Pastikan catatannya membawa label itu", "Labeli di JW Library sambil jalan, atau buka cadangan Anda di Penjelajah Pelajaran pada jwsync.org lalu pakai penyunting label untuk menambahkan label ke banyak catatan sekaligus. Pelabelan yang konsisten sekarang itulah yang membuat berbagi jadi pekerjaan semenit nanti."),
+   ("Buka halaman Bagikan lalu muat cadangan Anda", "Kunjungi jwsync.org/share.html, pilih Kirim catatan, dan muat berkas .jwlibrary Anda. Berkas itu dibaca di peramban Anda dan tidak pernah meninggalkan perangkat Anda."),
+   ("Ambil labelnya dari saringan, lalu Pilih semua", "Pemilih catatan punya saringan label yang mencantumkan setiap label di cadangan Anda beserta jumlah catatan di bawahnya. Pilih label Anda dan daftarnya menyempit tepat ke catatan-catatan itu; Pilih semua mencentang seluruhnya. Itulah seluruh pemilihannya — dua klik."),
+   ("Buat berkasnya lalu kirim", "JW Sync membangun berkas berbagi kecil yang hanya memuat catatan yang Anda centang. Kirim lewat obrolan, surel, atau AirDrop — tidak ada server yang terlibat dan tidak ada akun di kedua sisi."),
+   ("Dia menambahkannya ke cadangannya sendiri", "Orang itu membuka halaman yang sama, memilih Terima, melihat pratinjau catatannya, lalu menambahkannya ke cadangannya. Label Anda tiba bersama catatannya, ditambah satu label penanda untuk impor itu, sehingga seluruh kumpulannya juga hanya sejauh satu saringan baginya."),
+  ],
+  "sections": [
+   ("Kenapa membagikan label dan bukan cadangan", "Menyerahkan cadangan .jwlibrary utuh berarti memberikan semua yang pernah Anda tulis, dan memulihkannya akan menghapus catatan orang itu sendiri. Membagikan pilihan berlabel adalah kebalikannya dalam kedua hal itu: dia hanya melihat apa yang Anda pilih, dan tidak kehilangan apa pun miliknya."),
+   ("Mempersempit lebih jauh, atau berbagi lintas label", "Saringan label dan kotak pencarian bekerja bersama: pilih sebuah label, lalu ketik sebuah kata untuk mempersempitnya lagi, dan Pilih semua tetap hanya mencentang apa yang ada di hadapan Anda. Pencarian juga mencocokkan nama label, jadi satu kata kunci yang dipakai beberapa label mengumpulkan semuanya dalam sekali jalan. Setiap catatan dalam daftar menampilkan label yang dibawanya, jadi Anda bisa melihat apa yang Anda kirim sebelum mengirimnya."),
+   ("Label yang layak disimpan untuk berbagi", "Ada baiknya menyimpan beberapa label yang memang ada semata-mata untuk dibagikan — nama sebuah acara, pokok yang Anda teliti untuk orang lain, atau orang yang Anda ajak belajar. Ketika saatnya tiba untuk mengirim sesuatu, tak perlu berburu: kumpulannya sudah tersusun."),
+  ],
+  "faq": [
+   ("Apakah label saya ikut sampai ke orang itu?", "Ya. Catatan yang dibagikan membawa labelnya, dan impornya diberi label tersendiri, sehingga penerimanya bisa menemukan, meninjau, atau menghapus seluruh kumpulan itu nanti."),
+   ("Bagaimana kalau sebuah catatan punya beberapa label?", "Catatan itu muncul di bawah masing-masing label dalam saringan, dan semua labelnya ikut serta bersamanya. Menyaring dengan satu label tidak pernah menanggalkan label lainnya."),
+   ("Apakah berbagi menghapus catatan itu dari perpustakaan saya?", "Tidak. Berbagi menyalin catatan ke sebuah berkas kecil; cadangan dan aplikasi Anda tidak tersentuh."),
+   ("Bisakah saya mengirim label yang sama kepada beberapa orang?", "Bisa — berkas berbagi adalah berkas biasa. Kirim kepada sebanyak apa pun orang yang Anda mau, dan masing-masing menambahkannya ke perpustakaannya sendiri secara terpisah."),
+  ],
+ },
+
+ "share-notes-with-bible-student": {
+  "title": "Bagikan Catatan JW Library kepada Pelajar Alkitab",
+  "h1": "Membagikan catatan pelajaran kepada orang yang Anda ajak belajar Alkitab",
+  "description": "Kirim catatan untuk sebuah pelajaran — ayat, perumpamaan, pokok-pokok yang Anda siapkan — langsung ke JW Library milik orang itu, tanpa menyentuh apa pun yang dia tulis sendiri.",
+  "intro": [
+   "Ketika Anda menyiapkan sebuah pelajaran, sebagian besar hasil kerjanya berakhir di catatan Anda sendiri: ayat-ayat tambahan, perumpamaan yang membuat sebuah pokok mengena, jawaban atas pertanyaan yang dia ajukan minggu lalu. Membacakannya adalah satu hal; meninggalkan salinan yang bisa dia baca ulang sepanjang minggu adalah hal lain.",
+   "Berbagi catatan menaruh catatan yang Anda siapkan ke dalam perpustakaannya sebagai catatan JW Library yang sesungguhnya, tertaut ke paragraf dan ayat yang sama — bukan sebagai tangkapan layar atau pesan yang akan dia lewati saat menggulir.",
+  ],
+  "steps": [
+   ("Siapkan catatan pelajarannya di JW Library", "Tulis catatannya seperti biasa, pada paragraf dan ayat yang dibahas pelajaran itu. Beri sebuah label — nama orangnya, atau publikasinya — supaya kumpulannya mudah dipilih nanti."),
+   ("Buka halaman Bagikan lalu muat cadangan Anda", "Buat cadangan (Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan), lalu buka jwsync.org/share.html, pilih Kirim catatan, dan muat berkasnya. Berkas itu tidak pernah meninggalkan perangkat Anda."),
+   ("Centang catatan untuk pelajaran ini", "Saring pemilihnya dengan label yang Anda pakai lalu tekan Pilih semua, atau cari dan centang satu per satu. Buat berkas berbaginya — segala hal lain di perpustakaan Anda tetap di tempatnya."),
+   ("Kirim dan tuntun dia menerimanya", "Dia butuh cadangannya sendiri lebih dulu — Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan. Lalu dia membuka jwsync.org/share.html, memilih Terima, memuat berkas Anda dan cadangannya, dan mengunduh cadangan yang sudah diperbarui."),
+   ("Dia memulihkannya di JW Library", "Cadangan dan Pemulihan → Pulihkan, pilih berkas yang sudah diperbarui, dan catatan Anda muncul di perpustakaannya berdampingan dengan miliknya sendiri — berlabel, sehingga dia tahu mana yang datang dari Anda."),
+  ],
+  "sections": [
+   ("Catatannya tidak pernah tertimpa", "Inilah perbedaan penting dibandingkan mengirim sebuah cadangan. Pemulihan mengganti seluruh perpustakaan sebuah perangkat; menerima catatan berbagi justru menambahkannya. Apa pun yang dia tulis sendiri — termasuk pada paragraf yang sama persis — tetap seperti semula."),
+   ("Irama mingguan yang hanya perlu dua menit", "Setelah kalian berdua melakukannya sekali, rutinitasnya jadi singkat: siapkan, centang, kirim, pulihkan. Banyak yang merasa paling praktis mengirim catatannya tepat setelah persiapan, sehingga si pelajar sudah memilikinya sebelum pelajaran, bukan sesudahnya."),
+  ],
+  "faq": [
+   ("Apakah pelajarnya butuh akun atau aplikasi yang dipasang?", "Tidak ada akun di mana pun, dan tidak ada yang perlu dipasang selain JW Library itu sendiri — halaman berbaginya adalah halaman web biasa."),
+   ("Bagaimana kalau pelajarnya belum pernah membuat cadangan?", "Dia membuatnya dulu, di JW Library lewat Pelajaran Pribadi → Cadangan dan Pemulihan. Perpustakaan yang tampak kosong pun tetap bisa; cadangan itulah yang menjadi tempat catatan berbagi ditambahkan."),
+   ("Bisakah saya menarik kembali catatannya nanti?", "Berkas itu hak Anda untuk dikirim atau tidak. Begitu ada di tangan seseorang, berkas itu miliknya, persis seperti pesan apa pun — jadi bagikan hanya apa yang nyaman Anda bagikan secara tertulis."),
+  ],
+ },
+
+ "share-meeting-notes-with-family": {
+  "title": "Bagikan Catatan Perhimpunan kepada Keluarga atau Serumah",
+  "h1": "Membagikan catatan perhimpunan minggu ini kepada keluarga",
+  "description": "Ada yang sakit, bekerja, atau bepergian — kirimkan catatan minggu itu sebagai berkas kecil yang bisa dia tambahkan ke JW Library-nya sendiri, tanpa ada yang kehilangan apa pun.",
+  "intro": [
+   "Di kebanyakan rumah tangga, setiap orang mencatat sendiri di perangkatnya sendiri, dan selalu ada yang melewatkan perhimpunan. Membacakan catatan Anda saat makan malam berguna sekali itu saja; menaruhnya di perpustakaan orang itulah yang memungkinkannya memakai bahan tersebut nanti, di tempat yang benar-benar akan dia cari.",
+   "Karena berbagi dilakukan per catatan, bukan per cadangan, beberapa orang bisa bertukar catatan dengan bebas tanpa ada perpustakaan siapa pun yang tertimpa.",
+  ],
+  "steps": [
+   ("Cadangkan perangkat tempat Anda mencatat", "JW Library → Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan."),
+   ("Pilih catatan minggu itu", "Di jwsync.org/share.html pilih Kirim catatan, muat cadangan Anda, lalu centang catatan minggu ini — mencari berdasarkan publikasinya menyatukannya dengan cepat, dan kalau Anda melabeli catatan minggu itu, saringan label mengumpulkannya dalam satu klik."),
+   ("Kirim di obrolan keluarga", "Buat berkas berbaginya lalu kirim lewat cara yang sudah biasa dipakai di rumah — aplikasi pesan, surel, AirDrop. Berkasnya kecil dan hanya berisi catatan yang Anda centang."),
+   ("Masing-masing menambahkannya ke cadangannya sendiri", "Mereka membuka halaman yang sama, memilih Terima, memuat berkas Anda bersama cadangannya sendiri, mengunduh cadangan yang sudah diperbarui, lalu memulihkannya di JW Library."),
+  ],
+  "sections": [
+   ("Perpustakaan setiap orang tetap miliknya sendiri", "Catatan siapa pun tidak ada yang diganti, dan tidak ada yang harus menyerahkan seluruh perpustakaannya untuk ikut serta. Catatan yang diimpor tiba di bawah sebuah label, sehingga setiap orang bisa melihat sekilas catatan mana yang datang dari orang lain dan menghapus seluruh kumpulan itu nanti kalau memang tidak ingin menyimpannya."),
+   ("Ibadat keluarga: mengumpulkan, bukan menyebarkan", "Alat yang sama bekerja ke arah sebaliknya. Kalau semua orang mencatat selama ibadat keluarga, satu orang bisa mengumpulkan berkas berbagi milik yang lain ke dalam satu cadangan dan berakhir dengan catatan gabungan seisi rumah atas bahan yang sama."),
+  ],
+  "faq": [
+   ("Bisakah perangkat anak-anak ikut serta?", "Perangkat apa pun yang bisa menjalankan JW Library dan membuka halaman web bisa ikut. Langkahnya sama persis di ponsel, tablet, maupun komputer."),
+   ("Apakah kami harus memakai platform yang sama?", "Tidak. Android, iPhone, iPad, dan aplikasi Windows semuanya memakai format cadangan yang sama, jadi catatan berpindah di antaranya tanpa konversi."),
+  ],
+ },
+
+ "receive-shared-jw-library-notes": {
+  "title": "Seseorang Mengirimi Saya Catatan JW Library — Bagaimana Membukanya?",
+  "h1": "Menambahkan catatan yang dibagikan seseorang ke JW Library Anda sendiri",
+  "description": "Anda dikirimi berkas catatan berbagi atau sebongkah teks berbagi. Inilah cara melihat pratinjaunya dan menambahkannya ke cadangan JW Library Anda sendiri tanpa kehilangan satu catatan pun milik Anda.",
+  "intro": [
+   "Catatan JW Library yang dibagikan datang sebagai berkas kecil (berakhiran .jwshare.json) atau sebagai bongkahan teks yang ditempelkan ke dalam sebuah pesan. JW Library sendiri tidak bisa membuka keduanya — tapi Anda memang tidak membutuhkannya. Sisi penerima di JW Sync membaca catatan berbagi itu, menunjukkan isinya kepada Anda, lalu menuliskannya ke dalam salah satu cadangan Anda.",
+   "Seluruh pertukaran ini berlangsung di perangkat Anda. Tidak ada akun, tidak ada yang diunggah, dan catatan Anda sendiri hanya ditambahi, tidak pernah diganti.",
+  ],
+  "steps": [
+   ("Buat dulu cadangan perpustakaan Anda sendiri", "Di JW Library: Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan. Berkas inilah yang akan menerima tambahan catatan berbagi itu, jadi sebaiknya masih baru."),
+   ("Buka halaman Bagikan lalu pilih Terima", "Kunjungi jwsync.org/share.html lalu pilih Terima catatan."),
+   ("Muat apa yang dikirimkan kepada Anda", "Pilih berkas .jwshare.json-nya, atau tempelkan langsung teks berbaginya ke dalam kotak kalau datangnya lewat pesan. Bagaimanapun caranya, Anda mendapat pratinjau setiap catatan yang hanya bisa dibaca sebelum apa pun ditulis."),
+   ("Tambahkan ke cadangan Anda", "Muat cadangan Anda sendiri, pilih label yang akan dibawa catatan yang diimpor, lalu tambahkan. JW Sync membangun berkas cadangan yang sudah diperbarui untuk Anda unduh."),
+   ("Pulihkan cadangan yang diperbarui itu di JW Library", "Pelajaran Pribadi → Cadangan dan Pemulihan → Pulihkan, lalu pilih berkas yang sudah diperbarui. Kini catatan berbagi itu ada di perpustakaan Anda, tepat pada paragraf dan ayat yang benar."),
+  ],
+  "sections": [
+   ("Tidak ada milik Anda yang diganti", "Catatan berbagi ditambahkan sebagai catatan baru. Bahkan ketika sebuah catatan berbagi jatuh pada paragraf yang sudah pernah Anda tulisi, keduanya tetap ada — milik Anda tak tersentuh, miliknya berdampingan dengannya. Satu hal yang perlu diingat adalah aturan pemulihan yang biasa: pulihkan cadangan yang sudah diperbarui, bukan yang lama."),
+   ("Berubah pikiran belakangan?", "Setiap catatan yang diimpor membawa label yang Anda pilih saat menambahkannya. Buka cadangan Anda di Penjelajah Pelajaran, saring dengan label itu, dan Anda bisa meninjau atau menghapus seluruh kumpulannya sekaligus."),
+  ],
+  "faq": [
+   ("Berkasnya datang dengan nama berubah menjadi .txt atau terbuka sebagai teks — apakah rusak?", "Tidak. Aplikasi pesan sering melakukan itu. Salin teksnya lalu tempelkan ke kotak Terima; hasilnya sama persis."),
+   ("Apakah saya butuh seluruh cadangan si pengirim?", "Tidak. Berkas berbagi hanya memuat catatan yang dia pilih untuk dikirim — tidak ada apa pun lagi dari perpustakaannya."),
+   ("Apakah ada yang diunggah saat saya melihat pratinjau catatannya?", "Tidak. Membaca berkas berbagi, melihat pratinjaunya, dan menulis cadangan yang diperbarui semuanya berlangsung di peramban pada perangkat Anda."),
+  ],
+ },
+
+ "share-notes-with-study-group": {
+  "title": "Bagikan Catatan Penelitian kepada Kelompok Belajar",
+  "h1": "Membagikan penelitian kepada sebuah kelompok — dan mengumpulkan milik mereka kembali",
+  "description": "Satu berkas, banyak orang: kirimkan sekumpulan catatan penelitian kepada semua orang yang meneliti pokok yang sama, lalu kumpulkan apa yang mereka kirimkan balik ke dalam satu kumpulan gabungan milik Anda sendiri.",
+  "intro": [
+   "Ketika beberapa orang menggali pokok yang sama, hasil penelitiannya biasanya berserakan — satu orang menemukan rujukan silangnya, yang lain latar belakang sejarahnya, yang ketiga perumpamaannya. Melihat tangkapan layar satu sama lain tidak sama dengan memiliki bahan itu di perpustakaan Anda sendiri, pada ayat yang sama, dan bisa dicari lagi tahun depan.",
+   "Karena berkas berbagi hanyalah sebuah berkas, satu kali ekspor sudah melayani seluruh kelompok, dan mekanisme yang sama membawa hasil kerja mereka kembali kepada Anda.",
+  ],
+  "steps": [
+   ("Labeli penelitian Anda sambil mengumpulkannya", "Beri pokok itu sebuah label di JW Library supaya kumpulannya tetap menyatu. Di Penjelajah Pelajaran Anda bisa menambahkan label ke banyak catatan sekaligus kalau saat itu Anda lupa melabelinya."),
+   ("Buat satu berkas berbagi untuk kelompoknya", "Di jwsync.org/share.html pilih Kirim catatan, muat cadangan Anda, ambil label pokoknya dari saringan label, tekan Pilih semua, lalu buat berkasnya."),
+   ("Kirim sekali saja", "Kirim berkas yang sama kepada semua orang — di obrolan kelompok, surel ke beberapa orang, atau apa pun yang sudah biasa dipakai kelompok itu. Tidak ada penyiapan per orang dan tidak ada salinan di server."),
+   ("Minta milik mereka sebagai gantinya", "Setiap orang bisa melakukan hal yang persis sama dari sisinya. Tambahkan setiap berkas yang Anda terima ke cadangan Anda satu per satu, dan beri setiap impor labelnya sendiri — nama pengirimnya cocok sekali — supaya Anda selalu tahu penelitian siapa yang mana."),
+  ],
+  "sections": [
+   ("Satu kumpulan gabungan, tapi sumbernya tetap jelas", "Setelah beberapa putaran, seluruh penelitian kelompok tentang pokok itu ada di perpustakaan Anda sendiri, pada paragraf dan ayat yang tepat, dengan setiap sumbangan berlabel sumbernya. Pencarian menemukan semuanya sekaligus; dan labelnya memungkinkan Anda memisahkannya lagi kapan pun Anda mau."),
+   ("Tidak ada yang harus membuka perpustakaannya", "Setiap orang hanya membagikan catatan yang dia centang. Sisanya — pelajaran pribadi, pengingat untuk diri sendiri, dan segala lainnya — tidak pernah masuk ke dalam berkas itu."),
+  ],
+  "faq": [
+   ("Adakah batas berapa banyak catatan yang bisa saya bagikan sekaligus?", "Secara praktis, tidak ada. Catatan itu kecil; kumpulan yang besar sekalipun tetap menghasilkan berkas yang bisa Anda kirim lewat pesan."),
+   ("Bagaimana kalau dua orang mengirimi saya catatan yang sama?", "Anda akan melihatnya dua kali, masing-masing di bawah label pengirimnya. Pencarian di Penjelajah Pelajaran memudahkan Anda menemukan dan menghapus yang nyaris kembar."),
+   ("Bisakah seseorang menerima tanpa mengirim balik apa pun?", "Bisa. Menerima dan mengirim berdiri sendiri-sendiri — tidak ada yang wajib berbagi untuk bisa menambahkan apa yang diberikan kepadanya."),
+  ],
+ },
+
+ "share-talk-preparation-notes": {
+  "title": "Serahkan Hasil Penelitian di Balik Sebuah Khotbah atau Tugas",
+  "h1": "Meneruskan hasil penelitian khotbah dan tugas Anda",
+  "description": "Anda yang menggali bahan untuk sebuah khotbah, bagian acara, atau tugas. Inilah cara menyerahkan penelitiannya kepada siapa pun yang membutuhkannya berikutnya — sebagai catatan sungguhan di perpustakaannya, atau sebagai teks biasa untuk sebuah dokumen.",
+  "intro": [
+   "Persiapan jarang sekali terpakai hanya sekali. Ayat-ayat yang Anda telusuri, latar belakang yang Anda baca, dan cara Anda akhirnya memutuskan membingkai sebuah pokok — orang yang membawakan bahan yang sama nanti tentu lebih suka berangkat dari situ daripada dari halaman kosong.",
+   "JW Sync memberi Anda dua cara meneruskannya, dan keduanya cocok untuk orang yang berbeda: sebagai catatan yang mendarat di JW Library orang itu, atau sebagai teks biasa yang bisa dia tempelkan ke sebuah dokumen.",
+  ],
+  "steps": [
+   ("Kumpulkan penelitiannya di bawah satu label", "Selagi menyiapkan, labeli catatannya dengan temanya atau tugasnya. Kalau catatannya sudah ditulis dan belum berlabel, buka cadangan Anda di Penjelajah Pelajaran lalu labeli semuanya sekaligus dalam beberapa menit."),
+   ("Putuskan bentuk mana yang cocok untuk orang itu", "Orang yang belajar di JW Library menginginkan catatan di perpustakaannya. Orang yang sedang menyusun dokumen menginginkan teks. Anda bisa membuat keduanya dari kumpulan yang sama."),
+   ("Untuk mengirim catatan: pakai halaman Bagikan", "Di jwsync.org/share.html pilih Kirim catatan, muat cadangan Anda, saring dengan label yang Anda pakai lalu tekan Pilih semua, kemudian buat berkasnya. Dia menambahkannya ke cadangannya sendiri lalu memulihkannya — catatannya sendiri tidak tersentuh."),
+   ("Untuk mengirim teks: ekspor dari Penjelajah Pelajaran", "Saring ke kumpulan yang sama lalu salin atau ekspor sebagai Markdown atau teks biasa. Formatnya bertahan, jadi kerangka yang tersusun rapi tetap rapi saat ditempelkan ke sebuah dokumen."),
+  ],
+  "sections": [
+   ("Simpan salinan untuk diri sendiri, dalam bentuk yang bisa Anda temukan lagi", "Ekspor yang sama layak disimpan untuk pemakaian Anda sendiri. Sebuah label ditambah rentang tanggal membuat seluruh persiapan itu bisa ditarik kembali bertahun-tahun kemudian, dan justru saat itulah Anda akan membutuhkannya — sementara pengambilan berdasarkan tanggal di Penjelajah Pelajaran mengubah rentang waktu mana pun menjadi berkasnya sendiri."),
+  ],
+  "faq": [
+   ("Apakah ayat-ayatnya tetap tertaut ke ayat yang benar?", "Ya — catatan yang dibagikan mempertahankan paragraf dan ayat tempatnya menempel, jadi semuanya mendarat di tempat yang tepat di perpustakaan orang itu."),
+   ("Bisakah saya membagikan catatan yang ada sorotannya?", "Bisa. Sorotan yang menempel pada catatan yang Anda bagikan ikut serta bersamanya."),
+  ],
+ },
+
+ "weekly-meeting-preparation-jw-library-notes": {
+  "title": "Bersiap untuk Perhimpunan dengan Catatan yang Sudah Anda Tulis",
+  "h1": "Persiapan mingguan dengan catatan yang sudah Anda punya",
+  "description": "Anda pernah mempelajari bahan ini sebelumnya. Inilah rutinitas mingguan singkat yang memunculkan catatan lama, sorotan, dan jawaban isian Anda atas publikasi yang sama sebelum Anda bersiap lagi.",
+  "intro": [
+   "Kebanyakan orang bersiap setiap minggu dari halaman kosong, padahal mereka sudah beberapa kali menulis tentang pokok yang sama — kadang ayat yang sama pula. Pemikiran terdahulu itu tersimpan di perpustakaan Anda; satu-satunya masalah adalah tidak ada yang membawanya kembali kepada Anda pada saat yang tepat.",
+   "Rutinitas lima menit di awal persiapan membereskan hal itu, dan ia tidak memakai apa pun selain cadangan yang sudah Anda punya.",
+  ],
+  "steps": [
+   ("Muat cadangan terkini di Penjelajah Pelajaran", "Buat cadangan di JW Library, lalu buka di jwsync.org. Semuanya dibaca di peramban Anda."),
+   ("Cari pokoknya sebelum Anda mulai", "Cari ayat temanya, pokoknya, atau publikasinya. Apa pun yang pernah Anda tulis tentangnya di tahun-tahun lalu muncul bersama-sama, dari setiap publikasi tempatnya berada."),
+   ("Periksa jawaban isian Anda", "Tampilan Jawaban Pelajaran mengumpulkan jawaban yang Anda ketik pada pertanyaan pelajaran, sehingga putaran-putaran sebelumnya atas bahan yang sama tersedia untuk dikembangkan, bukan diulang."),
+   ("Tambahkan yang kurang, lalu kembalikan", "Catatan bisa disunting atau ditambahkan di sana juga — judul, teks, label, warna sorotan. Ekspor cadangan yang sudah disunting lalu pulihkan di JW Library, dan persiapan Anda sudah ada di aplikasi untuk perhimpunan."),
+  ],
+  "sections": [
+   ("Kenapa catatan lama itu penting", "Meninjau kesimpulan Anda yang terakhir mengubah persiapan menjadi sesuatu yang menumpuk. Anda berhenti menemukan ulang pokok yang sama dan mulai membangun di atasnya — dan catatan yang Anda tambahkan minggu ini menjadi titik berangkat untuk putaran berikutnya."),
+   ("Versi yang lebih santai: biarkan catatannya yang mendatangi Anda", "Kalau pencarian mingguan terasa seperti pekerjaan, Munculkan Lagi di halaman Statistik Pelajaran membawa kembali beberapa catatan lama dengan sendirinya setiap hari, termasuk yang Anda tulis pada tanggal ini di tahun-tahun lalu. Manfaatnya sama, tanpa rutinitas yang harus diingat."),
+  ],
+  "faq": [
+   ("Apakah menyunting di peramban langsung mengubah perpustakaan saya?", "Tidak. Anda mengekspor cadangan yang sudah diperbarui lalu memulihkannya di JW Library — aplikasinya hanya berubah oleh pemulihan yang Anda lakukan sendiri."),
+   ("Apakah cadangan saya diunggah saat saya mencarinya?", "Tidak. Berkasnya dibaca di peramban Anda; tidak ada yang dikirim ke mana pun."),
+  ],
+ },
+
+ "print-jw-library-notes": {
+  "title": "Cara Mencetak Catatan JW Library Anda",
+  "h1": "Menuangkan catatan JW Library Anda ke atas kertas",
+  "description": "JW Library tidak punya tombol cetak. Ekspor catatan Anda sebagai teks atau Markdown, tempelkan ke dokumen apa pun, lalu cetak — sebagai jurnal pelajaran, kumpulan catatan untuk orang yang tidak memakai aplikasinya, atau arsip.",
+  "intro": [
+   "Tidak ada cara mencetak dari JW Library, dan tangkapan layar ponsel tidak enak dibaca. Tapi catatan itu milik Anda, dan menuangkannya ke dalam dokumen yang bisa dicetak adalah hal yang sederhana begitu Anda bisa membaca berkas cadangannya.",
+   "Penjelajah Pelajaran membaca cadangan .jwlibrary di peramban Anda dan membiarkan Anda menyalin atau mengekspor kumpulan catatan mana pun sebagai teks biasa atau Markdown — bentuk yang sudah dipahami setiap pengolah kata, aplikasi catatan, dan pencetak.",
+  ],
+  "steps": [
+   ("Buat cadangan lalu buka", "JW Library → Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan, lalu muat berkasnya di jwsync.org."),
+   ("Persempit ke apa yang Anda inginkan di atas kertas", "Saring menurut publikasi, label, warna sorotan, atau rentang tanggal, atau cari sebuah pokok. Mencetak semuanya memang bisa, tapi kumpulan yang sudah disaring biasanya menghasilkan dokumen yang jauh lebih berguna."),
+   ("Salin atau ekspor sebagai teks atau Markdown", "Keluarkan pilihannya sebagai Markdown atau teks biasa. Huruf tebal, miring, dan daftar tetap bertahan, jadi catatan yang tersusun rapi tetap rapi di atas halaman."),
+   ("Tempelkan ke sebuah dokumen lalu cetak", "Pengolah kata atau aplikasi catatan apa pun bisa dipakai. Atur judul dan marginnya sesuai keinginan, lalu cetak atau simpan sebagai PDF."),
+  ],
+  "sections": [
+   ("Membuat jurnal pelajaran", "Rentang tanggal adalah satuan yang paling alami untuk jurnal cetak — satu tahun catatan, atau periode yang mencakup satu publikasi. Mengambil berdasarkan tanggal memberi Anda kumpulan kronologis yang rapi untuk dicetak atau dijilid, dan memilikinya di luar layar terasa memuaskan."),
+   ("Mencetak untuk orang yang tidak memakai aplikasinya", "Tidak semua orang belajar dari perangkat. Kumpulan catatan cetak atas bahan yang sedang dibahas sungguh berguna bagi orang yang lebih suka kertas, dan waktunya sama saja dua menit seperti ekspor lainnya."),
+  ],
+  "faq": [
+   ("Bisakah saya mencetak sorotan saya juga?", "Tampilan Sorotan mencantumkan bagian-bagian yang Anda tandai, dan daftar itu bisa disalin sebagai teks berdampingan dengan catatan Anda."),
+   ("Apakah mengekspor mengubah sesuatu di JW Library?", "Tidak. Mengekspor membaca salinan cadangan Anda; berkas asli dan aplikasinya tidak tersentuh."),
+  ],
+ },
+
+ "clean-up-duplicate-jw-library-notes": {
+  "title": "Bersihkan Catatan JW Library yang Ganda dan Kosong",
+  "h1": "Membersihkan catatan ganda, catatan kosong, dan kekacauan",
+  "description": "Memulihkan sebuah cadangan dua kali, atau mengimpor catatan yang sama lagi? Library Doctor memindai berkas .jwlibrary Anda di peramban, menemukan yang ganda dan yang kosong, lalu menghasilkan salinan yang bersih.",
+  "intro": [
+   "Perpustakaan mengumpulkan kekacauan. Memulihkan sebuah cadangan ke perangkat yang sudah punya sebagian catatan yang sama, mengimpor kumpulan berbagi dua kali, atau catatan setengah jadi bertahun-tahun yang tak pernah diselesaikan — masing-masing meninggalkan sesuatu, dan JW Library tidak memberi Anda cara menyapunya sekaligus.",
+   "Library Doctor adalah pemeriksaan kesehatan gratis untuk berkas .jwlibrary. Ia memindai cadangannya di peramban Anda, memberi tahu apa yang ditemukannya dengan bahasa yang jelas, dan memperbaiki apa yang bisa diperbaiki dalam satu ketukan.",
+  ],
+  "steps": [
+   ("Cadangkan dulu — seperti biasa", "JW Library → Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan. Simpan berkas ini; inilah pegangan Anda."),
+   ("Jalankan pemeriksaan kesehatannya", "Buka jwsync.org, muat cadangannya, lalu jalankan Library Doctor. Ia memeriksa isi dan struktur berkasnya tanpa mengirimkannya ke mana pun."),
+   ("Baca apa yang ditemukannya", "Catatan ganda, catatan kosong, dan kekacauan lainnya dicantumkan dengan jelas beserta jumlahnya, jadi Anda bisa melihat besarnya masalah sebelum mengubah apa pun."),
+   ("Perbaiki lalu unduh salinan bersihnya", "Satu ketukan menerapkan perbaikannya dan menghasilkan berkas .jwlibrary baru yang sudah dibersihkan. Berkas asli Anda tidak pernah diubah."),
+   ("Pulihkan berkas yang bersih itu", "Cadangan dan Pemulihan → Pulihkan, lalu pilih berkas yang sudah dibersihkan. Perpustakaan Anda tetap sama, hanya tanpa kekacauannya."),
+  ],
+  "sections": [
+   ("Bagaimana catatan ganda bisa muncul sejak awal", "Hampir selalu lewat sebuah pemulihan. Kalau Anda memulihkan cadangan ke perangkat yang sudah membawa sebagian bahan yang sama — atau memulihkan berkas yang sama dua kali lewat jalur berbeda — aplikasinya tidak punya cara untuk tahu bahwa ia sudah pernah melihat catatan-catatan itu."),
+   ("Menggabungkan adalah cara menghindarinya", "Justru inilah sebabnya menggabungkan dua cadangan lebih aman daripada memulihkan yang satu di atas yang lain: penggabungan mengenali bahan yang sudah ada dan menyimpannya sekali saja. Pemeriksaan yang sama berjalan di dalam setiap penggabungan, jadi cadangan gabungan keluar dalam keadaan bersih bahkan kalau berkas masukannya tidak."),
+  ],
+  "faq": [
+   ("Apakah ia akan menghapus catatan yang sebenarnya saya butuhkan?", "Ia menghapus yang benar-benar kembar persis dan catatan kosong — bahan yang memang tidak ada isinya untuk hilang. Dan karena ia menulis berkas baru alih-alih menyunting berkas Anda, yang asli selalu ada untuk Anda kembali."),
+   ("Bisakah ia mengembalikan catatan yang saya hapus di aplikasinya?", "Tidak. Kalau sebuah catatan dihapus di JW Library sebelum cadangannya dibuat, catatan itu tidak ada di berkas tersebut untuk dikembalikan — cadangan yang lebih lama adalah tempat mencarinya."),
+  ],
+ },
+
+ "backup-jw-library-before-phone-repair": {
+  "title": "Cadangkan JW Library Sebelum Setel Ulang Pabrik atau Perbaikan",
+  "h1": "Sebelum setel ulang pabrik, perbaikan, atau menjual ponsel",
+  "description": "Setel ulang menghapus catatan JW Library bersama semua yang lain, dan alat pemindah ponsel tidak membawanya. Buat cadangan, pastikan berkasnya benar-benar bisa dibuka, lalu setel ulang tanpa ada yang dipertaruhkan.",
+  "intro": [
+   "Setel ulang ponselnya, kirim untuk diperbaiki, atau berikan kepada orang lain, dan data pelajaran pribadi JW Library ikut lenyap bersamanya. Foto dan aplikasi kembali dari cadangan awan; catatan, sorotan, dan penanda bertahun-tahun umumnya tidak, karena alat pemindah ponsel melewatkan data pribadi milik aplikasi.",
+   "Solusinya perlu lima menit, dan langkah yang paling sering dilewatkan orang justru yang paling penting: memastikan berkas cadangannya benar-benar bisa dibaca sebelum perangkatnya dihapus.",
+  ],
+  "steps": [
+   ("Buat cadangannya", "JW Library → Pelajaran Pribadi → Cadangan dan Pemulihan → Buat Cadangan. Anda mendapat berkas .jwlibrary — biasanya hanya beberapa megabita."),
+   ("Keluarkan dari perangkatnya", "Kirim ke surel Anda sendiri, atau taruh di Drive, iCloud, atau folder komputer. Cadangan yang hanya ada di ponsel yang hendak Anda hapus bukanlah cadangan."),
+   ("Pastikan berkasnya bisa dibuka sebelum menghapus apa pun", "Muat berkasnya di jwsync.org lalu lihat — catatan, sorotan, dan penandanya semua harus ada, dan pemeriksaan kesehatannya akan menandai apa pun yang bermasalah pada berkas itu. Inilah seluruh maksud latihan ini: mengetahui berkasnya tak terbaca setelah semuanya terlambat sudah tidak ada gunanya."),
+   ("Setel ulang, lalu pulihkan", "Setelah setel ulang atau perbaikan, pasang JW Library, masuk, lalu Cadangan dan Pemulihan → Pulihkan dan pilih berkas Anda."),
+   ("Sempat memakai ponsel pinjaman? Gabungkan, jangan timpa", "Kalau Anda mencatat di perangkat sementara, cadangkan juga perangkat itu lalu gabungkan kedua berkasnya di jwsync.org sebelum memulihkan — kalau tidak, memulihkan cadangan lama akan menghapus apa pun yang Anda tulis selama menunggu."),
+  ],
+  "sections": [
+   ("Kenapa pemeriksaan itu sepadan dengan satu menit tambahan", "Pemindahan yang terputus, penyimpanan awan yang merusak berkas, dan ekstensi yang berganti nama di perjalanan semuanya menghasilkan cadangan yang tampak baik-baik saja di dalam folder tapi gagal saat dipulihkan. Membuka berkasnya lebih dulu mengubah masalah yang senyap menjadi masalah yang masih bisa Anda perbaiki, selagi perangkat aslinya masih memuat datanya."),
+   ("Simpan berkasnya setelah pemulihan", "Jangan menghapusnya begitu perangkat baru berjalan. Cadangan lama adalah satu-satunya jalan kembali dari catatan yang tak sengaja terhapus berbulan-bulan kemudian, dan menyimpannya tidak memakan biaya apa pun."),
+  ],
+  "faq": [
+   ("Apakah publikasi yang sudah saya unduh akan kembali?", "Cadangan membawa data pelajaran pribadi Anda — catatan, sorotan, penanda, label, dan daftar putar. Publikasi cukup diunduh ulang sesudahnya."),
+   ("Apakah berkasnya tetap bisa dipakai kalau saya pindah ke merek atau platform lain?", "Bisa. Format .jwlibrary sama di Android, iPhone, iPad, dan Windows."),
+  ],
+ },
+
+ "jw-library-notes-missing-after-update": {
+  "title": "Catatan JW Library Hilang Setelah Pembaruan atau Pemasangan Ulang",
+  "h1": "Catatan lenyap setelah pembaruan aplikasi, pemasangan ulang, atau pemulihan",
+  "description": "Catatan Anda lenyap setelah memperbarui, memasang ulang, atau masuk kembali. Apa yang harus dilakukan lebih dulu, apa yang jangan dilakukan, dan cara mendapatkannya kembali tanpa kehilangan apa pun yang Anda tulis sejak itu.",
+  "intro": [
+   "Membuka JW Library setelah pembaruan dan mendapati catatan Anda lenyap memang mengagetkan, dan dalam sebagian besar kasus catatan itu masih bisa diselamatkan. Yang menentukan adalah apa yang Anda lakukan dalam beberapa menit berikutnya — khususnya, tidak melakukan satu hal yang mengubah keadaan yang masih bisa diselamatkan menjadi kehilangan permanen.",
+   "Momennya memang tidak enak: JW Library terbuka, dan catatannya tidak ada. Sebelum apa pun, satu nasihat — jangan terburu-buru. Sebagian besar hal yang membuat keadaan ini tak tertolong terjadi dalam sepuluh menit pertama, yaitu dengan menimpa cadangan yang justru masih memuat catatan yang hilang itu.",
+   "Kerjakan langkah-langkah di bawah ini secara berurutan. Tujuannya adalah berakhir dengan satu berkas yang memuat catatan lama sekaligus apa pun yang Anda tulis sejak itu.",
+  ],
+  "steps": [
+   ("Jangan timpa cadangan Anda dulu", "Tahan diri untuk tidak membuat cadangan baru di atas yang lama, dan jangan memulihkan apa pun secara membuta. Berkas cadangan yang lebih lama adalah tempat yang paling mungkin masih memuat catatan Anda."),
+   ("Buru cadangan terbaru yang Anda punya", "Periksa lampiran surel, Google Drive, iCloud Drive, folder unduhan di komputer Anda, dan setiap perangkat lain yang pernah Anda pulihkan. Cadangan itu kecil, jadi orang sering punya lebih banyak salinan daripada yang diingatnya."),
+   ("Lihat isi berkasnya sebelum memulihkannya", "Muat kandidatnya di jwsync.org lalu lihat apa yang sebenarnya ada di dalamnya — berapa catatan, dari publikasi mana, sampai tanggal berapa. Itu memberi tahu Anda apakah berkas itu yang tepat untuk dipakai, sebelum Anda memutuskan memulihkannya."),
+   ("Cadangkan juga perangkat yang sekarang", "Bahkan kalau tampak kosong, cadangkan saja. Kalau Anda menulis apa pun sejak catatannya lenyap, berkas ini adalah satu-satunya salinannya."),
+   ("Gabungkan keduanya, lalu pulihkan", "Gabungkan cadangan lama dengan yang sekarang di jwsync.org. Hasilnya memuat catatan yang diselamatkan sekaligus semua yang ditulis sejak itu, dengan yang kembar disimpan sekali saja. Pulihkan berkas gabungan itu — jangan pernah cadangan lama itu sendirian."),
+  ],
+  "sections": [
+   ("Kenapa memulihkan cadangan lama sendirian adalah langkah yang salah", "Pemulihan mengganti perpustakaan perangkat sepenuhnya. Kalau Anda langsung memulihkan cadangan lama, catatan yang hilang memang kembali tapi semua yang ditulis setelah cadangan itu dibuat akan lenyap. Menggabungkan lebih dulu itulah yang membuat penyelamatan ini tanpa kehilangan."),
+   ("Kalau cadangannya sendiri tidak mau dipulihkan", "Berkas yang memunculkan kesalahan saat pemulihan belum tentu tamat. Jalankan pemeriksaan kesehatan padanya — kerusakan akibat unduhan terputus, sinkronisasi awan, atau ekstensi yang berganti nama sering bisa diperbaiki, dan salinan yang sudah dibersihkan akan dipulihkan seperti biasa."),
+   ("Pertama: jangan buat cadangan baru dulu", "Kalau catatan sudah lenyap, tahan naluri untuk langsung mencadangkan. Cadangan merekam keadaan sekarang, dan kalau keadaan sekarang adalah yang kosong itu, Anda berisiko menimpa berkas bagus yang sudah Anda punya. Cari tahu dulu cadangan apa saja yang ada — di Downloads, Files, surel, atau penyimpanan awan — baru putuskan apa yang harus dilakukan. Tidak ada apa pun di perangkat yang membaik oleh cadangan baru yang dibuat dalam kepanikan."),
+   ("Kenapa sebuah pembaruan bisa tampak menghilangkan catatan", "Penyebab yang biasa bukanlah penghapusan. Pembaruan bisa membuat aplikasi menunjuk ke basis data baru yang kosong sementara yang lama masih ada di penyimpanan; pemasangan ulang — termasuk yang terjadi otomatis akibat pembaruan toko yang gagal di tengah jalan — memulai aplikasi dari nol; dan pada perangkat bersama atau berbanyak profil, aplikasi bisa berakhir berjalan di bawah profil yang berbeda dari sebelumnya. Dalam setiap kasus, catatannya bukan hilang melainkan sekadar tidak sedang dimuat, dan itu pula sebabnya pemulihan dari cadangan biasanya mengembalikan semuanya dengan mulus."),
+   ("Menyelamatkan cadangan lama tanpa membuang hasil kerja baru", "Kalau Anda sudah belajar sejak cadangan itu dibuat, pemulihan biasa menukar satu kehilangan dengan kehilangan lain: ia mengembalikan catatan lama dan menghapus yang lebih baru. Jalan keluarnya adalah mencadangkan keadaan sekarang ke berkas terpisah, menggabungkannya dengan cadangan lama sehingga kedua kumpulan catatan ada dalam satu berkas, lalu memulihkan hasil gabungannya. Anda berakhir dengan catatan yang diselamatkan dan catatan yang baru sekaligus, bukan harus memilih di antaranya."),
+   ("Kalau aplikasinya memasang ulang dirinya sendiri", "Pemasangan ulang membersihkan penyimpanan pribadi aplikasi, jadi apa pun yang tidak ada di cadangan tidak bisa diselamatkan — tidak ada salinan awan untuk diandalkan. Periksa setiap tempat berkas .jwlibrary mungkin tersimpan sebelum menyimpulkan tidak ada, termasuk folder surel terkirim Anda dan setiap penyimpanan awan yang pernah Anda pakai. Begitu menemukan satu, pulihkan, dan sesudah itu simpanlah cadangan di luar perangkat."),
+   ("Setelah semuanya kembali", "Ketika catatan Anda sudah pulih, buatlah satu cadangan lagi lalu simpan di luar perangkat — kejadian yang baru saja Anda alami adalah alasannya. Kalau untuk sampai di sini Anda harus menggabungkan cadangan lama dengan keadaan sekarang, simpan juga kedua berkas sumbernya: keduanya adalah potret bertanggal, dan justru karena punya lebih banyak potret itulah penyelamatan ini jadi mungkin."),
+  ],
+  "faq": [
+   ("Apakah catatannya masih ada di perangkat, di suatu tempat?", "Tidak dalam bentuk yang bisa Anda jangkau dari luar aplikasi. Secara realistis, penyelamatan berarti berkas cadangan yang lebih lama — dan itulah sebabnya menyimpan yang lama begitu penting."),
+   ("Apakah masuk kembali ke akun akan mengembalikan catatannya?", "Tidak. Data pelajaran pribadi tidak disimpan di sebuah akun; ia berada di perangkat dan hanya berpindah lewat berkas cadangan."),
+   ("Bagaimana kalau satu-satunya cadangan yang saya punya berumur berbulan-bulan?", "Gabungkan dengan cadangan perangkat dalam keadaannya sekarang. Anda akan menyelamatkan semua isi berkas lama itu, dan menyimpan semua yang masih ada di perangkat, tanpa harus memilih di antaranya."),
+   ("Apakah catatan saya benar-benar hilang?", "Belum tentu. Kalau ada cadangan di suatu tempat, semua isinya bisa diselamatkan sepenuhnya. Yang tidak bisa diselamatkan hanyalah hasil kerja setelah cadangan terakhir dibuat."),
+   ("Bisakah saya menyatukan cadangan lama dengan apa yang ada di perangkat sekarang?", "Bisa — cadangkan dulu keadaan sekarang, lalu gabungkan berkas itu dengan yang lebih lama dan pulihkan hasilnya. Kedua kumpulan catatan berakhir dalam perpustakaan yang sama."),
+   ("Apakah memulihkan cadangan lama akan menghapus catatan saya yang baru?", "Kalau sendirian, ya, karena pemulihan mengganti data perangkat. Gabungkan dulu cadangan yang sekarang dengan yang lama lalu pulihkan berkas gabungannya."),
+   ("Haruskah saya memasang ulang aplikasinya untuk membereskannya?", "Jangan — memasang ulang membersihkan penyimpanan pribadi aplikasi dan menghilangkan segala peluang menyelamatkan apa yang mungkin masih ada di perangkat. Carilah dulu cadangan yang sudah ada, dan jadikan pemasangan ulang sebagai upaya terakhir, itu pun setelah Anda memilikinya."),
+  ],
+ },
+
+ "help-family-member-move-jw-library-notes": {
+  "title": "Bantu Anggota Keluarga Memindahkan Catatan JW Library Mereka",
+  "h1": "Membantu orang lain memindahkan atau menyelamatkan catatan JW Library-nya",
+  "description": "Andalah yang selalu dimintai tolong membereskan ponsel. Inilah jalan terpendek yang bisa diandalkan untuk memindahkan catatan JW Library milik kerabat ke perangkat baru — termasuk cara melakukannya tanpa membaca catatan mereka.",
+  "intro": [
+   "Cepat atau lambat seseorang akan menyodorkan ponselnya kepada Anda dengan ponsel baru di sebelahnya. Catatan JW Library adalah bagian yang tidak berpindah dengan sendirinya, dan sering kali justru bagian yang paling berarti — pelajaran bertahun-tahun yang tidak akan dibawa oleh alat pemindah mana pun.",
+   "Prosesnya sama seperti ketika Anda melakukannya untuk diri sendiri, dengan satu pertimbangan tambahan yang layak dipikirkan lebih dulu: pekerjaan ini dilakukan di perangkat siapa.",
+  ],
+  "steps": [
+   ("Tuntun dia membuat cadangan di perangkat lama", "JW Library → Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Itu menyimpan sebuah berkas .jwlibrary. Kalau Anda tidak sedang bersamanya, bagian ini bisa dia kerjakan sambil ditelepon."),
+   ("Bawa berkasnya ke tempat yang Anda butuhkan", "Minta dia mengirimkannya ke surelnya sendiri, atau membagikannya kepada Anda. Berkasnya cukup kecil untuk dikirim lewat aplikasi pesan apa pun."),
+   ("Pastikan berkasnya bisa dibuka", "Muat di jwsync.org lalu pastikan catatannya ada. Melakukan ini sebelum perangkat lamanya dihapus atau diberikan kepada orang lain itulah yang mengubah kejutan buruk menjadi bukan apa-apa."),
+   ("Gabungkan kalau perangkat barunya sudah ada catatannya", "Kalau dia sudah memakai ponsel barunya beberapa waktu, cadangkan juga perangkat itu lalu gabungkan kedua berkasnya — kalau tidak, memulihkan cadangan lama akan menghapus semua yang dia tulis di perangkat baru."),
+   ("Tuntun dia melakukan pemulihannya", "Di perangkat baru: Cadangan dan Pemulihan → Pulihkan, lalu pilih berkasnya. Catatan, sorotan, penanda, dan label semuanya muncul."),
+  ],
+  "sections": [
+   ("Melakukannya tanpa membaca catatannya", "Catatan pelajaran pribadi itu bersifat pribadi. Kalau Anda lebih suka tidak melihatnya — atau dia lebih suka Anda tidak melihatnya — kerjakan seluruhnya di perangkatnya: ini halaman web, jadi Anda bisa membuka jwsync.org di ponsel atau tabletnya, memuat berkasnya di sana, dan cadangannya tidak pernah singgah di mesin Anda sendiri. Bagaimanapun caranya tidak ada yang diunggah, tapi dengan cara ini berkasnya sama sekali tidak berpindah dari tangannya."),
+   ("Tinggalkan cadangan yang bisa dia temukan", "Sebelum mengembalikan ponselnya, pastikan berkas cadangannya ada di tempat yang bisa dia temukan lagi — surel atau penyimpanan awan miliknya sendiri, bukan sekadar folder unduhan Anda. Lain kali, mungkin dia tidak membutuhkan Anda sama sekali."),
+  ],
+  "faq": [
+   ("Bisakah saya melakukannya dari jarak jauh?", "Bisa. Kalau dia mampu membuat cadangan dan mengirimkan berkasnya kepada Anda, selebihnya bisa dikerjakan dari jauh — dan pemulihannya hanya beberapa ketukan yang bisa Anda tuntun lewat telepon."),
+   ("Dia memakai Android dan yang baru iPhone. Apakah itu masalah?", "Tidak. Format cadangannya sama persis di Android, iPhone, iPad, dan Windows."),
+   ("Bagaimana kalau dia tidak pernah membuat cadangan dan ponsel lamanya sudah tidak ada?", "Maka tidak ada yang bisa dipulihkan — datanya memang berada di perangkat itu. Ada baiknya langsung membangun kebiasaan mencadangkan secara rutin di ponsel barunya."),
+  ],
+ },
 }

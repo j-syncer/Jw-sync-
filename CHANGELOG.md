@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.25.0] — 2026-08-10
+
+### Indonesian is now complete — all 37 guides
+
+The Indonesian guide tree is finished. Every guide the site publishes in
+English now exists in Indonesian at `/guides/id/`, with its own index, hreflang
+cluster and sitemap entries, and the `/id/` landing page links its popular
+guides in Indonesian rather than falling back to English.
+
+Indonesian shipped its interface in 3.24.0 with one guide translated; the
+remaining 36 landed here.
+
+---
+
 ## [3.24.0] — 2026-08-10
 
 ### Added: Indonesian — the site's 23rd language
