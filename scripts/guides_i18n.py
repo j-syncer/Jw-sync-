@@ -875,6 +875,41 @@ CHROME = {
             "Power tools": "Công cụ nâng cao",
         },
     },
+    "hu": {
+        "lang_name": "Magyar",
+        "lang_label": "Nyelv",
+        "lang_other": "Ez az útmutató más nyelveken",
+        "og_locale": "hu_HU",
+        "site_guides": "JW Sync útmutatók",
+        "nav_guides": "Útmutatók",
+        "nav_community": "Közösség",
+        "nav_open_app": "Alkalmazás megnyitása",
+        "crumb_guides": "Útmutatók",
+        "h_steps": "Lépésről lépésre",
+        "h_faq": "Gyakori kérdések",
+        "h_related": "Kapcsolódó útmutatók",
+        "cta_title": "Csináld most — ingyen, a böngésződben",
+        "cta_body": "A JW Sync teljes egészében a te eszközödön egyesíti, szerkeszti és elemzi a .jwlibrary mentéseket. Nincs fiók, nincs feltöltés, nem kell semmit telepíteni.",
+        "cta_btn": "JW Sync megnyitása →",
+        "index_title": "JW Library mentés-, szinkron- és jegyzetútmutatók | JW Sync",
+        "index_desc": "Gyakorlati útmutatók a JW Library-mentésekhez: két eszköz mentésének egyesítése, jegyzetek átvitele új telefonra, váltás Androidról iPhone-ra, vissza nem állítható mentés javítása, jegyzetek szerkesztése és keresése, és még sok más.",
+        "index_h1": "Útmutatók és leírások",
+        "index_lede": "Minden a JW Library-mentésekről, egyszerű lépésekben: eszközök egyesítése, költözés új telefonra, jegyzetek megmentése, és több haszon abból a könyvtárból, ami már megvan. Minden említett eszköz ingyen fut a böngésződben — a fájljaidat soha nem töltjük fel.",
+        "index_cta_title": "Hagyd az olvasást — nyisd meg az eszközt",
+        "index_cta_body": "Két mentés egyesítése körülbelül egy perc, és az alkalmazás végigvezet rajta.",
+        "footer_all_guides": "Összes útmutató",
+        "footer_community": "Közösség",
+        "footer_stats": "Tanulmányozási statisztika",
+        "footer_privacy": "A JW Sync minden adatot helyben dolgoz fel — a fájljaid soha nem hagyják el az eszközödet. Ingyenes; nincs fiók, nincs feltöltés.",
+        "footer_disclaimer": "A „JW Library” a Watch Tower Bible and Tract Society of Pennsylvania tulajdona. A JW Sync független segédeszköz, amely nem áll kapcsolatban vele, és nem is támogatja azt.",
+        "groups": {
+            "Getting started": "Első lépések",
+            "Sharing scenarios": "Megosztási helyzetek",
+            "Everyday scenarios": "Hétköznapi helyzetek",
+            "Fixing problems": "Hibaelhárítás",
+            "Power tools": "Haladó eszközök",
+        },
+    },
 }
 
 # ── Per-guide translations ───────────────────────────────────────────────
@@ -888,6 +923,7 @@ from guides_zh_hans import GUIDES_ZH_HANS  # noqa: E402
 from guides_zh_hant import GUIDES_ZH_HANT  # noqa: E402
 from guides_yue_hant import GUIDES_YUE_HANT  # noqa: E402
 from guides_vi import GUIDES_VI  # noqa: E402
+from guides_hu import GUIDES_HU  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -920,4 +956,5 @@ GUIDE_TEXT = {
     "zh-Hant": GUIDES_ZH_HANT,
     "yue-Hant": GUIDES_YUE_HANT,
     "vi": GUIDES_VI,
+    "hu": GUIDES_HU,
 }

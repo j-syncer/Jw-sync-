@@ -40,9 +40,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 
 # Scripts each language must NOT contain. Latin-script languages reject every
 # non-Latin block we have shipped copy in; add a row when adding a language.
+_NON_LATIN = "[Ѐ-ӿ֐-ۿ฀-๿가-힯぀-ヿ一-鿿]"
 STRAY = {
-    "vi": re.compile("[Ѐ-ӿ֐-ۿ฀-๿"
-                     "가-힯぀-ヿ一-鿿]"),
+    "vi": re.compile(_NON_LATIN),
+    "hu": re.compile(_NON_LATIN),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -50,6 +51,10 @@ STRAY = {
 DIACRITIC = {
     "vi": re.compile("[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợ"
                      "ùúủũụưừứửữựỳýỷỹỵđ]", re.I),
+    # Hungarian: á é í ó ö ő ú ü ű. Its long/short vowel pairs are contrastive
+    # (kerek/kérek, tor/tör/tőr), so unaccented copy is not a stylistic choice
+    # either — it is a different set of words, or ASCII-mangled text.
+    "hu": re.compile("[áéíóöőúüű]", re.I),
 }
 
 META = {
@@ -78,6 +83,32 @@ META = {
   talk                bài giảng
   Hebrew Scriptures   phần Kinh Thánh tiếng Hê-bơ-rơ
   Greek Scriptures    phần Kinh Thánh tiếng Hy Lạp""",
+    },
+    "hu": {
+        "name": "Hungarian",
+        "upper": "HU",
+        "glossary": """Glossary settled on for all 37 guides:
+
+  backup              biztonsági mentés
+  to merge / merge    egyesíteni / egyesítés
+  notes               jegyzetek
+  highlights          kiemelések
+  bookmarks           könyvjelzők
+  tags                címkék
+  device              eszköz
+  to restore          visszaállítani
+  Personal Study      Személyes tanulmányozás
+  Backup and Restore  Biztonsági mentés és visszaállítás
+  browser             böngésző
+  database            adatbázis
+  Conflict Reviewer   ütközésáttekintő
+  duplicate           duplikátum
+  publication         kiadvány
+  meeting             összejövetel
+  convention          kongresszus
+  talk                előadás
+  Hebrew Scriptures   Héber Iratok
+  Greek Scriptures    Görög Iratok""",
     },
 }
 

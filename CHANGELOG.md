@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.21.0] — 2026-08-10
+
+### Added: Hungarian — the site's 21st language
+
+Hungarian (`hu`) ships complete:
+
+- **The whole interface** — 1,100 strings across the merge app, Study
+  Explorer, Study Stats, Note Sharing, Library Doctor, Reading Companion,
+  Resurface, the setup wizard, the conflict reviewer and the community forum.
+- **All 37 guides**, at `/guides/hu/`, plus a pre-rendered Hungarian landing
+  page at `/hu/`.
+- **Findable in search** — own canonicals, `hreflang` alternates, `og:locale`
+  and sitemap entries.
+- **Bible chapter links open in Hungarian.** Reading Companion uses jw.org's
+  `H`, checked against the live finder — `HU`, the language's own ISO code,
+  serves English, and `M` serves Romanian.
+
+The language menu now offers 21 languages, and the guide tree stands at 798
+pages.
+
+---
+
 ## [3.20.0] — 2026-08-09
 
 ### Added: Vietnamese — the site's 20th language

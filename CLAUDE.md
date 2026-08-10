@@ -185,9 +185,9 @@ the page itself, or they will pass against the module file.
 
 ## Features Built (permanent reference)
 
-### Languages (20 total)
+### Languages (21 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
-`zh-Hans` `zh-Hant` `yue-Hant` `vi`
+`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu`
 
 RTL: `ar`, `he`. Everything else is LTR.
 
@@ -231,7 +231,7 @@ The code is **not** the ISO code, and near-misses fail silently: `PL`, `UK` and
 ```
 en E    es S    pt T    fr F    de X    it I    ru U    ja J
 ko KO   tl TG   sv Z    ceb CV  ar A    he Q    uk K    pl P
-zh-Hans CHS     zh-Hant CH      yue-Hant CHC     vi VT
+zh-Hans CHS     zh-Hant CH      yue-Hant CHC     vi VT     hu H
 ```
 
 Vietnamese is the sharpest illustration of why this step exists: `VI` — the
