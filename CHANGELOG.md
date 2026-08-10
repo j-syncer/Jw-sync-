@@ -21,7 +21,11 @@ scenarios and everyday scenarios, all 37.
 
 The Schema.org `featureList` in both shells read "Available in 13 languages".
 It has said 13 since the site had 13; it now says 22 — what the language
-picker, the hreflang cluster and the sitemap have all been saying.
+picker, the hreflang cluster and the sitemap have all been saying. The English
+semantic-search guide named a count too (12, since before Arabic); it now says
+"every language", which is what all 21 translations of that sentence already
+said. A new check in `01_static.js` fails the build on any hard-coded language
+count that disagrees with the language list, so this cannot drift again.
 
 ---
 

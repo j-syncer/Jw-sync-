@@ -192,7 +192,7 @@ def patch_landing_meta(rel):
     """Seed meta_title / meta_desc into __JW_LANDING_I18N and swap them at runtime.
 
     The strings are derived from hero_title / hero_desc, which are already
-    translated into all 13 languages and read well as a title tag and a meta
+    translated into every language and read well as a title tag and a meta
     description — so every language gets localized metadata without new copy
     being written (or machine-translated) per language.
     """

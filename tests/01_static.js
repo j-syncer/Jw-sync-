@@ -1345,6 +1345,42 @@ if (footerBg && footerFg && footerOld) {
   else fail(label + ' below AA: ' + r.toFixed(2) + ':1');
 });
 
+// ── Hard-coded language counts ──────────────────────────────────────────────
+// "Available in 13 languages" sat in the Schema.org featureList of both shells
+// from the release where 13 was true until the release where 22 was, because a
+// count written as prose has nothing tying it to the list it counts. Nine
+// languages shipped past it and no build, test or page load objected — the same
+// silent-wrongness class as the jw.org wtlocale. So: derive it, or don't say it.
+section('No stale language counts in shipped copy');
+{
+  const N = EXPECTED_LANGS.length;
+  ['index.html', 'beta/index.html'].forEach(rel => {
+    const html = fs.readFileSync(path.join(REPO, rel), 'utf8');
+    const hits = [...html.matchAll(/(?:in|all)\s+(\d{1,3})\s+languages/g)];
+    if (!hits.length) return ok(rel + ': states no language count');
+    const wrong = hits.filter(m => +m[1] !== N);
+    if (wrong.length) {
+      fail(rel + ': claims ' + wrong.map(m => m[1]).join('/') +
+           ' languages, but the site ships ' + N);
+    } else {
+      ok(rel + ': language count says ' + N + ', matching EXPECTED_LANGS');
+    }
+  });
+
+  // Guide copy must not carry a count at all. Every translation of the
+  // semantic-search guide already dropped the number; English was the last
+  // page still naming one, and it named the wrong one.
+  const guideSrc = fs.readFileSync(
+    path.join(REPO, 'scripts', 'build_guides.py'), 'utf8');
+  const inGuides = [...guideSrc.matchAll(/(?:in|all)\s+(\d{1,3})\s+languages/g)];
+  if (inGuides.length) {
+    fail('scripts/build_guides.py: guide copy hard-codes a language count (' +
+         inGuides.map(m => m[1]).join(', ') + ') — say "every language" instead');
+  } else {
+    ok('guide copy names no language count');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

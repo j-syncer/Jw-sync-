@@ -441,7 +441,7 @@ GUIDES = [
   ],
   "faq": [
    ("Does it need a powerful device?", "A modern phone or laptop handles it well; on devices with WebGPU it's fastest. There's a choice of model sizes to match your hardware."),
-   ("Does it work in my language?", "Yes — search works across the languages your notes are written in, and the interface is translated into all 12 languages JW Sync supports."),
+   ("Does it work in my language?", "Yes — search works across the languages your notes are written in, and the interface is translated into every language JW Sync supports."),
   ],
   "related": ["edit-jw-library-notes", "jw-library-study-stats", "merge-jw-library-backups"],
  },
