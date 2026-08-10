@@ -71,6 +71,16 @@ QUERY_PAGES = [
     ("highlights.html", SITE + "/highlights", "0.7", "monthly"),
     ("share.html", SITE + "/share", "0.7", "monthly"),
 ]
+# Pages that ship <meta name="robots" content="noindex">, and so must never
+# appear in the sitemap. A sitemap entry asks Google to index a URL while the
+# meta tag refuses it; every such URL then lands in Search Console's "Excluded
+# by 'noindex' tag" report, multiplied by each ?lang= and .html permutation the
+# language pickers and guide footers link to. /share is deliberately not
+# indexed — the /guides/share-jw-library-notes guide is the search target for
+# that topic — so it is excluded here rather than submitted and refused.
+# 01_static.js asserts this set agrees with the meta tag in each page.
+NOINDEX_PAGES = {"share.html"}
+
 # Pages with no i18n of their own.
 STATIC_PAGES = [
     ("forum.html", SITE + "/forum", "0.5", "weekly"),
@@ -260,7 +270,9 @@ def build_sitemap():
     landing_alts = {l: build_landing.page_url(l) for l in LANGS}
     for l in LANGS:
         blocks.append(url_entry(build_landing.page_url(l), landing_alts, "1.0", "weekly"))
-    for _rel, canonical, prio, freq in QUERY_PAGES[1:] + STATIC_PAGES:
+    for rel, canonical, prio, freq in QUERY_PAGES[1:] + STATIC_PAGES:
+        if rel in NOINDEX_PAGES:
+            continue
         blocks.append(url_entry(canonical, None, prio, freq))
 
     # Guides: the index plus every slug, once per translated language.

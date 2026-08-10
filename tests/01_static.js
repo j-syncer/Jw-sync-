@@ -1030,6 +1030,40 @@ section('Cross-tool session (jw-session.js)');
   if (locs.includes('https://jwsync.org/')) ok('sitemap.xml submits the landing page');
   else fail('sitemap.xml is missing https://jwsync.org/');
 
+  // A noindex page must never be submitted, and a submitted page must never be
+  // noindex. Shipping both signals is not a no-op: the sitemap asks Google to
+  // index the URL and the meta tag refuses, so the URL lands in Search
+  // Console's "Excluded by 'noindex' tag" report — once per ?lang= and .html
+  // permutation that the language pickers and guide footers link to. /share
+  // and /highlights sat in exactly that state and filled the report between
+  // them. Whichever way a page is settled, the two signals must agree.
+  {
+    const pages = [
+      ['index.html', 'https://jwsync.org/'],
+      ['highlights.html', 'https://jwsync.org/highlights'],
+      ['share.html', 'https://jwsync.org/share'],
+      ['forum.html', 'https://jwsync.org/forum'],
+      ['guides/index.html', 'https://jwsync.org/guides/'],
+      ['guides/backup-jw-library.html', 'https://jwsync.org/guides/backup-jw-library'],
+    ];
+    for (const [f, url] of pages) {
+      const src = fs.readFileSync(REPO + '/' + f, 'utf8');
+      const head = src.slice(0, src.indexOf('</head>'));
+      const tag = (head.match(/<meta name="robots" content="([^"]*)"/) || [])[1];
+      if (tag === undefined) { fail(f + ': no robots meta at all'); continue; }
+      const noindex = /noindex/i.test(tag);
+      const submitted = locs.includes(url);
+      if (noindex && submitted)
+        fail(f + ': noindex but submitted in sitemap.xml as ' + url +
+             ' — contradictory signals, drop one');
+      else if (!noindex && !submitted)
+        fail(f + ': indexable but missing from sitemap.xml (' + url + ')');
+      else
+        ok(f + ': robots "' + tag + '" agrees with sitemap (' +
+           (submitted ? 'submitted' : 'withheld') + ')');
+    }
+  }
+
   for (const f of ['index.html', 'beta/index.html']) {
     const head = (() => { const c = fs.readFileSync(REPO + '/' + f, 'utf8'); return c.slice(0, c.indexOf('</head>')); })();
     const alts = (head.match(/<link rel="alternate" hreflang="[A-Za-z-]+" href="([^"]*)"/g) || [])

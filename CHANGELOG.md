@@ -4,6 +4,38 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.22.2] — 2026-08-10
+
+### Fixed: Study Stats and the share page were fighting their own sitemap
+
+Search Console was reporting a growing list of URLs as **"Excluded by
+'noindex' tag"** — `/share`, `/share.html`, `/highlights?lang=ko`,
+`/highlights.html?lang=ar` and dozens more permutations. Both pages carried
+`<meta name="robots" content="noindex">` *and* were submitted in
+`sitemap.xml`. Those are contradictory instructions: the sitemap asks Google to
+index the URL, the meta tag refuses, and every discovered permutation gets
+logged as an exclusion. Because all 800 guide pages footer-link to
+`highlights.html` and both language pickers emit `?lang=` links, Google kept
+rediscovering the same two pages under many URLs, which is why the report
+looked far larger than two pages.
+
+Each page is now settled one way, not both:
+
+- **Study Stats (`/highlights`) is now indexable.** It is a real feature page
+  with its own title, description and content, and it stays in the sitemap.
+- **`/share` stays out of search and is no longer submitted.** It has no
+  content until a share link supplies one, and the
+  `/guides/share-jw-library-notes` guide is the better search result for that
+  topic.
+
+**The guides were never affected.** All 800 guide pages, in every language,
+serve `index, follow` and always have.
+
+`01_static.js` now asserts the two signals agree — a page is either noindex and
+withheld from the sitemap, or indexable and submitted, never both.
+
+---
+
 ## [3.22.1] — 2026-08-10
 
 ### Fixed: two script-loading errors reported by PageSpeed Insights
