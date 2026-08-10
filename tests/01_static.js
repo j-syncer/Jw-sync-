@@ -483,8 +483,7 @@ for (const path of FILES) {
     const shippedCdn = (cdnMap.match(/'https:\/\/[^']+'/g) || []).map(s => s.slice(1, -1));
     if (!shippedCdn.length) {
       fail('boot loader CDN map not found — cannot verify library URLs');
-    } else if (isBeta) {
-      // Production inherits these on the next go-live; beta is the gate.
+    } else {
       const unverified = shippedCdn.filter(u => VERIFIED_CDN.indexOf(u) === -1);
       if (unverified.length) {
         fail('boot loader requests unverified CDN URL(s): ' + unverified.join(', ') +
@@ -501,19 +500,17 @@ for (const path of FILES) {
     // status), so one flaky edge response used to drop the visitor on the
     // fatal-error screen. Cloudflare served exactly that for js/app.js and
     // js/browse.js.
-    if (isBeta) {
-      if (!c.includes('loadWithRetry')) {
-        fail('boot loader has no retry — a single transient 503 kills the app');
-      } else {
-        ok('boot loader retries failed script loads');
-        for (const bundle of ['js/app.js', 'js/browse.js']) {
-          const re = new RegExp("loadWithRetry\\('" + bundle.replace('.', '\\.') + "'");
-          if (!re.test(c)) fail(bundle + ' bundle loader does not go through loadWithRetry');
-          else ok(bundle + ' loaded with retry');
-        }
-        if (!/loadWithRetry\(CDN\[name\]/.test(c)) fail('CDN libraries not loaded with retry');
-        else ok('CDN libraries loaded with retry');
+    if (!c.includes('loadWithRetry')) {
+      fail('boot loader has no retry — a single transient 503 kills the app');
+    } else {
+      ok('boot loader retries failed script loads');
+      for (const bundle of ['js/app.js', 'js/browse.js']) {
+        const re = new RegExp("loadWithRetry\\('" + bundle.replace('.', '\\.') + "'");
+        if (!re.test(c)) fail(bundle + ' bundle loader does not go through loadWithRetry');
+        else ok(bundle + ' loaded with retry');
       }
+      if (!/loadWithRetry\(CDN\[name\]/.test(c)) fail('CDN libraries not loaded with retry');
+      else ok('CDN libraries loaded with retry');
     }
 
     if (!c.includes('window.__bootApp')) fail('main app not wrapped in window.__bootApp');
