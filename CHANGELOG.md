@@ -4,6 +4,27 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.23.0] — 2026-08-10
+
+### Hindi is now complete — all 37 guides
+
+The Hindi guide tree is finished. Every guide the site publishes in English
+now exists in Hindi at `/guides/hi/`, with its own index, hreflang cluster and
+sitemap entries, and the `/hi/` landing page links its popular guides in Hindi
+rather than falling back to English.
+
+Hindi shipped its interface in 3.22.0 with one guide translated; the remaining
+36 landed here — getting started, fixing problems, power tools, sharing
+scenarios and everyday scenarios, all 37.
+
+### Fixed: the app's structured data still claimed 13 languages
+
+The Schema.org `featureList` in both shells read "Available in 13 languages".
+It has said 13 since the site had 13; it now says 22 — what the language
+picker, the hreflang cluster and the sitemap have all been saying.
+
+---
+
 ## [3.22.2] — 2026-08-10
 
 ### Fixed: Study Stats and the share page were fighting their own sitemap
