@@ -50,8 +50,8 @@ cd tests && npm install --silent 2>/dev/null; npm test
 ```
 
 - `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
-- `npm test` chains all 19 suites (`01_static.js` … `19_landing_pages.js`) and exits non-zero on the first failure.
-- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`.
+- `npm test` chains all 20 suites (`01_static.js` … `20_translation_integrity.js`) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`.
 
 **Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
 
@@ -74,6 +74,12 @@ Suite coverage:
 - **16_reading.js** — Reading Companion: plan data (1,189 chapters both orders), engine (portions, self-healing carry-over, streaks, forecast, milestones), i18n coverage, JSDOM UI, notes integration — **and the jw.org wtlocale table** (see the language runbook below).
 - **17_guides.js** — the 37 static guides in every language: structure, canonicals, cross-links.
 - **18_arabic_rtl.js** — RTL guard: dictionary coverage, `?lang=` allow-list, nav picker, wtlocale presence, `dir="rtl"` applied before first paint, `rtl.css` not stale.
+- **20_translation_integrity.js** — reads what the strings *say*, in every
+  language: no stray scripts (the guard that caught a Cyrillic `материал` in a
+  Cantonese paragraph, previously run only for the 5 languages built through
+  `build_lang_guides.py`), no English left untranslated in guide copy or the
+  261 UI tables, and self-canonical + reciprocal hreflang across all 940 pages
+  rather than just the 24 landing pages.
 - **19_landing_pages.js** — the pre-rendered `/<lang>/` landing pages: they exist with correct `lang`/`dir`, are self-canonical with a reciprocal hreflang cluster, serve real translated copy (not JS-filled), carry substantive content, and are in the sitemap.
 
 If you add a new user-facing feature, extend the relevant suite to cover it.
