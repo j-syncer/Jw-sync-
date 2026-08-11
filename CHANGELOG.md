@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.29.0] — 2026-08-11
+
+### Nederlands is now complete — all 37 guides
+
+The Dutch guide tree is finished. Every guide the site publishes in English now
+exists in Dutch at `/guides/nl/`, with its own index, hreflang cluster and
+sitemap entries, and the `/nl/` landing page links its popular guides in Dutch
+rather than falling back to English.
+
+Dutch shipped its interface in 3.28.0 with one guide translated; the remaining
+36 landed here. That takes the site to 950 guide pages across 25 languages.
+
+---
+
 ## [3.28.0] — 2026-08-11
 
 ### Added: Nederlands — the 25th language

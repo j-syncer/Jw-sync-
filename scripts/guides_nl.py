@@ -804,4 +804,238 @@ GUIDES_NL = {
    ("Moeten we op hetzelfde platform zitten?", "Nee. Android, iPhone, iPad en de Windows-app gebruiken allemaal dezelfde back-upindeling, dus aantekeningen gaan zonder omzetten van de een naar de ander."),
   ],
  },
+
+ "receive-shared-jw-library-notes": {
+  "title": "Iemand heeft me JW Library-aantekeningen gestuurd — hoe open ik die?",
+  "h1": "Aantekeningen die iemand met je heeft gedeeld toevoegen aan je eigen JW Library",
+  "description": "Je hebt een bestand met gedeelde aantekeningen of een blok gedeelde tekst gekregen. Zo bekijk je het vooraf en voeg je het toe aan je eigen JW Library-back-up zonder ook maar één eigen aantekening te verliezen.",
+  "intro": [
+   "Gedeelde JW Library-aantekeningen komen binnen als klein bestand (eindigend op .jwshare.json) of als een blok tekst dat in een bericht is geplakt. JW Library zelf kan geen van beide openen — maar dat hoeft ook niet. De ontvangstkant van JW Sync leest de gedeelde aantekeningen, laat je zien wat erin zit en schrijft ze in een back-up van jou.",
+   "De hele uitwisseling gebeurt op je eigen apparaat. Er is geen account, er wordt niets geüpload, en er wordt aan je eigen aantekeningen toegevoegd, nooit iets vervangen.",
+  ],
+  "steps": [
+   ("Maak eerst een back-up van je eigen bibliotheek", "In JW Library: Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken. Dit is het bestand waaraan de gedeelde aantekeningen worden toegevoegd, dus het moet actueel zijn."),
+   ("Open de deelpagina en kies Ontvangen", "Ga naar jwsync.org/share.html en kies Aantekeningen ontvangen."),
+   ("Laad wat je hebt gekregen", "Kies het .jwshare.json-bestand, of plak de gedeelde tekst rechtstreeks in het vak als hij als bericht binnenkwam. Hoe dan ook krijg je een alleen-lezen voorbeeld van elke aantekening voordat er iets wordt weggeschreven."),
+   ("Voeg ze toe aan je back-up", "Laad je eigen back-up, kies het label dat de toegevoegde aantekeningen moeten dragen, en voeg ze toe. JW Sync bouwt een bijgewerkt back-upbestand dat je kunt downloaden."),
+   ("Zet de bijgewerkte back-up terug in JW Library", "Persoonlijke studie → Back-up maken en terugzetten → Terugzetten, en kies het bijgewerkte bestand. De gedeelde aantekeningen staan nu in je bibliotheek, op de juiste alinea's en verzen."),
+  ],
+  "sections": [
+   ("Er wordt niets van jou vervangen", "Gedeelde aantekeningen worden als nieuwe aantekeningen toegevoegd. Zelfs waar een gedeelde aantekening bij een alinea belandt waar je zelf al iets hebt geschreven, blijven ze allebei bestaan — die van jou onaangeroerd, die van de ander ernaast. Het enige om in gedachten te houden is de gewone regel van terugzetten: zet de bijgewerkte back-up terug en niet een oudere."),
+   ("Later van gedachten veranderd?", "Elke toegevoegde aantekening draagt het label dat je bij het toevoegen hebt gekozen. Open je back-up in de Studieverkenner, filter op dat label, en je kunt de hele partij in één keer nalopen of verwijderen."),
+  ],
+  "faq": [
+   ("Het bestand kwam aan als .txt of ging open als tekst — is het stuk?", "Nee. Berichtenapps doen dat vaak. Kopieer de tekst en plak hem in het ontvangstvak; het werkt precies hetzelfde."),
+   ("Heb ik de hele back-up van de verzender nodig?", "Nee. Het deelbestand bevat alleen de aantekeningen die hij heeft willen sturen — verder niets uit zijn bibliotheek."),
+   ("Wordt er iets geüpload als ik de aantekeningen vooraf bekijk?", "Nee. Het gedeelde bestand lezen, het voorbeeld bekijken en de bijgewerkte back-up schrijven gebeuren allemaal in je browser op je eigen apparaat."),
+  ],
+ },
+
+ "share-notes-with-study-group": {
+  "title": "Onderzoeksaantekeningen delen met een studiegroep",
+  "h1": "Onderzoek delen met een groep — en dat van hen weer verzamelen",
+  "description": "Eén bestand, veel mensen: stuur een set onderzoeksaantekeningen naar iedereen die hetzelfde onderwerp bestudeert, en verzamel wat zij terugsturen in één gecombineerde set van jezelf.",
+  "intro": [
+   "Als meerdere mensen zich in hetzelfde onderwerp verdiepen, raakt het onderzoek meestal verspreid — de een vond de kruisverwijzingen, de ander de historische achtergrond, een derde de illustraties. Elkaars schermafdrukken lezen is niet hetzelfde als het materiaal in je eigen bibliotheek hebben, bij dezelfde verzen, volgend jaar nog doorzoekbaar.",
+   "Omdat een deelbestand gewoon een bestand is, bedient één export de hele groep, en langs dezelfde weg komt hun werk weer bij jou terug.",
+  ],
+  "steps": [
+   ("Label je onderzoek terwijl je het verzamelt", "Geef het onderwerp een label in JW Library, dan blijft de set bij elkaar. In de Studieverkenner kun je in bulk een label aan aantekeningen toevoegen als je ze destijds niet hebt gelabeld."),
+   ("Maak één deelbestand voor de groep", "Kies op jwsync.org/share.html voor Aantekeningen versturen, laad je back-up, kies het label van het onderwerp in het labelfilter, klik Alles selecteren en maak het bestand."),
+   ("Plaats het één keer", "Stuur hetzelfde bestand naar iedereen — een groepschat, een mail aan meerdere mensen, wat de groep toch al gebruikt. Er is geen instelwerk per persoon en geen kopie op een server."),
+   ("Vraag dat van hen terug", "Ieder kan van zijn kant precies hetzelfde doen. Voeg elk bestand dat je krijgt op zijn beurt toe aan je back-up en geef elke toevoeging een eigen label — de naam van de afzender werkt goed — zodat je altijd ziet wiens onderzoek van wie is."),
+  ],
+  "sections": [
+   ("Eén gecombineerde set, en toch herleidbaar", "Na een paar rondes heb je het hele onderzoek van de groep over het onderwerp in je eigen bibliotheek, bij de juiste alinea's en verzen, met elke bijdrage gelabeld naar herkomst. Zoeken vindt het allemaal in één keer; met de labels haal je het weer uit elkaar wanneer je maar wilt."),
+   ("Niemand hoeft zijn bibliotheek prijs te geven", "Iedereen deelt alleen de aantekeningen die hij aanvinkt. De rest van ieders bibliotheek — persoonlijke studie, eigen geheugensteuntjes, al het andere — komt nooit in het bestand terecht."),
+  ],
+  "faq": [
+   ("Zit er een grens aan hoeveel aantekeningen ik tegelijk kan delen?", "In de praktijk niet. Aantekeningen zijn klein; ook een grote set levert een bestand op dat je in een bericht kwijt kunt."),
+   ("Wat als twee mensen me dezelfde aantekening sturen?", "Dan zie je hem twee keer, elk onder het label van zijn afzender. Met het zoeken in de Studieverkenner zijn bijna-dubbele aantekeningen makkelijk te herkennen en te verwijderen."),
+   ("Kan iemand ontvangen zonder zelf iets terug te sturen?", "Ja. Ontvangen en versturen staan los van elkaar — niemand is verplicht te delen om te kunnen toevoegen wat hij heeft gekregen."),
+  ],
+ },
+
+ "share-talk-preparation-notes": {
+  "title": "Het onderzoek achter een lezing of toewijzing doorgeven",
+  "h1": "Je onderzoek voor een lezing of toewijzing doorgeven",
+  "description": "Jij hebt het spitwerk voor een lezing, een deel of een toewijzing gedaan. Zo geef je het onderzoek door aan wie het hierna nodig heeft — als echte aantekeningen in zijn bibliotheek, of als platte tekst voor een document.",
+  "intro": [
+   "Voorbereiding wordt zelden maar één keer gebruikt. De teksten die je hebt opgezocht, de achtergrond die je hebt gelezen, de manier waarop je een punt uiteindelijk hebt verwoord — wie later hetzelfde materiaal behandelt, begint daar liever mee dan met een blanco pagina.",
+   "JW Sync geeft je twee manieren om het door te geven, en ze passen bij verschillende mensen: als aantekeningen die in de JW Library van de ander belanden, of als platte tekst die hij in een document kan plakken.",
+  ],
+  "steps": [
+   ("Breng het onderzoek onder één label bij elkaar", "Label de aantekeningen tijdens het voorbereiden met het thema of de toewijzing. Zijn ze al geschreven en ongelabeld, open dan je back-up in de Studieverkenner en label ze in een paar minuten in bulk."),
+   ("Bepaal welke vorm bij de ander past", "Wie in JW Library studeert, wil aantekeningen in zijn bibliotheek. Wie een document bouwt, wil tekst. Je kunt allebei doen vanuit dezelfde set."),
+   ("Aantekeningen sturen: gebruik de deelpagina", "Kies op jwsync.org/share.html voor Aantekeningen versturen, laad je back-up, filter op het label dat je gebruikte, klik Alles selecteren en maak het bestand. De ander voegt het toe aan zijn eigen back-up en zet die terug — zijn eigen aantekeningen blijven ongemoeid."),
+   ("Tekst sturen: exporteer vanuit de Studieverkenner", "Filter op dezelfde set en kopieer of exporteer hem als Markdown of platte tekst. De opmaak blijft behouden, dus een gestructureerd schema blijft gestructureerd als het in een document wordt geplakt."),
+  ],
+  "sections": [
+   ("Bewaar zelf een kopie, in een vorm die je terugvindt", "Diezelfde export is het waard om voor jezelf te bewaren. Een label plus een periode maakt de hele voorbereiding jaren later terug te vinden, en dat is precies wanneer je hem wilt hebben — en met het uithalen op datum in de Studieverkenner wordt elk tijdvenster een eigen bestand."),
+  ],
+  "faq": [
+   ("Blijven de Bijbelteksten aan de juiste verzen gekoppeld?", "Ja — gedeelde aantekeningen houden de alinea en het vers waaraan ze vastzaten, dus ze belanden op de juiste plek in de bibliotheek van de ander."),
+   ("Kan ik aantekeningen delen waar markeringen op zitten?", "Ja. Markeringen die aan de gedeelde aantekeningen vastzitten, reizen mee."),
+  ],
+ },
+
+ "weekly-meeting-preparation-jw-library-notes": {
+  "title": "Bereid je op de vergadering voor met aantekeningen die je al hebt geschreven",
+  "h1": "Wekelijkse voorbereiding met de aantekeningen die je al hebt",
+  "description": "Je hebt dit materiaal eerder bestudeerd. Hier staat een korte wekelijkse routine die je oude aantekeningen, markeringen en ingevulde antwoorden bij dezelfde publicatie naar boven haalt voordat je je opnieuw voorbereidt.",
+  "intro": [
+   "De meeste mensen bereiden zich elke week vanaf een blanco pagina voor, ook al hebben ze over hetzelfde onderwerp — soms over dezelfde Bijbeltekst — al meerdere keren geschreven. Dat eerdere denkwerk staat in je bibliotheek; het enige probleem is dat niets het je op het juiste moment terugbrengt.",
+   "Een routine van vijf minuten aan het begin van de voorbereiding verhelpt dat, en er komt niets anders aan te pas dan de back-up die je toch al hebt.",
+  ],
+  "steps": [
+   ("Laad een actuele back-up in de Studieverkenner", "Maak een back-up in JW Library en open hem dan op jwsync.org. Alles wordt in je browser gelezen."),
+   ("Zoek het onderwerp op voordat je begint", "Zoek op de themateksten, het onderwerp of de publicatie. Wat je er in eerdere jaren over hebt geschreven, komt bij elkaar naar boven, uit elke publicatie waarin het voorkomt."),
+   ("Kijk je ingevulde antwoorden na", "De weergave Studieantwoorden verzamelt de antwoorden die je bij studievragen hebt getypt, dus eerdere rondes door hetzelfde materiaal staan er om op voort te bouwen in plaats van ze te herhalen."),
+   ("Vul aan wat ontbreekt en zet het daarna terug", "Aantekeningen kun je daar meteen bewerken of toevoegen — titel, tekst, labels, markeringskleur. Exporteer de bewerkte back-up en zet hem terug in JW Library, dan staat je voorbereiding in de app klaar voor de vergadering."),
+  ],
+  "sections": [
+   ("Waarom de oude aantekeningen ertoe doen", "Teruglezen waar je de vorige keer op uitkwam, maakt de voorbereiding cumulatief. Je houdt op met dezelfde punten opnieuw ontdekken en gaat erop voortbouwen — en de aantekeningen die je deze week toevoegt, worden het startpunt van de volgende ronde."),
+   ("Een rustiger variant: laat de aantekeningen naar je toe komen", "Voelt een wekelijkse zoektocht als werk, dan brengt Opnieuw langs op de pagina Studiestatistieken elke dag vanzelf een paar oude aantekeningen terug, inclusief die je op deze datum in eerdere jaren schreef. Hetzelfde voordeel, zonder routine om te onthouden."),
+  ],
+  "faq": [
+   ("Verandert bewerken in de browser mijn bibliotheek rechtstreeks?", "Nee. Je exporteert een bijgewerkte back-up en zet die terug in JW Library — de app verandert alleen door een terugzetting die je zelf uitvoert."),
+   ("Wordt mijn back-up geüpload als ik erin zoek?", "Nee. Het bestand wordt lokaal in je browser gelezen; er gaat niets ergens naartoe."),
+  ],
+ },
+
+ "print-jw-library-notes": {
+  "title": "Zo druk je je JW Library-aantekeningen af",
+  "h1": "Je JW Library-aantekeningen op papier krijgen",
+  "description": "JW Library heeft geen afdrukknop. Exporteer je aantekeningen als tekst of Markdown, plak ze in een willekeurig document en druk af — een studiedagboek, een set aantekeningen voor iemand zonder de app, of een archief.",
+  "intro": [
+   "Vanuit JW Library valt niet af te drukken, en schermafdrukken van een telefoon lezen slecht. Maar de aantekeningen zijn van jou, en ze in een afdrukbaar document krijgen gaat vlot zodra je het back-upbestand kunt lezen.",
+   "De Studieverkenner leest een .jwlibrary-back-up in je browser en laat je elke selectie aantekeningen kopiëren of exporteren als platte tekst of Markdown — en die begrijpt elke tekstverwerker, notitie-app en printer al.",
+  ],
+  "steps": [
+   ("Maak een back-up en open hem", "JW Library → Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken, en laad het bestand daarna op jwsync.org."),
+   ("Baken af wat je op papier wilt", "Filter op publicatie, label, markeringskleur of periode, of zoek op een onderwerp. Alles afdrukken kan, maar een gefilterde set levert meestal een veel bruikbaarder document op."),
+   ("Kopieer of exporteer als tekst of Markdown", "Haal de selectie eruit als Markdown of platte tekst. Vet, cursief en lijsten blijven behouden, dus gestructureerde aantekeningen blijven op papier gestructureerd."),
+   ("Plak in een document en druk af", "Elke tekstverwerker of notitie-app volstaat. Stel de koppen en marges in die je wilt, en druk daarna af of bewaar als pdf."),
+  ],
+  "sections": [
+   ("Een studiedagboek maken", "Voor een gedrukt dagboek is een periode de natuurlijke eenheid — een jaar aantekeningen, of de periode die één publicatie beslaat. Op datum uithalen geeft je een schone chronologische set om af te drukken of in te binden, en dat is prettig om ook buiten het scherm te hebben."),
+   ("Afdrukken voor iemand die de app niet gebruikt", "Niet iedereen studeert vanaf een apparaat. Een gedrukte set aantekeningen bij het lopende materiaal is werkelijk nuttig voor iemand die papier prettiger vindt, en het kost dezelfde twee minuten als elke andere export."),
+  ],
+  "faq": [
+   ("Kan ik mijn markeringen ook afdrukken?", "De weergave Markeringen somt de passages op die je hebt gemarkeerd, en die lijst kopieert als tekst mee naast je aantekeningen."),
+   ("Verandert het exporteren iets in JW Library?", "Nee. Het exporteren leest een kopie van je back-up; je oorspronkelijke bestand en de app blijven ongemoeid."),
+  ],
+ },
+
+ "clean-up-duplicate-jw-library-notes": {
+  "title": "Dubbele en lege JW Library-aantekeningen opruimen",
+  "h1": "Dubbele aantekeningen, lege aantekeningen en rommel opruimen",
+  "description": "Een back-up twee keer teruggezet, of dezelfde aantekeningen nog eens toegevoegd? Library Doctor scant je .jwlibrary-bestand in de browser, vindt dubbele en lege aantekeningen en levert een schone kopie op.",
+  "intro": [
+   "Bibliotheken verzamelen rommel. Een back-up terugzetten op een apparaat dat al een deel van dezelfde aantekeningen had, een gedeelde set twee keer toevoegen, of jaren aan half geschreven aantekeningen die nooit af kwamen — elk daarvan laat iets achter, en JW Library geeft je geen manier om dat in bulk op te vegen.",
+   "Library Doctor is een gratis gezondheidscontrole voor een .jwlibrary-bestand. Hij scant de back-up in je browser, vertelt in gewone taal wat hij heeft gevonden, en herstelt met één tik wat te herstellen valt.",
+  ],
+  "steps": [
+   ("Maak eerst een back-up — zoals altijd", "JW Library → Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken. Bewaar dit bestand; het is je vangnet."),
+   ("Voer de gezondheidscontrole uit", "Open jwsync.org, laad de back-up en start Library Doctor. Hij bekijkt de inhoud en de structuur van het bestand zonder het ergens naartoe te sturen."),
+   ("Lees wat hij heeft gevonden", "Dubbele aantekeningen, lege aantekeningen en andere rommel staan helder op een rij, met aantallen, zodat je de omvang van het probleem ziet voordat je iets verandert."),
+   ("Herstel en download de schone kopie", "Eén tik past de reparaties toe en levert een nieuw, schoongemaakt .jwlibrary-bestand op. Je origineel wordt nooit gewijzigd."),
+   ("Zet het schone bestand terug", "Back-up maken en terugzetten → Terugzetten, en kies het schoongemaakte bestand. Je bibliotheek is dezelfde, min de rommel."),
+  ],
+  "sections": [
+   ("Hoe dubbele aantekeningen überhaupt ontstaan", "Bijna altijd door een terugzetting. Zet je een back-up terug op een apparaat dat al een deel van hetzelfde materiaal had — of zet je hetzelfde bestand langs twee wegen twee keer terug — dan kan de app onmogelijk weten dat het die aantekeningen al eerder heeft gezien."),
+   ("Samenvoegen is de manier om ze te voorkomen", "Precies daarom is twee back-ups samenvoegen veiliger dan de een over de ander terugzetten: de samenvoeging herkent materiaal dat al bestaat en bewaart het één keer. Dezelfde controles lopen bij elke samenvoeging mee, dus een samengevoegde back-up komt er schoon uit, ook als de ingeladen bestanden dat niet waren."),
+  ],
+  "faq": [
+   ("Verwijdert het aantekeningen die ik echt nodig heb?", "Het verwijdert exacte duplicaten en lege aantekeningen — materiaal waar niets in zit om te verliezen. En omdat het een nieuw bestand schrijft in plaats van het jouwe te bewerken, staat het origineel er altijd nog om op terug te vallen."),
+   ("Kan het aantekeningen terughalen die ik in de app heb verwijderd?", "Nee. Is een aantekening in JW Library verwijderd voordat de back-up werd gemaakt, dan zit hij niet in het bestand en valt hij dus niet terug te halen — een oudere back-up is de plek om te kijken."),
+  ],
+ },
+
+ "backup-jw-library-before-phone-repair": {
+  "title": "Maak een back-up van JW Library vóór een fabrieksreset of reparatie",
+  "h1": "Vóór een fabrieksreset, een reparatie of het verkopen van de telefoon",
+  "description": "Een reset wist de aantekeningen van JW Library samen met al het andere, en overzetprogramma's nemen ze niet mee. Maak een back-up, controleer of hij echt opengaat, en reset daarna zonder risico.",
+  "intro": [
+   "Reset je de telefoon, stuur je hem op voor reparatie of geef je hem aan iemand anders, dan gaan de persoonlijke studiegegevens van JW Library mee. Foto's en apps komen terug uit een cloudback-up; jaren aan aantekeningen, markeringen en bladwijzers meestal niet, omdat overzetprogramma's de eigen gegevens van de app overslaan.",
+   "De oplossing kost vijf minuten, en de stap die mensen overslaan is juist de belangrijkste: controleren dat het back-upbestand echt leesbaar is voordat het apparaat wordt gewist.",
+  ],
+  "steps": [
+   ("Maak de back-up", "JW Library → Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken. Je krijgt een .jwlibrary-bestand — meestal maar een paar megabyte."),
+   ("Haal hem van het apparaat af", "Mail hem naar jezelf, of zet hem in Drive, iCloud of een map op een computer. Een back-up die alleen bestaat op de telefoon die je gaat wissen, is geen back-up."),
+   ("Controleer dat hij opengaat voordat je iets wist", "Laad het bestand op jwsync.org en bekijk het — de aantekeningen, markeringen en bladwijzers horen er allemaal te staan, en de gezondheidscontrole meldt het als er iets mis is met het bestand. Daar draait deze hele oefening om: er achteraf achter komen dat het bestand onleesbaar is, is te laat."),
+   ("Reset en zet daarna terug", "Installeer na de reset of reparatie JW Library, meld je aan en ga dan naar Back-up maken en terugzetten → Terugzetten en kies je bestand."),
+   ("Ondertussen een leentelefoon gebruikt? Voeg samen, overschrijf niet", "Heb je op een tijdelijk apparaat aantekeningen gemaakt, maak daar dan ook een back-up van en voeg beide bestanden op jwsync.org samen voordat je terugzet — anders wist het terugzetten van de oude back-up alles wat je tijdens het wachten hebt geschreven."),
+  ],
+  "sections": [
+   ("Waarom die extra minuut controleren de moeite waard is", "Onderbroken overdrachten, clouddiensten die bestanden verminken en extensies die onderweg zijn hernoemd, leveren allemaal back-ups op die er in een map prima uitzien en bij het terugzetten alsnog falen. Het bestand eerst openen maakt van een stil probleem een probleem dat je nog kunt oplossen, zolang het oorspronkelijke apparaat de gegevens nog heeft."),
+   ("Bewaar het bestand ook na het terugzetten", "Gooi het niet weg zodra het nieuwe apparaat draait. Oude back-ups zijn de enige weg terug als je maanden later per ongeluk een aantekening verwijdert, en ze bewaren kost niets."),
+  ],
+  "faq": [
+   ("Komen mijn gedownloade publicaties terug?", "De back-up bevat je persoonlijke studiegegevens — aantekeningen, markeringen, bladwijzers, labels en afspeellijsten. Publicaties worden daarna eenvoudig opnieuw gedownload."),
+   ("Werkt het bestand ook als ik overstap op een ander merk of platform?", "Ja. De .jwlibrary-indeling is op Android, iPhone, iPad en Windows dezelfde."),
+  ],
+ },
+
+ "jw-library-notes-missing-after-update": {
+  "title": "JW Library-aantekeningen weg na een update of herinstallatie",
+  "h1": "Aantekeningen weg na een app-update, herinstallatie of terugzetting",
+  "description": "Je aantekeningen zijn verdwenen na een update, een herinstallatie of opnieuw aanmelden. Wat je eerst doet, wat je juist niet doet, en hoe je ze terugkrijgt zonder te verliezen wat je sindsdien hebt geschreven.",
+  "intro": [
+   "JW Library openen na een update en je aantekeningen weg zien te zijn is schrikken, en in verreweg de meeste gevallen zijn ze terug te halen. Wat telt is wat je de komende minuten doet — en vooral: dat je niet dat ene doet waarmee een oplosbare situatie een blijvend verlies wordt.",
+   "Het is een naar moment: JW Library gaat open en de aantekeningen zijn er niet. Nog voor al het andere één advies — haast je niet. Wat deze situatie onherstelbaar maakt, gebeurt meestal in de eerste tien minuten, doordat juist de back-up wordt overschreven waar de ontbrekende aantekeningen nog in staan.",
+   "Werk de stappen hieronder op volgorde af. Het doel is één bestand overhouden met daarin zowel de oude aantekeningen als alles wat je sindsdien hebt geschreven.",
+  ],
+  "steps": [
+   ("Overschrijf je back-ups nog niet", "Weersta de neiging om een nieuwe back-up over een oude heen te maken, en zet niets blindelings terug. Een ouder back-upbestand is de meest waarschijnlijke plek waar je aantekeningen nog staan."),
+   ("Zoek de nieuwste back-up die je hebt", "Kijk in mailbijlagen, Google Drive, iCloud Drive, de map met downloads op je computer en elk ander apparaat waarop je ooit hebt teruggezet. Back-ups zijn klein, dus mensen hebben er vaak meer dan ze zich herinneren."),
+   ("Kijk in het bestand voordat je het terugzet", "Laad de kandidaat op jwsync.org en zie wat erin zit — hoeveel aantekeningen, uit welke publicaties, tot welke datum. Daarmee weet je of het het juiste bestand is voordat je je aan een terugzetting vastlegt."),
+   ("Maak ook een back-up van het huidige apparaat", "Zelfs als het leeg lijkt: maak er een back-up van. Heb je sinds het verdwijnen van de aantekeningen iets geschreven, dan is dit bestand de enige kopie daarvan."),
+   ("Voeg de twee samen en zet dan terug", "Voeg de oude back-up op jwsync.org samen met de huidige. Het resultaat bevat de teruggehaalde aantekeningen én alles wat sindsdien is geschreven, met duplicaten één keer bewaard. Zet dat samengevoegde bestand terug — nooit de oude back-up in zijn eentje."),
+  ],
+  "sections": [
+   ("Waarom de oude back-up in zijn eentje terugzetten de verkeerde zet is", "Terugzetten vervangt de bibliotheek van het apparaat volledig. Zet je een oude back-up rechtstreeks terug, dan krijg je de ontbrekende aantekeningen terug en verlies je alles wat na die back-up is geschreven. Eerst samenvoegen is wat de redding verliesvrij maakt."),
+   ("Als de back-up zelf niet wil terugzetten", "Een bestand dat bij het terugzetten een fout geeft, is niet per se verloren. Voer de gezondheidscontrole erop uit — schade door onderbroken downloads, cloudsynchronisatie of een hernoemde extensie is vaak te herstellen, en een schoongemaakte kopie zet gewoon terug."),
+   ("Eerst: maak nog geen nieuwe back-up", "Zijn er aantekeningen verdwenen, weersta dan de reflex om meteen een back-up te maken. Een back-up legt de huidige toestand vast, en is die toestand de lege, dan loop je het risico het goede bestand te overschrijven dat je al had. Zoek eerst uit welke back-ups er zijn — in Downloads, Bestanden, e-mail of de cloud — en beslis pas daarna wat je doet. Er wordt op het apparaat niets beter van een back-up die je in paniek maakt."),
+   ("Waarom een update lijkt aantekeningen te verliezen", "De gebruikelijke oorzaak is geen verwijdering. Een update kan de app naar een verse, lege database laten wijzen terwijl de oude nog op de opslag staat; een herinstallatie — ook eentje die automatisch gebeurt doordat een winkelupdate halverwege misging — laat de app vanaf nul beginnen; en op gedeelde apparaten of apparaten met meerdere profielen kan de app onder een ander profiel draaien dan eerst. In elk geval zijn de aantekeningen niet zozeer weg als wel niet geladen, en daarom brengt terugzetten uit een back-up meestal alles netjes terug."),
+   ("Een oude back-up terughalen zonder nieuw werk weg te gooien", "Heb je sinds de back-up gestudeerd, dan ruilt gewoon terugzetten het ene verlies in voor het andere: de oude aantekeningen komen terug en alles wat nieuwer is verdwijnt. De uitweg is de huidige toestand naar een apart bestand back-uppen, dat samenvoegen met de oudere back-up zodat beide sets aantekeningen in één bestand staan, en het samengevoegde resultaat terugzetten. Je houdt de teruggehaalde en de recente aantekeningen samen over in plaats van ertussen te moeten kiezen."),
+   ("Als de app zichzelf opnieuw heeft geïnstalleerd", "Een herinstallatie wist de eigen opslag van de app, dus alles wat niet in een back-up staat is onherstelbaar — er is geen kopie in de cloud om op terug te vallen. Kijk overal waar een .jwlibrary-bestand bewaard kan zijn voordat je concludeert dat er geen is, ook in je map met verzonden mail en in elke cloudopslag waar je ooit iets hebt bewaard. Vind je er een, zet die dan terug, en bewaar back-ups voortaan buiten het apparaat."),
+   ("Als alles weer terug is", "Maak wanneer je aantekeningen terug zijn nog één back-up en zet die buiten het apparaat — wat je zojuist hebt meegemaakt is het argument daarvoor. Heb je een oude back-up met de huidige toestand moeten samenvoegen om hier te komen, bewaar dan ook beide bronbestanden: het zijn gedateerde momentopnamen, en dat je er meer had, is precies wat het terughalen mogelijk maakte."),
+  ],
+  "faq": [
+   ("Staan de aantekeningen nog ergens op het apparaat?", "Niet in een vorm waar je van buiten de app bij komt. Terughalen betekent in de praktijk een eerder back-upbestand — en daarom is oude back-ups bewaren zo belangrijk."),
+   ("Brengt opnieuw aanmelden aantekeningen terug?", "Nee. Persoonlijke studiegegevens zitten niet in een account; ze staan op het apparaat en reizen alleen via back-upbestanden."),
+   ("Wat als de enige back-up die ik heb maanden oud is?", "Voeg hem samen met een back-up van het apparaat zoals het nu is. Je haalt alles terug wat het oude bestand heeft en houdt alles wat het apparaat nog heeft, zonder ertussen te kiezen."),
+   ("Zijn mijn aantekeningen echt weg?", "Niet per se. Bestaat er ergens een back-up, dan is alles wat daarin zit volledig terug te halen. Onherstelbaar is alleen het werk van na de laatste back-up."),
+   ("Kan ik een oude back-up combineren met wat er nu op het apparaat staat?", "Ja — maak eerst een back-up van de huidige toestand, voeg dat bestand daarna samen met het oudere en zet het resultaat terug. Beide sets aantekeningen belanden in dezelfde bibliotheek."),
+   ("Verwijdert het terugzetten van een oude back-up mijn recente aantekeningen?", "In zijn eentje wel, want terugzetten vervangt de gegevens van het apparaat. Voeg de huidige back-up eerst samen met de oude en zet het samengevoegde bestand terug."),
+   ("Moet ik de app opnieuw installeren om het op te lossen?", "Nee — opnieuw installeren wist de eigen opslag van de app en neemt elke kans weg om terug te halen wat er nog op het apparaat staat. Zoek eerst naar een bestaande back-up, en zie opnieuw installeren als laatste redmiddel wanneer je die hebt."),
+  ],
+ },
+
+ "help-family-member-move-jw-library-notes": {
+  "title": "Help een familielid met het verhuizen van zijn JW Library-aantekeningen",
+  "h1": "Iemand anders helpen zijn JW Library-aantekeningen te verhuizen of te redden",
+  "description": "Jij bent degene aan wie gevraagd wordt de telefoon te fiksen. Hier staat de kortste betrouwbare route om de JW Library-aantekeningen van een familielid naar een nieuw apparaat te brengen — inclusief hoe je dat doet zonder hun aantekeningen te lezen.",
+  "intro": [
+   "Vroeg of laat krijg je iemands telefoon in handen met een nieuwe ernaast. De aantekeningen van JW Library zijn het deel dat niet vanzelf meegaat, en vaak juist het deel dat er het meest toe doet — jaren studie die geen enkel overzetprogramma meeneemt.",
+   "Het gaat precies zoals wanneer je het voor jezelf doet, met één extra overweging die het waard is om vooraf te maken: op wiens apparaat het werk gebeurt.",
+  ],
+  "steps": [
+   ("Loop met ze door hoe je op het oude apparaat een back-up maakt", "JW Library → Persoonlijke studie → het menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Dat bewaart een .jwlibrary-bestand. Ben je niet bij ze, dan kan dit deel gewoon telefonisch."),
+   ("Zorg dat het bestand komt waar je het nodig hebt", "Laat ze het naar zichzelf mailen, of naar jou delen. Het is klein genoeg om via elke berichtenapp te versturen."),
+   ("Controleer of het bestand opengaat", "Laad het op jwsync.org en stel vast dat de aantekeningen erin staan. Dat doen voordat het oude apparaat wordt gewist of doorgegeven, maakt van een vervelende verrassing een non-gebeurtenis."),
+   ("Voeg samen als het nieuwe apparaat al aantekeningen heeft", "Gebruiken ze de nieuwe telefoon al een tijdje, maak daar dan ook een back-up van en voeg beide bestanden samen — anders wist het terugzetten van de oude back-up alles wat ze op het nieuwe apparaat hebben geschreven."),
+   ("Loop de terugzetting met ze door", "Op het nieuwe apparaat: Back-up maken en terugzetten → Terugzetten, en kies het bestand. Aantekeningen, markeringen, bladwijzers en labels verschijnen allemaal."),
+  ],
+  "sections": [
+   ("Het doen zonder hun aantekeningen te lezen", "Persoonlijke studieaantekeningen zijn persoonlijk. Zie je ze liever niet — of zien zij liever niet dat jij ze ziet — doe dan het hele traject op hun apparaat: het is een webpagina, dus je kunt jwsync.org op hun telefoon of tablet openen, hun bestanden daar laden en de back-up nooit op je eigen machine hebben. Er wordt hoe dan ook niets geüpload, maar zo verlaat het bestand hun handen niet."),
+   ("Laat ze achter met een back-up die ze kunnen terugvinden", "Zorg voordat je de telefoon teruggeeft dat het back-upbestand ergens staat waar ze het opnieuw kunnen vinden — hun eigen e-mail of clouddienst, en niet alleen jouw map met downloads. De volgende keer hebben ze je misschien helemaal niet nodig."),
+  ],
+  "faq": [
+   ("Kan ik dit op afstand doen?", "Ja. Kunnen ze een back-up maken en je het bestand sturen, dan werkt de rest ook op afstand — en de terugzetting is een paar tikken die je ze telefonisch kunt aanwijzen."),
+   ("Zij hebben een Android en de nieuwe is een iPhone. Maakt dat uit?", "Nee. De back-upindeling is op Android, iPhone, iPad en Windows identiek."),
+   ("Wat als ze nooit een back-up hebben gemaakt en de oude telefoon weg is?", "Dan is er niets om van terug te halen — de gegevens stonden op dat apparaat. Het is de moeite waard om op de nieuwe telefoon meteen een gewoonte van regelmatige back-ups op te zetten."),
+  ],
+ },
 }
