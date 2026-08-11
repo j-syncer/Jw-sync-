@@ -945,6 +945,41 @@ CHROME = {
             "Power tools": "Instrumente avansate",
         },
     },
+    "nl": {
+        "lang_name": "Nederlands",
+        "lang_label": "Taal",
+        "lang_other": "Deze handleiding in andere talen",
+        "og_locale": "nl_NL",
+        "site_guides": "JW Sync-handleidingen",
+        "nav_guides": "Handleidingen",
+        "nav_community": "Community",
+        "nav_open_app": "App openen",
+        "crumb_guides": "Handleidingen",
+        "h_steps": "Stap voor stap",
+        "h_faq": "Veelgestelde vragen",
+        "h_related": "Verwante handleidingen",
+        "cta_title": "Doe het nu — gratis, in je browser",
+        "cta_body": "JW Sync voegt .jwlibrary-back-ups samen, bewerkt ze en analyseert ze volledig op je eigen apparaat. Geen account, niets uploaden, niets installeren.",
+        "cta_btn": "JW Sync openen \u2192",
+        "index_title": "Handleidingen voor JW Library-back-ups, synchronisatie en aantekeningen | JW Sync",
+        "index_desc": "Praktische handleidingen voor JW Library-back-ups: back-ups van twee apparaten samenvoegen, aantekeningen naar een nieuwe telefoon overzetten, van Android naar iPhone overstappen, een back-up repareren die niet terugleest, aantekeningen bewerken en doorzoeken en meer.",
+        "index_h1": "Handleidingen en instructies",
+        "index_lede": "Alles rond JW Library-back-ups, in eenvoudige stappen: apparaten samenvoegen, overstappen naar een nieuwe telefoon, je aantekeningen redden en meer halen uit de bibliotheek die je al hebt. Elk genoemd hulpmiddel draait gratis in je browser — je bestanden worden nooit ge\u00fcpload.",
+        "index_cta_title": "Sla het lezen over — open het hulpmiddel meteen",
+        "index_cta_body": "Twee back-ups samenvoegen duurt ongeveer een minuut, en de app leidt je stap voor stap.",
+        "footer_all_guides": "Alle handleidingen",
+        "footer_community": "Community",
+        "footer_stats": "Studiestatistieken",
+        "footer_privacy": "JW Sync verwerkt alles lokaal — je bestanden verlaten je apparaat nooit. Gratis; geen account, niets uploaden.",
+        "footer_disclaimer": "\u201cJW Library\u201d is eigendom van de Watch Tower Bible and Tract Society of Pennsylvania. JW Sync is een onafhankelijk hulpmiddel dat daar niet aan verbonden is en er ook niet door wordt goedgekeurd.",
+        "groups": {
+            "Getting started": "Aan de slag",
+            "Sharing scenarios": "Delen met anderen",
+            "Everyday scenarios": "Dagelijks gebruik",
+            "Fixing problems": "Problemen oplossen",
+            "Power tools": "Geavanceerde hulpmiddelen",
+        },
+    },
     "id": {
         "lang_name": "Bahasa Indonesia",
         "lang_label": "Bahasa",
@@ -1032,6 +1067,7 @@ from guides_hu import GUIDES_HU  # noqa: E402
 from guides_hi import GUIDES_HI  # noqa: E402
 from guides_id import GUIDES_ID  # noqa: E402
 from guides_ro import GUIDES_RO  # noqa: E402
+from guides_nl import GUIDES_NL  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -1068,4 +1104,5 @@ GUIDE_TEXT = {
     "hi": GUIDES_HI,
     "id": GUIDES_ID,
     "ro": GUIDES_RO,
+    "nl": GUIDES_NL,
 }

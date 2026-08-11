@@ -1,0 +1,16 @@
+{
+ "brand": "Weer in beeld",
+ "on_this_day": "Op deze dag",
+ "w_years": "{n} jaar geleden geschreven",
+ "w_year": "Een jaar geleden geschreven",
+ "w_months": "{n} maanden geleden geschreven",
+ "w_month": "Vorige maand geschreven",
+ "w_recent": "Onlangs geschreven",
+ "count_sep": "van",
+ "reflect": "Markeren als bekeken",
+ "next": "Volgende",
+ "done_title": "Je bent helemaal bij",
+ "done_sub": "Je hebt de aantekeningen van vandaag bekeken. Een beetje, maar vaak — zo blijft studie hangen.",
+ "come_back": "Kom morgen terug voor meer.",
+ "streak_days": "Reeks van {n} dagen"
+}

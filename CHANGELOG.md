@@ -4,6 +4,25 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.28.0] — 2026-08-11
+
+### Added: Nederlands — the 25th language
+
+The whole interface is now available in Dutch: the app, the Note Explorer, the
+Study Stats page, the share and receive flows, the Reading Companion, Library
+Doctor, the setup wizard, the community forum and the Dutch landing page at
+jwsync.org/nl/. Pick 🇳🇱 Nederlands from the language menu, or open
+jwsync.org/?lang=nl.
+
+Bible-chapter links from the Reading Companion open jw.org in Dutch. That is
+worth stating because it is the step most easily got wrong: jw.org uses its own
+locale codes, and the obvious guesses all fail *silently* — `NL` serves English,
+`DU` serves French, and `D` serves Danish, each returning a perfectly valid page
+in the wrong language. The correct code is `O`, verified against jw.org before
+shipping.
+
+---
+
 ## [3.27.1] — 2026-08-10
 
 ### Fixed: Română was listed twice in the language picker

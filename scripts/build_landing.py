@@ -43,7 +43,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import i18n_tool as t  # noqa: E402
 
 SITE = "https://jwsync.org"
-LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu", "hi", "id", "ro"]
+LANGS = ["en", "es", "pt", "fr", "de", "it", "ru", "ja", "ko", "tl", "sv", "ceb", "ar", "he", "uk", "pl", "zh-Hans", "zh-Hant", "yue-Hant", "vi", "hu", "hi", "id", "ro", "nl"]
 RTL_LANGS = {"ar", "he"}
 # Derived, not hand-listed: a language gets a /guides/<lang>/ link the moment
 # its translations land in guides_i18n.GUIDE_TEXT, and never before — so this
@@ -60,12 +60,14 @@ LANG_NAME = {
     "zh-Hans": "简体中文", "zh-Hant": "繁體中文", "yue-Hant": "粵語",
     "vi": "Tiếng Việt", "hu": "Magyar", "hi": "हिन्दी",
     "id": "Bahasa Indonesia", "ro": "Română",
+    "nl": "Nederlands",
 }
 LOCALE = {
     "en": "en_US", "es": "es_ES", "pt": "pt_BR", "fr": "fr_FR", "de": "de_DE",
     "it": "it_IT", "ru": "ru_RU", "ja": "ja_JP", "ko": "ko_KR", "tl": "tl_PH",
     "sv": "sv_SE", "ceb": "ceb_PH", "ar": "ar_SA", "he": "he_IL", "uk": "uk_UA", "pl": "pl_PL",
     "zh-Hans": "zh_CN", "zh-Hant": "zh_TW", "yue-Hant": "zh_HK", "vi": "vi_VN", "hu": "hu_HU", "hi": "hi_IN", "id": "id_ID", "ro": "ro_RO",
+    "nl": "nl_NL",
 }
 
 TOOLS = [

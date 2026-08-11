@@ -1,0 +1,8 @@
+{
+ "banner_title": "Demomodus",
+ "banner_body": "Er zijn twee voorbeeldback-ups geladen. Klik op <strong>Samenvoeging bekijken</strong> om te zien hoe ze worden gecombineerd, en daarna op <strong>Samenvoegen bevestigen</strong> om het resultaat te downloaden.",
+ "banner_dismiss": "Demo sluiten",
+ "err_generic": "De demo kon niet worden gestart — controleer je verbinding en probeer het opnieuw.",
+ "err_inject": "De voorbeeldbestanden konden niet in de app worden geladen. Ververs de pagina en probeer het opnieuw.",
+ "overwrite_warn": "Als je de demo start, worden de bestanden die je nu geladen hebt vervangen. Doorgaan?"
+}

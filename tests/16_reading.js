@@ -30,7 +30,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function eq(a, b, label) { if (a === b) ok(label + ' (' + a + ')'); else fail(label + ': expected ' + b + ', got ' + a); }
 
-const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk', 'pl', 'zh-Hans', 'zh-Hant', 'yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro'];
+const LANGS = ['en', 'es', 'pt', 'fr', 'de', 'it', 'ru', 'ja', 'ko', 'tl', 'sv', 'ceb', 'ar', 'he', 'uk', 'pl', 'zh-Hans', 'zh-Hant', 'yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl'];
 const REQUIRED_KEYS = ['brand', 'tagline', 'choose_plan', 'plan_canon', 'plan_canon_d', 'plan_chrono', 'plan_chrono_d',
   'choose_pace', 'pace_3m', 'pace_6m', 'pace_1y', 'pace_2y', 'pace_custom', 'per_day', 'finish_by', 'start',
   'today', 'read', 'streak_days', 'done_t', 'done_s', 'come_back', 'progress', 'chapters_read', 'forecast',
@@ -180,6 +180,9 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
       // `RO` — the ISO code — serves English, `R` serves Western Armenian,
       // and `RU` serves Rundi (Russian is `U`).
       ro: 'M',
+      // `NL` — the ISO code — serves English, `DU` serves French, and `D`
+      // serves Danish.
+      nl: 'O',
     };
     const src = fs.readFileSync(REPO + '/js/reading.js', 'utf8');
     const m = src.match(/var WTLOCALE = \{([^}]*)\}/);

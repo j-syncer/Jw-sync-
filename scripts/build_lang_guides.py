@@ -53,6 +53,10 @@ STRAY = {
     "id": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
     # Romanian is Latin-script; ă â î ș ț are all in Latin Extended-A/B.
     "ro": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
+    # Dutch is Latin-script. Its only non-ASCII letters are the diaeresis
+    # (geüpload, coördinatie) and borrowed acutes, all Latin-1 — so like
+    # Indonesian it gets the stray-script guard and no DIACRITIC entry.
+    "nl": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -97,6 +101,36 @@ META = {
   talk                cuvântare
   Hebrew Scriptures   Scripturile ebraice
   Greek Scriptures    Scripturile grecești
+
+JW Library, .jwlibrary, JW Sync and jwsync.org are never translated.""",
+    },
+    "nl": {
+        "name": "Dutch",
+        "upper": "NL",
+        "glossary": """Glossary settled on for all 37 guides:
+
+  backup              back-up
+  to merge / merge    samenvoegen / samenvoeging
+  notes               aantekeningen
+  highlights          markeringen
+  bookmarks           bladwijzers
+  tags                labels
+  device              apparaat
+  file                bestand
+  browser             browser
+  to restore          terugzetten
+  to back up          een back-up maken
+  Personal Study      Persoonlijke studie
+  Backup and Restore  Back-up maken en terugzetten
+  database            database
+  Conflict Reviewer   conflictcontrole
+  duplicate           dubbele
+  publication         publicatie
+  meeting             vergadering
+  convention          congres
+  talk                lezing
+  Hebrew Scriptures   Hebreeuwse Geschriften
+  Greek Scriptures    Griekse Geschriften
 
 JW Library, .jwlibrary, JW Sync and jwsync.org are never translated.""",
     },
