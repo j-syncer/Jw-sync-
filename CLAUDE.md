@@ -247,6 +247,12 @@ serve English.
 Add a row there for each new language, or the map can drift back out of step
 with the picker without anything objecting.
 
+`scripts/verify_wtlocale.py` sweeps the whole map against jw.org in one go —
+run it when adding a language and occasionally after. The `VERIFIED` table only
+proves the map matches values checked once by hand; this proves they are still
+right. Note that jw.org answers with ISO 639-3, so `zh-Hans` comes back as
+`cmn-hans`; both the sweep and `add_language.py` treat that as a match.
+
 ### Step 1 — plumbing (4 places, all outside the dictionaries)
 
 **Use `scripts/add_language.py`** — one parameterised script, not a copy:

@@ -141,6 +141,20 @@ def current_codes():
 
 
 # ── the jw.org gate ─────────────────────────────────────────────────────────
+# jw.org answers with the ISO 639-3 individual-language code where we use the
+# BCP-47 macrolanguage tag, so `zh-Hans` comes back as `cmn-hans`. Both name
+# the same language; a strict string compare would abort on a correct value and
+# push whoever hit it towards --skip-probe, which is the opposite of the point.
+# Keep this map minimal and evidenced — every entry is one we have seen served.
+MACROLANGUAGE = {"cmn": "zh"}
+
+
+def norm_tag(tag):
+    parts = tag.lower().split("-")
+    parts[0] = MACROLANGUAGE.get(parts[0], parts[0])
+    return "-".join(parts)
+
+
 def probe(code, wtlocale):
     url = ("https://www.jw.org/finder?wtlocale=%s&pub=nwtsty&bible=1001000"
            % wtlocale)
@@ -156,7 +170,7 @@ def probe(code, wtlocale):
         sys.exit("ABORT: jw.org response had no <html lang=…>; cannot verify "
                  "wtlocale %r." % wtlocale)
     served = m.group(1)
-    if served.lower() != code.lower():
+    if norm_tag(served) != norm_tag(code):
         sys.exit(
             "ABORT: wtlocale %r serves lang=%r, but you are adding %r.\n"
             "       This is the failure mode the probe exists for: jw.org "
