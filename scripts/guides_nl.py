@@ -510,4 +510,298 @@ GUIDES_NL = {
    ("Kan ik na het kiezen nog van gedachten veranderen?", "Ja — er wordt niets naar een apparaat geschreven tot je het samengevoegde bestand terugzet, en je oorspronkelijke back-ups worden nooit gewijzigd, dus je kunt de samenvoeging opnieuw doen."),
   ],
  },
+
+ "export-jw-library-notes": {
+  "title": "Zo exporteer je JW Library-aantekeningen naar tekst of Markdown",
+  "h1": "Je JW Library-aantekeningen exporteren naar tekst, Markdown of een nieuwe back-up",
+  "description": "Haal je JW Library-aantekeningen uit de app: kopieer of exporteer ze als Markdown of platte tekst voor gebruik waar je maar wilt, of haal een selectie naar een nieuwe .jwlibrary-back-up. Allemaal in je browser.",
+  "intro": [
+   "Aantekeningen die in JW Library zijn geschreven, lezen makkelijk in de app en zijn overal elders lastig te gebruiken — in een document, in een lezingschema, op papier, of in handen van iemand die de app niet gebruikt. Exporteren lost dat op, en de belangrijkste keuze is niet hóé je exporteert maar hoevéél: een gefilterde export is bijna altijd bruikbaarder dan alles in één keer.",
+   "Je studieaantekeningen horen niet opgesloten te zitten in één app. Soms wil je ze als platte tekst — om in een lezingschema, een document of je eigen notitie-app te plakken — en soms wil je een schone back-up met alleen een deelverzameling. De Studieverkenner kan allebei en leest je back-up volledig in de browser.",
+  ],
+  "steps": [
+   ("Laad je back-up", "Maak een back-up in JW Library (Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken), ga dan naar jwsync.org en laad hem in de Studieverkenner."),
+   ("Zoek de aantekeningen die je wilt", "Gebruik zoeken plus de filters op kleur, label en publicatie om precies af te bakenen wat je zoekt — één publicatie, één label, één onderwerp."),
+   ("Kopieer of exporteer als Markdown of tekst", "Kopieer aantekeningen als Markdown of platte tekst om overal te plakken. De opmaak (vet, cursief, lijsten) blijft behouden, dus gestructureerde aantekeningen blijven gestructureerd."),
+   ("Of haal ze naar een nieuwe back-up", "Liever een bestand? Exporteer een selectie of een periode naar een nieuwe .jwlibrary-back-up — handig om een project te archiveren of een bepaalde set aantekeningen aan een ander apparaat te geven."),
+  ],
+  "sections": [
+   ("Waarom überhaupt exporteren", "Aantekeningen zijn nuttiger als ze kunnen reizen: naar een document voor een deel op de vergadering, naar een persoonlijke wiki, naar een afdruk voor iemand die de app niet gebruikt. Markdown houdt de structuur vast en blijft tegelijk overal als platte tekst leesbaar."),
+   ("Een indeling kiezen", "Platte tekst is het meest overdraagbaar en plakt schoon in elk document of elke e-mail. Opgemaakte uitvoer houdt de structuur van langere aantekeningen vast en past bij afdrukken of delen. Wil je de aantekeningen later terug in JW Library — op een ander apparaat, of voor de bibliotheek van iemand anders — bewaar dan het .jwlibrary-bestand zelf en geen tekstexport, want alleen dat bewaart de verbanden tussen aantekeningen, markeringen, labels en de precieze plek in de publicatie waaraan ze vasthangen."),
+   ("Maar een deel van je bibliotheek exporteren", "Een volledige export van jaren studie is zelden wat je wilt. Eerst afbakenen — tot een label, een publicatie, een markeringskleur of een periode — levert iets op waar je echt iets aan hebt, zoals elke aantekening met het label van een lezing, of alles wat je tijdens één congres hebt geschreven. Dezelfde filters die de weergave afbakenen, bakenen de export af, dus wat je ziet is wat je krijgt."),
+   ("Wat er met de tekst meereist en wat niet", "Een export bevat je woorden. Hij bevat niet de verankering die een aantekening aan een bepaalde alinea van een bepaalde publicatie koppelt, want die verwijzingen betekenen alleen binnen JW Library iets. Dat is de praktische reden om naast exports ook back-ups te bewaren: een export is om buiten de app te lezen, af te drukken en te delen, terwijl een .jwlibrary-bestand de aantekeningen mét hun context terugzet in een bibliotheek."),
+   ("Alles bij elkaar halen voor één lezing of toewijzing", "Dit is de meest voorkomende reden om te exporteren. Filter op het label, de publicatie of de periode waar het materiaal onder valt, controleer het resultaat en exporteer alleen dat. Wat je krijgt is één document met de relevante aantekeningen en de passages die je hebt gemarkeerd, in de volgorde waarin ze voorkomen, in plaats van een onhandelbare berg van je hele bibliotheek."),
+   ("Aantekeningen met iemand anders delen", "Mensen bedoelen twee verschillende dingen met delen. Wil de ander je aantekeningen lezen, dan is een tekstexport het juiste — die gaat overal open en vraagt om geen bijzondere software. Wil diegene de aantekeningen in zijn eigen JW Library hebben, verankerd aan dezelfde alinea's en met hun labels en kleuren, dan wil je juist een .jwlibrary-bestand, want een tekstexport kan niets terugzetten in de app."),
+   ("Een archief bijhouden dat je later nog kunt lezen", "Exports zijn ook op zichzelf de moeite waard. Een kopie in platte tekst van je studieaantekeningen gaat over dertig jaar nog open in software die nog niemand heeft geschreven, en dat kan geen app-eigen indeling beloven. Allebei bewaren — het .jwlibrary-bestand om terug te zetten en een tekstexport om te lezen — kost vrijwel niets en dekt beide toekomsten."),
+   ("Export of back-up — wat je nodig hebt", "De twee beantwoorden verschillende vragen. Een export is om je aantekeningen buiten JW Library te gebruiken: lezen, afdrukken, citeren, naar iemand sturen. Een .jwlibrary-back-up is om ze terug te zetten in JW Library, op dit of een ander apparaat, met elke verankering, elk label en elke kleur intact. Het een vervangt het ander niet, en er is geen reden om niet allebei te bewaren."),
+  ],
+  "faq": [
+   ("Verandert het exporteren mijn JW Library-aantekeningen?", "Nee. De export leest een kopie van je back-up in de browser; je oorspronkelijke bestand en je app blijven ongemoeid."),
+   ("Kan ik alles in één keer exporteren?", "Ja — wis de filters om je hele bibliotheek te selecteren, of baken eerst af om er maar een deel van te exporteren."),
+   ("Krijg ik mijn aantekeningen in Word of Google Documenten?", "Ja — exporteer als tekst en plak het erin. De tekst komt met zijn structuur intact binnen en kun je van daaruit opmaken."),
+   ("Worden markeringen net als aantekeningen geëxporteerd?", "Ja, inclusief de gemarkeerde passage en de kleur, zodat een afdruk laat zien wat je hebt gemarkeerd en niet alleen wat je hebt geschreven."),
+   ("Kan ik alles in één keer exporteren?", "Ja, al is een gefilterde export meestal nuttiger. Alles kan in één keer worden geëxporteerd wanneer je een volledige kopie wilt."),
+   ("Kan ik de antwoorden exporteren die ik bij studievragen heb getypt?", "Ja. Getypte studieantwoorden horen bij je persoonlijke studiegegevens en kunnen samen met aantekeningen en markeringen worden geëxporteerd."),
+   ("Staat er in de export bij welke publicatie elke aantekening hoort?", "Ja, de export geeft aan waar elke aantekening vandaan komt, ook al werkt de onderliggende verankering alleen binnen JW Library."),
+   ("Verandert het exporteren iets in mijn bibliotheek?", "Nee. Een export leest je gegevens en schrijft een apart bestand; er wordt niets in JW Library gewijzigd, verplaatst of verwijderd."),
+   ("Kan ik exporteren vanuit een back-up in plaats van vanuit de app?", "Ja. Een .jwlibrary-bestand kun je rechtstreeks openen en de aantekeningen erin exporteren, wat handig is als wat je zoekt in een oude back-up staat en niet op je huidige apparaat."),
+  ],
+ },
+
+ "organize-jw-library-tags": {
+  "title": "Zo orden en ruim je JW Library-labels op",
+  "h1": "Je JW Library-labels ordenen: hernoemen, samenvoegen en in bulk opruimen",
+  "description": "Labels vermenigvuldigen zich in de loop van jaren studie. Hernoem een label over al je aantekeningen heen, voeg dubbele labels samen en verwijder de labels die je niet meer gebruikt — in bulk, in je browser, met volledig ongedaan maken.",
+  "intro": [
+   "Labels zijn hoe je aantekeningen later terugvindt — maar na een paar jaar woekeren ze. Je houdt “Velddienst”, “velddienst” en “Prediking” over die hetzelfde bedoelen, labels die je één keer maakte en nooit hergebruikte, en een wisselende schrijfwijze waardoor filteren onbetrouwbaar wordt. JW Library geeft je geen manier om dat op schaal recht te zetten. De Studieverkenner wel.",
+  ],
+  "steps": [
+   ("Laad je back-up in de Studieverkenner", "Laad op jwsync.org je .jwlibrary-bestand. Filter op label om elk label te zien en hoeveel aantekeningen het dragen."),
+   ("Hernoem een label over al zijn aantekeningen heen", "Herlabel in bulk: hernoem een label één keer en elke aantekening die het gebruikt wordt bijgewerkt — geen aantekeningen meer één voor één bewerken om een schrijffout te herstellen."),
+   ("Voeg dubbele labels samen", "Herlabel de aantekeningen van een dubbel label naar het label dat je aanhoudt en verwijder daarna het lege dubbele. “Velddienst” en “velddienst” worden zo één schoon label."),
+   ("Verwijder labels die je niet meer gebruikt", "Selecteer verouderde labels en verwijder ze in bulk. Alles is ongedaan te maken, dus een al te voortvarende opruiming is nooit blijvend."),
+   ("Exporteer de opgeruimde bibliotheek", "Download het bewerkte .jwlibrary-bestand en zet het terug in JW Library. Je labels zijn nu overal consistent."),
+  ],
+  "sections": [
+   ("Een labelsysteem waar je echt iets aan hebt", "Zodra labels consistent zijn, wordt filteren betrouwbaar — één tik toont elke aantekening over een thema, over alle publicaties heen. Dat is het verschil tussen labels als rommel en labels als een echte index van je studie."),
+   ("Met consistente labels is delen een kwestie van twee klikken", "De aantekeningenkiezer op de deelpagina heeft een eigen labelfilter, dus een schoon label is meteen de snelste manier om iemand een set aantekeningen te sturen: kies het label, klik Alles selecteren, maak het bestand. Slordige labels kosten je twee keer — als je aantekeningen zoekt, en nog eens als je ze wilt delen."),
+  ],
+  "faq": [
+   ("Raakt herlabelen in bulk de tekst van de aantekening?", "Nee — het verandert alleen welke labels eraan hangen. De titels en de inhoud van je aantekeningen blijven precies zoals je ze schreef."),
+   ("Kan ik iets ongedaan maken als ik me vergis?", "Ja. De Studieverkenner heeft volledig ongedaan maken en opnieuw doen, en je oorspronkelijke back-up wordt nooit gewijzigd — de wijzigingen gaan naar een geëxporteerde kopie."),
+  ],
+ },
+
+ "manage-jw-library-highlights": {
+  "title": "Zo beheer en verkleur je JW Library-markeringen",
+  "h1": "Je JW Library-markeringen beheren: in bulk verkleuren en ordenen",
+  "description": "Breng orde in jaren aan JW Library-markeringen: verander kleuren in bulk, geef je kleurcode een consistente betekenis en blader al je markeringen op één plek door. In je browser.",
+  "intro": [
+   "Markeringskleuren helpen alleen als ze iets consistents betekenen. Bij de meeste mensen verschuiven de markeringen na verloop van tijd — geel betekende in 2019 iets anders dan nu, en in JW Library is er geen manier om ze allemaal samen te zien of op schaal recht te zetten. De Studieverkenner brengt elke markering in één overzicht bijeen en laat je in bulk verkleuren.",
+  ],
+  "steps": [
+   ("Laad je back-up", "Open op jwsync.org je .jwlibrary-bestand in de Studieverkenner en ga naar het tabblad Markeringen."),
+   ("Blader door je markeringen en filter ze", "Zie elke markering in één lijst, filter op kleur of publicatie, en doorzoek de gemarkeerde tekst en eventuele gekoppelde aantekeningen."),
+   ("Verkleur in bulk", "Selecteer veel markeringen en verander hun kleur tegelijk — breng bijvoorbeeld alles wat je als “belangrijke tekst” bedoelde in je hele bibliotheek onder één kleur."),
+   ("Bewerk ook de gekoppelde aantekeningen", "Hangt er een aantekening aan een markering, dan bewerk je de titel en de inhoud daarvan hier meteen mee."),
+   ("Exporteer en zet terug", "Download het bewerkte .jwlibrary-bestand en zet het terug in JW Library, zodat je consistente kleurcode op elk apparaat staat."),
+  ],
+  "sections": [
+   ("Bepaal wat je kleuren betekenen", "Een eenvoudig schema — één kleur voor hoofdpunten, één voor teksten om uit het hoofd te leren, één voor vragen om uit te zoeken — maakt van markeringen een studiehulpmiddel in plaats van versiering. In bulk verkleuren laat je dat schema met terugwerkende kracht op jaren aan lezen toepassen."),
+  ],
+  "faq": [
+   ("Kan ik markeringen zien waar geen aantekening aan hangt?", "Ja — het tabblad Markeringen toont ze allemaal, met of zonder gekoppelde aantekening."),
+   ("Heeft verkleuren invloed op de onderliggende tekst?", "Nee, het verandert alleen de markeringskleur; de tekst van de publicatie en je aantekeningen blijven onaangeroerd."),
+  ],
+ },
+
+ "jw-library-study-answers": {
+  "title": "Je ingevulde studieantwoorden in JW Library bekijken en bewerken",
+  "h1": "Je JW Library-studieantwoorden op één plek terugvinden",
+  "description": "Je getypte antwoorden op vragen bij studieartikelen en werkboeken zitten verstopt in je back-up. Het tabblad Studieantwoorden van de Studieverkenner laat je ze allemaal in één keer lezen, doorzoeken en bewerken.",
+  "intro": [
+   "Tijdens het studeren typ je antwoorden in de invulvelden van studieartikelen, De Wachttoren en werkboeken voor de vergadering. Ze worden in je back-up bewaard — maar JW Library laat ze je alleen zien, elk begraven in zijn eigen publicatie. Er is geen enkele plek waar je alles terugleest wat je hebt geschreven. Het tabblad Studieantwoorden van de Studieverkenner is die plek.",
+  ],
+  "steps": [
+   ("Laad je back-up in de Studieverkenner", "Laad op jwsync.org je .jwlibrary-bestand en open het tabblad Studieantwoorden."),
+   ("Lees al je antwoorden bij elkaar", "Elk ingevuld antwoord dat je hebt getypt staat in één doorzoekbare lijst, zodat je in één oogopslag je eigen denkwerk bij een heel studieartikel kunt teruglezen."),
+   ("Zoeken en bewerken", "Vind een antwoord op zijn tekst en bewerk en verfijn het ter plekke — handig bij het doornemen vóór een vergadering of om haastige formuleringen bij te schaven."),
+   ("Exporteren of terugzetten", "Zet het bewerkte bestand terug om je wijzigingen mee te nemen naar JW Library, of kopieer antwoorden als tekst voor een lezing of je eigen administratie."),
+  ],
+  "sections": [
+   ("Waarom dit vóór vergaderingen handig is", "Je voorbereide antwoorden in één doorlopende lijst nalezen — in plaats van in de app door elke alinea te scrollen — is een snellere manier om op te frissen wat je van plan was te zeggen, en om te zien welke antwoorden je open hebt gelaten."),
+  ],
+  "faq": [
+   ("Zijn dit hetzelfde als mijn persoonlijke aantekeningen?", "Nee — ingevulde antwoorden zijn de reacties die je in de antwoordvelden van een publicatie hebt getypt. De Studieverkenner toont ze op een eigen tabblad, los van vrije aantekeningen."),
+   ("Wordt er iets geüpload om mijn antwoorden te lezen?", "Nee. Net als bij alles in JW Sync wordt je back-up lokaal in de browser gelezen en nooit ergens naartoe gestuurd."),
+  ],
+ },
+
+ "extract-jw-library-notes-by-date": {
+  "title": "JW Library-aantekeningen uit een periode naar een nieuwe back-up halen",
+  "h1": "Een periode aan JW Library-aantekeningen naar een nieuwe back-up halen",
+  "description": "Haal alleen de aantekeningen uit een bepaalde periode — een dienstjaar, een congres, een studieproject — naar een eigen schone .jwlibrary-back-up. Volledig in je browser.",
+  "intro": [
+   "Soms wil je een deel van je bibliotheek en niet het geheel: de aantekeningen van dit jaar om terug te lezen, alles van een congres, of het onderzoek van één project om aan iemand door te geven. De Studieverkenner kan aantekeningen uit een periode naar een gloednieuwe .jwlibrary-back-up halen en laat je hoofdbibliotheek daarbij ongemoeid.",
+  ],
+  "steps": [
+   ("Laad je back-up", "Open op jwsync.org je .jwlibrary-bestand in de Studieverkenner."),
+   ("Stel de periode in", "Kies de begin- en einddatum van de aantekeningen die je wilt — een dienstjaar, een maand, de data van een bepaald evenement."),
+   ("Haal ze naar een nieuwe back-up", "Exporteer de gevonden aantekeningen naar een nieuw .jwlibrary-bestand. Daarin zitten alleen de aantekeningen, markeringen en labels van die periode."),
+   ("Gebruik het uitgehaalde bestand", "Zet het terug in JW Library om gericht terug te lezen, archiveer het, of deel het met iemand die alleen dat deel nodig heeft."),
+  ],
+  "sections": [
+   ("Goede redenen om op datum uit te halen", "Een jaarlijks archief van je studie; een schoon bestand met congresaantekeningen om apart te houden; een studiepartner alleen de aantekeningen geven van een project waar je samen aan werkte; of een enorme bibliotheek opdelen in behapbare, gedateerde stukken — allemaal zonder je hoofdback-up te verstoren."),
+  ],
+  "faq": [
+   ("Verdwijnen die aantekeningen door het uithalen uit mijn bibliotheek?", "Nee. Het kopieert de gevonden aantekeningen naar een nieuw bestand; je oorspronkelijke back-up houdt alles."),
+   ("Welke datum wordt gebruikt — wanneer ik de aantekening schreef of voor het laatst bewerkte?", "Het gebruikt de tijdstempels van de aantekening zelf in de back-up, dus de periode weerspiegelt wanneer de aantekeningen zijn gemaakt of gewijzigd."),
+  ],
+ },
+
+ "connect-jw-library-notes-study-map": {
+  "title": "Zie hoe je JW Library-aantekeningen samenhangen — Studiekaart",
+  "h1": "Studiekaart: een privé kennisnetwerk van je JW Library-aantekeningen",
+  "description": "De Studiekaart maakt van je JW Library-aantekeningen een interactief web dat ze koppelt via gedeelde Bijbelteksten, gedeelde labels en gelijkende bewoordingen — zodat je de thema's ziet die door je studie heen lopen.",
+  "intro": [
+   "In jaren aan aantekeningen zitten verbanden die je nooit hebt gezien: dezelfde Bijbeltekst die in een stuk of twaalf aantekeningen wordt aangehaald, een thema waar je steeds op terugkomt, gedachten die elkaar in verschillende publicaties weerklinken. De Studiekaart tekent die verbanden als een interactief netwerk, zodat de vorm van je eigen studie zichtbaar wordt.",
+  ],
+  "steps": [
+   ("Open de pagina Studiestatistieken en laad een back-up", "Ga naar jwsync.org/highlights.html en laad je .jwlibrary-bestand. De Studiekaart leest het in je browser."),
+   ("Open de Studiekaart", "Start de kaart om je aantekeningen als verbonden punten te zien, gekoppeld via gedeelde Bijbelteksten, gedeelde labels en gelijkende bewoordingen."),
+   ("Verken de verbanden", "Wissel tussen de weergaven Thema's en Aantekeningen, ga met de muis over een aantekening om zijn verbanden te laten oplichten, sleep dingen rond, en gebruik de sterkteschuif om alleen de nauwste verbanden te tonen. In het volledige scherm heb je ruimte om rond te dwalen."),
+   ("Bouw en bewaar studieketens", "Trek je eigen handmatige “studieketens” tussen verwante aantekeningen om een redenering vast te leggen, en exporteer de kaart als PNG-afbeelding om te bewaren of te delen."),
+  ],
+  "sections": [
+   ("Wat de kaart blootlegt", "Clusters laten zien welke thema's je het meest bestudeert; een Bijbeltekst die aan veel aantekeningen hangt, wijst op een vers waar je steeds naar terugkeert; een losstaande aantekening kan een draad zijn die uitwerking verdient. Het is een manier om je studie te bestuderen — en om lezingen voor te bereiden door de verbanden te volgen die je al hebt gelegd."),
+  ],
+  "faq": [
+   ("Heb ik veel aantekeningen nodig voordat de kaart nuttig wordt?", "Een bescheiden bibliotheek laat al verbanden zien; hoe rijker je aantekeningen, hoe meer de kaart blootlegt. Bij hele kleine bibliotheken verschijnt een hint om er eerst meer aantekeningen bij te maken."),
+   ("Blijft de kaart privé?", "Volledig. Hij wordt in je browser uit je back-up opgebouwd en nooit geüpload; zelfs de PNG-export wordt op je eigen apparaat gemaakt."),
+  ],
+ },
+
+ "review-old-jw-library-notes": {
+  "title": "Zo lees je je oude JW Library-aantekeningen terug (zodat ze blijven hangen)",
+  "h1": "Oude JW Library-aantekeningen teruglezen met Opnieuw langs — een beetje, maar vaak",
+  "description": "Aantekeningen die je nooit terugleest, zijn aantekeningen die je vergeet. Opnieuw langs toont wat je op deze dag in eerdere jaren schreef en bouwt daar een rustige herhaling op verdeelde tijdstippen mee op, zodat eerdere studie voor je blijft werken.",
+  "intro": [
+   "De meeste studieaantekeningen worden één keer geschreven en nooit meer teruggezien. Dat is stille verspilling — het inzicht was het waard om vast te leggen, en zakte daarna naar de bodem van de bibliotheek. Opnieuw langs brengt je eigen oude aantekeningen weer boven, een paar tegelijk, zodat teruglezen een kleine dagelijkse gewoonte wordt in plaats van een project voor ooit.",
+  ],
+  "steps": [
+   ("Open de pagina Studiestatistieken en laad een back-up", "Ga naar jwsync.org/highlights.html en laad je .jwlibrary-bestand. Opnieuw langs leest je aantekeningen lokaal."),
+   ("Bekijk “Op deze dag”", "Opnieuw langs haalt aantekeningen naar boven die je op deze datum in eerdere jaren schreef — “twee jaar geleden vandaag geschreven” — en brengt je weer in contact met eerdere studie op het moment dat dat het meest zegt."),
+   ("Doe een korte dagelijkse herhaling", "Je krijgt een handvol aantekeningen voorgelegd om terug te lezen en als bekeken af te vinken. Een beetje, maar vaak, is hoe studie blijft hangen — en je reeks groeit zolang je de gewoonte volhoudt."),
+   ("Kom morgen terug", "Herhaling op verdeelde tijdstippen plant aantekeningen zo in dat ze na verloop van tijd opnieuw langskomen, dus wat het onthouden waard is blijft terugkeren tot het van jou is."),
+  ],
+  "sections": [
+   ("Waarom herhaling op verdeelde tijdstippen werkt", "Iets terugzien net voordat je het vergeet, is veel doeltreffender dan stampen. Door een paar aantekeningen over veel dagen te spreiden, maakt Opnieuw langs van je bestaande bibliotheek een doorlopende herhaling die weinig moeite kost en gestaag verdiept wat je hebt bestudeerd."),
+  ],
+  "faq": [
+   ("Waar wordt mijn voortgang bewaard?", "In je browser op je eigen apparaat — er is geen account en er wordt niets geüpload. De reeks en de planning zijn alleen van jou."),
+   ("Heb ik hier nieuwe aantekeningen voor nodig?", "Nee — Opnieuw langs werkt met de aantekeningen die je al hebt geschreven. Hoe ouder je bibliotheek, hoe leuker de momenten van “op deze dag”."),
+  ],
+ },
+
+ "jw-library-achievements-streaks": {
+  "title": "JW Library-studiereeksen, niveaus en onderscheidingen",
+  "h1": "Maak van je JW Library-studie reeksen, niveaus en onderscheidingen",
+  "description": "Bekijk je studiereeksen, klim 60 niveaus door 12 rangen op je studiereis, en ontgrendel zo'n 200 prestaties — allemaal privé gelezen uit je eigen JW Library-back-up.",
+  "intro": [
+   "Regelmaat is het lastige deel van persoonlijke studie, en vooruitgang die je niet ziet, laat je makkelijk versloffen. De pagina Studiestatistieken maakt van de geschiedenis in je back-up iets wat je ziet groeien: reeksen, niveaus en onderscheidingen die de studie weerspiegelen die je werkelijk hebt gedaan — geen opgelegde doelen, alleen je eigen verslag zichtbaar gemaakt.",
+  ],
+  "steps": [
+   ("Open de pagina Studiestatistieken", "Ga naar jwsync.org/highlights.html en laad je .jwlibrary-back-up. Alles wordt in je browser berekend."),
+   ("Bekijk je reeksen", "Zie je langste en je huidige studiereeks, je weekritme en je drukste uren en maanden — de hartslag van je studiegewoonte."),
+   ("Klim door je studiereis", "Werk je door 60 niveaus in 12 benoemde rangen (van Zaad helemaal tot Altijdgroen), met een bol die van kleur verschiet en feestjes bij elk nieuw niveau, op basis van je studie over alle jaren."),
+   ("Verzamel prestaties", "Ontgrendel zo'n 200 onderscheidingen van Gewoon tot Legendarisch, inclusief thematische medailles die op je inhoud letten; open een medaille om je vordering naar de volgende te zien."),
+  ],
+  "sections": [
+   ("Motivatie zonder druk", "Dit zijn geen doelen die iemand anders heeft gesteld — het is een spiegel van wat je al hebt gedaan. Een reeks zien die je niet wilt breken, of een niveau dat bijna in zicht is, is een vriendelijk duwtje om de goede gewoonte vol te houden. En een deelbare kaart vat je jaar samen zonder ook maar één persoonlijke aantekening prijs te geven."),
+  ],
+  "faq": [
+   ("Werken reeksen en onderscheidingen zichzelf bij?", "Ze weerspiegelen de back-up die je laadt, dus maak een nieuwe back-up om je laatste vorderingen te zien. Er draait niets op de achtergrond."),
+   ("Wordt hier iets van gedeeld of geüpload?", "Nee. Het wordt allemaal lokaal uit je back-up berekend; alleen de samenvattingskaart kun je desgewenst delen, en daar staat geen tekst van aantekeningen in."),
+  ],
+ },
+
+ "share-convention-assembly-notes": {
+  "title": "Zo deel je congres- en kringvergaderingsaantekeningen uit JW Library",
+  "h1": "Je aantekeningen van congressen, kringvergaderingen en vergaderingen delen",
+  "description": "Geef je aantekeningen van een congres, kringvergadering of vergadering als klein bestand door aan familie en vrienden — zonder je hele bibliotheek te overhandigen of die van hen te overschrijven. Een praktische toepassing van het delen van aantekeningen.",
+  "intro": [
+   "Je hebt een congres lang zorgvuldig aantekeningen gemaakt; een vriend die een programmadeel heeft gemist zou ze graag hebben; familieleden willen de punten om zelf terug te lezen. Je hele back-up sturen is veel te veel en zou bij het terugzetten de eigen aantekeningen van de ontvanger wissen. Met het delen van aantekeningen geef je precies de aantekeningen door die je wilt — en houdt de ontvanger alles wat hij al heeft.",
+  ],
+  "steps": [
+   ("Laad je back-up op de deelpagina", "Ga naar jwsync.org/share.html en laad je .jwlibrary-bestand."),
+   ("Selecteer alleen de congresaantekeningen", "Kies het label van het evenement in het labelfilter van de aantekeningenkiezer en klik Alles selecteren — de lijst bevat dan precies de aantekeningen die je hebt gelabeld. Markeringen die bij die aantekeningen horen, gaan mee."),
+   ("Stuur het kleine deelbestand", "JW Sync maakt een klein bestand met alleen die aantekeningen. Verstuur het zoals jou uitkomt — een berichtenapp, e-mail, AirDrop. Geen server, geen account."),
+   ("Familie en vrienden voegen het toe", "Iedereen opent dezelfde pagina, laadt jouw bestand samen met zijn eigen back-up en krijgt een nieuwe back-up met jouw aantekeningen erbij. Hun eigen aantekeningen worden nooit overschreven, en jouw toegevoegde aantekeningen komen gelabeld binnen zodat ze makkelijk terug te vinden zijn."),
+  ],
+  "sections": [
+   ("Met een label gaat dit vanzelf", "Label je je aantekeningen tijdens het evenement (bijvoorbeeld “Congres 2026”), dan is ze achteraf selecteren één klik op het filter plus Alles selecteren. Precies daarom is het de moeite waard om aan het begin van elk congres, elke kringvergadering of elke bijzondere vergadering een nieuw label te beginnen."),
+  ],
+  "faq": [
+   ("Kan ik met meerdere mensen tegelijk delen?", "Ja — het deelbestand is gewoon een bestand. Stuur het naar zoveel mensen als je wilt; ieder voegt het los in zijn eigen bibliotheek toe."),
+   ("Komt mijn hele bibliotheek zo op straat?", "Nee. Alleen de aantekeningen die je selecteert zitten in het bestand; de rest van je bibliotheek blijft privé."),
+  ],
+ },
+
+ "share-jw-library-notes-by-tag": {
+  "title": "Alleen de JW Library-aantekeningen onder één label delen",
+  "h1": "Alleen de aantekeningen met één bepaald label delen",
+  "description": "Stuur één onderwerp, één project of het materiaal van één Bijbelstudent in plaats van je hele bibliotheek — en je labels reizen mee, zodat het aan de andere kant geordend aankomt.",
+  "intro": [
+   "Een label is meestal de natuurlijke eenheid om te delen. Je hebt alles wat je over een onderwerp verzamelde gelabeld, of alles van één evenement, of alles wat je met één persoon doorneemt — en die set, niet je hele bibliotheek, is wat de ander eigenlijk wil.",
+   "Het delen van aantekeningen in JW Sync werkt per aantekening, dus een label is simpelweg de lijst die je aanvinkt. De aantekeningen houden onderweg hun labels, wat betekent dat degene die ze ontvangt daarna in zijn eigen bibliotheek op precies dezelfde set kan filteren.",
+  ],
+  "steps": [
+   ("Zorg dat de aantekeningen het label dragen", "Label ze gaandeweg in JW Library, of open je back-up in de Studieverkenner op jwsync.org en gebruik de labelbewerker om in bulk een label aan aantekeningen toe te voegen. Consequent labelen nu is wat delen later een klus van een minuut maakt."),
+   ("Open de deelpagina en laad je back-up", "Ga naar jwsync.org/share.html, kies Aantekeningen versturen en laad je .jwlibrary-bestand. Het wordt in je browser gelezen en verlaat je apparaat nooit."),
+   ("Kies het label in het filter en klik Alles selecteren", "De aantekeningenkiezer heeft een labelfilter dat elk label in je back-up opsomt met het aantal aantekeningen eronder. Kies je label en de lijst beperkt zich tot precies die aantekeningen; Alles selecteren vinkt de hele set aan. Dat is de hele selectie — twee klikken."),
+   ("Maak het bestand en verstuur het", "JW Sync bouwt een klein deelbestand met alleen de aantekeningen die je hebt aangevinkt. Verstuur het via chat, e-mail of AirDrop — er komt geen server aan te pas en aan geen van beide kanten een account."),
+   ("De ander voegt het toe aan zijn eigen back-up", "De ander opent dezelfde pagina, kiest Ontvangen, bekijkt de aantekeningen vooraf en voegt ze toe aan zijn back-up. Jouw labels komen met de aantekeningen mee, plus een label dat de toevoeging markeert, zodat de hele set ook voor de ander één filter ver is."),
+  ],
+  "sections": [
+   ("Waarom een label delen in plaats van een back-up", "Een volledige .jwlibrary-back-up overhandigen geeft alles weg wat je ooit hebt geschreven, en het terugzetten zou de eigen aantekeningen van de ander wissen. Een gelabelde selectie delen is op beide punten het tegenovergestelde: de ander ziet alleen wat jij hebt gekozen, en raakt niets van zichzelf kwijt."),
+   ("Nog verder afbakenen, of over labels heen delen", "Het labelfilter en het zoekvak werken samen: kies een label en typ dan een woord om het verder in te perken, en Alles selecteren vinkt nog steeds alleen aan wat voor je staat. Het zoeken kijkt ook naar labelnamen, dus een trefwoord dat meerdere labels delen brengt ze in één keer bij elkaar. Bij elke aantekening in de lijst staat welke labels hij draagt, dus je ziet wat je verstuurt voordat je het verstuurt."),
+   ("Labels die je aanhoudt om te delen", "Het loont om een paar labels aan te houden die er puur zijn om te delen — de naam van een evenement, een onderwerp waar je voor anderen onderzoek naar doet, de persoon met wie je studeert. Komt het moment om iets te sturen, dan hoef je niet te zoeken: de set staat al klaar."),
+  ],
+  "faq": [
+   ("Gaan mijn labels mee naar de ander?", "Ja. Gedeelde aantekeningen dragen hun labels, en de toevoeging krijgt een eigen label, zodat de ontvanger de hele partij later kan terugvinden, nalopen of verwijderen."),
+   ("Wat als een aantekening meerdere labels heeft?", "Die verschijnt onder elk daarvan in het filter, en al zijn labels reizen mee. Filteren op één label haalt de andere er nooit af."),
+   ("Verdwijnen de aantekeningen door het delen uit mijn bibliotheek?", "Nee. Delen kopieert aantekeningen naar een klein bestand; je back-up en je app blijven ongemoeid."),
+   ("Kan ik hetzelfde label naar meerdere mensen sturen?", "Ja — het deelbestand is een gewoon bestand. Stuur het naar zoveel mensen als je wilt, en ieder voegt het los toe aan zijn eigen bibliotheek."),
+  ],
+ },
+
+ "share-notes-with-bible-student": {
+  "title": "JW Library-aantekeningen delen met een Bijbelstudent",
+  "h1": "Studieaantekeningen delen met iemand met wie je de Bijbel bestudeert",
+  "description": "Stuur de aantekeningen bij een les — teksten, illustraties, de punten die je hebt voorbereid — rechtstreeks naar de eigen JW Library van de ander, zonder ook maar iets aan te raken van wat diegene zelf heeft geschreven.",
+  "intro": [
+   "Als je een studie voorbereidt, belandt het meeste werk in je eigen aantekeningen: de extra teksten, de illustratie waardoor een punt aankwam, het antwoord op de vraag van vorige week. Het voorlezen is één ding; de ander een kopie nalaten die hij de hele week kan herlezen is iets anders.",
+   "Het delen van aantekeningen zet je voorbereide aantekeningen als echte JW Library-aantekeningen in zijn bibliotheek, vast aan dezelfde alinea's en verzen — niet als schermafdruk of als bericht waar hij langs scrollt.",
+  ],
+  "steps": [
+   ("Bereid de aantekeningen bij de les voor in JW Library", "Schrijf de aantekeningen zoals je gewend bent, bij de alinea's en teksten die de les behandelt. Geef ze een label — de naam van de persoon, of de publicatie — zodat de set later makkelijk te selecteren is."),
+   ("Open de deelpagina en laad je back-up", "Maak een back-up (Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken), open dan jwsync.org/share.html, kies Aantekeningen versturen en laad het bestand. Het verlaat je apparaat nooit."),
+   ("Vink de aantekeningen bij deze les aan", "Filter de kiezer op het label dat je gebruikte en klik Alles selecteren, of zoek en vink ze een voor een aan. Maak het deelbestand — al het andere in je bibliotheek blijft waar het is."),
+   ("Verstuur het en loop het ontvangen met de ander door", "Diegene heeft eerst een eigen back-up nodig — Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken. Daarna opent hij jwsync.org/share.html, kiest Ontvangen, laadt jouw bestand en zijn back-up, en downloadt de bijgewerkte back-up."),
+   ("Hij zet hem terug in JW Library", "Back-up maken en terugzetten → Terugzetten, kies het bijgewerkte bestand, en jouw aantekeningen verschijnen in zijn bibliotheek naast die van hemzelf — gelabeld, zodat hij weet welke van jou komen."),
+  ],
+  "sections": [
+   ("Zijn aantekeningen worden nooit overschreven", "Dat is het belangrijke verschil met een back-up sturen. Terugzetten vervangt de hele bibliotheek van een apparaat; gedeelde aantekeningen ontvangen voegt eraan toe. Alles wat hij zelf heeft geschreven — ook bij precies dezelfde alinea's — blijft precies zoals het was."),
+   ("Een wekelijks ritme dat twee minuten kost", "Als jullie het allebei één keer hebben gedaan, is de routine kort: voorbereiden, aanvinken, versturen, terugzetten. Veel mensen vinden het het handigst om de aantekeningen meteen na de voorbereiding te sturen, zodat de student ze vóór de studie heeft en niet erna."),
+  ],
+  "faq": [
+   ("Heeft de student een account of een geïnstalleerde app nodig?", "Nergens een account, en niets te installeren behalve JW Library zelf — de deelpagina is een gewone webpagina."),
+   ("Wat als de student nog nooit een back-up heeft gemaakt?", "Dan maakt hij er eerst een, in JW Library onder Persoonlijke studie → Back-up maken en terugzetten. Zelfs een bibliotheek die leeg lijkt werkt; de back-up is waar de gedeelde aantekeningen aan worden toegevoegd."),
+   ("Kan ik de aantekeningen later weer terugnemen?", "Het bestand is van jou om wel of niet te versturen. Zodra iemand het heeft, is het van hem, precies als bij elk bericht — deel dus wat je ook op schrift zou willen delen."),
+  ],
+ },
+
+ "share-meeting-notes-with-family": {
+  "title": "Vergaderaantekeningen delen met je gezin of huisgenoten",
+  "h1": "De vergaderaantekeningen van deze week met het gezin delen",
+  "description": "Iemand was ziek, moest werken of was weg — stuur diegene de aantekeningen van de week als klein bestand dat hij aan zijn eigen JW Library kan toevoegen, zonder dat een van jullie iets kwijtraakt.",
+  "intro": [
+   "In de meeste huishoudens maakt iedereen eigen aantekeningen op een eigen apparaat, en mist er altijd iemand een vergadering. Je aantekeningen aan tafel voorlezen werkt één keer; ze in de bibliotheek van de ander zetten is wat hem het materiaal later laat gebruiken, op de plek waar hij er ook echt naar gaat zoeken.",
+   "Omdat het delen per aantekening gaat en niet per back-up, kunnen meerdere mensen vrij aantekeningen uitwisselen zonder dat iemands bibliotheek wordt overschreven.",
+  ],
+  "steps": [
+   ("Maak een back-up van het apparaat waarop je aantekeningen maakte", "JW Library → Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken."),
+   ("Selecteer de aantekeningen van de week", "Kies op jwsync.org/share.html voor Aantekeningen versturen, laad je back-up en vink de aantekeningen van deze week aan — zoeken op de publicatie brengt ze snel bij elkaar, en label je de aantekeningen van de week, dan verzamelt het labelfilter ze in één klik."),
+   ("Stuur het in de gezinsgroep", "Maak het deelbestand en verstuur het zoals er in huis toch al wordt gepraat — een berichtenapp, e-mail, AirDrop. Het is een klein bestand met alleen de aantekeningen die je hebt aangevinkt."),
+   ("Ieder voegt het toe aan zijn eigen back-up", "Ze openen dezelfde pagina, kiezen Ontvangen, laden jouw bestand samen met een eigen back-up, downloaden de bijgewerkte back-up en zetten die terug in JW Library."),
+  ],
+  "sections": [
+   ("Ieders bibliotheek blijft van hemzelf", "Niemands aantekeningen worden vervangen, en niemand hoeft zijn hele bibliotheek te overhandigen om mee te doen. Toegevoegde aantekeningen komen onder een label binnen, zodat iedereen in één oogopslag ziet welke aantekeningen van een ander komen en de hele partij later kan verwijderen als hij ze liever niet houdt."),
+   ("Gezinsaanbidding: verzamelen in plaats van verstrooien", "Hetzelfde hulpmiddel werkt de andere kant op. Maakt iedereen tijdens de gezinsaanbidding aantekeningen, dan kan één persoon de deelbestanden van de anderen in één back-up verzamelen en zo de gecombineerde aantekeningen van het hele huishouden over hetzelfde materiaal krijgen."),
+  ],
+  "faq": [
+   ("Kunnen de apparaten van kinderen meedoen?", "Elk apparaat waarop JW Library draait en een webpagina opengaat, kan meedoen. De stappen zijn op een telefoon, tablet of computer identiek."),
+   ("Moeten we op hetzelfde platform zitten?", "Nee. Android, iPhone, iPad en de Windows-app gebruiken allemaal dezelfde back-upindeling, dus aantekeningen gaan zonder omzetten van de een naar de ander."),
+  ],
+ },
 }
