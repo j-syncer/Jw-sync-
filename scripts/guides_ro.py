@@ -74,4 +74,968 @@ GUIDES_RO = {
    ("Pot anula o restaurare?", "Nu din JW Library, și tocmai de aceea contează să-ți păstrezi copiile de rezervă originale. Îmbinarea nu modifică niciodată fișierele pe care le încarci, așa că cele de dinainte de îmbinare rămân exact cum erau și pot fi restaurate dacă vrei să te întorci."),
   ],
  },
+
+ "sync-jw-library-multiple-devices": {
+  "title": "Cum sincronizezi JW Library între mai multe dispozitive",
+  "h1": "Cum ții JW Library la fel pe mai multe dispozitive",
+  "description": "JW Library nu are sincronizare între dispozitive. Iată o rutină simplă și privată prin care notițele, evidențierile și semnele de carte rămân identice pe telefon, tabletă și calculator.",
+  "intro": [
+   "Cei mai mulți dintre cei care studiază pe două dispozitive descoperă problema la fel: notițele scrise pe tabletă nu sunt pe telefon, iar restaurarea copiei de rezervă a unui dispozitiv pe celălalt ar șterge tot ce avea acesta. JW Library nu oferă sincronizare, iar restaurarea e deliberat totul-sau-nimic, așa că menținerea dispozitivelor aliniate cere o rutină, nu o setare.",
+   "JW Library nu sincronizează datele personale de studiu între dispozitive — nu există vreun cont care să-ți ducă notițele de pe telefon pe tabletă. Mecanismul oficial este Copiere de rezervă și restaurare, iar o restaurare înlocuiește pur și simplu datele dispozitivului. Atunci cum ții două sau trei dispozitive identice fără să pierzi nimic?",
+   "Răspunsul e o scurtă rutină de îmbinare și restaurare. Făcută săptămânal sau lunar, durează cam două minute și face ca fiecare dispozitiv să poarte biblioteca ta completă.",
+  ],
+  "steps": [
+   ("Fă o copie de rezervă pe fiecare dispozitiv", "Pe fiecare dispozitiv: Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Vei avea câte un fișier .jwlibrary de fiecare dispozitiv."),
+   ("Îmbină copiile la jwsync.org", "Încarcă toate fișierele. JW Sync combină notițele, evidențierile, semnele de carte și etichetele de pe fiecare dispozitiv într-un singur fișier .jwlibrary îmbinat — local, în browserul tău, fără să se încarce nimic."),
+   ("Restaurează fișierul îmbinat pe fiecare dispozitiv", "Copiere de rezervă și restaurare → Restaurează, alege fișierul îmbinat. Acum fiecare dispozitiv e identic și complet."),
+   ("Lasă JW Sync să-ți amintească", "Activează un memento de sincronizare (săptămânal sau lunar) în JW Sync și te va înghionti când e vremea să reiei rutina. Îți ține minte și dispozitivele salvate, așa că fiecare rundă e mai rapidă."),
+  ],
+  "sections": [
+   ("De ce să nu restaurez pur și simplu cea mai nouă copie?", "Pentru că „cea mai nouă” reflectă un singur dispozitiv. Dacă ai luat notițe la întrunire pe telefon și notițe de studiu pe tabletă în aceeași săptămână, fiecare copie are conținut care lipsește din cealaltă. Restaurarea uneia peste cealaltă îți pierde jumătate din muncă. Îmbinarea făcută întâi e cea care face rutina sigură."),
+   ("Cât de des ar trebui să sincronizez?", "Potrivește ritmul cu felul în care studiezi. Două dispozitive active folosite zilnic: săptămânal e comod. O tabletă scoasă doar la întruniri: lunar e mai mult decât suficient. Costul așteptării mai lungi e doar că îmbinarea are mai mult de combinat — între runde nu se pierde niciodată nimic."),
+   ("De ce nu există o sincronizare adevărată", "JW Library nu are un cont care să poarte datele personale de studiu între dispozitive. Notițele, evidențierile și semnele de carte stau într-o bază de date pe fiecare dispozitiv și acolo rămân. Singurul mecanism oficial de a le muta e Copierea de rezervă și restaurarea, iar o restaurare înlocuiește pur și simplu datele dispozitivului-țintă, în loc să le combine. Așa că două dispozitive folosite independent se despart definitiv dacă nu le îmbină ceva — și exact asta e rostul rutinei de mai jos."),
+   ("Păstrarea unui singur fișier principal", "Rutina merge cel mai bine dacă tratezi un fișier îmbinat drept exemplarul principal curent. La fiecare ciclu, fă o copie de rezervă a fiecărui dispozitiv, îmbină acele copii și restaurează rezultatul peste tot. Fișierul îmbinat devine apoi exemplarul principal pentru ciclul următor. Păstrarea acestor fișiere principale datate în stocarea din cloud îți dă deopotrivă un mecanism de sincronizare și o arhivă vie — dacă ștergi ceva din greșeală, un exemplar mai vechi îl conține în continuare."),
+   ("Ce se întâmplă dacă lași un dispozitiv deoparte o vreme", "Nu se pierde nimic. Un dispozitiv lăsat pe dinafară mai multe cicluri poartă doar date mai vechi; când în sfârșit îl incluzi, notițele lui se îmbină alături de restul, iar elementele identice sunt potrivite după GUID, nu duplicate. Singura situație care cere o decizie e aceeași notiță modificată pe două dispozitive de la ultima îmbinare, iar aceasta apare în verificatorul de conflicte, cu ambele versiuni una lângă alta."),
+   ("Cât de des e destul de des", "Măsoară după cât de multă muncă nu ți-ar plăcea s-o refaci. Săptămânal li se potrivește celor care studiază pe două dispozitive aproape zilnic; lunar e suficient dacă un dispozitiv e ocazional. Important e s-o faci înainte de orice lucru ireversibil — schimbarea telefonului, o resetare, o reparație — fiindcă atunci o divergență devine o pierdere."),
+   ("Telefon, tabletă și aplicația Windows la un loc", "Rutinei nu-i pasă câte dispozitive sunt implicate sau ce sistem au. Fă o copie de rezervă a fiecăruia, îmbină-le pe toate dintr-o singură trecere și restaurează fișierul îmbinat peste tot. Un calculator cu Windows folosit pentru pregătire și un telefon folosit la întruniri se combină exact cum ar face-o două telefoane, fiindcă orice platformă scrie același format de copie de rezervă."),
+   ("Reducerea conflictelor înainte să apară", "Conflictele apar doar când aceeași notiță e modificată pe două dispozitive între două îmbinări. În practică e rar, și devine și mai rar dacă scrii pe câte un singur dispozitiv — citind oriunde, dar tastând acolo unde tastezi de obicei. Îmbinarea mai frecventă micșorează și fereastra în care poate apărea o divergență, ceea ce e o soluție mai bună decât să încerci să ții minte ce dispozitiv are versiunea cea mai nouă."),
+   ("Unde se vede cu adevărat câștigul", "Valoarea menținerii dispozitivelor îmbinate nu stă în ordine — ci în faptul că fiecare dispozitiv devine o copie de rezervă completă a bibliotecii tale de studiu. Pierzi sau strici oricare dintre ele, iar celelalte poartă în continuare totul, ceea ce transformă cel mai rău caz din ani de notițe pierdute într-un simplu neajuns. E o poziție mai bună decât îți poate da orice obicei de a salva un singur dispozitiv."),
+  ],
+  "faq": [
+   ("JW Sync rulează în fundal?", "Nu — e o pagină web, nu un serviciu instalat. Nimic nu-ți scanează dispozitivele. Rulezi rutina când vrei tu; mementoul opțional e doar o notificare."),
+   ("Pot sincroniza trei sau mai multe dispozitive?", "Da. Fă o copie de rezervă a fiecăruia, încarcă toate fișierele, îmbină o dată și restaurează fișierul îmbinat peste tot."),
+   ("Ce fac dacă am modificat aceeași notiță pe două dispozitive?", "Ambele versiuni sunt păstrate până alegi tu. Verificatorul de conflicte ți le arată una lângă alta, cu diferențele cuvânt cu cuvânt, sau poți lăsa să-ți sugereze versiunea mai completă."),
+   ("Contează ordinea în care restaurez?", "Nu. Odată creat fișierul îmbinat, restaurarea lui pe fiecare dispozitiv le aduce pe toate în aceeași stare completă, în orice ordine îți convine."),
+   ("Pot sincroniza trei sau mai multe dispozitive?", "Da. Fă o copie de rezervă a fiecăruia și încarcă-le pe toate în aceeași îmbinare — nu există vreo limită legată de numărul de dispozitive."),
+   ("Se poate automatiza?", "Nu complet, fiindcă JW Library nu are un API de sincronizare, iar pasul de restaurare are loc în aplicație. Rutina manuală durează cam două minute odată ce te obișnuiești."),
+   ("Trebuie să îmbin dacă pe al doilea dispozitiv doar citesc?", "Dacă nu scrii niciodată nimic pe el, trebuie doar să restaurezi din când în când pe el, ca să poarte notițele tale actuale."),
+  ],
+ },
+
+ "transfer-jw-library-notes-new-phone": {
+  "title": "Cum muți notițele JW Library pe un telefon nou",
+  "h1": "Cum muți notițele JW Library pe un telefon nou",
+  "description": "Pas cu pas: mută-ți toate notițele, evidențierile, semnele de carte și etichetele JW Library pe un telefon nou cu o copie de rezervă .jwlibrary — și cum îmbini dacă ai făcut deja notițe pe telefonul nou.",
+  "intro": [
+   "Cumpărarea unui telefon nou e cel mai frecvent moment în care oamenii pierd ani de notițe JW Library — nu pentru că mutarea ar fi grea, ci pentru că trebuie făcută intenționat, înainte ca dispozitivul vechi să fie șters. Datele personale de studiu nu vin din oficiu cu o mutare obișnuită de pe un telefon pe altul, iar JW Library nu păstrează niciun exemplar al lor în vreun cont.",
+   "Aplicațiile de transfer între telefoane îți mută aplicațiile și pozele, dar nu mută în mod fiabil datele personale de studiu din JW Library. Modalitatea sigură de a-ți duce notițele, evidențierile, semnele de carte și etichetele pe un telefon nou e chiar fișierul de rezervă al JW Library — durează câteva minute și funcționează între platforme.",
+  ],
+  "steps": [
+   ("Creează o copie de rezervă pe telefonul vechi", "Deschide JW Library → Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Se salvează un fișier .jwlibrary care conține toate datele tale de studiu."),
+   ("Mută fișierul pe telefonul nou", "Trimite-ți-l pe e-mail sau folosește Google Drive, iCloud, AirDrop ori un cablu USB. Fișierul e mic — de obicei câțiva megabytes."),
+   ("Restaurează pe telefonul nou", "Instalează JW Library, apoi Studiu personal → Copiere de rezervă și restaurare → Restaurează și alege fișierul .jwlibrary. Apar toate notițele, evidențierile, semnele de carte și etichetele."),
+  ],
+  "sections": [
+   ("Ai făcut deja notițe pe telefonul nou? Îmbină, nu suprascrie", "Restaurarea înlocuiește tot ce e pe dispozitiv. Dacă folosești telefonul nou de ceva vreme și are propriile notițe, nu restaura peste ele — fă și telefonului nou o copie de rezervă, apoi îmbină copia veche cu cea nouă într-un singur fișier la jwsync.org (gratuit, în browserul tău, fără să se încarce nimic) și restaurează fișierul îmbinat. Păstrezi ambele seturi de notițe."),
+   ("O capcană frecventă pe iPhone", "Dacă fișierul de rezervă ajunge pe iPhone redenumit în .zip, redenumește-l înapoi în .jwlibrary înainte de restaurare — conținutul e în regulă; doar extensia s-a schimbat pe drum."),
+   ("Fă asta înainte ca telefonul vechi să fie șters sau dat la schimb", "Copia de rezervă trebuie creată cât timp telefonul vechi încă merge și încă are JW Library instalat. Odată ce dispozitivul e resetat, dat la schimb sau dat mai departe, notițele se duc cu el — JW Library nu păstrează niciun exemplar în cloud al datelor personale de studiu, iar o copie de rezervă la nivel de telefon, cum e Google One sau copia de dispozitiv iCloud, restaurează de obicei o versiune mai veche a datelor aplicației, sau deloc. Creează întâi fișierul .jwlibrary, pune-l undeva în siguranță și verifică dacă îl vezi înainte să ștergi ceva."),
+   ("Cum scoți fișierul de pe telefonul vechi", "Pe Android fișierul e scris în folderul ales de tine — de obicei Descărcări sau Documente — și îl poți muta cu orice manager de fișiere, ți-l poți trimite pe e-mail sau îl poți pune în cloud. Pe iPhone foaia de partajare apare imediat ce copia e creată: salveaz-o în Fișiere, trimite-o prin AirDrop pe telefonul nou sau trimite-ți-o ție. Metoda de transfer nu contează și nu poate strica fișierul; un .jwlibrary e o singură arhivă care ori ajunge intactă, ori nu ajunge deloc."),
+   ("De ce nu e de ajuns o aplicație de transfer între telefoane", "Instrumente ca Smart Switch, Move to iOS sau o restaurare iCloud copiază aplicații și date de sistem, dar bazele de date private ale aplicațiilor sunt adesea sărite, restaurate parțial sau restaurate dintr-un moment mai vechi. Oamenii descoperă golul în mod regulat abia peste săptămâni, după ce telefonul vechi nu mai e. Tratează fișierul .jwlibrary drept exemplarul de referință, iar transferul telefonului drept o comoditate — dacă transferul se întâmplă să-ți aducă notițele, restaurarea propriei copii peste ele nu costă nimic."),
+   ("Verifică dacă mutarea chiar a reușit", "După restaurarea pe telefonul nou, deschide două-trei publicații pe care le-ai adnotat recent și confirmă că notițele, culorile evidențierilor și semnele de carte sunt toate acolo. O verificare și mai rapidă e să deschizi chiar fișierul de rezervă în browser înainte să ștergi dispozitivul vechi — poți vedea fiecare notiță, evidențiere și semn de carte pe care le conține, așa că știi ce ar trebui să apară. Șterge telefonul vechi abia după ce l-ai verificat pe cel nou."),
+   ("Configurezi în același timp și o tabletă sau un calculator", "Același fișier funcționează peste tot. Dacă îți pregătești un telefon și o tabletă odată, restaurează pe amândouă exact același fișier .jwlibrary și vor porni identice. De atunci încolo se vor despărți din nou pe măsură ce studiezi pe fiecare, așa că merită să decizi acum dacă le vei ține îmbinate periodic sau dacă tratezi unul dintre ele drept cel care contează."),
+   ("Dacă telefonul nou are deja notițe pe el", "Asta se întâmplă când folosești dispozitivul nou o săptămână înainte să apuci să faci mutarea. O restaurare directă ar înlocui acea muncă cu datele telefonului vechi. Fă întâi o copie de rezervă a telefonului nou, îmbin-o cu copia telefonului vechi și restaurează rezultatul îmbinat — ambele seturi de notițe ajung într-o singură bibliotecă, în loc ca unul să-l suprascrie pe celălalt."),
+   ("Ce faci după ce telefonul nou merge", "Verifică înainte să te descotorosești de ceva. Deschide pe telefonul nou câteva publicații adnotate recent și confirmă că notițele, culorile și semnele de carte sunt toate acolo, apoi șterge sau dă la schimb dispozitivul vechi — în ordinea aceasta, niciodată invers. Odată ce te-ai așezat, pune o copie de rezervă undeva în afara telefonului, fiindcă situația care te-a adus pe pagina asta va reveni la următoarea schimbare."),
+  ],
+  "faq": [
+   ("Îmi va muta și publicațiile descărcate?", "Copia de rezervă îți poartă datele personale de studiu — notițe, evidențieri, semne de carte, etichete și liste de redare. Publicațiile se descarcă pur și simplu din nou pe telefonul nou."),
+   ("Contează dacă telefoanele au versiuni diferite de Android?", "Nu. Formatul .jwlibrary e același peste tot, inclusiv între versiuni de Android și între Android și iPhone."),
+   ("Îmi pot muta notițele dacă telefonul vechi nu mai e?", "Doar dacă există undeva o copie de rezervă .jwlibrary — în Fișiere, Descărcări, un e-mail către tine însuți sau în cloud. Fără ea nu ai de unde restaura, fiindcă datele personale de studiu sunt păstrate doar pe dispozitiv."),
+   ("Trebuie ca ambele telefoane să aibă aceeași versiune de JW Library?", "Nu trebuie să fie identice, dar actualizează telefonul nou la versiunea curentă înainte de restaurare. O copie făcută de o versiune mai nouă poate folosi o schemă de bază de date pe care o aplicație mai veche n-o înțelege."),
+   ("Va trebui să-mi descarc din nou publicațiile?", "De obicei da — materialul publicațiilor nu face parte din copia de rezervă. Notițele tale se reatașează la fiecare publicație imediat ce e descărcată, așa că nimic din ce ai scris nu se pierde între timp."),
+   ("Cât durează totul?", "Câteva minute. Crearea copiei durează secunde, mutarea fișierului depinde de metodă, iar restaurarea e rapidă. Cel mai mult durează redescărcarea publicațiilor, care se poate face în fundal."),
+   ("Se poate face fără Wi-Fi?", "Mutarea în sine da, prin AirDrop sau cablu. Redescărcarea publicațiilor pe dispozitivul nou are nevoie de conexiune."),
+  ],
+ },
+
+ "jw-library-android-to-iphone": {
+  "title": "Mută JW Library de pe Android pe iPhone (păstrând toate notițele)",
+  "h1": "Mutarea JW Library de pe Android pe iPhone sau iPad — păstrând fiecare notiță",
+  "description": "Formatul copiei de rezervă .jwlibrary este identic pe Android și iOS. Cum îți muți notițele, evidențierile și semnele de carte între platforme — și cum îmbini dacă ambele dispozitive au notițe.",
+  "intro": [
+   "Trecerea de la Android la iPhone pare cazul cel greu, dar e cel ușor. JW Library scrie același format de copie de rezervă pe orice platformă pe care rulează, așa că mutarea unei biblioteci de studiu de pe Android pe iOS e aceeași operațiune ca mutarea între două telefoane Android — fără conversie, fără vreun format de export de ales, fără nimic pierdut pe drum.",
+   "Schimbarea platformei e momentul în care oamenii se tem că pierd ani de notițe de studiu — aplicațiile de transfer de pe Android pe iPhone sar complet peste datele JW Library. Vestea bună: formatul copiei de rezervă JW Library e identic pe Android, iPhone, iPad și Windows, așa că o mutare între platforme înseamnă doar o copie de rezervă, un transfer de fișier și o restaurare.",
+  ],
+  "steps": [
+   ("Fă o copie de rezervă pe telefonul Android", "JW Library → Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Salvează fișierul .jwlibrary."),
+   ("Trimite fișierul pe iPhone sau iPad", "E-mail, Google Drive, iCloud Drive — orice mută un fișier. Dacă iOS îl redenumește în .zip pe drum, redenumește-l înapoi în .jwlibrary."),
+   ("Restaurează pe dispozitivul nou", "Instalează JW Library, autentifică-te, apoi Copiere de rezervă și restaurare → Restaurează și alege fișierul. Sosesc notițele, evidențierile, semnele de carte, etichetele și listele de redare."),
+  ],
+  "sections": [
+   ("Dacă iPhone-ul are deja notițe pe el", "Restaurarea înlocuiește datele dispozitivului. Când dispozitivul nou poartă deja propriile notițe, fă-i și lui o copie de rezervă și îmbină întâi ambele copii într-un singur fișier la jwsync.org — îmbinarea combină ambele biblioteci în browserul tău fără să încarce nimic — apoi restaurează fișierul îmbinat. Nu se pierde nimic din nicio parte."),
+   ("Aceiași pași funcționează în orice direcție", "De pe iPhone pe Android, de pe Android pe Android, adăugarea unui iPad ca al doilea dispozitiv de studiu sau mutarea pe aplicația Windows — fișierul de rezervă e limba comună între toate."),
+   ("De ce formatul e identic pe ambele platforme", "JW Library folosește același format de copie de rezervă oriunde rulează — Android, iOS, iPadOS și Windows. Un fișier .jwlibrary e un ZIP care conține o bază de date SQLite cu aceleași tabele și aceeași schemă, indiferent ce dispozitiv l-a scris. Nu există niciun pas de conversie, niciun dans export-import și nimic specific unei platforme înăuntru. O copie de pe Android se restaurează pe un iPhone exact așa cum ar face-o una de pe iPhone."),
+   ("Singura parte care chiar diferă", "Nu fișierul — doar felul în care pui mâna pe el. Pe Android copia se salvează într-un folder ales de tine și poate fi mutată cu orice manager de fișiere. Pe iPhone trece prin foaia de partajare în Fișiere, AirDrop sau ce alegi tu. Frecarea pe care o simt oamenii când trec de la o platformă la alta stă întotdeauna în acest pas de manevrare, niciodată în compatibilitate. E-mailul, stocarea în cloud sau AirDrop merg toate; arhiva ajunge intactă sau nu ajunge deloc."),
+   ("Culorile evidențierilor, etichetele și răspunsurile de studiu", "Totul supraviețuiește. Culorile evidențierilor sunt păstrate ca un index numeric — galben, verde, albastru, roz, portocaliu și mov — și se afișează la fel pe orice platformă. Etichetele și legăturile dintre etichete și notițe vin cu tot, la fel și răspunsurile tastate în câmpurile întrebărilor de studiu. Ce vezi pe iPhone după restaurare e ceea ce aveai pe dispozitivul Android."),
+   ("Dacă iOS nu te lasă să alegi fișierul", "Salvează întâi fișierul în aplicația Fișiere, apoi alege-l de acolo, nu dintr-un atașament de e-mail sau dintr-o previzualizare într-o aplicație de chat. Unele aplicații îi dau iOS-ului un exemplar temporar de previzualizare în loc de fișierul real, iar JW Library nu-l poate deschide. Dacă fișierul a venit ca atașament, atinge-l, alege Salvează în Fișiere și restaurează din Fișiere."),
+   ("Pregătește iPhone-ul înainte de restaurare", "Instalează JW Library din App Store și actualizeaz-o la versiunea curentă înainte să restaurezi ceva. O copie scrisă de o versiune mai nouă a aplicației poate folosi o schemă de bază de date pe care o versiune mai veche n-o înțelege, iar restaurarea va fi pur și simplu refuzată. Nu e nevoie să te autentifici nicăieri — datele personale de studiu se află în fișierul pe care îl restaurezi, nu într-un cont."),
+   ("Dacă ai început deja să studiezi pe iPhone", "Fă întâi o copie de rezervă a iPhone-ului. Restaurarea fișierului de pe Android direct peste ar înlocui tot ce ai scris de la schimbare încoace. Îmbinarea celor două copii produce un singur fișier care le conține pe amândouă, iar pe acela îl restaurezi — istoricul de pe Android și notițele noi de pe iPhone ajung în aceeași bibliotecă."),
+   ("Cum ții amândouă telefoanele în uz după aceea", "Unii păstrează vechiul dispozitiv Android ca al doilea cititor, în loc să-l retragă. Merge, dar cele două se vor despărți de îndată ce scrii pe amândouă, fiindcă între ele nu există sincronizare. Dacă ai de gând să le folosești pe amândouă, plănuiește să le îmbini periodic copiile, în loc să presupui că rămân aliniate."),
+   ("După mutare", "Dă-i iPhone-ului timp să redescarce publicațiile pe care le folosești cel mai des, apoi verifică vreo câteva dintre cele adnotate ca să confirmi că a ajuns totul — notițe, culori ale evidențierilor, semne de carte și etichete. Păstrează fișierul de rezervă de pe Android chiar și după ce mutarea e gata: e o fotografie datată a bibliotecii tale și nu costă nimic s-o ții."),
+  ],
+  "faq": [
+   ("Am nevoie de un calculator pentru asta?", "Nu. Toată mutarea se poate face de pe telefon pe telefon, cu e-mail sau cu o unitate din cloud."),
+   ("Culorile evidențierilor vor supraviețui mutării?", "Da — evidențierile își păstrează culorile, notițele își păstrează etichetele, iar semnele de carte își păstrează locurile."),
+   ("E nevoie de un calculator pentru asta?", "Nu. AirDrop, e-mailul sau orice aplicație de stocare în cloud mută fișierul direct între cele două telefoane."),
+   ("Funcționează și invers — de pe iPhone pe Android?", "Da, identic. Aceiași pași funcționează în orice direcție, inclusiv dinspre și înspre aplicația Windows."),
+   ("Va trebui ca iPhone-ul să descarce aceleași publicații?", "Da, fiindcă materialul publicațiilor nu face parte dintr-o copie de rezervă. Notițele se reatașează la fiecare publicație imediat ce e descărcată."),
+   ("Trebuie să păstrez telefonul Android după aceea?", "Nu, odată ce ai verificat că notițele sunt pe iPhone. Verifică câteva publicații adnotate înainte să ștergi sau să dai la schimb dispozitivul vechi."),
+   ("Mutarea funcționează și pentru răspunsurile la întrebările de studiu?", "Da. Răspunsurile tastate fac parte din datele personale de studiu și vin odată cu tot restul."),
+   ("Există vreun risc să pierd notițe la mutare?", "Nu dacă păstrezi copia de pe Android. Restaurarea scrie pe iPhone și nu modifică niciodată fișierul pe care îl citește, așa că originalul rămâne intact ca plasă de siguranță. Păstrează-l până confirmi că iPhone-ul are totul, și ideal și după aceea — e o fotografie datată a bibliotecii tale."),
+   ("Ce fac dacă telefonul Android nu vrea să creeze o copie de rezervă?", "Verifică întâi spațiul de stocare disponibil, fiindcă aplicația are nevoie de loc ca să scrie fișierul. Dacă aplicația însăși dă erori, actualizarea ei sau repornirea dispozitivului rezolvă de obicei problema. Datele rămân intacte cât timp cauți soluția."),
+  ],
+ },
+
+ "backup-jw-library": {
+  "title": "Cum faci corect o copie de rezervă a JW Library",
+  "h1": "Cum faci corect o copie de rezervă a JW Library",
+  "description": "O rutină de 30 de secunde care îți protejează ani de notițe de studiu, evidențieri și semne de carte din JW Library — și greșeala frecventă care îi prinde pe oameni pe picior greșit.",
+  "intro": [
+   "Tot ce ai marcat în JW Library — fiecare notiță, fiecare evidențiere, fiecare semn de carte și etichetă — există într-un singur loc: dispozitivul din mâna ta. Nu există vreun cont care să păstreze un exemplar și nici vreo sincronizare automată în cloud. O copie de rezervă e singurul lucru care stă între o bibliotecă de studiu clădită în ani și un telefon pierdut, resetat sau schimbat.",
+   "O copie de rezervă JW Library făcută cum trebuie durează jumătate de minut și protejează ani de studiu adunat. Cele mai multe povești despre date pierdute încep la fel: nu exista niciun fișier .jwlibrary recent când telefonul a fost pierdut, resetat sau înlocuit.",
+  ],
+  "steps": [
+   ("Creează copia de rezervă", "Deschide JW Library → Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Rezultă un fișier .jwlibrary care conține fiecare notiță, evidențiere, semn de carte și etichetă."),
+   ("Pune-o undeva în afara telefonului", "Trimite-ți-o pe e-mail sau salveaz-o în Google Drive, iCloud ori OneDrive. O copie de rezervă care trăiește doar pe telefon dispare odată cu telefonul."),
+   ("Repetă după un calendar", "Lunar e un bun punct de plecare; înainte de orice schimbare de telefon, resetare sau actualizare de sistem e obligatoriu. Păstrează și exemplarele mai vechi — fișierele sunt mici, iar o copie veche a salvat multă lume."),
+  ],
+  "sections": [
+   ("Greșeala frecventă: să te bazezi pe copia din cloud a telefonului", "O copie de rezervă a întregului telefon (Google One, copia de dispozitiv iCloud) restaurează adesea o versiune veche a datelor JW Library — sau deloc. Fișierul .jwlibrary e singura copie pe care o controlezi complet și o poți duce între platforme. Tratează copia telefonului ca pe un bonus, nu ca pe plan."),
+   ("Ai ajuns cu două copii diferite?", "Se întâmplă: o copie de pe telefon, una mai veche de pe tabletă, fiecare cu notițe proprii. Nu trebuie niciodată să alegi între ele — îmbină-le într-un singur fișier complet la jwsync.org, gratuit și privat, chiar în browser."),
+   ("Ce conține fișierul și ce nu", "Copia de rezervă conține datele tale personale de studiu: notițe, evidențieri și culorile lor, semne de carte, etichete și răspunsurile tastate în câmpurile întrebărilor de studiu. Nu conține publicațiile în sine — nicio Biblie, revistă, carte, videoclip sau fișier audio. De aceea o copie a unor ani de studiu are de obicei doar câțiva megabytes și de aceea, după restaurarea pe un dispozitiv nou, rămâi să redescarci publicații în timp ce fiecare notiță pe care ai scris-o e deja la locul ei."),
+   ("Câte copii să păstrezi", "Păstrează mai mult de una. Eșecul care îi costă pe oameni notițele nu e aproape niciodată un fișier pierdut — ci o copie bună suprascrisă de una proastă, sau o restaurare făcută pe dispozitivul greșit. Fiindcă fișierele sunt mici, nu ai niciun motiv să le ștergi pe cele vechi: ține-le datate într-un folder în cloud. O copie de acum șase luni nu devine inutilă nici după ce ai altele mai noi, fiindcă tot ce ai șters din greșeală de atunci încoace există în continuare înăuntrul ei."),
+   ("Unde să le păstrezi", "Oriunde, numai să nu fie doar pe dispozitivul însuși. Un folder în Drive, iCloud, Dropbox sau OneDrive acoperă cazul care contează cel mai mult — dispozitivul pierdut, furat, resetat sau stricat. Trimiterea fișierului către tine pe e-mail merge și ea și are efectul util de a-i pune o dată. Fișierul conține propriile tale notițe de studiu, așa că tratează-l cu aceeași grijă ca pe orice document personal."),
+   ("Verificarea unei copii înainte să te bazezi pe ea", "O copie de rezervă pe care n-ai deschis-o niciodată e o presupunere, nu o plasă de siguranță. Poți deschide un fișier .jwlibrary în browser și vezi exact ce notițe, evidențieri și semne de carte conține — o verificare de treizeci de secunde care transformă o presupunere într-un fapt. Contează cel mai mult chiar înainte de ceva ireversibil: o resetare din fabrică, un schimb, o reparație sau o actualizare majoră de sistem."),
+   ("Momentele înaintea cărora merită să faci o copie", "Orice punct în care dispozitivul își schimbă stăpânul sau starea: o actualizare de sistem, o resetare din fabrică, o reparație sau schimbarea ecranului, un schimb sau darea dispozitivului altcuiva. Adaugă la asta sfârșitul oricărui lucru pe care ți-ar displăcea să-l refaci — un congres, o adunare de circumscripție, o perioadă lungă de pregătire pentru o cuvântare. Copiile sunt ieftine și rapide, așa că obiceiul util e să le legi de evenimente, nu de calendar."),
+   ("O copie a telefonului nu e o copie a JW Library", "Google One, o copie de dispozitiv iCloud sau un instrument de transfer al producătorului lucrează la nivel de dispozitiv și tratează inconsecvent datele private ale aplicațiilor. Oamenii descoperă în mod curent că o restaurare completă a telefonului le-a adus înapoi aplicațiile și setările, dar nu și notițele de studiu, ori le-a adus o versiune de acum câteva săptămâni. Fișierul .jwlibrary e singurul exemplar al cărui conținut îl controlezi și îl poți verifica, așa că tratează copia la nivel de telefon ca pe un bonus, nu ca pe plan."),
+   ("Cum transformi asta într-un obicei care ține", "Rutina care chiar rezistă e cea agățată de ceva ce faci deja: fă o copie când termini pregătirea pentru săptămâna respectivă sau în aceeași zi în care îți rezolvi celelalte treburi obișnuite. Salvează de fiecare dată în același folder, ca fișierele să se adune într-un singur loc, și lasă-le pe cele vechi acolo. Un folder cu copii datate care se întind pe ani în urmă e forma cea mai robustă pe care o poate lua asta, iar întreținerea lui cere câteva secunde pe săptămână."),
+  ],
+  "faq": [
+   ("Cât de mare e un fișier de rezervă?", "De obicei câțiva megabytes chiar și pentru biblioteci foarte mari — cât un atașament de e-mail."),
+   ("Crearea unei copii schimbă ceva pe telefonul meu?", "Nu. Doar scrie fișierul; biblioteca ta rămâne neatinsă."),
+   ("Copia include publicațiile mele descărcate?", "Nu. Doar datele personale de studiu. Publicațiile se descarcă din nou pe dispozitivul nou, iar notițele tale se reatașează la ele automat."),
+   ("Pot deschide o copie ca să văd ce conține?", "Da. Poți deschide un fișier .jwlibrary în browser și răsfoi fiecare notiță, evidențiere și semn de carte pe care le conține, fără să instalezi nimic și fără ca fișierul să-ți părăsească dispozitivul."),
+   ("Copiile de rezervă expiră?", "Nu. Un fișier .jwlibrary rămâne restaurabil oricât. Restaurează într-o versiune curentă de JW Library, nu într-una veche, fiindcă aplicația citește formate de copie mai vechi, dar nu și mai noi."),
+   ("Ar trebui să fac o copie înainte de fiecare întrunire?", "Nu e nevoie. Leagă copiile de evenimente care te-ar putea costa date — actualizări, reparații, dispozitive noi — plus un ritm regulat pe măsura cantității de studiu pe care nu ți-ar plăcea s-o repeți."),
+   ("Merită să păstrez copii de acum ani de zile?", "Da. Sunt mici, iar tot ce ai șters din greșeală de atunci încoace există în continuare înăuntrul lor."),
+  ],
+ },
+
+ "jw-library-restore-replaced-notes": {
+  "title": "Restaurarea JW Library ți-a înlocuit notițele? Cum le recuperezi",
+  "h1": "Restaurarea ți-a înlocuit notițele? Iată cum combini ambele copii",
+  "description": "Restaurarea din JW Library e o înlocuire completă, nu o îmbinare — notițele făcute după data copiei par pierdute. Dacă mai ai ambele fișiere de rezervă, nu s-a pierdut nimic. Iată soluția.",
+  "intro": [
+   "E un moment cumplit: restaurezi o copie de rezervă pe un dispozitiv care avea deja notițe, iar restaurarea înlocuiește totul — notițele făcute după acea copie par duse. Se întâmplă fiindcă funcția Copiere de rezervă și restaurare din JW Library e o înlocuire completă, nu o îmbinare.",
+   "Faptul esențial: dacă munca mai nouă există în continuare într-un fișier de rezervă, de fapt nu s-a pierdut nimic. Soluția e să îmbini cele două copii, în loc să alegi între ele.",
+  ],
+  "steps": [
+   ("Oprește-te — nu mai restaura încă o dată", "Fiecare restaurare înlocuiește datele curente ale dispozitivului. Fă o pauză înainte să mai dispară ceva."),
+   ("Fă o copie de rezervă a dispozitivului așa cum e acum", "Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă. Asta păstrează starea curentă, oricare ar fi ea."),
+   ("Găsește copia care conține notițele lipsă", "Fișierul .jwlibrary din care ai restaurat, sau unul mai vechi — caută în e-mail, Drive, iCloud și în folderul de descărcări."),
+   ("Îmbină ambele fișiere la jwsync.org", "Încarcă ambele copii. JW Sync combină toate notițele, evidențierile, semnele de carte și etichetele din amândouă într-un singur fișier nou — în browserul tău, fără să se încarce nimic. Versiunile aflate în conflict ale aceleiași notițe îți sunt arătate una lângă alta, ca să alegi."),
+   ("Restaurează fișierul îmbinat", "Copiere de rezervă și restaurare → Restaurează, cu fișierul .jwlibrary îmbinat. Ambele seturi de notițe sunt înapoi pe dispozitiv."),
+  ],
+  "sections": [
+   ("Ce fac dacă nu există nicio copie a notițelor mai noi?", "Dacă singurul exemplar al notițelor mai noi era pe dispozitiv și o restaurare l-a suprascris deja, JW Library nu oferă nicio anulare. Tocmai de aceea pasul 2 de mai sus — copierea stării curente înainte să faci orice altceva — contează atât de mult ori de câte ori datele arată în neregulă. De acum înainte, rutina „întâi îmbini” face problema structural imposibilă."),
+  ],
+  "faq": [
+   ("Îmbinarea va dubla notițele pe care ambele copii le au în comun?", "Nu — elementele identice sunt detectate și păstrate o singură dată. Doar versiunile cu adevărat diferite ale aceleiași notițe sunt semnalate pentru verificare."),
+   ("Poate asta repara o copie care nu se restaurează deloc?", "De regulă acela e un fișier deteriorat, nu o suprascriere — vezi mai jos ghidul despre repararea unei copii corupte."),
+  ],
+ },
+
+ "fix-corrupted-jw-library-backup": {
+  "title": "Repară o copie de rezervă JW Library coruptă care nu se restaurează",
+  "h1": "Repararea unei copii de rezervă JW Library corupte cu Library Doctor",
+  "description": "JW Library refuză să-ți restaureze fișierul .jwlibrary? Library Doctor scanează copia în browserul tău, repară problemele obișnuite și produce un exemplar curat care se restaurează.",
+  "intro": [
+   "O copie de rezervă care nu se restaurează nu e neapărat o copie care ți-a pierdut notițele. Cele mai multe fișiere pe care oamenii le descriu drept corupte sunt sănătoase structural și refuzate dintr-un motiv reparabil, ori deteriorate la transfer într-un fel pe care un exemplar proaspăt îl rezolvă. Merită să treci prin cauze înainte să pui cruce fișierului.",
+   "Uneori JW Library refuză un fișier de rezervă — restaurarea eșuează, dă eroare sau fișierul nu se deschide. Cauze frecvente: o descărcare întreruptă, o unitate din cloud care a stricat fișierul, o extensie schimbată pe drum sau inconsecvențe interne adunate în ani de folosire.",
+   "JW Sync include Library Doctor, un verificator care scanează un fișier .jwlibrary și repară problemele obișnuite — în întregime în browserul tău, fără ca fișierul să-ți părăsească vreodată dispozitivul.",
+  ],
+  "steps": [
+   ("Deschide JW Sync și încarcă fișierul cu probleme", "Mergi la jwsync.org și încarcă fișierul .jwlibrary care nu se restaurează. (Dacă fișierul a ajuns redenumit în .zip, redenumește-l întâi înapoi în .jwlibrary — numai asta rezolvă multe cazuri.)"),
+   ("Rulează scanarea Library Doctor", "Doctor examinează structura internă a copiei și îți enumeră ce găsește — de la ciudățenii inofensive până la deteriorări reale — pe înțelesul tuturor."),
+   ("Aplică reparațiile", "O atingere repară ce se poate repara. Doctor nu-ți modifică niciodată fișierul original; produce un exemplar curățat, așa că originalul rămâne neatins ca plasă de siguranță."),
+   ("Descarcă și restaurează fișierul reparat", "Restaurează fișierul .jwlibrary curățat prin Copiere de rezervă și restaurare → Restaurează, în JW Library."),
+  ],
+  "sections": [
+   ("Doctor rulează și la fiecare îmbinare", "Aceleași verificări rulează automat în motorul de îmbinare, așa că o copie îmbinată e livrată mereu curată — chiar și când unul dintre fișierele de intrare avea probleme despre care n-ai știut niciodată."),
+   ("Când un fișier nu mai poate fi reparat", "Dacă fișierul a fost trunchiat atât de rău încât datele pur și simplu nu se află în el, niciun instrument nu le poate inventa înapoi. Doctor îți va spune asta cinstit, în loc să producă un fișier îndoielnic — iar acela e semnalul să cauți un exemplar mai vechi în e-mail, Drive sau iCloud, ceea ce explică și de ce merită să păstrezi copiile vechi."),
+   ("Ce înseamnă de fapt „corupt”", "În practică, rareori e vorba de date deteriorate. Cauzele obișnuite sunt un fișier trunchiat la transfer — scurtat de o încărcare eșuată sau de o aplicație de chat care l-a comprimat — sau o arhivă intactă, dar cu inconsecvențe interne pe care aplicația le refuză. Fiindcă un fișier .jwlibrary e un ZIP care înfășoară o bază de date SQLite, problema poate fi la oricare strat, iar cele două cer remedii diferite. Un fișier trunchiat nu poate fi reparat și trebuie obținut din nou; o bază de date inconsecventă de obicei poate."),
+   ("Ce verifică de fapt o scanare", "O scanare confirmă că arhiva se deschide, că userData.db e o bază de date SQLite lizibilă care trece o verificare de integritate, că schema corespunde cu ce așteaptă JW Library și că manifestul se potrivește cu baza de date pe care o descrie — inclusiv hash-ul pe care aplicația îl folosește ca să confirme că fișierul n-a fost modificat. O nepotrivire între manifest și baza de date e unul dintre cele mai frecvente motive pentru care o copie tehnic în regulă e refuzată la restaurare, și e direct reparabilă."),
+   ("Rândurile orfane sunt de obicei inofensive", "Scanarea unei copii reale va raporta adesea rânduri care trimit la ceva ce nu mai există — o evidențiere care indică o poziție dintr-o publicație care s-a mutat, de pildă. Chiar copiile făcute de JW Library conțin în mod curent sute de astfel de rânduri și se restaurează fără să crâcnească. Sunt o urmare normală a faptului că publicațiile se actualizează în timp, nu o dovadă de deteriorare, iar curățarea lor nu e necesară ca fișierul să funcționeze."),
+   ("Salvarea notițelor dintr-un fișier care nu se restaurează", "Chiar și atunci când o copie nu poate fi reparată suficient cât JW Library s-o accepte, notițele dinăuntru rămân adesea lizibile. Deschiderea fișierului în browser îți permite să vezi și să copiezi direct textul notițelor, ceea ce transformă un fișier inutilizabil în material de studiu recuperat. Dacă ai o a doua copie, mai veche, care se restaurează, conținutul lizibil din cea deteriorată poate fi adus alături de ea, în loc să fie retastat."),
+   ("Când restaurarea eșuează fără o eroare clară", "JW Library refuză adesea un fișier fără să explice de ce. Cele mai frecvente cauze sunt un manifest al cărui hash nu se mai potrivește cu baza de date pe care o descrie, un fișier trunchiat la transfer sau o copie scrisă de o versiune a aplicației mai nouă decât cea în care restaurezi. Prima e reparabilă, a doua cere aducerea fișierului din nou de la sursă, iar a treia se rezolvă actualizând aplicația înainte de restaurare."),
+   ("Cum eviți asta data viitoare", "Cele mai multe deteriorări se produc pe drum. Mută copiile ca fișiere, nu prin ceva ce le-ar putea recomprima, și preferă stocarea în cloud, AirDrop sau un cablu în locul aplicațiilor de chat. După transfer, verifică dacă dimensiunea fișierului se potrivește cu originalul — un fișier vizibil mai mic decât cel trimis a fost trunchiat, și nicio reparație nu aduce înapoi octeți care n-au sosit niciodată."),
+   ("Dacă nimic nu merge", "Un fișier care nu poate fi reparat poate fi totuși lizibil, iar citirea lui e adesea de ajuns — textul notițelor poate fi recuperat direct chiar și când JW Library refuză fișierul. Combină asta cu orice copie mai veche care se restaurează și de obicei ajungi cu cea mai mare parte a bibliotecii intactă. Înainte să conchizi că un fișier nu mai e bun de nimic, deschide-l și vezi ce se află de fapt înăuntru."),
+  ],
+  "faq": [
+   ("Datele mele sunt încărcate undeva pentru scanare?", "Nu. Scanarea, reparațiile și exportul rulează toate local, în browser."),
+   ("Poate recupera notițe șterse în JW Library?", "Nu — repară structura fișierului. Notițele șterse în aplicație înainte să fie făcută copia nu se află în fișier ca să poată fi recuperate."),
+   ("Repararea fișierului va pierde vreo notiță?", "Reparațiile lucrează pe un exemplar și se ocupă de probleme de structură, nu de conținut. Fișierul tău original nu e modificat niciodată, așa că rămâne disponibil dacă vrei s-o iei de la capăt."),
+   ("De ce s-a corupt copia mea de rezervă?", "Cel mai adesea fișierul a fost modificat pe drum — trimis printr-o aplicație care l-a comprimat sau trunchiat, ori o încărcare care nu s-a terminat. Transferul fișierului din nou de la sursa originală rezolvă de obicei problema."),
+   ("Poate o scanare să recupereze notițe pe care le-am șters în JW Library?", "Nu. Odată șterse în aplicație și făcută o copie nouă, notița nu mai e în acel fișier. O copie mai veche, făcută înainte de ștergere, o va conține în continuare."),
+   ("Îmi pot da seama după dimensiunea fișierului dacă e trunchiat?", "Adesea da. Compar-o cu originalul, dacă îl mai ai; un minus semnificativ înseamnă că transferul nu s-a încheiat."),
+   ("O copie care se deschide în browser se va restaura sigur?", "Nu e garantat, dar e un semn puternic că arhiva și baza de date sunt sănătoase, ceea ce elimină cele mai frecvente eșecuri."),
+  ],
+ },
+
+ "edit-jw-library-notes": {
+  "title": "Vezi și modifică notițele JW Library în browserul tău",
+  "h1": "Vezi, caută și modifică notițele JW Library — Exploratorul de studiu",
+  "description": "Deschide orice copie de rezervă .jwlibrary în browser ca să răsfoiești, cauți, modifici, reetichetezi, recolorezi și cureți în masă notițele, evidențierile și semnele de carte din JW Library. Fără să se încarce nimic.",
+  "intro": [
+   "JW Library e făcută ca să iei notițe, nu ca să gestionezi mii dintre ele. Exploratorul de studiu deschide orice copie de rezervă .jwlibrary chiar în browserul tău și o transformă într-un administrator de bibliotecă în care poți căuta și edita — notițe, evidențieri și semne de carte într-un singur loc, fără ca ceva să fie încărcat undeva.",
+  ],
+  "steps": [
+   ("Încarcă o copie de rezervă", "Creează o copie în JW Library (Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă), apoi deschide jwsync.org și încarcă fișierul în Exploratorul de studiu."),
+   ("Răsfoiește și caută în tot", "Trei file — Notițe, Evidențieri, Semne de carte — cu căutare în tot textul plus filtre de culoare, etichetă și publicație. O filă Răspunsuri de studiu îți arată și răspunsurile completate în publicații."),
+   ("Modifică pe loc", "Deschide orice notiță ca să-i modifici titlul și conținutul cu formatare bogată (aldin, cursiv, subliniat, liste), să-i schimbi culoarea evidențierii și să adaugi sau să scoți etichete. Semnele de carte și culorile evidențierilor se modifică la fel."),
+   ("Fă curat în masă", "Selectează multe notițe odată ca să le reetichetezi, recolorezi sau ștergi împreună — cu anulare și refacere complete, așa că o scăpare nu e niciodată fatală. Poți și să extragi un interval de date de notițe într-o copie nouă sau să copiezi notițe ca Markdown."),
+   ("Exportă biblioteca modificată", "Descarcă fișierul .jwlibrary modificat și restaurează-l în JW Library. Modificările tale sunt acum pe dispozitiv."),
+  ],
+  "sections": [
+   ("De ce să modifici în browser și nu în aplicație?", "Din cauza scării. Redenumirea unei etichete în 300 de notițe, recolorarea fiecărei evidențieri galbene dintr-o publicație sau ștergerea unor ani de semne de carte răsuflate înseamnă minute aici și ore de atins ecranul în aplicație. Fișierul exportat e o copie de rezervă standard, pe care JW Library o restaurează ca pe oricare alta."),
+  ],
+  "faq": [
+   ("Modificarea atinge copia mea de rezervă originală?", "Nu — modificările se fac pe un exemplar din browser și sunt salvate într-un fișier nou, exportat. Originalul rămâne cum a fost."),
+   ("Există vreo limită de mărime a bibliotecii?", "Bibliotecile foarte mari sunt împărțite pe pagini, ca răsfoirea să rămână rapidă; căutarea și filtrele funcționează peste tot."),
+  ],
+ },
+
+ "search-jw-library-notes": {
+  "title": "Caută în notițele JW Library după sens — Întreabă-ți biblioteca",
+  "h1": "Întreabă-ți biblioteca: caută în notițele JW Library după sens",
+  "description": "Căutare semantică în notițele tale JW Library: găsește notița pe care ți-o amintești pe jumătate doar descriind-o, chiar dacă nu-ți vin cuvintele exacte. Pe dispozitiv, funcționează offline, complet privat.",
+  "intro": [
+   "Oricine are notițe de ani de zile știe problema: îți amintești că ai scris despre a îndura încercările cu bucurie, dar notița nu conține cuvântul „perseverență”, așa că o căutare după cuvinte-cheie nu găsește nimic. Întreabă-ți biblioteca caută în schimb după sens — descrie gândul, iar ea scoate la iveală notițele cele mai apropiate de el, oricum ar fi formulate.",
+   "Rulează în întregime pe dispozitivul tău: modelul lingvistic se descarcă o singură dată în browser și funcționează offline după aceea, cu accelerare WebGPU acolo unde e disponibilă. Notițele tale nu sunt trimise nicăieri.",
+  ],
+  "steps": [
+   ("Încarcă o copie de rezervă în Exploratorul de studiu", "La jwsync.org, încarcă-ți fișierul .jwlibrary și deschide fila Întreabă."),
+   ("Lasă modelul să se pregătească o dată", "La prima folosire, modelul de pe dispozitiv se descarcă și îți indexează notițele. Se întâmplă o singură dată; după aceea funcționează instantaneu, chiar și offline."),
+   ("Întreabă cu cuvintele tale", "Scrie ce-ți amintești — „notița aceea despre răbdarea cu cei noi în lucrare”, „încurajare pentru pionierii descurajați” — iar cele mai apropiate notițe apar, ordonate după sens."),
+  ],
+  "sections": [
+   ("Prin ce diferă de căutarea obișnuită", "Căutarea după cuvinte-cheie potrivește litere; căutarea semantică potrivește idei. O întrebare despre „anxietate” găsește și notițe scrise cu „îngrijorare”, „grijile vieții” sau cu un verset citat pe această temă. Ambele feluri de căutare sunt disponibile în Exploratorul de studiu — se completează una pe alta."),
+   ("Privat prin construcție", "Nu e un serviciu de inteligență artificială din cloud. Modelul rulează în fila ta de browser, indexul stă pe dispozitivul tău, iar închiderea filei încheie totul. Nimic despre notițele tale nu-ți părăsește vreodată aparatul."),
+  ],
+  "faq": [
+   ("Are nevoie de un dispozitiv puternic?", "Un telefon sau un laptop din ziua de azi se descurcă bine; pe dispozitivele cu WebGPU e cel mai rapid. Poți alege între mai multe mărimi de model, potrivite cu hardware-ul tău."),
+   ("Funcționează în limba mea?", "Da — căutarea funcționează în limbile în care sunt scrise notițele tale, iar interfața e tradusă în fiecare limbă pe care o acceptă JW Sync."),
+  ],
+ },
+
+ "jw-library-study-stats": {
+  "title": "Vezi-ți statisticile de studiu JW Library: serii, hărți de activitate și premii",
+  "h1": "Statisticile tale de studiu JW Library: serii, hărți de activitate, acoperire și premii",
+  "description": "Transformă o copie de rezervă JW Library în analize private de studiu — totaluri, hartă a activității, serii, acoperirea Bibliei pe toate cele 66 de cărți, un profil de personalitate în studiu și circa 200 de premii.",
+  "intro": [
+   "Fișierul tău de rezervă înregistrează pe tăcute ani de istoric al studiului — când iei notițe, ce evidențiezi, ce cărți ai parcurs. Pagina Statistici de studiu citește o copie .jwlibrary și transformă acel istoric într-un panou privat, calculat în întregime în browserul tău.",
+  ],
+  "steps": [
+   ("Creează o copie de rezervă", "În JW Library: Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă."),
+   ("Deschide pagina Statistici de studiu", "Mergi la jwsync.org/highlights.html și încarcă fișierul."),
+   ("Explorează povestea studiului tău", "Totalurile principale, vizualizările pe an de serviciu și dintotdeauna, creșterea de la an la an — apoi părțile amuzante de mai jos."),
+  ],
+  "sections": [
+   ("Ce vei vedea", "O hartă a activității cu cea mai lungă serie a ta și cu cea curentă; ritmul săptămânal, cele mai aglomerate ore și luni; acoperirea Bibliei pe toate cele 66 de cărți, cu împărțire pe Scripturile ebraice și grecești; o roată a culorilor evidențierilor, o histogramă a profunzimii notițelor și un nor de cuvinte; plus un ceas de studiu de 24 de ore și un radar al sezonalității."),
+   ("Profil, călătorie și premii", "Un profil de studiu cu șase trăsături (Consecvență, Sârguință, Profunzime, Amploare, Reflecție, Statornicie) și o persoană „Semnătura de studiu”; o Călătorie de studiu cu 60 de niveluri pe 12 trepte cu nume; și circa 200 de premii, de la Obișnuit la Legendar, inclusiv medalii care țin cont de conținut. Un card de partajat îți rezumă anul fără să dezvăluie vreo notiță."),
+   ("Un motiv zilnic să revii", "Panoul Readuse în față îți arată notițele scrise în această zi în anii trecuți și construiește o recitire blândă, la intervale — câte puțin, dar des, așa rămâne studiul cu tine."),
+  ],
+  "faq": [
+   ("Se încarcă ceva din toate astea?", "Nu. Copia de rezervă e analizată în browserul tău; statisticile nu-ți părăsesc niciodată dispozitivul."),
+   ("Statisticile se actualizează singure?", "Ele reflectă copia pe care o încarci — creează o copie nouă ca să vezi statistici noi."),
+  ],
+ },
+
+ "share-jw-library-notes": {
+  "title": "Cum partajezi notițe JW Library cu un prieten",
+  "h1": "Cum partajezi notițe JW Library cu un prieten — fără server",
+  "description": "Trimite-i unui prieten notițe JW Library alese (și evidențierile lor) sub forma unui fișier mic — fără server, fără cont. Cel care le primește le îmbină fără să-și suprascrie propriile notițe.",
+  "intro": [
+   "JW Library nu are cum să-i dea altcuiva un exemplar al unor notițe anume. Trimiterea întregii tale copii de rezervă ar merge — dar predă tot, iar restaurarea ei ar șterge biblioteca celui care o primește. Partajarea de notițe din JW Sync rezolvă ambele probleme: alegi exact ce notițe partajezi, iar destinatarul le adaugă fără să piardă nimic.",
+  ],
+  "steps": [
+   ("Alege notițele de partajat", "Pe pagina Partajare de la jwsync.org/share.html, încarcă-ți copia de rezervă și selectează notițele — câteva dintr-o cuvântare sau tot ce se află sub o etichetă, dintr-un clic, cu filtrul de etichete al selectorului. Evidențierile atașate acelor notițe merg odată cu ele."),
+   ("Trimite fișierul de partajare", "JW Sync produce un fișier mic ce conține doar notițele selectate. Trimite-l pe orice cale îți place — aplicație de mesagerie, e-mail, AirDrop. Nu există niciun server și niciun cont; fișierul e tot schimbul."),
+   ("Destinatarul îl îmbină", "Prietenul tău deschide aceeași pagină, încarcă fișierul de partajare împreună cu propria copie de rezervă și primește o copie nouă cu notițele tale adăugate. Notițele lui nu sunt suprascrise niciodată — dacă o notiță partajată se ciocnește cu una de-a lui, el alege cum e adăugată — iar notițele importate sosesc etichetate, ca să fie ușor de găsit, verificat sau șters mai târziu."),
+  ],
+  "sections": [
+   ("Utilizări bune", "Să transmiți cercetarea unui partener de studiu, să împarți notițele de la o întrunire cu cineva care a lipsit, să-i dai unui vestitor nou un set de pornire de notițe la o publicație sau să muți notițele unui anumit proiect către un membru al familiei — toate fără să expui restul bibliotecii niciunuia dintre voi."),
+  ],
+  "faq": [
+   ("Destinatarul trebuie să aibă JW Sync instalat?", "Nu se instalează nimic de nicio parte — e o pagină web. Destinatarul are nevoie doar de fișierul de partajare și de propria copie de rezervă."),
+   ("Pot retrage un fișier partajat sau să-i pun o dată de expirare?", "Fișierul e un fișier obișnuit, trimis de tine — nu există niciun exemplar pe vreun server care să expire. Partajează doar ce ai partaja în orice mesaj."),
+  ],
+ },
+
+ "bible-reading-plan": {
+  "title": "Un plan zilnic de citire a Bibliei cu propriile tale notițe alături",
+  "h1": "Însoțitorul de lectură: un plan de citire a Bibliei cu propriile tale notițe alături",
+  "description": "Un program zilnic și privat de citire a Bibliei care îți arată notițele și evidențierile făcute la capitolele de azi. Alege-ți ritmul, ține o serie și privește cum se umple grila celor 66 de cărți.",
+  "intro": [
+   "Multe aplicații oferă un program de citire a Bibliei. Însoțitorul de lectură face ceva ce niciuna nu poate: fiindcă îți citește propria copie de rezervă .jwlibrary, lectura de azi vine însoțită de notițele și evidențierile pe care tu însuți le-ai făcut chiar la acele capitole — „acum doi ani ai evidențiat patru versete în Psalmul 37”. Citire prin lentila propriului tău istoric de studiu, în întregime pe dispozitivul tău.",
+  ],
+  "steps": [
+   ("Alege o ordine și un ritm", "Citește în ordinea Bibliei sau aproximativ cronologic; termină în 3 luni, 6 luni, 1 an, 2 ani sau stabilește-ți propriul număr de capitole pe zi — cu o previzualizare vie „ai termina pe la…”."),
+   ("Citește porția de azi", "Fiecare capitol e la o atingere distanță și se deschide direct în JW Library sau în Watchtower ONLINE LIBRARY, în limba ta. Bifează capitolele pe măsură ce înaintezi."),
+   ("Adu-ți notițele cu tine (opțional)", "Încarcă o copie de rezervă în oricare instrument JW Sync și propriile tale notițe, împreună cu numărul de evidențieri, apar chiar sub capitolele de azi."),
+   ("Privește cum se clădește progresul", "O grilă cu 66 de cărți se umple pe măsură ce citești, cu o bară a capitolelor citite, o estimare în funcție de ritm și praguri pentru terminarea fiecărei cărți, a Scripturilor ebraico-aramaice, a Scripturilor grecești — și a întregii Biblii."),
+  ],
+  "sections": [
+   ("Serii fără vinovăție", "Terminarea unei zile îți crește seria; ratarea unei zile doar mută data estimată de final. Nu există niciun teanc de restanțe — planul se îndoaie după viața ta, în loc să te certe."),
+  ],
+  "faq": [
+   ("Trebuie să încarc o copie de rezervă ca să-l folosesc?", "Nu — planul, seriile și progresul funcționează singure. Copia de rezervă doar adaugă notițele tale personale la lectura fiecărei zile."),
+   ("Progresul meu de citire e privat?", "Da. Progresul stă în browserul de pe dispozitivul tău — nu există cont și nu se încarcă nimic."),
+  ],
+ },
+
+ "open-jwlibrary-file": {
+  "title": "Ce este un fișier .jwlibrary și cum îl deschizi?",
+  "h1": "Ce este un fișier .jwlibrary — și cum îl deschizi pe orice dispozitiv",
+  "description": "Un fișier .jwlibrary este copia ta de rezervă JW Library: un singur fișier care conține fiecare notiță, evidențiere, semn de carte și etichetă. Iată ce se află înăuntru și cum îl deschizi și citești.",
+  "intro": [
+   "Un fișier .jwlibrary pare de nepătruns, dar nu este. E o arhivă ZIP obișnuită în jurul unei baze de date SQLite obișnuite, ceea ce înseamnă că îți poți citi propria copie de rezervă — să vezi exact ce notițe, evidențieri și semne de carte conține — fără JW Library și fără să instalezi absolut nimic.",
+   "Când faci o copie de rezervă a JW Library, primești un fișier care se termină în .jwlibrary. E un pachet unic și portabil care conține tot ce ține de studiul tău personal — notițe, evidențieri, semne de carte, etichete și liste de redare — într-o bază de date compactă. Nu e un document pe care să-l deschizi în Word sau într-un cititor de PDF; e făcut ca să fie restaurat înapoi în JW Library.",
+   "Dar nu trebuie să-l restaurezi doar ca să te uiți înăuntru. JW Sync deschide un fișier .jwlibrary direct în browserul tău, ca să-i poți citi, căuta și modifica conținutul fără să atingi telefonul.",
+  ],
+  "steps": [
+   ("Obține un fișier .jwlibrary", "Se creează în JW Library: Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Despre acest fișier vorbim."),
+   ("Deschide-l în JW Sync", "Mergi la jwsync.org și încarcă fișierul în Exploratorul de studiu. Se deschide instantaneu, pe dispozitivul tău — nu se încarcă nimic."),
+   ("Citește-l și lucrează cu el", "Răsfoiește notițe, evidențieri și semne de carte; caută în tot; modifică, reetichetează sau exportă. Când ai terminat, poți restaura fișierul (sau un exemplar modificat) înapoi în JW Library."),
+  ],
+  "sections": [
+   ("Ce se află de fapt în fișier", "Tehnic, un fișier .jwlibrary e o bază de date SQLite arhivată plus un manifest. De aceea se întâmplă uneori ca fișierul să fie redenumit din greșeală în .zip pe drum — și de aceea redenumirea înapoi în .jwlibrary rezolvă problema. Nu trebuie să știi nimic din toate astea ca să-l folosești, dar explică de ce fișierul e mic, de sine stătător și identic pe Android, iPhone, iPad și Windows."),
+   ("Deschiderea lui pe un calculator", "Aceeași pagină jwsync.org funcționează într-un browser de laptop sau desktop — util pentru a citi ani de notițe pe un ecran mare sau pentru curățenii în masă, care ar fi obositoare pe telefon. Nu ai nimic de instalat."),
+   ("Ce este de fapt acest fișier", "Un .jwlibrary e o arhivă ZIP cu altă extensie. Înăuntru se află userData.db — o bază de date SQLite care conține notițele, evidențierile, semnele de carte și etichetele tale — și manifest.json, un fișier mic ce descrie copia de rezervă, inclusiv un hash al bazei de date pe care JW Library îl folosește ca să confirme că fișierul n-a fost modificat. Nimic din el nu e proprietar sau criptat; e o arhivă standard în jurul unei baze de date standard."),
+   ("Deschiderea lui fără JW Library", "Nu ai nevoie de aplicație, nici de vreun software, ca să-ți citești propria copie de rezervă. Deschiderea fișierului în browser arată fiecare notiță, evidențiere și semn de carte pe care le conține, cu căutare și filtrare, iar fișierul nu-ți părăsește niciodată dispozitivul — e citit local, nu încărcat. E cel mai rapid mod de a confirma că o copie conține ce crezi tu că are, înainte de o resetare, un schimb sau o restaurare pe un telefon nou."),
+   ("Cum te uiți înăuntru manual", "Dacă ești curios, copiază fișierul, redenumește exemplarul în .zip și deschide-l cu orice instrument de arhivare. Vei vedea userData.db și manifest.json. Deschiderea bazei de date cere un vizualizator SQLite, iar tabelele sunt denumite după ce conțin — Note, UserMark, Bookmark, Tag. Lucrează întotdeauna pe un exemplar: modificarea bazei de date de mână, fără să actualizezi hash-ul din manifest, produce un fișier pe care JW Library va refuza să-l restaureze."),
+   ("Modificarea în siguranță", "Notițele pot fi corectate, reetichetate, recolorate sau șterse în afara aplicației, iar rezultatul exportat ca fișier .jwlibrary nou, pe care îl restaurezi normal. Regula care păstrează siguranța e să ții originalul: modifică un exemplar, restaurează fișierul modificat, iar dacă ceva nu e cum te așteptai, originalul neatins e încă acolo, la îndemână."),
+   ("Citirea unei copii pe telefon", "Nu ai nevoie de calculator. Deschiderea fișierului într-un browser mobil funcționează la fel, ceea ce e util când copia e deja pe telefon și vrei să-i confirmi conținutul înainte s-o restaurezi sau înainte să ștergi dispozitivul. Fișierul e citit local, așa că merge fără conexiune, dincolo de încărcarea paginii în sine."),
+   ("De ce contează hash-ul din manifest", "manifest.json înregistrează un hash al lui userData.db. JW Library îl folosește ca să confirme că baza de date n-a fost modificată de când a fost scrisă copia, așa că un fișier a cărui bază de date a fost editată fără recalcularea hash-ului e refuzat la restaurare. E cel mai frecvent motiv pentru care o copie modificată manual încetează să funcționeze și motivul pentru care e mai sigur să modifici printr-un instrument care rescrie manifestul decât să umbli direct la baza de date."),
+   ("La ce ajută toate astea", "Faptul că poți citi o copie de rezervă schimbă cât valorează o copie de rezervă. Poți confirma că un fișier conține ce crezi înainte să ștergi un telefon, poți vedea dacă un fișier vechi merită restaurat, poți găsi o notiță despre care știi că ai scris-o fără să scotocești prin aplicație sau poți recupera text dintr-un fișier pe care JW Library nu-l acceptă. Nimic din toate astea nu cere să încredințezi fișierul cuiva — e citit pe propriul tău dispozitiv."),
+  ],
+  "faq": [
+   ("Pot deschide un fișier .jwlibrary în Excel sau Notepad?", "Nu în mod util — e o bază de date, nu o foaie de calcul sau un fișier text. Deschide-l în JW Sync ca să-l citești sau exportă-ți notițele în Markdown/text din Exploratorul de studiu."),
+   ("E sigur să-mi deschid copia de rezervă în browser?", "Da. JW Sync citește fișierul local, în fila ta de browser; nimic nu e trimis către vreun server, iar fișierul tău original nu e modificat niciodată."),
+   ("Pot să-l redenumesc pur și simplu în .zip?", "Da, pe un exemplar. Redenumirea nu schimbă conținutul și îi permite oricărui instrument de arhivare să-ți arate ce se află înăuntru."),
+   ("Deschiderea fișierului îl va modifica?", "Nu. Citirea unei copii — în browser sau într-un instrument de arhivare — o lasă neschimbată, octet cu octet. Doar salvarea sau exportul produc un fișier nou."),
+   ("Trebuie să fiu online?", "Doar ca să încarci pagina. Fișierul în sine e citit pe dispozitivul tău, nu încărcat, așa că notițele tale nu circulă niciodată prin rețea."),
+   ("Pot deschide o copie de rezervă pe care mi-a trimis-o altcineva?", "Da, formatul nu e legat de un dispozitiv sau de un cont. Dacă ar trebui s-o și restaurezi e o întrebare separată, fiindcă restaurarea îți înlocuiește propria bibliotecă."),
+   ("Trebuie să instalez ceva ca să mă uit înăuntru?", "Nu. Un browser e de ajuns ca să citești notițele; doar inspectarea manuală a bazei de date în sine cere un vizualizator SQLite."),
+  ],
+ },
+
+ "jw-library-windows-pc": {
+  "title": "Copiere de rezervă și îmbinare JW Library pe un PC cu Windows",
+  "h1": "Folosirea copiilor de rezervă JW Library pe un PC cu Windows",
+  "description": "Cum faci o copie de rezervă a JW Library pe Windows și cum îmbini copia de pe PC cu telefonul și tableta, ca notițele, evidențierile și semnele de carte să rămână la un loc pe fiecare dispozitiv.",
+  "intro": [
+   "JW Library rulează pe Windows, nu doar pe telefoane și tablete, și produce același fișier de rezervă .jwlibrary. Asta înseamnă că PC-ul tău poate face parte din aceeași bibliotecă de studiu ca telefonul — atât timp cât îmbini copiile în loc să restaurezi una peste alta.",
+  ],
+  "steps": [
+   ("Fă o copie de rezervă pe Windows", "În aplicația JW Library pentru Windows, deschide meniul, mergi la Copiere de rezervă și restaurare și creează o copie. Salvează fișierul .jwlibrary undeva ușor de găsit."),
+   ("Fă copii și telefonului și tabletei", "Pe fiecare dispozitiv: Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă."),
+   ("Îmbină-le la jwsync.org", "Deschide jwsync.org în orice browser de pe PC și încarcă toate fișierele de rezervă. JW Sync combină notițele, evidențierile, semnele de carte și etichetele de pe fiecare dispozitiv într-un singur fișier .jwlibrary îmbinat — local, fără să se încarce nimic."),
+   ("Restaurează fișierul îmbinat peste tot", "Restaurează fișierul îmbinat în aplicația Windows și pe fiecare dispozitiv mobil. Acum PC-ul, telefonul și tableta poartă toate biblioteca completă."),
+  ],
+  "sections": [
+   ("De ce PC-ul e cel mai comod loc pentru asta", "Un browser de desktop face încărcarea mai multor fișiere, verificarea previzualizării și salvarea rezultatului mult mai rapide decât atinsul pe telefon. Mulți își țin rutina principală de îmbinare pe calculator și doar restaurează fișierul îmbinat înapoi pe dispozitivele mobile."),
+  ],
+  "faq": [
+   ("Copia de pe Windows merge cu copiile de pe iPhone și Android?", "Da — formatul .jwlibrary e identic pe orice platformă, așa că o copie de pe Windows se îmbină liber cu cele de pe telefon și tabletă."),
+   ("Trebuie să instalez ceva pe PC?", "Nu. JW Sync e o pagină web; rulează în Edge, Chrome sau Firefox, fără nimic de instalat."),
+  ],
+ },
+
+ "recover-jw-library-notes-lost-phone": {
+  "title": "Cum recuperezi notițele JW Library după un telefon pierdut sau stricat",
+  "h1": "Recuperarea notițelor JW Library de pe un telefon pierdut, stricat sau resetat",
+  "description": "Ți-ai pierdut telefonul sau a fost resetat cu notițele JW Library pe el? Ce poți recupera depinde de copiile tale de rezervă. Iată exact cum îți iei notițele înapoi — și ce să faci data viitoare.",
+  "intro": [
+   "Când un telefon e pierdut, furat sau stricat iremediabil, supraviețuirea notițelor tale JW Library se reduce la o singură întrebare: există undeva, în afara acelui dispozitiv, o copie de rezervă .jwlibrary? Dacă da, tot ce e în ea revine. Pagina asta îți arată cum să găsești una, cum s-o restaurezi pe orice dispozitiv de schimb și ce să faci când singura copie pe care o ai e veche.",
+   "Pierderea unui telefon e destul de stresantă și fără teama că ai pierdut odată cu el ani de notițe de studiu. Dacă le poți recupera se reduce la o singură întrebare: există undeva, în afara acelui telefon, o copie de rezervă .jwlibrary?",
+   "Ghidul acesta te plimbă prin găsirea oricărei copii pe care s-ar putea s-o ai — chiar și una pe care ai uitat că ai făcut-o — și prin transformarea ei înapoi într-o bibliotecă JW Library completă, pe dispozitivul tău nou.",
+  ],
+  "steps": [
+   ("Caută în fiecare loc unde ar putea fi o copie", "Verifică-ți e-mailul (caută „jwlibrary” sau „backup”), Google Drive, iCloud Drive, OneDrive, Dropbox și folderul Descărcări al calculatorului. Copiile sunt fișiere mici, ușor de uitat că le-ai salvat."),
+   ("Verifică-ți celelalte dispozitive", "Dacă ai folosit vreodată JW Library pe o tabletă sau pe un PC, acela are propriile date de studiu — creează-i o copie chiar acum, ca să păstrezi tot ce conține."),
+   ("Restaurează pe telefonul nou ce ai găsit", "Instalează JW Library pe dispozitivul nou, apoi Copiere de rezervă și restaurare → Restaurează și încarcă fișierul .jwlibrary. Notițele, evidențierile și semnele tale de carte se întorc."),
+   ("Îmbină dacă găsești mai mult de o copie", "Dispozitive sau date diferite pot conține fiecare notițe proprii. Nu alege doar una — încarcă-le pe toate la jwsync.org, îmbină-le într-un singur fișier complet și restaurează-l pe acela. Nu rămâne nimic în urmă."),
+  ],
+  "sections": [
+   ("Dacă nu există nicio copie nicăieri", "Fii sincer cu tine devreme: dacă singurul exemplar al notițelor tale trăia pe telefonul pierdut și n-ai exportat niciodată o copie, JW Library nu păstrează niciun exemplar în cloud din care să restaurezi. E dureros — și exact de aceea obiceiul de mai jos contează atât de mult."),
+   ("Să nu mai ajungi niciodată aici", "Pune-ți un memento lunar de copiere de rezervă și ține fiecare fișier .jwlibrary în afara telefonului (e destul să ți-l trimiți pe e-mail). JW Sync poate chiar să-ți amintească și să-ți îmbine dispozitivele după un calendar. Un fișier care trăiește în inboxul tău supraviețuiește oricărui telefon."),
+   ("Unde s-ar putea să existe deja o copie", "Înainte să conchizi că nu există niciuna, verifică peste tot pe unde ar fi putut fi salvat un fișier: folderele Descărcări și Documente ale oricărui calculator la care ai conectat telefonul, mesajele trimise din e-mail, aplicațiile de chat prin care s-ar putea să fi trimis fișierul și fiecare cont de stocare în cloud pe care îl folosești. Oamenii au făcut adesea o copie o dată, acum luni de zile, și au uitat — iar o copie veche de luni conține în continuare marea majoritate a unei biblioteci de studiu."),
+   ("Restaurarea pe alt telefon sau pe altă platformă", "Dispozitivul de schimb nu trebuie să fie la fel cu cel pierdut. O copie de pe un telefon Android se restaurează pe un iPhone și invers, fiindcă formatul e identic pe Android, iOS, iPadOS și Windows. Instalează JW Library pe dispozitivul nou, actualizeaz-o la versiunea curentă, apoi restaurează prin Studiu personal → Copiere de rezervă și restaurare."),
+   ("Dacă tot ce ai e o copie veche sau parțială", "Restaureaz-o oricum. Recuperarea celei mai mari părți a notițelor nu e un premiu de consolare — e chiar rezultatul. Dacă găsești mai târziu o a doua copie, diferită, cele două pot fi îmbinate într-un fișier care conține tot ce e în amândouă, așa că restaurarea celei vechi acum nu te împiedică să adaugi la ea mai încolo."),
+   ("Ce nu poate fi recuperat", "Dacă nu există nicio copie sub nicio formă, datele personale de studiu nu pot fi recuperate. Ele sunt păstrate doar în spațiul privat al aplicației de pe dispozitiv, iar nici JW Library, nici o copie în cloud la nivel de telefon nu le păstrează în mod fiabil. Merită spus limpede, fiindcă acesta e motivul pentru care există rutina de pe acest site."),
+   ("Verifică înainte ca dispozitivul să fie șters de la distanță", "Dacă telefonul e pierdut, nu distrus, și te gândești la o ștergere de la distanță, caută întâi copii existente — ștergerea e ireversibilă și înlătură ultima șansă ca cineva să creeze una. Dacă dispozitivul e doar rătăcit și încă se poate ajunge la el, crearea unei copii de la distanță nu e posibilă, dar datele rămân intacte atât timp cât telefonul nu e șters sau resetat."),
+   ("Cum te asiguri că nu se repetă", "Motivul pentru care un telefon pierdut îi costă pe oameni ani de studiu e că singurul exemplar era pe telefon. După ce ai restaurat pe un dispozitiv de schimb, pune în aceeași zi o copie undeva în afara lui și repetă într-un ritm pe care chiar îl vei ține. Fișierele sunt destul de mici încât păstrarea tuturor, la nesfârșit, nu costă nimic."),
+   ("Dacă într-adevăr nu există nicio copie", "Atunci răspunsul cinstit e că notițele nu pot fi recuperate, și e mai bine să auzi asta decât să tot cauți. Ce poți face e ca pierderea aceasta să fie ultima: instalează JW Library pe dispozitivul de schimb și, înainte să reconstruiești ceva ce ți-ar părea rău să pierzi, creează o copie și pune-o în afara dispozitivului. De atunci încolo, același eveniment nu te mai costă nimic."),
+  ],
+  "faq": [
+   ("Poate JW Sync să recupereze notițe de pe un telefon pe care nu-l mai am?", "Niciun instrument nu poate — recuperarea depinde de existența undeva a unui fișier de rezervă. Treaba JW Sync e să citească, să repare și să îmbine copiile pe care le ai."),
+   ("Copia mea e veche — mai merită restaurată?", "Absolut. O copie veche cu cele mai multe dintre notițele tale bate începutul de la zero, iar mai târziu o poți îmbina cu orice găsești mai nou."),
+   ("JW Library păstrează un exemplar în cloud al notițelor mele?", "Nu. Datele personale de studiu rămân pe dispozitiv dacă nu creezi tu însuți un fișier de rezervă."),
+   ("Se pot recupera notițele de pe un telefon cu ecranul spart?", "Uneori — dacă telefonul încă pornește și poate fi controlat, sau dacă un service poate porni afișajul, JW Library poate încă să creeze o copie. Datele sunt intacte cât timp e intactă memoria."),
+   ("O copie veche se va restaura în aplicația curentă?", "Da. JW Library citește formate de copie mai vechi. Actualizează întâi aplicația și restaurează în versiunea curentă."),
+   ("Am găsit două copii vechi — pe care s-o folosesc?", "Pe niciuna singură. Îmbină-le: rezultatul conține tot ce e în amândouă, inclusiv ce se afla în fișierul mai vechi și fusese șters până la data celui mai nou."),
+   ("Pot verifica ce conține o copie înainte s-o restaurez?", "Da. Deschide fișierul în browser și răsfoiește-i întâi notițele, evidențierile și semnele de carte, ca să știi ce restaurezi."),
+  ],
+ },
+
+ "handle-merge-conflicts": {
+  "title": "Aceeași notiță modificată pe două dispozitive? Cum tratezi conflictele de îmbinare",
+  "h1": "Tratarea conflictelor de îmbinare: aceeași notiță modificată pe două dispozitive",
+  "description": "Când modifici diferit aceeași notiță JW Library pe două dispozitive, îmbinarea trebuie să aleagă un câștigător. Verificatorul de conflicte îți arată ambele versiuni una lângă alta, ca să decizi tu — nu se pierde nimic.",
+  "intro": [
+   "Cea mai mare parte a unei îmbinări nu cere niciun efort — notițele care există doar pe câte un dispozitiv se combină pur și simplu. Singurul caz care cere o decizie e un conflict adevărat: aceeași notiță, modificată diferit pe două dispozitive, așa încât cele două copii nu se înțeleg asupra a ceea ce ar trebui să scrie în ea. JW Sync nu ghicește niciodată pe tăcute; îți dă ție alegerea.",
+  ],
+  "steps": [
+   ("Încarcă ambele copii de rezervă", "La jwsync.org, încarcă fișierele .jwlibrary de pe ambele dispozitive. JW Sync le compară pe măsură ce le îmbină."),
+   ("Deschide verificatorul de conflicte", "Dacă vreo notiță intră în conflict, verificatorul ți le enumeră. Tot ce n-a intrat în conflict e deja îmbinat — pasul acesta e doar pentru ciocnirile reale."),
+   ("Compară una lângă alta", "Fiecare conflict îți arată ambele versiuni, cu diferențele cuvânt cu cuvânt evidențiate exact acolo unde diferă. „Sugerează cea mai bună” poate alege pentru tine versiunea mai completă, sau alegi tu pe cea de păstrat — pentru fiecare notiță în parte."),
+   ("Termină și restaurează", "Odată rezolvate toate conflictele, descarcă fișierul îmbinat și restaurează-l. Acum ambele dispozitive sunt de acord, cu versiunea aleasă de tine pentru fiecare notiță."),
+  ],
+  "sections": [
+   ("De ce e mai bine decât să păstrezi pur și simplu cea mai nouă", "„Câștigă cea mai nouă” șterge pe tăcute modificări pe care poate le voiai. Poate versiunea mai veche avea un paragraf pe care l-ai șters din greșeală pe celălalt dispozitiv. Faptul că le vezi pe amândouă, cuvânt cu cuvânt, înseamnă că nu pierzi niciodată text fără să știi — și exact ăsta e rostul îmbinării în locul suprascrierii."),
+   ("Cum apar conflictele în primul rând", "De obicei din scrisul offline pe două dispozitive între două îmbinări sau din restaurarea unei copii vechi urmată de adăugiri. Îmbinarea la intervale regulate ține numărul conflictelor mic și diferențele proaspete în memoria ta."),
+  ],
+  "faq": [
+   ("Va trebui să verific sute de conflicte?", "Rar. Intră în conflict doar notițele modificate diferit de ambele părți; notițele noi și cele schimbate pe un singur dispozitiv se îmbină automat. Cele mai multe îmbinări au o mână de conflicte sau niciunul."),
+   ("Mă pot răzgândi după ce am ales?", "Da — nimic nu e scris pe vreun dispozitiv până nu restaurezi fișierul îmbinat, iar copiile tale originale nu sunt modificate niciodată, așa că poți reface îmbinarea."),
+  ],
+ },
+
+ "export-jw-library-notes": {
+  "title": "Cum exporți notițele JW Library în text sau Markdown",
+  "h1": "Exportarea notițelor JW Library în text, Markdown sau o copie de rezervă nouă",
+  "description": "Scoate-ți notițele JW Library din aplicație: copiază-le sau exportă-le ca Markdown/text simplu, ca să le folosești oriunde, sau extrage o selecție într-o copie .jwlibrary nouă. Totul în browserul tău.",
+  "intro": [
+   "Notițele scrise în JW Library sunt ușor de citit în aplicație și incomode oriunde altundeva — într-un document, într-o schiță de cuvântare, pe hârtie sau în mâinile cuiva care nu folosește aplicația. Exportul rezolvă asta, iar decizia principală nu e cum exporți, ci cât: un export filtrat e aproape întotdeauna mai util decât tot deodată.",
+   "Notițele tale de studiu n-ar trebui să fie prinse într-o singură aplicație. Uneori le vrei ca text simplu — de lipit într-o schiță de cuvântare, într-un document sau în propria ta aplicație de notițe — și alteori vrei o copie de rezervă curată, care să conțină doar o parte. Exploratorul de studiu le face pe amândouă, citindu-ți copia în întregime în browser.",
+  ],
+  "steps": [
+   ("Încarcă-ți copia de rezervă", "Creează o copie în JW Library (Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă), apoi deschide jwsync.org și încarc-o în Exploratorul de studiu."),
+   ("Găsește notițele care te interesează", "Folosește căutarea plus filtrele de culoare, etichetă și publicație ca să restrângi exact la notițele pe care le vrei — o publicație, o etichetă, un subiect."),
+   ("Copiază sau exportă ca Markdown/text", "Scoate notițele ca Markdown sau text simplu, ca să le lipești oriunde. Formatarea (aldin, cursiv, liste) se păstrează, așa că notițele structurate rămân structurate."),
+   ("Sau extrage-le într-o copie de rezervă nouă", "Preferi un fișier? Exportă o selecție sau un interval de date într-o copie .jwlibrary nouă — util ca să arhivezi un proiect sau să dai un set anume de notițe altui dispozitiv."),
+  ],
+  "sections": [
+   ("De ce să exporți în general", "Notițele sunt mai utile când pot călători: într-un document pentru o parte de la întrunire, într-un fișier personal, într-o listă tipărită pentru cineva care nu folosește aplicația. Markdown păstrează structura și rămâne totodată lizibil ca text simplu oriunde."),
+   ("Alegerea unui format", "Textul simplu e cel mai portabil și se lipește curat în orice document sau e-mail. Ieșirea formatată păstrează structura notițelor mai lungi și e potrivită pentru tipărire sau partajare. Dacă vrei notițele înapoi în JW Library mai târziu — pe alt dispozitiv sau pentru biblioteca altcuiva — păstrează chiar fișierul .jwlibrary, nu un export text, fiindcă doar el păstrează legăturile dintre notițe, evidențieri, etichete și locul exact din publicație unde sunt ancorate."),
+   ("Exportarea doar a unei părți din bibliotecă", "Un export complet al unor ani de studiu e rareori ce vrei de fapt. Restrângerea întâi — la o etichetă, o publicație, o culoare de evidențiere sau un interval de date — produce ceva ce chiar poți folosi, cum ar fi fiecare notiță etichetată pentru o cuvântare sau tot ce ai scris în timpul unui congres. Aceleași filtre care restrâng afișarea restrâng și exportul, așa că ce vezi e ce primești."),
+   ("Ce călătorește odată cu textul și ce nu", "Un export îți poartă cuvintele. Nu poartă ancorele care leagă o notiță de un anumit paragraf dintr-o anumită publicație, fiindcă acele referințe au sens doar în JW Library. Ăsta e motivul practic pentru care merită să păstrezi și copii de rezervă, nu doar exporturi: un export e pentru citit, tipărit și partajat în afara aplicației, în timp ce un fișier .jwlibrary e ceea ce pune notițele înapoi într-o bibliotecă, cu contextul intact."),
+   ("Adunarea a tot ce ține de o cuvântare sau o însărcinare", "E cel mai frecvent motiv de a exporta. Filtrează după eticheta, publicația sau intervalul de date sub care se află materialul, verifică rezultatul și exportă doar atât. Primești un singur document cu notițele relevante și cu pasajele pe care le-ai evidențiat, în ordinea în care apar, nu o revărsare de negestionat a întregii biblioteci."),
+   ("Partajarea notițelor cu altcineva", "Prin „partajare” oamenii înțeleg două lucruri diferite. Dacă celălalt vrea să-ți citească notițele, un export text e potrivit — se deschide oriunde și nu cere niciun software special. Dacă le vrea în propria lui JW Library, ancorate la aceleași paragrafe și purtându-și etichetele și culorile, atunci ai nevoie de un fișier .jwlibrary, fiindcă un export text nu poate pune nimic înapoi în aplicație."),
+   ("Păstrarea unei arhive pe care s-o poți citi și peste ani", "Exporturile merită făcute și de dragul lor. Un exemplar în text simplu al notițelor tale de studiu se va deschide și peste treizeci de ani, într-un software pe care nu l-a scris încă nimeni, ceea ce niciun format specific unei aplicații nu poate promite. Păstrarea ambelor — .jwlibrary pentru restaurare și un export text pentru citit — nu costă aproape nimic și acoperă ambele viitoruri."),
+   ("Export sau copie de rezervă — de care ai nevoie", "Cele două răspund la întrebări diferite. Un export e pentru a-ți folosi notițele în afara JW Library: citit, tipărit, citat, trimis cuiva. O copie de rezervă .jwlibrary e pentru a le pune înapoi în JW Library, pe dispozitivul acesta sau pe altul, cu fiecare ancoră, etichetă și culoare intacte. Niciunul nu-l înlocuiește pe celălalt și nu există niciun motiv să nu le păstrezi pe amândouă."),
+  ],
+  "faq": [
+   ("Exportul îmi schimbă notițele din JW Library?", "Nu. Exportul citește un exemplar al copiei tale de rezervă în browser; fișierul original și aplicația rămân neatinse."),
+   ("Pot exporta tot deodată?", "Da — golește filtrele ca să selectezi toată biblioteca sau restrânge întâi ca să exporți doar o parte."),
+   ("Îmi pot duce notițele în Word sau Google Docs?", "Da — exportă ca text și lipește-le. Textul ajunge cu structura intactă și poate fi stilizat de acolo."),
+   ("Se exportă și evidențierile, nu doar notițele?", "Da, inclusiv pasajul evidențiat și culoarea lui, așa că un exemplar tipărit arată și ce ai marcat, nu doar ce ai scris."),
+   ("Pot exporta tot dintr-o singură trecere?", "Da, deși un export filtrat e de obicei mai util. Totul poate fi exportat dintr-o singură dată când vrei un exemplar complet."),
+   ("Pot exporta răspunsurile tastate la întrebările de studiu?", "Da. Răspunsurile de studiu tastate fac parte din datele tale personale de studiu și pot fi exportate împreună cu notițele și evidențierile."),
+   ("Exportul va include și publicația din care provine fiecare notiță?", "Da, exportul arată de unde vine fiecare notiță, chiar dacă ancora din spate funcționează doar în JW Library."),
+   ("Exportul schimbă ceva în biblioteca mea?", "Nu. Un export îți citește datele și scrie un fișier separat; nimic din JW Library nu e modificat, mutat sau șters de el."),
+   ("Pot exporta dintr-o copie de rezervă, nu din aplicație?", "Da. Un fișier .jwlibrary poate fi deschis direct, iar notițele lui exportate, ceea ce e util când notițele pe care le vrei sunt într-o copie veche, nu pe dispozitivul tău actual."),
+  ],
+ },
+
+ "organize-jw-library-tags": {
+  "title": "Cum organizezi și cureți etichetele din JW Library",
+  "h1": "Organizarea etichetelor JW Library: redenumire, îmbinare și curățare în masă",
+  "description": "Etichetele se înmulțesc în ani de studiu. Redenumește o etichetă în fiecare notiță, îmbină duplicatele și scoate-le pe cele nefolosite — în masă, în browserul tău, cu anulare completă.",
+  "intro": [
+   "Etichetele sunt felul în care îți găsești notițele mai târziu — dar după câțiva ani se împrăștie. Ajungi cu „Lucrare”, „lucrare” și „Serviciu de teren” însemnând același lucru, cu etichete făcute o dată și niciodată refolosite și cu o denumire inconsecventă care face filtrarea nesigură. JW Library nu-ți dă nicio cale de a repara asta la scară. Exploratorul de studiu îți dă.",
+  ],
+  "steps": [
+   ("Încarcă-ți copia de rezervă în Exploratorul de studiu", "La jwsync.org, încarcă-ți fișierul .jwlibrary. Filtrează după etichetă ca să vezi fiecare etichetă și câte notițe o poartă."),
+   ("Redenumește o etichetă în toate notițele ei", "Reetichetează în masă: redenumește o etichetă o dată și fiecare notiță care o folosește se actualizează — gata cu modificatul notiță cu notiță ca să corectezi o scriere."),
+   ("Îmbină duplicatele", "Mută notițele de pe o etichetă duplicat pe cea corectă, apoi renunță la duplicatul rămas gol. „Lucrare” și „lucrare” devin o singură etichetă curată."),
+   ("Scoate etichetele pe care nu le mai folosești", "Selectează și șterge în masă etichetele răsuflate. Totul poate fi anulat, așa că o curățenie prea zeloasă nu e niciodată definitivă."),
+   ("Exportă biblioteca pusă la punct", "Descarcă fișierul .jwlibrary modificat și restaurează-l în JW Library. Etichetele tale sunt consecvente peste tot."),
+  ],
+  "sections": [
+   ("Un sistem de etichete care chiar ajută", "Odată ce etichetele sunt consecvente, filtrarea devine de încredere — o atingere îți arată fiecare notiță pe o temă, din toate publicațiile. E diferența dintre etichete ca dezordine și etichete ca un index real al studiului tău."),
+   ("Etichetele consecvente fac din partajare o treabă de două clicuri", "Selectorul de notițe de pe pagina Partajare are propriul filtru de etichete, așa că o etichetă curată e și cea mai rapidă cale de a-i trimite cuiva un set de notițe: alegi eticheta, apeși Selectează tot, creezi fișierul. Etichetele neglijente te costă de două ori — o dată când cauți notițe și încă o dată când încerci să le partajezi."),
+  ],
+  "faq": [
+   ("Reetichetarea în masă atinge textul notițelor?", "Nu — schimbă doar ce etichete sunt atașate. Titlurile și conținutul notițelor tale rămân exact cum au fost scrise."),
+   ("Există anulare dacă greșesc?", "Da. Exploratorul de studiu are anulare și refacere complete, iar copia ta originală nu e modificată niciodată — modificările ajung într-un exemplar exportat."),
+  ],
+ },
+
+ "manage-jw-library-highlights": {
+  "title": "Cum gestionezi și recolorezi evidențierile din JW Library",
+  "h1": "Gestionarea evidențierilor JW Library: recolorare și organizare în masă",
+  "description": "Pune ordine în ani de evidențieri JW Library: schimbă culorile în masă, dă-i codului tău de culori un înțeles consecvent și răsfoiește fiecare evidențiere într-un singur loc. În browserul tău.",
+  "intro": [
+   "Culorile evidențierilor ajută doar dacă înseamnă ceva consecvent. Cu timpul, evidențierile celor mai mulți o iau razna — galbenul însemna ceva în 2019 și altceva acum, iar în JW Library nu ai cum să le vezi pe toate la un loc sau să le repari la scară. Exploratorul de studiu adună fiecare evidențiere într-o singură vedere și te lasă să recolorezi în masă.",
+  ],
+  "steps": [
+   ("Încarcă-ți copia de rezervă", "La jwsync.org, deschide-ți fișierul .jwlibrary în Exploratorul de studiu și treci la fila Evidențieri."),
+   ("Răsfoiește și filtrează evidențierile", "Vezi fiecare evidențiere într-o singură listă, filtrează după culoare sau publicație și caută în textul evidențiat și în notițele legate de el."),
+   ("Recolorează în masă", "Selectează multe evidențieri și schimbă-le culoarea împreună — de pildă, unifică tot ce ai marcat drept „verset-cheie” într-o singură culoare, în toată biblioteca."),
+   ("Modifică și notițele legate", "Acolo unde o evidențiere are o notiță atașată, modifică-i titlul și conținutul tot aici."),
+   ("Exportă și restaurează", "Descarcă fișierul .jwlibrary modificat și restaurează-l în JW Library, ca să ai codul tău consecvent de culori pe fiecare dispozitiv."),
+  ],
+  "sections": [
+   ("Hotărăște ce înseamnă culorile tale", "O schemă simplă — o culoare pentru ideile principale, una pentru versetele de memorat, una pentru întrebările de cercetat — transformă evidențierile într-un instrument de studiu, nu într-o decorațiune. Recolorarea în masă îți permite să aplici retroactiv schema aceea unor ani de citit."),
+  ],
+  "faq": [
+   ("Pot vedea și evidențierile care n-au nicio notiță atașată?", "Da — fila Evidențieri le arată pe toate, cu sau fără notiță legată."),
+   ("Recolorarea afectează textul de dedesubt?", "Nu, schimbă doar culoarea evidențierii; textul publicației și notițele tale rămân neatinse."),
+  ],
+ },
+
+ "jw-library-study-answers": {
+  "title": "Vezi și modifică răspunsurile completate la întrebările de studiu din JW Library",
+  "h1": "Găsirea răspunsurilor tale de studiu din JW Library (răspunsurile completate) într-un singur loc",
+  "description": "Răspunsurile tastate la întrebările din articolele de studiu și din caiete sunt ascunse în copia ta de rezervă. Fila Răspunsuri de studiu din Exploratorul de studiu te lasă să le citești, să le cauți și să le modifici pe toate odată.",
+  "intro": [
+   "Pe măsură ce studiezi, tastezi răspunsuri în casetele din articolele de studiu, din Turnul de veghe și din caietele pentru întruniri. Sunt salvate în copia ta de rezervă — dar JW Library ți le arată doar pe fiecare îngropată în publicația ei. Nu există un singur loc unde să treci în revistă tot ce ai scris. Fila Răspunsuri de studiu din Exploratorul de studiu e acel loc.",
+  ],
+  "steps": [
+   ("Încarcă-ți copia de rezervă în Exploratorul de studiu", "La jwsync.org, încarcă-ți fișierul .jwlibrary și deschide fila Răspunsuri de studiu."),
+   ("Citește-ți toate răspunsurile la un loc", "Fiecare răspuns completat pe care l-ai tastat apare într-o singură listă în care poți căuta, așa că poți trece în revistă dintr-o privire cât un articol întreg din propria ta gândire."),
+   ("Caută și modifică", "Găsește un răspuns după textul lui, apoi modifică-l și șlefuiește-l pe loc — util când recapitulezi înainte de o întrunire sau când pui la punct o formulare scrisă în grabă."),
+   ("Exportă sau restaurează", "Restaurează fișierul modificat ca să-ți duci schimbările înapoi în JW Library sau copiază răspunsurile ca text, pentru o cuvântare ori pentru arhiva ta personală."),
+  ],
+  "sections": [
+   ("De ce e util înainte de întruniri", "Recapitularea răspunsurilor pregătite într-o singură listă continuă — în loc să derulezi fiecare paragraf din aplicație — e o cale mai rapidă de a-ți reîmprospăta ce plănuiai să spui și de a observa răspunsurile lăsate goale."),
+  ],
+  "faq": [
+   ("Sunt la fel cu notițele mele personale?", "Nu — răspunsurile completate sunt cele tastate în casetele de răspuns ale unei publicații. Exploratorul de studiu le arată în fila lor, separat de notițele libere."),
+   ("Se încarcă ceva ca să-mi fie citite răspunsurile?", "Nu. Ca tot ce ține de JW Sync, copia ta de rezervă e citită local, în browser, și nu e trimisă niciodată nicăieri."),
+  ],
+ },
+
+ "extract-jw-library-notes-by-date": {
+  "title": "Extrage notițe JW Library dintr-un interval de date într-o copie nouă",
+  "h1": "Extragerea unui interval de date de notițe JW Library într-o copie de rezervă nouă",
+  "description": "Scoate doar notițele dintr-o anumită perioadă — un an de serviciu, un congres, un proiect de studiu — într-o copie .jwlibrary curată, numai a lor. În întregime în browserul tău.",
+  "intro": [
+   "Uneori vrei o felie din bibliotecă, nu toată: notițele de anul acesta pentru o recapitulare, tot ce ține de un congres sau cercetarea unui singur proiect, ca s-o dai cuiva. Exploratorul de studiu poate extrage notițele dintr-un interval de date într-o copie .jwlibrary complet nouă, lăsând biblioteca ta principală neatinsă.",
+  ],
+  "steps": [
+   ("Încarcă-ți copia de rezervă", "La jwsync.org, deschide-ți fișierul .jwlibrary în Exploratorul de studiu."),
+   ("Stabilește intervalul de date", "Alege data de început și cea de sfârșit pentru notițele pe care le vrei — un an de serviciu, o lună, datele unui anumit eveniment."),
+   ("Extrage într-o copie nouă", "Exportă notițele care se potrivesc într-un fișier .jwlibrary nou. Conține doar notițele, evidențierile și etichetele din perioada aceea."),
+   ("Folosește fișierul extras", "Restaurează-l în JW Library pentru o recapitulare concentrată, arhivează-l sau împarte-l cu cineva care are nevoie doar de felia aceea."),
+  ],
+  "sections": [
+   ("Motive bune să extragi după dată", "O arhivă anuală a studiului tău; un fișier curat cu notițele de la un congres, de ținut separat; a-i da unui partener de studiu doar notițele dintr-un proiect la care ați lucrat împreună; sau tăierea unei biblioteci uriașe în bucăți datate și ușor de mânuit — toate fără să-ți deranjezi copia principală."),
+  ],
+  "faq": [
+   ("Extragerea scoate acele notițe din biblioteca mea?", "Nu. Copiază notițele care se potrivesc într-un fișier nou; copia ta originală păstrează totul."),
+   ("Ce dată folosește — când am scris sau când am modificat ultima dată notița?", "Folosește marcajele de timp ale notiței din copia de rezervă, așa că intervalul reflectă când au fost create sau modificate notițele."),
+  ],
+ },
+
+ "connect-jw-library-notes-study-map": {
+  "title": "Vezi cum se leagă notițele tale JW Library — Harta studiului",
+  "h1": "Harta studiului: un graf privat al cunoștințelor din notițele tale JW Library",
+  "description": "Harta studiului îți transformă notițele JW Library într-o rețea interactivă, legându-le prin versete comune, etichete comune și formulări asemănătoare — ca să vezi temele care străbat studiul tău.",
+  "intro": [
+   "Ani de notițe ascund legături pe care nu le-ai văzut niciodată: același verset citat în vreo duzină de însemnări, o temă la care revii mereu, idei care își fac ecou în publicații diferite. Harta studiului desenează acele legături ca un graf interactiv, așa încât forma propriului tău studiu devine vizibilă.",
+  ],
+  "steps": [
+   ("Deschide pagina Statistici de studiu și încarcă o copie de rezervă", "Mergi la jwsync.org/highlights.html și încarcă-ți fișierul .jwlibrary. Harta studiului îl citește în browserul tău."),
+   ("Deschide Harta studiului", "Pornește harta ca să-ți vezi notițele ca puncte conectate, legate prin versete comune, etichete comune și formulări asemănătoare."),
+   ("Explorează legăturile", "Comută între vizualizările Teme și Notițe, treci cu mouse-ul ca să scoți în evidență legăturile unei notițe, trage lucrurile prin ecran și folosește cursorul de intensitate ca să vezi doar cele mai strânse legături. Modul pe tot ecranul îți dă loc de hoinărit."),
+   ("Construiește și salvează lanțuri de studiu", "Trasează-ți propriile „lanțuri de studiu” între notițe înrudite, ca să prinzi un fir de raționament, și exportă harta ca imagine PNG, de păstrat sau de împărțit."),
+  ],
+  "sections": [
+   ("Ce dezvăluie harta", "Aglomerările arată temele pe care le studiezi cel mai mult; un verset legat de multe notițe arată un pasaj la care revii mereu; o notiță izolată poate fi un fir care merită dezvoltat. E o cale de a-ți studia propriul studiu — și de a pregăti cuvântări urmând legăturile pe care le-ai făcut deja."),
+  ],
+  "faq": [
+   ("Am nevoie de multe notițe ca harta să fie utilă?", "O bibliotecă modestă arată deja legături; cu cât notițele tale sunt mai bogate, cu atât harta dezvăluie mai mult. Bibliotecile foarte mici vor afișa un îndemn de a mai adăuga notițe întâi."),
+   ("Harta e privată?", "În întregime. E construită în browserul tău din copia ta de rezervă și nu e încărcată niciodată; până și exportul PNG e generat pe dispozitivul tău."),
+  ],
+ },
+
+ "review-old-jw-library-notes": {
+  "title": "Cum îți recitești notițele vechi din JW Library (ca să-ți rămână)",
+  "h1": "Recitirea notițelor vechi din JW Library cu Readuse în față — câte puțin, dar des",
+  "description": "Notițele pe care nu le mai deschizi sunt notițe pe care le uiți. Readuse în față îți arată ce ai scris în această zi în anii trecuți și construiește o recitire blândă, la intervale, ca studiul de altădată să lucreze mai departe pentru tine.",
+  "intro": [
+   "Cele mai multe notițe de studiu sunt scrise o dată și nu mai sunt văzute niciodată. E o risipă tăcută — ideea merita prinsă, apoi s-a scufundat la fundul bibliotecii. Readuse în față îți aduce propriile notițe vechi înapoi la suprafață, câteva odată, ca revenirea la ele să devină un mic obicei zilnic în loc de un proiect pentru „cândva”.",
+  ],
+  "steps": [
+   ("Deschide pagina Statistici de studiu și încarcă o copie de rezervă", "Mergi la jwsync.org/highlights.html și încarcă-ți fișierul .jwlibrary. Readuse în față îți citește notițele local."),
+   ("Vezi „În această zi”", "Readuse în față scoate la iveală notițele scrise la această dată în anii precedenți — „scrisă acum doi ani, în ziua asta” — reconectându-te cu studiul de atunci exact în clipa în care are cel mai mult sens."),
+   ("Fă o scurtă recitire zilnică", "Îți prezintă o mână de notițe pe care să le revezi și să le marchezi ca recitite. Câte puțin, dar des — așa rămâne studiul cu tine — iar seria crește pe măsură ce ții obiceiul."),
+   ("Revino mâine", "Repetiția la intervale programează notițele să reapară în timp, așa încât cele care merită ținute minte revin până devin cu adevărat ale tale."),
+  ],
+  "sections": [
+   ("De ce funcționează repetiția la intervale", "Recitirea a ceva exact când ești pe punctul de a-l uita e mult mai eficientă decât tocitul. Împrăștiind câteva notițe pe multe zile, Readuse în față transformă biblioteca pe care o ai deja într-o recapitulare continuă și fără efort, care adâncește treptat ce ai studiat."),
+  ],
+  "faq": [
+   ("Unde se salvează progresul recitirilor mele?", "În browserul de pe dispozitivul tău — nu există cont și nu se încarcă nimic. Seria și programul sunt doar ale tale."),
+   ("Am nevoie de notițe noi pentru asta?", "Nu — Readuse în față lucrează cu notițele pe care le-ai scris deja. Cu cât biblioteca ta e mai veche, cu atât momentele „în această zi” sunt mai plăcute."),
+  ],
+ },
+
+ "jw-library-achievements-streaks": {
+  "title": "Serii, niveluri și realizări de studiu în JW Library",
+  "h1": "Transformă-ți studiul JW Library în serii, niveluri și premii",
+  "description": "Vezi-ți seriile de studiu, urcă 60 de niveluri pe 12 trepte în Călătoria de studiu și deblochează circa 200 de realizări — toate citite în privat din propria ta copie de rezervă JW Library.",
+  "intro": [
+   "Consecvența e partea grea a studiului personal, iar un progres pe care nu-l vezi e ușor de lăsat să scape. Pagina Statistici de studiu transformă istoricul copiei tale de rezervă în ceva ce poți privi cum crește: serii, niveluri și premii care reflectă studiul pe care chiar l-ai făcut — fără obiective impuse, doar propria ta evidență făcută vizibilă.",
+  ],
+  "steps": [
+   ("Deschide pagina Statistici de studiu", "Mergi la jwsync.org/highlights.html și încarcă-ți copia de rezervă .jwlibrary. Totul e calculat în browserul tău."),
+   ("Verifică-ți seriile", "Vezi cea mai lungă serie de studiu și pe cea curentă, ritmul tău săptămânal și cele mai aglomerate ore și luni — pulsul obiceiului tău de studiu."),
+   ("Urcă-ți Călătoria de studiu", "Înaintează prin 60 de niveluri pe 12 trepte cu nume (de la Sămânță până la Veșnic verde), cu un glob care își schimbă culoarea și cu sărbătoriri la fiecare nivel, în funcție de studiul tău de-o viață."),
+   ("Adună realizări", "Deblochează circa 200 de premii, de la raritatea Obișnuit la Legendar, inclusiv medalii tematice care țin cont de conținut; deschide orice medalie ca să-ți vezi progresul spre următoarea."),
+  ],
+  "sections": [
+   ("Motivație fără presiune", "Nu sunt ținte stabilite de altcineva — sunt o oglindă a ceea ce ai făcut deja. Când vezi o serie pe care nu vrei s-o rupi sau un nivel aproape atins, e un ghiont blând să ții mai departe obiceiul bun. Iar un card de partajat îți rezumă anul fără să dezvăluie vreo notiță personală."),
+  ],
+  "faq": [
+   ("Seriile și premiile se actualizează singure?", "Ele reflectă copia de rezervă pe care o încarci, așa că fă o copie nouă ca să-ți vezi progresul cel mai recent. Nimic nu rulează în fundal."),
+   ("Se partajează sau se încarcă ceva din toate astea?", "Nu. Totul e calculat local, din copia ta de rezervă; doar cardul-rezumat e ceva ce poți alege să împarți, iar el nu conține text din notițe."),
+  ],
+ },
+
+ "share-convention-assembly-notes": {
+  "title": "Cum partajezi notițele de la congres și de la adunări din JW Library",
+  "h1": "Partajarea notițelor de la congres, de la adunări și de la întruniri",
+  "description": "Trimite-le familiei și prietenilor notițele tale de la congres, de la o adunare sau de la o întrunire sub forma unui fișier mic — fără să predai toată biblioteca ta și fără să o suprascrii pe a lor. O utilizare practică a partajării de notițe.",
+  "intro": [
+   "Ai luat notițe cu grijă de-a lungul unui congres; un prieten care a lipsit de la o sesiune le-ar primi cu drag; membrii familiei vor ideile pentru propria recapitulare. Trimiterea întregii tale copii de rezervă e mult prea mult și ar șterge notițele destinatarului dacă ar fi restaurată. Partajarea de notițe îți permite să transmiți exact notițele pe care le vrei — iar destinatarul păstrează tot ce are deja.",
+  ],
+  "steps": [
+   ("Încarcă-ți copia de rezervă pe pagina Partajare", "Mergi la jwsync.org/share.html și încarcă-ți fișierul .jwlibrary."),
+   ("Selectează doar notițele de la congres", "Alege eticheta evenimentului din filtrul de etichete al selectorului de notițe și apasă Selectează tot — lista e deja exact notițele pe care le-ai etichetat. Evidențierile atașate acelor notițe vin cu ele."),
+   ("Trimite fișierul mic de partajare", "JW Sync creează un fișier mic ce conține doar acele notițe. Trimite-l cum vrei — aplicație de mesagerie, e-mail, AirDrop. Fără server, fără cont."),
+   ("Familia și prietenii îl îmbină", "Fiecare deschide aceeași pagină, încarcă fișierul tău împreună cu propria copie de rezervă și primește o copie nouă, cu notițele tale adăugate. Notițele lor nu sunt suprascrise niciodată, iar notițele tale importate sosesc etichetate, ca să fie ușor de găsit."),
+  ],
+  "sections": [
+   ("O etichetă face totul fără efort", "Dacă îți etichetezi notițele în timpul evenimentului (să zicem „Congres 2026”), selectarea lor după aceea înseamnă un clic pe filtru și un Selectează tot. Exact de aceea merită să începi o etichetă nouă la începutul oricărui congres, adunări sau întruniri speciale."),
+  ],
+  "faq": [
+   ("Pot partaja cu mai multe persoane deodată?", "Da — fișierul de partajare e doar un fișier. Trimite-l la câți oameni vrei; fiecare îl îmbină independent în propria bibliotecă."),
+   ("Va fi expusă toată biblioteca mea?", "Nu. În fișier sunt doar notițele pe care le selectezi; restul bibliotecii tale rămâne privat."),
+  ],
+ },
+
+ "share-jw-library-notes-by-tag": {
+  "title": "Partajează doar notițele JW Library dintr-o singură etichetă",
+  "h1": "Partajarea doar a notițelor care poartă o anumită etichetă",
+  "description": "Trimite un subiect, un proiect sau notițele pentru un singur elev, în loc de toată biblioteca ta — iar etichetele tale călătoresc cu ele, așa că ajung organizate de partea cealaltă.",
+  "intro": [
+   "O etichetă e de obicei unitatea firească de partajare. Ai etichetat tot ce ai adunat pe un subiect, tot ce ține de un eveniment sau tot ce parcurgi cu o anumită persoană — iar acel set, nu toată biblioteca ta, e ceea ce vrea de fapt celălalt.",
+   "Partajarea de notițe din JW Sync lucrează notiță cu notiță, așa că o etichetă e pur și simplu lista pe care o bifezi. Notițele își păstrează etichetele la ieșire, ceea ce înseamnă că persoana care le primește poate filtra după exact același set în propria bibliotecă, mai târziu.",
+  ],
+  "steps": [
+   ("Asigură-te că notițele poartă eticheta", "Etichetează-le în JW Library pe măsură ce lucrezi sau deschide-ți copia de rezervă în Exploratorul de studiu, la jwsync.org, și folosește editorul de etichete ca să adaugi o etichetă mai multor notițe deodată. Etichetarea consecventă de acum e cea care face din partajare o treabă de un minut mai târziu."),
+   ("Deschide pagina Partajare și încarcă-ți copia de rezervă", "Mergi la jwsync.org/share.html, alege Trimite notițe și încarcă-ți fișierul .jwlibrary. E citit în browserul tău și nu-ți părăsește niciodată dispozitivul."),
+   ("Alege eticheta din filtru, apoi Selectează tot", "Selectorul de notițe are un filtru de etichete care le enumeră pe toate din copia ta, cu numărul de notițe de sub fiecare. Alege-ți eticheta și lista se restrânge exact la acele notițe; Selectează tot le bifează pe toate. Asta e toată selecția — două clicuri."),
+   ("Creează fișierul și trimite-l", "JW Sync construiește un fișier mic de partajare ce conține doar notițele bifate. Trimite-l prin chat, e-mail sau AirDrop — nu e implicat niciun server și niciun cont, de nicio parte."),
+   ("El îl adaugă în propria copie de rezervă", "Cealaltă persoană deschide aceeași pagină, alege Primește, previzualizează notițele și le adaugă în copia sa. Etichetele tale sosesc odată cu notițele, plus o etichetă pentru importul în sine, așa că tot setul e la un filtru distanță și pentru el."),
+  ],
+  "sections": [
+   ("De ce să partajezi o etichetă și nu o copie de rezervă", "Predarea unei copii .jwlibrary întregi înseamnă a da tot ce ai scris vreodată, iar restaurarea ei ar șterge notițele celeilalte persoane. Partajarea unei selecții etichetate e opusul, pe ambele planuri: vede doar ce ai ales tu și nu pierde nimic din ce e al lui."),
+   ("Restrângere suplimentară sau partajare între etichete", "Filtrul de etichete și caseta de căutare lucrează împreună: alegi o etichetă, apoi scrii un cuvânt ca s-o restrângi și mai mult, iar Selectează tot bifează în continuare doar ce ai în față. Căutarea potrivește și numele etichetelor, așa că un cuvânt-cheie folosit de mai multe etichete le adună dintr-o singură trecere. Fiecare notiță din listă își arată etichetele, ca să vezi ce trimiți înainte s-o trimiți."),
+   ("Etichete de păstrat pentru partajare", "Merită să ții câteva etichete care există doar ca să fie partajate — numele unui eveniment, un subiect pe care îl cercetezi pentru alții, persoana cu care studiezi. Când vine momentul să trimiți ceva, nu mai vânezi nimic: setul e deja adunat."),
+  ],
+  "faq": [
+   ("Etichetele mele ajung și la cealaltă persoană?", "Da. Notițele partajate își poartă etichetele, iar importul primește o etichetă proprie, așa că destinatarul poate găsi, verifica sau șterge tot lotul mai târziu."),
+   ("Ce se întâmplă dacă o notiță are mai multe etichete?", "Apare sub fiecare dintre ele în filtru, iar toate etichetele ei călătoresc odată cu ea. Filtrarea după o etichetă nu le înlătură niciodată pe celelalte."),
+   ("Partajarea scoate notițele din biblioteca mea?", "Nu. Partajarea copiază notițe într-un fișier mic; copia ta de rezervă și aplicația rămân neatinse."),
+   ("Pot trimite aceeași etichetă mai multor persoane?", "Da — fișierul de partajare e un fișier obișnuit. Trimite-l la câți oameni vrei, iar fiecare îl adaugă independent în propria bibliotecă."),
+  ],
+ },
+
+ "share-notes-with-bible-student": {
+  "title": "Partajează notițe JW Library cu un elev al Bibliei",
+  "h1": "Partajarea notițelor de studiu cu cineva cu care studiezi Biblia",
+  "description": "Trimite notițele pentru o lecție — versete, ilustrații, ideile pe care le-ai pregătit — direct în JW Library a celeilalte persoane, fără să atingi nimic din ce a scris ea însăși.",
+  "intro": [
+   "Când pregătești un studiu, cea mai mare parte a muncii ajunge în propriile tale notițe: versetele în plus, ilustrația care a făcut ca o idee să prindă, răspunsul la întrebarea pusă săptămâna trecută. Una e să le citești cu voce tare; alta e să-i lași un exemplar pe care să-l recitească toată săptămâna.",
+   "Partajarea de notițe pune notițele tale pregătite în biblioteca lui ca notițe JW Library adevărate, atașate la aceleași paragrafe și versete — nu ca o captură de ecran sau un mesaj peste care va derula.",
+  ],
+  "steps": [
+   ("Pregătește notițele lecției în JW Library", "Scrie notițele cum o faci de obicei, la paragrafele și versetele acoperite de lecție. Dă-le o etichetă — numele persoanei sau publicația — ca setul să fie ușor de selectat mai târziu."),
+   ("Deschide pagina Partajare și încarcă-ți copia de rezervă", "Creează o copie (Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă), apoi deschide jwsync.org/share.html, alege Trimite notițe și încarcă fișierul. Nu-ți părăsește niciodată dispozitivul."),
+   ("Bifează notițele pentru lecția asta", "Filtrează selectorul după eticheta folosită și apasă Selectează tot, sau caută și bifează una câte una. Creează fișierul de partajare — tot restul bibliotecii tale rămâne unde e."),
+   ("Trimite-l și ajută-l să-l primească", "Îi trebuie mai întâi o copie de rezervă proprie — Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă. Apoi deschide jwsync.org/share.html, alege Primește, încarcă fișierul tău și copia lui și descarcă noua copie actualizată."),
+   ("El o restaurează în JW Library", "Copiere de rezervă și restaurare → Restaurează, alege fișierul actualizat, iar notițele tale apar în biblioteca lui alături de ale sale — etichetate, ca să știe care au venit de la tine."),
+  ],
+  "sections": [
+   ("Notițele lui nu sunt suprascrise niciodată", "Asta e diferența importantă față de trimiterea unei copii de rezervă. O restaurare înlocuiește toată biblioteca unui dispozitiv; primirea de notițe partajate se adaugă la ea. Tot ce a scris el însuși — inclusiv la exact aceleași paragrafe — rămâne exact cum era."),
+   ("Un ritm săptămânal de două minute", "Odată ce ați făcut-o amândoi o dată, rutina e scurtă: pregătești, bifezi, trimiți, restaurează. Multora li se pare cel mai simplu să trimită notițele imediat după pregătire, ca elevul să le aibă înainte de studiu, nu după."),
+  ],
+  "faq": [
+   ("Elevul are nevoie de un cont sau de o aplicație instalată?", "Niciun cont nicăieri și nimic de instalat în afară de JW Library însăși — pagina de partajare e o pagină web obișnuită."),
+   ("Ce fac dacă elevul n-a făcut niciodată o copie de rezervă?", "Face una întâi, în JW Library, la Studiu personal → Copiere de rezervă și restaurare. Merge și o bibliotecă ce pare goală; copia e cea la care se adaugă notițele partajate."),
+   ("Pot să-mi iau notițele înapoi mai târziu?", "Fișierul e al tău, să-l trimiți sau nu. Odată ce cineva îl are, e al lui, exact ca orice mesaj — așa că partajează ce ți-ar fi comod să partajezi în scris."),
+  ],
+ },
+
+ "share-meeting-notes-with-family": {
+  "title": "Partajează notițele de la întrunire cu familia sau cu cei din casă",
+  "h1": "Partajarea notițelor de la întrunirea din săptămâna aceasta cu familia",
+  "description": "Cineva a fost bolnav, la muncă sau plecat — trimite-i notițele săptămânii ca pe un fișier mic, pe care să-l adauge în propria JW Library, fără ca vreunul dintre voi să piardă ceva.",
+  "intro": [
+   "În cele mai multe case fiecare își ia propriile notițe pe propriul dispozitiv și mereu cineva ratează o întrunire. Să-ți citești notițele cu voce tare la masă merge o dată; punerea lor în biblioteca celuilalt e ceea ce îi permite să folosească materialul mai târziu, acolo unde chiar îl va căuta.",
+   "Fiindcă partajarea se face notiță cu notiță, nu copie cu copie, mai multe persoane pot schimba notițe fără ca biblioteca vreuneia să fie suprascrisă.",
+  ],
+  "steps": [
+   ("Fă o copie de rezervă a dispozitivului pe care ai luat notițe", "JW Library → Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă."),
+   ("Selectează notițele săptămânii", "La jwsync.org/share.html alege Trimite notițe, încarcă-ți copia și bifează notițele săptămânii — căutarea după publicație le adună repede, iar dacă etichetezi notițele săptămânii, filtrul de etichete le strânge dintr-un clic."),
+   ("Trimite-l în conversația familiei", "Creează fișierul de partajare și trimite-l cum vorbiți deja în casă — aplicație de mesagerie, e-mail, AirDrop. E un fișier mic, cu doar notițele bifate de tine în el."),
+   ("Fiecare îl adaugă în propria copie de rezervă", "Deschid aceeași pagină, aleg Primește, încarcă fișierul tău împreună cu o copie proprie, descarcă noua copie actualizată și o restaurează în JW Library."),
+  ],
+  "sections": [
+   ("Biblioteca fiecăruia rămâne a lui", "Notițele nimănui nu sunt înlocuite și nimeni nu trebuie să-și predea toată biblioteca ca să participe. Notițele importate sosesc sub o etichetă, așa că fiecare vede dintr-o privire care au venit de la altcineva și poate șterge lotul mai târziu, dacă preferă să nu-l păstreze."),
+   ("Închinarea în familie: adună în loc să împrăștii", "Același instrument merge și în cealaltă direcție. Dacă toți iau notițe în timpul închinării în familie, o singură persoană poate strânge fișierele de partajare ale celorlalți într-o singură copie de rezervă și ajunge cu notițele reunite ale casei asupra aceluiași material."),
+  ],
+  "faq": [
+   ("Pot participa și dispozitivele copiilor?", "Orice dispozitiv care poate rula JW Library și deschide o pagină web poate. Pașii sunt identici pe telefon, tabletă sau calculator."),
+   ("Trebuie să fim pe aceeași platformă?", "Nu. Android, iPhone, iPad și aplicația Windows folosesc toate același format de copie de rezervă, așa că notițele trec între ele fără nicio conversie."),
+  ],
+ },
+
+ "receive-shared-jw-library-notes": {
+  "title": "Cineva mi-a trimis notițe JW Library — cum le deschid?",
+  "h1": "Adăugarea notițelor pe care ți le-a partajat cineva în propria ta JW Library",
+  "description": "Ai primit un fișier cu notițe partajate sau un bloc de text partajat. Iată cum îl previzualizezi și îl adaugi în propria copie de rezervă JW Library fără să pierzi nici măcar o notiță de-a ta.",
+  "intro": [
+   "Notițele JW Library partajate ajung fie ca un fișier mic (care se termină în .jwshare.json), fie ca un bloc de text lipit într-un mesaj. JW Library însăși nu poate deschide niciuna dintre variante — dar nici nu ai nevoie. Partea de primire din JW Sync citește notițele partajate, îți arată ce conțin și le scrie într-una dintre copiile tale de rezervă.",
+   "Tot schimbul are loc pe dispozitivul tău. Nu există cont, nu se încarcă nimic, iar la notițele tale se adaugă, nu se înlocuiesc niciodată.",
+  ],
+  "steps": [
+   ("Fă întâi o copie de rezervă a propriei biblioteci", "În JW Library: Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă. Acesta e fișierul la care se vor adăuga notițele partajate, așa că e bine să fie recent."),
+   ("Deschide pagina Partajare și alege Primește", "Mergi la jwsync.org/share.html și alege Primește notițe."),
+   ("Încarcă ce ți s-a trimis", "Alege fișierul .jwshare.json sau lipește textul partajat direct în casetă, dacă a venit ca mesaj. În ambele cazuri primești o previzualizare doar-citire a fiecărei notițe înainte să se scrie ceva."),
+   ("Adaugă-le în copia ta de rezervă", "Încarcă-ți propria copie, alege eticheta pe care s-o poarte notițele importate și adaugă-le. JW Sync îți construiește un fișier de rezervă actualizat, pe care să-l descarci."),
+   ("Restaurează copia actualizată în JW Library", "Studiu personal → Copiere de rezervă și restaurare → Restaurează, alege fișierul actualizat. Notițele partajate sunt acum în biblioteca ta, la paragrafele și versetele potrivite."),
+  ],
+  "sections": [
+   ("Nimic de-al tău nu e înlocuit", "Notițele partajate sunt adăugate ca notițe noi. Chiar și acolo unde o notiță partajată nimerește pe un paragraf pe care ai scris deja, amândouă supraviețuiesc — a ta neatinsă, a lui alături. Singurul lucru de ținut minte e regula obișnuită a restaurării: restaurează copia actualizată, nu una mai veche."),
+   ("Te-ai răzgândit mai târziu?", "Fiecare notiță importată poartă eticheta pe care ai ales-o când ai adăugat-o. Deschide-ți copia în Exploratorul de studiu, filtrează după acea etichetă și poți verifica sau șterge tot lotul dintr-o singură trecere."),
+  ],
+  "faq": [
+   ("Fișierul a ajuns redenumit în .txt sau s-a deschis ca text — e stricat?", "Nu. Aplicațiile de mesagerie fac asta des. Copiază textul și lipește-l în caseta Primește; funcționează exact la fel."),
+   ("Am nevoie de toată copia de rezervă a expeditorului?", "Nu. Fișierul de partajare conține doar notițele pe care a ales să le trimită — nimic altceva din biblioteca lui."),
+   ("Se încarcă ceva când previzualizez notițele?", "Nu. Citirea fișierului partajat, previzualizarea lui și scrierea copiei actualizate se întâmplă toate în browserul de pe dispozitivul tău."),
+  ],
+ },
+
+ "share-notes-with-study-group": {
+  "title": "Partajează notițe de cercetare cu un grup de studiu",
+  "h1": "Partajarea cercetării cu un grup — și strângerea înapoi a celei făcute de ei",
+  "description": "Un fișier, mulți oameni: trimite un set de notițe de cercetare tuturor celor care se ocupă de același subiect și strânge ce îți trimit înapoi într-un singur set propriu, reunit.",
+  "intro": [
+   "Când mai mulți sapă în același subiect, cercetarea ajunge de obicei împrăștiată — unul a găsit referințele încrucișate, altul contextul istoric, al treilea ilustrațiile. Să vă uitați la capturile de ecran ale celorlalți nu e același lucru cu a avea materialul în propria bibliotecă, la aceleași versete, unde să-l poți căuta și anul viitor.",
+   "Fiindcă un fișier de partajare e doar un fișier, un singur export servește tot grupul, iar același mecanism îți aduce înapoi munca lor.",
+  ],
+  "steps": [
+   ("Etichetează-ți cercetarea pe măsură ce o aduni", "Dă subiectului o etichetă în JW Library, ca setul să rămână împreună. În Exploratorul de studiu poți adăuga o etichetă mai multor notițe deodată, dacă atunci n-ai etichetat nimic."),
+   ("Creează un singur fișier de partajare pentru grup", "La jwsync.org/share.html alege Trimite notițe, încarcă-ți copia de rezervă, alege eticheta subiectului din filtrul de etichete, apasă Selectează tot și creează fișierul."),
+   ("Publică-l o singură dată", "Trimite același fișier tuturor — într-o conversație de grup, într-un e-mail către mai multe persoane, orice folosește deja grupul. Nu există configurare pentru fiecare persoană și nici vreun exemplar pe vreun server."),
+   ("Cere-le și pe ale lor în schimb", "Fiecare poate face exact același lucru din partea lui. Adaugă pe rând fiecare fișier primit în copia ta de rezervă, dând fiecărui import o etichetă proprie — numele expeditorului merge bine — ca să știi mereu a cui e fiecare cercetare."),
+  ],
+  "sections": [
+   ("Un singur set reunit, dar cu sursele vizibile", "După câteva runde ai toată cercetarea grupului pe acel subiect în propria ta bibliotecă, la paragrafele și versetele potrivite, cu fiecare contribuție etichetată după sursă. Căutarea le găsește pe toate deodată; iar etichetele îți permit să le separi din nou oricând vrei."),
+   ("Nimeni nu trebuie să-și deschidă biblioteca", "Fiecare partajează doar notițele pe care le bifează. Restul bibliotecii fiecăruia — studiul personal, însemnările private, tot ce mai e — nu intră niciodată în fișier."),
+  ],
+  "faq": [
+   ("Există o limită de notițe pe care le pot partaja deodată?", "Practic, nu. Notițele sunt mici; chiar și un set mare produce un fișier pe care îl poți trimite într-un mesaj."),
+   ("Ce fac dacă doi oameni îmi trimit aceeași notiță?", "O vei vedea de două ori, fiecare sub eticheta expeditorului ei. Căutarea din Exploratorul de studiu face ca aproape-duplicatele să fie ușor de observat și de șters."),
+   ("Poate cineva să primească fără să trimită nimic?", "Da. Primirea și trimiterea sunt independente — nimeni nu e obligat să partajeze ca să poată adăuga ce i s-a dat."),
+  ],
+ },
+
+ "share-talk-preparation-notes": {
+  "title": "Transmite mai departe cercetarea din spatele unei cuvântări sau însărcinări",
+  "h1": "Transmiterea cercetării pentru cuvântări și însărcinări",
+  "description": "Tu ai făcut săpătura pentru o cuvântare, o parte de program sau o însărcinare. Iată cum îi predai cercetarea celui care are nevoie de ea data viitoare — ca notițe adevărate în biblioteca lui sau ca text simplu pentru un document.",
+  "intro": [
+   "Pregătirea e rareori folosită o singură dată. Versetele pe care le-ai urmărit, contextul pe care l-ai citit, felul în care ai hotărât până la urmă să încadrezi o idee — cel care va trata același material mai târziu ar prefera să pornească de acolo, nu de la o pagină goală.",
+   "JW Sync îți dă două căi de a o transmite, potrivite pentru oameni diferiți: ca notițe care ajung în JW Library a celuilalt sau ca text simplu, pe care să-l lipească într-un document.",
+  ],
+  "steps": [
+   ("Adună cercetarea sub o singură etichetă", "Pe măsură ce te pregătești, etichetează notițele cu tema sau cu însărcinarea. Dacă sunt deja scrise și neetichetate, deschide-ți copia de rezervă în Exploratorul de studiu și etichetează-le în masă în două minute."),
+   ("Hotărăște ce formă i se potrivește celuilalt", "Cine studiază în JW Library vrea notițe în biblioteca lui. Cine construiește un document vrea text. Le poți face pe amândouă din același set."),
+   ("Ca să trimiți notițe: folosește pagina Partajare", "La jwsync.org/share.html alege Trimite notițe, încarcă-ți copia, filtrează după eticheta folosită, apasă Selectează tot, apoi creează fișierul. El îl adaugă în propria copie și o restaurează — notițele lui rămân neatinse."),
+   ("Ca să trimiți text: exportă din Exploratorul de studiu", "Filtrează la același set și copiază-l sau exportă-l ca Markdown ori text simplu. Formatarea supraviețuiește, așa că o schiță structurată rămâne structurată când e lipită într-un document."),
+  ],
+  "sections": [
+   ("Păstrează un exemplar și pentru tine, într-o formă pe care s-o regăsești", "Același export merită păstrat pentru uzul tău. O etichetă plus un interval de date face ca toată pregătirea să fie recuperabilă peste ani, exact atunci când vei avea nevoie de ea — iar extragerea după dată din Exploratorul de studiu transformă orice fereastră de timp în propriul ei fișier."),
+  ],
+  "faq": [
+   ("Versetele vor rămâne legate de pasajele potrivite?", "Da — notițele partajate păstrează paragraful și versetul de care erau atașate, așa că ajung la locul potrivit în biblioteca celeilalte persoane."),
+   ("Pot partaja notițe care au evidențieri pe ele?", "Da. Evidențierile atașate notițelor pe care le partajezi călătoresc odată cu ele."),
+  ],
+ },
+
+ "weekly-meeting-preparation-jw-library-notes": {
+  "title": "Pregătește-te de întrunire folosind notițele pe care le-ai scris deja",
+  "h1": "Pregătirea săptămânală cu notițele pe care le ai deja",
+  "description": "Ai mai studiat materialul acesta. Iată o scurtă rutină săptămânală care îți scoate la iveală notițele vechi, evidențierile și răspunsurile completate la aceeași publicație, înainte să te pregătești din nou.",
+  "intro": [
+   "Cei mai mulți se pregătesc în fiecare săptămână de la o pagină goală, deși au scris despre același subiect — uneori despre același verset — de mai multe ori până atunci. Gândirea aceea de altădată stă în biblioteca ta; singura problemă e că nimic nu ți-o aduce înapoi la momentul potrivit.",
+   "O rutină de cinci minute la începutul pregătirii rezolvă asta și nu folosește nimic altceva decât copia de rezervă pe care o ai deja.",
+  ],
+  "steps": [
+   ("Încarcă o copie de rezervă recentă în Exploratorul de studiu", "Creează o copie în JW Library, apoi deschide-o la jwsync.org. Totul e citit în browserul tău."),
+   ("Caută subiectul înainte să începi", "Caută versetul temei, subiectul sau publicația. Tot ce ai scris despre el în anii trecuți apare la un loc, din fiecare publicație în care se regăsește."),
+   ("Verifică-ți răspunsurile completate", "Vizualizarea Răspunsuri de studiu adună răspunsurile pe care le-ai tastat la întrebările de studiu, așa că rundele anterioare prin același material sunt acolo, ca să construiești pe ele, nu ca să le repeți."),
+   ("Adaugă ce lipsește, apoi pune totul la loc", "Notițele pot fi modificate sau adăugate chiar acolo — titlu, text, etichete, culoarea evidențierii. Exportă copia modificată și restaureaz-o în JW Library, iar pregătirea ta e în aplicație pentru întrunire."),
+  ],
+  "sections": [
+   ("De ce contează notițele vechi", "Recitirea concluziilor de data trecută transformă pregătirea în ceva cumulativ. Încetezi să redescoperi aceleași idei și începi să construiești pe ele — iar notițele pe care le adaugi săptămâna asta devin punctul de plecare al rundei următoare."),
+   ("O variantă mai blândă: lasă notițele să vină la tine", "Dacă o căutare săptămânală ți se pare muncă, panoul Readuse în față de pe pagina Statistici de studiu îți aduce singur câteva notițe vechi în fiecare zi, inclusiv pe cele scrise la această dată în anii trecuți. Același folos, fără nicio rutină de ținut minte."),
+  ],
+  "faq": [
+   ("Modificarea în browser îmi schimbă direct biblioteca?", "Nu. Exporți o copie de rezervă actualizată și o restaurezi în JW Library — aplicația e schimbată doar de o restaurare făcută de tine."),
+   ("Copia mea de rezervă e încărcată undeva când caut în ea?", "Nu. Fișierul e citit local, în browserul tău; nimic nu e trimis nicăieri."),
+  ],
+ },
+
+ "print-jw-library-notes": {
+  "title": "Cum îți tipărești notițele din JW Library",
+  "h1": "Cum îți pui pe hârtie notițele din JW Library",
+  "description": "JW Library nu are buton de tipărire. Exportă-ți notițele ca text sau Markdown, lipește-le în orice document și tipărește — un jurnal de studiu, un set de notițe pentru cineva fără aplicație sau o arhivă.",
+  "intro": [
+   "Din JW Library nu se poate tipări, iar capturile de ecran de pe telefon se citesc prost. Dar notițele sunt ale tale, iar aducerea lor într-un document tipăribil e simplă odată ce poți citi fișierul de rezervă.",
+   "Exploratorul de studiu citește o copie .jwlibrary în browserul tău și îți permite să copiezi sau să exporți orice selecție de notițe ca text simplu sau Markdown — pe care orice procesor de text, aplicație de notițe și imprimantă le înțeleg deja.",
+  ],
+  "steps": [
+   ("Creează o copie de rezervă și deschide-o", "JW Library → Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă, apoi încarcă fișierul la jwsync.org."),
+   ("Restrânge la ce vrei pe hârtie", "Filtrează după publicație, etichetă, culoarea evidențierii sau interval de date, ori caută un subiect. Se poate tipări tot, dar un set filtrat face de obicei un document mult mai util."),
+   ("Copiază sau exportă ca text ori Markdown", "Scoate selecția ca Markdown sau text simplu. Aldinul, cursivele și listele supraviețuiesc, așa că notițele structurate rămân structurate pe pagină."),
+   ("Lipește într-un document și tipărește", "Merge orice procesor de text sau aplicație de notițe. Pune titlurile și marginile pe care le vrei, apoi tipărește sau salvează ca PDF."),
+  ],
+  "sections": [
+   ("Realizarea unui jurnal de studiu", "Pentru un jurnal tipărit, intervalul de date e unitatea firească — un an de notițe sau perioada acoperită de o publicație. Extragerea după dată îți dă un set cronologic curat, de tipărit sau de legat, și e plăcut să-l ai și în afara ecranului."),
+   ("Tipărirea pentru cineva care nu folosește aplicația", "Nu toată lumea studiază de pe un dispozitiv. Un set tipărit de notițe la materialul curent e cu adevărat util pentru cineva care preferă hârtia și cere aceleași două minute ca orice alt export."),
+  ],
+  "faq": [
+   ("Îmi pot tipări și evidențierile?", "Vizualizarea Evidențieri îți enumeră pasajele marcate, iar lista aceea se copiază ca text alături de notițele tale."),
+   ("Exportul schimbă ceva în JW Library?", "Nu. Exportul citește un exemplar al copiei tale de rezervă; fișierul original și aplicația rămân neatinse."),
+  ],
+ },
+
+ "clean-up-duplicate-jw-library-notes": {
+  "title": "Curăță notițele duplicate și goale din JW Library",
+  "h1": "Curățarea notițelor duplicate, a celor goale și a dezordinii",
+  "description": "Ai restaurat o copie de rezervă de două ori sau ai importat din nou aceleași notițe? Library Doctor îți scanează fișierul .jwlibrary în browser, găsește duplicatele și notițele goale și produce un exemplar curat.",
+  "intro": [
+   "Bibliotecile adună dezordine. Restaurarea unei copii pe un dispozitiv care avea deja o parte din aceleași notițe, importarea de două ori a unui set partajat sau ani de notițe începute și niciodată terminate — fiecare lasă ceva în urmă, iar JW Library nu-ți dă nicio cale de a le mătura în masă.",
+   "Library Doctor e o verificare gratuită a stării unui fișier .jwlibrary. Scanează copia în browserul tău, îți spune pe înțelesul tuturor ce a găsit și repară dintr-o atingere ce se poate repara.",
+  ],
+  "steps": [
+   ("Fă întâi o copie de rezervă — ca întotdeauna", "JW Library → Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă. Păstrează fișierul acesta; e plasa ta de siguranță."),
+   ("Rulează verificarea stării", "Deschide jwsync.org, încarcă copia de rezervă și pornește Library Doctor. Examinează conținutul și structura fișierului fără să-l trimită nicăieri."),
+   ("Citește ce a găsit", "Duplicatele, notițele goale și restul dezordinii sunt enumerate limpede, cu numărătoare, ca să vezi cât de mare e problema înainte să schimbi ceva."),
+   ("Repară și descarcă exemplarul curat", "O atingere aplică reparațiile și produce un fișier .jwlibrary nou, curățat. Originalul tău nu e modificat niciodată."),
+   ("Restaurează fișierul curat", "Copiere de rezervă și restaurare → Restaurează și alege fișierul curățat. Biblioteca ta e aceeași, doar fără dezordine."),
+  ],
+  "sections": [
+   ("Cum apar duplicatele în primul rând", "Aproape întotdeauna printr-o restaurare. Dacă restaurezi o copie pe un dispozitiv care purta deja o parte din același material — sau dacă restaurezi de două ori același fișier pe căi diferite — aplicația nu are cum să știe că a mai văzut acele notițe."),
+   ("Îmbinarea e felul în care le eviți", "Exact de aceea îmbinarea a două copii e mai sigură decât restaurarea uneia peste alta: îmbinarea detectează materialul care există deja și îl păstrează o singură dată. Aceleași verificări rulează în fiecare îmbinare, așa că o copie îmbinată iese curată chiar dacă fișierele de la intrare n-au fost."),
+  ],
+  "faq": [
+   ("Va șterge notițe de care chiar am nevoie?", "Elimină duplicatele exacte și notițele goale — material în care nu e nimic de pierdut. Și fiindcă scrie un fișier nou în loc să-l modifice pe al tău, originalul e mereu acolo, la îndemână."),
+   ("Poate recupera notițe pe care le-am șters în aplicație?", "Nu. Dacă o notiță a fost ștearsă în JW Library înainte să fie făcută copia, ea nu se află în fișier ca să poată fi recuperată — o copie mai veche e locul unde merită să cauți."),
+  ],
+ },
+
+ "backup-jw-library-before-phone-repair": {
+  "title": "Fă o copie de rezervă a JW Library înainte de o resetare din fabrică sau o reparație",
+  "h1": "Înainte de o resetare din fabrică, o reparație sau vânzarea telefonului",
+  "description": "O resetare șterge notițele din JW Library odată cu tot restul, iar aplicațiile de transfer nu le duc mai departe. Fă o copie de rezervă, verifică dacă chiar se deschide, apoi resetează fără să riști nimic.",
+  "intro": [
+   "Resetezi telefonul, îl trimiți la reparat sau îl dai altcuiva, iar datele personale de studiu din JW Library pleacă odată cu el. Pozele și aplicațiile se întorc dintr-o copie din cloud; anii de notițe, evidențieri și semne de carte de regulă nu, fiindcă aplicațiile de transfer sar peste datele private ale aplicației.",
+   "Rezolvarea durează cinci minute, iar pasul pe care oamenii îl sar e tocmai cel care contează cel mai mult: verificarea faptului că fișierul de rezervă chiar poate fi citit, înainte ca dispozitivul să fie șters.",
+  ],
+  "steps": [
+   ("Creează copia de rezervă", "JW Library → Studiu personal → Copiere de rezervă și restaurare → Creează o copie de rezervă. Primești un fișier .jwlibrary — de obicei doar câțiva megabytes."),
+   ("Scoate-l de pe dispozitiv", "Trimite-ți-l pe e-mail sau pune-l în Drive, iCloud ori într-un folder de pe calculator. O copie care există doar pe telefonul pe care urmează să-l ștergi nu e o copie de rezervă."),
+   ("Verifică dacă se deschide înainte să ștergi ceva", "Încarcă fișierul la jwsync.org și uită-te la el — notițele, evidențierile și semnele de carte ar trebui să fie toate acolo, iar verificarea stării va semnala orice e în neregulă cu fișierul. Ăsta e tot rostul exercițiului: să afli după aceea că fișierul e ilizibil e prea târziu."),
+   ("Resetează, apoi restaurează", "După resetare sau reparație, instalează JW Library, autentifică-te, apoi Copiere de rezervă și restaurare → Restaurează și alege fișierul tău."),
+   ("Ai folosit între timp un telefon de împrumut? Îmbină, nu suprascrie", "Dacă ai luat notițe pe un dispozitiv temporar, fă și lui o copie de rezervă și îmbină ambele fișiere la jwsync.org înainte de restaurare — altfel restaurarea copiei vechi șterge tot ce ai scris cât ai așteptat."),
+  ],
+  "sections": [
+   ("De ce merită minutul în plus pentru verificare", "Transferurile întrerupte, unitățile din cloud care strică fișiere și extensiile redenumite pe drum produc toate copii care arată bine într-un folder și eșuează la restaurare. Deschiderea fișierului mai întâi transformă o problemă tăcută într-una pe care încă o poți repara, cât timp dispozitivul original are încă datele."),
+   ("Păstrează fișierul și după restaurare", "Nu-l șterge odată ce dispozitivul nou merge. Copiile vechi sunt singura cale de întoarcere după o notiță ștearsă din greșeală peste luni de zile, iar păstrarea lor nu costă nimic."),
+  ],
+  "faq": [
+   ("Publicațiile mele descărcate se vor întoarce?", "Copia de rezervă îți poartă datele personale de studiu — notițe, evidențieri, semne de carte, etichete și liste de redare. Publicațiile se descarcă pur și simplu din nou după aceea."),
+   ("Fișierul funcționează dacă trec la altă marcă de telefon sau la altă platformă?", "Da. Formatul .jwlibrary e același pe Android, iPhone, iPad și Windows."),
+  ],
+ },
+
+ "jw-library-notes-missing-after-update": {
+  "title": "Notițele JW Library lipsesc după o actualizare sau o reinstalare",
+  "h1": "Notițe dispărute după o actualizare a aplicației, o reinstalare sau o restaurare",
+  "description": "Notițele tale au dispărut după ce ai actualizat, ai reinstalat sau te-ai autentificat din nou. Ce să faci întâi, ce să nu faci și cum le recuperezi fără să pierzi nimic din ce ai scris între timp.",
+  "intro": [
+   "Să deschizi JW Library după o actualizare și să-ți găsești notițele dispărute e alarmant, iar în marea majoritate a cazurilor ele pot fi recuperate. Ce contează e ce faci în următoarele minute — mai exact, să nu faci singurul lucru care transformă o situație recuperabilă într-o pierdere definitivă.",
+   "E un moment neplăcut: JW Library se deschide, iar notițele nu sunt acolo. Înainte de orice, un sfat — nu te grăbi. Cea mai mare parte din ce face situația irecuperabilă se petrece în primele zece minute, prin suprascrierea tocmai a copiei care mai conține notițele lipsă.",
+   "Parcurge pașii de mai jos în ordine. Scopul e să ajungi la un singur fișier care conține și notițele vechi, și tot ce ai scris de atunci.",
+  ],
+  "steps": [
+   ("Nu-ți suprascrie încă nicio copie de rezervă", "Abține-te să creezi o copie nouă peste una veche și nu restaura nimic pe nevăzute. Un fișier de rezervă mai vechi e locul cel mai probabil în care notițele tale există în continuare."),
+   ("Vânează cea mai nouă copie pe care o ai", "Verifică atașamentele din e-mail, Google Drive, iCloud Drive, folderul de descărcări al calculatorului și orice alt dispozitiv pe care ai restaurat vreodată. Copiile sunt mici, așa că oamenii au adesea mai multe exemplare decât își amintesc."),
+   ("Uită-te înăuntrul fișierului înainte să-l restaurezi", "Încarcă la jwsync.org fișierul candidat și vezi ce conține de fapt — câte notițe, din ce publicații, până la ce dată. Asta îți spune dacă e fișierul potrivit, înainte să te angajezi la o restaurare."),
+   ("Fă o copie și dispozitivului de acum", "Chiar dacă pare gol, fă-i o copie. Dacă ai scris ceva de când au dispărut notițele, fișierul acesta e singurul lui exemplar."),
+   ("Îmbină-le pe cele două, apoi restaurează", "Îmbină copia veche cu cea curentă la jwsync.org. Rezultatul conține notițele recuperate și tot ce a fost scris de atunci, cu duplicatele păstrate o singură dată. Restaurează acel fișier îmbinat — niciodată copia veche singură."),
+  ],
+  "sections": [
+   ("De ce restaurarea copiei vechi singure e mișcarea greșită", "O restaurare înlocuiește complet biblioteca dispozitivului. Dacă restaurezi direct o copie veche, îți iei înapoi notițele lipsă și pierzi tot ce a fost scris după ce a fost făcută acea copie. Îmbinarea prealabilă e cea care face recuperarea să nu coste nimic."),
+   ("Dacă însăși copia de rezervă nu se restaurează", "Un fișier care dă eroare la restaurare nu e neapărat pierdut. Rulează verificarea stării pe el — deteriorările din descărcări întrerupte, din sincronizarea în cloud sau dintr-o extensie redenumită sunt adesea reparabile, iar un exemplar curățat se va restaura normal."),
+   ("Mai întâi: nu crea încă o copie nouă", "Dacă notițele au dispărut, rezistă reflexului de a face imediat o copie de rezervă. O copie surprinde starea curentă, iar dacă starea curentă e cea goală, riști să suprascrii fișierul bun pe care îl aveai deja. Află întâi ce copii există — în Descărcări, Fișiere, e-mail sau în cloud — și abia apoi hotărăște ce faci. Nimic de pe dispozitiv nu se îmbunătățește printr-o copie făcută în panică."),
+   ("De ce o actualizare poate părea că pierde notițe", "Cauza obișnuită nu e ștergerea. O actualizare poate lăsa aplicația să arate spre o bază de date nouă și goală, în timp ce cea veche e încă pe disc; o reinstalare — inclusiv una făcută automat de o actualizare din magazin care a eșuat la jumătate — pornește aplicația de la zero; iar pe dispozitivele partajate sau cu mai multe profiluri, aplicația poate ajunge să ruleze sub alt profil decât înainte. În fiecare caz, notițele nu sunt atât dispărute, cât neîncărcate în acel moment, ceea ce explică și de ce o restaurare dintr-o copie readuce de obicei totul curat."),
+   ("Recuperarea unei copii vechi fără să arunci munca nouă", "Dacă ai studiat de când a fost făcută copia, o restaurare simplă schimbă o pierdere cu alta: îți aduce înapoi notițele vechi și le înlătură pe cele mai noi. Ocolirea e să faci o copie a stării curente într-un fișier separat, s-o îmbini cu copia mai veche, ca ambele seturi de notițe să existe într-un singur fișier, și să restaurezi rezultatul îmbinat. Ajungi cu notițele recuperate și cu cele recente laolaltă, în loc să alegi între ele."),
+   ("Dacă aplicația s-a reinstalat singură", "O reinstalare golește spațiul privat al aplicației, așa că tot ce nu se află într-o copie de rezervă e irecuperabil — nu există niciun exemplar în cloud la care să apelezi. Verifică fiecare loc în care ar fi putut fi salvat un fișier .jwlibrary înainte să conchizi că nu există niciunul, inclusiv folderul de mesaje trimise din e-mail și orice stocare în cloud în care ai salvat vreodată ceva. Odată ce găsești una, restaureaz-o, iar de atunci înainte ține copiile în afara dispozitivului."),
+   ("După ce totul e înapoi", "Când notițele tale sunt recuperate, mai fă o copie și pune-o în afara dispozitivului — episodul prin care tocmai ai trecut e argumentul. Dacă a trebuit să îmbini o copie veche cu starea curentă ca să ajungi aici, păstrează și ambele fișiere-sursă: sunt fotografii datate, iar faptul că aveai mai multe e ceea ce a făcut recuperarea posibilă în primul rând."),
+  ],
+  "faq": [
+   ("Notițele mai sunt undeva pe dispozitiv?", "Nu într-o formă la care să ajungi din afara aplicației. Recuperarea înseamnă realist un fișier de rezervă mai vechi — de aceea contează atât de mult să le păstrezi pe cele vechi."),
+   ("Autentificarea din nou aduce notițele înapoi?", "Nu. Datele personale de studiu nu sunt ținute într-un cont; ele stau pe dispozitiv și circulă doar prin fișiere de rezervă."),
+   ("Ce fac dacă singura copie pe care o am e veche de luni de zile?", "Îmbin-o cu o copie a dispozitivului așa cum e acum. Vei recupera tot ce are fișierul vechi și vei păstra tot ce mai are dispozitivul, fără să alegi între ele."),
+   ("Chiar mi-am pierdut notițele?", "Nu neapărat. Dacă există o copie undeva, tot ce e în ea poate fi recuperat integral. Irecuperabilă e doar munca făcută după ultima copie."),
+   ("Pot combina o copie veche cu ce e acum pe dispozitiv?", "Da — fă întâi o copie a stării curente, apoi îmbin-o cu cea mai veche și restaurează rezultatul. Ambele seturi de notițe ajung în aceeași bibliotecă."),
+   ("Restaurarea unei copii vechi îmi va șterge notițele recente?", "Singură, da, fiindcă o restaurare înlocuiește datele dispozitivului. Îmbină întâi copia curentă cu cea veche și restaurează în schimb fișierul îmbinat."),
+   ("Ar trebui să reinstalez aplicația ca s-o repar?", "Nu — reinstalarea golește spațiul privat al aplicației și înlătură orice șansă de a recupera ce mai e pe dispozitiv. Caută întâi o copie existentă și tratează reinstalarea ca pe ultima soluție, abia după ce ai una."),
+  ],
+ },
+
+ "help-family-member-move-jw-library-notes": {
+  "title": "Ajută un membru al familiei să-și mute notițele JW Library",
+  "h1": "Cum îl ajuți pe altcineva să-și mute sau să-și salveze notițele JW Library",
+  "description": "Tu ești cel căruia i se cere să repare telefonul. Iată cea mai scurtă cale sigură de a muta notițele JW Library ale unei rude pe un dispozitiv nou — inclusiv cum s-o faci fără să-i citești notițele.",
+  "intro": [
+   "Mai devreme sau mai târziu cineva îți întinde telefonul lui, cu unul nou alături. Notițele din JW Library sunt partea care nu se mută singură și, adesea, partea care contează cel mai mult — ani de studiu pe care niciun instrument de transfer nu-i va duce dincolo.",
+   "Procesul e același ca atunci când o faci pentru tine, cu o singură considerație în plus, la care merită să te gândești de la început: pe dispozitivul cui se face treaba.",
+  ],
+  "steps": [
+   ("Ghidează-l să facă o copie de rezervă pe dispozitivul vechi", "JW Library → Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Se salvează un fișier .jwlibrary. Dacă nu ești lângă el, partea asta o poate face la telefon."),
+   ("Adu fișierul unde ai nevoie de el", "Pune-l să și-l trimită pe e-mail sau să ți-l trimită ție. E destul de mic ca să treacă prin orice aplicație de mesagerie."),
+   ("Verifică dacă fișierul se deschide", "Încarcă-l la jwsync.org și confirmă că notițele sunt acolo. Făcând asta înainte ca dispozitivul vechi să fie șters sau dat mai departe transformi o surpriză neplăcută într-un non-eveniment."),
+   ("Îmbină dacă dispozitivul nou are deja notițe", "Dacă folosește telefonul nou de ceva vreme, fă-i și lui o copie de rezervă și îmbină ambele fișiere — altfel restaurarea copiei vechi șterge tot ce a scris pe dispozitivul nou."),
+   ("Ghidează-l prin restaurare", "Pe dispozitivul nou: Copiere de rezervă și restaurare → Restaurează, alege fișierul. Apar notițele, evidențierile, semnele de carte și etichetele."),
+  ],
+  "sections": [
+   ("Cum o faci fără să-i citești notițele", "Notițele de studiu personal sunt personale. Dacă preferi să nu le vezi — sau el preferă să nu le vezi — fă totul pe dispozitivul lui: e o pagină web, așa că poți deschide jwsync.org pe telefonul sau tableta lui, poți încărca fișierele acolo și copia de rezervă nu ajunge niciodată pe propriul tău aparat. Oricum nu se încarcă nimic nicăieri, dar așa fișierul nu-i iese deloc din mână."),
+   ("Lasă-l cu o copie de rezervă pe care s-o poată găsi", "Înainte să-i dai telefonul înapoi, asigură-te că fișierul de rezervă e undeva de unde îl va putea găsi din nou — în propriul lui e-mail sau în cloudul lui, nu doar în folderul tău de descărcări. Data viitoare s-ar putea să nu mai aibă deloc nevoie de tine."),
+  ],
+  "faq": [
+   ("Pot face asta de la distanță?", "Da. Dacă poate crea o copie de rezervă și să-ți trimită fișierul, tot restul merge de la distanță — iar restaurarea înseamnă câteva atingeri pe care i le poți dicta la telefon."),
+   ("El are un Android, iar cel nou e un iPhone. Contează?", "Nu. Formatul copiei de rezervă e identic pe Android, iPhone, iPad și Windows."),
+   ("Ce fac dacă n-a făcut niciodată o copie și telefonul vechi nu mai e?", "Atunci nu există de unde recupera — datele trăiau pe acel dispozitiv. Merită să-i pui pe loc obiceiul unor copii de rezervă regulate pe telefonul nou."),
+  ],
+ },
 }

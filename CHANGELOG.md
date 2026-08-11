@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.27.0] — 2026-08-10
+
+### Romanian is now complete — all 37 guides
+
+The Romanian guide tree is finished. Every guide the site publishes in English
+now exists in Romanian at `/guides/ro/`, with its own index, hreflang cluster
+and sitemap entries, and the `/ro/` landing page links its popular guides in
+Romanian rather than falling back to English.
+
+Romanian shipped its interface in 3.26.0 with one guide translated; the
+remaining 36 landed here.
+
+---
+
 ## [3.26.0] — 2026-08-10
 
 ### Added: Romanian — the site's 24th language
