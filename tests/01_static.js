@@ -947,6 +947,30 @@ section('Cross-tool session (jw-session.js)');
     }
   }
 
+  // The <select> in the HTML is a *second*, independent picker from NAV_LANGS,
+  // and nothing checked it until Romanian shipped listed twice in it. The
+  // plumbing script had been run a second time and re-inserted the option,
+  // because its idempotency guard asked whether the anchor was still present
+  // rather than whether the language already was. Duplicates in a dropdown are
+  // visible to every user and no other check looked here.
+  section('HTML language picker lists each language exactly once');
+  {
+    ['index.html', 'beta/index.html'].forEach(rel => {
+      const html = fs.readFileSync(path.join(REPO, rel), 'utf8');
+      const codes = [...html.matchAll(/<option value="([A-Za-z-]{2,12})">/g)]
+        .map(x => x[1]).filter(c => EXPECTED_LANGS.includes(c));
+      const dupes = codes.filter((c, i) => codes.indexOf(c) !== i);
+      if (dupes.length) {
+        fail(rel + ': picker lists twice: ' + [...new Set(dupes)].join(', '));
+      } else if (codes.length !== EXPECTED_LANGS.length) {
+        const missing = EXPECTED_LANGS.filter(l => !codes.includes(l));
+        fail(rel + ': picker is missing: ' + missing.join(', '));
+      } else {
+        ok(rel + ': ' + codes.length + ' options, no duplicates');
+      }
+    });
+  }
+
   section('Community forum is translated');
   {
     const forum = fs.readFileSync(REPO + '/forum.html', 'utf8');

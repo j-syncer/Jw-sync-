@@ -4,6 +4,39 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.27.1] — 2026-08-10
+
+### Fixed: Română was listed twice in the language picker
+
+The nav dropdown on both jwsync.org and the beta site offered Romanian twice.
+The plumbing script had been run a second time, and its idempotency guard asked
+whether the *anchor* was still present rather than whether the language already
+was — so it re-inserted the `<option>`. Visible to every visitor, and no check
+looked at the HTML picker at all; `01_static.js` now asserts each language
+appears there exactly once.
+
+### Changed: one `add_language.py` replaces ten copy-pasted plumbing scripts
+
+Adding a language meant copying the previous language's ~70-line script and
+editing its anchors by hand. That pattern shipped both of Romanian's bugs — the
+stale `jw-dir-init` list and the duplicate picker option — and hid a broken
+skip-condition across six languages.
+
+`scripts/add_language.py` takes `--code`, `--label` and `--wtlocale`, derives
+every insertion point from the current state of the files, and:
+
+- **verifies the wtlocale against jw.org before writing anything.** The probe
+  is now a precondition, not a runbook step. `ID`, `RO`, `VI`, `V`, `R`, `RU`
+  and `INS` all serve a working page in the wrong language.
+- **aborts on an anchor it cannot find**, instead of treating it as "nothing to
+  do" — the exact failure that left the bootstrap lists stale.
+- **refuses to run twice** for a code already in the allow-list.
+
+Verified by replaying Romanian from the pre-Romanian commit: all 23
+enumeration points come out identical to what shipped by hand.
+
+---
+
 ## [3.27.0] — 2026-08-10
 
 ### Romanian is now complete — all 37 guides

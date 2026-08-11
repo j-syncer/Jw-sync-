@@ -249,7 +249,22 @@ with the picker without anything objecting.
 
 ### Step 1 — plumbing (4 places, all outside the dictionaries)
 
-Copy the newest `add_*_plumbing.py`, change the anchors, run it. It patches:
+**Use `scripts/add_language.py`** — one parameterised script, not a copy:
+
+```bash
+python3 scripts/add_language.py --code sw --label "🇰🇪 Kiswahili" --wtlocale SW
+```
+
+It derives every insertion point from the current state of the files (nothing
+is hard-coded to the previous language), verifies `--wtlocale` against jw.org
+before writing anything, aborts on an anchor it cannot find rather than
+skipping it, and refuses to run twice for the same code. The ten
+`add_*_plumbing.py` files are historical records of what was actually run —
+**do not re-run them and do not copy them.** Between them they shipped two
+bugs: a stale `jw-dir-init` list on Romanian, and a duplicated `<option>` in
+the nav picker on the same release, both from copy-pasted idempotency logic.
+
+It patches:
 
 1. the `?lang=` allow-list `var V=[…]` in both index.html files
 2. the nav `<option>` picker in both index.html files
