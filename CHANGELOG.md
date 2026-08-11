@@ -4,6 +4,35 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.26.0] — 2026-08-10
+
+### Added: Romanian — the site's 24th language
+
+Romanian (`ro`) ships its interface complete: the app, the Study Explorer, the
+Reading Companion, Study Stats, the share and receive pages, the Library
+Doctor, the forum and the pre-rendered `/ro/` landing page are all in Romanian.
+The nav picker and `?lang=ro` both select it.
+
+Bible-chapter links open jw.org in Romanian (`wtlocale=M`, verified against
+jw.org). `RO` — the language's own ISO code — serves **English**, `R` serves
+**Western Armenian**, and `RU` serves **Rundi**, not Russian. Only `M` is right.
+
+**Guides:** one guide is translated so far — "Cum îmbini copiile de rezervă JW
+Library de pe două dispozitive" at `/guides/ro/merge-jw-library-backups`. The
+other 36 are being translated; per-slug gating means only the translated one is
+published, linked and submitted.
+
+### Fixed: the plumbing scripts could silently skip an already-patched anchor
+
+`patch()` skipped a substitution when the *new* string was already present,
+which no-ops wrongly when the new string is a substring of something else on
+the page — exactly what happens to the `jw-dir-init` allow-list once
+`var V=[…,'ro']` exists above it. It now skips on the absence of the *old*
+string instead, which is idempotent for the right reason, and the bootstrap
+copy is anchored on its leading newline so the two lists can't be confused.
+
+---
+
 ## [3.25.0] — 2026-08-10
 
 ### Indonesian is now complete — all 37 guides

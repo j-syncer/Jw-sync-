@@ -18,7 +18,7 @@ function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro'];
 
 function extractOffline() {
   const html = fs.readFileSync(HTML_PATH, 'utf8');

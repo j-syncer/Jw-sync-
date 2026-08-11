@@ -910,6 +910,41 @@ CHROME = {
             "Power tools": "Haladó eszközök",
         },
     },
+    "ro": {
+        "lang_name": "Română",
+        "lang_label": "Limbă",
+        "lang_other": "Acest ghid în alte limbi",
+        "og_locale": "ro_RO",
+        "site_guides": "Ghiduri JW Sync",
+        "nav_guides": "Ghiduri",
+        "nav_community": "Comunitate",
+        "nav_open_app": "Deschide aplicația",
+        "crumb_guides": "Ghiduri",
+        "h_steps": "Pas cu pas",
+        "h_faq": "Întrebări frecvente",
+        "h_related": "Ghiduri înrudite",
+        "cta_title": "Fă-o acum — gratuit, în browserul tău",
+        "cta_body": "JW Sync îmbină, modifică și analizează copii de rezervă .jwlibrary în întregime pe dispozitivul tău. Fără cont, fără încărcări, fără nimic de instalat.",
+        "cta_btn": "Deschide JW Sync →",
+        "index_title": "Ghiduri pentru copii de rezervă, sincronizare și notițe JW Library | JW Sync",
+        "index_desc": "Ghiduri practice pentru copiile de rezervă JW Library: îmbină copiile de pe două dispozitive, mută notițe pe un telefon nou, treci de la Android la iPhone, repară o copie care nu se restaurează, modifică și caută în notițe și multe altele.",
+        "index_h1": "Ghiduri și instrucțiuni",
+        "index_lede": "Tot ce ține de copiile de rezervă JW Library, în pași simpli: îmbinarea dispozitivelor, mutarea pe un telefon nou, salvarea notițelor și cum să scoți mai mult din biblioteca pe care o ai deja. Fiecare instrument amintit rulează gratuit în browserul tău — fișierele tale nu sunt încărcate niciodată.",
+        "index_cta_title": "Sari peste citit — deschide direct instrumentul",
+        "index_cta_body": "Îmbinarea a două copii de rezervă durează cam un minut, iar aplicația te ghidează pas cu pas.",
+        "footer_all_guides": "Toate ghidurile",
+        "footer_community": "Comunitate",
+        "footer_stats": "Statistici de studiu",
+        "footer_privacy": "JW Sync procesează toate datele local — fișierele tale nu părăsesc niciodată dispozitivul. Gratuit; fără cont, fără încărcări.",
+        "footer_disclaimer": "„JW Library” este proprietatea Watch Tower Bible and Tract Society of Pennsylvania. JW Sync este un utilitar independent, care nu este afiliat cu aceasta și nici aprobat de ea.",
+        "groups": {
+            "Getting started": "Primii pași",
+            "Sharing scenarios": "Situații de partajare",
+            "Everyday scenarios": "Situații de zi cu zi",
+            "Fixing problems": "Rezolvarea problemelor",
+            "Power tools": "Instrumente avansate",
+        },
+    },
     "id": {
         "lang_name": "Bahasa Indonesia",
         "lang_label": "Bahasa",
@@ -996,6 +1031,7 @@ from guides_vi import GUIDES_VI  # noqa: E402
 from guides_hu import GUIDES_HU  # noqa: E402
 from guides_hi import GUIDES_HI  # noqa: E402
 from guides_id import GUIDES_ID  # noqa: E402
+from guides_ro import GUIDES_RO  # noqa: E402
 from guides_es import GUIDES_ES  # noqa: E402
 from guides_pt import GUIDES_PT  # noqa: E402
 from guides_fr import GUIDES_FR  # noqa: E402
@@ -1031,4 +1067,5 @@ GUIDE_TEXT = {
     "hu": GUIDES_HU,
     "hi": GUIDES_HI,
     "id": GUIDES_ID,
+    "ro": GUIDES_RO,
 }

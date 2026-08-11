@@ -1,0 +1,8 @@
+{
+ "banner_title": "Mod demonstrativ",
+ "banner_body": "Sunt încărcate două copii de rezervă de probă. Apasă pe <strong>Previzualizează îmbinarea</strong> ca să vezi cum se combină, apoi pe <strong>Confirmă îmbinarea</strong> ca să descarci rezultatul.",
+ "banner_dismiss": "Închide demonstrația",
+ "err_generic": "Demonstrația nu a putut porni — verifică-ți conexiunea și încearcă din nou.",
+ "err_inject": "Fișierele de probă nu au putut fi încărcate în aplicație. Reîmprospătează pagina și încearcă din nou.",
+ "overwrite_warn": "Pornirea demonstrației va înlocui fișierele încărcate în acest moment. Continui?"
+}

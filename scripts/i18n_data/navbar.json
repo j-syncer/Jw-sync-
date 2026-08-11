@@ -389,5 +389,22 @@
   "nav_share_title": "Buka di perangkat lain",
   "theme_to_light": "Beralih ke Mode Terang",
   "theme_to_dark": "Beralih ke Mode Gelap"
+ },
+ "ro": {
+  "nav_adv_options": "Opțiuni avansate",
+  "nav_simple_view": "‹ Vizualizare simplă",
+  "nav_adv_show_title": "Arată instrumentele avansate",
+  "nav_adv_back_title": "Înapoi la vizualizarea simplă",
+  "mode_simple": "Simplu",
+  "mode_full": "Complet",
+  "mode_simple_title": "Simplu — asistent pas cu pas",
+  "mode_full_title": "Modul complet — toate instrumentele avansate",
+  "nav_demo_title": "Încearcă cu notițe de probă",
+  "nav_browse_title": "Deschide exploratorul de notițe",
+  "nav_community_title": "Comunitate — pune întrebări, raportează erori",
+  "nav_share_btn": "Partajează",
+  "nav_share_title": "Deschide pe alt dispozitiv",
+  "theme_to_light": "Comută la modul luminos",
+  "theme_to_dark": "Comută la modul întunecat"
  }
 }

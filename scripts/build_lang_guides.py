@@ -51,6 +51,8 @@ STRAY = {
     # the stray-script guard but no DIACRITIC entry — an unaccented
     # Indonesian paragraph is simply correct Indonesian.
     "id": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
+    # Romanian is Latin-script; ă â î ș ț are all in Latin Extended-A/B.
+    "ro": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -68,6 +70,36 @@ DIACRITIC = {
 }
 
 META = {
+    "ro": {
+        "name": "Romanian",
+        "upper": "RO",
+        "glossary": """Glossary settled on for all 37 guides:
+
+  backup              copie de rezervă
+  to merge / merge    a îmbina / îmbinare
+  notes               notițe
+  highlights          evidențieri
+  bookmarks           semne de carte
+  tags                etichete
+  device              dispozitiv
+  file                fișier
+  browser             browser
+  to restore          a restaura
+  to back up          a face o copie de rezervă
+  Personal Study      Studiu personal
+  Backup and Restore  Copiere de rezervă și restaurare
+  database            bază de date
+  Conflict Reviewer   verificatorul de conflicte
+  duplicate           duplicat
+  publication         publicație
+  meeting             întrunire
+  convention          congres
+  talk                cuvântare
+  Hebrew Scriptures   Scripturile ebraice
+  Greek Scriptures    Scripturile grecești
+
+JW Library, .jwlibrary, JW Sync and jwsync.org are never translated.""",
+    },
     "id": {
         "name": "Indonesian",
         "upper": "ID",

@@ -185,9 +185,9 @@ the page itself, or they will pass against the module file.
 
 ## Features Built (permanent reference)
 
-### Languages (23 total)
+### Languages (24 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
-`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id`
+`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id` `ro`
 
 RTL: `ar`, `he`. Everything else is LTR.
 

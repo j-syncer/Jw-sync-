@@ -205,5 +205,14 @@
   "lp_guides_d": "Bantuan langkah demi langkah untuk mencadangkan, menggabungkan, memindahkan, dan menyelamatkan catatan JW Library Anda.",
   "lp_popular": "Panduan populer",
   "lp_disclaimer": "“JW Library” adalah milik Watch Tower Bible and Tract Society of Pennsylvania. JW Sync adalah alat bantu independen yang tidak berafiliasi dengan maupun didukung olehnya."
+ },
+ "ro": {
+  "lp_features": "Ce face",
+  "lp_how": "Cum funcționează",
+  "lp_faq": "Întrebări frecvente",
+  "lp_guides": "Ghiduri și instrucțiuni",
+  "lp_guides_d": "Ajutor pas cu pas ca să-ți salvezi, îmbini, muți și recuperezi notițele din JW Library.",
+  "lp_popular": "Ghiduri populare",
+  "lp_disclaimer": "„JW Library” este proprietatea Watch Tower Bible and Tract Society of Pennsylvania. JW Sync este un utilitar independent, care nu este afiliat cu aceasta și nici aprobat de ea."
  }
 }
