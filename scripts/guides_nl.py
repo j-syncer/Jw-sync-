@@ -74,4 +74,440 @@ GUIDES_NL = {
    ("Kan ik een terugzetting ongedaan maken?", "Niet vanuit JW Library zelf, en daarom is het bewaren van je oorspronkelijke back-ups belangrijk. Bij het samenvoegen worden de bestanden die je laadt nooit gewijzigd, dus je back-ups van vóór het samenvoegen zijn er nog precies zoals ze waren en kun je terugzetten als je terug wilt."),
   ],
  },
+
+ "sync-jw-library-multiple-devices": {
+  "title": "Zo houd je JW Library op meerdere apparaten gelijk",
+  "h1": "JW Library op meerdere apparaten gelijk houden",
+  "description": "JW Library synchroniseert niet tussen apparaten. Hier staat een eenvoudige, privéroutine om aantekeningen, markeringen en bladwijzers op je telefoon, tablet en computer identiek te houden.",
+  "intro": [
+   "De meeste mensen die op twee apparaten studeren, ontdekken het probleem op dezelfde manier: aantekeningen die op de tablet zijn geschreven, staan niet op de telefoon, en de back-up van het ene apparaat terugzetten op het andere zou wissen wat dat apparaat had. JW Library biedt geen synchronisatie, en Terugzetten is er bewust alles-of-niets, dus apparaten gelijk houden vraagt om een routine in plaats van een instelling.",
+   "JW Library synchroniseert persoonlijke studiegegevens niet tussen apparaten — er is geen account dat je aantekeningen van je telefoon naar je tablet meeneemt. Het officiële mechanisme is Back-up maken en terugzetten, en terugzetten vervangt de gegevens van het apparaat volledig. Hoe houd je twee of drie apparaten dan identiek zonder iets kwijt te raken?",
+   "Het antwoord is een korte routine van samenvoegen en terugzetten. Wekelijks of maandelijks gedaan kost dat ongeveer twee minuten, en elk apparaat draagt daarna je volledige bibliotheek.",
+  ],
+  "steps": [
+   ("Maak van elk apparaat een back-up", "Op elk apparaat: Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Je krijgt één .jwlibrary-bestand per apparaat."),
+   ("Voeg de back-ups samen op jwsync.org", "Laad alle bestanden. JW Sync combineert de aantekeningen, markeringen, bladwijzers en labels van elk apparaat tot één samengevoegd .jwlibrary-bestand — lokaal in je browser, er wordt niets geüpload."),
+   ("Zet het samengevoegde bestand op elk apparaat terug", "Back-up maken en terugzetten → Terugzetten, en kies het samengevoegde bestand. Elk apparaat is nu identiek en compleet."),
+   ("Laat JW Sync je eraan herinneren", "Zet in JW Sync een herinnering aan (wekelijks of maandelijks) en je krijgt een seintje wanneer het tijd is om de routine te herhalen. Je opgeslagen apparaten worden ook onthouden, zodat elke ronde sneller gaat."),
+  ],
+  "sections": [
+   ("Waarom niet gewoon de nieuwste back-up terugzetten?", "Omdat “de nieuwste” maar één apparaat weerspiegelt. Als je in dezelfde week vergaderaantekeningen op de telefoon en studieaantekeningen op de tablet hebt gemaakt, heeft elke back-up iets wat de andere mist. Welke je ook over de andere heen zet, je verliest de helft van je werk. Eerst samenvoegen is wat de routine veilig maakt."),
+   ("Hoe vaak moet ik dit doen?", "Stem het af op hoe je studeert. Twee apparaten die je dagelijks gebruikt: wekelijks is prettig. Een tablet die alleen voor vergaderingen tevoorschijn komt: maandelijks is ruim voldoende. Langer wachten kost je alleen dat er meer te combineren valt — tussen twee rondes gaat er nooit iets verloren."),
+   ("Waarom er geen echte synchronisatie is", "JW Library heeft geen account dat persoonlijke studiegegevens tussen apparaten meeneemt. Aantekeningen, markeringen en bladwijzers staan in een database op elk apparaat en blijven daar. Het enige officiële middel om ze te verplaatsen is Back-up maken en terugzetten, en terugzetten vervangt de gegevens op het doelapparaat in plaats van ze te combineren. Twee apparaten die je los gebruikt, lopen dus blijvend uiteen tenzij iets ze samenvoegt — en daar draait de routine hieronder om."),
+   ("Eén hoofdbestand bijhouden", "De routine werkt het best als je één samengevoegd bestand als het huidige hoofdbestand beschouwt. Maak elke ronde van elk apparaat een back-up, voeg die back-ups samen en zet het resultaat overal terug. Dat samengevoegde bestand is dan het hoofdbestand voor de volgende ronde. Bewaar je de gedateerde hoofdbestanden in de cloud, dan heb je tegelijk een synchronisatiemethode en een lopend archief — verwijder je per ongeluk iets, dan staat het nog in een eerder hoofdbestand."),
+   ("Wat er gebeurt als je een apparaat een tijd overslaat", "Er gaat niets verloren. Een apparaat dat een paar rondes buiten beeld blijft, draagt gewoon oudere gegevens; neem je het weer mee, dan voegen zijn aantekeningen zich bij de rest en worden dubbele items via de GUID herkend in plaats van verdubbeld. Alleen als dezelfde aantekening op twee apparaten is bewerkt sinds ze voor het laatst zijn samengevoegd, is er een keuze nodig, en die komt in de conflictcontrole terecht met beide versies naast elkaar."),
+   ("Hoe vaak is vaak genoeg", "Stem het af op hoeveel werk je erg zou vinden om over te doen. Wekelijks past bij wie de meeste dagen op twee apparaten studeert; maandelijks is ruim voldoende als één apparaat er zelden bij komt. Het belangrijkste is dat je het doet vóór iets onomkeerbaars — een nieuwe telefoon, een reset, een reparatie — want dan wordt een verschil ineens een verlies."),
+   ("Telefoon, tablet en de Windows-app samen", "Het maakt de routine niet uit hoeveel apparaten erbij betrokken zijn of waar ze op draaien. Maak van elk een back-up, voeg ze in één keer samen, zet het samengevoegde bestand overal terug. Een Windows-machine voor de voorbereiding en een telefoon voor de vergaderingen combineren precies zoals twee telefoons zouden doen, want elk platform schrijft dezelfde back-upindeling."),
+   ("Conflicten voorkomen voordat ze ontstaan", "Conflicten ontstaan alleen als dezelfde aantekening tussen twee samenvoegingen op twee apparaten wordt bewerkt. In de praktijk is dat zeldzaam, en het wordt nog zeldzamer als je op één apparaat tegelijk schrijft — lezen waar je wilt, maar typen waar je meestal typt. Vaker samenvoegen verkleint ook het tijdvenster waarin iets uiteen kan lopen, en dat werkt beter dan proberen te onthouden welk apparaat de nieuwste versie heeft."),
+   ("Waar de routine zich terugbetaalt", "De winst van apparaten samengevoegd houden is niet de netheid — het is dat elk apparaat een volledige back-up van je studiebibliotheek wordt. Raak je er één kwijt of gaat er één stuk, dan hebben de andere nog alles, en daarmee wordt het ergste geval geen jaren aan verloren aantekeningen maar een ongemak. Dat is een sterkere positie dan welke back-upgewoonte op één apparaat ook kan opleveren."),
+  ],
+  "faq": [
+   ("Draait JW Sync op de achtergrond?", "Nee — het is een webpagina, geen geïnstalleerde dienst. Er wordt niets op je apparaten gescand. Je doorloopt de routine wanneer jij dat wilt; de optionele herinnering is niet meer dan een melding."),
+   ("Kan ik drie of meer apparaten gelijk houden?", "Ja. Maak van elk een back-up, laad alle bestanden, voeg één keer samen en zet het samengevoegde bestand overal terug."),
+   ("Wat als ik dezelfde aantekening op twee apparaten heb bewerkt?", "Beide versies blijven bewaard tot jij kiest. De conflictcontrole zet ze naast elkaar met een verschil per woord, of je laat de volledigere versie voorstellen."),
+   ("Maakt de volgorde van terugzetten uit?", "Nee. Zodra het samengevoegde bestand er is, brengt terugzetten elk apparaat in dezelfde volledige toestand, in welke volgorde jou ook uitkomt."),
+   ("Kan ik drie of meer apparaten samenvoegen?", "Ja. Maak van elk een back-up en laad ze allemaal in dezelfde samenvoeging — er is geen grens die aan het aantal apparaten hangt."),
+   ("Kan dit geautomatiseerd worden?", "Niet helemaal, want JW Library heeft geen synchronisatie-API en het terugzetten gebeurt in de app. De handmatige routine kost ongeveer twee minuten als je eraan gewend bent."),
+   ("Moet ik samenvoegen als ik op het tweede apparaat alleen lees?", "Als je er nooit iets in aantekent, hoef je er alleen af en toe op terug te zetten zodat het je actuele aantekeningen draagt."),
+  ],
+ },
+
+ "transfer-jw-library-notes-new-phone": {
+  "title": "Zo zet je JW Library-aantekeningen over naar een nieuwe telefoon",
+  "h1": "JW Library-aantekeningen overzetten naar een nieuwe telefoon",
+  "description": "Stap voor stap: verplaats al je JW Library-aantekeningen, markeringen, bladwijzers en labels met een .jwlibrary-back-up naar een nieuwe telefoon — en hoe je samenvoegt als je op de nieuwe telefoon al aantekeningen hebt gemaakt.",
+  "intro": [
+   "Een nieuwe telefoon is het moment waarop mensen het vaakst jaren aan JW Library-aantekeningen kwijtraken — niet omdat de overzetting lastig is, maar omdat je die bewust moet doen vóórdat het oude apparaat wordt gewist. Persoonlijke studiegegevens gaan niet vanzelf mee met een gewone overzetting van telefoon naar telefoon, en JW Library bewaart er in geen enkel account een kopie van.",
+   "Overzetprogramma's verplaatsen je apps en foto's, maar de persoonlijke studiegegevens van JW Library nemen ze niet betrouwbaar mee. De manier waarop je je aantekeningen, markeringen, bladwijzers en labels wél zeker naar een nieuwe telefoon krijgt, is het back-upbestand van JW Library zelf — dat kost een paar minuten en werkt over platforms heen.",
+  ],
+  "steps": [
+   ("Maak een back-up op de oude telefoon", "Open JW Library → Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Zo bewaar je een .jwlibrary-bestand met al je studiegegevens."),
+   ("Zet het bestand op de nieuwe telefoon", "Mail het naar jezelf, of gebruik Google Drive, iCloud, AirDrop of een USB-kabel. Het bestand is klein — meestal een paar megabyte."),
+   ("Zet het terug op de nieuwe telefoon", "Installeer JW Library en ga dan naar Persoonlijke studie → Back-up maken en terugzetten → Terugzetten, en kies het .jwlibrary-bestand. Alle aantekeningen, markeringen, bladwijzers en labels verschijnen."),
+  ],
+  "sections": [
+   ("Al aantekeningen op de nieuwe telefoon? Voeg samen in plaats van overschrijven", "Terugzetten vervangt alles wat er op het apparaat staat. Gebruik je de nieuwe telefoon al een tijdje en staan er eigen aantekeningen op, zet er dan niets overheen: maak ook van de nieuwe telefoon een back-up, voeg de oude en de nieuwe back-up op jwsync.org samen tot één bestand (gratis, in je browser, er wordt niets geüpload) en zet dat samengevoegde bestand terug. Zo houd je beide sets aantekeningen."),
+   ("Een bekende valkuil op de iPhone", "Komt het back-upbestand op een iPhone aan met de naam .zip, hernoem het dan terug naar .jwlibrary vóór het terugzetten — de inhoud is in orde; alleen de extensie is onderweg veranderd."),
+   ("Doe dit voordat de oude telefoon wordt gewist of ingeruild", "De back-up moet worden gemaakt terwijl de oude telefoon nog werkt en JW Library er nog op staat. Zodra het apparaat is gereset, ingeruild of doorgegeven, zijn de aantekeningen ermee verdwenen — JW Library bewaart geen kopie van persoonlijke studiegegevens in de cloud, en een back-up op apparaatniveau zoals Google One of een iCloud-back-up zet meestal een oudere momentopname van de app-gegevens terug, of helemaal niets. Maak eerst het .jwlibrary-bestand, breng het ergens veilig onder en controleer dat je het kunt zien voordat je iets wist."),
+   ("Het bestand van de oude telefoon af krijgen", "Op Android wordt het bestand in de map van je keuze geschreven — meestal Downloads of Documenten — en kun je het met elke bestandsbeheerder verplaatsen, naar jezelf mailen of in de cloud zetten. Op de iPhone verschijnt het deelmenu zodra de back-up klaar is: bewaar hem in Bestanden, AirDrop hem naar de nieuwe telefoon of stuur hem naar jezelf. De manier van overzetten maakt niet uit en kan het bestand niet beschadigen; een .jwlibrary is één archief dat óf heel aankomt óf helemaal niet."),
+   ("Waarom een overzet-app van telefoon naar telefoon niet genoeg is", "Programma's als Smart Switch, Zet over naar iOS of een iCloud-herstel kopiëren apps en systeemgegevens, maar app-eigen databases worden regelmatig overgeslagen, half teruggezet of teruggezet vanaf een ouder moment. Mensen ontdekken dat gat geregeld pas weken later, als de oude telefoon al weg is. Beschouw het .jwlibrary-bestand als de gezaghebbende kopie en de telefoonoverzetting als gemak — brengt die je aantekeningen toevallig wel mee, dan kost je eigen back-up er overheen zetten niets."),
+   ("Controleer of de overzetting echt is gelukt", "Open na het terugzetten op de nieuwe telefoon twee of drie publicaties waarin je onlangs iets hebt aangetekend en kijk of de aantekeningen, markeringskleuren en bladwijzers er allemaal zijn. Sneller nog is het back-upbestand zelf in je browser openen voordat je het oude apparaat wist — je ziet dan elke aantekening, markering en bladwijzer die erin zit, dus je weet wat er hoort te verschijnen. Wis de oude telefoon pas als de nieuwe is nagelopen."),
+   ("Tegelijk overstappen op een tablet of computer", "Hetzelfde bestand werkt overal. Zet je een nieuwe telefoon en een tablet tegelijk op, zet dan hetzelfde .jwlibrary-bestand op beide terug, dan beginnen ze gelijk. Vanaf dat moment lopen ze weer uiteen naarmate je op elk studeert, dus het is de moeite waard nu al te bepalen of je ze regelmatig gaat samenvoegen of één ervan als het apparaat beschouwt dat telt."),
+   ("Als er op de nieuwe telefoon al aantekeningen staan", "Dat gebeurt als je het nieuwe apparaat een week gebruikt voordat je aan de overzetting toekomt. Gewoon terugzetten zou dat werk vervangen door de gegevens van de oude telefoon. Maak eerst een back-up van de nieuwe telefoon, voeg die samen met de back-up van de oude en zet het samengevoegde resultaat terug — beide sets aantekeningen belanden dan in één bibliotheek in plaats van dat de een de ander overschrijft."),
+   ("Wat te doen zodra de nieuwe telefoon werkt", "Controleer voordat je iets wegdoet. Open op de nieuwe telefoon een paar publicaties waarin je onlangs iets hebt aangetekend en kijk of de aantekeningen, kleuren en bladwijzers er allemaal zijn; wis of ruil daarna pas het oude apparaat in — in die volgorde, nooit andersom. Zet als je eenmaal draait een back-up ergens buiten de telefoon neer, want de situatie die je op deze pagina bracht, komt bij de volgende telefoon weer langs."),
+  ],
+  "faq": [
+   ("Gaan mijn gedownloade publicaties ook mee?", "De back-up bevat je persoonlijke studiegegevens — aantekeningen, markeringen, bladwijzers, labels en afspeellijsten. Publicaties worden op de nieuwe telefoon eenvoudig opnieuw gedownload."),
+   ("Maakt het uit of de telefoons op verschillende Android-versies draaien?", "Nee. De .jwlibrary-indeling is overal hetzelfde, ook tussen Android-versies onderling en tussen Android en iPhone."),
+   ("Kan ik mijn aantekeningen nog verplaatsen als de oude telefoon al weg is?", "Alleen als er ergens een .jwlibrary-back-up bestaat — in Bestanden, Downloads, een mailtje aan jezelf of in de cloud. Zonder zo'n bestand is er niets om van terug te zetten, want persoonlijke studiegegevens staan alleen op het apparaat."),
+   ("Moeten beide telefoons dezelfde versie van JW Library hebben?", "Ze hoeven niet precies gelijk te zijn, maar werk de nieuwe telefoon vóór het terugzetten bij naar de huidige versie. Een back-up van een nieuwere versie kan een nieuwer databaseschema gebruiken dan een oudere app begrijpt."),
+   ("Moet ik mijn publicaties opnieuw downloaden?", "Meestal wel — publicatiemedia horen niet bij de back-up. Je aantekeningen hechten zich weer aan elke publicatie zodra die is gedownload, dus wat je hebt geschreven gaat intussen niet verloren."),
+   ("Hoe lang duurt het geheel?", "Een paar minuten. De back-up maken kost seconden, het verplaatsen hangt van je methode af en het terugzetten gaat snel. Het opnieuw downloaden van publicaties duurt het langst en kan op de achtergrond gebeuren."),
+   ("Kan dit zonder wifi?", "De overzetting zelf wel, via AirDrop of een kabel. Publicaties opnieuw downloaden op het nieuwe apparaat vraagt om een verbinding."),
+  ],
+ },
+
+ "jw-library-android-to-iphone": {
+  "title": "JW Library van Android naar iPhone verhuizen (met al je aantekeningen)",
+  "h1": "JW Library van Android naar iPhone of iPad verhuizen — met elke aantekening",
+  "description": "De .jwlibrary-back-upindeling is op Android en iOS identiek. Zo verhuis je je aantekeningen, markeringen en bladwijzers tussen platforms — en zo voeg je samen als beide apparaten aantekeningen hebben.",
+  "intro": [
+   "Overstappen tussen Android en iPhone klinkt als het lastige geval, en het is juist het makkelijke. JW Library schrijft op elk platform waarop het draait dezelfde back-upindeling, dus een studiebibliotheek van Android naar iOS verhuizen is dezelfde handeling als tussen twee Android-telefoons — geen omzetting, geen exportindeling om te kiezen, niets dat onderweg sneuvelt.",
+   "Van platform wisselen is het moment waarop mensen bang zijn jaren aan studieaantekeningen te verliezen — overzet-apps van Android naar iPhone slaan de gegevens van JW Library helemaal over. Het goede nieuws: de back-upindeling van JW Library is op Android, iPhone, iPad en Windows identiek, dus een verhuizing tussen platforms is niet meer dan een back-up, een bestand versturen en terugzetten.",
+  ],
+  "steps": [
+   ("Maak een back-up op de Android-telefoon", "JW Library → Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Bewaar het .jwlibrary-bestand."),
+   ("Stuur het bestand naar de iPhone of iPad", "E-mail, Google Drive, iCloud Drive — alles wat een bestand verplaatst. Hernoemt iOS het onderweg naar .zip, hernoem het dan terug naar .jwlibrary."),
+   ("Zet het terug op het nieuwe apparaat", "Installeer JW Library, meld je aan en ga dan naar Back-up maken en terugzetten → Terugzetten en kies het bestand. Aantekeningen, markeringen, bladwijzers, labels en afspeellijsten komen allemaal mee."),
+  ],
+  "sections": [
+   ("Als er op de iPhone al aantekeningen staan", "Terugzetten vervangt de gegevens van het apparaat. Draagt het nieuwe apparaat al eigen aantekeningen, maak er dan ook een back-up van en voeg beide back-ups eerst op jwsync.org samen tot één bestand — de samenvoeging combineert beide bibliotheken in je browser zonder iets te uploaden — en zet daarna het samengevoegde bestand terug. Van geen van beide kanten gaat er iets verloren."),
+   ("Dezelfde stappen werken alle kanten op", "iPhone naar Android, Android naar Android, een iPad als tweede studieapparaat erbij, of overstappen op de Windows-app — het back-upbestand is de gemeenschappelijke taal tussen die allemaal."),
+   ("Waarom de indeling op beide platforms identiek is", "JW Library gebruikt overal waar het draait dezelfde back-upindeling — Android, iOS, iPadOS en Windows. Een .jwlibrary-bestand is een ZIP met een SQLite-database met dezelfde tabellen en hetzelfde schema, ongeacht welk apparaat het heeft geschreven. Er is geen omzetstap, geen dans van exporteren en importeren, en er zit niets platformspecifieks in het bestand. Een Android-back-up laat zich op een iPhone precies zo terugzetten als een iPhone-back-up."),
+   ("Het enige wat werkelijk verschilt", "Niet het bestand — alleen hoe je eraan komt. Op Android wordt de back-up bewaard in een map die je zelf kiest en kun je hem met elke bestandsbeheerder verplaatsen. Op de iPhone gaat hij via het deelmenu naar Bestanden, AirDrop of wat je maar kiest. De weerstand die mensen bij een overstap tussen platforms voelen zit altijd in dat verplaatsen, nooit in de compatibiliteit. E-mail, cloudopslag en AirDrop werken alle drie; het archief komt heel aan of helemaal niet."),
+   ("Markeringskleuren, labels en studieantwoorden", "Het gaat allemaal mee. Markeringskleuren worden als getal opgeslagen — geel, groen, blauw, roze, oranje en paars — en worden op elk platform hetzelfde weergegeven. Labels en de koppelingen tussen labels en aantekeningen komen mee, net als de antwoorden die je in de velden bij de studievragen hebt getypt. Wat je na het terugzetten op de iPhone ziet, is wat je op het Android-apparaat had."),
+   ("Als iOS je het bestand niet laat kiezen", "Bewaar het bestand eerst in de app Bestanden en kies het daar, in plaats van vanuit een mailbijlage of een voorbeeldweergave in een chat-app. Sommige apps geven iOS een tijdelijke voorbeeldkopie in plaats van het echte bestand, en dat kan JW Library niet openen. Kwam het bestand als bijlage binnen, tik erop, kies Bewaar in Bestanden en zet het van daaruit terug."),
+   ("Zet de iPhone op voordat je terugzet", "Installeer JW Library uit de App Store en werk hem bij naar de huidige versie voordat je iets terugzet. Een back-up van een nieuwere versie van de app kan een databaseschema gebruiken dat een oudere versie niet begrijpt, en dan wordt het terugzetten simpelweg geweigerd. Je hoeft je nergens voor aan te melden — persoonlijke studiegegevens staan in het bestand dat je terugzet, niet in een account."),
+   ("Als je al op de iPhone bent begonnen met studeren", "Maak eerst een back-up van de iPhone. Het Android-bestand er meteen overheen zetten zou vervangen wat je sinds de overstap hebt geschreven. De twee back-ups samenvoegen levert één bestand op dat allebei bevat, en dat zet je vervolgens terug — de Android-geschiedenis en de nieuwe iPhone-aantekeningen komen dan in dezelfde bibliotheek terecht."),
+   ("Beide telefoons daarna aanhouden", "Sommige mensen houden het oude Android-apparaat aan als tweede leesapparaat in plaats van het weg te doen. Dat kan, maar de twee lopen uiteen zodra je op beide iets aantekent, want er is geen synchronisatie tussen ze. Ben je van plan beide te gebruiken, reken er dan op dat je hun back-ups regelmatig samenvoegt in plaats van aan te nemen dat ze gelijk blijven."),
+   ("Na de verhuizing", "Geef de iPhone de tijd om de publicaties die je het meest gebruikt opnieuw te downloaden en loop dan een handvol geannoteerde publicaties na om te zien dat alles is aangekomen — aantekeningen, markeringskleuren, bladwijzers en labels. Bewaar het Android-back-upbestand ook nadat de overstap rond is: het is een gedateerde momentopname van je bibliotheek, en bewaren kost niets."),
+  ],
+  "faq": [
+   ("Heb ik hier een computer voor nodig?", "Nee. De hele verhuizing kan van telefoon naar telefoon met e-mail of een clouddienst."),
+   ("Blijven mijn markeringskleuren bij de verhuizing behouden?", "Ja — markeringen houden hun kleur, aantekeningen houden hun labels en bladwijzers houden hun plaats."),
+   ("Heb ik hier een computer voor nodig?", "Nee. AirDrop, e-mail of een willekeurige cloud-app verplaatst het bestand rechtstreeks tussen de twee telefoons."),
+   ("Werkt het ook andersom — iPhone naar Android?", "Ja, precies zo. Dezelfde stappen werken alle kanten op, ook van en naar de Windows-app."),
+   ("Moeten op de iPhone dezelfde publicaties worden gedownload?", "Ja, want publicatiemedia horen niet bij een back-up. Aantekeningen hechten zich weer aan een publicatie zodra die is gedownload."),
+   ("Moet ik de Android-telefoon daarna aanhouden?", "Nee, zodra je hebt gecontroleerd dat de aantekeningen op de iPhone staan. Loop een paar geannoteerde publicaties na voordat je het oude apparaat wist of inruilt."),
+   ("Werkt de overzetting ook voor antwoorden op studievragen?", "Ja. Getypte antwoorden horen bij de persoonlijke studiegegevens en komen met de rest mee."),
+   ("Loop ik het risico bij de verhuizing aantekeningen te verliezen?", "Niet als je de Android-back-up bewaart. Het terugzetten schrijft naar de iPhone en wijzigt het bestand dat het leest nooit, dus het origineel blijft intact als terugvaloptie. Bewaar het tot je hebt bevestigd dat de iPhone alles heeft, en het liefst ook daarna — het is een gedateerde momentopname van je bibliotheek."),
+   ("Wat als de Android-telefoon geen back-up wil maken?", "Kijk eerst naar de vrije opslagruimte, want de app heeft plek nodig om het bestand te schrijven. Hapert de app zelf, dan helpt bijwerken of het apparaat opnieuw opstarten meestal. Je gegevens blijven intact terwijl je zoekt."),
+  ],
+ },
+
+ "backup-jw-library": {
+  "title": "Zo maak je een goede back-up van JW Library",
+  "h1": "Zo maak je een goede back-up van JW Library",
+  "description": "Een back-uproutine van 30 seconden die jaren aan JW Library-studieaantekeningen, markeringen en bladwijzers beschermt — en de veelgemaakte fout waar mensen op stuklopen.",
+  "intro": [
+   "Alles wat je in JW Library hebt gemarkeerd — elke aantekening, elke markering, elke bladwijzer en elk label — bestaat op precies één plek: het apparaat in je hand. Er is geen account met een kopie en geen automatische synchronisatie met de cloud. Een back-up is het enige wat staat tussen een studiebibliotheek van jaren en een verloren, gereset of vervangen telefoon.",
+   "Een goede back-up van JW Library kost een halve minuut en beschermt jaren aan opgebouwde studie. De meeste verhalen over gegevensverlies beginnen op dezelfde manier: er was geen recent .jwlibrary-bestand toen een telefoon verloren ging, werd gereset of werd vervangen.",
+  ],
+  "steps": [
+   ("Maak de back-up", "Open JW Library → Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Dat levert een .jwlibrary-bestand op met elke aantekening, markering, bladwijzer en elk label."),
+   ("Bewaar hem ergens buiten de telefoon", "Mail hem naar jezelf of zet hem in Google Drive, iCloud of OneDrive. Een back-up die alleen op de telefoon staat, verdwijnt met de telefoon."),
+   ("Herhaal het volgens een ritme", "Maandelijks is een prima uitgangspunt; vóór elke telefoonwissel, reset of besturingssysteem-update is het onmisbaar. Bewaar oudere kopieën — de bestanden zijn klein, en een oude back-up heeft al veel mensen gered."),
+  ],
+  "sections": [
+   ("De veelgemaakte fout: vertrouwen op de cloudback-up van de telefoon zelf", "Een back-up van de hele telefoon (Google One, een iCloud-back-up van het apparaat) zet vaak een oude kopie van de gegevens van JW Library terug — of helemaal niets. Het .jwlibrary-bestand is de enige back-up die je volledig zelf beheert en tussen platforms kunt meenemen. Zie de telefoonback-up als meegenomen, niet als het plan."),
+   ("Twee verschillende back-ups overgehouden?", "Dat gebeurt: één back-up van de telefoon, een oudere van een tablet, elk met eigen aantekeningen. Je hoeft nooit tussen die twee te kiezen — voeg ze op jwsync.org samen tot één volledig bestand, gratis en privé, gewoon in de browser."),
+   ("Wat er in het bestand zit, en wat niet", "De back-up bevat je persoonlijke studiegegevens: aantekeningen, markeringen met hun kleuren, bladwijzers, labels en de antwoorden die je in de velden bij studievragen hebt getypt. De publicaties zelf zitten er niet in — geen Bijbels, tijdschriften, boeken, video's of audio. Daarom is een back-up van jaren studie meestal maar een paar megabyte, en daarom moet je op een nieuw apparaat wel publicaties opnieuw downloaden terwijl elke aantekening die je schreef er al weer staat."),
+   ("Hoeveel back-ups je moet bewaren", "Bewaar er meer dan één. Wat mensen hun aantekeningen kost is zelden een verloren bestand — het is een goede back-up die door een slechte wordt overschreven, of een terugzetting op het verkeerde apparaat. Omdat de bestanden klein zijn, is er geen reden om oude weg te gooien: bewaar ze gedateerd in een map in de cloud. Een back-up van een half jaar geleden is niet waardeloos zodra je nieuwere hebt, want alles wat je sindsdien per ongeluk hebt verwijderd, staat er nog in."),
+   ("Waar je ze bewaart", "Overal, zolang het niet alléén het apparaat zelf is. Een map in Drive, iCloud, Dropbox of OneDrive dekt het geval dat er het meest toe doet — een apparaat dat verloren, gestolen, gereset of beschadigd raakt. Het bestand naar jezelf mailen werkt ook en heeft het handige bijeffect dat het meteen een datum krijgt. In het bestand staan je eigen studieaantekeningen, dus ga ermee om zoals je met elk persoonlijk document zou doen."),
+   ("Een back-up controleren voordat je erop vertrouwt", "Een back-up die je nooit hebt geopend is een aanname, geen vangnet. Je kunt een .jwlibrary-bestand in je browser openen en precies zien welke aantekeningen, markeringen en bladwijzers erin zitten — een controle van dertig seconden die van een aanname een feit maakt. Dat telt het zwaarst vlak voor iets onomkeerbaars: een fabrieksreset, een inruil, een reparatie of een grote systeemupdate."),
+   ("De momenten waarvoor het de moeite waard is", "Elk moment waarop het apparaat van eigenaar of toestand verandert: een systeemupdate, een fabrieksreset, een reparatie of schermvervanging, een inruil, of een apparaat dat je aan iemand doorgeeft. Daar komt bij: het einde van alles wat je vreselijk zou vinden om over te doen — een congres, een kring, een periode waarin je een lezing voorbereidde. Back-ups zijn goedkoop en snel, dus de nuttige gewoonte koppelt ze aan gebeurtenissen in plaats van aan een kalender."),
+   ("Een telefoonback-up is geen JW Library-back-up", "Google One, een iCloud-back-up van het apparaat of het overzetprogramma van de fabrikant werken op apparaatniveau en gaan wisselend om met app-eigen gegevens. Mensen merken geregeld dat een volledige telefoonherstelling hun apps en instellingen wel terugbracht maar hun studieaantekeningen niet, of een versie van weken eerder. Het .jwlibrary-bestand is de enige kopie waarvan jij de inhoud beheert en kunt controleren, dus zie de back-up op telefoonniveau als meegenomen in plaats van als het plan."),
+   ("Er een gewoonte van maken die blijft hangen", "De routine die het echt volhoudt, hangt aan iets wat je toch al doet: een back-up wanneer je klaar bent met de voorbereiding voor de week, of op dezelfde dag als je andere vaste regelklusjes. Bewaar elke keer in dezelfde map, zodat de bestanden zich op één plek verzamelen, en laat de oude staan. Een map met gedateerde back-ups die jaren teruggaat is de meest robuuste vorm hiervan, en het onderhouden kost seconden per week."),
+  ],
+  "faq": [
+   ("Hoe groot is een back-upbestand?", "Meestal een paar megabyte, zelfs bij hele grote bibliotheken — klein genoeg voor een mailbijlage."),
+   ("Verandert het maken van een back-up iets op mijn telefoon?", "Nee. Er wordt alleen een bestand weggeschreven; je bibliotheek blijft ongemoeid."),
+   ("Zitten mijn gedownloade publicaties in de back-up?", "Nee. Alleen persoonlijke studiegegevens. Publicaties worden op het nieuwe apparaat opnieuw gedownload, en je aantekeningen hechten zich er vanzelf weer aan."),
+   ("Kan ik een back-up openen om te zien wat erin zit?", "Ja. Je kunt een .jwlibrary-bestand in je browser openen en elke aantekening, markering en bladwijzer erin doorbladeren, zonder iets te installeren en zonder dat het bestand je apparaat verlaat."),
+   ("Verlopen back-ups?", "Nee. Een .jwlibrary-bestand blijft onbeperkt terug te zetten. Zet wel terug in een actuele versie van JW Library en niet in een oude, want de app leest oudere back-upindelingen wel en nieuwere niet."),
+   ("Moet ik voor elke vergadering een back-up maken?", "Dat hoeft niet. Koppel back-ups aan gebeurtenissen die je gegevens kunnen kosten — updates, reparaties, nieuwe apparaten — plus een vast ritme dat past bij hoeveel studie je erg zou vinden om over te doen."),
+   ("Is het zinvol om back-ups van jaren geleden te bewaren?", "Ja. Ze zijn klein, en alles wat je sindsdien per ongeluk hebt verwijderd, staat er nog in."),
+  ],
+ },
+
+ "jw-library-restore-replaced-notes": {
+  "title": "Heeft Terugzetten in JW Library je aantekeningen vervangen? Zo krijg je ze terug",
+  "h1": "Heeft terugzetten je aantekeningen vervangen? Zo combineer je beide back-ups",
+  "description": "Terugzetten in JW Library is een volledige vervanging, geen samenvoeging — aantekeningen van na de back-updatum lijken weg. Heb je beide back-upbestanden nog, dan is er niets verloren. Hier staat de oplossing.",
+  "intro": [
+   "Het is een naar moment: je zet een back-up terug op een apparaat waar al aantekeningen op stonden, en het terugzetten vervangt alles — de aantekeningen die je sinds die back-up hebt gemaakt, lijken weg. Dat komt doordat Back-up maken en terugzetten in JW Library een volledige vervanging is en geen samenvoeging.",
+   "Het cruciale punt: bestaat het nieuwere werk nog in een back-upbestand, dan is er in werkelijkheid niets verloren. De oplossing is de twee back-ups samenvoegen in plaats van ertussen te kiezen.",
+  ],
+  "steps": [
+   ("Stop — zet niets opnieuw terug", "Elke terugzetting vervangt de huidige gegevens van het apparaat. Pauzeer voordat er nog meer verdwijnt."),
+   ("Maak nu meteen een back-up van het apparaat zoals het is", "Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken. Zo bewaar je de huidige toestand, wat die ook bevat."),
+   ("Zoek de back-up met de ontbrekende aantekeningen", "Het .jwlibrary-bestand waarvan je hebt teruggezet, of een eerder bestand — kijk in je e-mail, Drive, iCloud en de map Downloads."),
+   ("Voeg beide bestanden samen op jwsync.org", "Laad beide back-ups. JW Sync combineert alle aantekeningen, markeringen, bladwijzers en labels uit allebei tot één nieuw bestand — in je browser, er wordt niets geüpload. Botsende versies van dezelfde aantekening komen naast elkaar te staan zodat jij kiest."),
+   ("Zet het samengevoegde bestand terug", "Back-up maken en terugzetten → Terugzetten met het samengevoegde .jwlibrary-bestand. Beide sets aantekeningen staan weer op het apparaat."),
+  ],
+  "sections": [
+   ("En als er geen back-up van de nieuwere aantekeningen is?", "Als de enige kopie van de nieuwere aantekeningen op het apparaat stond en een terugzetting die al heeft overschreven, biedt JW Library zelf geen manier om dat ongedaan te maken. Daarom is stap 2 hierboven — een back-up van de huidige toestand maken vóór je iets anders doet — zo belangrijk zodra gegevens er verkeerd uitzien. Voortaan maakt de routine van eerst samenvoegen dit probleem structureel onmogelijk."),
+  ],
+  "faq": [
+   ("Verdubbelt de samenvoeging de aantekeningen die beide back-ups delen?", "Nee — identieke items worden herkend en één keer bewaard. Alleen werkelijk verschillende versies van dezelfde aantekening worden ter beoordeling gemarkeerd."),
+   ("Lost dit ook een back-up op die helemaal niet wil terugzetten?", "Dat is meestal schade aan het bestand en geen overschrijving — zie hieronder de handleiding over het repareren van een beschadigde back-up."),
+  ],
+ },
+
+ "fix-corrupted-jw-library-backup": {
+  "title": "Een beschadigde JW Library-back-up repareren die niet wil terugzetten",
+  "h1": "Een beschadigde JW Library-back-up repareren met Library Doctor",
+  "description": "Weigert JW Library je .jwlibrary-bestand terug te zetten? Library Doctor scant de back-up in je browser, repareert veelvoorkomende problemen en levert een schone kopie op die het wél doet.",
+  "intro": [
+   "Een back-up die niet wil terugzetten, is niet per se een back-up die je aantekeningen kwijt is. De meeste bestanden die mensen beschadigd noemen, zijn structureel in orde en worden om een oplosbare reden geweigerd, of zijn onderweg beschadigd op een manier die met een nieuwe kopie is verholpen. Het loont om de oorzaken langs te lopen voordat je het bestand afschrijft.",
+   "Soms weigert JW Library een back-upbestand — het terugzetten mislukt, geeft een foutmelding, of het bestand gaat niet open. Veelvoorkomende oorzaken: een onderbroken download, een clouddienst die het bestand heeft verminkt, een extensie die onderweg is veranderd, of interne tegenstrijdigheden die zich in de loop van jaren hebben opgestapeld.",
+   "JW Sync heeft Library Doctor aan boord, een controle die een .jwlibrary-bestand scant en de gebruikelijke problemen repareert — volledig in je browser, zonder dat het bestand ooit je apparaat verlaat.",
+  ],
+  "steps": [
+   ("Open JW Sync en laad het probleembestand", "Ga naar jwsync.org en laad het .jwlibrary-bestand dat niet wil terugzetten. (Kwam het bestand aan met de naam .zip, hernoem het dan eerst terug naar .jwlibrary — dat alleen al lost veel gevallen op.)"),
+   ("Voer de scan van Library Doctor uit", "De Doctor bekijkt de interne structuur van de back-up en somt in gewone taal op wat hij vindt — van onschuldige eigenaardigheden tot echte schade."),
+   ("Pas de reparaties toe", "Eén tik herstelt wat te herstellen valt. De Doctor bewerkt je oorspronkelijke bestand nooit; hij levert een schoongemaakte kopie op, zodat het origineel als terugvaloptie onaangeroerd blijft."),
+   ("Download het gerepareerde bestand en zet het terug", "Zet het schoongemaakte .jwlibrary-bestand terug via Back-up maken en terugzetten → Terugzetten in JW Library."),
+  ],
+  "sections": [
+   ("De Doctor draait ook bij elke samenvoeging", "Dezelfde controles lopen automatisch mee in de samenvoegmotor, dus een samengevoegde back-up komt er altijd schoon uit — zelfs als een van de ingeladen bestanden problemen had waarvan je niets wist."),
+   ("Als een bestand niet meer te redden is", "Is het bestand zo ver afgekapt dat de gegevens er simpelweg niet in zitten, dan kan geen enkel hulpmiddel ze terugverzinnen. De Doctor zegt dat dan eerlijk in plaats van een twijfelachtig bestand af te leveren — en dat is het teken om in e-mail, Drive of iCloud naar een eerdere kopie te zoeken, wat meteen laat zien waarom oudere back-ups bewaren de moeite waard is."),
+   ("Wat “beschadigd” meestal betekent", "In de praktijk gaat het zelden om beschadigde gegevens. De gebruikelijke oorzaken zijn een bestand dat onderweg is afgekapt — afgebroken door een mislukte upload of een chat-app die het heeft ingedikt — of een archief dat wel heel is maar interne tegenstrijdigheden bevat die de app afwijst. Omdat een .jwlibrary-bestand een ZIP om een SQLite-database heen is, kan elk van die twee lagen het probleem zijn, en ze vragen om een verschillende aanpak. Een afgekapt bestand valt niet te repareren en moet opnieuw worden opgehaald; een tegenstrijdige database meestal wel."),
+   ("Wat een scan werkelijk nakijkt", "Een scan controleert of het archief opengaat, of userData.db een leesbare SQLite-database is die de integriteitscontrole doorstaat, of het schema overeenkomt met wat JW Library verwacht, en of het manifest strookt met de database die het beschrijft — inclusief de hash waarmee de app vaststelt dat het bestand niet is gewijzigd. Een manifest dat niet meer bij de database past, is een van de meest voorkomende redenen waarom een technisch prima back-up bij het terugzetten wordt geweigerd, en dat is eenvoudig te herstellen."),
+   ("Losse verwijzingen zijn meestal onschuldig", "Een scan van een echte back-up meldt vaak rijen die naar iets verwijzen dat er niet meer is — een markering die wijst naar een plek in een publicatie die is verschoven, bijvoorbeeld. De eigen back-ups van JW Library bevatten er standaard honderden en zetten zonder klagen terug. Ze zijn een normaal gevolg van publicaties die in de loop van de tijd worden bijgewerkt, geen bewijs van schade, en opruimen is niet nodig om een bestand werkend te krijgen."),
+   ("Aantekeningen redden uit een bestand dat niet wil terugzetten", "Zelfs als een back-up niet goed genoeg te repareren is om door JW Library te worden geaccepteerd, zijn de aantekeningen erin vaak nog leesbaar. Door het bestand in je browser te openen kun je de tekst van de aantekeningen rechtstreeks zien en kopiëren, en zo wordt een onbruikbaar bestand toch teruggewonnen studiemateriaal. Heb je een tweede, oudere back-up die wél terugzet, dan kan de leesbare inhoud uit het beschadigde bestand daarmee worden samengebracht in plaats van overgetypt."),
+   ("Als het terugzetten mislukt zonder duidelijke foutmelding", "JW Library weigert een bestand vaak zonder uit te leggen waarom. De meest voorkomende oorzaken zijn een manifest waarvan de hash niet meer bij de beschreven database past, een bestand dat onderweg is afgekapt, of een back-up die is geschreven door een nieuwere versie van de app dan die waarin je terugzet. Het eerste is te repareren, het tweede vraagt om het bestand opnieuw ophalen bij de bron, en het derde is opgelost door de app bij te werken voordat je terugzet."),
+   ("Volgende keer voorkomen", "De meeste schade ontstaat onderweg. Verplaats back-ups als bestand en niet via iets wat ze opnieuw kan indikken, en geef de voorkeur aan cloudopslag, AirDrop of een kabel boven chat-apps. Controleer na het overzetten of de bestandsgrootte klopt met het origineel — een bestand dat merkbaar kleiner is dan wat je verstuurde, is afgekapt, en geen reparatie brengt bytes terug die nooit zijn aangekomen."),
+   ("Als niets werkt", "Een bestand dat niet te repareren is, kan nog wel leesbaar zijn, en lezen is vaak genoeg — de tekst van de aantekeningen valt rechtstreeks terug te halen, ook als JW Library het bestand weigert. Combineer dat met een oudere back-up die wél terugzet en meestal houd je het grootste deel van je bibliotheek intact over. Open een bestand dus en kijk wat erin zit voordat je concludeert dat het onbruikbaar is."),
+  ],
+  "faq": [
+   ("Worden mijn gegevens voor de scan geüpload?", "Nee. De scan, de reparaties en de export draaien allemaal lokaal in de browser."),
+   ("Kan het aantekeningen terughalen die ik in JW Library heb verwijderd?", "Nee — het repareert de structuur van het bestand. Aantekeningen die in de app zijn verwijderd voordat de back-up werd gemaakt, zitten niet in het bestand en zijn dus niet terug te halen."),
+   ("Raak ik bij het repareren aantekeningen kwijt?", "Reparaties werken op een kopie en richten zich op structurele problemen, niet op inhoud. Je oorspronkelijke bestand wordt nooit gewijzigd en blijft dus beschikbaar als je opnieuw wilt beginnen."),
+   ("Waarom is mijn back-up beschadigd geraakt?", "Meestal is het bestand onderweg veranderd — verstuurd via een app die het heeft ingedikt of afgekapt, of een upload die niet is afgerond. Het bestand opnieuw versturen vanaf de oorspronkelijke bron lost het meestal op."),
+   ("Kan een scan aantekeningen terughalen die ik in JW Library heb verwijderd?", "Nee. Is iets in de app verwijderd en daarna een nieuwe back-up gemaakt, dan zit de aantekening niet meer in dat bestand. Een oudere back-up van vóór het verwijderen bevat hem nog wel."),
+   ("Kan ik aan de bestandsgrootte zien of het is afgekapt?", "Vaak wel. Vergelijk hem met het origineel als je dat nog hebt; een flink verschil betekent dat de overdracht niet is voltooid."),
+   ("Is een back-up die in de browser opengaat gegarandeerd terug te zetten?", "Gegarandeerd niet, maar het is een sterke aanwijzing dat het archief en de database in orde zijn, en dat sluit de meest voorkomende storingen uit."),
+  ],
+ },
+
+ "edit-jw-library-notes": {
+  "title": "JW Library-aantekeningen bekijken en bewerken in je browser",
+  "h1": "Je JW Library-aantekeningen bekijken, doorzoeken en bewerken — Studieverkenner",
+  "description": "Open elke .jwlibrary-back-up in je browser om je JW Library-aantekeningen, markeringen en bladwijzers door te bladeren, te doorzoeken, te bewerken, opnieuw te labelen, te verkleuren en in bulk op te schonen. Er wordt niets geüpload.",
+  "intro": [
+   "JW Library is gemaakt om aantekeningen te maken, niet om er duizenden te beheren. De Studieverkenner opent elke .jwlibrary-back-up gewoon in je browser en maakt er een doorzoekbare, bewerkbare bibliotheekbeheerder van — aantekeningen, markeringen en bladwijzers op één plek, zonder dat er ook maar iets wordt geüpload.",
+  ],
+  "steps": [
+   ("Laad een back-up", "Maak in JW Library een back-up (Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken), ga dan naar jwsync.org en laad het bestand in de Studieverkenner."),
+   ("Blader en doorzoek alles", "Drie tabbladen — Aantekeningen, Markeringen, Bladwijzers — met zoeken op volledige tekst plus filters op kleur, label en publicatie. Een tabblad Studieantwoorden laat ook de antwoorden zien die je in publicaties hebt ingevuld."),
+   ("Bewerk ter plekke", "Open een aantekening om titel en inhoud te bewerken met opmaak (vet, cursief, onderstreept, lijsten), de markeringskleur te wijzigen en labels toe te voegen of te verwijderen. Bladwijzers en markeringskleuren bewerk je op dezelfde manier."),
+   ("Ruim in bulk op", "Selecteer veel aantekeningen tegelijk om ze samen opnieuw te labelen, te verkleuren of te verwijderen — met volledig ongedaan maken en opnieuw doen, dus een vergissing is nooit fataal. Je kunt ook een periode aan aantekeningen naar een nieuwe back-up halen, of aantekeningen als Markdown kopiëren."),
+   ("Exporteer je bewerkte bibliotheek", "Download het bewerkte .jwlibrary-bestand en zet het terug in JW Library. Je wijzigingen staan nu op het apparaat."),
+  ],
+  "sections": [
+   ("Waarom in een browser bewerken in plaats van in de app?", "Schaal. Een label hernoemen over 300 aantekeningen, elke gele markering in één publicatie verkleuren of jaren aan verouderde bladwijzers verwijderen kost hier minuten en in de app uren tikken. Het geëxporteerde bestand is een gewone back-up die JW Library net als elke andere terugzet."),
+  ],
+  "faq": [
+   ("Raakt het bewerken mijn oorspronkelijke back-up?", "Nee — bewerkingen gebeuren op een kopie in de browser en worden in een nieuw geëxporteerd bestand bewaard. Het origineel blijft zoals het was."),
+   ("Zit er een grens aan de grootte van de bibliotheek?", "Heel grote bibliotheken worden over pagina's verdeeld zodat bladeren snel blijft; zoeken en filters werken over alles heen."),
+  ],
+ },
+
+ "search-jw-library-notes": {
+  "title": "JW Library-aantekeningen doorzoeken op betekenis — Vraag je bibliotheek",
+  "h1": "Vraag je bibliotheek: je JW Library-aantekeningen doorzoeken op betekenis",
+  "description": "Zoeken op betekenis in je JW Library-aantekeningen: vind die half onthouden aantekening door hem te omschrijven, ook als je de precieze woorden kwijt bent. Op je eigen apparaat, offline bruikbaar, privé.",
+  "intro": [
+   "Iedereen met jaren aan aantekeningen kent het probleem: je weet nog dat je iets hebt geschreven over beproevingen met vreugde doorstaan, maar het woord “volharding” staat niet in de aantekening, dus zoeken op trefwoord levert niets op. Vraag je bibliotheek zoekt in plaats daarvan op betekenis — omschrijf de gedachte en de aantekeningen die er het dichtst bij liggen komen bovendrijven, hoe ze ook zijn verwoord.",
+   "Het draait volledig op je eigen apparaat: het taalmodel wordt één keer naar de browser gedownload en werkt daarna offline, met WebGPU-versnelling waar die beschikbaar is. Je aantekeningen worden nooit ergens naartoe gestuurd.",
+  ],
+  "steps": [
+   ("Laad een back-up in de Studieverkenner", "Laad op jwsync.org je .jwlibrary-bestand en open het tabblad Vraag."),
+   ("Laat het model zich één keer voorbereiden", "Bij het eerste gebruik wordt het model op je apparaat gedownload en worden je aantekeningen geïndexeerd. Dat gebeurt eenmalig; daarna werkt het meteen, ook offline."),
+   ("Vraag het in je eigen woorden", "Typ wat je je herinnert — “die aantekening over geduld hebben met nieuwe verkondigers”, “aanmoediging voor ontmoedigde pioniers” — en de dichtstbijzijnde aantekeningen verschijnen, geordend op betekenis."),
+  ],
+  "sections": [
+   ("Hoe het verschilt van gewoon zoeken", "Zoeken op trefwoord vergelijkt letters; zoeken op betekenis vergelijkt gedachten. Een vraag over “angst” vindt ook aantekeningen die zijn geschreven met “zorgen”, “de zorgen van het leven” of een aangehaalde tekst over dat thema. Beide manieren van zoeken zitten in de Studieverkenner — ze vullen elkaar aan."),
+   ("Privé van opzet", "Dit is geen AI-dienst in de cloud. Het model draait in je eigen browsertabblad, de index staat op je apparaat, en met het sluiten van het tabblad houdt het op. Er verlaat nooit iets over je aantekeningen je machine."),
+  ],
+  "faq": [
+   ("Heb ik er een krachtig apparaat voor nodig?", "Een moderne telefoon of laptop kan het prima aan; op apparaten met WebGPU gaat het het snelst. Je kunt kiezen uit modelgroottes die bij je hardware passen."),
+   ("Werkt het in mijn taal?", "Ja — zoeken werkt in de talen waarin je aantekeningen zijn geschreven, en de interface is vertaald in elke taal die JW Sync ondersteunt."),
+  ],
+ },
+
+ "jw-library-study-stats": {
+  "title": "Bekijk je JW Library-studiestatistieken: reeksen, heatmaps en onderscheidingen",
+  "h1": "Je JW Library-studiestatistieken: reeksen, heatmaps, dekking en onderscheidingen",
+  "description": "Maak van een JW Library-back-up een privéanalyse van je studie — totalen, een activiteiten-heatmap, reeksen, Bijbeldekking over 66 boeken, een studieprofiel en zo'n 200 onderscheidingen.",
+  "intro": [
+   "Je back-upbestand legt in stilte jaren studiegeschiedenis vast — wanneer je aantekeningen maakt, wat je markeert, welke boeken je hebt doorgenomen. De pagina Studiestatistieken leest een .jwlibrary-back-up en maakt van die geschiedenis een privéoverzicht, volledig berekend in je browser.",
+  ],
+  "steps": [
+   ("Maak een back-up", "In JW Library: Persoonlijke studie → Back-up maken en terugzetten → Een back-up maken."),
+   ("Open de pagina Studiestatistieken", "Ga naar jwsync.org/highlights.html en laad het bestand."),
+   ("Verken je studieverhaal", "Totalen in het kort, weergaven per dienstjaar en over alle jaren, groei ten opzichte van vorig jaar — en daaronder de leuke onderdelen."),
+  ],
+  "sections": [
+   ("Wat je te zien krijgt", "Een activiteiten-heatmap met je langste en je huidige reeks; je weekritme, drukste uren en maanden; Bijbeldekking over alle 66 boeken met een verdeling tussen de Hebreeuwse en de Griekse Geschriften; een kleurenwiel van je markeringen, een histogram van de diepgang van je aantekeningen en een woordwolk; een studieklok over 24 uur en een seizoensradar."),
+   ("Profiel, reis en onderscheidingen", "Een studieprofiel met zes eigenschappen (Regelmaat, IJver, Diepgang, Breedte, Bezinning, Standvastigheid) met een persoonlijke “studiesignatuur”; een studiereis van 60 niveaus verdeeld over 12 benoemde rangen; en zo'n 200 onderscheidingen van Gewoon tot Legendarisch, inclusief medailles die op je inhoud letten. Een deelbare kaart vat je jaar samen zonder ook maar één aantekening prijs te geven."),
+   ("Elke dag een reden om terug te komen", "Het paneel Opnieuw langs laat aantekeningen zien die je op deze dag in eerdere jaren hebt geschreven en bouwt daar een rustige herhaling op verdeelde tijdstippen mee op — een beetje, maar vaak, is hoe studie blijft hangen."),
+  ],
+  "faq": [
+   ("Wordt hier iets van geüpload?", "Nee. De back-up wordt in je browser gelezen; de statistieken verlaten je apparaat nooit."),
+   ("Werken de statistieken zichzelf automatisch bij?", "Ze weerspiegelen de back-up die je laadt — maak een nieuwe back-up om nieuwe statistieken te zien."),
+  ],
+ },
+
+ "share-jw-library-notes": {
+  "title": "Zo deel je JW Library-aantekeningen met een vriend",
+  "h1": "JW Library-aantekeningen met een vriend delen — zonder server",
+  "description": "Stuur geselecteerde JW Library-aantekeningen (en hun markeringen) als klein bestand naar een vriend — geen server, geen account. De ontvanger voegt ze toe zonder zijn eigen aantekeningen te overschrijven.",
+  "intro": [
+   "JW Library heeft geen manier om iemand anders een kopie van bepaalde aantekeningen te geven. Je hele back-up sturen zou werken — maar dan geef je alles weg, en het terugzetten zou de bibliotheek van de ontvanger wissen. Het delen van aantekeningen in JW Sync lost allebei op: kies precies welke aantekeningen je deelt, en de ontvanger voegt ze toe zonder iets kwijt te raken.",
+  ],
+  "steps": [
+   ("Kies de aantekeningen die je wilt delen", "Laad op de deelpagina jwsync.org/share.html je back-up en selecteer de aantekeningen — een handvol uit één lezing, of met het labelfilter in één klik alles onder een label. Markeringen die bij die aantekeningen horen, gaan mee."),
+   ("Stuur het deelbestand", "JW Sync maakt een klein bestand met alleen de gekozen aantekeningen. Verstuur het via het kanaal dat jou uitkomt — een berichtenapp, e-mail, AirDrop. Er is geen server en geen account; het bestand ís de hele uitwisseling."),
+   ("De ontvanger voegt het toe", "Je vriend opent dezelfde pagina, laadt het deelbestand samen met zijn eigen back-up en krijgt een nieuwe back-up met jouw aantekeningen erbij. Zijn eigen aantekeningen worden nooit overschreven — botst een gedeelde aantekening met een van de zijne, dan kiest hij hoe die wordt toegevoegd — en toegevoegde aantekeningen komen gelabeld binnen, zodat ze later makkelijk terug te vinden, na te lopen of te verwijderen zijn."),
+  ],
+  "sections": [
+   ("Goede toepassingen", "Onderzoek doorgeven aan een studiepartner, vergaderaantekeningen delen met iemand die er niet was, een nieuwe verkondiger een startset aantekeningen bij een publicatie geven, of de aantekeningen van een bepaald project naar een familielid verplaatsen — en dat allemaal zonder de rest van beide bibliotheken prijs te geven."),
+  ],
+  "faq": [
+   ("Moet de ontvanger JW Sync installeren?", "Aan geen van beide kanten wordt iets geïnstalleerd — het is een webpagina. De ontvanger heeft alleen het deelbestand en zijn eigen back-up nodig."),
+   ("Kan ik het delen ongedaan maken of een deelbestand laten verlopen?", "Het bestand is een gewoon bestand dat jij hebt verstuurd — er is geen kopie op een server die kan verlopen. Deel dus alleen wat je in elk ander bericht ook zou delen."),
+  ],
+ },
+
+ "bible-reading-plan": {
+  "title": "Een dagelijks Bijbelleesrooster met je eigen aantekeningen ernaast",
+  "h1": "Leesmaatje: een Bijbelleesrooster met je eigen aantekeningen ernaast",
+  "description": "Een privé dagelijks Bijbelleesrooster dat de aantekeningen en markeringen laat zien die je bij de hoofdstukken van vandaag hebt gemaakt. Kies je tempo, houd een reeks vol en zie het raster van 66 boeken vollopen.",
+  "intro": [
+   "Genoeg apps bieden een Bijbelleesrooster. Het Leesmaatje doet iets wat geen van die apps kan: omdat het je eigen .jwlibrary-back-up leest, komt het leesgedeelte van vandaag mét de aantekeningen en markeringen die jijzelf bij precies die hoofdstukken hebt gemaakt — “je hebt twee jaar geleden vier verzen in Psalm 37 gemarkeerd”. Lezen door de bril van je eigen studiegeschiedenis, volledig op je eigen apparaat.",
+  ],
+  "steps": [
+   ("Kies een volgorde en een tempo", "Lees in Bijbelvolgorde of in ongeveer chronologische volgorde; rond af in 3 maanden, 6 maanden, 1 jaar of 2 jaar, of stel je eigen aantal hoofdstukken per dag in — met een meelopend voorbeeld van “je bent dan klaar rond…”."),
+   ("Lees het gedeelte van vandaag", "Elk hoofdstuk is één tik ver en opent rechtstreeks in JW Library of de WACHTTOREN ONLINE BIBLIOTHEEK in jouw taal. Vink hoofdstukken af terwijl je vordert."),
+   ("Neem je aantekeningen mee (optioneel)", "Laad in een willekeurig hulpmiddel van JW Sync een back-up, en je eigen aantekeningen en het aantal markeringen verschijnen meteen onder de hoofdstukken van vandaag."),
+   ("Zie de voortgang groeien", "Een raster van 66 boeken loopt vol terwijl je leest, met een balk voor gelezen hoofdstukken, een voorspelling of je op schema ligt, en mijlpalen voor het afronden van elk boek, van de Hebreeuws-Aramese Geschriften, van de Griekse Geschriften — en van de hele Bijbel."),
+  ],
+  "sections": [
+   ("Reeksen zonder schuldgevoel", "Een dag afronden laat je reeks groeien; een dag missen verschuift alleen de voorspelde einddatum. Er is geen stapel achterstand — het rooster buigt mee met je leven in plaats van je toe te spreken."),
+  ],
+  "faq": [
+   ("Moet ik een back-up laden om het te gebruiken?", "Nee — het rooster, de reeksen en de voortgang werken op zichzelf. De back-up voegt alleen je persoonlijke aantekeningen aan het leesgedeelte van elke dag toe."),
+   ("Blijft mijn leesvoortgang privé?", "Ja. De voortgang staat in je browser op je eigen apparaat — er is geen account en er wordt niets geüpload."),
+  ],
+ },
+
+ "open-jwlibrary-file": {
+  "title": "Wat is een .jwlibrary-bestand en hoe open je het?",
+  "h1": "Wat is een .jwlibrary-bestand — en hoe open je er een op elk apparaat",
+  "description": "Een .jwlibrary-bestand is je JW Library-back-up: één bestand met elke aantekening, markering, bladwijzer en elk label. Dit zit erin, en zo open en lees je het.",
+  "intro": [
+   "Een .jwlibrary-bestand ziet er ondoorzichtig uit, en dat is het niet. Het is een gewoon ZIP-archief om een gewone SQLite-database heen, wat betekent dat je je eigen back-up kunt lezen — precies zien welke aantekeningen, markeringen en bladwijzers erin zitten — zonder JW Library en zonder ook maar iets te installeren.",
+   "Als je een back-up van JW Library maakt, krijg je een bestand dat eindigt op .jwlibrary. Het is één draagbaar pakket met alles uit je persoonlijke studie — aantekeningen, markeringen, bladwijzers, labels en afspeellijsten — in een compacte database. Het is geen document dat je in Word of een pdf-lezer opent; het is bedoeld om terug te zetten in JW Library.",
+   "Maar je hoeft het niet terug te zetten om erin te kijken. JW Sync opent een .jwlibrary-bestand rechtstreeks in je browser, zodat je de inhoud kunt lezen, doorzoeken en bewerken zonder je telefoon aan te raken.",
+  ],
+  "steps": [
+   ("Zorg voor een .jwlibrary-bestand", "Dat maak je in JW Library: Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Dat is het bestand waar het hier om gaat."),
+   ("Open het in JW Sync", "Ga naar jwsync.org en laad het bestand in de Studieverkenner. Het gaat meteen open, op je eigen apparaat — er wordt niets geüpload."),
+   ("Lees het en werk ermee", "Blader door aantekeningen, markeringen en bladwijzers; doorzoek alles; bewerk, herlabel of exporteer. Ben je klaar, dan kun je het bestand (of een bewerkte kopie) terugzetten in JW Library."),
+  ],
+  "sections": [
+   ("Wat er eigenlijk in het bestand zit", "Technisch gezien is een .jwlibrary-bestand een gecomprimeerde SQLite-database plus een manifest. Daarom gebeurt het onderweg soms per ongeluk dat het naar .zip wordt hernoemd — en daarom lost terug hernoemen naar .jwlibrary dat op. Je hoeft daar niets van te weten om het te gebruiken, maar het verklaart wel waarom het bestand klein en op zichzelf staand is en op Android, iPhone, iPad en Windows identiek."),
+   ("Het op een computer openen", "Dezelfde pagina op jwsync.org werkt in de browser van een laptop of desktop — handig om jaren aan aantekeningen op een groot scherm te lezen, of om in bulk op te ruimen wat op een telefoon moeizaam zou zijn. Er valt niets te installeren."),
+   ("Wat het bestand werkelijk is", "Een .jwlibrary-bestand is een ZIP-archief met een andere extensie. Erin zitten userData.db — een SQLite-database met je aantekeningen, markeringen, bladwijzers en labels — en manifest.json, een klein bestand dat de back-up beschrijft, inclusief een hash van de database waarmee JW Library vaststelt dat het bestand niet is gewijzigd. Er is niets eigendomsmatigs of versleutelds aan; het is een standaardarchief om een standaarddatabase heen."),
+   ("Het openen zonder JW Library", "Je hebt de app niet nodig, en ook geen andere software, om je eigen back-up te lezen. Het bestand in je browser openen laat elke aantekening, markering en bladwijzer zien die erin zit, met zoeken en filteren, en het bestand verlaat je apparaat nooit — het wordt lokaal gelezen in plaats van geüpload. Dit is de snelste manier om te bevestigen dat een back-up bevat wat jij denkt, vóór een reset, een inruil of een terugzetting op een nieuwe telefoon."),
+   ("Handmatig een kijkje nemen", "Ben je nieuwsgierig, kopieer het bestand dan, hernoem de kopie naar .zip en open die met een willekeurig archiefprogramma. Je ziet userData.db en manifest.json. Om de database te openen heb je een SQLite-viewer nodig, en de tabellen heten naar wat ze bevatten — Note, UserMark, Bookmark, Tag. Werk altijd op een kopie: de database met de hand bewerken zonder de hash in het manifest bij te werken levert een bestand op dat JW Library weigert terug te zetten."),
+   ("Veilig bewerken", "Aantekeningen kun je buiten de app corrigeren, herlabelen, verkleuren of verwijderen, en het resultaat exporteer je als een nieuw .jwlibrary-bestand dat je gewoon terugzet. De regel die dat veilig houdt, is het origineel bewaren: bewerk een kopie, zet het bewerkte bestand terug, en is er iets anders dan je verwachtte, dan staat het onaangeroerde origineel er nog om op terug te vallen."),
+   ("Een back-up op een telefoon lezen", "Je hebt geen computer nodig. Het bestand in een mobiele browser openen werkt precies zo, en dat is handig als de back-up al op de telefoon staat en je de inhoud wilt controleren voordat je terugzet of het apparaat wist. Het bestand wordt lokaal gelezen, dus dit werkt zonder verbinding zodra de pagina zelf geladen is."),
+   ("Waarom de hash in het manifest ertoe doet", "manifest.json legt een hash van userData.db vast. JW Library stelt daarmee vast dat de database sinds het schrijven van de back-up niet is veranderd, dus een bestand waarvan de database is bewerkt zonder dat de hash opnieuw is berekend, wordt bij het terugzetten geweigerd. Dit is verreweg de meest voorkomende reden waarom een met de hand bewerkte back-up het niet meer doet, en de reden waarom bewerken via een hulpmiddel dat het manifest herschrijft veiliger is dan de database rechtstreeks aanpassen."),
+   ("Waar dit goed voor is", "Kunnen lezen wat er in een back-up zit, verandert wat een back-up waard is. Je kunt bevestigen dat een bestand bevat wat je denkt voordat je een telefoon wist, nagaan of een oud bestand het terugzetten waard is, een aantekening terugvinden waarvan je weet dat je hem schreef zonder de app door te spitten, of tekst redden uit een bestand dat JW Library niet accepteert. Voor niets daarvan hoef je het bestand aan iemand toe te vertrouwen — het wordt op je eigen apparaat gelezen."),
+  ],
+  "faq": [
+   ("Kan ik een .jwlibrary-bestand in Excel of Kladblok openen?", "Niet zinvol — het is een database, geen rekenblad of tekstbestand. Open het in JW Sync om het te lezen, of exporteer je aantekeningen vanuit de Studieverkenner naar Markdown of platte tekst."),
+   ("Is het veilig om mijn back-up in de browser te openen?", "Ja. JW Sync leest het bestand lokaal in je browsertabblad; er gaat niets naar een server, en je oorspronkelijke bestand wordt nooit gewijzigd."),
+   ("Kan ik het gewoon naar .zip hernoemen?", "Ja, op een kopie. Hernoemen verandert de inhoud niet, en zo kan elk archiefprogramma je laten zien wat erin zit."),
+   ("Verandert het bestand als ik het open?", "Nee. Een back-up lezen — in de browser of in een archiefprogramma — laat hem byte voor byte onveranderd. Alleen opslaan of exporteren levert een nieuw bestand op."),
+   ("Moet ik online zijn?", "Alleen om de pagina te laden. Het bestand zelf wordt op je apparaat gelezen en niet geüpload, dus je aantekeningen gaan nooit over het netwerk."),
+   ("Kan ik een back-up openen die iemand anders me heeft gestuurd?", "Ja, de indeling is niet aan een apparaat of account gebonden. Of je hem moet terugzetten is een andere vraag, want terugzetten vervangt je eigen bibliotheek."),
+   ("Moet ik iets installeren om erin te kijken?", "Nee. Een browser is genoeg om de aantekeningen te lezen; alleen om de database zelf handmatig te bekijken heb je een SQLite-viewer nodig."),
+  ],
+ },
+
+ "jw-library-windows-pc": {
+  "title": "JW Library op een Windows-pc: back-uppen en samenvoegen",
+  "h1": "JW Library-back-ups gebruiken op een Windows-pc",
+  "description": "Zo maak je op Windows een back-up van JW Library, en zo voeg je een pc-back-up samen met die van je telefoon en tablet, zodat aantekeningen, markeringen en bladwijzers op elk apparaat bij elkaar blijven.",
+  "intro": [
+   "JW Library draait behalve op telefoons en tablets ook op Windows, en het maakt daar hetzelfde .jwlibrary-back-upbestand. Je pc kan dus deel uitmaken van dezelfde studiebibliotheek als je telefoon — zolang je de back-ups samenvoegt in plaats van de een over de ander terug te zetten.",
+  ],
+  "steps": [
+   ("Maak een back-up op Windows", "Open in de Windows-app van JW Library het menu, ga naar Back-up maken en terugzetten en maak een back-up. Bewaar het .jwlibrary-bestand op een plek die je makkelijk terugvindt."),
+   ("Maak ook een back-up van je telefoon en tablet", "Op elk apparaat: Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken."),
+   ("Voeg ze samen op jwsync.org", "Open jwsync.org in een willekeurige browser op de pc en laad alle back-upbestanden. JW Sync combineert de aantekeningen, markeringen, bladwijzers en labels van elk apparaat tot één samengevoegd .jwlibrary-bestand — lokaal, er wordt niets geüpload."),
+   ("Zet het samengevoegde bestand overal terug", "Zet het samengevoegde bestand terug in de Windows-app en op elk mobiel apparaat. De pc, de telefoon en de tablet dragen nu allemaal de volledige bibliotheek."),
+  ],
+  "sections": [
+   ("Waarom de pc hier de handigste plek voor is", "In een browser op een computer gaat het laden van meerdere bestanden, het nalopen van het voorbeeld en het opslaan van het resultaat een stuk vlotter dan tikken op een telefoon. Veel mensen houden hun vaste samenvoegroutine op de computer en zetten het samengevoegde bestand daarna alleen nog terug op hun mobiele apparaten."),
+  ],
+  "faq": [
+   ("Werkt de Windows-back-up samen met back-ups van iPhone en Android?", "Ja — de .jwlibrary-indeling is op elk platform identiek, dus een Windows-back-up laat zich zonder meer samenvoegen met back-ups van telefoon en tablet."),
+   ("Moet ik iets op de pc installeren?", "Nee. JW Sync is een webpagina; hij draait in Edge, Chrome of Firefox zonder dat je iets installeert."),
+  ],
+ },
+
+ "recover-jw-library-notes-lost-phone": {
+  "title": "JW Library-aantekeningen terughalen na een verloren of kapotte telefoon",
+  "h1": "JW Library-aantekeningen terughalen van een verloren, kapotte of gereset telefoon",
+  "description": "Telefoon kwijt of gereset met JW Library-aantekeningen erop? Wat je kunt terughalen hangt af van je back-ups. Hier staat precies hoe je je aantekeningen terugkrijgt — en wat je de volgende keer doet.",
+  "intro": [
+   "Als een telefoon verloren, gestolen of onherstelbaar beschadigd raakt, hangt het lot van je JW Library-aantekeningen af van één vraag: bestaat er ergens buiten dat apparaat een .jwlibrary-back-up? Zo ja, dan komt alles wat erin zit terug. Deze pagina behandelt hoe je er een vindt, hoe je hem op elk vervangend apparaat terugzet, en wat je doet als de enige back-up die je hebt oud is.",
+   "Een telefoon kwijtraken is al vervelend genoeg zonder de angst dat je er jaren aan studieaantekeningen mee kwijt bent. Of je ze kunt terughalen, hangt af van één vraag: bestaat er ergens buiten die telefoon een .jwlibrary-back-up?",
+   "Deze handleiding loopt langs alle plekken waar je een back-up kunt hebben staan — ook eentje waarvan je vergeten was dat je hem maakte — en hoe je die weer tot een volledige JW Library op je nieuwe apparaat maakt.",
+  ],
+  "steps": [
+   ("Zoek overal waar een back-up kan staan", "Kijk in je e-mail (zoek op “jwlibrary” of “back-up”), Google Drive, iCloud Drive, OneDrive, Dropbox en de map Downloads van je computer. Back-ups zijn kleine bestanden waarvan je makkelijk vergeet dat je ze hebt bewaard."),
+   ("Kijk op je andere apparaten", "Heb je JW Library ooit op een tablet of pc gebruikt, dan staan daar eigen studiegegevens op — maak daar meteen een back-up van om te bewaren wat erop staat."),
+   ("Zet terug wat je vindt op de nieuwe telefoon", "Installeer JW Library op het nieuwe apparaat en ga dan naar Back-up maken en terugzetten → Terugzetten, en laad het .jwlibrary-bestand. Je aantekeningen, markeringen en bladwijzers komen terug."),
+   ("Voeg samen als je meer dan één back-up vindt", "Verschillende apparaten of data kunnen elk eigen aantekeningen bevatten. Kies er niet één uit — laad ze allemaal op jwsync.org, voeg ze samen tot één volledig bestand en zet dat terug. Er blijft niets achter."),
+  ],
+  "sections": [
+   ("Als er nergens een back-up is", "Wees vroeg eerlijk tegen jezelf: stond de enige kopie van je aantekeningen op de verloren telefoon en heb je nooit een back-up geëxporteerd, dan bewaart JW Library geen kopie in de cloud om van terug te zetten. Dat doet pijn — en dat is precies waarom de gewoonte hieronder er zoveel toe doet."),
+   ("Sta hier nooit meer", "Zet een maandelijkse herinnering voor een back-up en bewaar elk .jwlibrary-bestand buiten de telefoon (naar jezelf mailen is genoeg). JW Sync kan je er zelfs aan herinneren en je apparaten volgens een ritme samenvoegen. Een bestand dat in je postvak staat, overleeft elke telefoon."),
+   ("Waar al een back-up kan staan", "Kijk voordat je concludeert dat er geen is overal waar een bestand bewaard kan zijn: de mappen Downloads en Documenten van elke computer waarop je de telefoon hebt aangesloten, je verzonden mail, chat-apps waarmee je het bestand kunt hebben gestuurd, en elk cloudaccount dat je gebruikt. Mensen maakten vaak ooit één back-up, maanden geleden, en zijn dat vergeten — en een back-up van maanden oud bevat nog steeds verreweg het grootste deel van een studiebibliotheek."),
+   ("Terugzetten op een andere telefoon of een ander platform", "Het vervangende apparaat hoeft niet gelijk te zijn aan het verloren apparaat. Een back-up van een Android-telefoon laat zich op een iPhone terugzetten en andersom, want de indeling is op Android, iOS, iPadOS en Windows identiek. Installeer JW Library op het nieuwe apparaat, werk het bij naar de huidige versie en zet dan terug via Persoonlijke studie → Back-up maken en terugzetten."),
+   ("Als je alleen een oude of onvolledige back-up hebt", "Zet hem toch terug. Het grootste deel van je aantekeningen terughalen is geen troostprijs — dat is het resultaat. Vind je later een tweede, andere back-up, dan kunnen die twee tot één bestand worden samengevoegd dat alles uit allebei bevat, dus de oudere nu terugzetten belemmert je niet om er later aan toe te voegen."),
+   ("Wat niet terug te halen is", "Bestaat er in geen enkele vorm een back-up, dan zijn persoonlijke studiegegevens niet op te halen. Ze staan alleen in de eigen opslag van de app op het apparaat, en noch JW Library noch een cloudback-up op telefoonniveau bewaart ze betrouwbaar. Dat is de moeite waard om ronduit te weten, want het is de reden dat de routine op deze site überhaupt bestaat."),
+   ("Kijk voordat het apparaat op afstand wordt gewist", "Is de telefoon verloren en niet vernield, en overweeg je hem op afstand te wissen, zoek dan eerst naar bestaande back-ups — dat wissen is onomkeerbaar en neemt de laatste kans weg dat iemand er nog een maakt. Is het apparaat alleen zoekgeraakt en nog bereikbaar, dan kun je op afstand geen back-up maken, maar blijven de gegevens intact zolang de telefoon niet wordt gewist of gereset."),
+   ("Zorgen dat dit niet twee keer gebeurt", "Dat een verloren telefoon mensen jaren aan studie kost, komt doordat de enige kopie op de telefoon stond. Zodra je op een vervangend apparaat hebt teruggezet, zet je dezelfde dag een back-up ergens buiten dat apparaat, en herhaal je dat in een ritme dat je ook echt volhoudt. De bestanden zijn klein genoeg dat ze allemaal onbeperkt bewaren niets kost."),
+   ("Als er echt geen back-up is", "Dan is het eerlijke antwoord dat de aantekeningen niet terug te halen zijn, en dat hoor je liever dan dat je blijft zoeken. Wat je wél kunt doen, is dit het laatste verlies laten zijn: installeer JW Library op het vervangende apparaat en maak, voordat je iets hebt opgebouwd dat je zou missen, een back-up die je ergens buiten het apparaat zet. Vanaf dat moment kost dezelfde gebeurtenis je niets."),
+  ],
+  "faq": [
+   ("Kan JW Sync aantekeningen terughalen van een telefoon die ik niet meer heb?", "Geen enkel hulpmiddel kan dat — terughalen hangt ervan af of er ergens een back-upbestand bestaat. Het werk van JW Sync is het lezen, repareren en samenvoegen van de back-ups die je wél hebt."),
+   ("Mijn back-up is oud — is het nog de moeite waard om hem terug te zetten?", "Absoluut. Een oude back-up met het grootste deel van je aantekeningen is beter dan vanaf nul beginnen, en je kunt hem samenvoegen met alles wat je later nog nieuwer vindt."),
+   ("Bewaart JW Library een kopie van mijn aantekeningen in de cloud?", "Nee. Persoonlijke studiegegevens blijven op het apparaat, tenzij je zelf een back-upbestand maakt."),
+   ("Kun je aantekeningen terughalen van een telefoon met een kapot scherm?", "Soms — als de telefoon nog aangaat en bedienbaar is, of als een reparateur het scherm kan aansturen, kan JW Library nog een back-up maken. De gegevens zijn intact zolang de opslag dat is."),
+   ("Laat een oude back-up zich nog terugzetten in de huidige app?", "Ja. JW Library leest oudere back-upindelingen. Werk de app eerst bij en zet terug in de huidige versie."),
+   ("Ik heb twee oude back-ups gevonden — welke moet ik gebruiken?", "Geen van beide alleen. Voeg ze samen: het resultaat bevat alles uit allebei, ook wat in het oudere bestand stond en tegen de tijd van het nieuwere al was verwijderd."),
+   ("Kan ik kijken wat er in een back-up zit voordat ik hem terugzet?", "Ja. Open het bestand in je browser en blader eerst door de aantekeningen, markeringen en bladwijzers, dan weet je wat je terugzet."),
+  ],
+ },
+
+ "handle-merge-conflicts": {
+  "title": "Dezelfde aantekening op twee apparaten bewerkt? Zo ga je met conflicten om",
+  "h1": "Omgaan met conflicten bij het samenvoegen: dezelfde aantekening op twee apparaten bewerkt",
+  "description": "Bewerk je dezelfde JW Library-aantekening op twee apparaten verschillend, dan moet het samenvoegen een winnaar kiezen. De conflictcontrole zet beide versies naast elkaar zodat jij beslist — er gaat niets verloren.",
+  "intro": [
+   "Het samenvoegen gaat grotendeels vanzelf — aantekeningen die maar op één apparaat staan, komen simpelweg samen. Het enige geval waarin een beslissing nodig is, is een echt conflict: dezelfde aantekening, op twee apparaten verschillend bewerkt, zodat de twee back-ups het oneens zijn over wat er moet staan. JW Sync gokt nooit in stilte; de keuze komt bij jou te liggen.",
+  ],
+  "steps": [
+   ("Laad beide back-ups", "Laad op jwsync.org de .jwlibrary-bestanden van beide apparaten. JW Sync vergelijkt ze tijdens het samenvoegen."),
+   ("Open de conflictcontrole", "Botsen er aantekeningen, dan somt de controle ze op. Alles wat niet botste is al samengevoegd — deze stap gaat alleen over de echte botsingen."),
+   ("Vergelijk naast elkaar", "Bij elk conflict zie je beide versies met een verschil per woord dat precies laat zien wat er afwijkt. “Beste voorstellen” kan de volledigere versie voor je kiezen, of je kiest zelf welke je houdt — per aantekening."),
+   ("Rond af en zet terug", "Als elk conflict is opgelost, download je het samengevoegde bestand en zet je het terug. Beide apparaten zijn het nu eens, met jouw gekozen versie van elke aantekening."),
+  ],
+  "sections": [
+   ("Waarom dit beter is dan gewoon de nieuwste houden", "“De nieuwste wint” verwijdert in stilte bewerkingen die je misschien had willen houden. Misschien had de oudere versie een alinea die je op het andere apparaat per ongeluk hebt weggehaald. Beide woord voor woord zien, betekent dat je nooit ongemerkt tekst kwijtraakt — en daar draait samenvoegen in plaats van overschrijven om."),
+   ("Hoe conflicten überhaupt ontstaan", "Meestal doordat je tussen twee samenvoegingen offline op twee apparaten bewerkt, of doordat je een oude back-up terugzet en er daarna aan toevoegt. Volgens een vast ritme samenvoegen houdt het aantal conflicten klein en de verschillen vers in je geheugen."),
+  ],
+  "faq": [
+   ("Moet ik honderden conflicten nalopen?", "Zelden. Alleen aantekeningen die aan beide kanten verschillend zijn bewerkt, botsen; nieuwe aantekeningen en aantekeningen die maar op één apparaat zijn gewijzigd, voegen zich vanzelf samen. De meeste samenvoegingen hebben een handvol conflicten of geen enkel."),
+   ("Kan ik na het kiezen nog van gedachten veranderen?", "Ja — er wordt niets naar een apparaat geschreven tot je het samengevoegde bestand terugzet, en je oorspronkelijke back-ups worden nooit gewijzigd, dus je kunt de samenvoeging opnieuw doen."),
+  ],
+ },
 }
