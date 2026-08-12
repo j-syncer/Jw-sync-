@@ -41,8 +41,9 @@ GUIDES_VI = {
   "h1": "Cách hợp nhất bản sao lưu JW Library từ hai thiết bị",
   "description": "Gộp ghi chú, phần tô màu, dấu trang và thẻ từ hai bản sao lưu JW Library trở lên thành một tập tin .jwlibrary — miễn phí, riêng tư, ngay trong trình duyệt của bạn.",
   "intro": [
-   "Nếu bạn học hỏi trên nhiều hơn một thiết bị — điện thoại ở Phòng Nước Trời, máy tính bảng ở nhà — thì mỗi thiết bị sẽ tích lũy ghi chú và phần tô màu riêng của nó. Tính năng Sao lưu và khôi phục sẵn có của JW Library không gộp chúng lại được: khôi phục một bản sao lưu sẽ thay thế mọi thứ trên thiết bị, xóa sạch công sức của thiết bị kia.",
-   "JW Sync giải quyết chuyện này. Nó đọc hai (hoặc nhiều hơn) tập tin sao lưu .jwlibrary rồi hợp nhất ghi chú, phần tô màu, dấu trang và thẻ từ tất cả chúng thành một tập tin sao lưu mới. Việc hợp nhất diễn ra hoàn toàn trong trình duyệt của bạn — tập tin của bạn không bao giờ được tải lên máy chủ nào, nên ghi chú học hỏi cá nhân của bạn vẫn riêng tư.",
+   "Bạn học Tháp Canh trên điện thoại và một bài khác trên máy tính bảng. Giờ mỗi thiết bị đều có phần công sức mà thiết bị kia không có, còn JW Library thì không dung hòa được: khôi phục ở đó là thay thế toàn bộ chứ không phải hợp nhất, nên bạn khôi phục bản sao lưu nào thì phần học của thiết bị kia cũng bị xóa. Chỉ với ứng dụng, không có cách nào giữ được cả hai.",
+   "Trang này ra đời vì điều đó. Nó đọc hai (hoặc nhiều hơn) tệp .jwlibrary và gộp ghi chú, phần tô màu, dấu trang và thẻ từ tất cả vào một bản sao lưu mới — nên không phải chọn bỏ thứ gì. Toàn bộ việc hợp nhất diễn ra ngay trong trình duyệt của bạn; tệp của bạn không bao giờ được tải lên máy chủ nào, nên ghi chú học hỏi cá nhân vẫn là riêng tư.",
+   "Đó cũng là lý do thói quen này mang tính phòng ngừa chứ không phải chữa cháy: khi đã hợp nhất đều đặn, bạn không còn phải nhớ khôi phục trước khi học ở nơi khác. Học ở đâu tùy bạn, hợp nhất khi nào thuận tiện, và mọi thiết bị đều theo kịp.",
   ],
   "steps": [
    ("Tạo một bản sao lưu trên mỗi thiết bị", "Trong JW Library, mở Học hỏi cá nhân, nhấn menu ba chấm, chọn Sao lưu và khôi phục, rồi chọn Tạo bản sao lưu. Hãy làm vậy trên mọi thiết bị. Mỗi thiết bị sẽ cho ra một tập tin .jwlibrary."),
@@ -111,10 +112,11 @@ GUIDES_VI = {
  "transfer-jw-library-notes-new-phone": {
   "title": "Cách chuyển ghi chú JW Library sang điện thoại mới",
   "h1": "Cách chuyển ghi chú JW Library sang điện thoại mới",
-  "description": "Từng bước một: chuyển toàn bộ ghi chú, phần tô màu, dấu trang và thẻ JW Library sang điện thoại mới bằng một bản sao lưu .jwlibrary — và cách hợp nhất nếu bạn đã ghi chú trên điện thoại mới.",
+  "description": "Chuyển ghi chú JW Library sang điện thoại mới chỉ là một bản sao lưu và một lần khôi phục, và ứng dụng làm được trong khoảng hai phút. Đây là các bước — cùng trường hợp duy nhất nó không xử lý được: khi điện thoại mới đã có ghi chú riêng.",
   "intro": [
-   "Đổi điện thoại mới là thời điểm phổ biến nhất khiến người ta mất nhiều năm ghi chú JW Library — không phải vì việc chuyển khó, mà vì nó phải được làm có chủ ý trước khi thiết bị cũ bị xóa sạch. Dữ liệu học hỏi cá nhân không đi kèm một lần chuyển máy thông thường, và JW Library cũng không giữ bản sao nào của nó trong bất kỳ tài khoản nào.",
-   "Các công cụ chuyển máy dời ứng dụng và ảnh của bạn, nhưng chúng không chuyển đáng tin cậy dữ liệu học hỏi cá nhân của JW Library. Cách chắc chắn để đưa ghi chú, phần tô màu, dấu trang và thẻ sang điện thoại mới là dùng chính tập tin sao lưu của JW Library — chỉ mất vài phút và dùng được giữa các nền tảng.",
+   "Việc này dễ hơn nhiều người tưởng, và bạn không cần thêm công cụ nào. JW Library có sẵn sao lưu và khôi phục, và nó mang từng ghi chú, phần tô màu, dấu trang và thẻ sang điện thoại mới — kể cả giữa Android và iPhone. Hãy làm khi thiết bị cũ còn chạy được, cả việc chỉ mất vài phút.",
+   "Phần duy nhất cần chủ động làm là chính việc chuyển: các công cụ di chuyển từ điện thoại sang điện thoại mang theo ứng dụng và ảnh, nhưng bỏ qua dữ liệu học hỏi cá nhân của JW Library, nên hãy tạo tệp sao lưu thay vì cho rằng nó tự đi theo.",
+   "Có đúng một tình huống ứng dụng không xử lý được, và nên biết trước khi bắt đầu: nếu bạn đã học trên điện thoại mới, việc khôi phục bản sao lưu của máy cũ sẽ xóa phần công sức đó, vì khôi phục thay thế toàn bộ thư viện của thiết bị. Nếu đúng là trường hợp của bạn, phần nói về hợp nhất ở dưới mới là phần bạn cần.",
   ],
   "steps": [
    ("Tạo một bản sao lưu trên điện thoại cũ", "Mở JW Library → Học hỏi cá nhân → menu ba chấm → Sao lưu và khôi phục → Tạo bản sao lưu. Thao tác này lưu một tập tin .jwlibrary chứa toàn bộ dữ liệu học hỏi của bạn."),
@@ -184,10 +186,10 @@ GUIDES_VI = {
  "backup-jw-library": {
   "title": "Cách sao lưu JW Library đúng cách",
   "h1": "Cách sao lưu JW Library đúng cách",
-  "description": "Một quy trình sao lưu 30 giây bảo vệ nhiều năm ghi chú, phần tô màu và dấu trang học hỏi trong JW Library — và sai lầm phổ biến khiến nhiều người mắc bẫy.",
+  "description": "Một thói quen sao lưu 30 giây: tệp .jwlibrary thực sự chứa gì, nên cất ở đâu, và vì sao có một bản mới vẫn đáng giá ngay cả khi chẳng có gì trục trặc.",
   "intro": [
-   "Mọi thứ bạn đã đánh dấu trong JW Library — từng ghi chú, từng phần tô màu, từng dấu trang và thẻ — chỉ tồn tại ở đúng một nơi: chiếc thiết bị trong tay bạn. Không có tài khoản nào giữ bản sao và cũng không có đồng bộ đám mây tự động. Một bản sao lưu là thứ duy nhất đứng giữa một thư viện học hỏi gây dựng qua nhiều năm và một chiếc điện thoại bị mất, bị khôi phục cài đặt gốc hay được thay mới.",
-   "Một bản sao lưu JW Library đàng hoàng chỉ mất nửa phút và bảo vệ nhiều năm tích lũy học hỏi. Hầu hết các câu chuyện mất dữ liệu đều bắt đầu như nhau: không có tập tin .jwlibrary gần đây nào tồn tại khi chiếc điện thoại bị mất, bị đặt lại hay được thay.",
+   "Một bản sao lưu mất khoảng nửa phút và đáng để thành thói quen — dù không hẳn vì lý do người ta thường nói. Chính tính năng sao lưu và khôi phục của JW Library đã chuyển thư viện sang thiết bị mới rất tốt rồi, nên bản sao lưu không hẳn là một tấm bảo hiểm, mà là nguyên liệu cho mọi việc khác bạn muốn làm với phần học hỏi của mình.",
+   "Tệp .jwlibrary là hình thức duy nhất mà thư viện của bạn mang lấy bên ngoài ứng dụng. Đó là thứ bạn hợp nhất khi đã học trên hai thiết bị, thứ bạn mở ra để đọc, gắn lại thẻ hay sắp xếp nhiều năm ghi chú, thứ bạn tìm theo ý nghĩa khi chỉ nhớ mang máng mình đã viết gì, và là nơi bạn rút ra một nhóm ghi chú khi muốn gửi cho một người bạn. Có một bản mới chính là điều làm tất cả những việc đó khả thi.",
   ],
   "steps": [
    ("Tạo bản sao lưu", "Mở JW Library → Học hỏi cá nhân → menu ba chấm → Sao lưu và khôi phục → Tạo bản sao lưu. Nó tạo ra một tập tin .jwlibrary chứa mọi ghi chú, phần tô màu, dấu trang và thẻ."),
@@ -452,9 +454,9 @@ GUIDES_VI = {
   "h1": "Khôi phục ghi chú JW Library từ một điện thoại bị mất, hỏng hoặc đã đặt lại",
   "description": "Mất điện thoại hay đã đặt lại máy trong khi còn ghi chú JW Library trên đó? Bạn khôi phục được bao nhiêu phụ thuộc vào các bản sao lưu. Đây là cách lấy lại ghi chú — và nên làm gì cho lần sau.",
   "intro": [
-   "Khi một chiếc điện thoại bị mất, bị lấy trộm hay hỏng đến mức không dùng được, việc ghi chú JW Library của bạn có sống sót hay không quy về một câu hỏi: có tồn tại một bản sao lưu .jwlibrary ở đâu đó ngoài thiết bị ấy không? Nếu có, mọi thứ trong đó đều quay lại. Trang này nói về cách tìm một bản sao lưu, cách khôi phục nó lên bất kỳ thiết bị thay thế nào, và phải làm gì khi bản sao lưu duy nhất bạn có lại là bản cũ.",
-   "Mất điện thoại đã đủ căng thẳng rồi, chưa kể nỗi lo mất luôn nhiều năm ghi chú học hỏi theo nó. Bạn có lấy lại được hay không quy về một câu hỏi: có tồn tại một bản sao lưu .jwlibrary ở đâu đó ngoài chiếc điện thoại ấy không?",
-   "Hướng dẫn này đưa bạn đi qua việc tìm bất kỳ bản sao lưu nào bạn có thể có — kể cả những bản bạn quên là mình từng tạo — và biến nó trở lại thành một JW Library đầy đủ trên thiết bị mới của bạn.",
+   "Câu trả lời thành thật trước, vì nó tiết kiệm cho bạn phần đọc còn lại. Nếu có một bản sao lưu .jwlibrary ở bất kỳ đâu ngoài thiết bị đã mất, mọi thứ trong đó sẽ trở lại qua chính tính năng khôi phục của JW Library, và phần ấy bạn không cần đến trang này. Nếu không tồn tại bản sao lưu nào dưới bất kỳ dạng nào, dữ liệu học hỏi cá nhân hoàn toàn không lấy lại được: nó chỉ sống trên thiết bị, và không công cụ nào thay đổi được điều đó.",
+   "Chỗ trang này thực sự giúp được là trường hợp ở giữa, và nó phổ biến hơn cả hai trường hợp kia: bạn có bản sao lưu, nhưng nó không phải toàn bộ câu chuyện. Nó có thể đã vài tháng tuổi, hoặc bạn đã học trên chiếc điện thoại thay thế — nên khôi phục nó một cách đơn thuần sẽ đổi nhóm ghi chú này lấy nhóm kia thay vì trả lại cho bạn tất cả.",
+   "Gộp hai bên lại chính là điều JW Library không làm được, và đó là nội dung phần còn lại của trang này. Nhưng trước hết là việc tìm kiếm: người ta thường có nhiều bản sao lưu hơn mình nhớ đã tạo.",
   ],
   "steps": [
    ("Tìm mọi nơi một bản sao lưu có thể nằm", "Hãy kiểm tra email (tìm “jwlibrary” hoặc “backup”), Google Drive, iCloud Drive, OneDrive, Dropbox và thư mục Tải xuống của máy tính. Bản sao lưu là những tập tin nhỏ, rất dễ quên là mình đã lưu chúng."),

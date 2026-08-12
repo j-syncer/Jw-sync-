@@ -39,8 +39,9 @@ GUIDES_PL = {
   "h1": "Jak scalić kopie zapasowe JW Library z dwóch urządzeń",
   "description": "Połącz notatki, wyróżnienia, zakładki i etykiety z dwóch lub więcej kopii zapasowych JW Library w jeden plik .jwlibrary — bezpłatnie, prywatnie, w Twojej przeglądarce.",
   "intro": [
-   "Jeśli studiujesz na więcej niż jednym urządzeniu — telefon w sali, tablet w domu — każde z nich gromadzi własne notatki i wyróżnienia. Wbudowana w JW Library funkcja kopii zapasowej i przywracania nie potrafi ich połączyć: przywrócenie jednej kopii zastępuje na urządzeniu wszystko, kasując pracę wykonaną na drugim.",
-   "JW Sync rozwiązuje ten problem. Odczytuje dwie (lub więcej) kopie zapasowe .jwlibrary i scala notatki, wyróżnienia, zakładki i etykiety ze wszystkich w jeden nowy plik kopii. Scalanie odbywa się w całości w Twojej przeglądarce — Twoje pliki nigdy nie trafiają na żaden serwer, więc osobiste notatki pozostają prywatne.",
+   "Studiowałeś Strażnicę na telefonie, a inny artykuł na tablecie. Teraz każde urządzenie ma pracę, której nie ma to drugie, a JW Library nie potrafi ich pogodzić: przywracanie jest tam pełną podmianą, a nie scaleniem, więc którąkolwiek kopię przywrócisz, skasuje ona studium z drugiego urządzenia. Samą aplikacją nie da się zachować obu.",
+   "Po to jest ta strona. Czyta dwa (lub więcej) pliki .jwlibrary i łączy notatki, zakreślenia, zakładki i etykiety z nich wszystkich w jedną nową kopię zapasową — więc niczego nie trzeba wybierać kosztem czegoś innego. Scalanie odbywa się w całości w twojej przeglądarce; twoje pliki nigdy nie trafiają na żaden serwer, więc twoje osobiste notatki pozostają prywatne.",
+   "Dlatego też ten nawyk jest zapobiegawczy, a nie naprawczy: gdy scalasz co jakiś czas, nie musisz już pamiętać o przywracaniu, zanim zaczniesz studiować gdzie indziej. Studiuj tam, gdzie jesteś, scalaj, kiedy ci wygodnie, a każde urządzenie nadrobi zaległości.",
   ],
   "steps": [
    ("Utwórz kopię zapasową na każdym urządzeniu", "W JW Library otwórz Studium osobiste, dotknij menu z trzema kropkami, wybierz Kopia zapasowa i przywracanie, a potem Utwórz kopię zapasową. Zrób to na każdym urządzeniu. Każde utworzy plik .jwlibrary."),
@@ -130,10 +131,11 @@ GUIDES_PL = {
  "transfer-jw-library-notes-new-phone": {
   "title": "Jak przenieść notatki JW Library na nowy telefon",
   "h1": "Jak przenieść notatki JW Library na nowy telefon",
-  "description": "Krok po kroku: przenieś wszystkie swoje notatki, wyróżnienia, zakładki i etykiety z JW Library na nowy telefon za pomocą kopii zapasowej .jwlibrary — oraz jak scalić, jeśli na nowym telefonie masz już notatki.",
+  "description": "Przeniesienie notatek JW Library na nowy telefon to kopia zapasowa i przywrócenie, a aplikacja robi to w jakieś dwie minuty. Oto kroki — a przy nich jedyny przypadek, z którym sobie nie poradzi: gdy nowy telefon ma już własne notatki.",
   "intro": [
-   "Zakup nowego telefonu to najczęstszy moment, w którym ludzie tracą lata notatek JW Library — nie dlatego, że przeniesienie jest trudne, ale dlatego, że trzeba je wykonać świadomie, zanim stare urządzenie zostanie wyczyszczone. Osobiste dane studium nie podróżują razem ze zwykłym przenoszeniem z telefonu na telefon, a JW Library nie przechowuje ich kopii na żadnym koncie.",
-   "Narzędzia do przenoszenia danych przenoszą aplikacje i zdjęcia, ale nie przenoszą niezawodnie osobistych danych studium JW Library. Pewnym sposobem na przeniesienie notatek, wyróżnień, zakładek i etykiet na nowy telefon jest własny plik kopii zapasowej JW Library — zajmuje to kilka minut i działa między platformami.",
+   "To łatwiejsze, niż się ludziom wydaje, i nie potrzebujesz do tego żadnego dodatkowego narzędzia. JW Library ma wbudowane tworzenie i przywracanie kopii zapasowej, które przenosi na nowy telefon każdą notatkę, każde zakreślenie, zakładkę i etykietę — również między Androidem a iPhonem. Zrób to, dopóki stare urządzenie jeszcze działa, a całość zajmie kilka minut.",
+   "Jedyna część, którą trzeba wykonać świadomie, to samo przeniesienie: narzędzia do migracji z telefonu na telefon przenoszą aplikacje i zdjęcia, ale pomijają osobiste dane studium JW Library, więc utwórz plik kopii zapasowej, zamiast zakładać, że pojedzie sam.",
+   "Jest dokładnie jedna sytuacja, z którą aplikacja sobie nie poradzi, i warto o niej wiedzieć przed rozpoczęciem: jeśli już studiowałeś na nowym telefonie, przywrócenie kopii ze starego skasuje tę pracę, bo przywracanie podmienia całą bibliotekę urządzenia. Jeśli to twój przypadek, potrzebujesz sekcji o scalaniu poniżej.",
   ],
   "steps": [
    ("Utwórz kopię zapasową na starym telefonie", "Otwórz JW Library → Studium osobiste → menu z trzema kropkami → Kopia zapasowa i przywracanie → Utwórz kopię zapasową. Zapisze to plik .jwlibrary ze wszystkimi Twoimi danymi studium."),
@@ -225,10 +227,10 @@ GUIDES_PL = {
  "backup-jw-library": {
   "title": "Jak prawidłowo tworzyć kopie zapasowe JW Library",
   "h1": "Jak prawidłowo tworzyć kopie zapasowe JW Library",
-  "description": "Trwająca 30 sekund procedura, która chroni lata notatek, wyróżnień i zakładek w JW Library — oraz częsty błąd, na którym ludzie się przejeżdżają.",
+  "description": "Trzydziestosekundowa rutyna tworzenia kopii: co naprawdę zawiera plik .jwlibrary, gdzie go trzymać i dlaczego aktualny plik warto mieć nawet wtedy, gdy nic się nie stało.",
   "intro": [
-   "Wszystko, co zaznaczyłeś w JW Library — każda notatka, każde wyróżnienie, każda zakładka i etykieta — istnieje dokładnie w jednym miejscu: na urządzeniu w Twojej ręce. Nie ma konta przechowującego kopię ani automatycznej synchronizacji z chmurą. Kopia zapasowa to jedyne, co dzieli budowaną latami bibliotekę studium od zgubionego, zresetowanego albo wymienionego telefonu.",
-   "Porządna kopia zapasowa JW Library zajmuje pół minuty i chroni lata nagromadzonego studium. Większość historii o utracie danych zaczyna się tak samo: nie istniał aktualny plik .jwlibrary, gdy telefon zginął, został zresetowany albo wymieniony.",
+   "Kopia zapasowa zajmuje pół minuty i warto zrobić z niej nawyk — choć nie całkiem z tego powodu, który zwykle się podaje. Własne tworzenie i przywracanie kopii w JW Library już świetnie przenosi bibliotekę na nowe urządzenie, więc kopia jest mniej polisą ubezpieczeniową, a bardziej surowcem dla wszystkiego innego, co zechcesz zrobić ze swoim studium.",
+   "Plik .jwlibrary to jedyna postać, jaką twoja biblioteka przyjmuje poza aplikacją. To jego scalasz, gdy studiowałeś na dwóch urządzeniach; to jego otwierasz, żeby przeczytać, przeetykietować albo uporządkować lata notatek; to w nim szukasz według znaczenia, gdy pamiętasz tylko w połowie, co napisałeś; i to z niego wyciągasz zestaw notatek, gdy chcesz kilka wysłać znajomemu. Posiadanie aktualnego pliku jest tym, co umożliwia to wszystko.",
   ],
   "steps": [
    ("Utwórz kopię zapasową", "Otwórz JW Library → Studium osobiste → menu z trzema kropkami → Kopia zapasowa i przywracanie → Utwórz kopię zapasową. Powstanie plik .jwlibrary zawierający każdą notatkę, wyróżnienie, zakładkę i etykietę."),
@@ -534,9 +536,9 @@ GUIDES_PL = {
   "h1": "Odzyskiwanie notatek JW Library ze zgubionego, zepsutego lub zresetowanego telefonu",
   "description": "Zgubiłeś telefon albo został zresetowany razem z notatkami JW Library? To, co da się odzyskać, zależy od Twoich kopii zapasowych. Oto dokładnie, jak odzyskać notatki — i co zrobić następnym razem.",
   "intro": [
-   "Gdy telefon zostaje zgubiony, skradziony albo uszkodzony bez możliwości użycia, los Twoich notatek JW Library sprowadza się do jednego pytania: czy gdzieś poza tym urządzeniem istnieje kopia .jwlibrary? Jeśli tak, wszystko z niej wróci. Ta strona opisuje, jak taką kopię znaleźć, jak przywrócić ją na dowolne urządzenie zastępcze i co zrobić, gdy jedyna kopia, którą masz, jest stara.",
-   "Utrata telefonu jest wystarczająco stresująca bez obawy, że przepadły z nim lata notatek. To, czy da się je odzyskać, sprowadza się do jednego pytania: czy gdzieś poza tym telefonem istnieje kopia .jwlibrary?",
-   "Ten poradnik przeprowadzi Cię przez szukanie każdej kopii, jaką mogłeś zrobić — nawet takiej, o której zapomniałeś — i zamienienie jej z powrotem w pełną bibliotekę JW Library na nowym urządzeniu.",
+   "Najpierw szczera odpowiedź, bo oszczędzi ci dalszego czytania. Jeśli kopia .jwlibrary istnieje gdziekolwiek poza utraconym urządzeniem, wszystko, co w niej jest, wraca przez własne przywracanie JW Library i do tej części ta strona nie jest ci potrzebna. Jeśli nie ma kopii w żadnej postaci, osobistych danych studium nie da się odzyskać w ogóle: żyją wyłącznie na urządzeniu i żadne narzędzie tego nie zmieni.",
+   "Naprawdę ta strona pomaga w przypadku pośrednim, a ten zdarza się częściej niż oba pozostałe: kopię masz, ale nie jest ona całą historią. Może mieć kilka miesięcy albo już studiowałeś na telefonie zastępczym — wtedy zwykłe jej przywrócenie zamieniłoby jeden zestaw notatek na drugi, zamiast oddać ci wszystko.",
+   "Połączenie obu to dokładnie to, czego JW Library nie potrafi, i o tym jest reszta tej strony. Ale najpierw poszukiwania: ludzie regularnie mają więcej kopii, niż pamiętają, że zrobili.",
   ],
   "steps": [
    ("Przeszukaj każde miejsce, gdzie może być kopia", "Sprawdź pocztę (szukaj „jwlibrary” albo „kopia”), Google Drive, iCloud Drive, OneDrive, Dropbox i folder pobranych na komputerze. Kopie to małe pliki, o których zapisaniu łatwo zapomnieć."),

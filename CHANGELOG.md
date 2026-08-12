@@ -4,6 +4,40 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.30.0] — 2026-08-12
+
+### Changed: the guides no longer sell the site as protection against a lost phone
+
+JW Library's own Backup and Restore already moves a library to a new device in
+about two minutes. Copy that positioned JW Sync as insurance against losing a
+phone was therefore both untrue and a waste of the pitch — it advertised the
+site on something the app already does, and buried the things only this site
+can do.
+
+Four guides carried the framing and have had their opening rewritten, in all
+25 languages:
+
+- **Merging two backups** now opens on the actual crux, concretely: you studied
+  the Watchtower on your phone and a different article on your tablet, neither
+  backup holds the other's work, and restore is a full swap — so with the app
+  alone there is no way to end up with both. It also says what follows from
+  that: the routine is preventive, so you stop having to remember to restore
+  before studying somewhere else.
+- **Transferring to a new phone** answers the question straight away and says
+  plainly that the app handles it, then pivots to the one case it cannot: a new
+  phone that already has notes of its own.
+- **Backing up** reframes a .jwlibrary file as the raw material for merging,
+  reorganising, searching by meaning and sharing — not as an insurance policy.
+- **Recovering from a lost phone** leads with the honest answer. If a backup
+  exists you do not need this site; if none exists nothing can be retrieved.
+  The page is for the middle case, where combining an old backup with a
+  replacement phone's notes is the part JW Library cannot do.
+
+Guides that answer transfer and recovery searches still exist — those are real
+questions — but they now answer them honestly and pivot at the real limitation.
+
+---
+
 ## [3.29.0] — 2026-08-11
 
 ### Nederlands is now complete — all 37 guides

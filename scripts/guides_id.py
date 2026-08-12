@@ -36,8 +36,9 @@ GUIDES_ID = {
   "h1": "Cara menggabungkan cadangan JW Library dari dua perangkat",
   "description": "Satukan catatan, sorotan, penanda, dan label dari dua cadangan JW Library atau lebih menjadi satu berkas .jwlibrary — gratis, pribadi, di peramban Anda.",
   "intro": [
-   "Kalau Anda belajar di lebih dari satu perangkat — ponsel di balai, tablet di rumah — setiap perangkat akhirnya punya catatan dan sorotannya sendiri. Fitur Cadangan dan Pemulihan bawaan JW Library tidak bisa menyatukannya: memulihkan satu cadangan akan mengganti semua isi perangkat, menghapus hasil kerja perangkat yang lain.",
-   "JW Sync mengatasi hal ini. Alat ini membaca dua (atau lebih) berkas cadangan .jwlibrary lalu menggabungkan catatan, sorotan, penanda, dan label dari semuanya menjadi satu berkas cadangan baru. Penggabungan berlangsung sepenuhnya di peramban Anda — berkas Anda tidak pernah diunggah ke server mana pun, jadi catatan pelajaran pribadi Anda tetap pribadi.",
+   "Anda mempelajari Menara Pengawal di ponsel dan artikel lain di tablet. Kini masing-masing perangkat menyimpan hasil kerja yang tidak ada di perangkat satunya, dan JW Library tidak bisa mendamaikannya: pemulihan di sana adalah penggantian menyeluruh, bukan penggabungan, sehingga cadangan mana pun yang Anda pulihkan akan menghapus pelajaran dari perangkat yang lain. Dengan aplikasi saja, tidak ada cara untuk mempertahankan keduanya.",
+   "Untuk itulah situs ini ada. Ia membaca dua (atau lebih) berkas .jwlibrary dan menyatukan catatan, sorotan, penanda, dan label dari semuanya ke dalam satu cadangan baru — jadi tidak ada yang perlu dikorbankan. Seluruh penggabungan berjalan di dalam peramban Anda; berkas Anda tidak pernah diunggah ke server mana pun, sehingga catatan pelajaran pribadi Anda tetap pribadi.",
+   "Itu juga sebabnya kebiasaan ini bersifat mencegah, bukan memperbaiki: begitu Anda menggabungkan secara berkala, Anda tidak perlu lagi ingat untuk memulihkan sebelum belajar di tempat lain. Belajarlah di mana pun Anda berada, gabungkan saat sempat, dan setiap perangkat akan menyusul.",
   ],
   "steps": [
    ("Buat cadangan di setiap perangkat", "Di JW Library, buka Pelajaran Pribadi, ketuk menu tiga titik, pilih Cadangan dan Pemulihan, lalu Buat Cadangan. Lakukan ini di setiap perangkat. Masing-masing menghasilkan satu berkas .jwlibrary."),
@@ -106,10 +107,11 @@ GUIDES_ID = {
  "transfer-jw-library-notes-new-phone": {
   "title": "Cara Memindahkan Catatan JW Library ke Ponsel Baru",
   "h1": "Cara memindahkan catatan JW Library ke ponsel baru",
-  "description": "Langkah demi langkah: pindahkan semua catatan, sorotan, penanda, dan label JW Library Anda ke ponsel baru dengan cadangan .jwlibrary — dan cara menggabungkan kalau Anda sudah membuat catatan di ponsel baru.",
+  "description": "Memindahkan catatan JW Library ke ponsel baru hanyalah satu pencadangan dan satu pemulihan, dan aplikasinya menyelesaikannya dalam sekitar dua menit. Berikut langkah-langkahnya — beserta satu-satunya kasus yang tidak bisa ditanganinya: ketika ponsel baru sudah punya catatan sendiri.",
   "intro": [
-   "Membeli ponsel baru adalah momen paling umum orang kehilangan catatan JW Library bertahun-tahun — bukan karena pemindahannya sulit, tapi karena harus dilakukan dengan sengaja sebelum perangkat lama dihapus. Data pelajaran pribadi tidak ikut terbawa dalam pemindahan ponsel-ke-ponsel biasa, dan JW Library tidak menyimpan salinannya di akun mana pun.",
-   "Alat pemindah ponsel memindahkan aplikasi dan foto Anda, tapi tidak andal dalam memindahkan data pelajaran pribadi JW Library. Cara yang bisa diandalkan untuk membawa catatan, sorotan, penanda, dan label Anda ke ponsel baru adalah berkas cadangan JW Library sendiri — hanya perlu beberapa menit dan bekerja lintas platform.",
+   "Ini lebih mudah daripada yang orang kira, dan Anda tidak memerlukan alat tambahan apa pun. JW Library sudah menyertakan pencadangan dan pemulihan, dan itu membawa setiap catatan, sorotan, penanda, dan label ke ponsel baru — termasuk antara Android dan iPhone. Lakukan selagi perangkat lama masih berfungsi, dan seluruhnya hanya makan beberapa menit.",
+   "Satu-satunya bagian yang harus dilakukan dengan sengaja adalah pemindahannya sendiri: alat migrasi antarponsel memindahkan aplikasi dan foto Anda, tetapi melewatkan data pelajaran pribadi JW Library, jadi buatlah berkas cadangannya alih-alih menganggap ia ikut dengan sendirinya.",
+   "Ada tepat satu situasi yang tidak bisa ditangani aplikasi, dan ini layak diketahui sebelum mulai: jika Anda sudah belajar di ponsel baru, memulihkan cadangan ponsel lama akan menghapus hasil kerja itu, karena pemulihan mengganti seluruh perpustakaan perangkat. Kalau itu situasi Anda, bagian tentang penggabungan di bawah adalah yang Anda perlukan.",
   ],
   "steps": [
    ("Buat cadangan di ponsel lama", "Buka JW Library → Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Ini menyimpan berkas .jwlibrary yang memuat semua data pelajaran Anda."),
@@ -179,10 +181,10 @@ GUIDES_ID = {
  "backup-jw-library": {
   "title": "Cara Mencadangkan JW Library dengan Benar",
   "h1": "Cara mencadangkan JW Library dengan benar",
-  "description": "Rutinitas cadangan 30 detik yang melindungi catatan pelajaran, sorotan, dan penanda JW Library bertahun-tahun — dan kesalahan umum yang sering menjebak orang.",
+  "description": "Rutinitas pencadangan 30 detik: apa yang sebenarnya ada di dalam berkas .jwlibrary, di mana menyimpannya, dan mengapa punya yang terbaru tetap berharga meski tidak ada yang salah.",
   "intro": [
-   "Semua yang Anda tandai di JW Library — setiap catatan, setiap sorotan, setiap penanda dan label — hanya ada di satu tempat: perangkat di tangan Anda. Tidak ada akun yang menyimpan salinannya dan tidak ada sinkronisasi awan otomatis. Cadangan adalah satu-satunya hal yang berdiri di antara perpustakaan pelajaran yang dibangun bertahun-tahun dan ponsel yang hilang, disetel ulang, atau diganti.",
-   "Cadangan JW Library yang benar hanya perlu setengah menit dan melindungi pelajaran yang menumpuk bertahun-tahun. Kebanyakan kisah kehilangan data bermula dengan cara yang sama: tidak ada berkas .jwlibrary yang baru saat ponsel hilang, disetel ulang, atau diganti.",
+   "Sebuah cadangan makan waktu sekitar setengah menit dan layak dijadikan kebiasaan — meski tidak persis karena alasan yang biasa disebut orang. Pencadangan dan pemulihan bawaan JW Library sudah memindahkan perpustakaan ke perangkat baru dengan sangat baik, jadi cadangan lebih merupakan bahan mentah bagi semua hal lain yang ingin Anda lakukan dengan pelajaran Anda daripada sebuah asuransi.",
+   "Berkas .jwlibrary adalah satu-satunya wujud yang diambil perpustakaan Anda di luar aplikasi. Itulah yang Anda gabungkan ketika dua perangkat sama-sama dipakai belajar, yang Anda buka untuk membaca, melabeli ulang, atau merapikan bertahun-tahun catatan, yang Anda telusuri berdasarkan makna ketika Anda hanya setengah ingat apa yang Anda tulis, dan tempat Anda mengambil sekumpulan catatan ketika ingin mengirim beberapa kepada teman. Punya berkas terbaru itulah yang membuat semua itu mungkin.",
   ],
   "steps": [
    ("Buat cadangannya", "Buka JW Library → Pelajaran Pribadi → menu tiga titik → Cadangan dan Pemulihan → Buat Cadangan. Hasilnya berkas .jwlibrary berisi setiap catatan, sorotan, penanda, dan label."),
@@ -447,9 +449,9 @@ GUIDES_ID = {
   "h1": "Menyelamatkan catatan JW Library dari ponsel yang hilang, rusak, atau disetel ulang",
   "description": "Ponsel Anda hilang atau disetel ulang padahal ada catatan JW Library di dalamnya? Apa yang bisa diselamatkan bergantung pada cadangan Anda. Inilah cara persisnya mendapatkan catatan Anda kembali — dan apa yang harus dilakukan lain kali.",
   "intro": [
-   "Saat sebuah ponsel hilang, dicuri, atau rusak sampai tak terpakai, selamat tidaknya catatan JW Library Anda bergantung pada satu pertanyaan: apakah ada berkas cadangan .jwlibrary di suatu tempat di luar perangkat itu? Kalau ada, semua isinya bisa kembali. Halaman ini membahas cara menemukannya, cara memulihkannya ke perangkat pengganti mana pun, dan apa yang harus dilakukan kalau satu-satunya cadangan yang Anda punya sudah lama.",
-   "Kehilangan ponsel sudah cukup membuat stres tanpa ditambah ketakutan kehilangan catatan pelajaran bertahun-tahun bersamanya. Bisa tidaknya catatan itu diselamatkan bergantung pada satu pertanyaan: apakah ada berkas cadangan .jwlibrary di suatu tempat di luar ponsel itu?",
-   "Panduan ini menuntun Anda menemukan cadangan apa pun yang mungkin Anda punya — bahkan yang sudah Anda lupa pernah dibuat — lalu mengubahnya kembali menjadi JW Library yang utuh di perangkat baru Anda.",
+   "Jawaban jujurnya lebih dulu, karena itu menghemat waktu baca Anda. Kalau ada cadangan .jwlibrary di mana pun di luar perangkat yang hilang, semua isinya kembali lewat pemulihan bawaan JW Library, dan untuk bagian itu Anda tidak perlu situs ini. Kalau tidak ada cadangan dalam bentuk apa pun, data pelajaran pribadi sama sekali tidak bisa diambil kembali: data itu hanya hidup di perangkat, dan tidak ada alat yang bisa mengubahnya.",
+   "Tempat halaman ini benar-benar menolong adalah kasus tengah, dan itu lebih umum daripada dua kasus lainnya: Anda punya cadangan, tetapi itu bukan keseluruhan ceritanya. Bisa jadi umurnya berbulan-bulan, atau Anda sudah belajar di ponsel pengganti — sehingga memulihkannya begitu saja justru menukar satu kumpulan catatan dengan kumpulan lain alih-alih mengembalikan semuanya.",
+   "Menyatukan keduanya persis itulah yang tidak bisa dilakukan JW Library, dan itulah isi sisa halaman ini. Tetapi pertama-tama, pencariannya: orang biasanya punya lebih banyak cadangan daripada yang mereka ingat pernah buat.",
   ],
   "steps": [
    ("Cari di setiap tempat yang mungkin memuat cadangan", "Periksa surel Anda (cari “jwlibrary” atau “backup”), Google Drive, iCloud Drive, OneDrive, Dropbox, dan folder Downloads di komputer Anda. Cadangan adalah berkas kecil yang mudah terlupakan pernah disimpan."),

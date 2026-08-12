@@ -45,8 +45,9 @@ GUIDES_RO = {
   "h1": "Cum îmbini copiile de rezervă JW Library de pe două dispozitive",
   "description": "Combină notițele, evidențierile, semnele de carte și etichetele din două sau mai multe copii de rezervă JW Library într-un singur fișier .jwlibrary — gratuit, privat, în browserul tău.",
   "intro": [
-   "Dacă studiezi pe mai multe dispozitive — un telefon la sală, o tabletă acasă — fiecare dispozitiv ajunge cu propriile notițe și evidențieri. Funcția Copiere de rezervă și restaurare din JW Library nu le poate combina: restaurarea unei copii înlocuiește tot ce e pe dispozitiv, ștergând munca celuilalt.",
-   "JW Sync rezolvă asta. Citește două (sau mai multe) fișiere de rezervă .jwlibrary și îmbină notițele, evidențierile, semnele de carte și etichetele din toate într-un singur fișier nou. Îmbinarea rulează în întregime în browserul tău — fișierele tale nu sunt încărcate niciodată pe vreun server, așa că notițele tale personale de studiu rămân private.",
+   "Ai studiat Turnul de veghere pe telefon și un alt articol pe tabletă. Acum fiecare dispozitiv are o muncă pe care celălalt nu o are, iar JW Library nu le poate împăca: restaurarea de acolo este o înlocuire totală, nu o îmbinare, așa că oricare copie ai restaura, ea șterge studiul celuilalt dispozitiv. Doar cu aplicația nu există nicio cale de a le păstra pe amândouă.",
+   "Pentru asta există site-ul acesta. Citește două (sau mai multe) fișiere .jwlibrary și adună notițele, evidențierile, semnele de carte și etichetele din toate într-o singură copie de rezervă nouă — așa că nu trebuie ales nimic în dauna altceva. Îmbinarea are loc în întregime în browserul tău; fișierele tale nu sunt încărcate niciodată pe vreun server, așa că notițele tale de studiu rămân private.",
+   "Tot de aceea obiceiul este preventiv, nu de reparație: odată ce îmbini din când în când, nu mai trebuie să ții minte să restaurezi înainte de a studia în altă parte. Studiază unde ești, îmbină când îți convine, iar fiecare dispozitiv se pune la zi.",
   ],
   "steps": [
    ("Creează o copie de rezervă pe fiecare dispozitiv", "În JW Library, deschide Studiu personal, atinge meniul cu trei puncte, alege Copiere de rezervă și restaurare, apoi Creează o copie de rezervă. Fă asta pe fiecare dispozitiv. Fiecare produce câte un fișier .jwlibrary."),
@@ -115,10 +116,11 @@ GUIDES_RO = {
  "transfer-jw-library-notes-new-phone": {
   "title": "Cum muți notițele JW Library pe un telefon nou",
   "h1": "Cum muți notițele JW Library pe un telefon nou",
-  "description": "Pas cu pas: mută-ți toate notițele, evidențierile, semnele de carte și etichetele JW Library pe un telefon nou cu o copie de rezervă .jwlibrary — și cum îmbini dacă ai făcut deja notițe pe telefonul nou.",
+  "description": "Mutarea notițelor din JW Library pe un telefon nou înseamnă o copie de rezervă și o restaurare, iar aplicația se descurcă în vreo două minute. Iată pașii — plus singurul caz de care nu se poate ocupa: când telefonul nou are deja notițe proprii.",
   "intro": [
-   "Cumpărarea unui telefon nou e cel mai frecvent moment în care oamenii pierd ani de notițe JW Library — nu pentru că mutarea ar fi grea, ci pentru că trebuie făcută intenționat, înainte ca dispozitivul vechi să fie șters. Datele personale de studiu nu vin din oficiu cu o mutare obișnuită de pe un telefon pe altul, iar JW Library nu păstrează niciun exemplar al lor în vreun cont.",
-   "Aplicațiile de transfer între telefoane îți mută aplicațiile și pozele, dar nu mută în mod fiabil datele personale de studiu din JW Library. Modalitatea sigură de a-ți duce notițele, evidențierile, semnele de carte și etichetele pe un telefon nou e chiar fișierul de rezervă al JW Library — durează câteva minute și funcționează între platforme.",
+   "E mai ușor decât se așteaptă lumea și nu ai nevoie de niciun instrument în plus. JW Library are copierea de rezervă și restaurarea încorporate, iar acestea duc fiecare notiță, evidențiere, semn de carte și etichetă pe telefonul nou — inclusiv între Android și iPhone. Fă-o cât timp dispozitivul vechi încă funcționează, și totul durează câteva minute.",
+   "Singura parte de făcut intenționat este mutarea propriu-zisă: instrumentele care mută datele de pe un telefon pe altul îți duc aplicațiile și pozele, dar sar peste datele de studiu personal din JW Library, așa că fă fișierul copiei de rezervă în loc să presupui că vine singur.",
+   "Există exact o situație de care aplicația nu se poate ocupa și merită știută înainte de a începe: dacă ai studiat deja pe telefonul nou, restaurarea copiei de pe cel vechi va șterge munca aceea, fiindcă o restaurare înlocuiește în întregime biblioteca dispozitivului. Dacă asta e situația ta, secțiunea despre îmbinare de mai jos este cea care te interesează.",
   ],
   "steps": [
    ("Creează o copie de rezervă pe telefonul vechi", "Deschide JW Library → Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Se salvează un fișier .jwlibrary care conține toate datele tale de studiu."),
@@ -188,10 +190,10 @@ GUIDES_RO = {
  "backup-jw-library": {
   "title": "Cum faci corect o copie de rezervă a JW Library",
   "h1": "Cum faci corect o copie de rezervă a JW Library",
-  "description": "O rutină de 30 de secunde care îți protejează ani de notițe de studiu, evidențieri și semne de carte din JW Library — și greșeala frecventă care îi prinde pe oameni pe picior greșit.",
+  "description": "O rutină de copiere de rezervă de 30 de secunde: ce conține de fapt un fișier .jwlibrary, unde să-l ții și de ce merită să ai unul recent chiar și atunci când nu s-a stricat nimic.",
   "intro": [
-   "Tot ce ai marcat în JW Library — fiecare notiță, fiecare evidențiere, fiecare semn de carte și etichetă — există într-un singur loc: dispozitivul din mâna ta. Nu există vreun cont care să păstreze un exemplar și nici vreo sincronizare automată în cloud. O copie de rezervă e singurul lucru care stă între o bibliotecă de studiu clădită în ani și un telefon pierdut, resetat sau schimbat.",
-   "O copie de rezervă JW Library făcută cum trebuie durează jumătate de minut și protejează ani de studiu adunat. Cele mai multe povești despre date pierdute încep la fel: nu exista niciun fișier .jwlibrary recent când telefonul a fost pierdut, resetat sau înlocuit.",
+   "O copie de rezervă durează vreo jumătate de minut și merită făcută obicei — deși nu chiar din motivul care se invocă de obicei. Copierea și restaurarea proprii ale JW Library duc deja foarte bine o bibliotecă pe un dispozitiv nou, așa că o copie este mai puțin o asigurare și mai mult materia primă pentru tot ce ai mai vrea să faci cu studiul tău.",
+   "Un fișier .jwlibrary este singura formă pe care biblioteca ta o ia în afara aplicației. E ceea ce îmbini când s-a studiat pe două dispozitive, ce deschizi ca să citești, să reetichetezi sau să pui în ordine ani de notițe, ce cauți după înțeles când îți amintești doar pe jumătate ce ai scris și de unde scoți un set de notițe când vrei să-i trimiți câteva unui prieten. Faptul că ai unul recent este ceea ce face posibile toate acestea.",
   ],
   "steps": [
    ("Creează copia de rezervă", "Deschide JW Library → Studiu personal → meniul cu trei puncte → Copiere de rezervă și restaurare → Creează o copie de rezervă. Rezultă un fișier .jwlibrary care conține fiecare notiță, evidențiere, semn de carte și etichetă."),
@@ -456,9 +458,9 @@ GUIDES_RO = {
   "h1": "Recuperarea notițelor JW Library de pe un telefon pierdut, stricat sau resetat",
   "description": "Ți-ai pierdut telefonul sau a fost resetat cu notițele JW Library pe el? Ce poți recupera depinde de copiile tale de rezervă. Iată exact cum îți iei notițele înapoi — și ce să faci data viitoare.",
   "intro": [
-   "Când un telefon e pierdut, furat sau stricat iremediabil, supraviețuirea notițelor tale JW Library se reduce la o singură întrebare: există undeva, în afara acelui dispozitiv, o copie de rezervă .jwlibrary? Dacă da, tot ce e în ea revine. Pagina asta îți arată cum să găsești una, cum s-o restaurezi pe orice dispozitiv de schimb și ce să faci când singura copie pe care o ai e veche.",
-   "Pierderea unui telefon e destul de stresantă și fără teama că ai pierdut odată cu el ani de notițe de studiu. Dacă le poți recupera se reduce la o singură întrebare: există undeva, în afara acelui telefon, o copie de rezervă .jwlibrary?",
-   "Ghidul acesta te plimbă prin găsirea oricărei copii pe care s-ar putea s-o ai — chiar și una pe care ai uitat că ai făcut-o — și prin transformarea ei înapoi într-o bibliotecă JW Library completă, pe dispozitivul tău nou.",
+   "Mai întâi răspunsul sincer, fiindcă îți scutește citirea mai departe. Dacă există o copie .jwlibrary oriunde în afara dispozitivului pierdut, tot ce se află în ea revine prin restaurarea proprie a JW Library, iar pentru partea aceea nu ai nevoie de site-ul acesta. Dacă nu există nicio copie sub nicio formă, datele de studiu personal nu pot fi recuperate deloc: ele trăiesc numai pe dispozitiv, și niciun instrument nu schimbă asta.",
+   "Acolo unde pagina aceasta chiar ajută este cazul de mijloc, iar el este mai frecvent decât celelalte două: ai o copie, dar ea nu spune toată povestea. Poate fi veche de luni de zile, sau poate ai studiat deja pe telefonul de schimb — așa că restaurarea ei pur și simplu ar schimba un set de notițe cu altul în loc să-ți dea totul.",
+   "Punerea lor laolaltă este exact ceea ce JW Library nu poate face, și despre asta este restul paginii. Dar mai întâi căutarea: oamenii au în mod obișnuit mai multe copii decât își amintesc că au făcut.",
   ],
   "steps": [
    ("Caută în fiecare loc unde ar putea fi o copie", "Verifică-ți e-mailul (caută „jwlibrary” sau „backup”), Google Drive, iCloud Drive, OneDrive, Dropbox și folderul Descărcări al calculatorului. Copiile sunt fișiere mici, ușor de uitat că le-ai salvat."),

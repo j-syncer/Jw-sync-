@@ -41,8 +41,9 @@ GUIDES_HU = {
   "h1": "Hogyan egyesítsd két eszköz JW Library-mentését",
   "description": "Fűzd össze két vagy több JW Library-mentés jegyzeteit, kiemeléseit, könyvjelzőit és címkéit egyetlen .jwlibrary fájlba — ingyen, magánjellegűen, a böngésződben.",
   "intro": [
-   "Ha egynél több eszközön tanulmányozol — telefon a Királyság-teremben, táblagép otthon —, akkor mindegyik eszközön a saját jegyzeteid és kiemeléseid gyűlnek. A JW Library beépített Biztonsági mentés és visszaállítás funkciója nem tudja összefűzni őket: egy mentés visszaállítása mindent lecserél az eszközön, és letörli a másik eszközön végzett munkát.",
-   "A JW Sync ezt oldja meg. Beolvas két (vagy több) .jwlibrary mentésfájlt, és mindegyikből egyetlen új mentésfájlba egyesíti a jegyzeteket, kiemeléseket, könyvjelzőket és címkéket. Az egyesítés teljes egészében a böngésződben fut — a fájljaid soha nem kerülnek fel semmilyen szerverre, így a személyes tanulmányozási jegyzeteid magánjellegűek maradnak.",
+   "Az Őrtornyot a telefonodon tanulmányoztad, egy másik cikket pedig a táblagépeden. Most mindkét eszközön van olyan munka, ami a másikon nincs, és a JW Library nem tudja összeegyeztetni őket: a visszaállítás ott teljes csere, nem egyesítés, így bármelyik biztonsági mentést állítod vissza, az törli a másik eszköz tanulmányozását. Pusztán az alkalmazással sehogy sem lehet mindkettőt megtartani.",
+   "Ezért van ez az oldal. Beolvas két (vagy több) .jwlibrary fájlt, és mindegyikük jegyzeteit, kiemeléseit, könyvjelzőit és címkéit egyetlen új biztonsági mentésbe egyesíti — így semmi között nem kell választani. Az egyesítés teljes egészében a böngésződben zajlik; a fájljaid soha nem kerülnek fel semmilyen szerverre, így a személyes tanulmányozási jegyzeteid magánügyek maradnak.",
+   "Ezért is megelőző ez a szokás, nem pedig javító: ha időnként egyesítesz, többé nem kell emlékezned arra, hogy visszaállíts, mielőtt máshol tanulmányozol. Tanulmányozz ott, ahol vagy, egyesíts, amikor kényelmes, és minden eszköz felzárkózik.",
   ],
   "steps": [
    ("Készíts mentést minden eszközön", "A JW Libraryben nyisd meg a Személyes tanulmányozást, koppints a három pontra, válaszd a Biztonsági mentés és visszaállítás lehetőséget, majd a Biztonsági mentés készítését. Csináld meg minden eszközön. Mindegyik egy-egy .jwlibrary fájlt ad."),
@@ -111,10 +112,11 @@ GUIDES_HU = {
  "transfer-jw-library-notes-new-phone": {
   "title": "Hogyan vidd át a JW Library-jegyzeteidet új telefonra",
   "h1": "Hogyan vidd át a JW Library-jegyzeteidet új telefonra",
-  "description": "Lépésről lépésre: költöztesd át az összes JW Library-jegyzetedet, kiemelésedet, könyvjelződet és címkédet egy új telefonra egy .jwlibrary mentéssel — és így egyesíts, ha az új telefonon már jegyzeteltél.",
+  "description": "A JW Library jegyzeteinek átvitele új telefonra egy biztonsági mentés és egy visszaállítás, és az alkalmazás mintegy két perc alatt elintézi. Itt vannak a lépések — és az egyetlen eset, amit nem tud kezelni: amikor az új telefonon már vannak saját jegyzetek.",
   "intro": [
-   "Az új telefon a leggyakoribb pillanat, amikor az emberek évnyi JW Library-jegyzetet veszítenek el — nem azért, mert az átvitel nehéz, hanem mert szándékosan el kell végezni, mielőtt a régi eszközt letörlik. A személyes tanulmányozási adatok nem jönnek át maguktól egy szokásos telefonról telefonra költöztetéssel, a JW Library pedig egyetlen fiókban sem őriz róluk másolatot.",
-   "A telefonköltöztető eszközök átviszik az alkalmazásaidat és a fényképeidet, de a JW Library személyes tanulmányozási adatait nem viszik át megbízhatóan. A jegyzeteid, kiemeléseid, könyvjelzőid és címkéid átvitelének biztos módja a JW Library saját mentésfájlja — pár percet vesz igénybe, és platformok között is működik.",
+   "Ez könnyebb, mint sokan gondolnák, és nincs szükséged hozzá semmilyen külön eszközre. A JW Library beépítve tartalmazza a biztonsági mentést és a visszaállítást, és ez minden jegyzetet, kiemelést, könyvjelzőt és címkét átvisz az új telefonra — Android és iPhone között is. Csináld meg, amíg a régi készülék még működik, és az egész néhány percig tart.",
+   "Az egyetlen rész, amit szándékosan kell elvégezni, maga az átvitel: a telefonról telefonra költöztető eszközök átviszik az alkalmazásaidat és a fényképeidet, de kihagyják a JW Library személyes tanulmányozási adatait, ezért hozd létre a mentésfájlt, ahelyett hogy feltételeznéd, magától is átjön.",
+   "Pontosan egy helyzet van, amit az alkalmazás nem tud kezelni, és érdemes tudni róla, mielőtt belekezdenél: ha már tanulmányoztál az új telefonon, a régi mentésének visszaállítása törli azt a munkát, mert a visszaállítás teljesen lecseréli az eszköz könyvtárát. Ha ez a te helyzeted, az egyesítésről szóló lentebbi rész az, amire szükséged van.",
   ],
   "steps": [
    ("Készíts mentést a régi telefonon", "Nyisd meg a JW Libraryt → Személyes tanulmányozás → három pont → Biztonsági mentés és visszaállítás → Biztonsági mentés készítése. Ez elment egy .jwlibrary fájlt az összes tanulmányozási adatoddal."),
@@ -184,10 +186,10 @@ GUIDES_HU = {
  "backup-jw-library": {
   "title": "Hogyan ments le helyesen a JW Libraryből",
   "h1": "Hogyan ments le helyesen a JW Libraryből",
-  "description": "Egy 30 másodperces mentési rutin, amely évnyi JW Library-tanulmányozási jegyzetet, kiemelést és könyvjelzőt véd meg — és a gyakori hiba, amibe sokan beleesnek.",
+  "description": "Harmincmásodperces mentési rutin: mit tartalmaz valójában egy .jwlibrary fájl, hol tartsd, és miért érdemes friss példányt tartani akkor is, amikor semmi nem romlott el.",
   "intro": [
-   "Minden, amit a JW Libraryben megjelöltél — minden jegyzet, minden kiemelés, minden könyvjelző és címke — pontosan egy helyen létezik: a kezedben lévő eszközön. Nincs olyan fiók, amely másolatot tartana, és nincs automatikus felhőszinkron sem. Egy évek alatt felépített tanulmányozási könyvtár és egy elvesztett, visszaállított vagy lecserélt telefon között egyedül a mentés áll.",
-   "Egy rendes JW Library-mentés fél percet vesz igénybe, és évnyi felhalmozott tanulmányozást véd meg. A legtöbb adatvesztéses történet ugyanúgy kezdődik: nem létezett friss .jwlibrary fájl, amikor a telefon elveszett, visszaállt gyári állapotba vagy lecserélődött.",
+   "Egy biztonsági mentés fél percet vesz igénybe, és érdemes szokássá tenni — bár nem egészen azért, amiért általában mondani szokták. A JW Library saját mentése és visszaállítása már most is remekül átviszi a könyvtárat egy új eszközre, így a mentés nem annyira biztosítás, mint inkább alapanyaga mindannak, amit még kezdeni szeretnél a tanulmányozásoddal.",
+   "A .jwlibrary fájl az egyetlen forma, amit a könyvtárad az alkalmazáson kívül felvesz. Ezt egyesíted, amikor két eszközön is tanulmányoztál; ezt nyitod meg, hogy évek jegyzeteit elolvasd, újracímkézd vagy rendezd; ebben keresel jelentés szerint, amikor csak félig emlékszel, mit is írtál; és ebből emelsz ki egy csokor jegyzetet, amikor küldeni szeretnél párat egy barátodnak. Egy friss példány megléte az, ami mindezt lehetővé teszi.",
   ],
   "steps": [
    ("Készítsd el a mentést", "Nyisd meg a JW Libraryt → Személyes tanulmányozás → három pont → Biztonsági mentés és visszaállítás → Biztonsági mentés készítése. Egy .jwlibrary fájl készül, amelyben minden jegyzet, kiemelés, könyvjelző és címke benne van."),
@@ -452,9 +454,9 @@ GUIDES_HU = {
   "h1": "JW Library-jegyzetek visszaszerzése elveszett, elromlott vagy visszaállított telefonról",
   "description": "Elveszett a telefonod, vagy visszaállt gyári állapotba a JW Library-jegyzeteiddel? Amit vissza tudsz szerezni, az a mentéseiden múlik. Íme pontosan, hogyan szerezd vissza a jegyzeteidet — és mit tegyél legközelebb.",
   "intro": [
-   "Amikor egy telefon elveszik, ellopják vagy használhatatlanná törik, az, hogy a JW Library-jegyzeteid túlélik-e, egyetlen kérdésen múlik: létezik-e .jwlibrary mentés bárhol az eszközön kívül? Ha igen, minden visszakerül belőle. Ez az oldal arról szól, hogyan találj egyet, hogyan állítsd vissza bármilyen csereeszközre, és mit tegyél, ha az egyetlen mentésed régi.",
-   "Egy telefon elvesztése önmagában is elég stresszes anélkül, hogy attól kellene tartanod, évnyi tanulmányozási jegyzet is odaveszett vele. Hogy vissza tudod-e szerezni őket, egyetlen kérdésen múlik: létezik-e .jwlibrary mentés bárhol azon a telefonon kívül?",
-   "Ez az útmutató végigvezet azon, hogyan találj bármilyen mentést, ami esetleg megvan — akár olyat is, amelyről elfelejtetted, hogy elkészítetted —, és hogyan alakítsd vissza teljes JW Libraryvé az új eszközödön.",
+   "Előbb az őszinte válasz, mert megkímél a további olvasástól. Ha létezik .jwlibrary mentés bárhol az elveszett készüléken kívül, minden, ami benne van, visszatér a JW Library saját visszaállításával, és ehhez a részhez nincs szükséged erre az oldalra. Ha semmilyen formában nem létezik mentés, a személyes tanulmányozási adatok egyáltalán nem nyerhetők vissza: kizárólag a készüléken élnek, és ezen semmilyen eszköz nem változtat.",
+   "Ahol ez az oldal valóban segít, az a köztes eset, és az gyakoribb a másik kettőnél: van mentésed, de az nem a teljes történet. Lehet több hónapos, vagy már tanulmányoztál a cserekészüléken — így a puszta visszaállítása egyik jegyzetcsokrot cserélné a másikra ahelyett, hogy mindent visszaadna.",
+   "A kettő egyesítése éppen az, amire a JW Library nem képes, és erről szól az oldal többi része. De előbb a keresés: az embereknek rendszeresen több mentésük van, mint amennyiről emlékeznek, hogy készítették.",
   ],
   "steps": [
    ("Nézz meg minden helyet, ahol mentés lehet", "Ellenőrizd az e-mailjeidet (keress rá: „jwlibrary” vagy „backup”), a Google Drive-ot, az iCloud Drive-ot, a OneDrive-ot, a Dropboxot és a számítógéped Letöltések mappáját. A mentések kicsi fájlok, könnyű elfelejteni, hogy elmentetted őket."),
