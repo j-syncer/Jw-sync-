@@ -4,6 +4,23 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.32.1] — 2026-08-12
+
+### Fixed: four scripts were blocking the page from rendering
+
+`forum.js`, `enhancements.js`, `resurface.js` and `reading.js` were loaded
+without `defer`, and they sit about 40% of the way through the document — so
+the browser stopped building the page at that point and waited for all four
+(91.5 KiB) to download and run before parsing the remaining 60%. PageSpeed
+measured 520 ms of render-blocking time across them. Every other feature module
+was already deferred; these four had been missed.
+
+They are now deferred like the rest. Nothing about the page changes visually,
+and the modules still run before the page finishes loading, so the Reading
+Companion card and the demo hand-off behave exactly as before.
+
+---
+
 ## [3.32.0] — 2026-08-12
 
 ### Removed: Simple Mode. There is now one interface.

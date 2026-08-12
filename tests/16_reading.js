@@ -360,7 +360,10 @@ async function waitFor(predicate, label, timeoutMs = 8000) {
   for (const page of ['beta/index.html', 'index.html']) {
     section(page + ' wiring');
     const html = fs.readFileSync(REPO + '/' + page, 'utf8');
-    if (html.includes('<script src="js/reading.js"></script>')) ok('reading.js script tag present');
+    // Match the tag by src, not by exact markup — pinning the full string meant
+    // adding `defer` read as "script tag missing" on a perfectly good page.
+    // 04_lazy_load.js owns the separate assertion that it stays non-blocking.
+    if (/<script [^>]*src="js\/reading\.js"[^>]*><\/script>/.test(html)) ok('reading.js script tag present');
     else fail('reading.js script tag missing');
     if (html.includes('class="svc-card svc-reading"') && html.includes('id="jw-reading-live"'))
       ok('Reading Companion tool card present with live-state hook');

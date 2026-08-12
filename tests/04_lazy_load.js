@@ -28,10 +28,39 @@ function readHtml() {
     // Drop google tag inline scripts (they reference uninitialised dataLayer in JSDOM)
     .replace(/<script async src="https:\/\/www\.googletagmanager\.com[\s\S]*?<\/script>/, '')
     .replace(/<script>\s*window\.dataLayer[\s\S]*?gtag\('config'[^)]*\);\s*<\/script>/, '')
-    // forum.js and enhancements.js are file:// requests we don't want JSDOM to attempt
-    .replace(/<script src="js\/forum\.js"><\/script>/, '')
-    .replace(/<script src="js\/enhancements\.js"><\/script>/, '');
+    // forum.js and enhancements.js are file:// requests we don't want JSDOM to
+    // attempt. Match the tag regardless of its attributes — pinning the exact
+    // markup meant adding `defer` silently stopped the strip from matching.
+    .replace(/<script [^>]*src="js\/forum\.js"[^>]*><\/script>/, '')
+    .replace(/<script [^>]*src="js\/enhancements\.js"[^>]*><\/script>/, '');
 }
+
+// ── Every feature module must be non-blocking ───────────────────────────────
+// forum/enhancements/resurface/reading sit ~40% through the document, so
+// without `defer` they blocked the parser for the remaining 60% of the page.
+// Lighthouse measured 520 ms of render-blocking time across them plus the two
+// stylesheets. They are all safe to defer: none uses document.write, none is
+// referenced by an inline script, and the one markup reference
+// (onclick="window.JwReading&&...") is a click handler that is already guarded.
+(function deferGuard() {
+  section('Feature modules are not render-blocking');
+  const raw = fs.readFileSync(HTML_PATH, 'utf8');
+  const MUST_DEFER = [
+    'js/jw-session.js', 'js/forum.js', 'js/enhancements.js', 'js/resurface.js',
+    'js/reading.js', 'js/demo.js', 'js/conflict-review.js', 'js/impact-preview.js',
+    'js/post-merge.js', 'js/sync-hub.js', 'js/receive.js', 'js/wizard.js',
+    'js/doctor.js',
+  ];
+  for (const src of MUST_DEFER) {
+    const m = raw.match(new RegExp('<script [^>]*src="' + src.replace(/[/.]/g, '\\$&') + '"[^>]*>'));
+    if (!m) { fail(src + ' script tag not found'); continue; }
+    if (!/\bdefer\b|\basync\b/.test(m[0])) {
+      fail(src + ' is render-blocking — needs defer: ' + m[0]);
+    } else {
+      ok(src + ' is deferred');
+    }
+  }
+})();
 
 function makeDom({ seeded, url } = {}) {
   const html = readHtml();
