@@ -23,7 +23,7 @@ const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','
 // below builds its key fragment here, so a new tag *shape* widens the guards
 // rather than quietly dropping the language out of each of them.
 const KEY = (lang) => '(?:^|[,{\\s])"?' + lang + '"?\\s*:';
-const REQUIRED_I18N_KEYS = ['brw_open', 'disc_open_full']; // in the main TRANSLATIONS object (both files)
+const REQUIRED_I18N_KEYS = ['brw_open']; // in the main TRANSLATIONS object (both files)
 // Keys that must exist on the beta build (new features land in beta first).
 const BETA_ONLY_KEYS = ['cta_try_demo', 'cta_try_demo_nav', 'cta_howto',
   'err_corrupt', 'err_no_db', 'err_not_sqlite', 'err_oversize', 'warn_oversize'];
@@ -408,8 +408,6 @@ for (const path of FILES) {
     // These render inside the React bundle (now external for beta)
     if (!allSrc.includes('nav-btn-demo')) fail('React internal nav demo button missing (nav-btn-demo class)');
     else ok('React internal nav demo button present');
-    if (!allSrc.includes('simple-mode-teaser-btn-demo')) fail('Simple Mode teaser demo button missing');
-    else ok('Simple Mode teaser demo button present');
     if (!cAll.includes('window.__jwOpenDemo')) fail('window.__jwOpenDemo not exposed');
     else ok('window.__jwOpenDemo exposed for React buttons');
     if (!c.includes('data-demo-trigger')) fail('data-demo-trigger attribute missing');
@@ -1273,28 +1271,57 @@ section('Cross-tool session (jw-session.js)');
   }
 }
 
-// ── "Explore Full Mode" jump from the post-merge discover panel ──────────
-section('Discover panel → Full Mode jump');
-for (const appRel of ['beta/js/app.js', 'js/app.js']) {
-  const appPath = REPO + '/' + appRel;
-  const src = fs.readFileSync(appPath, 'utf8');
-  if (src.includes('window.__jwSetFullMode=function(){na(!1)')) {
-    ok(appRel + ': exposes __jwSetFullMode bridge (switches to Full Mode + saves pref)');
-  } else {
-    fail(appRel + ': __jwSetFullMode bridge missing — discover-panel button cannot switch modes');
-  }
-  if (/className:"discover-fullmode-btn"[\s\S]{0,120}window\.__jwSetFullMode/.test(src)
-      && src.includes('s("disc_open_full")')) {
-    ok(appRel + ': discover-fullmode-btn wired to __jwSetFullMode with disc_open_full label');
-  } else {
-    fail(appRel + ': discover-fullmode-btn not wired correctly');
+// ── One interface: Simple Mode must not come back ────────────────────────
+// Removed in v3.32.0. It was meant to be a gentle way in and did the opposite:
+// it was bare enough that first-time visitors concluded the site did less than
+// it does, and the two-mode toggle was itself the confusing part. What used to
+// justify a second mode is now the advanced-settings disclosure below.
+//
+// These assertions replace the old "Discover panel → Full Mode jump" checks
+// rather than deleting them, because a half-removed feature is the real risk
+// here: a stray `simpleMode` pref read would silently render an empty page for
+// anyone who still has simpleMode:true saved from before the change.
+section('Simple Mode is gone, and stays gone');
+{
+  const DEAD = ['simpleMode', 'simple-mode-teaser', 'mode-seg-ctrl', 'mode-seg-btn',
+                '__jwSetFullMode', 'discover-fullmode-btn'];
+  for (const rel of ['js/app.js', 'beta/js/app.js', 'styles.css', 'beta/styles.css',
+                     'index.html', 'beta/index.html']) {
+    const src = fs.readFileSync(REPO + '/' + rel, 'utf8');
+    const found = DEAD.filter(t => src.includes(t));
+    if (found.length === 0) ok(rel + ': no Simple Mode remnants');
+    else fail(rel + ': still references ' + found.join(', '));
   }
 }
-for (const cssRel of ['beta/styles.css', 'styles.css']) {
-  const cssPath = REPO + '/' + cssRel;
-  const css = fs.readFileSync(cssPath, 'utf8');
-  if (css.includes('.discover-fullmode-btn')) ok(cssRel + ': .discover-fullmode-btn styled');
-  else fail(cssRel + ': .discover-fullmode-btn CSS missing');
+
+// ── Advanced settings sit behind a disclosure ────────────────────────────
+// The merge panel opens showing only "what to bring over"; Smart Logic, Quick
+// Sync, Skip Duplicates, Deep Clean and the conflict radios are one click away.
+// The label reuses nav_adv_options, which already exists in every language.
+section('Advanced merge settings are deferred');
+for (const appRel of ['js/app.js', 'beta/js/app.js']) {
+  const src = fs.readFileSync(REPO + '/' + appRel, 'utf8');
+  if (/className:"jw-adv-disclosure"/.test(src) && src.includes('s("nav_adv_options")')) {
+    ok(appRel + ': disclosure button present, labelled from nav_adv_options');
+  } else {
+    fail(appRel + ': advanced-settings disclosure missing');
+  }
+  if (/advOpen&&React\.createElement\("div",\{className:"pt-4 border-t/.test(src)) {
+    ok(appRel + ': Smart Logic + conflict block gated on advOpen');
+  } else {
+    fail(appRel + ': advanced block is not gated on advOpen');
+  }
+  // The always-visible half must stay visible.
+  if (src.includes('s("choose_bring")') && src.includes('s("merge_settings")')) {
+    ok(appRel + ': "what to bring over" still renders unconditionally');
+  } else {
+    fail(appRel + ': the always-visible merge settings went missing');
+  }
+}
+for (const cssRel of ['styles.css', 'beta/styles.css']) {
+  const css = fs.readFileSync(REPO + '/' + cssRel, 'utf8');
+  if (css.includes('.jw-adv-disclosure')) ok(cssRel + ': .jw-adv-disclosure styled');
+  else fail(cssRel + ': .jw-adv-disclosure CSS missing');
 }
 
 // ── Accessibility: one main landmark + WCAG AA text contrast ────────────

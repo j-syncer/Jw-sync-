@@ -41,9 +41,11 @@ const MERGE_ANCHORS = [
   'ja=async e=>{if(!M||!e)return;',
   // The Insights modal close
   'className:"modal-close"',
-  // Simple Mode teaser
-  'simple-mode-teaser',
-  'Explore Full Mode →',
+  // Merge settings: the half that must always be visible, and the disclosure
+  // that now holds the rest. (Replaced the Simple Mode teaser anchors, which
+  // were removed with the mode itself in v3.32.0.)
+  'jw-adv-disclosure',
+  's("choose_bring")',
   // Existing features mentioned by the merge engine
   'Preview Merge',
   'Tag Manager',

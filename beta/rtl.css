@@ -19,7 +19,6 @@
 [dir="rtl"] div[class*="bg-stone-800/80"] > div[class*="justify-between"]{padding-left:1.75rem !important;padding-right:0 !important}
 [dir="rtl"] div[class*="bg-stone-800/80"] > div[class*="justify-between"] > div[class*="shrink-0"]{flex-direction:row-reverse !important}
 [dir="rtl"] .fn-peek-btn{margin-right:var(--sp-1);margin-left:0}
-[dir="rtl"] .smt-peek-label{text-align:right}
 [dir="rtl"] .nav-unread-dot{left:4px;right:auto}
 [dir="rtl"] .feat-new-dot{margin-right:var(--sp-1);margin-left:0}
 [dir="rtl"] .feat-tip-list li{padding-right:10px;padding-left:0}
@@ -86,8 +85,6 @@
 /* from index.html <style> #8 */
 [dir="rtl"] #fn-popup{right:50%;left:auto;transform:translate(50%, -50%)}
 [dir="rtl"] .fn-peek-btn{margin-right:4px;margin-left:0}
-[dir="rtl"] .mode-seg-ctrl{margin-left:6px;margin-right:0}
-[dir="rtl"] .mode-seg-ctrl::after{left:-10px;right:auto}
 [dir="rtl"] .feat-tip-list{padding-right:14px;padding-left:0}
 
 /* from index.html <style> #9 */

@@ -50,8 +50,8 @@ cd tests && npm install --silent 2>/dev/null; npm test
 ```
 
 - `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
-- `npm test` chains all 20 suites (`01_static.js` … `20_translation_integrity.js`) and exits non-zero on the first failure.
-- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`.
+- `npm test` chains all 21 suites (`01_static.js` … `21_app_boot.js`) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`, `:boot`.
 
 **Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
 
@@ -74,6 +74,13 @@ Suite coverage:
 - **16_reading.js** — Reading Companion: plan data (1,189 chapters both orders), engine (portions, self-healing carry-over, streaks, forecast, milestones), i18n coverage, JSDOM UI, notes integration — **and the jw.org wtlocale table** (see the language runbook below).
 - **17_guides.js** — the 37 static guides in every language: structure, canonicals, cross-links.
 - **18_arabic_rtl.js** — RTL guard: dictionary coverage, `?lang=` allow-list, nav picker, wtlocale presence, `dir="rtl"` applied before first paint, `rtl.css` not stale.
+- **21_app_boot.js** — **mounts the React app in JSDOM** and checks it renders a
+  real page rather than a blank one, with a stale `simpleMode:true` pref seeded.
+  Every other suite reads `js/app.js` as *text*, which cannot see a
+  ReferenceError: removing Simple Mode left one `${be}` in a `useEffect`
+  dependency key, the app crashed into its error boundary on load, and
+  `node --check` plus all twenty other suites passed. Requires `react` /
+  `react-dom`, which is why `tests/package.json` now depends on them.
 - **20_translation_integrity.js** — reads what the strings *say*, in every
   language: no stray scripts (the guard that caught a Cyrillic `материал` in a
   Cantonese paragraph, previously run only for the 5 languages built through
@@ -482,12 +489,31 @@ and how-tos" link, but `guides_url()` points it at the English `/guides/` rather
 than a `/guides/<lang>/` that does not exist — a deliberate fallback, not a 404.
 Nothing has to be remembered or switched off by hand.
 
-### Simple Mode
-- Default ON for first-time visitors; restores saved pref via `loadPrefs().simpleMode`
-- State init: `useState(()=>{const p=loadPrefs();return p.simpleMode!==void 0?p.simpleMode:!0})`
-- Segmented pill toggle in nav bar — CSS classes: `.mode-seg-ctrl`, `.mode-seg-btn`, `.mode-seg-on`, `.mode-seg-full`
-- Static teaser banner at top of Simple Mode — CSS classes: `.simple-mode-teaser`, `.simple-mode-teaser-inner`
-- All mode changes call `savePrefs({simpleMode: bool})`
+### One interface (Simple Mode removed in v3.32.0)
+There is no mode toggle and no `simpleMode` pref. Simple Mode was bare enough
+that first-time visitors concluded the site did less than it does, and the
+toggle itself was a thing to be confused by. **Do not reintroduce a second
+mode** — `01_static.js` fails the build on any of `simpleMode`,
+`simple-mode-teaser`, `mode-seg-ctrl`, `mode-seg-btn`, `__jwSetFullMode` or
+`discover-fullmode-btn` reappearing in the shipped files.
+
+What used to justify a second mode is the **advanced-settings disclosure**:
+Merge Settings opens showing only "what to bring over" (Notes / Highlights /
+Bookmarks / Auto-Tag), and Smart Logic & Cleanup, Quick Sync, Skip Exact
+Duplicates, Deep Clean and conflict resolution sit behind `.jw-adv-disclosure`,
+gated on `advOpen` and persisted via `savePrefs({advancedOpen})`. The label
+reuses `nav_adv_options`, which already exists in all 25 languages — a new
+string would have meant 25 translations for one word.
+
+Note the Merge Settings panel is *itself* collapsed by default (`[Rt,Sa]`),
+so the empty state is three panel headers, not a wall of controls.
+
+⚠️ The `smt_*`, `mode_*`, `nav_simple_view`, `nav_adv_show_title`,
+`nav_adv_back_title` and `disc_open_full` keys are now **dead strings** still
+present in every language. They are harmless at runtime but should be swept.
+Removing them is a two-store job like the landing dictionary: only 14 of 25
+languages have extracted `js_app.js.0.<lang>.json` tables; the other 11 live
+only inside the `js/app.js` object literal.
 
 ### Merge Pipeline — Web Worker (`beta/js/merge-worker.js`)
 All SQLite query execution, ZIP decompression, and ZIP recompression run in a dedicated Web Worker off the UI thread. The main thread transfers `ArrayBuffer`s to the worker via Transferable Objects (zero-copy) and receives the merged `.jwlibrary` buffer back the same way. The main thread's `vt()` function is now a thin dispatcher; result assembly (Blob URL, IDB save) stays on the main thread.

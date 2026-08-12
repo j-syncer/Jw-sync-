@@ -565,19 +565,7 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 /* === User Engagement Improvements === */
 
 /* Revamped Simple Mode teaser: feature mini-cards */
-.smt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--sp-2);margin-bottom:var(--sp-3)}
-@media(max-width:600px){.smt-grid{grid-template-columns:1fr}}
-.smt-feat{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3);display:flex;flex-direction:column;gap:3px;transition:border-color var(--t-fast)}
-.smt-feat:hover{border-color:var(--color-border-strong)}
-.smt-feat-name{font-size:var(--text-sm);font-weight:700;color:var(--color-orange-light)}
-.smt-feat-desc{font-size:15px;color:#cbd5e1;line-height:1.6}.smt-feat-new{border-color:rgba(234,88,12,.35);background:rgba(234,88,12,.06)}
 /* Simple Mode teaser collapse */
-.simple-mode-teaser-inner{overflow:hidden;max-height:900px;opacity:1;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease}
-.smt-hidden{max-height:0!important;opacity:0!important;pointer-events:none}
-.smt-peek-toggle-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:8px 12px;background:transparent;border:none;cursor:pointer;color:var(--color-text-secondary);font-size:var(--text-sm);font-weight:600;border-bottom:1px solid var(--color-border)}
-.smt-peek-toggle-btn:hover{color:var(--color-text-primary)}
-.smt-peek-label{flex:1;text-align:left}
-.smt-peek-chevron{font-size:10px;opacity:.7;transition:transform .2s}
 
 /* Post-merge discover panel */
 .discover-panel{margin-top:var(--sp-5);padding:var(--sp-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-md)}
@@ -588,8 +576,6 @@ div[class*="rounded-lg"] div[class*="overflow-hidden"] span[class*="truncate"] {
 .discover-card:hover{border-color:var(--color-border-orange)}
 .discover-card-name{font-size:var(--text-sm);font-weight:700;color:var(--color-text-primary)}
 .discover-card-desc{font-size:var(--text-xs);color:#cbd5e1;line-height:1.6}
-.discover-fullmode-btn{display:block;width:100%;margin-bottom:12px;padding:11px;background:#ea580c;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s}
-.discover-fullmode-btn:hover{opacity:.9}
 .discover-community{font-size:12px;color:rgba(208,232,248,.4);text-align:center;margin-top:4px}
 .discover-community-link{color:#fb923c;text-decoration:none;transition:color .15s}
 .discover-community-link:hover{color:#ea580c;text-decoration:underline}
@@ -741,9 +727,6 @@ body.light .simple-step.active { background:rgba(234,88,12,.03)!important; borde
 body.light .simple-step.done { background:rgba(34,197,94,.03)!important; border-color:rgba(34,197,94,.3)!important; }
 body.light .simple-drop-zone { border-color:rgba(11,46,88,.2)!important; }
 body.light .simple-drop-zone:hover { background:rgba(234,88,12,.03)!important; border-color:var(--color-orange)!important; }
-body.light .simple-mode-teaser { background:#fff!important; border-color:rgba(11,46,88,.12)!important; }
-body.light .smt-feat { background:#f8fbff!important; border-color:rgba(11,46,88,.1)!important; }
-body.light .smt-feat-desc { color:#475569!important; }
 body.light .discover-card-desc { color:#475569!important; }
 body.light .privacy-pill { color:#16a34a!important; background:rgba(22,163,74,.06)!important; border-color:rgba(22,163,74,.2)!important; }
 body.light .privacy-dot { background:#16a34a!important; }
@@ -752,9 +735,6 @@ body.light #mob-bar { background:rgba(244,248,255,.98)!important; border-top-col
 body.light div[class*="bg-stone-800"][class*="rounded-2xl"] { background:#fff!important; border-color:rgba(11,46,88,.12)!important; }
 body.light div[class*="bg-stone-800/50"][class*="border-b"] { background:rgba(11,46,88,.03)!important; border-bottom-color:rgba(11,46,88,.1)!important; }
 body.light .discover-panel { background:rgba(11,46,88,.03)!important; border-color:rgba(11,46,88,.1)!important; }
-body.light .mode-seg-ctrl { background:rgba(11,46,88,.08)!important; border-color:rgba(11,46,88,.15)!important; }
-body.light .mode-seg-btn { color:#64748b!important; }
-body.light .mode-seg-on { background:var(--color-orange)!important; color:#fff!important; }
 body.light #jws-loading { background:#f4f8ff; }
 
 /* CLS fix: pre-size root so footer starts near final position */
@@ -1117,26 +1097,6 @@ body.light .site-nav-shimmer-explorer {
   color: #ea580c !important;
   border-color: rgba(234,88,12,.45) !important;
   background: rgba(234,88,12,.08) !important;
-}
-.simple-mode-teaser-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 14px;
-}
-/* Compound selector wins over the inline-style .simple-mode-teaser-btn rule. */
-.simple-mode-teaser-btn.simple-mode-teaser-btn-demo {
-  background: transparent;
-  color: #cbd5e1;
-  border: 1px solid rgba(148,163,184,.3);
-}
-.simple-mode-teaser-btn.simple-mode-teaser-btn-demo:hover {
-  color: #ea580c;
-  border-color: rgba(234,88,12,.5);
-  background: rgba(234,88,12,.07);
-  opacity: 1;
 }
 /* Loading state when a demo button has triggered lazy-load. */
 .jw-demo-loading {
@@ -2155,12 +2115,6 @@ body.light .svc-tag { color: #475569; background: rgba(71,85,105,.1); border-col
   .cta-btn, .cta-btn-secondary, .cta-btn-ghost,
   .svc-card-btn, .simple-merge-btn,
   .btn, .btn--primary, .btn--secondary, .btn--ghost, .btn--danger, .btn--danger-solid,
-  .mode-seg-btn {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
   .nav-lang-select { min-height: 44px; }
 }
 
@@ -2610,3 +2564,21 @@ html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]:disa
 @media (min-width: 640px) {
   .jw-nav-tools { flex-wrap: wrap; overflow-x: visible; row-gap: 6px; }
 }
+
+/* ── Advanced settings disclosure ─────────────────────────────────────
+   Simple Mode is gone (v3.32.0): one interface for everyone. What used to
+   justify a second mode is handled here instead — the merge settings that
+   almost nobody needs to touch (Smart Logic, Quick Sync, Skip Duplicates,
+   Deep Clean, conflict resolution) sit behind this, so the panel opens
+   showing only "what to bring over". Quiet slate, per the design rules:
+   it is a utility control and must not compete with content. */
+.jw-adv-disclosure{display:flex;align-items:center;gap:8px;width:100%;
+  margin-top:16px;padding:9px 12px;background:rgba(71,85,105,.35);
+  border:1px solid var(--color-border);border-radius:var(--radius-sm);
+  color:var(--color-text-secondary);font-size:var(--text-sm);font-weight:600;
+  cursor:pointer;transition:border-color var(--t-fast),color var(--t-fast)}
+.jw-adv-disclosure:hover{border-color:var(--color-border-strong);
+  color:var(--color-text-primary)}
+.jw-adv-disclosure-chev{font-size:11px;opacity:.75}
+body.light .jw-adv-disclosure{background:rgba(11,46,88,.06)!important;
+  border-color:rgba(11,46,88,.14)!important;color:#475569!important}

@@ -4,6 +4,37 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.32.0] — 2026-08-12
+
+### Removed: Simple Mode. There is now one interface.
+
+Simple Mode was meant to be a gentle way in and did the opposite. It was bare
+enough that first-time visitors concluded the site did less than it does, and
+the two-mode toggle was itself a thing to be confused by. Both modes are gone;
+everyone gets the full app.
+
+### Changed: the advanced merge settings are one click away instead of in the way
+
+What used to justify a second mode is handled here instead. The Merge Settings
+panel now opens showing only **what to bring over** — Notes, Highlights,
+Bookmarks and Auto-Tag. Smart Logic & Cleanup, Quick Sync, Skip Exact
+Duplicates, Deep Clean and the conflict-resolution choice sit behind a single
+**Advanced options** disclosure that remembers whether you left it open.
+
+Nothing was removed and no default changed — the defaults were already right
+for almost everyone, which is exactly why they did not need to be on screen.
+
+### Added: a test that boots the app
+
+Twenty suites, and none of them rendered the React app; they read `js/app.js` as
+text. That gap let a real crash through during this change — one surviving
+`${be}` in a `useEffect` dependency key sent the app to its error boundary on
+load, while `node --check` and all twenty suites passed. `21_app_boot.js` now
+mounts the app in JSDOM, with a stale `simpleMode:true` pref seeded, and checks
+it renders a real page rather than a blank one.
+
+---
+
 ## [3.31.0] — 2026-08-12
 
 ### Changed: the landing page now says what only this site can do
