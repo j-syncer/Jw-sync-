@@ -59,8 +59,9 @@ GUIDES = [
   "h1": "How to merge JW Library backups from two devices",
   "description": "Combine the notes, highlights, bookmarks and tags from two or more JW Library backups into one .jwlibrary file — free, private, in your browser.",
   "intro": [
-   "If you study on more than one device — a phone at the hall, a tablet at home — each device ends up with its own notes and highlights. JW Library's built-in Backup and Restore can't combine them: restoring one backup replaces everything on the device, wiping out the other device's work.",
-   "JW Sync solves this. It reads two (or more) .jwlibrary backup files and merges the notes, highlights, bookmarks and tags from all of them into one new backup file. The merge runs entirely in your browser — your files are never uploaded to any server, so your personal study notes stay private.",
+   "You studied the Watchtower on your phone and a different article on your tablet. Both devices now hold work the other does not — and JW Library cannot reconcile them. Its Restore is a full swap, not a merge, so whichever backup you restore deletes the other device's study. Using the app alone there is no way to end up with both.",
+   "That is what this site is for. It reads two (or more) .jwlibrary backup files and combines the notes, highlights, bookmarks and tags from all of them into one new backup — so nothing has to be chosen between. The merge runs entirely in your browser; your files are never uploaded to any server, so your personal study notes stay private.",
+   "It is also why the habit is preventive rather than remedial: once you merge periodically, you stop having to remember to restore before studying somewhere else. Study wherever you are, merge when it suits you, and every device catches up.",
   ],
   "steps": [
    ("Create a backup on each device", "In JW Library, open Personal Study, tap the three-dot menu, choose Backup and Restore, then Create a backup. Do this on every device. Each one produces a .jwlibrary file."),
@@ -158,10 +159,11 @@ GUIDES = [
   "group": "Getting started",
   "title": "How to Transfer JW Library Notes to a New Phone",
   "h1": "How to transfer JW Library notes to a new phone",
-  "description": "Step-by-step: move all your JW Library notes, highlights, bookmarks and tags to a new phone with a .jwlibrary backup — and how to merge if you already made notes on the new phone.",
+  "description": "Moving JW Library notes to a new phone is a backup and a restore, and the app handles it in about two minutes. Here are the steps — plus the one case it cannot handle, when the new phone already has notes of its own.",
   "intro": [
-   "Getting a new phone is the single most common moment people lose years of JW Library notes — not because the transfer is difficult, but because it has to be done deliberately before the old device is wiped. Personal study data does not ride along with a normal phone-to-phone transfer, and JW Library keeps no copy of it in any account.",
-   "Phone-transfer tools move your apps and photos, but they do not reliably move JW Library's personal study data. The dependable way to bring your notes, highlights, bookmarks and tags to a new phone is JW Library's own backup file — it takes a few minutes and works across platforms.",
+   "This is easier than people expect, and you do not need any extra tool for it. JW Library has Backup and Restore built in, and it carries every note, highlight, bookmark and tag to a new phone — including between Android and iPhone. Do it while the old device still works and the whole thing takes a couple of minutes.",
+   "The one part to do deliberately is the transfer itself: phone-to-phone migration tools move your apps and photos, but they skip JW Library's personal study data, so create the backup file rather than assuming it rides along.",
+   "There is exactly one situation the app cannot handle, and it is worth knowing before you start: if you have already been studying on the new phone, restoring the old phone's backup will delete that work, because a restore replaces the device's library outright. If that is your situation, the section on merging further down is the part you want.",
   ],
   "steps": [
    ("Create a backup on the old phone", "Open JW Library → Personal Study → three-dot menu → Backup and Restore → Create a backup. This saves a .jwlibrary file containing all your study data."),
@@ -266,10 +268,10 @@ GUIDES = [
   "group": "Getting started",
   "title": "How to Back Up JW Library the Right Way",
   "h1": "How to back up JW Library the right way",
-  "description": "A 30-second backup routine that protects years of JW Library study notes, highlights and bookmarks — and the common mistake that catches people out.",
+  "description": "A 30-second backup routine: what a .jwlibrary file actually holds, where to keep it, and why a current one is worth having even when nothing has gone wrong.",
   "intro": [
-   "Everything you have marked in JW Library — every note, every highlight, every bookmark and tag — exists in exactly one place: the device in your hand. There is no account holding a copy and no automatic cloud sync. A backup is the only thing standing between a study library built over years and a lost, reset or upgraded phone.",
-   "A proper JW Library backup takes half a minute and protects years of accumulated study. Most data loss stories start the same way: no recent .jwlibrary file existed when a phone was lost, reset or replaced.",
+   "A backup takes about half a minute, and it is worth making a habit of — though not quite for the reason people usually give. JW Library's own Backup and Restore already moves a library to a new device perfectly well, so a backup is less an insurance policy than the raw material for everything else you might want to do with your study.",
+   "A .jwlibrary file is the only form your library takes outside the app. It is what you merge when two devices have both been studied on, what you open to read, retag or reorganise years of notes, what you search by meaning when you can only half remember what you wrote, and what you draw a set of notes from when you want to send some to a friend. Keeping a current one is what makes any of that available.",
   ],
   "steps": [
    ("Create the backup", "Open JW Library → Personal Study → three-dot menu → Backup and Restore → Create a backup. It produces a .jwlibrary file containing every note, highlight, bookmark and tag."),
@@ -606,9 +608,9 @@ GUIDES = [
   "h1": "Recovering JW Library notes from a lost, broken or reset phone",
   "description": "Lost your phone or had it reset with JW Library notes on it? What you can recover depends on your backups. Here's exactly how to get your notes back — and what to do next time.",
   "intro": [
-   "When a phone is lost, stolen or damaged beyond use, whether your JW Library notes survive comes down to one question: does a .jwlibrary backup exist anywhere outside that device? If it does, everything in it comes back. This page covers how to find one, how to restore it onto any replacement device, and what to do when the only backup you have is old.",
-   "Losing a phone is stressful enough without fearing you've lost years of study notes with it. Whether you can recover them comes down to one question: does a .jwlibrary backup exist anywhere outside that phone?",
-   "This guide walks through finding any backup you may have — even ones you forgot you made — and turning it back into a full JW Library on your new device.",
+   "The honest answer first, because it saves you reading further. If a .jwlibrary backup exists anywhere outside the lost device, everything in it comes back through JW Library's own Restore, and you do not need this site for that part. If no backup exists in any form, personal study data cannot be retrieved at all — it lives only on the device, and no tool can change that.",
+   "Where this page genuinely helps is the middle case, which is more common than either: you have a backup, but it is not the whole story. It may be months old, or you may have been studying on the replacement phone already — so restoring it plainly would trade one set of notes for another rather than getting you everything.",
+   "Combining them is the part JW Library cannot do, and it is what the rest of this page is about. First, though, the search: people routinely have more backups than they remember making.",
   ],
   "steps": [
    ("Search every place a backup might be", "Check your email (search for “jwlibrary” or “backup”), Google Drive, iCloud Drive, OneDrive, Dropbox and your computer's Downloads folder. Backups are small files that are easy to forget you saved."),
