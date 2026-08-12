@@ -4,6 +4,42 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.34.0] — 2026-08-12
+
+### Import Markdown notes back into a backup
+
+The Study Explorer has a new **Import Markdown** button next to Export
+Markdown. Give it `.md` files — or the `.zip` this page exports — and their
+notes are added to the backup you have open. Both directions people asked for
+are covered by the same button:
+
+- **Notes that came out of this page** carry `book`, `chapter` and `verse` in
+  their front matter, so they go back to the exact verse they came from.
+- **Notes written anywhere else** — Obsidian, Notion, a plain text editor —
+  have no such header, so they arrive as standalone notes with their title,
+  date and tags intact. Adding a line like `publication: Matthew 26:14` to any
+  file places it on that verse.
+
+Before anything is written you get a count of what will land on a verse, what
+will be added as a standalone note, and what is already in the backup and will
+be skipped — so re-importing the same export twice does not double your notes.
+Imported notes are tagged **Imported** so you can find or remove them, and the
+whole import is one step of Undo.
+
+Formatting survives the round trip: `**bold**`, `*italics*` and `- lists` come
+back as real formatting in JW Library.
+
+One deliberate limit, worth stating plainly. To place a note on a verse the
+site needs the internal identifiers JW Library uses for that chapter, and it
+will only ever copy those from a Bible location your own backup already has —
+never guess them. If a backup has no Bible notes or highlights at all, imported
+notes are added as standalone notes rather than attached to a location the app
+might not recognise.
+
+Thanks to purlo on the community page for both halves of this.
+
+---
+
 ## [3.33.0] — 2026-08-12
 
 ### The verse is now in the Markdown export
