@@ -177,6 +177,69 @@ the page itself, or they will pass against the module file.
 
 ---
 
+## ⚠️ What the site is actually for (always apply to any copy you write)
+
+**The site does not exist to rescue people who lost their phone.** JW Library's
+own Backup and Restore already moves a library to a new device perfectly well,
+and it takes about two minutes. Writing copy that positions JW Sync as a
+recovery tool is both untrue and a waste of the pitch — it markets the site on
+something the app already does, and buries the things only this site can do.
+
+### The crux: two devices that have both been studied on
+
+Restore is a **full swap**, not a merge. So the moment you study on two devices
+without restoring in between, you are stuck:
+
+> You studied the Watchtower on your phone and a different article on your
+> tablet. Neither backup contains the other's work. Restoring either one
+> deletes the other. There is no way, using JW Library alone, to end up with
+> both.
+
+That is the whole problem. Not loss — **divergence**. The user does not have to
+have been careless, lost anything, or broken anything; they just used two
+devices in the ordinary way. Merging is the only exit, and nothing else offers
+it. **This scenario belongs near the top of the site's most important copy**,
+and it is the thing to lead with whenever you are explaining why the site
+exists.
+
+Note what this also means: the routine is *preventive*, not remedial. The value
+is that you never have to remember to restore before studying somewhere else.
+
+### The four things the app cannot do
+
+Every one of these is a real selling point; none of them is available in
+JW Library alone:
+
+1. **Merge two libraries without either overwriting the other** — the crux
+   above, plus the Conflict Reviewer for the one case that needs a decision.
+2. **Selective sharing** — send a friend *just the notes under one tag*, or
+   *just a date range*, and have them arrive as real notes in their library
+   without touching anything they wrote. Nobody else has this, and it is
+   integrated end to end (pick → send → receive → merge in).
+3. **The tag manager** — rename a tag across 300 notes, merge duplicates,
+   bulk retag and recolour. The app has no bulk editing at all.
+4. **Note search by meaning (the on-device LLM)** — find the note you half
+   remember by describing it, when keyword search cannot.
+
+Plus the rest of the browser-only layer: Study Stats, Study Map, Reading
+Companion, Library Doctor, date-range extraction.
+
+### The rule for guide copy
+
+Guides that answer a transfer/new-phone/recovery search **may keep existing** —
+those are real queries and good SEO doors. But they must be honest and they
+must pivot:
+
+- Answer the query straight away, and say plainly that JW Library already
+  handles it. Do not manufacture peril.
+- Then pivot at the real limitation: *"the part the app cannot do is when both
+  devices have notes"* — which is exactly the situation a reader arriving from
+  one of those searches is often actually in.
+- Never imply the site is insurance against loss. It is the tool for combining,
+  organising, searching and sharing a library you still have.
+
+---
+
 ## Design Principles (always apply)
 
 - **Single accent color** — orange (`#ea580c`) is the brand color. Blue (`#1d4ed8`) is used only for the Full Mode toggle indicator. Never introduce a third competing accent.
