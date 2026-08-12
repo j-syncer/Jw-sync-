@@ -155,6 +155,57 @@
   window.__jwBootApp = bootApp;
   window.__jwBootBrowse = bootBrowse;
 
+  // ── Lazily fetched feature modules (v3.32.2) ──────────────────────────────
+  // conflict-review.js (40 KB) and doctor.js (78 KB) are pure API: they define
+  // their entry points and do no work at load time. Shipping them eagerly meant
+  // every visitor downloaded and parsed 118 KB to reach a Library Doctor button
+  // most never press, and a conflict reviewer that only opens after a merge
+  // finds a conflict. Lighthouse counted them in its 137 KiB of unused
+  // JavaScript.
+  //
+  // Each entry point is replaced by a stub that fetches the module on first
+  // call and then forwards to the real implementation. Call sites do not
+  // change: the two live ones are `window.__openJwDoctor && window.__openJwDoctor()`
+  // (an onclick, return value unused) and post-merge.js's
+  // `typeof window.__jwConflictReview === 'function' ? window.__jwConflictReview(...)`
+  // which already awaits a promise and catches rejection. Both see a function
+  // and get a promise, exactly as before.
+  //
+  // Modules that wire themselves up at load — demo, post-merge, sync-hub,
+  // receive, wizard — cannot use this: the listener they attach on load *is*
+  // the trigger, so deferring them until first call would mean nothing ever
+  // calls them. They stay eager. impact-preview.js stays eager too, because
+  // app.js renders `window.__jwDoctorCbLabel()` synchronously inside React and
+  // a stub cannot return a string.
+  var featureLoaders = Object.create(null);
+  function loadFeature(name) {
+    if (!featureLoaders[name]) {
+      featureLoaders[name] = loadWithRetry('js/' + name + '.js', false)
+        .catch(function (err) { featureLoaders[name] = null; throw err; });
+    }
+    return featureLoaders[name];
+  }
+  function lazyEntry(moduleName, entry) {
+    var stub = function () {
+      var args = arguments, self = this;
+      return loadFeature(moduleName).then(function () {
+        var real = window[entry];
+        // The module overwrites the global as it loads. If it somehow did not,
+        // fail loudly instead of recursing into this stub forever.
+        if (real === stub) throw new Error(moduleName + '.js did not define ' + entry);
+        return real.apply(self, args);
+      });
+    };
+    stub.__jwLazy = moduleName;
+    window[entry] = stub;
+  }
+  lazyEntry('conflict-review', '__jwConflictReview');
+  lazyEntry('doctor', '__openJwDoctor');
+  // impact-preview.js calls __jwDoctorT() for the labels in its doctor summary.
+  // That lives in doctor.js, so it needs a way to pull the module in first —
+  // otherwise those rows would render raw i18n keys.
+  window.__jwLoadFeature = loadFeature;
+
   var prefetched = false;
   function prefetchAll() {
     if (prefetched) return;
@@ -346,7 +397,7 @@
         "Free and open source",
         "Available in 25 languages"
       ],
-      "softwareVersion": "3.32.1",
+      "softwareVersion": "3.32.2",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1680,7 +1731,8 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jcr-btn-primary:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
 @media (max-width:560px){.jcr-head{padding:18px 18px 14px}.jcr-body{padding:6px 16px}.jcr-foot{padding:14px 16px}.jcr-versions{grid-template-columns:1fr}}
 </style>
-<script src="js/conflict-review.js" defer></script>
+<!-- js/conflict-review.js is fetched on first call — the boot loader stubs
+     window.__jwConflictReview via lazyEntry(). No <script> tag by design. -->
 <!-- ── End Merge Conflict Reviewer ─────────────────────────── -->
 
 <!-- ── Pre-merge Impact Preview (v2.16.0) ───────────────── -->
@@ -2108,7 +2160,8 @@ body.light .jwr-ntitle{color:#0b2e58}
 .jbd-rv-other-label{flex:1;font:600 13px/1.35 inherit;color:#cbd5e1}
 .jbd-rv-warn{margin:12px 0 0;padding:10px 13px;border-radius:9px;font:600 12px/1.45 inherit;color:#fcd34d;background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.32);text-align:center}
 </style>
-<script src="js/doctor.js" defer></script>
+<!-- js/doctor.js is fetched on first call — the boot loader stubs
+     window.__openJwDoctor via lazyEntry(). No <script> tag by design. -->
 <!-- ── End Backup Doctor ─────────────────────────────────── -->
 
 <!-- ── Collapsible tool sections (Extract / Bulk Color / Manage Tags) v2.62.0 ── -->

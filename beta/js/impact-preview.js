@@ -30,7 +30,12 @@
   // (rendered by the React app in js/app.js).
   window.__jwDoctorCbLabel = function(){ return t('doctor'); };
 
-  window.__jwImpactPreview = function (counts, doctor) {
+  // The doctor summary rows below label themselves through __jwDoctorT, which
+  // lives in doctor.js — lazily fetched since v3.32.2. Pull the module in
+  // before rendering when there is doctor data to show, otherwise those rows
+  // would fall back to raw i18n keys ('c_dup_notes' instead of the translated
+  // label). No doctor data means no fetch: the common path is untouched.
+  function buildImpactPreview(counts, doctor) {
     counts = counts || {};
     var docGroup = '';
     if (doctor && doctor.checks) {
@@ -84,5 +89,17 @@
       overlay.querySelector('[data-jip-go]').addEventListener('click', function(){ done(true); });
       document.addEventListener('keydown', onKey);
     });
+  }
+
+  window.__jwImpactPreview = function (counts, doctor) {
+    if (doctor && doctor.checks && typeof window.__jwDoctorT !== 'function'
+        && typeof window.__jwLoadFeature === 'function') {
+      return window.__jwLoadFeature('doctor')
+        // If it will not load, still open the preview — degraded labels beat
+        // swallowing the whole confirmation step.
+        .catch(function () {})
+        .then(function () { return buildImpactPreview(counts, doctor); });
+    }
+    return buildImpactPreview(counts, doctor);
   };
 })();

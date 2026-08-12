@@ -21,7 +21,11 @@ function section(name) { console.log('\n== ' + name + ' =='); }
 
 const { inlineModules } = require('./helpers/page-source');
 
-function readHtml() {
+// `raw: true` skips inlineModules, so the page is seen exactly as a browser
+// first receives it — needed to observe the lazy stubs before the real
+// modules overwrite them. inlineModules deliberately splices those in.
+function readHtml(opts) {
+  if (opts && opts.raw) return fs.readFileSync(HTML_PATH, 'utf8');
   // v3.8.0: the feature modules are external now. JSDOM does not fetch them,
   // so inline them back to test the page a browser actually gets.
   return inlineModules(fs.readFileSync(HTML_PATH, 'utf8'), HTML_PATH)
@@ -47,9 +51,8 @@ function readHtml() {
   const raw = fs.readFileSync(HTML_PATH, 'utf8');
   const MUST_DEFER = [
     'js/jw-session.js', 'js/forum.js', 'js/enhancements.js', 'js/resurface.js',
-    'js/reading.js', 'js/demo.js', 'js/conflict-review.js', 'js/impact-preview.js',
-    'js/post-merge.js', 'js/sync-hub.js', 'js/receive.js', 'js/wizard.js',
-    'js/doctor.js',
+    'js/reading.js', 'js/demo.js', 'js/impact-preview.js', 'js/post-merge.js',
+    'js/sync-hub.js', 'js/receive.js', 'js/wizard.js',
   ];
   for (const src of MUST_DEFER) {
     const m = raw.match(new RegExp('<script [^>]*src="' + src.replace(/[/.]/g, '\\$&') + '"[^>]*>'));
@@ -60,10 +63,31 @@ function readHtml() {
       ok(src + ' is deferred');
     }
   }
+
+  // conflict-review.js and doctor.js go further: no eager tag at all. Read the
+  // raw page here, never withModules/inlineModules — those deliberately hand
+  // JSDOM the module source, so an assertion built on them would pass even if
+  // the eager <script> tag came back.
+  const MUST_BE_LAZY = {
+    'js/conflict-review.js': '__jwConflictReview',
+    'js/doctor.js': '__openJwDoctor',
+  };
+  for (const [src, entry] of Object.entries(MUST_BE_LAZY)) {
+    if (new RegExp('<script [^>]*src="' + src.replace(/[/.]/g, '\\$&') + '"').test(raw)) {
+      fail(src + ' is eagerly loaded again — it should be fetched on first call');
+    } else {
+      ok(src + ' has no eager <script> tag');
+    }
+    if (!raw.includes("lazyEntry('" + src.slice(3, -3) + "', '" + entry + "')")) {
+      fail(src + ' has no lazyEntry stub for ' + entry + ' — the entry point would be undefined');
+    } else {
+      ok(src + ' stubs ' + entry + ' until first call');
+    }
+  }
 })();
 
-function makeDom({ seeded, url } = {}) {
-  const html = readHtml();
+function makeDom({ seeded, url, raw } = {}) {
+  const html = readHtml({ raw });
   const requested = [];
   const prefetched = [];
   const dom = new JSDOM(html, {
@@ -102,6 +126,37 @@ function makeDom({ seeded, url } = {}) {
 function wait(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 (async () => {
+
+  section('Lazy feature modules are stubbed, then fetched on first call');
+  {
+    const { dom, requested } = makeDom({ seeded: { jwsync_lp_seen: '1' }, raw: true });
+    const win = dom.window;
+    await new Promise(r => setTimeout(r, 50));
+
+    // Nothing should have gone out for either module just from loading the page.
+    for (const [mod, entry] of [['doctor', '__openJwDoctor'], ['conflict-review', '__jwConflictReview']]) {
+      const hit = requested.filter(u => new RegExp('js/' + mod + '\\.js').test(u));
+      if (hit.length) fail(mod + '.js fetched on page load — the point is that it is not');
+      else ok(mod + '.js not fetched on page load');
+
+      // The stub must be callable, or `window.X && window.X()` call sites break.
+      const fn = win[entry];
+      if (typeof fn !== 'function') { fail(entry + ' is not a function before load'); continue; }
+      if (fn.__jwLazy !== mod) fail(entry + ' is not the lazy stub for ' + mod);
+      else ok(entry + ' is a callable stub');
+    }
+
+    // Calling the stub must trigger the fetch. The intercept above fires onload
+    // without actually evaluating the module, so the stub's own guard rejects
+    // with "did not define" — that is the guard working, not a failure. Swallow
+    // it; what is under test here is that the request went out at all.
+    win.__openJwDoctor().catch(function () {});
+    await new Promise(r => setTimeout(r, 50));
+    if (requested.some(u => /js\/doctor\.js/.test(u))) ok('calling __openJwDoctor fetches js/doctor.js');
+    else fail('calling __openJwDoctor did NOT fetch js/doctor.js');
+
+    dom.window.close();
+  }
 
   section('Returning visitor on empty hash → bootApp immediately');
   {

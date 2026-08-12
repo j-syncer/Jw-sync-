@@ -4,6 +4,27 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.32.2] — 2026-08-12
+
+### Faster first load: the Library Doctor and conflict reviewer now load on demand
+
+Two feature modules were downloaded and parsed by every visitor even though
+most never use them: the Library Doctor (84 KB) and the merge conflict reviewer
+(43 KB). Neither does anything at load time — they just define the function that
+opens them. They are now fetched the first moment they are actually needed:
+when you press the Library Doctor card, or when a merge turns up a conflict
+worth reviewing.
+
+That takes 124 KB (42 KB compressed) off every single page load, which is most
+of the 137 KiB of unused JavaScript PageSpeed was reporting. Nothing about
+using either feature changes — the first click fetches the module and opens it,
+and after that it is cached.
+
+The pre-merge preview still shows fully translated Library Doctor findings; it
+pulls the Doctor module in first when it has findings to label.
+
+---
+
 ## [3.32.1] — 2026-08-12
 
 ### Fixed: four scripts were blocking the page from rendering
