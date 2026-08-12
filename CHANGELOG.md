@@ -4,6 +4,35 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.31.0] — 2026-08-12
+
+### Changed: the landing page now says what only this site can do
+
+The tools were all listed, but the descriptions named them without saying what
+was distinctive about any of them. "Send notes to a friend, or add notes they
+sent you" does not tell anyone that you can send *just the notes under one tag*
+and have them arrive without touching a line the other person wrote — and the
+tag manager was invisible, buried inside a card called Study Explorer.
+
+Eleven strings rewritten, in all 25 languages:
+
+- **The hero** leads with the crux instead of a feature list: studied on your
+  phone and your tablet, restoring either backup deletes the other's notes,
+  merging is the only way to keep both.
+- **Selective sharing** is now spelled out on its card — one tag or one date
+  range, without touching anything the other person wrote — with the chips
+  changed from "No account / Highlights too" to "Pick by tag or date / Their
+  notes untouched".
+- **The tag manager** gets its own feature card: rename a tag across 300 notes,
+  merge duplicates, bulk retag and recolour, which JW Library cannot do at all.
+- **Note search by meaning** is stated rather than left as a chip label.
+- **Merging** says "without either one overwriting the other" everywhere.
+
+The search-result description changed too, so the four things the app cannot do
+are what shows up in a listing.
+
+---
+
 ## [3.30.0] — 2026-08-12
 
 ### Changed: the guides no longer sell the site as protection against a lost phone
