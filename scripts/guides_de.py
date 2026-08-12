@@ -34,16 +34,9 @@ GUIDES_DE["merge-jw-library-backups"] = {
                    "mehr JW-Library-Sicherungen in einer .jwlibrary-Datei zusammen — "
                    "kostenlos, privat, in deinem Browser.",
     "intro": [
-        "Wenn du auf mehreren Geräten studierst — Handy im Königreichssaal, Tablet zu Hause — "
-        "hat am Ende jedes Gerät eigene Notizen und Markierungen. Die eingebaute Sicherung "
-        "und Wiederherstellung von JW Library kann sie nicht vereinen: Eine Sicherung "
-        "wiederherzustellen ersetzt alles auf dem Gerät und löscht damit die Arbeit vom "
-        "anderen.",
-        "JW Sync löst das. Es liest zwei (oder mehr) .jwlibrary-Sicherungen und führt die "
-        "Notizen, Markierungen, Lesezeichen und Schlagwörter aus allen zu einer neuen "
-        "Sicherungsdatei zusammen. Die Zusammenführung läuft vollständig in deinem Browser — "
-        "deine Dateien werden nie auf einen Server geladen, deine persönlichen Studiennotizen "
-        "bleiben also privat.",
+        "Du hast den Wachtturm auf dem Handy studiert und einen anderen Artikel auf dem Tablet. Jetzt enthält jedes Gerät Arbeit, die das andere nicht hat, und JW Library kann sie nicht zusammenbringen: Die Wiederherstellung ersetzt alles, sie führt nicht zusammen. Welche Sicherung du auch wiederherstellst, sie löscht das Studium des anderen Geräts. Mit der App allein gibt es keinen Weg, beides zu behalten.",
+        "Dafür ist diese Seite da. Sie liest zwei (oder mehr) .jwlibrary-Dateien und vereint die Notizen, Markierungen, Lesezeichen und Tags aus allen in einer neuen Sicherung — es muss also zwischen nichts entschieden werden. Alles läuft in deinem Browser: Deine Dateien werden nie auf einen Server hochgeladen, deine persönlichen Studiennotizen bleiben privat.",
+        "Genau deshalb ist die Gewohnheit vorbeugend und nicht heilend: Wer regelmäßig zusammenführt, muss nicht mehr daran denken, vor dem Studieren anderswo wiederherzustellen. Studiere, wo du gerade bist, führe zusammen, wann es dir passt, und jedes Gerät zieht nach.",
     ],
     "steps": [
         ("Erstelle auf jedem Gerät eine Sicherung",
@@ -195,17 +188,11 @@ GUIDES_DE["sync-jw-library-multiple-devices"] = {
 GUIDES_DE["transfer-jw-library-notes-new-phone"] = {
     "title": "JW-Library-Notizen auf ein neues Handy übertragen",
     "h1": "So überträgst du deine JW-Library-Notizen auf ein neues Handy",
-    "description": "Schritt für Schritt: Bring alle deine JW-Library-Notizen, Markierungen, "
-                   "Lesezeichen und Schlagwörter mit einer .jwlibrary-Sicherung auf ein neues "
-                   "Handy — und so führst du zusammen, wenn du auf dem neuen Handy schon "
-                   "Notizen gemacht hast.",
+    "description": "Notizen aus JW Library auf ein neues Handy zu bringen ist eine Sicherung und eine Wiederherstellung — die App erledigt das in etwa zwei Minuten. Hier stehen die Schritte, und dazu der eine Fall, den sie nicht lösen kann: wenn auf dem neuen Handy bereits eigene Notizen liegen.",
     "intro": [
-        "Ein neues Telefon ist der häufigste Moment, in dem Jahre an JW-Library-Notizen verloren gehen — nicht weil die Übertragung schwierig wäre, sondern weil sie bewusst erfolgen muss, bevor das alte Gerät gelöscht wird. Persönliche Studiendaten wandern bei einer normalen Telefonübertragung nicht zuverlässig mit, und JW Library bewahrt davon keine Kopie in irgendeinem Konto auf.",
-        "Umzugs-Assistenten für Handys übertragen Apps und Fotos, aber die persönlichen "
-        "Studiendaten von JW Library bringen sie nicht zuverlässig mit. Der verlässliche Weg, "
-        "deine Notizen, Markierungen, Lesezeichen und Schlagwörter aufs neue Handy zu holen, "
-        "ist die Sicherungsdatei von JW Library selbst — ein paar Minuten, und es "
-        "funktioniert plattformübergreifend.",
+        "Das ist einfacher, als die meisten erwarten, und du brauchst kein zusätzliches Werkzeug dafür. JW Library bringt Sicherung und Wiederherstellung mit, und damit kommt jede Notiz, jede Markierung, jedes Lesezeichen und jedes Tag auf das neue Handy — auch zwischen Android und iPhone. Mach es, solange das alte Gerät noch läuft, dann dauert das Ganze ein paar Minuten.",
+        "Der einzige Teil, den du bewusst erledigen musst, ist die Übertragung selbst: Umzugshelfer von Handy zu Handy nehmen Apps und Fotos mit, überspringen aber die persönlichen Studiendaten von JW Library. Erstelle also die Sicherungsdatei, statt darauf zu vertrauen, dass sie von allein mitkommt.",
+        "Es gibt genau eine Situation, die die App nicht lösen kann, und die solltest du vorher kennen: Hast du auf dem neuen Handy bereits studiert, löscht das Wiederherstellen der alten Sicherung diese Arbeit, denn eine Wiederherstellung ersetzt die Bibliothek des Geräts vollständig. Trifft das auf dich zu, ist der Abschnitt zum Zusammenführen weiter unten der richtige.",
     ],
     "steps": [
         ("Erstelle auf dem alten Handy eine Sicherung",
@@ -348,15 +335,10 @@ GUIDES_DE["jw-library-android-to-iphone"] = {
 GUIDES_DE["backup-jw-library"] = {
     "title": "JW Library richtig sichern",
     "h1": "So sicherst du JW Library richtig",
-    "description": "Eine 30-Sekunden-Sicherungsroutine, die Jahre an JW-Library-Studiennotizen, "
-                   "Markierungen und Lesezeichen schützt — und der typische Fehler, der viele "
-                   "kalt erwischt.",
+    "description": "Eine 30-Sekunden-Sicherungsroutine: was in einer .jwlibrary-Datei wirklich steckt, wo du sie aufbewahrst, und warum eine aktuelle sich lohnt, auch wenn nichts schiefgegangen ist.",
     "intro": [
-        "Alles, was du in JW Library markiert hast — jede Notiz, jede Markierung, jedes Lesezeichen und Schlagwort — existiert an genau einem Ort: auf dem Gerät in deiner Hand. Es gibt kein Konto, das eine Kopie hält, und keine automatische Cloud-Synchronisierung. Eine Sicherung ist das Einzige, was zwischen einer über Jahre aufgebauten Studienbibliothek und einem verlorenen, zurückgesetzten oder getauschten Telefon steht.",
-        "Eine ordentliche JW-Library-Sicherung dauert eine halbe Minute und schützt Jahre "
-        "angesammelten Studiums. Die meisten Datenverlust-Geschichten fangen gleich an: Es "
-        "gab keine aktuelle .jwlibrary-Datei, als das Handy verloren ging, zurückgesetzt oder "
-        "ersetzt wurde.",
+        "Eine Sicherung dauert eine halbe Minute und lohnt sich als Gewohnheit — wenn auch nicht ganz aus dem Grund, den man üblicherweise hört. Sicherung und Wiederherstellung in JW Library bringen eine Bibliothek bereits problemlos auf ein neues Gerät. Eine Sicherung ist deshalb weniger eine Versicherung als der Rohstoff für alles andere, was du mit deinem Studium anfangen möchtest.",
+        "Eine .jwlibrary-Datei ist die einzige Form, die deine Bibliothek außerhalb der App annimmt. Sie ist das, was du zusammenführst, wenn auf zwei Geräten studiert wurde; was du öffnest, um Jahre von Notizen zu lesen, neu zu verschlagworten oder zu ordnen; was du dem Sinn nach durchsuchst, wenn du dich nur halb erinnerst, was du geschrieben hast; und woraus du eine Auswahl an Notizen ziehst, wenn du einem Freund etwas schicken willst. Eine aktuelle zu haben ist das, was all das möglich macht.",
     ],
     "steps": [
         ("Erstelle die Sicherung",
@@ -922,13 +904,9 @@ GUIDES_DE["recover-jw-library-notes-lost-phone"] = {
                    "retten kannst, hängt von deinen Sicherungen ab. So holst du deine Notizen "
                    "zurück — und so machst du es beim nächsten Mal.",
     "intro": [
-        "Geht ein Telefon verloren, wird gestohlen oder irreparabel beschädigt, hängt das Überleben deiner JW-Library-Notizen an einer einzigen Frage: Existiert irgendwo außerhalb dieses Geräts eine .jwlibrary-Sicherung? Wenn ja, kommt alles darin zurück. Diese Seite zeigt, wie du eine findest, wie du sie auf einem beliebigen Ersatzgerät wiederherstellst und was zu tun ist, wenn die einzige Sicherung alt ist.",
-        "Ein Handy zu verlieren ist stressig genug, auch ohne die Sorge, Jahre an "
-        "Studiennotizen mitverloren zu haben. Ob du sie zurückbekommst, hängt an einer Frage: "
-        "Gibt es irgendwo außerhalb dieses Handys eine .jwlibrary-Sicherung?",
-        "Diese Anleitung hilft dir, jede Sicherung zu finden, die du haben könntest — auch "
-        "solche, die du längst vergessen hast — und daraus wieder eine vollständige "
-        "JW-Library-Bibliothek auf deinem neuen Gerät zu machen.",
+        "Zuerst die ehrliche Antwort, sie erspart dir das Weiterlesen. Existiert irgendwo außerhalb des verlorenen Geräts eine .jwlibrary-Sicherung, kommt alles darin über die Wiederherstellung von JW Library selbst zurück — dafür brauchst du diese Seite nicht. Existiert überhaupt keine Sicherung, lassen sich persönliche Studiendaten gar nicht wiederherstellen: Sie liegen nur auf dem Gerät, und daran ändert kein Werkzeug etwas.",
+        "Wirklich helfen kann diese Seite im mittleren Fall, und der ist häufiger als die beiden anderen: Du hast eine Sicherung, aber sie erzählt nicht die ganze Geschichte. Sie kann Monate alt sein, oder du hast auf dem Ersatzhandy schon studiert — sie einfach wiederherzustellen würde dann einen Satz Notizen gegen einen anderen tauschen, statt dir alles zu geben.",
+        "Beides zu vereinen ist genau das, was JW Library nicht kann, und darum geht es im Rest dieser Seite. Zuerst aber die Suche: Man hat regelmäßig mehr Sicherungen, als man sich zu machen erinnert.",
     ],
     "steps": [
         ("Such an jedem Ort, wo eine Sicherung liegen könnte",

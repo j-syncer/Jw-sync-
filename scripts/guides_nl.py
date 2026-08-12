@@ -45,8 +45,9 @@ GUIDES_NL = {
   "h1": "JW Library-back-ups van twee apparaten samenvoegen",
   "description": "Voeg de aantekeningen, markeringen, bladwijzers en labels van twee of meer JW Library-back-ups samen tot één .jwlibrary-bestand — gratis, privé, in je browser.",
   "intro": [
-   "Als je op meer dan één apparaat studeert — een telefoon in de zaal, een tablet thuis — krijgt elk apparaat zijn eigen aantekeningen en markeringen. Met de ingebouwde functie Back-up maken en terugzetten van JW Library krijg je die niet bij elkaar: één back-up terugzetten vervangt alles op het apparaat en wist het werk van het andere apparaat.",
-   "JW Sync lost dat op. Het leest twee (of meer) .jwlibrary-back-ups en voegt de aantekeningen, markeringen, bladwijzers en labels daaruit samen tot één nieuwe back-up. Het samenvoegen gebeurt volledig in je browser — je bestanden worden nooit naar een server geüpload, dus je persoonlijke studieaantekeningen blijven privé.",
+   "Je hebt de Wachttoren op je telefoon bestudeerd en een ander artikel op je tablet. Beide apparaten dragen nu werk dat het andere niet heeft — en JW Library kan ze niet met elkaar verzoenen. Terugzetten is daar een volledige vervanging en geen samenvoeging, dus welke back-up je ook terugzet, die wist de studie van het andere apparaat. Met de app alleen is er geen manier om allebei over te houden.",
+   "Daar is deze site voor. Hij leest twee (of meer) .jwlibrary-back-ups en combineert de aantekeningen, markeringen, bladwijzers en labels daaruit tot één nieuwe back-up — zodat er nergens tussen hoeft te worden gekozen. Het samenvoegen gebeurt volledig in je browser; je bestanden worden nooit naar een server geüpload, dus je persoonlijke studieaantekeningen blijven privé.",
+   "Daarom is de gewoonte preventief en niet herstellend: zodra je geregeld samenvoegt, hoef je niet meer te onthouden dat je moet terugzetten voordat je ergens anders gaat studeren. Studeer waar je bent, voeg samen wanneer het uitkomt, en elk apparaat loopt bij.",
   ],
   "steps": [
    ("Maak op elk apparaat een back-up", "Open in JW Library Persoonlijke studie, tik op het menu met de drie puntjes, kies Back-up maken en terugzetten en dan Een back-up maken. Doe dit op elk apparaat. Elk apparaat levert een .jwlibrary-bestand op."),
@@ -115,10 +116,11 @@ GUIDES_NL = {
  "transfer-jw-library-notes-new-phone": {
   "title": "Zo zet je JW Library-aantekeningen over naar een nieuwe telefoon",
   "h1": "JW Library-aantekeningen overzetten naar een nieuwe telefoon",
-  "description": "Stap voor stap: verplaats al je JW Library-aantekeningen, markeringen, bladwijzers en labels met een .jwlibrary-back-up naar een nieuwe telefoon — en hoe je samenvoegt als je op de nieuwe telefoon al aantekeningen hebt gemaakt.",
+  "description": "JW Library-aantekeningen naar een nieuwe telefoon verhuizen is een back-up en een terugzetting, en de app doet dat in ongeveer twee minuten. Hier staan de stappen — plus het ene geval dat de app niet aankan: een nieuwe telefoon die al eigen aantekeningen heeft.",
   "intro": [
-   "Een nieuwe telefoon is het moment waarop mensen het vaakst jaren aan JW Library-aantekeningen kwijtraken — niet omdat de overzetting lastig is, maar omdat je die bewust moet doen vóórdat het oude apparaat wordt gewist. Persoonlijke studiegegevens gaan niet vanzelf mee met een gewone overzetting van telefoon naar telefoon, en JW Library bewaart er in geen enkel account een kopie van.",
-   "Overzetprogramma's verplaatsen je apps en foto's, maar de persoonlijke studiegegevens van JW Library nemen ze niet betrouwbaar mee. De manier waarop je je aantekeningen, markeringen, bladwijzers en labels wél zeker naar een nieuwe telefoon krijgt, is het back-upbestand van JW Library zelf — dat kost een paar minuten en werkt over platforms heen.",
+   "Dit gaat makkelijker dan mensen verwachten, en je hebt er geen extra hulpmiddel voor nodig. JW Library heeft Back-up maken en terugzetten ingebouwd, en dat brengt elke aantekening, markering, bladwijzer en elk label naar een nieuwe telefoon — ook tussen Android en iPhone. Doe het terwijl het oude apparaat nog werkt, dan kost het hele karwei een paar minuten.",
+   "Het enige wat je bewust moet doen, is de overzetting zelf: overzetprogramma's van telefoon naar telefoon verplaatsen je apps en foto's, maar slaan de persoonlijke studiegegevens van JW Library over, dus maak het back-upbestand in plaats van aan te nemen dat het vanzelf meegaat.",
+   "Er is precies één situatie die de app niet aankan, en die is het waard om vooraf te weten: heb je al op de nieuwe telefoon gestudeerd, dan wist het terugzetten van de back-up van de oude telefoon dat werk, want terugzetten vervangt de bibliotheek van het apparaat volledig. Is dat jouw situatie, dan is het gedeelte over samenvoegen verderop wat je zoekt.",
   ],
   "steps": [
    ("Maak een back-up op de oude telefoon", "Open JW Library → Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Zo bewaar je een .jwlibrary-bestand met al je studiegegevens."),
@@ -188,10 +190,10 @@ GUIDES_NL = {
  "backup-jw-library": {
   "title": "Zo maak je een goede back-up van JW Library",
   "h1": "Zo maak je een goede back-up van JW Library",
-  "description": "Een back-uproutine van 30 seconden die jaren aan JW Library-studieaantekeningen, markeringen en bladwijzers beschermt — en de veelgemaakte fout waar mensen op stuklopen.",
+  "description": "Een back-uproutine van 30 seconden: wat er werkelijk in een .jwlibrary-bestand zit, waar je het bewaart, en waarom een actueel bestand de moeite waard is ook als er niets is misgegaan.",
   "intro": [
-   "Alles wat je in JW Library hebt gemarkeerd — elke aantekening, elke markering, elke bladwijzer en elk label — bestaat op precies één plek: het apparaat in je hand. Er is geen account met een kopie en geen automatische synchronisatie met de cloud. Een back-up is het enige wat staat tussen een studiebibliotheek van jaren en een verloren, gereset of vervangen telefoon.",
-   "Een goede back-up van JW Library kost een halve minuut en beschermt jaren aan opgebouwde studie. De meeste verhalen over gegevensverlies beginnen op dezelfde manier: er was geen recent .jwlibrary-bestand toen een telefoon verloren ging, werd gereset of werd vervangen.",
+   "Een back-up kost ongeveer een halve minuut, en er een gewoonte van maken is de moeite waard — al is de reden niet helemaal die welke mensen meestal geven. Back-up maken en terugzetten van JW Library brengt een bibliotheek al prima naar een nieuw apparaat, dus een back-up is minder een verzekering dan de grondstof voor al het andere wat je met je studie zou willen doen.",
+   "Een .jwlibrary-bestand is de enige vorm die je bibliotheek buiten de app aanneemt. Het is wat je samenvoegt als er op twee apparaten is gestudeerd, wat je opent om jaren aan aantekeningen te lezen, te herlabelen of te ordenen, wat je op betekenis doorzoekt als je je maar half herinnert wat je schreef, en waar je een set aantekeningen uit haalt als je iemand iets wilt sturen. Een actueel bestand hebben is wat dat allemaal mogelijk maakt.",
   ],
   "steps": [
    ("Maak de back-up", "Open JW Library → Persoonlijke studie → menu met drie puntjes → Back-up maken en terugzetten → Een back-up maken. Dat levert een .jwlibrary-bestand op met elke aantekening, markering, bladwijzer en elk label."),
@@ -456,9 +458,9 @@ GUIDES_NL = {
   "h1": "JW Library-aantekeningen terughalen van een verloren, kapotte of gereset telefoon",
   "description": "Telefoon kwijt of gereset met JW Library-aantekeningen erop? Wat je kunt terughalen hangt af van je back-ups. Hier staat precies hoe je je aantekeningen terugkrijgt — en wat je de volgende keer doet.",
   "intro": [
-   "Als een telefoon verloren, gestolen of onherstelbaar beschadigd raakt, hangt het lot van je JW Library-aantekeningen af van één vraag: bestaat er ergens buiten dat apparaat een .jwlibrary-back-up? Zo ja, dan komt alles wat erin zit terug. Deze pagina behandelt hoe je er een vindt, hoe je hem op elk vervangend apparaat terugzet, en wat je doet als de enige back-up die je hebt oud is.",
-   "Een telefoon kwijtraken is al vervelend genoeg zonder de angst dat je er jaren aan studieaantekeningen mee kwijt bent. Of je ze kunt terughalen, hangt af van één vraag: bestaat er ergens buiten die telefoon een .jwlibrary-back-up?",
-   "Deze handleiding loopt langs alle plekken waar je een back-up kunt hebben staan — ook eentje waarvan je vergeten was dat je hem maakte — en hoe je die weer tot een volledige JW Library op je nieuwe apparaat maakt.",
+   "Eerst het eerlijke antwoord, want dat scheelt je verder lezen. Bestaat er ergens buiten het verloren apparaat een .jwlibrary-back-up, dan komt alles wat erin zit terug via Terugzetten van JW Library zelf, en heb je deze site voor dat deel niet nodig. Bestaat er in geen enkele vorm een back-up, dan zijn persoonlijke studiegegevens helemaal niet op te halen — ze staan alleen op het apparaat, en geen enkel hulpmiddel verandert daar iets aan.",
+   "Waar deze pagina echt helpt, is het geval ertussenin, en dat komt vaker voor dan allebei de andere: je hébt een back-up, maar hij is niet het hele verhaal. Hij kan maanden oud zijn, of je hebt al op de vervangende telefoon gestudeerd — dus hem zomaar terugzetten zou de ene set aantekeningen voor de andere inruilen in plaats van je alles te geven.",
+   "Die twee combineren is het deel dat JW Library niet kan, en daar gaat de rest van deze pagina over. Maar eerst het zoeken: mensen hebben stelselmatig meer back-ups dan ze zich herinneren gemaakt te hebben.",
   ],
   "steps": [
    ("Zoek overal waar een back-up kan staan", "Kijk in je e-mail (zoek op “jwlibrary” of “back-up”), Google Drive, iCloud Drive, OneDrive, Dropbox en de map Downloads van je computer. Back-ups zijn kleine bestanden waarvan je makkelijk vergeet dat je ze hebt bewaard."),

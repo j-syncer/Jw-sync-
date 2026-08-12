@@ -32,14 +32,9 @@ GUIDES_SV["merge-jw-library-backups"] = {
                    "flera JW Library-säkerhetskopior till en enda .jwlibrary-fil — gratis, "
                    "privat, direkt i webbläsaren.",
     "intro": [
-        "Om du studerar på fler än en enhet — mobilen i Rikets sal, surfplattan hemma — får "
-        "varje enhet sina egna anteckningar och markeringar. JW Librarys inbyggda "
-        "Säkerhetskopiera och återställ kan inte förena dem: att återställa en säkerhetskopia "
-        "ersätter allt på enheten och raderar arbetet från den andra.",
-        "JW Sync löser det. Programmet läser två (eller fler) .jwlibrary-säkerhetskopior och "
-        "slår ihop anteckningar, markeringar, bokmärken och etiketter från alla till en ny "
-        "säkerhetskopia. Sammanslagningen sker helt i din webbläsare — dina filer laddas "
-        "aldrig upp till någon server, så dina personliga studieanteckningar förblir privata.",
+        "Du studerade Vakttornet på telefonen och en annan artikel på surfplattan. Nu har varje enhet arbete som den andra saknar, och JW Library kan inte förena dem: återställning där byter ut allt i stället för att slå ihop, så vilken säkerhetskopia du än återställer raderar den andra enhetens studium. Med enbart appen finns det inget sätt att behålla båda.",
+        "Det är vad den här webbplatsen är till för. Den läser två (eller fler) .jwlibrary-filer och för samman anteckningarna, överstrykningarna, bokmärkena och taggarna från alla till en ny säkerhetskopia — så att inget behöver väljas bort. Sammanslagningen sker helt i din webbläsare; dina filer laddas aldrig upp till någon server, så dina personliga studieanteckningar förblir privata.",
+        "Det är också därför vanan är förebyggande snarare än reparerande: när du slår ihop med jämna mellanrum behöver du inte längre komma ihåg att återställa innan du studerar någon annanstans. Studera där du är, slå ihop när det passar, och varje enhet hinner i kapp.",
     ],
     "steps": [
         ("Skapa en säkerhetskopia på varje enhet",
@@ -185,15 +180,11 @@ GUIDES_SV["sync-jw-library-multiple-devices"] = {
 GUIDES_SV["transfer-jw-library-notes-new-phone"] = {
     "title": "Så flyttar du JW Library-anteckningar till en ny mobil",
     "h1": "Så flyttar du JW Library-anteckningar till en ny mobil",
-    "description": "Steg för steg: flytta alla dina anteckningar, markeringar, bokmärken och "
-                   "etiketter i JW Library till en ny mobil med en .jwlibrary-säkerhetskopia — "
-                   "och hur du slår ihop om du redan skrivit anteckningar på den nya mobilen.",
+    "description": "Att flytta JW Library-anteckningar till en ny telefon är en säkerhetskopia och en återställning, och appen klarar det på ett par minuter. Här är stegen — plus det enda fall den inte klarar: när den nya telefonen redan har egna anteckningar.",
     "intro": [
-        "Ett telefonbyte är det enskilt vanligaste tillfället då många års anteckningar i JW Library går förlorade — inte för att flytten är svår, utan för att den måste göras medvetet innan den gamla enheten raderas. Personliga studiedata följer inte tillförlitligt med vid en vanlig överföring mellan telefoner, och JW Library sparar ingen kopia av dem i något konto.",
-        "Verktyg för mobilflytt tar med appar och foton, men de flyttar inte tillförlitligt JW "
-        "Librarys personliga studiedata. Det säkra sättet att få med dina anteckningar, "
-        "markeringar, bokmärken och etiketter till en ny mobil är JW Librarys egen "
-        "säkerhetskopia — det tar några minuter och fungerar mellan plattformar.",
+        "Det här är enklare än folk väntar sig, och du behöver inget extra verktyg. JW Library har säkerhetskopiering och återställning inbyggt, och det bär över varje anteckning, överstrykning, bokmärke och tagg till den nya telefonen — även mellan Android och iPhone. Gör det medan den gamla enheten fortfarande fungerar, så tar det hela ett par minuter.",
+        "Den enda delen att göra medvetet är själva överföringen: verktyg som flyttar innehåll från telefon till telefon tar med appar och foton, men hoppar över JW Librarys personliga studiedata. Skapa alltså säkerhetskopian i stället för att räkna med att den följer med av sig själv.",
+        "Det finns exakt en situation appen inte klarar, och den är värd att känna till innan du börjar: har du redan studerat på den nya telefonen raderar en återställning av den gamlas säkerhetskopia det arbetet, eftersom en återställning byter ut enhetens hela bibliotek. Är det din situation är avsnittet om sammanslagning längre ner det du vill ha.",
     ],
     "steps": [
         ("Skapa en säkerhetskopia på den gamla mobilen",
@@ -334,14 +325,10 @@ GUIDES_SV["jw-library-android-to-iphone"] = {
 GUIDES_SV["backup-jw-library"] = {
     "title": "Så säkerhetskopierar du JW Library på rätt sätt",
     "h1": "Så säkerhetskopierar du JW Library på rätt sätt",
-    "description": "En rutin på 30 sekunder som skyddar år av studieanteckningar, markeringar "
-                   "och bokmärken i JW Library — och det vanliga misstaget som överraskar "
-                   "många.",
+    "description": "En säkerhetskopiering på 30 sekunder: vad en .jwlibrary-fil faktiskt innehåller, var du ska förvara den, och varför en aktuell är värd att ha även när inget har gått fel.",
     "intro": [
-        "Allt du markerat i JW Library — varje anteckning, varje markering, varje bokmärke och etikett — finns på exakt en plats: enheten i din hand. Det finns inget konto som håller en kopia och ingen automatisk molnsynkronisering. En säkerhetskopia är det enda som står mellan ett studiebibliotek uppbyggt under år och en förlorad, återställd eller utbytt telefon.",
-        "En ordentlig säkerhetskopia av JW Library tar en halv minut och skyddar år av samlat "
-        "studium. Nästan alla berättelser om förlorade data börjar likadant: det fanns ingen "
-        "färsk .jwlibrary-fil när mobilen tappades bort, återställdes eller byttes ut.",
+        "En säkerhetskopia tar en halv minut och är värd att göra till vana — om än inte riktigt av det skäl man brukar höra. JW Librarys egen säkerhetskopiering och återställning flyttar redan ett bibliotek till en ny enhet alldeles utmärkt, så en säkerhetskopia är mindre en försäkring än råmaterialet för allt annat du kan vilja göra med ditt studium.",
+        "En .jwlibrary-fil är den enda form ditt bibliotek antar utanför appen. Det är den du slår ihop när två enheter båda har studerats på, den du öppnar för att läsa, tagga om eller ordna år av anteckningar, den du söker i efter betydelse när du bara halvt minns vad du skrev, och den du hämtar ett urval anteckningar ur när du vill skicka några till en vän. Att ha en aktuell är det som gör allt det möjligt.",
     ],
     "steps": [
         ("Skapa säkerhetskopian",
@@ -892,13 +879,9 @@ GUIDES_SV["recover-jw-library-notes-lost-phone"] = {
                    "Vad du kan rädda beror på dina säkerhetskopior. Så får du tillbaka dina "
                    "anteckningar — och så gör du nästa gång.",
     "intro": [
-        "När en telefon tappas bort, blir stulen eller går sönder bortom räddning avgörs dina JW Library-anteckningars öde av en enda fråga: finns det en .jwlibrary-kopia någonstans utanför den enheten? Om den gör det kommer allt i den tillbaka. Den här sidan handlar om hur du hittar en, hur du återställer den på vilken ersättningsenhet som helst, och vad du gör när den enda kopia du har är gammal.",
-        "Att tappa bort en mobil är stressigt nog utan rädslan att år av studieanteckningar gick "
-        "med. Om du kan rädda dem avgörs av en enda fråga: finns det en "
-        ".jwlibrary-säkerhetskopia någonstans utanför den mobilen?",
-        "Den här guiden går igenom hur du hittar varje säkerhetskopia du kan tänkas ha — även "
-        "sådana du glömt att du gjorde — och gör den till ett fullständigt JW Library på din "
-        "nya enhet.",
+        "Först det ärliga svaret, för det besparar dig fortsatt läsning. Finns det en .jwlibrary-säkerhetskopia någonstans utanför den förlorade enheten kommer allt i den tillbaka via JW Librarys egen återställning, och till den delen behöver du inte den här webbplatsen. Finns ingen säkerhetskopia alls går personliga studiedata inte att få tillbaka över huvud taget: de lever bara på enheten, och inget verktyg ändrar på det.",
+        "Där den här sidan verkligen hjälper är mellanfallet, och det är vanligare än de båda andra: du har en säkerhetskopia, men den är inte hela historien. Den kan vara flera månader gammal, eller så har du redan studerat på ersättningstelefonen — att bara återställa den skulle då byta en uppsättning anteckningar mot en annan i stället för att ge dig allt.",
+        "Att föra samman de två är just det JW Library inte kan, och det handlar resten av sidan om. Men först letandet: folk har regelbundet fler säkerhetskopior än de minns att de gjort.",
     ],
     "steps": [
         ("Leta på varje ställe där en säkerhetskopia kan finnas",

@@ -32,16 +32,9 @@ GUIDES_FR["merge-jw-library-backups"] = {
                    "sauvegardes JW Library ou plus dans un seul fichier .jwlibrary — "
                    "gratuitement, en privé, dans votre navigateur.",
     "intro": [
-        "Si vous étudiez sur plusieurs appareils — un téléphone à la Salle du Royaume, une "
-        "tablette à la maison — chacun finit avec ses propres notes et surlignages. La "
-        "fonction Sauvegarde et restauration de JW Library ne sait pas les réunir : restaurer "
-        "une sauvegarde remplace tout ce qui se trouve sur l'appareil et efface le travail "
-        "fait sur l'autre.",
-        "JW Sync résout cela. Il lit deux fichiers de sauvegarde .jwlibrary (ou plus) et "
-        "fusionne les notes, surlignages, signets et étiquettes de tous dans une nouvelle "
-        "sauvegarde. La fusion s'exécute entièrement dans votre navigateur — vos fichiers ne "
-        "sont jamais envoyés sur un serveur, donc vos notes d'étude personnelle restent "
-        "privées.",
+        "Vous avez étudié La Tour de Garde sur votre téléphone et un autre article sur votre tablette. Chaque appareil contient maintenant un travail que l'autre n'a pas, et JW Library ne peut pas les concilier : sa restauration remplace tout, elle ne fusionne pas, donc la sauvegarde que vous restaurez efface l'étude de l'autre appareil. Avec l'application seule, il n'y a aucun moyen de garder les deux.",
+        "C'est à cela que sert ce site. Il lit deux fichiers .jwlibrary (ou plus) et réunit les notes, les surlignages, les signets et les étiquettes de chacun dans une nouvelle sauvegarde, sans qu'il faille choisir entre quoi que ce soit. Tout se passe dans votre navigateur : vos fichiers ne sont jamais envoyés sur un serveur, et vos notes d'étude restent privées.",
+        "C'est aussi pourquoi l'habitude est préventive et non curative : dès lors que vous fusionnez régulièrement, vous n'avez plus à penser à restaurer avant d'étudier ailleurs. Étudiez où vous êtes, fusionnez quand cela vous arrange, et chaque appareil se met à jour.",
     ],
     "steps": [
         ("Créez une sauvegarde sur chaque appareil",
@@ -192,17 +185,11 @@ GUIDES_FR["sync-jw-library-multiple-devices"] = {
 GUIDES_FR["transfer-jw-library-notes-new-phone"] = {
     "title": "Comment transférer ses notes JW Library vers un nouveau téléphone",
     "h1": "Comment transférer ses notes JW Library vers un nouveau téléphone",
-    "description": "Pas à pas : transférez toutes vos notes, surlignages, signets et "
-                   "étiquettes JW Library vers un nouveau téléphone grâce à une sauvegarde "
-                   ".jwlibrary — et comment fusionner si vous avez déjà pris des notes sur le "
-                   "nouvel appareil.",
+    "description": "Transférer ses notes JW Library vers un nouveau téléphone, c'est une sauvegarde et une restauration, et l'application s'en charge en deux minutes environ. Voici les étapes, ainsi que le seul cas qu'elle ne sait pas traiter : quand le nouveau téléphone contient déjà des notes.",
     "intro": [
-        "Changer de téléphone est le moment où l'on perd le plus souvent des années de notes JW Library — non parce que le transfert est difficile, mais parce qu'il doit être fait volontairement avant que l'ancien appareil ne soit effacé. Les données d'étude personnelle ne suivent pas de façon fiable lors d'un transfert classique entre téléphones, et JW Library n'en conserve aucune copie dans un compte.",
-        "Les outils de transfert de téléphone déplacent vos applications et vos photos, mais "
-        "ils ne transfèrent pas de façon fiable les données d'étude personnelle de JW "
-        "Library. Le moyen sûr d'emporter vos notes, surlignages, signets et étiquettes vers "
-        "un nouveau téléphone, c'est le fichier de sauvegarde de JW Library lui-même — "
-        "quelques minutes, et cela fonctionne d'une plateforme à l'autre.",
+        "C'est plus simple qu'on ne le croit, et aucun outil supplémentaire n'est nécessaire. JW Library intègre la sauvegarde et la restauration, qui emportent chaque note, chaque surlignage, chaque signet et chaque étiquette vers le nouveau téléphone, y compris entre Android et iPhone. Faites-le tant que l'ancien appareil fonctionne encore : l'ensemble prend quelques minutes.",
+        "La seule partie à faire délibérément, c'est le transfert lui-même : les outils de migration d'un téléphone à l'autre déplacent vos applications et vos photos, mais ignorent les données d'étude personnelle de JW Library. Créez donc le fichier de sauvegarde plutôt que de supposer qu'il suivra tout seul.",
+        "Il existe exactement une situation que l'application ne sait pas traiter, et il vaut mieux la connaître avant de commencer : si vous avez déjà étudié sur le nouveau téléphone, restaurer la sauvegarde de l'ancien effacera ce travail, car une restauration remplace intégralement la bibliothèque de l'appareil. Si c'est votre cas, la section sur la fusion plus bas est celle qui vous intéresse.",
     ],
     "steps": [
         ("Créez une sauvegarde sur l'ancien téléphone",
@@ -347,15 +334,10 @@ GUIDES_FR["jw-library-android-to-iphone"] = {
 GUIDES_FR["backup-jw-library"] = {
     "title": "Comment sauvegarder JW Library correctement",
     "h1": "Comment sauvegarder JW Library correctement",
-    "description": "Une routine de sauvegarde de 30 secondes qui protège des années de notes, "
-                   "de surlignages et de signets d'étude JW Library — et l'erreur classique "
-                   "qui prend tout le monde de court.",
+    "description": "Une routine de sauvegarde de 30 secondes : ce que contient réellement un fichier .jwlibrary, où le conserver, et pourquoi en avoir un à jour vaut la peine même quand rien n'a mal tourné.",
     "intro": [
-        "Tout ce que vous avez marqué dans JW Library — chaque note, chaque surlignage, chaque signet et chaque étiquette — n'existe qu'à un seul endroit : l'appareil que vous tenez. Aucun compte n'en garde de copie et aucune synchronisation infonuagique automatique n'existe. Une sauvegarde est la seule chose qui sépare une bibliothèque d'étude bâtie sur des années d'un téléphone perdu, réinitialisé ou remplacé.",
-        "Une bonne sauvegarde JW Library prend une demi-minute et protège des années d'étude "
-        "accumulée. Presque toutes les histoires de perte de données commencent pareil : "
-        "aucun fichier .jwlibrary récent n'existait quand le téléphone a été perdu, "
-        "réinitialisé ou remplacé.",
+        "Une sauvegarde prend une demi-minute et mérite d'en faire une habitude, quoique pas tout à fait pour la raison qu'on avance d'ordinaire. La sauvegarde et la restauration de JW Library transfèrent déjà très bien une bibliothèque vers un nouvel appareil ; une sauvegarde est donc moins une assurance que la matière première de tout ce que vous voudrez faire d'autre avec votre étude.",
+        "Un fichier .jwlibrary est la seule forme que prend votre bibliothèque en dehors de l'application. C'est ce que vous fusionnez quand deux appareils ont chacun servi à étudier, ce que vous ouvrez pour lire, réétiqueter ou réorganiser des années de notes, ce que vous interrogez par le sens quand vous ne vous rappelez qu'à moitié ce que vous aviez écrit, et ce d'où vous tirez un ensemble de notes à envoyer à un ami. En avoir un à jour, c'est ce qui rend tout cela possible.",
     ],
     "steps": [
         ("Créez la sauvegarde",
@@ -929,13 +911,9 @@ GUIDES_FR["recover-jw-library-notes-lost-phone"] = {
                    "vous pouvez récupérer dépend de vos sauvegardes. Voici exactement comment "
                    "retrouver vos notes — et quoi faire la prochaine fois.",
     "intro": [
-        "Quand un téléphone est perdu, volé ou irrémédiablement endommagé, la survie de vos notes JW Library tient à une seule question : existe-t-il une sauvegarde .jwlibrary quelque part en dehors de cet appareil ? Si oui, tout ce qu'elle contient revient. Cette page explique comment en trouver une, comment la restaurer sur n'importe quel appareil de remplacement, et que faire quand la seule sauvegarde dont vous disposez est ancienne.",
-        "Perdre un téléphone est déjà bien assez stressant sans craindre d'avoir perdu des "
-        "années de notes d'étude avec. Pouvoir les récupérer se ramène à une seule question : "
-        "existe-t-il une sauvegarde .jwlibrary quelque part en dehors de ce téléphone ?",
-        "Ce guide vous accompagne pour retrouver toute sauvegarde que vous pourriez avoir — y "
-        "compris celles que vous aviez oubliées — et la retransformer en une bibliothèque JW "
-        "Library complète sur votre nouvel appareil.",
+        "D'abord la réponse honnête, elle vous évitera de lire plus loin. S'il existe une sauvegarde .jwlibrary quelque part en dehors de l'appareil perdu, tout ce qu'elle contient revient par la restauration de JW Library elle-même, et pour cette partie vous n'avez pas besoin de ce site. S'il n'en existe aucune, les données d'étude personnelle ne peuvent pas être récupérées du tout : elles ne vivent que sur l'appareil, et aucun outil n'y change rien.",
+        "Là où cette page aide vraiment, c'est le cas intermédiaire, plus fréquent que les deux autres : vous avez une sauvegarde, mais elle ne dit pas tout. Elle peut dater de plusieurs mois, ou vous avez peut-être déjà étudié sur le téléphone de remplacement — la restaurer telle quelle échangerait alors un ensemble de notes contre un autre au lieu de tout vous rendre.",
+        "Réunir les deux est précisément ce que JW Library ne sait pas faire, et c'est l'objet du reste de cette page. Mais d'abord, la recherche : on a régulièrement plus de sauvegardes qu'on ne se souvient en avoir fait.",
     ],
     "steps": [
         ("Cherchez partout où une sauvegarde pourrait se trouver",

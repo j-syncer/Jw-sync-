@@ -32,14 +32,9 @@ GUIDES_IT["merge-jw-library-backups"] = {
                    "di JW Library in un unico file .jwlibrary — gratis, in privato, nel tuo "
                    "browser.",
     "intro": [
-        "Se studi su più dispositivi — il telefono in Sala del Regno, il tablet a casa — ogni "
-        "dispositivo finisce con le proprie note ed evidenziazioni. Il Backup e ripristino "
-        "integrato in JW Library non riesce a unirli: ripristinare un backup sostituisce "
-        "tutto ciò che c'è sul dispositivo, cancellando il lavoro fatto sull'altro.",
-        "JW Sync risolve il problema. Legge due (o più) file di backup .jwlibrary e unisce "
-        "note, evidenziazioni, segnalibri ed etichette di tutti in un nuovo file di backup. "
-        "L'unione avviene interamente nel tuo browser — i tuoi file non vengono mai caricati "
-        "su alcun server, quindi le tue note di studio personale restano private.",
+        "Hai studiato La Torre di Guardia sul telefono e un altro articolo sul tablet. Ora ogni dispositivo contiene un lavoro che l'altro non ha, e JW Library non può conciliarli: il suo ripristino sostituisce tutto, non unisce, quindi la copia che ripristini cancella lo studio dell'altro dispositivo. Con la sola applicazione non c'è modo di tenere entrambi.",
+        "È per questo che esiste questo sito. Legge due (o più) file .jwlibrary e riunisce le note, le evidenziazioni, i segnalibri e le etichette di tutti in una nuova copia di sicurezza, senza dover scegliere fra niente. Tutto avviene nel tuo browser: i tuoi file non vengono mai caricati su alcun server, così le tue note di studio restano private.",
+        "È anche il motivo per cui l'abitudine è preventiva e non curativa: una volta che unisci con regolarità, non devi più ricordarti di ripristinare prima di studiare altrove. Studia dove sei, unisci quando ti conviene, e ogni dispositivo si aggiorna.",
     ],
     "steps": [
         ("Crea un backup su ogni dispositivo",
@@ -188,15 +183,11 @@ GUIDES_IT["sync-jw-library-multiple-devices"] = {
 GUIDES_IT["transfer-jw-library-notes-new-phone"] = {
     "title": "Come trasferire le note di JW Library su un telefono nuovo",
     "h1": "Come trasferire le note di JW Library su un telefono nuovo",
-    "description": "Passo passo: porta tutte le tue note, evidenziazioni, segnalibri ed "
-                   "etichette di JW Library su un telefono nuovo con un backup .jwlibrary — e "
-                   "come unire se hai già preso note sul telefono nuovo.",
+    "description": "Portare le note di JW Library su un telefono nuovo è una copia di sicurezza e un ripristino, e l'applicazione se ne occupa in un paio di minuti. Ecco i passaggi, più l'unico caso che non sa gestire: quando il telefono nuovo ha già note sue.",
     "intro": [
-        "Cambiare telefono è il momento in cui più spesso si perdono anni di note di JW Library, non perché il trasferimento sia difficile, ma perché va fatto deliberatamente prima che il vecchio dispositivo venga cancellato. I dati di studio personale non seguono in modo affidabile un normale trasferimento tra telefoni, e JW Library non ne conserva copia in alcun account.",
-        "Gli strumenti di trasferimento tra telefoni spostano app e foto, ma non portano in "
-        "modo affidabile i dati di studio personale di JW Library. Il modo sicuro per portare "
-        "note, evidenziazioni, segnalibri ed etichette su un telefono nuovo è il file di "
-        "backup di JW Library stesso — pochi minuti, e funziona tra piattaforme diverse.",
+        "È più facile di quanto ci si aspetti, e non serve nessuno strumento aggiuntivo. JW Library ha la copia di sicurezza e il ripristino integrati, e portano ogni nota, evidenziazione, segnalibro ed etichetta sul telefono nuovo, anche fra Android e iPhone. Fallo mentre il vecchio dispositivo funziona ancora e l'intera operazione richiede un paio di minuti.",
+        "L'unica parte da fare di proposito è il trasferimento in sé: gli strumenti che spostano i dati da un telefono all'altro portano applicazioni e foto, ma saltano i dati di studio personale di JW Library, quindi crea il file di copia invece di dare per scontato che arrivi da solo.",
+        "C'è esattamente una situazione che l'applicazione non sa gestire, ed è bene saperlo prima di cominciare: se hai già studiato sul telefono nuovo, ripristinare la copia del vecchio cancellerà quel lavoro, perché un ripristino sostituisce per intero la biblioteca del dispositivo. Se è il tuo caso, la sezione sull'unione più sotto è quella che ti interessa.",
     ],
     "steps": [
         ("Crea un backup sul telefono vecchio",
@@ -337,15 +328,10 @@ GUIDES_IT["jw-library-android-to-iphone"] = {
 GUIDES_IT["backup-jw-library"] = {
     "title": "Come fare il backup di JW Library nel modo giusto",
     "h1": "Come fare il backup di JW Library nel modo giusto",
-    "description": "Una routine di backup da 30 secondi che protegge anni di note di studio, "
-                   "evidenziazioni e segnalibri di JW Library — e l'errore comune che coglie "
-                   "tanti di sorpresa.",
+    "description": "Una routine di copia di sicurezza da 30 secondi: cosa contiene davvero un file .jwlibrary, dove conservarlo e perché averne uno aggiornato conviene anche quando non è andato storto niente.",
     "intro": [
-        "Tutto ciò che hai contrassegnato in JW Library — ogni nota, ogni evidenziazione, ogni segnalibro ed etichetta — esiste in un solo posto: il dispositivo che hai in mano. Non c'è alcun account che ne conservi una copia né sincronizzazione automatica nel cloud. Un backup è l'unica cosa che separa una biblioteca di studio costruita in anni da un telefono perso, ripristinato o cambiato.",
-        "Un backup fatto bene di JW Library richiede mezzo minuto e protegge anni di studio "
-        "accumulato. Quasi tutte le storie di perdita di dati iniziano allo stesso modo: non "
-        "esisteva un file .jwlibrary recente quando il telefono è stato perso, ripristinato o "
-        "sostituito.",
+        "Una copia di sicurezza richiede mezzo minuto e vale la pena farne un'abitudine, anche se non proprio per il motivo che si sente di solito. La copia e il ripristino di JW Library portano già benissimo una biblioteca su un dispositivo nuovo, quindi una copia è meno un'assicurazione che la materia prima di tutto il resto che potresti voler fare con il tuo studio.",
+        "Un file .jwlibrary è l'unica forma che la tua biblioteca assume fuori dall'applicazione. È ciò che unisci quando si è studiato su due dispositivi, ciò che apri per leggere, rietichettare o riordinare anni di note, ciò in cui cerchi per significato quando ricordi solo a metà cosa avevi scritto, e da cui estrai un insieme di note quando vuoi mandarne alcune a un amico. Averne uno aggiornato è ciò che rende possibile tutto questo.",
     ],
     "steps": [
         ("Crea il backup",
@@ -897,13 +883,9 @@ GUIDES_IT["recover-jw-library-notes-lost-phone"] = {
                    "Library? Quello che puoi recuperare dipende dai tuoi backup. Ecco "
                    "esattamente come riaverle — e come fare la prossima volta.",
     "intro": [
-        "Quando un telefono viene perso, rubato o danneggiato irreparabilmente, la sopravvivenza delle tue note di JW Library dipende da una sola domanda: esiste un backup .jwlibrary da qualche parte fuori da quel dispositivo? Se esiste, tutto ciò che contiene torna. Questa pagina spiega come trovarne uno, come ripristinarlo su qualsiasi dispositivo sostitutivo e cosa fare quando l'unico backup che hai è vecchio.",
-        "Perdere un telefono è già abbastanza stressante senza il timore di aver perso anche "
-        "anni di note di studio. Se potrai recuperarle dipende da una sola domanda: esiste un "
-        "backup .jwlibrary da qualche parte fuori da quel telefono?",
-        "Questa guida ti accompagna a trovare qualunque backup tu possa avere — anche quelli "
-        "che hai dimenticato di aver fatto — e a trasformarlo di nuovo in una biblioteca JW "
-        "Library completa sul dispositivo nuovo.",
+        "Prima la risposta sincera, perché ti risparmia di leggere oltre. Se esiste una copia .jwlibrary da qualche parte fuori dal dispositivo perso, tutto ciò che contiene torna con il ripristino di JW Library stesso, e per quella parte non ti serve questo sito. Se non esiste alcuna copia, i dati di studio personale non si possono recuperare affatto: vivono solo sul dispositivo, e nessuno strumento cambia questo.",
+        "Dove questa pagina aiuta davvero è il caso intermedio, più frequente degli altri due: una copia ce l'hai, ma non racconta tutta la storia. Può essere di mesi fa, oppure hai già studiato sul telefono sostitutivo, quindi ripristinarla e basta scambierebbe un insieme di note con un altro invece di restituirti tutto.",
+        "Unirli è proprio ciò che JW Library non sa fare, ed è l'argomento del resto di questa pagina. Ma prima, la ricerca: di solito si hanno più copie di quante si ricordi di averne fatte.",
     ],
     "steps": [
         ("Cerca in ogni posto dove potrebbe esserci un backup",

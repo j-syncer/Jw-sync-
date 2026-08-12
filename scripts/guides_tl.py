@@ -32,16 +32,9 @@ GUIDES_TL["merge-jw-library-backups"] = {
                    "higit pang backup ng JW Library sa iisang .jwlibrary na file — libre, "
                    "pribado, sa loob mismo ng browser mo.",
     "intro": [
-        "Kung nag-aaral ka sa mahigit isang device — cellphone sa Kingdom Hall, tablet sa "
-        "bahay — magkakaroon ang bawat isa ng sariling mga nota at highlight. Hindi kayang "
-        "pagsamahin ang mga iyon ng Backup at Pagsasauli ng JW Library: kapag isinauli mo ang "
-        "isang backup, papalitan nito ang lahat ng laman ng device at mabubura ang ginawa mo "
-        "sa kabila.",
-        "Nilulutas ito ng JW Sync. Binabasa nito ang dalawa (o higit pa) na .jwlibrary na "
-        "backup at pinagsasama ang mga nota, highlight, bookmark at tag ng lahat sa iisang "
-        "bagong backup. Nangyayari ang lahat sa loob mismo ng browser mo — hindi kailanman "
-        "ina-upload ang mga file mo sa anumang server, kaya nananatiling pribado ang mga nota "
-        "mo sa personal na pag-aaral.",
+        "Pinag-aralan mo ang Bantayan sa telepono at ibang artikulo naman sa tablet. Ngayon ay may laman ang bawat device na wala sa isa, at hindi sila mapagsasama ng JW Library: ang pag-restore doon ay buong pagpapalit, hindi paghahalo, kaya alinmang backup ang i-restore mo ay buburahin nito ang pinag-aralan sa kabilang device. Sa app lamang, walang paraan para mapanatili ang dalawa.",
+        "Para diyan ang site na ito. Binabasa nito ang dalawa (o higit pa) na .jwlibrary at pinagsasama ang mga tala, highlight, bookmark at tag ng lahat ng iyon sa isang bagong backup — kaya wala nang kailangang piliin. Sa loob mismo ng browser mo nangyayari ang lahat: hindi kailanman ina-upload ang mga file mo sa anumang server, kaya nananatiling pribado ang iyong mga tala sa pag-aaral.",
+        "Kaya rin pang-iwas ito at hindi panlunas: kapag regular kang nagsasama, hindi mo na kailangang tandaan na mag-restore bago mag-aral sa ibang device. Mag-aral kung nasaan ka, magsama kapag maginhawa, at aabot ang bawat device.",
     ],
     "steps": [
         ("Gumawa ng backup sa bawat device",
@@ -193,16 +186,11 @@ GUIDES_TL["sync-jw-library-multiple-devices"] = {
 GUIDES_TL["transfer-jw-library-notes-new-phone"] = {
     "title": "Paano ilipat ang mga nota sa JW Library sa bagong cellphone",
     "h1": "Paano ilipat ang mga nota sa JW Library sa bagong cellphone",
-    "description": "Hakbang-hakbang: ilipat ang lahat ng nota, highlight, bookmark at tag mo "
-                   "sa JW Library patungo sa bagong cellphone gamit ang .jwlibrary na backup "
-                   "— at kung paano magsama kung may nota ka na sa bagong cellphone.",
+    "description": "Ang paglipat ng mga tala sa JW Library papunta sa bagong telepono ay isang backup at isang restore, at kaya iyon ng app sa mga dalawang minuto. Narito ang mga hakbang — pati ang tanging kaso na hindi nito kaya: kapag may sariling mga tala na ang bagong telepono.",
     "intro": [
-        "Ang pagpapalit ng telepono ang pinakamadalas na sandali kung kailan nawawala ang taon-taong nota sa JW Library — hindi dahil mahirap ang paglilipat, kundi dahil kailangan itong sadyain bago pa mabura ang lumang device. Hindi maaasahang kasama ang datos ng personal na pag-aaral sa karaniwang paglilipat mula telepono tungo sa telepono, at walang itinatagong kopya nito ang JW Library sa anumang account.",
-        "Inililipat ng mga tool sa paglilipat ng cellphone ang mga app at litrato, pero hindi "
-        "maaasahang nadadala ng mga ito ang datos ng personal na pag-aaral sa JW Library. Ang "
-        "maaasahang paraan para madala ang mga nota, highlight, bookmark at tag mo sa bagong "
-        "cellphone ay ang backup na file mismo ng JW Library — ilang minuto lang at gumagana "
-        "sa magkakaibang plataporma.",
+        "Mas madali ito kaysa inaasahan ng marami, at hindi mo kailangan ng anumang karagdagang kasangkapan. Nakapaloob na sa JW Library ang backup at restore, at dala nito ang bawat tala, highlight, bookmark at tag papunta sa bagong telepono — pati sa pagitan ng Android at iPhone. Gawin mo habang gumagana pa ang lumang device at ilang minuto lang ang buong proseso.",
+        "Ang tanging bahaging dapat sadyain ay ang paglilipat mismo: inililipat ng mga kasangkapan sa paglipat ng telepono ang iyong apps at mga larawan, pero nilalaktawan nila ang personal na datos ng pag-aaral sa JW Library, kaya gawin mo ang backup file sa halip na asahang kasama na ito.",
+        "May eksaktong isang sitwasyon na hindi kaya ng app, at makabubuting malaman bago ka magsimula: kung nag-aaral ka na sa bagong telepono, buburahin ng pag-restore ng backup ng luma ang trabahong iyon, dahil pinapalitan ng restore ang buong aklatan ng device. Kung iyan ang kalagayan mo, ang bahagi tungkol sa pagsasama sa ibaba ang kailangan mo.",
     ],
     "steps": [
         ("Gumawa ng backup sa lumang cellphone",
@@ -345,15 +333,10 @@ GUIDES_TL["jw-library-android-to-iphone"] = {
 GUIDES_TL["backup-jw-library"] = {
     "title": "Paano mag-backup ng JW Library sa tamang paraan",
     "h1": "Paano mag-backup ng JW Library sa tamang paraan",
-    "description": "Isang rutinang 30 segundo lang na nag-iingat sa taon-taong nota, "
-                   "highlight at bookmark mo sa JW Library — at ang karaniwang pagkakamaling "
-                   "nabibiktima ang marami.",
+    "description": "Isang 30-segundong gawi sa pag-backup: ano talaga ang laman ng isang .jwlibrary file, saan ito itatago, at bakit sulit magkaroon ng bago kahit walang namamalihan.",
     "intro": [
-        "Lahat ng minarkahan mo sa JW Library — bawat nota, bawat highlight, bawat bookmark at tag — ay nasa iisang lugar lang: ang device na hawak mo. Walang account na may kopya at walang awtomatikong pag-sync sa cloud. Ang backup lang ang nakatayo sa pagitan ng aklatan ng pag-aaral na tinipon mo sa loob ng maraming taon at ng nawala, na-reset o napalitang telepono.",
-        "Kalahating minuto lang ang wastong backup ng JW Library at iniingatan nito ang "
-        "taon-taong naipong pag-aaral. Halos pare-pareho ang simula ng mga kuwento ng "
-        "nawalang datos: walang kamakailang .jwlibrary na file nang mawala, ma-reset o "
-        "mapalitan ang cellphone.",
+        "Mga kalahating minuto lang ang isang backup, at sulit itong gawing gawi — bagaman hindi eksakto sa dahilang karaniwang ibinibigay. Nailipat na nang maayos ng sariling backup at restore ng JW Library ang isang aklatan papunta sa bagong device, kaya ang backup ay hindi gaanong seguro kundi ang hilaw na materyal ng lahat ng iba pang gusto mong gawin sa iyong pag-aaral.",
+        "Ang .jwlibrary file ang tanging anyo na ginagawa ng iyong aklatan sa labas ng app. Ito ang pinagsasama mo kapag pinag-aralan sa dalawang device, ito ang binubuksan mo para basahin, palitan ang tag o ayusin ang mga taon ng tala, ito ang hinahanap mo ayon sa kahulugan kapag kalahati lang ang natatandaan mo sa isinulat mo, at dito mo kinukuha ang mga talang ipadadala mo sa isang kaibigan. Ang pagkakaroon ng bago ang siyang nagbibigay-daan sa lahat ng iyon.",
     ],
     "steps": [
         ("Gumawa ng backup",
@@ -920,13 +903,9 @@ GUIDES_TL["recover-jw-library-notes-lost-phone"] = {
                    "mababawi mo ay nakasalalay sa mga backup mo. Narito kung paano eksaktong "
                    "mababawi ang mga nota — at kung ano ang gagawin sa susunod.",
     "intro": [
-        "Kapag nawala, nanakaw o nasirang tuluyan ang telepono, ang pananatili ng mga nota mo sa JW Library ay nakasalalay sa iisang tanong: may .jwlibrary na backup ba sa kung saan sa labas ng device na iyon? Kung mayroon, bumabalik ang lahat ng nasa loob nito. Sinasaklaw ng pahinang ito kung paano makahanap ng isa, kung paano ito isauli sa anumang kapalit na device, at kung ano ang gagawin kung luma na ang tanging backup na mayroon ka.",
-        "Sapat nang nakakastress ang pagkawala ng cellphone nang wala pang takot na kasama "
-        "nitong nawala ang taon-taong nota sa pag-aaral. Nakasalalay sa isang tanong ang "
-        "pagbawi: may .jwlibrary na backup ba kahit saan sa labas ng cellphone na iyon?",
-        "Sinasamahan ka ng gabay na ito sa paghahanap ng kahit anong backup na maaaring nasa "
-        "iyo — pati na ang mga nakalimutan mong ginawa — at sa pagbabalik nito sa buong "
-        "library ng JW Library sa bagong device mo.",
+        "Una ang tapat na sagot, dahil makatitipid ito sa iyong pagbabasa. Kung may .jwlibrary backup saanman sa labas ng nawalang device, babalik ang lahat ng laman nito sa pamamagitan ng sariling restore ng JW Library, at hindi mo kailangan ang site na ito para sa bahaging iyon. Kung wala talagang backup sa anumang anyo, hindi na mababawi ang personal na datos ng pag-aaral: sa device lamang ito nakatira, at walang kasangkapang makapagbabago niyan.",
+        "Ang tunay na natutulungan ng pahinang ito ay ang gitnang kaso, at mas madalas pa ito kaysa sa dalawa: may backup ka, pero hindi ito ang buong kuwento. Maaaring ilang buwan na ito, o baka nag-aaral ka na sa pamalit na telepono — kaya ang basta pag-restore ay magpapalit lang ng isang set ng tala sa isa pa sa halip na maibalik ang lahat.",
+        "Ang pagsasama ng dalawa ang mismong hindi kayang gawin ng JW Library, at iyan ang paksa ng natitirang bahagi ng pahinang ito. Pero una, ang paghahanap: madalas na mas marami ang backup ng mga tao kaysa sa natatandaan nilang ginawa.",
     ],
     "steps": [
         ("Hanapin sa bawat lugar na maaaring may backup",
