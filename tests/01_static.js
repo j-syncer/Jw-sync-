@@ -973,8 +973,12 @@ section('Cross-tool session (jw-session.js)');
   {
     const forum = fs.readFileSync(REPO + '/forum.html', 'utf8');
     const forumJs = fs.readFileSync(REPO + '/js/forum.js', 'utf8');
-    const m = forum.match(/window\.__FORUM_I18N=(\{.*?\});<\/script>/s);
-    if (!m) { fail('__FORUM_I18N dictionary missing from forum.html'); }
+    // v3.33.0: the dictionary moved out of forum.html into a shared file. It
+    // used to be checked only where it happened to live, which is why nobody
+    // noticed that the app's own copy of the forum had no dictionary at all.
+    const forumI18n = fs.readFileSync(REPO + '/js/forum-i18n.js', 'utf8');
+    const m = forumI18n.match(/window\.__FORUM_I18N=(\{.*\});\s*\n\(function\(\)\{/s);
+    if (!m) { fail('__FORUM_I18N dictionary missing from js/forum-i18n.js'); }
     else {
       let dict;
       try { dict = JSON.parse(m[1]); } catch (e) { dict = null; fail('__FORUM_I18N does not parse'); }
@@ -1004,20 +1008,39 @@ section('Cross-tool session (jw-session.js)');
       }
     }
 
-    // Markup hooks + the applier
-    for (const [attr, min] of [['data-i18n=', 20], ['data-i18n-ph=', 5], ['data-i18n-opt=', 4]]) {
-      const n = (forum.match(new RegExp(attr, 'g')) || []).length;
-      if (n >= min) ok('forum markup: ' + n + ' ' + attr + ' hooks');
-      else fail('forum markup: only ' + n + ' ' + attr + ' hooks (expected >= ' + min + ')');
+    // Markup hooks, on every surface that renders the forum. forum.html was
+    // the only one checked before, and the embedded copy inside index.html
+    // carried no hooks at all — hardcoded English behind a language picker.
+    const SURFACES = [
+      ['forum.html', forum],
+      ['index.html', fs.readFileSync(REPO + '/index.html', 'utf8')],
+      ['beta/index.html', fs.readFileSync(REPO + '/beta/index.html', 'utf8')],
+    ];
+    for (const [name, src] of SURFACES) {
+      const scope = name === 'forum.html' ? src
+        : src.slice(src.indexOf('<div id="forum-view"'), src.indexOf('<!-- ── End embedded forum view'));
+      const n = (scope.match(/data-i18n[=-]/g) || []).length;
+      if (n >= 25) ok(name + ': forum markup carries ' + n + ' i18n hooks');
+      else fail(name + ': forum markup has only ' + n + ' i18n hooks (expected >= 25)');
+      // Loading js/forum.js without the dictionary is the exact shape of the
+      // bug: FT() then renders its own argument, e.g. "cat_feature".
+      if (!src.includes('js/forum.js')) continue;
+      const iDict = src.indexOf('js/forum-i18n.js'), iJs = src.indexOf('js/forum.js');
+      if (iDict >= 0 && iDict < iJs) ok(name + ': loads the dictionary before js/forum.js');
+      else fail(name + ': loads js/forum.js without the dictionary ahead of it');
     }
-    if (forum.includes('id="forum-i18n"') && forum.includes('window.__forumT'))
-      ok('forum applier installed and exposes __forumT for the runtime');
-    else fail('forum i18n applier missing');
+    if (forumI18n.includes('window.__forumT') && forumI18n.includes('window.__forumApplyI18N'))
+      ok('shared applier exposes __forumT and __forumApplyI18N');
+    else fail('forum i18n applier missing from js/forum-i18n.js');
+    if (!/const\s+catLabel\s*=/.test(forum))
+      ok('forum.html has no second copy of the forum runtime');
+    else fail('forum.html carries an inline forum implementation — it will drift out of translation');
 
     // Runtime copy must go through FT(), not literals.
     const LEFTOVERS = ["'Please add a title.'", "'Posted! ✓'", "'Already upvoted!'",
       "'No posts yet'", "'Be the first to post!'", "'just now'", "' ago'",
-      "'No replies yet", "'Posting…'"];
+      "'No replies yet", "'Posting…'", '>Try again<', 'Loading replies…',
+      '>Copy link', '✓ Solved<', "Couldn't load posts"];
     const stuck = LEFTOVERS.filter(s => forumJs.includes(s));
     if (!stuck.length) ok('forum runtime strings all read from the dictionary');
     else fail(stuck.length + ' hardcoded string(s) left in js/forum.js', stuck.join(' | '));

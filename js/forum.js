@@ -16,6 +16,9 @@ let posts = [], filter = 'all', activePostId = null;
 // (and swipe-back on mobile) closes the post instead of leaving the
 // community — see openThread / closeThread / syncThreadRoute.
 const THREAD_HASH_RE = /^#forum\/post\/(.+)$/;
+// forum.html addressed threads at #post/<id> before the app embedded the
+// forum; links shared from that page are still in circulation.
+const LEGACY_HASH_RE = /^#post\/(.+)$/;
 let pendingThreadId = null; // deep-linked post id waiting for posts to load
 let votedP = new Set(JSON.parse(localStorage.getItem('vp') || '[]'));
 let votedR = new Set(JSON.parse(localStorage.getItem('vr') || '[]'));
@@ -26,9 +29,9 @@ const saveVotes = () => {
 
 // ── Utils ─────────────────────────────────────────────────────
 const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-// UI copy lives in window.__FORUM_I18N (embedded in forum.html) and is read
-// through the helper the page installs. The fallback keeps this file usable if
-// the script order ever changes.
+// UI copy lives in window.__FORUM_I18N (js/forum-i18n.js, loaded by both the
+// standalone page and the app) and is read through the helper it installs.
+// The fallback keeps this file usable if the script order ever changes.
 const FT = (k, n) => (window.__forumT ? window.__forumT(k, n) : k);
 
 const ago = iso => {
@@ -78,9 +81,9 @@ async function load() {
         document.getElementById('post-list').innerHTML = `
             <div class="state-box">
                 <div class="icon">⚠️</div>
-                <h3>Couldn't load posts</h3>
+                <h3>${FT('err_load_posts')}</h3>
                 <p>${esc(e.message)}</p>
-                <button class="btn btn-ghost" style="margin-top:12px" onclick="load()">Try again</button>
+                <button class="btn btn-ghost" style="margin-top:12px" onclick="load()">${FT('try_again')}</button>
             </div>`;
     }
 }
@@ -104,7 +107,7 @@ function render() {
             <div class="post-body">
                 <div class="badges">
                     <span class="cat-badge ${catCls(p.category)}">${catLabel(p.category)}</span>
-                    ${p.solved?'<span class="solved-badge">✓ Solved</span>':''}
+                    ${p.solved?`<span class="solved-badge">✓ ${FT('s_solved')}</span>`:''}
                 </div>
                 <div class="post-title">${esc(p.title)}</div>
                 ${p.content?`<div class="post-excerpt">${esc(p.content)}</div>`:''}
@@ -227,7 +230,7 @@ async function showThread(id) {
         <div class="thread-card original">
             <div class="badges">
                 <span class="cat-badge ${catCls(post.category)}">${catLabel(post.category)}</span>
-                ${post.solved?'<span class="solved-badge">✓ Solved</span>':''}
+                ${post.solved?`<span class="solved-badge">✓ ${FT('s_solved')}</span>`:''}
             </div>
             <div class="thread-title">${esc(post.title)}</div>
             ${post.content?`<div class="thread-content">${esc(post.content)}</div>`:''}
@@ -240,15 +243,15 @@ async function showThread(id) {
                 <button class="react-btn${voted?' voted':''}" id="tv-btn" onclick="votePostThread('${esc(id)}')">
                     ▲ <span id="tv-count">${post.votes}</span>
                 </button>
-                <button class="react-btn" onclick="copyThreadLink('${esc(id)}')" title="Copy a direct link to this post">
+                <button class="react-btn" onclick="copyThreadLink('${esc(id)}')" title="${esc(FT('copy_link'))}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                    Copy link
+                    ${FT('copy_link')}
                 </button>
             </div>
         </div>` + navHtml;
     document.getElementById('replies-section').style.display = 'block';
     document.getElementById('reply-compose').style.display   = 'block';
-    document.getElementById('replies-list').innerHTML = '<div style="padding:14px 0;color:var(--muted);font-size:13px">Loading replies…</div>';
+    document.getElementById('replies-list').innerHTML = `<div style="padding:14px 0;color:var(--muted);font-size:13px">${FT('loading_replies')}</div>`;
     await loadReplies(id);
 }
 
@@ -371,6 +374,11 @@ function hideThread() {
 // back/forward, or navigating to another part of the app). Also guarantees
 // the body scroll lock never leaks into the rest of the app.
 function syncThreadRoute() {
+    // Rewrite a legacy #post/<id> link to the canonical route before matching.
+    const legacy = location.hash.match(LEGACY_HASH_RE);
+    if (legacy) {
+        history.replaceState(null, '', '#forum/post/' + legacy[1]);
+    }
     const m = location.hash.match(THREAD_HASH_RE);
     if (m) {
         const id = decodeURIComponent(m[1]);
@@ -390,6 +398,18 @@ document.addEventListener('keydown', e => {
     else if (document.getElementById('compose-panel').classList.contains('open')) toggleCompose();
 });
 
+
+// ── Language changes ───────────────────────────────────────────────────────
+// index.html switches language without a reload, so the applier in
+// js/forum-i18n.js calls this to redraw what is already on screen.
+window.__forumRerender = function () {
+    if (!posts.length) return;   // still loading: leave the state box alone
+    render();
+    stats();
+    if (activePostId && document.getElementById('overlay').classList.contains('open')) {
+        showThread(activePostId);
+    }
+};
 
 // ── Lazy initialization ────────────────────────────────────────────────
 // The Supabase JS library is ~50KB and only needed when the user actually
@@ -415,7 +435,7 @@ window.jwsyncForumInit = async function () {
     } catch (e) {
         console.error('Forum failed to initialize:', e);
         var list = document.getElementById('post-list');
-        if (list) list.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#7a6558;font-family:system-ui,sans-serif"><div style="font-size:32px;margin-bottom:12px">⚠️</div><div style="font-size:15px;font-weight:600;color:#e8ddd5;margin-bottom:6px">Could not load community forum</div><div style="font-size:13px">' + ((e && e.message) || 'Unknown error — check your connection') + '</div></div>';
+        if (list) list.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#7a6558;font-family:system-ui,sans-serif"><div style="font-size:32px;margin-bottom:12px">⚠️</div><div style="font-size:15px;font-weight:600;color:#e8ddd5;margin-bottom:6px">' + FT('err_load_posts') + '</div><div style="font-size:13px">' + ((e && e.message) || 'Unknown error — check your connection') + '</div></div>';
         // Reset flag so a retry (re-entering the route) will try again
         window.__jwsync_forum_loaded__ = false;
     }

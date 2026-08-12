@@ -125,13 +125,17 @@ function assertContains(text, needle, label) {
     (4, 5, 4, 'guid-um-4', 1),
     (5, 6, 4, 'guid-um-5', 1)`);
 
-  // Seed notes (some linked to highlights, some standalone)
-  db.run(`INSERT INTO Note (NoteId, Guid, UserMarkId, LocationId, Title, Content, LastModified) VALUES
-    (10, 'guid-note-10', 1, 1, 'Beginning thoughts', 'In the beginning God created the heaven and the earth.', '2024-01-15 10:00:00'),
-    (11, 'guid-note-11', 2, 2, 'Light', 'And God said let there be light.', '2024-02-20 12:00:00'),
-    (12, 'guid-note-12', NULL, 3, 'Faith', 'Now faith is the assured expectation of things hoped for.', '2024-03-05 09:00:00'),
-    (13, 'guid-note-13', 4, 4, NULL, 'A standalone observation about the article.', '2024-04-10 14:00:00'),
-    (14, 'guid-note-14', NULL, 5, 'Awake note', '<p>This is an HTML note with <br/>line breaks and <strong>bold</strong>.</p>', '2024-05-01 08:30:00')`);
+  // Seed notes (some linked to highlights, some standalone).
+  // BlockType 2 / BlockIdentifier is how a Bible note records its verse; note
+  // 12 carries one directly, note 10 inherits its verse from the BlockRange of
+  // the highlight it is attached to, and note 13 sits in a publication, which
+  // has paragraphs rather than verses.
+  db.run(`INSERT INTO Note (NoteId, Guid, UserMarkId, LocationId, Title, Content, LastModified, BlockType, BlockIdentifier) VALUES
+    (10, 'guid-note-10', 1, 1, 'Beginning thoughts', 'In the beginning God created the heaven and the earth.', '2024-01-15 10:00:00', NULL, NULL),
+    (11, 'guid-note-11', 2, 2, 'Light', 'And God said let there be light.', '2024-02-20 12:00:00', NULL, NULL),
+    (12, 'guid-note-12', NULL, 3, 'Faith', 'Now faith is the assured expectation of things hoped for.', '2024-03-05 09:00:00', 2, 16),
+    (13, 'guid-note-13', 4, 4, NULL, 'A standalone observation about the article.', '2024-04-10 14:00:00', NULL, NULL),
+    (14, 'guid-note-14', NULL, 5, 'Awake note', '<p>This is an HTML note with <br/>line breaks and <strong>bold</strong>.</p>', '2024-05-01 08:30:00', NULL, NULL)`);
 
   // Seed tags
   db.run(`INSERT INTO Tag (TagId, Type, Name) VALUES
@@ -433,8 +437,10 @@ function assertContains(text, needle, label) {
       assertEq(mdFiles.length, 5, 'one .md per note (5 total)');
       // The "Awake note" has <strong>bold</strong> → expect **bold** in its markdown
       let foundBold = false, foundFrontmatter = false;
+      const mdTexts = [];
       for (const fn of mdFiles) {
         const txt = await zip.files[fn].async('string');
+        mdTexts.push(txt);
         if (txt.includes('**bold**')) foundBold = true;
         if (/^---[\s\S]*title:/.test(txt)) foundFrontmatter = true;
       }
@@ -442,6 +448,23 @@ function assertContains(text, needle, label) {
       else fail('bold not converted to Markdown');
       if (foundFrontmatter) ok('Markdown files include YAML frontmatter');
       else fail('no frontmatter in Markdown output');
+
+      // Verse in the front matter. Location stops at the chapter, so this only
+      // works if the export reads the note's own BlockIdentifier and the
+      // BlockRange of any highlight it is attached to.
+      const has = (needle) => mdTexts.some(t => t.includes(needle));
+      if (has('publication: John 3:16')) ok('verse from the note itself (John 3:16)');
+      else fail('note 12 exported without its verse: ' +
+        (mdTexts.find(t => t.includes('John 3')) || '').split('\n').slice(0, 8).join(' | '));
+      if (has('book: John') && has('chapter: 3') && has('verse: 16'))
+        ok('book / chapter / verse also emitted as discrete fields');
+      else fail('discrete book/chapter/verse fields missing from front matter');
+      if (has('publication: Genesis 1:5')) ok("verse from the attached highlight's BlockRange (Genesis 1:5)");
+      else fail('note 10 exported without the verse its highlight covers');
+      // A publication has paragraphs, not verses — it must not grow a verse line.
+      const wt = mdTexts.find(t => t.includes('The Watchtower'));
+      if (wt && !/\nverse:/.test(wt)) ok('publication note exports with no verse field');
+      else fail('a publication note was given a verse');
     }
   }
 

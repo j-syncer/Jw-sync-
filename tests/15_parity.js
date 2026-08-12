@@ -35,29 +35,32 @@ function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 // ── 1. Files that must be byte-identical between production and beta ──────
 console.log('== Production/beta pairs must be identical ==');
 
-const IDENTICAL_PAIRS = [
-  ['js/app.js', 'beta/js/app.js'],
-  // v3.8.0: feature modules lifted out of index.html.
-  ['js/browse.js', 'beta/js/browse.js'],
-  ['js/demo.js', 'beta/js/demo.js'],
-  ['js/conflict-review.js', 'beta/js/conflict-review.js'],
-  ['js/impact-preview.js', 'beta/js/impact-preview.js'],
-  ['js/post-merge.js', 'beta/js/post-merge.js'],
-  ['js/sync-hub.js', 'beta/js/sync-hub.js'],
-  ['js/receive.js', 'beta/js/receive.js'],
-  ['js/wizard.js', 'beta/js/wizard.js'],
-  ['js/doctor.js', 'beta/js/doctor.js'],
-  ['js/forum.js', 'beta/js/forum.js'],
-  ['js/jw-session.js', 'beta/js/jw-session.js'],
-  ['js/merge-worker.js', 'beta/js/merge-worker.js'],
-  ['js/reading.js', 'beta/js/reading.js'],
-  ['js/resurface.js', 'beta/js/resurface.js'],
-  ['js/semantic-worker.js', 'beta/js/semantic-worker.js'],
-  ['highlights.html', 'beta/highlights.html'],
-  ['share.html', 'beta/share.html'],
-  ['styles.css', 'beta/styles.css'],
-  ['rtl.css', 'beta/rtl.css'],
-];
+// Discovered rather than listed: a hardcoded roster is how a new shared file
+// escapes this guard. js/forum-i18n.js was added in v3.33.0 and would have had
+// to be remembered here; instead every js/*.js with a beta twin is checked, and
+// a file with no twin at all is a failure of its own.
+// enhancements.js is the one legitimate exception (section 2 below).
+const ENHANCEMENTS = 'enhancements.js';
+const SHARED_JS = fs.readdirSync(path.join(ROOT, 'js'))
+  .filter(function (f) { return /\.js$/.test(f) && f !== ENHANCEMENTS; })
+  .sort();
+
+const IDENTICAL_PAIRS = SHARED_JS
+  .filter(function (f) { return fs.existsSync(path.join(ROOT, 'beta', 'js', f)); })
+  .map(function (f) { return ['js/' + f, 'beta/js/' + f]; })
+  .concat([
+    ['highlights.html', 'beta/highlights.html'],
+    ['share.html', 'beta/share.html'],
+    ['styles.css', 'beta/styles.css'],
+    ['rtl.css', 'beta/rtl.css'],
+  ]);
+
+SHARED_JS.forEach(function (f) {
+  if (!fs.existsSync(path.join(ROOT, 'beta', 'js', f))) {
+    fail('js/' + f + ' has no beta twin',
+      'Every file in js/ ships to both sites. Copy it to beta/js/ in the same commit.');
+  }
+});
 
 IDENTICAL_PAIRS.forEach(function (pair) {
   if (read(pair[0]) === read(pair[1])) {

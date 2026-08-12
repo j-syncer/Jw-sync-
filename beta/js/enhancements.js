@@ -147,9 +147,15 @@
       if (isForum && typeof window.jwsyncForumInit === 'function') {
         window.jwsyncForumInit();
       }
+      // The forum view carries its own dictionary and the language may have
+      // changed in the app since it was last applied.
+      if (isForum && typeof window.__forumApplyI18N === 'function') {
+        window.__forumApplyI18N();
+      }
       // Update <title> for clarity
+      var forumT = window.__forumT;
       document.title = isForum
-        ? 'JW Sync — Community'
+        ? 'JW Sync — ' + (forumT ? forumT('logo_sub') : 'Community')
         : 'JW Library Backup Merger | Combine Notes & Highlights';
     }
     window.addEventListener('hashchange', update);

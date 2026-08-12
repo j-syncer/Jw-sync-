@@ -4,6 +4,54 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.33.0] — 2026-08-12
+
+### The verse is now in the Markdown export
+
+Notes exported to Markdown used to carry `publication: Matthew 26` — the book
+and the chapter, never the verse. They now carry `publication: Matthew 26:14`,
+and a note attached to a highlight that spans several verses gets the range:
+`Matthew 26:14-16`.
+
+The front matter also gained `book`, `chapter` and `verse` as separate fields,
+so Markdown editors that query front matter (Obsidian's Dataview and the like)
+can filter and sort by them:
+
+```yaml
+---
+title: The cup he prayed about
+date: 2026-08-12
+tags: [study]
+publication: Matthew 26:39
+book: Matthew
+chapter: 26
+verse: 39
+---
+```
+
+Two cases have no verse to show and are unchanged: a note placed on a chapter
+rather than on a specific verse still reads `Matthew 26`, and notes in
+publications — *The Watchtower*, books, the workbook — are numbered by
+paragraph, so they keep the publication name.
+
+Thanks to purlo on the community page for asking.
+
+### The community forum speaks all 25 languages again
+
+Opening a post from inside the app showed raw translation keys where the text
+should have been — `cat_feature` instead of "Feature", `no_replies` instead of
+"No replies yet", `ago_h` instead of "3h ago" — for every reader, in every
+language including English. The standalone community page had the opposite
+half of the same fault: its headings were translated but its posts, dates and
+buttons were English in all 25 languages.
+
+Both are fixed, and four buttons and messages that never had translations at
+all ("Copy link", "Try again", "Loading replies…", "Couldn't load posts") now
+have them in every language. Links to a post shared from the old community page
+still open the right post.
+
+---
+
 ## [3.32.2] — 2026-08-12
 
 ### Faster first load: the Library Doctor and conflict reviewer now load on demand

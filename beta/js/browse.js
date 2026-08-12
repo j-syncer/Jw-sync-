@@ -76,6 +76,33 @@ window.__bootBrowse = function() {
     }
     return row.LocTitle || row.KeySymbol || '';
   }
+  // The verse a Bible note sits on. A Bible Location stops at the chapter, so
+  // pubLabel() can only ever say "Matthew 26"; the verse is on the note
+  // (BlockType 2, BlockIdentifier) or on the BlockRange rows of the highlight
+  // it is attached to, which span a range when the highlight does.
+  function verseRange(row){
+    if(!row) return null;
+    var bn = row.BookNumber;
+    // Publications are numbered by paragraph, not by verse.
+    if(!(bn >= 1 && bn <= 66) || !row.ChapterNumber) return null;
+    var lo = null, hi = null;
+    if(row.BlockIdentifier != null && row.BlockIdentifier >= 1){ lo = hi = row.BlockIdentifier; }
+    if(row.BrFirst != null && row.BrFirst >= 1){
+      lo = (lo == null) ? row.BrFirst : Math.min(lo, row.BrFirst);
+      hi = (hi == null) ? row.BrLast  : Math.max(hi, row.BrLast);
+    }
+    if(lo == null) return null;              // a note on the chapter as a whole
+    return (hi != null && hi > lo) ? (lo + '-' + hi) : ('' + lo);
+  }
+  // pubLabel() with the verse appended where there is one. The Explorer's own
+  // labels stay at chapter level — grouping a list by "Matthew 26" reads
+  // better than by 30 separate verses — so this is used by the export.
+  function pubRef(row){
+    var base = pubLabel(row);
+    if(!base) return '';
+    var v = verseRange(row);
+    return v ? (base + ':' + v) : base;
+  }
   function fmtDate(s){
     if(!s) return '';
     var d = new Date(String(s).replace(' ', 'T'));
@@ -466,7 +493,16 @@ window.__bootBrowse = function() {
     var fm='---\ntitle: '+title.replace(/\n/g,' ')+'\n';
     if(n.LastModified) fm+='date: '+String(n.LastModified).slice(0,10)+'\n';
     if(tags.length) fm+='tags: ['+tags.join(', ')+']\n';
-    var pub=pubLabel(n); if(pub) fm+='publication: '+pub.replace(/\n/g,' ')+'\n';
+    var pub=pubRef(n); if(pub) fm+='publication: '+pub.replace(/\n/g,' ')+'\n';
+    // Discrete fields as well as the readable line: Markdown editors query
+    // front matter, and an importer reading these back can place the note
+    // exactly where it came from.
+    var bn=n.BookNumber;
+    if(bn>=1&&bn<=66){
+      fm+='book: '+(BIBLE[bn-1]||('Book '+bn))+'\n';
+      if(n.ChapterNumber) fm+='chapter: '+n.ChapterNumber+'\n';
+      var vr=verseRange(n); if(vr) fm+='verse: '+vr+'\n';
+    }
     fm+='---\n\n';
     return fm+'# '+title+'\n\n'+htmlToMarkdown(n.Content||'')+'\n';
   }
@@ -698,11 +734,18 @@ window.__bootBrowse = function() {
       // Notes — also fetch n.UserMarkId for color editing
       state.allNotes = rowsFromExec(db,
         "SELECT n.NoteId, n.LocationId, n.UserMarkId, n.Title, n.Content, n.LastModified, n.Guid, " +
+        "n.BlockType, n.BlockIdentifier, " +
         "l.Title AS LocTitle, l.BookNumber, l.ChapterNumber, l.KeySymbol, " +
-        "u.ColorIndex " +
+        "u.ColorIndex, br.BrFirst, br.BrLast " +
         "FROM Note n " +
         "LEFT JOIN Location l ON n.LocationId = l.LocationId " +
         "LEFT JOIN UserMark u ON n.UserMarkId = u.UserMarkId " +
+        // A highlight can span several verses, so the note anchored to it
+        // covers the range its BlockRange rows describe. Grouped once and
+        // joined rather than run as a correlated subquery per note: a large
+        // library has thousands of each.
+        "LEFT JOIN (SELECT UserMarkId, MIN(Identifier) AS BrFirst, MAX(Identifier) AS BrLast " +
+        "           FROM BlockRange GROUP BY UserMarkId) br ON br.UserMarkId = n.UserMarkId " +
         "ORDER BY n.LastModified DESC"
       );
 

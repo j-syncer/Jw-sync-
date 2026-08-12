@@ -58,7 +58,11 @@
     "copy_failed": "Could not copy the link.",
     "reply_empty": "Reply cannot be empty.",
     "reply_posted": "Reply posted! ✓",
-    "lib_failed": "Could not load the forum library"
+    "lib_failed": "Could not load the forum library",
+    "err_load_posts": "Couldn't load posts",
+    "try_again": "Try again",
+    "loading_replies": "Loading replies…",
+    "copy_link": "Copy link"
   },
   "es": {
     "logo_sub": "Comunidad",
@@ -119,7 +123,11 @@
     "copy_failed": "No se pudo copiar el enlace.",
     "reply_empty": "La respuesta no puede estar vacía.",
     "reply_posted": "¡Respuesta publicada! ✓",
-    "lib_failed": "No se pudo cargar la biblioteca del foro"
+    "lib_failed": "No se pudo cargar la biblioteca del foro",
+    "err_load_posts": "No se pudieron cargar las publicaciones",
+    "try_again": "Reintentar",
+    "loading_replies": "Cargando respuestas…",
+    "copy_link": "Copiar enlace"
   },
   "pt": {
     "logo_sub": "Comunidade",
@@ -180,7 +188,11 @@
     "copy_failed": "Não foi possível copiar o link.",
     "reply_empty": "A resposta não pode ficar vazia.",
     "reply_posted": "Resposta publicada! ✓",
-    "lib_failed": "Não foi possível carregar a biblioteca do fórum"
+    "lib_failed": "Não foi possível carregar a biblioteca do fórum",
+    "err_load_posts": "Não foi possível carregar as publicações",
+    "try_again": "Tentar de novo",
+    "loading_replies": "Carregando respostas…",
+    "copy_link": "Copiar link"
   },
   "fr": {
     "logo_sub": "Communauté",
@@ -241,7 +253,11 @@
     "copy_failed": "Impossible de copier le lien.",
     "reply_empty": "La réponse ne peut pas être vide.",
     "reply_posted": "Réponse publiée ! ✓",
-    "lib_failed": "Impossible de charger la bibliothèque du forum"
+    "lib_failed": "Impossible de charger la bibliothèque du forum",
+    "err_load_posts": "Impossible de charger les messages",
+    "try_again": "Réessayer",
+    "loading_replies": "Chargement des réponses…",
+    "copy_link": "Copier le lien"
   },
   "de": {
     "logo_sub": "Community",
@@ -302,7 +318,11 @@
     "copy_failed": "Der Link konnte nicht kopiert werden.",
     "reply_empty": "Die Antwort darf nicht leer sein.",
     "reply_posted": "Antwort veröffentlicht! ✓",
-    "lib_failed": "Die Forum-Bibliothek konnte nicht geladen werden"
+    "lib_failed": "Die Forum-Bibliothek konnte nicht geladen werden",
+    "err_load_posts": "Beiträge konnten nicht geladen werden",
+    "try_again": "Erneut versuchen",
+    "loading_replies": "Antworten werden geladen…",
+    "copy_link": "Link kopieren"
   },
   "it": {
     "logo_sub": "Comunità",
@@ -363,7 +383,11 @@
     "copy_failed": "Impossibile copiare il link.",
     "reply_empty": "La risposta non può essere vuota.",
     "reply_posted": "Risposta pubblicata! ✓",
-    "lib_failed": "Impossibile caricare la libreria del forum"
+    "lib_failed": "Impossibile caricare la libreria del forum",
+    "err_load_posts": "Impossibile caricare i post",
+    "try_again": "Riprova",
+    "loading_replies": "Caricamento delle risposte…",
+    "copy_link": "Copia link"
   },
   "ru": {
     "logo_sub": "Сообщество",
@@ -426,7 +450,11 @@
     "copy_failed": "Не удалось скопировать ссылку.",
     "reply_empty": "Ответ не может быть пустым.",
     "reply_posted": "Ответ опубликован! ✓",
-    "lib_failed": "Не удалось загрузить библиотеку форума"
+    "lib_failed": "Не удалось загрузить библиотеку форума",
+    "err_load_posts": "Не удалось загрузить записи",
+    "try_again": "Повторить",
+    "loading_replies": "Загрузка ответов…",
+    "copy_link": "Скопировать ссылку"
   },
   "ja": {
     "logo_sub": "コミュニティ",
@@ -486,7 +514,11 @@
     "copy_failed": "リンクをコピーできませんでした。",
     "reply_empty": "返信を入力してください。",
     "reply_posted": "返信を投稿しました！ ✓",
-    "lib_failed": "フォーラムのライブラリを読み込めませんでした"
+    "lib_failed": "フォーラムのライブラリを読み込めませんでした",
+    "err_load_posts": "投稿を読み込めませんでした",
+    "try_again": "再試行",
+    "loading_replies": "返信を読み込み中…",
+    "copy_link": "リンクをコピー"
   },
   "ko": {
     "logo_sub": "커뮤니티",
@@ -546,7 +578,11 @@
     "copy_failed": "링크를 복사하지 못했습니다.",
     "reply_empty": "답글을 입력해 주세요.",
     "reply_posted": "답글을 등록했습니다! ✓",
-    "lib_failed": "포럼 라이브러리를 불러오지 못했습니다"
+    "lib_failed": "포럼 라이브러리를 불러오지 못했습니다",
+    "err_load_posts": "글을 불러오지 못했습니다",
+    "try_again": "다시 시도",
+    "loading_replies": "답글을 불러오는 중…",
+    "copy_link": "링크 복사"
   },
   "tl": {
     "logo_sub": "Komunidad",
@@ -607,7 +643,11 @@
     "copy_failed": "Hindi makopya ang link.",
     "reply_empty": "Hindi puwedeng walang laman ang sagot.",
     "reply_posted": "Nai-post ang sagot! ✓",
-    "lib_failed": "Hindi ma-load ang library ng forum"
+    "lib_failed": "Hindi ma-load ang library ng forum",
+    "err_load_posts": "Hindi na-load ang mga post",
+    "try_again": "Subukan ulit",
+    "loading_replies": "Nilo-load ang mga sagot…",
+    "copy_link": "Kopyahin ang link"
   },
   "sv": {
     "logo_sub": "Gemenskap",
@@ -668,7 +708,11 @@
     "copy_failed": "Det gick inte att kopiera länken.",
     "reply_empty": "Svaret får inte vara tomt.",
     "reply_posted": "Svaret har publicerats! ✓",
-    "lib_failed": "Det gick inte att läsa in forumbiblioteket"
+    "lib_failed": "Det gick inte att läsa in forumbiblioteket",
+    "err_load_posts": "Det gick inte att läsa in inläggen",
+    "try_again": "Försök igen",
+    "loading_replies": "Läser in svar…",
+    "copy_link": "Kopiera länk"
   },
   "ceb": {
     "logo_sub": "Komunidad",
@@ -729,7 +773,11 @@
     "copy_failed": "Dili makopya ang link.",
     "reply_empty": "Dili mahimong walay sulod ang tubag.",
     "reply_posted": "Na-post ang tubag! ✓",
-    "lib_failed": "Dili makarga ang librarya sa forum"
+    "lib_failed": "Dili makarga ang librarya sa forum",
+    "err_load_posts": "Wala ma-load ang mga post",
+    "try_again": "Sulayi pag-usab",
+    "loading_replies": "Gikarga ang mga tubag…",
+    "copy_link": "Kopyaha ang link"
   },
   "ar": {
     "logo_sub": "المجتمع",
@@ -812,7 +860,11 @@
     "copy_failed": "تعذّر نسخ الرابط.",
     "reply_empty": "لا يمكن أن يكون الرد فارغًا.",
     "reply_posted": "تم نشر الرد! ✓",
-    "lib_failed": "تعذّر تحميل مكتبة المنتدى"
+    "lib_failed": "تعذّر تحميل مكتبة المنتدى",
+    "err_load_posts": "تعذّر تحميل المنشورات",
+    "try_again": "أعد المحاولة",
+    "loading_replies": "جارٍ تحميل الردود…",
+    "copy_link": "نسخ الرابط"
   },
   "he": {
     "logo_sub": "קהילה",
@@ -873,7 +925,11 @@
     "copy_failed": "לא הצלחנו להעתיק את הקישור.",
     "reply_empty": "התגובה לא יכולה להיות ריקה.",
     "reply_posted": "התגובה פורסמה! ✓",
-    "lib_failed": "לא הצלחנו לטעון את ספריית הפורום"
+    "lib_failed": "לא הצלחנו לטעון את ספריית הפורום",
+    "err_load_posts": "לא ניתן לטעון את הפוסטים",
+    "try_again": "נסו שוב",
+    "loading_replies": "טוען תגובות…",
+    "copy_link": "העתקת קישור"
   },
   "uk": {
     "logo_sub": "Спільнота",
@@ -934,7 +990,11 @@
     "copy_failed": "Не вдалося скопіювати посилання.",
     "reply_empty": "Відповідь не може бути порожньою.",
     "reply_posted": "Відповідь опубліковано! ✓",
-    "lib_failed": "Не вдалося завантажити бібліотеку форуму"
+    "lib_failed": "Не вдалося завантажити бібліотеку форуму",
+    "err_load_posts": "Не вдалося завантажити дописи",
+    "try_again": "Спробувати ще раз",
+    "loading_replies": "Завантажуємо відповіді…",
+    "copy_link": "Скопіювати посилання"
   },
   "pl": {
     "logo_sub": "Społeczność",
@@ -995,7 +1055,11 @@
     "copy_failed": "Nie udało się skopiować linku.",
     "reply_empty": "Odpowiedź nie może być pusta.",
     "reply_posted": "Odpowiedź opublikowana! ✓",
-    "lib_failed": "Nie udało się wczytać biblioteki forum"
+    "lib_failed": "Nie udało się wczytać biblioteki forum",
+    "err_load_posts": "Nie udało się wczytać postów",
+    "try_again": "Spróbuj ponownie",
+    "loading_replies": "Wczytywanie odpowiedzi…",
+    "copy_link": "Kopiuj link"
   },
   "zh-Hans": {
     "logo_sub": "社区",
@@ -1056,7 +1120,11 @@
     "copy_failed": "无法复制链接。",
     "reply_empty": "回复不能为空。",
     "reply_posted": "回复已发布！✓",
-    "lib_failed": "无法加载论坛组件"
+    "lib_failed": "无法加载论坛组件",
+    "err_load_posts": "无法加载帖子",
+    "try_again": "重试",
+    "loading_replies": "正在加载回复……",
+    "copy_link": "复制链接"
   },
   "zh-Hant": {
     "logo_sub": "社群",
@@ -1117,7 +1185,11 @@
     "copy_failed": "無法複製連結。",
     "reply_empty": "回覆不能為空。",
     "reply_posted": "回覆已釋出！✓",
-    "lib_failed": "無法載入論壇元件"
+    "lib_failed": "無法載入論壇元件",
+    "err_load_posts": "無法載入帖子",
+    "try_again": "重試",
+    "loading_replies": "正在載入回覆……",
+    "copy_link": "複製連結"
   },
   "yue-Hant": {
     "logo_sub": "社群",
@@ -1178,7 +1250,11 @@
     "copy_failed": "複製唔到連結。",
     "reply_empty": "回覆唔可以係空白。",
     "reply_posted": "回覆發佈咗！✓",
-    "lib_failed": "載入唔到論壇元件"
+    "lib_failed": "載入唔到論壇元件",
+    "err_load_posts": "載入唔到啲帖",
+    "try_again": "再試吓",
+    "loading_replies": "載入緊啲回覆……",
+    "copy_link": "複製連結"
   },
   "vi": {
     "logo_sub": "Cộng đồng",
@@ -1239,7 +1315,11 @@
     "copy_failed": "Không chép được liên kết.",
     "reply_empty": "Trả lời không được để trống.",
     "reply_posted": "Đã đăng trả lời! ✓",
-    "lib_failed": "Không tải được thư viện diễn đàn"
+    "lib_failed": "Không tải được thư viện diễn đàn",
+    "err_load_posts": "Không tải được bài",
+    "try_again": "Thử lại",
+    "loading_replies": "Đang tải trả lời…",
+    "copy_link": "Chép liên kết"
   },
   "hu": {
     "logo_sub": "Közösség",
@@ -1300,7 +1380,11 @@
     "copy_failed": "Nem sikerült kimásolni a linket.",
     "reply_empty": "A válasz nem lehet üres.",
     "reply_posted": "Válasz beküldve! ✓",
-    "lib_failed": "Nem sikerült betölteni a fórum könyvtárát"
+    "lib_failed": "Nem sikerült betölteni a fórum könyvtárát",
+    "err_load_posts": "Nem sikerült betölteni a bejegyzéseket",
+    "try_again": "Újra",
+    "loading_replies": "Válaszok betöltése…",
+    "copy_link": "Link másolása"
   },
   "hi": {
     "logo_sub": "समुदाय",
@@ -1361,7 +1445,11 @@
     "copy_failed": "लिंक कॉपी नहीं हो सका।",
     "reply_empty": "जवाब खाली नहीं हो सकता।",
     "reply_posted": "जवाब पोस्ट हो गया! ✓",
-    "lib_failed": "फ़ोरम लाइब्रेरी लोड नहीं हो सकी"
+    "lib_failed": "फ़ोरम लाइब्रेरी लोड नहीं हो सकी",
+    "err_load_posts": "पोस्ट लोड नहीं हो सकीं",
+    "try_again": "फिर कोशिश करें",
+    "loading_replies": "जवाब लोड हो रहे हैं…",
+    "copy_link": "लिंक कॉपी करें"
   },
   "id": {
     "logo_sub": "Komunitas",
@@ -1422,7 +1510,11 @@
     "copy_failed": "Tautan tidak dapat disalin.",
     "reply_empty": "Balasan tidak boleh kosong.",
     "reply_posted": "Balasan terkirim! ✓",
-    "lib_failed": "Pustaka forum tidak dapat dimuat"
+    "lib_failed": "Pustaka forum tidak dapat dimuat",
+    "err_load_posts": "Tidak dapat memuat kiriman",
+    "try_again": "Coba lagi",
+    "loading_replies": "Memuat balasan…",
+    "copy_link": "Salin tautan"
   },
   "ro": {
     "logo_sub": "Comunitate",
@@ -1483,7 +1575,11 @@
     "copy_failed": "Linkul nu a putut fi copiat.",
     "reply_empty": "Răspunsul nu poate fi gol.",
     "reply_posted": "Răspuns postat! ✓",
-    "lib_failed": "Biblioteca forumului nu a putut fi încărcată"
+    "lib_failed": "Biblioteca forumului nu a putut fi încărcată",
+    "err_load_posts": "Postările nu au putut fi încărcate",
+    "try_again": "Încearcă din nou",
+    "loading_replies": "Se încarcă răspunsurile…",
+    "copy_link": "Copiază linkul"
   },
   "nl": {
     "logo_sub": "Community",
@@ -1544,6 +1640,10 @@
     "copy_failed": "De link kon niet worden gekopieerd.",
     "reply_empty": "Een reactie mag niet leeg zijn.",
     "reply_posted": "Reactie geplaatst! ✓",
-    "lib_failed": "De forumbibliotheek kon niet worden geladen"
+    "lib_failed": "De forumbibliotheek kon niet worden geladen",
+    "err_load_posts": "Kan berichten niet laden",
+    "try_again": "Opnieuw proberen",
+    "loading_replies": "Reacties laden…",
+    "copy_link": "Link kopiëren"
   }
 }
