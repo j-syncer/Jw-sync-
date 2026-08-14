@@ -186,8 +186,14 @@
             return decide.then(function(mode){
               if(mode==='cancel'){ db.close(); return {buffer:buffer, added:0, highlights:0, overlaps:conflicts.length, imported:[], cancelled:true}; }
               var res=adoptIntoDb(db, notes, {tagLabel:opts.tagLabel, overlapMode:(mode==='note'?'note':'layer')});
-              var out=db.export(); db.close(); zip.file(key, out);
-              return zip.generateAsync({type:'arraybuffer',compression:'DEFLATE'}).then(function(buf){ return {buffer:buf, added:res.added, highlights:res.highlights, overlaps:conflicts.length, imported:res.imported}; });
+              if(window.__jwFinalizeBackup) window.__jwFinalizeBackup.touchLastModified(db);
+              var out=db.export(); db.close();
+              // manifest.json has to describe the database we just wrote, not
+              // the one that arrived — see js/jwlibrary-manifest.js.
+              var ready = window.__jwFinalizeBackup
+                ? window.__jwFinalizeBackup(zip, key, out, {nameSuffix:' (Updated)'})
+                : Promise.resolve(zip.file(key, out));
+              return ready.then(function(){ return zip.generateAsync({type:'arraybuffer',compression:'DEFLATE'}); }).then(function(buf){ return {buffer:buf, added:res.added, highlights:res.highlights, overlaps:conflicts.length, imported:res.imported}; });
             });
           });
         });

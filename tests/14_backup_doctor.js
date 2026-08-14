@@ -102,6 +102,10 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
   const dom = new JSDOM(pageHtml, { url: 'https://jwsync.org/', runScripts: 'dangerously', pretendToBeVisual: true });
   const win = dom.window;
   win.JSZip = JSZip;
+  // index.html loads this beside the module; without it the export falls
+  // back to writing a backup whose manifest no longer matches its database.
+  new Function('self', fs.readFileSync(path.join(REPO, 'js/jwlibrary-manifest.js'), 'utf8'))(win);
+
   win.initSqlJs = () => initSqlJs({ locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) });
   win.localStorage.setItem('jwsync_lang', 'en');
 
@@ -364,8 +368,20 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
       const dbKey = Object.keys(rezip.files).find(k => /userdata\.db$/i.test(k));
       if (dbKey) ok('exported file is a real ZIP containing userData.db');
       else fail('exported file has no userData.db');
-      if (rezip.file('manifest.json')) ok('manifest.json preserved in export');
+      const mf = rezip.file('manifest.json');
+      if (mf) ok('manifest.json preserved in export');
       else fail('manifest.json missing from export');
+      // Preserved is not enough. JW Library validates userDataBackup.hash
+      // against the database beside it and silently refuses the file when the
+      // two disagree — which is what a cleaned backup used to ship with.
+      if (mf && dbKey) {
+        const claimed = JSON.parse(await mf.async('string'));
+        const actual = require('crypto').createHash('sha256')
+          .update(Buffer.from(await rezip.files[dbKey].async('nodebuffer'))).digest('hex');
+        if (claimed.userDataBackup && claimed.userDataBackup.hash === actual)
+          ok('manifest hash matches the cleaned database');
+        else fail('manifest hash still points at the pre-clean database — JW Library will refuse it');
+      }
       if (dbKey) {
         const outBytes = await rezip.files[dbKey].async('uint8array');
         const outDb = new SQL.Database(outBytes);

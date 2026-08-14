@@ -4,6 +4,48 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.34.1] — 2026-08-13
+
+### Fixed: files from the Library Doctor and Study Explorer would not restore
+
+Reported on the community page: a backup that had been through the Library
+Doctor, or edited (or Markdown-imported) in the Study Explorer, could not be
+restored in JW Library. The app flickered and stayed where it was — no
+confirmation prompt, no error message. Merged files restored normally, which
+made it look like a problem with those two tools rather than one rule that
+applied to all of them.
+
+A `.jwlibrary` carries a `manifest.json` describing the database beside it,
+including a checksum of that database. JW Library checks it, and refuses the
+file without a word when it does not match:
+
+- the **Study Explorer** was building its own archive containing only the
+  database — no manifest at all;
+- the **Library Doctor** kept the original manifest, with a checksum still
+  describing the backup as it was *before* cleaning;
+- **adding notes shared with you** had the same stale checksum;
+- the **merge tool** did too, though merged files are the ones people report
+  as working.
+
+All four now go through one place that rewrites the manifest to match what is
+actually in the file, refreshes the modified date, and updates the database's
+own `LastModified` record. Everything else in the manifest — including fields
+we do not recognise — is left exactly as it was, because the parts we do not
+understand are the parts we must not rewrite.
+
+Two more things the Explorer now gets right: the rest of the original archive
+travels with the exported file instead of being dropped, and the download is
+wrapped so that iOS saves it as `.jwlibrary` rather than `.zip`.
+
+If a Doctor or Explorer file still refuses to restore for you, please say so on
+the community page — that would mean there is a second cause behind the first.
+
+Thanks to purlo for a report precise enough to find this: "it does not prompt
+any message, the app just flickers" is exactly what a rejected manifest looks
+like.
+
+---
+
 ## [3.34.0] — 2026-08-12
 
 ### Import Markdown notes back into a backup

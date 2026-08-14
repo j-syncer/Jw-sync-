@@ -40,6 +40,10 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
   const dom = new JSDOM(`<!DOCTYPE html><html><body>${m[0]}</body></html>`, { url: 'https://jwsync.org/beta/', runScripts: 'dangerously', pretendToBeVisual: true });
   const win = dom.window;
   win.JSZip = JSZip;
+  // index.html loads this beside the module; without it the adopted backup
+  // goes out with a manifest describing the database it used to hold.
+  new Function('self', fs.readFileSync(path.join(__dirname, '..', 'js/jwlibrary-manifest.js'), 'utf8'))(win);
+
   win.initSqlJs = () => initSqlJs(locate);
   await wait(20);
   if (typeof win.__jwParseShareEnvelope === 'function' && typeof win.__jwAdoptSharedIntoBuffer === 'function')
@@ -68,6 +72,20 @@ const locate = { locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist
   const z2 = await JSZip.loadAsync(res.buffer);
   const key = Object.keys(z2.files).find(k => /userdata\.db$/i.test(k));
   const bytes = await z2.file(key).async('uint8array');
+  // The file handed back has to be restorable: JW Library checks
+  // userDataBackup.hash against the database beside it and refuses, silently,
+  // when the adopted notes have moved on without it.
+  {
+    const mf = z2.file('manifest.json');
+    if (mf) {
+      const claimed = JSON.parse(await mf.async('string'));
+      const actual = require('crypto').createHash('sha256')
+        .update(Buffer.from(await z2.file(key).async('nodebuffer'))).digest('hex');
+      if (claimed.userDataBackup && claimed.userDataBackup.hash === actual)
+        ok('manifest hash matches the augmented database');
+      else fail('manifest hash is stale after adopting notes — JW Library will refuse it');
+    } else fail('adopted backup has no manifest.json');
+  }
   const SQL2 = await initSqlJs(locate);
   const db2 = new SQL2.Database(bytes);
   const cnt = (sql) => { const r = db2.exec(sql); return (r[0] && r[0].values[0]) ? r[0].values[0][0] : 0; };

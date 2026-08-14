@@ -398,15 +398,30 @@ window.__bootBrowse = function() {
     return true;
   }
 
+  // Everything that writes a .jwlibrary goes through js/jwlibrary-manifest.js,
+  // which recomputes manifest.json's hash to match the database beside it. A
+  // file whose hash is stale — or which has no manifest at all, which is what
+  // this module used to produce — is refused by JW Library without a word.
+  function finalizeZip(zip, key, bytes, suffix){
+    if(window.__jwFinalizeBackup) return window.__jwFinalizeBackup(zip, key, bytes, {nameSuffix:suffix});
+    zip.file(key, bytes);
+    return Promise.resolve(zip);
+  }
   function exportDb(){
     if(!state.db||!window.JSZip) return;
     var exportBtn=state.overlay&&state.overlay.querySelector('.jb-export-btn');
     if(exportBtn){ exportBtn.disabled=true; exportBtn.innerHTML='<span style="font-size:11px">...</span>'; }
     try{
+      if(window.__jwFinalizeBackup) window.__jwFinalizeBackup.touchLastModified(state.db);
       var bytes=state.db.export();
-      var zip=new JSZip();
-      zip.file('userData.db', bytes);
-      zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){
+      var zip=state.zip||new JSZip();
+      var key=state.dbKey||'userData.db';
+      finalizeZip(zip, key, bytes, ' (Edited)').then(function(z){
+        // application/octet-stream, not JSZip's application/zip, so iOS Safari
+        // saves it as .jwlibrary — the same wrapping the merge tool uses.
+        return z.generateAsync({type:'arraybuffer',compression:'DEFLATE',compressionOptions:{level:6}});
+      }).then(function(buf){
+        var blob=new Blob([buf],{type:'application/octet-stream'});
         var url=URL.createObjectURL(blob);
         var a=document.createElement('a');
         a.href=url;
@@ -451,10 +466,15 @@ window.__bootBrowse = function() {
         }
         clone.run('COMMIT;');
       }catch(e){ try{ clone.run('ROLLBACK;'); }catch(_){} console.error('[jb] extract',e); try{ clone.close(); }catch(__){} return; }
+      if(window.__jwFinalizeBackup) window.__jwFinalizeBackup.touchLastModified(clone);
       var bytes=clone.export();
       try{ clone.close(); }catch(_){}
-      var zip=new JSZip(); zip.file('userData.db', bytes);
-      zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:6}}).then(function(blob){
+      var zip=state.zip||new JSZip();
+      var key=state.dbKey||'userData.db';
+      finalizeZip(zip, key, bytes, ' (Extract)').then(function(z){
+        return z.generateAsync({type:'arraybuffer',compression:'DEFLATE',compressionOptions:{level:6}});
+      }).then(function(buf){
+        var blob=new Blob([buf],{type:'application/octet-stream'});
         var url=URL.createObjectURL(blob);
         var base=(state.fileName?state.fileName.replace(/\.jwlibrary$/i,''):'backup');
         var a=document.createElement('a'); a.href=url; a.download='extracted_'+base+'.jwlibrary';
@@ -1373,12 +1393,17 @@ window.__bootBrowse = function() {
     if(!window.JSZip || !window.initSqlJs){ fail('Required libraries are not loaded yet.'); return; }
     // Close any existing DB
     if(state.db){ try{ state.db.close(); }catch(_){} state.db=null; }
+    state.zip=null; state.dbKey=null;   // the retained archive belongs to that file only
     // New file → previous semantic index no longer applies
     state.askMode=false; state.askResults=[]; state.askQuery=''; state.askPhase='idle'; state.askError=''; ASK.vecs=null;
 
     new JSZip().loadAsync(file).then(function(zip){
       var dbName = Object.keys(zip.files).find(function(n){ return /userdata\.db$/i.test(n); });
       if(!dbName) throw new Error('userData.db not found in backup.');
+      // Hold on to the whole archive, not just the database. Everything else in
+      // it — manifest.json above all — has to travel with the file we hand back,
+      // or JW Library silently refuses to restore it.
+      state.zip = zip; state.dbKey = dbName;
       return zip.files[dbName].async('uint8array');
     }).then(function(bytes){
       return window.initSqlJs({locateFile:function(f){return 'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/' + f;}})
@@ -1922,6 +1947,7 @@ window.__bootBrowse = function() {
     if(state.overlay&&state.overlay.parentNode) state.overlay.parentNode.removeChild(state.overlay);
     state.overlay=null;
     if(state.db){ try{ state.db.close(); }catch(_){} state.db=null; }
+    state.zip=null; state.dbKey=null;   // the retained archive belongs to that file only
     var dl=document.getElementById('jb-tag-dl'); if(dl&&dl.parentNode) dl.parentNode.removeChild(dl);
     state.allNotes=[]; state.allHighlights=[]; state.allBookmarks=[]; state.allInputFields=[];
     state.tagsByNote={}; state.tagsByLocation={}; state.tagsByHighlight={};

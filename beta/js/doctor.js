@@ -252,17 +252,14 @@
   }
 
   function exportCleaned(st){
+    // The manifest's hash has to be recomputed from the cleaned database.
+    // Leaving the original in place produced a file JW Library refuses to
+    // restore, silently — see js/jwlibrary-manifest.js.
+    if(window.__jwFinalizeBackup) window.__jwFinalizeBackup.touchLastModified(st.db);
     var bytes=st.db.export();
-    st.zip.file(st.dbKey, bytes);
-    var mf=st.zip.file('manifest.json');
-    var p = mf ? mf.async('string').then(function(s){
-      try{
-        var raw=JSON.parse(s);
-        raw.creationDate=new Date().toISOString();
-        raw.name=(raw.name||'Backup')+' (Cleaned)';
-        st.zip.file('manifest.json', JSON.stringify(raw,null,2));
-      }catch(_){}
-    }) : Promise.resolve();
+    var p = window.__jwFinalizeBackup
+      ? window.__jwFinalizeBackup(st.zip, st.dbKey, bytes, {nameSuffix:' (Cleaned)'}).then(function(){})
+      : Promise.resolve(st.zip.file(st.dbKey, bytes)).then(function(){});
     return p.then(function(){
       // Generate a raw buffer and wrap it in an application/octet-stream Blob
       // (NOT JSZip's default application/zip) so browsers — iOS Safari in

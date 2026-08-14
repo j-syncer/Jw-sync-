@@ -21,6 +21,9 @@ importScripts(
   'https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js',
   'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'
 );
+// Same rules as every other path that writes a .jwlibrary; resolved against
+// this worker's own URL, so it loads from js/ on both sites.
+importScripts('jwlibrary-manifest.js');
 
 let cancelled = false;
 let confirmResolver = null;
@@ -689,11 +692,15 @@ async function runMerge({ mainBuffer, secondaryFiles, opts, tagManager, colorRul
   log('Step 6: Packaging final download...');
   await A();
   timings.merge = _now() - _tm; _tm = _now();
+  if (self.__jwFinalizeBackup) self.__jwFinalizeBackup.touchLastModified(a);
   const exportedDb = a.export();
   a.close();
   a = null;
 
-  o.file(Object.keys(o.files).find(k => /userdata\.db$/i.test(k)), exportedDb);
+  const outKey = Object.keys(o.files).find(k => /userdata\.db$/i.test(k));
+  // manifest.json must describe the merged database, hash included.
+  if (self.__jwFinalizeBackup) await self.__jwFinalizeBackup(o, outKey, exportedDb);
+  else o.file(outKey, exportedDb);
   const zipBuf = await o.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' });
   timings.package = _now() - _tm; timings.total = _now() - _t0;
   timings.rows = (f.Note + f.UserMark + f.Bookmark + f.Tag + (f.InputFields || 0) + f.Updated + f.Deduplicated) || 0;

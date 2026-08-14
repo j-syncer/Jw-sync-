@@ -126,8 +126,21 @@ async function captureDownload(win, selector, label) {
   return blob;
 }
 
-async function readDb(SQL, blob) {
-  const zip = await JSZip.loadAsync(Buffer.from(await blob.arrayBuffer()));
+// JSDOM's Blob has no arrayBuffer() in this version, and the export now builds
+// its Blob inside the page (application/octet-stream, so iOS saves it as
+// .jwlibrary). FileReader is the reader both realms agree on.
+function blobBytes(win, blob) {
+  if (typeof blob.arrayBuffer === 'function') return blob.arrayBuffer().then(b => Buffer.from(b));
+  return new Promise((res, rej) => {
+    const r = new win.FileReader();
+    r.onload = () => res(Buffer.from(r.result));
+    r.onerror = rej;
+    r.readAsArrayBuffer(blob);
+  });
+}
+
+async function readDb(SQL, blob, win) {
+  const zip = await JSZip.loadAsync(await blobBytes(win, blob));
   const key = Object.keys(zip.files).find(n => /userdata\.db$/i.test(n));
   return new SQL.Database(await zip.files[key].async('uint8array'));
 }
@@ -154,7 +167,7 @@ function rows(db, sql) {
   await openWith(win, sourceBuf);
   const mdZipBlob = await captureDownload(win, '.jb-md-btn', 'markdown zip');
   if (!mdZipBlob) process.exit(1);
-  const mdZipBytes = Buffer.from(await mdZipBlob.arrayBuffer());
+  const mdZipBytes = await blobBytes(win, mdZipBlob);
   const mdZip = await JSZip.loadAsync(mdZipBytes);
   const mdNames = Object.keys(mdZip.files).filter(n => /\.md$/.test(n));
   assertEq(mdNames.length, 3, 'markdown files exported');
@@ -188,7 +201,7 @@ function rows(db, sql) {
   assertEq(res.anchored, 2, 'notes anchored to a Bible location');
 
   const outBlob = await captureDownload(win, '.jb-export-btn', 'exported .jwlibrary');
-  const outDb = await readDb(SQL, outBlob);
+  const outDb = await readDb(SQL, outBlob, win);
 
   const imported = rows(outDb, `SELECT n.Title, n.BlockType, n.BlockIdentifier, l.BookNumber, l.ChapterNumber,
     l.KeySymbol, l.MepsLanguage FROM Note n LEFT JOIN Location l ON l.LocationId = n.LocationId ORDER BY n.Title`);
@@ -227,9 +240,9 @@ function rows(db, sql) {
   const again = await win.__jwMdImport.readFiles(
     [{ name: 'notes_markdown.zip', arrayBuffer: async () => nodeBuffer(mdZipBytes) }]);
   const dupWin = win;
-  const before = rows(await readDb(SQL, await captureDownload(dupWin, '.jb-export-btn', 'pre-dupe export')), 'SELECT COUNT(*) AS c FROM Note')[0].c;
+  const before = rows(await readDb(SQL, await captureDownload(dupWin, '.jb-export-btn', 'pre-dupe export'), win), 'SELECT COUNT(*) AS c FROM Note')[0].c;
   // The preview panel is what filters duplicates, so exercise the same key.
-  const keys = new Set(rows(await readDb(SQL, await captureDownload(dupWin, '.jb-export-btn', 'key export')),
+  const keys = new Set(rows(await readDb(SQL, await captureDownload(dupWin, '.jb-export-btn', 'key export'), win),
     `SELECT IFNULL(Title,'') AS t, IFNULL(Content,'') AS c, IFNULL(LocationId,-1) AS l, IFNULL(BlockIdentifier,-1) AS b FROM Note`)
     .map(r => [r.t, r.c, r.l, r.b].join(' ')));
   if (keys.size === before) ok(`${before} existing notes give ${keys.size} distinct identity keys`);
@@ -269,7 +282,7 @@ function rows(db, sql) {
   const r2 = win2.__jwMdImport.importNotes(one);
   assertEq(r2.added, 1, 'note still imported');
   assertEq(r2.anchored, 0, 'but not anchored — there was no Location to copy identity from');
-  const db2 = await readDb(SQL, await captureDownload(win2, '.jb-export-btn', 'export from pub-only backup'));
+  const db2 = await readDb(SQL, await captureDownload(win2, '.jb-export-btn', 'export from pub-only backup'), win2);
   assertEq(rows(db2, 'SELECT COUNT(*) AS c FROM Location')[0].c, 1, 'no Location invented');
   const n2 = rows(db2, 'SELECT LocationId, BlockIdentifier FROM Note')[0];
   if (n2 && n2.LocationId === null) ok('the note is unanchored rather than pointing at a guessed Location');

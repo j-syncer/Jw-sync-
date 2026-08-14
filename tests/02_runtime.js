@@ -21,6 +21,19 @@ function assertGte(actual, min, label) {
   if (actual >= min) ok(`${label}: ${actual} >= ${min}`);
   else fail(`${label}: ${actual} < ${min}`);
 }
+// JSDOM's Blob has no arrayBuffer(); exports build their own Blob in the page
+// (application/octet-stream, so iOS saves them as .jwlibrary). FileReader is
+// the reader both realms agree on.
+function blobBytes(win, blob) {
+  if (typeof blob.arrayBuffer === 'function') return blob.arrayBuffer().then(b => Buffer.from(b));
+  return new Promise((res, rej) => {
+    const r = new win.FileReader();
+    r.onload = () => res(Buffer.from(r.result));
+    r.onerror = rej;
+    r.readAsArrayBuffer(blob);
+  });
+}
+
 function assertContains(text, needle, label) {
   if (String(text).includes(needle)) ok(`${label} contains "${needle.slice(0,40)}"`);
   else fail(`${label} missing "${needle.slice(0,40)}": got "${String(text).slice(0,100)}"`);
@@ -194,6 +207,9 @@ function assertContains(text, needle, label) {
 
   // Wire up JSZip + initSqlJs onto the window the module expects.
   win.JSZip = JSZip;
+  // index.html loads this beside the module; without it every export
+  // silently falls back to writing a backup with a stale manifest.
+  new Function('self', fs.readFileSync(REPO + '/js/jwlibrary-manifest.js', 'utf8'))(win);
   win.initSqlJs = (opts) => initSqlJs({ locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) });
 
   // Polyfill matchMedia (jsdom doesn't ship one)
@@ -376,7 +392,9 @@ function assertContains(text, needle, label) {
   win.URL.createObjectURL = origCOU;
   if (capturedBlob) {
     ok('extract produced a .jwlibrary blob');
-    const buf = Buffer.from(await capturedBlob.arrayBuffer());
+    // JSDOM's Blob has no arrayBuffer(); the export builds its own Blob in the
+    // page now (application/octet-stream, so iOS saves it as .jwlibrary).
+    const buf = await blobBytes(win, capturedBlob);
     const ezip = await JSZip.loadAsync(buf);
     const ekey = Object.keys(ezip.files).find(n => /userdata\.db$/i.test(n));
     const ebytes = await ezip.files[ekey].async('uint8array');
@@ -386,6 +404,17 @@ function assertContains(text, needle, label) {
     const cnt = res[0].values[0][0];
     assertEq(cnt, 2, 'extracted backup contains only the 2 in-range notes');
     edb.close();
+    // The extract is a backup too: JW Library refuses one whose manifest hash
+    // does not match the database beside it, and says nothing when it does.
+    const emf = ezip.file('manifest.json');
+    if (emf) {
+      const claimed = JSON.parse(await emf.async('string'));
+      const actual = require('crypto').createHash('sha256')
+        .update(Buffer.from(await ezip.files[ekey].async('nodebuffer'))).digest('hex');
+      if (claimed.userDataBackup && claimed.userDataBackup.hash === actual)
+        ok('extracted backup manifest hash matches its database');
+      else fail('extracted backup manifest hash is stale — JW Library will refuse it');
+    } else fail('extracted backup has no manifest.json');
   }
 
   // Reset date filter so later sections see all 5 notes again.
@@ -432,7 +461,7 @@ function assertContains(text, needle, label) {
     win.URL.createObjectURL = origCOU;
     if (mdBlob) {
       ok('Markdown export produced a .zip blob');
-      const zip = await JSZip.loadAsync(Buffer.from(await mdBlob.arrayBuffer()));
+      const zip = await JSZip.loadAsync(await blobBytes(win, mdBlob));
       const mdFiles = Object.keys(zip.files).filter(n => /\.md$/.test(n));
       assertEq(mdFiles.length, 5, 'one .md per note (5 total)');
       // The "Awake note" has <strong>bold</strong> → expect **bold** in its markdown
@@ -507,7 +536,7 @@ function assertContains(text, needle, label) {
       doc.querySelector('.jb-export-btn').click();
       await waitFor(() => blob !== null, 'export blob');
       win.URL.createObjectURL = origCOU;
-      const zip = await JSZip.loadAsync(Buffer.from(await blob.arrayBuffer()));
+      const zip = await JSZip.loadAsync(await blobBytes(win, blob));
       const key = Object.keys(zip.files).find(n => /userdata\.db$/i.test(n));
       const bytes = await zip.files[key].async('uint8array');
       const SQLx = await initSqlJs({ locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) });
