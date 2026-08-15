@@ -55,6 +55,20 @@ def main():
         if slug not in txt:
             print("FAIL missing guide: %s" % slug)
             bad += 1
+    # A slug appearing as a *field* of another guide is how an entry written in
+    # the wrong shape lands: GUIDES_XX["slug"] = {...} modules take an appended
+    # dict-literal entry into the previous guide's dict. Valid Python, no error,
+    # and that language just falls back to English for the guide that never
+    # arrived — so name the cause here, where the language is being checked.
+    for slug, g in txt.items():
+        if not isinstance(g, dict):
+            continue
+        nested = [k for k in g if k in en]
+        if nested:
+            print("FAIL %s contains another guide as a field: %s — the entry was "
+                  "written in the wrong shape for this module" % (slug, ", ".join(nested)))
+            bad += 1
+
     for slug in txt:
         if slug not in en:
             print("FAIL unknown slug: %s" % slug)

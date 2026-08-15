@@ -14,45 +14,15 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const SLUGS = [
-  'merge-jw-library-backups',
-  'sync-jw-library-multiple-devices',
-  'transfer-jw-library-notes-new-phone',
-  'jw-library-android-to-iphone',
-  'backup-jw-library',
-  'jw-library-restore-replaced-notes',
-  'fix-corrupted-jw-library-backup',
-  'edit-jw-library-notes',
-  'search-jw-library-notes',
-  'jw-library-study-stats',
-  'share-jw-library-notes',
-  'bible-reading-plan',
-  'open-jwlibrary-file',
-  'jw-library-windows-pc',
-  'recover-jw-library-notes-lost-phone',
-  'handle-merge-conflicts',
-  'export-jw-library-notes',
-  'organize-jw-library-tags',
-  'manage-jw-library-highlights',
-  'jw-library-study-answers',
-  'extract-jw-library-notes-by-date',
-  'connect-jw-library-notes-study-map',
-  'review-old-jw-library-notes',
-  'jw-library-achievements-streaks',
-  'share-convention-assembly-notes',
-  'share-jw-library-notes-by-tag',
-  'share-notes-with-bible-student',
-  'share-meeting-notes-with-family',
-  'receive-shared-jw-library-notes',
-  'share-notes-with-study-group',
-  'share-talk-preparation-notes',
-  'weekly-meeting-preparation-jw-library-notes',
-  'print-jw-library-notes',
-  'clean-up-duplicate-jw-library-notes',
-  'backup-jw-library-before-phone-repair',
-  'jw-library-notes-missing-after-update',
-  'help-family-member-move-jw-library-notes',
-];
+// Discovered, not listed. A hardcoded roster silently stops covering the next
+// guide: the 38th shipped in v3.35.0 and this suite kept passing while checking
+// only the original 37 — none of its structure, JSON-LD or index linking was
+// ever looked at. The floor guards the opposite failure, an empty directory
+// quietly passing everything.
+const SLUGS = fs.readdirSync(path.join(ROOT, 'guides'))
+  .filter((f) => f.endsWith('.html') && f !== 'index.html')
+  .map((f) => f.slice(0, -5))
+  .sort();
 
 let failures = 0;
 const ok = (cond, label) => {
@@ -60,7 +30,40 @@ const ok = (cond, label) => {
   else { console.error('  ✗ ' + label); failures++; }
 };
 
+console.log('== Every language carries every guide ==');
+{
+  // Neither the file existing nor its title proves anything: build_guides.py
+  // writes no page for a language that lacks the translation, and it does not
+  // delete the previous one either — so the stale, correctly-titled file stays
+  // on disk and every naive check passes. (Confirmed: removing a language's
+  // entry drops the build from 975 pages to 974 with nothing else changing.)
+  //
+  // The English page is rebuilt every time, and its hreflang cluster lists only
+  // the languages that really have the guide. That is the one thing a stale
+  // file cannot fake, so it is what gets asserted here. This matters because an
+  // entry spliced into guides_<lang>.py in the wrong shape lands inside another
+  // guide's dict — valid Python, no error — and the language just falls back.
+  const LANGS = fs.readdirSync(path.join(ROOT, 'guides'), { withFileTypes: true })
+    .filter((d) => d.isDirectory()).map((d) => d.name).sort();
+  ok(LANGS.length === 24, `${LANGS.length} translated guide trees (expected 24)`);
+
+  const thin = [];
+  for (const slug of SLUGS) {
+    const en = fs.readFileSync(path.join(ROOT, 'guides', slug + '.html'), 'utf8');
+    const listed = new Set(
+      [...en.matchAll(/hreflang="([A-Za-z-]+)"\s+href="https:\/\/jwsync\.org\/guides\/([A-Za-z-]+)\//g)]
+        .map((m) => m[2]));
+    const absent = LANGS.filter((l) => !listed.has(l));
+    if (absent.length) thin.push(`${slug}: ${absent.join(', ')}`);
+  }
+  ok(thin.length === 0,
+     `every guide is advertised in all ${LANGS.length} languages` +
+     (thin.length ? ' — not translated: ' + thin.slice(0, 4).join(' | ') : ''));
+}
+
 console.log('== Guide pages exist and are well-formed ==');
+ok(SLUGS.length >= 38, `found ${SLUGS.length} guide pages (expected at least 38)`);
+
 const pages = {};
 for (const slug of SLUGS) {
   const file = path.join(ROOT, 'guides', slug + '.html');
