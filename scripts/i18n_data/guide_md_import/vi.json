@@ -1,0 +1,104 @@
+{
+ "title": "Cách nhập ghi chú Markdown vào JW Library",
+ "h1": "Cách nhập ghi chú Markdown vào JW Library",
+ "description": "Biến các tệp .md từ Obsidian, Notion hay bất kỳ trình soạn thảo Markdown nào thành ghi chú JW Library thật sự, đặt đúng câu Kinh Thánh — miễn phí, riêng tư, ngay trong trình duyệt.",
+ "intro": [
+  "JW Library không có cách nào để đưa văn bản vào. Bạn có thể viết ghi chú trong ứng dụng, nhưng một ghi chú viết ở nơi khác — trong Obsidian, trong Notion, trong một tệp văn bản thuần trên máy tính — hoàn toàn không có đường vào thư viện của bạn. Người ta gõ lại từng dòng, hoặc bỏ cuộc và giữ hai bộ ghi chú học hỏi chẳng bao giờ gặp nhau.",
+  "JW Sync lấp khoảng trống đó. Hãy nạp một bản sao lưu vào Trình khám phá học hỏi, bấm “Nhập Markdown”, và các tệp .md của bạn trở thành ghi chú thật bên trong: tiêu đề, ngày tháng và thẻ vẫn nguyên vẹn — và khi tệp cho biết nó thuộc về câu Kinh Thánh nào, ghi chú sẽ gắn vào đúng câu đó, y như thể bạn đã viết nó trong ứng dụng lúc đang đọc.",
+  "Nó hoạt động theo cả hai chiều. Ghi chú xuất ra từ trang này mang theo sách, chương và câu, nên quay về đúng nơi chúng đã ra đi. Ghi chú viết ở nơi khác thường không có gì như vậy, và đó là lý do trang này giải thích một hai dòng giúp đặt chúng đúng chỗ — cùng với điều xảy ra khi một tệp không có những dòng ấy."
+ ],
+ "steps": [
+  [
+   "Tạo bản sao lưu trong JW Library",
+   "Mở JW Library, vào Học hỏi cá nhân, chạm vào trình đơn ba chấm, chọn Sao lưu và khôi phục, rồi Tạo bản sao lưu. Bạn sẽ có một tệp .jwlibrary — chính là thư viện mà ghi chú của bạn sẽ được thêm vào."
+  ],
+  [
+   "Mở Trình khám phá học hỏi",
+   "Vào jwsync.org, mở Trình khám phá học hỏi và nạp tệp .jwlibrary đó. Mọi thứ diễn ra trong trình duyệt của bạn; tệp không bao giờ được tải lên."
+  ],
+  [
+   "Bấm “Nhập Markdown”",
+   "Nút này nằm cạnh “Xuất Markdown”. Chọn bao nhiêu tệp .md tùy ý, hoặc một tệp .zip chứa chúng — kể cả tệp .zip mà trang này tạo ra khi bạn xuất."
+  ],
+  [
+   "Đọc phần tóm tắt trước khi có gì được ghi",
+   "Bạn sẽ biết bao nhiêu ghi chú sẽ nằm đúng câu, bao nhiêu được thêm dưới dạng ghi chú rời, và bao nhiêu đã có sẵn trong bản sao lưu nên sẽ bỏ qua. Mọi thứ mà trang buộc phải suy đoán đều được liệt kê từng dòng kèm ô đánh dấu, để bạn quyết định thay vì phát hiện ra về sau."
+  ],
+  [
+   "Xuất rồi khôi phục",
+   "Bấm “Xuất .jwlibrary”, rồi khôi phục tệp đó trong JW Library qua Sao lưu và khôi phục → Khôi phục. Ghi chú vừa nhập giờ đã là một phần thư viện của bạn trên thiết bị ấy."
+  ]
+ ],
+ "sections": [
+  [
+   "Tệp ngắn nhất mà vẫn dùng được",
+   "Một tệp Markdown chẳng cần gì để được nhập: tệp chỉ có nội dung cũng thành ghi chú, tiêu đề lấy từ dòng tiêu đề đầu tiên, không có thì lấy từ tên tệp. Mọi thứ còn lại là để nói ghi chú thuộc về đâu. Một tệp đầy đủ trông như sau:\n\n---\ntitle: Chén mà ngài đã cầu xin\ntags: [học hỏi, ghết-sê-ma-nê]\npublication: Matthew 26:39\n---\n\nLời cầu nguyện của ngài cho thấy sự phục tùng, chứ không phải miễn cưỡng.\n\nPhần nằm giữa hai dòng gạch ngang gọi là front matter. Những dòng bên dưới mới là ghi chú."
+  ],
+  [
+   "Những trường được đọc",
+   "Chỉ năm thứ được đọc, và mỗi thứ chấp nhận nhiều cách viết để bạn khỏi phải nhớ một tên chính xác. **title** (hoặc name, heading) thành tiêu đề ghi chú. **tags** (hoặc tag, keywords, categories, labels, topics) thành thẻ JW Library thật sự, được tạo nếu chưa có. **date** (hoặc created, modified) đặt ngày cho ghi chú; bất cứ giá trị nào chứa NNNN-TT-NN đều hiểu được. **publication** (hoặc pub, reference, ref, scripture, citation, source, passage) là nơi bạn viết câu Kinh Thánh. **book**, **chapter** và **verse** (hoặc ch, v, vs, verses) làm cùng việc ấy nhưng tách thành từng trường. Mọi trường khác bạn giữ cho riêng mình — tác giả, trạng thái, thứ trình soạn thảo tự thêm — đều được bỏ qua chứ không bị coi là lỗi."
+  ],
+  [
+   "Ba cách trỏ ghi chú tới một câu",
+   "Viết trên một dòng: `publication: Matthew 26:39`. Hoặc tách ra: `book: Matthew`, `chapter: 26`, `verse: 39`. Hoặc dùng cả hai — đó chính là cách xuất của trang này, để tệp dễ đọc với người và chính xác với máy. Cả ba đều cho cùng kết quả, nên hãy dùng cách hợp với trình soạn thảo của bạn."
+  ],
+  [
+   "Câu Kinh Thánh được viết thoáng đến mức nào",
+   "Tên sách được đối chiếu rất rộng rãi. Tên đầy đủ dùng được, và những chữ viết tắt người ta thật sự gõ cũng vậy: Matt, Matt., Mt, 1 Cor, 1Cor, I Corinthians, Second Timothy, Psalm cũng như Psalms, Song of Songs cũng như Song of Solomon. Dấu ngăn giữa chương và câu có thể là hai chấm, dấu chấm hoặc chữ v — `John 3:16`, `John 3.16` và `1 Cor 13 v4` được đọc như nhau. Khoảng trắng ở đâu cũng có thể bỏ, nên `1Cor13:4` vẫn được.\n\nBản thân front matter cũng dễ tính như vậy. Tên trường viết hoa cũng được. Thiếu khoảng trắng sau dấu hai chấm cũng được. Khoảng trắng và tab dư bị bỏ qua, dấu nháy quanh giá trị và chú thích # ở cuối dòng cũng vậy. Ký tự xuống dòng kiểu Windows không thành vấn đề. Bạn thậm chí có thể bỏ hẳn hai dòng --- và bắt đầu tệp ngay bằng các trường, miễn là dòng đầu tiên là một trong những tên được nhận biết — quy tắc này có để một ghi chú mở đầu bằng câu văn bình thường có dấu hai chấm không bị mất đoạn đầu."
+  ],
+  [
+   "Thẻ, viết kiểu nào cũng được",
+   "Tất cả các cách sau đều cho ra cùng hai thẻ: `tags: [học hỏi, hy lạp]`, `tags: học hỏi, hy lạp`, `tags: học hỏi; hy lạp`, `tags: #họchỏi #hylạp`, hoặc một danh sách trên các dòng riêng dưới `tags:` với mỗi mục bắt đầu bằng dấu gạch ngang. Thẻ đã có trong thư viện sẽ được dùng lại chứ không nhân đôi, nên ghi chú vừa nhập sẽ nhập vào đúng thẻ bạn vẫn dùng để lọc."
+  ],
+  [
+   "Điều gì xảy ra khi có chỗ chưa rõ",
+   "Không điều gì chưa chắc chắn được quyết định thay bạn. Nếu tên sách gần giống tên thật nhưng không khớp — `Mathew`, `Ecclesiates` — ghi chú sẽ không tự động được đặt. Nó xuất hiện trong phần tóm tắt trên dòng riêng, cho biết trang đã hiểu ra sao: “được đọc là Matthew 26:39”, kèm ô đánh dấu. Bỏ đánh dấu thì nó không được nhập; để nguyên thì nó vào đúng chỗ dòng ấy nói.\n\nNếu hoàn toàn không nhận ra sách, dòng đó sẽ nói vậy và ghi chú được thêm dưới dạng ghi chú rời — không bao giờ bị ép theo một phỏng đoán. Sách có số vẫn giữ số của nó, nên `1 Jonh` chỉ có thể được sửa thành 1 Giăng, không bao giờ thành 2 Giăng."
+  ],
+  [
+   "Điều cố ý không làm",
+   "Một khoảng câu sẽ neo ghi chú vào câu đầu tiên: `Matthew 26:39-41` đặt ghi chú ở câu 39, vì ghi chú JW Library gắn vào một điểm trong văn bản chứ không phải một đoạn. Câu tham chiếu có chương mà không có câu — `Matthew 26` — gắn ghi chú vào chương ấy. Tệp ghi tên một ấn phẩm thay vì câu Kinh Thánh — `The Watchtower—2023 No. 4` — được nhập như ghi chú rời bình thường mà không hỏi han gì, vì đó chính là điều bản xuất của trang này viết cho ghi chú ghi trong một bài."
+  ],
+  [
+   "Định dạng sống sót suốt chặng đường",
+   "Đoạn văn, ngắt dòng, **in đậm**, *in nghiêng* và danh sách gạch đầu dòng đến JW Library vẫn là định dạng thật. Tiêu đề ở đầu tệp được dùng làm tiêu đề ghi chú chứ không lặp lại bên trong. Mọi thứ Markdown diễn đạt được mà ghi chú JW Library thì không — bảng, hình ảnh, liên kết, khối mã — đều được rút về phần chữ, nên không mất chữ nào dù bố cục không theo được."
+  ],
+  [
+   "Ghi chú thật sự nằm ở đâu, và vì sao như vậy là an toàn",
+   "Để gắn ghi chú vào một câu, JW Library cần những mã nhận dạng nội bộ của chương đó, vốn riêng cho thư viện của bạn. JW Sync không bao giờ bịa ra chúng. Nó dùng lại vị trí mà chính bản sao lưu của bạn đã có cho chương ấy, hoặc chép các mã đó từ một vị trí Kinh Thánh khác trong cùng tệp. Nếu bản sao lưu không có bất kỳ ghi chú hay đánh dấu Kinh Thánh nào, thì không có gì để chép — khi ấy ghi chú được thêm dưới dạng ghi chú rời thay vì gắn vào thứ mà ứng dụng có thể không nhận ra. Đây là lựa chọn có chủ ý: một ghi chú lặng lẽ nằm sai chỗ còn tệ hơn một ghi chú đến nơi rõ ràng là chưa gắn."
+  ],
+  [
+   "Nhập cùng những tệp đó hai lần",
+   "Một ghi chú được xem là đã có khi tiêu đề, nội dung và vị trí đều trùng với thứ gì đó trong bản sao lưu, nên nhập lại cùng một bản xuất sẽ không nhân đôi bất cứ gì. Phần tóm tắt cho bạn biết có bao nhiêu ghi chú bị bỏ qua vì lý do đó trước khi bạn xác nhận. Tất cả những gì một lần nhập thêm vào chỉ là một bước Hoàn tác, và ghi chú đã nhập được gắn thẻ Imported để sau này bạn tìm, lọc hoặc xóa cả nhóm."
+  ]
+ ],
+ "faq": [
+  [
+   "Tôi có bắt buộc dùng hai dòng --- không?",
+   "Không. Chúng làm tệp rõ ràng và mọi trình soạn thảo Markdown đều hiểu, nhưng bạn cũng có thể bắt đầu tệp ngay bằng các trường — `title: …` ở dòng đầu — hoặc bỏ hẳn front matter và để ghi chú lấy tiêu đề từ dòng tiêu đề đầu tiên."
+  ],
+  [
+   "Nếu tôi viết sai tên sách thì sao?",
+   "Thường thì trang sẽ đoán ra ý bạn, nhưng không hành động chỉ dựa vào đó. Ghi chú sẽ xuất hiện trong phần tóm tắt kèm cách nó được đọc và một ô đánh dấu, để bạn xác nhận trước khi có gì được ghi."
+  ],
+  [
+   "Tôi nhập được cả một thư mục Obsidian không?",
+   "Chọn cùng lúc bao nhiêu tệp .md tùy ý, hoặc nén thư mục lại và chọn tệp .zip. Tệp bên trong được đọc giống hệt tệp rời."
+  ],
+  [
+   "Nhập vào có ghi đè ghi chú sẵn có không?",
+   "Không. Nhập chỉ thêm vào. Ghi chú, đánh dấu, dấu trang và thẻ hiện có của bạn không bị đụng tới, và tệp bạn nạp cũng không bao giờ bị sửa — cuối cùng bạn tải về một .jwlibrary mới."
+  ],
+  [
+   "Ghi chú của tôi có được tải lên đâu không?",
+   "Không. Mọi thứ chạy trong trình duyệt của bạn, như phần còn lại của trang. Cả bản sao lưu lẫn tệp Markdown đều không rời khỏi thiết bị."
+  ],
+  [
+   "Tôi viết câu Kinh Thánh bằng ngôn ngữ nào?",
+   "Hiện tên sách được nhận biết bằng tiếng Anh, cũng là thứ bản xuất viết ra. Nếu bạn ghi chú bằng ngôn ngữ khác, hãy dùng các trường `book`, `chapter`, `verse` với tên sách tiếng Anh, hoặc nhập ghi chú ở dạng rời rồi tự đặt sau."
+  ],
+  [
+   "Tôi lấy ghi chú ra lại được không?",
+   "Được — “Xuất Markdown” ở cùng màn hình ghi từng ghi chú ra một tệp .md với đúng các trường ấy, nên ghi chú có thể rời JW Library rồi quay lại mà không mất chỗ của mình."
+  ]
+ ]
+}

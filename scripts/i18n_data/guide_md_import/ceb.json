@@ -1,0 +1,104 @@
+{
+ "title": "Unsaon pag-import sa mga nota nga Markdown ngadto sa JW Library",
+ "h1": "Unsaon pag-import sa mga nota nga Markdown ngadto sa JW Library",
+ "description": "Himoang tinuod nga nota sa JW Library ang mga .md file gikan sa Obsidian, Notion o bisan unsang Markdown editor, nga nabutang sa hustong bersikulo — libre, pribado, sulod sa imong browser.",
+ "intro": [
+  "Ang JW Library walay bisan unsang paagi sa pagpasulod ug teksto. Makasulat ka ug nota sulod sa app, apan ang notang gisulat sa laing dapit — sa Obsidian, sa Notion, sa usa ka yano nga text file sa kompyuter — walay bisan unsang agianan padulong sa imong librarya. Gi-retype kini sa uban, o nagpaubos na lang sila ug nagtipig ug duha ka hugpong sa mga nota sa pagtuon nga wala gayod magkita.",
+  "Gitakpan kini sa JW Sync. I-load ang backup sa Study Explorer, pindota ang “I-import ang Markdown”, ug ang imong mga .md file mahimong tinuod nga nota sulod niini: buo ang titulo, petsa ug mga tag — ug kon ang file mag-ingon kon asang kasulatan kini iya, motugpa kini sa maong bersikulo, sama ra nga gisulat nimo ang nota sa app samtang nagbasa ka.",
+  "Molihok kini sa duha ka direksyon. Ang mga notang gi-export gikan niini nga site nagdala sa ilang libro, kapitulo ug bersikulo, mao nga mobalik sila sa eksaktong dapit nga ilang gigikanan. Ang mga notang gisulat sa laing dapit kasagaran walay ingon niana, mao nga gipatin-aw niining panid ang usa o duha ka linya nga magbutang kanila — ug unsay mahitabo kon wala kini sa file."
+ ],
+ "steps": [
+  [
+   "Paghimo ug backup sa JW Library",
+   "Ablihi ang JW Library, adto sa Personal nga Pagtuon, pindota ang tulo ka tuldok nga menu, pilia ang Backup and Restore, dayon Create a backup. Makakuha ka ug .jwlibrary file — ang libraryang dugangan sa imong mga nota."
+  ],
+  [
+   "Ablihi ang Study Explorer",
+   "Adto sa jwsync.org, ablihi ang Study Explorer ug i-load ang maong .jwlibrary file. Ang tanan mahitabo sulod sa imong browser; ang file wala gayod i-upload."
+  ],
+  [
+   "Pindota ang “I-import ang Markdown”",
+   "Ang buton anaa tapad sa “I-export ang Markdown”. Pagpili ug bisan pila ka .md file, o usa ka .zip nga naglangkob niini — lakip ang .zip nga gihimo niini nga site kon mo-export ka."
+  ],
+  [
+   "Basaha ang katingbanan una pa may masulat",
+   "Gisultihan ka kon pila ang motugpa sa usa ka bersikulo, pila ang idugang isip nagbarog nga nota, ug pila ang anaa na sa imong backup ug pagalaktawan. Ang tanan nga kinahanglang hubaron sa site gilista matag linya, uban ang kahon nga tsekan, aron ikaw ang modesisyon inay makadiskobre ra unya."
+  ],
+  [
+   "I-export ug i-restore",
+   "Pindota ang “I-export ang .jwlibrary”, dayon i-restore kanang file sa JW Library pinaagi sa Backup and Restore → Restore. Ang imong gi-import nga mga nota bahin na sa imong librarya niana nga device."
+  ]
+ ],
+ "sections": [
+  [
+   "Ang labing mubo nga file nga molihok",
+   "Ang usa ka Markdown file walay gikinahanglan aron ma-import: ang file nga puro teksto mahimo usab nga nota, ug ang titulo kuhaon gikan sa unang ulohan o, kon wala, gikan sa ngalan sa file. Ang tanan nga uban alang sa pagsulti kon asa iya ang nota. Ang usa ka kompleto nga file ingon niini:\n\n---\ntitle: Ang kopa nga iyang giampo\ntags: [pagtuon, getsemani]\npublication: Matthew 26:39\n---\n\nAng iyang pag-ampo nagpakita ug pagpasakop, dili pagpanuko.\n\nAng bahin tali sa duha ka linya sa gitik-gitik gitawag ug front matter. Ang mga linya sa ilawom mao ang nota mismo."
+  ],
+  [
+   "Ang mga field nga gibasa",
+   "Lima ra ka butang ang gibasa, ug ang matag usa modawat ug daghang paagi sa pagsulat aron dili nimo kinahanglang hinumdoman ang eksaktong ngalan. Ang **title** (o name, heading) mahimong titulo sa nota. Ang **tags** (o tag, keywords, categories, labels, topics) mahimong tinuod nga tag sa JW Library, ug himoon kon wala pa. Ang **date** (o created, modified) magbutang sa petsa; masabtan ang bisan unsa nga naglangkob sa YYYY-MM-DD. Ang **publication** (o pub, reference, ref, scripture, citation, source, passage) mao ang butanganan sa kasulatan. Ang **book**, **chapter** ug **verse** (o ch, v, vs, verses) mao ra usab, apan binulag nga field. Ang bisan unsang laing field nga imong gitipigan alang sa kaugalingon — awtor, kahimtang, kon unsay idugang sa imong editor — dili tagdon inay isipon nga sayop."
+  ],
+  [
+   "Tulo ka paagi sa pagtudlo sa nota ngadto sa bersikulo",
+   "Isulat ang kasulatan sa usa ka linya: `publication: Matthew 26:39`. O bahina: `book: Matthew`, `chapter: 26`, `verse: 39`. O gamita ang duha — mao kana ang gibuhat sa export niini nga site, aron ang file maayong basahon sa tawo ug tukmang mabasa sa makina. Ang tulo parehas ug resulta, busa gamita kon hain ang haom sa imong editor."
+  ],
+  [
+   "Unsa ka luag ang pagbasa sa kasulatan",
+   "Ang ngalan sa libro gipares nga maluluy-on. Molihok ang bug-os nga ngalan, ug ang mga minubo nga tinuoray gita-type sa mga tawo: Matt, Matt., Mt, 1 Cor, 1Cor, I Corinthians, Second Timothy, Psalm ug Psalms, Song of Songs ug Song of Solomon. Ang tunga sa kapitulo ug bersikulo mahimong tulbok-duha, tulbok o ang letrang v — `John 3:16`, `John 3.16` ug `1 Cor 13 v4` parehas ug basa. Ang mga espasyo dili kinahanglan, mao nga `1Cor13:4` maayo ra.\n\nAng front matter mismo sama ka luag. Ang mga ngalan sa field mahimong dagko ang unang letra. Ang espasyo human sa tulbok-duha mahimong wala. Ang sobrang espasyo ug tab wala tagda, mao usab ang mga kudlit sa palibot sa bili ug ang # komento sa kataposan. Walay problema ang line ending sa Windows. Mahimo pa gani nimong kuhaon ang mga linyang --- ug sugdan ang file diretso sa mga field, basta ang labing unang linya usa sa mga nailhang ngalan — kini nga lagda naglungtad aron ang notang magsugod sa ordinaryong tudling-pulong nga adunay tulbok-duha dili mawad-an sa unang parapo."
+  ],
+  [
+   "Mga tag, bisan unsaon nimo pagsulat",
+   "Kining tanan mohatag sa parehong duha ka tag: `tags: [pagtuon, grigo]`, `tags: pagtuon, grigo`, `tags: pagtuon; grigo`, `tags: #pagtuon #grigo`, o usa ka lista sa kaugalingong mga linya ilawom sa `tags:` diin ang matag entry magsugod sa gitik-gitik. Ang mga tag nga anaa na sa imong librarya gigamit pag-usab inay doblehon, mao nga ang gi-import nga nota moapil sa maong tag nga imong gigamit na sa pag-filter."
+  ],
+  [
+   "Unsay mahitabo kon dili klaro ang usa ka butang",
+   "Walay dili sigurong butang nga desisyonan alang kanimo. Kon ang ngalan sa libro duol sa tinuod apan dili eksakto — `Mathew`, `Ecclesiates` — ang nota dili awtomatikong ibutang. Motungha kini sa katingbanan sa kaugalingong linya nga nagsulti kon giunsa kini pagbasa sa site: “gibasa isip Matthew 26:39”, uban ang kahon nga tsekan. Tangtangi ang tsek ug dili kini iapil; pasagdi nga natsek ug moadto kini sumala sa linya.\n\nKon ang libro dili gayod mailhan, kana ang gisulti sa linya ug ang nota idugang isip nagbarog nga nota — dili gayod pugson ngadto sa usa ka banabana. Ang libro nga may numero magpabilin ang numero, mao nga ang `1 Jonh` matul-id lamang ngadto sa 1 Juan, dili gayod ngadto sa 2 Juan."
+  ],
+  [
+   "Ang tinuyong dili himoon",
+   "Ang gilay-on sa bersikulo mo-angkla sa nota sa una niini: ang `Matthew 26:39-41` magbutang sa nota sa bersikulo 39, kay ang nota sa JW Library modikit sa usa ka punto sa teksto ug dili sa usa ka gilay-on. Ang kasulatan nga may kapitulo apan walay bersikulo — `Matthew 26` — modikit sa maong kapitulo. Ang file nga naghisgot ug publikasyon inay kasulatan — `The Watchtower—2023 No. 4` — i-import isip ordinaryong nagbarog nga nota nga walay gipangutana, kay mao gyod kana ang gisulat sa export niini nga site alang sa mga notang gikuha sa artikulo."
+  ],
+  [
+   "Ang pormat nga mabuhi sa panaw",
+   "Ang mga parapo, line break, **bold**, *italic* ug bulleted list moabot isip tinuod nga pormat sa JW Library. Ang ulohan sa ibabaw sa file gamiton isip titulo sa nota inay balikon sa sulod. Ang bisan unsa nga mapahayag sa Markdown apan dili sa nota sa JW Library — mga lamesa, hulagway, link, code block — kunhoron ngadto sa teksto niini, mao nga walay pulong nga mawala bisan kon ang han-ay dili madala."
+  ],
+  [
+   "Asa gayod motugpa ang mga nota, ug nganong luwas kana",
+   "Aron idikit ang nota sa bersikulo, ang JW Library nagkinahanglan ug internal nga identifier alang niana nga kapitulo nga talagsaon sa imong librarya. Wala gayod kini gimbut-an sa JW Sync. Gigamit niini pag-usab ang lokasyon nga anaa na sa imong kaugalingong backup alang niana nga kapitulo, o gikopya kini nga identifier gikan sa laing lokasyon sa Bibliya sulod sa samang file. Kon ang backup walay bisan unsang nota o highlight sa Bibliya, walay makopyahan — busa ang mga nota idugang isip nagbarog nga nota inay idikit sa butang nga tingali dili mailhan sa app. Tinuyo kini: ang notang hilom nga nasayop ug butang mas grabe kay sa notang klarong miabot nga walay dikit."
+  ],
+  [
+   "Pag-import sa samang mga file sa makaduha",
+   "Ang nota isipon nga anaa na kon ang titulo, teksto ug dapit niini mohaom sa usa ka butang sa backup, mao nga ang pag-import pag-usab sa samang export walay doblehon. Ang katingbanan mosulti kon pila ang laktawan tungod niana sa dili pa ka mokompirmar. Ang tanan nga gidugang sa usa ka import usa ka lakang sa Undo, ug ang gi-import nga mga nota may tag nga Imported aron makit-an, ma-filter o mapapas nimo sila isip grupo human niana."
+  ]
+ ],
+ "faq": [
+  [
+   "Kinahanglan ba gyod nako gamiton ang mga linyang ---?",
+   "Dili. Naghimo silang tin-aw sa file ug masabtan sila sa matag Markdown editor, apan mahimo usab nimong sugdan ang file diretso sa mga field — `title: …` sa unang linya — o laktawan ang front matter ug pasagdan ang nota nga mokuha sa titulo gikan sa unang ulohan."
+  ],
+  [
+   "Unsa kon masayop ko sa pagsulat sa ngalan sa libro?",
+   "Kasagaran matag-an sa site kon unsay imong buot ipasabot, apan dili kini molihok base ra niana. Ang nota motungha sa katingbanan nga may giingon kon giunsa kini pagbasa, uban ang kahon nga tsekan, aron ikaw ang mokompirmar una pa may masulat."
+  ],
+  [
+   "Mahimo ba nakong i-import ang tibuok folder gikan sa Obsidian?",
+   "Pagpili ug bisan pila ka .md file sa usa ka higayon, o i-zip ang folder ug pilia ang .zip. Ang mga file sulod niini basahon sama sa nag-inusarang mga file."
+  ],
+  [
+   "Pulihan ba sa import ang mga notang naa na nako?",
+   "Dili. Ang import modugang lamang. Ang imong nabatasan nga mga nota, highlight, bookmark ug tag dili hilabtan, ug ang file nga imong gi-load wala gayod usba — usa ka bag-ong .jwlibrary ang imong i-download sa kataposan."
+  ],
+  [
+   "Gi-upload ba ang akong mga nota bisan asa?",
+   "Wala. Ang tanan modagan sa imong browser, sama sa uban nga bahin sa site. Ang imong backup ug ang imong mga Markdown file wala mobiya sa imong device."
+  ],
+  [
+   "Unsang pinulongan ang mahimo nakong gamiton sa kasulatan?",
+   "Sa pagkakaron ang ngalan sa libro mailhan sa Iningles, nga mao usab ang gisulat sa export. Kon lain ang pinulongan sa imong mga nota, gamita ang `book`, `chapter` ug `verse` uban ang Iningles nga ngalan sa libro, o i-import ang mga nota nga walay dikit ug ibutang sila sa dapit sa kamot unya."
+  ],
+  [
+   "Makuha ba nako pag-usab ang akong mga nota?",
+   "Oo — ang “I-export ang Markdown” sa samang screen magsulat sa matag nota ngadto sa .md file nga may samang field, mao nga ang mga nota makagawas sa JW Library ug makabalik nga wala mawala ang ilang gigikanan nga dapit."
+  ]
+ ]
+}

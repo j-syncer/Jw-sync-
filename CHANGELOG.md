@@ -4,6 +4,60 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.35.0] — 2026-08-15
+
+### The Markdown importer now reads files the way people actually write them
+
+The first version understood exactly the front matter this site produces, which
+was no use at all for a file you typed yourself. A missing space after a colon,
+a capitalised field name, `Matt. 26:39` instead of `Matthew 26:39`, tags on
+their own lines, or no `---` fences at all — any of those and the reference was
+quietly dropped and the note arrived unattached.
+
+All of them now work:
+
+- **Field names** are matched loosely: `pub`, `ref`, `reference`, `scripture`,
+  `citation`, `source` and `passage` all mean the same as `publication`; `ch`,
+  `v`, `vs` and `verses` work alongside `chapter` and `verse`; `keywords`,
+  `categories`, `labels` and `topics` all mean `tags`. Capitals are fine, the
+  space after the colon is optional, and fields we don't use are simply ignored.
+- **Book names** accept the abbreviations people really type — `Matt`, `Matt.`,
+  `Mt`, `1 Cor`, `1Cor`, `I Corinthians`, `Second Timothy`, `Psalm` as well as
+  `Psalms`, `Song of Songs` as well as `Song of Solomon`.
+- **References** may separate chapter and verse with a colon, a full stop or
+  the letter v: `John 3:16`, `John 3.16` and `1 Cor 13 v4` are read the same.
+- **Tags** can be written `[a, b]`, `a, b`, `a; b`, `#a #b`, or as a list on
+  their own lines.
+- **The `---` fences are optional**, as long as the first line is a field name.
+
+### Nothing uncertain is placed without asking
+
+Being generous about what a file looks like is only safe while being strict
+about where a note ends up. So anything that had to be interpreted is now
+listed for you before a single note is written:
+
+- a book name that resolved only by correcting a spelling — `Mathew` — appears
+  on its own line saying "read as Matthew 26:39", with a tick box;
+- a book that cannot be recognised at all says so, and comes in as a standalone
+  note rather than being forced onto a guess;
+- untick anything you would rather leave out.
+
+A numbered book keeps its number, so `1 Jonh` can only ever become 1 John.
+
+Two related fixes: previewing your files no longer creates anything in the
+backup (it used to add a chapter location just by looking), and a note whose
+book could not be recognised can no longer reach the database as a location.
+
+### A new guide, in all 25 languages
+
+**How to import Markdown notes into JW Library** documents the format in full —
+the shortest file that works, every field it reads, the three ways to point a
+note at a verse, what happens when something is unclear, and what it will
+deliberately not guess. Every promise on that page is enforced by a test, so
+the guide cannot quietly drift away from what the importer actually does.
+
+---
+
 ## [3.34.1] — 2026-08-13
 
 ### Fixed: files from the Library Doctor and Study Explorer would not restore
