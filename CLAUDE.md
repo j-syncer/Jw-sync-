@@ -528,12 +528,20 @@ string would have meant 25 translations for one word.
 Note the Merge Settings panel is *itself* collapsed by default (`[Rt,Sa]`),
 so the empty state is three panel headers, not a wall of controls.
 
-⚠️ The `smt_*`, `mode_*`, `nav_simple_view`, `nav_adv_show_title`,
-`nav_adv_back_title` and `disc_open_full` keys are now **dead strings** still
-present in every language. They are harmless at runtime but should be swept.
-Removing them is a two-store job like the landing dictionary: only 14 of 25
-languages have extracted `js_app.js.0.<lang>.json` tables; the other 11 live
-only inside the `js/app.js` object literal.
+The `smt_*`, `mode_*`, `nav_simple_view`, `nav_adv_show_title`,
+`nav_adv_back_title` and `disc_open_full` keys were swept in v3.35.1 — 22 keys
+× 25 languages, about 35 KB off the app. **Do not let them back.** They were a
+two-store job, and the second store is the one that matters: the keys lived in
+the `js/app.js` object literal for all 25 languages *and* in
+`scripts/i18n_data/` (14 extracted `js_app.js.0.<lang>.json` tables plus
+`navbar.json`, which carries all 25). Deleting only the first would have been
+undone by the next `i18n_tool.py inject`. `01_static.js` now fails the build on
+any of them reappearing in either store.
+
+⚠️ `scripts/patch_navbar_i18n.py` still contains the seven navbar/mode keys, as
+the historical record of what it once wrote. It is one of the one-off scripts
+that must not be re-run — doing so would reintroduce them, which is now a build
+failure rather than a silent regression.
 
 ### Merge Pipeline — Web Worker (`beta/js/merge-worker.js`)
 All SQLite query execution, ZIP decompression, and ZIP recompression run in a dedicated Web Worker off the UI thread. The main thread transfers `ArrayBuffer`s to the worker via Transferable Objects (zero-copy) and receives the merged `.jwlibrary` buffer back the same way. The main thread's `vt()` function is now a thin dispatcher; result assembly (Blob URL, IDB save) stays on the main thread.

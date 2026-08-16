@@ -197,9 +197,16 @@ for (const path of FILES) {
     } else fail('landing i18n object not parseable');
   }
 
-  // 7) Upsell + CTA in markup
-  if (!allSrc.includes('Note Explorer ✨')) fail('upsell item missing');
-  else ok('Upsell "Note Explorer ✨" present');
+  // 7) Browse CTA in markup
+  //
+  // There was a third assertion here, that the source still contained the
+  // string "Note Explorer ✨". It was the Simple Mode teaser's upsell item, and
+  // it had been vacuous since v3.32.0 removed that landing: the string survived
+  // only as the smt_note_explorer dictionary value, which no component ever
+  // looked up, so the check was reading a translation table and calling it
+  // markup. (It also asserted an ✨ in a button, which the design rules forbid.)
+  // The live Note Explorer entry points are the CTA card and the Insights
+  // trigger button, both checked immediately below.
   if (!allSrc.includes('jb-cta-card') || !allSrc.includes('jb-cta-btn')) fail('CTA card markup missing');
   else ok('CTA card markup present');
 
@@ -884,9 +891,10 @@ section('Cross-tool session (jw-session.js)');
     else fail(found.length + ' hardcoded English string(s) in the navbar', found.join(' | '));
 
     // The keys those lookups need, in every language.
-    const NAV_KEYS = ['nav_adv_options', 'nav_simple_view', 'nav_adv_show_title',
-      'nav_adv_back_title', 'mode_simple', 'mode_full', 'mode_simple_title',
-      'mode_full_title', 'nav_demo_title', 'nav_browse_title',
+    // The mode_* and nav_simple_view/nav_adv_*_title keys used to be listed
+    // here. They described a navbar that no longer exists — v3.32.0 removed the
+    // mode toggle — and were swept out of every language in v3.35.1.
+    const NAV_KEYS = ['nav_adv_options', 'nav_demo_title', 'nav_browse_title',
       'nav_community_title', 'nav_share_btn', 'nav_share_title',
       'theme_to_light', 'theme_to_dark'];
     let missing = [];
@@ -1306,8 +1314,14 @@ section('Cross-tool session (jw-session.js)');
 // anyone who still has simpleMode:true saved from before the change.
 section('Simple Mode is gone, and stays gone');
 {
+  // The identifiers went in v3.32.0. The strings they used to label did not:
+  // 22 keys describing the mode toggle, the "‹ Simple view" back link and the
+  // Simple Mode teaser cards stayed in all 25 languages for three releases,
+  // and were swept in v3.35.1.
   const DEAD = ['simpleMode', 'simple-mode-teaser', 'mode-seg-ctrl', 'mode-seg-btn',
-                '__jwSetFullMode', 'discover-fullmode-btn'];
+                '__jwSetFullMode', 'discover-fullmode-btn',
+                'smt_', 'mode_simple', 'mode_full', 'nav_simple_view',
+                'nav_adv_show_title', 'nav_adv_back_title', 'disc_open_full'];
   for (const rel of ['js/app.js', 'beta/js/app.js', 'styles.css', 'beta/styles.css',
                      'index.html', 'beta/index.html']) {
     const src = fs.readFileSync(REPO + '/' + rel, 'utf8');
@@ -1315,6 +1329,16 @@ section('Simple Mode is gone, and stays gone');
     if (found.length === 0) ok(rel + ': no Simple Mode remnants');
     else fail(rel + ': still references ' + found.join(', '));
   }
+
+  // And the translation store behind them, or `i18n_tool.py inject` would put
+  // every one of them straight back into js/app.js on the next language pass.
+  const dataDir = path.join(REPO, 'scripts', 'i18n_data');
+  const dirty = fs.readdirSync(dataDir).filter(f => f.endsWith('.json')).filter(f => {
+    const src = fs.readFileSync(path.join(dataDir, f), 'utf8');
+    return DEAD.some(t => src.includes(t));
+  });
+  if (!dirty.length) ok('scripts/i18n_data: no Simple Mode strings left to re-inject');
+  else fail('scripts/i18n_data: dead Simple Mode strings in ' + dirty.join(', '));
 }
 
 // ── Advanced settings sit behind a disclosure ────────────────────────────

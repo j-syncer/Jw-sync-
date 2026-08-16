@@ -4,6 +4,30 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.35.1] — 2026-08-16
+
+### A smaller download, and one fewer way for the site to be wrong
+
+Nothing changes on screen. Simple Mode was removed in v3.32.0, but the words it
+used to display were never taken out — 22 strings covering the mode toggle, the
+"‹ Simple view" back link and the teaser cards, translated into all 25
+languages, and still being downloaded by every visitor to a page that had no
+way to show them. Removing them takes about 35 KB off the app.
+
+They were also a hazard rather than merely dead weight. `i18n_tool.py inject`
+copies whatever is in the translation store into the app, so every one of them
+would have come back on the next language pass; a check in the test suite now
+fails the build if any of the keys reappears, in the app or in the store behind
+it.
+
+One test was removed rather than updated. It asserted that the page still
+contained the string "Note Explorer ✨" — the Simple Mode teaser's upsell item —
+and it had been passing on nothing since v3.32.0, because the string survived
+only as a dictionary value that no part of the app ever read. The Note Explorer
+entry points people actually click are checked by the two assertions beside it.
+
+---
+
 ## [3.35.0] — 2026-08-15
 
 ### The Markdown importer now reads files the way people actually write them
