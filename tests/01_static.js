@@ -1455,6 +1455,94 @@ section('No stale language counts in shipped copy');
   }
 }
 
+// ── The same rot, in the repo's own documentation ───────────────────────────
+// The check above was written when README.md had gone stale at 13 languages,
+// and README was brought current in the same commit — to 22. It then rotted
+// straight back to 22/37 guides/836 pages/19 suites while the site moved to 25
+// languages, 38 guides and 25 suites, because the guard was pointed at the
+// shipped pages and not at the file describing them. CLAUDE.md drifted the same
+// way and matters more: it is the first thing every session reads, and it was
+// telling them the suite stopped at 21_app_boot.js while four suites after it
+// ran on every push.
+//
+// Note the regexes here are deliberately broader than the shipped-copy one
+// above: README stated its count as "**22 languages**", with no "in"/"all" in
+// front, which is exactly why the existing pattern never saw it. That breadth
+// is only safe because neither file may now state a count of these things that
+// disagrees with the repo — so where a number is genuinely awkward to derive,
+// the prose says "every page" instead of naming one.
+section('Repo docs state counts that match the repo');
+{
+  const htmlUnder = dir => {
+    let n = 0;
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory()) n += htmlUnder(path.join(dir, e.name));
+      else if (e.name.endsWith('.html')) n++;
+    }
+    return n;
+  };
+  const guidesDir = path.join(REPO, 'guides');
+  const testsDir = path.join(REPO, 'tests');
+  const suiteFiles = fs.readdirSync(testsDir)
+    .filter(f => /^\d\d_.+\.js$/.test(f)).sort();
+
+  const FACTS = [
+    ['languages', /(\d[\d,]*)\s+languages/g, EXPECTED_LANGS.length],
+    ['guides', /(\d[\d,]*)\s+(?:step-by-step\s+|static\s+)?guides/g,
+      fs.readdirSync(guidesDir).filter(f => f.endsWith('.html') && f !== 'index.html').length],
+    ['guide pages', /(\d[\d,]*)\s+pages/g, htmlUnder(guidesDir)],
+    ['test suites', /(\d[\d,]*)\s+suites/g, suiteFiles.length],
+    ['sitemap URLs', /(\d[\d,]*)\s+URLs/g,
+      (fs.readFileSync(path.join(REPO, 'sitemap.xml'), 'utf8').match(/<loc>/g) || []).length],
+  ];
+
+  ['README.md', 'CLAUDE.md'].forEach(rel => {
+    const doc = fs.readFileSync(path.join(REPO, rel), 'utf8');
+    FACTS.forEach(([label, re, actual]) => {
+      const hits = [...doc.matchAll(re)].map(m => +m[1].replace(/,/g, ''));
+      if (!hits.length) return;
+      const wrong = [...new Set(hits.filter(n => n !== actual))];
+      if (wrong.length) {
+        fail(rel + ': says ' + wrong.join('/') + ' ' + label +
+             ', but the repo has ' + actual + ' — fix the number or stop naming one');
+      } else {
+        ok(rel + ': ' + label + ' count says ' + actual + ', matching the repo');
+      }
+    });
+  });
+
+  // Counting the suites is not enough on its own: CLAUDE.md's list stopped at
+  // 21_app_boot.js for four releases, and a total would have been just as easy
+  // to leave alone. Every suite on disk has to be named.
+  const claude = fs.readFileSync(path.join(REPO, 'CLAUDE.md'), 'utf8');
+  const unlisted = suiteFiles.filter(f => !claude.includes(f));
+  if (unlisted.length) {
+    fail('CLAUDE.md: suite(s) not documented — ' + unlisted.join(', '));
+  } else {
+    ok('CLAUDE.md names all ' + suiteFiles.length + ' suites');
+  }
+
+  const aliases = Object.keys(
+    JSON.parse(fs.readFileSync(path.join(testsDir, 'package.json'), 'utf8')).scripts)
+    .filter(k => k.startsWith('test:')).map(k => k.slice(5));
+  const unlistedAliases = aliases.filter(a => !claude.includes(':' + a));
+  if (unlistedAliases.length) {
+    fail('CLAUDE.md: npm alias(es) not documented — ' + unlistedAliases.join(', '));
+  } else {
+    ok('CLAUDE.md names all ' + aliases.length + ' npm test aliases');
+  }
+
+  // Simple Mode went in v3.32.0. The shipped files are already guarded against
+  // the identifiers coming back; README kept advertising the feature in prose,
+  // which no identifier check can see.
+  const readme = fs.readFileSync(path.join(REPO, 'README.md'), 'utf8');
+  if (/Simple Mode/i.test(readme)) {
+    fail('README.md: still advertises Simple Mode, removed in v3.32.0');
+  } else {
+    ok('README.md does not advertise Simple Mode');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

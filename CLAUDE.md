@@ -50,8 +50,8 @@ cd tests && npm install --silent 2>/dev/null; npm test
 ```
 
 - `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
-- `npm test` chains all 21 suites (`01_static.js` … `21_app_boot.js`) and exits non-zero on the first failure.
-- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`, `:boot`.
+- `npm test` chains all 25 suites (`01_static.js` … `25_md_tolerance.js`, with `15_parity.js` run last) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`, `:boot`, `:forum`, `:md-import`, `:manifest`, `:md-tolerance`.
 
 **Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
 
@@ -72,7 +72,7 @@ Suite coverage:
 - **14_backup_doctor.js** — Library Doctor scan/fix, standalone and inside the merge engine.
 - **15_parity.js** — beta/production drift guard: shared-file pairs identical, `enhancements.js` differs only by SW registration, and `CACHE_VERSION` bumped whenever a precached page changes (checks both working tree and git history).
 - **16_reading.js** — Reading Companion: plan data (1,189 chapters both orders), engine (portions, self-healing carry-over, streaks, forecast, milestones), i18n coverage, JSDOM UI, notes integration — **and the jw.org wtlocale table** (see the language runbook below).
-- **17_guides.js** — the 37 static guides in every language: structure, canonicals, cross-links.
+- **17_guides.js** — the 38 static guides in every language: structure, canonicals, cross-links. Its slug list is read from the built directory rather than written by hand, so a new guide is covered the day it ships; it also asserts every guide is advertised in every translated language, via the English page's hreflang cluster (counting files or comparing titles both pass on a stale leftover page).
 - **18_arabic_rtl.js** — RTL guard: dictionary coverage, `?lang=` allow-list, nav picker, wtlocale presence, `dir="rtl"` applied before first paint, `rtl.css` not stale.
 - **21_app_boot.js** — **mounts the React app in JSDOM** and checks it renders a
   real page rather than a blank one, with a stale `simpleMode:true` pref seeded.
@@ -83,11 +83,30 @@ Suite coverage:
   `react-dom`, which is why `tests/package.json` now depends on them.
 - **20_translation_integrity.js** — reads what the strings *say*, in every
   language: no stray scripts (the guard that caught a Cyrillic `материал` in a
-  Cantonese paragraph, previously run only for the 5 languages built through
+  Cantonese paragraph, previously run only for the languages built through
   `build_lang_guides.py`), no English left untranslated in guide copy or the
-  261 UI tables, and self-canonical + reciprocal hreflang across all 940 pages
-  rather than just the 24 landing pages.
+  UI tables, and self-canonical + reciprocal hreflang across every page the
+  site ships rather than just the landing pages.
 - **19_landing_pages.js** — the pre-rendered `/<lang>/` landing pages: they exist with correct `lang`/`dir`, are self-canonical with a reciprocal hreflang cluster, serve real translated copy (not JS-filled), carry substantive content, and are in the sitemap.
+- **22_forum.js** — the community forum in every language, on both of its
+  surfaces: `forum.html` standalone and the `#forum` route inside both
+  index.html files. It exists because `build_forum_i18n.py` translated one half
+  of each — the dictionary went into `forum.html`, the `FT()` calls into
+  `js/forum.js` — so `#forum` rendered the literal keys `cat_feature`, `ago_h`
+  and `no_replies` to every reader, and `forum.html` stayed English throughout.
+- **23_md_import.js** — Markdown out of a backup and back into a *different*
+  one, asserting the `BookNumber` / `ChapterNumber` / `BlockIdentifier` each
+  note actually landed on. A note imported onto the wrong Location throws
+  nothing and looks fine on the page — it is simply not where the reader put
+  it — so only reading the resulting rows catches it.
+- **24_backup_manifest.js** — every path that hands back a `.jwlibrary` writes
+  a `manifest.json` whose `userDataBackup.hash` matches the database beside it.
+  JW Library silently refuses a file where it does not, which is what made the
+  Doctor and Explorer exports un-restorable in v3.34.1.
+- **25_md_tolerance.js** — one row per promise the Markdown-import guide makes:
+  loose field names, book abbreviations, `.`/`:`/`v` verse separators, optional
+  `---` fences. If a row fails, either the parser regressed or the guide is now
+  lying.
 
 If you add a new user-facing feature, extend the relevant suite to cover it.
 
@@ -402,12 +421,13 @@ maps rather than `lang:{…}` objects — patch them by hand:
 match a literal English word with a SQL `LIKE`; translating the quoted word
 would make the stated criterion untrue.
 
-### Step 3 — the 37 guides (~122k characters, ~85% of the total work)
+### Step 3 — the 38 guides (~122k characters, ~85% of the total work)
 
 Write `scripts/guides_<lang>.py` defining `GUIDES_<LANG>`, add `CHROME["<lang>"]`
 (27 keys incl. the 5-entry `groups` map) to `guides_i18n.py`, register it in
-`GUIDE_TEXT`, then `python3 scripts/check_guide_lang.py <lang>` (must be
-`37/37, 0 problems`). Dump the English source in batches with
+`GUIDE_TEXT`, then `python3 scripts/check_guide_lang.py <lang>` (which must
+report every guide translated and `0 problem(s)` — it prints the tally itself,
+so don't hard-code what the numerator should be). Dump the English source in batches with
 `python3 scripts/dump_guides.py <start> <end>` and append batch by batch —
 building the module in one pass is unwieldy.
 
@@ -418,7 +438,7 @@ It reads one JSON file per batch (`{lang: {slug: {...}}}`) and generates the
 `.py` module,
 which is strictly better than appending to a Python file by hand: the batch is
 valid JSON or it is not, a slug translated twice aborts instead of silently
-winning, and re-running is idempotent. It also reports `n/37 translated` with
+winning, and re-running is idempotent. It also reports how many are translated with
 the missing slugs named, so progress is never guessed at, and it writes an
 empty stub on the first run so registering the language in `guides_i18n.py`
 before generating the module does not deadlock the import.

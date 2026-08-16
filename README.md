@@ -32,15 +32,15 @@ JW Sync fills that gap. It reads two or more `.jwlibrary` backups and combines t
 - **Note Explorer** — open any backup to search, filter and fully edit notes, highlights and bookmarks, then export an updated `.jwlibrary`
 - **Ask** — semantic search across your own notes
 - **Library Doctor** — scan a backup for structural problems and repair the ones that stop it restoring
-- **Study Stats** — a visual summary of your library: notes, highlights, tags, reading streaks and awards
+- **Study Stats** — a visual summary of your library: notes, highlights, tags, reading streaks, awards and a Study Map of where you have been reading
 - **Share & receive notes** — send a selection of notes to someone else and adopt them into their own library
-- **Note export** — TXT, CSV, HTML or PDF
+- **Note export** — TXT, CSV, HTML, PDF or Markdown
+- **Markdown import** — write notes in any editor and bring them back into a backup, anchored to the verse the front matter names
 - **Reading Companion** — build and track a Bible reading plan
 
 **The app itself**
 
-- **22 languages** — English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean, Filipino (Tagalog), Swedish, Cebuano, Arabic, Hebrew, Ukrainian, Polish, Mandarin (Simplified and Traditional), Cantonese, Vietnamese, Hungarian and Hindi — with full right-to-left support for Arabic and Hebrew
-- **Simple Mode** — a clean, minimal interface for everyday use
+- **25 languages** — English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean, Filipino (Tagalog), Swedish, Cebuano, Arabic, Hebrew, Ukrainian, Polish, Mandarin (Simplified and Traditional), Cantonese, Vietnamese, Hungarian, Hindi, Indonesian, Romanian and Dutch — with full right-to-left support for Arabic and Hebrew
 - **Works offline** — installs as a Progressive Web App
 - **Opens files from your device** — tap a `.jwlibrary` file and JW Sync opens it directly
 
@@ -48,7 +48,7 @@ JW Sync fills that gap. It reads two or more `.jwlibrary` backups and combines t
 
 ## Guides
 
-Alongside the app there is a library of **37 step-by-step guides, translated into all 22 languages** — 836 pages in total, covering the questions people actually arrive with:
+Alongside the app there is a library of **38 step-by-step guides, translated into all 25 languages** — 975 pages in total, covering the questions people actually arrive with:
 
 | | |
 |---|---|
@@ -58,7 +58,7 @@ Alongside the app there is a library of **37 step-by-step guides, translated int
 | [Recover notes from a lost phone](https://jwsync.org/guides/recover-jw-library-notes-lost-phone) | [Repair a corrupted backup](https://jwsync.org/guides/fix-corrupted-jw-library-backup) |
 | [Export your notes](https://jwsync.org/guides/export-jw-library-notes) | [Open a .jwlibrary file](https://jwsync.org/guides/open-jwlibrary-file) |
 
-**Browse all guides:** [English](https://jwsync.org/guides/) · [Español](https://jwsync.org/guides/es/) · [Português](https://jwsync.org/guides/pt/) · [Français](https://jwsync.org/guides/fr/) · [Deutsch](https://jwsync.org/guides/de/) · [Italiano](https://jwsync.org/guides/it/) · [Русский](https://jwsync.org/guides/ru/) · [日本語](https://jwsync.org/guides/ja/) · [한국어](https://jwsync.org/guides/ko/) · [Filipino](https://jwsync.org/guides/tl/) · [Svenska](https://jwsync.org/guides/sv/) · [Cebuano](https://jwsync.org/guides/ceb/) · [العربية](https://jwsync.org/guides/ar/) · [עברית](https://jwsync.org/guides/he/) · [Українська](https://jwsync.org/guides/uk/) · [Polski](https://jwsync.org/guides/pl/) · [简体中文](https://jwsync.org/guides/zh-Hans/) · [繁體中文](https://jwsync.org/guides/zh-Hant/) · [粵語](https://jwsync.org/guides/yue-Hant/) · [Tiếng Việt](https://jwsync.org/guides/vi/) · [Magyar](https://jwsync.org/guides/hu/) · [हिन्दी](https://jwsync.org/guides/hi/)
+**Browse all guides:** [English](https://jwsync.org/guides/) · [Español](https://jwsync.org/guides/es/) · [Português](https://jwsync.org/guides/pt/) · [Français](https://jwsync.org/guides/fr/) · [Deutsch](https://jwsync.org/guides/de/) · [Italiano](https://jwsync.org/guides/it/) · [Русский](https://jwsync.org/guides/ru/) · [日本語](https://jwsync.org/guides/ja/) · [한국어](https://jwsync.org/guides/ko/) · [Filipino](https://jwsync.org/guides/tl/) · [Svenska](https://jwsync.org/guides/sv/) · [Cebuano](https://jwsync.org/guides/ceb/) · [العربية](https://jwsync.org/guides/ar/) · [עברית](https://jwsync.org/guides/he/) · [Українська](https://jwsync.org/guides/uk/) · [Polski](https://jwsync.org/guides/pl/) · [简体中文](https://jwsync.org/guides/zh-Hans/) · [繁體中文](https://jwsync.org/guides/zh-Hant/) · [粵語](https://jwsync.org/guides/yue-Hant/) · [Tiếng Việt](https://jwsync.org/guides/vi/) · [Magyar](https://jwsync.org/guides/hu/) · [हिन्दी](https://jwsync.org/guides/hi/) · [Bahasa Indonesia](https://jwsync.org/guides/id/) · [Română](https://jwsync.org/guides/ro/) · [Nederlands](https://jwsync.org/guides/nl/)
 
 ---
 
@@ -122,15 +122,15 @@ No build step for the app itself — the HTML and `js/*.js` files are edited dir
 ├── index.html              Production landing page + app shell
 ├── beta/index.html         Beta shell (noindex) — beta-first changes land here
 ├── js/                     Feature modules, loaded lazily or deferred
-├── guides/                 37 guides × 22 languages (836 pages)
+├── guides/                 38 guides × 25 languages (975 pages)
 ├── <lang>/                 Pre-rendered landing page per language
 ├── highlights.html         Study Stats
 ├── share.html              Share notes
 ├── forum.html              Community forum
 ├── service-worker.js       Offline support and asset caching (PWA)
 ├── scripts/                Generators + one-off patch scripts
-├── tests/                  19 suites, plain Node — no framework
-└── sitemap.xml             860 URLs with a full hreflang cluster
+├── tests/                  25 suites, plain Node — no framework
+└── sitemap.xml             1,002 URLs with a full hreflang cluster
 ```
 
 The heavy feature code lives in `js/` rather than inline, because ~550 KB of inline `<script>` was the cause of a 4.7 s First Contentful Paint — the bytes rode in the HTML at the browser's highest priority and starved the render-blocking CSS.
@@ -165,7 +165,7 @@ Guide copy lives in `scripts/guides_<lang>.py`; `scripts/check_guide_lang.py <la
 cd tests && npm install && npm test
 ```
 
-19 suites covering static structure, a JSDOM run of the full Browse UI against a synthesised `.jwlibrary`, merge regressions, the guide tree, Arabic/RTL, landing pages, and a production/beta parity guard.
+25 suites covering static structure, a JSDOM run of the full Browse UI against a synthesised `.jwlibrary`, a JSDOM boot of the React app itself, merge regressions, Markdown import round-trips, `.jwlibrary` manifest integrity, the guide tree, translation integrity in every language, Arabic/RTL, landing pages, the forum, and a production/beta parity guard.
 
 ---
 
@@ -192,7 +192,7 @@ Contributions are warmly welcome — a bug report, a translation correction, a f
 
 **Want to contribute code?** `js/enhancements.js` is the cleanest entry point — well-structured vanilla JavaScript handling PWA features, file handling and UI additions. Run the test suite before opening a PR.
 
-**Translations?** The app and the full guide library ship in 22 languages. If you spot an error, or want to add a language, open an issue — `scripts/GUIDE-TRANSLATION-RUNBOOK.md` documents exactly how a language pass works.
+**Translations?** The app and the full guide library ship in 25 languages. If you spot an error, or want to add a language, open an issue — `scripts/GUIDE-TRANSLATION-RUNBOOK.md` documents exactly how a language pass works.
 
 All contributions, no matter how small, are appreciated.
 
