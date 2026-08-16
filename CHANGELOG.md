@@ -4,6 +4,25 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.35.3] — 2026-08-16
+
+### Fixed: the Share page was English for Cebuano readers
+
+`share.html` shipped 24 of the site's 25 languages — Cebuano was the one
+missing. The page's language bootstrap already accepted `ceb` as valid, so
+`?lang=ceb` was stored and `<html lang="ceb">` was set, but with no `ceb` entry
+in the Share page's own `I18N` the lookup fell through and rendered the whole
+page in English. The page also sat in the Cebuano `hreflang` cluster and
+declared `ceb_PH` in `og:locale:alternate`, so search engines were being
+pointed at a Cebuano page that did not exist.
+
+- All 63 Share page strings are now translated into Cebuano, following the
+  wording the rest of the site already uses — *Ipaambit* for share, *Dawaton*
+  for receive, *nota* for note.
+- Applied identically to `share.html` and `beta/share.html`.
+
+---
+
 ## [3.35.2] — 2026-08-16
 
 ### Fixed: every translated landing page advertised the wrong version
