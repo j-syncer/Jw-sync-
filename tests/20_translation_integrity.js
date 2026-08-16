@@ -150,7 +150,7 @@ section('UI strings: no stray scripts, no English falling through');
 }
 
 // ── the SEO cluster, on every page rather than just the landing pages ───────
-// 19_landing_pages.js checks the 24 landing pages. The guide tree is 912 more
+// 19_landing_pages.js checks the landing pages. The guide tree is ~900 more
 // pages built by the same code, and nothing looked at them.
 section('Every page: self-canonical, reciprocal hreflang');
 {

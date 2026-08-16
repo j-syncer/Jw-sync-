@@ -191,6 +191,27 @@ function git(args) {
       ', beta/index.html says ' + got['beta/index.html'],
       'Set both to the release you are shipping.');
   }
+
+  // The same field ships on all 25 pre-rendered /<lang>/ landing pages, and
+  // nothing looked at it: bumping the shells does not touch them, only
+  // re-running build_landing.py does. They sat at 3.34.1 through the whole of
+  // v3.35.0 — wrong in the Schema.org block search engines read, in every
+  // language, for a release.
+  const shell = got['index.html'];
+  const stale = [];
+  for (const lang of fs.readdirSync(ROOT, { withFileTypes: true })
+    .filter(e => e.isDirectory() && fs.existsSync(path.join(ROOT, e.name, 'index.html')))
+    .map(e => e.name)) {
+    if (lang === 'beta') continue;
+    const m = re.exec(read(lang + '/index.html'));
+    if (m && m[1] !== shell) stale.push(lang + '/' + m[1]);
+  }
+  if (!stale.length) {
+    ok('every /<lang>/ landing page declares ' + shell);
+  } else {
+    fail('landing pages left behind at an older release: ' + stale.join(', '),
+      'Re-run python3 scripts/build_landing.py after bumping the shells.');
+  }
 })();
 
 // ── Summary ────────────────────────────────────────────────────────────────

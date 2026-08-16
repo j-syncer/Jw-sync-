@@ -1567,6 +1567,44 @@ section('Repo docs state counts that match the repo');
   }
 }
 
+// ── scripts/ holds the toolchain; one-offs live in scripts/archive/ ─────────
+// 74 single-use patchers used to sit in the same flat directory as the dozen
+// scripts you are meant to run, sorted in among them — add_language.py, which
+// you must use to add a language, filed directly beside add_arabic_plumbing.py,
+// which must never be run again. CLAUDE.md said so in prose, and prose lost
+// three times: add_rtl_wiring.py reverted a first-paint fix, the copy-pasted
+// add_*_plumbing.py family shipped two bugs, and patch_navbar_i18n.py would
+// restore the keys v3.35.1 swept.
+//
+// So the split is enforced rather than described. Anything not on this list is
+// assumed to be a one-off and belongs in scripts/archive/.
+section('scripts/ contains only the maintained toolchain');
+{
+  const TOOLCHAIN = new Set([
+    'build_guides.py', 'build_landing.py', 'build_seo.py', 'build_rtl.py',
+    'build_lang_guides.py', 'build_chinese_guides.py',
+    'guides_i18n.py', 'i18n_tool.py', 'i18n_check.py',
+    'check_guide_lang.py', 'dump_guides.py',
+    'add_language.py', 'verify_wtlocale.py',
+  ]);
+  const scriptsDir = path.join(REPO, 'scripts');
+  const strays = fs.readdirSync(scriptsDir)
+    .filter(f => f.endsWith('.py'))
+    // guides_<lang>.py are copy modules imported by guides_i18n.py, one per
+    // language, so they are matched by shape rather than listed.
+    .filter(f => !TOOLCHAIN.has(f) && !/^guides_[a-z_]+\.py$/.test(f));
+  if (!strays.length) {
+    ok('scripts/: only the toolchain, one-offs are in scripts/archive/');
+  } else {
+    fail('scripts/: ' + strays.join(', ') + ' looks like a one-off — move it to scripts/archive/');
+  }
+  if (fs.existsSync(path.join(scriptsDir, 'archive', 'README.md'))) {
+    ok('scripts/archive/ documents why nothing in it may be re-run');
+  } else {
+    fail('scripts/archive/README.md missing');
+  }
+}
+
 section('SUMMARY');
 if (failures === 0) { console.log('\nAll static checks passed.'); process.exit(0); }
 console.log('\nFAIL: ' + failures + ' check(s) failed.');

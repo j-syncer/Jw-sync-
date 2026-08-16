@@ -90,7 +90,7 @@ Suite coverage:
 - **19_landing_pages.js** — the pre-rendered `/<lang>/` landing pages: they exist with correct `lang`/`dir`, are self-canonical with a reciprocal hreflang cluster, serve real translated copy (not JS-filled), carry substantive content, and are in the sitemap.
 - **22_forum.js** — the community forum in every language, on both of its
   surfaces: `forum.html` standalone and the `#forum` route inside both
-  index.html files. It exists because `build_forum_i18n.py` translated one half
+  index.html files. It exists because `archive/build_forum_i18n.py` translated one half
   of each — the dictionary went into `forum.html`, the `FT()` calls into
   `js/forum.js` — so `#forum` rendered the literal keys `cat_feature`, `ago_h`
   and `no_replies` to every reader, and `forum.html` stayed English throughout.
@@ -301,7 +301,8 @@ recipe that used to live here is obsolete: `scripts/i18n_tool.py` finds and
 splices every dictionary, and the builders regenerate the pages.
 
 Reference implementations, newest first — copy the most recent one:
-`add_polish_plumbing.py`, `add_ukrainian_plumbing.py`, `add_hebrew_plumbing.py`.
+`archive/add_polish_plumbing.py`, `archive/add_ukrainian_plumbing.py`,
+`archive/add_hebrew_plumbing.py`.
 
 ### Step 0 — verify the jw.org locale code FIRST
 
@@ -373,19 +374,19 @@ It patches:
 3. **`NAV_LANGS` in `js/app.js`** — a *second, independent* picker
 4. `WTLOCALE` in `js/reading.js`
 
-Anchor on `var V=` for (1), not the bare list: `add_rtl_wiring.py` derives its
+Anchor on `var V=` for (1), not the bare list: `archive/add_rtl_wiring.py` derives its
 own copy of the allow-list out of index.html, so the short form now matches
 twice. That second copy — the `jw-dir-init` `<head>` bootstrap — lives on
 **all seven** pages (both index.html files, both highlights.html, both
 share.html, and forum.html) and `01_static.js` asserts it matches `var V=`
-exactly. Patch it in the plumbing script (see `add_indonesian_plumbing.py`
-step 5); do **not** "just re-run `add_rtl_wiring.py`" as the older scripts
+exactly. Patch it in the plumbing script (see `archive/add_indonesian_plumbing.py`
+step 5); do **not** "just re-run `archive/add_rtl_wiring.py`" as the older scripts
 advise, because that script predates the shipped bootstrap and re-running it
 reverts the first-paint fix. If the code is a BCP-47 tag with a hyphen it must be **quoted** wherever
 it is a JS object key — `i18n_tool.py` does this for you, and `add_chinese_
 plumbing.py` is the reference for the four enumeration points.
 
-> `add_arabic_plumbing.py` only knew about (1), (2) and (4) — it predates
+> `archive/add_arabic_plumbing.py` only knew about (1), (2) and (4) — it predates
 > `NAV_LANGS` being extracted out of the HTML — which is why Hebrew needed a
 > separate patch after `01_static.js` caught it. Always do both pickers.
 
@@ -538,7 +539,7 @@ the `js/app.js` object literal for all 25 languages *and* in
 undone by the next `i18n_tool.py inject`. `01_static.js` now fails the build on
 any of them reappearing in either store.
 
-⚠️ `scripts/patch_navbar_i18n.py` still contains the seven navbar/mode keys, as
+⚠️ `scripts/archive/patch_navbar_i18n.py` still contains the seven navbar/mode keys, as
 the historical record of what it once wrote. It is one of the one-off scripts
 that must not be re-run — doing so would reintroduce them, which is now a build
 failure rather than a silent regression.
@@ -624,10 +625,10 @@ Delivered 22 notes, 43 highlights, 19 answers. Earlier articles annotated the sa
 
 - **Python replacements only** — files are too large for Edit tool; use `open().read()` → `str.replace()` → `write()`
 - **Always verify anchors first** — check `content.count(anchor) == 1` before replacing
-- **A stale `scripts/*.py` will happily undo a later fix.** `add_rtl_wiring.py` carried its own copy of the `<head>` bootstrap. Re-running it overwrote the shipped one and silently reverted a first-paint fix (rtl.css had been made lazy so it stopped blocking render for the 14 LTR languages). Before re-running any patch script, diff what it *writes* against what is actually in the file — the script is not necessarily the newer of the two.
+- **A stale `scripts/*.py` will happily undo a later fix.** `archive/add_rtl_wiring.py` carried its own copy of the `<head>` bootstrap. Re-running it overwrote the shipped one and silently reverted a first-paint fix (rtl.css had been made lazy so it stopped blocking render for the 14 LTR languages). Before re-running any patch script, diff what it *writes* against what is actually in the file — the script is not necessarily the newer of the two.
 - **Bugs that produce no error are the expensive ones.** Two hit this codebase: the jw.org wtlocale falling back to English, and a language table that no tooling could see. Neither failed a test, a build, or a page load. When a field is "an opaque code someone else's system interprets", verify it against that system rather than reasoning about it.
 - **Service worker** precaches `index.html`, `highlights.html`, and `share.html`. Bump `CACHE_VERSION` in `service-worker.js` (currently `jwsync-vN` — check the file) any time you ship a change to any of those pages (or their beta twins) so PWA users pick it up. Test suite `15_parity.js` fails if you forget.
-- **One-off Python patch scripts** from past sessions live in `scripts/` — they are historical records, not part of any build; don't re-run them.
+- **One-off Python patch scripts** from past sessions live in `scripts/archive/` — they are historical records, not part of any build; don't re-run them. `scripts/` proper holds only the maintained toolchain, and `01_static.js` fails the build if a one-off appears there, so a new single-use patcher belongs in `archive/` from the start. Note `archive/build_forum_i18n.py`: the `build_` prefix is not a promise, and it was superseded by `archive/fix_forum_i18n_parity.py`.
 - **Mobile language picker** — on Android, the `<select>` renders as a native radio list. That IS the language selector; no separate component
 - **TRANSLATIONS validation** — verify after any language insertion:
   ```bash

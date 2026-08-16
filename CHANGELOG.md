@@ -4,6 +4,20 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.35.2] — 2026-08-16
+
+### Fixed: every translated landing page advertised the wrong version
+
+The 25 pre-rendered `/<lang>/` pages carry a Schema.org block that names the
+release, and it is generated — bumping the version on the main site does not
+touch them, only rebuilding them does. That step was missed for v3.35.0, so
+every language page told search engines it was version 3.34.1. They are correct
+again, and a check now compares them against the main site on every run.
+
+Nothing else about the pages changed, and nothing was wrong on screen.
+
+---
+
 ## [3.35.1] — 2026-08-16
 
 ### A smaller download, and one fewer way for the site to be wrong
