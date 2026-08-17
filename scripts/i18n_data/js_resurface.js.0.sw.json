@@ -1,0 +1,16 @@
+{
+ "brand": "Kumbusho",
+ "on_this_day": "Siku kama ya leo",
+ "w_years": "Liliandikwa miaka {n} iliyopita",
+ "w_year": "Liliandikwa mwaka mmoja uliopita",
+ "w_months": "Liliandikwa miezi {n} iliyopita",
+ "w_month": "Liliandikwa mwezi uliopita",
+ "w_recent": "Liliandikwa hivi karibuni",
+ "count_sep": "kati ya",
+ "reflect": "Weka alama kuwa umepitia",
+ "next": "Ifuatayo",
+ "done_title": "Umemaliza yote",
+ "done_sub": "Umepitia madokezo ya leo. Kidogo, mara kwa mara, ndiyo njia ya funzo kubaki akilini.",
+ "come_back": "Rudi kesho kwa mengine zaidi.",
+ "streak_days": "Mfululizo wa siku {n}"
+}

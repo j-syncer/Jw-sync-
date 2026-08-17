@@ -139,5 +139,22 @@
  "ask_match": "{pct}% match",
  "batch_tagged_ok": "Tagged {n} notes",
  "ask_switch_model": "Use a different model",
- "change_file": "Change file"
+ "change_file": "Change file",
+ "md_import": "Import Markdown",
+ "mdi_title": "Import Markdown notes",
+ "mdi_intro": "Add .md files — or the .zip this page exports — as notes in this backup. A note whose header names a book, chapter and verse lands on that verse; the rest arrive as standalone notes.",
+ "mdi_choose": "Choose .md files or a .zip",
+ "mdi_found": "{n} note(s) in {f} file(s)",
+ "mdi_anchored": "{n} will land on their verse",
+ "mdi_plain": "{n} will be added as standalone notes",
+ "mdi_dupes": "{n} already in this backup — skipped",
+ "mdi_go": "Add to backup",
+ "mdi_none": "No notes found in those files.",
+ "mdi_err": "Those files could not be read.",
+ "mdi_done": "{n} note(s) added — use Export .jwlibrary to save them.",
+ "mdi_tag": "Imported",
+ "mdi_check": "Check these before importing",
+ "mdi_read_as": "read as {ref}",
+ "mdi_no_book": "book not recognised — will be added as a standalone note",
+ "mdi_untick": "Untick anything you would rather leave out."
 }

@@ -280,9 +280,9 @@ must pivot:
 
 ## Features Built (permanent reference)
 
-### Languages (25 total)
+### Languages (26 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
-`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id` `ro` `nl`
+`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id` `ro` `nl` `sw`
 
 RTL: `ar`, `he`. Everything else is LTR.
 
@@ -328,7 +328,7 @@ The code is **not** the ISO code, and near-misses fail silently: `PL`, `UK` and
 en E    es S    pt T    fr F    de X    it I    ru U    ja J
 ko KO   tl TG   sv Z    ceb CV  ar A    he Q    uk K    pl P
 zh-Hans CHS     zh-Hant CH      yue-Hant CHC     vi VT     hu H
-hi HI   id IN  ro M   nl O
+hi HI   id IN  ro M   nl O   sw SW
 ```
 
 Vietnamese is the sharpest illustration of why this step exists: `VI` — the
@@ -523,7 +523,7 @@ Merge Settings opens showing only "what to bring over" (Notes / Highlights /
 Bookmarks / Auto-Tag), and Smart Logic & Cleanup, Quick Sync, Skip Exact
 Duplicates, Deep Clean and conflict resolution sit behind `.jw-adv-disclosure`,
 gated on `advOpen` and persisted via `savePrefs({advancedOpen})`. The label
-reuses `nav_adv_options`, which already exists in all 25 languages — a new
+reuses `nav_adv_options`, which already exists in all 26 languages — a new
 string would have meant 25 translations for one word.
 
 Note the Merge Settings panel is *itself* collapsed by default (`[Rt,Sa]`),
@@ -531,9 +531,9 @@ so the empty state is three panel headers, not a wall of controls.
 
 The `smt_*`, `mode_*`, `nav_simple_view`, `nav_adv_show_title`,
 `nav_adv_back_title` and `disc_open_full` keys were swept in v3.35.1 — 22 keys
-× 25 languages, about 35 KB off the app. **Do not let them back.** They were a
+× 26 languages, about 35 KB off the app. **Do not let them back.** They were a
 two-store job, and the second store is the one that matters: the keys lived in
-the `js/app.js` object literal for all 25 languages *and* in
+the `js/app.js` object literal for all 26 languages *and* in
 `scripts/i18n_data/` (14 extracted `js_app.js.0.<lang>.json` tables plus
 `navbar.json`, which carries all 25). Deleting only the first would have been
 undone by the next `i18n_tool.py inject`. `01_static.js` now fails the build on

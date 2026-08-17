@@ -248,5 +248,15 @@
     "nav_share_title": "Openen op een ander apparaat",
     "theme_to_light": "Overschakelen naar lichte modus",
     "theme_to_dark": "Overschakelen naar donkere modus"
+  },
+  "sw": {
+    "nav_adv_options": "Chaguo za hali ya juu",
+    "nav_demo_title": "Jaribu kwa madokezo ya mfano",
+    "nav_browse_title": "Fungua Kichunguzi cha Madokezo",
+    "nav_community_title": "Jumuiya — uliza maswali, ripoti hitilafu",
+    "nav_share_btn": "Shiriki",
+    "nav_share_title": "Fungua kwenye kifaa kingine",
+    "theme_to_light": "Badilisha kwenda Hali Angavu",
+    "theme_to_dark": "Badilisha kwenda Hali Nyeusi"
   }
 }

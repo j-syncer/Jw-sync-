@@ -1,0 +1,8 @@
+{
+ "banner_title": "Hali ya onyesho",
+ "banner_body": "Nakala rudufu mbili za mfano zimepakiwa. Bofya <strong>Hakiki Muunganisho</strong> uone jinsi zinavyoungana, kisha <strong>Thibitisha Muunganisho</strong> ili kupakua matokeo.",
+ "banner_dismiss": "Ondoa onyesho",
+ "err_generic": "Haikuwezekana kuanzisha onyesho — tafadhali angalia muunganisho wako wa intaneti kisha ujaribu tena.",
+ "err_inject": "Haikuwezekana kupakia mafaili ya mfano kwenye programu. Tafadhali onyesha upya ukurasa kisha ujaribu tena.",
+ "overwrite_warn": "Kuanzisha onyesho kutabadilisha mafaili uliyopakia sasa. Uendelee?"
+}

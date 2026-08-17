@@ -33,7 +33,7 @@ const initSqlJs = require('sql.js');
 
 // Every UI language the site ships. Adding one here makes the coverage
 // checks below guard it automatically.
-const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl'];
+const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl', 'sw'];
 
 const REPO = path.join(__dirname, '..');
 const HL_PATH = REPO + '/beta/highlights.html';
@@ -684,7 +684,7 @@ async function waitForStats(doc, timeoutMs) {
       'tags_label','notes_label','top_books','timeline','your_tags','hl_colors',
       'first_note','latest_note','study_span','no_notes','loading_tools','years_unit',
       'all_time','service_yr','no_data_sy'];
-    const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl'];
+    const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl', 'sw'];
 
     let allGood = true;
     for (const key of REQUIRED_KEYS) {

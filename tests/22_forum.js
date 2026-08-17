@@ -47,8 +47,18 @@ const missingEn = used.filter(k => DICT.en[k] === undefined);
 if (!missingEn.length) ok('every FT() key is defined in English');
 else fail('FT() keys with no English string: ' + missingEn.join(', '));
 
-if (LANGS.length === 25) ok('dictionary carries all 25 languages');
-else fail(`dictionary carries ${LANGS.length} languages, expected 25`);
+// Derived from the ?lang= allow-list rather than hard-coded: a literal here
+// drifts the moment a language is added, and then the fix is to bump the
+// number, which is how a guard quietly stops guarding anything.
+const ALLOWED = [...(read('index.html').match(/var V=\[([^\]]*)\]/) || [, ''])[1]
+  .matchAll(/'([^']+)'/g)].map(m => m[1]);
+if (ALLOWED.length && LANGS.length === ALLOWED.length) {
+  ok(`dictionary carries all ${ALLOWED.length} languages the site offers`);
+} else {
+  const absent = ALLOWED.filter(l => !LANGS.includes(l));
+  fail(`dictionary carries ${LANGS.length} languages, the site offers ` +
+       `${ALLOWED.length}` + (absent.length ? ' — missing: ' + absent.join(', ') : ''));
+}
 
 const enKeys = Object.keys(DICT.en);
 const gaps = LANGS.filter(l => enKeys.some(k => DICT[l][k] === undefined));

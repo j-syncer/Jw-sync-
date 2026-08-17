@@ -4,6 +4,31 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.37.0] — 2026-08-17
+
+### Added: Kiswahili — the 26th language, and the site's first African language
+
+The whole interface is now available in Kiswahili: the app, the Study Explorer,
+Study Stats, the share and receive flows, the Reading Companion, Library Doctor,
+the setup wizard, the Markdown importer, the community forum and the Kiswahili
+landing page at jwsync.org/sw/. Pick 🇹🇿 Kiswahili from the language menu, or
+open jwsync.org/?lang=sw.
+
+The site had twenty-five languages and not one African language, despite very
+large Kiswahili-speaking populations across Tanzania, Kenya and the DRC.
+
+Bible-chapter links from the Reading Companion open jw.org in Kiswahili. The
+wtlocale is `SW` — the first time the obvious guess has been right. The misses
+are recorded in the VERIFIED table anyway, because two of them are worse than
+the usual silent English fallback: `SA` serves Waray and `SU` serves Sesotho,
+while `SZ`, `SWA` and `KSW` all quietly serve English.
+
+The guides follow. A language absent from `GUIDE_TEXT` gets its full landing
+page and is simply not advertised as a guide tree, which is the documented way
+to ship a language's interface before its 39 guides.
+
+---
+
 ## [3.36.0] — 2026-08-17
 
 ### A guide on writing the Markdown file, in all 25 languages

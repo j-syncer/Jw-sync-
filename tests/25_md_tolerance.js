@@ -196,8 +196,12 @@ section('The guide and the parser agree');
   ok('the guide still documents the reference forms this suite enforces');
 
   // Every language must have the page, not just English.
-  const LANGS = ['es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk',
-    'pl','zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl'];
+  // Derived from the guide trees that exist, not from the site's language list:
+  // a language may ship its UI before its guides (Kiswahili does), and hard-coding
+  // the roster here would demand pages that were never meant to exist yet. This
+  // still catches the real failure — a tree that exists but lacks this page.
+  const LANGS = fs.readdirSync(path.join(REPO, 'guides'), { withFileTypes: true })
+    .filter((e) => e.isDirectory()).map((e) => e.name).sort();
   const absent = LANGS.filter(l =>
     !fs.existsSync(path.join(REPO, 'guides', l, 'import-markdown-notes-jw-library.html')));
   if (!absent.length) ok(`the guide is published in all ${LANGS.length} languages`);
@@ -213,8 +217,12 @@ section('The authoring guide shows files the reader can actually copy');
   // the example back into run-on prose. Nothing else notices that, because the
   // page is still valid, still translated, and still passes 17_guides.js.
   const SLUG = 'write-markdown-notes-for-jw-library';
-  const LANGS = ['es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk',
-    'pl','zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl'];
+  // Derived from the guide trees that exist, not from the site's language list:
+  // a language may ship its UI before its guides (Kiswahili does), and hard-coding
+  // the roster here would demand pages that were never meant to exist yet. This
+  // still catches the real failure — a tree that exists but lacks this page.
+  const LANGS = fs.readdirSync(path.join(REPO, 'guides'), { withFileTypes: true })
+    .filter((e) => e.isDirectory()).map((e) => e.name).sort();
   const read = (l) => {
     const p = l === 'en' ? `guides/${SLUG}.html` : `guides/${l}/${SLUG}.html`;
     return fs.existsSync(path.join(REPO, p))
