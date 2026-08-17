@@ -72,7 +72,7 @@ Suite coverage:
 - **14_backup_doctor.js** — Library Doctor scan/fix, standalone and inside the merge engine.
 - **15_parity.js** — beta/production drift guard: shared-file pairs identical, `enhancements.js` differs only by SW registration, and `CACHE_VERSION` bumped whenever a precached page changes (checks both working tree and git history).
 - **16_reading.js** — Reading Companion: plan data (1,189 chapters both orders), engine (portions, self-healing carry-over, streaks, forecast, milestones), i18n coverage, JSDOM UI, notes integration — **and the jw.org wtlocale table** (see the language runbook below).
-- **17_guides.js** — the 38 static guides in every language: structure, canonicals, cross-links. Its slug list is read from the built directory rather than written by hand, so a new guide is covered the day it ships; it also asserts every guide is advertised in every translated language, via the English page's hreflang cluster (counting files or comparing titles both pass on a stale leftover page).
+- **17_guides.js** — the 39 static guides in every language: structure, canonicals, cross-links. Its slug list is read from the built directory rather than written by hand, so a new guide is covered the day it ships; it also asserts every guide is advertised in every translated language, via the English page's hreflang cluster (counting files or comparing titles both pass on a stale leftover page).
 - **18_arabic_rtl.js** — RTL guard: dictionary coverage, `?lang=` allow-list, nav picker, wtlocale presence, `dir="rtl"` applied before first paint, `rtl.css` not stale.
 - **21_app_boot.js** — **mounts the React app in JSDOM** and checks it renders a
   real page rather than a blank one, with a stale `simpleMode:true` pref seeded.
@@ -422,7 +422,7 @@ maps rather than `lang:{…}` objects — patch them by hand:
 match a literal English word with a SQL `LIKE`; translating the quoted word
 would make the stated criterion untrue.
 
-### Step 3 — the 38 guides (~122k characters, ~85% of the total work)
+### Step 3 — the 39 guides (~125k characters, ~85% of the total work)
 
 Write `scripts/guides_<lang>.py` defining `GUIDES_<LANG>`, add `CHROME["<lang>"]`
 (27 keys incl. the 5-entry `groups` map) to `guides_i18n.py`, register it in

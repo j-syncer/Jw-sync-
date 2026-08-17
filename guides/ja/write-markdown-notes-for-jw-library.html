@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JW Library に読み込める Markdown ファイルの書き方 | JW Sync ガイド</title>
+<meta name="description" content="メモ帳・TextEdit・Obsidian で書いたノートを、JW Library の正しい聖句に載せる方法。実際に打ち込む行と、省いてよいものを説明します。">
+<link rel="canonical" href="https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="x-default" href="https://jwsync.org/guides/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="en" href="https://jwsync.org/guides/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="ar" href="https://jwsync.org/guides/ar/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="ceb" href="https://jwsync.org/guides/ceb/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="de" href="https://jwsync.org/guides/de/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="es" href="https://jwsync.org/guides/es/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="fr" href="https://jwsync.org/guides/fr/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="he" href="https://jwsync.org/guides/he/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="hi" href="https://jwsync.org/guides/hi/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="hu" href="https://jwsync.org/guides/hu/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="id" href="https://jwsync.org/guides/id/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="it" href="https://jwsync.org/guides/it/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="ja" href="https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="ko" href="https://jwsync.org/guides/ko/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="nl" href="https://jwsync.org/guides/nl/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="pl" href="https://jwsync.org/guides/pl/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="pt" href="https://jwsync.org/guides/pt/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="ro" href="https://jwsync.org/guides/ro/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="ru" href="https://jwsync.org/guides/ru/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="sv" href="https://jwsync.org/guides/sv/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="tl" href="https://jwsync.org/guides/tl/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="uk" href="https://jwsync.org/guides/uk/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="vi" href="https://jwsync.org/guides/vi/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="yue-Hant" href="https://jwsync.org/guides/yue-Hant/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="zh-Hans" href="https://jwsync.org/guides/zh-Hans/write-markdown-notes-for-jw-library">
+<link rel="alternate" hreflang="zh-Hant" href="https://jwsync.org/guides/zh-Hant/write-markdown-notes-for-jw-library">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#040f22">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:site_name" content="JW Sync">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JW Library に読み込める Markdown ファイルの書き方 | JW Sync ガイド">
+<meta property="og:description" content="メモ帳・TextEdit・Obsidian で書いたノートを、JW Library の正しい聖句に載せる方法。実際に打ち込む行と、省いてよいものを説明します。">
+<meta property="og:url" content="https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library">
+<meta property="og:image" content="https://jwsync.org/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:locale" content="ja_JP">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "JW Library に読み込める Markdown ファイルの書き方", "description": "メモ帳・TextEdit・Obsidian で書いたノートを、JW Library の正しい聖句に載せる方法。実際に打ち込む行と、省いてよいものを説明します。", "inLanguage": "ja", "datePublished": "2026-07-13", "dateModified": "2026-07-13", "mainEntityOfPage": "https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library", "image": "https://jwsync.org/og-image.png", "author": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}, "publisher": {"@type": "Organization", "name": "JW Sync", "url": "https://jwsync.org"}}, {"@type": "HowTo", "name": "JW Library に読み込める Markdown ファイルの書き方", "description": "メモ帳・TextEdit・Obsidian で書いたノートを、JW Library の正しい聖句に載せる方法。実際に打ち込む行と、省いてよいものを説明します。", "inLanguage": "ja", "totalTime": "PT5M", "tool": [{"@type": "HowToTool", "name": "JW Sync (jwsync.org)"}], "step": [{"@type": "HowToStep", "position": 1, "name": "プレーンテキストのエディタを開く", "text": "Windows ならメモ帳、Mac なら TextEdit、あるいはすでに使っている Markdown アプリ——Obsidian、Typora、iA Writer、Joplin などです。避けたいのはワープロだけです。Word や Google ドキュメントはプレーンテキストではなく書式やレイアウトを保存するので、どちらも読み込みが読めるファイルにはなりません。"}, {"@type": "HowToStep", "position": 2, "name": "ノートを打ち込む", "text": "1 行目に # を付けてタイトルを書き、1 行空けて、その下にノートを書きます。これでもう完全な、有効なファイルです。タイトル行を書きたくなければ、代わりにファイル名が使われます。"}, {"@type": "HowToStep", "position": 3, "name": ".md を付けて保存する", "text": "名前は何でも構いません——マイノート.md のように。Windows のメモ帳は、先に「ファイルの種類」を「すべてのファイル」に変えないと .txt で保存します。ここが一番間違えやすいところです。Mac では保存前に「フォーマット」から「標準テキストにする」を選びます。"}, {"@type": "HowToStep", "position": 4, "name": "聖句に載せる行を足す", "text": "ファイルのいちばん上、他のすべてより前に、ハイフン 3 つの行、publication: Matthew 26:39、そしてまたハイフン 3 つの行を書きます。これでノートはその聖句に結び付きました。省いてもノートは読み込まれます——ただ、どこにも結び付かない状態で入るだけです。"}, {"@type": "HowToStep", "position": 5, "name": "バックアップに読み込む", "text": "JW Library で「個人研究」を開き、三点メニューから「バックアップと復元」を選んでバックアップを作ります。そのファイルを jwsync.org の研究エクスプローラーに読み込ませ、「Markdown を読み込み」を押し、.md ファイルを選び、何かが書き込まれる前に表示される要約を読みます。そのうえで「.jwlibrary を書き出し」を押し、JW Library でそのファイルを復元します。"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "JW Sync", "item": "https://jwsync.org/"}, {"@type": "ListItem", "position": 2, "name": "ガイド", "item": "https://jwsync.org/guides/ja/"}, {"@type": "ListItem", "position": 3, "name": "JW Library に読み込める Markdown ファイルの書き方", "item": "https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "先に Markdown を覚える必要がありますか。", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。普通の文が並んだファイルで、すでに有効なノートです。Markdown が関わるのは太字・斜体・箇条書きが欲しいときだけで、それも太字は語をアスタリスク 2 つで囲む、箇条書きは行頭にハイフンを置く、というだけです。"}}, {"@type": "Question", "name": "ファイル名は関係ありますか。", "acceptedAnswer": {"@type": "Answer", "text": "ファイル自体にタイトルがないときだけです。title: の行も # の見出しもない場合、ファイル名が整えられて代わりに使われるので、彼が祈った杯.md は「彼が祈った杯」というノートになります。それ以外なら名前は自由です。"}}, {"@type": "Question", "name": "うっかり .txt で保存してしまったら。", "acceptedAnswer": {"@type": "Answer", "text": ".md で終わるように名前を変えて、もう一度読み込んでください。中身は何も変えなくて構いません。Windows では先にエクスプローラーの「表示」メニューでファイル名拡張子を表示させないと、末尾が見えないことがあります。"}}, {"@type": "Question", "name": "書名を自分の言語で書けますか。", "acceptedAnswer": {"@type": "Answer", "text": "今のところできません。書名は英語で認識され、このサイトの Markdown 書き出しもそう書きます。ノート本文は好きな言語で構いません。英語名が要るのは聖句の行だけです。それが嫌なら聖句の行を省き、あとから手で位置を決めてください。"}}, {"@type": "Question", "name": "1 つのファイルに複数のノートを入れられますか。", "acceptedAnswer": {"@type": "Answer", "text": "いいえ——1 ファイルが 1 ノートになります。一度の読み込みで好きなだけファイルを選ぶか、フォルダを zip にして .zip を選んでください。"}}, {"@type": "Question", "name": "今あるノートが変わってしまいますか。", "acceptedAnswer": {"@type": "Answer", "text": "いいえ。読み込みは足すだけです。今あるノートには手を触れませんし、読み込ませたバックアップが書き換えられることもありません。最後に新しいファイルをダウンロードし、復元するかどうかはあなたが決めます。"}}, {"@type": "Question", "name": "聖句の行を省くとどうなりますか。", "acceptedAnswer": {"@type": "Answer", "text": "ノートはそれでも読み込まれます。聖句に結び付くのではなく、独立したノートとしてライブラリーに入ります——話や会話、個人的な考えについてのノートなら、たいていそれこそが望ましい形です。"}}]}]}</script>
+<style>:root{--bg:#040f22;--card:rgba(15,28,52,.6);--line:rgba(71,85,105,.35);--txt:#e2e8f0;
+--muted:#94a3b8;--accent:#ea580c;--accent-strong:#c2410c;--accent-soft:#fb923c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);
+font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased}
+a{color:var(--accent-soft);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--line);padding:14px 0}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;color:var(--txt);font-weight:700;font-size:17px}
+.brand:hover{text-decoration:none}
+.brand .dot{width:26px;height:26px;border-radius:7px;background:var(--accent);display:inline-flex;
+align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800}
+.hnav a{color:var(--muted);font-size:14px;margin-left:18px}
+.crumbs{font-size:13px;color:var(--muted);margin:26px 0 6px}
+.crumbs a{color:var(--muted)}
+h1{font-size:30px;line-height:1.25;margin:8px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);font-size:15px;margin:0 0 26px}
+h2{font-size:21px;margin:38px 0 10px;letter-spacing:-.01em}
+p{margin:0 0 16px}
+ol.steps{counter-reset:s;list-style:none;margin:0 0 8px;padding:0}
+ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 52px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;width:32px;height:32px;
+border-radius:50%;background:var(--accent-strong);color:#fff;font-weight:700;font-size:15px;
+display:flex;align-items:center;justify-content:center}
+ol.steps h3{margin:0 0 4px;font-size:16.5px}
+ol.steps p{margin:0;color:var(--muted);font-size:15px}
+.cta{display:block;background:var(--card);border:1px solid var(--line);border-radius:14px;
+padding:20px 22px;margin:34px 0}
+.cta strong{display:block;font-size:17px;margin-bottom:4px}
+.cta span{color:var(--muted);font-size:14.5px}
+.cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
+font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
+.cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
+pre.code{background:rgba(2,8,20,.55);border:1px solid var(--line);border-radius:10px;
+padding:14px 16px;margin:0 0 16px;overflow-x:auto;color:#cbd5e1;white-space:pre;
+font:13.5px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
+.faq dt{font-weight:600;margin:18px 0 4px}
+.faq dd{margin:0;color:var(--muted);font-size:15px}
+.related{margin:8px 0 0;padding:0;list-style:none}
+.related li{margin:0 0 8px}
+footer.site{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 40px;
+color:#8b99ad;font-size:12.5px}
+footer.site p{margin:0 0 10px}
+.gcards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0 0;padding:0;list-style:none}
+@media(min-width:640px){.gcards{grid-template-columns:1fr 1fr}}
+.gcards a{display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:16px 18px;color:var(--txt);height:100%}
+.gcards a:hover{text-decoration:none;border-color:var(--accent)}
+.gcards strong{display:block;font-size:15.5px;margin-bottom:4px}
+.gcards span{color:var(--muted);font-size:13.5px;line-height:1.55;display:block}
+.glang{background:transparent;border:1px solid var(--line);color:var(--muted);
+font-size:13px;padding:4px 8px;border-radius:8px;margin-left:14px;font-family:inherit;
+max-width:150px}
+.glang:hover{border-color:var(--accent)}
+.glangs{border-top:1px solid var(--line);margin-top:30px;padding-top:18px}
+.glangs b{display:block;font-size:13px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.glangs a{display:inline-block;color:#8b99ad;font-size:12.5px;margin:0 14px 6px 0}
+.glangs a:hover{color:var(--accent)}
+.glangs a[aria-current]{color:var(--txt);font-weight:600}</style>
+
+</head>
+<body><header class="site"><div class="wrap"><a class="brand" href="../../?lang=ja"><span class="dot">JW</span>JW Sync</a><nav class="hnav"><a href="../../guides/ja/">ガイド</a><a href="../../forum.html">コミュニティー</a><a href="../../?lang=ja">アプリを開く</a><select class="glang" aria-label="言語" onchange="location.href=this.value"><option value="https://jwsync.org/guides/write-markdown-notes-for-jw-library">English</option><option value="https://jwsync.org/guides/ar/write-markdown-notes-for-jw-library">العربية</option><option value="https://jwsync.org/guides/ceb/write-markdown-notes-for-jw-library">Cebuano</option><option value="https://jwsync.org/guides/de/write-markdown-notes-for-jw-library">Deutsch</option><option value="https://jwsync.org/guides/es/write-markdown-notes-for-jw-library">Español</option><option value="https://jwsync.org/guides/fr/write-markdown-notes-for-jw-library">Français</option><option value="https://jwsync.org/guides/he/write-markdown-notes-for-jw-library">עברית</option><option value="https://jwsync.org/guides/hi/write-markdown-notes-for-jw-library">हिन्दी</option><option value="https://jwsync.org/guides/hu/write-markdown-notes-for-jw-library">Magyar</option><option value="https://jwsync.org/guides/id/write-markdown-notes-for-jw-library">Bahasa Indonesia</option><option value="https://jwsync.org/guides/it/write-markdown-notes-for-jw-library">Italiano</option><option value="https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library" selected>日本語</option><option value="https://jwsync.org/guides/ko/write-markdown-notes-for-jw-library">한국어</option><option value="https://jwsync.org/guides/nl/write-markdown-notes-for-jw-library">Nederlands</option><option value="https://jwsync.org/guides/pl/write-markdown-notes-for-jw-library">Polski</option><option value="https://jwsync.org/guides/pt/write-markdown-notes-for-jw-library">Português</option><option value="https://jwsync.org/guides/ro/write-markdown-notes-for-jw-library">Română</option><option value="https://jwsync.org/guides/ru/write-markdown-notes-for-jw-library">Русский</option><option value="https://jwsync.org/guides/sv/write-markdown-notes-for-jw-library">Svenska</option><option value="https://jwsync.org/guides/tl/write-markdown-notes-for-jw-library">Filipino</option><option value="https://jwsync.org/guides/uk/write-markdown-notes-for-jw-library">Українська</option><option value="https://jwsync.org/guides/vi/write-markdown-notes-for-jw-library">Tiếng Việt</option><option value="https://jwsync.org/guides/yue-Hant/write-markdown-notes-for-jw-library">粵語</option><option value="https://jwsync.org/guides/zh-Hans/write-markdown-notes-for-jw-library">简体中文</option><option value="https://jwsync.org/guides/zh-Hant/write-markdown-notes-for-jw-library">繁體中文</option></select></nav></div></header><main class="wrap"><nav class="crumbs"><a href="../../">JW Sync</a> › <a href="./">ガイド</a> › 上級ツール</nav><h1>JW Library に読み込める Markdown ファイルの書き方</h1><p class="lede">メモ帳・TextEdit・Obsidian で書いたノートを、JW Library の正しい聖句に載せる方法。実際に打ち込む行と、省いてよいものを説明します。</p><p>JW Sync は Markdown ファイルを JW Library のバックアップに読み込めます。その機能を知ったとき本当に問題になるのは一つだけ——ファイルはどんな形でなければならないのか、ということです。このページは書く側から答えます。読み込み側が何を受け付けるかではなく、あなたが実際に何を打ち込むかです。</p><p>短く言えば、ノートとはテキストファイルです。ファイルを作り、ノートを書き、末尾を .md にして保存すれば、それで読み込めます。ここから先はすべて、省いてもよい一行についての説明です。そのノートがどの聖句に属するかを示す行で、これがあるとノートはあなたの他のノートに埋もれず、JW Library でその聖句を読んでいるときに現れます。</p><p>Markdown エディタは要りません。Markdown を覚える必要もありません。Windows のメモ帳、Mac の TextEdit で十分です。すでに Obsidian や Notion で研究ノートを取っているなら、そのファイルはもう Markdown です。それぞれの節が下にあります。</p><h2>手順</h2><ol class="steps"><li><h3>プレーンテキストのエディタを開く</h3><p>Windows ならメモ帳、Mac なら TextEdit、あるいはすでに使っている Markdown アプリ——Obsidian、Typora、iA Writer、Joplin などです。避けたいのはワープロだけです。Word や Google ドキュメントはプレーンテキストではなく書式やレイアウトを保存するので、どちらも読み込みが読めるファイルにはなりません。</p></li><li><h3>ノートを打ち込む</h3><p>1 行目に # を付けてタイトルを書き、1 行空けて、その下にノートを書きます。これでもう完全な、有効なファイルです。タイトル行を書きたくなければ、代わりにファイル名が使われます。</p></li><li><h3>.md を付けて保存する</h3><p>名前は何でも構いません——マイノート.md のように。Windows のメモ帳は、先に「ファイルの種類」を「すべてのファイル」に変えないと .txt で保存します。ここが一番間違えやすいところです。Mac では保存前に「フォーマット」から「標準テキストにする」を選びます。</p></li><li><h3>聖句に載せる行を足す</h3><p>ファイルのいちばん上、他のすべてより前に、ハイフン 3 つの行、publication: Matthew 26:39、そしてまたハイフン 3 つの行を書きます。これでノートはその聖句に結び付きました。省いてもノートは読み込まれます——ただ、どこにも結び付かない状態で入るだけです。</p></li><li><h3>バックアップに読み込む</h3><p>JW Library で「個人研究」を開き、三点メニューから「バックアップと復元」を選んでバックアップを作ります。そのファイルを jwsync.org の研究エクスプローラーに読み込ませ、「Markdown を読み込み」を押し、.md ファイルを選び、何かが書き込まれる前に表示される要約を読みます。そのうえで「.jwlibrary を書き出し」を押し、JW Library でそのファイルを復元します。</p></li></ol><div class="cta"><strong>今すぐどうぞ — 無料、ブラウザーの中で</strong><span>JW Sync は .jwlibrary バックアップの統合・編集・分析を、すべてあなたの端末で行います。アカウント不要、アップロードなし、インストール不要です。</span><a class="btn" href="../../?lang=ja">JW Sync を開く →</a></div><h2>いちばん短い、それでも通るファイル</h2><p>テキストしか入っていないファイルでも、すでに有効なノートです。これで全部です。</p><pre class="code"># 彼が祈った杯
+
+この祈りは、いやいやではなく従順を示している。</pre><p># で始まる行がノートのタイトルになり、その下がすべてノート本文になります。このファイルは何の文句もなく読み込まれます。ただ、聖句に結び付かない独立したノートとして、他のノートに並んで入るだけです。</p><h2>Windows でファイルを作る</h2><p>メモ帳を開いてノートを打ち込み、「ファイル」から「名前を付けて保存」を選びます。保存する前に「ファイルの種類」を「テキスト文書」から「すべてのファイル」に変えてください。この手順を飛ばすとメモ帳は黙って .txt を足し、マイノート.md.txt になってしまい、読み込みからは見えません。そのうえで .md で終わる名前を入力します。拡張子を変えるとファイルが使えなくなるかもしれない、と Windows が警告することがありますが、その警告こそ正しくできた印です。</p><h2>Mac でファイルを作る</h2><p>TextEdit を開き、何かを打ち込む前に「フォーマット」から「標準テキストにする」を選びます。TextEdit はリッチテキストモードで起動し、.rtf で保存しますが、これはそもそもテキストファイルではありません。標準テキストモードにしたら「ファイル」から「保存」を選び、名前を .md で終わらせます。macOS が .txt を付け足そうと申し出たら断ってください。</p><h2>スマートフォンやタブレットでファイルを作る</h2><p>Markdown を保存または書き出せるアプリなら何でも使えます——Obsidian、Bear、iA Writer、Joplin、Android なら Markor など。iPhone や Android に最初から入っているメモアプリはたいてい .md ファイルを保存できないので、スマートフォンではこうしたアプリを使うか、素直にパソコンで書くのが普通の道です。読み込むときは何ファイルでも一度に選べますし、フォルダごと zip にして一つの .zip として渡すこともできます。</p><h2>ノートを聖句に載せる、たった一行</h2><p>ノートがどこに属するかを読み込みに伝えるものは、すべてファイルのいちばん上、ハイフン 3 つの行 2 本にはさまれた小さなブロックに入れます。これを front matter と呼び、たいていのノートでは一行で足ります。</p><pre class="code">---
+publication: Matthew 26:39
+---
+
+# 彼が祈った杯
+
+この祈りは、いやいやではなく従順を示している。</pre><p>このノートはこれでマタイ 26:39 に結び付きました。その聖句を読んでいるあいだ JW Library に現れます——アプリの中でそこに書いたのと、まったく同じように。</p><h2>理解される書き方で聖句を書く</h2><p>書名は英語で書いてください。ノート本文が別の言語でも同じです——マタイではなく Matthew です。人が実際に打ち込む略記も通じます——Matt、Matt.、Mt、1 Cor、1Cor、I Corinthians、Second Timothy。章と節のあいだはコロン、ピリオド、あるいは文字 v が使えるので、John 3:16、John 3.16、1 Cor 13 v4 はどれも同じ意味になります。スペースは省けるので 1Cor13:4 でも構いません。Matthew 26:39-41 のような範囲指定は、最初の節である 39 節にノートを置きます。JW Library のノートは範囲ではなく本文の一点に結び付くからです。</p><h2>タイトル・日付・タグ付きの完全なファイル</h2><p>望むならあと 3 行使えます。どれも省いて構いません。</p><pre class="code">---
+title: 彼が祈った杯
+date: 2026-08-15
+tags: [研究, ゲッセマネ]
+publication: Matthew 26:39
+---
+
+この祈りは、いやいやではなく従順を示している。</pre><p>title は # の見出しと同じ働きなので、どちらか一方で足ります。date は読み込んだ日ではなくノートの日付を決めます。tags は絞り込みに使える本物の JW Library のタグになり、すでにあるタグは重複させずに再利用されます。tags の行は、角かっこなしで 研究, ゲッセマネ と書いても、#研究 #ゲッセマネ と書いても、下に行を分けてハイフンの箇条書きにしても構いません——4 通りとも同じに読まれます。</p><h2>1 ファイルに 1 ノート</h2><p>.md ファイル 1 つがノート 1 つになります。1 つのファイルに複数のノートを入れて分割させることはできません。Markdown ファイルの中には、どこでノートが終わり次が始まるかを確実に示すものが何もないからです——途中の見出しは 2 つ目のノートかもしれませんし、1 つ目の小見出しかもしれません。取り違えれば書いたものが散らばってしまいます。ですからノートごとにファイルを分け、読み込むときにまとめて選ぶか、フォルダを zip にして .zip を選んでください。</p><h2>そのまま届く書式</h2><p>段落、改行、太字、斜体、箇条書きは、JW Library に本物の書式として届きます。最初の見出しより後の見出しは普通の段落になります。Markdown で表せて JW Library のノートでは表せないもの——表、画像、リンク、コードブロック——はテキストに落とし込まれるので、レイアウトが付いていけないところでも言葉は残ります。</p><h2>すでに Obsidian で書いている場合</h2><p>Obsidian のファイルはもう Markdown で、そのプロパティ欄はここで説明した front matter をそのまま書き出します。publication というプロパティに Matthew 26:39 という値を入れれば、ノートはそこに着きます。Obsidian 自身の tags プロパティは tags として読まれます。二重角かっこのリンクや埋め込みノートはテキストに落とし込まれます。JW Library のノートには、それらを指し示す先がないからです。フォルダ 1 つ分の .md を一度の読み込みで選ぶことも、フォルダを zip にして .zip を渡すこともできます。</p><h2>すでに Notion で書いている場合</h2><p>Notion は Markdown で書き出せます。ページのメニューを開き、「エクスポート」を選び、「Markdown &amp; CSV」を指定してください。出てくるのは .zip で、読み込みはそのまま受け付けます。Notion はページタイトルを見出しとして、自身のプロパティを下の普通の行として書き出しますが、読み込みが知らない項目はエラー扱いではなく無視されます。ですからノートを聖句に載せたいときは、書き出したファイルの先頭に publication の行を自分で足してください。</p><h2>きちんと合わせなくてよいこと</h2><p>項目名の大文字小文字は関係ありません。コロンの後のスペースはなくても構いません。余分なスペースやタブは無視され、値を囲む引用符や # の後に書いたコメントも同じです。Windows の改行でも問題ありません。--- の行をまるごと省いて、いきなり項目からファイルを始めることさえできます。いちばん最初の行が項目のどれかでありさえすればよいのです。そして書名を打ち間違えても——Mathew のように——読み込みは「Matthew 26:39 と読みました」と伝え、あなたがチェックを入れるのを待ちます。勝手に決めることはありません。</p><h2>読み込みがあなたのライブラリーにしないこと</h2><p>読み込みは足すだけです。バックアップにすでにあるノート、ハイライト、しおり、タグには手を触れませんし、読み込ませたファイルが書き換えられることもありません——最後に新しい .jwlibrary をダウンロードし、それを復元します。タイトル・本文・位置がバックアップの中の何かと一致するノートは飛ばされるので、同じファイルを二度読み込んでも重複しません。読み込みが足したものはすべて「元に戻す」一回分で、読み込まれたノートには Imported というタグが付くので、後から探すことも、絞り込むことも、まとめて消すこともできます。そのどれもが端末の外には出ません。</p><h2>よくある質問</h2><dl class="faq"><dt>先に Markdown を覚える必要がありますか。</dt><dd>いいえ。普通の文が並んだファイルで、すでに有効なノートです。Markdown が関わるのは太字・斜体・箇条書きが欲しいときだけで、それも太字は語をアスタリスク 2 つで囲む、箇条書きは行頭にハイフンを置く、というだけです。</dd><dt>ファイル名は関係ありますか。</dt><dd>ファイル自体にタイトルがないときだけです。title: の行も # の見出しもない場合、ファイル名が整えられて代わりに使われるので、彼が祈った杯.md は「彼が祈った杯」というノートになります。それ以外なら名前は自由です。</dd><dt>うっかり .txt で保存してしまったら。</dt><dd>.md で終わるように名前を変えて、もう一度読み込んでください。中身は何も変えなくて構いません。Windows では先にエクスプローラーの「表示」メニューでファイル名拡張子を表示させないと、末尾が見えないことがあります。</dd><dt>書名を自分の言語で書けますか。</dt><dd>今のところできません。書名は英語で認識され、このサイトの Markdown 書き出しもそう書きます。ノート本文は好きな言語で構いません。英語名が要るのは聖句の行だけです。それが嫌なら聖句の行を省き、あとから手で位置を決めてください。</dd><dt>1 つのファイルに複数のノートを入れられますか。</dt><dd>いいえ——1 ファイルが 1 ノートになります。一度の読み込みで好きなだけファイルを選ぶか、フォルダを zip にして .zip を選んでください。</dd><dt>今あるノートが変わってしまいますか。</dt><dd>いいえ。読み込みは足すだけです。今あるノートには手を触れませんし、読み込ませたバックアップが書き換えられることもありません。最後に新しいファイルをダウンロードし、復元するかどうかはあなたが決めます。</dd><dt>聖句の行を省くとどうなりますか。</dt><dd>ノートはそれでも読み込まれます。聖句に結び付くのではなく、独立したノートとしてライブラリーに入ります——話や会話、個人的な考えについてのノートなら、たいていそれこそが望ましい形です。</dd></dl><h2>関連ガイド</h2><ul class="related"><li><a href="import-markdown-notes-jw-library">Markdown のノートを JW Library に読み込む方法</a></li><li><a href="export-jw-library-notes">JW Library のノートをテキストや Markdown に書き出す方法</a></li><li><a href="edit-jw-library-notes">ブラウザーで JW Library のノートを見る・編集する</a></li></ul></main><footer class="site"><div class="wrap"><nav class="glangs"><b>このガイドを他の言語で読む</b><a href="https://jwsync.org/guides/write-markdown-notes-for-jw-library" hreflang="en" lang="en">English</a><a href="https://jwsync.org/guides/ar/write-markdown-notes-for-jw-library" hreflang="ar" lang="ar">العربية</a><a href="https://jwsync.org/guides/ceb/write-markdown-notes-for-jw-library" hreflang="ceb" lang="ceb">Cebuano</a><a href="https://jwsync.org/guides/de/write-markdown-notes-for-jw-library" hreflang="de" lang="de">Deutsch</a><a href="https://jwsync.org/guides/es/write-markdown-notes-for-jw-library" hreflang="es" lang="es">Español</a><a href="https://jwsync.org/guides/fr/write-markdown-notes-for-jw-library" hreflang="fr" lang="fr">Français</a><a href="https://jwsync.org/guides/he/write-markdown-notes-for-jw-library" hreflang="he" lang="he">עברית</a><a href="https://jwsync.org/guides/hi/write-markdown-notes-for-jw-library" hreflang="hi" lang="hi">हिन्दी</a><a href="https://jwsync.org/guides/hu/write-markdown-notes-for-jw-library" hreflang="hu" lang="hu">Magyar</a><a href="https://jwsync.org/guides/id/write-markdown-notes-for-jw-library" hreflang="id" lang="id">Bahasa Indonesia</a><a href="https://jwsync.org/guides/it/write-markdown-notes-for-jw-library" hreflang="it" lang="it">Italiano</a><a href="https://jwsync.org/guides/ja/write-markdown-notes-for-jw-library" hreflang="ja" lang="ja" aria-current="page">日本語</a><a href="https://jwsync.org/guides/ko/write-markdown-notes-for-jw-library" hreflang="ko" lang="ko">한국어</a><a href="https://jwsync.org/guides/nl/write-markdown-notes-for-jw-library" hreflang="nl" lang="nl">Nederlands</a><a href="https://jwsync.org/guides/pl/write-markdown-notes-for-jw-library" hreflang="pl" lang="pl">Polski</a><a href="https://jwsync.org/guides/pt/write-markdown-notes-for-jw-library" hreflang="pt" lang="pt">Português</a><a href="https://jwsync.org/guides/ro/write-markdown-notes-for-jw-library" hreflang="ro" lang="ro">Română</a><a href="https://jwsync.org/guides/ru/write-markdown-notes-for-jw-library" hreflang="ru" lang="ru">Русский</a><a href="https://jwsync.org/guides/sv/write-markdown-notes-for-jw-library" hreflang="sv" lang="sv">Svenska</a><a href="https://jwsync.org/guides/tl/write-markdown-notes-for-jw-library" hreflang="tl" lang="tl">Filipino</a><a href="https://jwsync.org/guides/uk/write-markdown-notes-for-jw-library" hreflang="uk" lang="uk">Українська</a><a href="https://jwsync.org/guides/vi/write-markdown-notes-for-jw-library" hreflang="vi" lang="vi">Tiếng Việt</a><a href="https://jwsync.org/guides/yue-Hant/write-markdown-notes-for-jw-library" hreflang="yue-Hant" lang="yue-Hant">粵語</a><a href="https://jwsync.org/guides/zh-Hans/write-markdown-notes-for-jw-library" hreflang="zh-Hans" lang="zh-Hans">简体中文</a><a href="https://jwsync.org/guides/zh-Hant/write-markdown-notes-for-jw-library" hreflang="zh-Hant" lang="zh-Hant">繁體中文</a></nav><p><a href="../../?lang=ja">JW Sync</a> · <a href="../../guides/ja/">すべてのガイド</a> · <a href="../../forum.html?lang=ja">コミュニティー</a> · <a href="../../highlights.html?lang=ja">研究統計</a></p><p>JW Sync はすべてのデータをローカルで処理します——ファイルが端末を出ることはありません。無料で、アカウントもアップロードもありません。</p><p>「JW Library」は Watch Tower Bible and Tract Society of Pennsylvania の所有物です。JW Sync は独立したユーティリティであり、同協会とは関係がなく、承認も受けていません。</p></div></footer></body>
+</html>

@@ -204,6 +204,62 @@ section('The guide and the parser agree');
   else fail('guide missing for: ' + absent.join(', '));
 }
 
+section('The authoring guide shows files the reader can actually copy');
+{
+  // The companion page — how to *write* the .md file, as opposed to what the
+  // importer accepts. Its whole subject is three sample files, so what needs
+  // guarding is that they survive as samples: build_guides.section_body()
+  // renders a ``` fence as <pre>, and a translation that drops the fence turns
+  // the example back into run-on prose. Nothing else notices that, because the
+  // page is still valid, still translated, and still passes 17_guides.js.
+  const SLUG = 'write-markdown-notes-for-jw-library';
+  const LANGS = ['es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk',
+    'pl','zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl'];
+  const read = (l) => {
+    const p = l === 'en' ? `guides/${SLUG}.html` : `guides/${l}/${SLUG}.html`;
+    return fs.existsSync(path.join(REPO, p))
+      ? fs.readFileSync(path.join(REPO, p), 'utf8') : null;
+  };
+  const samples = (h) => [...h.matchAll(/<pre class="code">([\s\S]*?)<\/pre>/g)].map((m) => m[1]);
+
+  const en = read('en');
+  if (!en) { fail('the English authoring guide was not built'); }
+  else {
+    const enSamples = samples(en);
+    if (enSamples.length === 3) ok('English renders its 3 sample files as <pre> blocks');
+    else fail(`English has ${enSamples.length} sample blocks, expected 3`);
+
+    // A sample the reader copies has to carry the field name the parser
+    // matches, and the English book name it recognises — those two are syntax,
+    // not prose, so they must not have been translated along with the rest.
+    const bad = [];
+    for (const l of LANGS) {
+      const h = read(l);
+      if (!h) { bad.push(`${l}: page missing`); continue; }
+      const s = samples(h);
+      if (s.length !== enSamples.length) { bad.push(`${l}: ${s.length} samples`); continue; }
+      const joined = s.join('\n');
+      if (!joined.includes('publication: Matthew 26:39')) bad.push(`${l}: sample lost its reference line`);
+      else if (!joined.includes('date: 2026-08-15')) bad.push(`${l}: sample lost its date field`);
+    }
+    if (!bad.length) ok(`sample files intact in all ${LANGS.length} translations`);
+    else fail('sample files damaged — ' + bad.slice(0, 4).join(' | '));
+
+    // The page tells people to type these; the parser has to accept them.
+    const browse = fs.readFileSync(path.join(REPO, 'js/browse.js'), 'utf8');
+    const TYPED = ['publication', 'title', 'date', 'tags'];
+    const unread = TYPED.filter((k) => !new RegExp('\\b' + k + ":'").test(browse));
+    if (!unread.length) ok('the parser accepts every field the samples type');
+    else fail('samples type fields the parser ignores: ' + unread.join(', '));
+
+    // Both directions of the pair, so neither becomes an island again.
+    const imp = fs.readFileSync(path.join(REPO, 'guides/import-markdown-notes-jw-library.html'), 'utf8');
+    if (en.includes('href="import-markdown-notes-jw-library"') && imp.includes(`href="${SLUG}"`))
+      ok('the two Markdown guides link to each other');
+    else fail('the Markdown guides are no longer cross-linked');
+  }
+}
+
 section('Nothing is written until the reader agrees');
 (async () => {
   const SQL = await initSqlJs({ locateFile: f => path.join(__dirname, 'node_modules/sql.js/dist/' + f) });

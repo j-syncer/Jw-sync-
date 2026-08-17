@@ -4,6 +4,46 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.36.0] — 2026-08-17
+
+### A guide on writing the Markdown file, in all 25 languages
+
+The Markdown importer had a reference guide — every field name it accepts, every
+abbreviation, what it will and will not guess. What it did not have was a page
+for the question people actually ask first: *what am I supposed to type?* That
+explanation existed only as a post in the Community forum, in English, and forum
+posts are loaded into the page after it opens, so no search engine has ever seen
+a word of it.
+
+It is now **How to Write a Markdown File That Imports into JW Library**, at
+`/guides/write-markdown-notes-for-jw-library`, published in all 25 languages
+with its own hreflang cluster and sitemap entries. It covers the part the
+reference guide assumed you already knew:
+
+- making the file at all — Notepad's *Save as type → All Files* trap, TextEdit's
+  *Make Plain Text*, which phone apps can save a `.md` and which cannot;
+- the shortest file that works, then the one line that puts a note on a verse,
+  then the full version with a title, a date and tags;
+- writing for Obsidian and for Notion specifically, since those files are
+  already Markdown;
+- why it is one note per file, and what importing will not do to your library.
+
+The two Markdown guides now link to each other, and the export guide links to
+both. The import guide previously had **no inbound links from any other guide** —
+it was reachable only from the guides index.
+
+### Sample files in guides render as sample files
+
+A guide body containing a ``` fence is now split into paragraphs and `<pre>`
+blocks instead of being escaped whole into one `<p>`. The Markdown-import guide's
+example file has been rendering as a single run-on line since it shipped: the
+front matter, the blank line and the note ran together as prose, which is neither
+readable nor copyable. Bodies without a fence render exactly as before, so the
+other guides are unchanged apart from the new stylesheet rule. In Arabic and
+Hebrew the sample block stays left-to-right, because its contents are Latin.
+
+---
+
 ## [3.35.2] — 2026-08-16
 
 ### Fixed: every translated landing page advertised the wrong version

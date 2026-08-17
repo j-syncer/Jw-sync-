@@ -737,7 +737,71 @@ GUIDES = [
    ("Can I get my notes back out again?",
     "Yes — Export Markdown in the same screen writes every note to a .md file with the same fields, so notes can travel out of JW Library and back in without losing where they belong."),
   ],
-  "related": ["export-jw-library-notes", "edit-jw-library-notes", "merge-jw-library-backups"],
+  "related": ["write-markdown-notes-for-jw-library", "export-jw-library-notes", "edit-jw-library-notes"],
+ },
+ {
+  "slug": "write-markdown-notes-for-jw-library",
+  "group": "Power tools",
+  "title": "How to Write a Markdown File That Imports into JW Library",
+  "h1": "How to write a Markdown file that imports into JW Library",
+  "description": "Write a note in Notepad, TextEdit or Obsidian and have it land on the right verse in JW Library. The exact lines to type, and everything you can leave out.",
+  "intro": [
+   "JW Sync can read Markdown files into a JW Library backup, which raises the only question that really matters once you know the feature exists: what is the file supposed to look like? This page answers it from the writing end — not what the importer will accept, but what you actually type.",
+   "The short version is that a note is a text file. Make a file, write the note, save it with .md on the end, and it will import. Everything else here is about one optional line: the one that says which scripture the note belongs to, so it appears in JW Library while you are reading that verse instead of sitting loose among your other notes.",
+   "None of this needs a Markdown editor, and none of it needs you to learn Markdown. Notepad on Windows and TextEdit on a Mac are enough. If you already keep study notes in Obsidian or Notion, those files are Markdown already, and there is a section for each below.",
+  ],
+  "steps": [
+   ("Open any plain text editor", "Notepad on Windows, TextEdit on a Mac, or whatever Markdown app you already use — Obsidian, Typora, iA Writer, Joplin. The one thing to avoid is a word processor: Word and Google Docs save layout and styling rather than plain text, and neither produces a file the importer can read."),
+   ("Type the note", "Put the title on the first line with a # in front of it, leave a blank line, then write the note underneath. That is already a complete, valid file. If you would rather not write a title line at all, the filename is used instead."),
+   ("Save it with .md on the end", "Call it whatever you like — my note.md. On Windows, Notepad saves a .txt unless you change Save as type to All Files first, which is the single most common thing to get wrong. On a Mac, choose Format and then Make Plain Text before you save."),
+   ("Add the line that puts it on a verse", "At the very top of the file, above everything else, write a line of three dashes, then publication: Matthew 26:39, then three dashes again. The note is now attached to that verse. Leave this out and the note still imports — it simply arrives unattached."),
+   ("Import it into a backup", "In JW Library, go to Personal Study, open the three-dot menu, choose Backup and Restore and create a backup. Load that file at jwsync.org in the Study Explorer, press Import Markdown, choose your .md files, and read the summary it shows you before anything is written. Then press Export .jwlibrary and restore that file in JW Library."),
+  ],
+  "sections": [
+   ("The smallest file that works",
+    "A file with nothing in it but text is a valid note. This is the whole thing:\n\n```\n# The cup he prayed about\n\nHis prayer shows submission, not reluctance.\n```\n\nThe line beginning with # becomes the note's title, and everything below it becomes the note. That file imports without complaint. It simply arrives as a standalone note, sitting among your notes rather than attached to a scripture."),
+   ("Making the file on Windows",
+    "Open Notepad, type the note, then choose File and Save as. Before you save, change Save as type from Text Documents to All Files — without that step Notepad quietly appends .txt and you end up with my note.md.txt, which the importer will not see. Then type the name with .md on the end. Windows may warn you that changing a file extension could make the file unusable; that warning is the sign you did it right."),
+   ("Making the file on a Mac",
+    "Open TextEdit and choose Format, then Make Plain Text, before typing anything. TextEdit starts in rich text mode and saves .rtf, which is not a text file at all. Once it is in plain text mode, choose File and Save, and give the name a .md ending. If macOS offers to append .txt for you, decline it."),
+   ("Making the file on a phone or tablet",
+    "Any app that can save or export Markdown will do — Obsidian, Bear, iA Writer, Joplin, Markor on Android. The Notes apps built into iPhone and Android generally cannot save a .md file, so on a phone the usual route is one of those apps, or simply writing on a computer instead. When you come to import you can select as many files as you like at once, and a whole folder can be zipped and handed over as a single .zip."),
+   ("The one line that puts a note on a verse",
+    "Everything that tells the importer where a note belongs goes in a small block at the very top of the file, between two lines of three dashes. It is called front matter, and for most notes it is one line long:\n\n```\n---\npublication: Matthew 26:39\n---\n\n# The cup he prayed about\n\nHis prayer shows submission, not reluctance.\n```\n\nThat note is now attached to Matthew 26:39. It appears in JW Library while you are reading that verse, exactly as if you had written it there in the app."),
+   ("Writing the reference so that it is understood",
+    "Write the book name in English, even when the note itself is in another language: Matthew, not Mateo or Matthäus. The abbreviations people actually type are understood too — Matt, Matt., Mt, 1 Cor, 1Cor, I Corinthians, Second Timothy. Between the chapter and the verse you may use a colon, a full stop or the letter v, so John 3:16, John 3.16 and 1 Cor 13 v4 all mean the same thing, and the spaces are optional, so 1Cor13:4 is fine as well. A range such as Matthew 26:39-41 puts the note on the first verse, 39, because a JW Library note attaches to one point in the text rather than to a span."),
+   ("The full file, with a title, a date and tags",
+    "Three more lines are available if you want them, and every one of them is optional:\n\n```\n---\ntitle: The cup he prayed about\ndate: 2026-08-15\ntags: [study, gethsemane]\npublication: Matthew 26:39\n---\n\nHis prayer shows submission, not reluctance.\n```\n\ntitle does the same job as the # heading, so you need only one of the two. date sets the note's date rather than leaving it as the day you imported. tags become real JW Library tags you can filter by, and a tag you already have is reused rather than duplicated. The tags line can also be written study, gethsemane without the brackets, or #study #gethsemane, or as a dashed list on separate lines underneath — all four are read the same way."),
+   ("One note per file",
+    "Each .md file becomes one note. There is no way to put several notes in one file and have them split apart, because nothing in a Markdown file reliably marks where one note ends and the next begins — a heading part-way down might be a second note or might be a subheading of the first, and guessing wrong would scatter your writing. So write one file per note, then select them all in one go when you import, or zip the folder and choose the .zip."),
+   ("Formatting that comes through",
+    "Paragraphs, line breaks, bold, italics and bulleted lists all arrive as real formatting in JW Library. Headings below the first one become ordinary paragraphs. Anything Markdown can express that a JW Library note cannot — tables, images, links, code blocks — is reduced to its text, so the words survive even where the layout cannot follow them."),
+   ("If you already write in Obsidian",
+    "Obsidian files are Markdown already, and its Properties panel writes exactly the front matter described here: add a property called publication with the value Matthew 26:39 and the note will land there. Obsidian's own tags property is read as tags. Wiki-style links in double square brackets and embedded notes are reduced to their text, since a JW Library note has nowhere to point them. You can select a folder's worth of .md files in a single import, or zip the folder and hand over the .zip."),
+   ("If you already write in Notion",
+    "Notion can export Markdown: open the page menu, choose Export, and pick Markdown & CSV. What you get is a .zip, which the importer accepts as it is. Notion writes the page title as a heading and its own properties as ordinary lines underneath, and fields the importer does not recognise are ignored rather than treated as errors — so to place a note on a verse, add a publication line at the top of the exported file yourself."),
+   ("Things you do not have to get right",
+    "Capital letters in the field names are fine. The space after the colon may be missing. Extra spaces and tabs are ignored, and so are quotation marks around a value and a comment written after a #. Windows line endings are fine. You can even leave the --- fences out altogether and begin the file with the fields, as long as the very first line is one of them. And if you misspell a book name — Mathew — the importer tells you it read that as Matthew 26:39 and waits for you to tick the box, rather than deciding on its own."),
+   ("What importing will not do to your library",
+    "Importing only ever adds. The notes, highlights, bookmarks and tags already in your backup are untouched, and the file you load is never modified — you download a new .jwlibrary at the end and restore that one. A note whose title, text and place all match something already in the backup is skipped, so importing the same files twice does not double anything up. Everything an import adds is a single step of Undo, and imported notes carry an Imported tag, so you can find them, filter by them or remove them as a group later. None of it leaves your device."),
+  ],
+  "faq": [
+   ("Do I need to learn Markdown first?",
+    "No. A file of plain sentences is a valid note. Markdown only comes into it if you want bold, italics or bullet points, and even then it is two asterisks around a word for bold and a dash at the start of a line for a bullet."),
+   ("Does the filename matter?",
+    "Only when the file has no title of its own. If there is no title: line and no # heading, the filename is tidied up and used instead, so the-cup-he-prayed-about.md becomes a note called “the cup he prayed about”. Otherwise call the file whatever you like."),
+   ("What if I saved it as .txt by mistake?",
+    "Rename it so that it ends in .md and import again — nothing about the contents needs to change. On Windows you may first need to turn on file name extensions in File Explorer's View menu, or the ending will be hidden from you."),
+   ("Can I write the book name in my own language?",
+    "Not at present. Book names are recognised in English, which is also what this site's own Markdown export writes. Write the note itself in whatever language you like; only the reference line needs the English name. If you would rather not, leave the reference out and place the note by hand afterwards."),
+   ("Can I put more than one note in a single file?",
+    "No — each file becomes one note. Select as many files as you like in one import, or zip the folder and choose the .zip."),
+   ("Will this change the notes I already have?",
+    "No. Importing only adds. Your existing notes are untouched, and the backup you load is never modified: you download a new file at the end and choose whether to restore it."),
+   ("What happens if I leave the reference line out?",
+    "The note still imports. It arrives as a standalone note in your library rather than attached to a scripture — which is what a note about a talk, a conversation or a personal thought usually wants anyway."),
+  ],
+  "related": ["import-markdown-notes-jw-library", "export-jw-library-notes", "edit-jw-library-notes"],
  },
  {
   "slug": "export-jw-library-notes",
@@ -791,7 +855,7 @@ GUIDES = [
    ("Can I export from a backup rather than the app?",
     "Yes. A .jwlibrary file can be opened directly and its notes exported, which is useful when the notes you want are in an old backup rather than on your current device."),
   ],
-  "related": ["print-jw-library-notes", "share-talk-preparation-notes", "extract-jw-library-notes-by-date", "open-jwlibrary-file"],
+  "related": ["import-markdown-notes-jw-library", "write-markdown-notes-for-jw-library", "print-jw-library-notes", "open-jwlibrary-file"],
  },
  {
   "slug": "organize-jw-library-tags",
@@ -1423,6 +1487,9 @@ padding:20px 22px;margin:34px 0}
 .cta .btn{display:inline-block;margin-top:14px;background:var(--accent-strong);color:#fff;font-weight:600;
 font-size:15px;padding:10px 22px;border-radius:9px;box-shadow:0 1px 5px rgba(0,0,0,.35)}
 .cta .btn:hover{text-decoration:none;filter:brightness(1.07)}
+pre.code{background:rgba(2,8,20,.55);border:1px solid var(--line);border-radius:10px;
+padding:14px 16px;margin:0 0 16px;overflow-x:auto;color:#cbd5e1;white-space:pre;
+font:13.5px/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}
 .faq dt{font-weight:600;margin:18px 0 4px}
 .faq dd{margin:0;color:var(--muted);font-size:15px}
 .related{margin:8px 0 0;padding:0;list-style:none}
@@ -1452,6 +1519,7 @@ max-width:150px}
 # they carry their own small RTL block rather than linking the site's rtl.css.
 RTL_CSS = """<style>
 body{direction:rtl}
+pre.code{direction:ltr;text-align:left}
 .hnav a{margin-left:0;margin-right:18px}
 ol.steps li{padding:0 52px 20px 0}
 ol.steps li::before{left:auto;right:0}
@@ -1636,6 +1704,47 @@ def guide_jsonld(g, canonical, lang="en"):
         })
     return {"@context": "https://schema.org", "@graph": graph}
 
+def section_body(body):
+    """A section is one paragraph unless it fences a sample file.
+
+    Bodies without a fence render exactly as they always have — a single <p>,
+    newlines and all — so the guides that predate fencing are byte-identical.
+    A body that fences an example is split instead, because a file the reader
+    is being asked to type has to survive as lines: escaped into a <p> it
+    collapses into run-on prose, which is neither copyable nor readable, and
+    is what the Markdown-import guide's example currently does.
+    """
+    if "```" not in body:
+        return f"<p>{esc(body)}</p>"
+    out, para, code = [], [], []
+    inside = False
+
+    def flush():
+        text = "\n".join(para).strip()
+        del para[:]
+        if text:
+            out.append(f"<p>{esc(text)}</p>")
+
+    for line in body.split("\n"):
+        if line.strip().startswith("```"):
+            if inside:
+                sample = "\n".join(code).strip("\n")
+                del code[:]
+                out.append(f'<pre class="code">{esc(sample)}</pre>')
+            else:
+                flush()
+            inside = not inside
+            continue
+        if inside:
+            code.append(line)
+        elif line.strip():
+            para.append(line)
+        else:
+            flush()
+    flush()
+    return "".join(out)
+
+
 def build_guide(g_en, lang="en"):
     g = localize(g_en, lang)
     t = CHROME[lang]
@@ -1663,7 +1772,7 @@ def build_guide(g_en, lang="en"):
                  f'<span>{esc(t["cta_body"])}</span>'
                  f'<a class="btn" href="{app}">{esc(t["cta_btn"])}</a></div>')
     for h2, body in g["sections"]:
-        parts.append(f"<h2>{esc(h2)}</h2><p>{esc(body)}</p>")
+        parts.append(f"<h2>{esc(h2)}</h2>{section_body(body)}")
     if g.get("faq"):
         parts.append(f'<h2>{esc(t["h_faq"])}</h2><dl class="faq">')
         for q, a in g["faq"]:
