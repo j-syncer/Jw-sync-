@@ -57,6 +57,9 @@ STRAY = {
     # (geüpload, coördinatie) and borrowed acutes, all Latin-1 — so like
     # Indonesian it gets the stray-script guard and no DIACRITIC entry.
     "nl": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
+    # Kiswahili is Latin-script with no diacritics at all, so like
+    # Indonesian it gets the stray-script guard and no DIACRITIC entry.
+    "sw": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -101,6 +104,36 @@ META = {
   talk                cuvântare
   Hebrew Scriptures   Scripturile ebraice
   Greek Scriptures    Scripturile grecești
+
+JW Library, .jwlibrary, JW Sync and jwsync.org are never translated.""",
+    },
+    "sw": {
+        "name": "Swahili",
+        "upper": "SW",
+        "glossary": """Glossary settled on for all 39 guides:
+
+  backup              nakala rudufu
+  to merge / merge    kuunganisha / muunganisho
+  notes               madokezo (sing. dokezo)
+  highlights          viangazio (sing. kiangazio)
+  bookmarks           alamisho
+  tags                lebo
+  device              kifaa (pl. vifaa)
+  file                faili (pl. mafaili)
+  browser             kivinjari
+  to restore          kurejesha
+  to back up          kutengeneza nakala rudufu
+  Personal Study      Funzo la Kibinafsi
+  Backup and Restore  Nakala Rudufu na Kurejesha
+  database            hifadhidata
+  Conflict Reviewer   kikagua migongano
+  duplicate           nakala iliyojirudia
+  publication         chapisho (pl. machapisho)
+  meeting             mkutano
+  convention          kusanyiko
+  talk                hotuba
+  Hebrew Scriptures   Maandiko ya Kiebrania
+  Greek Scriptures    Maandiko ya Kigiriki
 
 JW Library, .jwlibrary, JW Sync and jwsync.org are never translated.""",
     },
