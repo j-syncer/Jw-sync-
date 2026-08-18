@@ -405,7 +405,7 @@ function bootShare() {
   {
     const html = fs.readFileSync(SHARE_PATH, 'utf8');
     const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl',
-      'zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl','sw'];
+      'zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl','sw','el'];
     const CEL_KEYS = ['cel_title','cel_sub','cel_stat_notes','cel_stat_hl','cel_stat_tags','cel_next',
       'cel_s1','cel_s2','cel_s3','cel_msg','cel_msg_body','cel_send','cel_again','cel_more','cel_close'];
     // the page's I18N object: <lang key>:{ ... } — brace-match so compact blocks are seen too

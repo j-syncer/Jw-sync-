@@ -30,9 +30,17 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 const FORUM_JS = read('js/forum.js');
 const I18N_JS = read('js/forum-i18n.js');
-const DICT = JSON.parse(
-  (I18N_JS.match(/window\.__FORUM_I18N=(\{.*\});\s*\n\(function\(\)\{/) ||
-   [, '{}'])[1]);
+// Falling back to {} on a failed match hid the real problem behind a
+// TypeError forty lines later: a dictionary written across several lines does
+// not match, and "no languages" is indistinguishable from "no file". Say what
+// went wrong instead.
+const DICT_MATCH = I18N_JS.match(/window\.__FORUM_I18N=(\{.*\});\s*\n\(function\(\)\{/);
+if (!DICT_MATCH) {
+  console.log('  ✗ could not read window.__FORUM_I18N from js/forum-i18n.js');
+  console.log('      the blob must be one line of JSON ending `};` before the IIFE');
+  process.exit(1);
+}
+const DICT = JSON.parse(DICT_MATCH[1]);
 const LANGS = Object.keys(DICT);
 
 // ── 1. every key the runtime asks for exists, in every language ─────────────
