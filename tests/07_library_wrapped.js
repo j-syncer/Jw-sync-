@@ -739,6 +739,22 @@ async function waitForStats(doc, timeoutMs) {
   }
 
   // ──────────────────────────────────────────────────────────────────
+  section('Light mode covers every dark surface');
+  {
+    const { auditLightMode } = require('./helpers/light-mode.js');
+    // Saturated medal/orb discs and the ambient wash: white ink on their own
+    // gradient, identical in both themes, so they need no light counterpart.
+    const ALLOW = ['.jww-orb', '.jww-rung-dot', '.jww-wc',
+      '.jww-medal-on .jww-medal-disc', '.jww-medal-on .jww-medal-disc svg',
+      '.jww-medal-on .jww-medal-disc::after'];
+    const r = auditLightMode(fs.readFileSync(HL_PATH, 'utf8'), ALLOW);
+    if (!r.checked) fail('light-mode guard found no dark rules to check — the scan is broken');
+    else if (!r.missing.length) ok('all ' + r.checked + ' dark-painted rules have a body.light counterpart');
+    else fail('no light-mode rule for: ' + r.missing.join(', '));
+    if (r.paintsPage) ok('light mode repaints the page itself, not just the header');
+    else fail('body.light never sets the page background');
+  }
+
   console.log('\n== SUMMARY ==\n');
   if (failures === 0) {
     console.log('All highlights.html checks passed.');

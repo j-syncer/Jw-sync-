@@ -4,6 +4,33 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.42.0] — 2026-08-18
+
+### Added: the receive side gets its finish line too
+
+Adding notes someone sent you ended the same way sending did: you clicked
+**Download updated backup** and the page sat there. Now it opens a panel that
+counts what landed in your backup (notes, how many carry highlights, how many
+tags) and walks through getting it into JW Library — Personal Study → Backup
+and restore → Restore — including the part people worry about: restoring
+replaces what is in the app right now, which is safe here, because the file
+you just downloaded already contains it.
+
+### Fixed: light mode was only half-built on the standalone pages
+
+Share Notes and Study Stats both lightened their header and some of their
+cards while the page itself stayed near-black. Anyone who switched to light
+mode got white cards floating on a dark background — on Study Stats, whole
+sections of text were near-invisible.
+
+Both pages now have a complete light theme: page, panels, lists, inputs,
+chips, buttons, the celebration panels, the Study Map and the awards cabinet.
+A new guard walks every rule in each page's stylesheet and fails the build if
+a dark-painted rule ships without its light counterpart, so the two themes
+cannot drift apart again.
+
+---
+
 ## [3.41.0] — 2026-08-18
 
 ### Added: a finish line for sharing notes

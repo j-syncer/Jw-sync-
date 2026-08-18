@@ -631,6 +631,59 @@
     .jww-crest.jww-medal-on .jww-medal-disc{background:radial-gradient(circle at 33% 27%,#fff,var(--tc) 52%,var(--tc2) 100%)}
     body.light .jww-ach-cat-h{background:linear-gradient(180deg,#f1f5f9,#fff);border-color:#e2e8f0}
     body.light .jww-cat-count{color:#475569}
+  
+    /* ── Light mode, completed ───────────────────────────────────────────
+       The page used to lighten its header and a handful of cards while the
+       body stayed #060d1a, so light mode looked like a rendering fault.
+       Every dark-painted rule now has a counterpart; the medal and orb discs
+       are deliberately exempt (saturated gradients, white ink, identical in
+       both themes) and are listed in tests/helpers/light-mode.js. */
+    body.light{background:#f4f8ff;color:#071a38}
+    body.light .hl-new-btn:hover{color:#071a38}
+    body.light .jww-sy-tab{background:#fff;border-color:rgba(11,46,88,.18);color:#475569}
+    body.light .jww-sy-tab:hover{color:#071a38;border-color:rgba(11,46,88,.35)}
+    body.light .jww-stab:hover{color:#071a38}
+    body.light .jww-tab:hover{color:#071a38;border-color:rgba(11,46,88,.35)}
+    body.light .jww-cell-num{color:#071a38}
+    body.light .jww-hbar-name{color:#334155}
+    body.light .jww-color-name{color:#334155}
+    body.light .jww-fact{background:#fff;border-color:rgba(11,46,88,.14)}
+    body.light .jww-fact-val{color:#071a38}
+    body.light .jww-fact-expandable:hover{background:rgba(11,46,88,.04)}
+    body.light .jww-fact-note-panel{background:#f4f7fb;border-color:rgba(11,46,88,.12)}
+    body.light .jww-fn-title{color:#071a38}
+    body.light .jww-btn-ghost{background:rgba(11,46,88,.06);color:#134678}
+    body.light .jww-btn-ghost:hover{background:rgba(11,46,88,.12);color:#071a38}
+    body.light .jww-mini{background:#fff;border-color:rgba(11,46,88,.14)}
+    body.light .jww-mini-lbl{color:#334155}
+    body.light .jww-gauge-card{background:#fff;border-color:rgba(11,46,88,.14)}
+    body.light .jww-gauge-lbl{color:#334155}
+    body.light .jww-ring-pct{color:#071a38}
+    body.light .jww-ring-legend{color:#475569}
+    body.light .jww-badge{background:#fff;border-color:rgba(11,46,88,.14)}
+    body.light .jww-badge-name{color:#475569}
+    body.light .jww-jr-stage{color:#071a38}
+    body.light .jww-jr-desc{color:#475569}
+    body.light .jww-ins-card{background:#fff;border-color:rgba(11,46,88,.14)}
+    body.light .jww-ins-val{color:#071a38}
+    body.light .jww-medal-on .jww-medal-name{color:#334155}
+    body.light .jww-mp-close:hover{color:#071a38}
+    body.light .jww-mp-name{color:#071a38}
+    body.light .jww-st-title{color:#071a38}
+    body.light .jww-nx-name{color:#334155}
+    body.light .jww-modal{background:rgba(15,23,42,.4)}
+    body.light .jww-rung-name{color:#334155}
+    body.light .jww-orb-num .jww-orb-lvl{color:#fff}
+    body.light .jww-map-view{background:#eef2f7;color:#475569}
+    body.light .jww-map-chip{background:#fff;color:#334155;border-color:rgba(11,46,88,.18)}
+    body.light .jww-map-ptitle{color:#071a38}
+    body.light .jww-map-prow-t{color:#334155}
+    body.light .jww-map-chains-h{color:#475569}
+    body.light .jww-map-chain-t{color:#334155}
+    body.light .jww-mapcta-sub{color:#475569}
+    body.light .jww-mapov-btn{background:#fff;color:#134678;border-color:rgba(11,46,88,.2)}
+    body.light .jww-mapov-btn:hover{background:rgba(11,46,88,.06);color:#071a38}
+    body.light .jww-ach-cat-h:hover{background:linear-gradient(180deg,#e8eef7,#f8fafc)}
   </style>
 <script id="site-theme-early">(function(){try{var p=JSON.parse(localStorage.getItem('jwsync_prefs_v1')||'{}');if(p.isDarkMode===false)document.body.classList.add('light');}catch(e){}}());</script>
 <script id="jw-dir-init">

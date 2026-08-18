@@ -407,7 +407,8 @@ function bootShare() {
     const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl',
       'zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl','sw','el'];
     const CEL_KEYS = ['cel_title','cel_sub','cel_stat_notes','cel_stat_hl','cel_stat_tags','cel_next',
-      'cel_s1','cel_s2','cel_s3','cel_msg','cel_msg_body','cel_send','cel_again','cel_more','cel_close'];
+      'cel_s1','cel_s2','cel_s3','cel_msg','cel_msg_body','cel_send','cel_again','cel_more','cel_close',
+      'rcel_title','rcel_sub','rcel_next','rcel_s1','rcel_s2','rcel_s3','rcel_more'];
     // the page's I18N object: <lang key>:{ ... } — brace-match so compact blocks are seen too
     const start = html.indexOf('var I18N=');
     let missing = [];
@@ -426,6 +427,70 @@ function bootShare() {
     }
     if (!missing.length) ok('all ' + LANGS.length + ' languages carry the ' + CEL_KEYS.length + ' celebration keys');
     else fail('celebration keys missing — ' + missing.join(' | '));
+  }
+
+  section('Light mode covers every dark surface');
+  {
+    const { auditLightMode } = require('./helpers/light-mode.js');
+    const r = auditLightMode(fs.readFileSync(SHARE_PATH, 'utf8'), []);
+    if (!r.checked) fail('light-mode guard found no dark rules to check — the scan is broken');
+    else if (!r.missing.length) ok('all ' + r.checked + ' dark-painted rules have a body.light counterpart');
+    else fail('no light-mode rule for: ' + r.missing.join(', '));
+    if (r.paintsPage) ok('light mode repaints the page itself, not just the header');
+    else fail('body.light never sets the page background');
+  }
+
+  section('Receive — downloading the updated backup shows a celebration');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    win.__shRenderReceive(); await wait(20);
+    const backupBuf = await buildBackup(SQL, [{ id: 1, title: 'Existing', content: 'already here' }]);
+    const fileLike = { name: 'mybackup.jwlibrary', arrayBuffer: async () => backupBuf };
+    const sharedNotes = [
+      { title: 'Gift', content: 'a shared note', tags: ['FromFriend'], pub: 'Genesis 1',
+        loc: { BookNumber: 1, ChapterNumber: 1, IssueTagNumber: 0, KeySymbol: 'nwt', MepsLanguage: 0, Type: 0 },
+        ranges: [{ blockType: 2, identifier: 9, startToken: 0, endToken: 3 }] },
+      { title: 'Grace', content: 'another shared note', tags: ['FromFriend'] },
+    ];
+    let blobs = 0;
+    win.URL.createObjectURL = () => { blobs++; return 'blob:upd'; };
+    win.URL.revokeObjectURL = () => {};
+    win.__shAdopt(fileLike, sharedNotes, 'Gift2026');
+    async function until(p, l, ms = 9000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.getElementById('sh-dlu'), 'adopt done screen');
+    if (!doc.getElementById('sh-cel')) ok('no celebration until the updated backup is downloaded');
+    else fail('celebration shown before download');
+
+    const before = blobs;
+    doc.getElementById('sh-dlu').click();
+    await until(() => doc.getElementById('sh-cel'), 'adopt celebration');
+    ok('downloading the updated backup opens the celebration');
+    if (blobs > before) ok('the .jwlibrary itself still downloads'); else fail('no blob created for the updated backup');
+    const ov = doc.getElementById('sh-cel');
+    if (/updated_mybackup\.jwlibrary/.test(ov.querySelector('.sh-cel-sub').textContent))
+      ok('it names the file that was saved');
+    else fail('filename missing from the subtitle: ' + ov.querySelector('.sh-cel-sub').textContent);
+    const stats = [...ov.querySelectorAll('.sh-cel-stat strong')].map(s => s.textContent);
+    // tags counted are the ones actually written to the backup: the note's own
+    // tag plus the import tag the reader chose
+    if (stats.join(',') === '2,1,2') ok('counts what was added (2 notes, 1 highlighted, 2 tags)');
+    else fail('adopt celebration stats wrong: ' + stats.join(','));
+    const steps = [...ov.querySelectorAll('.sh-cel-next .sh-step')].map(s => s.textContent);
+    if (steps.length === 3 && /JW Library/.test(steps.join(' '))) ok('it explains how to restore into JW Library');
+    else fail('restore steps wrong: ' + steps.join(' | '));
+    if (/replaces/i.test(steps[2] || '')) ok('and says plainly that restoring replaces the app’s current notes');
+    else fail('restore warning missing: ' + steps[2]);
+
+    const before2 = blobs;
+    doc.getElementById('sh-cel-dl').click();
+    await until(() => blobs > before2, 're-download');
+    ok('“Download again” re-downloads the updated backup');
+    doc.getElementById('sh-cel-more').click();
+    await until(() => !doc.getElementById('sh-cel'), 'closed');
+    if (doc.getElementById('sh-paste')) ok('“Add more shared notes” returns to the receive screen');
+    else fail('did not return to the receive screen');
+    dom.window.close();
   }
 
   console.log('\n== SUMMARY ==');
