@@ -157,6 +157,8 @@
 /* from share.html <style> #1 */
 [dir="rtl"] .sh-card{text-align:right}
 [dir="rtl"] .sh-item.sel .sh-check::after{right:4px;left:auto}
+[dir="rtl"] .sh-cel-x{left:11px;right:auto}
+[dir="rtl"] .sh-cel-next{text-align:right}
 
 /* from forum.html <style> #1 */
 [dir="rtl"] .char-count{text-align:left}

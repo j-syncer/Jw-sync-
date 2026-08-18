@@ -329,6 +329,105 @@ function bootShare() {
     dom.window.close();
   }
 
+  section('Send — downloading the share file shows a celebration');
+  {
+    const dom = bootShare(); const win = dom.window, doc = win.document;
+    await wait(40);
+    let copied = null;
+    Object.defineProperty(win.navigator, 'clipboard', { value: { writeText: t => { copied = t; return Promise.resolve(); } }, configurable: true });
+    let blobs = 0;
+    win.URL.createObjectURL = () => { blobs++; return 'blob:share'; };
+    win.URL.revokeObjectURL = () => {};
+    const buf = await buildBackup(SQL, [
+      { id: 1, title: 'Faith', content: 'Hope and trust', tags: ['Bible study'], hl: { color: 2, blockType: 2, identifier: 5, start: 0, end: 4 } },
+      { id: 2, title: 'Love', content: 'Patience and kindness', tags: ['Bible study', 'Convention'] },
+      { id: 3, title: 'Peace', content: 'Calm in the storm' },
+    ]);
+    win.__shLoadBackup({ name: 'cel.jwlibrary', arrayBuffer: async () => buf });
+    async function until(p, l, ms = 8000) { const s = Date.now(); while (Date.now() - s < ms) { try { if (p()) return true; } catch (_) {} await wait(40); } fail('timeout: ' + l); return false; }
+    await until(() => doc.querySelectorAll('.sh-list .sh-item').length === 3, 'note list');
+    doc.getElementById('sh-all').click();
+    await until(() => doc.getElementById('sh-create') && !doc.getElementById('sh-create').disabled, 'create enabled');
+    doc.getElementById('sh-create').click();
+    await until(() => doc.getElementById('sh-dl'), 'share result');
+
+    if (!doc.getElementById('sh-cel')) ok('no celebration before the file is downloaded');
+    else fail('celebration shown before download');
+
+    doc.getElementById('sh-dl').click();
+    await until(() => doc.getElementById('sh-cel'), 'celebration overlay');
+    const ov = doc.getElementById('sh-cel');
+    ok('clicking Download opens the celebration overlay');
+    if (blobs >= 1) ok('the file itself still downloads'); else fail('download blob never created');
+
+    const stats = [...ov.querySelectorAll('.sh-cel-stat strong')].map(s => s.textContent);
+    if (stats.join(',') === '3,1,2') ok('celebration counts notes / highlighted / tags (3, 1, 2)');
+    else fail('celebration stats wrong: ' + stats.join(','));
+
+    const steps = ov.querySelectorAll('.sh-cel-next .sh-step');
+    if (steps.length === 3) ok('celebration explains the three steps the recipient takes');
+    else fail('recipient steps wrong: ' + steps.length);
+    if (/https?:\/\//.test(steps[0] ? steps[0].textContent : '')) ok('step 1 names the URL to open');
+    else fail('receive URL missing from step 1: ' + (steps[0] && steps[0].textContent));
+
+    const msgBtn = doc.getElementById('sh-cel-msg');
+    msgBtn.click();
+    await until(() => copied !== null, 'message copied');
+    if (/\b3\b/.test(copied) && /https?:\/\//.test(copied)) ok('“copy a message” puts the count and the link on the clipboard');
+    else fail('copied message wrong: ' + String(copied).slice(0, 90));
+    await until(() => /copied/i.test(msgBtn.textContent), 'copy feedback');
+    ok('the copy button confirms it copied');
+
+    const before = blobs;
+    doc.getElementById('sh-cel-dl').click();
+    await until(() => blobs > before, 're-download');
+    ok('“Download again” re-downloads the same file');
+
+    doc.getElementById('sh-cel-more').click();
+    await until(() => !doc.getElementById('sh-cel'), 'overlay closed');
+    if (doc.querySelectorAll('.sh-list .sh-item').length === 3) ok('“Share other notes” closes the overlay and returns to the picker');
+    else fail('did not return to the note picker');
+    if (!doc.body.classList.contains('sh-noscroll')) ok('page scrolling restored on close');
+    else fail('sh-noscroll left on the body');
+
+    // Escape also closes it
+    doc.getElementById('sh-create').click();
+    await until(() => doc.getElementById('sh-dl'), 'share result again');
+    doc.getElementById('sh-dl').click();
+    await until(() => doc.getElementById('sh-cel'), 'celebration again');
+    doc.dispatchEvent(new win.KeyboardEvent('keydown', { key: 'Escape' }));
+    await until(() => !doc.getElementById('sh-cel'), 'escape closes');
+    ok('Escape closes the celebration');
+    dom.window.close();
+  }
+
+  section('Celebration copy exists in every language');
+  {
+    const html = fs.readFileSync(SHARE_PATH, 'utf8');
+    const LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl',
+      'zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl','sw'];
+    const CEL_KEYS = ['cel_title','cel_sub','cel_stat_notes','cel_stat_hl','cel_stat_tags','cel_next',
+      'cel_s1','cel_s2','cel_s3','cel_msg','cel_msg_body','cel_send','cel_again','cel_more','cel_close'];
+    // the page's I18N object: <lang key>:{ ... } — brace-match so compact blocks are seen too
+    const start = html.indexOf('var I18N=');
+    let missing = [];
+    for (const lang of LANGS) {
+      const key = /^[a-z]+$/.test(lang) ? '\\b' + lang + ':' : '"' + lang + '":';
+      const m = html.slice(start).match(new RegExp(key + '\\{'));
+      if (!m) { missing.push(lang + ' (absent)'); continue; }
+      let i = start + m.index + m[0].length - 1, depth = 0, end = i;
+      for (; i < html.length; i++) {
+        if (html[i] === '{') depth++;
+        else if (html[i] === '}') { depth--; if (depth === 0) { end = i; break; } }
+      }
+      const block = html.slice(start + m.index, end);
+      const miss = CEL_KEYS.filter(k => !new RegExp('[,{\\s]' + k + ':').test(block));
+      if (miss.length) missing.push(lang + ': ' + miss.join(','));
+    }
+    if (!missing.length) ok('all ' + LANGS.length + ' languages carry the ' + CEL_KEYS.length + ' celebration keys');
+    else fail('celebration keys missing — ' + missing.join(' | '));
+  }
+
   console.log('\n== SUMMARY ==');
   if (failures) { console.log('\nFAIL: ' + failures + ' check(s) failed.'); process.exit(1); }
   console.log('\nAll Share-page checks passed.');

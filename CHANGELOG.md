@@ -4,6 +4,32 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.40.0] — 2026-08-18
+
+### Added: a finish line for sharing notes
+
+Picking the notes to send — by tag, by search, or by hand — ended with a
+silent download. The file landed in Downloads, the page did not change, and
+there was nothing to tell you it had worked or what to do with the file.
+
+Clicking **Download file** on the Share page now opens a confirmation screen:
+
+- what you just packed — how many notes, how many carry highlights, how many
+  tags they span
+- what the other person does next, in three steps, with the exact link they
+  need to open
+- **Copy a message to send with it** — puts a ready-made note on your
+  clipboard (how many notes, the link, and the reassurance that nothing of
+  theirs gets replaced) to paste into the email or chat you send the file in
+- **Send the file…** on phones that support it, handing the file straight to
+  the share sheet
+- **Download again** if the file went missing, and **Share other notes** to go
+  back to the picker with your selection intact
+
+Translated into all 26 languages.
+
+---
+
 ## [3.39.0] — 2026-08-18
 
 ### Fixed: the English landing page still served the old pitch
