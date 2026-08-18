@@ -1114,6 +1114,7 @@ from guides_ko import GUIDES_KO  # noqa: E402
 from guides_tl import GUIDES_TL  # noqa: E402
 from guides_sv import GUIDES_SV  # noqa: E402
 from guides_ceb import GUIDES_CEB  # noqa: E402
+from guides_sw import GUIDES_SW  # noqa: E402
 
 GUIDE_TEXT = {
     "ja": GUIDES_JA,
@@ -1140,4 +1141,5 @@ GUIDE_TEXT = {
     "id": GUIDES_ID,
     "ro": GUIDES_RO,
     "nl": GUIDES_NL,
+    "sw": GUIDES_SW,
 }

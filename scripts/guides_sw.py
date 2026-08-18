@@ -394,4 +394,731 @@ GUIDES_SW = {
    ("Je, maendeleo yangu ya kusoma ni ya faragha?", "Ndiyo. Maendeleo hukaa ndani ya kivinjari chako kwenye kifaa chako — hakuna akaunti wala kinachopakiwa."),
   ],
  },
+
+ "open-jwlibrary-file": {
+  "title": "Faili la .jwlibrary ni nini na unalifunguaje?",
+  "h1": "Faili la .jwlibrary ni nini — na jinsi ya kulifungua kwenye kifaa chochote",
+  "description": "Faili la .jwlibrary ni nakala yako rudufu ya JW Library: faili moja lenye kila dokezo, kiangazio, alamisho na lebo. Hiki hapa ndicho kilichomo na jinsi ya kulifungua na kulisoma.",
+  "intro": [
+   "Faili la .jwlibrary linaonekana kama halieleweki, kumbe si hivyo. Ni kasha la kawaida la ZIP linalofunika hifadhidata ya kawaida ya SQLite, jambo linalomaanisha unaweza kusoma nakala yako rudufu mwenyewe — kuona hasa madokezo, viangazio na alamisho yaliyomo — bila JW Library na bila kusakinisha chochote kabisa.",
+   "Unapotengeneza nakala rudufu ya JW Library unapata faili linaloishia kwa .jwlibrary. Ni kifurushi kimoja kinachobebeka chenye kila kitu kutoka funzo lako la kibinafsi — madokezo, viangazio, alamisho, lebo na orodha za kucheza — ndani ya hifadhidata iliyobana. Si hati unayoifungua katika Word au kisomaji cha PDF; imeundwa ili kurejeshwa ndani ya JW Library.",
+   "Lakini huhitaji kuirejesha ili tu kuangalia ndani yake. JW Sync hufungua faili la .jwlibrary moja kwa moja ndani ya kivinjari chako ili uweze kusoma, kutafuta na kuhariri maudhui yake bila kugusa simu yako.",
+  ],
+  "steps": [
+   ("Pata faili la .jwlibrary", "Hutengenezwa ndani ya JW Library: Funzo la Kibinafsi → menyu ya vitone vitatu → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu. Hilo ndilo faili tunalolizungumzia."),
+   ("Lifungue katika JW Sync", "Nenda jwsync.org kisha upakie faili kwenye Kichunguzi cha Funzo. Hufunguka papo hapo, ndani ya kifaa chako — hakuna kinachopakiwa."),
+   ("Lisome na ulifanyie kazi", "Vinjari madokezo, viangazio na alamisho; tafuta katika kila kitu; hariri, weka lebo upya au hamisha. Ukimaliza unaweza kurejesha faili (au nakala iliyohaririwa) ndani ya JW Library."),
+  ],
+  "sections": [
+   ("Ni nini hasa kilicho ndani ya faili", "Kiufundi faili la .jwlibrary ni hifadhidata ya SQLite iliyobanwa pamoja na manifest. Ndiyo maana kulibadilisha jina kuwa .zip wakati mwingine hutokea kwa bahati mbaya njiani — na ndiyo maana kulibadilisha tena kuwa .jwlibrary hurekebisha. Huhitaji kamwe kujua yoyote kati ya hayo ili kulitumia, lakini yanaeleza kwa nini faili ni dogo, linajitosheleza na ni lilelile kwenye Android, iPhone, iPad na Windows."),
+   ("Kulifungua kwenye kompyuta", "Ukurasa uleule wa jwsync.org hufanya kazi kwenye kivinjari cha kompyuta mpakato au ya mezani — jambo linalofaa kusoma miaka ya madokezo kwenye skrini kubwa, au kufanya usafishaji wa wingi ambao ungechosha kwenye simu. Hakuna cha kusakinisha."),
+   ("Faili ni nini hasa", "Faili la .jwlibrary ni kasha la ZIP lenye kiendelezi tofauti. Ndani yake mna userData.db — hifadhidata ya SQLite yenye madokezo, viangazio, alamisho na lebo zako — na manifest.json, faili dogo linaloeleza nakala rudufu, ikiwa ni pamoja na hash ya hifadhidata ambayo JW Library hutumia kuthibitisha kuwa faili halijabadilishwa. Hakuna chochote kwake ambacho ni cha kumiliki au kilichofichwa; ni kasha la kawaida linalofunika hifadhidata ya kawaida."),
+   ("Kulifungua bila JW Library", "Huhitaji programu, wala programu-tumizi yoyote, ili kusoma nakala yako rudufu mwenyewe. Kufungua faili kwenye kivinjari chako huonyesha kila dokezo, kiangazio na alamisho lililomo, pamoja na utafutaji na kuchuja, nalo faili haliondoki kwenye kifaa chako kamwe — husomwa hapo hapo badala ya kupakiwa. Hii ndiyo njia ya haraka zaidi ya kuthibitisha kuwa nakala rudufu ina kile unachodhani kabla ya kuweka upya, kuuza, au kurejesha kwenye simu mpya."),
+   ("Kuangalia ndani kwa mkono", "Ikiwa una hamu, nakili faili, ubadilishe jina la nakala kuwa .zip kisha uifungue kwa kifaa chochote cha makasha. Utaona userData.db na manifest.json. Kufungua hifadhidata kunahitaji kisomaji cha SQLite, na majedwali yamepewa majina kulingana na yaliyomo — Note, UserMark, Bookmark, Tag. Fanya kazi kwenye nakala kila mara: kuhariri hifadhidata kwa mkono bila kusasisha hash ya manifest hutoa faili ambalo JW Library itakataa kulirejesha."),
+   ("Kuhariri kwa usalama", "Madokezo yanaweza kusahihishwa, kuwekewa lebo upya, kubadilishwa rangi au kufutwa nje ya programu, na matokeo kuhamishwa kama faili jipya la .jwlibrary unalorejesha kama kawaida. Kanuni inayofanya hili liwe salama ni kuweka la awali: hariri nakala, rejesha faili lililohaririwa, na ikiwa chochote si kama ulivyotarajia, la awali lisiloguswa bado lipo la kurudia."),
+   ("Kusoma nakala rudufu kwenye simu", "Huhitaji kompyuta. Kufungua faili kwenye kivinjari cha simu hufanya kazi vilevile, jambo linalofaa wakati nakala rudufu tayari iko kwenye simu nawe unataka kuthibitisha yaliyomo kabla ya kurejesha au kabla ya kufuta kifaa. Faili husomwa hapo hapo, kwa hiyo hili hufanya kazi bila muunganisho zaidi ya kupakia ukurasa wenyewe."),
+   ("Kwa nini hash ya manifest inahesabika", "manifest.json huhifadhi hash ya userData.db. JW Library huitumia kuthibitisha kuwa hifadhidata haijabadilishwa tangu nakala rudufu iandikwe, kwa hiyo faili ambalo hifadhidata yake imehaririwa bila hash kukokotolewa upya hukataliwa wakati wa kurejesha. Hii ndiyo sababu ya kawaida zaidi ya nakala rudufu iliyohaririwa kwa mkono kuacha kufanya kazi, na sababu ya kuhariri kupitia kifaa kinachoandika upya manifest kuwa salama zaidi kuliko kuhariri hifadhidata moja kwa moja."),
+   ("Hili linafaa kwa nini", "Kuweza kusoma nakala rudufu hubadilisha thamani ya nakala rudufu. Unaweza kuthibitisha kuwa faili lina kile unachodhani kabla ya kufuta simu, kuangalia kama faili la zamani linafaa kurejeshwa, kupata dokezo unalojua uliliandika bila kupekua ndani ya programu, au kuokoa maandishi kutoka faili ambalo JW Library haikubali. Hakuna kati ya hayo kinachohitaji kumkabidhi mtu yeyote faili — husomwa ndani ya kifaa chako mwenyewe."),
+  ],
+  "faq": [
+   ("Je, ninaweza kufungua faili la .jwlibrary katika Excel au Notepad?", "Si kwa manufaa — ni hifadhidata, si lahajedwali wala faili la maandishi. Lifungue katika JW Sync ili kulisoma, au uhamishe madokezo yako kwenda Markdown au maandishi kutoka Kichunguzi cha Funzo."),
+   ("Je, ni salama kufungua nakala yangu rudufu kwenye kivinjari?", "Ndiyo. JW Sync husoma faili hapo hapo ndani ya kichupo chako cha kivinjari; hakuna kinachotumwa kwenye seva, nalo faili lako la awali halibadilishwi kamwe."),
+   ("Je, ninaweza tu kulibadilisha jina kuwa .zip?", "Ndiyo, kwenye nakala. Kubadilisha jina hakubadilishi maudhui, nako huruhusu kifaa chochote cha makasha kikuonyeshe kilichomo."),
+   ("Je, kufungua faili kutalibadilisha?", "Hapana. Kusoma nakala rudufu — kwenye kivinjari au kifaa cha makasha — huliacha bila kubadilika hata baiti moja. Ni kuhifadhi au kuhamisha tu ndiko hutoa faili jipya."),
+   ("Je, ninahitaji kuwa mtandaoni?", "Ni kupakia ukurasa tu. Faili lenyewe husomwa ndani ya kifaa chako, halipakiwi, kwa hiyo madokezo yako hayasafiri kamwe kwenye mtandao."),
+   ("Je, ninaweza kufungua nakala rudufu ambayo mtu mwingine amenitumia?", "Ndiyo, muundo haufungamani na kifaa wala akaunti. Kama unapaswa kuirejesha ni swali jingine, kwa kuwa kurejesha hubadilisha maktaba yako mwenyewe."),
+   ("Je, ninahitaji kusakinisha chochote ili kuangalia ndani?", "Hapana. Kivinjari kinatosha kusoma madokezo; ni ukaguzi wa mkono wa hifadhidata yenyewe tu ndio unaohitaji kisomaji cha SQLite."),
+  ],
+ },
+
+ "jw-library-windows-pc": {
+  "title": "Tengeneza nakala rudufu na uunganishe JW Library kwenye kompyuta ya Windows",
+  "h1": "Kutumia nakala rudufu za JW Library kwenye kompyuta ya Windows",
+  "description": "Jinsi ya kutengeneza nakala rudufu ya JW Library kwenye Windows, na jinsi ya kuunganisha nakala ya kompyuta na ile ya simu na kompyuta kibao ili madokezo, viangazio na alamisho vibaki pamoja kwenye kila kifaa.",
+  "intro": [
+   "JW Library hufanya kazi kwenye Windows vilevile kama kwenye simu na kompyuta kibao, nayo hutengeneza faili lilelile la nakala rudufu la .jwlibrary. Hiyo inamaanisha kompyuta yako inaweza kuwa sehemu ya maktaba ileile ya funzo kama simu yako — mradi tu uunganishe nakala rudufu badala ya kurejesha moja juu ya nyingine.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu kwenye Windows", "Katika programu ya JW Library ya Windows, fungua menyu, nenda Nakala Rudufu na Kurejesha, kisha utengeneze nakala rudufu. Hifadhi faili la .jwlibrary mahali rahisi kupata."),
+   ("Tengeneza nakala rudufu ya simu na kompyuta kibao pia", "Kwenye kila kifaa: Funzo la Kibinafsi → menyu ya vitone vitatu → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu."),
+   ("Ziunganishe kwenye jwsync.org", "Fungua jwsync.org kwenye kivinjari chochote kwenye kompyuta kisha upakie mafaili yote ya nakala rudufu. JW Sync huunganisha madokezo, viangazio, alamisho na lebo kutoka kila kifaa kuwa faili moja lililounganishwa la .jwlibrary — hapo hapo, hakuna kinachopakiwa."),
+   ("Rejesha faili lililounganishwa kila mahali", "Rejesha faili lililounganishwa ndani ya programu ya Windows na kwenye kila kifaa cha mkononi. Sasa kompyuta, simu na kompyuta kibao vyote vina maktaba kamili."),
+  ],
+  "sections": [
+   ("Kwa nini kompyuta ndipo mahali rahisi zaidi pa kufanya hivi", "Kivinjari cha kompyuta hufanya kupakia mafaili kadhaa, kukagua hakikisho la muunganisho na kuhifadhi matokeo kuwe haraka zaidi kuliko kugonga kwenye simu. Watu wengi huweka rutuba yao kuu ya kuunganisha kwenye kompyuta kisha hurejesha tu faili lililounganishwa kwenye vifaa vyao vya mkononi."),
+  ],
+  "faq": [
+   ("Je, nakala rudufu ya Windows hufanya kazi pamoja na za iPhone na Android?", "Ndiyo — muundo wa .jwlibrary ni uleule kwenye kila mfumo, kwa hiyo nakala rudufu ya Windows huunganishwa bila tatizo na nakala za simu na kompyuta kibao."),
+   ("Je, ninahitaji kusakinisha chochote kwenye kompyuta?", "Hapana. JW Sync ni ukurasa wa wavuti; hufanya kazi ndani ya Edge, Chrome au Firefox bila cha kusakinisha."),
+  ],
+ },
+
+ "recover-jw-library-notes-lost-phone": {
+  "title": "Jinsi ya kuokoa madokezo ya JW Library baada ya simu kupotea au kuharibika",
+  "h1": "Kuokoa madokezo ya JW Library kutoka simu iliyopotea, iliyoharibika au iliyowekwa upya",
+  "description": "Umepoteza simu yako au imewekwa upya ikiwa na madokezo ya JW Library? Unachoweza kuokoa hutegemea nakala zako rudufu. Hivi ndivyo hasa unavyoyarudisha madokezo yako — na cha kufanya wakati ujao.",
+  "intro": [
+   "Jibu la kweli kwanza, kwa sababu hukuokoa kusoma zaidi. Ikiwa nakala rudufu ya .jwlibrary ipo mahali popote nje ya kifaa kilichopotea, kila kitu kilichomo hurudi kupitia Kurejesha ya JW Library yenyewe, wala huhitaji tovuti hii kwa sehemu hiyo. Ikiwa hakuna nakala rudufu ya aina yoyote, data ya funzo la kibinafsi haiwezi kuokolewa hata kidogo — hukaa kwenye kifaa pekee, wala hakuna kifaa kinachoweza kubadilisha hilo.",
+   "Pale ukurasa huu unaposaidia kikweli ni kesi ya katikati, ambayo ni ya kawaida zaidi kuliko zote mbili: una nakala rudufu, lakini si hadithi nzima. Inaweza kuwa ya miezi kadhaa iliyopita, au unaweza kuwa tayari umekuwa ukijifunza kwenye simu ya kubadilisha — kwa hiyo kuirejesha tu kungebadilishana seti moja ya madokezo kwa nyingine badala ya kukupa kila kitu.",
+   "Kuziunganisha ndiyo sehemu ambayo JW Library haiwezi kufanya, nayo ndiyo sehemu nyingine ya ukurasa huu inahusu. Lakini kwanza, utafutaji: watu mara kwa mara huwa na nakala rudufu nyingi kuliko wanavyokumbuka kutengeneza.",
+  ],
+  "steps": [
+   ("Tafuta kila mahali ambapo nakala rudufu inaweza kuwa", "Angalia barua pepe yako (tafuta “jwlibrary” au “backup”), Google Drive, iCloud Drive, OneDrive, Dropbox na folda ya vipakuliwa ya kompyuta yako. Nakala rudufu ni mafaili madogo ambayo ni rahisi kusahau kuwa uliyahifadhi."),
+   ("Angalia vifaa vyako vingine", "Ikiwa uliwahi kutumia JW Library kwenye kompyuta kibao au kompyuta, kina data yake ya funzo — tengeneza nakala rudufu kutoka humo sasa hivi ili kuhifadhi chochote kilichomo."),
+   ("Rejesha unachopata kwenye simu mpya", "Sakinisha JW Library kwenye kifaa kipya, kisha Nakala Rudufu na Kurejesha → Rejesha, kisha upakie faili la .jwlibrary. Madokezo, viangazio na alamisho zako hurudi."),
+   ("Unganisha ukipata nakala rudufu zaidi ya moja", "Vifaa au tarehe tofauti vinaweza kila kimoja kuwa na madokezo ya kipekee. Usichague moja tu — zipakie zote kwenye jwsync.org, uziunganishe kuwa faili moja kamili, kisha urejeshe hilo. Hakuna kinachoachwa nyuma."),
+  ],
+  "sections": [
+   ("Ikiwa hakuna nakala rudufu popote", "Kuwa mkweli kwako mwenyewe mapema: ikiwa nakala pekee ya madokezo yako ilikaa kwenye simu iliyopotea nawe hukuwahi kuhamisha nakala rudufu, JW Library haihifadhi nakala ya wingu ya kurejesha kutoka. Hilo huumiza — na ndiyo hasa sababu zoea lililo hapa chini linahesabika sana."),
+   ("Usiwe hapa tena kamwe", "Weka ukumbusho wa nakala rudufu wa kila mwezi kisha uhifadhi kila faili la .jwlibrary nje ya simu (kujitumia kwa barua pepe kunatosha). JW Sync inaweza hata kukukumbusha na kuunganisha vifaa vyako kwa ratiba. Faili linalokaa ndani ya kikasha chako hunusurika simu yoyote."),
+   ("Ambapo nakala rudufu inaweza kuwa tayari ipo", "Kabla ya kuhitimisha kuwa hakuna, angalia kila mahali ambapo faili lingeweza kuhifadhiwa: folda za Downloads na Documents za kompyuta yoyote uliyowahi kuunganisha simu nayo, barua pepe zako zilizotumwa, programu za gumzo ambazo huenda ulituma faili kupitia, na kila akaunti ya hifadhi ya wingu unayotumia. Watu mara nyingi walitengeneza nakala rudufu mara moja, miezi iliyopita, kisha wakasahau — nayo nakala rudufu ya miezi kadhaa bado ina sehemu kubwa mno ya maktaba ya funzo."),
+   ("Kurejesha kwenye simu au mfumo tofauti", "Kifaa cha kubadilisha si lazima kilingane na kilichopotea. Nakala rudufu kutoka simu ya Android hurejeshwa kwenye iPhone na kinyume chake, kwa sababu muundo ni uleule kwenye Android, iOS, iPadOS na Windows. Sakinisha JW Library kwenye kifaa kipya, kisasishe hadi toleo la sasa, kisha urejeshe kupitia Funzo la Kibinafsi → Nakala Rudufu na Kurejesha."),
+   ("Ikiwa unachokuwa nacho ni nakala rudufu ya zamani au isiyokamilika", "Irejeshe hata hivyo. Kuokoa sehemu kubwa ya madokezo yako si tuzo ya faraja — ndiyo matokeo. Ukipata baadaye nakala rudufu ya pili, tofauti, hizo mbili zinaweza kuunganishwa kuwa faili moja lenye kila kitu kutoka zote mbili, kwa hiyo kurejesha ya zamani sasa hakukuzuii kuiongezea baadaye."),
+   ("Kisichoweza kuokolewa", "Ikiwa hakuna nakala rudufu ya aina yoyote, data ya funzo la kibinafsi haiwezi kupatikana. Huhifadhiwa ndani ya hifadhi ya ndani ya programu kwenye kifaa pekee, wala JW Library au nakala rudufu ya wingu ya kiwango cha simu haiihifadhi kwa uhakika. Hili linafaa kujulikana wazi, kwa sababu ndiyo sababu rutuba iliyo kwenye tovuti hii ipo kabisa."),
+   ("Angalia kabla kifaa hakijafutwa kwa mbali", "Ikiwa simu imepotea badala ya kuharibiwa, nawe unafikiria kuifuta kwa mbali, tafuta nakala rudufu zilizopo kwanza — kufuta hakutenduliki nako huondoa nafasi ya mwisho ya yeyote kutengeneza moja. Ikiwa kifaa kimepotea tu nacho bado kinapatikana, kutengeneza nakala rudufu kwa mbali hakuwezekani, lakini data hubaki zima mradi simu haijafutwa wala kuwekwa upya."),
+   ("Kuhakikisha hili haliwezi kutokea mara mbili", "Sababu ya simu iliyopotea kuwagharimu watu miaka ya funzo ni kwamba nakala pekee ilikuwa kwenye simu. Mara utakapokwisha kurejesha kwenye kifaa cha kubadilisha, weka nakala rudufu mahali fulani nje ya kifaa siku ileile, kisha urudie kwa mdundo utakaoushika kikweli. Mafaili ni madogo vya kutosha kiasi kwamba kuyaweka yote bila kikomo hakugharimu chochote."),
+   ("Ikiwa kikweli hakuna nakala rudufu", "Basi jibu la kweli ni kwamba madokezo hayawezi kupatikana, nako ni bora kusikia hivyo kuliko kuendelea kutafuta. Unachoweza kufanya ni kuifanya hasara hii iwe ya mwisho: sakinisha JW Library kwenye kifaa cha kubadilisha, na kabla hujajenga upya chochote cha kupotea, tengeneza nakala rudufu kisha uiweke mahali fulani nje ya kifaa. Kuanzia hapo tukio lilelile halitakugharimu chochote."),
+  ],
+  "faq": [
+   ("Je, JW Sync inaweza kuokoa madokezo kutoka simu nisiyokuwa nayo tena?", "Hakuna kifaa kinachoweza — uokoaji hutegemea faili la nakala rudufu kuwepo mahali fulani. Kazi ya JW Sync ni kusoma, kurekebisha na kuunganisha nakala rudufu ulizo nazo."),
+   ("Nakala yangu rudufu ni ya zamani — je, bado inafaa kurejeshwa?", "Kabisa. Nakala rudufu ya zamani yenye sehemu kubwa ya madokezo yako ni bora kuliko kuanza kutoka bila kitu, nawe unaweza kuiunganisha na chochote kipya zaidi utakachopata baadaye."),
+   ("Je, JW Library huhifadhi nakala ya wingu ya madokezo yangu?", "Hapana. Data ya funzo la kibinafsi hubaki kwenye kifaa isipokuwa utengeneze faili la nakala rudufu mwenyewe."),
+   ("Je, madokezo yanaweza kuokolewa kutoka simu yenye skrini iliyovunjika?", "Wakati mwingine — ikiwa simu bado inawaka na inaweza kudhibitiwa, au fundi anaweza kuendesha skrini, JW Library bado inaweza kutengeneza nakala rudufu. Data ni zima mradi hifadhi ni zima."),
+   ("Je, nakala rudufu ya zamani bado itarejeshwa ndani ya programu ya sasa?", "Ndiyo. JW Library husoma miundo ya zamani ya nakala rudufu. Sasisha programu kwanza kisha urejeshe ndani ya toleo la sasa."),
+   ("Nimepata nakala rudufu mbili za zamani — nitumie ipi?", "Hakuna hata moja peke yake. Ziunganishe: matokeo yana kila kitu kutoka zote mbili, ikiwa ni pamoja na chochote kilichokuwa ndani ya faili la zamani ambacho kilikuwa kimefutwa kufikia wakati wa jipya."),
+   ("Je, ninaweza kuangalia kilichomo ndani ya nakala rudufu kabla ya kuirejesha?", "Ndiyo. Fungua faili kwenye kivinjari chako kisha uvinjari madokezo, viangazio na alamisho yaliyomo kwanza, ili ujue unachorejesha."),
+  ],
+ },
+
+ "handle-merge-conflicts": {
+  "title": "Dokezo lilelile limehaririwa kwenye vifaa viwili? Kushughulikia migongano ya muunganisho",
+  "h1": "Kushughulikia migongano ya muunganisho: dokezo lilelile lililohaririwa kwenye vifaa viwili",
+  "description": "Unapohariri dokezo lilelile la JW Library kwa njia tofauti kwenye vifaa viwili, muunganisho lazima uchague mshindi. Kikagua migongano huonyesha matoleo yote mawili kando kwa kando ili wewe uamue — hakuna kinachopotea.",
+  "intro": [
+   "Sehemu kubwa ya kuunganisha hufanyika bila juhudi — madokezo yaliyo ya kipekee kwa kila kifaa huungana tu. Kesi pekee inayohitaji uamuzi ni mgongano halisi: dokezo lilelile, lililohaririwa kwa njia tofauti kwenye vifaa viwili, kiasi kwamba nakala hizo mbili hazikubaliani kuhusu linalopaswa kusema. JW Sync haibashiri kimyakimya kamwe; hukukabidhi wewe uamuzi.",
+  ],
+  "steps": [
+   ("Pakia nakala rudufu zote mbili", "Kwenye jwsync.org, pakia mafaili ya .jwlibrary kutoka vifaa vyote viwili. JW Sync huvilinganisha inapounganisha."),
+   ("Fungua kikagua migongano", "Ikiwa madokezo yoyote yanagongana, kikagua huyaorodhesha. Kila kisichogongana tayari kimeunganishwa — hatua hii ni kwa migongano halisi tu."),
+   ("Linganisha kando kwa kando", "Kila mgongano huonyesha matoleo yote mawili pamoja na tofauti ya kila neno inayoonyesha hasa kinachotofautiana. “Pendekeza bora” kinaweza kukuchagulia toleo lililo kamili zaidi, au wewe uchague la kuhifadhi — kwa kila dokezo."),
+   ("Maliza kisha urejeshe", "Mara kila mgongano unaposuluhishwa, pakua faili lililounganishwa kisha ulirejeshe. Sasa vifaa vyote viwili vinakubaliana, vikiwa na toleo ulilochagua la kila dokezo."),
+  ],
+  "sections": [
+   ("Kwa nini hii ni bora kuliko kuhifadhi jipya zaidi tu", "“Jipya zaidi hushinda” hufuta kimyakimya hariri ambazo huenda ulizitaka. Labda toleo la zamani lilikuwa na aya uliyoiondoa kwa bahati mbaya kwenye kifaa kingine. Kuona yote mawili, neno kwa neno, kunamaanisha hupotezi maandishi bila kujua — na hilo ndilo lengo lote la kuunganisha badala ya kuandika juu."),
+   ("Jinsi migongano inavyotokea mwanzoni", "Kwa kawaida kutokana na kuhariri bila intaneti kwenye vifaa viwili kati ya muunganisho mmoja na mwingine, au kurejesha nakala rudufu ya zamani kisha kuiongezea. Kuunganisha kwa ratiba ya kawaida huweka idadi ya migongano ikiwa ndogo na tofauti zikiwa bado safi akilini mwako."),
+  ],
+  "faq": [
+   ("Je, itanibidi kukagua mamia ya migongano?", "Ni nadra. Ni madokezo yaliyohaririwa kwa njia tofauti pande zote mbili tu ndiyo yanayogongana; madokezo mapya, na yale yaliyobadilishwa kwenye kifaa kimoja tu, huungana yenyewe. Miunganisho mingi huwa na migongano michache au haina kabisa."),
+   ("Je, ninaweza kubadili mawazo baada ya kuchagua?", "Ndiyo — hakuna kinachoandikwa kwenye kifaa hadi urejeshe faili lililounganishwa, nazo nakala zako rudufu za awali hazibadilishwi kamwe, kwa hiyo unaweza kurudia muunganisho."),
+  ],
+ },
+
+ "import-markdown-notes-jw-library": {
+  "title": "Jinsi ya kuleta madokezo ya Markdown ndani ya JW Library",
+  "h1": "Jinsi ya kuleta madokezo ya Markdown ndani ya JW Library",
+  "description": "Geuza mafaili ya .md kutoka Obsidian, Notion au kihariri chochote cha Markdown kuwa madokezo halisi ya JW Library, yaliyowekwa kwenye mstari sahihi — bila malipo, kwa faragha, ndani ya kivinjari chako.",
+  "intro": [
+   "JW Library haina njia ya kuingiza maandishi. Unaweza kuandika madokezo ndani ya programu, lakini dokezo lililoandikwa mahali pengine popote — ndani ya Obsidian, ndani ya Notion, ndani ya faili la maandishi sahili kwenye kompyuta yako — halina njia yoyote ya kuingia kwenye maktaba yako. Watu huyaandika upya, au hukata tamaa na kubaki na seti mbili za madokezo ya funzo ambazo hazikutani kamwe.",
+   "JW Sync huziba pengo hilo. Pakia nakala rudufu kwenye Kichunguzi cha Funzo, bonyeza Leta Markdown, nayo mafaili yako ya .md huwa madokezo halisi ndani yake: kichwa, tarehe na lebo vikiwa vizima, na — faili linaposema ni andiko lipi linalohusika — likiwa limeambatishwa kwenye mstari huo, sawasawa kama ungeliandika dokezo ndani ya programu ukiwa unalisoma.",
+   "Hufanya kazi pande zote mbili. Madokezo yaliyohamishwa kutoka tovuti hii hubeba kitabu, sura na mstari wake, kwa hiyo hurudi hasa mahali yalikotoka. Madokezo yaliyoandikwa mahali pengine kwa kawaida hayabebi chochote cha aina hiyo, kwa hiyo ukurasa huu unaeleza mstari mmoja au miwili inayoyaweka — na nini hutokea faili linapokosa mistari hiyo.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu katika JW Library", "Fungua JW Library, nenda Funzo la Kibinafsi, gonga menyu ya vitone vitatu, chagua Nakala Rudufu na Kurejesha, kisha Tengeneza nakala rudufu. Hiyo hukupa faili la .jwlibrary — maktaba ambayo madokezo yako yataongezwa ndani yake."),
+   ("Fungua Kichunguzi cha Funzo", "Nenda jwsync.org, fungua Kichunguzi cha Funzo, kisha upakie faili hilo la .jwlibrary. Kila kitu hufanyika ndani ya kivinjari chako; faili halipakiwi kamwe."),
+   ("Bonyeza Leta Markdown", "Kitufe kiko kando ya Hamisha Markdown. Chagua mafaili mengi ya .md upendavyo, au faili la .zip lenye hayo — ikiwa ni pamoja na .zip ambalo tovuti hii hutoa unapohamisha."),
+   ("Soma muhtasari kabla ya chochote kuandikwa", "Unaambiwa ni madokezo mangapi yatatua kwenye mstari, mangapi yataongezwa kama madokezo yasiyoambatishwa, na mangapi tayari yamo kwenye nakala yako rudufu nayo yatarukwa. Chochote ambacho tovuti ilibidi kukikisia huorodheshwa mstari mmoja kwa wakati, pamoja na kisanduku cha kuweka alama, ili wewe uamue badala ya kugundua baadaye."),
+   ("Hamisha kisha urejeshe", "Bonyeza Hamisha .jwlibrary, kisha urejeshe faili hilo katika JW Library kupitia Nakala Rudufu na Kurejesha → Rejesha. Madokezo yako uliyoleta sasa ni sehemu ya maktaba yako kwenye kifaa hicho."),
+  ],
+  "sections": [
+   ("Faili fupi zaidi linalofanya kazi", "Faili la Markdown halihitaji chochote kabisa ili kuletwa — faili lenye maandishi tu huwa dokezo, likichukua kichwa chake kutoka kichwa cha kwanza au, likikosa hicho, kutoka jina la faili. Kila kitu zaidi ya hapo ni kuhusu kuiambia tovuti dokezo linapohusika. Faili kamili huonekana hivi:\n\n---\ntitle: Kikombe alichoomba kuhusu\ntags: [funzo, gethsemane]\npublication: Matthew 26:39\n---\n\nSala yake inaonyesha utii, si kusitasita.\n\nKizuizi kilicho kati ya mistari miwili ya vistari huitwa front matter. Mistari iliyo chini yake ni dokezo lenyewe."),
+   ("Sehemu inazozisoma", "Ni vitu vitano tu vinavyosomwa, na kila kimoja kina tahajia kadhaa zinazokubalika ili usilazimike kukumbuka moja hasa. **title** (au name, heading) huwa kichwa cha dokezo. **tags** (au tag, keywords, categories, labels, topics) huwa lebo halisi za JW Library, zikitengenezwa kama hazipo bado. **date** (au created, modified) huweka tarehe ya dokezo; chochote chenye YYYY-MM-DD hueleweka. **publication** (au pub, reference, ref, scripture, citation, source, passage) ndipo unapoandika mstari. **book**, **chapter** na **verse** (au ch, v, vs, verses) hufanya kazi ileile katika sehemu tofauti. Sehemu nyingine yoyote unayoiweka kwa madhumuni yako mwenyewe — author, status, chochote kihariri chako huongeza — hupuuzwa badala ya kuchukuliwa kuwa hitilafu."),
+   ("Njia tatu za kuelekeza dokezo kwenye mstari", "Andika rejeleo kwenye mstari mmoja: `publication: Matthew 26:39`. Au ligawe: `book: Matthew`, `chapter: 26`, `verse: 39`. Au tumia zote mbili — ndivyo uhamishaji wa tovuti hii yenyewe hufanya, ili faili lisomeke vizuri kwa binadamu na lichanganuliwe hasa kwa mashine. Njia zote tatu hutoa matokeo yaleyale, kwa hiyo tumia ile inayolingana na kihariri unachoandikia."),
+   ("Rejeleo linaweza kuwa huru kiasi gani", "Majina ya vitabu hulinganishwa kwa ukarimu. Majina kamili hufanya kazi, vivyo hivyo vifupisho ambavyo watu huandika kihalisi: Matt, Matt., Mt, 1 Cor, 1Cor, I Corinthians, Second Timothy, Psalm pamoja na Psalms, Song of Songs pamoja na Song of Solomon. Kitenganishi kati ya sura na mstari kinaweza kuwa nukta mbili, nukta au herufi v — `John 3:16`, `John 3.16` na `1 Cor 13 v4` vyote husomwa vivyo hivyo. Nafasi si lazima popote, kwa hiyo `1Cor13:4` ni sawa.\n\nFront matter yenyewe ni huru vivyo hivyo. Funguo zinaweza kuandikwa kwa herufi kubwa. Nafasi baada ya nukta mbili inaweza kukosekana. Nafasi na tabu za ziada hupuuzwa, vivyo hivyo alama za nukuu kuzunguka thamani na maoni ya # yaliyo mwishoni. Miisho ya mstari ya Windows ni sawa. Unaweza hata kuacha vizuizi vya --- kabisa na kuanza faili moja kwa moja na sehemu, mradi tu mstari wa kwanza kabisa uwe mojawapo ya majina yanayotambulika — kanuni hiyo ipo ili dokezo linaloanza kwa sentensi ya kawaida yenye nukta mbili lisipoteze aya yake ya kwanza."),
+   ("Lebo, jinsi utakavyoziandika", "Zote hizi hutoa lebo zilezile mbili: `tags: [funzo, greek]`, `tags: funzo, greek`, `tags: funzo; greek`, `tags: #funzo #greek`, au orodha kwenye mistari yake chini ya `tags:` kila kipengele kikianza kwa kistari. Lebo zilizopo tayari kwenye maktaba yako hutumiwa tena badala ya kuongezwa mara mbili, kwa hiyo dokezo lililoletwa hujiunga na lebo ileile unayochujia tayari."),
+   ("Nini hutokea kitu kinapokuwa hakiko wazi", "Hakuna kisicho na uhakika kinachoamuliwa kwa niaba yako. Ikiwa jina la kitabu liko karibu na halisi lakini si sahihi kabisa — `Mathew`, `Ecclesiates` — dokezo haliwekwi kiotomatiki. Huonekana kwenye muhtasari kwenye mstari wake likisema tovuti ilielewa nini: “yamesomwa kama Matthew 26:39”, pamoja na kisanduku cha alama. Ondoa alama nalo huachwa nje; liache likiwa na alama nalo huenda pale mstari unaposema.\n\nIkiwa kitabu hakitambuliki kabisa, mstari husema hivyo nalo dokezo huongezwa kama dokezo lisiloambatishwa badala yake — kamwe halilazimishwi kwenye kisio. Kitabu chenye namba huweka namba yake, kwa hiyo `1 Jonh` linaweza tu kusahihishwa kuwa 1 John, kamwe si 2 John."),
+   ("Kile ambacho kwa makusudi haitafanya", "Mfululizo wa mistari huambatisha dokezo kwenye mstari wake wa kwanza: `Matthew 26:39-41` huweka dokezo kwenye mstari wa 39, kwa sababu dokezo la JW Library huambatana na sehemu moja ya maandishi badala ya eneo pana. Rejeleo lenye sura lakini bila mstari — `Matthew 26` — huambatisha dokezo kwenye sura hiyo. Faili linalotaja chapisho badala ya andiko — `The Watchtower—2023 No. 4` — huletwa kama dokezo la kawaida lisiloambatishwa bila swali lolote kuulizwa, kwa kuwa hicho ndicho uhamishaji wa tovuti hii yenyewe huandika kwa madokezo yaliyoandikwa ndani ya makala."),
+   ("Umbizo linalonusurika safari", "Aya, mikato ya mstari, **nene**, *italiki* na orodha za vitone huingia kama umbizo halisi ndani ya JW Library. Kichwa kilicho juu ya faili hutumika kama kichwa cha dokezo badala ya kurudiwa ndani yake. Chochote ambacho Markdown inaweza kueleza lakini madokezo ya JW Library hayawezi — majedwali, picha, viungo, vizuizi vya msimbo — hupunguzwa hadi maandishi yake, kwa hiyo hakuna kinachopotea kutoka maneno hata pale mpangilio usipoweza kubebwa."),
+   ("Madokezo huishia wapi hasa, na kwa nini hilo ni salama", "Ili kuambatisha dokezo kwenye mstari, JW Library inahitaji vitambulisho vya ndani vya sura hiyo ambavyo ni mahususi kwa maktaba yako. JW Sync haivibuni kamwe. Hutumia tena mahali ambapo nakala yako rudufu tayari inapo kwa sura hiyo, au hunakili vitambulisho hivyo kutoka mahali pengine pa andiko ndani ya faili lilelile. Ikiwa nakala rudufu haina madokezo wala viangazio vyovyote vya Biblia, hakuna cha kunakili kutoka, kwa hiyo madokezo huongezwa kama madokezo yasiyoambatishwa badala ya kuambatishwa kwenye kitu ambacho programu huenda isikitambue. Hilo ni chaguo la makusudi: dokezo linalotua kimyakimya mahali pasipofaa ni baya kuliko lile linalofika wazi bila kuambatishwa."),
+   ("Kuleta mafaili yaleyale mara mbili", "Dokezo huchukuliwa kuwa tayari lipo wakati kichwa chake, maandishi yake na mahali pake vyote vinalingana na kitu kilicho ndani ya nakala rudufu, kwa hiyo kuleta tena uhamishaji uleule hakuongezi chochote mara mbili. Muhtasari hukuambia mangapi yalirukwa kwa sababu hiyo kabla hujathibitisha. Kila kitu ambacho uletaji huongeza ni hatua moja ya Kutendua, nayo madokezo yaliyoletwa huwekewa lebo ya Yaliyoletwa ili uweze kuyapata, kuyachuja au kuyafuta kama kundi baadaye."),
+  ],
+  "faq": [
+   ("Je, lazima nitumie mistari ya ---?", "Hapana. Huifanya faili isiwe na utata, na kila kihariri cha Markdown huielewa, lakini unaweza pia kuanza faili moja kwa moja na sehemu — `title: …` kwenye mstari wa kwanza — au kuacha front matter kabisa na kuacha dokezo lichukue kichwa chake kutoka kichwa cha kwanza."),
+   ("Itakuwaje nikikosea tahajia ya jina la kitabu?", "Tovuti kwa kawaida itaelewa ulichokusudia, lakini haitatenda kutokana na hilo peke yake. Dokezo huonekana kwenye muhtasari likisema lilivyosomwa, pamoja na kisanduku cha alama, ili uthibitishe kabla ya chochote kuandikwa."),
+   ("Je, ninaweza kuleta folda nzima kutoka Obsidian?", "Chagua mafaili mengi ya .md upendavyo kwa mpigo mmoja, au ubane folda kisha uchague .zip. Mafaili yaliyo ndani ya kasha husomwa vilevile kama yaliyo huru."),
+   ("Je, kuleta kutaandika juu ya madokezo niliyo nayo tayari?", "Hapana. Kuleta huongeza tu. Madokezo, viangazio, alamisho na lebo zako zilizopo hazitaguswa, nalo faili ulilopakia halibadilishwi kamwe — unapakua .jwlibrary jipya mwishoni."),
+   ("Je, madokezo yangu hupakiwa popote?", "Hapana. Jambo lote hufanyika ndani ya kivinjari chako, kama kila kitu kingine kwenye tovuti hii. Nakala yako rudufu na mafaili yako ya Markdown hayaondoki kwenye kifaa chako kamwe."),
+   ("Ni lugha zipi ninazoweza kuandika rejeleo kwazo?", "Majina ya vitabu hutambuliwa kwa Kiingereza kwa sasa, ambacho pia ndicho uhamishaji huandika. Ikiwa unaandika madokezo yako kwa lugha nyingine, tumia sehemu za `book`, `chapter` na `verse` pamoja na jina la kitabu la Kiingereza, au ulete tu madokezo bila kuambatishwa kisha uyaweke kwa mkono baadaye."),
+   ("Je, ninaweza kuyatoa madokezo yangu tena?", "Ndiyo — Hamisha Markdown kwenye skrini ileile huandika kila dokezo kwenye faili la .md lenye sehemu zilezile, kwa hiyo madokezo yanaweza kusafiri kutoka JW Library na kurudi bila kupoteza mahali yanapohusika."),
+  ],
+ },
+
+ "write-markdown-notes-for-jw-library": {
+  "title": "Jinsi ya kuandika faili la Markdown linaloingia ndani ya JW Library",
+  "h1": "Jinsi ya kuandika faili la Markdown linaloingia ndani ya JW Library",
+  "description": "Andika dokezo katika Notepad, TextEdit au Obsidian kisha litue kwenye mstari sahihi ndani ya JW Library. Mistari hasa ya kuandika, na kila kitu unachoweza kuacha.",
+  "intro": [
+   "JW Sync inaweza kusoma mafaili ya Markdown kuingia kwenye nakala rudufu ya JW Library, jambo linaloibua swali pekee linalohesabika ukishajua kipengele hiki kipo: faili linapaswa kuonekanaje? Ukurasa huu unalijibu kutoka upande wa kuandika — si kile ambacho kiletaji kitakubali, bali kile unachoandika hasa.",
+   "Kwa ufupi, dokezo ni faili la maandishi. Tengeneza faili, andika dokezo, ulihifadhi likiwa na .md mwishoni, nalo litaingia. Kila kitu kingine hapa ni kuhusu mstari mmoja wa hiari: ule unaosema ni andiko lipi dokezo linahusika nalo, ili lionekane ndani ya JW Library unaposoma mstari huo badala ya kukaa huru kati ya madokezo yako mengine.",
+   "Hakuna kati ya haya kinachohitaji kihariri cha Markdown, wala hakuna kinachohitaji ujifunze Markdown. Notepad kwenye Windows na TextEdit kwenye Mac vinatosha. Ikiwa tayari unaweka madokezo ya funzo ndani ya Obsidian au Notion, mafaili hayo tayari ni Markdown, na kuna sehemu ya kila kimoja hapa chini.",
+  ],
+  "steps": [
+   ("Fungua kihariri chochote cha maandishi sahili", "Notepad kwenye Windows, TextEdit kwenye Mac, au programu yoyote ya Markdown unayotumia tayari — Obsidian, Typora, iA Writer, Joplin. Kitu kimoja cha kuepuka ni programu ya kuchakata maneno: Word na Google Docs huhifadhi mpangilio na mtindo badala ya maandishi sahili, wala hakuna kati yavyo kinachotoa faili ambalo kiletaji kinaweza kusoma."),
+   ("Andika dokezo", "Weka kichwa kwenye mstari wa kwanza kikiwa na # mbele yake, acha mstari mtupu, kisha uandike dokezo chini yake. Hilo tayari ni faili kamili na halali. Ikiwa hutaki kuandika mstari wa kichwa kabisa, jina la faili hutumika badala yake."),
+   ("Lihifadhi likiwa na .md mwishoni", "Liite unavyotaka — dokezo langu.md. Kwenye Windows, Notepad huhifadhi .txt isipokuwa ubadilishe Save as type kuwa All Files kwanza, ambalo ndilo kosa la kawaida zaidi. Kwenye Mac, chagua Format kisha Make Plain Text kabla ya kuhifadhi."),
+   ("Ongeza mstari unaoliweka kwenye mstari wa Biblia", "Juu kabisa ya faili, juu ya kila kitu kingine, andika mstari wa vistari vitatu, kisha publication: Matthew 26:39, kisha vistari vitatu tena. Sasa dokezo limeambatishwa kwenye mstari huo. Liache hili nje nalo dokezo bado huingia — hufika tu bila kuambatishwa."),
+   ("Lilete ndani ya nakala rudufu", "Katika JW Library, nenda Funzo la Kibinafsi, fungua menyu ya vitone vitatu, chagua Nakala Rudufu na Kurejesha kisha utengeneze nakala rudufu. Pakia faili hilo kwenye jwsync.org ndani ya Kichunguzi cha Funzo, bonyeza Leta Markdown, chagua mafaili yako ya .md, kisha usome muhtasari inayokuonyesha kabla ya chochote kuandikwa. Kisha bonyeza Hamisha .jwlibrary kisha urejeshe faili hilo katika JW Library."),
+  ],
+  "sections": [
+   ("Faili dogo zaidi linalofanya kazi", "Faili lisilo na chochote isipokuwa maandishi ni dokezo halali. Hili ndilo jambo lote:\n\n```\n# Kikombe alichoomba kuhusu\n\nSala yake inaonyesha utii, si kusitasita.\n```\n\nMstari unaoanza kwa # huwa kichwa cha dokezo, na kila kitu kilicho chini yake huwa dokezo. Faili hilo huingia bila malalamiko. Hufika tu kama dokezo lisiloambatishwa, likikaa kati ya madokezo yako badala ya kuambatishwa kwenye andiko."),
+   ("Kutengeneza faili kwenye Windows", "Fungua Notepad, andika dokezo, kisha uchague File na Save as. Kabla ya kuhifadhi, badilisha Save as type kutoka Text Documents kwenda All Files — bila hatua hiyo Notepad huongeza .txt kimyakimya nawe unaishia na dokezo langu.md.txt, ambalo kiletaji hakitaliona. Kisha andika jina likiwa na .md mwishoni. Windows inaweza kukuonya kuwa kubadilisha kiendelezi cha faili kunaweza kulifanya lisitumike; onyo hilo ndiyo ishara kuwa umefanya sawa."),
+   ("Kutengeneza faili kwenye Mac", "Fungua TextEdit kisha uchague Format, kisha Make Plain Text, kabla ya kuandika chochote. TextEdit huanza katika hali ya maandishi tajiri nayo huhifadhi .rtf, ambalo si faili la maandishi kabisa. Mara inapokuwa katika hali ya maandishi sahili, chagua File na Save, kisha upe jina liishie kwa .md. Ikiwa macOS itajitolea kuongeza .txt kwa niaba yako, ikatae."),
+   ("Kutengeneza faili kwenye simu au kompyuta kibao", "Programu yoyote inayoweza kuhifadhi au kuhamisha Markdown itatosha — Obsidian, Bear, iA Writer, Joplin, Markor kwenye Android. Programu za Notes zilizojengwa ndani ya iPhone na Android kwa kawaida haziwezi kuhifadhi faili la .md, kwa hiyo kwenye simu njia ya kawaida ni mojawapo ya programu hizo, au kuandika kwenye kompyuta badala yake. Unapofika kuleta unaweza kuchagua mafaili mengi upendavyo kwa mpigo mmoja, nayo folda nzima inaweza kubanwa na kukabidhiwa kama .zip moja."),
+   ("Mstari mmoja unaoweka dokezo kwenye mstari wa Biblia", "Kila kinachoiambia kiletaji dokezo linapohusika huenda kwenye kizuizi kidogo juu kabisa ya faili, kati ya mistari miwili ya vistari vitatu. Huitwa front matter, na kwa madokezo mengi ni mstari mmoja tu:\n\n```\n---\npublication: Matthew 26:39\n---\n\n# Kikombe alichoomba kuhusu\n\nSala yake inaonyesha utii, si kusitasita.\n```\n\nDokezo hilo sasa limeambatishwa kwenye Matthew 26:39. Huonekana ndani ya JW Library unaposoma mstari huo, sawasawa kama ungeliandika hapo ndani ya programu."),
+   ("Kuandika rejeleo ili lieleweke", "Andika jina la kitabu kwa Kiingereza, hata wakati dokezo lenyewe liko katika lugha nyingine: Matthew, si Mateo wala Matthäus. Vifupisho ambavyo watu huandika kihalisi hueleweka pia — Matt, Matt., Mt, 1 Cor, 1Cor, I Corinthians, Second Timothy. Kati ya sura na mstari unaweza kutumia nukta mbili, nukta au herufi v, kwa hiyo John 3:16, John 3.16 na 1 Cor 13 v4 vyote vinamaanisha kitu kilekile, nazo nafasi si lazima, kwa hiyo 1Cor13:4 ni sawa pia. Mfululizo kama Matthew 26:39-41 huweka dokezo kwenye mstari wa kwanza, 39, kwa sababu dokezo la JW Library huambatana na sehemu moja ya maandishi badala ya eneo pana."),
+   ("Faili kamili, lenye kichwa, tarehe na lebo", "Mistari mitatu zaidi inapatikana ukiitaka, nayo yote ni ya hiari:\n\n```\n---\ntitle: Kikombe alichoomba kuhusu\ndate: 2026-08-15\ntags: [funzo, gethsemane]\npublication: Matthew 26:39\n---\n\nSala yake inaonyesha utii, si kusitasita.\n```\n\ntitle hufanya kazi ileile kama kichwa cha #, kwa hiyo unahitaji kimoja tu kati ya viwili. date huweka tarehe ya dokezo badala ya kuiacha iwe siku uliyoleta. tags huwa lebo halisi za JW Library unazoweza kuchujia, nayo lebo uliyo nayo tayari hutumiwa tena badala ya kuongezwa mara mbili. Mstari wa tags unaweza pia kuandikwa funzo, gethsemane bila mabano, au #funzo #gethsemane, au kama orodha ya vistari kwenye mistari tofauti chini yake — zote nne husomwa vivyo hivyo."),
+   ("Dokezo moja kwa kila faili", "Kila faili la .md huwa dokezo moja. Hakuna njia ya kuweka madokezo kadhaa ndani ya faili moja na yakatengwa, kwa sababu hakuna chochote ndani ya faili la Markdown kinachoonyesha kwa uhakika dokezo moja linapoishia na jingine linapoanza — kichwa kilicho katikati kinaweza kuwa dokezo la pili au kikawa kichwa kidogo cha la kwanza, na kukisia vibaya kungetawanya maandishi yako. Kwa hiyo andika faili moja kwa kila dokezo, kisha uyachague yote kwa mpigo mmoja unapoleta, au ubane folda kisha uchague .zip."),
+   ("Umbizo linaloingia", "Aya, mikato ya mstari, herufi nene, italiki na orodha za vitone vyote hufika kama umbizo halisi ndani ya JW Library. Vichwa vilivyo chini ya cha kwanza huwa aya za kawaida. Chochote ambacho Markdown inaweza kueleza lakini dokezo la JW Library haliwezi — majedwali, picha, viungo, vizuizi vya msimbo — hupunguzwa hadi maandishi yake, kwa hiyo maneno hunusurika hata pale mpangilio usipoweza kuyafuata."),
+   ("Ikiwa tayari unaandika ndani ya Obsidian", "Mafaili ya Obsidian tayari ni Markdown, nayo paneli yake ya Properties huandika hasa front matter iliyoelezwa hapa: ongeza sifa iitwayo publication yenye thamani Matthew 26:39 nalo dokezo litatua hapo. Sifa ya tags ya Obsidian yenyewe husomwa kama tags. Viungo vya mtindo wa wiki vilivyo ndani ya mabano mawili ya mraba na madokezo yaliyopachikwa hupunguzwa hadi maandishi yake, kwa kuwa dokezo la JW Library halina pa kuvielekeza. Unaweza kuchagua mafaili ya .md ya folda nzima katika uletaji mmoja, au ubane folda kisha ukabidhi .zip."),
+   ("Ikiwa tayari unaandika ndani ya Notion", "Notion inaweza kuhamisha Markdown: fungua menyu ya ukurasa, chagua Export, kisha uchague Markdown & CSV. Unachopata ni .zip, ambalo kiletaji hukikubali kilivyo. Notion huandika kichwa cha ukurasa kama kichwa na sifa zake zenyewe kama mistari ya kawaida chini yake, nazo sehemu ambazo kiletaji hakizitambui hupuuzwa badala ya kuchukuliwa kuwa hitilafu — kwa hiyo ili kuweka dokezo kwenye mstari, ongeza mstari wa publication juu ya faili lililohamishwa wewe mwenyewe."),
+   ("Mambo ambayo si lazima uyapate sawa", "Herufi kubwa katika majina ya sehemu ni sawa. Nafasi baada ya nukta mbili inaweza kukosekana. Nafasi na tabu za ziada hupuuzwa, vivyo hivyo alama za nukuu kuzunguka thamani na maoni yaliyoandikwa baada ya #. Miisho ya mstari ya Windows ni sawa. Unaweza hata kuacha vizuizi vya --- kabisa na kuanza faili na sehemu, mradi tu mstari wa kwanza kabisa uwe mojawapo yavyo. Na ukikosea tahajia ya jina la kitabu — Mathew — kiletaji hukuambia kimesoma hivyo kama Matthew 26:39 kisha husubiri uweke alama kwenye kisanduku, badala ya kuamua chenyewe."),
+   ("Kile ambacho kuleta hakutafanya kwenye maktaba yako", "Kuleta huongeza tu daima. Madokezo, viangazio, alamisho na lebo zilizo tayari ndani ya nakala yako rudufu hazitaguswa, nalo faili unalopakia halibadilishwi kamwe — unapakua .jwlibrary jipya mwishoni kisha urejeshe hilo. Dokezo ambalo kichwa chake, maandishi yake na mahali pake vyote vinalingana na kitu kilicho tayari ndani ya nakala rudufu hurukwa, kwa hiyo kuleta mafaili yaleyale mara mbili hakuongezi chochote mara mbili. Kila kitu ambacho uletaji huongeza ni hatua moja ya Kutendua, nayo madokezo yaliyoletwa hubeba lebo ya Yaliyoletwa, kwa hiyo unaweza kuyapata, kuyachujia au kuyaondoa kama kundi baadaye. Hakuna kati ya hayo kinachoondoka kwenye kifaa chako."),
+  ],
+  "faq": [
+   ("Je, ninahitaji kujifunza Markdown kwanza?", "Hapana. Faili la sentensi za kawaida ni dokezo halali. Markdown huingia tu ikiwa unataka herufi nene, italiki au vitone, na hata hapo ni nyota mbili kuzunguka neno kwa nene na kistari mwanzoni mwa mstari kwa kitone."),
+   ("Je, jina la faili linaleta tofauti?", "Ni wakati tu faili halina kichwa chake. Ikiwa hakuna mstari wa title: wala kichwa cha #, jina la faili hupangwa vizuri kisha hutumika badala yake, kwa hiyo kikombe-alichoomba-kuhusu.md huwa dokezo liitwalo “kikombe alichoomba kuhusu”. Vinginevyo liite faili unavyotaka."),
+   ("Itakuwaje nikilihifadhi kama .txt kwa makosa?", "Libadilishe jina liishie kwa .md kisha ulete tena — hakuna kinachohitaji kubadilika kuhusu maudhui. Kwenye Windows huenda ukahitaji kwanza kuwasha viendelezi vya majina ya mafaili katika menyu ya View ya File Explorer, la sivyo mwisho utafichwa kwako."),
+   ("Je, ninaweza kuandika jina la kitabu kwa lugha yangu mwenyewe?", "Si kwa sasa. Majina ya vitabu hutambuliwa kwa Kiingereza, ambacho pia ndicho uhamishaji wa Markdown wa tovuti hii huandika. Andika dokezo lenyewe kwa lugha yoyote unayopenda; ni mstari wa rejeleo tu unaohitaji jina la Kiingereza. Ikiwa hutaki, acha rejeleo nje kisha uweke dokezo kwa mkono baadaye."),
+   ("Je, ninaweza kuweka zaidi ya dokezo moja ndani ya faili moja?", "Hapana — kila faili huwa dokezo moja. Chagua mafaili mengi upendavyo katika uletaji mmoja, au ubane folda kisha uchague .zip."),
+   ("Je, hii itabadilisha madokezo niliyo nayo tayari?", "Hapana. Kuleta huongeza tu. Madokezo yako yaliyopo hayataguswa, nayo nakala rudufu unayopakia haibadilishwi kamwe: unapakua faili jipya mwishoni kisha uchague kama utalirejesha."),
+   ("Nini hutokea nikiacha mstari wa rejeleo nje?", "Dokezo bado huingia. Hufika kama dokezo lisiloambatishwa ndani ya maktaba yako badala ya kuambatishwa kwenye andiko — jambo ambalo dokezo kuhusu hotuba, mazungumzo au wazo la kibinafsi kwa kawaida hulitaka hivyo."),
+  ],
+ },
+
+ "export-jw-library-notes": {
+  "title": "Jinsi ya kuhamisha madokezo ya JW Library kwenda maandishi au Markdown",
+  "h1": "Kuhamisha madokezo yako ya JW Library kwenda maandishi, Markdown au nakala rudufu mpya",
+  "description": "Toa madokezo yako ya JW Library nje ya programu: yanakili au uyahamishe kama Markdown au maandishi sahili kwa matumizi popote, au uchopoe uteuzi kwenda nakala rudufu mpya ya .jwlibrary. Yote ndani ya kivinjari chako.",
+  "intro": [
+   "Madokezo yaliyoandikwa ndani ya JW Library ni rahisi kusoma ndani ya programu na ni magumu kutumia mahali pengine popote — ndani ya hati, ndani ya muhtasari wa hotuba, kwenye karatasi, au mikononi mwa mtu asiyetumia programu. Kuhamisha hutatua hilo, nao uamuzi mkuu si jinsi ya kuhamisha bali kiasi gani: uhamishaji uliochujwa karibu daima ni wa manufaa zaidi kuliko kila kitu kwa mpigo mmoja.",
+   "Madokezo yako ya funzo hayapaswi kunaswa ndani ya programu moja. Wakati mwingine unayataka kama maandishi sahili — ya kubandika kwenye muhtasari wa hotuba, hati, au programu yako ya madokezo — na wakati mwingine unataka nakala rudufu safi yenye sehemu ndogo tu. Kichunguzi cha Funzo hufanya yote mawili, kikisoma nakala yako rudufu ndani kabisa ya kivinjari.",
+  ],
+  "steps": [
+   ("Pakia nakala yako rudufu", "Tengeneza nakala rudufu ndani ya JW Library (Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu), kisha ufungue jwsync.org na kuipakia kwenye Kichunguzi cha Funzo."),
+   ("Tafuta madokezo unayoyataka", "Tumia utafutaji pamoja na vichujio vya rangi, lebo na chapisho ili kupunguza hadi hasa madokezo unayoyatafuta — chapisho moja, lebo moja, mada moja."),
+   ("Nakili au hamisha kama Markdown au maandishi", "Nakili madokezo kama Markdown au maandishi sahili ya kubandika popote. Umbizo (nene, italiki, orodha) huhifadhiwa ili madokezo yaliyopangwa yabaki yamepangwa."),
+   ("Au uchopoe kwenda nakala rudufu mpya", "Unapendelea faili? Hamisha uteuzi au kipindi cha tarehe kwenda nakala rudufu mpya ya .jwlibrary — jambo linalofaa kuhifadhi mradi au kumkabidhi kifaa kingine seti mahususi ya madokezo."),
+  ],
+  "sections": [
+   ("Kwa nini kuhamisha kabisa", "Madokezo ni ya manufaa zaidi yanapoweza kusafiri: kwenda ndani ya hati ya sehemu ya mkutano, ndani ya wiki yako binafsi, ndani ya chapisho la karatasi kwa asiyetumia programu. Markdown huweka muundo huku ikibaki inasomeka kama maandishi sahili popote."),
+   ("Kuchagua umbizo", "Maandishi sahili ndiyo yanayobebeka zaidi nayo hubandika safi ndani ya hati au barua pepe yoyote. Matokeo yenye umbizo huhifadhi muundo wa madokezo marefu nayo hufaa kuchapisha au kushiriki. Ikiwa unataka madokezo yarudi ndani ya JW Library baadaye — kwenye kifaa kingine, au kwa maktaba ya mtu mwingine — weka faili la .jwlibrary lenyewe badala ya uhamishaji wa maandishi, kwa kuwa ni hilo tu ndilo linalohifadhi viunganisho kati ya madokezo, viangazio, lebo na mahali hasa ndani ya chapisho ambapo yameambatishwa."),
+   ("Kuhamisha sehemu ya maktaba yako pekee", "Uhamishaji kamili wa miaka ya funzo ni nadra kuwa kile unachotaka. Kupunguza kwanza — hadi lebo, chapisho, rangi ya kiangazio, au kipindi cha tarehe — hutoa kitu unachoweza kukitumia kikweli, kama vile kila dokezo lenye lebo ya hotuba, au kila kitu kilichoandikwa wakati wa kusanyiko moja. Vichujio vilevile vinavyopunguza mwonekano hupunguza uhamishaji, kwa hiyo unachokiona ndicho unachokipata."),
+   ("Kinachosafiri pamoja na maandishi, na kisichosafiri", "Uhamishaji hubeba maneno yako. Haubebi vituo vinavyofunga dokezo kwenye aya mahususi ya chapisho mahususi, kwa sababu marejeo hayo yanamaanisha kitu ndani ya JW Library pekee. Hii ndiyo sababu ya vitendo ya kuweka nakala rudufu pamoja na uhamishaji: uhamishaji ni wa kusoma, kuchapisha na kushiriki nje ya programu, ilhali faili la .jwlibrary ndilo linalorudisha madokezo ndani ya maktaba pamoja na muktadha wake ukiwa zima."),
+   ("Kukusanya kila kitu kwa ajili ya hotuba au mgawo mmoja", "Hii ndiyo sababu ya kawaida zaidi ya kuhamisha. Chuja hadi lebo, chapisho au kipindi cha tarehe ambapo nyenzo iko, angalia matokeo, kisha uhamishe hicho tu. Unachopata ni hati moja yenye madokezo husika na vifungu ulivyoviangazia, kwa mpangilio vinavyotokea, badala ya lundo lisiloshikika la maktaba yako yote."),
+   ("Kushiriki madokezo na mtu mwingine", "Kuna vitu viwili tofauti ambavyo watu humaanisha kwa kushiriki. Ikiwa mtu mwingine anataka kusoma madokezo yako, uhamishaji wa maandishi ndio sahihi — hufunguka popote wala hauhitaji programu maalum. Ikiwa anataka madokezo ndani ya JW Library yake mwenyewe, yakiwa yameambatishwa kwenye aya zilezile na yakibeba lebo na rangi zake, basi faili la .jwlibrary ndilo unalolitaka badala yake, kwa sababu uhamishaji wa maandishi hauwezi kurudisha chochote ndani ya programu."),
+   ("Kuweka kumbukumbu utakayoweza kuisoma baadaye", "Uhamishaji unafaa pia kufanywa kwa ajili yake wenyewe. Nakala ya maandishi sahili ya madokezo yako ya funzo bado itafunguka miaka thelathini ijayo kwenye programu ambayo bado hakuna aliyeiandika, jambo ambalo hakuna umbizo mahususi wa programu unaoweza kuliahidi. Kuweka vyote viwili — .jwlibrary kwa kurejesha na uhamishaji wa maandishi kwa kusoma — hakugharimu karibu chochote nako hufunika mustakabali wote wawili."),
+   ("Uhamishaji au nakala rudufu — unachohitaji", "Vyote viwili hujibu maswali tofauti. Uhamishaji ni wa kutumia madokezo yako nje ya JW Library: kusoma, kuchapisha, kunukuu, kumtumia mtu. Nakala rudufu ya .jwlibrary ni ya kuyarudisha ndani ya JW Library, kwenye kifaa hiki au kingine, kila kituo, lebo na rangi vikiwa vizima. Hakuna kinachochukua nafasi ya kingine, wala hakuna sababu ya kutoweka vyote viwili."),
+  ],
+  "faq": [
+   ("Je, kuhamisha hubadilisha madokezo yangu ya JW Library?", "Hapana. Uhamishaji husoma nakala ya nakala yako rudufu ndani ya kivinjari; faili lako la awali na programu yako haviguswi."),
+   ("Je, ninaweza kuhamisha kila kitu kwa mpigo mmoja?", "Ndiyo — futa vichujio ili kuchagua maktaba yako yote, au upunguze kwanza ili kuhamisha sehemu yake tu."),
+   ("Je, ninaweza kupata madokezo yangu ndani ya Word au Google Documents?", "Ndiyo — hamisha kama maandishi kisha uyabandike. Maandishi hufika muundo wake ukiwa zima nayo yanaweza kupambwa kutoka hapo."),
+   ("Je, viangazio huhamishwa vilevile kama madokezo?", "Ndiyo, ikiwa ni pamoja na kifungu kilichoangaziwa na rangi yake, kwa hiyo nakala iliyochapishwa huonyesha ulichokiweka alama pamoja na ulichokiandika."),
+   ("Je, ninaweza kuhamisha kila kitu kwa mpigo mmoja?", "Ndiyo, ingawa uhamishaji uliochujwa kwa kawaida ni wa manufaa zaidi. Kila kitu kinaweza kuhamishwa kwa mpigo mmoja unapotaka nakala kamili."),
+   ("Je, ninaweza kuhamisha majibu niliyoandika kwenye maswali ya funzo?", "Ndiyo. Majibu ya funzo yaliyoandikwa ni sehemu ya data yako ya funzo la kibinafsi nayo yanaweza kuhamishwa pamoja na madokezo na viangazio."),
+   ("Je, uhamishaji utaonyesha ni chapisho gani kila dokezo linatoka?", "Ndiyo, uhamishaji hutambulisha mahali kila dokezo lilipotoka, ingawa nanga yenyewe hufanya kazi ndani ya JW Library pekee."),
+   ("Je, kuhamisha hubadilisha chochote katika maktaba yangu?", "Hapana. Uhamishaji husoma data yako na kuandika faili tofauti; hakuna kitu ndani ya JW Library kinachobadilishwa, kuhamishwa au kuondolewa."),
+   ("Je, ninaweza kuhamisha kutoka kwa nakala rudufu badala ya programu?", "Ndiyo. Faili la .jwlibrary linaweza kufunguliwa moja kwa moja na madokezo yake kuhamishwa, jambo linalosaidia wakati madokezo unayotaka yamo katika nakala rudufu ya zamani badala ya kifaa chako cha sasa."),
+  ],
+ },
+
+ "organize-jw-library-tags": {
+  "title": "Jinsi ya kupanga na kusafisha lebo za JW Library",
+  "h1": "Kupanga lebo zako za JW Library: badilisha majina, unganisha na usafishe kwa wingi",
+  "description": "Lebo huzidi kuongezeka baada ya miaka ya funzo. Badilisha jina la lebo kwenye kila dokezo, unganisha zilizojirudia, na uondoe zile usizotumia tena — kwa wingi, ndani ya kivinjari chako, kwa kutendua kamili.",
+  "intro": [
+   "Lebo ndizo njia ya kupata madokezo baadaye — lakini baada ya miaka michache huenea ovyo. Unaishia na “Huduma”, “huduma” na “Utumishi wa shambani” zikimaanisha kitu kilekile, lebo ulizotengeneza mara moja na kutozitumia tena, na majina yasiyolingana yanayofanya kuchuja kusiwe na uhakika. JW Library haikupi njia ya kurekebisha hili kwa ukubwa. Kichunguzi cha Funzo hukupa.",
+  ],
+  "steps": [
+   ("Pakia nakala yako rudufu kwenye Kichunguzi cha Funzo", "Kwenye jwsync.org, pakia faili lako la .jwlibrary. Chuja kwa lebo ili kuona kila lebo na madokezo mangapi yanayoibeba."),
+   ("Badilisha jina la lebo kwenye madokezo yake yote", "Weka lebo upya kwa wingi: badilisha jina la lebo mara moja na kila dokezo linaloitumia husasishwa — hakuna tena kuhariri madokezo moja baada ya jingine ili kurekebisha tahajia."),
+   ("Unganisha zilizojirudia", "Weka upya lebo za madokezo kutoka lebo iliyojirudia kwenda kwenye ile unayoihifadhi, kisha uondoe ile iliyobaki tupu. “Huduma” na “huduma” huwa lebo moja safi."),
+   ("Ondoa lebo usizotumia tena", "Chagua kisha ufute lebo za zamani kwa wingi. Kila kitu kinaweza kutendulika, kwa hiyo usafishaji wa haraka mno si wa kudumu kamwe."),
+   ("Hamisha maktaba iliyopangwa", "Pakua .jwlibrary iliyohaririwa kisha uirejeshe katika JW Library. Lebo zako sasa zinalingana kila mahali."),
+  ],
+  "sections": [
+   ("Mfumo wa lebo unaosaidia kikweli", "Mara lebo zinapolingana, kuchuja huwa kunaaminika — mgusa mmoja huonyesha kila dokezo juu ya mada, katika kila chapisho. Ndio tofauti kati ya lebo kama takataka na lebo kama faharasa halisi ya funzo lako."),
+   ("Lebo zinazolingana hufanya kushiriki kuwa kazi ya mibofyo miwili", "Kikagua cha madokezo kwenye ukurasa wa Kushiriki kina kichujio chake cha lebo, kwa hiyo lebo safi pia ndiyo njia ya haraka zaidi ya kumtumia mtu seti ya madokezo: chagua lebo, gonga Chagua yote, tengeneza faili. Lebo zilizochafuka hukugharimu mara mbili — mara moja unapotafuta madokezo, na tena unapojaribu kuyashiriki."),
+  ],
+  "faq": [
+   ("Je, kuweka lebo upya kwa wingi kutagusa maandishi ya dokezo?", "Hapana — hubadilisha tu lebo zilizoambatishwa. Vichwa na maudhui ya madokezo yako hubaki hasa kama ulivyoandika."),
+   ("Je, kuna kutendua nikikosea?", "Ndiyo. Kichunguzi cha Funzo kina kutendua na kurudia kamili, nayo nakala yako rudufu ya awali haibadilishwi kamwe — mabadiliko huenda kwenye nakala iliyohamishwa."),
+  ],
+ },
+
+ "manage-jw-library-highlights": {
+  "title": "Jinsi ya kudhibiti na kubadilisha rangi za viangazio vya JW Library",
+  "h1": "Kudhibiti viangazio vyako vya JW Library: badilisha rangi na upange kwa wingi",
+  "description": "Leta utaratibu katika miaka ya viangazio vya JW Library: badilisha rangi kwa wingi, ipe kanuni yako ya rangi maana inayolingana, na uvinjari kila kiangazio mahali pamoja. Ndani ya kivinjari chako.",
+  "intro": [
+   "Rangi za viangazio husaidia tu ikiwa zinamaanisha kitu kinacholingana. Baada ya muda viangazio vya watu wengi huteleza — njano ilimaanisha kitu kimoja mwaka 2019 na kingine sasa, na hakuna njia ndani ya JW Library ya kuviona vyote pamoja au kuvirekebisha kwa ukubwa. Kichunguzi cha Funzo hukusanya kila kiangazio kwenye mwonekano mmoja na hukuruhusu kubadilisha rangi kwa wingi.",
+  ],
+  "steps": [
+   ("Pakia nakala yako rudufu", "Kwenye jwsync.org, fungua faili lako la .jwlibrary ndani ya Kichunguzi cha Funzo kisha ubadilishe kwenda kichupo cha Viangazio."),
+   ("Vinjari na uchuje viangazio vyako", "Ona kila kiangazio ndani ya orodha moja, chuja kwa rangi au chapisho, kisha utafute maandishi yaliyoangaziwa na madokezo yoyote yaliyounganishwa."),
+   ("Badilisha rangi kwa wingi", "Chagua viangazio vingi kisha ubadilishe rangi yavyo pamoja — kwa mfano, unganisha kila kitu ulichokusudia kuwa “andiko kuu” kuwa rangi moja katika maktaba yako yote."),
+   ("Hariri pia madokezo yaliyounganishwa", "Pale kiangazio kina dokezo lililoambatishwa, hariri kichwa na maudhui ya dokezo hilo hapa hapa pia."),
+   ("Hamisha kisha urejeshe", "Pakua .jwlibrary iliyohaririwa kisha uirejeshe katika JW Library ili kanuni yako ya rangi inayolingana iwe kwenye kila kifaa."),
+  ],
+  "sections": [
+   ("Amua rangi zako zinamaanisha nini", "Mpango rahisi — rangi moja kwa hoja kuu, moja kwa maandiko ya kukariri, moja kwa maswali ya kufanyia utafiti — hugeuza viangazio kuwa kifaa cha funzo badala ya pambo. Kubadilisha rangi kwa wingi hukuruhusu kutumia mpango huo kwa nyuma kwenye miaka ya kusoma."),
+  ],
+  "faq": [
+   ("Je, ninaweza kuona viangazio visivyo na dokezo lililoambatishwa?", "Ndiyo — kichupo cha Viangazio huonyesha vyote, vikiwa na dokezo lililounganishwa au bila."),
+   ("Je, kubadilisha rangi huathiri maandishi yaliyo chini yake?", "Hapana, hubadilisha rangi ya kiangazio tu; maandishi ya chapisho na madokezo yako hayaguswi."),
+  ],
+ },
+
+ "jw-library-study-answers": {
+  "title": "Ona na uhariri majibu yako ya funzo uliyojaza katika JW Library",
+  "h1": "Kupata majibu yako ya funzo ya JW Library (majibu uliyojaza) mahali pamoja",
+  "description": "Majibu uliyoandika kwa maswali ya makala za funzo na vitabu vya kazi yamefichwa ndani ya nakala yako rudufu. Kichupo cha Majibu ya Funzo cha Kichunguzi cha Funzo hukuruhusu kuyasoma, kuyatafuta na kuyahariri yote kwa mpigo mmoja.",
+  "intro": [
+   "Unapojifunza, unaandika majibu ndani ya visanduku vya kujaza vya makala za funzo, Mnara wa Mlinzi, na vitabu vya kazi vya mkutano. Huhifadhiwa ndani ya nakala yako rudufu — lakini JW Library huonyesha kila moja likiwa limezikwa ndani ya chapisho lake. Hakuna mahali pamoja pa kupitia kila kitu ulichoandika. Kichupo cha Majibu ya Funzo cha Kichunguzi cha Funzo ndipo mahali hapo.",
+  ],
+  "steps": [
+   ("Pakia nakala yako rudufu kwenye Kichunguzi cha Funzo", "Kwenye jwsync.org, pakia faili lako la .jwlibrary kisha ufungue kichupo cha Majibu ya Funzo."),
+   ("Soma majibu yako yote pamoja", "Kila jibu ulilojaza huonekana ndani ya orodha moja inayoweza kutafutwa, kwa hiyo unaweza kupitia kwa mtazamo mmoja kiasi cha makala nzima ya funzo cha mawazo yako mwenyewe."),
+   ("Tafuta na uhariri", "Pata jibu kwa maandishi yake, kisha ulihariri na kulinoa palepale — jambo linalosaidia unapopitia kabla ya mkutano au unaporekebisha maneno uliyoandika haraka."),
+   ("Hamisha au urejeshe", "Rejesha faili lililohaririwa ili kubeba mabadiliko yako kurudi JW Library, au unakili majibu kama maandishi kwa ajili ya hotuba au kumbukumbu yako binafsi."),
+  ],
+  "sections": [
+   ("Kwa nini hili ni la manufaa kabla ya mikutano", "Kupitia majibu yako uliyoandaa ndani ya orodha moja inayoendelea — badala ya kusogeza kila aya ndani ya programu — ni njia ya haraka zaidi ya kukumbusha ulichopanga kusema, na ya kuona majibu uliyoacha wazi."),
+  ],
+  "faq": [
+   ("Je, haya ni sawa na madokezo yangu binafsi?", "Hapana — majibu uliyojaza ni majibu uliyoandika ndani ya visanduku vya majibu vya chapisho. Kichunguzi cha Funzo huyaonyesha kwenye kichupo chake, kando na madokezo huru."),
+   ("Je, chochote hupakiwa ili kusoma majibu yangu?", "Hapana. Kama kila kitu ndani ya JW Sync, nakala yako rudufu husomwa hapo hapo ndani ya kivinjari wala haitumwi popote kamwe."),
+  ],
+ },
+
+ "extract-jw-library-notes-by-date": {
+  "title": "Chopoa madokezo ya JW Library ya kipindi cha tarehe kwenda nakala rudufu mpya",
+  "h1": "Kuchopoa kipindi cha tarehe cha madokezo ya JW Library kwenda nakala rudufu mpya",
+  "description": "Chomoa madokezo ya kipindi mahususi tu — mwaka wa utumishi, kusanyiko, mradi wa funzo — kwenda nakala rudufu yake safi ya .jwlibrary. Ndani kabisa ya kivinjari chako.",
+  "intro": [
+   "Wakati mwingine unataka kipande cha maktaba yako, si yote: madokezo ya mwaka huu kwa ajili ya kupitia, kila kitu cha kusanyiko, au utafiti wa mradi mmoja wa kumpa mtu. Kichunguzi cha Funzo kinaweza kuchopoa madokezo ya kipindi cha tarehe kwenda nakala rudufu mpya kabisa ya .jwlibrary, kikiacha maktaba yako kuu bila kuguswa.",
+  ],
+  "steps": [
+   ("Pakia nakala yako rudufu", "Kwenye jwsync.org, fungua faili lako la .jwlibrary ndani ya Kichunguzi cha Funzo."),
+   ("Weka kipindi cha tarehe", "Chagua tarehe za kuanzia na kuishia za madokezo unayotaka — mwaka wa utumishi, mwezi, tarehe za tukio mahususi."),
+   ("Chopoa kwenda nakala rudufu mpya", "Hamisha madokezo yanayolingana kwenda faili jipya la .jwlibrary. Lina madokezo, viangazio na lebo za kipindi hicho pekee."),
+   ("Tumia faili lililochopolewa", "Lirejeshe ndani ya JW Library kwa ajili ya kupitia kwa umakini, lihifadhi kama kumbukumbu, au ulishiriki na mtu anayehitaji kipande hicho tu."),
+  ],
+  "sections": [
+   ("Sababu nzuri za kuchopoa kwa tarehe", "Kumbukumbu ya mwaka ya funzo lako; faili safi la madokezo ya kusanyiko la kuweka kando; kumpa mwenzako wa funzo madokezo ya mradi mliofanya pamoja tu; au kupunguza maktaba kubwa kuwa vipande vinavyoshikika, vyenye tarehe — yote bila kuvuruga nakala yako rudufu kuu."),
+  ],
+  "faq": [
+   ("Je, kuchopoa huondoa madokezo hayo kwenye maktaba yangu?", "Hapana. Hunakili madokezo yanayolingana kwenda faili jipya; nakala yako rudufu ya awali huweka kila kitu."),
+   ("Hutumia tarehe gani — niliyoandika au niliyohariri mwisho dokezo?", "Hutumia tarehe za dokezo lenyewe zilizo ndani ya nakala rudufu, kwa hiyo kipindi huakisi wakati madokezo yalitengenezwa au kubadilishwa."),
+  ],
+ },
+
+ "connect-jw-library-notes-study-map": {
+  "title": "Ona jinsi madokezo yako ya JW Library yanavyounganika — Ramani ya Funzo",
+  "h1": "Ramani ya Funzo: mtandao wa faragha wa maarifa wa madokezo yako ya JW Library",
+  "description": "Ramani ya Funzo hugeuza madokezo yako ya JW Library kuwa mtandao unaoshirikisha, ikiyaunganisha kwa maandiko yanayoshirikiwa, lebo zinazoshirikiwa na maneno yanayofanana — ili uone mada zinazopita katika funzo lako.",
+  "intro": [
+   "Miaka ya madokezo hubeba uhusiano ambao hujawahi kuuona: andiko lilelile likinukuliwa katika maandiko kadhaa, mada unayoirudia kila mara, mawazo yanayoitikiana katika machapisho tofauti. Ramani ya Funzo huchora viunganisho hivyo kama mtandao unaoshirikisha, ili umbo la funzo lako mwenyewe lionekane.",
+  ],
+  "steps": [
+   ("Fungua ukurasa wa Takwimu za Funzo kisha upakie nakala rudufu", "Nenda jwsync.org/highlights.html kisha upakie faili lako la .jwlibrary. Ramani ya Funzo huisoma ndani ya kivinjari chako."),
+   ("Fungua Ramani ya Funzo", "Zindua ramani ili kuona madokezo yako kama nukta zilizounganishwa, zikiunganishwa kwa maandiko yanayoshirikiwa, lebo zinazoshirikiwa na maneno yanayofanana."),
+   ("Chunguza viunganisho", "Badilisha kati ya mionekano ya Mada na Madokezo, weka kielekezi juu ili kuangazia viunganisho vya dokezo, buruta vitu huku na huko, kisha utumie kitelezi cha nguvu ili kuonyesha viunganisho vya karibu zaidi pekee. Hali ya skrini nzima hukupa nafasi ya kuzurura."),
+   ("Jenga na uhifadhi minyororo ya funzo", "Chora “minyororo ya funzo” yako mwenyewe kati ya madokezo yanayohusiana ili kunasa mkondo wa hoja, kisha uhamishe ramani kama picha ya PNG ya kuweka au kushiriki."),
+  ],
+  "sections": [
+   ("Ramani hufichua nini", "Makundi huonyesha mada unazojifunza zaidi; andiko lililounganishwa na madokezo mengi huonyesha mstari unaourudia kila mara; dokezo lililo peke yake linaweza kuwa uzi unaofaa kuendelezwa. Ni njia ya kujifunza funzo lako — na ya kuandaa hotuba kwa kufuata viunganisho ambavyo tayari umevitengeneza."),
+  ],
+  "faq": [
+   ("Je, ninahitaji madokezo mengi ili ramani iwe ya manufaa?", "Maktaba ya wastani tayari huonyesha viunganisho; kadiri madokezo yako yanavyokuwa mengi, ndivyo ramani inavyofichua zaidi. Maktaba ndogo sana zitaonyesha dokezo la kuongeza madokezo zaidi kwanza."),
+   ("Je, ramani ni ya faragha?", "Kabisa. Hujengwa ndani ya kivinjari chako kutoka nakala yako rudufu wala haipakiwi kamwe; hata uhamishaji wa PNG hutengenezwa ndani ya kifaa chako."),
+  ],
+ },
+
+ "review-old-jw-library-notes": {
+  "title": "Jinsi ya kupitia madokezo yako ya zamani ya JW Library (ili yabaki akilini)",
+  "h1": "Kupitia madokezo ya zamani ya JW Library kwa Kumbusho — kidogo, mara kwa mara",
+  "description": "Madokezo usiyoyarudia ni madokezo unayoyasahau. Kumbusho huonyesha ulichoandika siku kama ya leo katika miaka iliyopita nayo hujenga marudio ya taratibu yaliyotawanywa, ili funzo la zamani liendelee kukufanyia kazi.",
+  "intro": [
+   "Madokezo mengi ya funzo huandikwa mara moja kisha hayaonekani tena. Hiyo ni hasara ya kimyakimya — ufahamu ulistahili kunaswa, kisha ukazama chini ya maktaba. Kumbusho hurudisha juu madokezo yako mwenyewe ya zamani, machache kwa wakati, ili kuyapitia kuwe zoea dogo la kila siku badala ya mradi wa siku fulani.",
+  ],
+  "steps": [
+   ("Fungua ukurasa wa Takwimu za Funzo kisha upakie nakala rudufu", "Nenda jwsync.org/highlights.html kisha upakie faili lako la .jwlibrary. Kumbusho husoma madokezo yako hapo hapo."),
+   ("Ona “Siku kama ya leo”", "Kumbusho huleta juu madokezo uliyoandika tarehe kama hii katika miaka iliyopita — “liliandikwa miaka miwili iliyopita leo” — likikuunganisha tena na funzo la zamani wakati linapokuwa na maana zaidi."),
+   ("Fanya marudio mafupi ya kila siku", "Hukuletea madokezo machache ya kuyapitia na kuyawekea alama kuwa umeyapitia. Kidogo, mara kwa mara, ndiyo njia ya funzo kubaki akilini — nao mfululizo hukua unapodumisha zoea."),
+   ("Rudi kesho", "Marudio yaliyotawanywa hupanga madokezo yajitokeze tena baada ya muda, kwa hiyo yale yanayostahili kukumbukwa huendelea kurudi hadi yawe yako."),
+  ],
+  "sections": [
+   ("Kwa nini marudio yaliyotawanywa hufanya kazi", "Kupitia kitu wakati tu unapokaribia kukisahau ni kwa ufanisi zaidi kuliko kubugia yote mara moja. Kwa kutawanya madokezo machache katika siku nyingi, Kumbusho hugeuza maktaba yako iliyopo kuwa marudio yanayoendelea, yanayohitaji juhudi kidogo, yanayozidisha kina cha ulichojifunza."),
+  ],
+  "faq": [
+   ("Maendeleo yangu ya kupitia huhifadhiwa wapi?", "Ndani ya kivinjari chako kwenye kifaa chako — hakuna akaunti wala kinachopakiwa. Mfululizo na ratiba ni vyako peke yako."),
+   ("Je, ninahitaji madokezo mapya kwa ajili ya hili?", "Hapana — Kumbusho hufanya kazi na madokezo ambayo tayari umeyaandika. Kadiri maktaba yako inavyokuwa ya zamani, ndivyo nyakati za “siku kama ya leo” zinavyokuwa na thawabu zaidi."),
+  ],
+ },
+
+ "jw-library-achievements-streaks": {
+  "title": "Mifululizo, ngazi na mafanikio ya funzo la JW Library",
+  "h1": "Geuza funzo lako la JW Library kuwa mifululizo, ngazi na tuzo",
+  "description": "Ona mifululizo yako ya funzo, panda ngazi 60 katika madaraja 12 kwenye Safari yako ya Funzo, na ufungue mafanikio takriban 200 — yote yakisomwa kwa faragha kutoka nakala yako rudufu ya JW Library.",
+  "intro": [
+   "Uthabiti ndio sehemu ngumu ya funzo la kibinafsi, nayo maendeleo usiyoyaona ni rahisi kuyaacha yateleze. Ukurasa wa Takwimu za Funzo hugeuza historia ya nakala yako rudufu kuwa kitu unachoweza kukiona kikikua: mifululizo, ngazi na tuzo zinazoakisi funzo ambalo umelifanya kihalisi — hakuna malengo yaliyowekwa, ni rekodi yako mwenyewe iliyofanywa ionekane.",
+  ],
+  "steps": [
+   ("Fungua ukurasa wa Takwimu za Funzo", "Nenda jwsync.org/highlights.html kisha upakie nakala yako rudufu ya .jwlibrary. Kila kitu hukokotolewa ndani ya kivinjari chako."),
+   ("Angalia mifululizo yako", "Ona mfululizo wako mrefu zaidi na wa sasa wa funzo, mdundo wako wa juma, na saa na miezi yenye shughuli nyingi zaidi — mapigo ya zoea lako la funzo."),
+   ("Panda Safari yako ya Funzo", "Endelea kupitia ngazi 60 katika madaraja 12 yenye majina (kuanzia Mbegu hadi Kijani Daima), pamoja na tufe linalobadilika rangi na sherehe za kupanda ngazi, kutokana na funzo lako la maisha yote."),
+   ("Kusanya mafanikio", "Fungua tuzo takriban 200 kuanzia unadra wa Kawaida hadi wa Kisasa, ikiwa ni pamoja na medali za kimada zinazozingatia maudhui; fungua medali yoyote ili kuona maendeleo yako kuelekea inayofuata."),
+  ],
+  "sections": [
+   ("Kutiwa moyo bila shinikizo", "Haya si malengo aliyoweka mtu mwingine — ni kioo cha ulichokwisha kufanya. Kuona mfululizo usiotaka kuuvunja, au ngazi iliyokaribia kufikiwa, ni kutiwa moyo kwa upole kudumisha zoea zuri. Nayo Kadi ya Kushirikiwa hufupisha mwaka wako bila kufichua hata dokezo moja la faragha."),
+  ],
+  "faq": [
+   ("Je, mifululizo na tuzo hujisasisha zenyewe?", "Huakisi nakala rudufu unayoipakia, kwa hiyo tengeneza nakala rudufu mpya ili kuona maendeleo yako ya karibuni. Hakuna kinachofanya kazi chinichini."),
+   ("Je, chochote kati ya haya hushirikiwa au kupakiwa?", "Hapana. Vyote hukokotolewa hapo hapo kutoka nakala yako rudufu; ni kadi ya muhtasari tu ndiyo unaweza kuchagua kuishiriki, nayo haina maandishi ya madokezo."),
+  ],
+ },
+
+ "share-convention-assembly-notes": {
+  "title": "Jinsi ya kushiriki madokezo ya kusanyiko na mkusanyiko kutoka JW Library",
+  "h1": "Kushiriki madokezo yako ya kusanyiko, mkusanyiko na mkutano",
+  "description": "Pitisha madokezo yako ya kusanyiko, mkusanyiko au mkutano kwa familia na marafiki kama faili dogo — bila kukabidhi maktaba yako yote wala kuandika juu ya yao. Matumizi ya vitendo ya kushiriki madokezo.",
+  "intro": [
+   "Ulichukua madokezo kwa uangalifu katika kusanyiko lote; rafiki aliyekosa kipindi angependa kuyapata; watu wa familia wanataka hoja kwa ajili ya kupitia wenyewe. Kutuma nakala yako rudufu nzima ni kupita kiasi nako kungefuta madokezo ya mpokeaji mwenyewe ikirejeshwa. Kushiriki madokezo hukuruhusu kupitisha hasa madokezo unayotaka — na humruhusu mpokeaji kubaki na kila kitu alicho nacho tayari.",
+  ],
+  "steps": [
+   ("Pakia nakala yako rudufu kwenye ukurasa wa Kushiriki", "Nenda jwsync.org/share.html kisha upakie faili lako la .jwlibrary."),
+   ("Chagua madokezo ya kusanyiko pekee", "Chagua lebo ya tukio kutoka kichujio cha lebo kilicho ndani ya kikagua cha madokezo kisha ugonge Chagua yote — orodha tayari ni hasa madokezo uliyoyawekea lebo. Viangazio vilivyoambatishwa na madokezo hayo huja pamoja."),
+   ("Tuma faili dogo la kushiriki", "JW Sync hutengeneza faili dogo lenye madokezo hayo pekee. Litume unavyopenda — programu ya ujumbe, barua pepe, AirDrop. Hakuna seva, hakuna akaunti."),
+   ("Familia na marafiki wanaliunganisha", "Kila mtu hufungua ukurasa uleule, hupakia faili lako pamoja na nakala yake rudufu, kisha hupata nakala rudufu mpya yenye madokezo yako yameongezwa. Madokezo yao wenyewe hayaandikwi juu kamwe, nayo madokezo yako yaliyoletwa hufika yakiwa na lebo ili yawe rahisi kupatikana."),
+  ],
+  "sections": [
+   ("Lebo hufanya hili liwe rahisi", "Ukiwekea madokezo yako lebo wakati wa tukio (tuseme, “Kusanyiko 2026”), kuyachagua baadaye ni mbofyo mmoja wa kichujio na Chagua yote. Inafaa kuanzisha lebo mpya mwanzoni mwa kusanyiko, mkusanyiko au mkutano wowote wa pekee kwa sababu hiyohiyo."),
+  ],
+  "faq": [
+   ("Je, ninaweza kushiriki na watu kadhaa kwa wakati mmoja?", "Ndiyo — faili la kushiriki ni faili tu. Litume kwa watu wengi upendavyo; kila mmoja hulliunganisha kwenye maktaba yake kivyake."),
+   ("Je, maktaba yangu yote itafichuliwa?", "Hapana. Ni madokezo unayochagua tu yaliyo ndani ya faili; sehemu nyingine ya maktaba yako inabaki ya faragha."),
+  ],
+ },
+
+ "share-jw-library-notes-by-tag": {
+  "title": "Shiriki madokezo ya JW Library ya lebo moja tu",
+  "h1": "Kushiriki madokezo yenye lebo moja tu",
+  "description": "Tuma mada moja, mradi mmoja au madokezo ya mwanafunzi mmoja badala ya maktaba yako yote — nazo lebo zako husafiri nayo, kwa hiyo hufika yakiwa yamepangwa upande wa pili.",
+  "intro": [
+   "Lebo kwa kawaida ndiyo kipimo cha asili cha kushiriki. Uliwekea lebo kila kitu ulichokusanya juu ya somo, kila kitu cha tukio moja, au kila kitu unachopitia na mtu mmoja — nayo seti hiyo, si maktaba yako yote, ndiyo mtu mwingine anataka kihalisi.",
+   "Kushiriki madokezo kwa JW Sync hufanya kazi dokezo kwa dokezo, kwa hiyo lebo ni orodha unayoweka alama tu. Madokezo huweka lebo zake yanapotoka, jambo linalomaanisha anayeyapokea anaweza kuchuja seti ileile hasa ndani ya maktaba yake baadaye.",
+  ],
+  "steps": [
+   ("Hakikisha madokezo yana lebo", "Yawekee lebo ndani ya JW Library unapoendelea, au fungua nakala yako rudufu ndani ya Kichunguzi cha Funzo kwenye jwsync.org kisha utumie kihariri cha lebo kuongeza lebo kwenye madokezo kwa wingi. Kuweka lebo kwa uthabiti sasa ndiko kunakofanya kushiriki kuwe kazi ya dakika moja baadaye."),
+   ("Fungua ukurasa wa Kushiriki kisha upakie nakala yako rudufu", "Nenda jwsync.org/share.html, chagua Tuma madokezo kisha upakie faili lako la .jwlibrary. Husomwa ndani ya kivinjari chako wala haliondoki kwenye kifaa chako kamwe."),
+   ("Chagua lebo kutoka kichujio, kisha Chagua yote", "Kikagua cha madokezo kina kichujio cha lebo kinachoorodhesha kila lebo iliyo ndani ya nakala yako rudufu pamoja na idadi ya madokezo chini yake. Chagua lebo yako nayo orodha hupungua hadi kufikia madokezo hayo hasa; Chagua yote huweka alama kwenye yote. Hiyo ndiyo uteuzi wote — mibofyo miwili."),
+   ("Tengeneza faili kisha ulitume", "JW Sync hujenga faili dogo la kushiriki lenye madokezo uliyoweka alama pekee. Litume kwa gumzo, barua pepe au AirDrop — hakuna seva inayohusika wala akaunti upande wowote."),
+   ("Wanaliongeza kwenye nakala yao rudufu", "Mtu mwingine hufungua ukurasa uleule, huchagua Pokea, huhakiki madokezo, kisha huyaongeza kwenye nakala yake rudufu. Lebo zako hufika pamoja na madokezo, pamoja na lebo ya alama ya uletaji, kwa hiyo seti nzima iko kichujio kimoja tu mbali kwake pia."),
+  ],
+  "sections": [
+   ("Kwa nini kushiriki lebo badala ya nakala rudufu", "Kukabidhi nakala rudufu kamili ya .jwlibrary hutoa kila kitu ulichowahi kuandika, na kuirejesha kungefuta madokezo ya mtu mwingine mwenyewe. Kushiriki uteuzi wenye lebo ni kinyume chake kwa pande zote mbili: huona tu ulichochagua, wala hapotezi chochote chake."),
+   ("Kupunguza zaidi, au kushiriki kuvuka lebo", "Kichujio cha lebo na kisanduku cha kutafuta hufanya kazi pamoja: chagua lebo, kisha uandike neno ili kuipunguza zaidi, nayo Chagua yote bado huweka alama kwenye kilicho mbele yako tu. Kutafuta pia hulinganisha majina ya lebo, kwa hiyo neno kuu linaloshirikiwa na lebo kadhaa huzikusanya kwa mpigo mmoja. Kila dokezo ndani ya orodha huonyesha lebo linazobeba, kwa hiyo unaweza kuona unachotuma kabla ya kukituma."),
+   ("Lebo za kuweka kwa ajili ya kushiriki", "Inafaa kuweka lebo chache zilizopo kwa ajili ya kushiriki tu — jina la tukio, somo unalofanyia utafiti kwa ajili ya wengine, mtu unayejifunza naye. Wakati wa kutuma kitu unapofika, hakuna kutafuta: seti tayari imekusanywa."),
+  ],
+  "faq": [
+   ("Je, lebo zangu huenda kwa mtu mwingine?", "Ndiyo. Madokezo yaliyoshirikiwa hubeba lebo zake, nao uletaji huwekewa lebo yake, kwa hiyo mpokeaji anaweza kupata, kupitia au kuondoa kundi zima baadaye."),
+   ("Itakuwaje ikiwa dokezo lina lebo kadhaa?", "Huonekana chini ya kila mojawapo ndani ya kichujio, nazo lebo zake zote husafiri nalo. Kuchuja kwa lebo moja hakuondoi nyingine kamwe."),
+   ("Je, kushiriki huondoa madokezo kwenye maktaba yangu?", "Hapana. Kushiriki hunakili madokezo kwenda faili dogo; nakala yako rudufu na programu yako haziguswi."),
+   ("Je, ninaweza kutuma lebo ileile kwa watu kadhaa?", "Ndiyo — faili la kushiriki ni faili la kawaida. Litume kwa watu wengi upendavyo, naye kila mmoja hulliongeza kwenye maktaba yake kivyake."),
+  ],
+ },
+
+ "share-notes-with-bible-student": {
+  "title": "Shiriki madokezo ya JW Library na mwanafunzi wa Biblia",
+  "h1": "Kushiriki madokezo ya funzo na mtu unayejifunza naye Biblia",
+  "description": "Tuma madokezo ya somo — maandiko, mifano, hoja ulizoandaa — moja kwa moja ndani ya JW Library ya mtu mwingine, bila kugusa chochote alichoandika mwenyewe.",
+  "intro": [
+   "Unapoandaa funzo, kazi nyingi huishia ndani ya madokezo yako mwenyewe: maandiko ya ziada, mfano uliofanya hoja ieleweke, jibu la swali alilouliza wiki iliyopita. Kuyasoma kwa sauti ni jambo moja; kumwachia nakala anayoweza kuisoma tena juma zima ni jambo jingine.",
+   "Kushiriki madokezo huweka madokezo yako uliyoandaa ndani ya maktaba yake kama madokezo halisi ya JW Library, yakiwa yameambatishwa kwenye aya na mistari ileile — si kama picha ya skrini wala ujumbe atakaoupitia kwa haraka.",
+  ],
+  "steps": [
+   ("Andaa madokezo ya somo ndani ya JW Library", "Andika madokezo kama kawaida yako, kwenye aya na maandiko ambayo somo linayagusa. Yapatie lebo — jina la mtu, au chapisho — ili seti iwe rahisi kuchagua baadaye."),
+   ("Fungua ukurasa wa Kushiriki kisha upakie nakala yako rudufu", "Tengeneza nakala rudufu (Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu), kisha ufungue jwsync.org/share.html, uchague Tuma madokezo kisha upakie faili. Haliondoki kwenye kifaa chako kamwe."),
+   ("Weka alama kwenye madokezo ya somo hili", "Chuja kikagua kwa lebo uliyotumia kisha ugonge Chagua yote, au utafute kisha uweke alama moja baada ya jingine. Tengeneza faili la kushiriki — kila kitu kingine ndani ya maktaba yako hubaki pale kilipo."),
+   ("Litume kisha umwongoze jinsi ya kupokea", "Anahitaji nakala rudufu yake mwenyewe kwanza — Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu. Kisha hufungua jwsync.org/share.html, huchagua Pokea, hupakia faili lako na nakala yake rudufu, kisha hupakua nakala rudufu iliyosasishwa."),
+   ("Anairejesha ndani ya JW Library", "Nakala Rudufu na Kurejesha → Rejesha, achague faili lililosasishwa, nayo madokezo yako huonekana ndani ya maktaba yake kando ya yake mwenyewe — yakiwa na lebo, ili ajue yapi yalitoka kwako."),
+  ],
+  "sections": [
+   ("Madokezo yake hayaandikwi juu kamwe", "Hii ndiyo tofauti muhimu na kutuma nakala rudufu. Kurejesha hubadilisha maktaba nzima ya kifaa; kupokea madokezo yaliyoshirikiwa huongeza juu yake. Chochote alichoandika mwenyewe — hata kwenye aya zilezile — hubaki hasa kama kilivyokuwa."),
+   ("Mdundo wa juma unaochukua dakika mbili", "Mara mnapokwisha kuifanya mara ya kwanza nyote wawili, rutuba ni fupi: andaa, weka alama, tuma, rejesha. Wengi huona ni rahisi zaidi kutuma madokezo mara tu baada ya kuandaa, ili mwanafunzi ayapate kabla ya funzo badala ya baada yake."),
+  ],
+  "faq": [
+   ("Je, mwanafunzi anahitaji akaunti au programu iliyosakinishwa?", "Hakuna akaunti popote, wala hakuna cha kusakinisha zaidi ya JW Library yenyewe — ukurasa wa kushiriki ni ukurasa wa kawaida wa wavuti."),
+   ("Itakuwaje ikiwa mwanafunzi hajawahi kutengeneza nakala rudufu?", "Hutengeneza moja kwanza, ndani ya JW Library chini ya Funzo la Kibinafsi → Nakala Rudufu na Kurejesha. Hata maktaba inayoonekana tupu hufanya kazi; nakala rudufu ndiyo madokezo yaliyoshirikiwa yanayoongezwa ndani yake."),
+   ("Je, ninaweza kuyarudisha madokezo baadaye?", "Faili ni lako kulituma au kutolituma. Mara mtu anapokuwa nalo, ni lake, sawasawa kama ujumbe wowote — kwa hiyo shiriki kile ambacho ungeridhika kukishiriki kwa maandishi."),
+  ],
+ },
+
+ "share-meeting-notes-with-family": {
+  "title": "Shiriki madokezo ya mkutano na familia yako au watu wa nyumbani",
+  "h1": "Kushiriki madokezo ya mkutano wa juma hili na familia",
+  "description": "Mtu alikuwa mgonjwa, kazini au hayupo — mtumie madokezo ya juma kama faili dogo analoweza kuliongeza kwenye JW Library yake, bila yeyote kati yenu kupoteza chochote.",
+  "intro": [
+   "Katika nyumba nyingi kila mtu huchukua madokezo yake kwenye kifaa chake, na daima kuna mtu anayekosa mkutano. Kusoma madokezo yako kwa sauti mezani hufanya kazi mara moja; kuyaweka ndani ya maktaba ya mtu mwingine ndiko kunakomwezesha kutumia nyenzo hiyo baadaye, mahali ambapo ataitafuta kikweli.",
+   "Kwa sababu kushiriki ni dokezo kwa dokezo badala ya nakala rudufu kwa nakala rudufu, watu kadhaa wanaweza kubadilishana madokezo kwa uhuru bila maktaba ya yeyote kuandikwa juu.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu ya kifaa ulichoandikia madokezo", "JW Library → Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu."),
+   ("Chagua madokezo ya juma", "Kwenye jwsync.org/share.html chagua Tuma madokezo, pakia nakala yako rudufu, kisha uweke alama kwenye madokezo ya juma hili — kutafuta kwa chapisho huyakusanya haraka, na ukiwekea madokezo ya juma lebo, kichujio cha lebo huyakusanya kwa mbofyo mmoja."),
+   ("Litume kwenye gumzo la familia", "Tengeneza faili la kushiriki kisha ulitume kwa njia ambayo nyumba tayari inazungumza — programu ya ujumbe, barua pepe, AirDrop. Ni faili dogo lenye madokezo uliyoweka alama pekee."),
+   ("Kila mtu analiongeza kwenye nakala yake rudufu", "Hufungua ukurasa uleule, huchagua Pokea, hupakia faili lako pamoja na nakala yake rudufu, hupakua nakala rudufu iliyosasishwa kisha huirejesha ndani ya JW Library."),
+  ],
+  "sections": [
+   ("Maktaba ya kila mtu hubaki yake", "Madokezo ya yeyote hayabadilishwi, wala hakuna anayelazimika kukabidhi maktaba yake yote ili kushiriki. Madokezo yaliyoletwa hufika chini ya lebo, kwa hiyo kila mtu anaweza kuona kwa mtazamo mmoja madokezo yapi yalitoka kwa mtu mwingine kisha kufuta kundi hilo baadaye asipotaka kulihifadhi."),
+   ("Ibada ya familia: kusanya badala ya kutawanya", "Kifaa kilekile hufanya kazi upande mwingine. Ikiwa kila mtu huchukua madokezo wakati wa ibada ya familia, mtu mmoja anaweza kukusanya mafaili ya kushiriki ya wengine kwenye nakala rudufu moja kisha kuishia na madokezo ya nyumba nzima yaliyounganishwa juu ya nyenzo ileile."),
+  ],
+  "faq": [
+   ("Je, vifaa vya watoto vinaweza kushiriki?", "Kifaa chochote kinachoweza kuendesha JW Library na kufungua ukurasa wa wavuti kinaweza. Hatua ni zilezile kwenye simu, kompyuta kibao au kompyuta."),
+   ("Je, tunahitaji kuwa kwenye mfumo uleule?", "Hapana. Android, iPhone, iPad na programu ya Windows zote hutumia muundo uleule wa nakala rudufu, kwa hiyo madokezo huvuka kati yavyo bila ubadilishaji."),
+  ],
+ },
+
+ "receive-shared-jw-library-notes": {
+  "title": "Mtu amenitumia madokezo ya JW Library — ninayafunguaje?",
+  "h1": "Kuongeza madokezo ambayo mtu ameshiriki nawe ndani ya JW Library yako",
+  "description": "Umetumiwa faili la madokezo yaliyoshirikiwa au kizuizi cha maandishi yaliyoshirikiwa. Hivi ndivyo unavyoyahakiki na kuyaongeza kwenye nakala yako rudufu ya JW Library bila kupoteza hata dokezo moja lako.",
+  "intro": [
+   "Madokezo ya JW Library yaliyoshirikiwa hufika kama faili dogo (linaloishia kwa .jwshare.json) au kama kizuizi cha maandishi yaliyobandikwa ndani ya ujumbe. JW Library yenyewe haiwezi kufungua chochote kati ya hivyo — lakini huhitaji iyafungue. Upande wa kupokea wa JW Sync husoma madokezo yaliyoshirikiwa, hukuonyesha yaliyomo, kisha huyaandika ndani ya nakala rudufu yako.",
+   "Badiliano lote hufanyika ndani ya kifaa chako. Hakuna akaunti, hakuna kinachopakiwa, nayo madokezo yako mwenyewe huongezewa, kamwe hayabadilishwi.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu ya maktaba yako mwenyewe kwanza", "Katika JW Library: Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu. Hili ndilo faili ambalo madokezo yaliyoshirikiwa yataongezwa ndani yake, kwa hiyo linapaswa kuwa la sasa."),
+   ("Fungua ukurasa wa Kushiriki kisha uchague Pokea", "Nenda jwsync.org/share.html kisha uchague Pokea madokezo."),
+   ("Pakia ulichotumiwa", "Chagua faili la .jwshare.json, au ubandike maandishi yaliyoshirikiwa moja kwa moja kwenye kisanduku ikiwa yalikuja kama ujumbe. Kwa vyovyote vile unapata hakikisho la kusoma tu la kila dokezo kabla ya chochote kuandikwa."),
+   ("Yaongeze kwenye nakala yako rudufu", "Pakia nakala yako rudufu mwenyewe, chagua lebo ambayo madokezo yaliyoletwa yatabeba, kisha uyaongeze. JW Sync hujenga faili la nakala rudufu lililosasishwa ili ulipakue."),
+   ("Rejesha nakala rudufu iliyosasishwa ndani ya JW Library", "Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Rejesha, kisha uchague faili lililosasishwa. Madokezo yaliyoshirikiwa sasa yako ndani ya maktaba yako, yakikaa kwenye aya na mistari sahihi."),
+  ],
+  "sections": [
+   ("Hakuna chochote chako kinachobadilishwa", "Madokezo yaliyoshirikiwa huongezwa kama madokezo mapya. Hata pale dokezo lililoshirikiwa linapotua kwenye aya ambayo tayari umeandika juu yake, yote mawili hunusurika — lako bila kuguswa, lake kando yake. Jambo moja la kukumbuka ni kanuni ya kawaida ya kurejesha: rejesha nakala rudufu iliyosasishwa, si ya zamani."),
+   ("Umebadili mawazo baadaye?", "Kila dokezo lililoletwa hubeba lebo uliyochagua ulipoliongeza. Fungua nakala yako rudufu ndani ya Kichunguzi cha Funzo, chuja kwa lebo hiyo, nawe unaweza kupitia au kufuta kundi zima kwa mpigo mmoja."),
+  ],
+  "faq": [
+   ("Faili lilifika likiwa limebadilishwa jina kuwa .txt au lilifunguka kama maandishi — je, limeharibika?", "Hapana. Programu za ujumbe hufanya hivyo mara nyingi. Nakili maandishi kisha uyabandike kwenye kisanduku cha Pokea; hufanya kazi vivyo hivyo."),
+   ("Je, ninahitaji nakala rudufu nzima ya mtumaji?", "Hapana. Faili la kushiriki lina madokezo aliyochagua kutuma pekee — hakuna kingine kutoka maktaba yake."),
+   ("Je, chochote hupakiwa ninapohakiki madokezo?", "Hapana. Kusoma faili lililoshirikiwa, kulihakiki na kuandika nakala rudufu iliyosasishwa vyote hufanyika ndani ya kivinjari chako kwenye kifaa chako."),
+  ],
+ },
+
+ "share-notes-with-study-group": {
+  "title": "Shiriki madokezo ya utafiti na kikundi cha funzo",
+  "h1": "Kushiriki utafiti na kikundi — na kukusanya wao tena",
+  "description": "Faili moja, watu wengi: tuma seti ya madokezo ya utafiti kwa kila mtu anayejifunza somo lilelile, kisha ukusanye wanachotuma kurudi kuwa seti moja iliyounganishwa yako mwenyewe.",
+  "intro": [
+   "Wakati watu kadhaa wanapochimba somo lilelile, utafiti kwa kawaida huishia umetawanyika — mmoja alipata marejeo mtambuka, mwingine historia ya nyuma, wa tatu mifano. Kusomeana picha za skrini si sawa na kuwa na nyenzo ndani ya maktaba yako mwenyewe, kwenye mistari ileile, ikitafutika mwaka ujao.",
+   "Kwa sababu faili la kushiriki ni faili tu, uhamishaji mmoja huhudumia kikundi kizima, nayo njia ileile hubeba kazi yao kurudi kwako.",
+  ],
+  "steps": [
+   ("Wekea utafiti wako lebo unapoukusanya", "Lipatie somo lebo ndani ya JW Library ili seti ibaki pamoja. Ndani ya Kichunguzi cha Funzo unaweza kuongeza lebo kwenye madokezo kwa wingi kama hukuyawekea lebo wakati ule."),
+   ("Tengeneza faili moja la kushiriki kwa ajili ya kikundi", "Kwenye jwsync.org/share.html chagua Tuma madokezo, pakia nakala yako rudufu, chagua lebo ya somo kutoka kichujio cha lebo, gonga Chagua yote kisha utengeneze faili."),
+   ("Litume mara moja", "Tuma faili lilelile kwa kila mtu — gumzo la kikundi, barua pepe kwa watu kadhaa, chochote kikundi kinachotumia tayari. Hakuna maandalizi ya kila mtu wala nakala kwenye seva."),
+   ("Omba wao pia kwa kubadilishana", "Kila mtu anaweza kufanya vivyo hivyo kutoka upande wake. Ongeza kila faili unalopokea kwenye nakala yako rudufu mmoja baada ya mwingine, ukipa kila uletaji lebo yake — jina la mtumaji hufanya kazi vizuri — ili uweze kujua daima utafiti wa nani ni wa nani."),
+  ],
+  "sections": [
+   ("Seti moja iliyounganishwa, bado inayotambulika", "Baada ya raundi chache una utafiti wote wa kikundi juu ya somo ndani ya maktaba yako mwenyewe, kwenye aya na mistari sahihi, kila mchango ukiwa na lebo ya chanzo chake. Utafutaji huupata wote kwa mpigo mmoja; lebo hukuruhusu kuutenganisha tena wakati wowote unapotaka."),
+   ("Hakuna anayelazimika kufichua maktaba yake", "Kila mtu hushiriki madokezo anayoweka alama pekee. Sehemu nyingine ya maktaba ya kila mtu — funzo la faragha, vikumbusho vya binafsi, kila kitu kingine — haiingii ndani ya faili kamwe."),
+  ],
+  "faq": [
+   ("Je, kuna kikomo cha madokezo mangapi ninayoweza kushiriki kwa mpigo mmoja?", "Kivitendo, hapana. Madokezo ni madogo; seti kubwa bado hutoa faili unaloweza kulituma ndani ya ujumbe."),
+   ("Itakuwaje ikiwa watu wawili wataninitumia dokezo lilelile?", "Utaliona mara mbili, kila moja chini ya lebo ya mtumaji wake. Utafutaji wa Kichunguzi cha Funzo hufanya karibu-nakala ziwe rahisi kuonekana na kufutwa."),
+   ("Je, mtu anaweza kupokea bila kutuma chochote kurudi?", "Ndiyo. Kupokea na kutuma vinajitegemea — hakuna anayelazimika kushiriki ili aweze kuongeza alichopewa."),
+  ],
+ },
+
+ "share-talk-preparation-notes": {
+  "title": "Kabidhi utafiti ulio nyuma ya hotuba au mgawo",
+  "h1": "Kupitisha utafiti wako wa hotuba na mgawo",
+  "description": "Wewe ndiye ulifanya uchimbaji kwa ajili ya hotuba, sehemu au mgawo. Hivi ndivyo unavyokabidhi utafiti kwa yeyote anayeuhitaji baadaye — kama madokezo halisi ndani ya maktaba yake, au kama maandishi sahili kwa ajili ya hati.",
+  "intro": [
+   "Maandalizi hutumika mara moja tu mara chache. Maandiko uliyoyafuatilia, historia uliyoisoma, jinsi ulivyoamua hatimaye kuweka hoja — mtu atakayeshughulikia nyenzo ileile baadaye angependelea kuanzia hapo kuliko kwenye ukurasa mtupu.",
+   "JW Sync hukupa njia mbili za kuupitisha, nazo hufaa watu tofauti: kama madokezo yanayotua ndani ya JW Library ya mtu mwingine, au kama maandishi sahili anayoweza kuyabandika kwenye hati.",
+  ],
+  "steps": [
+   ("Kusanya utafiti pamoja chini ya lebo moja", "Unapojiandaa, wekea madokezo lebo ya mada au ya mgawo. Ikiwa tayari yameandikwa bila lebo, fungua nakala yako rudufu ndani ya Kichunguzi cha Funzo kisha uyawekee lebo kwa wingi ndani ya dakika kadhaa."),
+   ("Amua umbo linalomfaa mtu mwingine", "Anayejifunza ndani ya JW Library anataka madokezo ndani ya maktaba yake. Anayejenga hati anataka maandishi. Unaweza kufanya yote mawili kutoka seti ileile."),
+   ("Kutuma madokezo: tumia ukurasa wa Kushiriki", "Kwenye jwsync.org/share.html chagua Tuma madokezo, pakia nakala yako rudufu, chuja kwa lebo uliyotumia kisha ugonge Chagua yote, kisha utengeneze faili. Yeye hulliongeza kwenye nakala yake rudufu kisha huirejesha — madokezo yake mwenyewe hayaguswi."),
+   ("Kutuma maandishi: hamisha kutoka Kichunguzi cha Funzo", "Chuja hadi seti ileile kisha unakili au uhamishe kama Markdown au maandishi sahili. Umbizo hunusurika, kwa hiyo muhtasari uliopangwa hubaki umepangwa unapobandikwa kwenye hati."),
+  ],
+  "sections": [
+   ("Jiwekee nakala, katika umbo utakalolipata tena", "Uhamishaji uleule unafaa kuuweka kwa matumizi yako mwenyewe. Lebo pamoja na kipindi cha tarehe hufanya maandalizi yote yapatikane miaka baadaye, ambao ndio hasa wakati utakapoyahitaji — nako kuchopoa kwa tarehe kwa Kichunguzi cha Funzo hugeuza dirisha lolote la muda kuwa faili lake."),
+  ],
+  "faq": [
+   ("Je, maandiko yatabaki yameunganishwa na mistari sahihi?", "Ndiyo — madokezo yaliyoshirikiwa huweka aya na mstari yaliyoambatishwa navyo, kwa hiyo hutua mahali sahihi ndani ya maktaba ya mtu mwingine."),
+   ("Je, ninaweza kushiriki madokezo yaliyo na viangazio juu yake?", "Ndiyo. Viangazio vilivyoambatishwa na madokezo unayoshiriki husafiri navyo."),
+  ],
+ },
+
+ "weekly-meeting-preparation-jw-library-notes": {
+  "title": "Jiandae kwa mkutano kwa kutumia madokezo uliyokwisha kuandika",
+  "h1": "Maandalizi ya juma kwa madokezo uliyo nayo tayari",
+  "description": "Umekwisha kujifunza nyenzo hii. Hii hapa ni rutuba fupi ya juma inayoleta juu madokezo yako ya zamani, viangazio na majibu uliyojaza juu ya chapisho lilelile kabla hujajiandaa tena.",
+  "intro": [
+   "Watu wengi hujiandaa kila juma kutoka ukurasa mtupu, ingawa wameandika juu ya somo lilelile — wakati mwingine andiko lilelile — mara kadhaa hapo awali. Mawazo hayo ya awali yamekaa ndani ya maktaba yako; tatizo pekee ni kwamba hakuna kinachoyarudisha kwako wakati unaofaa.",
+   "Rutuba ya dakika tano mwanzoni mwa maandalizi hurekebisha hilo, nayo haitumii chochote isipokuwa nakala rudufu uliyo nayo tayari.",
+  ],
+  "steps": [
+   ("Pakia nakala rudufu ya sasa kwenye Kichunguzi cha Funzo", "Tengeneza nakala rudufu ndani ya JW Library, kisha uifungue kwenye jwsync.org. Kila kitu husomwa ndani ya kivinjari chako."),
+   ("Tafuta somo kabla hujaanza", "Tafuta andiko la mada, somo au chapisho. Chochote ulichoandika juu yake katika miaka iliyopita huja pamoja, kutoka kila chapisho linamokuwepo."),
+   ("Angalia majibu uliyojaza", "Mwonekano wa Majibu ya Funzo hukusanya majibu uliyoandika kwenye maswali ya funzo, kwa hiyo raundi zilizotangulia kupitia nyenzo ileile zipo za kujengea juu badala ya kuzirudia."),
+   ("Ongeza kinachokosekana, kisha urudishe", "Madokezo yanaweza kuhaririwa au kuongezwa hapo hapo — kichwa, maandishi, lebo, rangi ya kiangazio. Hamisha nakala rudufu iliyohaririwa kisha uirejeshe ndani ya JW Library, nayo maandalizi yako yako ndani ya programu kwa ajili ya mkutano."),
+  ],
+  "sections": [
+   ("Kwa nini madokezo ya zamani yanahesabika", "Kupitia ulichohitimisha mara ya mwisho hugeuza maandalizi kuwa kitu kinachojirundika. Unaacha kugundua upya hoja zilezile na kuanza kuzijengea juu — nayo madokezo unayoongeza juma hili huwa mwanzo wa raundi inayofuata."),
+   ("Toleo laini zaidi: acha madokezo yaje kwako", "Ikiwa utafutaji wa kila juma unahisi kama kazi, Kumbusho kwenye ukurasa wa Takwimu za Funzo huleta madokezo machache ya zamani chenyewe kila siku, ikiwa ni pamoja na yale uliyoandika tarehe kama hii katika miaka iliyopita. Faida ileile, bila rutuba ya kukumbuka."),
+  ],
+  "faq": [
+   ("Je, kuhariri ndani ya kivinjari hubadilisha maktaba yangu moja kwa moja?", "Hapana. Unahamisha nakala rudufu iliyosasishwa kisha uirejeshe ndani ya JW Library — programu hubadilishwa tu na urejeshaji unaoufanya wewe mwenyewe."),
+   ("Je, nakala yangu rudufu hupakiwa ninapoitafuta?", "Hapana. Faili husomwa hapo hapo ndani ya kivinjari chako; hakuna kinachotumwa popote."),
+  ],
+ },
+
+ "print-jw-library-notes": {
+  "title": "Jinsi ya kuchapisha madokezo yako ya JW Library",
+  "h1": "Kupata madokezo yako ya JW Library kwenye karatasi",
+  "description": "JW Library haina kitufe cha kuchapisha. Hamisha madokezo yako kama maandishi au Markdown, uyabandike kwenye hati yoyote, kisha uchapishe — jarida la funzo, seti ya madokezo kwa mtu asiye na programu, au kumbukumbu.",
+  "intro": [
+   "Hakuna njia ya kuchapisha kutoka JW Library, nazo picha za skrini ya simu husomeka vibaya. Lakini madokezo ni yako, na kuyapeleka kwenye hati inayoweza kuchapishwa ni rahisi mara unapoweza kusoma faili la nakala rudufu.",
+   "Kichunguzi cha Funzo husoma nakala rudufu ya .jwlibrary ndani ya kivinjari chako kisha hukuruhusu kunakili au kuhamisha uteuzi wowote wa madokezo kama maandishi sahili au Markdown — ambavyo kila programu ya kuchakata maneno, programu ya madokezo na printa tayari huvielewa.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu kisha uifungue", "JW Library → Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu, kisha upakie faili kwenye jwsync.org."),
+   ("Punguza hadi kile unachotaka kwenye karatasi", "Chuja kwa chapisho, lebo, rangi ya kiangazio au kipindi cha tarehe, au utafute somo. Kuchapisha kila kitu kunawezekana, lakini seti iliyochujwa kwa kawaida hutoa hati yenye manufaa zaidi."),
+   ("Nakili au hamisha kama maandishi au Markdown", "Toa uteuzi kama Markdown au maandishi sahili. Herufi nene, italiki na orodha hunusurika, kwa hiyo madokezo yaliyopangwa hubaki yamepangwa kwenye ukurasa."),
+   ("Bandika kwenye hati kisha uchapishe", "Programu yoyote ya kuchakata maneno au ya madokezo itatosha. Weka vichwa na kingo unavyotaka, kisha uchapishe au uhifadhi kama PDF."),
+  ],
+  "sections": [
+   ("Kutengeneza jarida la funzo", "Kipindi cha tarehe ndicho kipimo cha asili cha jarida lililochapishwa — mwaka wa madokezo, au kipindi kinachofunika chapisho moja. Kuchopoa kwa tarehe hukupa seti safi ya kimpangilio ya kuchapisha au kujalidi, jambo ambalo ni la kuridhisha kuwa nalo nje ya skrini."),
+   ("Kuchapisha kwa ajili ya mtu asiyetumia programu", "Si kila mtu hujifunza kutoka kifaa. Seti iliyochapishwa ya madokezo juu ya nyenzo ya sasa ina manufaa kikweli kwa mtu anayependelea karatasi, nayo huchukua dakika mbili zilezile kama uhamishaji mwingine wowote."),
+  ],
+  "faq": [
+   ("Je, ninaweza kuchapisha pia viangazio vyangu?", "Mwonekano wa viangazio huorodhesha vifungu ulivyoviangazia, nayo orodha hiyo hunakiliwa kama maandishi kando ya madokezo yako."),
+   ("Je, kuhamisha hubadilisha chochote ndani ya JW Library?", "Hapana. Kuhamisha husoma nakala ya nakala yako rudufu; faili lako la awali na programu haviguswi."),
+  ],
+ },
+
+ "clean-up-duplicate-jw-library-notes": {
+  "title": "Safisha madokezo ya JW Library yaliyojirudia na matupu",
+  "h1": "Kuondoa madokezo yaliyojirudia, madokezo matupu na takataka",
+  "description": "Umerejesha nakala rudufu mara mbili, au umeleta madokezo yaleyale tena? Daktari wa Maktaba huchunguza faili lako la .jwlibrary ndani ya kivinjari, hupata nakala zilizojirudia na madokezo matupu, kisha hutoa nakala safi.",
+  "intro": [
+   "Maktaba hukusanya takataka. Kurejesha nakala rudufu kwenye kifaa ambacho tayari kilikuwa na baadhi ya madokezo yaleyale, kuleta seti iliyoshirikiwa mara mbili, au miaka ya madokezo yaliyoandikwa nusu na kutokamilishwa kamwe — kila moja huacha kitu nyuma, nayo JW Library haikupi njia ya kufagia kwa wingi.",
+   "Daktari wa Maktaba ni ukaguzi wa afya wa bure kwa faili la .jwlibrary. Huchunguza nakala rudufu ndani ya kivinjari chako, hukuambia kwa lugha rahisi alichokipata, kisha hurekebisha kinachoweza kurekebishwa kwa mgusa mmoja.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu kwanza — kama kawaida", "JW Library → Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu. Liweke faili hili; ndilo kimbilio lako."),
+   ("Endesha ukaguzi wa afya", "Fungua jwsync.org, pakia nakala rudufu kisha uanzishe Daktari wa Maktaba. Huchunguza maudhui na muundo wa faili bila kulituma popote."),
+   ("Soma alichokipata", "Nakala zilizojirudia, madokezo matupu na takataka nyingine huorodheshwa wazi, pamoja na idadi, ili uone ukubwa wa tatizo kabla hujabadilisha chochote."),
+   ("Rekebisha kisha upakue nakala safi", "Mgusa mmoja hutekeleza marekebisho kisha hutoa faili jipya la .jwlibrary lililosafishwa. Lako la awali halibadilishwi kamwe."),
+   ("Rejesha faili safi", "Nakala Rudufu na Kurejesha → Rejesha, kisha uchague faili lililosafishwa. Maktaba yako ni ileile, ukiondoa takataka."),
+  ],
+  "sections": [
+   ("Jinsi nakala zilizojirudia zinavyotokea mwanzoni", "Karibu daima kupitia urejeshaji. Ukirejesha nakala rudufu kwenye kifaa ambacho tayari kilibeba baadhi ya nyenzo ileile — au ukirejesha faili lilelile mara mbili kupitia njia tofauti — programu haina njia ya kujua kuwa imekwisha kuona madokezo hayo."),
+   ("Kuunganisha ndiyo njia ya kuziepuka", "Ndiyo hasa sababu kuunganisha nakala rudufu mbili ni salama zaidi kuliko kurejesha moja juu ya nyingine: muunganisho hutambua nyenzo iliyopo tayari kisha huihifadhi mara moja. Ukaguzi uleule hufanyika ndani ya kila muunganisho, kwa hiyo nakala rudufu iliyounganishwa hutoka safi hata kama mafaili yaliyoingia hayakuwa safi."),
+  ],
+  "faq": [
+   ("Je, itafuta madokezo ninayoyahitaji kikweli?", "Huondoa nakala zilizojirudia hasa na madokezo matupu — nyenzo isiyo na kitu ndani yake cha kupotea. Na kwa kuwa huandika faili jipya badala ya kuhariri lako, la awali lipo daima la kurudia."),
+   ("Je, inaweza kuokoa madokezo niliyofuta ndani ya programu?", "Hapana. Ikiwa dokezo lilifutwa ndani ya JW Library kabla nakala rudufu haijatengenezwa, halimo ndani ya faili ili kuokolewa — nakala rudufu ya zamani ndipo mahali pa kuangalia."),
+  ],
+ },
+
+ "backup-jw-library-before-phone-repair": {
+  "title": "Tengeneza nakala rudufu ya JW Library kabla ya kuweka upya kiwandani au kutengeneza",
+  "h1": "Kabla ya kuweka upya kiwandani, kutengeneza au kuuza simu",
+  "description": "Kuweka upya hufuta madokezo ya JW Library pamoja na kila kitu kingine, nayo vifaa vya kuhamisha simu havibebi. Tengeneza nakala rudufu, thibitisha kuwa inafunguka kikweli, kisha uweke upya bila hatari yoyote.",
+  "intro": [
+   "Weka upya simu, ipeleke kutengenezwa, au umpe mtu mwingine, nayo data ya funzo la kibinafsi ya JW Library huondoka nayo. Picha na programu hurudi kutoka nakala rudufu ya wingu; miaka ya madokezo, viangazio na alamisho kwa kawaida hairudi, kwa sababu vifaa vya kuhamisha simu huruka data ya ndani ya programu.",
+   "Suluhisho huchukua dakika tano, nayo hatua ambayo watu huikosa ndiyo inayohesabika zaidi: kuhakikisha kuwa faili la nakala rudufu linasomeka kikweli kabla kifaa hakijafutwa.",
+  ],
+  "steps": [
+   ("Tengeneza nakala rudufu", "JW Library → Funzo la Kibinafsi → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu. Unapata faili la .jwlibrary — kwa kawaida megabaiti chache tu."),
+   ("Litoe kwenye kifaa", "Jitumie kwa barua pepe, au uliweke kwenye Drive, iCloud au folda ya kompyuta. Nakala rudufu iliyopo kwenye simu unayokaribia kuifuta si nakala rudufu."),
+   ("Thibitisha kuwa linafunguka kabla hujafuta chochote", "Pakia faili kwenye jwsync.org kisha uliangalie — madokezo, viangazio na alamisho vyote vinapaswa kuwepo, nao ukaguzi wa afya utaonyesha chochote kisicho sawa na faili. Hilo ndilo lengo lote la zoezi hili: kugundua kuwa faili halisomeki baadaye ni kuchelewa mno."),
+   ("Weka upya, kisha urejeshe", "Baada ya kuweka upya au kutengeneza, sakinisha JW Library, ujiandikishe, kisha Nakala Rudufu na Kurejesha → Rejesha kisha uchague faili lako."),
+   ("Umetumia simu ya kuazima katikati? Unganisha, usiandike juu", "Ikiwa uliandika madokezo kwenye kifaa cha muda, tengeneza nakala rudufu yake pia kisha uunganishe mafaili yote mawili kwenye jwsync.org kabla ya kurejesha — la sivyo kurejesha nakala rudufu ya zamani hufuta chochote ulichoandika ukiwa unasubiri."),
+  ],
+  "sections": [
+   ("Kwa nini kuthibitisha kunastahili dakika ya ziada", "Uhamishaji uliokatizwa, hifadhi za wingu zinazoharibu mafaili na viendelezi vilivyobadilishwa njiani vyote hutoa nakala rudufu zinazoonekana sawa ndani ya folda kisha hushindwa wakati wa kurejesha. Kufungua faili kwanza hugeuza tatizo la kimya kuwa lile unaloweza bado kulirekebisha, wakati kifaa cha awali bado kina data."),
+   ("Weka faili baada ya kurejesha", "Usilifute mara kifaa kipya kinapofanya kazi. Nakala rudufu za zamani ndiyo njia pekee ya kurudi kutoka dokezo lililofutwa kwa bahati mbaya miezi baadaye, nazo hazigharimu chochote kuziweka."),
+  ],
+  "faq": [
+   ("Je, machapisho niliyopakua yatarudi?", "Nakala rudufu hubeba data yako ya funzo la kibinafsi — madokezo, viangazio, alamisho, lebo na orodha za kucheza. Machapisho hupakuliwa tu upya baadaye."),
+   ("Je, faili hufanya kazi nikihamia chapa au mfumo tofauti wa simu?", "Ndiyo. Muundo wa .jwlibrary ni uleule kwenye Android, iPhone, iPad na Windows."),
+  ],
+ },
+
+ "jw-library-notes-missing-after-update": {
+  "title": "Madokezo ya JW Library yamekosekana baada ya sasisho au usakinishaji upya",
+  "h1": "Madokezo yameondoka baada ya sasisho la programu, usakinishaji upya au urejeshaji",
+  "description": "Madokezo yako yametoweka baada ya kusasisha, kusakinisha upya au kujiandikisha tena. Cha kufanya kwanza, kisichopaswa kufanywa, na jinsi ya kuyarudisha bila kupoteza chochote ulichoandika tangu wakati huo.",
+  "intro": [
+   "Kufungua JW Library baada ya sasisho kisha kukuta madokezo yako yameondoka kunatisha, na katika idadi kubwa ya kesi yanaweza kurudishwa. Kinachohesabika ni unachokifanya katika dakika chache zinazofuata — hasa, kutokufanya kile kimoja kinachogeuza hali inayoweza kurekebishwa kuwa hasara ya kudumu.",
+   "Ni wakati usiopendeza: JW Library hufunguka, nayo madokezo hayapo. Kabla ya kitu kingine chochote, ushauri mmoja — usiharakishe. Sehemu kubwa ya kinachofanya hali hii isirekebishike hufanyika katika dakika kumi za kwanza, kwa kuandika juu ya ileile nakala rudufu ambayo bado ina madokezo yaliyokosekana.",
+   "Pitia hatua zilizo hapa chini kwa mpangilio. Lengo ni kuishia na faili moja lenye madokezo ya zamani na chochote ulichoandika tangu wakati huo.",
+  ],
+  "steps": [
+   ("Usiandike bado juu ya nakala zako rudufu", "Zuia kutengeneza nakala rudufu mpya juu ya ya zamani, wala usirejeshe chochote bila kuangalia. Faili la nakala rudufu la zamani ndipo mahali penye uwezekano mkubwa zaidi madokezo yako bado yalipo."),
+   ("Tafuta nakala rudufu mpya zaidi uliyo nayo", "Angalia viambatisho vya barua pepe, Google Drive, iCloud Drive, folda ya vipakuliwa ya kompyuta yako na kifaa kingine chochote ulichowahi kurejeshea. Nakala rudufu ni ndogo, kwa hiyo watu mara nyingi huwa na nakala nyingi kuliko wanavyokumbuka."),
+   ("Angalia ndani ya faili kabla ya kulirejesha", "Pakia mgombea kwenye jwsync.org kisha uone kilichomo hasa — madokezo mangapi, kutoka machapisho yapi, hadi tarehe gani. Hilo hukuambia kama ndilo faili sahihi la kutumia, kabla hujajitolea kurejesha."),
+   ("Tengeneza pia nakala rudufu ya kifaa cha sasa", "Hata kikionekana kitupu, tengeneza nakala rudufu yake. Ikiwa umeandika chochote tangu madokezo yalipotoweka, faili hili ndiyo nakala pekee yake."),
+   ("Unganisha hizo mbili, kisha urejeshe", "Unganisha nakala rudufu ya zamani na ya sasa kwenye jwsync.org. Matokeo yana madokezo yaliyookolewa na kila kitu kilichoandikwa tangu wakati huo, nakala zilizojirudia zikihifadhiwa mara moja. Rejesha faili hilo lililounganishwa — kamwe si nakala rudufu ya zamani peke yake."),
+  ],
+  "sections": [
+   ("Kwa nini kurejesha nakala rudufu ya zamani peke yake ni hatua isiyofaa", "Urejeshaji hubadilisha maktaba ya kifaa kabisa. Ukirejesha nakala rudufu ya zamani moja kwa moja, unarudisha madokezo yaliyokosekana kisha unapoteza kila kitu kilichoandikwa baada ya nakala hiyo kutengenezwa. Kuunganisha kwanza ndiko kunakofanya uokoaji usiwe na hasara."),
+   ("Ikiwa nakala rudufu yenyewe hairejeshwi", "Faili linalotoa hitilafu wakati wa kurejesha si lazima liwe limepotea. Endesha ukaguzi wa afya juu yake — uharibifu kutokana na vipakuliwa vilivyokatizwa, usawazishaji wa wingu au kiendelezi kilichobadilishwa jina mara nyingi unaweza kurekebishwa, nayo nakala iliyosafishwa itarejeshwa kama kawaida."),
+   ("Kwanza: usitengeneze nakala rudufu mpya bado", "Ikiwa madokezo yametoweka, zuia mwitikio wa kutengeneza nakala rudufu mara moja. Nakala rudufu hunasa hali ya sasa, na ikiwa hali ya sasa ni ile tupu unahatarisha kuandika juu ya faili zuri uliloliwa nalo tayari. Gundua kwanza nakala rudufu zipi zipo — ndani ya Downloads, Files, barua pepe, au hifadhi ya wingu — kisha ndipo uamue cha kufanya. Hakuna kitu kwenye kifaa kinachoboreshwa na nakala rudufu iliyotengenezwa kwa hofu."),
+   ("Kwa nini sasisho linaweza kuonekana kupoteza madokezo", "Sababu ya kawaida si kufutwa. Sasisho linaweza kuiacha programu ikielekeza kwenye hifadhidata mpya tupu wakati ya zamani bado ipo kwenye hifadhi; usakinishaji upya — ikiwa ni pamoja na ule uliofanyika wenyewe kutokana na sasisho la duka lililoshindwa katikati — huanzisha programu kutoka mwanzo; na kwenye vifaa vinavyoshirikiwa au vyenye wasifu kadhaa programu inaweza kuishia ikifanya kazi chini ya wasifu tofauti na wa awali. Katika kila kesi madokezo si kwamba yameondoka kama vile hayajapakiwa kwa sasa, ambayo pia ndiyo sababu kurejesha kutoka nakala rudufu kwa kawaida hurudisha kila kitu vizuri."),
+   ("Kuokoa nakala rudufu ya zamani bila kutupa kazi mpya", "Ikiwa umejifunza tangu nakala rudufu itengenezwe, urejeshaji wa kawaida hubadilishana hasara moja kwa nyingine: hurudisha madokezo ya zamani kisha huondoa chochote kipya zaidi. Njia ya kulizunguka ni kutengeneza nakala rudufu ya hali ya sasa kwenye faili tofauti, kuiunganisha na nakala rudufu ya zamani ili seti zote mbili za madokezo ziwepo ndani ya faili moja, kisha kurejesha matokeo yaliyounganishwa. Unaishia na madokezo yaliyookolewa na yale ya karibuni pamoja badala ya kuchagua kati yayo."),
+   ("Ikiwa programu ilijisakinisha upya yenyewe", "Usakinishaji upya husafisha hifadhi ya ndani ya programu, kwa hiyo chochote kisichokuwa ndani ya nakala rudufu hakiwezi kuokolewa — hakuna nakala ya wingu ya kurudia. Angalia kila mahali ambapo faili la .jwlibrary lingeweza kuhifadhiwa kabla hujahitimisha kuwa hakuna, ikiwa ni pamoja na folda yako ya barua pepe zilizotumwa na hifadhi yoyote ya wingu uliyowahi kuhifadhia. Ukipata moja, irejeshe, kisha baadaye uweke nakala rudufu nje ya kifaa."),
+   ("Mara kila kitu kinaporudi", "Madokezo yako yakisharudi, tengeneza nakala rudufu moja zaidi kisha uihifadhi nje ya kifaa — tukio ulilotoka kulipitia ndilo hoja yake. Ikiwa ilibidi uunganishe nakala rudufu ya zamani na hali ya sasa ili kufika hapa, weka pia mafaili yote mawili ya chanzo: ni picha zenye tarehe, na kuwa na nyingi zaidi ndiko kulikofanya uokoaji uwezekane mwanzoni."),
+  ],
+  "faq": [
+   ("Je, madokezo bado yapo mahali fulani kwenye kifaa?", "Si katika umbo unaloweza kulifikia kutoka nje ya programu. Uokoaji kihalisi humaanisha faili la nakala rudufu la awali — ndiyo sababu kuweka za zamani kunahesabika sana."),
+   ("Je, kujiandikisha tena hurudisha madokezo?", "Hapana. Data ya funzo la kibinafsi haishikiliwi ndani ya akaunti; hukaa kwenye kifaa nayo husafiri kupitia mafaili ya nakala rudufu pekee."),
+   ("Itakuwaje ikiwa nakala rudufu pekee niliyo nayo ni ya miezi kadhaa iliyopita?", "Iunganishe na nakala rudufu ya kifaa kilivyo sasa. Utaokoa kila kitu kilicho ndani ya faili la zamani, na kubaki na kila kitu kifaa bado kinacho, bila kuchagua kati yavyo."),
+   ("Je, madokezo yangu yameondoka kikweli?", "Si lazima. Ikiwa nakala rudufu ipo mahali popote, kila kitu kilichomo kinaweza kuokolewa kikamilifu. Kisichoweza kuokolewa ni kazi iliyofanywa baada ya nakala rudufu ya karibuni zaidi kutengenezwa pekee."),
+   ("Je, ninaweza kuchanganya nakala rudufu ya zamani na kilicho kwenye kifaa sasa?", "Ndiyo — tengeneza nakala rudufu ya hali ya sasa kwanza, kisha uunganishe faili hilo na la zamani kisha urejeshe matokeo. Seti zote mbili za madokezo huishia kwenye maktaba ileile."),
+   ("Je, kurejesha nakala rudufu ya zamani kutafuta madokezo yangu ya karibuni?", "Peke yake, ndiyo, kwa sababu urejeshaji hubadilisha data ya kifaa. Unganisha nakala rudufu ya sasa na ya zamani kwanza kisha urejeshe faili lililounganishwa badala yake."),
+   ("Je, nisakinishe programu upya ili kurekebisha?", "Hapana — kusakinisha upya husafisha hifadhi ya ndani ya programu nako huondoa nafasi yoyote ya kuokoa kilicho bado kwenye kifaa. Tafuta nakala rudufu iliyopo kwanza, kisha uchukulie kusakinisha upya kuwa hatua ya mwisho baada ya kuwa nayo."),
+  ],
+ },
+
+ "help-family-member-move-jw-library-notes": {
+  "title": "Msaidie mtu wa familia kuhamisha madokezo yake ya JW Library",
+  "h1": "Kumsaidia mtu mwingine kuhamisha au kuokoa madokezo yake ya JW Library",
+  "description": "Wewe ndiye unayeombwa kutengeneza simu. Hii hapa ni njia fupi zaidi na ya kuaminika ya kuhamisha madokezo ya JW Library ya ndugu kwenda kifaa kipya — ikiwa ni pamoja na jinsi ya kufanya hivyo bila kusoma madokezo yake.",
+  "intro": [
+   "Mapema au baadaye mtu hukukabidhi simu yake pamoja na mpya kando yake. Madokezo ya JW Library ndiyo sehemu isiyohama yenyewe, nayo mara nyingi ndiyo sehemu inayohesabika zaidi — miaka ya funzo ambayo hakuna kifaa cha kuhamisha kitakachoibeba.",
+   "Mchakato ni uleule kama kujifanyia mwenyewe, pamoja na jambo moja la ziada linalofaa kufikiriwa kwanza: kazi hufanyika kwenye kifaa cha nani.",
+  ],
+  "steps": [
+   ("Mwongoze jinsi ya kutengeneza nakala rudufu kwenye kifaa cha zamani", "JW Library → Funzo la Kibinafsi → menyu ya vitone vitatu → Nakala Rudufu na Kurejesha → Tengeneza nakala rudufu. Huhifadhi faili la .jwlibrary. Ikiwa hupo pamoja naye, sehemu hii anaweza kuifanya kwa simu."),
+   ("Peleka faili mahali unapolihitaji", "Mwambie ajitumie kwa barua pepe, au akushirikishe. Ni dogo vya kutosha kutumwa kupitia programu yoyote ya ujumbe."),
+   ("Hakikisha faili linafunguka", "Lipakie kwenye jwsync.org kisha uthibitishe madokezo yapo. Kufanya hivi kabla kifaa cha zamani hakijafutwa au kupewa mtu ndiko kunakogeuza mshangao mbaya kuwa jambo lisilo na maana."),
+   ("Unganisha ikiwa kifaa kipya tayari kina madokezo", "Ikiwa amekuwa akitumia simu mpya kwa muda, tengeneza nakala rudufu yake pia kisha uunganishe mafaili yote mawili — la sivyo kurejesha nakala rudufu ya zamani hufuta kila kitu alichoandika kwenye kifaa kipya."),
+   ("Mwongoze kupitia urejeshaji", "Kwenye kifaa kipya: Nakala Rudufu na Kurejesha → Rejesha, kisha achague faili. Madokezo, viangazio, alamisho na lebo vyote huonekana."),
+  ],
+  "sections": [
+   ("Kuifanya bila kusoma madokezo yake", "Madokezo ya funzo la kibinafsi ni ya binafsi. Ikiwa hupendi kuyaona — au yeye hapendi uyaone — fanya jambo lote kwenye kifaa chake: ni ukurasa wa wavuti, kwa hiyo unaweza kufungua jwsync.org kwenye simu au kompyuta yake kibao, kupakia mafaili yake hapo, na kutokuwa kamwe na nakala rudufu kwenye mashine yako mwenyewe. Hakuna kinachopakiwa kwa vyovyote vile, lakini kwa njia hii faili haliondoki mikononi mwake."),
+   ("Mwachie nakala rudufu anayoweza kuipata", "Kabla ya kumrudishia simu, hakikisha faili la nakala rudufu liko mahali atakapoweza kulipata tena — barua pepe yake mwenyewe au hifadhi yake ya wingu, si folda yako ya vipakuliwa tu. Wakati ujao, huenda asikuhitaji kabisa."),
+  ],
+  "faq": [
+   ("Je, ninaweza kufanya hivi kwa mbali?", "Ndiyo. Ikiwa anaweza kutengeneza nakala rudufu na kukutumia faili, kila kitu kingine hufanya kazi kwa umbali — nao urejeshaji ni migusa michache unayoweza kumwelekeza."),
+   ("Yeye ana Android na mpya ni iPhone. Je, hilo linaleta tofauti?", "Hapana. Muundo wa nakala rudufu ni uleule kwenye Android, iPhone, iPad na Windows."),
+   ("Itakuwaje ikiwa hakuwahi kutengeneza nakala rudufu nayo simu ya zamani imeondoka?", "Basi hakuna cha kuokoa kutoka — data ilikaa kwenye kifaa hicho. Inafaa kuanzisha zoea la nakala rudufu za kawaida kwenye simu mpya mara moja."),
+  ],
+ },
 }

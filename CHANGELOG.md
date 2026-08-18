@@ -4,6 +4,26 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.38.0] — 2026-08-18
+
+### Added: all 39 guides in Kiswahili
+
+Kiswahili shipped as an interface last release; it now has the full guide tree
+as well. All 39 how-tos — merging two libraries, the tag manager, sharing a
+tagged selection with a friend, searching notes by meaning, the Reading
+Companion, Study Stats, Library Doctor, the Markdown import and export routes —
+are written in Kiswahili at `/guides/sw/`, and Kiswahili is advertised in the
+guide hreflang cluster alongside the other 24 translated trees.
+
+### Changed
+
+- `tests/17_guides.js` now derives the expected number of guide trees from
+  `guides_i18n.GUIDE_TEXT`, the registry the builder itself reads, instead of a
+  hand-written literal that had to be bumped by hand every time a language
+  shipped.
+
+---
+
 ## [3.37.0] — 2026-08-17
 
 ### Added: Kiswahili — the 26th language, and the site's first African language

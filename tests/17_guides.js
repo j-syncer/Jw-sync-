@@ -45,7 +45,19 @@ console.log('== Every language carries every guide ==');
   // guide's dict — valid Python, no error — and the language just falls back.
   const LANGS = fs.readdirSync(path.join(ROOT, 'guides'), { withFileTypes: true })
     .filter((d) => d.isDirectory()).map((d) => d.name).sort();
-  ok(LANGS.length === 24, `${LANGS.length} translated guide trees (expected 24)`);
+  // Expected count comes from guides_i18n.GUIDE_TEXT, the registry the builder
+  // itself reads — a literal here drifts the moment a language ships, and the
+  // quickest way to green is then to bump the number, which is how a guard
+  // quietly stops guarding anything.
+  const registry = fs.readFileSync(path.join(ROOT, 'scripts', 'guides_i18n.py'), 'utf8');
+  const block = registry.slice(registry.indexOf('GUIDE_TEXT = {'));
+  const REGISTERED = [...block.slice(0, block.indexOf('\n}')).matchAll(/^\s*"([A-Za-z-]+)":/gm)]
+    .map((m) => m[1]).sort();
+  ok(REGISTERED.length > 0, 'GUIDE_TEXT registry parsed');
+  ok(
+    LANGS.length === REGISTERED.length && LANGS.every((l, i) => l === REGISTERED[i]),
+    `guide trees on disk match GUIDE_TEXT (${LANGS.length} vs ${REGISTERED.length})`
+  );
 
   const thin = [];
   for (const slug of SLUGS) {
