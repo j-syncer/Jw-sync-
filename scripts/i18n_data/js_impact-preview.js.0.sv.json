@@ -1,0 +1,15 @@
+{
+ "title": "Redo att slå ihop",
+ "sub": "Här är vad sammanslagningen ändrar. Granska siffrorna och ladda sedan ner din sammanslagna säkerhetskopia.",
+ "added": "Kommer att läggas till",
+ "notes": "Anteckningar",
+ "highlights": "Överstrykningar",
+ "bookmarks": "Bokmärken",
+ "tags": "Taggar",
+ "updated": "Uppdaterade anteckningar (nyare version vinner)",
+ "deduped": "Dubbletter överhoppade",
+ "confirm": "Slå ihop och ladda ner",
+ "cancel": "Avbryt",
+ "study_answers": "Studiesvar",
+ "doctor": "Hälsokolla och rensa den sammanslagna filen före nedladdning (Biblioteksdoktorn)"
+}

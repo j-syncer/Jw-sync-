@@ -1,0 +1,16 @@
+{
+ "brand": "Resurgir",
+ "on_this_day": "Ce jour-là",
+ "w_years": "Écrite il y a {n} ans",
+ "w_year": "Écrite il y a un an",
+ "w_months": "Écrite il y a {n} mois",
+ "w_month": "Écrite le mois dernier",
+ "w_recent": "Écrite récemment",
+ "count_sep": "sur",
+ "reflect": "Marquer comme revue",
+ "next": "Suivante",
+ "done_title": "Vous êtes à jour",
+ "done_sub": "Vous avez revu les notes du jour. Un peu, souvent : c'est ainsi que l'étude s'ancre.",
+ "come_back": "Revenez demain pour la suite.",
+ "streak_days": "Série de {n} jours"
+}

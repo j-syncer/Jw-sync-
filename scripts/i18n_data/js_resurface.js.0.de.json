@@ -1,0 +1,16 @@
+{
+ "brand": "Rückblick",
+ "on_this_day": "An diesem Tag",
+ "w_years": "Vor {n} Jahren geschrieben",
+ "w_year": "Vor einem Jahr geschrieben",
+ "w_months": "Vor {n} Monaten geschrieben",
+ "w_month": "Letzten Monat geschrieben",
+ "w_recent": "Kürzlich geschrieben",
+ "count_sep": "von",
+ "reflect": "Als wiederholt markieren",
+ "next": "Weiter",
+ "done_title": "Du bist auf dem neuesten Stand",
+ "done_sub": "Du hast die heutigen Notizen wiederholt. Wenig, aber regelmäßig — so bleibt das Studium haften.",
+ "come_back": "Komm morgen für mehr wieder.",
+ "streak_days": "{n}-Tage-Serie"
+}

@@ -1,0 +1,8 @@
+{
+ "banner_title": "Modo demo",
+ "banner_body": "Se cargaron dos copias de seguridad de ejemplo. Haz clic en <strong>Vista previa de fusión</strong> y luego en <strong>Confirmar fusión</strong> para descargar el resultado.",
+ "banner_dismiss": "Cerrar demo",
+ "err_generic": "No se pudo iniciar la demo. Verifica tu conexión e inténtalo de nuevo.",
+ "err_inject": "No se pudieron cargar los archivos de ejemplo. Actualiza la página e inténtalo de nuevo.",
+ "overwrite_warn": "Iniciar la demo reemplazará los archivos cargados. ¿Continuar?"
+}

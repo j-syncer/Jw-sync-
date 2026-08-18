@@ -1,0 +1,16 @@
+{
+ "brand": "Recuperar",
+ "on_this_day": "Tal día como hoy",
+ "w_years": "Escrita hace {n} años",
+ "w_year": "Escrita hace un año",
+ "w_months": "Escrita hace {n} meses",
+ "w_month": "Escrita el mes pasado",
+ "w_recent": "Escrita hace poco",
+ "count_sep": "de",
+ "reflect": "Marcar como repasada",
+ "next": "Siguiente",
+ "done_title": "Estás al día",
+ "done_sub": "Has repasado las notas de hoy. Un poco cada día es lo que hace que el estudio perdure.",
+ "come_back": "Vuelve mañana para más.",
+ "streak_days": "Racha de {n} días"
+}

@@ -1,0 +1,8 @@
+{
+ "banner_title": "Demo-Modus",
+ "banner_body": "Zwei Beispiel-Backups sind geladen. Klicke auf <strong>Vorschau zusammenführen</strong> und dann auf <strong>Zusammenführung bestätigen</strong>, um das Ergebnis herunterzuladen.",
+ "banner_dismiss": "Demo schließen",
+ "err_generic": "Demo konnte nicht gestartet werden. Bitte Verbindung prüfen und erneut versuchen.",
+ "err_inject": "Die Beispieldateien konnten nicht geladen werden. Bitte aktualisieren.",
+ "overwrite_warn": "Beim Start der Demo werden die geladenen Dateien ersetzt. Fortfahren?"
+}

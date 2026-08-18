@@ -129,7 +129,7 @@ No build step for the app itself — the HTML and `js/*.js` files are edited dir
 ├── forum.html              Community forum
 ├── service-worker.js       Offline support and asset caching (PWA)
 ├── scripts/                Generators + one-off patch scripts
-├── tests/                  25 suites, plain Node — no framework
+├── tests/                  26 suites, plain Node — no framework
 └── sitemap.xml             1,068 URLs with a full hreflang cluster
 ```
 
@@ -165,7 +165,7 @@ Guide copy lives in `scripts/guides_<lang>.py`; `scripts/check_guide_lang.py <la
 cd tests && npm install && npm test
 ```
 
-25 suites covering static structure, a JSDOM run of the full Browse UI against a synthesised `.jwlibrary`, a JSDOM boot of the React app itself, merge regressions, Markdown import round-trips, `.jwlibrary` manifest integrity, the guide tree, translation integrity in every language, Arabic/RTL, landing pages, the forum, and a production/beta parity guard.
+26 suites covering static structure, a JSDOM run of the full Browse UI against a synthesised `.jwlibrary`, a JSDOM boot of the React app itself, merge regressions, Markdown import round-trips, `.jwlibrary` manifest integrity, the guide tree, translation integrity in every language, Arabic/RTL, landing pages, the forum, dictionary coverage in every language, and a production/beta parity guard.
 
 ---
 

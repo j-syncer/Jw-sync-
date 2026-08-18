@@ -1,0 +1,15 @@
+{
+ "title": "Prêt à fusionner",
+ "sub": "Voici ce que cette fusion va modifier. Vérifiez les chiffres, puis téléchargez votre sauvegarde fusionnée.",
+ "added": "Sera ajouté",
+ "notes": "Notes",
+ "highlights": "Surlignages",
+ "bookmarks": "Signets",
+ "tags": "Étiquettes",
+ "updated": "Notes mises à jour (la plus récente l’emporte)",
+ "deduped": "Doublons ignorés",
+ "confirm": "Fusionner et télécharger",
+ "cancel": "Annuler",
+ "study_answers": "Réponses d’étude",
+ "doctor": "Vérifier et nettoyer le fichier fusionné avant le téléchargement (Docteur de Bibliothèque)"
+}

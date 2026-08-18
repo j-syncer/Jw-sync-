@@ -1,0 +1,8 @@
+{
+ "banner_title": "Demoläge",
+ "banner_body": "Två exempelsäkerhetskopior är inlästa. Klicka på <strong>Förhandsvisa sammanslagning</strong> för att se hur de kombineras, och sedan <strong>Bekräfta sammanslagning</strong> för att ladda ner resultatet.",
+ "banner_dismiss": "Avsluta demo",
+ "err_generic": "Kunde inte starta demon — kontrollera din anslutning och försök igen.",
+ "err_inject": "Kunde inte läsa in exempelfilerna i appen. Uppdatera sidan och försök igen.",
+ "overwrite_warn": "Att starta demon ersätter de filer du har inlästa just nu. Fortsätta?"
+}

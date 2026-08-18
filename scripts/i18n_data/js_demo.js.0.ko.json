@@ -1,0 +1,8 @@
+{
+ "banner_title": "데모 모드",
+ "banner_body": "두 개의 샘플 백업이 로드되었습니다. <strong>병합 미리보기</strong>를 클릭한 다음 <strong>병합 확인</strong>을 눌러 결과를 다운로드하세요.",
+ "banner_dismiss": "데모 닫기",
+ "err_generic": "데모를 시작할 수 없습니다. 연결을 확인하고 다시 시도하세요.",
+ "err_inject": "샘플 파일을 로드할 수 없습니다. 페이지를 새로고침해 주세요.",
+ "overwrite_warn": "데모를 시작하면 로드된 파일이 교체됩니다. 계속할까요?"
+}

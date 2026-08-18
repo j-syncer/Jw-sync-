@@ -1,0 +1,8 @@
+{
+ "banner_title": "Modo demo",
+ "banner_body": "Dois backups de exemplo foram carregados. Clique em <strong>Visualizar mesclagem</strong> e depois em <strong>Confirmar mesclagem</strong> para baixar o resultado.",
+ "banner_dismiss": "Fechar demo",
+ "err_generic": "Não foi possível iniciar a demo. Verifique sua conexão e tente novamente.",
+ "err_inject": "Não foi possível carregar os arquivos de exemplo. Atualize a página.",
+ "overwrite_warn": "Iniciar a demo substituirá os arquivos carregados. Continuar?"
+}

@@ -1,0 +1,8 @@
+{
+ "banner_title": "Modalità demo",
+ "banner_body": "Sono caricati due backup di esempio. Fai clic su <strong>Anteprima fusione</strong> e poi su <strong>Conferma fusione</strong> per scaricare il risultato.",
+ "banner_dismiss": "Chiudi demo",
+ "err_generic": "Impossibile avviare la demo. Controlla la connessione e riprova.",
+ "err_inject": "Impossibile caricare i file di esempio. Aggiorna la pagina.",
+ "overwrite_warn": "Avviare la demo sostituirà i file caricati. Continuare?"
+}

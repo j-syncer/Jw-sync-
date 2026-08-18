@@ -1,0 +1,16 @@
+{
+ "brand": "되살리기",
+ "on_this_day": "오늘 이날",
+ "w_years": "{n}년 전 작성",
+ "w_year": "1년 전 작성",
+ "w_months": "{n}개월 전 작성",
+ "w_month": "지난달 작성",
+ "w_recent": "최근 작성",
+ "count_sep": "/",
+ "reflect": "복습 완료로 표시",
+ "next": "다음",
+ "done_title": "오늘 분량을 마쳤습니다",
+ "done_sub": "오늘의 노트를 복습했습니다. 조금씩 꾸준히 하는 것이 연구를 오래 남게 합니다.",
+ "come_back": "내일 다시 오세요.",
+ "streak_days": "{n}일 연속"
+}

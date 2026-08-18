@@ -4,6 +4,37 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.38.1] — 2026-08-18
+
+### Fixed: Study Stats awards were English in eleven languages
+
+The "Distinguished Honors" cabinet on Study Stats — the 26 award names and the
+53 lines describing how each one is earned — existed only in the fourteen
+languages added most recently. In Spanish, Portuguese, French, German, Italian,
+Russian, Japanese, Korean, Tagalog, Swedish and Cebuano, all 79 strings fell
+back to English on a page that was otherwise fully translated. They are now
+translated in all eleven.
+
+### Fixed: the whole share page was English for Cebuano
+
+`share.html` carried no Cebuano dictionary at all, so every one of its 63
+strings — the send flow, the receive flow, the previews, the privacy notice —
+rendered in English. Cebuano now has the same page as everyone else.
+
+### Changed
+
+- `scripts/i18n_tool.py` gained a `merge` command. It could add a language that
+  was missing but had no way to add *keys* to a language already present, which
+  is why both gaps above could open and stay open: `inject` skips a language it
+  finds, and nothing else backfills.
+- Its dictionary anchor list dropped its `sv` fallback. The fallback existed
+  only because share.html had no `ceb` table — an anchor list that accommodates
+  a missing language cannot also detect one.
+- New test suite `26_i18n_coverage.js` runs the dictionary check for every
+  language in the shipped `?lang=` allow-list. The check itself is not new; it
+  had only ever been run for Arabic, which is why a page could be missing 79
+  strings in eleven languages and still pass a green build.
+
 ## [3.38.0] — 2026-08-18
 
 ### Added: all 39 guides in Kiswahili

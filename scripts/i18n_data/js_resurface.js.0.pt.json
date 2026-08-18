@@ -1,0 +1,16 @@
+{
+ "brand": "Reviver",
+ "on_this_day": "Neste dia",
+ "w_years": "Escrita há {n} anos",
+ "w_year": "Escrita há um ano",
+ "w_months": "Escrita há {n} meses",
+ "w_month": "Escrita no mês passado",
+ "w_recent": "Escrita recentemente",
+ "count_sep": "de",
+ "reflect": "Marcar como revisada",
+ "next": "Próxima",
+ "done_title": "Você está em dia",
+ "done_sub": "Você revisou as notas de hoje. Um pouco, com frequência, é o que fixa o estudo.",
+ "come_back": "Volte amanhã para mais.",
+ "streak_days": "Sequência de {n} dias"
+}

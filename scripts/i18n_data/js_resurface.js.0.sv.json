@@ -1,0 +1,16 @@
+{
+ "brand": "Återblick",
+ "on_this_day": "På denna dag",
+ "w_years": "Skriven för {n} år sedan",
+ "w_year": "Skriven för ett år sedan",
+ "w_months": "Skriven för {n} månader sedan",
+ "w_month": "Skriven förra månaden",
+ "w_recent": "Skriven nyligen",
+ "count_sep": "av",
+ "reflect": "Markera som repeterad",
+ "next": "Nästa",
+ "done_title": "Du är ikapp",
+ "done_sub": "Du har repeterat dagens anteckningar. Lite men ofta — så fastnar studierna.",
+ "come_back": "Kom tillbaka i morgon för mer.",
+ "streak_days": "{n} dagar i rad"
+}

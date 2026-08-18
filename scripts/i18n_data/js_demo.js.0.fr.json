@@ -1,0 +1,8 @@
+{
+ "banner_title": "Mode démo",
+ "banner_body": "Deux sauvegardes d’exemple sont chargées. Cliquez sur <strong>Aperçu de la fusion</strong>, puis sur <strong>Confirmer la fusion</strong> pour télécharger le résultat.",
+ "banner_dismiss": "Fermer la démo",
+ "err_generic": "Impossible de démarrer la démo. Vérifiez votre connexion et réessayez.",
+ "err_inject": "Impossible de charger les fichiers d’exemple. Veuillez actualiser.",
+ "overwrite_warn": "Démarrer la démo remplacera vos fichiers chargés. Continuer ?"
+}

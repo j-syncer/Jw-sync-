@@ -7,16 +7,26 @@ extract / inject a language.
 The site keeps its UI strings in ~16 independent object literals scattered
 across the HTML files and the js/ bundles. Each one is keyed by language
 code (en, es, pt, ...). This tool finds them all by locating the *last*
-existing language key ("ceb", or "sv" where ceb is absent) and treating the
-object that follows as the template.
+existing language key ("ceb") and treating the object that follows as the
+template.
 
   python3 scripts/i18n_tool.py list
   python3 scripts/i18n_tool.py extract en  -> scripts/i18n_data/<site>.<n>.en.json
   python3 scripts/i18n_tool.py inject  ar  <- scripts/i18n_data/<site>.<n>.ar.json
+  python3 scripts/i18n_tool.py merge   es  <- backfill keys a table is missing
 
 Extraction preserves key order so the injected block reads like its
 neighbours. Injection is idempotent: a dictionary that already carries the
 language is skipped.
+
+`inject` adds a language that is absent; `merge` adds *keys* to a language
+that is already there. Both exist because a table goes stale in two different
+ways, and for a long time only the first had a tool. When a feature adds keys
+to the English table, every existing language silently falls back to English
+for them -- no error, no failed build, just English text on a translated page.
+That is how the 79-key Awards cabinet on Study Stats reached production
+untranslated in the site's eleven oldest languages and stayed that way. Run
+`i18n_check.py` after adding keys, and `merge` to fill what it reports.
 """
 import io
 import json
@@ -54,9 +64,16 @@ FILES = [
 # identical English source, so both read the same translation files.
 DATA_ALIAS = {"beta/index.html": "index.html"}
 
-# The language whose object marks the end of each dictionary. Most carry
-# "ceb"; share.html's stops at "sv".
-TAIL_LANGS = ["ceb", "sv"]
+# The language whose object marks the end of each dictionary. Every dictionary
+# carries "ceb", so one anchor is enough.
+#
+# This used to read ["ceb", "sv"], because share.html had no ceb table. The
+# fallback let the tool work anyway — and so nothing ever reported that the
+# whole note-sharing page was English for Cebuano readers. An anchor list that
+# accommodates a missing language cannot also detect one. If a new dictionary
+# ships without ceb, dict_sites should fail to find it and i18n_check should
+# say so, rather than quietly anchoring one language earlier.
+TAIL_LANGS = ["ceb"]
 
 
 def _match_brace(s, start):
@@ -130,8 +147,7 @@ def dict_sites(text):
             if len(re.findall(r"[{,]\s*[\"']?[A-Za-z_][A-Za-z0-9_]*[\"']?\s*:", body)) < 3:
                 continue
             table = enclosing_table(text, key_start)
-            # First tail wins: TAIL_LANGS is ordered ceb-before-sv, and ceb is
-            # always the later entry where both exist.
+            # First tail wins, if TAIL_LANGS ever carries more than one again.
             if table in by_table:
                 continue
             by_table[table] = {
@@ -280,6 +296,49 @@ def cmd_inject(lang):
     print("injected into %d dictionaries" % total)
 
 
+def cmd_merge(lang):
+    """Splice keys into a language table that already exists but is short.
+
+    Appends the missing entries just before the table's closing brace, in the
+    order the translation file lists them, and leaves every byte of the existing
+    object untouched. Rebuilding the object in English key order would read more
+    tidily and produce a diff nobody can review.
+    """
+    total = 0
+    for f in FILES:
+        path = os.path.join(REPO, f)
+        text = io.open(path, encoding="utf-8").read()
+        orig = text
+        # Work back-to-front so earlier offsets stay valid.
+        for n, s in reversed(list(enumerate(dict_sites(text)))):
+            name = data_name(f, n, lang)
+            src = os.path.join(DATA, name)
+            if not os.path.exists(src):
+                continue
+            existing, (table_start, _) = read_lang(text, s, lang)
+            if existing is None:
+                print("  %s[%d]: no '%s' table — use inject, not merge" % (f, n, lang))
+                continue
+            want = json.load(io.open(src, encoding="utf-8"))
+            have = js_to_obj(existing)
+            add = {k: v for k, v in want.items() if k not in have}
+            if not add:
+                continue
+            # Absolute span of this language's object literal.
+            hits = find_dicts(text[table_start:_match_brace(text, table_start)], lang)
+            obj_start = table_start + hits[0][1]
+            obj_end = table_start + hits[0][2]
+            style = detect_style(text[obj_start:obj_end])
+            body = obj_to_js(add, style)[1:-1]        # drop the braces
+            sep = "" if text[obj_end - 2].strip() in ("{", "") else ","
+            text = text[:obj_end - 1] + sep + body + text[obj_end - 1:]
+            total += len(add)
+            print("  %s[%d]: merged %d key(s) into %s" % (f, n, len(add), lang))
+        if text != orig:
+            io.open(path, "w", encoding="utf-8").write(text)
+    print("merged %d key(s)" % total)
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "list"
     if cmd == "list":
@@ -288,6 +347,8 @@ if __name__ == "__main__":
         cmd_extract(sys.argv[2])
     elif cmd == "inject":
         cmd_inject(sys.argv[2])
+    elif cmd == "merge":
+        cmd_merge(sys.argv[2])
     else:
         print(__doc__)
         sys.exit(1)

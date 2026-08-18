@@ -50,8 +50,8 @@ cd tests && npm install --silent 2>/dev/null; npm test
 ```
 
 - `npm install` is idempotent — skip the wait if `tests/node_modules` already exists, but it's safe to run every time.
-- `npm test` chains all 25 suites (`01_static.js` … `25_md_tolerance.js`, with `15_parity.js` run last) and exits non-zero on the first failure.
-- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`, `:boot`, `:forum`, `:md-import`, `:manifest`, `:md-tolerance`.
+- `npm test` chains all 26 suites (`01_static.js` … `26_i18n_coverage.js`, with `15_parity.js` run last) and exits non-zero on the first failure.
+- Individual suites are available too: `npm run test:static`, `:runtime`, `:regression`, `:lazy`, `:post-merge`, `:conflict`, `:wrapped`, `:preview`, `:sync`, `:mobile`, `:semantic`, `:share`, `:receive`, `:doctor`, `:parity`, `:reading`, `:guides`, `:arabic`, `:landing`, `:integrity`, `:boot`, `:forum`, `:md-import`, `:manifest`, `:md-tolerance`, `:i18n`.
 
 **Run the tests proactively before pushing any feature that touches `beta/index.html`, `index.html`, the Browse module, or `service-worker.js`.** If a suite fails, fix it before committing — do not push a broken build.
 
@@ -107,6 +107,16 @@ Suite coverage:
   loose field names, book abbreviations, `.`/`:`/`v` verse separators, optional
   `---` fences. If a row fails, either the parser regressed or the guide is now
   lying.
+- **26_i18n_coverage.js** — runs `i18n_check.py` for **every** language in the
+  shipped `?lang=` allow-list, not just one. That check could always prove a
+  dictionary complete; nothing ran it for more than `ar`, so two gaps sat in
+  production undetected: the 79-key Awards cabinet on Study Stats was missing
+  from the eleven oldest languages (es pt fr de it ru ja ko tl sv ceb — most of
+  the site's readers), and `share.html` had no `ceb` table at all, leaving the
+  whole note-sharing page English for Cebuano. Neither failed anything, because
+  every lookup ends `: I18N.en[k]` and a missing key renders as English. It also
+  asserts English is a superset of every translation, and that all languages see
+  the same number of dictionaries.
 
 If you add a new user-facing feature, extend the relevant suite to cover it.
 
@@ -409,6 +419,23 @@ python3 scripts/i18n_tool.py extract en   # -> scripts/i18n_data/*.en.json
 python3 scripts/i18n_tool.py inject <lang>
 python3 scripts/i18n_check.py <lang>      # must exit 0
 ```
+
+### ⚠️ Adding keys to an *existing* language is a different command
+
+`inject` adds a language that is absent and **skips one that is already there**,
+so it cannot backfill. When a feature adds keys to the English table, use:
+
+```bash
+python3 scripts/i18n_tool.py merge <lang>   # splices in only the missing keys
+```
+
+`scripts/i18n_data/` now holds all 26 languages, so `extract`/`merge` work for
+any of them. Do this for every language the moment a feature adds a key —
+otherwise the new strings silently render in English on an otherwise translated
+page, because every lookup ends `: I18N.en[k]`. That is not hypothetical: the
+79-key Awards cabinet on Study Stats shipped to the fourteen newer languages and
+never reached the eleven oldest (es pt fr de it ru ja ko tl sv ceb), and nothing
+objected for months. `26_i18n_coverage.js` now fails the build on it.
 
 Two tables `i18n_tool.py` cannot see, because they are flat `lang:"string"`
 maps rather than `lang:{…}` objects — patch them by hand:

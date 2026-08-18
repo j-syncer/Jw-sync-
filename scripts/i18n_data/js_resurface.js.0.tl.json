@@ -1,0 +1,16 @@
+{
+ "brand": "Balikan",
+ "on_this_day": "Sa araw na ito",
+ "w_years": "Isinulat {n} taon na ang nakalipas",
+ "w_year": "Isinulat isang taon na ang nakalipas",
+ "w_months": "Isinulat {n} buwan na ang nakalipas",
+ "w_month": "Isinulat noong nakaraang buwan",
+ "w_recent": "Kamakailang isinulat",
+ "count_sep": "sa",
+ "reflect": "Markahan bilang nasuri",
+ "next": "Susunod",
+ "done_title": "Nakahabol ka na",
+ "done_sub": "Nasuri mo na ang mga tala ngayong araw. Kaunti pero madalas — ganito tumatagal ang pag-aaral.",
+ "come_back": "Bumalik bukas para sa iba pa.",
+ "streak_days": "{n}-araw na sunod-sunod"
+}

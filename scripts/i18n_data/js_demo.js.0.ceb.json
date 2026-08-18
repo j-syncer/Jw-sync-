@@ -1,0 +1,8 @@
+{
+ "banner_title": "Demo mode",
+ "banner_body": "Naka-load ang duha ka sample backup. I-click ang <strong>Preview Merge</strong> unya <strong>Confirm Merge</strong> aron i-download ang resulta.",
+ "banner_dismiss": "Isira ang demo",
+ "err_generic": "Dili masimulan ang demo. Pakisusi ang imong koneksyon ug sulayi pag-usab.",
+ "err_inject": "Dili na-load ang mga sample file. Palihug i-refresh ang pahina.",
+ "overwrite_warn": "Mapulihan sa demo ang mga naka-load na nga file. Magpadayon?"
+}
