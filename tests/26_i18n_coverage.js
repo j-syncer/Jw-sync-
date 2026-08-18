@@ -174,6 +174,39 @@ section('data-i18n defaults match the English dictionary');
   }
 }
 
+// ── Two dictionaries hold the landing copy; they have to agree ────────────
+// index.html.0 is the landing table, js_app.js.0 is the React app's. They
+// share 18 keys. That would be harmless except for the override order: once
+// js/app.js loads it calls applyLandingI18n(lang, TRANSLATIONS) with its own
+// table, which becomes `cachedT` and from then on wins for every data-i18n
+// element — the landing table only fills keys the app table lacks.
+//
+// So when the positioning was corrected, updating the landing table (and the
+// markup) fixed the served HTML and the first paint, and the app bundle
+// silently reverted all six rewritten strings the moment it finished loading
+// — in all 26 languages, 156 strings. Whichever store you edit, the other one
+// is the one the reader ends up looking at.
+section('landing and app dictionaries agree on their shared keys');
+{
+  const dataDir = path.join(REPO, 'scripts', 'i18n_data');
+  const enA = JSON.parse(fs.readFileSync(path.join(dataDir, 'index.html.0.en.json'), 'utf8'));
+  const enB = JSON.parse(fs.readFileSync(path.join(dataDir, 'js_app.js.0.en.json'), 'utf8'));
+  const shared = Object.keys(enA).filter((k) => k in enB);
+  ok(shared.length + ' keys live in both the landing and app tables');
+  let drifted = 0;
+  for (const lang of LANGS) {
+    const pa = path.join(dataDir, 'index.html.0.' + lang + '.json');
+    const pb = path.join(dataDir, 'js_app.js.0.' + lang + '.json');
+    if (!fs.existsSync(pa) || !fs.existsSync(pb)) continue;
+    const a = JSON.parse(fs.readFileSync(pa, 'utf8'));
+    const b = JSON.parse(fs.readFileSync(pb, 'utf8'));
+    const bad = shared.filter((k) => k in a && k in b
+      && String(a[k]).trim() !== String(b[k]).trim());
+    if (bad.length) { fail(lang + ': ' + bad.length + ' shared key(s) differ', bad.join(', ')); drifted++; }
+  }
+  if (!drifted) ok('all ' + LANGS.length + ' languages agree across both tables');
+}
+
 // ── Summary ───────────────────────────────────────────────────────────────
 section('SUMMARY');
 if (failCount) {

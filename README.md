@@ -40,7 +40,7 @@ JW Sync fills that gap. It reads two or more `.jwlibrary` backups and combines t
 
 **The app itself**
 
-- **26 languages** — English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean, Filipino (Tagalog), Swedish, Cebuano, Arabic, Hebrew, Ukrainian, Polish, Mandarin (Simplified and Traditional), Cantonese, Vietnamese, Hungarian, Hindi, Indonesian, Romanian, Dutch and Kiswahili — with full right-to-left support for Arabic and Hebrew
+- **27 languages** — English, Spanish, Portuguese, French, German, Italian, Russian, Japanese, Korean, Filipino (Tagalog), Swedish, Cebuano, Arabic, Hebrew, Ukrainian, Polish, Mandarin (Simplified and Traditional), Cantonese, Vietnamese, Hungarian, Hindi, Indonesian, Romanian, Dutch, Kiswahili and Greek — with full right-to-left support for Arabic and Hebrew
 - **Works offline** — installs as a Progressive Web App
 - **Opens files from your device** — tap a `.jwlibrary` file and JW Sync opens it directly
 
@@ -130,7 +130,7 @@ No build step for the app itself — the HTML and `js/*.js` files are edited dir
 ├── service-worker.js       Offline support and asset caching (PWA)
 ├── scripts/                Generators + one-off patch scripts
 ├── tests/                  26 suites, plain Node — no framework
-└── sitemap.xml             1,068 URLs with a full hreflang cluster
+└── sitemap.xml             1,069 URLs with a full hreflang cluster
 ```
 
 The heavy feature code lives in `js/` rather than inline, because ~550 KB of inline `<script>` was the cause of a 4.7 s First Contentful Paint — the bytes rode in the HTML at the browser's highest priority and starved the render-blocking CSS.
@@ -192,7 +192,7 @@ Contributions are warmly welcome — a bug report, a translation correction, a f
 
 **Want to contribute code?** `js/enhancements.js` is the cleanest entry point — well-structured vanilla JavaScript handling PWA features, file handling and UI additions. Run the test suite before opening a PR.
 
-**Translations?** The app ships in 26 languages and the full guide library in 25 of them. If you spot an error, or want to add a language, open an issue — `scripts/GUIDE-TRANSLATION-RUNBOOK.md` documents exactly how a language pass works.
+**Translations?** The app ships in 27 languages and the full guide library in 25 of them. If you spot an error, or want to add a language, open an issue — `scripts/GUIDE-TRANSLATION-RUNBOOK.md` documents exactly how a language pass works.
 
 All contributions, no matter how small, are appreciated.
 

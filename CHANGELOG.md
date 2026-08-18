@@ -4,6 +4,49 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.40.0] — 2026-08-18
+
+### Added: Greek — the 27th language
+
+The whole interface is now available in Greek: the merge app, the Study
+Explorer, Study Stats and its awards cabinet, the share and receive flows, the
+Reading Companion, Library Doctor, the forum, the offline banner and the
+`/el/` landing page. About 1,100 strings across all 19 dictionaries.
+
+Greek ships UI-first; its 39 guides follow. A language absent from
+`GUIDE_TEXT` gets its full landing page and hreflang cluster and is simply not
+advertised as a guide tree, which is the documented way to ship an interface
+ahead of its guides.
+
+The jw.org locale code was verified against jw.org before anything else was
+written, and it is a good example of why that step exists: `EL` — the
+language's own ISO code, and the first thing anyone would try — serves
+**English**, and `GK` serves **Spanish**. The correct code is `G`.
+
+### Fixed: the app bundle was reverting the landing copy in every language
+
+`index.html` and `js/app.js` both hold the landing hero and feature-card copy,
+and they share 18 keys. Once the app bundle loads it calls the landing
+translator with its *own* table, which then wins for every `data-i18n`
+element — so the corrected positioning shipped in 3.39.0 was silently replaced
+by the previous draft the moment the page finished loading. Six strings, in all
+26 languages: 156 in total. The two tables now agree.
+
+### Changed
+
+- `26_i18n_coverage.js` checks that the landing and app dictionaries agree on
+  every shared key, in every language.
+- `20_translation_integrity.js` learned that Greek copy is legitimately Greek,
+  and gained the other half of that check: a language written in a non-Latin
+  script must actually *use* that script in its prose. Transliterated or
+  stripped text passed every previous check.
+- `22_forum.js` no longer falls back to an empty dictionary when it cannot read
+  `window.__FORUM_I18N`; it says so and stops, instead of failing forty lines
+  later with a TypeError.
+- `16_reading.js` gained the `sw` row its `VERIFIED` wtlocale table was missing,
+  alongside the new `el` one. The presence check catches a missing entry; only
+  the verified table catches a wrong one.
+
 ## [3.39.0] — 2026-08-18
 
 ### Fixed: the English landing page still served the old pitch

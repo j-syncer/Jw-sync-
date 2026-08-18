@@ -1,262 +1,272 @@
 {
-  "en": {
-    "nav_adv_options": "Advanced options",
-    "nav_demo_title": "Try with sample notes",
-    "nav_browse_title": "Open Note Explorer",
-    "nav_community_title": "Community — ask questions, report bugs",
-    "nav_share_btn": "Share",
-    "nav_share_title": "Open on another device",
-    "theme_to_light": "Switch to Light Mode",
-    "theme_to_dark": "Switch to Dark Mode"
-  },
-  "es": {
-    "nav_adv_options": "Opciones avanzadas",
-    "nav_demo_title": "Probar con notas de ejemplo",
-    "nav_browse_title": "Abrir el Explorador de notas",
-    "nav_community_title": "Comunidad — preguntas y reporte de errores",
-    "nav_share_btn": "Compartir",
-    "nav_share_title": "Abrir en otro dispositivo",
-    "theme_to_light": "Cambiar al modo claro",
-    "theme_to_dark": "Cambiar al modo oscuro"
-  },
-  "pt": {
-    "nav_adv_options": "Opções avançadas",
-    "nav_demo_title": "Testar com notas de exemplo",
-    "nav_browse_title": "Abrir o Explorador de notas",
-    "nav_community_title": "Comunidade — perguntas e relato de erros",
-    "nav_share_btn": "Compartilhar",
-    "nav_share_title": "Abrir em outro dispositivo",
-    "theme_to_light": "Mudar para o modo claro",
-    "theme_to_dark": "Mudar para o modo escuro"
-  },
-  "fr": {
-    "nav_adv_options": "Options avancées",
-    "nav_demo_title": "Essayer avec des notes d'exemple",
-    "nav_browse_title": "Ouvrir l'Explorateur de notes",
-    "nav_community_title": "Communauté — questions et signalement de bugs",
-    "nav_share_btn": "Partager",
-    "nav_share_title": "Ouvrir sur un autre appareil",
-    "theme_to_light": "Passer au mode clair",
-    "theme_to_dark": "Passer au mode sombre"
-  },
-  "de": {
-    "nav_adv_options": "Erweiterte Optionen",
-    "nav_demo_title": "Mit Beispielnotizen ausprobieren",
-    "nav_browse_title": "Notizen-Explorer öffnen",
-    "nav_community_title": "Community — Fragen stellen, Fehler melden",
-    "nav_share_btn": "Teilen",
-    "nav_share_title": "Auf einem anderen Gerät öffnen",
-    "theme_to_light": "Zum hellen Modus wechseln",
-    "theme_to_dark": "Zum dunklen Modus wechseln"
-  },
-  "it": {
-    "nav_adv_options": "Opzioni avanzate",
-    "nav_demo_title": "Prova con note di esempio",
-    "nav_browse_title": "Apri l'Esploratore note",
-    "nav_community_title": "Comunità — domande e segnalazione di bug",
-    "nav_share_btn": "Condividi",
-    "nav_share_title": "Apri su un altro dispositivo",
-    "theme_to_light": "Passa alla modalità chiara",
-    "theme_to_dark": "Passa alla modalità scura"
-  },
-  "ru": {
-    "nav_adv_options": "Расширенные настройки",
-    "nav_demo_title": "Попробовать на примере заметок",
-    "nav_browse_title": "Открыть обзор заметок",
-    "nav_community_title": "Сообщество — вопросы и сообщения об ошибках",
-    "nav_share_btn": "Поделиться",
-    "nav_share_title": "Открыть на другом устройстве",
-    "theme_to_light": "Переключить на светлую тему",
-    "theme_to_dark": "Переключить на тёмную тему"
-  },
-  "ja": {
-    "nav_adv_options": "詳細オプション",
-    "nav_demo_title": "サンプルのノートで試す",
-    "nav_browse_title": "ノートエクスプローラーを開く",
-    "nav_community_title": "コミュニティ — 質問・不具合の報告",
-    "nav_share_btn": "共有",
-    "nav_share_title": "別の端末で開く",
-    "theme_to_light": "ライトモードに切り替え",
-    "theme_to_dark": "ダークモードに切り替え"
-  },
-  "ko": {
-    "nav_adv_options": "고급 옵션",
-    "nav_demo_title": "샘플 노트로 사용해 보기",
-    "nav_browse_title": "노트 탐색기 열기",
-    "nav_community_title": "커뮤니티 — 질문 및 버그 신고",
-    "nav_share_btn": "공유",
-    "nav_share_title": "다른 기기에서 열기",
-    "theme_to_light": "라이트 모드로 전환",
-    "theme_to_dark": "다크 모드로 전환"
-  },
-  "tl": {
-    "nav_adv_options": "Advanced na opsyon",
-    "nav_demo_title": "Subukan gamit ang halimbawang mga nota",
-    "nav_browse_title": "Buksan ang Note Explorer",
-    "nav_community_title": "Komunidad — magtanong, mag-ulat ng bug",
-    "nav_share_btn": "Ibahagi",
-    "nav_share_title": "Buksan sa ibang device",
-    "theme_to_light": "Lumipat sa Light Mode",
-    "theme_to_dark": "Lumipat sa Dark Mode"
-  },
-  "sv": {
-    "nav_adv_options": "Avancerade alternativ",
-    "nav_demo_title": "Testa med exempelanteckningar",
-    "nav_browse_title": "Öppna anteckningsutforskaren",
-    "nav_community_title": "Gemenskap — ställ frågor, rapportera fel",
-    "nav_share_btn": "Dela",
-    "nav_share_title": "Öppna på en annan enhet",
-    "theme_to_light": "Byt till ljust läge",
-    "theme_to_dark": "Byt till mörkt läge"
-  },
-  "ceb": {
-    "nav_adv_options": "Advanced nga opsyon",
-    "nav_demo_title": "Sulayi gamit ang panig-ingnang mga nota",
-    "nav_browse_title": "Ablihi ang Note Explorer",
-    "nav_community_title": "Komunidad — pangutana, ireport ang mga bug",
-    "nav_share_btn": "Ipaambit",
-    "nav_share_title": "Ablihi sa laing device",
-    "theme_to_light": "Balhin sa Light Mode",
-    "theme_to_dark": "Balhin sa Dark Mode"
-  },
-  "ar": {
-    "nav_adv_options": "خيارات متقدّمة",
-    "nav_demo_title": "جرّب بملاحظات تجريبية",
-    "nav_browse_title": "افتح مستكشف الملاحظات",
-    "nav_community_title": "المجتمع — اطرح الأسئلة وأبلغ عن الأخطاء",
-    "nav_share_btn": "مشاركة",
-    "nav_share_title": "افتح على جهاز آخر",
-    "theme_to_light": "التبديل إلى الوضع الفاتح",
-    "theme_to_dark": "التبديل إلى الوضع الداكن"
-  },
-  "he": {
-    "nav_adv_options": "אפשרויות מתקדמות",
-    "nav_demo_title": "נסו עם הערות לדוגמה",
-    "nav_browse_title": "פתיחת סייר ההערות",
-    "nav_community_title": "קהילה — שאלו שאלות, דווחו על תקלות",
-    "nav_share_btn": "שיתוף",
-    "nav_share_title": "פתיחה במכשיר אחר",
-    "theme_to_light": "מעבר למצב בהיר",
-    "theme_to_dark": "מעבר למצב כהה"
-  },
-  "uk": {
-    "nav_adv_options": "Розширені параметри",
-    "nav_demo_title": "Спробувати зі зразковими нотатками",
-    "nav_browse_title": "Відкрити оглядач нотаток",
-    "nav_community_title": "Спільнота — ставте запитання, повідомляйте про помилки",
-    "nav_share_btn": "Поділитися",
-    "nav_share_title": "Відкрити на іншому пристрої",
-    "theme_to_light": "Перейти на світлу тему",
-    "theme_to_dark": "Перейти на темну тему"
-  },
-  "pl": {
-    "nav_adv_options": "Opcje zaawansowane",
-    "nav_demo_title": "Wypróbuj na przykładowych notatkach",
-    "nav_browse_title": "Otwórz eksplorator notatek",
-    "nav_community_title": "Społeczność — zadawaj pytania, zgłaszaj błędy",
-    "nav_share_btn": "Udostępnij",
-    "nav_share_title": "Otwórz na innym urządzeniu",
-    "theme_to_light": "Przełącz na tryb jasny",
-    "theme_to_dark": "Przełącz na tryb ciemny"
-  },
-  "zh-Hans": {
-    "nav_adv_options": "高级选项",
-    "nav_demo_title": "用示例笔记试试",
-    "nav_browse_title": "打开笔记浏览器",
-    "nav_community_title": "社区——提问、报告问题",
-    "nav_share_btn": "分享",
-    "nav_share_title": "在其他设备上打开",
-    "theme_to_light": "切换到浅色模式",
-    "theme_to_dark": "切换到深色模式"
-  },
-  "zh-Hant": {
-    "nav_adv_options": "高階選項",
-    "nav_demo_title": "用示例筆記試試",
-    "nav_browse_title": "開啟筆記瀏覽器",
-    "nav_community_title": "社群——提問、報告問題",
-    "nav_share_btn": "分享",
-    "nav_share_title": "在其他裝置上開啟",
-    "theme_to_light": "切換到淺色模式",
-    "theme_to_dark": "切換到深色模式"
-  },
-  "yue-Hant": {
-    "nav_adv_options": "進階選項",
-    "nav_demo_title": "用範例筆記試吓",
-    "nav_browse_title": "打開筆記瀏覽器",
-    "nav_community_title": "社群——問問題、報告問題",
-    "nav_share_btn": "分享",
-    "nav_share_title": "喺第部裝置度打開",
-    "theme_to_light": "轉做淺色模式",
-    "theme_to_dark": "轉做深色模式"
-  },
-  "vi": {
-    "nav_adv_options": "Tùy chọn nâng cao",
-    "nav_demo_title": "Thử với ghi chú mẫu",
-    "nav_browse_title": "Mở Trình khám phá ghi chú",
-    "nav_community_title": "Cộng đồng — đặt câu hỏi, báo lỗi",
-    "nav_share_btn": "Chia sẻ",
-    "nav_share_title": "Mở trên thiết bị khác",
-    "theme_to_light": "Chuyển sang Chế độ sáng",
-    "theme_to_dark": "Chuyển sang Chế độ tối"
-  },
-  "hu": {
-    "nav_adv_options": "Haladó beállítások",
-    "nav_demo_title": "Próbáld ki mintajegyzetekkel",
-    "nav_browse_title": "Jegyzetböngésző megnyitása",
-    "nav_community_title": "Közösség — kérdezz, jelents hibát",
-    "nav_share_btn": "Megosztás",
-    "nav_share_title": "Megnyitás másik eszközön",
-    "theme_to_light": "Váltás világos módra",
-    "theme_to_dark": "Váltás sötét módra"
-  },
-  "hi": {
-    "nav_adv_options": "उन्नत विकल्प",
-    "nav_demo_title": "नमूना नोटों के साथ आज़माएँ",
-    "nav_browse_title": "नोट एक्सप्लोरर खोलें",
-    "nav_community_title": "समुदाय — सवाल पूछें, गड़बड़ी बताएँ",
-    "nav_share_btn": "साझा करें",
-    "nav_share_title": "दूसरे डिवाइस पर खोलें",
-    "theme_to_light": "उजले मोड में जाएँ",
-    "theme_to_dark": "गहरे मोड में जाएँ"
-  },
-  "id": {
-    "nav_adv_options": "Pilihan lanjutan",
-    "nav_demo_title": "Coba dengan catatan contoh",
-    "nav_browse_title": "Buka Penjelajah Catatan",
-    "nav_community_title": "Komunitas — ajukan pertanyaan, laporkan bug",
-    "nav_share_btn": "Bagikan",
-    "nav_share_title": "Buka di perangkat lain",
-    "theme_to_light": "Beralih ke Mode Terang",
-    "theme_to_dark": "Beralih ke Mode Gelap"
-  },
-  "ro": {
-    "nav_adv_options": "Opțiuni avansate",
-    "nav_demo_title": "Încearcă cu notițe de probă",
-    "nav_browse_title": "Deschide exploratorul de notițe",
-    "nav_community_title": "Comunitate — pune întrebări, raportează erori",
-    "nav_share_btn": "Partajează",
-    "nav_share_title": "Deschide pe alt dispozitiv",
-    "theme_to_light": "Comută la modul luminos",
-    "theme_to_dark": "Comută la modul întunecat"
-  },
-  "nl": {
-    "nav_adv_options": "Geavanceerde opties",
-    "nav_demo_title": "Proberen met voorbeeldaantekeningen",
-    "nav_browse_title": "Aantekeningenverkenner openen",
-    "nav_community_title": "Community — stel vragen, meld fouten",
-    "nav_share_btn": "Delen",
-    "nav_share_title": "Openen op een ander apparaat",
-    "theme_to_light": "Overschakelen naar lichte modus",
-    "theme_to_dark": "Overschakelen naar donkere modus"
-  },
-  "sw": {
-    "nav_adv_options": "Chaguo za hali ya juu",
-    "nav_demo_title": "Jaribu kwa madokezo ya mfano",
-    "nav_browse_title": "Fungua Kichunguzi cha Madokezo",
-    "nav_community_title": "Jumuiya — uliza maswali, ripoti hitilafu",
-    "nav_share_btn": "Shiriki",
-    "nav_share_title": "Fungua kwenye kifaa kingine",
-    "theme_to_light": "Badilisha kwenda Hali Angavu",
-    "theme_to_dark": "Badilisha kwenda Hali Nyeusi"
-  }
+ "en": {
+  "nav_adv_options": "Advanced options",
+  "nav_demo_title": "Try with sample notes",
+  "nav_browse_title": "Open Note Explorer",
+  "nav_community_title": "Community — ask questions, report bugs",
+  "nav_share_btn": "Share",
+  "nav_share_title": "Open on another device",
+  "theme_to_light": "Switch to Light Mode",
+  "theme_to_dark": "Switch to Dark Mode"
+ },
+ "es": {
+  "nav_adv_options": "Opciones avanzadas",
+  "nav_demo_title": "Probar con notas de ejemplo",
+  "nav_browse_title": "Abrir el Explorador de notas",
+  "nav_community_title": "Comunidad — preguntas y reporte de errores",
+  "nav_share_btn": "Compartir",
+  "nav_share_title": "Abrir en otro dispositivo",
+  "theme_to_light": "Cambiar al modo claro",
+  "theme_to_dark": "Cambiar al modo oscuro"
+ },
+ "pt": {
+  "nav_adv_options": "Opções avançadas",
+  "nav_demo_title": "Testar com notas de exemplo",
+  "nav_browse_title": "Abrir o Explorador de notas",
+  "nav_community_title": "Comunidade — perguntas e relato de erros",
+  "nav_share_btn": "Compartilhar",
+  "nav_share_title": "Abrir em outro dispositivo",
+  "theme_to_light": "Mudar para o modo claro",
+  "theme_to_dark": "Mudar para o modo escuro"
+ },
+ "fr": {
+  "nav_adv_options": "Options avancées",
+  "nav_demo_title": "Essayer avec des notes d'exemple",
+  "nav_browse_title": "Ouvrir l'Explorateur de notes",
+  "nav_community_title": "Communauté — questions et signalement de bugs",
+  "nav_share_btn": "Partager",
+  "nav_share_title": "Ouvrir sur un autre appareil",
+  "theme_to_light": "Passer au mode clair",
+  "theme_to_dark": "Passer au mode sombre"
+ },
+ "de": {
+  "nav_adv_options": "Erweiterte Optionen",
+  "nav_demo_title": "Mit Beispielnotizen ausprobieren",
+  "nav_browse_title": "Notizen-Explorer öffnen",
+  "nav_community_title": "Community — Fragen stellen, Fehler melden",
+  "nav_share_btn": "Teilen",
+  "nav_share_title": "Auf einem anderen Gerät öffnen",
+  "theme_to_light": "Zum hellen Modus wechseln",
+  "theme_to_dark": "Zum dunklen Modus wechseln"
+ },
+ "it": {
+  "nav_adv_options": "Opzioni avanzate",
+  "nav_demo_title": "Prova con note di esempio",
+  "nav_browse_title": "Apri l'Esploratore note",
+  "nav_community_title": "Comunità — domande e segnalazione di bug",
+  "nav_share_btn": "Condividi",
+  "nav_share_title": "Apri su un altro dispositivo",
+  "theme_to_light": "Passa alla modalità chiara",
+  "theme_to_dark": "Passa alla modalità scura"
+ },
+ "ru": {
+  "nav_adv_options": "Расширенные настройки",
+  "nav_demo_title": "Попробовать на примере заметок",
+  "nav_browse_title": "Открыть обзор заметок",
+  "nav_community_title": "Сообщество — вопросы и сообщения об ошибках",
+  "nav_share_btn": "Поделиться",
+  "nav_share_title": "Открыть на другом устройстве",
+  "theme_to_light": "Переключить на светлую тему",
+  "theme_to_dark": "Переключить на тёмную тему"
+ },
+ "ja": {
+  "nav_adv_options": "詳細オプション",
+  "nav_demo_title": "サンプルのノートで試す",
+  "nav_browse_title": "ノートエクスプローラーを開く",
+  "nav_community_title": "コミュニティ — 質問・不具合の報告",
+  "nav_share_btn": "共有",
+  "nav_share_title": "別の端末で開く",
+  "theme_to_light": "ライトモードに切り替え",
+  "theme_to_dark": "ダークモードに切り替え"
+ },
+ "ko": {
+  "nav_adv_options": "고급 옵션",
+  "nav_demo_title": "샘플 노트로 사용해 보기",
+  "nav_browse_title": "노트 탐색기 열기",
+  "nav_community_title": "커뮤니티 — 질문 및 버그 신고",
+  "nav_share_btn": "공유",
+  "nav_share_title": "다른 기기에서 열기",
+  "theme_to_light": "라이트 모드로 전환",
+  "theme_to_dark": "다크 모드로 전환"
+ },
+ "tl": {
+  "nav_adv_options": "Advanced na opsyon",
+  "nav_demo_title": "Subukan gamit ang halimbawang mga nota",
+  "nav_browse_title": "Buksan ang Note Explorer",
+  "nav_community_title": "Komunidad — magtanong, mag-ulat ng bug",
+  "nav_share_btn": "Ibahagi",
+  "nav_share_title": "Buksan sa ibang device",
+  "theme_to_light": "Lumipat sa Light Mode",
+  "theme_to_dark": "Lumipat sa Dark Mode"
+ },
+ "sv": {
+  "nav_adv_options": "Avancerade alternativ",
+  "nav_demo_title": "Testa med exempelanteckningar",
+  "nav_browse_title": "Öppna anteckningsutforskaren",
+  "nav_community_title": "Gemenskap — ställ frågor, rapportera fel",
+  "nav_share_btn": "Dela",
+  "nav_share_title": "Öppna på en annan enhet",
+  "theme_to_light": "Byt till ljust läge",
+  "theme_to_dark": "Byt till mörkt läge"
+ },
+ "ceb": {
+  "nav_adv_options": "Advanced nga opsyon",
+  "nav_demo_title": "Sulayi gamit ang panig-ingnang mga nota",
+  "nav_browse_title": "Ablihi ang Note Explorer",
+  "nav_community_title": "Komunidad — pangutana, ireport ang mga bug",
+  "nav_share_btn": "Ipaambit",
+  "nav_share_title": "Ablihi sa laing device",
+  "theme_to_light": "Balhin sa Light Mode",
+  "theme_to_dark": "Balhin sa Dark Mode"
+ },
+ "ar": {
+  "nav_adv_options": "خيارات متقدّمة",
+  "nav_demo_title": "جرّب بملاحظات تجريبية",
+  "nav_browse_title": "افتح مستكشف الملاحظات",
+  "nav_community_title": "المجتمع — اطرح الأسئلة وأبلغ عن الأخطاء",
+  "nav_share_btn": "مشاركة",
+  "nav_share_title": "افتح على جهاز آخر",
+  "theme_to_light": "التبديل إلى الوضع الفاتح",
+  "theme_to_dark": "التبديل إلى الوضع الداكن"
+ },
+ "he": {
+  "nav_adv_options": "אפשרויות מתקדמות",
+  "nav_demo_title": "נסו עם הערות לדוגמה",
+  "nav_browse_title": "פתיחת סייר ההערות",
+  "nav_community_title": "קהילה — שאלו שאלות, דווחו על תקלות",
+  "nav_share_btn": "שיתוף",
+  "nav_share_title": "פתיחה במכשיר אחר",
+  "theme_to_light": "מעבר למצב בהיר",
+  "theme_to_dark": "מעבר למצב כהה"
+ },
+ "uk": {
+  "nav_adv_options": "Розширені параметри",
+  "nav_demo_title": "Спробувати зі зразковими нотатками",
+  "nav_browse_title": "Відкрити оглядач нотаток",
+  "nav_community_title": "Спільнота — ставте запитання, повідомляйте про помилки",
+  "nav_share_btn": "Поділитися",
+  "nav_share_title": "Відкрити на іншому пристрої",
+  "theme_to_light": "Перейти на світлу тему",
+  "theme_to_dark": "Перейти на темну тему"
+ },
+ "pl": {
+  "nav_adv_options": "Opcje zaawansowane",
+  "nav_demo_title": "Wypróbuj na przykładowych notatkach",
+  "nav_browse_title": "Otwórz eksplorator notatek",
+  "nav_community_title": "Społeczność — zadawaj pytania, zgłaszaj błędy",
+  "nav_share_btn": "Udostępnij",
+  "nav_share_title": "Otwórz na innym urządzeniu",
+  "theme_to_light": "Przełącz na tryb jasny",
+  "theme_to_dark": "Przełącz na tryb ciemny"
+ },
+ "zh-Hans": {
+  "nav_adv_options": "高级选项",
+  "nav_demo_title": "用示例笔记试试",
+  "nav_browse_title": "打开笔记浏览器",
+  "nav_community_title": "社区——提问、报告问题",
+  "nav_share_btn": "分享",
+  "nav_share_title": "在其他设备上打开",
+  "theme_to_light": "切换到浅色模式",
+  "theme_to_dark": "切换到深色模式"
+ },
+ "zh-Hant": {
+  "nav_adv_options": "高階選項",
+  "nav_demo_title": "用示例筆記試試",
+  "nav_browse_title": "開啟筆記瀏覽器",
+  "nav_community_title": "社群——提問、報告問題",
+  "nav_share_btn": "分享",
+  "nav_share_title": "在其他裝置上開啟",
+  "theme_to_light": "切換到淺色模式",
+  "theme_to_dark": "切換到深色模式"
+ },
+ "yue-Hant": {
+  "nav_adv_options": "進階選項",
+  "nav_demo_title": "用範例筆記試吓",
+  "nav_browse_title": "打開筆記瀏覽器",
+  "nav_community_title": "社群——問問題、報告問題",
+  "nav_share_btn": "分享",
+  "nav_share_title": "喺第部裝置度打開",
+  "theme_to_light": "轉做淺色模式",
+  "theme_to_dark": "轉做深色模式"
+ },
+ "vi": {
+  "nav_adv_options": "Tùy chọn nâng cao",
+  "nav_demo_title": "Thử với ghi chú mẫu",
+  "nav_browse_title": "Mở Trình khám phá ghi chú",
+  "nav_community_title": "Cộng đồng — đặt câu hỏi, báo lỗi",
+  "nav_share_btn": "Chia sẻ",
+  "nav_share_title": "Mở trên thiết bị khác",
+  "theme_to_light": "Chuyển sang Chế độ sáng",
+  "theme_to_dark": "Chuyển sang Chế độ tối"
+ },
+ "hu": {
+  "nav_adv_options": "Haladó beállítások",
+  "nav_demo_title": "Próbáld ki mintajegyzetekkel",
+  "nav_browse_title": "Jegyzetböngésző megnyitása",
+  "nav_community_title": "Közösség — kérdezz, jelents hibát",
+  "nav_share_btn": "Megosztás",
+  "nav_share_title": "Megnyitás másik eszközön",
+  "theme_to_light": "Váltás világos módra",
+  "theme_to_dark": "Váltás sötét módra"
+ },
+ "hi": {
+  "nav_adv_options": "उन्नत विकल्प",
+  "nav_demo_title": "नमूना नोटों के साथ आज़माएँ",
+  "nav_browse_title": "नोट एक्सप्लोरर खोलें",
+  "nav_community_title": "समुदाय — सवाल पूछें, गड़बड़ी बताएँ",
+  "nav_share_btn": "साझा करें",
+  "nav_share_title": "दूसरे डिवाइस पर खोलें",
+  "theme_to_light": "उजले मोड में जाएँ",
+  "theme_to_dark": "गहरे मोड में जाएँ"
+ },
+ "id": {
+  "nav_adv_options": "Pilihan lanjutan",
+  "nav_demo_title": "Coba dengan catatan contoh",
+  "nav_browse_title": "Buka Penjelajah Catatan",
+  "nav_community_title": "Komunitas — ajukan pertanyaan, laporkan bug",
+  "nav_share_btn": "Bagikan",
+  "nav_share_title": "Buka di perangkat lain",
+  "theme_to_light": "Beralih ke Mode Terang",
+  "theme_to_dark": "Beralih ke Mode Gelap"
+ },
+ "ro": {
+  "nav_adv_options": "Opțiuni avansate",
+  "nav_demo_title": "Încearcă cu notițe de probă",
+  "nav_browse_title": "Deschide exploratorul de notițe",
+  "nav_community_title": "Comunitate — pune întrebări, raportează erori",
+  "nav_share_btn": "Partajează",
+  "nav_share_title": "Deschide pe alt dispozitiv",
+  "theme_to_light": "Comută la modul luminos",
+  "theme_to_dark": "Comută la modul întunecat"
+ },
+ "nl": {
+  "nav_adv_options": "Geavanceerde opties",
+  "nav_demo_title": "Proberen met voorbeeldaantekeningen",
+  "nav_browse_title": "Aantekeningenverkenner openen",
+  "nav_community_title": "Community — stel vragen, meld fouten",
+  "nav_share_btn": "Delen",
+  "nav_share_title": "Openen op een ander apparaat",
+  "theme_to_light": "Overschakelen naar lichte modus",
+  "theme_to_dark": "Overschakelen naar donkere modus"
+ },
+ "sw": {
+  "nav_adv_options": "Chaguo za hali ya juu",
+  "nav_demo_title": "Jaribu kwa madokezo ya mfano",
+  "nav_browse_title": "Fungua Kichunguzi cha Madokezo",
+  "nav_community_title": "Jumuiya — uliza maswali, ripoti hitilafu",
+  "nav_share_btn": "Shiriki",
+  "nav_share_title": "Fungua kwenye kifaa kingine",
+  "theme_to_light": "Badilisha kwenda Hali Angavu",
+  "theme_to_dark": "Badilisha kwenda Hali Nyeusi"
+ },
+ "el": {
+  "nav_adv_options": "Προηγμένες επιλογές",
+  "nav_demo_title": "Δοκιμή με δείγμα σημειώσεων",
+  "nav_browse_title": "Άνοιγμα της Εξερεύνησης σημειώσεων",
+  "nav_community_title": "Κοινότητα — κάντε ερωτήσεις, αναφέρετε σφάλματα",
+  "nav_share_btn": "Κοινοποίηση",
+  "nav_share_title": "Άνοιγμα σε άλλη συσκευή",
+  "theme_to_light": "Εναλλαγή σε φωτεινή λειτουργία",
+  "theme_to_dark": "Εναλλαγή σε σκοτεινή λειτουργία"
+ }
 }

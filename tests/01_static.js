@@ -15,7 +15,7 @@ function ok(msg) { console.log('  ✓', msg); }
 function fail(msg) { console.log('  ✗', msg); failures++; }
 function section(name) { console.log('\n== ' + name + ' =='); }
 
-const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl', 'sw'];
+const EXPECTED_LANGS = ['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant', 'vi', 'hu', 'hi', 'id', 'ro', 'nl', 'sw', 'el'];
 
 // A dictionary's language key is written `en:` while the tag is a bare JS
 // identifier and `"zh-Hans":` once it is not — a BCP-47 tag with a script

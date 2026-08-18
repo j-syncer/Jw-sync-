@@ -290,9 +290,9 @@ must pivot:
 
 ## Features Built (permanent reference)
 
-### Languages (26 total)
+### Languages (27 total)
 `en` `es` `pt` `fr` `de` `it` `ru` `ja` `ko` `tl` `sv` `ceb` `ar` `he` `uk` `pl`
-`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id` `ro` `nl` `sw`
+`zh-Hans` `zh-Hant` `yue-Hant` `vi` `hu` `hi` `id` `ro` `nl` `sw` `el`
 
 RTL: `ar`, `he`. Everything else is LTR.
 
@@ -338,7 +338,7 @@ The code is **not** the ISO code, and near-misses fail silently: `PL`, `UK` and
 en E    es S    pt T    fr F    de X    it I    ru U    ja J
 ko KO   tl TG   sv Z    ceb CV  ar A    he Q    uk K    pl P
 zh-Hans CHS     zh-Hant CH      yue-Hant CHC     vi VT     hu H
-hi HI   id IN  ro M   nl O   sw SW
+hi HI   id IN  ro M   nl O   sw SW   el G
 ```
 
 Vietnamese is the sharpest illustration of why this step exists: `VI` — the
@@ -429,7 +429,7 @@ so it cannot backfill. When a feature adds keys to the English table, use:
 python3 scripts/i18n_tool.py merge <lang>   # splices in only the missing keys
 ```
 
-`scripts/i18n_data/` now holds all 26 languages, so `extract`/`merge` work for
+`scripts/i18n_data/` now holds all 27 languages, so `extract`/`merge` work for
 any of them. Do this for every language the moment a feature adds a key —
 otherwise the new strings silently render in English on an otherwise translated
 page, because every lookup ends `: I18N.en[k]`. That is not hypothetical: the
@@ -550,17 +550,17 @@ Merge Settings opens showing only "what to bring over" (Notes / Highlights /
 Bookmarks / Auto-Tag), and Smart Logic & Cleanup, Quick Sync, Skip Exact
 Duplicates, Deep Clean and conflict resolution sit behind `.jw-adv-disclosure`,
 gated on `advOpen` and persisted via `savePrefs({advancedOpen})`. The label
-reuses `nav_adv_options`, which already exists in all 26 languages — a new
-string would have meant 25 translations for one word.
+reuses `nav_adv_options`, which already exists in every language — a new
+string would have meant a translation pass for one word.
 
 Note the Merge Settings panel is *itself* collapsed by default (`[Rt,Sa]`),
 so the empty state is three panel headers, not a wall of controls.
 
 The `smt_*`, `mode_*`, `nav_simple_view`, `nav_adv_show_title`,
 `nav_adv_back_title` and `disc_open_full` keys were swept in v3.35.1 — 22 keys
-× 26 languages, about 35 KB off the app. **Do not let them back.** They were a
+in every language then shipping, about 35 KB off the app. **Do not let them back.** They were a
 two-store job, and the second store is the one that matters: the keys lived in
-the `js/app.js` object literal for all 26 languages *and* in
+the `js/app.js` object literal for every language *and* in
 `scripts/i18n_data/` (14 extracted `js_app.js.0.<lang>.json` tables plus
 `navbar.json`, which carries all 25). Deleting only the first would have been
 undone by the next `i18n_tool.py inject`. `01_static.js` now fails the build on

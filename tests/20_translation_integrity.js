@@ -39,6 +39,20 @@ const ALLOWED = {
   ru: ['cyrillic'], uk: ['cyrillic'], he: ['hebrew'], ar: ['arabic'],
   hi: ['devanagari'], ja: ['cjk', 'kana'], ko: ['hangul', 'cjk'],
   'zh-Hans': ['cjk'], 'zh-Hant': ['cjk'], 'yue-Hant': ['cjk'],
+  el: ['greek'],
+};
+
+// The other half of the same idea. ALLOWED stops a language borrowing another
+// script; this requires it to actually use its own. A language written in a
+// non-Latin script whose prose contains none of that script is untranslated,
+// transliterated, or was stripped somewhere in the pipeline — and every one of
+// those renders as a perfectly valid page. Latin-script languages have no entry
+// because Latin is legitimate everywhere (product names, .jwlibrary, URLs).
+const REQUIRES = {
+  ru: 'cyrillic', uk: 'cyrillic', he: 'hebrew', ar: 'arabic',
+  hi: 'devanagari', ja: 'kana', ko: 'hangul',
+  'zh-Hans': 'cjk', 'zh-Hant': 'cjk', 'yue-Hant': 'cjk',
+  el: 'greek',
 };
 
 // Keys whose value is *meant* to repeat the English word: the awards match a
@@ -54,6 +68,14 @@ function strayScript(lang, s) {
     if (m) return { name, ch: m[0] };
   }
   return null;
+}
+
+// Only applied to strings long enough to be prose: a value like "JW Sync",
+// "iPhone / iPad" or "~{n} MB" is legitimately all-Latin in every language.
+function missingOwnScript(lang, s) {
+  const want = REQUIRES[lang];
+  if (!want || s.length <= 25) return null;
+  return BLOCKS[want].test(s) ? null : want;
 }
 
 // ── guides ──────────────────────────────────────────────────────────────────
@@ -102,6 +124,12 @@ print(json.dumps({
                JSON.stringify(s.slice(0, 70)));
           leaks++;
         }
+        const noScript = missingOwnScript(lang, s);
+        if (noScript) {
+          fail(`${lang}/${slug} ${label}: no ${noScript} in prose`,
+               JSON.stringify(s.slice(0, 70)));
+          strays++;
+        }
       }
     }
   }
@@ -141,6 +169,11 @@ section('UI strings: no stray scripts, no English falling through');
         if (s.length > 25 && en[k] === s) {
           fail(`${lang} ${base}${k}: still English`, JSON.stringify(s.slice(0, 60)));
           leaks++;
+        }
+        const noScript = missingOwnScript(lang, s);
+        if (noScript) {
+          fail(`${lang} ${base}${k}: no ${noScript} in prose`, JSON.stringify(s.slice(0, 60)));
+          strays++;
         }
       }
     }
