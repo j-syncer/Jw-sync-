@@ -124,6 +124,56 @@ print(json.dumps(extra))
   }
 }
 
+// ── The inline defaults are the English page ──────────────────────────────
+// Each `data-i18n="k"` element ships fallback text in the markup. The runtime
+// overwrites it from the dictionary — including for English — so a stale
+// default still *renders* correctly and looks fine in a browser. But it is what
+// the served HTML says, which is what a crawler indexes and what paints before
+// the script runs, and the pre-rendered /<lang>/ landing pages are built from
+// the dictionary instead. So drift here means every translation shows the new
+// copy while English alone serves the old.
+//
+// That is not hypothetical. When the site's positioning was corrected — from
+// "recover a lost phone" to the divergence crux — the dictionary was updated
+// and the markup was not, leaving all eleven of the rewritten strings stale in
+// English: the hero, the merge card, the share card, the tag manager and the
+// semantic-search copy. Twenty-five languages pitched the site correctly and
+// the canonical English page did not.
+section('data-i18n defaults match the English dictionary');
+{
+  const PAGES = {
+    'index.html': 'index.html.0.en.json',
+    'beta/index.html': 'index.html.0.en.json',
+    'highlights.html': 'highlights.html.0.en.json',
+    'beta/highlights.html': 'highlights.html.0.en.json',
+    'share.html': 'share.html.0.en.json',
+    'beta/share.html': 'share.html.0.en.json',
+    'forum.html': 'forum.html.0.en.json',
+  };
+  const unescape = (s) => s.replace(/&amp;/g, '&').replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#x27;|&#39;/g, "'");
+  for (const [page, dict] of Object.entries(PAGES)) {
+    const dp = path.join(REPO, 'scripts', 'i18n_data', dict);
+    if (!fs.existsSync(path.join(REPO, page)) || !fs.existsSync(dp)) continue;
+    const en = JSON.parse(fs.readFileSync(dp, 'utf8'));
+    const html = fs.readFileSync(path.join(REPO, page), 'utf8');
+    const drift = [];
+    for (const m of html.matchAll(/data-i18n="([A-Za-z0-9_]+)"[^>]*>([^<]*)</g)) {
+      const [, key, raw] = m;
+      const inline = unescape(raw).trim();
+      // An empty default is a deliberate placeholder, not drift.
+      if (!inline || !(key in en)) continue;
+      if (inline !== String(en[key]).trim()) drift.push(key);
+    }
+    if (drift.length) {
+      fail(page + ': ' + drift.length + ' default(s) stale vs the en dictionary',
+        drift.slice(0, 8).join(', '));
+    } else {
+      ok(page + ': inline defaults match en');
+    }
+  }
+}
+
 // ── Summary ───────────────────────────────────────────────────────────────
 section('SUMMARY');
 if (failCount) {

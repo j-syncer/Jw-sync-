@@ -4,6 +4,40 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.39.0] — 2026-08-18
+
+### Fixed: the English landing page still served the old pitch
+
+When the site's positioning was corrected — away from "recover a lost phone",
+toward the crux that two devices both studied on cannot be reconciled by
+JW Library alone — the dictionary was updated and the page markup was not.
+
+Every `data-i18n` element ships fallback text in the HTML, and the runtime
+replaces it from the dictionary, English included. So the corrected copy did
+appear once scripts ran, and the page looked right in a browser. But the served
+HTML is what a crawler reads and what paints first, and the `/<lang>/` landing
+pages are pre-rendered from the dictionary. The result: all 25 translations
+pitched the site correctly and the canonical English page did not.
+
+All eleven rewritten strings were stale — the hero paragraph, the merge card,
+the share card and its two feature pills, the tag manager, the date-range
+extractor, the Study Explorer and the conflict reviewer. English now serves the
+same copy as everyone else:
+
+- the hero opens on the scenario ("Studied on your phone and your tablet?
+  Restoring either backup deletes the other's notes") rather than on a feature
+  list;
+- the merge card says what only this site does, instead of "combine backups
+  from all your devices into one";
+- the tag manager is named as a tag manager, not "tags & highlights merged".
+
+### Changed
+
+- `26_i18n_coverage.js` now checks every `data-i18n` default against the English
+  dictionary, across both landing shells, both Study Stats pages, both share
+  pages and the forum. Nothing had ever compared the two, which is why copy
+  could be rewritten in one and not the other and stay that way.
+
 ## [3.38.1] — 2026-08-18
 
 ### Fixed: Study Stats awards were English in eleven languages
