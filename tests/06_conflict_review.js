@@ -20,6 +20,7 @@
 //      asserted on the Note rows that come back out of the rebuilt file
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto');
 const { JSDOM } = require('jsdom');
 const { inlineModules } = require('./helpers/page-source');
 const JSZip = require('jszip');
@@ -51,9 +52,20 @@ async function buildBackup(SQL, notes) {
   db.close();
   const zip = new JSZip();
   zip.file('userData.db', bytes);
-  zip.file('manifest.json', JSON.stringify({ version: 1, name: 'Test' }));
+  // A realistic manifest, hash included. A stub without one cannot show that
+  // the reviewer refreshed the hash, and a hash left pointing at the database
+  // the file used to hold is a file JW Library refuses without saying so.
+  zip.file('manifest.json', JSON.stringify({
+    name: 'UserdataBackup', creationDate: '2024-01-01', version: 1, type: 0,
+    userDataBackup: {
+      lastModifiedDate: '2024-01-01T00:00:00Z', deviceName: 'Test', databaseName: 'userData.db',
+      hash: sha256Hex(bytes), schemaVersion: '16'
+    }
+  }));
   return zip.generateAsync({ type: 'arraybuffer' });
 }
+
+function sha256Hex(bytes) { return crypto.createHash('sha256').update(Buffer.from(bytes)).digest('hex'); }
 
 async function readNotes(SQL, buf) {
   const zip = await JSZip.loadAsync(buf);
@@ -82,6 +94,9 @@ function makeReviewerDom(opts) {
   if (opts.deps) {
     win.JSZip = JSZip;
     win.initSqlJs = () => initSqlJs(SQL_OPTS);
+    // Both index.html files load this; without it the reviewer would be tested
+    // on a code path production never takes.
+    win.eval(fs.readFileSync(path.join(REPO, 'js/jwlibrary-manifest.js'), 'utf8'));
   }
   // Stub createObjectURL (jsdom doesn't implement it)
   win.URL.createObjectURL = () => 'blob:https://jwsync.org/corrected-' + Math.random().toString(16).slice(2);
@@ -537,6 +552,59 @@ async function waitForOverlay(doc, timeoutMs) {
       const short = langs.filter(l => NEW_KEYS.some(k => !table[l][k]));
       if (!short.length) ok('all ' + NEW_KEYS.length + ' new strings translated in every one of the ' + langs.length + ' languages');
       else fail('untranslated comparison strings in: ' + short.join(', '));
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  // Everything above proves the reviewer writes the right rows. This proves
+  // JW Library will accept the file it wrote them into. A .jwlibrary whose
+  // manifest hash still points at the database the file used to contain is
+  // refused *silently* — the app flickers back to the same screen — so a
+  // correct merge and a stale hash are indistinguishable from a corrupt
+  // file to the person holding it. The reviewer rebuilt the database and
+  // re-zipped it on its own for four releases without touching the hash.
+  section('The rebuilt .jwlibrary is one JW Library will actually restore');
+  {
+    for (const [label, resolve] of [
+      ['picking the other version', o => {
+        const cards = Array.from(o.querySelectorAll('.jcr-ver'));
+        cards.find(x => !x.querySelector('.jcr-ver-current')).querySelector('.jcr-ver-pick').click();
+      }],
+      ['keeping both', o => o.querySelector('.jcr-both-btn').click()],
+      ['combining by hand', o => {
+        o.querySelector('.jcr-compare-btn').click();
+        Array.from(o.querySelectorAll('.jcr-cmp-act'))[2].click();
+        o.querySelector('.jcr-use-combined').click();
+      }]
+    ]) {
+      const dom = bootMulti();
+      const win = dom.window, doc = win.document;
+      const reviewP = win.__jwConflictReview({ blobUrl: 'blob:merged' });
+      const overlay = await waitForOverlay(doc);
+      if (!overlay) { fail('overlay did not appear (' + label + ')'); dom.window.close(); continue; }
+      resolve(overlay);
+      overlay.querySelector('.jcr-btn-primary').click();
+      const res = await reviewP;
+      if (!res || !res.buffer) { fail('no buffer returned when ' + label); dom.window.close(); continue; }
+
+      const zip = await JSZip.loadAsync(res.buffer);
+      const dbBytes = await zip.file(Object.keys(zip.files).find(f => /userdata\.db$/i.test(f))).async('uint8array');
+      const db = new SQL.Database(dbBytes);
+      const integrity = db.exec('PRAGMA integrity_check')[0].values[0][0];
+      db.close();
+      if (integrity === 'ok') ok('SQLite intact after ' + label);
+      else fail('database corrupt after ' + label + ': ' + integrity);
+
+      const mf = zip.file('manifest.json');
+      if (!mf) { fail('manifest.json dropped from the file when ' + label); dom.window.close(); continue; }
+      const m = JSON.parse(await mf.async('string'));
+      const stated = m.userDataBackup && m.userDataBackup.hash;
+      if (stated === sha256Hex(dbBytes)) ok('manifest hash describes the rebuilt database after ' + label);
+      else fail('stale manifest hash after ' + label + ' — JW Library would refuse this file silently');
+      if (m.userDataBackup && m.userDataBackup.schemaVersion === '16')
+        ok('schemaVersion carried through untouched after ' + label);
+      else fail('schemaVersion lost after ' + label + ': ' + JSON.stringify(m.userDataBackup));
+      dom.window.close();
     }
   }
 

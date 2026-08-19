@@ -147,6 +147,10 @@ function loadHelper(withSubtle) {
     ['js/doctor.js', '__jwFinalizeBackup'],
     ['js/receive.js', '__jwFinalizeBackup'],
     ['js/merge-worker.js', '__jwFinalizeBackup'],
+    // The Conflict Reviewer rebuilds the merged database and re-zips it, so it
+    // writes a .jwlibrary just as much as the four above. It was missing from
+    // this list, and shipped a stale manifest hash on every corrected file.
+    ['js/conflict-review.js', '__jwFinalizeBackup'],
   ];
   for (const [rel, needle] of WRITERS) {
     const src = fs.readFileSync(path.join(REPO, rel), 'utf8');

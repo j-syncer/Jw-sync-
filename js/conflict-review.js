@@ -316,12 +316,19 @@
         }
       });
       if (!changed) { try { db.close(); } catch (_) {} return null; }
+      if (window.__jwFinalizeBackup) window.__jwFinalizeBackup.touchLastModified(db);
       var out = db.export();
       try { db.close(); } catch (_) {}
       return window.JSZip.loadAsync(ctx.mergedBuf.slice(0)).then(function (zip) {
         var key = Object.keys(zip.files).find(function (f) { return /userdata\.db$/i.test(f); });
-        zip.file(key, out);
-        return zip.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' });
+        // manifest.json has to describe the database we just wrote, not the one
+        // the merge produced — see js/jwlibrary-manifest.js. Leave its hash
+        // pointing at the old database and JW Library refuses the corrected
+        // file *silently*, which looks exactly like the reviewer corrupting it.
+        var ready = window.__jwFinalizeBackup
+          ? window.__jwFinalizeBackup(zip, key, out)
+          : Promise.resolve(zip.file(key, out));
+        return ready.then(function () { return zip.generateAsync({ type: 'arraybuffer', compression: 'DEFLATE' }); });
       }).then(function (arr) {
         var url = URL.createObjectURL(new Blob([arr], { type: 'application/octet-stream' }));
         return { blobUrl: url, buffer: arr };
