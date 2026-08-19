@@ -99,6 +99,13 @@ by the previous draft the moment the page finished loading. Six strings, in all
 - `16_reading.js` gained the `sw` row its `VERIFIED` wtlocale table was missing,
   alongside the new `el` one. The presence check catches a missing entry; only
   the verified table catches a wrong one.
+- `26_i18n_coverage.js` runs in 10 seconds instead of 74. It invoked
+  `i18n_check.py` once per language, so all nineteen dictionaries were re-read
+  and re-parsed 27 times, and `js_to_obj` spawns a node process per object —
+  about 1,000 of them per run. `i18n_check.py --all` now does one pass, and
+  `i18n_tool.js_to_objs` evaluates a whole dictionary's languages in a single
+  node process. The full suite is back to 41 seconds. Same 37 checks; verified
+  both defect classes still fail it.
 
 ## [3.39.0] — 2026-08-18
 
