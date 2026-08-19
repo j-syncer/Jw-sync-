@@ -48,7 +48,7 @@ JW Sync fills that gap. It reads two or more `.jwlibrary` backups and combines t
 
 ## Guides
 
-Alongside the app there is a library of **39 step-by-step guides**, translated alongside it — 1,040 pages in total, covering the questions people actually arrive with:
+Alongside the app there is a library of **39 step-by-step guides**, translated alongside it — 1,080 pages in total, covering the questions people actually arrive with:
 
 | | |
 |---|---|
@@ -122,7 +122,7 @@ No build step for the app itself — the HTML and `js/*.js` files are edited dir
 ├── index.html              Production landing page + app shell
 ├── beta/index.html         Beta shell (noindex) — beta-first changes land here
 ├── js/                     Feature modules, loaded lazily or deferred
-├── guides/                 39 guides × 26 guide trees (1040 pages)
+├── guides/                 39 guides × 27 guide trees (1080 pages)
 ├── <lang>/                 Pre-rendered landing page per language
 ├── highlights.html         Study Stats
 ├── share.html              Share notes
@@ -130,7 +130,7 @@ No build step for the app itself — the HTML and `js/*.js` files are edited dir
 ├── service-worker.js       Offline support and asset caching (PWA)
 ├── scripts/                Generators + one-off patch scripts
 ├── tests/                  26 suites, plain Node — no framework
-└── sitemap.xml             1,069 URLs with a full hreflang cluster
+└── sitemap.xml             1,109 URLs with a full hreflang cluster
 ```
 
 The heavy feature code lives in `js/` rather than inline, because ~550 KB of inline `<script>` was the cause of a 4.7 s First Contentful Paint — the bytes rode in the HTML at the browser's highest priority and starved the render-blocking CSS.
@@ -192,7 +192,7 @@ Contributions are warmly welcome — a bug report, a translation correction, a f
 
 **Want to contribute code?** `js/enhancements.js` is the cleanest entry point — well-structured vanilla JavaScript handling PWA features, file handling and UI additions. Run the test suite before opening a PR.
 
-**Translations?** The app ships in 27 languages and the full guide library in 25 of them. If you spot an error, or want to add a language, open an issue — `scripts/GUIDE-TRANSLATION-RUNBOOK.md` documents exactly how a language pass works.
+**Translations?** The app ships in 27 languages and the full guide library in 26 of them. If you spot an error, or want to add a language, open an issue — `scripts/GUIDE-TRANSLATION-RUNBOOK.md` documents exactly how a language pass works.
 
 All contributions, no matter how small, are appreciated.
 

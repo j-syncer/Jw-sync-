@@ -4,6 +4,23 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.44.0] — 2026-08-19
+
+### Added: all 39 guides in Greek
+
+Greek shipped as an interface in 3.40.0; it now has the full guide tree as
+well. All 39 how-tos — merging two devices, the tag manager, sharing a tagged
+selection with a friend, searching notes by meaning, the Reading Companion,
+Study Stats, Library Doctor, the Markdown import and export routes, and every
+sharing and troubleshooting scenario — are written in Greek at `/guides/el/`,
+and Greek is advertised in the guide hreflang cluster alongside the other 25
+translated trees.
+
+The site now builds 1,080 guide pages and a 1,109-URL sitemap. Greek is the
+27th language and the 26th complete one — UI and guides both.
+
+---
+
 ## [3.43.1] — 2026-08-19
 
 ### Fixed: the forum was two different colours depending on how you opened it
