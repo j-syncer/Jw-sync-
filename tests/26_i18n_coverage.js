@@ -49,26 +49,34 @@ const LANGS = [...allow[1].matchAll(/['"]([A-Za-z-]+)['"]/g)].map((m) => m[1]);
 section('Every UI dictionary carries every offered language');
 console.log('  (' + LANGS.length + ' languages from the ?lang= allow-list)');
 
+// One pass over every dictionary rather than one invocation per language:
+// re-reading and re-parsing all nineteen tables 27 times took 74 seconds,
+// against three to five for every other suite. i18n_check.py --all shares the
+// file reads and batches the object evaluation into one node process per
+// dictionary.
+let report;
+try {
+  report = execFileSync('python3',
+    [path.join(REPO, 'scripts', 'i18n_check.py'), '--all', '--json'],
+    { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 });
+} catch (e) {
+  report = ((e.stdout || '') + (e.stderr || ''));
+}
+let RESULTS;
+try {
+  RESULTS = JSON.parse(report.trim().split('\n').pop());
+} catch (e) {
+  fail('i18n_check.py --all did not return usable JSON', report.slice(0, 300));
+  RESULTS = {};
+}
+
 let tablesSeen = 0;
 for (const lang of LANGS) {
-  let report;
-  try {
-    report = execFileSync('python3',
-      [path.join(REPO, 'scripts', 'i18n_check.py'), lang], { encoding: 'utf8' });
-  } catch (e) {
-    report = (e.stdout || '') + (e.stderr || '');
-  }
-  const lines = report.trim().split('\n').filter(Boolean);
-  const bad = lines.filter((l) => l.startsWith('FAIL '));
-  const good = lines.filter((l) => l.startsWith('OK ')).length;
-  if (good === 0) {
-    fail(lang + ': i18n_check.py produced no results', report.slice(0, 300));
-    continue;
-  }
-  if (bad.length) {
-    for (const b of bad) fail(lang + ': ' + b.slice(5));
-    continue;
-  }
+  const r = RESULTS[lang];
+  if (!r) { fail(lang + ': i18n_check.py returned no result'); continue; }
+  if (r.fail.length) { for (const b of r.fail) fail(lang + ': ' + b); continue; }
+  const good = r.ok.length;
+  if (good === 0) { fail(lang + ': no dictionaries were checked'); continue; }
   if (tablesSeen && good !== tablesSeen) {
     fail(lang + ': sees ' + good + ' dictionaries, other languages see ' + tablesSeen,
       'a language that finds fewer tables is anchored in the wrong place');
@@ -99,12 +107,17 @@ for f in t.FILES:
         en_src, _ = t.read_lang(text, s, 'en')
         if en_src is None:
             continue
-        en = t.js_to_obj(en_src)
+        present, srcs = [], []
         for lang in langs:
             src, _ = t.read_lang(text, s, lang)
-            if src is None:
-                continue
-            for k in t.js_to_obj(src):
+            if src is not None:
+                present.append(lang)
+                srcs.append(src)
+        # One node process per dictionary, not one per language of it.
+        objs = t.js_to_objs([en_src] + srcs)
+        en = objs[0]
+        for lang, got in zip(present, objs[1:]):
+            for k in got:
                 if k not in en:
                     extra.append('%s[%d] %s: %s' % (f, n, lang, k))
 print(json.dumps(extra))

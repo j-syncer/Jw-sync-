@@ -205,6 +205,33 @@ def js_to_obj(src):
     return json.loads(out.stdout)
 
 
+def js_to_objs(srcs):
+    """Evaluate many JS object literals in one node process.
+
+    js_to_obj spawns a node process per object. A full coverage sweep reads 19
+    dictionaries in 27 languages, so doing it one at a time is ~530 spawns and
+    took 74 seconds while every other test suite finished in under five.
+    Batching removes almost all of that. The script goes through a temp file
+    rather than `node -e`, because half a megabyte of object literals is past
+    what an argv is meant to carry.
+    """
+    if not srcs:
+        return []
+    import subprocess
+    import tempfile
+    body = "const a=[\n" + ",\n".join("(" + s + ")" for s in srcs) + "\n];\n"
+    fh = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8")
+    try:
+        fh.write(body + "process.stdout.write(JSON.stringify(a))")
+        fh.close()
+        out = subprocess.run(["node", fh.name], capture_output=True, text=True)
+        if out.returncode != 0:
+            raise ValueError(out.stderr.strip()[:400])
+        return json.loads(out.stdout)
+    finally:
+        os.unlink(fh.name)
+
+
 def obj_to_js(obj, style):
     """Render a Python dict back as a JS object literal.
 
