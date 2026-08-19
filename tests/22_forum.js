@@ -225,6 +225,53 @@ const SURFACES = [
   if (overlay && overlay.classList.contains('open')) ok('opens the thread it points at');
   else fail('legacy deep link did not open the thread');
 
+  // ── 5. light mode, on both forum surfaces ────────────────────────────────
+  section('Light mode');
+  {
+    const { auditLightMode, auditThemeVars } = require('./helpers/light-mode.js');
+    // The forum palette is these variables; styles.css also holds the app's
+    // own --color-* tokens, which are themed by rule overrides instead.
+    const FORUM_VARS = ['--bg', '--bg2', '--bg3', '--border', '--border2', '--text', '--muted'];
+    // Avatars take a per-author colour inline (js/forum.js sets background on
+    // the element), so white ink on them is right in either theme.
+    const ALLOW = ['.avatar-sm', '.avatar-md'];
+
+    const forumHtml = read('forum.html');
+    const forumCss = forumHtml.slice(forumHtml.indexOf('<style>') + 7, forumHtml.indexOf('</style>'));
+
+    // standalone forum.html
+    let v = auditThemeVars(forumCss, { only: FORUM_VARS });
+    if (v.dark.length && !v.missing.length) ok(`forum.html: all ${v.dark.length} dark theme variables have light values`);
+    else fail('forum.html: no light value for ' + (v.missing.join(', ') || '(no dark variables found — scan broken)'));
+    const lit = auditLightMode(forumHtml, ALLOW);
+    if (!lit.missing.length) ok('forum.html: hard-coded dark rules all have a body.light counterpart');
+    else fail('forum.html: no light-mode rule for ' + lit.missing.join(', '));
+    if (lit.paintsPage) ok('forum.html: light mode repaints the page itself');
+    else fail('forum.html: body.light never repaints the page');
+    if (forumHtml.includes('id="nav-theme-btn"') && forumHtml.includes('site-theme-early'))
+      ok('forum.html: carries the theme toggle and applies the saved theme before first paint');
+    else fail('forum.html: theme toggle or early-theme script missing');
+
+    // js/forum.js renders the load-failure state with an inline style; it used
+    // to hard-code the dark palette's ink there, and an inline style beats any
+    // theme rule, so that screen stayed dark-on-light for light-mode readers.
+    for (const f of ['js/forum.js', 'beta/js/forum.js']) {
+      const hits = read(f).match(/style="[^"]*color:\s*#[0-9a-fA-F]{3,6}/g) || [];
+      if (!hits.length) ok(`${f}: rendered markup takes its ink from the theme, not a hex`);
+      else fail(`${f}: inline theme colour ignores light mode — ${hits.join(' | ')}`);
+    }
+
+    // the same forum embedded in the app (#forum-view), styled from styles.css
+    for (const sheet of ['styles.css', 'beta/styles.css']) {
+      const css = read(sheet);
+      v = auditThemeVars(css, { only: FORUM_VARS });
+      if (v.dark.length && !v.missing.length) ok(`${sheet}: #forum-view dark variables all have light values`);
+      else fail(`${sheet}: no light value for ` + (v.missing.join(', ') || '(no dark variables found — scan broken)'));
+      if (/body\.light #forum-view header/.test(css)) ok(`${sheet}: the forum header lightens too`);
+      else fail(`${sheet}: #forum-view header keeps its dark background in light mode`);
+    }
+  }
+
   console.log(failures ? `\n${failures} failure(s)` : '\nAll forum checks passed');
   process.exit(failures ? 1 : 0);
 })();

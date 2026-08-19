@@ -435,7 +435,7 @@ window.jwsyncForumInit = async function () {
     } catch (e) {
         console.error('Forum failed to initialize:', e);
         var list = document.getElementById('post-list');
-        if (list) list.innerHTML = '<div style="padding:48px 16px;text-align:center;color:#7a6558;font-family:system-ui,sans-serif"><div style="font-size:32px;margin-bottom:12px">⚠️</div><div style="font-size:15px;font-weight:600;color:#e8ddd5;margin-bottom:6px">' + FT('err_load_posts') + '</div><div style="font-size:13px">' + ((e && e.message) || 'Unknown error — check your connection') + '</div></div>';
+        if (list) list.innerHTML = '<div style="padding:48px 16px;text-align:center;color:var(--muted);font-family:system-ui,sans-serif"><div style="font-size:32px;margin-bottom:12px">⚠️</div><div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px">' + FT('err_load_posts') + '</div><div style="font-size:13px">' + ((e && e.message) || 'Unknown error — check your connection') + '</div></div>';
         // Reset flag so a retry (re-entering the route) will try again
         window.__jwsync_forum_loaded__ = false;
     }

@@ -2582,3 +2582,26 @@ html.jw-beta body:not(.light) button[class*="bg-orange-600"][class*="py-4"]:disa
 .jw-adv-disclosure-chev{font-size:11px;opacity:.75}
 body.light .jw-adv-disclosure{background:rgba(11,46,88,.06)!important;
   border-color:rgba(11,46,88,.14)!important;color:#475569!important}
+
+/* ── Forum, light mode ───────────────────────────────────────────────────────
+   The embedded forum (#forum-view) painted from its own dark variable set no
+   matter which theme the reader had chosen, so switching the site to light
+   left the Community tab black. The palette is a variable set, so the theme is
+   mostly a redeclaration; below it are the rules that hard-code a dark value.
+   body.is-forum paints from var(--bg), so the page follows. Guarded by
+   tests/22_forum.js. */
+body.light {
+    --bg:      #f4f8ff;
+    --bg2:     #ffffff;
+    --bg3:     #eef3fb;
+    --border:  rgba(11,46,88,.14);
+    --border2: rgba(11,46,88,.30);
+    --text:    #071a38;
+    --muted:   #4d6a8f;
+}
+body.light #forum-view header {background:rgba(244,248,255,.96);}
+body.light #forum-view .post-body,
+body.light #forum-view .thread-content,
+body.light #forum-view .reply-body {color:#334155;}
+body.light #forum-view .post-excerpt {color:rgba(51,65,85,.75);}
+body.light #forum-view .thread-back {background:rgba(244,248,255,.92);}

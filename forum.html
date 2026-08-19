@@ -54,7 +54,8 @@
 
         /* Header */
         header { border-bottom:1px solid var(--border); background:rgba(12,10,9,0.96); backdrop-filter:blur(12px); position:sticky; top:0; z-index:100; }
-        .header-inner { display:flex; align-items:center; justify-content:space-between; padding:13px 0; }
+        .header-inner { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 0; }
+        .header-right { display:flex; align-items:center; gap:9px; }
         .logo-area { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
         .logo-icon { width:34px; height:34px; border-radius:8px; background:#ea580c; display:flex; align-items:center; justify-content:center; font-size:17px; }
         .logo-name { font-size:15px; font-weight:700; letter-spacing:-0.3px; }
@@ -187,7 +188,35 @@
             .stats-bar { gap:16px; }
             .vote-col { min-width:26px; }
         }
+    
+        /* nav-theme-btn (theme toggle in header) — same control as the other pages */
+        .nav-theme-btn { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:7px; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; transition:color .15s,background .15s,border-color .15s; flex-shrink:0; padding:0; font-size:0; }
+        .nav-theme-btn:hover { color:var(--text); background:var(--bg2); border-color:var(--border2); }
+        .nav-theme-btn svg { width:14px; height:14px; display:block; }
+
+        /* ── Light mode ──────────────────────────────────────────────────────
+           The forum had no light theme at all and no way to switch: a reader
+           who chose light mode elsewhere on the site arrived here to a dark
+           page. The palette is a variable set, so most of the theme is a
+           redeclaration; the rules below it are the ones that hard-code a
+           dark value. 22_forum.js fails the build if that list grows. */
+        body.light {
+            --bg:      #f4f8ff;
+            --bg2:     #ffffff;
+            --bg3:     #eef3fb;
+            --border:  rgba(11,46,88,.14);
+            --border2: rgba(11,46,88,.30);
+            --text:    #071a38;
+            --muted:   #4d6a8f;
+            --green:   #15803d;
+            --blue:    #1d4ed8;
+            --red:     #b91c1c;
+            --amber:   #b45309;
+        }
+        body.light header { background:rgba(244,248,255,.96); }
+        body.light .thread-content, body.light .reply-text { color:rgba(7,26,56,.85); }
     </style>
+<script id="site-theme-early">(function(){try{var p=JSON.parse(localStorage.getItem('jwsync_prefs_v1')||'{}');if(p.isDarkMode===false)document.body.classList.add('light');}catch(e){}}());</script>
 <script id="jw-dir-init">
 (function(){var R={ar:1,he:1,fa:1,ur:1},
 V=['en','es','pt','fr','de','it','ru','ja','ko','tl','sv','ceb','ar','he','uk','pl','zh-Hans','zh-Hant','yue-Hant','vi','hu','hi','id','ro','nl','sw','el'];
@@ -210,7 +239,10 @@ a(q||localStorage.getItem('jwsync_lang')||'en');}catch(e){a('en');}}());
                 <div class="logo-sub" data-i18n="logo_sub">Community</div>
             </div>
         </a>
-        <a class="back-btn" href="index.html" data-i18n="back_app">← Back to the app</a>
+        <div class="header-right">
+            <a class="back-btn" href="index.html" data-i18n="back_app">← Back to the app</a>
+            <button id="nav-theme-btn" class="nav-theme-btn" aria-label="Switch to light mode" title="Switch to light mode"></button>
+        </div>
     </div>
 </header>
 
@@ -313,5 +345,31 @@ a(q||localStorage.getItem('jwsync_lang')||'en');}catch(e){a('en');}}());
 // away. Inside the app, enhancements.js calls this on the #forum route instead.
 jwsyncForumInit();
 </script>
+<script id="fm-theme-init">
+(function(){
+  var PK='jwsync_prefs_v1';
+  var MOON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+  var SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+  function isDark(){return !document.body.classList.contains('light');}
+  function getPrefs(){try{return JSON.parse(localStorage.getItem(PK)||'{}');}catch(e){return{};}}
+  function saveTheme(dark){try{var p=getPrefs();p.isDarkMode=dark;localStorage.setItem(PK,JSON.stringify(p));}catch(e){}}
+  function setIcon(btn,dark){btn.innerHTML=dark?MOON:SUN;btn.title=dark?'Switch to light mode':'Switch to dark mode';btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');}
+  function initBtn(id){
+    var btn=document.getElementById(id);
+    if(!btn)return;
+    setIcon(btn,isDark());
+    btn.addEventListener('click',function(){
+      var dark=isDark();
+      document.body.classList.toggle('light',dark);
+      saveTheme(!dark);
+    });
+    var mo=new MutationObserver(function(){setIcon(btn,isDark());});
+    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){initBtn('nav-theme-btn');});}
+  else{initBtn('nav-theme-btn');}
+})();
+</script>
+
 </body>
 </html>

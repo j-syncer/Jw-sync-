@@ -4,6 +4,28 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.43.0] — 2026-08-18
+
+### Added: the forum can be read in light mode, and switched from there
+
+The Community forum was the last page with no light theme and no way to
+switch: choose light mode anywhere else on the site, open Community, and the
+page was still black — the standalone page and the Community tab inside the
+app alike.
+
+Both now follow the theme, and forum.html carries the same theme toggle as
+Study Stats and Share Notes, applied before first paint so there is no dark
+flash on the way in.
+
+One bug fixed while wiring it up: the "Couldn't load posts" screen is drawn by
+`js/forum.js` with an inline `color:#e8ddd5`, and an inline style beats any
+theme rule — so the one screen a reader sees when something has gone wrong
+would have stayed unreadable in light mode. It takes its ink from the theme
+now, and the forum suite fails the build if a theme colour is hard-coded into
+rendered markup again.
+
+---
+
 ## [3.42.0] — 2026-08-18
 
 ### Added: the receive side gets its finish line too
