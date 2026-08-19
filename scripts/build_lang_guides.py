@@ -60,6 +60,12 @@ STRAY = {
     # Kiswahili is Latin-script with no diacritics at all, so like
     # Indonesian it gets the stray-script guard and no DIACRITIC entry.
     "sw": re.compile(_NON_LATIN + "|[ऀ-ॿ]"),
+    # Greek is Greek-script, so — like Hindi — the Latin-script class is the
+    # wrong guard. Allow Greek and ASCII product names, reject the rest.
+    # Note Cyrillic is in the reject set on purpose: а е о р с х у and their
+    # capitals are visually identical to Greek/Latin letters, so a stray one
+    # reads as an ordinary word and nothing downstream objects.
+    "el": re.compile("[Ѐ-ӿ֐-ۿ฀-๿가-힯぀-ヿ一-鿿ऀ-ॿ]"),
 }
 
 # Languages written in Latin script with obligatory diacritics, and the
@@ -74,9 +80,40 @@ DIACRITIC = {
     # Hindi has no Latin diacritics; the equivalent "is this really the
     # language" check is that the prose is in Devanagari at all.
     "hi": re.compile("[ऀ-ॿ]"),
+    # Same for Greek: prose with no Greek letters in it is transliterated,
+    # untranslated or stripped — never a stylistic choice.
+    "el": re.compile("[Ͱ-Ͽ]"),
 }
 
 META = {
+    "el": {
+        "name": "Greek",
+        "upper": "EL",
+        "glossary": """Glossary settled on for all 39 guides:
+
+  backup              αντίγραφο ασφαλείας
+  to merge / merge    συγχωνεύω / συγχώνευση
+  notes               σημειώσεις
+  highlights          επισημάνσεις
+  bookmarks           σελιδοδείκτες
+  tags                ετικέτες
+  device              συσκευή
+  file                αρχείο
+  browser             πρόγραμμα περιήγησης
+  to restore          κάνω επαναφορά / επαναφορά
+  to back up          δημιουργώ αντίγραφο ασφαλείας
+  Personal Study      Προσωπική Μελέτη
+  Backup and Restore  Αντίγραφο ασφαλείας και επαναφορά
+  database            βάση δεδομένων
+  publication         έντυπο
+  verse               εδάφιο
+  Hebrew Scriptures   Εβραϊκές Γραφές
+  Greek Scriptures    Ελληνικές Γραφές
+  service year        υπηρεσιακό έτος
+
+  "JW Library", "JW Sync", ".jwlibrary" and jwsync.org stay in Latin.
+""",
+    },
     "ro": {
         "name": "Romanian",
         "upper": "RO",
