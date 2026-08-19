@@ -4,6 +4,51 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.44.0] — 2026-08-19
+
+### Added: see both versions of a conflicted note side by side — and combine them
+
+Until now the Conflict Reviewer asked one question: which of these two
+versions do you want? That is the right question when one device has the
+note you meant to keep. It is the wrong question when you added a paragraph
+on the phone and fixed a sentence on the tablet, because answering it throws
+one of them away.
+
+Every conflict now has a **Compare side by side** control that opens a
+line-by-line diff of the two versions, laid out the way a code review shows
+a patch:
+
+- Lines both devices agree on sit across from each other, unchanged.
+- A line you edited sits opposite its replacement, with the words that
+  actually differ marked — removed on the left, added on the right.
+- A line only one device has gets a column to itself.
+
+Each differing line has its own tick, so you decide line by line what the
+note should end up saying. **Keep both sides** takes everything from both
+devices; **All from the merge** and **All from the other version** are one
+click each. The result appears in a text box underneath as the exact text
+that will be saved, and you can type in it directly — reword a sentence,
+delete a line, join two thoughts into one. Once you have typed in it, a tick
+no longer overwrites your wording; it offers to rebuild the draft instead.
+
+Opening the comparison changes nothing on its own — the draft starts as a
+copy of what the merge already chose. **Use this combined text** is what
+commits it, and the conflict is badged *Combined* so you can see at a glance
+which notes you resolved by hand. The combined note is written back in
+whatever shape the note was already stored in, and it replaces the note
+rather than duplicating it.
+
+Available in all 27 languages.
+
+### Fixed
+
+- `i18n_tool.py merge` dropped the comma joining new keys onto a dictionary
+  whose last value was followed by a space, producing a file that no longer
+  parsed. It judged the object by the single character before its closing
+  brace; it now reads the whole body.
+
+---
+
 ## [3.43.0] — 2026-08-18
 
 ### Added: the forum can be read in light mode, and switched from there

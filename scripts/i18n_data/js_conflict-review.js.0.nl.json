@@ -20,5 +20,16 @@
  "suggested": "Voorgesteld",
  "sg_content": "Heeft inhoud",
  "sg_newer": "Meest recente bewerking",
- "sg_longer": "Meest uitgebreid"
+ "sg_longer": "Meest uitgebreid",
+ "compare": "Naast elkaar vergelijken",
+ "compare_hide": "Vergelijking verbergen",
+ "cmp_hint": "Kies uit elke versie de regels die je wilt en pas het resultaat daarna aan als dat nodig is.",
+ "all_cur": "Alles uit de samenvoeging",
+ "all_alt": "Alles uit de andere versie",
+ "all_both": "Beide kanten houden",
+ "combined": "Gecombineerde aantekening",
+ "use_combined": "Deze gecombineerde tekst gebruiken",
+ "using_combined": "✓ Gecombineerde tekst wordt gebruikt",
+ "rebuild": "Opnieuw opbouwen uit selectie",
+ "custom_badge": "Gecombineerd"
 }

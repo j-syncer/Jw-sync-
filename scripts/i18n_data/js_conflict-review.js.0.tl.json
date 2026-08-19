@@ -20,5 +20,16 @@
  "suggested": "Iminumungkahi",
  "sg_content": "May nilalaman",
  "sg_newer": "Pinakabagong edit",
- "sg_longer": "Pinakadetalyado"
+ "sg_longer": "Pinakadetalyado",
+ "compare": "Ihambing nang magkatabi",
+ "compare_hide": "Itago ang paghahambing",
+ "cmp_hint": "Piliin ang mga linyang gusto mo mula sa bawat bersyon, tapos i-edit ang resulta kung kailangan.",
+ "all_cur": "Lahat mula sa merge",
+ "all_alt": "Lahat mula sa isang bersyon",
+ "all_both": "Panatilihin pareho",
+ "combined": "Pinagsamang tala",
+ "use_combined": "Gamitin ang pinagsamang teksto",
+ "using_combined": "✓ Ginagamit ang pinagsamang teksto",
+ "rebuild": "Gawing muli mula sa pinili",
+ "custom_badge": "Pinagsama"
 }

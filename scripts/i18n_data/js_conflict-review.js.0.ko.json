@@ -20,5 +20,16 @@
  "suggested": "추천",
  "sg_content": "내용 있음",
  "sg_newer": "가장 최근 편집",
- "sg_longer": "가장 상세함"
+ "sg_longer": "가장 상세함",
+ "compare": "나란히 비교",
+ "compare_hide": "비교 숨기기",
+ "cmp_hint": "각 버전에서 남길 줄을 고른 다음, 필요하면 결과를 편집하세요.",
+ "all_cur": "병합 결과에서 전부",
+ "all_alt": "다른 버전에서 전부",
+ "all_both": "양쪽 다 남기기",
+ "combined": "합친 메모",
+ "use_combined": "이 합친 내용 사용",
+ "using_combined": "✓ 합친 내용 사용 중",
+ "rebuild": "선택한 대로 다시 만들기",
+ "custom_badge": "합침"
 }

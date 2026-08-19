@@ -20,5 +20,16 @@
  "suggested": "Föreslagen",
  "sg_content": "Har innehåll",
  "sg_newer": "Senaste ändringen",
- "sg_longer": "Mest detaljerad"
+ "sg_longer": "Mest detaljerad",
+ "compare": "Jämför sida vid sida",
+ "compare_hide": "Dölj jämförelsen",
+ "cmp_hint": "Välj de rader du vill ha från varje version och redigera sedan resultatet om du behöver.",
+ "all_cur": "Allt från sammanslagningen",
+ "all_alt": "Allt från den andra versionen",
+ "all_both": "Behåll båda sidorna",
+ "combined": "Sammansatt anteckning",
+ "use_combined": "Använd den här sammansatta texten",
+ "using_combined": "✓ Använder sammansatt text",
+ "rebuild": "Bygg om från valet",
+ "custom_badge": "Sammansatt"
 }

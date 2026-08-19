@@ -357,7 +357,12 @@ def cmd_merge(lang):
             obj_end = table_start + hits[0][2]
             style = detect_style(text[obj_start:obj_end])
             body = obj_to_js(add, style)[1:-1]        # drop the braces
-            sep = "" if text[obj_end - 2].strip() in ("{", "") else ","
+            # Only the character *before* the closing brace was looked at here,
+            # so a table whose last value is followed by a space -- `sg_longer:"..." }`
+            # -- read as an empty object and the joining comma was dropped, producing
+            # a file that no longer parses. Judge the whole body instead.
+            body_before = text[obj_start + 1:obj_end - 1].rstrip()
+            sep = "" if (not body_before or body_before.endswith(",")) else ","
             text = text[:obj_end - 1] + sep + body + text[obj_end - 1:]
             total += len(add)
             print("  %s[%d]: merged %d key(s) into %s" % (f, n, len(add), lang))

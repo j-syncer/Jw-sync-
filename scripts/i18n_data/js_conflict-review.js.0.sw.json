@@ -20,5 +20,16 @@
  "suggested": "Limependekezwa",
  "sg_content": "Lina maudhui",
  "sg_newer": "Hariri ya karibuni zaidi",
- "sg_longer": "Lenye maelezo zaidi"
+ "sg_longer": "Lenye maelezo zaidi",
+ "compare": "Linganisha ubavu kwa ubavu",
+ "compare_hide": "Ficha ulinganisho",
+ "cmp_hint": "Chagua mistari unayotaka kutoka kila toleo, kisha hariri matokeo ukihitaji.",
+ "all_cur": "Yote kutoka kwa muunganisho",
+ "all_alt": "Yote kutoka toleo lingine",
+ "all_both": "Hifadhi pande zote mbili",
+ "combined": "Dokezo lililounganishwa",
+ "use_combined": "Tumia maandishi haya yaliyounganishwa",
+ "using_combined": "✓ Yanatumika maandishi yaliyounganishwa",
+ "rebuild": "Jenga upya kutoka kwa uliyochagua",
+ "custom_badge": "Limeunganishwa"
 }

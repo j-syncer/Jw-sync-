@@ -20,5 +20,16 @@
  "suggested": "已推薦",
  "sg_content": "有內容",
  "sg_newer": "最近修改",
- "sg_longer": "內容最詳細"
+ "sg_longer": "內容最詳細",
+ "compare": "並排比較",
+ "compare_hide": "隱藏比較",
+ "cmp_hint": "從兩個版本中挑出你要保留的行，然後視需要修改結果。",
+ "all_cur": "全部取自合併結果",
+ "all_alt": "全部取自另一個版本",
+ "all_both": "兩邊都保留",
+ "combined": "合併後的筆記",
+ "use_combined": "使用這段合併後的文字",
+ "using_combined": "✓ 正在使用合併後的文字",
+ "rebuild": "依所選重新產生",
+ "custom_badge": "已合併"
 }

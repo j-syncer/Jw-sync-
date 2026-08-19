@@ -20,5 +20,16 @@
  "suggested": "Zaproponowano",
  "sg_content": "Ma treść",
  "sg_newer": "Najnowsza zmiana",
- "sg_longer": "Najbardziej szczegółowa"
+ "sg_longer": "Najbardziej szczegółowa",
+ "compare": "Porównaj obok siebie",
+ "compare_hide": "Ukryj porównanie",
+ "cmp_hint": "Wybierz z każdej wersji wiersze, które chcesz zachować, a potem w razie potrzeby popraw wynik.",
+ "all_cur": "Wszystko ze scalenia",
+ "all_alt": "Wszystko z drugiej wersji",
+ "all_both": "Zachowaj obie strony",
+ "combined": "Połączona notatka",
+ "use_combined": "Użyj tego połączonego tekstu",
+ "using_combined": "✓ Używam połączonego tekstu",
+ "rebuild": "Zbuduj na nowo z zaznaczenia",
+ "custom_badge": "Połączona"
 }

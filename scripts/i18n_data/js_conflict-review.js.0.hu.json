@@ -20,5 +20,16 @@
  "suggested": "Javasolt",
  "sg_content": "Van benne tartalom",
  "sg_newer": "Legutóbbi szerkesztés",
- "sg_longer": "Legrészletesebb"
+ "sg_longer": "Legrészletesebb",
+ "compare": "Összehasonlítás egymás mellett",
+ "compare_hide": "Összehasonlítás elrejtése",
+ "cmp_hint": "Válaszd ki mindkét változatból a megtartandó sorokat, majd szükség esetén szerkeszd az eredményt.",
+ "all_cur": "Minden az egyesítésből",
+ "all_alt": "Minden a másik változatból",
+ "all_both": "Mindkét oldal megtartása",
+ "combined": "Összevont jegyzet",
+ "use_combined": "Ezt az összevont szöveget használom",
+ "using_combined": "✓ Az összevont szöveg van használatban",
+ "rebuild": "Újraépítés a kijelölésből",
+ "custom_badge": "Összevont"
 }

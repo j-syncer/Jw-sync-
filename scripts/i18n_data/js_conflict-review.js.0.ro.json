@@ -20,5 +20,16 @@
  "suggested": "Sugerată",
  "sg_content": "Are conținut",
  "sg_newer": "Cea mai recentă modificare",
- "sg_longer": "Cea mai detaliată"
+ "sg_longer": "Cea mai detaliată",
+ "compare": "Compară una lângă alta",
+ "compare_hide": "Ascunde comparația",
+ "cmp_hint": "Alege rândurile pe care le vrei din fiecare versiune, apoi modifică rezultatul dacă e nevoie.",
+ "all_cur": "Tot din îmbinare",
+ "all_alt": "Tot din cealaltă versiune",
+ "all_both": "Păstrează ambele părți",
+ "combined": "Notiță combinată",
+ "use_combined": "Folosește acest text combinat",
+ "using_combined": "✓ Se folosește textul combinat",
+ "rebuild": "Reconstruiește din selecție",
+ "custom_badge": "Combinată"
 }

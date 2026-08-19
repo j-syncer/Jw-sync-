@@ -20,5 +20,16 @@
  "suggested": "Suggested",
  "sg_content": "Has content",
  "sg_newer": "Most recent edit",
- "sg_longer": "Most detailed"
+ "sg_longer": "Most detailed",
+ "compare": "Compare side by side",
+ "compare_hide": "Hide comparison",
+ "cmp_hint": "Pick the lines you want from each version, then edit the result below if you need to.",
+ "all_cur": "All from the merge",
+ "all_alt": "All from the other version",
+ "all_both": "Keep both sides",
+ "combined": "Combined note",
+ "use_combined": "Use this combined text",
+ "using_combined": "✓ Using combined text",
+ "rebuild": "Rebuild from selection",
+ "custom_badge": "Combined"
 }

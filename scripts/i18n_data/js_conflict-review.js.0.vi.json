@@ -20,5 +20,16 @@
  "suggested": "Được gợi ý",
  "sg_content": "Có nội dung",
  "sg_newer": "Sửa gần đây nhất",
- "sg_longer": "Chi tiết nhất"
+ "sg_longer": "Chi tiết nhất",
+ "compare": "So sánh cạnh nhau",
+ "compare_hide": "Ẩn phần so sánh",
+ "cmp_hint": "Chọn những dòng bạn muốn giữ từ mỗi phiên bản, rồi sửa lại kết quả nếu cần.",
+ "all_cur": "Lấy hết từ bản hợp nhất",
+ "all_alt": "Lấy hết từ phiên bản kia",
+ "all_both": "Giữ cả hai bên",
+ "combined": "Ghi chú đã kết hợp",
+ "use_combined": "Dùng đoạn văn bản đã kết hợp này",
+ "using_combined": "✓ Đang dùng văn bản đã kết hợp",
+ "rebuild": "Dựng lại theo lựa chọn",
+ "custom_badge": "Đã kết hợp"
 }

@@ -20,5 +20,16 @@
  "suggested": "Vorschlag",
  "sg_content": "Hat Inhalt",
  "sg_newer": "Neueste Änderung",
- "sg_longer": "Am ausführlichsten"
+ "sg_longer": "Am ausführlichsten",
+ "compare": "Nebeneinander vergleichen",
+ "compare_hide": "Vergleich ausblenden",
+ "cmp_hint": "Wähle aus jeder Version die Zeilen, die du behalten willst, und bearbeite das Ergebnis bei Bedarf.",
+ "all_cur": "Alles aus der Zusammenführung",
+ "all_alt": "Alles aus der anderen Version",
+ "all_both": "Beide Seiten behalten",
+ "combined": "Kombinierte Notiz",
+ "use_combined": "Diesen kombinierten Text verwenden",
+ "using_combined": "✓ Kombinierter Text wird verwendet",
+ "rebuild": "Aus Auswahl neu aufbauen",
+ "custom_badge": "Kombiniert"
 }

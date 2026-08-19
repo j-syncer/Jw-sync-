@@ -20,5 +20,16 @@
  "suggested": "Disarankan",
  "sg_content": "Ada isinya",
  "sg_newer": "Perubahan terbaru",
- "sg_longer": "Paling rinci"
+ "sg_longer": "Paling rinci",
+ "compare": "Bandingkan berdampingan",
+ "compare_hide": "Sembunyikan perbandingan",
+ "cmp_hint": "Pilih baris yang Anda inginkan dari tiap versi, lalu ubah hasilnya jika perlu.",
+ "all_cur": "Semua dari gabungan",
+ "all_alt": "Semua dari versi satunya",
+ "all_both": "Simpan kedua sisi",
+ "combined": "Catatan gabungan",
+ "use_combined": "Pakai teks gabungan ini",
+ "using_combined": "✓ Memakai teks gabungan",
+ "rebuild": "Susun ulang dari pilihan",
+ "custom_badge": "Gabungan"
 }

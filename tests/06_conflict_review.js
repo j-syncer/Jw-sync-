@@ -15,6 +15,9 @@
 //   3. "Keep both" adds the alternate version as a second note
 //   4. Identical notes across backups produce NO overlay (resolve null)
 //   5. Missing deps (no JSZip / sql.js) short-circuits to null instantly
+//   6. The v3.44.0 comparison: a line-aligned diff of the two versions,
+//      per-line ticks that combine them, and a hand-editable result — each
+//      asserted on the Note rows that come back out of the rebuilt file
 const path = require('path');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
@@ -310,6 +313,231 @@ async function waitForOverlay(doc, timeoutMs) {
     if (res === null) ok('fewer than 2 source backups → resolves null');
     else fail('expected null for single backup, got ' + JSON.stringify(res));
     dom.window.close();
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  // v3.44.0 — side-by-side comparison and combining.
+  //
+  // Picking a whole version is the fast path, but it is still a choice
+  // between two things the reader wrote: whichever loses is gone. These
+  // sections cover the case the automatic merge cannot resolve at all —
+  // each device holds a line worth keeping — and assert on the note rows
+  // that actually land in the rebuilt backup, not just the UI state. A
+  // combined note that renders correctly but writes the wrong Content is
+  // silent data loss, which is the failure this whole screen exists to
+  // prevent.
+  section('Compare side by side → aligned line diff with per-line ticks');
+  const SHARED_LINE = 'Both devices kept this line.';
+  const G2 = 'guid-multiline-1';
+  const phoneMulti = {
+    guid: G2, title: 'Faith',
+    content: '<p>' + SHARED_LINE + '</p><p>Faith is the assured expectation.</p><p>Written on the phone.</p>',
+    lastMod: '2024-03-01 09:00:00'
+  };
+  const tabletMulti = {
+    guid: G2, title: 'Faith',
+    content: '<p>' + SHARED_LINE + '</p><p>Faith is the assured expectation of what is hoped for.</p><p>Written on the tablet.</p>',
+    lastMod: '2024-04-15 18:00:00'
+  };
+  const phoneMultiBuf = await buildBackup(SQL, [phoneMulti]);
+  const tabletMultiBuf = await buildBackup(SQL, [tabletMulti]);
+  const mergedMultiBuf = await buildBackup(SQL, [phoneMulti]);   // the merge kept the phone side
+
+  function openCompare(overlay) {
+    const btn = overlay.querySelector('.jcr-compare-btn');
+    if (!btn) return null;
+    btn.click();
+    return overlay.querySelector('.jcr-compare');
+  }
+  function bootMulti() {
+    const dom = makeReviewerDom({ deps: true });
+    dom.window.fetch = () => Promise.resolve({ arrayBuffer: async () => mergedMultiBuf.slice(0) });
+    attachInputs(dom.window, [
+      { name: 'phone.jwlibrary', buffer: phoneMultiBuf },
+      { name: 'tablet.jwlibrary', buffer: tabletMultiBuf }
+    ]);
+    return dom;
+  }
+
+  {
+    const dom = bootMulti();
+    const win = dom.window, doc = win.document;
+    const reviewP = win.__jwConflictReview({ blobUrl: 'blob:merged' });
+    const overlay = await waitForOverlay(doc);
+    if (!overlay) { fail('overlay did not appear for the multi-line conflict'); dom.window.close(); }
+    else {
+      const btn = overlay.querySelector('.jcr-compare-btn');
+      if (btn) ok('"Compare side by side" control present on the conflict');
+      else fail('no compare control rendered');
+      const pane = openCompare(overlay);
+      if (pane && !pane.hidden) ok('comparison pane opens on click');
+      else fail('comparison pane did not open');
+
+      const rows = overlay.querySelectorAll('.jcr-drow');
+      if (rows.length >= 3) ok('line-aligned diff rendered (' + rows.length + ' rows)');
+      else fail('expected at least 3 diff rows, got ' + rows.length);
+      if (overlay.querySelector('.jcr-drow-eq')) ok('the line both devices share is shown as unchanged');
+      else fail('no unchanged row — the shared line was not aligned');
+      const chg = overlay.querySelectorAll('.jcr-drow-chg');
+      if (chg.length >= 1) ok('edited lines are paired opposite their replacement (' + chg.length + ')');
+      else fail('no changed-line rows: edits were not aligned side by side');
+      // Both columns exist on a changed row, each carrying its own word marks.
+      if (overlay.querySelector('.jcr-dcut .jcr-del')) ok('removed words marked in the left column');
+      else fail('no word-level deletion marked on the left column');
+      if (overlay.querySelector('.jcr-dnew .jcr-ins')) ok('added words marked in the right column');
+      else fail('no word-level insertion marked on the right column');
+      if (overlay.querySelectorAll('.jcr-dtick').length >= 2) ok('every changed line carries its own tick');
+      else fail('per-line ticks missing');
+
+      // Opening the comparison must not, by itself, change the outcome:
+      // the draft starts as an exact copy of the merge's own choice.
+      const ta = overlay.querySelector('.jcr-combine-text');
+      if (ta && ta.value.includes('Written on the phone.') && !ta.value.includes('Written on the tablet.'))
+        ok('the draft opens reproducing the merge exactly (nothing adopted yet)');
+      else fail('draft did not open as the merged version: ' + (ta && JSON.stringify(ta.value)));
+
+      overlay.querySelector('[data-jcr-skip].jcr-btn').click();
+      await reviewP;
+      dom.window.close();
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  section('Combine both sides → one note carrying work from both devices');
+  {
+    const dom = bootMulti();
+    const win = dom.window, doc = win.document;
+    const reviewP = win.__jwConflictReview({ blobUrl: 'blob:merged' });
+    const overlay = await waitForOverlay(doc);
+    if (!overlay) { fail('overlay did not appear'); dom.window.close(); }
+    else {
+      openCompare(overlay);
+      const acts = Array.from(overlay.querySelectorAll('.jcr-cmp-act'));
+      const bothAct = acts[2];           // All from merge / All from other / Keep both sides
+      bothAct.click();
+      const ta = overlay.querySelector('.jcr-combine-text');
+      if (ta.value.includes('Written on the phone.') && ta.value.includes('Written on the tablet.'))
+        ok('"Keep both sides" draws both devices’ lines into the draft');
+      else fail('combined draft is missing a side: ' + JSON.stringify(ta.value));
+      if ((ta.value.match(new RegExp(SHARED_LINE, 'g')) || []).length === 1)
+        ok('the line both devices share appears once, not twice');
+      else fail('shared line duplicated in the combined draft');
+
+      const useBtn = overlay.querySelector('.jcr-use-combined');
+      useBtn.click();
+      if (useBtn.classList.contains('on')) ok('"Use this combined text" latches on');
+      else fail('use-combined did not latch');
+      const badge = overlay.querySelector('.jcr-custom-badge');
+      if (badge && !badge.hidden) ok('the conflict is badged as combined');
+      else fail('no combined badge on the conflict');
+      if (!overlay.querySelector('.jcr-ver.sel')) ok('choosing a whole version is deselected while combining');
+      else fail('a version card stayed selected alongside the combined text');
+
+      overlay.querySelector('.jcr-btn-primary').click();
+      const res = await reviewP;
+      if (res && res.buffer) {
+        const { byGuid, total } = await readNotes(SQL, res.buffer);
+        const note = byGuid[G2] && byGuid[G2][0];
+        if (note && note.content.includes('Written on the phone.') && note.content.includes('Written on the tablet.'))
+          ok('the rebuilt backup holds one note with both devices’ lines');
+        else fail('combined text did not reach the note row: ' + (note && note.content));
+        if (note && !/Written on the phone\.[\s\S]*Written on the phone\./.test(note.content))
+          ok('no line was written twice');
+        else fail('a line was duplicated in the written note');
+        if (note && /<p>/i.test(note.content) && /<br\s*\/?>/i.test(note.content))
+          ok('written back as HTML, matching how the note was already stored');
+        else fail('combined note lost the note’s storage format: ' + (note && note.content));
+        if (total === 1) ok('still one note — combined, not duplicated');
+        else fail('expected 1 note after combining, got ' + total);
+      } else fail('Apply after combining returned no buffer');
+      dom.window.close();
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  section('Hand-edited combined text is written through verbatim');
+  {
+    const dom = bootMulti();
+    const win = dom.window, doc = win.document;
+    const reviewP = win.__jwConflictReview({ blobUrl: 'blob:merged' });
+    const overlay = await waitForOverlay(doc);
+    if (!overlay) { fail('overlay did not appear'); dom.window.close(); }
+    else {
+      openCompare(overlay);
+      const ta = overlay.querySelector('.jcr-combine-text');
+      ta.value = 'A sentence the reader typed themselves.';
+      ta.dispatchEvent(new win.Event('input', { bubbles: true }));
+
+      // Ticks no longer overwrite what was typed; rebuilding is asked for.
+      const rebuild = overlay.querySelector('.jcr-rebuild');
+      if (rebuild && rebuild.hidden) ok('no rebuild prompt until a tick is touched');
+      else fail('rebuild control shown too early');
+      const tick = overlay.querySelector('.jcr-dtick');
+      tick.click();
+      if (ta.value === 'A sentence the reader typed themselves.') ok('a tick does not silently discard the typed text');
+      else fail('typed text was overwritten by a tick: ' + JSON.stringify(ta.value));
+      if (rebuild && !rebuild.hidden) ok('a rebuild control appears instead');
+      else fail('no rebuild control offered after a tick');
+
+      overlay.querySelector('.jcr-use-combined').click();
+      overlay.querySelector('.jcr-btn-primary').click();
+      const res = await reviewP;
+      if (res && res.buffer) {
+        const { byGuid } = await readNotes(SQL, res.buffer);
+        const note = byGuid[G2] && byGuid[G2][0];
+        if (note && note.content.includes('A sentence the reader typed themselves.'))
+          ok('the reader’s own wording is what lands in the note');
+        else fail('hand-edited text did not reach the note: ' + (note && note.content));
+        if (note && !note.content.includes('Written on the tablet.'))
+          ok('nothing the reader deleted came back');
+        else fail('discarded text reappeared in the note');
+      } else fail('Apply after a hand edit returned no buffer');
+      dom.window.close();
+    }
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  // The reviewer's script is a shared file — one copy serves both sites —
+  // but its stylesheet lives in each index.html. Ship the module without
+  // the styles and the comparison renders unstyled on whichever page was
+  // missed, which is exactly how the Awards tab went missing from beta.
+  section('Comparison CSS is defined on both index.html copies');
+  {
+    const CLASSES = [
+      'jcr-compare-row', 'jcr-compare-btn', 'jcr-compare', 'jcr-cmp-pick-row', 'jcr-cmp-pick',
+      'jcr-cmp-heads', 'jcr-cmp-head', 'jcr-cmp-hint', 'jcr-diff', 'jcr-drow', 'jcr-dside',
+      'jcr-deq', 'jcr-dcut', 'jcr-dnew', 'jcr-dempty', 'jcr-dtick', 'jcr-dtext',
+      'jcr-cmp-actions', 'jcr-cmp-act', 'jcr-rebuild', 'jcr-combine', 'jcr-combine-label',
+      'jcr-combine-text', 'jcr-use-combined', 'jcr-custom-badge'
+    ];
+    ['index.html', 'beta/index.html'].forEach(f => {
+      const src = fs.readFileSync(path.join(REPO, f), 'utf8');
+      const missing = CLASSES.filter(cls => !src.includes('.' + cls + '{') && !src.includes('.' + cls + ' ') && !src.includes('.' + cls + ':') && !src.includes('.' + cls + ','));
+      if (!missing.length) ok('all ' + CLASSES.length + ' comparison classes styled in ' + f);
+      else fail(f + ' is missing CSS for: ' + missing.join(', '));
+    });
+  }
+
+  // ──────────────────────────────────────────────────────────────────
+  section('Every language can read the comparison UI');
+  {
+    const src = fs.readFileSync(path.join(REPO, 'js/conflict-review.js'), 'utf8');
+    const NEW_KEYS = ['compare', 'compare_hide', 'cmp_hint', 'all_cur', 'all_alt', 'all_both',
+                      'combined', 'use_combined', 'using_combined', 'rebuild', 'custom_badge'];
+    const start = src.indexOf('{', src.indexOf('var I18N'));
+    let d = 0, end = start;
+    for (let i = start; i < src.length; i++) {
+      if (src[i] === '{') d++;
+      else if (src[i] === '}') { d--; if (d === 0) { end = i + 1; break; } }
+    }
+    let table = null;
+    try { table = eval('(' + src.slice(start, end) + ')'); } catch (e) { fail('I18N table does not evaluate: ' + e.message); }
+    if (table) {
+      const langs = Object.keys(table);
+      const short = langs.filter(l => NEW_KEYS.some(k => !table[l][k]));
+      if (!short.length) ok('all ' + NEW_KEYS.length + ' new strings translated in every one of the ' + langs.length + ' languages');
+      else fail('untranslated comparison strings in: ' + short.join(', '));
+    }
   }
 
   section('SUMMARY');

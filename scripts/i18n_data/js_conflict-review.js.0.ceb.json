@@ -20,5 +20,16 @@
  "suggested": "Girekomenda",
  "sg_content": "May sulod",
  "sg_newer": "Pinakabag-o nga pag-edit",
- "sg_longer": "Pinaka-detalyado"
+ "sg_longer": "Pinaka-detalyado",
+ "compare": "Itandi nga magtapad",
+ "compare_hide": "Itago ang pagtandi",
+ "cmp_hint": "Pilia ang mga linya nga gusto nimo gikan sa matag bersyon, dayon usba ang resulta kon kinahanglan.",
+ "all_cur": "Tanan gikan sa merge",
+ "all_alt": "Tanan gikan sa laing bersyon",
+ "all_both": "Tipigan ang duha ka kilid",
+ "combined": "Gihiusang nota",
+ "use_combined": "Gamita kining gihiusang teksto",
+ "using_combined": "✓ Gigamit ang gihiusang teksto",
+ "rebuild": "Himoa pag-usab gikan sa gipili",
+ "custom_badge": "Gihiusa"
 }

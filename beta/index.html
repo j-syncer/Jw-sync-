@@ -371,7 +371,7 @@
         "Free and open source",
         "Available in 27 languages"
       ],
-      "softwareVersion": "3.43.0",
+      "softwareVersion": "3.44.0",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -1667,7 +1667,7 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 <style>
 #jw-conflict-overlay{position:fixed;inset:0;z-index:10050;display:flex;align-items:center;justify-content:center;padding:16px;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 .jcr-backdrop{position:absolute;inset:0;background:rgba(4,15,34,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.jcr-card{position:relative;width:100%;max-width:780px;max-height:88vh;display:flex;flex-direction:column;background:#0b1424;border:1px solid rgba(71,85,105,.45);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.55);color:#e2e8f0;overflow:hidden}
+.jcr-card{position:relative;width:100%;max-width:880px;max-height:88vh;display:flex;flex-direction:column;background:#0b1424;border:1px solid rgba(71,85,105,.45);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.55);color:#e2e8f0;overflow:hidden}
 .jcr-close{position:absolute;top:12px;right:14px;width:32px;height:32px;border:none;border-radius:9px;background:rgba(71,85,105,.35);color:#cbd5e1;font-size:20px;line-height:1;cursor:pointer;transition:background .15s}
 .jcr-close:hover{background:rgba(71,85,105,.6)}
 .jcr-head{display:flex;gap:14px;align-items:flex-start;padding:22px 24px 16px;border-bottom:1px solid rgba(71,85,105,.3)}
@@ -1704,6 +1704,45 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jcr-both-btn:hover{border-color:#94a3b8;color:#f1f5f9;background:rgba(255,255,255,.04)}
 .jcr-both-btn.on{background:rgba(5,150,105,.18);border-style:solid;border-color:#059669;color:#6ee7b7;box-shadow:0 0 0 1px rgba(5,150,105,.3)}
 .jcr-both-hint{font-size:11.5px;color:#64748b}
+.jcr-compare-row{margin-top:11px}
+.jcr-compare-btn{padding:6px 12px;border:1px solid rgba(71,85,105,.5);border-radius:8px;background:rgba(71,85,105,.22);color:#cbd5e1;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s ease}
+.jcr-compare-btn:hover{background:rgba(71,85,105,.35);color:#f1f5f9}
+.jcr-compare-btn.on{border-color:#ea580c;background:rgba(234,88,12,.14);color:#fdba74}
+.jcr-compare{margin-top:12px;padding:12px;border:1px solid rgba(71,85,105,.4);border-radius:12px;background:rgba(15,23,42,.45)}
+.jcr-cmp-pick-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.jcr-cmp-pick{padding:4px 9px;border:1px solid rgba(71,85,105,.5);border-radius:7px;background:transparent;color:#94a3b8;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .2s ease}
+.jcr-cmp-pick:hover{color:#e2e8f0;border-color:rgba(71,85,105,.7)}
+.jcr-cmp-pick.on{border-color:#ea580c;background:rgba(234,88,12,.14);color:#fdba74}
+.jcr-cmp-heads{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.jcr-cmp-head{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#94a3b8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jcr-cmp-hint{margin:6px 0 10px;font-size:11.5px;line-height:1.5;color:#64748b}
+.jcr-diff{display:flex;flex-direction:column;gap:3px;max-height:300px;overflow-y:auto;padding:6px;border:1px solid rgba(71,85,105,.3);border-radius:9px;background:rgba(4,15,34,.5)}
+.jcr-drow{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:stretch}
+.jcr-dside{display:flex;gap:6px;align-items:flex-start;padding:5px 7px;border:1px solid transparent;border-radius:7px;font-size:12px;line-height:1.55;color:#94a3b8;word-break:break-word}
+.jcr-deq{background:rgba(71,85,105,.12)}
+.jcr-dcut{background:rgba(190,18,60,.12);border-color:rgba(190,18,60,.28);color:#fecdd3}
+.jcr-dnew{background:rgba(5,150,105,.12);border-color:rgba(5,150,105,.3);color:#bbf7d0}
+.jcr-dside.on{box-shadow:inset 0 0 0 1px rgba(234,88,12,.55)}
+.jcr-dempty{border-radius:7px;background:repeating-linear-gradient(135deg,rgba(71,85,105,.1) 0 6px,transparent 6px 12px)}
+.jcr-dtick{flex:none;width:19px;height:19px;margin-top:1px;padding:0;border:1px solid rgba(148,163,184,.5);border-radius:5px;background:transparent;color:#94a3b8;font-size:11px;font-weight:800;line-height:1;cursor:pointer;transition:all .15s ease}
+.jcr-dtick:hover{border-color:#94a3b8;color:#e2e8f0}
+.jcr-dside.on .jcr-dtick{background:#ea580c;border-color:#ea580c;color:#fff}
+.jcr-dtext{flex:1 1 auto;white-space:pre-wrap}
+.jcr-dtext .jcr-ins{background:rgba(5,150,105,.3);color:#6ee7b7;border-radius:3px;padding:0 1px}
+.jcr-dtext .jcr-del{background:rgba(190,18,60,.24);color:#fda4af;border-radius:3px;padding:0 1px;text-decoration:line-through}
+.jcr-cmp-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.jcr-cmp-act{padding:5px 10px;border:1px solid rgba(71,85,105,.5);border-radius:7px;background:rgba(71,85,105,.2);color:#cbd5e1;font-size:11.5px;font-weight:700;cursor:pointer;transition:all .2s ease}
+.jcr-cmp-act:hover{background:rgba(71,85,105,.35);color:#f1f5f9}
+.jcr-rebuild{border-style:dashed;border-color:rgba(234,88,12,.55);color:#fdba74;background:transparent}
+.jcr-combine{margin-top:12px}
+.jcr-combine-label{display:block;margin-bottom:6px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#94a3b8}
+.jcr-combine-text{width:100%;min-height:110px;padding:9px 11px;resize:vertical;border:1px solid rgba(71,85,105,.5);border-radius:9px;background:rgba(4,15,34,.6);color:#e2e8f0;font-size:12.5px;line-height:1.6;font-family:inherit}
+.jcr-combine-text:focus{outline:none;border-color:#ea580c;box-shadow:0 0 0 3px rgba(234,88,12,.16)}
+.jcr-use-combined{margin-top:9px;padding:8px 14px;border:1px solid rgba(71,85,105,.5);border-radius:9px;background:rgba(71,85,105,.22);color:#e2e8f0;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .2s ease}
+.jcr-use-combined:hover{background:rgba(71,85,105,.35)}
+.jcr-use-combined.on{background:#059669;border-color:#059669;color:#fff;box-shadow:0 0 0 2px rgba(5,150,105,.3)}
+.jcr-use-combined:disabled{opacity:.5;cursor:default}
+.jcr-custom-badge{flex:none;padding:2px 6px;border:1px solid rgba(234,88,12,.45);border-radius:5px;background:rgba(234,88,12,.16);color:#fdba74;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
 .jcr-more{padding:10px 24px;font-size:12px;color:#94a3b8;background:rgba(15,23,42,.4)}
 .jcr-foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid rgba(71,85,105,.3);background:rgba(11,20,36,.85)}
 .jcr-btn{display:inline-flex;align-items:center;gap:7px;padding:11px 18px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:1px solid transparent;transition:all .2s ease}
@@ -1714,7 +1753,7 @@ if(!window.TRANSLATIONS) window.TRANSLATIONS = window.__JW_LANDING_I18N;
 .jcr-btn-primary:hover{background:#f97316;box-shadow:0 4px 12px rgba(234,88,12,.5);transform:translateY(-2px)}
 .jcr-btn-primary:active{transform:translateY(0)}
 .jcr-btn-primary:disabled{opacity:.6;cursor:default;transform:none;box-shadow:none}
-@media (max-width:560px){.jcr-head{padding:18px 18px 14px}.jcr-body{padding:6px 16px}.jcr-foot{padding:14px 16px}.jcr-versions{grid-template-columns:1fr}}
+@media (max-width:560px){.jcr-head{padding:18px 18px 14px}.jcr-body{padding:6px 16px}.jcr-foot{padding:14px 16px}.jcr-versions{grid-template-columns:1fr}.jcr-cmp-heads{grid-template-columns:1fr}.jcr-drow{grid-template-columns:1fr}.jcr-dempty{display:none}}
 </style>
 <!-- js/conflict-review.js is fetched on first call — the boot loader stubs
      window.__jwConflictReview via lazyEntry(). No <script> tag by design. -->

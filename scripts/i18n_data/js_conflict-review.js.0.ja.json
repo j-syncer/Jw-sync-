@@ -20,5 +20,16 @@
  "suggested": "おすすめ",
  "sg_content": "内容あり",
  "sg_newer": "最新の編集",
- "sg_longer": "最も詳しい"
+ "sg_longer": "最も詳しい",
+ "compare": "左右に並べて比較",
+ "compare_hide": "比較を隠す",
+ "cmp_hint": "各バージョンから残したい行を選び、必要なら結果を編集してください。",
+ "all_cur": "マージ結果からすべて",
+ "all_alt": "もう一方からすべて",
+ "all_both": "両方を残す",
+ "combined": "組み合わせたメモ",
+ "use_combined": "この組み合わせた文章を使う",
+ "using_combined": "✓ 組み合わせた文章を使用中",
+ "rebuild": "選択から作り直す",
+ "custom_badge": "組み合わせ"
 }

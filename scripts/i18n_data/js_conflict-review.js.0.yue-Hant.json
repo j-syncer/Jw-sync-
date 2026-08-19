@@ -20,5 +20,16 @@
  "suggested": "已建議",
  "sg_content": "有內容",
  "sg_newer": "最近改過",
- "sg_longer": "內容最詳細"
+ "sg_longer": "內容最詳細",
+ "compare": "左右並排比較",
+ "compare_hide": "收埋比較",
+ "cmp_hint": "喺兩個版本入面揀你想要嘅行，之後有需要就自己改下個結果。",
+ "all_cur": "合併結果全部要",
+ "all_alt": "另一個版本全部要",
+ "all_both": "兩邊都保留",
+ "combined": "合埋嘅筆記",
+ "use_combined": "用呢段合埋嘅文字",
+ "using_combined": "✓ 用緊合埋嘅文字",
+ "rebuild": "照所揀嘅重新砌過",
+ "custom_badge": "已合埋"
 }

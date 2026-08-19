@@ -20,5 +20,16 @@
  "suggested": "Sugerida",
  "sg_content": "Tiene contenido",
  "sg_newer": "Edición más reciente",
- "sg_longer": "Más detallada"
+ "sg_longer": "Más detallada",
+ "compare": "Comparar lado a lado",
+ "compare_hide": "Ocultar comparación",
+ "cmp_hint": "Elige las líneas que quieras de cada versión y luego edita el resultado si lo necesitas.",
+ "all_cur": "Todo de la fusión",
+ "all_alt": "Todo de la otra versión",
+ "all_both": "Conservar ambos lados",
+ "combined": "Nota combinada",
+ "use_combined": "Usar este texto combinado",
+ "using_combined": "✓ Usando el texto combinado",
+ "rebuild": "Rehacer desde la selección",
+ "custom_badge": "Combinada"
 }
