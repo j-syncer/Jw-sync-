@@ -30,15 +30,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
+        /* Palette shared with the same forum embedded in the app (#forum-view in
+           styles.css) — cool navy, brand orange. 22_forum.js keeps the two in
+           step. It used to be warm brown here and navy there: the same forum,
+           two different colours, depending on which door you came in by. */
         :root {
-            --bg:      #0c0a09;
-            --bg2:     #18110e;
-            --bg3:     #211610;
-            --border:  #2d1f14;
-            --border2: #3d2a1a;
-            --text:    #e8ddd5;
-            --muted:   #7a6558;
-            --accent:  #f97316;
+            --bg:      #020a16;
+            --bg2:     #061428;
+            --bg3:     #0a1e3a;
+            --border:  #0d2550;
+            --border2: #163870;
+            --text:    #d0e8f8;
+            --muted:   #3a7abf;
+            --accent:  #ea580c;
             --accent2: #fb923c;
             --green:   #22c55e;
             --blue:    #60a5fa;
@@ -53,7 +57,7 @@
         .wrap { max-width:860px; margin:0 auto; padding:0 16px; }
 
         /* Header */
-        header { border-bottom:1px solid var(--border); background:rgba(12,10,9,0.96); backdrop-filter:blur(12px); position:sticky; top:0; z-index:100; }
+        header { border-bottom:1px solid var(--border); background:rgba(2,10,22,0.96); backdrop-filter:blur(12px); position:sticky; top:0; z-index:100; }
         .header-inner { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 0; }
         .header-right { display:flex; align-items:center; gap:9px; }
         .logo-area { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
@@ -154,12 +158,12 @@
         .overlay.open { display:block; animation:fadeIn 0.15s ease; }
         @keyframes fadeIn { from{opacity:0} to{opacity:1} }
         .thread-inner { max-width:720px; margin:0 auto; padding:20px 16px 80px; }
-        .thread-back { position:sticky; top:10px; z-index:20; display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:13px; cursor:pointer; margin-bottom:18px; transition:color 0.15s; background:rgba(12,10,9,.92); backdrop-filter:blur(8px); border:1px solid var(--border); border-radius:7px; padding:7px 14px; font-family:inherit; }
+        .thread-back { position:sticky; top:10px; z-index:20; display:inline-flex; align-items:center; gap:6px; color:var(--muted); font-size:13px; cursor:pointer; margin-bottom:18px; transition:color 0.15s; background:rgba(2,10,22,.92); backdrop-filter:blur(8px); border:1px solid var(--border); border-radius:7px; padding:7px 14px; font-family:inherit; }
         .thread-back:hover { color:var(--text); border-color:var(--border2); }
         .thread-card { background:var(--bg2); border:1px solid var(--border2); border-radius:12px; padding:20px; margin-bottom:4px; }
         .thread-card.original { border-color:rgba(249,115,22,0.25); }
         .thread-title { font-size:19px; font-weight:700; letter-spacing:-0.3px; margin:10px 0 8px; }
-        .thread-content { font-size:14px; line-height:1.75; color:rgba(232,221,213,0.85); white-space:pre-wrap; word-break:break-word; }
+        .thread-content { font-size:14px; line-height:1.75; color:rgba(208,232,248,0.85); white-space:pre-wrap; word-break:break-word; }
         .thread-footer { display:flex; align-items:center; gap:12px; margin-top:14px; padding-top:12px; border-top:1px solid var(--border); flex-wrap:wrap; }
         .author-chip { display:flex; align-items:center; gap:7px; font-size:13px; }
         .avatar-md { width:28px; height:28px; border-radius:50%; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; color:#fff; flex-shrink:0; }
@@ -174,7 +178,7 @@
         .reply-author-row { display:flex; align-items:center; gap:6px; margin-bottom:5px; flex-wrap:wrap; }
         .reply-author { font-size:13px; font-weight:600; }
         .reply-time { font-size:11px; color:var(--muted); font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
-        .reply-text { font-size:14px; color:rgba(232,221,213,0.85); line-height:1.65; white-space:pre-wrap; word-break:break-word; }
+        .reply-text { font-size:14px; color:rgba(208,232,248,0.85); line-height:1.65; white-space:pre-wrap; word-break:break-word; }
         .solution-badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; color:var(--green); font-weight:600; margin-top:5px; }
         .reply-compose { background:var(--bg2); border:1px solid var(--border2); border-radius:10px; padding:16px; margin-top:18px; }
         .reply-compose h4 { font-size:13px; font-weight:600; margin-bottom:10px; }

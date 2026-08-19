@@ -945,6 +945,41 @@ CHROME = {
             "Power tools": "Instrumente avansate",
         },
     },
+    "el": {
+        "lang_name": "Ελληνικά",
+        "lang_label": "Γλώσσα",
+        "lang_other": "Αυτός ο οδηγός σε άλλες γλώσσες",
+        "og_locale": "el_GR",
+        "site_guides": "Οδηγοί JW Sync",
+        "nav_guides": "Οδηγοί",
+        "nav_community": "Κοινότητα",
+        "nav_open_app": "Άνοιγμα εφαρμογής",
+        "crumb_guides": "Οδηγοί",
+        "h_steps": "Βήμα προς βήμα",
+        "h_faq": "Συχνές ερωτήσεις",
+        "h_related": "Σχετικοί οδηγοί",
+        "cta_title": "Κάντε το τώρα — δωρεάν, μέσα στο πρόγραμμα περιήγησής σας",
+        "cta_body": "Το JW Sync συγχωνεύει, επεξεργάζεται και αναλύει αρχεία .jwlibrary εξ ολοκλήρου μέσα στη συσκευή σας. Χωρίς λογαριασμό, χωρίς μεταφορτώσεις, χωρίς εγκατάσταση.",
+        "cta_btn": "Άνοιγμα του JW Sync →",
+        "index_title": "Οδηγοί για αντίγραφα ασφαλείας, συγχρονισμό και σημειώσεις του JW Library | JW Sync",
+        "index_desc": "Πρακτικοί οδηγοί για τα αντίγραφα ασφαλείας του JW Library: συγχωνεύστε τα αντίγραφα δύο συσκευών, μεταφέρετε σημειώσεις σε νέο τηλέφωνο, περάστε από Android σε iPhone, διορθώστε ένα αντίγραφο που δεν επαναφέρεται, επεξεργαστείτε και αναζητήστε τις σημειώσεις σας και πολλά ακόμη.",
+        "index_h1": "Οδηγοί και οδηγίες",
+        "index_lede": "Όλα όσα αφορούν τα αντίγραφα ασφαλείας του JW Library, σε απλά βήματα: συγχώνευση συσκευών, μετακόμιση σε νέο τηλέφωνο, διάσωση των σημειώσεών σας και πώς να αξιοποιήσετε καλύτερα τη βιβλιοθήκη που ήδη έχετε. Κάθε εργαλείο που αναφέρεται λειτουργεί δωρεάν μέσα στο πρόγραμμα περιήγησής σας — τα αρχεία σας δεν μεταφορτώνονται ποτέ.",
+        "index_cta_title": "Παραλείψτε το διάβασμα — ανοίξτε κατευθείαν το εργαλείο",
+        "index_cta_body": "Η συγχώνευση δύο αντιγράφων ασφαλείας παίρνει περίπου ένα λεπτό και η εφαρμογή σάς καθοδηγεί βήμα προς βήμα.",
+        "footer_all_guides": "Όλοι οι οδηγοί",
+        "footer_community": "Κοινότητα",
+        "footer_stats": "Στατιστικά μελέτης",
+        "footer_privacy": "Το JW Sync επεξεργάζεται όλα τα δεδομένα μέσα στη συσκευή σας — τα αρχεία σας δεν φεύγουν ποτέ από αυτήν. Δωρεάν· χωρίς λογαριασμό, χωρίς μεταφορτώσεις.",
+        "footer_disclaimer": "Το «JW Library» ανήκει στη Watch Tower Bible and Tract Society of Pennsylvania. Το JW Sync είναι ανεξάρτητο εργαλείο που δεν συνδέεται με αυτήν ούτε έχει την έγκρισή της.",
+        "groups": {
+            "Getting started": "Ξεκινώντας",
+            "Sharing scenarios": "Σενάρια κοινοποίησης",
+            "Everyday scenarios": "Καθημερινά σενάρια",
+            "Fixing problems": "Επίλυση προβλημάτων",
+            "Power tools": "Προηγμένα εργαλεία",
+        },
+    },
     "sw": {
         "lang_name": "Kiswahili",
         "lang_label": "Lugha",
@@ -1115,6 +1150,7 @@ from guides_tl import GUIDES_TL  # noqa: E402
 from guides_sv import GUIDES_SV  # noqa: E402
 from guides_ceb import GUIDES_CEB  # noqa: E402
 from guides_sw import GUIDES_SW  # noqa: E402
+from guides_el import GUIDES_EL  # noqa: E402
 
 GUIDE_TEXT = {
     "ja": GUIDES_JA,
@@ -1142,4 +1178,5 @@ GUIDE_TEXT = {
     "ro": GUIDES_RO,
     "nl": GUIDES_NL,
     "sw": GUIDES_SW,
+    "el": GUIDES_EL,
 }

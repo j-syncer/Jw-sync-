@@ -56,6 +56,14 @@ function collect(css, out) {
   }
 }
 
+// An accent surface only carries its own contrast when it is actually painted:
+// rgba(234,88,12,.04) is a tint, and white ink on a tint is unreadable once the
+// page behind it turns white. Only a solid-enough accent earns the exemption.
+function opaqueEnough(value) {
+  const m = /rgba\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*,\s*([\d.]+)\s*\)/.exec(value);
+  return m ? parseFloat(m[1]) >= 0.5 : true;
+}
+
 // allow: selectors exempt from needing a light twin, each with a reason
 function auditLightMode(html, allow) {
   const skip = new Set(allow || []);
@@ -81,7 +89,7 @@ function auditLightMode(html, allow) {
     if (sel.startsWith('body.light') || skip.has(sel)) continue;
     const bg = (/background(?:-color)?:\s*([^;]+)/.exec(body) || [])[1] || '';
     const ink = (/(?:^|;)\s*color:\s*([^;]+)/.exec(body) || [])[1] || '';
-    if (ACCENT.some(a => bg.includes(a))) continue;
+    if (ACCENT.some(a => bg.includes(a)) && opaqueEnough(bg)) continue;
     if (!(INK.includes(ink.trim()) || SURFACE.some(s => bg.includes(s)))) continue;
     checked++;
     if (!light.has(sel)) missing.push(sel);

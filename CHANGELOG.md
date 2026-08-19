@@ -4,7 +4,7 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
-## [3.44.0] — 2026-08-19
+## [3.45.0] — 2026-08-19
 
 ### Added: see both versions of a conflicted note side by side — and combine them
 
@@ -40,12 +40,63 @@ rather than duplicating it.
 
 Available in all 27 languages.
 
+### Fixed: a corrected merge is now a file JW Library will actually restore
+
+Resolving a conflict rebuilt the merged database and re-zipped it, but left
+`manifest.json` describing the database the file used to contain. JW Library
+refuses a backup whose hash does not match — and it refuses it *silently*, so
+the corrected download looked, to anyone holding it, exactly like a corrupt
+file. This affected every resolution, not just the new combined one; the
+database inside was always sound. Corrected files now go through the same
+finalizer every other download on the site already used.
+
 ### Fixed
 
 - `i18n_tool.py merge` dropped the comma joining new keys onto a dictionary
   whose last value was followed by a space, producing a file that no longer
   parsed. It judged the object by the single character before its closing
   brace; it now reads the whole body.
+
+---
+
+## [3.44.0] — 2026-08-19
+
+### Added: all 39 guides in Greek
+
+Greek shipped as an interface in 3.40.0; it now has the full guide tree as
+well. All 39 how-tos — merging two devices, the tag manager, sharing a tagged
+selection with a friend, searching notes by meaning, the Reading Companion,
+Study Stats, Library Doctor, the Markdown import and export routes, and every
+sharing and troubleshooting scenario — are written in Greek at `/guides/el/`,
+and Greek is advertised in the guide hreflang cluster alongside the other 25
+translated trees.
+
+The site now builds 1,080 guide pages and a 1,109-URL sitemap. Greek is the
+27th language and the 26th complete one — UI and guides both.
+
+---
+
+## [3.43.1] — 2026-08-19
+
+### Fixed: the forum was two different colours depending on how you opened it
+
+The same Community forum is served two ways — `forum.html` and the Community
+tab inside the app — and each carried its own copy of the palette. They had
+drifted apart completely: warm brown on the standalone page, cool navy in the
+app, with two different oranges. Nothing could see it, because each copy was
+internally consistent.
+
+The forum is now the site's cool navy with the brand orange (`#ea580c`), on
+both surfaces, in both themes — and the two palettes are asserted identical,
+so they cannot drift again. The orange also moved into the theme itself,
+replacing an override in `index.html` that was repainting the accent after the
+fact.
+
+Also fixed: the "Prefer email? Contact us directly" heading was written with an
+inline `color:#f1f5f9`, so it stayed near-white on the pale band in light mode.
+The guard that caught it now knows a low-alpha accent tint is not a surface
+that carries its own contrast, and it checks inline styles in the forum markup
+as well as in the code that renders it.
 
 ---
 
