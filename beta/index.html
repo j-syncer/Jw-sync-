@@ -371,7 +371,7 @@
         "Free and open source",
         "Available in 27 languages"
       ],
-      "softwareVersion": "3.43.0",
+      "softwareVersion": "3.43.1",
       "image": "https://jwsync.org/og-image.png",
       "screenshot": "https://jwsync.org/og-image.png",
       "downloadUrl": "https://jwsync.org/",
@@ -497,9 +497,8 @@
 
     <!-- ── End design theme ────────────────────────────────── -->
 <style id="beta-forum-theme">
-/* Community forum on the orange brand (shipped to both sites) */
-#forum-view{--accent:#ea580c;--accent2:#fb923c}
-#forum-view .logo-icon{background:#ea580c}
+/* Forum tweaks that belong to the page rather than the palette; the orange
+   accent itself now lives with the rest of the forum theme in styles.css */
 #forum-view .pill svg,#forum-view .btn svg{width:14px;height:14px;flex:none}
 #forum-view .pill svg{margin-right:4px}
 </style>
@@ -1192,8 +1191,8 @@ body.light .landing-feat:hover{border-color:rgba(234,88,12,.45)}
     <div style="background:rgba(234,88,12,.08);border:1px solid rgba(234,88,12,.25);border-radius:12px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" aria-hidden="true" style="flex-shrink:0"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         <div style="flex:1;min-width:0">
-            <div style="font-size:13px;font-weight:700;color:#f1f5f9;margin-bottom:2px">Prefer email? Contact us directly</div>
-            <a href="mailto:jwsyncsupport@gmail.com" style="font-size:13px;color:#fb923c;text-decoration:none;font-weight:600">jwsyncsupport@gmail.com</a>
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Prefer email? Contact us directly</div>
+            <a href="mailto:jwsyncsupport@gmail.com" style="font-size:13px;color:var(--accent2);text-decoration:none;font-weight:600">jwsyncsupport@gmail.com</a>
         </div>
     </div>
     <div class="filter-bar">

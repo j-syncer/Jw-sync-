@@ -225,6 +225,42 @@ const SURFACES = [
   if (overlay && overlay.classList.contains('open')) ok('opens the thread it points at');
   else fail('legacy deep link did not open the thread');
 
+  // ── 5. one forum, one palette ────────────────────────────────────────────
+  section('Palette parity between the two forum surfaces');
+  {
+    const { auditThemeVars } = require('./helpers/light-mode.js');
+    // The same forum is served two ways — forum.html standalone and #forum-view
+    // inside the app — and each carried its own copy of the palette. They drifted
+    // to different colour schemes entirely (warm brown vs cool navy), which no
+    // check could see because each was internally consistent.
+    const forumHtml = read('forum.html');
+    const pageCss = forumHtml.slice(forumHtml.indexOf('<style>') + 7, forumHtml.indexOf('</style>'));
+    const VARS = ['--bg', '--bg2', '--bg3', '--border', '--border2', '--text', '--muted',
+      '--accent', '--accent2', '--green', '--blue', '--red', '--amber'];
+    const readVars = (css, sel) => {
+      const out = {};
+      const m = new RegExp(sel.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([^}]*)\\}', 'g');
+      let hit;
+      while ((hit = m.exec(css))) for (const d of hit[1].matchAll(/(--[\w-]+)\s*:\s*([^;]+)/g)) out[d[1]] = d[2].trim();
+      return out;
+    };
+    for (const [label, sel] of [['dark', ':root'], ['light', 'body.light']]) {
+      const page = readVars(pageCss, sel), app = readVars(read('styles.css'), sel);
+      const differ = VARS.filter(v => (v in page || v in app) && page[v] !== app[v]);
+      if (!differ.length) ok(`${label} palette identical in forum.html and styles.css`);
+      else fail(`${label} palette differs — ` + differ.map(v => `${v}: ${page[v]} vs ${app[v]}`).join(', '));
+    }
+    // and the brand colour is the site's orange, not a near-miss
+    if (readVars(pageCss, ':root')['--accent'] === '#ea580c') ok('the forum accent is the brand orange');
+    else fail('forum accent is not #ea580c: ' + readVars(pageCss, ':root')['--accent']);
+    // the theme's own variables must not be overridden back out of it elsewhere
+    for (const f of ['index.html', 'beta/index.html']) {
+      if (/#forum-view\s*\{[^}]*--accent/.test(read(f))) fail(`${f} still overrides the forum accent outside the theme`);
+      else ok(`${f}: no palette override competing with the theme`);
+    }
+    void auditThemeVars;
+  }
+
   // ── 5. light mode, on both forum surfaces ────────────────────────────────
   section('Light mode');
   {
@@ -255,10 +291,26 @@ const SURFACES = [
     // js/forum.js renders the load-failure state with an inline style; it used
     // to hard-code the dark palette's ink there, and an inline style beats any
     // theme rule, so that screen stayed dark-on-light for light-mode readers.
-    for (const f of ['js/forum.js', 'beta/js/forum.js']) {
+    for (const f of ['js/forum.js', 'beta/js/forum.js', 'forum.html']) {
       const hits = read(f).match(/style="[^"]*color:\s*#[0-9a-fA-F]{3,6}/g) || [];
       if (!hits.length) ok(`${f}: rendered markup takes its ink from the theme, not a hex`);
       else fail(`${f}: inline theme colour ignores light mode — ${hits.join(' | ')}`);
+    }
+    // the same markup embedded in the app — scan only the forum view
+    for (const f of ['index.html', 'beta/index.html']) {
+      const src = read(f);
+      const view = src.slice(src.indexOf('<div id="forum-view"'), src.indexOf('<!-- ── End embedded forum view'));
+      const hits = view.match(/style="[^"]*color:\s*#[0-9a-fA-F]{3,6}/g) || [];
+      if (!hits.length) ok(`${f}: #forum-view markup takes its ink from the theme`);
+      else fail(`${f}: inline theme colour in #forum-view ignores light mode — ${hits.join(' | ')}`);
+    }
+    // and the app's copy of the forum stylesheet, scoped to the forum's own rules
+    for (const sheet of ['styles.css', 'beta/styles.css']) {
+      const r = auditLightMode('<style>' + read(sheet) + '</style>', []);
+      const mine = r.missing.filter(s => /^(#forum-view|body\.is-forum)/.test(s))
+        .filter(s => !/\.avatar-(sm|md)$/.test(s));   // per-author colour set inline
+      if (!mine.length) ok(`${sheet}: #forum-view dark rules all have a light counterpart`);
+      else fail(`${sheet}: no light-mode rule for ` + mine.join(', '));
     }
 
     // the same forum embedded in the app (#forum-view), styled from styles.css

@@ -371,8 +371,8 @@ body.light .nav-lang-select { background: rgba(11,46,88,.08); border-color: rgba
     --border2: #163870;
     --text:    #d0e8f8;
     --muted:   #3a7abf;
-    --accent:  #3282bc;
-    --accent2: #62a6d8;
+    --accent:  #ea580c;
+    --accent2: #fb923c;
     --green:   #22c55e;
     --blue:    #60a5fa;
     --red:     #f87171;
@@ -2598,6 +2598,10 @@ body.light {
     --border2: rgba(11,46,88,.30);
     --text:    #071a38;
     --muted:   #4d6a8f;
+    --green:   #15803d;
+    --blue:    #1d4ed8;
+    --red:     #b91c1c;
+    --amber:   #b45309;
 }
 body.light #forum-view header {background:rgba(244,248,255,.96);}
 body.light #forum-view .post-body,
