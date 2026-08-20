@@ -142,20 +142,42 @@ function loadHelper(withSubtle) {
 
   // ── 3. every writer goes through it ───────────────────────────────────────
   section('Every path that writes a .jwlibrary uses it');
-  const WRITERS = [
-    ['js/browse.js', '__jwFinalizeBackup'],
-    ['js/doctor.js', '__jwFinalizeBackup'],
-    ['js/receive.js', '__jwFinalizeBackup'],
-    ['js/merge-worker.js', '__jwFinalizeBackup'],
-    // The Conflict Reviewer rebuilds the merged database and re-zips it, so it
-    // writes a .jwlibrary just as much as the four above. It was missing from
-    // this list, and shipped a stale manifest hash on every corrected file.
-    ['js/conflict-review.js', '__jwFinalizeBackup'],
-  ];
-  for (const [rel, needle] of WRITERS) {
-    const src = fs.readFileSync(path.join(REPO, rel), 'utf8');
-    if (src.includes(needle)) ok(`${rel} finalizes its output`);
-    else fail(`${rel} writes a backup without refreshing the manifest`);
+  // Derived, not listed. This began as four filenames written out by hand; the
+  // Conflict Reviewer was missing and shipped a stale hash on every corrected
+  // file, and adding it as a fifth row left js/app.js — whose Extract & Share
+  // path rewrote manifest.json's name and creationDate but never its hash —
+  // just as invisible. A roster of writers only ever protects the writers
+  // somebody remembered to add.
+  //
+  // So: anything under js/ that zips up a userData.db has to finalize it.
+  const EXEMPT = {
+    // Builds the two synthetic backups for demo mode. They are handed straight
+    // back to the site's own loader, never offered for download and never
+    // restored into JW Library; the merged result the user *can* download is
+    // written by the worker, which does finalize.
+    'js/enhancements.js': 'demo fixtures, never restored',
+  };
+  {
+    const jsDir = path.join(REPO, 'js');
+    const writers = fs.readdirSync(jsDir).filter((f) => f.endsWith('.js')).filter((f) => {
+      const src = fs.readFileSync(path.join(jsDir, f), 'utf8');
+      // Match on the word, not on "userData.db" exactly: conflict-review.js
+      // names the database only inside the regex /userdata\.db$/i, whose source
+      // text carries a backslash before the dot — so a first draft looking for
+      // a literal dot skipped one of the two writers that were actually broken.
+      return src.includes('generateAsync') && /userdata/i.test(src);
+    }).map((f) => 'js/' + f).sort();
+
+    if (writers.length) ok(`found ${writers.length} file(s) that zip a userData.db`);
+    else fail('found no .jwlibrary writers at all — this check has stopped looking');
+
+    for (const rel of writers) {
+      const src = fs.readFileSync(path.join(REPO, rel), 'utf8');
+      if (src.includes('__jwFinalizeBackup')) ok(`${rel} finalizes its output`);
+      else if (EXEMPT[rel]) ok(`${rel} exempt — ${EXEMPT[rel]}`);
+      else fail(`${rel} writes a backup without refreshing the manifest hash`,
+                'JW Library refuses it silently; add __jwFinalizeBackup or an EXEMPT reason');
+    }
   }
   const worker = fs.readFileSync(path.join(REPO, 'js/merge-worker.js'), 'utf8');
   if (/importScripts\('jwlibrary-manifest\.js'\)/.test(worker)) ok('the worker imports the helper');

@@ -4,6 +4,39 @@ All notable changes to JW Sync are recorded here.
 
 ---
 
+## [3.45.1] — 2026-08-19
+
+### Fixed: Extract & Share Backup produced files JW Library refused
+
+3.45.0 fixed the Conflict Reviewer's stale manifest hash. The same fault was
+present in a second writer that the fix did not reach: **Extract & Share
+Backup**. Extracting by tag or by date rewrote `manifest.json`'s `name` and
+`creationDate` but left `userDataBackup.hash` describing the database the file
+used to contain — and the extraction deletes rows and runs `VACUUM`, so almost
+every byte had moved. JW Library refuses such a file silently, returning to the
+same screen with no error.
+
+It now goes through `finalizeBackup()` like every other writer.
+
+Files already downloaded from Extract & Share cannot be repaired by re-saving
+them; produce them again from the current site and they will restore.
+
+### Changed
+
+- The guard meant to prevent this listed its writers by hand. 3.45.0 added the
+  Conflict Reviewer to that list as a fifth row, which left `js/app.js` exactly
+  as invisible as the Reviewer had been. It now derives the list instead:
+  anything under `js/` that zips a `userData.db` must finalize it, or carry a
+  stated exemption — only the demo fixtures, which are never restored. Seven
+  writers are checked where five were named.
+
+  Worth recording that the first draft of the derived check still missed
+  `conflict-review.js`, which names the database only inside the regex
+  `/userdata\.db$/i`; matching a literal `userData.db` skipped it. It matches on
+  the word now.
+
+---
+
 ## [3.45.0] — 2026-08-19
 
 ### Added: see both versions of a conflicted note side by side — and combine them
